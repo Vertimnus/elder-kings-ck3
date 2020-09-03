@@ -1,0 +1,496 @@
+#EK MainMenu Tweak
+widget = {
+	name = "mainmenu_panel_bottom"
+	parentanchor = center
+	size = { 100% 100% }
+	
+	state = {
+		name = _show
+		using = Animation_FadeIn_Standard
+	}
+	
+	state = {
+		name = _hide
+		using = Animation_FadeOut_Standard
+	}
+	
+	widget = {
+		parentanchor = center
+		size = { 1920 1080 }
+		scale = "[ScaleToFitElementInside('(int32)1', '(int32)1080')]"
+		
+		icon = {
+			parentanchor = center
+			size = { 100% 100% }
+			texture = "[FrontEndMainView.GetBackground]"
+		}
+		
+		icon = {
+			name = "shadow_left"
+			visible = "[FrontEndMainView.ShowSecondaryCharacter]"
+			parentanchor = bottom|hcenter
+			position = { 170 -75 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.7
+		}
+		
+		icon = {
+			name = "shadow_right"
+			visible = "[FrontEndMainView.ShowHeirCharacter]"
+			parentanchor = bottom|hcenter
+			position = { 515 -75 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.7
+		}
+		
+		icon = {
+			name = "shadow_center"
+			parentanchor = bottom|hcenter
+			position = { 335 -40 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.7
+		}
+		
+		portrait_button = {
+			name = "menu_portrait_left"
+			visible = "[FrontEndMainView.ShowSecondaryCharacter]"
+			parentanchor = center
+			position = { 0 -240 }
+			using = portrait_base
+			size = { 1920 1400 }
+			alwaystransparent = yes
+			
+			portrait_texture = "[FrontEndMainView.GetSecondaryCharacterTexture('camera_main_menu_heir', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes'))]"
+			mask = "gfx/portraits/portrait_mask_solid.dds"
+			
+			blockoverride "grayscale"
+			{}
+			blockoverride "portrait_button_template_onmouseenter"
+			{}
+			blockoverride "portrait_button_template_onmouseleave"
+			{}
+			blockoverride "portrait_button_template_onclick"
+			{}
+			blockoverride "portrait_button_template_onrightclick"
+			{}
+			blockoverride "portrait_button_template_tooltip"
+			{}
+		}
+		
+		portrait_button = {
+			name = "menu_portrait_right"
+			visible = "[FrontEndMainView.ShowHeirCharacter]"
+			parentanchor = center
+			position = { 0 -240 }
+			using = portrait_base
+			size = { 1920 1400 }
+			alwaystransparent = yes
+			
+			portrait_texture = "[FrontEndMainView.GetHeirCharacterTexture('camera_main_menu_secondary', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes')]"
+			mask = "gfx/portraits/portrait_mask_solid.dds"
+			
+			blockoverride "grayscale"
+			{}
+			blockoverride "portrait_button_template_onmouseenter"
+			{}
+			blockoverride "portrait_button_template_onmouseleave"
+			{}
+			blockoverride "portrait_button_template_onclick"
+			{}
+			blockoverride "portrait_button_template_onrightclick"
+			{}
+			blockoverride "portrait_button_template_tooltip"
+			{}
+		}
+		
+		portrait_button = {
+			name = "menu_portrait_center"
+			parentanchor = center
+			position = { 0 -240 }
+			using = portrait_base
+			size = { 1920 1400 }
+			alwaystransparent = yes
+			
+			portrait_texture = "[FrontEndMainView.GetMainCharacterTexture('camera_main_menu_main', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes'))]"
+			mask = "gfx/portraits/portrait_mask_solid.dds"
+			
+			blockoverride "grayscale"
+			{}
+			blockoverride "portrait_button_template_onmouseenter"
+			{}
+			blockoverride "portrait_button_template_onmouseleave"
+			{}
+			blockoverride "portrait_button_template_onclick"
+			{}
+			blockoverride "portrait_button_template_onrightclick"
+			{}
+			blockoverride "portrait_button_template_tooltip"
+			{}
+		}
+	}
+	
+	widget = {
+		parentanchor = center
+		size = { 1920 1080 }
+		scale = "[ScaleToFitElementInside('(int32)1920', '(int32)1080')]"
+		
+		widget = {
+			name = "left_panel"
+			parentanchor = left|vcenter
+			position = { 200 -50 }
+			scale = 0.8
+			alpha = 0
+			
+			state = {
+				name = a
+				next = b
+				trigger_on_create = yes
+				position = { 200 -100 }
+				alpha = 0
+			}
+			
+			state = {
+				name = b
+				position = { 200 -50 }
+				duration = 0.5
+				alpha = 1
+				delay = 0.5
+				
+				
+				using = Animation_Curve_Default
+			}
+			
+			background = {
+				texture = "gfx/interface/tiles/generic_dark_rectangle.dds"
+				spriteType = Corneredtiled
+				spriteborder = { 2 2 }
+				margin_left = 40
+				margin_right = 40
+				margin_top = -88
+				margin_bottom = 80
+				alpha = 0.7
+				
+				using = Mask_Rough_Edges
+			}
+			
+			icon = {
+				parentanchor = top|hcenter
+				name = "tile_frame_top"
+				texture = "gfx/interface/frontend/frontend_menu_top.dds"
+				position = { 0 50 }
+				scale = 1.25
+			}
+			
+			icon = {
+				parentanchor = bottom|hcenter
+				name = "tile_frame_bottom"
+				texture = "gfx/interface/frontend/frontend_menu_bottom.dds"
+				position = { 0 110 }
+				scale = 1.25
+			}
+			
+			vbox = {
+				spacing = 25
+				datacontext = "[FrontEndMainView.AccessLoadView]"
+				set_parent_size_to_minimum = yes
+				#EK Main Logo
+				icon = {
+					texture = "gfx/interface/frontend/main_logo.dds"
+					size = { 500 235 }
+				}
+				
+				vbox = {
+					spacing = 5
+					
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						text = "SINGLE_PLAYER"
+					}
+					
+					button_frontend = {
+						name = "continue_button"
+						datacontext = "[FrontEndLoadView.GetContinueSave]"
+						visible = "[FrontEndLoadView.CanDoContinue]"
+						texture = "gfx/interface/frontend/button_frontend_2.dds"
+						enabled = "[Not( SaveGameItem.HasMissingDLCs )]"
+						onclick = "[FrontEndLoadView.OnContinue]"
+						
+						text = "CONTINUE"
+						fontsize = 25
+						
+						tooltip = FRONTEND_CONTINUE_TT
+						
+						hbox = {
+							parentanchor = right|vcenter
+							alwaystransparent = yes
+							position = { 0 4 }
+							
+							expand = {}
+							
+							ironman_save_icon = {
+								visible = "[SaveGameItem.IsIronmanSave]"
+								tooltip = "LOAD_IRONMAN_TOOLTIP"
+							}
+							
+							invalid_save_icon = {
+								visible = "[SaveGameItem.HasMissingDLCs]"
+								tooltip = "[SaveGameItem.GetMissingDLCInfo]"
+							}
+							achievements_disabled_icon = {
+								visible = "[SaveGameItem.HasAchievementBlockingGameRules]"
+								tooltip = "[SaveGameItem.GetAchievementBlockingGameRulesInfo]"
+							}
+							achievements_disabled_icon = {
+								visible = "[And( SaveGameItem.CanGetAchievements, Not( IsGameChecksumOk ) )]"
+								tooltip = "GAME_CHECKSUM_CHANGED_FROM_SAVE_FILE"
+							}
+							
+							coat_of_arms_icon = {
+								name = "realm_flag"
+								
+								size = { 62 62 }
+								coat_of_arms_slot = "[SaveGameItem.GetCoatOfArms.GetSlot('(int32)124','(int32)124')]"
+								coat_of_arms = "[SaveGameItem.GetCoatOfArms.GetTexture('(int32)124','(int32)124')]"
+								coat_of_arms_mask = "[SaveGameItem.GetPlayerGovernment.GetRealmMask]"
+								
+								coa_realm_overlay = {
+									texture = "[SaveGameItem.GetPlayerGovernment.GetRealmFrame('(int32)62')]"
+									frame = "[SaveGameItem.GetPlayerTier]"
+									framesize = { 62 71 }
+									size = { 62 71 }
+								}
+								
+								coa_realm_topframe = {
+									texture = "gfx/interface/coats_of_arms/topframe_62.dds"
+									frame = "[SaveGameItem.GetPlayerTier]"
+									framesize = { 62 71 }
+									size = { 62 71 }
+								}
+							}
+						}
+					}
+					
+					button_frontend = {
+						name = "new_game_button"
+						text = "NEW_GAME"
+						fontsize = 25
+						onclick = "[FrontEndMainView.OnNewGame]"
+						texture = "gfx/interface/frontend/button_frontend_2.dds"
+					
+					# animation_attention_text = {
+					# 	visible = "[Not(FrontEndLoadView.CanDoContinue)]"
+					# }
+					}
+					
+					button_frontend = {
+						name = "load_game_button"
+						visible = "[FrontEndLoadView.CanDoContinue]"
+						text = "LOAD"
+						fontsize = 25
+						onclick = "[FrontEndMainView.OnLoad]"
+						texture = "gfx/interface/frontend/button_frontend_2.dds"
+					}
+				}
+				
+				vbox = {
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						text = "MULTI_PLAYER"
+					}
+					
+					spacer = {
+						size = { 5 5 }
+					}
+					
+					vbox = {
+						visible = "[And( POPSStatusIsLoggedIn, Not( POPStatusIsUserNameEmpty ) )]"
+						spacing = 5
+						
+						button_frontend = {
+							name = "host_button"
+							text = "HOST_GAME"
+							fontsize = 25
+							onclick = "[FrontEndMainView.OnHost]"
+							onclick = "[RefreshIllustration]"
+							enabled = "[JominiIsMultiplayerAccessible]"
+							tooltip = "[JominiGetMultiplayerAccessibleString]"
+							texture = "gfx/interface/frontend/button_frontend_2.dds"
+						}
+						
+						button_frontend = {
+							name = "join_button"
+							text = "FRONTEND_JOIN_MULTIPLAYER"
+							fontsize = 25
+							onclick = "[FrontEndMainView.OnMultiPlayer]"
+							onclick = "[RefreshIllustration]"
+							enabled = "[JominiIsMultiplayerAccessible]"
+							tooltip = "[JominiGetMultiplayerAccessibleString]"
+							texture = "gfx/interface/frontend/button_frontend_2.dds"
+						}
+					}
+					
+					vbox = {
+						visible = "[Or( Not( POPSStatusIsLoggedIn ), POPStatusIsUserNameEmpty )]"
+						spacing = 5
+						
+						button_frontend = {
+							name = "host_button"
+							text = "HOST_GAME"
+							fontsize = 25
+							onclick = "[FrontEndMainView.OnLogin]"
+							tooltip = "[JominiGetMultiplayerAccessibleString]"
+							texture = "gfx/interface/frontend/button_frontend_2.dds"
+							
+							icon = {
+								parentanchor = right|vcenter
+								position = { -15 0 }
+								texture = "gfx/interface/frontend/icon_online_offline.dds"
+								
+								size = { 30 30 }
+								framesize = { 80 80 }
+								frame = 2
+							}
+						}
+						
+						button_frontend = {
+							name = "join_button"
+							text = "FRONTEND_JOIN_MULTIPLAYER"
+							fontsize = 25
+							onclick = "[FrontEndMainView.OnLogin]"
+							tooltip = "[JominiGetMultiplayerAccessibleString]"
+							texture = "gfx/interface/frontend/button_frontend_2.dds"
+							
+							icon = {
+								parentanchor = right|vcenter
+								position = { -15 0 }
+								texture = "gfx/interface/frontend/icon_online_offline.dds"
+								
+								size = { 30 30 }
+								framesize = { 80 80 }
+								frame = 2
+							}
+						}
+					}
+				}
+				
+				expand = {}
+				
+				button_frontend = {
+					name = "exit_game_button"
+					visible = yes
+					text = "EXIT_TO_DESKTOP"
+					fontsize = 25
+					onclick = "[FrontEndMainView.OnQuit]"
+					texture = "gfx/interface/frontend/button_frontend_2.dds"
+				}
+				
+				expand = {}
+				
+				hbox = {
+					name = "bottom_panel"
+					# layoutpolicy_horizontal = expanding
+					spacing = 55
+					
+					pops_login_accountwidget = {
+						blockoverride "properties"
+						{
+							onclick = "[FrontEndMainView.OnLogin]"
+						}
+						
+						text_multi = {
+							parentanchor = hcenter
+							position = { 0 50 }
+							max_width = 100
+							autoresize = yes
+							text = "PARADOX_ACCOUNT"
+							default_format = "#low"
+							align = center
+						}
+					}
+					
+					button_settings = {
+						name = "settings"
+						onclick = "[FrontEndMainView.OnSettings]"
+						
+						text_multi = {
+							parentanchor = hcenter
+							position = { 0 50 }
+							max_width = 100
+							autoresize = yes
+							text = "SETTINGS"
+							default_format = "#low"
+							align = center
+						}
+					}
+					
+					button_achievements = {
+						name = "achievements"
+						onclick = "[OpenAchievements]"
+						enabled = "[AreAchievementsAvailable]"
+						tooltip = "[GetAchievementsAvailableString]"
+						
+						text_multi = {
+							parentanchor = hcenter
+							position = { 0 50 }
+							max_width = 100
+							autoresize = yes
+							text = "ACHIEVEMENTS"
+							default_format = "#low"
+							align = center
+						}
+					}
+					
+					button_encyclopedia = {
+						onclick = "[ToggleEncyclopedia]"
+						
+						text_multi = {
+							parentanchor = hcenter
+							position = { 0 50 }
+							max_width = 100
+							autoresize = yes
+							text = "HEADING_ENCYCLOPEDIA"
+							default_format = "#low"
+							align = center
+						}
+					}
+					
+					button_credits = {
+						onclick = "[FrontEndMainView.OnCredits]"
+						
+						text_multi = {
+							parentanchor = hcenter
+							position = { 0 50 }
+							max_width = 100
+							autoresize = yes
+							text = "CREDITS"
+							default_format = "#low"
+							align = center
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	button = {
+		name = "copy_build_version"
+		parentanchor = top|right
+		position = { -15 0 }
+		size = { 400 80 }
+		
+		onclick = "[CopyBuildVersionInfoToClipboard]"
+		tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
+		tooltip_parentanchor = bottom|right
+		tooltip_widgetanchor = top|right
+		
+		textbox = {
+			name = "build_version"
+			parentanchor = center
+			size = { 100% 100% }
+			text = "TOP_BAR_VERSION"
+			fontcolor = { 1 1 1 0.15 }
+			align = right
+		}
+	}
+}
+
