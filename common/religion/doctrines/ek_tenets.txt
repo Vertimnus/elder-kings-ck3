@@ -1,26 +1,17 @@
+### Tenets added in Elder Kings
+# When possible, try to use vanilla tenets, that will make things easier
+
 doctrine_core_tenets = {
 	group = "core_tenets"
 	number_of_picks = 3
 
-	# Syncretism
+	### Syncretism
 	tenet_nedic_nordic_syncretism = {
 		icon = core_tenet_followers
 
 		piety_cost = {
-			if = {
-				limit = {
-					OR = {
-						# religion_tag = judaism_religion
-						# religion_tag = christianity_religion
-						# religion_tag = dualism_religion
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else = {
-				value = faith_tenet_cost_mid
-			}
-
+			value = faith_tenet_cost_mid
+			
 			# Multiplier for keeping same tenet
 			if = {
 				limit = { has_doctrine = tenet_nedic_nordic_syncretism }
@@ -57,20 +48,8 @@ doctrine_core_tenets = {
 		icon = core_tenet_followers
 
 		piety_cost = {
-			if = {
-				limit = {
-					OR = {
-						# religion_tag = judaism_religion
-						# religion_tag = christianity_religion
-						# religion_tag = dualism_religion
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else = {
-				value = faith_tenet_cost_mid
-			}
-
+			value = faith_tenet_cost_mid
+			
 			# Multiplier for keeping same tenet
 			if = {
 				limit = { has_doctrine = tenet_aldmeri_syncretism }
@@ -95,11 +74,40 @@ doctrine_core_tenets = {
 			hostility_override_special_doctrine_is_aldmeri_faith = 1
 			aldmeri_syncretic_actor_opinion_active = yes
 			opinion_of_aldmeri_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			additional_personal_gods_active = yes
 		}
 
 		traits = {
 			virtues = { patient }
 			sins = { cynical greedy }
+		}
+	}
+	
+	### Patron deities
+	# Gives the 8 Divines as a basis
+	tenet_divines_worship = {
+		icon = core_tenet_bhakti
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_divines_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			religion_tag = nedic_nordic_religion
+		}
+		
+		can_pick = {
+			always = yes
+		}
+
+		parameters = {
+			select_personal_god_active = yes
 		}
 	}
 }
