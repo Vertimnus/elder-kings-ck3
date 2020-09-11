@@ -155,4 +155,54 @@ doctrine_core_tenets = {
 			sins = { gluttonous greedy arbitrary drunkard }
 		}
 	}
+	
+	### Other tenets
+	tenet_snow_adaptation = {
+		icon = core_tenet_holytree
+
+		piety_cost = {
+			# if = {
+				# limit = {
+					# OR = {
+						# religion_tag = hinduism_religion
+					# }
+				# }
+				# value = faith_tenet_cost_high
+			# }
+			# else_if = {
+				# limit = {
+					# OR = {
+						# has_doctrine = pagan_hostility_doctrine
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else_if = {
+				# limit = {
+					# has_doctrine = abrahamic_hostility_doctrine
+				# }
+				# value = faith_tenet_cost_massive
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_snow_adaptation }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		character_modifier = {
+			taiga_advantage = 5
+			taiga_attrition_mult = -0.25
+			mountain_advantage = 5
+			mountain_attrition_mult = -0.25
+			build_gold_cost = 0.1
+			county_opinion_add = 5
+		}
+	}
 }
