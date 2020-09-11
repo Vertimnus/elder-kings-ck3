@@ -2,7 +2,7 @@ doctrine_core_tenets = {
 	group = "core_tenets"
 	number_of_picks = 3
 
-	# Syncretism
+	### Syncretism
 	tenet_nedic_nordic_syncretism = {
 		icon = core_tenet_followers
 
@@ -49,8 +49,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = { patient }
-			sins = { cynical greedy }
+			virtues = { compassionate }
+			sins = { sadistic }
 		}
 	}
 	
@@ -58,19 +58,21 @@ doctrine_core_tenets = {
 		icon = core_tenet_followers
 
 		piety_cost = {
-			if = {
-				limit = {
-					OR = {
+			# if = {
+				# limit = {
+					# OR = {
 						# religion_tag = judaism_religion
 						# religion_tag = christianity_religion
 						# religion_tag = dualism_religion
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else = {
-				value = faith_tenet_cost_mid
-			}
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
@@ -97,31 +99,35 @@ doctrine_core_tenets = {
 			hostility_override_special_doctrine_is_aldmeri_faith = 1
 			aldmeri_syncretic_actor_opinion_active = yes
 			opinion_of_aldmeri_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			additional_personal_gods_active = yes
+			personal_god_different_names_active = yes
 		}
 
 		traits = {
-			virtues = { patient }
-			sins = { cynical greedy }
+			virtues = { diligent }
+			sins = { lazy }
 		}
 	}
 	
-		tenet_yokudan_syncretism = {
+	tenet_yokudan_syncretism = {
 		icon = core_tenet_followers
 
 		piety_cost = {
-			if = {
-				limit = {
-					OR = {
+			# if = {
+				# limit = {
+					# OR = {
 						# religion_tag = judaism_religion
 						# religion_tag = christianity_religion
 						# religion_tag = dualism_religion
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else = {
-				value = faith_tenet_cost_mid
-			}
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
@@ -148,11 +154,65 @@ doctrine_core_tenets = {
 			hostility_override_special_doctrine_is_yokudan_faith = 1
 			yokudan_syncretic_actor_opinion_active = yes
 			opinion_of_yokudan_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			additional_personal_gods_active = yes
+			personal_god_different_names_active = yes
 		}
 
 		traits = {
 			virtues = { temperate generous just }
 			sins = { gluttonous greedy arbitrary drunkard }
+		}
+	}
+	
+	### New tenets
+	tenet_children_skyrim = {
+		icon = core_tenet_holytree
+
+		piety_cost = {
+			# if = {
+				# limit = {
+					# OR = {
+						# religion_tag = hinduism_religion
+					# }
+				# }
+				# value = faith_tenet_cost_high
+			# }
+			# else_if = {
+				# limit = {
+					# OR = {
+						# has_doctrine = pagan_hostility_doctrine
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else_if = {
+				# limit = {
+					# has_doctrine = abrahamic_hostility_doctrine
+				# }
+				# value = faith_tenet_cost_massive
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_snow_adaptation }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			personal_god_different_names_active = yes
+		}
+
+		character_modifier = {
+			taiga_advantage = 5
+			taiga_attrition_mult = -0.25
+			mountains_advantage = 5
+			mountains_attrition_mult = -0.25
 		}
 	}
 }
