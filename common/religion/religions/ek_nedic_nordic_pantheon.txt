@@ -25,26 +25,28 @@
 
 	#Clerical Functions
 	doctrine = doctrine_clerical_function_taxation
-	doctrine = doctrine_clerical_gender_male_only
+	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_disallowed
 	doctrine = doctrine_clerical_succession_spiritual_fixed_appointment
+	
+	### EK Doctrines
+	doctrine = doctrine_daedra_worship_forbidden
+	doctrine = doctrine_lycanthropy_outlawed
+	doctrine = doctrine_necromancy_pragmatic
 
 	#Special Doctrine for Nedic-Nordic Syncretism
 	doctrine = special_doctrine_is_nedic_nordic_faith
 
 	traits = {
-		virtues = { forgiving compassionate chaste }
-		sins = { vengeful sadistic lustful }
+		virtues = { honest generous compassionate }
+		sins = { deceitful greedy sadistic }
 	}
-
+	
 	reserved_male_names = {
-		Andrew Antoninus Bartolomeus Benedict Christian Christopher Clement Constantine David Demetrius Eustace George Gregory
-		Hans Isaac Joakim Jacob John Jordan Joseph Laurence Magnus Marcus Martin Matthew Michael Nicholas Patrick Paul Peter Philip
-		Salvador Samuel Sebastian Simon Stephen Thomas Abraham Alexander Daniel Jesus Job Joshua Cyrus Luke Zachariah
+		Belharza Pelinius Tiber
 	}
 	reserved_female_names = {
-		Anna Beatrice Benedicta Brigid Catherine Cecilia Christina Clementia Constance Dorothy Elisabeth Joan Judith Juliana Helen
-		Magdalena Margaret Maria Marine Patricia Philippa Rachel Sarah Sophia Stephania
+		Alessia
 	}
 
 	custom_faith_icons = {
@@ -73,6 +75,8 @@
 		CreatorSheHe = CHARACTER_SHEHE_HE
 		CreatorHerHis = CHARACTER_HERHIS_HIS
 		CreatorHerHim = CHARACTER_HERHIM_HIM
+		CreatorNameAlternate = nedic_nordiccreator_god_name_alternate
+		CreatorNameAlternatePossessive = nedic_nordiccreator_god_name_alternate_possessive
 
 		#HealthGod
 		HealthGodName = nedic_nordichealth_god_name
@@ -80,6 +84,8 @@
 		HealthGodSheHe = CHARACTER_SHEHE_HE
 		HealthGodHerHis = CHARACTER_HERHIS_HIS
 		HealthGodHerHim = CHARACTER_HERHIM_HIM
+		HealthGodNameAlternate = nedic_nordichealth_god_name_alternate
+		HealthGodNameAlternatePossessive = nedic_nordichealth_god_name_alternate_possessive
 		
 		#FertilityGod
 		FertilityGodName = nedic_nordicfertility_god_name
@@ -87,6 +93,8 @@
 		FertilityGodSheHe = CHARACTER_SHEHE_HE
 		FertilityGodHerHis = CHARACTER_HERHIS_HIS
 		FertilityGodHerHim = CHARACTER_HERHIM_HIM
+		FertilityGodNameAlternate = nedic_nordicfertility_god_name_alternate
+		FertilityGodNameAlternatePossessive = nedic_nordicfertility_god_name_alternate_possessive
 
 		#WealthGod
 		WealthGodName = nedic_nordicwealth_god_name
@@ -94,6 +102,8 @@
 		WealthGodSheHe = CHARACTER_SHEHE_HE
 		WealthGodHerHis = CHARACTER_HERHIS_HIS
 		WealthGodHerHim = CHARACTER_HERHIM_HIM
+		WealthGodNameAlternate = nedic_nordicwealth_god_name_alternate
+		WealthGodNameAlternatePossessive = nedic_nordicwealth_god_name_alternate_possessive
 
 		#HouseholdGod
 		HouseholdGodName = nedic_nordichousehold_god_name
@@ -101,6 +111,8 @@
 		HouseholdGodSheHe = CHARACTER_SHEHE_HE
 		HouseholdGodHerHis = CHARACTER_HERHIS_HIS
 		HouseholdGodHerHim = CHARACTER_HERHIM_HIM
+		HouseholdGodNameAlternate = nedic_nordichousehold_god_name_alternate
+		HouseholdGodNameAlternatePossessive = nedic_nordichousehold_god_name_alternate_possessive
 
 		#FateGod
 		FateGodName = nedic_nordicfate_god_name
@@ -108,6 +120,8 @@
 		FateGodSheHe = CHARACTER_SHEHE_HE
 		FateGodHerHis = CHARACTER_HERHIS_HIS
 		FateGodHerHim = CHARACTER_HERHIM_HIM
+		FateGodNameAlternate = nedic_nordicfate_god_name_alterante
+		FateGodNameAlternatePossessive = nedic_nordicfate_god_name_alterante_possessive
 
 		#KnowledgeGod
 		KnowledgeGodName = nedic_nordicknowledge_god_name
@@ -136,6 +150,8 @@
 		NightGodSheHe = CHARACTER_SHEHE_HE
 		NightGodHerHis = CHARACTER_HERHIS_HIS
 		NightGodHerHim = CHARACTER_HERHIM_HIM
+		NightGodNameAlternate = nedic_nordicnight_god_name_alternate
+		NightGodNameAlternatePossessive = nedic_nordicnight_god_name_alternate_possessive
 
 		#WaterGod
 		WaterGodName = nedic_nordicwater_god_name
@@ -144,13 +160,18 @@
 		WaterGodHerHis = CHARACTER_HERHIS_HIS
 		WaterGodHerHim = CHARACTER_HERHIM_HIM
 
-		PantheonTerm = nedic_nordichigh_god_name
-		PantheonTermHasHave = pantheon_term_has
+		PantheonTerm = nedic_nordichigh_pantheon_name
+		PantheonTermHasHave = pantheon_term_have
 		GoodGodNames = {
 			nedic_nordichigh_god_name
-			nedic_nordichigh_god_name_alternate
-			chistianity_good_god_jesus
-			chistianity_good_god_christ
+			nedic_nordiccreator_god_name
+			nedic_nordichealth_god_name
+			nedic_nordicfertility_god_name
+			nedic_nordicwealth_god_name
+			nedic_nordicfate_god_name
+			nedic_nordicwar_god_name
+			nedic_nordicnight_god_name
+			nedic_nordicwater_god_name
 		}
 		DevilName = nedic_nordicdevil_name
 		DevilNamePossessive = nedic_nordicdevil_name_possessive
@@ -216,11 +237,13 @@
 			color = { 1.0 0.8 0.9 }
 			#religious_head = k_papal_state
 			graphical_faith = "catholic_gfx"
+			
+			icon = imperial_cult
 
 			#Tenets
-			doctrine = tenet_communion
-			doctrine = tenet_sanctity_of_nature
-			doctrine = tenet_ancestor_worship
+			doctrine = tenet_monasticism
+			doctrine = tenet_bhakti
+			doctrine = tenet_adaptive
 
 			holy_order_names = {
 				{ name = "holy_order_knights_templar" coat_of_arms = "ho_knights_templar" }
@@ -276,10 +299,16 @@
 			#religious_head = k_papal_state
 			graphical_faith = "catholic_gfx"
 
+			icon = nord_cult
+
+			#Main Group
+			doctrine = doctrine_no_head
+			doctrine = doctrine_theocracy_temporal
+	
 			#Tenets
-			doctrine = tenet_communion
-			doctrine = tenet_sanctity_of_nature
-			doctrine = tenet_ancestor_worship
+			doctrine = tenet_monasticism
+			doctrine = tenet_bhakti
+			doctrine = tenet_children_skyrim
 
 			holy_order_names = {
 				{ name = "holy_order_knights_templar" coat_of_arms = "ho_knights_templar" }
@@ -335,10 +364,12 @@
 			#religious_head = k_papal_state
 			graphical_faith = "catholic_gfx"
 
+			icon = breton_cult
+
 			#Tenets
-			doctrine = tenet_communion
+			doctrine = tenet_monasticism
+			doctrine = tenet_bhakti
 			doctrine = tenet_aldmeri_syncretism
-			doctrine = tenet_ancestor_worship
 
 			holy_order_names = {
 				{ name = "holy_order_knights_templar" coat_of_arms = "ho_knights_templar" }
@@ -388,10 +419,13 @@
 				WaterGodHerHim = CHARACTER_HERHIM_HIM
 			}
 		}
+		
 		redguard_cult = {
 			color = { 0.8 0.3 0.0 }
 			#religious_head = k_papal_state
 			graphical_faith = "catholic_gfx"
+
+			icon = redguard_cult
 
 			#Tenets
 			doctrine = tenet_communion
