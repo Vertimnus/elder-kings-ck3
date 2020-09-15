@@ -48,3 +48,20 @@ is_yokudan_faith = {
 		}
 	}
 }
+
+is_celestial_faith = {
+	group = "special"
+	
+	is_available_on_create = {
+		has_doctrine = special_doctrine_is_celestial_faith
+	}
+
+	special_doctrine_is_celestial_faith = {
+		parameters = {
+			# Since doctrines cannot modify other faith's views of us, only our view of others, all Celestial faiths are given this special doctrine which makes them friendlier to Faiths with the Celestial Syncretism tenet.
+			hostility_override_tenet_celestial_syncretism = 1
+			celestial_syncretic_recipient_opinion_active = yes
+			opinion_of_celestial_syncretic_actor_opinion_active = 15
+		}
+	}
+}
