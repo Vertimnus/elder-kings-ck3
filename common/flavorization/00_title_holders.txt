@@ -81,7 +81,7 @@ baron_theocracy_yokudan_religion = {
 	type = character
 	special = holder
 	tier = barony
-	priority = 8
+	priority = 10
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -90,7 +90,7 @@ barony_theocracy_yokudan_religion = {
 	type = title
 	tier = barony
 	top_liege = no
-	priority = 8
+	priority = 10
 	holding = church_holding
 	religions = { yokudan_religion }
 }
@@ -98,7 +98,7 @@ count_theocracy_yokudan_religion = {
 	type = character
 	special = holder
 	tier = county
-	priority = 18
+	priority = 20
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -107,7 +107,7 @@ county_theocracy_yokudan_religion = {
 	type = title
 	tier = county
 	top_liege = no
-	priority = 18
+	priority = 20
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
 }
@@ -115,7 +115,7 @@ duke_theocracy_yokudan_religion = {
 	type = character
 	special = holder
 	tier = duchy
-	priority = 28
+	priority = 30
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -124,7 +124,7 @@ duchy_theocracy_yokudan_religion = {
 	type = title
 	tier = duchy
 	top_liege = no
-	priority = 28
+	priority = 30
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
 }
@@ -133,7 +133,7 @@ king_theocracy_male_yokudan_religion = {
 	gender = male
 	special = holder
 	tier = kingdom
-	priority = 48
+	priority = 50
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -143,7 +143,7 @@ king_theocracy_female_yokudan_religion = {
 	gender = female
 	special = holder
 	tier = kingdom
-	priority = 48
+	priority = 50
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -152,7 +152,7 @@ kingdom_theocracy_yokudan_religion = {
 	type = title
 	tier = kingdom
 	top_liege = no
-	priority = 48
+	priority = 50
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
 }
@@ -160,7 +160,7 @@ emperor_theocracy_yokudan_religion = {
 	type = character
 	special = holder
 	tier = empire
-	priority = 103
+	priority = 105
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -168,7 +168,7 @@ emperor_theocracy_yokudan_religion = {
 empire_theocracy_yokudan_religion = {
 	type = title
 	tier = empire
-	priority = 103
+	priority = 105
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { yokudan_religion }
@@ -181,6 +181,17 @@ empire_theocracy_yokudan_religion = {
 ##############################################
 # Special cultural titles (sorted by culture groups, then cultures, then government special).
 
+#Special
+
+#Tribes (overrides "High Chiefdom")
+duchy_tribal_tribe = {
+	type = title
+	tier = duchy
+	top_liege = no
+	priority = 30
+	governments = { tribal_government }
+	cultures = { mountain_orc iron_orc wood_orc horsemen reachmen }
+}
 
  #############################################
  # Default titles by Government. This list should always be below any custom localization that is tied to specific cultures/religion.
@@ -270,7 +281,7 @@ duke_feudal_independent = {
 	priority = 27
 	only_independent = yes
 	governments = { feudal_government }
-	culture_groups = { breton }
+	culture_groups = { nedic_group }
 }
 duke_feudal_independent_female = {
 	type = character
@@ -280,13 +291,13 @@ duke_feudal_independent_female = {
 	priority = 27
 	only_independent = yes
 	governments = { feudal_government }
-	culture_groups = { breton }
+	culture_groups = { nedic_group }
 }
 duchy_feudal_independent = {
 	type = title
 	tier = duchy
 	governments = { feudal_government }
-	culture_groups = { breton }
+	culture_groups = { nedic_group }
 	only_independent = yes
 	priority = 28
 }
