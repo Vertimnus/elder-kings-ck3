@@ -563,54 +563,101 @@ GetActualBishopTitle = {
 
 	# Religion-By-Religion Titles for Bishops based on Liege's Tier.
 
-	#Paganism
+	#Yokudan
+	text = {
+		trigger = { 
+			faith.religion = faith:yokudan_religion
+			liege.highest_held_title_tier >= tier_empire 
+			is_female = no
+		}
+		localization_key = councillor_court_chaplain_yokudan_religion_empire
+	}
+	text = {
+		trigger = { 
+			faith.religion = faith:yokudan_religion
+			liege.highest_held_title_tier >= tier_empire 
+			is_female = yes 
+		}
+		localization_key = councillor_court_chaplain_yokudan_religion_empire_female
+	}
+	text = {
+		trigger = {
+			faith.religion = faith:yokudan_religion
+			liege.highest_held_title_tier >= tier_kingdom
+		}
+		localization_key = councillor_court_chaplain_yokudan_religion_kingdom
+	}
+	text = {
+		trigger = { 
+			faith.religion = faith:yokudan_religion
+			liege.highest_held_title_tier >= tier_duchy
+		}
+		localization_key = councillor_court_chaplain_yokudan_religion_duchy
+	}
+	text = {
+		trigger = { 
+			faith.religion = faith:yokudan_religion
+			liege.highest_held_title_tier < tier_duchy
+		}
+		localization_key = councillor_court_chaplain_yokudan_religion_county
+	}
+
+	#Fallback
+	text = {
+		trigger = { 
+			liege.highest_held_title_tier >= tier_empire 
+			is_female = no 
+		}
+		localization_key = councillor_court_chaplain_theocrat_empire
+	}
+	text = {
+		trigger = { 
+			liege.highest_held_title_tier >= tier_empire 
+			is_female = yes 
+		}
+		localization_key = councillor_court_chaplain_theocrat_empire_female
+	}
 	text = {
 		trigger = {
 			liege.highest_held_title_tier >= tier_kingdom
 			is_female = no
 		}
-		localization_key = councillor_court_chaplain_generic_kingdom
+		localization_key = councillor_court_chaplain_theocrat_kingdom
 	}
 	text = {
 		trigger = {
 			liege.highest_held_title_tier >= tier_kingdom
 			is_female = yes
 		}
-		localization_key = councillor_court_chaplain_generic_kingdom_female
+		localization_key = councillor_court_chaplain_theocrat_kingdom_female
 	}
 	text = {
-		trigger = {
+		trigger = { 
 			liege.highest_held_title_tier >= tier_duchy
+			is_female = no
 		}
-		localization_key = councillor_court_chaplain_generic_duchy
-	}
-	text = {
-		trigger = {
-			liege.highest_held_title_tier < tier_duchy
-		}
-		localization_key = councillor_court_chaplain_generic_county
-	}
-
-	#Fallback
-	text = {
-		trigger = { liege.highest_held_title_tier >= tier_empire is_female = no }
-		localization_key = councillor_court_chaplain_theocrat_empire
-	}
-	text = {
-		trigger = { liege.highest_held_title_tier >= tier_empire is_female = yes }
-		localization_key = councillor_court_chaplain_theocrat_empire_female
-	}
-	text = {
-		trigger = { liege.highest_held_title_tier >= tier_kingdom }
-		localization_key = councillor_court_chaplain_theocrat_kingdom
-	}
-	text = {
-		trigger = { liege.highest_held_title_tier >= tier_duchy }
 		localization_key = councillor_court_chaplain_theocrat_duchy
 	}
 	text = {
-		trigger = { liege.highest_held_title_tier < tier_duchy }
+		trigger = { 
+			liege.highest_held_title_tier >= tier_duchy
+			is_female = yes
+		}
+		localization_key = councillor_court_chaplain_theocrat_duchy_female
+	}
+	text = {
+		trigger = { 
+			liege.highest_held_title_tier < tier_duchy
+			is_female = no
+		}
 		localization_key = councillor_court_chaplain_theocrat_county
+	}
+	text = {
+		trigger = { 
+			liege.highest_held_title_tier < tier_duchy
+			is_female = yes
+		}
+		localization_key = councillor_court_chaplain_theocrat_county_female
 	}
 }
 
