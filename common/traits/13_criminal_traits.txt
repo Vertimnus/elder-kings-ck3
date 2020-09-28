@@ -1,0 +1,434 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 401-425
+
+kinslayer_1 = {
+	index = 401
+
+	dynasty_opinion = -5
+	fame = yes
+	group = kinslayer
+	level = 1
+	
+	# Criminal for dynasty
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+	triggered_opinion = {
+		parameter = kinslaying_extended_family_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+	triggered_opinion = {
+		parameter = kinslaying_any_dynasty_member_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+
+	# Opinion hit for everyone
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_extended_family_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_any_dynasty_member_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_shunned
+		opinion_modifier = kinslayer_intolerant
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_kinslayer_1_desc
+			}
+			desc = trait_kinslayer_1_character_desc
+		}
+	}
+}
+kinslayer_2 = {
+	index = 402
+
+	dynasty_opinion = -5
+	close_relative_opinion = -5
+	fame = yes
+	group = kinslayer
+	level = 2
+	
+	# Criminal for extended family
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+	triggered_opinion = {
+		parameter = kinslaying_extended_family_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+
+	# Opinion hit for everyone
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_extended_family_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_any_dynasty_member_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_shunned
+		opinion_modifier = kinslayer_intolerant
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_kinslayer_2_desc
+			}
+			desc = trait_kinslayer_2_character_desc
+		}
+	}
+}
+kinslayer_3 = {
+	index = 403
+
+	dynasty_opinion = -5
+	close_relative_opinion = -10
+	fame = yes
+	group = kinslayer
+	level = 3
+	
+	# Criminal for close family
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_crime_dynasty
+		same_dynasty = yes
+	}
+
+	# Opinion hit for everyone
+	triggered_opinion = {
+		parameter = kinslaying_close_kin_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_extended_family_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_any_dynasty_member_crime
+		opinion_modifier = kinslayer_intolerant
+	}
+	triggered_opinion = {
+		parameter = kinslaying_shunned
+		opinion_modifier = kinslayer_intolerant
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_kinslayer_3_desc
+			}
+			desc = trait_kinslayer_3_character_desc
+		}
+	}
+}
+
+deviant = {
+	index = 404
+
+	stress_loss_mult = 0.25
+	same_opinion = 35
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_deviant_desc
+			}
+			desc = trait_deviant_character_desc
+		}
+	}
+
+	ai_zeal = -25
+	
+	triggered_opinion = {
+		parameter = deviancy_illegal
+		opinion_modifier = deviant_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = deviancy_shunned
+		opinion_modifier = deviant_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	compatibility = {
+		deviant = @pos_compat_high
+		lustful = @pos_compat_medium
+		chaste = @neg_compat_medium
+		celibate = @neg_compat_medium
+	}
+}
+
+cannibal = {
+	index = 405
+	prowess = 2
+	
+	same_opinion = 35
+	
+	stress_loss_mult = 0.15
+	
+	dread_baseline_add = 20
+		
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_cannibal_desc
+			}
+			desc = trait_cannibal_character_desc
+		}
+	}
+
+	ai_rationality = -20
+	ai_honor = -10
+	ai_compassion = -10
+	
+	triggered_opinion = {
+		parameter = cannibalism_legal
+		opinion_modifier = cannibal_crime
+		check_missing = yes
+		ignore_opinion_value_if_same_trait = yes
+	}
+}
+
+sodomite = {
+	index = 406
+
+	same_opinion = 10
+	
+	triggered_opinion = {
+		parameter = homosexuality_illegal
+		opinion_modifier = sodomite_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = homosexuality_shunned
+		opinion_modifier = sodomite_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_sodomite_desc
+			}
+			desc = trait_sodomite_character_desc
+		}
+	}
+}
+
+incestuous = {
+	index = 407
+	same_opinion = 20
+	
+	triggered_opinion = {
+		parameter = allows_unrestricted_marriage
+		opinion_modifier = incest_intolerant
+		check_missing = yes
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_incestuous_desc
+			}
+			desc = trait_incestuous_character_desc
+		}
+	}
+}
+
+adulterer = {
+	index = 408
+
+	same_opinion = 10
+	fame = yes
+
+	triggered_opinion = {
+		parameter = adultery_male_crime
+		male_only = yes
+		opinion_modifier = adulterer_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_male_shunned
+		male_only = yes
+		opinion_modifier = adulterer_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_female_crime
+		female_only = yes
+		opinion_modifier = adulterer_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_female_shunned
+		female_only = yes
+		opinion_modifier = adulterer_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_adulterer_desc
+			}
+			desc = trait_adulterer_character_desc
+		}
+	}
+}
+
+fornicator = {
+	index = 409
+
+	same_opinion = 10
+	fame = yes
+
+	triggered_opinion = {
+		parameter = adultery_male_crime
+		male_only = yes
+		opinion_modifier = fornicator_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_male_shunned
+		male_only = yes
+		opinion_modifier = fornicator_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_female_crime
+		female_only = yes
+		opinion_modifier = fornicator_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = adultery_female_shunned
+		female_only = yes
+		opinion_modifier = fornicator_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_fornicator_desc
+			}
+			desc = trait_fornicator_character_desc
+		}
+	}
+}
+
+murderer = {
+	index = 410
+
+	general_opinion = -15
+	fame = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_murderer_desc
+			}
+			desc = trait_murderer_character_desc
+		}
+	}
+}
+
+witch = {
+	index = 411
+	diplomacy = -1
+	intrigue = 1
+	learning = 1
+	group = witch
+	level = 1
+
+	same_opinion = 20
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_witch_desc
+			}
+			desc = trait_witch_character_desc
+		}
+	}
+
+	ai_compassion = very_low_negative_ai_value
+	ai_boldness = very_low_positive_ai_value
+	ai_rationality = very_low_positive_ai_value
+	
+	triggered_opinion = {
+		parameter = witchcraft_illegal
+		opinion_modifier = witchcraft_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = witchcraft_shunned
+		opinion_modifier = witchcraft_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}

@@ -1,0 +1,980 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 51-100
+
+### Diplomacy lifestyle
+diplomat = {
+	index = 51
+	lifestyle = yes
+
+	diplomacy = 3
+	personal_scheme_power_mult = 0.25
+	independent_ruler_opinion = 20
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_diplomat_desc
+			}
+			desc = trait_diplomat_character_desc
+		}
+	}
+
+	#AI Values
+	ai_energy = 20
+	ai_sociability = low_positive_ai_value
+
+	compatibility = {
+		diplomat = @pos_compat_medium
+		family_first = @pos_compat_medium
+		august = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+	}
+}
+
+family_first = {
+	index = 52
+	lifestyle = yes
+
+	fertility = 0.2
+	dynasty_house_opinion = 10
+	close_relative_opinion = 15
+	stress_loss_mult = 0.2
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_family_first_neutral
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_family_first_female
+			}
+			desc = trait_family_first_male
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_family_first_desc
+			}
+			desc = trait_family_first_character_desc
+		}
+	}
+
+	#AI Values
+	ai_energy = 20
+	ai_sociability = low_positive_ai_value
+	
+	compatibility = {
+		diplomat = @pos_compat_medium
+		family_first = @pos_compat_medium
+		august = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+	}
+}
+
+august = {
+	index = 53
+	lifestyle = yes
+	
+	diplomacy = 2
+	martial = 1
+	monthly_prestige = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_august_desc
+			}
+			desc = trait_august_character_desc
+		}
+	}
+
+	#AI Values
+	ai_energy = 20
+	
+	compatibility = {
+		diplomat = @pos_compat_medium
+		family_first = @pos_compat_medium
+		august = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+	}
+}
+
+### Martial lifestyle
+strategist = {
+	index = 56
+	lifestyle = yes
+
+	martial = 3
+	diplomacy = 1
+	enemy_hard_casualty_modifier = 0.25
+	no_water_crossing_penalty = yes
+
+	ai_rationality = 30
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_strategist_desc
+			}
+			desc = trait_strategist_character_desc
+		}
+	}
+
+	compatibility = {
+		strategist = @pos_compat_medium
+		overseer = @pos_compat_medium
+		gallant = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+
+overseer = {
+	index = 57
+	lifestyle = yes
+
+	stewardship = 2
+	martial = 2
+	monthly_county_control_change_factor = 0.5
+
+	ai_rationality = 20
+
+	compatibility = {
+		strategist = @pos_compat_medium
+		overseer = @pos_compat_medium
+		gallant = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+
+gallant = {
+	index = 58
+	lifestyle = yes
+	
+	martial = 2
+	prowess = 4
+	attraction_opinion = 20
+	monthly_prestige_gain_mult = 0.2
+
+	ai_boldness = medium_positive_ai_value
+	ai_honor = low_positive_ai_value
+	ai_sociability = low_positive_ai_value
+
+	compatibility = {
+		strategist = @pos_compat_medium
+		overseer = @pos_compat_medium
+		gallant = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+
+### Stewardship lifestyle
+architect = {
+	index = 61
+	lifestyle = yes
+
+	stewardship = 2
+	build_speed = -0.15
+	holding_build_speed = -0.15
+	build_gold_cost = -0.1
+	holding_build_gold_cost = -0.1
+	
+	ai_rationality = 10
+	ai_energy = 5
+
+	compatibility = {
+		architect = @pos_compat_medium
+		administrator = @pos_compat_medium
+		avaricious = @pos_compat_medium
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+	}
+}
+
+administrator = {
+	index = 62
+	lifestyle = yes
+
+	stewardship = 3
+	diplomacy = 1
+	vassal_opinion = 5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_administrator_desc
+			}
+			desc = trait_administrator_character_desc
+		}
+	}
+
+	ai_rationality = 20
+	ai_energy = 10
+
+	compatibility = {
+		architect = @pos_compat_medium
+		administrator = @pos_compat_medium
+		avaricious = @pos_compat_medium
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+	}
+}
+
+avaricious = {
+	index = 63
+	lifestyle = yes
+
+	stewardship = 2
+	tax_mult = 0.15
+
+	ai_rationality = -20
+	ai_greed = 30
+	ai_honor = -20
+	ai_compassion = -30
+	ai_energy = 20
+	
+	compatibility = {
+		architect = @pos_compat_medium
+		administrator = @pos_compat_medium
+		avaricious = @pos_compat_medium
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+	}
+}
+
+### Intrigue lifestyles
+schemer = {
+	index = 66
+	lifestyle = yes
+	
+	intrigue = 5
+	hostile_scheme_power_mult = 0.25
+
+	ai_honor = -20
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_schemer_desc
+			}
+			desc = trait_schemer_character_desc
+		}
+	}
+	
+	compatibility = {
+		schemer = @pos_compat_medium
+		seducer = @pos_compat_medium
+		torturer = @pos_compat_medium
+		deceitful = @pos_compat_low
+		honest = @neg_compat_low
+	}
+}
+
+seducer = {
+	index = 67
+	lifestyle = yes
+
+	intrigue = 3
+	attraction_opinion = 40
+	fertility = 0.2
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					exists = this
+					is_female = yes
+				}
+				desc = trait_seducer_female
+			}
+			desc = trait_seducer
+		}
+	}
+
+	ai_honor = -10
+	ai_sociability = low_positive_ai_value
+	
+	compatibility = {
+		schemer = @pos_compat_medium
+		seducer = @pos_compat_medium
+		torturer = @pos_compat_medium
+		deceitful = @pos_compat_low
+		honest = @neg_compat_low
+	}
+}
+
+torturer = {
+	index = 68
+	lifestyle = yes
+
+	dread_gain_mult = 0.5
+	prowess = 4
+	levy_size = 0.1
+	hostile_scheme_resistance_mult = 0.25
+
+	ai_honor = -30
+	ai_vengefulness = 20
+	ai_boldness = 20
+	
+	compatibility = {
+		schemer = @pos_compat_medium
+		seducer = @pos_compat_medium
+		torturer = @pos_compat_medium
+		deceitful = @pos_compat_low
+		honest = @neg_compat_low
+	}
+}
+
+### Learning lifestyles
+whole_of_body = {
+	index = 71
+	lifestyle = yes
+
+	health = 0.5
+	fertility = 0.2
+	stress_gain_mult = -0.2
+
+	ai_energy = 20
+
+	compatibility = {
+		whole_of_body = @pos_compat_medium
+		scholar = @pos_compat_medium
+		theologian = @pos_compat_medium
+		intellect_good_1 = @pos_compat_low
+		intellect_good_2 = @pos_compat_low
+		intellect_good_3 = @pos_compat_low
+		pensive = @pos_compat_low
+		shrewd = @pos_compat_low
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+		intellect_bad_1 = @neg_compat_low
+		intellect_bad_2 = @neg_compat_low
+		intellect_bad_3 = @neg_compat_low
+	}
+}
+
+scholar = {
+	index = 72
+	lifestyle = yes
+
+	learning = 5
+	owned_personal_scheme_success_chance_add = 10
+	owned_hostile_scheme_success_chance_add = 10
+	development_growth_factor = 0.15
+	
+	ai_rationality = 30
+
+	compatibility = {
+		whole_of_body = @pos_compat_medium
+		scholar = @pos_compat_medium
+		theologian = @pos_compat_medium
+		intellect_good_1 = @pos_compat_low
+		intellect_good_2 = @pos_compat_low
+		intellect_good_3 = @pos_compat_low
+		pensive = @pos_compat_low
+		shrewd = @pos_compat_low
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+		intellect_bad_1 = @neg_compat_low
+		intellect_bad_2 = @neg_compat_low
+		intellect_bad_3 = @neg_compat_low
+	}
+}
+
+theologian = {
+	index = 73
+	lifestyle = yes
+	
+	learning = 3
+	monthly_piety_gain_mult = 0.2
+
+	ai_rationality = 10
+	ai_zeal = 20
+
+	compatibility = {
+		whole_of_body = @pos_compat_medium
+		scholar = @pos_compat_medium
+		theologian = @pos_compat_medium
+		intellect_good_1 = @pos_compat_low
+		intellect_good_2 = @pos_compat_low
+		intellect_good_3 = @pos_compat_low
+		pensive = @pos_compat_low
+		shrewd = @pos_compat_low
+		diligent = @pos_compat_low
+		lazy = @neg_compat_low
+		intellect_bad_1 = @neg_compat_low
+		intellect_bad_2 = @neg_compat_low
+		intellect_bad_3 = @neg_compat_low
+	}
+}
+
+### Other
+reveler_1 = {
+	index = 76
+	lifestyle = yes
+	diplomacy = 2
+	intrigue = 1
+	
+	group = lifestyle_reveler
+	level = 1
+	opposite_opinion = -5
+	same_opinion = 10
+	# AI Values
+	ai_greed = 25
+	ai_sociability = medium_positive_ai_value
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reveler_1_desc
+			}
+			desc = trait_reveler_1_character_desc
+		}
+	}
+
+	compatibility = {
+		reveler_1 = @pos_compat_medium
+		reveler_2 = @pos_compat_medium
+		reveler_3 = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+		lustful = @pos_compat_low
+		chaste = @neg_compat_low
+		drunkard = @pos_compat_low
+		temperate = @neg_compat_low
+		gluttonous = @pos_compat_low
+	}
+}
+reveler_2 = {
+	index = 77
+	lifestyle = yes
+	diplomacy = 3
+	intrigue = 2
+	
+	group = lifestyle_reveler
+	level = 2
+	opposite_opinion = -10
+	same_opinion = 15
+	# AI Values
+	ai_greed = 25
+	ai_sociability = medium_positive_ai_value
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reveler_2_desc
+			}
+			desc = trait_reveler_2_character_desc
+		}
+	}
+
+	compatibility = {
+		reveler_1 = @pos_compat_medium
+		reveler_2 = @pos_compat_medium
+		reveler_3 = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+		lustful = @pos_compat_low
+		chaste = @neg_compat_low
+		drunkard = @pos_compat_low
+		temperate = @neg_compat_low
+		gluttonous = @pos_compat_low
+	}
+}
+reveler_3 = {
+	index = 78
+	lifestyle = yes
+	diplomacy = 4
+	intrigue = 3
+	
+	group = lifestyle_reveler
+	level = 3
+	opposite_opinion = -15
+	same_opinion = 20
+	# AI Values
+	ai_greed = 25
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reveler_3_desc
+			}
+			desc = trait_reveler_3_character_desc
+		}
+	}
+
+
+	ai_sociability = medium_positive_ai_value
+
+	compatibility = {
+		reveler_1 = @pos_compat_medium
+		reveler_2 = @pos_compat_medium
+		reveler_3 = @pos_compat_medium
+		gregarious = @pos_compat_low
+		shy = @neg_compat_low
+		lustful = @pos_compat_low
+		chaste = @neg_compat_low
+		drunkard = @pos_compat_low
+		temperate = @neg_compat_low
+		gluttonous = @pos_compat_low
+	}
+}
+
+blademaster_1 = {
+	index = 79
+	lifestyle = yes
+	negate_health_penalty_add = 0.25
+	prowess = 3
+
+	group = lifestyle_blademaster
+	level = 1
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_blademaster_1_desc
+			}
+			desc = trait_blademaster_1_character_desc
+		}
+	}
+
+	compatibility = {
+		blademaster_1 = @pos_compat_medium
+		blademaster_2 = @pos_compat_medium
+		blademaster_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+blademaster_2 = {
+	index = 80
+	lifestyle = yes
+	negate_health_penalty_add = 0.5
+	prowess = 6
+
+	group = lifestyle_blademaster
+	level = 2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_blademaster_2_desc
+			}
+			desc = trait_blademaster_2_character_desc
+		}
+	}
+
+	compatibility = {
+		blademaster_1 = @pos_compat_medium
+		blademaster_2 = @pos_compat_medium
+		blademaster_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+blademaster_3 = {
+	index = 81
+	lifestyle = yes
+	negate_health_penalty_add = 1
+	prowess = 12
+
+	group = lifestyle_blademaster
+	level = 3
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_blademaster_3_desc
+			}
+			desc = trait_blademaster_3_character_desc
+		}
+	}
+
+	compatibility = {
+		blademaster_1 = @pos_compat_medium
+		blademaster_2 = @pos_compat_medium
+		blademaster_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+	}
+}
+
+hunter_1 = {
+	index = 82
+	lifestyle = yes
+	prowess = 2
+	
+	stress_loss_mult = 0.1
+	
+	group = lifestyle_hunter
+	level = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_hunter_1_desc
+			}
+			desc = trait_hunter_1_character_desc
+		}
+	}
+
+	compatibility = {
+		hunter_1 = @pos_compat_medium
+		hunter_2 = @pos_compat_medium
+		hunter_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+		lazy = @neg_compat_low
+	}
+}
+hunter_2 = {
+	index = 83
+	lifestyle = yes
+	prowess = 4
+	
+	stress_loss_mult = 0.15
+
+	group = lifestyle_hunter
+	level = 2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_hunter_2_desc
+			}
+			desc = trait_hunter_2_character_desc
+		}
+	}
+
+	compatibility = {
+		hunter_1 = @pos_compat_medium
+		hunter_2 = @pos_compat_medium
+		hunter_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+		lazy = @neg_compat_low
+	}
+}
+hunter_3 = {
+	index = 84
+	lifestyle = yes
+	prowess = 6
+	
+	stress_loss_mult = 0.2
+	
+	group = lifestyle_hunter
+	level = 3
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_hunter_3_desc
+			}
+			desc = trait_hunter_3_character_desc
+		}
+	}
+
+	compatibility = {
+		hunter_1 = @pos_compat_medium
+		hunter_2 = @pos_compat_medium
+		hunter_3 = @pos_compat_medium
+		brave = @pos_compat_low
+		craven = @neg_compat_low
+		lazy = @neg_compat_low
+	}
+}
+
+mystic_1 = {
+	index = 85
+	lifestyle = yes
+	learning = 1
+	
+	group = lifestyle_mystic
+	level = 1
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_mystic_male_1
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_mystic_female_1
+			}
+			desc = trait_mystic_male_1
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_mystic_1_desc
+			}
+			desc = trait_mystic_1_character_desc
+		}
+	}
+
+	ai_rationality = -10
+
+	compatibility = {
+		mystic_1 = @pos_compat_medium
+		mystic_2 = @pos_compat_medium
+		mystic_3 = @pos_compat_medium
+	}
+}
+mystic_2 = {
+	index = 86
+	lifestyle = yes
+	learning = 2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_mystic_2_desc
+			}
+			desc = trait_mystic_2_character_desc
+		}
+	}
+	
+	group = lifestyle_mystic
+	level = 2
+
+	ai_rationality = -10
+	ai_zeal = -10
+
+	compatibility = {
+		mystic_1 = @pos_compat_medium
+		mystic_2 = @pos_compat_medium
+		mystic_3 = @pos_compat_medium
+	}
+}
+mystic_3 = {
+	index = 87
+	lifestyle = yes
+	learning = 4
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_mystic_3_desc
+			}
+			desc = trait_mystic_3_character_desc
+		}
+	}
+	
+	group = lifestyle_mystic
+	level = 3
+
+	ai_rationality = -10
+	ai_zeal = -20
+
+	compatibility = {
+		mystic_1 = @pos_compat_medium
+		mystic_2 = @pos_compat_medium
+		mystic_3 = @pos_compat_medium
+	}
+}
+
+physician_1 = {
+	index = 88
+	lifestyle = yes
+	learning = 1
+	negate_health_penalty_add = 0.25
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_physician_1_desc
+			}
+			desc = trait_physician_1_character_desc
+		}
+	}
+	
+	group = lifestyle_physician
+	level = 1
+
+	ai_rationality = 10
+
+	compatibility = {
+		physician_1 = @pos_compat_medium
+		physician_2 = @pos_compat_medium
+		physician_3 = @pos_compat_medium
+		whole_of_body = @pos_compat_low
+		scholar = @pos_compat_low
+		theologian = @pos_compat_low
+	}
+}
+physician_2 = {
+	index = 89
+	lifestyle = yes
+	learning = 2
+	negate_health_penalty_add = 0.5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_physician_2_desc
+			}
+			desc = trait_physician_2_character_desc
+		}
+	}
+	
+	group = lifestyle_physician
+	level = 2
+
+	ai_rationality = 20
+
+	compatibility = {
+		physician_1 = @pos_compat_medium
+		physician_2 = @pos_compat_medium
+		physician_3 = @pos_compat_medium
+		whole_of_body = @pos_compat_low
+		scholar = @pos_compat_low
+		theologian = @pos_compat_low
+	}
+}
+physician_3 = {
+	index = 90
+	lifestyle = yes
+	learning = 4
+	negate_health_penalty_add = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_physician_3_desc
+			}
+			desc = trait_physician_3_character_desc
+		}
+	}
+	
+	group = lifestyle_physician
+	level = 3
+
+	ai_rationality = 30
+
+	compatibility = {
+		physician_1 = @pos_compat_medium
+		physician_2 = @pos_compat_medium
+		physician_3 = @pos_compat_medium
+		whole_of_body = @pos_compat_low
+		scholar = @pos_compat_low
+		theologian = @pos_compat_low
+	}
+}
+
+#Herbalist has been made into a 1 tiered lifestyle trait because no lvl up system exists in the game
+lifestyle_herbalist = {
+	index  = 91
+
+	lifestyle = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = lifestyle_herbalist_desc
+			}
+			desc = lifestyle_herbalist_character_desc
+		}
+	}
+
+	learning = 2
+	intrigue = 2
+	negate_health_penalty_add = 0.5
+
+	ai_rationality = 10
+
+	compatibility = {
+		mystic_1 = @pos_compat_medium
+		mystic_2 = @pos_compat_medium
+		mystic_3 = @pos_compat_medium
+		whole_of_body = @pos_compat_low
+		scholar = @pos_compat_low
+		theologian = @pos_compat_low
+		zealous = @neg_compat_low
+	}
+}

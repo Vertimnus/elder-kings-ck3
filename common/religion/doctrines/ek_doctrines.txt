@@ -1,9 +1,48 @@
-﻿doctrine_daedra_worship = {
+﻿### Main doctrines
+# doctrine_number_deities = {
+	# group = "main_group"
+
+	# doctrine_number_deities_monotheism = {
+		# piety_cost = {
+			# value = faith_doctrine_cost_mid
+			# if = {
+				# limit = { has_doctrine = doctrine_number_deities_monotheism }
+				# multiply = faith_unchanged_doctrine_cost_mult
+			# }
+		# }
+		# parameters = {
+			
+		# }
+	# }
+	# doctrine_number_deities_polytheism = {
+		# piety_cost = {
+			# value = faith_doctrine_cost_mid
+			# if = {
+				# limit = { has_doctrine = doctrine_number_deities_polytheism }
+				# multiply = faith_unchanged_doctrine_cost_mult
+			# }
+		# }
+		# parameters = {
+			# polytheism_patron_deities = yes
+		# }
+	# }
+# }
+
+### Crimes
+doctrine_daedra_worship = {
 	group = "crimes"
 	
 	doctrine_daedra_worship_forbidden = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_daedra_worship_forbidden }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_daedra_worship_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 			daedric_worship_criminal = yes
@@ -14,6 +53,10 @@
 	doctrine_daedra_worship_shunned = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_daedra_worship_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
 		}
 		parameters = {
 			daedric_worship_shunned = yes
@@ -24,6 +67,14 @@
 	doctrine_daedra_worship_accepted = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_daedra_worship_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_daedra_worship_forbidden }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 			hostility_override_daedric_hostility_doctrine = 2
@@ -38,6 +89,14 @@ doctrine_lycanthropy = {
 	doctrine_lycanthropy_outlawed = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_lycanthropy_outlawed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_lycanthropy_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 			lycanthropy_criminal = yes
@@ -47,6 +106,10 @@ doctrine_lycanthropy = {
 	doctrine_lycanthropy_pragmatic = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_lycanthropy_pragmatic }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
 		}
 		parameters = {
 			benevolent_lycanthropy_shunned = yes
@@ -57,6 +120,65 @@ doctrine_lycanthropy = {
 	doctrine_lycanthropy_accepted = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_lycanthropy_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_lycanthropy_outlawed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+		}
+	}
+}
+
+doctrine_vampirism = {
+	group = "crimes"
+	
+	doctrine_vampirism_outlawed = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_vampirism_outlawed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_vampirism_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
+		parameters = {
+			vampirism_criminal = yes
+		}
+	}
+
+	doctrine_vampirism_pragmatic = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_vampirism_pragmatic }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			benevolent_vampirism_shunned = yes
+			evil_vampirism_criminal = yes
+		}
+	}
+
+	doctrine_vampirism_accepted = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_vampirism_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_vampirism_outlawed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 		}
@@ -69,10 +191,17 @@ doctrine_necromancy = {
 	doctrine_necromancy_outlawed = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_necromancy_outlawed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_necromancy_accepted }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 			necromancy_criminal = yes
-			vampirism_criminal = yes
 			undeath_criminal = yes
 		}
 	}
@@ -80,11 +209,13 @@ doctrine_necromancy = {
 	doctrine_necromancy_pragmatic = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_necromancy_pragmatic }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
 		}
 		parameters = {
 			necromancy_shunned = yes
-			benevolent_vampirism_shunned = yes
-			evil_vampirism_criminal = yes
 			undeath_criminal = yes
 		}
 	}
@@ -92,6 +223,14 @@ doctrine_necromancy = {
 	doctrine_necromancy_accepted = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_necromancy_accepted }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_necromancy_outlawed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
 		}
 		parameters = {
 		}

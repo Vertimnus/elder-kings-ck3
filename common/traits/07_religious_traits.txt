@@ -1,0 +1,764 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 251-275
+
+celibate = {
+	index = 251
+	opposites = {
+		lifestyle_reveler
+		seducer
+	}
+	can_have_children = no
+	monthly_piety = 1
+	
+	clergy_opinion = 10
+	opposite_opinion = -10
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_celibate_desc
+			}
+			desc = trait_celibate_character_desc
+		}
+	}
+
+	ai_zeal = 30
+	ai_sociability = medium_negative_ai_value
+
+	compatibility = {
+		chaste = @pos_compat_low
+		celibate = @pos_compat_low
+		temperate = @pos_compat_low
+		calm = @pos_compat_low
+		lustful = @neg_compat_low
+		deviant = @neg_compat_low
+		lovers_pox = @neg_compat_low
+		early_great_pox = @neg_compat_low
+		great_pox = @neg_compat_low
+		reveler_1 = @neg_compat_low
+		reveler_2 = @neg_compat_low
+		reveler_3 = @neg_compat_low
+		seducer = @neg_compat_low
+	}
+}
+
+pilgrim = {
+	index = 252
+
+	monthly_piety_gain_mult = 0.1
+	same_faith_opinion = 5
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_pilgrim
+			}
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = trait_hajjaj
+			# }
+			desc = trait_pilgrim
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_pilgrim_desc
+			}
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = trait_hajjaj_desc
+			# }
+			desc = trait_pilgrim_character_desc
+		}
+	}
+
+	ai_zeal = 10
+}
+
+excommunicated = {
+	index = 253
+	
+	monthly_piety_gain_mult = -0.5
+
+	triggered_opinion = {
+		parameter = excommunication_active
+		opinion_modifier = tenet_excommunicated_crime
+		same_faith = yes
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_excommunicated_desc
+			}
+			desc = trait_excommunicated_character_desc
+		}
+	}
+}
+
+# Monk for christian male, Nun for christian female. Devoted for others.
+devoted = {
+	index = 254
+	# potential = {
+		# is_ruler = no
+	# }
+	monthly_piety = 0.3
+	
+	same_faith_opinion = 5
+	
+	flag = can_not_marry
+	can_inherit = no
+
+	ai_sociability = very_low_negative_ai_value
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_devoted_male
+			}
+			triggered_desc = {
+				trigger = {
+					is_adult = no
+				}
+				desc = trait_devoted_child
+			}
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:theravada.religion
+					# is_female = no
+				# }
+				# desc = trait_devoted_buddhism_male
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:theravada.religion
+					# is_female = yes
+				# }
+				# desc = trait_devoted_buddhism_female
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:vaishnavism.religion
+					# is_female = no
+				# }
+				# desc = trait_devoted_hinduism_male
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:vaishnavism.religion
+					# is_female = yes
+				# }
+				# desc = trait_devoted_hinduism_female
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:digambara.religion
+					# is_female = no
+				# }
+				# desc = trait_devoted_jainism_male
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# exists = faith.religion
+					# faith.religion = faith:digambara.religion
+					# is_female = yes
+				# }
+				# desc = trait_devoted_jainism_female
+			# }
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_devoted_female
+			}
+			desc = trait_devoted_male
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_devoted_desc
+			}
+			triggered_desc = {
+				trigger = { is_adult = no }
+				desc = trait_devoted_child_desc
+			}
+			desc = trait_devoted_character_desc
+		}
+	}
+
+}
+
+# Muslim version of the Blood of the Prophet-trait. Muslim agnatically descended from Muhammed. Female version is localized 'Sayyida'
+sayyid = {
+	index = 255
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_sayyid
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_sayyida
+			}
+			desc = trait_sayyid
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_sayyid_desc
+			}
+			desc = trait_sayyid_character_desc
+		}
+	}
+
+	same_faith_opinion = 5
+	
+	inherit_chance = 100
+	parent_inheritance_sex = male
+	inherit_from_real_father = no
+}
+
+# Zoroastrian version of the Savior-trait.
+saoshyant = {
+	index = 256
+	opposites = {
+		saoshyant_descendant
+	}
+	diplomacy = 1
+	learning = 2
+	prowess = 2
+
+	same_faith_opinion = 5
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_saoshyant_desc
+			}
+			desc = trait_saoshyant_character_desc
+		}
+	}
+
+	ai_zeal = 100
+}
+
+# Zoroastrian version of the Divine Blood-trait.
+saoshyant_descendant = {
+	index = 257
+	opposites = {
+		saoshyant
+	}
+	learning = 1
+
+	same_faith_opinion = 5
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_saoshyant_descendant_desc
+			}
+			desc = trait_saoshyant_descendant_character_desc
+		}
+	}
+
+}
+
+# Generic version of Saoshyant, Mahdi, Messiah, etc.
+savior = {
+	index = 258
+	opposites = {
+		divine_blood
+	}
+	
+	same_faith_opinion = 10
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_savior_desc
+			}
+			desc = trait_savior_character_desc
+		}
+	}
+
+	ai_zeal = 100
+}
+
+# Generic version of Descendant of Saoshyant, Mahdi, Messiah, etc. This is automatically granted to all members of a dynasty with "Divine Blood".
+divine_blood = {
+	index = 259
+	opposites = {
+		savior
+	}
+	
+	same_faith_opinion = 5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_divine_blood_desc
+			}
+			desc = trait_divine_blood_character_desc
+		}
+	}
+
+}
+
+# Generic version of Sayyid. Dynasties can now be marked with "Prophetic Blood", which will automatically grant this trait to all members.
+blood_of_prophet = {
+	index = 260
+	
+	same_faith_opinion = 5
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_blood_of_prophet_desc
+			}
+			desc = trait_blood_of_prophet_character_desc
+		}
+	}
+
+	# Sayyid has different effects
+}
+
+# Generic version of Crusader and Mujahid
+faith_warrior = {
+	index = 261
+	martial = 2
+	prowess = 1
+	
+	clergy_opinion = 15
+	same_faith_opinion = 15
+
+	icon = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = faith_warrior.dds
+			}
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = christianity_religion } }
+				# desc = crusader.dds
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = mujahid.dds
+			# }
+			desc = faith_warrior.dds
+		}
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_faith_warrior
+			}
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = christianity_religion } }
+				# desc = trait_crusader
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = trait_mujahid
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = bon_religion } }
+				# desc = trait_crusader_bon
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = buddhism_religion } }
+				# desc = trait_crusader_buddhism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = dualism_religion } }
+				# desc = trait_crusader_dualism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = germanic_religion } }
+				# desc = trait_crusader_germanic
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = hellenism_religion } }
+				# desc = trait_crusader_hellenism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = hinduism_religion } }
+				# desc = trait_crusader_hinduism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = jainism_religion } }
+				# desc = trait_crusader_jainism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = judaism_religion } }
+				# desc = trait_crusader_judaism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = magyar_religion } }
+				# desc = trait_crusader_magyar
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = baltic_religion } }
+				# desc = trait_crusader_baltic
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = slavic_religion } }
+				# desc = trait_crusader_slavic
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = finno_ugric_religion } }
+				# desc = trait_crusader_finno_ugric
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = tengrism_religion } }
+				# desc = trait_crusader_tengrism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_religion } }
+				# desc = trait_crusader_west_african
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_bori_religion } }
+				# desc = trait_crusader_west_african_bori
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_roog_religion } }
+				# desc = trait_crusader_west_african_roog
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = zoroastrianism_religion } }
+				# desc = trait_crusader_zoroastrianism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = zunism_religion } }
+				# desc = trait_crusader_zunism
+			# }
+
+			desc = trait_faith_warrior
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_faith_warrior_desc
+			}
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = trait_mujahid_character_desc
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = christianity_religion } }
+				# desc = trait_crusader_character_desc
+			# }
+			desc = trait_faith_warrior_character_desc
+		}
+	}
+	
+	ai_zeal = 10
+}
+
+saint = {
+	index = 262
+	monthly_piety = 2
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_saint_desc
+			}
+			desc = trait_saint_character_desc
+		}
+	}
+
+	ai_zeal = 50
+}
+
+order_member = {
+	index = 263
+
+	flag = can_not_marry
+	can_inherit = no
+
+	martial = 1
+	prowess = 4
+
+	same_opinion = 15
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_order_member_desc
+			}
+			desc = trait_order_member_character_desc
+		}
+	}
+
+	ai_zeal = 10
+	ai_honor = 5
+	ai_greed = -10
+}
+
+paragon = {
+	index = 264
+
+	religious_vassal_opinion = 20
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_paragon_desc
+			}
+			desc = trait_paragon_character_desc
+		}
+	}
+
+	ai_zeal = 20
+}
+
+consecrated_blood = {
+	index = 265
+
+	religious_vassal_opinion = 10
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_consecrated_blood_desc
+			}
+			desc = trait_consecrated_blood_character_desc
+		}
+	}
+
+	ai_zeal = 10
+}
+
+crusader_king = {
+	index = 266
+	martial = 3
+	prowess = 2
+	
+	same_opinion = 10
+	same_faith_opinion = 15
+	ignore_negative_culture_opinion = yes
+	monthly_county_control_change_factor = 0.5
+	
+	tolerance_advantage_mod = 5
+	hard_casualty_modifier = -0.15
+	retreat_losses = -0.2
+	
+	county_opinion_add = 35
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_crusader_king_fallback_desc
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_crusader_king_female_desc
+			}
+			desc = trait_crusader_king_male_desc
+		}
+	}
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_crusader_king_fallback_dead
+			}
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = christianity_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = christianity_religion } }
+				# desc = trait_crusader_king
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = islam_religion } }
+				# desc = trait_crusader_king_islam
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = bon_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_bon_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = bon_religion } }
+				# desc = trait_crusader_king_bon_male
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = buddhism_religion } }
+				# desc = trait_crusader_king_buddhism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = dualism_religion } }
+				# desc = trait_crusader_king_dualism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = germanic_religion } }
+				# desc = trait_crusader_king_germanic
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = hellenism_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_hellenism_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = hellenism_religion } }
+				# desc = trait_crusader_king_hellenism_male
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = hinduism_religion } }
+				# desc = trait_crusader_king_hinduism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = jainism_religion } }
+				# desc = trait_crusader_king_jainism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = judaism_religion } }
+				# desc = trait_crusader_king_judaism
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = magyar_religion } }
+				# desc = trait_crusader_king_magyar
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = baltic_religion } }
+				# desc = trait_crusader_king_baltic
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = slavic_religion } }
+				# desc = trait_crusader_king_slavic
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = finno_ugric_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_finno_ugric_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = finno_ugric_religion } }
+				# desc = trait_crusader_king_finno_ugric_male
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = tengrism_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_tengrism_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = tengrism_religion } }
+				# desc = trait_crusader_king_tengrism_male
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_religion } }
+				# desc = trait_crusader_king_west_african
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_bori_religion } }
+				# desc = trait_crusader_king_west_african_bori
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = west_african_roog_religion } }
+				# desc = trait_crusader_king_west_african_roog
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = zoroastrianism_religion } }
+				# desc = trait_crusader_king_zoroastrianism
+			# }
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = zunism_religion }
+					# is_female = yes
+				# }
+				# desc = trait_crusader_king_zunism_female
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = zunism_religion } }
+				# desc = trait_crusader_king_zunism_male
+			# }
+
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_crusader_king_fallback_female
+			}
+			desc = trait_crusader_king_fallback_male
+		}
+	}
+
+	ai_zeal = 25
+}
