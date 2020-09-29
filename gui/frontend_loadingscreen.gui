@@ -1,0 +1,123 @@
+### This GUI cannot use types or templates from other files, as they have not been loaded yet.
+
+widget = {
+	name = "load_screen"
+	size = { 100% 100% }
+
+	widget_loading_screen = {}
+}
+
+types LoadingScreen
+{
+	type widget_loading_screen = widget {
+		size = { 100% 100% }
+
+		background = {
+			texture = "[GetCurrentLoadingScreen]"
+			fittype = centercrop
+		}
+
+		flowcontainer = {
+			margin = { 25 25 }
+
+			flowcontainer = {
+				ignoreinvisible = yes
+				spacing = 10
+
+				progressbar = {
+					size = { 65 65 }
+					gfxtype = framedprogressbargfx
+					texture = "gfx/interface/frontend/loading_progress.dds"
+					framesize = { 88 88 }
+					loopinterval = 1.5
+					max = 0
+
+					icon = {
+						parentanchor =  center
+						texture = "gfx/interface/frontend/main_logo_small.dds"
+						size = { 37 45 }
+						scale = 0.8
+					}
+				}
+
+				textbox = {
+					name = "load_status_text"
+					visible = "[Not(ReleaseMode)]"
+					parentanchor = vcenter
+					size = { 200 30 }
+					fontsize = 20
+					font = StandardGameFont
+					default_format = "#medium;glow_color:{0.1,0.1,0.1,1}"
+					align = left|nobaseline
+				}
+
+				textbox = {
+					name = "load_status_text_release"
+					visible = "[ReleaseMode]"
+					text = "LOADSCREEN_INITIALIZING_GAME"
+					parentanchor = vcenter
+					size = { 200 30 }
+					fontsize = 20
+					font = StandardGameFont
+					default_format = "#medium;glow_color:{0.1,0.1,0.1,1}"
+					align = left|nobaseline
+				}
+			}
+		}
+
+		button = {
+			name = "copy_build_version"
+			visible = "[Not(ReleaseMode)]"
+			parentanchor = top|right
+			position = { -20 10 }
+			size = { 400 80 }
+			onclick = "[CopyBuildVersionInfoToClipboard]"
+
+
+			block "build_tooltip" {}
+
+			textbox = {
+				name = "build_version"
+				size = { 100% 100% }
+				fontsize = 13
+				font = StandardGameFont
+				default_format = "#low"
+				multiline = yes
+				text = "TOP_BAR_VERSION"
+				align = right
+				alpha = 0.5
+			}
+		}
+	}
+}
+
+template Animation_LoadingScreen_ShowHide
+{
+	alpha = 0.3
+
+	state = {
+		name = appear
+		trigger_on_create = yes
+		bezier = { 0.25 0.1 0.25 1 }
+		delay = 0.3
+		duration = 1
+
+		alpha = 1
+	}
+
+	state = {
+		name = _show
+		bezier = { 0.25 0.1 0.25 1 }
+		duration = 1
+
+		alpha = 1
+	}
+
+	state = {
+		name = _hide
+		bezier = { 0.25 0.1 0.25 1 }
+		duration = 1
+
+		alpha = 0
+	}
+}

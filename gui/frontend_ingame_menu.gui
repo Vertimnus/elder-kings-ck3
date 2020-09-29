@@ -2,61 +2,62 @@ window = {
 	name = "ingame_pausemenu"
 	parentanchor = center
 	movable = no
-	size = { 100% 104.999992% }
+	size = { 100% 105% }
 	layer = frontend
 	filter_mouse = all
-	
+
 	background = {
 		using = Background_Area_Dark
 		alpha = 0.7
 	}
-	
+
 	background = {
 		texture = "gfx/interface/illustrations/frontend/pause_bg.dds"
-		
+
 		modify_texture = {
 			texture = "gfx/interface/frontend/fade_bg_ingame_menu.dds"
 			blend_mode = alphamultiply
 		}
 	}
-	
+
 	state = {
 		name = _show
 		using = Animation_FadeIn_Quick
-		
+
 		position = { 0 0 }
-		
+
 		start_sound = {
 			soundeffect = "snapshot:/States/MainMenu"
 		}
-		
+
 		start_sound = {
 			soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_tab"
 		}
 	}
-	
+
 	state = {
 		name = _hide
 		using = Animation_FadeOut_Quick
-		start_sound = {soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_tab"}
+		start_sound = { soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_tab"}
 		position_y = 10
 	}
-	
+
 	widget = {
 		size = { 100% 100% }
 		scale = "[ScaleToFitElementOutside('(int32)1920', '(int32)1080')]"
 		parentanchor = left|vcenter
-		
+
 		widget = {
 			parentanchor = vcenter
-			position = { 160 -80 }
-			
+			position = { 172 -80 }
+
 			vbox = {
 				set_parent_size_to_minimum = yes
+
 				vbox = {
 					margin = { 30 30 }
 					spacing = 10
-					
+
 					icon = {
 						texture = "gfx/interface/frontend/main_logo.dds"
 						size = { 500 235 }
@@ -65,63 +66,65 @@ window = {
 					spacer = {
 						size = { 30 25 }
 					}
-					
+
+					spacer = {
+						size = { 30 15 }
+					}
+
 					button_frontend = {
 						size = { 332 58 }
 						name = "resume_button"
 						text = "RESUME"
-						
+
 						shortcut = "close_window"
 						onclick = "[PauseMenu.Resume]"
-					
-					# animation_attention_text = {}
 					}
-					
+
 					vbox = {
-						visible = "[GameIsMultiplayer]"
+						visible = "[GameHasMultiplePlayers]"
 						spacing = 5
-						
+
 						background = {
 							using = Background_Area_With_Header
 							margin_bottom = 5
 						}
-						
+
 						text_single = {
 							margin = { 10 10 }
 							layoutpolicy_horizontal = expanding
 							text = "MULTI_PLAYER"
 						}
-						
+
 						text_single = {
 							visible = "[Not(IsGamePaused)]"
 							text = "FRONTEND_NOT_PAUSED"
 						}
-						
+
 						text_single = {
 							visible = "[IsGamePaused]"
 							text = "FRONTEND_IS_PAUSED"
 						}
-						
+
 						text_single = {
 							layoutpolicy_horizontal = expanding
 							margin_left = 10
 							text = "FRONTEND_PLAYERS_COUNT"
 						}
-						
+
 						button_frontend = {
 							name = "lobby_button"
-							size = { 332 58 }
+							size = { 325 58 }
 							text = "FRONTEND_GOTO_LOBBY"
 							onclick = "[PauseMenu.OpenLobby]"
 						}
-						
+
 						spacer = {
 							size = { 10 10 }
 						}
-						
+
 						textbox = {
 							align = top|left
-							
+
 							text_multi = {
 								layoutpolicy_horizontal = expanding
 								maximumsize = { 332 -1 }
@@ -129,40 +132,30 @@ window = {
 								autoresize = yes
 								resizeparent = yes
 								text = "FRONTEND_INVITE"
-								
+
 								text_occluder = {
 									size = { 40 40 }
 									parentanchor = bottom|right
-									
-									button_normal = {
-										texture = "gfx/interface/frontend/icon_copy.dds"
-										size = { 30 30 }
+
+									button_copy = {
 										parentanchor = center
-										
 										onclick = "[CopyServerID]"
 										tooltip = "FRONTEND_COPY_CLIPBUFFER_TT"
-										
-										gfxtype = framedbuttongfx
-										effectname = "NoHighlight"
-										upframe = 1
-										overframe = 2
-										downframe = 3
-										framesize = { 80 80 }
 									}
 								}
 							}
 						}
 					}
-					
+
 					vbox = {
 						margin_top = 20
 						spacing = 30
-						
+
 						hbox = {
 							visible = "[IsIronmanEnabled]"
-							
+
 							ironman_save_icon = {}
-							
+
 							vbox = {
 								spacing = 5
 								text_label_center = {
@@ -179,139 +172,157 @@ window = {
 								}
 							}
 						}
-						
+
 						vbox = {
 							spacing = 4
-							
+
 							button_frontend = {
 								name = "save_button"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "SAVE_GAME"
 								visible = "[Not( IsIronmanEnabled )]"
 								onclick = "[PauseMenu.Save]"
 							}
-							
+
 							button_frontend = {
 								name = "load_ingame_button"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "LOAD_GAME"
-								
-								visible = "[Not( GameIsMultiplayer )]"
+
+								visible = "[Not( GameHasMultiplePlayers )]"
 								enabled = "[PauseMenu.CanLoadIngame]"
 								onclick = "[PauseMenu.LoadIngame]"
 								tooltip = "[PauseMenu.LoadIngameTooltip]"
 							}
-							
+
 							button_frontend = {
 								name = "open_lobby_button"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "OPEN_LOBBY"
-								
+
 								onclick = "[PauseMenu.OpenLobby]"
 								visible = "[Not( Or( Or( Or( PauseMenu.IsLobbyOpen, IsIronmanEnabled ), GameIsMultiplayer ), Not( CanOpenLobby ) ) )]"
 								tooltip = "[GetOpenLobbyTooltip]"
 							}
-							
+
 							button_frontend = {
 								name = "open_lobby_button_login"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "OPEN_LOBBY"
-								
+
 								onclick = "[OnToggleLoginWindow]"
 								visible = "[Not( Or( Or( Or( PauseMenu.IsLobbyOpen, IsIronmanEnabled ), GameIsMultiplayer ), CanOpenLobby ) )]"
 								tooltip = "[GetOpenLobbyTooltip]"
-								
-								icon = {
+
+								icon_online_offline = {
 									parentanchor = right|vcenter
 									position = { -15 0 }
-									texture = "gfx/interface/frontend/icon_online_offline.dds"
-									
-									size = { 30 30 }
-									framesize = { 80 80 }
 									frame = 1
 								}
 							}
-							
+
 							button_frontend = {
 								name = "switch_character_button"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "FRONTEND_SWITCH_CHARACTER"
-								
+
 								onclick = "[PauseMenu.SwitchCharacter]"
-								visible = "[Not( Or( Or( PauseMenu.IsLobbyOpen, IsIronmanEnabled ), GameIsMultiplayer ) )]"
+								visible = "[Not( Or( Or( PauseMenu.IsLobbyOpen, IsIronmanEnabled ), GameHasMultiplePlayers ) )]"
 							}
-							
+
 							button_frontend = {
 								name = "exit_button"
-								size = { 332 58 }
+								size = { 325 58 }
 								text = "[PauseMenu.GetExitName]"
 								onclick = "[PauseMenu.ExitGame( '(bool)yes' )]"
 							}
 						}
 					}
-					
+
 					hbox = {
 						margin_top = 30
-						spacing = 55
-						
+						spacing = 60
+
 						pops_login_accountwidget = {
-							blockoverride "properties"
-							{
+							size = { 35 35 }
+
+							blockoverride "properties" {
 								onclick = "[OnToggleLoginWindow]"
 							}
-							
-							text_multi = {
-								parentanchor = hcenter
-								position = { 0 50 }
-								max_width = 80
-								autoresize = yes
-								text = "PARADOX_ACCOUNT"
-								default_format = "#low"
-							}
-						}
-						
-						button_settings = {
-							name = "settings"
-							onclick = "[PauseMenu.OpenSettings]"
-							
+
 							text_single = {
 								parentanchor = bottom|hcenter
 								position = { 0 20 }
+								max_width = 90
+								min_width = 90
+								align = center
+								fontsize = 13
+
+								text = "ACCOUNT"
+								default_format = "#low"
+							}
+						}
+
+						button_settings = {
+							name = "settings"
+							onclick = "[PauseMenu.OpenSettings]"
+							size = { 35 35 }
+
+							text_single = {
+								parentanchor = bottom|hcenter
+								position = { 0 20 }
+								max_width = 90
+								min_width = 90
+								align = center
+								fontsize = 13
+
 								text = "SETTINGS"
 								default_format = "#low"
 							}
 						}
-						
+
 						button_achievements = {
 							name = "achievements"
 							onclick = "[OpenAchievements]"
 							enabled = "[AreAchievementsAvailable]"
 							tooltip = "[GetAchievementsAvailableString]"
-							
+							size = { 35 35 }
+
 							text_single = {
 								parentanchor = bottom|hcenter
 								position = { 0 20 }
+								max_width = 90
+								min_width = 90
+								align = center
+								fontsize = 13
+
 								text = "ACHIEVEMENTS_LABEL"
 								default_format = "#low"
 							}
 						}
-						
+
 						hbox = {
 							button_rules = {
 								name = "game_rules"
 								onclick = "[OpenGameRules]"
-								
+								size = { 35 35 }
+
 								text_single = {
-									text = "GAME_RULES"
-									default_format = "#low"
 									parentanchor = bottom|hcenter
 									position = { 0 20 }
+									max_width = 90
+									min_width = 90
+									align = center
+									fontsize = 13
+
+									default_format = "#low"
+									text = "GAME_RULES"
 								}
 							}
-							
+
 							vbox = {
 								datacontext = "[GetGameRules]"
-								visible = "[Not( GameIsMultiplayer )]"
+								visible = "[Not( GameHasMultiplePlayers )]"
 								ironman_save_icon = {
 									visible = "[IsIronmanEnabled]"
 									size = { 25 25 }
@@ -336,23 +347,26 @@ window = {
 						}
 					}
 				}
-				
-				button = {
-					name = "copy_build_version"
+
+				hbox = {
 					layoutpolicy_horizontal = expanding
-					size = { 0 20 }
-					alpha = 0.6
-					
-					
-					tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
-					onclick = "[CopyBuildVersionInfoToClipboard]"
-					
-					text_single = {
-						name = "build_version"
-						parentanchor = hcenter
-						text = "VERSION_SHORT"
-						default_format = "#low"
-						align = center
+					margin_top = 20
+
+					button = {
+						name = "copy_build_version"
+						size = { 300 20 }
+						alpha = 0.4
+
+						tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
+						onclick = "[CopyBuildVersionInfoToClipboard]"
+
+						text_single = {
+							name = "build_version"
+							parentanchor = hcenter
+							text = "VERSION_SHORT"
+							default_format = "#low"
+							align = center
+						}
 					}
 				}
 			}
@@ -361,55 +375,54 @@ window = {
 }
 
 window = {
-	gfxtype = windowgfx
 	name = "ingame_load_ingame"
-	alwaystransparent = no
 	movable = no
-	resizable = no
 	layer = confirmation
 	size = { 100% 100% }
-	
-	background = {
-		using = Background_Area_Dark
-		margin = { 10 10 }
-	}
-	
-	button = {
+
+	using = Animation_ShowHide_Quick
+	using = Background_Full_Dim
+
+	button_normal = {
 		size = { 100% 100% }
 		onclick = "[LoadIngameWindow.OnBack]"
 	}
-	
+
 	widget_load_game = {
 		parentanchor = center
 		size = { 1030 70% }
-		
+
 		blockoverride "datamodel_savegames"
 		{
 			datamodel = "[LoadIngameWindow.GetSaveGames]"
 		}
-		
-		blockoverride "checkbox_invalid"
+
+		blockoverride "invalid_saves_click"
 		{
-			checked = "[LoadIngameWindow.ShouldShowInvalidSavegames]"
 			onclick = "[LoadIngameWindow.OnShowInvalidSavegames]"
 		}
-		
+
+		blockoverride "invalid_saves_checked"
+		{
+			checked = "[LoadIngameWindow.ShouldShowInvalidSavegames]"
+		}
+
 		blockoverride "button_back"
 		{
 			onclick = "[LoadIngameWindow.OnBack]"
 		}
-		
+
 		blockoverride "selected_save"
 		{
 			datacontext = "[LoadIngameWindow.GetSelectedSavegame]"
 			visible = "[LoadIngameWindow.HasSelectedSavegame]"
 		}
-		
+
 		blockoverride "button_delete_save"
 		{
 			onclick = "[LoadIngameWindow.OnDelete]"
 		}
-		
+
 		blockoverride "button_load_save"
 		{
 			onclick = "[LoadIngameWindow.OnLoad]"
@@ -421,124 +434,14 @@ window = {
 	}
 }
 
-types SaveGameTypes
+Types SaveGameTypes
 {
-	type cloud_save_checkbutton = button_checkbox {
-		name = "cloud_save"# Name referenced from code
+	type cloud_save_checkbutton = button_checkbox
+	{
+		name = "cloud_save" # Name referenced from code
 		checked = "[CloudSaveData.ShouldSaveToCloud]"
 		tooltip = "[CloudSaveData.GetCloudSaveTooltip]"
 		onclick = "[CloudSaveData.OnCloudSaveClick]"
 		enabled = "[CloudSaveData.AreCloudSavesAvailable]"
-	}
-	
-	type cloud_save_icon = icon {
-		name = "cloud_save_icon"
-		size = { 40 40 }
-		texture = "gfx/interface/frontend/cloud_save.dds"
-		tooltip = "LOAD_CLOUDSAVE_TOOLTIP"
-	}
-	
-	type ironman_save_icon = icon {
-		name = "ironman_icon"
-		size = { 40 40 }
-		texture = "gfx/interface/icons/icon_ironman.dds"
-	}
-	
-	type ironman_disabled_icon = icon {
-		name = "ironman_icon"
-		size = { 40 40 }
-		alpha = 0.8
-		texture = "gfx/interface/icons/icon_ironman_disabled.dds"
-	}
-	
-	type multiplayer_save_icon = icon {
-		name = "multiplayer_icon"
-		size = { 40 40 }
-		texture = "gfx/interface/frontend/icon_multiplayer.dds"
-		tooltip = "LOAD_MULTIPLAYER_TOOLTIP"
-	}
-	
-	type invalid_save_icon = icon {
-		name = "invalid_icon"
-		size = { 40 40 }
-		texture = "gfx/interface/icons/icon_warning.dds"
-	}
-	
-	type missing_dlcs_icon = icon {
-		name = "missing_dlcs_icon"
-		size = { 40 40 }
-		texture = "gfx/interface/icons/icon_dread.dds"
-	}
-	
-	type save_in_progress_widget = widget {
-		parentanchor = center
-		
-		container = {
-			block "visibility"
-			{}
-			
-			parentanchor = bottom|hcenter
-			background = {
-				name = "bg"
-				texture = "gfx/interface/tooltips/tooltip_bg.dds"
-				spriteType = Corneredtiled
-				gfxtype = icongfx
-				spriteborder = { 2 2 }
-				margin = { 40 24 }
-				shaderfile = "gfx/FX/pdxgui_default.shader"
-			
-			}
-			background = {
-				name = "frame"
-				texture = "gfx/interface/tooltips/tooltip_frame.dds"
-				gfxtype = icongfx
-				spriteType = Corneredtiled
-				spriteborder = { 20 20 }
-				margin = { 40 24 }
-				shaderfile = "gfx/FX/pdxgui_default.shader"
-				
-				
-				modify_texture = {
-					name = "overlay"
-					texture = "gfx/interface/tiles/tile_overlay_effect_01.dds"
-					spriteType = Corneredstretched
-					spriteborder = { 0 0 }
-					blend_mode = overlay
-				}
-			}
-			
-			flowcontainer = {
-				
-				text_single = {
-					text = "SAVE_IN_PROGRESS"
-					align = nobaseline
-				}
-				
-				widget = {
-					size = { 60 44 }
-					progressbar = {
-						parentanchor = top|right
-						size = { 44 44 }
-						gfxtype = framedprogressbargfx
-						texture = "gfx/interface/frontend/loading_progress.dds"
-						framesize = { 88 88 }
-						loopinterval = 2
-						max = 0
-					}
-				}
-			}
-		}
-	}
-}
-
-types AchievementTypes
-{
-	type achievements_enabled_icon = icon {
-		size = { 40 40 }
-		texture = "gfx/interface/icons/icon_achievements_enabled.dds"
-	}
-	type achievements_disabled_icon = icon {
-		size = { 40 40 }
-		texture = "gfx/interface/icons/icon_achievements_disabled.dds"
 	}
 }
