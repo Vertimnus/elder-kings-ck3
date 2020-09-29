@@ -1,0 +1,416 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 301-325
+
+# 'Wounded'
+wounded_1 = {
+	index = 301
+	martial = -1
+	intrigue = -1
+	health = -1
+	prowess = -2
+	health_trait = yes
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	disables_combat_leadership = yes
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_1_desc
+			}
+			desc = trait_wounded_1_character_desc
+		}
+	}
+
+	ai_energy = -20
+
+	group = wounded
+	level = 1
+}
+
+# 'Severly Injured'
+wounded_2 = {
+	index = 302
+	martial = -2
+	intrigue = -2
+	health = -2
+	prowess = -4
+	fertility = -0.25
+	health_trait = yes
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+	
+	attraction_opinion = -10
+
+	disables_combat_leadership = yes
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_2_desc
+			}
+			desc = trait_wounded_2_character_desc
+		}
+	}
+
+	ai_energy = -30
+	
+	group = wounded
+	level = 2
+}
+
+# 'Near Death'
+wounded_3 = {
+	index = 303
+	martial = -4
+	intrigue = -4
+	health = -4
+	prowess = -8
+	fertility = -0.75
+	health_trait = yes
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	attraction_opinion = -20
+	
+	disables_combat_leadership = yes
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_wounded_3_desc
+			}
+			desc = trait_wounded_3_character_desc
+		}
+	}
+
+	ai_energy = -40
+	
+	group = wounded
+	level = 3
+}
+
+maimed = {
+	index = 304
+	
+	diplomacy = -2
+	martial = -2
+	stewardship = -2
+	intrigue = -2
+	learning = -2
+	prowess = -4
+	health = -3
+	fertility = -0.5
+
+	health_trait = yes
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+	
+	attraction_opinion = -10
+	
+	same_opinion = 5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_maimed_desc
+			}
+			desc = trait_maimed_character_desc
+		}
+	}
+}
+
+infirm = {
+	index = 305
+	diplomacy = -3
+	martial = -3
+	stewardship = -3
+	intrigue = -3
+	learning = -3
+	prowess = -6
+	health = -1
+	fertility = -0.3
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	health_trait = yes
+
+	disables_combat_leadership = yes
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_infirm_desc
+			}
+			desc = trait_infirm_character_desc
+		}
+	}
+
+	ai_energy = -30
+}
+
+incapable = {
+	index = 306
+	diplomacy = -6
+	intrigue = -6
+	stewardship = -6
+	martial = -6
+	learning = -6
+	prowess = -12
+	health = -3
+	fertility = -0.3
+	
+	dread_baseline_add = -25
+	dread_loss_mult = 1
+	health_trait = yes
+
+	incapacitating = yes
+	
+	can_have_children = no
+
+	disables_combat_leadership = yes
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_incapable_desc
+			}
+			desc = trait_incapable_character_desc
+		}
+	}
+
+	ai_energy = -100
+}
+
+blind = {
+	index = 307
+	martial = -6
+	stewardship = -2
+	intrigue = -2
+	prowess = -10
+	health = -0.25
+	
+	dread_baseline_add = -10
+
+	attraction_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_blind_desc
+			}
+			desc = trait_blind_character_desc
+		}
+	}
+
+	# Portrait Modification
+	# dna_modifiers = {
+	#	accessory = {
+	#		mode = replace
+	#		gene = eye_accessory
+	#		template = blind_eyes
+	#	}
+	# }
+}
+
+# Non-genetic impotency
+impotent = {
+	index = 308
+	
+	fertility = -0.5
+	ai_energy = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_impotent_desc
+			}
+			desc = trait_impotent_character_desc
+		}
+	}
+}
+
+# Young children only
+sickly = {
+	index = 309
+	potential = {
+		NOT = { age = 6 }
+	}
+	health = -2.5
+
+	health_trait = yes
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_sickly_desc
+			}
+			desc = trait_sickly_character_desc
+		}
+	}
+
+	ai_energy = -30
+}
+
+pregnant = {
+	index = 310
+	health_trait = yes
+	prowess = -2
+
+	flag = no_message
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_pregnant_desc
+			}
+			desc = trait_pregnant_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+depressed_1 = {
+	index = 311
+	health_trait = yes
+	group = depressed
+	level = 1
+	
+	diplomacy = -1
+	stewardship = -1
+	martial = -1
+	intrigue = -1
+	health = -0.5
+	
+	fertility = -0.1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_depressed_1_desc
+			}
+			desc = trait_depressed_1_character_desc
+		}
+	}
+
+	ai_energy = -15
+	ai_sociability = medium_negative_ai_value
+}
+
+lunatic_1 = { # Highly event driven, Schizophrenia
+	index = 312
+
+	group = lunatic
+	level = 1
+	
+	vassal_opinion = -10
+	attraction_opinion = -10
+	same_opinion = 10
+	hostile_scheme_resistance_mult = 0.1
+	health = -0.25
+	health_trait = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_lunatic_1_desc
+			}
+			desc = trait_lunatic_1_character_desc
+		}
+	}
+
+	ai_honor = -10
+	ai_rationality = -200
+	ai_boldness = 50
+}
+
+possessed_1 = { # Highly event driven, Temporal lobe epilepsy
+	index = 313
+
+	group = possessed
+	level = 1
+
+	health_trait = yes
+
+	monthly_learning_lifestyle_xp_gain_mult = 0.1
+	health = -0.5
+
+	attraction_opinion = -10
+	same_opinion = 15
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_possessed_1_desc
+			}
+			desc = trait_possessed_1_character_desc
+		}
+	}
+
+	ai_rationality = -30
+	ai_boldness = 25
+	ai_vengefulness = 25
+}

@@ -1,0 +1,365 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 326-350
+
+ill = {
+	index = 326
+	opposites = {
+		pneumonic
+	}
+	
+	health = -1
+	prowess = -4
+	fertility = -0.2
+
+	health_trait = yes
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_ill_desc
+			}
+			desc = trait_ill_character_desc
+		}
+	}
+
+	ai_energy = -25
+}
+
+pneumonic = {
+	index = 327
+	opposites = {
+		ill
+	}
+	
+	diplomacy = -2
+	stewardship = -2
+	martial = -2
+	intrigue = -2
+	learning = -2
+	health = -3
+	prowess = -8
+	fertility = -0.5
+
+	health_trait = yes
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_pneumonic_desc
+			}
+			desc = trait_pneumonic_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+great_pox = { #Syphilis
+	index = 328
+	inherit_chance = 10
+	
+	diplomacy = -1
+	stewardship = -1
+	martial = -1
+	intrigue = -1
+	learning = -1
+	health = -1
+	fertility = -0.2
+
+	health_trait = yes
+	
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_great_pox_desc
+			}
+			desc = trait_great_pox_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+early_great_pox = { #Great pox, but looks like lover's pox
+	index = 329
+
+	dread_baseline_add = -5	#Mimic's Lover's Pox loss at this stage.
+
+	attraction_opinion = -20
+	health_trait = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_early_great_pox_desc
+			}
+			desc = trait_early_great_pox_character_desc
+		}
+	}
+}
+
+lovers_pox = {
+	index = 330
+	inherit_chance = 10
+	
+	dread_baseline_add = -5
+
+	attraction_opinion = -20
+	health_trait = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_lovers_pox_desc
+			}
+			desc = trait_lovers_pox_character_desc
+		}
+	}
+}
+
+leper = {
+	index = 331
+	health = -1.5
+	prowess = -8
+	fertility = -0.95
+	health_trait = yes
+
+	dread_baseline_add = -20
+	dread_loss_mult = 1
+
+	attraction_opinion = -35
+	general_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_leper_desc
+			}
+			desc = trait_leper_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+gout_ridden = {
+	index = 332
+	diplomacy = -2
+	martial = -1
+	prowess = -2
+	health = -1
+	
+	dread_baseline_add = -5
+	health_trait = yes
+	attraction_opinion = -15
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_gout_ridden_desc
+			}
+			desc = trait_gout_ridden_character_desc
+		}
+	}
+
+	ai_energy = -15
+}
+
+consumption = { # Tuberculosis
+	index = 333
+	diplomacy = -2
+	stewardship = -1
+	intrigue = -2
+	prowess = -2
+	health = -2
+	health_trait = yes
+
+	dread_baseline_add = -10
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_consumption_desc
+			}
+			desc = trait_consumption_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+cancer = {
+	index = 334
+	health = -3
+	fertility = -0.20
+	health_trait = yes
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_cancer_desc
+			}
+			desc = trait_cancer_character_desc
+		}
+	}
+
+	ai_energy = -25
+}
+
+typhus = {
+	index = 335
+	diplomacy = -1
+	stewardship = -2
+	intrigue = -1
+	learning = -2
+	prowess = -4
+	health = -3.5
+	fertility = -0.2
+
+	health_trait = yes
+
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_typhus_desc
+			}
+			desc = trait_typhus_character_desc
+		}
+	}
+
+	ai_energy = -50
+}
+
+bubonic_plague = {
+	index = 336
+	diplomacy = -2
+	martial = -3
+	stewardship = -2
+	intrigue = -3
+	learning = -2
+	prowess = -10
+	health = -6.5
+	fertility = -0.50
+
+	health_trait = yes
+	
+	dread_baseline_add = -30
+	dread_loss_mult = 1
+
+	attraction_opinion = -30
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_bubonic_plague_desc
+			}
+			desc = trait_bubonic_plague_character_desc
+		}
+	}
+
+	ai_energy = -75
+
+	# Portrait Modification
+	# dna_modifiers = {
+	#	morph = {
+	#		mode = add
+	#		gene = face
+	#		value = 1.0
+	#		template = bubonic_plague
+	#	}
+	# }
+}
+
+smallpox = {
+	index = 337
+	diplomacy = -2
+	stewardship = -1
+	learning = -2
+	prowess = -10
+	health = -3.5
+	fertility = -0.25
+
+	health_trait = yes
+	
+	dread_baseline_add = -15
+	dread_loss_mult = 1
+
+	attraction_opinion = -10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_smallpox_desc
+			}
+			desc = trait_smallpox_character_desc
+		}
+	}
+
+	ai_energy = -75
+}

@@ -1,0 +1,460 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 176-200
+
+drunkard = { # Substance Abuse (Alcohol)
+	index = 176
+	stewardship = -2
+	prowess = -2
+	health = -0.15
+	stress_loss_mult = 0.2
+
+	same_opinion = 10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_drunkard_desc
+			}
+			desc = trait_drunkard_character_desc
+		}
+	}
+
+	ai_rationality = -10
+	ai_energy = -15
+
+	compatibility = {
+		temperate = @neg_compat_low
+	}
+}
+
+hashishiyah = { # Substance Abuse (Hashish)
+	index = 177
+	stewardship = -2
+	learning = -2
+	stress_loss_mult = 0.2
+
+	same_opinion = 10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_hashishiyah_desc
+			}
+			desc = trait_hashishiyah_character_desc
+		}
+	}
+
+	ai_energy = -15
+	ai_vengefulness = -10
+
+	compatibility = {
+		temperate = @neg_compat_low
+	}
+
+}
+
+opium_addled = { # Substance Abuse (Opium)
+	index = 178
+	learning = -2
+	prowess = -2
+	health = -0.75
+	stress_loss_mult = 0.2
+
+	same_opinion = 10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_opium_addled_desc
+			}
+			desc = trait_opium_addled_character_desc
+		}
+	}
+
+	ai_energy = -25
+	ai_vengefulness = -10
+
+	compatibility = {
+		diligent = @neg_compat_low
+		temperate = @neg_compat_low
+	}	
+}
+
+henbane_addict = { # Substance Abuse (Henbane)
+	index = 179
+	stress_loss_mult = 0.2
+
+	same_opinion = 10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_henbane_addict_desc
+			}
+			desc = trait_henbane_addict_character_desc
+		}
+	}
+
+	ai_rationality = -30
+
+	compatibility = {
+		temperate = @neg_compat_low
+	}
+
+}
+
+rakish = { # Brothel-frequenter.
+	index = 180
+	intrigue = 1
+	diplomacy = -1
+	stress_loss_mult = 0.2
+
+	same_opinion = 5
+	attraction_opinion = -5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_rakish_desc
+			}
+			desc = trait_rakish_character_desc
+		}
+	}
+
+	ai_honor = -10
+	ai_greed = 10
+	ai_energy = -10
+	ai_zeal = -10
+	ai_sociability = low_positive_ai_value
+
+	compatibility = {
+		chaste = @neg_compat_low
+	}	
+}
+
+reclusive = { # Hides away from relationships and responsibilities.
+	index = 181
+	diplomacy = -2
+	stewardship = -1
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reclusive_desc
+			}
+			desc = trait_reclusive_character_desc
+		}
+	}
+
+	ai_energy = -10
+	ai_boldness = -10
+	ai_sociability = medium_negative_ai_value
+
+	compatibility = {
+		gregarious = @neg_compat_low
+	}	
+}
+
+irritable = { # Prone to outbursts and tantrums.
+	index = 182
+	diplomacy = -2
+	martial = -1
+	prowess = 2
+	dread_gain_mult = 0.1
+	stress_loss_mult = 0.2
+
+	ai_war_chance = 0.25
+	ai_war_cooldown = -0.25
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_irritable_desc
+			}
+			desc = trait_irritable_character_desc
+		}
+	}
+
+	attraction_opinion = -5
+
+	ai_rationality = -20
+	ai_energy = 10
+	ai_boldness = 10
+	ai_vengefulness = 10
+	ai_compassion = -10
+
+	compatibility = {
+		compassionate = @neg_compat_low
+		gregarious = @neg_compat_low
+		calm = @neg_compat_low
+	}
+}
+
+flagellant = { # Habitually self-harms; whipping is the 'primary' one but cutting, burning, etc. could also be options.
+	index = 183
+	prowess = -2
+	health = -0.5
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_flagellant_desc
+			}
+			desc = trait_flagellant_character_desc
+		}
+	}
+
+	ai_honor = 10
+	ai_zeal = 25
+	ai_boldness = 5
+
+	compatibility = {
+		cynical = @neg_compat_low
+	}		
+}
+
+profligate = { # Subject to compulsive spending. Maybe also gambling?
+	index = 184
+	opposites = {
+		improvident
+	}
+
+	monthly_prestige = 0.5
+	monthly_income_mult = -0.10
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_profligate_desc
+			}
+			desc = trait_profligate_character_desc
+		}
+	}
+
+	ai_greed = 10
+	ai_compassion = -10
+
+	compatibility = {
+		generous = @neg_compat_low
+	}
+}
+
+improvident = { # Habitually gives money to charity.
+	index = 185
+	opposites = {
+		profligate
+	}
+
+	monthly_income_mult = -0.10
+	diplomacy = 1
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_improvident_desc
+			}
+			desc = trait_improvident_character_desc
+		}
+	}
+
+	ai_greed = -10
+	ai_compassion = 10
+
+	compatibility = {
+		greedy = @neg_compat_low
+	}	
+
+	monthly_income_mult = -0.15
+}
+
+contrite = { # Compulsively reveals own/other's Secrets. If no known Secrets, may reveal 'minor secrets', e.g., things which aren't true Secrets but may harm other's Opinions of the character.
+	index = 186
+	intrigue = -2
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_contrite_desc
+			}
+			desc = trait_contrite_character_desc
+		}
+	}
+
+	ai_honor = 10
+	ai_zeal = 10
+	ai_vengefulness = -10
+	ai_compassion = 10
+
+	compatibility = {
+		gregarious = @neg_compat_low
+		deceitful = @neg_compat_low
+	}	
+}
+
+comfort_eater = { # Eats food to relieve stress.
+	index = 187
+	opposites = {
+		inappetetic
+	}
+
+	stewardship = -1
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_comfort_eater_desc
+			}
+			desc = trait_comfort_eater_character_desc
+		}
+	}
+
+	ai_greed = 5
+	ai_energy = -5
+
+	compatibility = {
+		temperate = @neg_compat_low
+	}
+}
+
+inappetetic = { # Avoids eating food when stressed
+	index = 188
+	opposites = {
+		comfort_eater
+	}
+
+	diplomacy = -1
+	prowess = -3
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_inappetetic_desc
+			}
+			desc = trait_inappetetic_character_desc
+		}
+	}
+
+	ai_greed = -5
+	ai_energy = -10
+
+	compatibility = {
+		gluttonous = @neg_compat_low
+	}
+}
+
+journaller = { # Writes down thoughts to relieve stress (Healthy)
+	index = 189
+	learning = 1
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_journaller_desc
+			}
+			desc = trait_journaller_character_desc
+		}
+	}
+
+	ai_rationality = 10
+}
+
+confider = { # Has a close friend to relieve stress (Healthy)
+	index = 190
+	diplomacy = 1
+	stress_loss_mult = 0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_confider_desc
+			}
+			desc = trait_confider_character_desc
+		}
+	}
+
+	ai_compassion = 10
+	ai_sociability = low_positive_ai_value
+}
+
+athletic = { # Exercises to relieve stress (Healthy)
+	index = 191
+	prowess = 1
+	health = 0.25
+	stress_loss_mult = 0.2
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_athletic_desc
+			}
+			desc = trait_athletic_character_desc
+		}
+	}
+
+	ai_energy = 25
+	ai_boldness = 5
+}

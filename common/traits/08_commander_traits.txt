@@ -1,0 +1,385 @@
+﻿# Standard Values
+@pos_compat_high = 30
+@pos_compat_medium = 15
+@pos_compat_low = 5
+
+@neg_compat_high = -30
+@neg_compat_medium = -15
+@neg_compat_low = -5
+
+# Index range: 276-300
+
+logistician = {
+	index = 276
+	
+	commander = yes
+	
+	supply_duration = 1
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_logistician_desc
+			}
+			desc = trait_logistician_character_desc
+		}
+	}
+}
+
+military_engineer = {
+	index = 277
+	
+	commander = yes
+	
+	siege_phase_time = -0.3
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_military_engineer_desc
+			}
+			desc = trait_military_engineer_character_desc
+		}
+	}
+}
+
+aggressive_attacker = {
+	index = 278
+	
+	commander = yes
+	
+	#attacker_advantage = 10
+	enemy_hard_casualty_modifier = 0.25
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_aggressive_attacker_desc
+			}
+			desc = trait_aggressive_attacker_character_desc
+		}
+	}
+}
+
+unyielding_defender = {
+	index = 279
+	
+	commander = yes
+	
+	#defender_advantage = 10
+	hard_casualty_modifier = -0.25
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_unyielding_defender_desc
+			}
+			desc = trait_unyielding_defender_character_desc
+		}
+	}
+}
+
+forder = {
+	index = 280
+	
+	commander = yes
+	
+	no_water_crossing_penalty = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_forder_desc
+			}
+			desc = trait_forder_character_desc
+		}
+	}
+}
+
+flexible_leader = {
+	index = 281
+	
+	commander = yes
+	
+	enemy_terrain_advantage = -0.5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_flexible_leader_desc
+			}
+			desc = trait_flexible_leader_character_desc
+		}
+	}
+}
+
+desert_warrior = {
+	index = 282
+	
+	commander = yes
+	
+	drylands_advantage = 5
+	desert_advantage = 5
+	desert_mountains_advantage = 5
+	oasis_advantage = 5
+	
+	desert_cancel_negative_supply = yes
+	#desert_mountains_cancel_negative_supply = yes
+	#oasis_cancel_negative_supply = yes
+	
+	#desert_attrition_mult = -0.5
+	#desert_mountains_attrition_mult = -0.5
+	#oasis_attrition_mult = -0.5
+	
+	#desert_min_combat_roll = 1
+	#desert_max_combat_roll = 5
+
+	trait_exclusive_if_realm_contains = {
+		drylands
+		desert
+		desert_mountains
+		oasis
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_desert_warrior_desc
+			}
+			desc = trait_desert_warrior_character_desc
+		}
+	}
+}
+
+jungle_stalker = {
+	index = 283
+	
+	commander = yes
+	
+	jungle_advantage = 6
+	jungle_cancel_negative_supply = yes
+	jungle_attrition_mult = -0.5
+
+	trait_exclusive_if_realm_contains = {
+		jungle
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_jungle_stalker_desc
+			}
+			desc = trait_jungle_stalker_character_desc
+		}
+	}
+}
+
+reaver = {
+	index = 284
+	
+	commander = yes
+	
+	raid_speed = 1.0
+	hostile_county_attrition = -0.75
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reaver_desc
+			}
+			desc = trait_reaver_character_desc
+		}
+	}
+}
+
+reckless = {
+	index = 285
+	
+	commander = yes
+	
+	min_combat_roll = -4
+	max_combat_roll = 6
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_reckless_desc
+			}
+			desc = trait_reckless_character_desc
+		}
+	}
+}
+
+holy_warrior = {
+	index = 286
+	
+	commander = yes
+	
+	tolerance_advantage_mod = 10
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_holy_warrior_desc
+			}
+			desc = trait_holy_warrior_character_desc
+		}
+	}
+}
+
+open_terrain_expert = {
+	index = 287
+	
+	commander = yes
+	
+	farmlands_advantage = 4
+	plains_advantage = 4
+	steppe_advantage = 4
+
+	trait_exclusive_if_realm_contains = {
+		farmlands
+		plains
+		steppe
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_open_terrain_expert_desc
+			}
+			desc = trait_open_terrain_expert_character_desc
+		}
+	}
+}
+
+rough_terrain_expert = {
+	index = 288
+	
+	commander = yes
+	
+	hills_advantage = 4
+	mountains_advantage = 4
+	wetlands_advantage = 4
+
+	trait_exclusive_if_realm_contains = {
+		hills
+		mountains
+		wetlands
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_rough_terrain_expert_desc
+			}
+			desc = trait_rough_terrain_expert_character_desc
+		}
+	}
+}
+
+forest_fighter = {
+	index = 289
+	
+	commander = yes
+	
+	forest_advantage = 5
+	taiga_advantage = 5
+
+	trait_exclusive_if_realm_contains = {
+		forest
+		taiga
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_forest_fighter_desc
+			}
+			desc = trait_forest_fighter_character_desc
+		}
+	}
+}
+
+cautious_leader = {
+	index = 290
+	
+	commander = yes
+	
+	min_combat_roll = 4
+	max_combat_roll = -2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_cautious_leader_desc
+			}
+			desc = trait_cautious_leader_character_desc
+		}
+	}
+}
+
+organizer = {
+	index = 291
+	
+	commander = yes
+	
+	movement_speed = 0.25
+	retreat_losses = -0.2
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_organizer_desc
+			}
+			desc = trait_organizer_character_desc
+		}
+	}
+}
