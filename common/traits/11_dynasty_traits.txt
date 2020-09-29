@@ -24,6 +24,8 @@ bastard = {
 	dynasty_opinion = -15
 
 	can_inherit = no
+	blocks_from_claim_inheritance = yes
+	
 	fame = yes
 	illegitimate_bastard = yes
 	
@@ -102,9 +104,11 @@ disputed_heritage = {
 }
 
 # Male version is called 'Child of Consort'
-child_of_concubine = {
+child_of_concubine_female = {
 	index = 354
 	fame = yes
+	group = child_of_concubine
+	level = 1
 	opposites = {
 		bastard
 		legitimized_bastard
@@ -112,31 +116,7 @@ child_of_concubine = {
 	}
 	diplomacy = -1
 	
-	name = {
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					NOT = { exists = this }
-				}
-				desc = trait_child_of_concubine
-			}
-			triggered_desc = {
-				trigger = {
-					exists = father
-					father = { save_temporary_scope_as = father }
-					OR = {
-						father = { is_concubine = yes }
-						mother = {
-							any_former_concubine = { this = scope:father }
-						}
-					}
-				}
-				desc = trait_child_of_consort
-			}
-			desc = trait_child_of_concubine
-		}
-	}
-
+	name = trait_child_of_concubine
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -145,29 +125,46 @@ child_of_concubine = {
 				}
 				desc = trait_child_of_concubine_desc
 			}
-			triggered_desc = {
-				trigger = {
-					exists = father
-					father = { save_temporary_scope_as = father }
-					OR = {
-						father = { is_concubine = yes }
-						mother = {
-							any_former_concubine = { this = scope:father }
-						}
-					}
-				}
-				desc = trait_child_of_consort_character_desc
-			}
-			desc = trait_child_of_concubine_character_desc
+			desc = trait_child_of_consort_character_desc
 		}
 	}
+	icon = child_of_concubine.dds
+
+	ai_energy = 15
+}
+
+child_of_concubine_male = {
+	index = 355
+	fame = yes
+	group = child_of_concubine
+	level = 2
+	opposites = {
+		bastard
+		legitimized_bastard
+		wild_oat
+	}
+	diplomacy = -1
+	
+	name = trait_child_of_consort
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_child_of_concubine_desc
+			}
+			desc = trait_child_of_consort_character_desc
+		}
+	}
+	icon = child_of_concubine.dds
 
 	ai_energy = 15
 }
 
 #Children born out of wedlock in religions without bastardy
 wild_oat = {
-	index = 355
+	index = 356
 	fame = yes
 	opposites = {
 		bastard
@@ -192,7 +189,7 @@ wild_oat = {
 }
 
 bastard_founder = {
-	index = 356
+	index = 357
 
 	opposites = {
 		bastard
@@ -202,6 +199,7 @@ bastard_founder = {
 	}
 
 	can_inherit = no
+	blocks_from_claim_inheritance = yes
 	fame = yes
 	diplomacy = -1
 	
@@ -221,7 +219,7 @@ bastard_founder = {
 }
 
 twin = {
-	index = 357
+	index = 358
 	fame = yes
 	twin_opinion = 15
 
@@ -240,7 +238,7 @@ twin = {
 
 # Character is seen as a reincarnation of another character.
 reincarnation = {
-	index = 358
+	index = 359
 
 	same_faith_opinion = 5
 	monthly_piety = 1
@@ -259,7 +257,7 @@ reincarnation = {
 }
 
 born_in_the_purple = {
-	index = 359
+	index = 360
 	monthly_prestige = 0.5	
 
 	vassal_opinion = 5
@@ -279,9 +277,10 @@ born_in_the_purple = {
 }
 
 disinherited = {
-	index = 360
+	index = 361
 
 	can_inherit_from_dynasty = no
+	blocks_from_claim_inheritance_from_dynasty = yes
 	
 	dynasty_opinion = -5
 	
@@ -299,7 +298,7 @@ disinherited = {
 }
 
 denounced = {
-	index = 361
+	index = 362
 
 	potential = {
 		exists = dynasty.dynast
@@ -329,7 +328,7 @@ denounced = {
 }
 
 impure = {
-	index = 362
+	index = 363
 	
 	same_faith_opinion = -10
 	diplomacy = -1
