@@ -1,6 +1,24 @@
 ﻿### EK EDITS: Removed all references to vanilla's religions
 ### TO DO: Edit the tenet cost depending on the faith's philosophy (can check EK1 to get an idea)
 
+## Daedra-related tenets (unlock the worship of this Prince as a patron deity if the tenet is used & Daedric worship is not a crime)
+# Azura: Esotericism
+# Boethiah: Sacred Lies + Pursuit of Power
+# Clavicus: Merchant Faith
+# Hermaeus: Veneration of Knowledge
+# Hircine: Lycan Worship
+# Malacath: Communal Identity
+# Mehrunes: Pursuit of Power + Auspicious Birthright
+# Mephala: Sacred Lies
+# Meridia:
+# Molag: Human Sacrifice + Vampire Worship
+# Namira: Ritual Cannibalism + Adorcism
+# Nocturnal:
+# Peryite:
+# Sanguine: Carnal Exaltation + Hedonistic
+# Sheogorath:
+# Vaermina:
+
 doctrine_core_tenets = {
 	group = "core_tenets"
 	number_of_picks = 3
@@ -362,6 +380,202 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_boethiah_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_boethiah_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = boethiah_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_boethiah_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_boethiah_faith = 1
+			boethiah_syncretic_actor_opinion_active = yes
+			opinion_of_boethiah_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_boethiah_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { vengeful }
+			sins = { forgiving }
+		}
+	}
+	
+	tenet_clavicus_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_clavicus_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = clavicus_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_clavicus_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_clavicus_faith = 1
+			clavicus_syncretic_actor_opinion_active = yes
+			opinion_of_clavicus_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_clavicus_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { greedy }
+			sins = { generous }
+		}
+	}
+	
+	tenet_hermaeus_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_hermaeus_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = hermaeus_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_hermaeus_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_hermaeus_faith = 1
+			hermaeus_syncretic_actor_opinion_active = yes
+			opinion_of_hermaeus_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_hermaeus_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { patient }
+			sins = { impatient }
+		}
+	}
+	
+	tenet_hircine_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_hircine_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = hircine_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_hircine_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_hircine_faith = 1
+			hircine_syncretic_actor_opinion_active = yes
+			opinion_of_hircine_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_hircine_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { diligent }
+			sins = { lazy }
+		}
+	}
+	
 	tenet_malacath_syncretism = {
 		icon = core_tenet_followers
 		name = {
@@ -432,6 +646,449 @@ doctrine_core_tenets = {
 		traits = {
 			virtues = { brave }
 			sins = { craven }
+		}
+	}
+	
+	tenet_mehrunes_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_mehrunes_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = mehrunes_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_mehrunes_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_mehrunes_faith = 1
+			mehrunes_syncretic_actor_opinion_active = yes
+			opinion_of_mehrunes_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_mehrunes_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { ambitious }
+			sins = { content }
+		}
+	}
+	
+	tenet_mephala_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_mephala_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = mephala_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_mephala_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_mephala_faith = 1
+			mephala_syncretic_actor_opinion_active = yes
+			opinion_of_mephala_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_mephala_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { deceitful }
+			sins = { honest }
+		}
+	}
+	
+	tenet_meridia_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_meridia_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = meridia_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_meridia_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_meridia_faith = 1
+			meridia_syncretic_actor_opinion_active = yes
+			opinion_of_meridia_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_meridia_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { zealous }
+			sins = { cynical }
+		}
+	}
+	
+	tenet_molag_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_molag_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = molag_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_molag_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_molag_faith = 1
+			molag_syncretic_actor_opinion_active = yes
+			opinion_of_molag_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_molag_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { sadistic }
+			sins = { compassionate }
+		}
+	}
+	
+	tenet_namira_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_namira_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = namira_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_namira_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_namira_faith = 1
+			namira_syncretic_actor_opinion_active = yes
+			opinion_of_namira_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_namira_all_doctrines_active = yes
+		}
+
+		# WIP
+		traits = {
+			virtues = { humble }
+			sins = { arrogant }
+		}
+	}
+	
+	tenet_nocturnal_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_nocturnal_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = nocturnal_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_nocturnal_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_nocturnal_faith = 1
+			nocturnal_syncretic_actor_opinion_active = yes
+			opinion_of_nocturnal_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_nocturnal_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { callous }
+			sins = { compassionate }
+		}
+	}
+	
+	tenet_peryite_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_peryite_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = peryite_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_peryite_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_peryite_faith = 1
+			peryite_syncretic_actor_opinion_active = yes
+			opinion_of_peryite_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_peryite_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { calm }
+			sins = { wrathful }
+		}
+	}
+	
+	tenet_sheogorath_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sheogorath_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = sheogorath_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_sheogorath_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_sheogorath_faith = 1
+			sheogorath_syncretic_actor_opinion_active = yes
+			opinion_of_sheogorath_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_sheogorath_all_doctrines_active = yes
+		}
+
+		traits = {
+			virtues = { fickle }
+			sins = { calm }
+		}
+	}
+	
+	tenet_vaermina_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_vaermina_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = vaermina_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_vaermina_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_special_doctrine_is_vaermina_faith = 1
+			vaermina_syncretic_actor_opinion_active = yes
+			opinion_of_vaermina_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
+			allows_worship_vaermina_all_doctrines_active = yes
+		}
+
+		# WIP
+		traits = {
+			virtues = { humble }
+			sins = { arrogant }
 		}
 	}
 	
@@ -558,6 +1215,10 @@ doctrine_core_tenets = {
 		character_modifier = {
 			monthly_stewardship_lifestyle_xp_gain_mult = 0.2
 		}
+		
+		parameters = {
+			allows_worship_clavicus_shunned_doctrines_active = yes
+		}
 	}
 	
 	tenet_shadow_worship = {
@@ -612,6 +1273,7 @@ doctrine_core_tenets = {
 		parameters = {
 			# TODO: Actually make that have an effect
 			children_education_learning = yes
+			allows_worship_hermaeus_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -984,6 +1646,10 @@ doctrine_core_tenets = {
 
 		character_modifier = {
 			fertility = 0.25
+		}
+		
+		parameters = {
+			allows_worship_sanguine_shunned_doctrines_active = yes
 		}
 
 		traits = {
@@ -1516,6 +2182,7 @@ doctrine_core_tenets = {
 		
 		parameters = {
 			clergy_can_fight = yes
+			allows_worship_boethiah_shunned_doctrines_active = yes
 		}
 	}
 
@@ -1716,6 +2383,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			tenet_esotericism_mystic_education = yes
+			allows_worship_azura_shunned_doctrines_active = yes
 		}
 	}
 
@@ -2344,6 +3012,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			spirit_possession_active = yes
+			allows_worship_namira_shunned_doctrines_active = yes
 		}
 
 		traits = {
@@ -2485,6 +3154,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			piety_from_feasts_active = yes
+			allows_worship_sanguine_shunned_doctrines_active = yes
 		}
 
 		traits = {
@@ -2547,6 +3217,7 @@ doctrine_core_tenets = {
 		parameters = {
 			human_sacrifice_active = yes
 			flower_war_cb_active = yes
+			allows_worship_molag_shunned_doctrines_active = yes
 		}
 	}
 
@@ -2569,6 +3240,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			mystic_birthright_active = yes
+			allows_worship_mehrunes_shunned_doctrines_active = yes
 		}
 
 		traits = {
@@ -3253,6 +3925,7 @@ doctrine_core_tenets = {
 		parameters = {
 			conquest_cb_enabled = yes
 			invasion_cb_enabled = yes
+			allows_worship_mehrunes_shunned_doctrines_active = yes
 		}
 
 		character_modifier = {
@@ -3315,6 +3988,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			cannibalism_legal = yes
+			allows_worship_namira_shunned_doctrines_active = yes
 		}
 	}
 
@@ -3355,6 +4029,8 @@ doctrine_core_tenets = {
 		parameters = {
 			piety_gain_from_successful_intrigue_schemes = yes
 			adherents_more_likely_to_join_schemes = yes
+			allows_worship_mephala_shunned_doctrines_active = yes
+			allows_worship_boethiah_shunned_doctrines_active = yes
 		}
 
 		traits = {
