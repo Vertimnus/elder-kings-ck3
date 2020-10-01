@@ -16,6 +16,43 @@ building_requirement_tribal_holding_in_county = {
 	}
 }
 
+# EK Added triggers for different governments
+building_requirement_feudal = {
+	scope:holder = {
+		has_government = feudal_government
+	}
+}
+
+building_requirement_republic = {
+	scope:holder = {
+		has_government = republic_government
+	}
+}
+
+building_requirement_theocracy = {
+	scope:holder = {
+		has_government = theocracy_government
+	}
+}
+
+building_requirement_clan = {
+	scope:holder = {
+		has_government = clan_government
+	}
+}
+
+building_requirement_mercenary = {
+	scope:holder = {
+		has_government = mercenary_government
+	}
+}
+
+building_requirement_holy_order = {
+	scope:holder = {
+		has_government = holy_order_government
+	}
+}
+
 ######################################################################
 # Holding Level
 ######################################################################
@@ -32,6 +69,11 @@ building_requirement_castle_city_church = {
 	trigger_else_if = {
 		limit = { has_holding_type = church_holding }
 		has_building_or_higher = temple_$LEVEL$
+	}
+	# EK Added trigger for tower_holding
+	trigger_else_if = {
+		limit = { has_holding_type = tower_holding }
+		has_building_or_higher = tower_$LEVEL$
 	}
 	trigger_else = {
 		custom_description = {
@@ -252,39 +294,39 @@ building_hill_forts_requirement_terrain = {
 ######################################################################
 # Baronies that cannot have a holding (intended for Sahara)
 ######################################################################
-
+# EK commented out vanilla baronies for now
 barony_cannot_construct_holding = {
 	#Can add effectively uninhabitables here
 	OR = {
-		barony = title:b_4773
-		barony = title:b_4769
-		barony = title:b_4768
-		barony = title:b_4766
-		barony = title:b_4722
-		barony = title:b_4778
-		barony = title:b_4777
-		barony = title:b_4780
-		barony = title:b_4782
-		barony = title:b_4775
-		barony = title:b_4784
-		barony = title:b_4785
-		barony = title:b_4774
-		barony = title:b_4756
-		barony = title:b_4757
-		barony = title:b_4787
-		barony = title:b_4791
-		barony = title:b_4958
-		barony = title:b_4956
-		barony = title:b_4959
-		barony = title:b_4004
-		barony = title:b_4430
-		barony = title:b_4414
-		barony = title:b_4013
-		barony = title:b_4129
-		barony = title:b_4627
-		barony = title:b_3795
-		barony = title:b_1540
-		barony = title:b_3930
-		barony = title:b_3920
+		#barony = title:b_4773
+		#barony = title:b_4769
+		#barony = title:b_4768
+		#barony = title:b_4766
+		#barony = title:b_4722
+		#barony = title:b_4778
+		#barony = title:b_4777
+		#barony = title:b_4780
+		#barony = title:b_4782
+		#barony = title:b_4775
+		#barony = title:b_4784
+		#barony = title:b_4785
+		#barony = title:b_4774
+		#barony = title:b_4756
+		#barony = title:b_4757
+		#barony = title:b_4787
+		#barony = title:b_4791
+		#barony = title:b_4958
+		#barony = title:b_4956
+		#barony = title:b_4959
+		#barony = title:b_4004
+		#barony = title:b_4430
+		#barony = title:b_4414
+		#barony = title:b_4013
+		#barony = title:b_4129
+		#barony = title:b_4627
+		#barony = title:b_3795
+		#barony = title:b_1540
+		#barony = title:b_3930
+		#barony = title:b_3920
 	}
 }
