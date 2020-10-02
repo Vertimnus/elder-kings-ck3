@@ -1,0 +1,141 @@
+﻿namespace = ek_race
+
+# scripted_trigger ek_race_compatable_trigger = {
+	# trigger_if = {
+		# limit = {
+			# scope:mother = {
+				# has_trait = race_khajiit
+			# }
+		# }
+		# scope:real_father = { has_trait = race_khajiit }
+	# }
+	# trigger_if = {
+		# limit = {
+			# scope:real_father = {
+				# has_trait = race_khajiit
+			# }
+		# }
+		# scope:mother = { has_trait = race_khajiit }
+	# }
+	# trigger_if = {
+		# limit = {
+			# scope:mother = {
+				# has_trait = race_argonian
+			# }
+		# }
+		# scope:real_father = { has_trait = race_argonian }
+	# }
+	# trigger_if = {
+		# limit = {
+			# scope:real_father = {
+				# has_trait = race_argonian
+			# }
+		# }
+		# scope:mother = { has_trait = race_argonian }
+	# }
+	# trigger_if = {
+		# limit = {
+			# scope:mother = {
+				# NOT = { has_trait = race_khajiit }
+				# NOT = { has_trait = race_argonian }
+			# }
+			# scope:real_father = {
+				# NOT = { has_trait = race_khajiit }
+				# NOT = { has_trait = race_argonian }
+			# }
+		# }
+		# always = yes
+	# }
+# }
+
+# ek_race.0001 = {
+	# hidden = yes
+
+	# trigger = {
+		# ek_race_compatable_trigger = no
+	# }
+
+	# immediate = {
+		# hidden_effect = {
+			# random_dummy_gender_effect = yes
+			# end_pregnancy = yes
+			# pregnancy_cleanup_effect = yes
+		# }
+	# }
+# }
+
+# ek_race.0100 = {
+	# hidden = yes
+
+	# trigger = {
+		# #Let's avoid having more than one stance of the event running or letting it fire unnecessarily
+		# NOR = { 
+			# has_character_flag = race_check 
+			# has_trait = species_mer
+			# has_trait = species_human
+		# }
+	# }
+
+	# immediate = {
+		# #Maintenance flag
+		# add_character_flag = race_check
+		
+		# #Checks to see if it's a Mer
+		# if = {
+			# limit = {
+				# calc_true_if = {
+					# amount >= 2
+			
+					# has_gene = {
+						# category = race_gene_mer_ears_01
+						# template = default_1
+					# }
+					# has_gene = {
+						# category = race_gene_mer_ears_01
+						# template = mer_ears_01
+					# }
+					# has_gene = {
+						# category = race_gene_mer_ears_01
+						# template = mer_ears_02
+					# }
+					# has_gene = {
+						# category = race_gene_mer_ears_02
+						# template = default_1
+					# }
+					# has_gene = {
+						# category = race_gene_mer_ears_02
+						# template = mer_ears_01
+					# }
+					# has_gene = {
+						# category = race_gene_mer_ears_02
+						# template = mer_ears_02
+					# }
+					# has_gene = {
+						# category = race_gene_mer_eyebrows_01
+						# template = default_1
+					# }
+					# has_gene = {
+						# category = race_gene_mer_eyebrows_01
+						# template = mer_eyebrows_01
+					# }
+					# has_gene = {
+						# category = race_gene_mer_eyes
+						# template = default_1
+					# }
+					# has_gene = {
+						# category = race_gene_mer_eyes
+						# template = mer_eyes_01
+					# }
+				# }
+			# }
+			# add_trait = species_mer
+		# }
+		
+		# else = {
+			# add_trait = species_human
+		# }
+		
+		# #Remove maintenance flag
+		# remove_character_flag = race_check
+	# }
+# }
