@@ -1,0 +1,67 @@
+﻿namespace = ek_race
+
+scripted_trigger ek_race_compatable_trigger = {
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				has_trait = race_khajiit
+			}
+		}
+		scope:real_father = { has_trait = race_khajiit }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_khajiit
+			}
+		}
+		scope:mother = { has_trait = race_khajiit }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				has_trait = race_argonian
+			}
+		}
+		scope:real_father = { has_trait = race_argonian }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_argonian
+			}
+		}
+		scope:mother = { has_trait = race_argonian }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				NOT = { has_trait = race_khajiit }
+				NOT = { has_trait = race_argonian }
+			}
+			scope:real_father = {
+				NOT = { has_trait = race_khajiit }
+				NOT = { has_trait = race_argonian }
+			}
+		}
+		always = yes
+	}
+
+
+}
+
+ek_race.0001 = {
+	hidden = yes
+
+	trigger = {
+		ek_race_compatable_trigger = no
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_dummy_gender_effect = yes
+			end_pregnancy = yes
+			pregnancy_cleanup_effect = yes
+		}
+	}
+}
