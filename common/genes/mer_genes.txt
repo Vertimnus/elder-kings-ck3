@@ -34,9 +34,19 @@
 					boy = male
 					girl = male
 					}
+				mer_ears_03 = {
+				index = 3
+					male = {
+						setting = { attribute = "race_mer_ears_03_bs"	value = { min = 0.0 max = 0.5 }	age = age_preset_child_features_wide_range } 
+					}
+					female = male
+					boy = male
+					girl = male
+					}
+
 				}
 			
-			race_gene_mer_ears_02 = {
+				race_gene_mer_ears_02 = {
 				inheritable = yes
 				default_1 = { 
 					index = 0
@@ -59,6 +69,16 @@
 						index = 2
 							male = {
 								setting = { attribute = "race_mer_ears_02_bs"	value = { min = 0.0 max = 0.5 }	age = age_preset_child_features_wide_range } 
+							}
+							female = male
+							boy = male
+							girl = male
+						}
+
+					mer_ears_03 = {
+						index = 3
+							male = {
+								setting = { attribute = "race_mer_ears_03_bs"	value = { min = 0.0 max = 0.5 }	age = age_preset_child_features_wide_range } 
 							}
 							female = male
 							boy = male
@@ -97,13 +117,222 @@
 			}
 			mer_eyes_01 = {
 			index = 1
-			set_tags = "mer_eyes"
+			set_tags = "altmer_eyes"
 				male = {}
 				female = male
 				boy = male
 				girl = male
 				}
+
+			mer_eyes_02 = {
+				index = 2
+				set_tags = "bosmer_eyes"
+					male = {}
+					female = male
+					boy = male
+					girl = male
+					}				
+
+				
 			}
+
+			orc_teeth_bottom_size = {
+				inheritable = yes
+				default_1 = { 
+					index = 0
+					male = {}
+					female = male
+					boy = male
+					girl = male
+				}
+				bottom_teeth_size = {
+				index = 1
+				set_tags = "orc_teeth"
+					male = {
+						setting = { attribute = "bs_orc_teeth_bottom_teeth_size"	value = { min = 0.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+					}
+
+					female = {
+						setting = { attribute = "bs_orc_teeth_bottom_teeth_size"	value = { min = 0.0 max = 0.5 }	age = age_preset_child_features_wide_range } 
+					}
+
+					boy = male
+					girl = female
+					}
+				}
+
+				orc_teeth_tusk_size = {
+					inheritable = yes
+					default_1 = { 
+						index = 0
+						male = {}
+						female = male
+						boy = male
+						girl = male
+					}
+					tusk_size = {
+					index = 1
+					set_tags = "orc_teeth"
+						male = {
+							setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "jaw_forward"	value = { min = 0.75 max = 1.0 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "mouth_width"	value = { min = 0.0 max = 0.75 }	age = age_preset_child_features } 
+
+							
+						}
+						female = {
+							setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.0 max = 0.7 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "jaw_forward"				value = { min = 0.5 max = 0.75 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "bs_orc_teeth_lips"			value = { min = 0.0 max = 0.85 }	age = age_preset_child_features_wide_range } 
+							setting = { attribute = "mouth_width"				value = { min = 0.0 max = 0.75 }	age = age_preset_child_features } 
+
+							
+						}
+						boy = male
+						girl = female
+						}
+					}
+
+					orc_teeth_broken = {
+						inheritable = no
+						default_1 = { 
+							index = 0
+							male = {}
+							female = male
+							boy = male
+							girl = male
+						}
+						left1 = {
+						index = 1
+						set_tags = "orc_teeth"
+							male = {
+								setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "jaw_forward"	value = { min = 0.875 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_broken_left"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+							}
+							female = {
+								setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.3 max = 0.7 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "jaw_forward"	value = { min = 0.2 max = 0.75 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_broken_left"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+								setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+							}
+							boy = male
+							girl = female
+							}
+						
+
+						right1 = {
+							index = 2
+							set_tags = "orc_teeth"
+								male = {
+									setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.4 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "jaw_forward"	value = { min = 0.875 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_broken_right"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+								}
+								female = {
+									setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.3 max = 0.7 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "jaw_forward"	value = { min = 0.2 max = 0.75 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_broken_right"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+									setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+								}
+								boy = male
+								girl = female
+								}
+							
+
+							both1 = {
+								index = 3
+								set_tags = "orc_teeth"
+									male = {
+										setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "jaw_forward"	value = { min = 0.875 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_broken_right"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_broken_left"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+									}
+									female = {
+										setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.3 max = 0.7 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "jaw_forward"	value = { min = 0.2 max = 0.75 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.5 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_broken_right"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_broken_left"	value = { min = 1.0 max = 1.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+										setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.0 }	age = age_preset_child_features_wide_range } 
+									}
+									boy = male
+									girl = female
+									}
+								}
+
+
+								orc_teeth_outward_angle = {
+									inheritable = yes
+									default_1 = { 
+										index = 0
+										male = {}
+										female = male
+										boy = male
+										girl = male
+									}
+									outward_angle = {
+									index = 1
+									set_tags = "orc_teeth"
+										male = {
+											setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.8 }	age = age_preset_child_features_wide_range } 
+											setting = { attribute = "mouth_width"	value = { min = 0.3 max = 0.5 }	age = age_preset_child_features } 
+										}
+										female = {
+											setting = { attribute = "bs_orc_teeth_tusks_outward"	value = { min = 0.0 max = 0.6 }	age = age_preset_child_features_wide_range } 
+											setting = { attribute = "mouth_width"	value = { min = 0.2 max = 0.4 }	age = age_preset_child_features } 
+										}
+										boy = male
+										girl = female
+										}
+									}
+
+									orc_teeth_forward_angle = {
+										inheritable = yes
+										default_1 = { 
+											index = 0
+											male = {}
+											female = male
+											boy = male
+											girl = male
+										}
+										forward_angle = {
+										index = 1
+										set_tags = "orc_teeth"
+											male = {
+												setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.8 }	age = age_preset_child_features_wide_range } 
+												setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.0 max = 0.3 }	age = age_preset_child_features_wide_range } 
+												setting = { attribute = "mouth_width"	value = { min = 0.0 max = -0.5 }	age = age_preset_child_features } 
+											}
+											female = {
+												setting = { attribute = "bs_orc_teeth_tusks_forward"	value = { min = 0.0 max = 0.6 }	age = age_preset_child_features_wide_range } 
+												setting = { attribute = "bs_orc_teeth_lips"	value = { min = 0.0 max = 0.4 }	age = age_preset_child_features_wide_range } 
+												setting = { attribute = "mouth_width"	value = { min = 0.0 max = -0.3 }	age = age_preset_child_features } 
+											}
+											boy = male
+											girl = female
+											}
+										}
+							
+
+
+
 
 	
 	}
