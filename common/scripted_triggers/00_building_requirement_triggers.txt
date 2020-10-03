@@ -16,6 +16,56 @@ building_requirement_tribal_holding_in_county = {
 	}
 }
 
+# EK Added triggers for different governments
+building_requirement_feudal = {
+	scope:holder = {
+		has_government = feudal_government
+	}
+}
+
+building_requirement_republic = {
+	scope:holder = {
+		has_government = republic_government
+	}
+}
+
+building_requirement_theocracy = {
+	scope:holder = {
+		has_government = theocracy_government
+	}
+}
+
+building_requirement_clan = {
+	scope:holder = {
+		has_government = clan_government
+	}
+}
+
+building_requirement_mercenary = {
+	scope:holder = {
+		has_government = mercenary_government
+	}
+}
+
+building_requirement_holy_order = {
+	scope:holder = {
+		has_government = holy_order_government
+	}
+}
+
+building_not_buildable_any_government = {
+	scope:holder = {
+		OR = {
+			has_government = feudal_government
+			has_government = republic_government
+			has_government = theocracy_government
+			has_government = clan_government
+			has_government = mercenary_government
+			has_government = holy_order_government
+		}
+	}
+}
+
 ######################################################################
 # Holding Level
 ######################################################################
@@ -32,6 +82,11 @@ building_requirement_castle_city_church = {
 	trigger_else_if = {
 		limit = { has_holding_type = church_holding }
 		has_building_or_higher = temple_$LEVEL$
+	}
+	# EK Added trigger for tower_holding
+	trigger_else_if = {
+		limit = { has_holding_type = tower_holding }
+		has_building_or_higher = tower_$LEVEL$
 	}
 	trigger_else = {
 		custom_description = {

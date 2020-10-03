@@ -1,4 +1,4 @@
-#EK MainMenu Tweak
+# EK MainMenu Tweak
 position = { 0 0 }
 widget = {
 	name = "mainmenu_panel_bottom"
@@ -165,11 +165,11 @@ widget = {
 				texture = "gfx/interface/tiles/generic_dark_rectangle.dds"
 				spriteType = Corneredtiled
 				spriteborder = { 2 2 }
-				margin_left = 40
-				margin_right = 40
+				margin_left = 15
+				margin_right = 15
 				margin_top = -88
 				margin_bottom = 80
-				alpha = 0.7
+				alpha = 0.75
 				
 				using = Mask_Rough_Edges
 			}
@@ -178,23 +178,314 @@ widget = {
 				parentanchor = top|hcenter
 				name = "tile_frame_top"
 				texture = "gfx/interface/frontend/frontend_menu_top.dds"
+				size = { 442 40 }
 				position = { 0 50 }
-				scale = 1.25
+				scale = 1.2
 			}
 			
 			icon = {
 				parentanchor = bottom|hcenter
 				name = "tile_frame_bottom"
 				texture = "gfx/interface/frontend/frontend_menu_bottom.dds"
+				#size = { 442 54 }
 				position = { 0 110 }
-				scale = 1.25
+				scale = 1.2
+			}
+
+			modify_texture = {
+				name = "glow_main"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_glow.dds"
+				blend_mode = colordodge
+				alpha = 0
+				translate_uv = { 0.29 -0.5 }
+			}
+
+			modify_texture = {
+				name = "glow_continue"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+				blend_mode = colordodge
+				translate_uv = { 0 -0.14 }
+				alpha = 1
+			}
+
+			modify_texture = {
+				name = "glow_new"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+				blend_mode = colordodge
+				translate_uv = { 0 -0.07 }
+				alpha = 0
+			}
+
+			modify_texture = {
+				name = "glow_load"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+				blend_mode = colordodge
+				translate_uv = { 0 -0.14 }
+				alpha = 0
+			}
+
+			modify_texture = {
+				name = "glow_host"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+				blend_mode = colordodge
+				translate_uv = { 0 -0.28 }
+				alpha = 0
+			}
+
+			modify_texture = {
+				name = "glow_join"
+				texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+				blend_mode = colordodge
+				translate_uv = { 0 -0.31 }
+				alpha = 0
 			}
 			
+			# modify_texture = {
+			# 	name = "glow_exit"
+			# 	texture = "gfx/interface/frontend/frontend_main_menu_bg_button_glow.dds"
+			# 	blend_mode = colordodge
+			# 	translate_uv = { 0 -0.41 }
+			# 	alpha = 0
+			# }
+
+			@duration_button_enter = 0.1
+			@duration_button_leave = 0.5
+
+			# Continue
+			state = {
+				name = "main_menu_glow_continue_enter"
+				duration = 0.05
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_continue"
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_continue_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_continue"
+					alpha = 0
+				}
+			}
+
+			# New
+			state = {
+				name = "main_menu_glow_new_enter"
+				duration = @duration_button_enter
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_new"
+					translate_uv = { 0 -0.07 }
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_new_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_new"
+					translate_uv = { 0 -0.07 }
+					alpha = 0
+				}
+			}
+
+			# Load
+			state = {
+				name = "main_menu_glow_load_enter"
+				duration = @duration_button_enter
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_load"
+					translate_uv = { 0 -0.14 }
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_load_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_load"
+					translate_uv = { 0 -0.14 }
+					alpha = 0
+				}
+			}
+
+			# Load
+			state = {
+				name = "main_menu_glow_host_enter"
+				duration = @duration_button_enter
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_host"
+					translate_uv = { 0 -0.28 }
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_host_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_host"
+					translate_uv = { 0 -0.28 }
+					alpha = 0
+				}
+			}
+
+			# Load
+			state = {
+				name = "main_menu_glow_join_enter"
+				duration = @duration_button_enter
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_join"
+					translate_uv = { 0 -0.31 }
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_join_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_join"
+					translate_uv = { 0 -0.31 }
+					alpha = 0
+				}
+			}
+
+			# Exit
+			state = {
+				name = "main_menu_glow_exit_enter"
+				duration = 0.05
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_continue"
+					translate_uv = { 0 -0.41 }
+					alpha = 1
+				}
+			}
+
+			state = {
+				name = "main_menu_glow_exit_leave"
+				duration = @duration_button_leave
+				using = Animation_Curve_Default
+
+				modify_texture = {
+					name = "glow_continue"
+					translate_uv = { 0 -0.41 }
+					alpha = 0
+				}
+			}
+
+			state = {
+				name = "glow_1"
+				next = "glow_3"
+				duration = 0.3
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0
+					translate_uv = { 0.25 -0.22 }
+				}
+			}
+
+			state = {
+				name = "glow_3"
+				next = "glow_4"
+				duration = 0.5
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0.4
+					translate_uv = { 0.19 -0.03 }
+				}
+			}
+
+			state = {
+				name = "glow_4"
+				next = "glow_5"
+				duration = 0.25
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0.8
+					translate_uv = { 0.1 0.1 }
+				}
+			}
+
+			state = {
+				name = "glow_5"
+				next = "glow_6"
+				duration = 0.25
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0.5
+					translate_uv = { 0.03 0.19 }
+				}
+			}
+
+			state = {
+				name = "glow_6"
+				next = "glow_7"
+				duration = 0.3
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0.2
+					translate_uv = { -0.15 0.25 }
+				}
+			}
+
+			state = {
+				name = "glow_7"
+				duration = 0.4
+
+				modify_texture = {
+					name = "glow_main"
+					alpha = 0
+					translate_uv = { -0.3 0.29 }
+				}
+			}
+
+			# Continue Game
+			state = {
+				name = "main_menu_continue"
+				duration = 0.4
+				bezier = { 0.5 0 1 0.5 }
+				delay = 0.4
+				alpha = 0
+
+				position_x = -100
+			}
+
 			vbox = {
 				spacing = 25
 				datacontext = "[FrontEndMainView.AccessLoadView]"
 				set_parent_size_to_minimum = yes
-				#EK Main Logo
+				# EK Main Logo
 				icon = {
 					texture = "gfx/interface/frontend/main_logo.dds"
 					size = { 500 235 }
@@ -202,187 +493,300 @@ widget = {
 				
 				vbox = {
 					spacing = 5
-					
+
 					text_single = {
 						layoutpolicy_horizontal = expanding
+						margin_left = 5
 						text = "SINGLE_PLAYER"
+						default_format = "#weak;italic;glow_color:{0.1,0.1,0.1,1}"
 					}
-					
-					button_frontend = {
-						name = "continue_button"
-						datacontext = "[FrontEndLoadView.GetContinueSave]"
-						visible = "[FrontEndLoadView.CanDoContinue]"
-						texture = "gfx/interface/frontend/button_frontend_2.dds"
-						enabled = "[Not( SaveGameItem.HasMissingDLCs )]"
-						onclick = "[FrontEndLoadView.OnContinue]"
-						
-						text = "CONTINUE"
-						fontsize = 25
-						
-						tooltip = FRONTEND_CONTINUE_TT
-						
-						hbox = {
-							parentanchor = right|vcenter
-							alwaystransparent = yes
-							position = { 0 4 }
-							
-							expand = {}
-							
-							ironman_save_icon = {
-								visible = "[SaveGameItem.IsIronmanSave]"
-								tooltip = "LOAD_IRONMAN_TOOLTIP"
+
+					vbox = {
+						button_frontend = {
+							name = "continue_button_disabled"
+							visible = "[Not(FrontEndLoadView.CanDoContinue)]"
+							enabled = no
+
+							text = "CONTINUE"
+							default_format = "#weak"
+							fontsize = 22
+							tooltip = FRONTEND_CONTINUE_TT
+
+						}
+
+						button_frontend = {
+							name = "continue_button"
+							datacontext = "[FrontEndLoadView.GetContinueSave]"
+							visible = "[FrontEndLoadView.CanDoContinue]"
+							enabled = "[Not( SaveGameItem.HasMissingDLCs )]"
+							onclick = "[PdxGuiTriggerAllAnimations('main_menu_continue')]"
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptAllAnimations('main_menu_glow_exit_leave')]"
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_continue_leave','main_menu_glow_continue_enter')]"
 							}
-							
-							invalid_save_icon = {
-								visible = "[SaveGameItem.HasMissingDLCs]"
-								tooltip = "[SaveGameItem.GetMissingDLCInfo]"
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_continue_enter','main_menu_glow_continue_leave')]"
 							}
-							achievements_disabled_icon = {
-								visible = "[SaveGameItem.HasAchievementBlockingGameRules]"
-								tooltip = "[SaveGameItem.GetAchievementBlockingGameRulesInfo]"
+
+							state = {
+								name = "main_menu_continue"
+								delay = 1.5
+								on_finish = "[FrontEndLoadView.OnContinue]"
 							}
-							achievements_disabled_icon = {
-								visible = "[And( SaveGameItem.CanGetAchievements, Not( IsGameChecksumOk ) )]"
-								tooltip = "GAME_CHECKSUM_CHANGED_FROM_SAVE_FILE"
-							}
-							
-							coat_of_arms_icon = {
-								name = "realm_flag"
-								
-								size = { 62 62 }
-								coat_of_arms_slot = "[SaveGameItem.GetCoatOfArms.GetSlot('(int32)124','(int32)124')]"
-								coat_of_arms = "[SaveGameItem.GetCoatOfArms.GetTexture('(int32)124','(int32)124')]"
-								coat_of_arms_mask = "[SaveGameItem.GetPlayerGovernment.GetRealmMask]"
-								
-								coa_realm_overlay = {
-									texture = "[SaveGameItem.GetPlayerGovernment.GetRealmFrame('(int32)62')]"
-									frame = "[SaveGameItem.GetPlayerTier]"
-									framesize = { 62 71 }
-									size = { 62 71 }
+
+							state = {
+								name = _mouse_release
+								start_sound = {
+									soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_start_game"
 								}
-								
-								coa_realm_topframe = {
-									texture = "gfx/interface/coats_of_arms/topframe_62.dds"
-									frame = "[SaveGameItem.GetPlayerTier]"
-									framesize = { 62 71 }
-									size = { 62 71 }
+								on_start = "[FrontEndLoadView.PreContinueSaveCheck]"
+							}
+
+							text = "CONTINUE"
+							fontsize = 22
+							tooltip = FRONTEND_CONTINUE_TT
+
+							hbox = {
+								parentanchor = right|vcenter
+								alwaystransparent = yes
+								margin_right = 10
+
+								ironman_save_icon = {
+									visible = "[SaveGameItem.IsIronmanSave]"
+									tooltip = "LOAD_IRONMAN_TOOLTIP"
+								}
+
+								invalid_save_icon = {
+									visible = "[SaveGameItem.HasMissingDLCs]"
+									tooltip = "[SaveGameItem.GetMissingDLCInfo]"
+								}
+
+								achievements_disabled_icon = {
+									visible = "[SaveGameItem.HasAchievementBlockingGameRules]"
+									tooltip = "[SaveGameItem.GetAchievementBlockingGameRulesInfo]"
+								}
+
+								achievements_disabled_icon = {
+									visible = "[And( SaveGameItem.CanGetAchievements, Not( IsGameChecksumOk ) )]"
+									tooltip = "GAME_CHECKSUM_CHANGED_FROM_SAVE_FILE"
+								}
+
+								expand = {
+									alwaystransparent = yes
+								}
+
+								coat_of_arms_icon = {
+									name = "realm_flag"
+									alwaystransparent = yes
+
+									size = { 62 62 }
+									coat_of_arms_slot = "[SaveGameItem.GetCoatOfArms.GetSlot('(int32)124','(int32)124')]"
+									coat_of_arms = "[SaveGameItem.GetCoatOfArms.GetTexture('(int32)124','(int32)124')]"
+									coat_of_arms_mask = "[SaveGameItem.GetPlayerGovernment.GetRealmMask]"
+
+									coa_realm_overlay  = {
+										texture = "[SaveGameItem.GetPlayerGovernment.GetRealmFrame('(int32)62')]"
+										frame = "[SaveGameItem.GetPlayerTier]"
+										framesize = { 62 71 }
+										size = { 62 71 }
+									}
+
+									coa_realm_topframe  = {
+										texture = "gfx/interface/coat_of_arms/topframe_62.dds"
+										frame = "[SaveGameItem.GetPlayerTier]"
+										framesize = { 62 71 }
+										size = { 62 71 }
+									}
 								}
 							}
 						}
 					}
-					
+
 					button_frontend = {
 						name = "new_game_button"
 						text = "NEW_GAME"
-						fontsize = 25
+						fontsize = 22
 						onclick = "[FrontEndMainView.OnNewGame]"
-						texture = "gfx/interface/frontend/button_frontend_2.dds"
-					
-					# animation_attention_text = {
-					# 	visible = "[Not(FrontEndLoadView.CanDoContinue)]"
-					# }
+
+						state = {
+							name = _mouse_hierarchy_enter
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_new_leave','main_menu_glow_new_enter')]"
+						}
+
+						state = {
+							name = _mouse_hierarchy_leave
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_new_enter','main_menu_glow_new_leave')]"
+						}
 					}
-					
-					button_frontend = {
-						name = "load_game_button"
-						visible = "[FrontEndLoadView.CanDoContinue]"
-						text = "LOAD"
-						fontsize = 25
-						onclick = "[FrontEndMainView.OnLoad]"
-						texture = "gfx/interface/frontend/button_frontend_2.dds"
+
+					vbox = {
+						button_frontend = {
+							name = "load_game_button_disabled"
+							visible = "[Not(FrontEndLoadView.CanDoContinue)]"
+							enabled = no
+
+							text = "LOAD"
+							default_format = "#weak"
+							fontsize = 22
+							tooltip = FRONTEND_CONTINUE_TT
+
+						}
+
+						button_frontend = {
+							name = "load_game_button"
+							visible = "[FrontEndLoadView.CanDoContinue]"
+							text = "LOAD"
+							fontsize = 22
+							onclick = "[FrontEndMainView.OnLoad]"
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_load_leave','main_menu_glow_load_enter')]"
+							}
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_load_enter','main_menu_glow_load_leave')]"
+							}
+						}
 					}
 				}
-				
+
 				vbox = {
 					text_single = {
 						layoutpolicy_horizontal = expanding
+						margin_left = 5
 						text = "MULTI_PLAYER"
+						default_format = "#weak;italic;glow_color:{0.1,0.1,0.1,1}"
 					}
-					
+
 					spacer = {
 						size = { 5 5 }
 					}
-					
+
 					vbox = {
 						visible = "[And( POPSStatusIsLoggedIn, Not( POPStatusIsUserNameEmpty ) )]"
 						spacing = 5
-						
+
 						button_frontend = {
 							name = "host_button"
 							text = "HOST_GAME"
-							fontsize = 25
+							fontsize = 22
 							onclick = "[FrontEndMainView.OnHost]"
 							onclick = "[RefreshIllustration]"
 							enabled = "[JominiIsMultiplayerAccessible]"
 							tooltip = "[JominiGetMultiplayerAccessibleString]"
-							texture = "gfx/interface/frontend/button_frontend_2.dds"
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_host_leave','main_menu_glow_host_enter')]"
+							}
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_host_enter','main_menu_glow_host_leave')]"
+							}
 						}
-						
+
 						button_frontend = {
 							name = "join_button"
 							text = "FRONTEND_JOIN_MULTIPLAYER"
-							fontsize = 25
+							fontsize = 22
 							onclick = "[FrontEndMainView.OnMultiPlayer]"
 							onclick = "[RefreshIllustration]"
 							enabled = "[JominiIsMultiplayerAccessible]"
 							tooltip = "[JominiGetMultiplayerAccessibleString]"
-							texture = "gfx/interface/frontend/button_frontend_2.dds"
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_join_leave','main_menu_glow_join_enter')]"
+							}
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_join_enter','main_menu_glow_join_leave')]"
+							}
 						}
 					}
-					
+
 					vbox = {
 						visible = "[Or( Not( POPSStatusIsLoggedIn ), POPStatusIsUserNameEmpty )]"
 						spacing = 5
-						
+
 						button_frontend = {
 							name = "host_button"
 							text = "HOST_GAME"
-							fontsize = 25
+							default_format = "#weak"
+							fontsize = 22
 							onclick = "[FrontEndMainView.OnLogin]"
 							tooltip = "[JominiGetMultiplayerAccessibleString]"
-							texture = "gfx/interface/frontend/button_frontend_2.dds"
-							
-							icon = {
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_host_leave','main_menu_glow_host_enter')]"
+							}
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_host_enter','main_menu_glow_host_leave')]"
+							}
+
+							icon_online_offline = {
 								parentanchor = right|vcenter
 								position = { -15 0 }
-								texture = "gfx/interface/frontend/icon_online_offline.dds"
-								
-								size = { 30 30 }
-								framesize = { 80 80 }
 								frame = 2
 							}
 						}
-						
+
 						button_frontend = {
 							name = "join_button"
 							text = "FRONTEND_JOIN_MULTIPLAYER"
-							fontsize = 25
+							default_format = "#weak"
+							fontsize = 22
 							onclick = "[FrontEndMainView.OnLogin]"
 							tooltip = "[JominiGetMultiplayerAccessibleString]"
-							texture = "gfx/interface/frontend/button_frontend_2.dds"
-							
-							icon = {
+
+							state = {
+								name = _mouse_hierarchy_enter
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_join_leave','main_menu_glow_join_enter')]"
+							}
+
+							state = {
+								name = _mouse_hierarchy_leave
+								on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_join_enter','main_menu_glow_join_leave')]"
+							}
+
+							icon_online_offline = {
 								parentanchor = right|vcenter
 								position = { -15 0 }
-								texture = "gfx/interface/frontend/icon_online_offline.dds"
-								
-								size = { 30 30 }
-								framesize = { 80 80 }
 								frame = 2
 							}
 						}
 					}
 				}
-				
-				expand = {}
-				
+
+
 				button_frontend = {
 					name = "exit_game_button"
 					visible = yes
 					text = "EXIT_TO_DESKTOP"
-					fontsize = 25
+					fontsize = 22
 					onclick = "[FrontEndMainView.OnQuit]"
-					texture = "gfx/interface/frontend/button_frontend_2.dds"
+
+					state = {
+						name = _mouse_hierarchy_enter
+						on_start = "[PdxGuiInterruptAllAnimations('main_menu_glow_continue_leave')]"
+						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_exit_leave','main_menu_glow_exit_enter')]"
+					}
+
+					state = {
+						name = _mouse_hierarchy_leave
+						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('main_menu_glow_exit_enter','main_menu_glow_exit_leave')]"
+					}
 				}
 				
 				expand = {}
