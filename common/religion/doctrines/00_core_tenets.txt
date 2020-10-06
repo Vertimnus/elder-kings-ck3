@@ -1324,6 +1324,32 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_daedric_bargains = {
+		icon = core_tenet_handcoin
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_daedric_bargians }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			custom_description = {
+				text = daedric_worship_must_not_be_criminal
+				NOT = { flag:doctrine_daedra_worship_forbidden = { is_in_list = selected_doctrines } }
+			}
+		}
+		
+		parameters = {
+			# TODO: Decisions to deal with a Daedric Prince
+			daedric_bargains_active = yes
+			allows_worship_clavicus_shunned_doctrines_active = yes
+		}
+	}
+	
 	tenet_witch_worship = {
 		icon = core_tenet_festivities
 		name = {
@@ -1398,6 +1424,10 @@ doctrine_core_tenets = {
 		# traits = {
 			# virtues = { vampire = 2 }
 		# }
+		
+		parameters = {
+			allows_worship_molag_shunned_doctrines_active = yes
+		}
 	}
 	
 	tenet_lycanthrope_worship = {
@@ -1427,6 +1457,10 @@ doctrine_core_tenets = {
 		# traits = {
 			# virtues = { lycanthrope = 2 }
 		# }
+		
+		parameters = {
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
 	}
 	
 	tenet_necromancy_worship = {
