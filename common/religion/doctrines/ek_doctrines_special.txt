@@ -132,3 +132,35 @@ is_malacath_faith = {
 		}
 	}
 }
+
+#Velothi
+is_velothi_faith = {
+	group = "special"
+	
+	is_available_on_create = {
+		has_doctrine = special_doctrine_is_velothi_faith
+	}
+
+	special_doctrine_is_velothi_faith = {
+		parameters = {
+			# Since doctrines cannot modify other faith's views of us, only our view of others, all Velothi faiths are given this special doctrine which makes them friendlier to Faiths with the Velothi Syncretism tenet.
+			hostility_override_tenet_velothi_syncretism = 1
+			velothi_syncretic_recipient_opinion_active = yes
+			opinion_of_velothi_syncretic_actor_opinion_active = 15
+		}
+	}
+}
+
+special_tolerance = {
+	group = "main_group"
+	
+	is_available_on_create = {
+		always = no #goes away when selecting a new faith
+	}
+	
+	special_doctrine_living_gods = {
+		parameters = {
+			hostility_override_special_doctrine_living_gods = 1
+		}
+	}
+}

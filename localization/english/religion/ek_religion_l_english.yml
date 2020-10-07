@@ -109,17 +109,36 @@
     malacath_religion_adherent_plural:1 "Malacathite"
     malacath_religion_desc:0 "A loose collections of faiths centered around the Prince of the Spurned, Malacath. Due to his nature, his worship is not very prevalent in Tamriel, but is focused on tightly-knit communities who are otherwise isolated from the rest of the world. Most Orsimer in Tamriel worship him as their God-King, while the Dunmer of Morrowind see him as part of the Four Bad Daedra."
  
- code_of_mauloch:1 "Code of Mauloch"
-    code_of_mauloch_adj:1 "Code of Mauloch"
-    code_of_mauloch_adherent:1 "Pariah"
-    code_of_mauloch_adherent_plural:1 "Pariahs"
-    code_of_mauloch_desc:0 "Mauloch is the god-king of the orcs. He is the Sworn Oath and Bloody Curse, and his domain is conflict, anguish, and broken promises. All orcs who follow Mauloch live by his Code. It prescribes respect for smiths, demands vengeance for slights against one's honor, and holds that death in battle is the most honorable way for an orc to die."
+ code_of_malacath:1 "Code of Malacath"
+    code_of_malacath_adj:1 "Code of Malacath"
+    code_of_malacath_adherent:1 "Pariah"
+    code_of_malacath_adherent_plural:1 "Pariahs"
+    code_of_malacath_desc:0 "Malacath is the god-king of the orcs. He is the Sworn Oath and Bloody Curse, and his domain is conflict, anguish, and broken promises. All orcs who follow Malacath live by his Code. It prescribes respect for smiths, demands vengeance for slights against one's honor, and holds that death in battle is the most honorable way for an orc to die."
  malacath_cult:1 "Malacath Cult"
     malacath_cult_adj:1 "Malacath Cult"
     malacath_cult_adherent:1 "Malacath Cultist"
     malacath_cult_adherent_plural:1 "Malacath Cultists"
     malacath_cult_desc:0 "The Cult of Malacath honours the Keeper of the Bloody Curse, and uphold his strictest principles. They see themselves surrounded by enemies due to the nature of the Prince, and they are ready to fight and die to preserve their faith."
  
+ # Velothi
+ velothi_faiths:1 "Velothi"
+    velothi_faiths_adj:1 "Velothi"
+    velothi_faiths_adherent:1 "Velothi"
+    velothi_faiths_adherent_plural:1 "Velothi"
+    velothi_faiths_desc:0 "WIP"
+
+ tribunal_temple:1 "Tribunal Temple"
+    tribunal_temple_adj:1 "Tribunal Temple"
+    tribunal_temple_adherent:1 "Temple Follower" #Wip
+    tribunal_temple_adherent_plural:1 "Temple Followers" #WIP
+    tribunal_temple_desc:0 "The Tribunal Temple is the native religion of Morrowind, founded by St. Veloth after he led his followers into the East. It combines selective veneration of the "Good Daedra" and condemnation of the "House of Troubles" with the worship of the Tribunal, the three immortal god-kings of Morrowind, who ascended to godhood following the Battle of Red Mountain. The Tribunal Temple is organized along strict lines and exerts great influence on most of Dunmer society."
+
+ tribunal_cult:1 "Tribunal Cult"
+    tribunal_cult_adj:1 "Tribunal Cult"
+    tribunal_cult_adherent:1 "Temple Follower" #Wip
+    tribunal_cult_adherent_plural:1 "Temple Followers" #WIP
+    tribunal_cult_desc:0 "The Tribunal enjoys almost unquestioning adherence in Morrowind, but some of the Houses are known to be less fervent or even lapsing in the rigor of their religious practice, such as Telvanni - who disdain the Temple hierarchy and its meddling – and Hlaalu – who are known to make common ground with Divines-worshipping foreigners, and thus to accommodate their views. Though not unbelievers by any metric, the less dogmatic followers of the Tribunal are still viewed askance by the Temple."
+    
  # Reach Faiths
  reach_religion:1 "Reach Faiths"
     reach_religion_adj:1 "Reach"
@@ -293,16 +312,6 @@
     atmoran_syncretic_recipient_opinion_active_opinion_name:0 "$faith_syncretic_opinion_active_control$"
     atmoran_syncretic_actor_opinion_active_opinion_name:0 "$faith_syncretic_opinion_active_control$"
     
- tenet_reach_syncretism_name:0 "Reach Syncretism"
-    tenet_reach_syncretism_desc:0 "The various Gods worshipped by the people in the Reach may seem terrifying and obscure, but if we learn about them with an open mind they can bring ancient and forgotten truths..."
-    doctrine_parameter_hostility_override_special_doctrine_is_reach_faith:0 "Considers Reach [faiths|E] and is considered by Reach $game_concept_faiths$ to be [GetHostilityLevelName( FAITH_DOCTRINE_PARAMETER.GetIntValue )|V] instead of #V Hostile#!"
-    doctrine_parameter_reach_syncretic_actor_opinion_active:1 "Mutual [EmptyScope.ScriptValue('syncretic_astray_mutual_opinion_bonus_value')|=+0] [opinion|E] bonus with Reach [faiths|E]"
-    doctrine_parameter_opinion_of_reach_syncretic_recipient_opinion_active:0 ""
-    doctrine_parameter_reach_syncretic_recipient_opinion_active:1 "Mutual [EmptyScope.ScriptValue('syncretic_astray_mutual_opinion_bonus_value')|=+0] [opinion|E] bonus with [faiths|E] that have the $tenet_reach_syncretism_name$ [core_tenet|E]"
-    doctrine_parameter_opinion_of_reach_syncretic_actor_opinion_active:0 ""
-    reach_syncretic_recipient_opinion_active_opinion_name:0 "$faith_syncretic_opinion_active_control$"
-    reach_syncretic_actor_opinion_active_opinion_name:0 "$faith_syncretic_opinion_active_control$"
- 
  # Daedric Worship
  tenet_azura_syncretism_name:0 "Worship of Azura"
     tenet_azura_syncretism_desc:0 "The Queen of Dawn and Dusk has been part of our customs and prayers for generations. It is time to give her the place she deserves in our pantheon."
@@ -522,6 +531,17 @@
     tenet_focused_worship_desc:0 "While other faiths pretend to revere a wide variety of gods, true worship can only be given to a single deity."
     doctrine_parameter_no_patron_deities_active:0 "Adherents cannot pick [patron_deities|E]"
     doctrine_parameter_resistance_to_heresy_active:0 "$doctrine_parameter_pluralism_pluralistic_resistant_to_heresy$"
+    
+ tenet_guidance_temple_name:0 "Guidance of the Tribunal Temple"
+    tenet_guidance_temple_desc:0 "The Ascension of the Three Living Gods deeply transformed our society. The worship of the Three Good Daedra was necessary to survive, but they should be now regarded as the Anticipations, those who came before the Living Gods of Morrowind."
+    doctrine_parameter_hostility_override_tenet_nerevarine_prophecies:0 "[faiths|E] with the '$tenet_nerevarine_prophecies_name$' tenet are considered [GetHostilityLevelName( FAITH_DOCTRINE_PARAMETER.GetIntValue )|V] instead of #V Hostile#!"
+    
+ tenet_teachings_veloth_name:0 "Teachings of Saint Veloth"
+    tenet_teachings_veloth_desc:0 "For centuries we have to live hidden, persecuted by our so-called kin of Summerset. A prophet, Saint Veloth, led us and guided us to the sacred land of Resdayn, under the protection of the Three Good Daedra, the Queen of Dawn and Dusk, the Prince of Plots, and the Teacher of the Secret Arts."
+    
+ tenet_nerevarine_prophecies_name:0 "Nerevarine Prophecies"
+    tenet_nerevarine_prophecies_desc:0 "From seventh sign of eleventh generation,\nNeither Hound nor Guar, nor Seed nor Harrow,\nBut Dragon-born and far-star-marked,\nOutlander Incarnate beneath Red Mountain,\nBlessed Guest counters seven curses,\nStar-blessed hand wields thrice-cursed blade,\nTo reap the harvest of the unmourned house."
+    doctrine_parameter_hostility_override_tenet_guidance_temple:0 "[faiths|E] with the '$tenet_guidance_temple_name$' tenet are considered [GetHostilityLevelName( FAITH_DOCTRINE_PARAMETER.GetIntValue )|V] instead of #V Hostile#!"
  
  ## Vanilla edits
  tenet_legalism_alternate_name:0 "Path to Alaxon"

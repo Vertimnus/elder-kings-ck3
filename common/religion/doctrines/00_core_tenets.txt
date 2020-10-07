@@ -1517,6 +1517,81 @@ doctrine_core_tenets = {
 			minimum_fervor = 25
 		}
 	}
+	
+	tenet_guidance_temple = {
+		icon = core_tenet_altar
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_guidance_temple }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			#WIP: Must worship Azura + Mephala + Boethiah
+			always = yes
+		}
+		
+		parameters = {
+			tenet_adaptive_conversion_resistance = yes
+			additional_personal_gods_active = yes
+			personal_god_different_names_active = yes
+			hostility_override_tenet_nerevarine_prophecies = 3
+			hostility_override_tenet_guidance_temple = 1
+		}
+	}
+	
+	tenet_teachings_veloth = {
+		# considers Malacath Faiths, Cult of Molag Bal, Cult of Sheogorath and Cult of Mehrunes Dagon as Evil rather than Hostile
+		# makes Ambitious a virtue and Content a sin
+		icon = core_tenet_shadyfigure
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_teachings_veloth }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			allows_worship_azura_shunned_doctrines_active = yes
+			allows_worship_mephala_shunned_doctrines_active = yes
+			allows_worship_boethiah_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = { ambitious }
+			sins = { content }
+		}
+	}
+	
+	tenet_nerevarine_prophecies = {
+		icon = core_tenet_sword
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_nerevarine_prophecies }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		character_modifier = {
+			prowess = 4
+			tolerance_advantage_mod = 2
+		}
+		
+		parameters = {
+			clergy_can_fight = yes
+			hostility_override_tenet_guidance_temple = 3
+		}
+	}
 
 	############################
 	# Christian Faith Tenets	#
