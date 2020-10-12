@@ -1,0 +1,922 @@
+patron_gui_toggle = {
+    scope = character
+
+    is_shown = {
+        has_variable = patron_gui_toggle
+    }
+
+    effect = {
+        if = {
+            limit = {
+                has_variable = patron_gui_toggle
+            }
+            remove_variable = patron_gui_toggle
+            #remove_variable = patron_selection_tab_toggle
+            remove_variable = patron_interaction_tab_toggle
+        }
+        else = {
+            set_variable = patron_gui_toggle
+            #set_variable = patron_selection_tab_toggle
+            remove_variable = societies_gui_toggle
+        }
+    }
+}
+
+patron_gui_close = {
+    scope = character
+
+    is_shown = {
+        always = yes
+    }
+
+    effect = {
+        remove_variable = patron_gui_toggle
+        remove_variable = patron_interaction_tab_toggle
+    }
+}
+
+societies_gui_toggle = {
+    scope = character
+
+    is_shown = {
+        has_variable = societies_gui_toggle
+    }
+
+    effect = {
+        if = {
+            limit = {
+                has_variable = societies_gui_toggle
+            }
+            remove_variable = societies_gui_toggle
+        }
+        else = {
+            set_variable = societies_gui_toggle
+            remove_variable = patron_gui_toggle
+        }
+    }
+}
+
+societies_gui_close = {
+    scope = character
+
+    is_shown = {
+        always = yes
+    }
+
+    effect = {
+        remove_variable = societies_gui_toggle
+    }
+}
+
+patron_selection_tab_toggle = { #interaction (passive) -> selection
+    scope = character
+
+    is_shown = {
+        NOR = {
+            has_variable = patron_interaction_tab_toggle
+            has_variable = patron_interaction_passive_tab_toggle
+        }
+    }
+
+    effect = {
+        remove_variable = patron_interaction_tab_toggle
+        remove_variable = patron_interaction_passive_tab_toggle
+    }
+}
+patron_interaction_tab_toggle = { #selection -> interaction
+    scope = character
+
+    is_shown = {
+        has_variable = patron_interaction_tab_toggle
+    }
+
+    is_valid = {
+        #has_patron_selected = yes
+        OR = {
+            has_variable = patron_azura_shown
+            has_variable = patron_boethiah_shown
+            has_variable = patron_clavicus_vile_shown
+            has_variable = patron_hermaeus_mora_shown
+            has_variable = patron_hircine_shown
+            has_variable = patron_jyggalag_shown
+            has_variable = patron_malacath_shown
+            has_variable = patron_mehrunes_dagon_shown
+            has_variable = patron_mephala_shown
+            has_variable = patron_meridia_shown
+            has_variable = patron_molag_bal_shown
+            has_variable = patron_namira_shown
+            has_variable = patron_nocturnal_shown
+            has_variable = patron_peryite_shown
+            has_variable = patron_sanguine_shown
+            has_variable = patron_sheogorath_shown
+            has_variable = patron_vaermina_shown
+
+            #has_variable = patron_divines_shown
+        }
+    }
+
+    effect = {
+        set_variable = patron_interaction_tab_toggle
+    }
+}
+patron_interaction_passive_tab_toggle = { #selection -> interaction passive
+    scope = character
+
+    is_shown = {
+        has_variable = patron_interaction_passive_tab_toggle
+    }
+
+    is_valid = {
+        #has_passive_patron_selected = yes
+        OR = {
+            #has_variable = patron_azura_selected
+            #has_variable = patron_boethiah_selected
+
+            has_variable = patron_divines_shown
+        }
+    }
+
+    effect = {
+        set_variable = patron_interaction_passive_tab_toggle
+    }
+}
+
+patron_has_no_patrons = {
+    scope = character
+
+    is_shown = {
+        always = no #for testing
+        # NOR = {
+        #     # Daedra #
+        # 	patron_azura_valid = yes
+        # 	patron_boethiah_valid = yes
+        # 	patron_clavicus_vile_valid = yes
+        # 	patron_hermaeus_mora_valid = yes
+        # 	patron_hircine_valid = yes
+        # 	patron_jyggalag_valid = yes
+        # 	patron_malacath_valid = yes
+        # 	patron_mehrunes_dagon_valid = yes
+        # 	patron_mephala_valid = yes
+        # 	patron_meridia_valid = yes
+        # 	patron_molag_bal_valid = yes
+        # 	patron_namira_valid = yes
+        # 	patron_nocturnal_valid = yes
+        # 	patron_peryite_valid = yes
+        # 	patron_sanguine_valid = yes
+        # 	patron_sheogorath_valid = yes
+        # 	patron_vaermina_valid = yes
+        #     # Tribunal #
+        # 	patron_almalexia_valid = yes
+        # 	patron_sotha_sil_valid = yes
+        # 	patron_vivec_valid = yes
+        #     # Others, potentially (dragons/dragon priests?, orgnum?, vivecat?)
+        # 	#patron__valid = yes
+        # 	#patron__valid = yes
+        # 	#patron__valid = yes
+        # 	#patron__valid = yes
+        # 	#patron__valid = yes
+        # }
+    }
+}
+
+patron_has_princes = {
+    scope = character
+
+    is_shown = {
+        always = yes #testing
+        #OR = {
+        # 	patron_azura_valid = yes
+        # 	patron_boethiah_valid = yes
+        # 	patron_clavicus_vile_valid = yes
+        # 	patron_hermaeus_mora_valid = yes
+        # 	patron_hircine_valid = yes
+        # 	patron_jyggalag_valid = yes
+        # 	patron_malacath_valid = yes
+        # 	patron_mehrunes_dagon_valid = yes
+        # 	patron_mephala_valid = yes
+        # 	patron_meridia_valid = yes
+        # 	patron_molag_bal_valid = yes
+        # 	patron_namira_valid = yes
+        # 	patron_nocturnal_valid = yes
+        # 	patron_peryite_valid = yes
+        # 	patron_sanguine_valid = yes
+        # 	patron_sheogorath_valid = yes
+        # 	patron_vaermina_valid = yes
+        #}
+    }
+}
+
+patron_has_tribunal = {
+    scope = character
+
+    is_shown = {
+        always = no #testing
+        #OR = {
+        # 	patron_almalexia_valid = yes
+        # 	patron_sotha_sil_valid = yes
+        # 	patron_vivec_valid = yes
+        #}
+    }
+}
+
+patron_has_pantheon = {
+    scope = character
+
+    is_shown = {
+        always = no #testing
+        #OR = {
+        # 	patron_divines_valid = yes
+        #}
+    }
+}
+
+# Active Patrons #
+# Daedra #
+patron_azura_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_azura_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_azura_shown }
+    }
+
+    effect = {
+        set_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_boethiah_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_boethiah_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_boethiah_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        set_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_clavicus_vile_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_clavicus_vile_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_clavicus_vile_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        set_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_hermaeus_mora_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_hermaeus_mora_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_hermaeus_mora_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        set_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_hircine_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_hircine_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_hircine_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        set_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_jyggalag_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_jyggalag_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_jyggalag_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        set_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_malacath_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_malacath_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_malacath_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        set_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_mehrunes_dagon_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_mehrunes_dagon_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_mehrunes_dagon_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        set_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_mephala_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_mephala_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_mephala_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        set_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_meridia_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_meridia_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_meridia_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        set_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_molag_bal_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_molag_bal_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_molag_bal_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        set_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_namira_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_namira_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_namira_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        set_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_nocturnal_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_nocturnal_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_nocturnal_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        set_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_peryite_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_peryite_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_peryite_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        set_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_sanguine_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_sanguine_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_sanguine_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        set_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_sheogorath_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_sheogorath_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_sheogorath_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        set_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+patron_vaermina_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_vaermina_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_vaermina_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        set_variable = patron_vaermina_shown
+
+        remove_variable = patron_divines_shown
+    }
+}
+
+# Passive Patrons #
+# Divines #
+patron_divines_shown = {
+    scope = character
+
+    is_shown = {
+        #patron_divines_valid = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_divines_shown }
+    }
+
+    effect = {
+        remove_variable = patron_azura_shown
+        remove_variable = patron_boethiah_shown
+        remove_variable = patron_clavicus_vile_shown
+        remove_variable = patron_hermaeus_mora_shown
+        remove_variable = patron_hircine_shown
+        remove_variable = patron_jyggalag_shown
+        remove_variable = patron_malacath_shown
+        remove_variable = patron_mehrunes_dagon_shown
+        remove_variable = patron_mephala_shown
+        remove_variable = patron_meridia_shown
+        remove_variable = patron_molag_bal_shown
+        remove_variable = patron_namira_shown
+        remove_variable = patron_nocturnal_shown
+        remove_variable = patron_peryite_shown
+        remove_variable = patron_sanguine_shown
+        remove_variable = patron_sheogorath_shown
+        remove_variable = patron_vaermina_shown
+
+        set_variable = patron_divines_shown
+    }
+}
+
+patron_decision_test = { #pair w/ ai=no and variable condition so don't appear in decisions normally except for ai
+    scope = character
+
+    #is_valid = {
+    #    can_execute_decision = host_feast_decision
+    #}
+
+    effect = {
+        #execute_decision = host_feast_decision
+        #set_variable = third_era_start
+        # add_to_global_variable_list = {
+        # 	name = era_start
+        # 	target = flag:third_era_start
+        # }
+        set_global_variable = {
+            name = third_era_start
+            value = scope:EmptyScope.GetCurrentDate.GetYear #GetCurrentDate.GetYear #yearvalue:Date.GetYear #$YEAR$
+        }
+        # if = {
+        #     limit = { NOT = { has_variable = ardor } }
+        #     set_variable = { name = ardor value = 100 }
+        # }
+        # else = {
+        #     change_variable = { name = ardor add = 100 }
+        # }
+    }
+}
+
+patron_decision_test_2 = { #double click version of above/ confirmation button
+    scope = character
+
+    is_valid = {
+        can_execute_decision = host_feast_decision
+    }
+
+    is_shown = {
+        has_variable = patron_host_feast_decision
+    }
+
+    effect = {
+        if = {
+            limit = {
+                has_variable = patron_host_feast_decision
+            }
+            remove_variable = patron_host_feast_decision
+            execute_decision = host_feast_decision
+        }
+        else = {
+            set_variable = patron_host_feast_decision
+        }
+    }
+}
+
+# patron_decision_clear = { #for use in cancel button in confirm/cancel dialog after first click
+#     scope = character
+# }

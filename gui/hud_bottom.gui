@@ -1,0 +1,539 @@
+widget = {
+	size = { 100% 100% }
+	name = "hud_bottom"
+	visible = "[IsDefaultGUIMode]"
+	layer = bottom_bottom
+
+	widget = { #replaced as the trigger variable wasn't playing nice w/ custom guis. side bar under the icons would disappear going from custom to vanilla, also map and outliner. originally used right_window_open, replaced instances of it to make gui work properly
+		visible = "[Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm'))]"
+		parentanchor = top|right #as for why it didnt work, the variable would not be set when switching windows, closing/opening was fine. as best i can determine the custom gui clears the variable after it is set by the newly opened window or the variale is not set
+		size = { 40 100% }
+
+		background = {
+			using = Background_Area_Dark
+			margin = { 0 5 }
+			margin_right = 5
+		}
+
+		background = {
+			using = Background_Area_Dark
+			margin = { 0 5 }
+			margin_right = 5
+			alpha = 0.8
+		}
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+			position_x = 0
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Quick
+			position_x = 40
+		}
+
+		icon = {
+			parentanchor = right
+			position = { 5 0 }
+			size = { 40 100% }
+
+			texture = "gfx/interface/colors/white.dds"
+			color = { 0.1 0.1 0.11 0.8 }
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/patterns/mask_pattern_01_vertical.dds"
+				spriteType = corneredtiled
+				blend_mode = alphamultiply
+				rotate_uv = 0
+				texture_density = 0.7
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_clouds.dds"
+				blend_mode = alphamultiply
+				spriteType = corneredTiled
+				alpha = 0.5
+			}
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_scratches.dds"
+				blend_mode = alphamultiply
+				spriteType = corneredTiled
+			}
+
+			icon = {
+				parentanchor = right
+				widgetanchor = right|vcenter
+				size = { 100% 390}
+				position = { 0 280 }
+				texture = "gfx/interface/colors/white.dds"
+				alpha = 0.7
+				color = { 0.1 0.1 0.1 1 }
+
+				modify_texture = {
+					name = "mask"
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick_vertical.dds"
+					spriteType = Corneredstretched
+					blend_mode = alphamultiply
+				}
+			}
+		}
+	}
+
+	# Widges for blocking map tooltips
+	widget = {
+		parentanchor = bottom|right
+		size = { 220 225 }
+		filter_mouse = all
+		alwaystransparent = no
+
+		# using = debug_square
+	}
+
+	widget = {
+		parentanchor = bottom|right
+		size = { 630 80 }
+		filter_mouse = all
+		alwaystransparent = no
+
+		# using = debug_square
+	}
+
+	widget = {
+		parentanchor = top|right
+		size = { 650 65 }
+		filter_mouse = all
+		alwaystransparent = no
+
+		# using = debug_square
+	}
+
+	widget = {
+		parentanchor = top|right
+		size = { 55 450 }
+		position = { 0 0 }
+		filter_mouse = all
+		alwaystransparent = no
+
+		# using = debug_square
+	}
+
+	widget = {
+		parentanchor = bottom|left
+		size = { 435 80 }
+		filter_mouse = all
+		alwaystransparent = no
+
+		# using = debug_square
+	}
+
+	######################################################
+	###################### PAUSE TEXT ####################
+	######################################################
+	container = {
+		visible = "[Not(IsManuallyPaused)]"
+		visible_at_creation = no
+		parentanchor = top|hcenter
+		widgetanchor = center
+		position = { 0 140 }
+		scale = 1
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Quick
+		}
+
+		state = {
+			name = _show
+			next = "fade_out"
+			using = Animation_Curve_Default
+			alpha = 0.6
+			# delay = 1
+			duration = 0.2
+			scale = 1.2
+		}
+
+		state = {
+			name = "fade_out"
+			using = Animation_Curve_Default
+			duration = 0.3
+			alpha = 0
+			scale = 0
+			delay = 0.2
+		}
+
+		background = {
+			using = Background_Title
+			margin = { 30 0 }
+			alpha = 1
+		}
+
+		text_single = {
+			visible = "[EqualTo_int32(GetCurrentGameSpeed, '(int32)1')]"
+			text = "CURRENT_SPEED_TEXT_1"
+			fontsize = 25
+			default_format = "#medium;glow_color:{0.1,0.1,0.1,1.0}"
+			align = nobaseline
+			using = Font_Type_Flavor
+		}
+
+		text_single = {
+			visible = "[EqualTo_int32(GetCurrentGameSpeed, '(int32)2')]"
+			text = "CURRENT_SPEED_TEXT_2"
+			fontsize = 25
+			default_format = "#medium;glow_color:{0.1,0.1,0.1,1.0}"
+			align = nobaseline
+			using = Font_Type_Flavor
+		}
+
+		text_single = {
+			visible = "[EqualTo_int32(GetCurrentGameSpeed, '(int32)3')]"
+			text = "CURRENT_SPEED_TEXT_3"
+			fontsize = 25
+			default_format = "#medium;glow_color:{0.1,0.1,0.1,1.0}"
+			align = nobaseline
+			using = Font_Type_Flavor
+		}
+
+		text_single = {
+			visible = "[EqualTo_int32(GetCurrentGameSpeed, '(int32)4')]"
+			text = "CURRENT_SPEED_TEXT_4"
+			fontsize = 25
+			default_format = "#medium;glow_color:{0.1,0.1,0.1,1.0}"
+			align = nobaseline
+			using = Font_Type_Flavor
+		}
+
+		text_single = {
+			visible = "[EqualTo_int32(GetCurrentGameSpeed, '(int32)5')]"
+			text = "CURRENT_SPEED_TEXT_5"
+			fontsize = 25
+			default_format = "#medium;glow_color:{0.1,0.1,0.1,1.0}"
+			align = nobaseline
+			using = Font_Type_Flavor
+		}
+	}
+
+	text_single = {
+		name = "paused_by_player"
+		visible = "[And(And(IsManuallyPaused, Not(IsPauseMenuShown)), Not(GameHasMultiplePlayers))]"
+		parentanchor = top|hcenter
+		widgetanchor = center
+		position = { 0 135 }
+
+		margin = { 50 0 }
+		margin_bottom = 10
+
+		fontsize = 40
+		text = "PAUSED_BY_PLAYER"
+		using = Font_Type_Flavor
+		default_format = "#high;glow_color:{0.1,0.1,0.1,1.0}"
+		snap_to_pixels = no
+		fonttintcolor = { 1.0 1.0 1.0 0.5 }
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Standard
+		}
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Standard
+		}
+
+		background = {
+			using = Background_Title
+			margin = { 0 -5 }
+		}
+	}
+
+	flowcontainer = {
+		name = "multiplayer_paused_by_player"
+		visible = "[And(IsManuallyPaused, GameHasMultiplePlayers)]"
+
+		parentanchor = top|hcenter
+		position = { 0 90 }
+
+		ignoreinvisible = yes
+		direction = vertical
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Standard
+		}
+
+		text_single = {
+			fontsize = 40
+			text = "PAUSED_BY_PLAYER"
+			using = Font_Type_Flavor
+			parentanchor = hcenter
+
+			margin = { 50 0 }
+			margin_bottom = 10
+
+			background = {
+				using = Background_Title
+			}
+		}
+
+		text_label_center = {
+			text = "[SelectLocalization( StringIsEmpty( GetPausedBy ), '', 'PAUSED_BY_PLAYER_MP' )]"
+			parentanchor = hcenter
+		}
+
+		text_label_center = {
+			visible = "[And( IsPausedByMe, Not( CanAnyoneUnpause ) )]"
+			text = "PAUSED_BY_UNPAUSE_ONLY_ME"
+			parentanchor = hcenter
+		}
+
+		text_label_center = {
+			visible = "[And( Not( IsPausedByMe ), Not( CanAnyoneUnpause ) )]"
+			text = "PAUSED_BY_UNPAUSE_ONLY_PAUSED_BY"
+			parentanchor = hcenter
+		}
+
+		text_label_center = {
+			visible = "[CanAnyoneUnpause]"
+			text = "PAUSED_BY_UNPAUSE_ANYONE"
+			parentanchor = hcenter
+		}
+	}
+
+	######################################################
+	###################### MAPMODE TEXT ##################
+	######################################################
+
+	widget = {
+		visible = "[Not(IsMapMode('realms'))]"
+		parentanchor = bottom|hcenter
+		size = { 100% 100 }
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Standard
+		}
+
+		background = {
+			texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+			color = { 0.2 0.2 0.2 1 }
+		}
+
+		background = {
+			texture ="gfx/interface/component_masks/patterns/mask_pattern_02.dds"
+			spriteType = Corneredtiled
+			color = { 0.6 0.7 0.65 0.2 }
+
+			modify_texture = {
+				texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+				blend_mode = alphamultiply
+			}
+		}
+
+		button_tertiary = {
+			name = "back_to_realms"
+			parentanchor = top|hcenter
+			min_width = 250
+			position = { 0 -10 }
+			onclick = "[SetMapMode('realms')]"
+			down = "[IsMapMode('realms')]"
+			shortcut = "map_mode_1"
+
+			tooltip = "BACK_TO_REALMS_TT"
+			using = tooltip_se
+			alpha = 0.8
+
+			state = {
+				name = _mouse_hierarchy_enter
+				alpha = 1
+				duration = 0.1
+				using = Animation_Curve_Default
+			}
+
+			state = {
+				name = _mouse_hierarchy_leave
+				alpha = 0.8
+				duration = 0.25
+				using = Animation_Curve_Default
+			}
+
+			hbox = {
+				margin = { 10 0 }
+				set_parent_size_to_minimum = yes
+
+				text_single = {
+					alwaystransparent = yes
+					text = "BACK_TO_REALMS"
+					default_format = "#clickable"
+					align = nobaseline
+					margin = { 5 0 }
+				}
+
+				widget = {
+					size = { 40 35 }
+
+					button_icon = {
+						parentanchor = center
+						alwaystransparent = yes
+						size = { 50 50 }
+						texture = "gfx/interface/icons/flat_icons/mapmode_realm.dds"
+					}
+				}
+			}
+		}
+
+		flowcontainer = {
+			parentanchor = center
+			position = { 0 10 }
+			direction = vertical
+			ignoreinvisible = yes
+			margin = { 15 10 }
+			margin_top = 5
+
+			text_label_center = {
+				visible = "[IsMapMode('dejure_counties')]"
+				text = "DE_JURE_COUNTIES_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('dejure_duchies')]"
+				text = "DE_JURE_DUCHIES_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('dejure_kingdoms')]"
+				text = "DE_JURE_KINGDOMS_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('dejure_empires')]"
+				text = "DE_JURE_EMPIRES_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('religions')]"
+				text = "FAITHS_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('cultures')]"
+				text = "CULTURES_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('houses')]"
+				text = "HOUSES_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('government')]"
+				text = "GOVERNMENTS_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('players')]"
+				text = "PLAYERS_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('county_development')]"
+				text = "DEVELOPMENT_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+
+			text_label_center = {
+				visible = "[IsMapMode('simple_terrain')]"
+				text = "SIMPLE_TERRAIN_HEADER"
+				fontsize = 25
+				margin = { 30 0 }
+				align = nobaseline
+			}
+		}
+	}
+
+
+	## PAUSE BORDER
+	icon = {
+		name = "pause_border_strong"
+		visible = "[IsManuallyPaused]"
+		size = { 100% 100% }
+
+		texture = "gfx/interface/component_masks/mask_vignette.dds"
+		color = { 0.15 0.15 0.15 1 }
+		spriteType = Corneredtiled
+		spriteborder = { 40 40 }
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Standard
+		}
+	}
+
+	icon = {
+		name = "pause_border_weak"
+		visible = "[And(IsPausedByEvent, Not(IsManuallyPaused))]"
+		size = { 100% 100% }
+		alpha = 0.5
+
+		texture = "gfx/interface/component_masks/mask_vignette.dds"
+		color = { 0.15 0.15 0.15 1 }
+		spriteType = Corneredtiled
+		spriteborder = { 40 40 }
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Standard
+		}
+	}
+}
