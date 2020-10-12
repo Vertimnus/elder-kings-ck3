@@ -1,0 +1,497 @@
+﻿### Main pantheon doctrine
+# This doctrine is used when deciding who to syncretize with
+doctrine_main_pantheon = {
+	group = "main_group"
+
+	### Aedric
+	## Nedic-Nordic pantheon
+	doctrine_pantheon_divines = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_divines }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = nedic_nordic_religion
+		}
+		parameters = {
+			pantheon_adds_deities_divines = yes
+			hostility_override_doctrine_pantheon_divines = 1
+			hostility_override_tenet_nedic_nordic_syncretism = 1
+		}
+	}
+	## Aldmeri pantheon
+	doctrine_pantheon_aedra = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_aedra }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = aldmer_religion
+		}
+		parameters = {
+			pantheon_adds_deities_edra = 1
+			hostility_override_doctrine_pantheon_aedra = 1
+			hostility_override_tenet_aldmeri_syncretism = 1
+		}
+	}
+	## Yokudan pantheon
+	doctrine_pantheon_yokudan = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_yokudan }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = yokudan_religion
+		}
+		parameters = {
+			pantheon_adds_deities_yokudan = 1
+			hostility_override_doctrine_pantheon_yokudan = 1
+			hostility_override_tenet_yokudan_syncretism = 1
+		}
+	}
+	doctrine_pantheon_herd_mother = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_herd_mother }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = yokudan_religion
+		}
+		parameters = {
+			hostility_override_doctrine_pantheon_herd_mother = 1
+		}
+	}
+	### Daedric
+	doctrine_pantheon_daedra = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_daedra }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			has_doctrine = daedric_hostility_doctrine
+		}
+		parameters = {
+			pantheon_adds_deities_daedra = yes
+			hostility_override_doctrine_daedra_worship_forbidden = 3
+		}
+	}
+	## Prince specific
+	doctrine_pantheon_azura = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_azura }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = azura_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_azura_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_azura = 1
+			hostility_override_tenet_azura_syncretism = 2
+		}
+	}
+	doctrine_pantheon_boethiah = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_boethiah }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = boethiah_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_boethiah_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_boethiah = 1
+			hostility_override_tenet_boethiah_syncretism = 2
+		}
+	}
+	doctrine_pantheon_clavicus = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_clavicus }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = clavicus_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_clavicus_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_clavicus = 1
+			hostility_override_tenet_clavicus_syncretism = 2
+		}
+	}
+	doctrine_pantheon_hermaeus = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_hermaeus }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = hermaeus_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_hermaeus_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_hermaeus = 1
+			hostility_override_tenet_hermaeus_syncretism = 2
+		}
+	}
+	doctrine_pantheon_hircine = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_hircine }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = hircine_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_hircine_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_hircine = 1
+			hostility_override_tenet_hircine_syncretism = 2
+		}
+	}
+	doctrine_pantheon_malacath = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_malacath }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = malacath_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_malacath_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_malacath = 1
+			hostility_override_tenet_malacath_syncretism = 2
+		}
+	}
+	doctrine_pantheon_mehrunes = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_mehrunes }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = mehrunes_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_mehrunes_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_mehrunes = 1
+			hostility_override_tenet_mehrunes_syncretism = 2
+		}
+	}
+	doctrine_pantheon_mephala = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_mephala }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = mephala_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_mephala_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_mephala = 1
+			hostility_override_tenet_mephala_syncretism = 2
+		}
+	}
+	doctrine_pantheon_meridia = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_meridia }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = meridia_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_meridia_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_meridia = 1
+			hostility_override_tenet_meridia_syncretism = 2
+		}
+	}
+	doctrine_pantheon_molag = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_molag }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = molag_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_molag_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_molag = 1
+			hostility_override_tenet_molag_syncretism = 2
+		}
+	}
+	doctrine_pantheon_namira = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_namira }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = namira_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_namira_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_namira = 1
+			hostility_override_tenet_namira_syncretism = 2
+		}
+	}
+	doctrine_pantheon_nocturnal = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_nocturnal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = nocturnal_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_nocturnal_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_nocturnal = 1
+			hostility_override_tenet_nocturnal_syncretism = 2
+		}
+	}
+	doctrine_pantheon_peryite = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_peryite }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = peryite_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_peryite_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_peryite = 1
+			hostility_override_tenet_peryite_syncretism = 2
+		}
+	}
+	doctrine_pantheon_sanguine = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_sanguine }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = sanguine_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_sanguine_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_sanguine = 1
+			hostility_override_tenet_sanguine_syncretism = 2
+		}
+	}
+	doctrine_pantheon_sheogorath = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_sheogorath }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = sheogorath_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_sheogorath_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_sheogorath = 1
+			hostility_override_tenet_sheogorath_syncretism = 2
+		}
+	}
+	doctrine_pantheon_vaermina = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_vaermina }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			OR = {
+				religion_tag = vaermina_religion
+				AND = {
+					has_doctrine = daedric_hostility_doctrine
+					NOT = { is_daedric_prince_religion_tag = yes }
+				}
+			}
+		}
+		parameters = {
+			allows_worship_vaermina_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_vaermina = 1
+			hostility_override_tenet_vaermina_syncretism = 2
+		}
+	}
+	## Velothi
+	doctrine_pantheon_tribunal = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_tribunal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = velothi_religion
+		}
+		parameters = {
+			pantheon_adds_deities_tribunal = 1
+			hostility_override_doctrine_pantheon_tribunal = 1
+			hostility_override_doctrine_pantheon_nerevar = 3
+		}
+	}
+	doctrine_pantheon_nerevar = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_nerevar }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = velothi_religion
+		}
+		parameters = {
+			hostility_override_doctrine_pantheon_nerevar = 1
+			hostility_override_doctrine_pantheon_tribunal = 3
+		}
+	}
+	### Aurbic
+}
