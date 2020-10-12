@@ -957,6 +957,53 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_sanguine_syncretism = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sanguine_syncretism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = sanguine_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				NOR = {
+					# Aedric
+					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					# Aurbic
+					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					# Daedric
+					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
+					# flag:tenet_peryite_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			allows_worship_sanguine_all_doctrines_active = yes
+			hostility_override_doctrine_pantheon_sanguine = 2
+		}
+
+		traits = {
+			virtues = { gregarious }
+			sins = { shy }
+		}
+	}
+	
 	tenet_sheogorath_syncretism = {
 		icon = core_tenet_followers
 
