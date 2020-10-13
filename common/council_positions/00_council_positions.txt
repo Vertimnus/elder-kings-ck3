@@ -1,4 +1,6 @@
-﻿councillor_chancellor = {
+﻿### EK EDIT: Removed references to vanilla cultures & religions
+
+councillor_chancellor = {
 	skill = diplomacy
 	
 	name = councillor_chancellor
@@ -214,6 +216,60 @@ councillor_court_chaplain = {
 				}
 				desc = actual_bishop_title
 			}
+			# triggered_desc = {
+				# trigger = {
+					# NOT = { scope:councillor_liege.faith = { has_doctrine = doctrine_theocracy_temporal } }
+				# }
+				# desc = {
+					# first_valid = {
+						# Shia
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_empire faith = faith:ismaili }
+							# desc = councillor_court_chaplain_ismaili_empire
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_kingdom faith = faith:ismaili }
+							# desc = councillor_court_chaplain_ismaili_kingdom
+						# }
+						# Islam
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_empire faith.religion = faith:ashari.religion }
+							# desc = councillor_court_chaplain_islam_empire
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_kingdom faith.religion = faith:ashari.religion }
+							# desc = councillor_court_chaplain_islam_kingdom
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_duchy faith.religion = faith:ashari.religion }
+							# desc = councillor_court_chaplain_islam_duchy
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier < tier_duchy faith.religion = faith:ashari.religion }
+							# desc = councillor_court_chaplain_islam_county
+						# }
+						# Yazidi
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_empire faith.religion = faith:yazidi.religion }
+							# desc = councillor_court_chaplain_yazidi_empire
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_kingdom faith.religion = faith:yazidi.religion }
+							# desc = councillor_court_chaplain_yazidi_kingdom
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier >= tier_duchy faith.religion = faith:yazidi.religion }
+							# desc = councillor_court_chaplain_yazidi_duchy
+						# }
+						# triggered_desc = {
+							# trigger = { scope:councillor_liege.highest_held_title_tier < tier_duchy faith.religion = faith:yazidi.religion }
+							# desc = councillor_court_chaplain_yazidi_county
+						# }
+						# desc = councillor_court_chaplain
+					# }
+
+				# }
+			# }
 			desc = councillor_court_chaplain
 		}
 	}
@@ -273,6 +329,7 @@ councillor_spouse = {
 	can_fire = no
 	can_reassign = no
 	
+	### EK EDIT: Removed like 2000 lines of vanilla cultural stuff
 	name = {
 		first_valid = {
 			triggered_desc = {
@@ -680,6 +737,13 @@ councillor_spouse = {
 			name = councillor_spouse_lifestyle_progress
 			value = 0
 		}
+		# if = {
+			# limit = {
+				# primary_spouse.primary_title = title:e_hre
+			# }
+			# debug_log = "Set new Spouse council position"
+			# debug_log_scopes = yes
+		# }
 		trigger_event = councillor_spouse_background.0001
 	}
 
