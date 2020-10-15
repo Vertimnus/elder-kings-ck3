@@ -163,6 +163,8 @@ widget = {
 
 			on_start = "[GetVariableSystem.Set('right_window_open', 'true' )]"
 			on_start = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
+			# datacontext = "[GetScriptedGui('patron_restore')]"
+			# on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		}
 
 		state = {
@@ -173,6 +175,8 @@ widget = {
 
 			on_start = "[GetVariableSystem.Clear('right_window_open')]"
 			on_start = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+			datacontext = "[GetScriptedGui('patron_clear')]"
+			on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		}
 
 		margin_widget = {
@@ -1268,18 +1272,20 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										layoutpolicy_vertical = expanding
 
-										# background = {
-										# 	texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
-										# 	margin = { -5 0 }
-										# 	fittype = end
-										# 	alpha = 0.4
-										# 	framesize = { 1200 848 }
+										background = {
+											texture = "gfx/interface/colors/green.dds"
+											spriteType = Corneredtiled
+											spriteborder = { 1 1 }
+											#margin = { -5 0 }
+											#fittype = end
+											alpha = 0.07 #offset for green brightness
+											#framesize = { 260 400 }
 
-										# 	modify_texture = {
-										# 		texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-										# 		blend_mode = alphamultiply
-										# 	}
-										# }
+											modify_texture = {
+												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+												blend_mode = alphamultiply
+											}
+										}
 
 										blockoverride "scrollbox_content"
 										{
@@ -1295,37 +1301,16 @@ widget = {
 												spacing = 10
 
 												vbox = {
-													name = "patron_minor_boon_test"
-													#datacontext = "[GetScriptedGui('patron_azura_shown')]"
-													#visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														text = "patron_decision_test"
-														tooltip = patron_decision_test_tt
-
-														datacontext = "[GetScriptedGui('patron_decision_test')]"
-														enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														#onclick = "[GetVariableSystem.Set( 'third_era_start', 'true' )]" #no good for date, but might be able to replace some char variables
-													}
+													name = "patron_boon_gold_decision"
+													datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_decision_entry = {}
 												}
 												vbox = {
-													name = "patron_minor_boon_test_2"
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														#text = "patron_decision_test_2"
-														#tooltip = patron_decision_test_tt
-
-														datacontext = "[GetDecisionWithKey('host_feast_decision')]"
-														text = "[Decision.GetTitleForPlayer]"
-														tooltip = "[Decision.GetDescriptionForPlayer]"
-
-														onclick = "[OpenDecisionDetailView(Decision.Self)]"
-														#down = "[ObjectsEqual(DecisionDetailView.GetDecision.Self, Decision.Self)]" cant call DecisionDetailView externally could set flag here and clear when decision fires but is
-													}
+													name = "patron_boon_training_decision"
+													datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_decision_entry = {}
 												}
 											}
 										}
@@ -1348,18 +1333,20 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										layoutpolicy_vertical = expanding
 
-										# background = {
-										# 	texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
-										# 	margin = { -5 0 }
-										# 	fittype = end
-										# 	alpha = 0.4
-										# 	framesize = { 1200 848 }
+										background = {
+											texture = "gfx/interface/colors/red.dds"
+											spriteType = Corneredtiled
+											spriteborder = { 1 1 }
+											#margin = { -5 0 }
+											#fittype = end
+											alpha = 0.1
+											#framesize = { 260 400 }
 
-										# 	modify_texture = {
-										# 		texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-										# 		blend_mode = alphamultiply
-										# 	}
-										# }
+											modify_texture = {
+												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+												blend_mode = alphamultiply
+											}
+										}
 
 										blockoverride "scrollbox_content"
 										{
@@ -1375,33 +1362,16 @@ widget = {
 												spacing = 10
 
 												vbox = {
-													name = "patron_offering_test"
-													#datacontext = "[GetScriptedGui('patron_azura_shown')]"
-													#visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														text = "patron_decision_test"
-														tooltip = patron_decision_test_tt
-
-														datacontext = "[GetScriptedGui('patron_decision_test')]"
-														enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-													}
+													name = "patron_offer_gold_decision"
+													datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_decision_entry = {}
 												}
 												vbox = {
-													name = "patron_offering_test_2"
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														text = "patron_decision_test_2"
-														tooltip = patron_decision_test_tt
-
-														datacontext = "[GetScriptedGui('patron_decision_test')]"
-														enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-													}
+													name = "patron_offer_sacrifice_decision"
+													datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_decision_entry = {}
 												}
 											}
 										}
@@ -1437,18 +1407,25 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										layoutpolicy_vertical = expanding
 
-										# background = {
-										# 	texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
-										# 	margin = { -5 0 }
-										# 	fittype = end
-										# 	alpha = 0.4
-										# 	framesize = { 1200 848 }
+										background = {
+											texture = "gfx/interface/colors/blue.dds"
+											spriteType = Corneredtiled
+											spriteborder = { 1 1 }
+											#margin = { -5 0 }
+											#fittype = end
+											alpha = 0.4
+											#framesize = { 260 400 }
 
-										# 	modify_texture = {
-										# 		texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-										# 		blend_mode = alphamultiply
-										# 	}
-										# }
+											modify_texture = {
+												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+												blend_mode = alphamultiply
+											}
+											modify_texture = {
+												texture = "gfx/interface/component_masks/mask_fade_halfcircle.dds"
+												rotate_uv = 3
+												blend_mode = alphamultiply
+											}
+										}
 
 										blockoverride "scrollbox_content"
 										{
@@ -1459,39 +1436,21 @@ widget = {
 												text = "PATRON_MAJOR_BOONS"
 											}
 
-											hbox = {
+											vbox = {
 												layoutpolicy_horizontal = expanding
 												spacing = 10
 
 												vbox = {
-													name = "patron_major_boon_test"
-													#datacontext = "[GetScriptedGui('patron_azura_shown')]"
-													#visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														text = "patron_decision_test"
-														tooltip = patron_decision_test_tt
-
-														datacontext = "[GetScriptedGui('patron_decision_test')]"
-														enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[GetVariableSystem.Toggle('right_window_open')]"
-													}
+													name = "patron_boon_invasion_decision"
+													datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_major_decision_entry = {}
 												}
 												vbox = {
-													name = "patron_major_boon_test_2"
-													button_standard = {
-														size = { 100 50 }
-														maximumsize = { 100 50 }
-														text = "patron_decision_test_2"
-														tooltip = patron_decision_test_tt
-
-														datacontext = "[GetScriptedGui('patron_decision_test')]"
-														enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-													}
+													name = "patron_offer_sacrifice_decision"
+													datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+													visible = "[Decision.IsShownForPlayer]"
+													button_patron_major_decision_entry = {}
 												}
 											}
 										}
@@ -1903,7 +1862,7 @@ widget = {
 
 						blockoverride "illustration_texture"
 						{
-							texture = "gfx/interface/illustrations/window_headers/header_prison.dds" #replace as shrine pic?
+							texture = "gfx/interface/patron_window/header_societies.dds" #replace as shrine pic?
 						}
 					}
 
@@ -3019,6 +2978,9 @@ widget = {
 						#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 						#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+						datacontext = "[GetScriptedGui('patron_restore')]"
+						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 						onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
 						#shortcut = "patron_window"
@@ -5569,12 +5531,12 @@ Types Patrons
 					parentanchor = center
 				}
 				icon = {
-					texture = "gfx/interface/tiles/generic_dark_rectangle.dds"
+					texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
 					position = { 100 2 }
 					size = { 396 96 }
 					alwaystransparent = yes
 					layer = bottom
-					alpha = 0.6
+					alpha = 0.7
 					modify_texture = {
 						name = "mask_1"
 						texture = "gfx/interface/component_masks/mask_culture_era_tab.dds"
@@ -5633,6 +5595,170 @@ Types Patrons
 			}
 			spacer = {
 				size = { 9 0 }
+			}
+		}
+	}
+
+	Type button_patron_decision_entry = button_standard {
+		size = { 200 40 }
+		maximumsize = { 200 40 }
+
+		#text = "[Decision.GetTitleForPlayer]"
+		tooltip = "[Decision.GetShortDescForPlayer]"
+
+		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+
+			size = { 110 38 }
+
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 110 44 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Decision.IsPossibleForPlayer]"
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 110 44 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+
+				effectname = "GreyedOut"
+
+				tintcolor = { 0.6 0.6 0.6 0.7 }
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		hbox = {
+			margin = {10 0 }
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				size = 14
+				align = nobaseline
+			}
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				default_format = "#low"
+				size = 14
+				align = nobaseline
+			}
+		}
+	}
+
+	Type button_patron_major_decision_entry = button_standard {
+		size = { 300 50 }
+		maximumsize = { 300 50 }
+
+		#text = "[Decision.GetTitleForPlayer]"
+		tooltip = "[Decision.GetShortDescForPlayer]"
+
+		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+
+			size = { 165 48 }
+
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 165 66 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Decision.IsPossibleForPlayer]"
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 165 66 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+
+				effectname = "GreyedOut"
+
+				tintcolor = { 0.6 0.6 0.6 0.7 }
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		hbox = {
+			margin = {10 0 }
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				size = 18
+				align = nobaseline
+			}
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				default_format = "#low"
+				size = 18
+				align = nobaseline
 			}
 		}
 	}

@@ -1,0 +1,354 @@
+﻿##########
+# Shared #
+##########
+
+# Shared Offerings #
+
+#gold offer
+#piety/prestige offer?
+#sacrifice
+
+patron_offer_gold_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_offer_gold_decision_desc
+    selection_tooltip = patron_offer_gold_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    is_valid_showing_failures_only = {
+        short_term_gold >= 50
+    }
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        remove_short_term_gold = 50
+        #}
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+patron_offer_sacrifice_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_offer_sacrifice_decision_desc
+    selection_tooltip = patron_offer_sacrifice_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+                NOR = { #dont care for human sacrifice, based on ek1
+                    has_variable = patron_azura_shown
+                    has_variable = patron_meridia_shown
+                    has_variable = patron_sanguine_shown
+                }
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    is_valid_showing_failures_only = {
+        any_prisoner = {
+            is_adult = yes
+            NOT = { any_heir_title = { count > 0 } }
+        }
+    }
+
+    effect = {
+        random_prisoner = {
+            limit = {
+                imprisoned_by = ROOT
+                is_adult = yes
+                NOT = { any_heir_title = { count > 0 } }
+            }
+            if = {
+                limit = { ROOT = { has_variable = patron_namira_shown } }
+                death = { killer = ROOT death_reason = death_eaten }
+            }
+            else = {
+                death = { killer = ROOT death_reason = death_execution_blot }
+            }
+        }
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+# Shared Boons #
+
+# stat boost max 5-8
+# wealth of oblivion - exchange piety/prestige?
+# small horde as mma?
+# large horde
+# kynmarcher knight
+# aura dispair +dread
+
+patron_boon_gold_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_boon_gold_decision_desc
+    selection_tooltip = patron_boon_gold_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    #is_valid_showing_failures_only = {
+    #	short_term_gold >= 50
+    #}
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        add_gold = 50
+        #}
+        #patron_gain_favor_effect = yes
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+patron_boon_training_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_boon_training_decision_desc
+    selection_tooltip = patron_boon_training_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    is_valid_showing_failures_only = {
+        NAND = {
+            diplomacy >= 25
+            martial >= 25
+            stewardship >= 25
+            intrigue >= 25
+            learning >= 25
+        }
+    }
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        random_list = {
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                modifier = { #should be zero at 25 skill level
+                    add = { #subtract doesnt seem to work
+                        value = -1
+                        multiply = diplomacy
+                    }
+                    always = yes
+                }
+                add_diplomacy_skill = 1
+            }
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                modifier = {
+                    add = {
+                        value = -1
+                        multiply = martial
+                    }
+                    always = yes
+                }
+                add_martial_skill = 1
+            }
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                modifier = {
+                    add = {
+                        value = -1
+                        multiply = stewardship
+                    }
+                    always = yes
+                }
+                add_stewardship_skill = 1
+            }
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                modifier = {
+                    add = {
+                        value = -1
+                        multiply = intrigue
+                    }
+                    always = yes
+                }
+                add_intrigue_skill = 1
+            }
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                modifier = {
+                    add = {
+                        value = -1
+                        multiply = learning
+                    }
+                    always = yes
+                }
+                add_learning_skill = 1
+            }
+        }
+        #}
+        #patron_gain_favor_effect = yes
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+# Shared Major Boons #
+
+# invasion
+
+patron_boon_invasion_decision = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_boon_invasion_decision_desc
+    selection_tooltip = patron_boon_invasion_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    #is_valid_showing_failures_only = {
+    #	short_term_gold >= 50
+    #}
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        #add_gold = 50
+        #}
+        #patron_gain_favor_effect = yes
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+##########
+# Unique #
+##########
+
+# Unique Offerings #
+
+#undead sacrifice meridia
+#gain disease peryite
+
+# Unique Boons #
+
+#disease resistance peryite
+
+# Unique Major Boons #
+
+# Artifact Claims #
+
+
+#for favor gain/loss
+# show_as_tooltip = {
+# 	committed_suicide_effect = yes
+# }
+
+# custom_tooltip = commit_suicide_decision_effect_tooltip
+# trigger_event = {
+# 	on_action = commit_suicide
+# }
