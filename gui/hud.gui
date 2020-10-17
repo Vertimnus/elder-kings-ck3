@@ -1170,7 +1170,27 @@ widget = {
 									}
 								}
 								spacer = {
-									size = { 140 0 } #+30 compared to other one for button
+									size = { 40 0 } #+30 -100 compared to other one + for button - for progress_bar
+								}
+								vbox = {
+									size = { 100 50 }
+									maximumsize = { 100 50 }
+
+									text_single = {
+										text = patron_ardor #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+
+									progressbar_standard = {
+										name = "progress_bar_azura"
+										parentanchor = center
+										size = { 100 10 }
+										#visible = "[Holding.IsConstructionInProgress]"
+										#min = 0
+										#max = 1
+										value = @special_mine_tax_base
+									}
 								}
 							}
 

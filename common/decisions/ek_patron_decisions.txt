@@ -5,7 +5,7 @@
 # Shared Offerings #
 
 #gold offer
-#piety/prestige offer?
+#piety/prestige offer? festival in [daedraname]'s honor? - mildest cost if cult religion, milder if pantheon
 #sacrifice
 
 patron_offer_gold_decision = {
@@ -31,16 +31,25 @@ patron_offer_gold_decision = {
         }
     }
 
-    cooldown = { days = 365 }
+    cooldown = { days = 5 } #365 }
 
     is_valid_showing_failures_only = {
         short_term_gold >= 50
+        NOT = { var:ardor_azura >= 100 }
     }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         remove_short_term_gold = 50
         #}
+        if = {
+            limit = { NOT = { has_variable = ardor_azura } }
+            set_variable = { name = ardor_azura value = 5 }
+            clamp_variable = { name = ardor_azura max = 100 min = 0 }
+        }
+        else = {
+            change_variable = { name = ardor_azura add = 5 }
+        }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -124,7 +133,7 @@ patron_offer_sacrifice_decision = {
 # kynmarcher knight
 # aura dispair +dread
 
-patron_boon_gold_decision = {
+patron_boon_gold_decision = { #750
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_gold_decision_desc
@@ -147,17 +156,19 @@ patron_boon_gold_decision = {
         }
     }
 
-    cooldown = { days = 365 }
+    cooldown = { days = 5 } #365 }
 
-    #is_valid_showing_failures_only = {
+    is_valid_showing_failures_only = {
     #	short_term_gold >= 50
-    #}
+        var:ardor_azura >= 5
+    }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         add_gold = 50
         #}
         #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 5 }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -169,7 +180,7 @@ patron_boon_gold_decision = {
     }
 }
 
-patron_boon_training_decision = {
+patron_boon_training_decision = { #5000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_training_decision_desc
@@ -280,7 +291,7 @@ patron_boon_training_decision = {
 
 # invasion
 
-patron_boon_invasion_decision = {
+patron_boon_invasion_decision = { #25000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_invasion_decision_desc
@@ -337,6 +348,7 @@ patron_boon_invasion_decision = {
 # Unique Boons #
 
 #disease resistance peryite
+#vamp molag- harkon sacrificed 1000 people
 
 # Unique Major Boons #
 
