@@ -1,4 +1,5 @@
 ﻿l_english:
+ # EK Era System
  #### Generic inserts
  ### Constants
  ## Era Dates
@@ -11,7 +12,7 @@
  # ERA
  ERA_SEL_IG:0 "[Select_CString( GreaterThanOrEqualTo_int32(FixedPointToInt(EmptyScope.ScriptValue('era_3_year')), '(int32)1'), $ERA_3E_IG$, $ERA_2E_IG$)]"
  ERA_3E_IG:0 "Select_CString( GreaterThanOrEqualTo_int32( '(int32)$YEAR$', FixedPointToInt(EmptyScope.ScriptValue('era_3_year'))), '3E ', $ERA_2E_IG$ )"
- ERA_2E_IG:0 "Select_CString( GreaterThanOrEqualTo_int32( '(int32)$YEAR$', $ERA_FIRST_END$ ), '2E ', '1E ' )"
+ ERA_2E_IG:0 "Select_CString( GreaterThanOrEqualTo_int32( '(int32)$YEAR$', $ERA_FIRST_END$ ), '2E ', '1E ' )" 
  # YEAR
  YEAR_SEL_IG:0 "[Select_int32( GreaterThanOrEqualTo_int32(FixedPointToInt(EmptyScope.ScriptValue('era_3_year')), '(int32)1'), $YEAR_3E_IG$, $YEAR_2E_IG$)]"
  YEAR_3E_IG:0 "Select_int32( GreaterThanOrEqualTo_int32( '(int32)$YEAR$', FixedPointToInt(EmptyScope.ScriptValue('era_3_year'))), Subtract_int32( '(int32)$YEAR$', Multiply_int32( Subtract_int32( BoolTo1And2( GreaterThanOrEqualTo_int32( '(int32)$YEAR$', FixedPointToInt(EmptyScope.ScriptValue('era_3_year')) ) ), '(int32)1' ), FixedPointToInt(EmptyScope.ScriptValue('era_3_year')) ) ), $YEAR_2E_IG$ )"
