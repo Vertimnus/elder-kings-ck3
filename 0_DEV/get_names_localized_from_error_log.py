@@ -27,7 +27,7 @@ try:
 	dict_name_cultures = {}
 	
 	for line in interestingLines:
-		name = line.split("Missing loc for name ")[1].split(" in culture ")[0].replace('\'', '').replace('\n', '')
+		name = line.split("Missing loc for name")[1].split("in culture")[0].replace(" \'", '').replace("\' ", '').replace('\n', '')
 		culture = line.split(" in culture ")[1].replace('\'', '').replace('\n', '')
 		
 		# We create a dictionary where each culture is given an array of names
@@ -44,7 +44,7 @@ try:
 	# Ok so now is the fun part! We create a loc file for each culture, in which we do a 1->1 localization of the name, poggers
 	for key in dict_name_cultures:
 		print(key)
-		with open("characters_name_"+key+"_l_english.yml", "w") as file:
+		with open("characters_name_"+key+"_l_english.yml", "w", encoding='utf-8-sig') as file:
 			file.write("l_english:\n")
 			for name in dict_name_cultures[key]:
 				file.write(" " + name + ":0 \"" + name + "\"\n")
