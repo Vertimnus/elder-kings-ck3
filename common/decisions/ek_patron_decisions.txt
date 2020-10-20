@@ -177,7 +177,7 @@ patron_boon_gold_decision = { #750
     cooldown = { days = 5 } #365 }
 
     is_valid_showing_failures_only = {
-    #	short_term_gold >= 50
+        #	short_term_gold >= 50
         var:ardor_azura >= 300
     }
 
@@ -307,6 +307,108 @@ patron_boon_training_decision = { #5000
     }
 }
 
+patron_boon_horde_decision = { #5000
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_boon_horde_decision_desc
+    selection_tooltip = patron_boon_horde_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    is_valid_showing_failures_only = {
+        # NOT = { #hard cap on number that can be summoned - 3 + 1 per 7 learning? scope to and store in list variable
+        #     num hordes >= cap
+        # }
+        var:ardor_azura >= 2000 #may add scaling cost for more hordes as soft limit cost * list_size/10
+    }
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        random_list = { #chance of failure or great success +30% larger
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                # modifier = { #should be zero at 25 skill level
+                #     add = { #subtract doesnt seem to work
+                #         value = -1
+                #         multiply = diplomacy
+                #     }
+                #     always = yes
+                # }
+                spawn_army = {
+                    #levies =  #needed to bulk up army?
+                    men_at_arms = { # optional, multiple can be specified. Need either levies or MAA
+                        type = daedra
+                        stacks = {
+                            value = 1
+                            # scope:attacker.faith.great_holy_war = {
+                            #     every_pledged_attacker = {
+                            #         add = 0.2
+                            #     }
+                            # }
+                        }
+                    }
+                    location = capital_province
+                    inheritable = no
+                    uses_supply = no #may be op, needs testing
+                    #army = army # optional. If set, the stack will merge into this army
+                    #save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war)
+                    #name = dremora # gives the troops a specific name that shows up in interfaces
+                }
+            }
+            # 25 = { #failure
+            #     #trigger = { NOT = { diplomacy = 20 } }
+            #     modifier = {
+            #         add = {
+            #             value = -1
+            #             multiply = martial
+            #         }
+            #         always = yes
+            #     }
+            #     add_martial_skill = 1
+            # }
+            # 25 = { #great success +30% size
+            #     #trigger = { NOT = { diplomacy = 20 } }
+            #     modifier = {
+            #         add = {
+            #             value = -1
+            #             multiply = stewardship
+            #         }
+            #         always = yes
+            #     }
+            #     add_stewardship_skill = 1
+            # }
+        }
+        #}
+        #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 2000 }
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
 # Shared Major Boons #
 
 # invasion
@@ -337,7 +439,7 @@ patron_boon_invasion_decision = { #25000
     cooldown = { days = 365 }
 
     is_valid_showing_failures_only = {
-    	#has_cult_religion = yes #really dedicated only
+        #has_cult_religion = yes #really dedicated only
         var:ardor_azura >= 10000
     }
 
