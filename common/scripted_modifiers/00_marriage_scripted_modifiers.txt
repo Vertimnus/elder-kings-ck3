@@ -150,7 +150,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 			}
 		}
 		add = {
-			value = -10
+			value = -15 #EK Value
 			if = {
 				limit = {
 					scope:recipient.faith = {
@@ -160,7 +160,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 						}
 					}
 				}
-				subtract = 15
+				subtract = 25 #EK Value
 			}
 			if = {
 				limit = {
@@ -171,7 +171,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 						}
 					}
 				}
-				subtract = 975
+				subtract = 975 #EK Value
 			}
 		}
 		
@@ -522,7 +522,7 @@ marriage_ai_accept_modifier = {
 		add = {
 			value = scope:actor.highest_held_title_tier
 			subtract = scope:recipient.highest_held_title_tier
-			multiply = 30
+			multiply = 10 #EK Value
 		}
 		desc = MARRYING_UP_REASON
 	}
@@ -897,7 +897,7 @@ marriage_ai_accept_modifier = {
 	#########
 	modifier = { # A recipient will be reluctant (to differing degrees) to agree to marriages sent from an actor of a different faith
 		add = {
-			value = -10
+			value = -20
 			if = {
 				limit = {
 					scope:recipient.faith = {
@@ -907,7 +907,7 @@ marriage_ai_accept_modifier = {
 						}
 					}
 				}
-				subtract = 15
+				subtract = 25
 			}
 			if = {
 				limit = {
@@ -918,7 +918,7 @@ marriage_ai_accept_modifier = {
 						}
 					}
 				}
-				subtract = 975
+				subtract = 985
 			}
 		}
 
@@ -1462,6 +1462,131 @@ marriage_ai_accept_modifier = {
 		}
 		desc = MARRIAGE_SPOUSE_COUNCILLOR_BOOST_CHILD
 	}
+	
+	###########################
+	# EK - PRESERVING DYNASTY #
+	###########################
+	
+	#The AI shouldn't marry off its heiresses non-matrilineal
+	modifier = {
+		add = -50
+		scope:secondary_recipient = {
+			is_heir_of = scope:recipient
+			is_female = yes
+			NOT = { always = scope:matrilineal }
+		}
+		desc = MARRIAGE_HEIRESS_MATRILINEAL_REASON
+	}
+	
+	#################
+	# EK - CULTURES #
+	#################
+	
+	#Generic different cultural group penalty - small nudge to keep people from marrying off cultural boundaries
+	modifier = {
+		add = -20
+		scope:secondary_actor = {
+			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+		}
+		desc = MARRIAGE_DIFFERENT_CULTURE_GROUP_REASON
+	}
+	
+	#Insular cultures - cultures that are more self-centered, isolated or otherwise harder to grasp for outsiders
+	modifier = {
+		add = -40
+		scope:secondary_actor = {
+			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+		}
+		OR = {
+			scope:secondary_actor = {
+				OR = {
+					has_culture = culture:alinor 
+					has_culture = culture:yokudan
+					has_culture = culture:alikr
+					has_culture = culture:horsemen
+					has_culture = culture:crown
+					has_culture = culture:chimer
+					has_culture = culture:reachfolk
+					has_culture = culture:kothringi
+					has_culture = culture:skaal
+					has_culture_group = culture_group:dunmeris_group
+					has_culture_group = culture_group:orsimer_group
+				}
+			}
+			scope:secondary_recipient = {
+				OR = {
+					has_culture = culture:alinor 
+					has_culture = culture:yokudan
+					has_culture = culture:alikr
+					has_culture = culture:horsemen
+					has_culture = culture:crown
+					has_culture = culture:chimer
+					has_culture = culture:reachfolk
+					has_culture = culture:kothringi
+					has_culture = culture:skaal
+					has_culture_group = culture_group:dunmeris_group
+					has_culture_group = culture_group:orsimer_group
+				}
+			}
+		}
+		desc = MARRIAGE_INSULAR_CULTURE_REASON
+	}
+	
+	#Men x Mer Traditions
+	modifier = {
+		add = -20
+		OR = {
+			AND = {
+				scope:secondary_actor = {
+					OR = {
+						has_culture_group = culture_group:nordic_group
+						has_culture_group = culture_group:nedic_group
+						has_culture_group = culture_group:imperial_group
+						has_culture_group = culture_group:breton_group
+						has_culture_group = culture_group:yokudan_group
+					}
+				}
+				scope:secondary_recipient = {
+					OR = {
+						has_culture_group = culture_group:aldmeris_group
+						has_culture_group = culture_group:bosmeris_group
+						has_culture_group = culture_group:orsimer_group
+						has_culture_group = culture_group:chimeris_group
+						has_culture_group = culture_group:dunmeris_group
+					}
+				}
+			}
+			AND = {
+				scope:secondary_actor = {
+					OR = {
+						has_culture_group = culture_group:aldmeris_group
+						has_culture_group = culture_group:bosmeris_group
+						has_culture_group = culture_group:orsimer_group
+						has_culture_group = culture_group:chimeris_group
+						has_culture_group = culture_group:dunmeris_group
+					}
+				}
+				scope:secondary_recipient = {
+					OR = {
+						has_culture_group = culture_group:nordic_group
+						has_culture_group = culture_group:nedic_group
+						has_culture_group = culture_group:imperial_group
+						has_culture_group = culture_group:breton_group
+						has_culture_group = culture_group:yokudan_group
+					}
+				}
+			}
+		}
+		desc = MARRIAGE_MAN_MER_CULTURE_GROUP_REASON
+	}
+	
+	##############
+	# EK - RACES #
+	##############
+	
+	# modifier = {
+
+	# }
 }
 
 divorce_character_ai_accept_modifier = {
