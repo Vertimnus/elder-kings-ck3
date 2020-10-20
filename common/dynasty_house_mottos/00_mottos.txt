@@ -33,9 +33,10 @@ for_our_foes_x_for_our_friends_y = { # For our Foes, the Sword - for our Friends
 		value = 400
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -46,9 +47,10 @@ break_your_x_upon_our_y = { # Break your Axe upon our Honor
 		value = 400
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -59,9 +61,10 @@ by_the_x_and_the_y = { # By the Axe and Spear
 		value = 300
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -73,9 +76,10 @@ with_the_x_i_y_z = { # With the Sword I Honor the Truthful
 		value = 300
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -86,9 +90,10 @@ with_x_I_seek_y = { # With the Axe I Seek Strength
 		value = 1000
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -99,9 +104,10 @@ the_spirit_of_x_grants_us_y = { # The Spirit of the Fox Grants Us Cunning
 		value = 800
 	}
 	trigger = {
-		faith = {
-			religion = { is_in_family = rf_all }
-		}
+		always = no
+		# faith = {
+			# religion = { is_in_family = rf_pagan }
+		# }
 	}
 }
 
@@ -113,6 +119,9 @@ through_x_mind_y = { # Through a Courageous Mind, Enlightenment
 	}
 	trigger = {
 		always = no
+		# faith = {
+			# religion = { is_in_family = rf_eastern }
+		# }
 	}
 }
 
@@ -124,6 +133,26 @@ the_x_mind_knows_y = { # The Calm Mind Knows Peace
 	}
 	trigger = {
 		always = no
+		# faith = {
+			# religion = { is_in_family = rf_eastern }
+		# }
+	}
+}
+
+by_god_and_x = { # By God and Sword. Reads best with a single god, so restricting to the abrahamics
+	insert = weapon
+	weight = {
+		value = 600
+	}
+	trigger = {
+		always = no
+		# faith = {
+			# OR = {
+				# religion_tag = christianity_religion
+				# religion_tag = islam_religion
+				# religion_tag = judaism_religion
+			# }
+		# }
 	}
 }
 
@@ -224,6 +253,13 @@ single_noun = {
 x_as_y = { # Cunning as the Fox, Strong as the Bear
 	insert = adjective_immaterial
 	insert = the_creature
+	trigger = {
+		# NOT = {
+			# faith = {
+				# religion_tag = islam_religion
+			# }
+		# }
+	}
 	weight = {
 		value = 300
 	}
@@ -258,14 +294,14 @@ son_of_x = {
 	
 	weight = {
 		value = 150
-		if = {
-			limit = {
-				faith = {
-					religion = { is_in_family = rf_all }
-				}
-			}
-			multiply = 2
-		}
+		# if = {
+			# limit = {
+				# faith = {
+					# religion = { is_in_family = rf_pagan }
+				# }
+			# }
+			# multiply = 2
+		# }
 	}
 }
 
@@ -309,6 +345,21 @@ the_ancient_x_is_ours = {
 	}
 }
 
+may_god_x_y_knight = {
+	insert = noble_act
+	insert = the_adjective_immaterial
+	trigger = {
+		always = no
+		# faith = {
+			# religion_tag = christianity_religion
+		# }
+		NOT = { has_trait = cynical }
+	}
+	weight = {
+		value = 150
+	}
+}
+
 may_x_join_my_coa = {
 	insert = noun_immaterial
 	weight = {
@@ -320,6 +371,20 @@ until_our_x_engulfs_the_world = {
 	insert = noun_immaterial
 	weight = {
 		value = 150
+	}
+}
+
+various_godly_things = {
+	insert = various_godly_things_list
+	trigger = {
+		always = no
+		# faith = {
+			# religion_tag = christianity_religion
+		# }
+		NOT = { has_trait = cynical }
+	}
+	weight = {
+		value = 300
 	}
 }
 

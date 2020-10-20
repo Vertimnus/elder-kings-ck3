@@ -1,0 +1,24 @@
+How to mass-produce name loc from name lists, via using notepad++:
+
+1. get the names isolated into a new text file
+
+2. in notepad++, open up find > replace and do
+
+Find what :  (just put a single space here)
+
+Replace with : :0\n
+
+check 'extended' search mode and click replace all. for some reason not all of the names get appended sometimes, so you may have to do this:
+
+find: ^(?!.*:0).*$
+replace: ($0):0
+MAKE SURE you do this one manually instead of 'replace all' as it catches blank lines as well.
+
+3. do another find > replace:
+
+Find what : ^([\w\-\']+)(.*)
+Replace with : \1\2 "\1"
+Search mode :"Regular expression"
+this one you can do 'replace all' for
+
+and now you are done, make sure to give everything a look over so theres no weird messups

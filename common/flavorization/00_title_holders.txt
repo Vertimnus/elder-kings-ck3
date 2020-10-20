@@ -44,8 +44,8 @@ title_high_king = { #High King
 	gender = male
 	special = holder
 	priority = 120
-	titles = { e_skyrim e_hammerfell e_high_rock }
-	governments = { feudal_government clan_government }
+	titles = { e_skyrim e_hammerfell e_high_rock e_cyrodiil }
+	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
 
@@ -54,8 +54,8 @@ title_high_queen = { #High Queen
 	gender = female
 	special = holder
 	priority = 120
-	titles = { e_skyrim e_hammerfell e_high_rock }
-	governments = { feudal_government clan_government }
+	titles = { e_skyrim e_hammerfell e_high_rock e_cyrodiil }
+	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
 
@@ -63,8 +63,8 @@ title_high_kingdom = { #High Kingdom
 	type = title
 	tier = empire
 	priority = 120
-	titles = { e_skyrim e_hammerfell e_high_rock }
-	governments = { feudal_government clan_government }
+	titles = { e_skyrim e_hammerfell e_high_rock e_cyrodiil }
+	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
 
@@ -382,12 +382,148 @@ duchy_tribal_tribe = { #Tribe
 	priority = 30
 	only_independent = yes
 	governments = { tribal_government }
-	cultures = { mountain_orc iron_orc wood_orc horsemen reachmen }
+	cultures = { mountain_orc iron_orc wood_orc horsemen reachfolk }
+}
+
+#Breton Group
+
+#Count -> Earl, Baron
+count_feudal_male_earl = { #Earl
+	type = character
+	special = holder
+	gender = male
+	tier = county
+	priority = 28
+	governments = { feudal_government }
+	cultures = { bjoule iliac cyro_nord }
+	top_liege = no
+}
+count_feudal_female_earl = { #Earl
+	type = character
+	special = holder
+	gender = female
+	tier = county
+	priority = 28
+	governments = { feudal_government }
+	cultures = { bjoule iliac cyro_nord }
+	top_liege = no
+}
+county_feudal_earldom = { #Earldom
+	type = title
+	tier = county
+	priority = 28
+	governments = { feudal_government }
+	cultures = { bjoule iliac cyro_nord }
+	top_liege = no
+}
+
+# # Count -> Baron for k_northpoint
+count_feudal_male_baron = { #Baron
+	type = character
+	special = holder
+	gender = male
+	tier = county
+	priority = 27
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+count_feudal_female_baron = { #Baroness
+	type = character
+	special = holder
+	gender = female
+	tier = county
+	priority = 27
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+county_feudal_barony = { #Barony
+	type = title
+	tier = county
+	priority = 27
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+
+#Reachmen Culture
+
+duke_feudal_tribal_independent_male_reachmen = { #Chief-of-Chiefs
+	type = character
+	special = holder
+	gender = male
+	tier = duchy
+	priority = 28
+	only_independent = yes
+	governments = { feudal_government tribal_government }
+	cultures = { reachfolk }
+	top_liege = no
+}
+duke_feudal_tribal_independent_female_reachmen = { #Chief-of-Chiefs
+	type = character
+	special = holder
+	gender = female
+	tier = duchy
+	priority = 28
+	only_independent = yes
+	governments = { feudal_government tribal_government }
+	cultures = { reachfolk }
+	top_liege = no
+}
+
+king_feudal_tribal_male_reachmen = { #Ard
+	type = character
+	special = holder
+	gender = male
+	tier = kingdom
+	priority = 48
+	governments = { feudal_government tribal_government }
+	cultures = { reachfolk }
+	top_liege = no
+}
+king_feudal_tribal_female_reachmen = { #Ard
+	type = character
+	special = holder
+	gender = female
+	tier = kingdom
+	priority = 48
+	governments = { feudal_government tribal_government }
+	cultures = { reachfolk }
+	top_liege = no
 }
 
 #Nordic Group
 
 #Feudal
+# baron_feudal_male_nordic_group = { #Lendmann
+	# type = character
+	# special = holder
+	# gender = male
+	# tier = barony
+	# priority = 18
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# top_liege = no
+# }
+# baron_feudal_female_nordic_group = { #Lendwif
+	# type = character
+	# special = holder
+	# gender = female
+	# tier = barony
+	# priority = 18
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# top_liege = no
+# }
+# barony_feudal_nordic_group = { #Lend
+	# type = title
+	# tier = barony
+	# priority = 18
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# top_liege = no
+# }
 count_feudal_male_nordic_group = { #Thane
 	type = character
 	special = holder
@@ -416,35 +552,35 @@ county_feudal_nordic_group = { #Thanedom
 	culture_groups = { nordic_group }
 	top_liege = no
 }
-duke_feudal_male_nordic_group = { #Jarl
-	type = character
-	special = holder
-	gender = male
-	tier = duchy
-	priority = 28
-	governments = { feudal_government }
-	culture_groups = { nordic_group }
-	top_liege = no
-}
-duke_feudal_female_nordic_group = { #Jarl
-	type = character
-	special = holder
-	gender = female
-	tier = duchy
-	priority = 28
-	governments = { feudal_government }
-	culture_groups = { nordic_group }
-	top_liege = no
-}
-duchy_feudal_nordic_group = { #Jarldom
-	type = title
-	tier = duchy
-	governments = { feudal_government }
-	culture_groups = { nordic_group }
-	priority = 28
-	top_liege = no
-}
-king_feudal_male_nordic_group = { #High Jarl
+# duke_feudal_male_nordic_group = { #Drott
+	# type = character
+	# special = holder
+	# gender = male
+	# tier = duchy
+	# priority = 28
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# top_liege = no
+# }
+# duke_feudal_female_nordic_group = { #Drottning
+	# type = character
+	# special = holder
+	# gender = female
+	# tier = duchy
+	# priority = 28
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# top_liege = no
+# }
+# duchy_feudal_nordic_group = { #Minor Hold
+	# type = title
+	# tier = duchy
+	# governments = { feudal_government }
+	# culture_groups = { nordic_group }
+	# priority = 28
+	# top_liege = no
+# }
+king_feudal_male_nordic_group = { #Jarl
 	type = character
 	special = holder
 	gender = male
@@ -454,7 +590,7 @@ king_feudal_male_nordic_group = { #High Jarl
 	culture_groups = { nordic_group }
 	top_liege = no
 }
-king_feudal_female_nordic_group = { #High Jarl
+king_feudal_female_nordic_group = { #Jarl
 	type = character
 	special = holder
 	gender = female
@@ -467,6 +603,37 @@ king_feudal_female_nordic_group = { #High Jarl
 kingdom_feudal_nordic_group = { #Hold
 	type = title
 	tier = kingdom
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	priority = 47
+	top_liege = no
+}
+king_feudal_male_nordic_group_independent = { #King
+	type = character
+	special = holder
+	gender = male
+	tier = kingdom
+	priority = 47
+	only_independent = yes
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	top_liege = no
+}
+king_feudal_female_nordic_group_independent = { #Queen
+	type = character
+	special = holder
+	gender = female
+	tier = kingdom
+	priority = 47
+	only_independent = yes
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	top_liege = no
+}
+kingdom_feudal_nordic_group_independent = { #Free Hold
+	type = title
+	tier = kingdom
+	only_independent = yes
 	governments = { feudal_government }
 	culture_groups = { nordic_group }
 	priority = 47
@@ -607,6 +774,85 @@ duke_republic_female_aldmeris_group = { #High Reeve
 	culture_groups = { aldmeris_group }
 }
 
+#Orsimer Group
+
+#Feudal with Tribal names
+baron_feudal_male_orsimer = {
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+baron_feudal_female_orsimer = {
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+barony_feudal_orsimer = {
+	type = title
+	tier = barony
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+count_feudal_male_orsimer = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+count_feudal_female_orsimer = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+county_feudal_orsimer = {
+	type = title
+	tier = county
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+duke_feudal_male_orsimer = {
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+duke_feudal_female_orsimer = {
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+duchy_feudal_orsimer = {
+	type = title
+	tier = duchy
+	priority = 50
+	governments = { feudal_government }
+	culture_groups = { orsimer_group }
+}
+
 #Yokudan Group
 
 #Feudal
@@ -740,6 +986,26 @@ count_republic_female_yokudan_group = { #Lady Magistrate
 #Yokudan
 
 #Feudal
+king_feudal_male_yokudan = { #Greklith
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 49
+	governments = { feudal_government }
+	cultures = { yokudan horsemen }
+	top_liege = no
+}
+king_feudal_female_yokudan = { #Greklith
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 49
+	governments = { feudal_government }
+	cultures = { yokudan horsemen }
+	top_liege = no
+}
 emperor_feudal_male_yokudan = { #Elden Yokeda
 	type = character
 	gender = male
