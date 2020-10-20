@@ -194,6 +194,33 @@ start_hunt_decision = {
 	effect = {
 		custom_tooltip = line_break
 		custom_tooltip = start_hunt_decision_go_on_hunt
+		
+		### EK EDIT: Piety gain from Ritual Hunts
+		#Piety gain
+		if = {
+			limit = {
+				faith = {
+					OR = {
+						has_doctrine_parameter = piety_from_hunts_active
+					}
+				}
+			}
+			add_piety = {
+				value = 0
+
+				# In case other tenets use the effect, we can specify the piety gain depending on it. Useless now, might be handy later?
+				faith = {
+					if = {
+						limit = {
+							has_doctrine = tenet_ritual_hunts
+						}
+						add = medium_piety_value
+					}
+				}
+
+				min = medium_piety_value # Always give some piety, even if we don't have any of the specified tenets.
+			}
+		}
 
 		#Stress loss
 		if = {

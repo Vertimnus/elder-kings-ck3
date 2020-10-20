@@ -6,7 +6,7 @@
 # Boethiah: Sacred Lies + Pursuit of Power
 # Clavicus: Merchant Faith
 # Hermaeus: Veneration of Knowledge
-# Hircine: Lycan Worship
+# Hircine: Lycan Worship + Ritual Hunts
 # Malacath: Communal Identity
 # Mehrunes: Pursuit of Power + Auspicious Birthright
 # Mephala: Sacred Lies
@@ -1398,9 +1398,7 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = {
-				witch
-			}
+			virtues = { witch }
 		}
 	}
 	
@@ -1544,6 +1542,33 @@ doctrine_core_tenets = {
 		parameters = {
 			tenet_adaptive_conversion_resistance = yes
 			minimum_fervor = 25
+		}
+	}
+	
+	tenet_ritual_hunts = {
+		icon = core_tenet_festivities
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_ritual_hunts }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			piety_from_hunts_active = yes
+			mandatory_hunts_attendance = yes
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
+
+		character_modifier = {
+			virtues = {
+				hunter_2
+				hunter_3
+			}
 		}
 	}
 
@@ -2439,9 +2464,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				lifestyle_mystic
-			}
+			virtues = { lifestyle_mystic }
 		}
 
 		parameters = {
@@ -2866,9 +2889,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				temperate
-			}
+			virtues = { temperate }
 			sins = {
 				gluttonous
 				greedy
@@ -3042,9 +3063,7 @@ doctrine_core_tenets = {
 			virtues = {
 				generous
 			}
-			sins = {
-				callous
-			}
+			sins = { callous }
 		}
 
 		character_modifier = {
@@ -3882,12 +3901,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				sadistic
-			}
-			sins = {
-				compassionate
-			}
+			virtues = { sadistic }
+			sins = { compassionate }
 		}
 	}
 
@@ -4002,12 +4017,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				ambitious
-			}
-			sins = {
-				content
-			}
+			virtues = { ambitious }
+			sins = { content }
 		}
 	}
 
@@ -4048,9 +4059,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				cannibal = 2
-			}
+			virtues = { cannibal = 2 }
 		}
 
 		parameters = {
@@ -4101,12 +4110,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				deceitful
-			}
-			sins = {
-				honest
-			}
+			virtues = { deceitful }
+			sins = { honest }
 		}
 	}
 
