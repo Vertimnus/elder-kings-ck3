@@ -13,6 +13,8 @@ pdxmesh = {
 			shader_file = "gfx/FX/jomini/portrait.shader"
 		}
 
+
+
 		additive_animation = { id = "chin_forward"					type = "male_head_chin_forward.anim" }
 		additive_animation = { id = "chin_height"					type = "male_head_chin_height.anim" }
 		additive_animation = { id = "chin_width"					type = "male_head_chin_width.anim" }
@@ -55,6 +57,11 @@ pdxmesh = {
 		additive_animation = { id = "head_body_height"				type = "male_head_body_height.anim" }
 		additive_animation = { id = "head_infant_proportions"				type = "male_head_infant_proportions.anim" }
 		additive_animation = { id = "head_hunchbacked"				type = "male_head_hunchbacked.anim" }
+
+
+
+		#Congenital additions
+		additive_animation = { id = "jaw_open"				type = "male_head_jaw_open.anim" }
 		
 
 
@@ -63,6 +70,8 @@ pdxmesh = {
 
 
 		#### BLEND SHAPES ####
+
+
 
 		blend_shape = { id = "male_bs_cheek_fat_min"	type = "blendshapes/male_bs_cheek_fat_min.mesh"  }
 		blend_shape = { id = "male_bs_cheek_fat_max"	type = "blendshapes/male_bs_cheek_fat_max.mesh"  }
@@ -190,6 +199,12 @@ pdxmesh = {
 
 		blend_shape = { id = "male_orc_teeth_lips"		type = "blendshapes/male_orc_teeth_lips.mesh" }
 
+
+
+
+		#Congenital additions
+		blend_shape = { id = "harelip"		type = "blendshapes/male_harelip.mesh" }
+
 		#### Face detail blendshapes to go together with decals
 		blend_shape = { id = "male_bs_cheek_def_01"		type = "blendshapes/male_bs_cheek_def_01.mesh" }
 		blend_shape = { id = "male_bs_cheek_def_02"		type = "blendshapes/male_bs_cheek_def_02.mesh" }
@@ -304,6 +319,9 @@ pdxmesh = {
 		animation = { id = "head_frontEnd_right"			type = "male_head_frontEnd_right.anim" }
 		animation = { id = "head_frontEnd_infant"			type = "male_head_frontEnd_infant_1.anim" }
 		animation = { id = "head_frontEnd_child"			type = "male_head_frontEnd_child.anim" }
+
+		# No animation
+		animation = { id = "head_no_animation"			type = "male_head_no_animation.anim" }
 		
 	}
 
@@ -314,7 +332,9 @@ entity = {
         portrait_decal = {
             body_part = head
         }
-    }		
+	}	
+		
+
 
 	attribute = { name = "chin_forward"					additive_animation = "chin_forward" default = 0.5 }			
 	attribute = { name = "chin_height"					additive_animation = "chin_height" default = 0.5 }	
@@ -360,7 +380,15 @@ entity = {
 	attribute = { name = "head_hunchbacked"					additive_animation = "head_hunchbacked" }
 
 
+
+	#Congenital additions
+	attribute = { name = "jaw_open"					additive_animation = "jaw_open" }
+
+
+
 	#### BLEND SHAPES ####
+
+
 
 	attribute = { name = "bs_cheek_fat_min"					blend_shape = "male_bs_cheek_fat_min" }
 	attribute = { name = "bs_cheek_fat_max"					blend_shape = "male_bs_cheek_fat_max" }
@@ -495,6 +523,13 @@ entity = {
 	attribute = { name = "bs_orc_teeth_tusks_outward"					blend_shape = "male_bs_neutral" }
 
 	attribute = { name = "bs_orc_teeth_lips"					blend_shape = "male_orc_teeth_lips" }
+	
+
+
+
+	#Congenital additions
+	attribute = { name = "bs_harelip"					blend_shape = "harelip" }
+
 
 	#### Face detail blendshapes to go together with decals
 	attribute = { name = "bs_cheek_def_01"					blend_shape = "male_bs_cheek_def_01" }
@@ -654,6 +689,10 @@ entity = {
 	state = {	name = "frontEnd_right"					animation = "head_frontEnd_right" }
 	state = {	name = "frontEnd_infant"				animation = "head_frontEnd_infant" }
 	state = {	name = "frontEnd_child"					animation = "head_frontEnd_child" }
+
+
+	# No animation
+	state = {	name = "no_animation" animation = "head_no_animation" }
 
 
 	#scale = 0.5
