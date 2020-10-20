@@ -3,16 +3,16 @@
 
 ## Daedra-related tenets (unlock the worship of this Prince as a patron deity if the tenet is used & Daedric worship is not a crime)
 # Azura: Esotericism
-# Boethiah: Sacred Lies + Pursuit of Power
-# Clavicus: Merchant Faith
+# Boethiah: Unrelenting Faith + Sacred Lies
+# Clavicus: Prosperity Worship + Daedric Bargains
 # Hermaeus: Veneration of Knowledge
-# Hircine: Lycan Worship + Ritual Hunts
+# Hircine: Lycan Worship + Ritual Hunts + Sanctity of Nature
 # Malacath: Communal Identity
-# Mehrunes: Pursuit of Power + Auspicious Birthright
+# Mehrunes: Pursuit of Power
 # Mephala: Sacred Lies
-# Meridia:
-# Molag: Human Sacrifice + Vampire Worship
-# Namira: Ritual Cannibalism + Adorcism
+# Meridia: Sanctity of Life
+# Molag: Vampire Worship + Human Sacrifice
+# Namira: Adorcism + Ritual Cannibalism
 # Nocturnal:
 # Peryite:
 # Sanguine: Carnal Exaltation + Hedonistic
@@ -1210,6 +1210,7 @@ doctrine_core_tenets = {
 		parameters = {
 			# TODO: Actually make that have an effect
 			children_education_stewardship = yes
+			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -1221,10 +1222,6 @@ doctrine_core_tenets = {
 
 		character_modifier = {
 			monthly_stewardship_lifestyle_xp_gain_mult = 0.2
-		}
-		
-		parameters = {
-			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
 	}
 	
@@ -1247,6 +1244,7 @@ doctrine_core_tenets = {
 		parameters = {
 			# TODO: Actually make that have an effect
 			children_education_intrigue = yes
+			allows_worship_mephala_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -1569,6 +1567,40 @@ doctrine_core_tenets = {
 				hunter_2
 				hunter_3
 			}
+		}
+	}
+	
+	tenet_sanctity_of_life = {
+		icon = core_tenet_prayer
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sanctity_of_life }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_outlawed
+				flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+			}
+			custom_description = {
+				text = necromancy_must_be_outlawed
+				flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
+			}
+		}
+
+		parameters = {
+			cheaper_holy_wars_undead_rulers_active = yes
+			holy_wars_pro_undeath_active = yes
+			cheaper_holy_wars_pro_undeath_active = yes
+			allows_worship_meridia_shunned_doctrines_active = yes
+			hostility_override_doctrine_vampirism_accepted = 3
+			hostility_override_doctrine_necromancy_accepted = 3
 		}
 	}
 
@@ -3322,7 +3354,6 @@ doctrine_core_tenets = {
 
 		parameters = {
 			mystic_birthright_active = yes
-			allows_worship_mehrunes_shunned_doctrines_active = yes
 		}
 
 		traits = {
