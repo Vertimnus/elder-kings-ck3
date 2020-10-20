@@ -34,6 +34,7 @@
 
 # Extra reward effects for specific tenets
 pilgrimage_additional_reward_effect = {
+	### EK TODO: Divine Purity
 	# Armed Pilgrimages
 	if = {
 		limit = { faith = { has_doctrine = tenet_armed_pilgrimages } }
@@ -124,26 +125,64 @@ pilgrimage_additional_reward_effect = {
 	}
 }
 
+### EK EDIT: The Hajj cannot be performed
 short_pilgrimage_reward_effect = {
 	add_piety = short_pilgrimage_piety_gain
+	# if = {
+		# limit = {
+			# can_perform_the_hajj_trigger = yes
+			# exists = scope:activity.var:is_hajj
+		# }
+		# add_trait = pilgrim
+	# }
 	pilgrimage_additional_reward_effect = yes
 }
 
 medium_pilgrimage_reward_effect = {
 	add_piety = long_pilgrimage_piety_gain
-	add_trait = pilgrim
+	if = {
+		limit = {
+			always = yes
+			# trigger_if = {
+				# limit = { can_perform_the_hajj_trigger = yes }
+				# exists = scope:activity.var:is_hajj
+			# }
+			# trigger_else = { always = yes }
+		}
+		add_trait = pilgrim
+	}
 	pilgrimage_additional_reward_effect = yes
 }
 
 long_pilgrimage_reward_effect = {
 	add_piety = very_long_pilgrimage_piety_gain
-	add_trait = pilgrim
+	if = {
+		limit = {
+			always = yes
+			# trigger_if = {
+				# limit = { can_perform_the_hajj_trigger = yes }
+				# exists = scope:activity.var:is_hajj
+			# }
+			# trigger_else = { always = yes }
+		}
+		add_trait = pilgrim
+	}
 	pilgrimage_additional_reward_effect = yes
 }
 
 very_long_pilgrimage_reward_effect = {
 	add_piety = exceptionally_long_pilgrimage_piety_gain
-	add_trait = pilgrim
+	if = {
+		limit = {
+			always = yes
+			# trigger_if = {
+				# limit = { can_perform_the_hajj_trigger = yes }
+				# exists = scope:activity.var:is_hajj
+			# }
+			# trigger_else = { always = yes }
+		}
+		add_trait = pilgrim
+	}
 	pilgrimage_additional_reward_effect = yes
 }
 
@@ -174,7 +213,8 @@ select_pilgrimage_effect = {
 	}
 	if = {
 		limit = {
-			NOT = { has_character_flag = is_on_hajj }
+			always = yes
+			# NOT = { has_character_flag = is_on_hajj }
 		}
 		switch = {
 			trigger = scope:distance
@@ -338,9 +378,18 @@ set_up_next_pilgrimage_event_effect = {
 					compare_value < scope:activity.var:pilgrimage_distance
 				}
 			}
-			trigger_event = {
-				on_action = pilgrimage_journey_events
-				days = $DAYS$
+			if = {
+				limit = { exists = scope:activity.var:is_hajj }
+				trigger_event = {
+					on_action = hajj_journey_events
+					days = $DAYS$
+				}
+			}
+			else = {
+				trigger_event = {
+					on_action = pilgrimage_journey_events
+					days = $DAYS$
+				}
 			}
 		}
 		else = {
@@ -368,6 +417,7 @@ set_up_next_pilgrimage_event_effect = {
 }
 
 
+### EK EDIT: Islam does not exist
 set_up_holy_sites_for_selection_effect = {
 	if = {
 		limit = { NOT = { exists = scope:has_set_up_pilgrimage_sites } }
@@ -375,6 +425,14 @@ set_up_holy_sites_for_selection_effect = {
 		faith = {
 			every_holy_site = {
 				# Exclude Mecca for Muslims
+				# limit = {
+					# trigger_if = {
+						# limit = {
+							# scope:pilgrim.faith.religion = religion:islam_religion
+						# }
+						# NOT = { county = title:c_mecca }
+					# }
+				# }
 				# Assign the Holy Site to the correct "scope slot"
 				if = {
 					limit = {
@@ -500,11 +558,11 @@ abandon_pilgrimage_early_effect = {
 		scope:activity = {
 			complete_activity = no
 		}
-		if = {
-			limit = {
-				has_character_flag = is_on_hajj
-			}
-			remove_character_flag = is_on_hajj
-		}
+		# if = {
+			# limit = {
+				# has_character_flag = is_on_hajj
+			# }
+			# remove_character_flag = is_on_hajj
+		# }
 	}
 } 
