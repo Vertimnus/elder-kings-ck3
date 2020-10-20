@@ -684,7 +684,6 @@ very_slow_construction_time = @[very_slow_construction_time_base]
 # root = province
 # scope:county = county
 # scope:holder = holder
-# EK removed fewer filled slots before vanilla 1066
 fill_building_slot_chance = {
 	value = 140
 	#if = {
@@ -699,17 +698,19 @@ fill_building_slot_chance = {
 		}
 		subtract = 15
 	}
+	### EK EDIT: These Special Buildings don't exist
+	### EK TODO: Add our own
 	if = {
 		limit = {
 			has_special_building = yes
-			NOR = {
-				has_building_or_higher = hadrians_wall_01
-				has_building_or_higher = offas_dyke_01
-				has_building_or_higher = stonehenge_01
-				has_building_or_higher = the_pyramids_01
-				has_building_or_higher = the_colosseum_01
-				has_building_or_higher = alhambra_01
-			}
+			# NOR = {
+				# has_building_or_higher = hadrians_wall_01
+				# has_building_or_higher = offas_dyke_01
+				# has_building_or_higher = stonehenge_01
+				# has_building_or_higher = the_pyramids_01
+				# has_building_or_higher = the_colosseum_01
+				# has_building_or_higher = alhambra_01
+			# }
 			num_buildings <= 1
 		}
 		add = 35
@@ -737,9 +738,9 @@ fill_building_slot_chance = {
 }
 
 # Chance of upgrading one more building. Used when starting from a bookmark. Done after filling out building slots
-# EK removed fewer upgraded buildings before vanilla 1066
 upgrade_building_chance = {
 	value = 65
+	### EK EDIT: Removed fewer filled slots before vanilla 1066
 	#if = { # Very few upgraded buildings in 867
 	#	limit = {
 	#		current_date < 1066.1.1
