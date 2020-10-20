@@ -67,7 +67,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_divines = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -114,7 +113,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_aedra = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -161,7 +159,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_yokudan = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -214,7 +211,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_celestial = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -261,7 +257,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_atmoran = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -308,10 +303,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			hostility_override_special_doctrine_is_reach_faith = 1
-			reach_syncretic_actor_opinion_active = yes
-			opinion_of_reach_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -1108,7 +1100,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_snow_adaptation }
+				limit = { has_doctrine = tenet_children_skyrim }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1122,6 +1114,31 @@ doctrine_core_tenets = {
 			taiga_attrition_mult = -0.25
 			mountains_advantage = 5
 			mountains_attrition_mult = -0.25
+		}
+	}
+	
+	tenet_desert_traditions = {
+		icon = core_tenet_skyshaman
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_desert_traditions }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			personal_god_different_names_active = yes
+		}
+
+		character_modifier = {
+			desert_advantage = 5
+			desert_attrition_mult = -0.25
+			drylands_advantage = 5
+			drylands_attrition_mult = -0.25
 		}
 	}
 	
@@ -1496,7 +1513,6 @@ doctrine_core_tenets = {
 		# }
 	}
 	
-	# Monotheism
 	tenet_focused_worship = {
 		icon = core_tenet_bhakti
 		
@@ -1596,7 +1612,6 @@ doctrine_core_tenets = {
 
 		parameters = {
 			cheaper_holy_wars_undead_rulers_active = yes
-			holy_wars_pro_undeath_active = yes
 			cheaper_holy_wars_pro_undeath_active = yes
 			allows_worship_meridia_shunned_doctrines_active = yes
 			hostility_override_doctrine_vampirism_accepted = 3
@@ -2505,7 +2520,7 @@ doctrine_core_tenets = {
 		}
 	}
 
-	# EK EDIT: Added special names for Aldmeri faiths
+	### EK EDIT: Added special names for Aldmeri faiths
 	tenet_legalism = {
 		icon = core_tenet_bigbook
 		name = {
