@@ -1,36 +1,36 @@
 ﻿has_active_patron_selected = {
-    OR = {
-        # Daedra #
-        has_variable = patron_azura_shown
-        has_variable = patron_boethiah_shown
-        has_variable = patron_clavicus_vile_shown
-        has_variable = patron_hermaeus_mora_shown
-        has_variable = patron_hircine_shown
-        has_variable = patron_jyggalag_shown
-        has_variable = patron_malacath_shown
-        has_variable = patron_mehrunes_dagon_shown
-        has_variable = patron_mephala_shown
-        has_variable = patron_meridia_shown
-        has_variable = patron_molag_bal_shown
-        has_variable = patron_namira_shown
-        has_variable = patron_nocturnal_shown
-        has_variable = patron_peryite_shown
-        has_variable = patron_sanguine_shown
-        has_variable = patron_sheogorath_shown
-        has_variable = patron_vaermina_shown
+	OR = {
+		# Daedra #
+		has_variable = patron_azura_shown
+		has_variable = patron_boethiah_shown
+		has_variable = patron_clavicus_vile_shown
+		has_variable = patron_hermaeus_mora_shown
+		has_variable = patron_hircine_shown
+		has_variable = patron_jyggalag_shown
+		has_variable = patron_malacath_shown
+		has_variable = patron_mehrunes_dagon_shown
+		has_variable = patron_mephala_shown
+		has_variable = patron_meridia_shown
+		has_variable = patron_molag_bal_shown
+		has_variable = patron_namira_shown
+		has_variable = patron_nocturnal_shown
+		has_variable = patron_peryite_shown
+		has_variable = patron_sanguine_shown
+		has_variable = patron_sheogorath_shown
+		has_variable = patron_vaermina_shown
 
-        # Tribunal #
-        has_variable = patron_almalexia_shown
-        has_variable = patron_sotha_sil_shown
-        has_variable = patron_vivec_shown
-    }
+		# Tribunal #
+		has_variable = patron_almalexia_shown
+		has_variable = patron_sotha_sil_shown
+		has_variable = patron_vivec_shown
+	}
 }
 
 has_passive_patron_selected = {
-    OR = {
-        # Pantheons #
-        has_variable = patron_divines_shown #v. wip, mostly here for testing
-    }
+	OR = {
+		# Pantheons #
+		has_variable = patron_divines_shown #v. wip, mostly here for testing
+	}
 }
 
 # Valid Triggers - tenets, doctrines and anything alse allowing a patron should be here
@@ -42,314 +42,277 @@ has_passive_patron_selected = {
 
 # Daedra #
 patron_azura_valid = {
-    OR = {
-        has_religion = religion:azura_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_azura_syncretism
-                has_doctrine = tenet_esotericism
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
-            }
-        }
-    }
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+				has_doctrine_parameter = allows_worship_azura_all_doctrines_active
+				has_doctrine_parameter = allows_worship_azura_shunned_doctrines_active
+				has_doctrine_parameter = allows_worship_azura_accepted_doctrines_active
+			}
+		}
+	}
 }
 
 patron_boethiah_valid = {
-    OR = {
-        has_religion = religion:boethiah_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_boethiah_syncretism
-                has_doctrine = tenet_sacred_shadows
-                has_doctrine = tenet_pursuit_of_power
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
-            }
-        }
-    }
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+				has_doctrine_parameter = allows_worship_boethiah_all_doctrines_active
+				has_doctrine_parameter = allows_worship_boethiah_shunned_doctrines_active
+				has_doctrine_parameter = allows_worship_boethiah_accepted_doctrines_active
+			}
+		}
+	}
 }
 
 patron_clavicus_vile_valid = {
-    OR = {
-        has_religion = religion:clavicus_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_clavicus_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
-            }
-        }
-    }
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+				has_doctrine_parameter = allows_worship_clavicus_all_doctrines_active
+				has_doctrine_parameter = allows_worship_clavicus_shunned_doctrines_active
+				has_doctrine_parameter = allows_worship_clavicus_accepted_doctrines_active
+			}
+		}
+	}
 }
 
 patron_hermaeus_mora_valid = {
-    OR = {
-        has_religion = religion:hermaeus_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_hermaeus_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_hermaeus_all_doctrines_active
+                has_doctrine_parameter = allows_worship_hermaeus_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_hermaeus_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_hircine_valid = {
-    OR = {
-        #has_religion = religion:hircine_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_hircine_syncretism
-                has_doctrine = tenet_lycanthrope_worship
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_hircine_all_doctrines_active
+                has_doctrine_parameter = allows_worship_hircine_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_hircine_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_jyggalag_valid = {
-    always = no
+	always = no
 }
 
 patron_malacath_valid = {
-    OR = {
-        has_religion = religion:malacath_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_malacath_syncretism
-                has_doctrine = tenet_communal_identity
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_malacath_all_doctrines_active
+                has_doctrine_parameter = allows_worship_malacath_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_malacath_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_mehrunes_dagon_valid = {
-    OR = {
-        #has_religion = religion:mehrunes_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_mehrunes_syncretism
-                has_doctrine = tenet_pursuit_of_power
-                has_doctrine = tenet_mystical_birthright
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_mehrunes_all_doctrines_active
+                has_doctrine_parameter = allows_worship_mehrunes_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_mehrunes_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_mephala_valid = {
-    OR = {
-        #has_religion = religion:mephala_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_mephala_syncretism
-                has_doctrine = tenet_sacred_shadows
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_mephala_all_doctrines_active
+                has_doctrine_parameter = allows_worship_mephala_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_mephala_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_meridia_valid = {
-    OR = {
-        #has_religion = religion:meridia_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_meridia_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_meridia_all_doctrines_active
+                has_doctrine_parameter = allows_worship_meridia_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_meridia_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_molag_bal_valid = {
-    OR = {
-        #has_religion = religion:molag_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_molag_syncretism
-                has_doctrine = tenet_vampire_worship
-                has_doctrine = tenet_human_sacrifice
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_molag_all_doctrines_active
+                has_doctrine_parameter = allows_worship_molag_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_molag_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_namira_valid = {
-    OR = {
-        #has_religion = religion:namira_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_namira_syncretism
-                has_doctrine = tenet_ritual_cannibalism
-                has_doctrine = tenet_adorcism
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_namira_all_doctrines_active
+                has_doctrine_parameter = allows_worship_namira_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_namira_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_nocturnal_valid = {
-    OR = {
-        #has_religion = religion:nocturnal_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_nocturnal_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_nocturnal_all_doctrines_active
+                has_doctrine_parameter = allows_worship_nocturnal_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_nocturnal_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_peryite_valid = {
-    OR = {
-        #has_religion = religion:peryite_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_peryite_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_peryite_all_doctrines_active
+                has_doctrine_parameter = allows_worship_peryite_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_peryite_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_sanguine_valid = {
-    OR = {
-        #has_religion = religion:sanguine_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_sanguine_syncretism
-                has_doctrine = tenet_carnal_exaltation
-                has_doctrine = tenet_hedonistic
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_sanguine_all_doctrines_active
+                has_doctrine_parameter = allows_worship_sanguine_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_sanguine_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_sheogorath_valid = {
-    OR = {
-        #has_religion = religion:sheogorath_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_sheogorath_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_sheogorath_all_doctrines_active
+                has_doctrine_parameter = allows_worship_sheogorath_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_sheogorath_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 patron_vaermina_valid = {
-    OR = {
-        #has_religion = religion:vaermina_religion #cult faiths
-        faith = {
-            NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-            OR = {
-                has_doctrine = tenet_vaermina_syncretism
-                #has_doctrine = 
-                has_doctrine = tenet_daedric_bargains
-                has_doctrine = doctrine_daedra_worship_accepted
+	OR = {
+		faith = {
+			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
+			OR = {
+                has_doctrine_parameter = allows_worship_vaermina_all_doctrines_active
+                has_doctrine_parameter = allows_worship_vaermina_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_vaermina_accepted_doctrines_active
             }
-        }
-    }
+		}
+	}
 }
 
 
 # Tribunal #
 patron_almalexia_valid = {
-    always = no
+	always = no
 }
 
 patron_sotha_sil_valid = {
-    always = no
+	always = no
 }
 
 patron_vivec_valid = {
-    always = no
+	always = no
 }
 
 # Pantheons #
 patron_divines_valid = {
-    always = yes
+	always = yes
 }
 
 # Aggregate Triggers #
 patron_has_princes = {
-    OR = {
-        patron_azura_valid = yes
-        patron_boethiah_valid = yes
-        patron_clavicus_vile_valid = yes
-        patron_hermaeus_mora_valid = yes
-        patron_hircine_valid = yes
-        patron_jyggalag_valid = yes
-        patron_malacath_valid = yes
-        patron_mehrunes_dagon_valid = yes
-        patron_mephala_valid = yes
-        patron_meridia_valid = yes
-        patron_molag_bal_valid = yes
-        patron_namira_valid = yes
-        patron_nocturnal_valid = yes
-        patron_peryite_valid = yes
-        patron_sanguine_valid = yes
-        patron_sheogorath_valid = yes
-        patron_vaermina_valid = yes
-    }
+	OR = {
+		patron_azura_valid = yes
+		patron_boethiah_valid = yes
+		patron_clavicus_vile_valid = yes
+		patron_hermaeus_mora_valid = yes
+		patron_hircine_valid = yes
+		patron_jyggalag_valid = yes
+		patron_malacath_valid = yes
+		patron_mehrunes_dagon_valid = yes
+		patron_mephala_valid = yes
+		patron_meridia_valid = yes
+		patron_molag_bal_valid = yes
+		patron_namira_valid = yes
+		patron_nocturnal_valid = yes
+		patron_peryite_valid = yes
+		patron_sanguine_valid = yes
+		patron_sheogorath_valid = yes
+		patron_vaermina_valid = yes
+	}
 }
 
 patron_has_tribunal = {
-    OR = {
-        patron_almalexia_valid = yes
-        patron_sotha_sil_valid = yes
-        patron_vivec_valid = yes
-    }
+	OR = {
+		patron_almalexia_valid = yes
+		patron_sotha_sil_valid = yes
+		patron_vivec_valid = yes
+	}
 }
 
 patron_has_pantheon = {
-    OR = {
-        patron_divines_valid = yes
-    }
+	OR = {
+		patron_divines_valid = yes
+	}
 }
 
 patron_has_patron = {
-    OR = {
-        patron_has_princes = yes
-        patron_has_tribunal = yes
-        patron_has_pantheon = yes
-    }
+	OR = {
+		patron_has_princes = yes
+		patron_has_tribunal = yes
+		patron_has_pantheon = yes
+	}
 }
