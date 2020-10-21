@@ -1253,6 +1253,112 @@ results_of_university_education_points_effect = {
 	}
 }
 
+### EK EDIT: Used to reflect the impact of a stat-focused tenet (Veneration of Knowledge, ...)
+# Can be fired by both the child and their guardian
+results_of_stat_aligned_tenet = {
+	if = {
+		limit = {
+			has_focus = education_diplomacy
+			
+			OR = {
+				faith = { has_doctrine_parameter = children_education_diplomacy }
+				AND = {
+					exists = var:guardian_liege
+					var:guardian_liege = {
+						is_alive = yes
+						faith = { has_doctrine_parameter = children_education_diplomacy }
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = education_diplomacy_variable
+			add = 3
+		}
+	}
+	else_if = {
+		limit = {
+			has_focus = education_martial
+			
+			OR = {
+				faith = { has_doctrine_parameter = children_education_martial }
+				AND = {
+					exists = var:guardian_liege
+					var:guardian_liege = {
+						is_alive = yes
+						faith = { has_doctrine_parameter = children_education_martial }
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = education_martial_variable
+			add = 3
+		}
+	}
+	else_if = {
+		limit = {
+			has_focus = education_stewardship
+			
+			OR = {
+				faith = { has_doctrine_parameter = children_education_stewardship }
+				AND = {
+					exists = var:guardian_liege
+					var:guardian_liege = {
+						is_alive = yes
+						faith = { has_doctrine_parameter = children_education_stewardship }
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = education_stewardship_variable
+			add = 3
+		}
+	}
+	else_if = {
+		limit = {
+			has_focus = education_intrigue
+			
+			OR = {
+				faith = { has_doctrine_parameter = children_education_intrigue }
+				AND = {
+					exists = var:guardian_liege
+					var:guardian_liege = {
+						is_alive = yes
+						faith = { has_doctrine_parameter = children_education_intrigue }
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = education_intrigue_variable
+			add = 3
+		}
+	}
+	else_if = {
+		limit = {
+			has_focus = education_learning
+			
+			OR = {
+				faith = { has_doctrine_parameter = children_education_learning }
+				AND = {
+					exists = var:guardian_liege
+					var:guardian_liege = {
+						is_alive = yes
+						faith = { has_doctrine_parameter = children_education_learning }
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = education_learning_variable
+			add = 3
+		}
+	}
+}
+	
+
 dynasty_legacy_education_boost_effect = {
 	if = {
 		limit = {
