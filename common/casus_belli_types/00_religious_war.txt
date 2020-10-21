@@ -1,6 +1,4 @@
-﻿### TO DO: Change how holy wars are handled
-
-minor_religious_war = {
+﻿minor_religious_war = {
 	group = religious
 
 	defender_faith_can_join = yes
@@ -131,6 +129,23 @@ minor_religious_war = {
 				limit = {
 					scope:attacker.faith = {
 						has_doctrine_parameter = cheaper_holy_wars_active
+					}
+				}
+				multiply = {
+					value = 0.8
+					desc = CB_REDUCED_HOLY_WAR_COST
+				}
+			}
+			
+			### EK EDIT: Sanctity of Life vs pro-undeath faiths
+			if = {
+				limit = {
+					scope:attacker.faith = { has_doctrine_parameter = cheaper_holy_wars_pro_undeath_active }
+					scope:defender.faith = {
+						OR = {
+							has_doctrine = doctrine_vampirism_accepted
+							has_doctrine = doctrine_necromancy_accepted
+						}
 					}
 				}
 				multiply = {
@@ -573,6 +588,23 @@ religious_war = {
 					desc = CB_REDUCED_HOLY_WAR_COST
 				}
 			}
+			
+			### EK EDIT: Sanctity of Life vs pro-undeath faiths
+			if = {
+				limit = {
+					scope:attacker.faith = { has_doctrine_parameter = cheaper_holy_wars_pro_undeath_active }
+					scope:defender.faith = {
+						OR = {
+							has_doctrine = doctrine_vampirism_accepted
+							has_doctrine = doctrine_necromancy_accepted
+						}
+					}
+				}
+				multiply = {
+					value = 0.8
+					desc = CB_REDUCED_HOLY_WAR_COST
+				}
+			}
 
 			# Innovation Piety Discounts
 			# if = {
@@ -1006,6 +1038,23 @@ major_religious_war = {
 				limit = {
 					scope:attacker.faith = {
 						has_doctrine_parameter = cheaper_holy_wars_active
+					}
+				}
+				multiply = {
+					value = 0.8
+					desc = CB_REDUCED_HOLY_WAR_COST
+				}
+			}
+			
+			### EK EDIT: Sanctity of Life vs pro-undeath faiths
+			if = {
+				limit = {
+					scope:attacker.faith = { has_doctrine_parameter = cheaper_holy_wars_pro_undeath_active }
+					scope:defender.faith = {
+						OR = {
+							has_doctrine = doctrine_vampirism_accepted
+							has_doctrine = doctrine_necromancy_accepted
+						}
 					}
 				}
 				multiply = {
