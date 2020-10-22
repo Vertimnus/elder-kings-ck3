@@ -121,122 +121,119 @@ title_illustration_save_province_temporary = {
 
 #has_indian_culture_trigger = {
 has_graphical_india_region_trigger = {
-	always = no
-	# trigger_if = {
-		# limit = {
-			# exists = capital_province
-		# }
-		# capital_province = {
-			# geographical_region = graphical_india
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = host.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# host.capital_province = {
-			# geographical_region = graphical_india
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = liege.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# liege.capital_province = {
-			# geographical_region = graphical_india
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = location.province_owner.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# location.province_owner.capital_province = {
-			# geographical_region = graphical_india
-		# }
-	# }
+	trigger_if = {
+		limit = {
+			exists = capital_province
+		}
+		capital_province = {
+			geographical_region = graphical_india
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = host.capital_province
+			NOT = { exists = capital_province }
+		}
+		host.capital_province = {
+			geographical_region = graphical_india
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = liege.capital_province
+			NOT = { exists = capital_province }
+		}
+		liege.capital_province = {
+			geographical_region = graphical_india
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = location.province_owner.capital_province
+			NOT = { exists = capital_province }
+		}
+		location.province_owner.capital_province = {
+			geographical_region = graphical_india
+		}
+	}
 }
 
 #has_mediterranean_culture_trigger = {
 has_graphical_mediterranean_region_trigger = {
-	always = no
-	# trigger_if = {
-		# limit = {
-			# exists = capital_province
-		# }
-		# capital_province = {
-			# geographical_region = graphical_mediterranean
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = host.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# host.capital_province = {
-			# geographical_region = graphical_mediterranean
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = liege.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# liege.capital_province = {
-			# geographical_region = graphical_mediterranean
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = location.province_owner.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# location.province_owner.capital_province = {
-			# geographical_region = graphical_mediterranean
-		# }
-	# }
+	trigger_if = {
+		limit = {
+			exists = capital_province
+		}
+		capital_province = {
+			geographical_region = graphical_mediterranean
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = host.capital_province
+			NOT = { exists = capital_province }
+		}
+		host.capital_province = {
+			geographical_region = graphical_mediterranean
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = liege.capital_province
+			NOT = { exists = capital_province }
+		}
+		liege.capital_province = {
+			geographical_region = graphical_mediterranean
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = location.province_owner.capital_province
+			NOT = { exists = capital_province }
+		}
+		location.province_owner.capital_province = {
+			geographical_region = graphical_mediterranean
+		}
+	}
 }
 
 #has_mena_culture_trigger = {
 has_graphical_mena_region_trigger = {
-	always = no
-	# trigger_if = {
-		# limit = {
-			# exists = capital_province
-		# }
-		# capital_province = {
-			# geographical_region = graphical_mena
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = host.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# host.capital_province = {
-			# geographical_region = graphical_mena
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = liege.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# liege.capital_province = {
-			# geographical_region = graphical_mena
-		# }
-	# }
-	# trigger_if = {
-		# limit = {
-			# exists = location.province_owner.capital_province
-			# NOT = { exists = capital_province }
-		# }
-		# location.province_owner.capital_province = {
-			# geographical_region = graphical_mena
-		# }
-	# }
+	trigger_if = {
+		limit = {
+			exists = capital_province
+		}
+		capital_province = {
+			geographical_region = graphical_mena
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = host.capital_province
+			NOT = { exists = capital_province }
+		}
+		host.capital_province = {
+			geographical_region = graphical_mena
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = liege.capital_province
+			NOT = { exists = capital_province }
+		}
+		liege.capital_province = {
+			geographical_region = graphical_mena
+		}
+	}
+	trigger_if = {
+		limit = {
+			exists = location.province_owner.capital_province
+			NOT = { exists = capital_province }
+		}
+		location.province_owner.capital_province = {
+			geographical_region = graphical_mena
+		}
+	}
 }
 
 #has_western_culture_trigger = {
@@ -246,12 +243,11 @@ has_graphical_western_region_trigger = {
 			exists = capital_province
 		}
 		capital_province = {
-			always = yes
-			# NOR = {
-				# geographical_region = graphical_india
-				# geographical_region = graphical_mediterranean
-				# geographical_region = graphical_mena
-			# }
+			NOR = {
+				geographical_region = graphical_india
+				geographical_region = graphical_mediterranean
+				geographical_region = graphical_mena
+			}
 		}
 	}
 	trigger_if = {
@@ -260,12 +256,11 @@ has_graphical_western_region_trigger = {
 			NOT = { exists = capital_province }
 		}
 		host.capital_province = {
-			always = yes
-			# NOR = {
-				# geographical_region = graphical_india
-				# geographical_region = graphical_mediterranean
-				# geographical_region = graphical_mena
-			# }
+			NOR = {
+				geographical_region = graphical_india
+				geographical_region = graphical_mediterranean
+				geographical_region = graphical_mena
+			}
 		}
 	}
 	trigger_if = {
@@ -274,12 +269,11 @@ has_graphical_western_region_trigger = {
 			NOT = { exists = capital_province }
 		}
 		liege.capital_province = {
-			always = yes
-			# NOR = {
-				# geographical_region = graphical_india
-				# geographical_region = graphical_mediterranean
-				# geographical_region = graphical_mena
-			# }
+			NOR = {
+				geographical_region = graphical_india
+				geographical_region = graphical_mediterranean
+				geographical_region = graphical_mena
+			}
 		}
 	}
 	trigger_if = {
@@ -288,12 +282,11 @@ has_graphical_western_region_trigger = {
 			NOT = { exists = capital_province }
 		}
 		location.province_owner.capital_province = {
-			always = yes
-			# NOR = {
-				# geographical_region = graphical_india
-				# geographical_region = graphical_mediterranean
-				# geographical_region = graphical_mena
-			# }
+			NOR = {
+				geographical_region = graphical_india
+				geographical_region = graphical_mediterranean
+				geographical_region = graphical_mena
+			}
 		}
 	}
 }
