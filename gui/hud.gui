@@ -964,10 +964,10 @@ widget = {
 												texture = "gfx/interface/icons/religion/imperial_cult.dds"
 											}
 											blockoverride "patron_entry_name" {
-												text = patron_divines_name
+												text = pantheon_divines_name
 											}
 											blockoverride "patron_entry_desc" {
-												text = patron_divines_long_desc
+												text = pantheon_divines_long_desc
 											}
 										}
 									}
@@ -1618,12 +1618,12 @@ widget = {
 										#parentanchor = left
 
 										text_single = {
-											text = selected_patron_passive_name #defined by custom loc
+											text = selected_pantheon_name #defined by custom loc
 											align = center
 											fontsize = 32
 										}
 										text_multi = {
-											text = selected_patron_passive_desc #defined by custom loc
+											text = selected_pantheon_desc #defined by custom loc
 											size = { 450 150 }
 											maximumsize = { 450 150 }
 											align = center
@@ -1634,7 +1634,7 @@ widget = {
 											size = { 0 15 }
 										}
 										text_multi = {
-											text = selected_patron_passive_long_desc #defined by custom loc
+											text = selected_pantheon_long_desc #defined by custom loc
 											size = { 450 150 }
 											maximumsize = { 450 150 }
 											align = center
@@ -1673,146 +1673,171 @@ widget = {
 									background = {
 										using = Background_Area
 									}
-
-									spacer = {
-										size = { 9 0 }
-									}
-
 									vbox = {
-										# button_patron_icon = {
-										# 	datacontext = "[GetScriptedGui('patron_divines_shown')]"
-										# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										# 	blockoverride "patron_icon" {
-										# 		texture = "gfx/interface/icons/religion/imperial_cult.dds"
-										# 	}
-										# }
-										# Akatosh #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_akatosh.dds"
-											}
-										}
-
-										# Arkay #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_arkay_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_arkay.dds"
-											}
-										}
-
-										# Dibella #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_dibella_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_dibella.dds"
-											}
-										}
-
-										# Julianos #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_julianos_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_julianos.dds"
-											}
-										}
-
-										# Kynareth #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_kynareth.dds"
-											}
-										}
-
-										# Mara #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_mara_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_mara.dds"
-											}
-										}
-
-										# Stendarr #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_stendarr.dds"
-											}
-										}
-
-										# Zenithar #
-										button_patron_icon = {
-											datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
-											visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_icon" {
-												texture = "gfx/interface/patrons/patron_zenithar.dds"
-											}
-										}
-									}
-
-									spacer = {
-										size = { 9 0 }
-									}
-
-									vbox = {
-										spacer = {
-											size = { 0 14 }
-										}
-										layoutpolicy_horizontal = expanding
-										layoutpolicy_vertical = expanding
 										hbox = {
-											layoutpolicy_horizontal = expanding
-											textbox = {
-												font = StandardGameFont
-												fontcolor = { 1 1 1 1 }
-												fontsize = 24
-												text = patron_passive_name
-												autoresize = no
-												layoutpolicy_horizontal = expanding
-												elide = right
-												minimumsize = { -1 16 }
-												align = left
+											spacer = {
+												size = { 9 0 }
+											}
+
+											#icons
+											vbox = {
+												name = "patron_icons"
+												# button_patron_icon = {
+												# 	datacontext = "[GetScriptedGui('patron_divines_shown')]"
+												# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												# 	blockoverride "patron_icon" {
+												# 		texture = "gfx/interface/icons/religion/imperial_cult.dds"
+												# 	}
+												# }
+												# Akatosh #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_akatosh.dds"
+													}
+												}
+
+												# Arkay #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_arkay_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_arkay.dds"
+													}
+												}
+
+												# Dibella #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_dibella_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_dibella.dds"
+													}
+												}
+
+												# Julianos #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_julianos_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_julianos.dds"
+													}
+												}
+
+												# Kynareth #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_kynareth.dds"
+													}
+												}
+
+												# Mara #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_mara_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_mara.dds"
+													}
+												}
+
+												# Stendarr #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_stendarr.dds"
+													}
+												}
+
+												# Zenithar #
+												button_patron_icon = {
+													datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_icon" {
+														texture = "gfx/interface/patrons/patron_zenithar.dds"
+													}
+												}
+											}
+
+											# spacer = {
+											# 	size = { 9 0 }
+											# }
+
+											#name + desc
+											vbox = {
+												size = { 200 0 }
+												spacer = {
+													size = { 0 14 }
+												}
+												#layoutpolicy_horizontal = expanding
+												layoutpolicy_vertical = expanding
+												hbox = {
+													layoutpolicy_horizontal = expanding
+													textbox = {
+														font = StandardGameFont
+														fontcolor = { 1 1 1 1 }
+														fontsize = 24
+														text = selected_patron_passive_name
+														autoresize = no
+														layoutpolicy_horizontal = expanding
+														elide = right
+														minimumsize = { -1 16 }
+														align = left
+													}
+												}
+												spacer = {
+													size = { 0 17 }
+												}
+												textbox = {
+													font = StandardGameFont
+													fontcolor = { 0.8 0.8 0.8 1 }
+													fontsize = 16
+													text = selected_patron_passive_modifier
+													#text = "[GetModifier('p_akatosh').GetNameWithTooltip]"
+													autoresize = yes
+													layoutpolicy_horizontal = expanding
+													layoutpolicy_vertical = expanding
+													elide = right
+													multiline = yes
+													align = top|left
+												}
+												spacer = {
+													size = { 0 13 }
+												}
+											}
+
+											spacer = {
+												size = { 9 0 }
 											}
 										}
-										spacer = {
-											size = { 0 17 }
-										}
-										textbox = {
-											font = StandardGameFont
-											fontcolor = { 0.8 0.8 0.8 1 }
-											fontsize = 16
-											text = patron_passive_long_desc
-											autoresize = no
-											layoutpolicy_horizontal = expanding
-											layoutpolicy_vertical = expanding
-											elide = right
-											multiline = yes
-											align = top|left
+										button_frontend = {
+											name = "patron_button_confirm_patron"
+											position = { 0 5 }
+											size = { 160 40 }
+											text = "CONFIRM"
+											#tooltip = confirm_tt
+
+											datacontext = "[GetScriptedGui('patron_confirm_patron')]"
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+											# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+											tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 										}
 										spacer = {
-											size = { 0 13 }
+											size = { 0 5 }
 										}
-									}
-									spacer = {
-										size = { 9 0 }
 									}
 								}
 
@@ -1940,8 +1965,8 @@ widget = {
 												# }
 
 												text_label_center = {
-													#datacontext = "[GetScriptedGui('patron_has_princes')]"
-													visible = yes #"[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													datacontext = "[GetScriptedGui('patron_divines_shown')]"
+													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 													text = "PATRON_THE_DIVINES"
 												}
 

@@ -256,6 +256,31 @@ patron_has_pantheon = {
     }
 }
 
+patron_confirm_patron = {
+    scope = character
+
+    is_valid = {
+        custom_description = {
+            text = "confirm_recent_select"
+            NOT = { has_character_flag = recent_patron_selected }
+        }
+        # custom_description = {
+        # 	text = confirm_tt
+        # 	has_character_flag = recent_patron_selected
+        # }
+        #NOT = { has_character_flag = recent_patron_selected }
+    }
+
+    effect = {
+        custom_description = {
+            text = "confirm_tt"
+            patron_clear_modifiers = yes
+            patron_assign_modifier = yes
+        }
+    }
+
+}
+
 # Active Patrons #
 # Daedra #
 patron_azura_shown = {

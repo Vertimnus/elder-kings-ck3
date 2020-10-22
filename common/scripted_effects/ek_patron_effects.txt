@@ -76,3 +76,51 @@ patron_passive_clear_variables = {
     remove_variable = patron_talos_shown
     remove_variable = patron_zenithar_shown
 }
+
+patron_clear_modifiers = {
+    remove_character_modifier = p_akatosh
+    remove_character_modifier = p_arkay
+    remove_character_modifier = p_dibella
+    remove_character_modifier = p_julianos
+    remove_character_modifier = p_kynareth
+    remove_character_modifier = p_mara
+    remove_character_modifier = p_stendarr
+    remove_character_modifier = p_zenithar
+}
+
+patron_assign_modifier = {
+    # Divines #
+    if = {
+        limit = { has_variable = patron_akatosh_shown }
+        add_character_modifier = p_akatosh
+    }
+    else_if = {
+        limit = { has_variable = patron_arkay_shown }
+        add_character_modifier = p_arkay
+    }
+    else_if = {
+        limit = { has_variable = patron_dibella_shown }
+        add_character_modifier = p_dibella
+    }
+    else_if = {
+        limit = { has_variable = patron_julianos_shown }
+        add_character_modifier = p_julianos
+    }
+    else_if = {
+        limit = { has_variable = patron_kynareth_shown }
+        add_character_modifier = p_kynareth
+    }
+    else_if = {
+        limit = { has_variable = patron_mara_shown }
+        add_character_modifier = p_mara
+    }
+    else_if = {
+        limit = { has_variable = patron_stendarr_shown }
+        add_character_modifier = p_stendarr
+    }
+    else_if = {
+        limit = { has_variable = patron_zenithar_shown }
+        add_character_modifier = p_zenithar
+    }
+    add_character_flag = { flag = recent_patron_selected years = 5 }
+}
