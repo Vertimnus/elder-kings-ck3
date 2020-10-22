@@ -1,11 +1,20 @@
-﻿##########
+﻿#should eventually have everything from ek1 excepting artifacts
+#ardor costs scaled down by 2.5 w/ 10000 as soft max for progress bar if that ever works
+#ai may be restricted to chosen patron(s) as keeping track of 16+ ardor variables may bloat saves
+#   -implement fully and see how plays - check vanilla for variables too
+#   -access to more than a few patrons may also be uncommon - consider edge cases
+#   -great boons should only be available to cults. three tiers:
+#       -worship from bargains/legal worship -> part of pantheon -> cult religion
+#       -part of pantheon should be default w/ cult getting major boons & slight discount, bargains should have moderate cost inflation
+
+##########
 # Shared #
 ##########
 
 # Shared Offerings #
 
 #gold offer
-#piety/prestige offer?
+#piety/prestige offer? festival in [daedraname]'s honor? - mildest cost if cult religion, milder if pantheon
 #sacrifice
 
 patron_offer_gold_decision = {
@@ -31,16 +40,25 @@ patron_offer_gold_decision = {
         }
     }
 
-    cooldown = { days = 365 }
+    cooldown = { days = 5 } #365 }
 
     is_valid_showing_failures_only = {
         short_term_gold >= 50
+        NOT = { var:ardor_azura >= 10000 }
     }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         remove_short_term_gold = 50
         #}
+        if = {
+            limit = { NOT = { has_variable = ardor_azura } } #have initialisation and update as separate effects
+            set_variable = { name = ardor_azura value = 5 }
+            clamp_variable = { name = ardor_azura max = 10000 min = 0 }
+        }
+        else = {
+            change_variable = { name = ardor_azura add = 100 }
+        }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -87,6 +105,7 @@ patron_offer_sacrifice_decision = {
             is_adult = yes
             NOT = { any_heir_title = { count > 0 } }
         }
+        NOT = { var:ardor_azura >= 10000 }
     }
 
     effect = {
@@ -103,6 +122,14 @@ patron_offer_sacrifice_decision = {
             else = {
                 death = { killer = ROOT death_reason = death_execution_blot }
             }
+        }
+        if = {
+            limit = { NOT = { has_variable = ardor_azura } }
+            set_variable = { name = ardor_azura value = 5 }
+            clamp_variable = { name = ardor_azura max = 10000 min = 0 }
+        }
+        else = {
+            change_variable = { name = ardor_azura add = 500 }
         }
     }
 
@@ -124,7 +151,7 @@ patron_offer_sacrifice_decision = {
 # kynmarcher knight
 # aura dispair +dread
 
-patron_boon_gold_decision = {
+patron_boon_gold_decision = { #750
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_gold_decision_desc
@@ -147,17 +174,19 @@ patron_boon_gold_decision = {
         }
     }
 
-    cooldown = { days = 365 }
+    cooldown = { days = 5 } #365 }
 
-    #is_valid_showing_failures_only = {
-    #	short_term_gold >= 50
-    #}
+    is_valid_showing_failures_only = {
+        #	short_term_gold >= 50
+        var:ardor_azura >= 300
+    }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         add_gold = 50
         #}
         #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 300 }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -169,7 +198,7 @@ patron_boon_gold_decision = {
     }
 }
 
-patron_boon_training_decision = {
+patron_boon_training_decision = { #5000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_training_decision_desc
@@ -202,6 +231,7 @@ patron_boon_training_decision = {
             intrigue >= 25
             learning >= 25
         }
+        var:ardor_azura >= 2000
     }
 
     effect = {
@@ -265,6 +295,109 @@ patron_boon_training_decision = {
         }
         #}
         #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 2000 }
+    }
+
+    ai_potential = { #should be able to eventually may handle seperatly
+        always = no
+    }
+
+    ai_will_do = {
+        base = 0
+    }
+}
+
+patron_boon_horde_decision = { #5000
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_boon_horde_decision_desc
+    selection_tooltip = patron_boon_horde_decision_tooltip
+
+    ai_check_interval = 3
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        OR = {
+            AND = {
+                is_ai = no
+                has_active_patron_selected = yes
+            }
+            # AND = {
+            #     is_ai = yes
+            #     patron_has_princes = yes
+            # }
+        }
+    }
+
+    cooldown = { days = 365 }
+
+    is_valid_showing_failures_only = {
+        # NOT = { #hard cap on number that can be summoned - 3 + 1 per 7 learning? scope to and store in list variable
+        #     num hordes >= cap
+        # }
+        var:ardor_azura >= 2000 #may add scaling cost for more hordes as soft limit cost * list_size/10
+    }
+
+    effect = {
+        #show_as_tooltip = { #The effect is actually applied in the event itself
+        random_list = { #chance of failure or great success +30% larger
+            25 = {
+                #trigger = { NOT = { diplomacy = 20 } }
+                # modifier = { #should be zero at 25 skill level
+                #     add = { #subtract doesnt seem to work
+                #         value = -1
+                #         multiply = diplomacy
+                #     }
+                #     always = yes
+                # }
+                spawn_army = {
+                    #levies =  #needed to bulk up army?
+                    men_at_arms = { # optional, multiple can be specified. Need either levies or MAA
+                        type = daedra
+                        stacks = {
+                            value = 1
+                            # scope:attacker.faith.great_holy_war = {
+                            #     every_pledged_attacker = {
+                            #         add = 0.2
+                            #     }
+                            # }
+                        }
+                    }
+                    location = capital_province
+                    inheritable = no
+                    uses_supply = no #may be op, needs testing
+                    #army = army # optional. If set, the stack will merge into this army
+                    #save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war)
+                    #name = dremora # gives the troops a specific name that shows up in interfaces
+                }
+            }
+            # 25 = { #failure
+            #     #trigger = { NOT = { diplomacy = 20 } }
+            #     modifier = {
+            #         add = {
+            #             value = -1
+            #             multiply = martial
+            #         }
+            #         always = yes
+            #     }
+            #     add_martial_skill = 1
+            # }
+            # 25 = { #great success +30% size
+            #     #trigger = { NOT = { diplomacy = 20 } }
+            #     modifier = {
+            #         add = {
+            #             value = -1
+            #             multiply = stewardship
+            #         }
+            #         always = yes
+            #     }
+            #     add_stewardship_skill = 1
+            # }
+        }
+        #}
+        #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 2000 }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -280,7 +413,7 @@ patron_boon_training_decision = {
 
 # invasion
 
-patron_boon_invasion_decision = {
+patron_boon_invasion_decision = { #25000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_invasion_decision_desc
@@ -305,15 +438,17 @@ patron_boon_invasion_decision = {
 
     cooldown = { days = 365 }
 
-    #is_valid_showing_failures_only = {
-    #	short_term_gold >= 50
-    #}
+    is_valid_showing_failures_only = {
+        #has_cult_religion = yes #really dedicated only
+        var:ardor_azura >= 10000
+    }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         #add_gold = 50
         #}
         #patron_gain_favor_effect = yes
+        change_variable = { name = ardor_azura subtract = 10000 }
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -337,6 +472,7 @@ patron_boon_invasion_decision = {
 # Unique Boons #
 
 #disease resistance peryite
+#vamp molag- harkon sacrificed 1000 people
 
 # Unique Major Boons #
 
