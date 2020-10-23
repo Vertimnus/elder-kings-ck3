@@ -1,0 +1,120 @@
+﻿fighters_guildhall_1 = {
+	cost_gold = expensive_building_tier_2_cost
+	construction_time = slow_construction_time
+	type = duchy_capital
+	can_construct_potential = {
+		scope:holder = {
+			#custom_tooltip
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 0
+			}
+		}
+	}
+	is_enabled = {
+		scope:holder = {
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 0
+			}
+		}
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
+	
+	duchy_capital_county_modifier = {
+		defender_advantage = normal_building_advantage_tier_1
+		garrison_size = 0.05
+	}
+	
+	character_modifier = {
+		knight_limit = 1
+		prowess = 2
+		knight_effectiveness_mult = 0.1
+		army_maintenance_mult = -0.01
+	}
+	
+	next_building = fighters_guildhall_2
+	
+	type_icon = "icon_building_fighters_lodge.dds"
+}
+fighters_guildhall_2 = {
+	cost_gold = expensive_building_tier_2_cost
+	construction_time = slow_construction_time
+	type = duchy_capital
+	can_construct_potential = {
+		scope:holder = {
+			#custom_tooltip
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 1
+			}
+		}
+	}
+	is_enabled = {
+		scope:holder = {
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 0
+			}
+		}
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
+	
+	duchy_capital_county_modifier = {
+		defender_advantage = normal_building_advantage_tier_1
+		fort_level = normal_building_fort_level_tier_1
+		garrison_size = 0.1
+	}
+	
+	character_modifier = {
+		knight_limit = 2
+		prowess = 4
+		knight_effectiveness_mult = 0.2
+		army_maintenance_mult = -0.02
+	}
+	
+	next_building = fighters_guildhall_3
+	
+	type_icon = "icon_building_fighters_lodge.dds"
+}
+fighters_guildhall_3 = {
+	cost_gold = expensive_building_tier_2_cost
+	construction_time = slow_construction_time
+	type = duchy_capital
+	can_construct_potential = {
+		scope:holder = {
+			#custom_tooltip
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 2
+			}
+		}
+	}
+	is_enabled = {
+		scope:holder = {
+			has_trait_rank = {
+				trait = guild_fighters_traits
+				rank > 0
+			}
+		}
+		county.duchy.holder = county.holder
+	}
+	show_disabled = yes
+	
+	duchy_capital_county_modifier = {
+		defender_advantage = normal_building_advantage_tier_2
+		fort_level = normal_building_fort_level_tier_1
+		garrison_size = 0.15
+	}
+	
+	character_modifier = {
+		knight_limit = 3
+		prowess = 6
+		knight_effectiveness_mult = 0.3
+		army_maintenance_mult = -0.03
+	}
+	
+	type_icon = "icon_building_fighters_lodge.dds"
+}

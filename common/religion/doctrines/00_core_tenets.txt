@@ -3,16 +3,16 @@
 
 ## Daedra-related tenets (unlock the worship of this Prince as a patron deity if the tenet is used & Daedric worship is not a crime)
 # Azura: Esotericism
-# Boethiah: Sacred Lies + Pursuit of Power
-# Clavicus: Merchant Faith
+# Boethiah: Unrelenting Faith + Sacred Lies
+# Clavicus: Prosperity Worship + Daedric Bargains
 # Hermaeus: Veneration of Knowledge
-# Hircine: Lycan Worship
+# Hircine: Lycan Worship + Ritual Hunts + Sanctity of Nature
 # Malacath: Communal Identity
-# Mehrunes: Pursuit of Power + Auspicious Birthright
-# Mephala: Sacred Lies
-# Meridia:
-# Molag: Human Sacrifice + Vampire Worship
-# Namira: Ritual Cannibalism + Adorcism
+# Mehrunes: Pursuit of Power
+# Mephala: Shadow Worship + Sanctioned False Conversion + Sacred Lies
+# Meridia: Sanctity of Life
+# Molag: Vampire Worship + Human Sacrifice
+# Namira: Adorcism + Ritual Cannibalism
 # Nocturnal:
 # Peryite:
 # Sanguine: Carnal Exaltation + Hedonistic
@@ -67,7 +67,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_divines = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -114,7 +113,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_aedra = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -161,7 +159,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_yokudan = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -214,7 +211,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_celestial = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -261,7 +257,6 @@ doctrine_core_tenets = {
 		parameters = {
 			hostility_override_doctrine_pantheon_atmoran = 1
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -308,10 +303,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			hostility_override_special_doctrine_is_reach_faith = 1
-			reach_syncretic_actor_opinion_active = yes
-			opinion_of_reach_syncretic_recipient_opinion_active = 15 #Sync this to syncretic_mutual_opinion_bonus_value
 			additional_personal_gods_active = yes
-			personal_god_different_names_active = yes
 		}
 
 		traits = {
@@ -1100,6 +1092,7 @@ doctrine_core_tenets = {
 	}
 	
 	### New tenets
+	## Terrain-tied tenets (boosting advantage in terrain + renaming gods)
 	tenet_children_skyrim = {
 		icon = core_tenet_holytree
 
@@ -1108,7 +1101,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_snow_adaptation }
+				limit = { has_doctrine = tenet_children_skyrim }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1125,6 +1118,32 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_desert_traditions = {
+		icon = core_tenet_skyshaman
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_desert_traditions }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			personal_god_different_names_active = yes
+		}
+
+		character_modifier = {
+			desert_advantage = 5
+			desert_attrition_mult = -0.25
+			drylands_advantage = 5
+			drylands_attrition_mult = -0.25
+		}
+	}
+	
+	## Stat-tied tenets (boosting lifestyle exp in that stat, making education lvl 3 & 4 virtues, making kids more effective in this education
 	tenet_dip_lifestyle_faith = {
 		icon = core_tenet_followers
 		piety_cost = {
@@ -1210,6 +1229,7 @@ doctrine_core_tenets = {
 		parameters = {
 			# TODO: Actually make that have an effect
 			children_education_stewardship = yes
+			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -1221,10 +1241,6 @@ doctrine_core_tenets = {
 
 		character_modifier = {
 			monthly_stewardship_lifestyle_xp_gain_mult = 0.2
-		}
-		
-		parameters = {
-			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
 	}
 	
@@ -1247,6 +1263,7 @@ doctrine_core_tenets = {
 		parameters = {
 			# TODO: Actually make that have an effect
 			children_education_intrigue = yes
+			allows_worship_mephala_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -1295,6 +1312,149 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	## Abomination worship
+	tenet_witch_worship = {
+		icon = core_tenet_festivities
+		name = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						religion_tag = reach_religion
+					}
+					desc = tenet_witch_worship_alternate_name
+				}
+				desc = tenet_witch_worship_name
+			}
+		}
+		
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = witchcraft_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
+					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		parameters = {
+			# TODO: Decision for Witches to become Occultists
+			# Handle Briarhearts somehow?
+			potent_witch_become_occultist = yes
+		}
+		
+		traits = {
+			virtues = { witch }
+		}
+	}
+	
+	tenet_vampire_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_vampire_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a vampire trait line
+		traits = {
+			virtues = { vampire_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_molag_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_lycanthrope_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_werewolf_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = lycanthropy_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_lycanthropy_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_lycanthropy_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a lycan trait line
+		traits = {
+			virtues = { lycan_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_necromancy_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_necromancy_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = necromancy_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_necromancy_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a necromancer trait line
+		traits = {
+			virtues = { necromancer_character = 1 }
+			#virtues = { lich = 3 }
+		}
+	}
+	
+	## Other
 	tenet_divine_purity = {
 		icon = core_tenet_bigbook
 		piety_cost = {
@@ -1357,150 +1517,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_witch_worship = {
-		icon = core_tenet_festivities
-		name = {
-			first_valid = {
-				triggered_desc = {
-					trigger = {
-						religion_tag = reach_religion
-					}
-					desc = tenet_witch_worship_alternate_name
-				}
-				desc = tenet_witch_worship_name
-			}
-		}
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = witchcraft_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
-					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		parameters = {
-			# TODO: Decision for Witches to become Occultists
-			# Handle Briarhearts somehow?
-			potent_witch_become_occultist = yes
-		}
-		
-		traits = {
-			virtues = {
-				witch
-			}
-		}
-	}
-	
-	tenet_vampire_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_vampire_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = vampirism_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a vampire trait line
-		# traits = {
-			# virtues = { vampire = 2 }
-		# }
-		
-		parameters = {
-			allows_worship_molag_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_lycanthrope_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_werewolf_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = lycanthropy_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_lycanthropy_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_lycanthropy_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a lycan trait line
-		# traits = {
-			# virtues = { lycanthrope = 2 }
-		# }
-		
-		parameters = {
-			allows_worship_hircine_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_necromancy_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_necromancy_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = necromancy_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_necromancy_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a necromancer trait line
-		# traits = {
-			# virtues = { necromancer = 1 }
-			# virtues = { lich = 3 }
-		# }
-	}
-	
-	# Monotheism
 	tenet_focused_worship = {
 		icon = core_tenet_bhakti
 		
@@ -1544,6 +1560,67 @@ doctrine_core_tenets = {
 		parameters = {
 			tenet_adaptive_conversion_resistance = yes
 			minimum_fervor = 25
+		}
+	}
+	
+	tenet_ritual_hunts = {
+		icon = core_tenet_festivities
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_ritual_hunts }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			piety_from_hunts_active = yes
+			mandatory_hunts_attendance = yes
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = {
+				hunter_2
+				hunter_3
+			}
+		}
+	}
+	
+	tenet_sanctity_of_life = {
+		icon = core_tenet_prayer
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sanctity_of_life }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_outlawed
+				flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+			}
+			custom_description = {
+				text = necromancy_must_be_outlawed
+				flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
+			}
+		}
+
+		parameters = {
+			cheaper_cleanse_abominations_active = yes
+			cheaper_holy_wars_pro_undeath_active = yes
+			bonus_cleanse_abomination_war_piety_active = yes
+			allows_worship_meridia_shunned_doctrines_active = yes
+			hostility_override_doctrine_vampirism_accepted = 3
+			hostility_override_doctrine_necromancy_accepted = 3
 		}
 	}
 
@@ -2439,9 +2516,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				lifestyle_mystic
-			}
+			virtues = { lifestyle_mystic }
 		}
 
 		parameters = {
@@ -2450,7 +2525,7 @@ doctrine_core_tenets = {
 		}
 	}
 
-	# EK EDIT: Added special names for Aldmeri faiths
+	### EK EDIT: Added special names for Aldmeri faiths
 	tenet_legalism = {
 		icon = core_tenet_bigbook
 		name = {
@@ -2764,6 +2839,7 @@ doctrine_core_tenets = {
 
 		parameters = {
 			sanctioned_false_conversion = yes
+			allows_worship_mephala_shunned_doctrines_active = yes
 		}
 	}
 
@@ -2866,9 +2942,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				temperate
-			}
+			virtues = { temperate }
 			sins = {
 				gluttonous
 				greedy
@@ -3042,9 +3116,7 @@ doctrine_core_tenets = {
 			virtues = {
 				generous
 			}
-			sins = {
-				callous
-			}
+			sins = { callous }
 		}
 
 		character_modifier = {
@@ -3303,7 +3375,6 @@ doctrine_core_tenets = {
 
 		parameters = {
 			mystic_birthright_active = yes
-			allows_worship_mehrunes_shunned_doctrines_active = yes
 		}
 
 		traits = {
@@ -3882,12 +3953,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				sadistic
-			}
-			sins = {
-				compassionate
-			}
+			virtues = { sadistic }
+			sins = { compassionate }
 		}
 	}
 
@@ -4002,12 +4069,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				ambitious
-			}
-			sins = {
-				content
-			}
+			virtues = { ambitious }
+			sins = { content }
 		}
 	}
 
@@ -4048,9 +4111,7 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				cannibal = 2
-			}
+			virtues = { cannibal = 2 }
 		}
 
 		parameters = {
@@ -4101,12 +4162,8 @@ doctrine_core_tenets = {
 		}
 
 		traits = {
-			virtues = {
-				deceitful
-			}
-			sins = {
-				honest
-			}
+			virtues = { deceitful }
+			sins = { honest }
 		}
 	}
 
