@@ -1,4 +1,5 @@
-﻿#Education focuses
+﻿### EK EDIT: Added stat-focused tenet effect
+#Education focuses
 #List them in the order they appear in the interface, clockwise
 
 #diplomacy
@@ -99,6 +100,10 @@ education_diplomacy = {
 		if = {
 			limit = { has_diplomacy_education_disaffinity_childhood_trait_trigger = yes }
 			add = -900
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = children_education_diplomacy } }
+			multiply = 1.2
 		}
 	}
 		
@@ -218,6 +223,10 @@ education_martial = {
 			limit = { NOT = { can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root } } }
 			multiply = 0.2
 		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = children_education_martial } }
+			multiply = 1.2
+		}
 	}
 }
 
@@ -320,6 +329,10 @@ education_stewardship = {
 		if = {
 			limit = { has_stewardship_education_disaffinity_childhood_trait_trigger = yes }
 			add = -900
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = children_education_stewardship } }
+			multiply = 1.2
 		}
 	}
 		
@@ -426,6 +439,10 @@ education_learning = {
 		if = {
 			limit = { has_learning_education_disaffinity_childhood_trait_trigger = yes }
 			add = -900
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = children_education_learning } }
+			multiply = 1.2
 		}
 	}
 		
@@ -534,6 +551,10 @@ education_intrigue = {
 		if = {
 			limit = { has_intrigue_education_disaffinity_childhood_trait_trigger = yes }
 			add = -900
+		}
+		if = {
+			limit = { faith = { has_doctrine_parameter = children_education_intrigue } }
+			multiply = 1.2
 		}
 	}
 		
