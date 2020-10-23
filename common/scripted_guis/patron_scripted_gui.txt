@@ -228,7 +228,7 @@ patron_has_no_patrons = {
     scope = character
 
     is_shown = {
-        patron_has_patron = no 
+        patron_has_patron = no
     }
 }
 
@@ -254,6 +254,31 @@ patron_has_pantheon = {
     is_shown = {
         patron_has_pantheon = yes
     }
+}
+
+patron_confirm_patron = {
+    scope = character
+
+    is_valid = {
+        custom_description = {
+            text = "confirm_recent_select"
+            NOT = { has_character_flag = recent_patron_selected }
+        }
+        # custom_description = {
+        # 	text = confirm_tt
+        # 	has_character_flag = recent_patron_selected
+        # }
+        #NOT = { has_character_flag = recent_patron_selected }
+    }
+
+    effect = {
+        custom_description = {
+            text = "confirm_tt"
+            patron_clear_modifiers = yes
+            patron_assign_modifier = yes
+        }
+    }
+
 }
 
 # Active Patrons #
@@ -581,6 +606,174 @@ patron_divines_shown = {
     effect = {
         patron_clear_variables = yes
         set_variable = patron_divines_shown
+    }
+}
+
+patron_akatosh_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_akatosh_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_akatosh_shown
+    }
+}
+
+patron_arkay_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_arkay_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_arkay_shown
+    }
+}
+
+patron_dibella_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_dibella_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_dibella_shown
+    }
+}
+
+patron_julianos_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_julianos_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_julianos_shown
+    }
+}
+
+patron_kynareth_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_kynareth_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_kynareth_shown
+    }
+}
+
+patron_mara_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_mara_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_mara_shown
+    }
+}
+
+patron_stendarr_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_stendarr_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_stendarr_shown
+    }
+}
+
+patron_zenithar_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_zenithar_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_zenithar_shown
     }
 }
 
