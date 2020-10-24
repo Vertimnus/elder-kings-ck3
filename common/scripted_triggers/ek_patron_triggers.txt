@@ -61,10 +61,12 @@ is_worshipping_daedra = {
 		faith = {
 			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
 			OR = {
-				has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-				has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-				has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-			}
+				# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
+                has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
+                has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
+                has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
+                has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
+            }
 		}
 	}
 }
