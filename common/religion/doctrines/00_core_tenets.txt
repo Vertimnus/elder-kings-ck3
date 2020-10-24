@@ -9,7 +9,7 @@
 # Hircine: Lycan Worship + Ritual Hunts + Sanctity of Nature
 # Malacath: Communal Identity
 # Mehrunes: Pursuit of Power
-# Mephala: Sanctioned False Conversion + Sacred Lies
+# Mephala: Shadow Worship + Sanctioned False Conversion + Sacred Lies
 # Meridia: Sanctity of Life
 # Molag: Vampire Worship + Human Sacrifice
 # Namira: Adorcism + Ritual Cannibalism
@@ -1092,6 +1092,7 @@ doctrine_core_tenets = {
 	}
 	
 	### New tenets
+	## Terrain-tied tenets (boosting advantage in terrain + renaming gods)
 	tenet_children_skyrim = {
 		icon = core_tenet_holytree
 
@@ -1142,6 +1143,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	## Stat-tied tenets (boosting lifestyle exp in that stat, making education lvl 3 & 4 virtues, making kids more effective in this education
 	tenet_dip_lifestyle_faith = {
 		icon = core_tenet_followers
 		piety_cost = {
@@ -1310,68 +1312,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_divine_purity = {
-		icon = core_tenet_bigbook
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_divine_purity }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			custom_description = {
-				text = doctrine_inverted_pluralism_fundamentalist_trigger
-				NOT = {	flag:doctrine_pluralism_righteous = { is_in_list = selected_doctrines } }
-				NOT = {	flag:doctrine_pluralism_pluralistic = { is_in_list = selected_doctrines } }
-			}
-		}
-		
-		traits = {
-			virtues = {
-				intellect_good_3
-				physique_good_3
-				beauty_good_3
-			}
-		}
-		
-		parameters = {
-			# TODO: Give Impure traits to foreign close relationships
-			children_bad_congenital_trait_impure = yes
-			character_impure_foreign_relationships_impure = yes
-			pilgrimage_decision_active = yes
-		}
-	}
-	
-	tenet_daedric_bargains = {
-		icon = core_tenet_handcoin
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_daedric_bargians }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			custom_description = {
-				text = daedric_worship_must_not_be_criminal
-				NOT = { flag:doctrine_daedra_worship_forbidden = { is_in_list = selected_doctrines } }
-			}
-		}
-		
-		parameters = {
-			# TODO: Decisions to deal with a Daedric Prince
-			daedric_bargains_active = yes
-			allows_worship_clavicus_shunned_doctrines_active = yes
-		}
-	}
-	
+	## Abomination worship
 	tenet_witch_worship = {
 		icon = core_tenet_festivities
 		name = {
@@ -1441,9 +1382,9 @@ doctrine_core_tenets = {
 		}
 		
 		# TODO: Update when we have a vampire trait line
-		# traits = {
-			# virtues = { vampire = 2 }
-		# }
+		traits = {
+			virtues = { vampire_character = 2 }
+		}
 		
 		parameters = {
 			allows_worship_molag_shunned_doctrines_active = yes
@@ -1474,9 +1415,9 @@ doctrine_core_tenets = {
 		}
 		
 		# TODO: Update when we have a lycan trait line
-		# traits = {
-			# virtues = { lycanthrope = 2 }
-		# }
+		traits = {
+			virtues = { lycan_character = 2 }
+		}
 		
 		parameters = {
 			allows_worship_hircine_shunned_doctrines_active = yes
@@ -1507,10 +1448,73 @@ doctrine_core_tenets = {
 		}
 		
 		# TODO: Update when we have a necromancer trait line
-		# traits = {
-			# virtues = { necromancer = 1 }
-			# virtues = { lich = 3 }
-		# }
+		traits = {
+			virtues = { necromancer_character = 1 }
+			#virtues = { lich = 3 }
+		}
+	}
+	
+	## Other
+	tenet_divine_purity = {
+		icon = core_tenet_bigbook
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_divine_purity }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			custom_description = {
+				text = doctrine_inverted_pluralism_fundamentalist_trigger
+				NOT = {	flag:doctrine_pluralism_righteous = { is_in_list = selected_doctrines } }
+				NOT = {	flag:doctrine_pluralism_pluralistic = { is_in_list = selected_doctrines } }
+			}
+		}
+		
+		traits = {
+			virtues = {
+				intellect_good_3
+				physique_good_3
+				beauty_good_3
+			}
+		}
+		
+		parameters = {
+			# TODO: Give Impure traits to foreign close relationships
+			children_bad_congenital_trait_impure = yes
+			character_impure_foreign_relationships_impure = yes
+			pilgrimage_decision_active = yes
+		}
+	}
+	
+	tenet_daedric_bargains = {
+		icon = core_tenet_handcoin
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_daedric_bargians }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			custom_description = {
+				text = daedric_worship_must_not_be_criminal
+				NOT = { flag:doctrine_daedra_worship_forbidden = { is_in_list = selected_doctrines } }
+			}
+		}
+		
+		parameters = {
+			# TODO: Decisions to deal with a Daedric Prince
+			daedric_bargains_active = yes
+			allows_worship_clavicus_shunned_doctrines_active = yes
+		}
 	}
 	
 	tenet_focused_worship = {
