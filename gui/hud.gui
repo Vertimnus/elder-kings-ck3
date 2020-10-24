@@ -141,2053 +141,2051 @@ widget = {
 	layer = middle
 
 	#Patron Window
-	widget = {
-		name = "patron_window"
-		parentanchor = top|right
-		layer = windows_layer
-		movable = no
-		alwaystransparent = no
-
-		#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
-		#visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-		visible = "[And(GetVariableSystem.Exists( 'patron_window_open' ), Not(GetVariableSystem.Exists( 'societies_window_open' )))]"
-
-		using = Window_Size_MainTab
-		#using = Window_Background
-
-		state = {
-			name = _show
-			using = Animation_FadeIn_Quick
-			using = Sound_WindowShow_Standard
-			using = Window_Position_MainTab
-
-			on_start = "[GetVariableSystem.Set('right_window_open', 'true' )]"
-			on_start = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
-			# datacontext = "[GetScriptedGui('patron_restore')]"
-			# on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-		}
-
-		state = {
-			name = _hide
-			using = Animation_FadeOut_Quick
-			using = Sound_WindowHide_Standard
-			using = Window_Position_MainTab_Hide
-
-			on_start = "[GetVariableSystem.Clear('right_window_open')]"
-			on_start = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-			datacontext = "[GetScriptedGui('patron_clear')]"
-			on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-		}
-
-		margin_widget = {
-			size = { 100% 100% }
-			margin = { 0 26 }
-			margin_right = 20
-			alwaystransparent = no
-
-			using = Window_Background
-
-			widget = {
-				size = { 100% 100% }
-				#using = Window_Background
-				#using = Window_Decoration_Thin
-
-				vbox = {
-					using = Window_Margins
-
-					header_with_picture = {
-						layoutpolicy_horizontal = expanding
-
-						blockoverride "header_text"
-						{
-							text = "PATRON_VIEW_TITLE"
-						}
-
-						blockoverride "button_close"
-						{
-							#datacontext = "[GetScriptedGui('patron_gui_close')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						}
-
-						blockoverride "illustration_texture"
-						{
-							texture = "gfx/interface/patron_window/header_patrons.dds" #replace as shrine pic?
-						}
-					}
-
-					#Selection Tab
-					vbox = {
-						name = "patron_selection_tab"
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
-						datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
-						visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-						#patron details
-						spacer = {
-							size = { 0 5 }
-						}
-						hbox = {
-							size = { 520 160 }
-							background = {
-								margin_left = 50
-								margin_right = 50
-								margin_top = 0
-								margin_bottom = 0
-
-								texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
-								spriteType = Corneredstretched
-								spriteborder = { 40 8 }
-
-								modify_texture = {
-									name = "mask"
-									texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
-									spriteType = Corneredstretched
-									spriteborder = { 0 0 }
-									blend_mode = alphamultiply
-								}
-								modify_texture = {
-									name = "mask"
-									texture = "gfx/interface/component_masks/mask_legacy_track.dds"
-									spriteType = Corneredstretched
-									spriteborder = { 0 0 }
-									blend_mode = alphamultiply
-								}
-							}
-
-							spacer = {
-								size = { 20 0 }
-							}
-
-							# Patron Icons #
-							#Azura
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_azura_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_azura.dds"
-								}
-							}
-
-							#Boethiah
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_boethiah.dds"
-								}
-							}
-
-							#Clavicus Vile
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
-								}
-							}
-
-							#Hermaeus Mora
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
-								}
-							}
-
-							#Hircine
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_hircine_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_hircine.dds"
-								}
-							}
-
-							#Jyggalag
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_jyggalag.dds"
-								}
-							}
-
-							#Malacath
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_malacath_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_malacath.dds"
-								}
-							}
-
-							#Mehrunes Dagon
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
-								}
-							}
-
-							#Mephala
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_mephala_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_mephala.dds"
-								}
-							}
-
-							#Meridia
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_meridia_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_meridia.dds"
-								}
-							}
-
-							#Molag Bal
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_molag_bal.dds"
-								}
-							}
-
-							#Namira
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_namira_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_namira.dds"
-								}
-							}
-
-							#Nocturnal
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_nocturnal.dds"
-								}
-							}
-
-							#Peryite
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_peryite_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_peryite.dds"
-								}
-							}
-
-							#Sanguine
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_sanguine.dds"
-								}
-							}
-
-							#Sheogorath
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_sheogorath.dds"
-								}
-							}
-
-							#Vaermina
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/patrons/patron_vaermina.dds"
-								}
-							}
-
-							#Divines
-							button_patron_icon = {
-								datacontext = "[GetScriptedGui('patron_divines_shown')]"
-								visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-								blockoverride "patron_icon" {
-									texture = "gfx/interface/icons/religion/imperial_cult.dds"
-								}
-							}
-
-							spacer = {
-								size = { 8 0 }
-							}
-
-							vbox = {
-								size = { 470 160 }
-
-								vbox = {
-									#parentanchor = left
-
-									text_single = {
-										text = selected_patron_name #defined by custom loc
-										align = center
-										fontsize = 20
-									}
-									text_multi = {
-										text = selected_patron_desc #defined by custom loc
-										size = { 450 150 }
-										maximumsize = { 450 150 }
-										align = center
-										fontsize = 16
-										autoresize = yes
-									}
-									spacer = {
-										size = { 0 15 }
-									}
-									button_frontend = {
-										name = "patron_button_commune"
-										position = { 0 5 }
-										size = { 160 40 }
-										text = "COMMUNE"
-										tooltip = patron_commune_tt
-
-										datacontext = "[GetScriptedGui('patron_interaction_tab_toggle')]"
-										visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-									}
-									button_frontend = {
-										name = "passive_patron_button_commune"
-										position = { 0 5 }
-										size = { 160 40 }
-										text = "COMMUNE"
-										tooltip = patron_commune_tt
-
-										datacontext = "[GetScriptedGui('patron_interaction_passive_tab_toggle')]"
-										visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-									}
-								}
-							}
-
-							spacer = {
-								size = { 20 0 }
-							}
-						}
-						spacer = {
-							size = { 0 5 }
-						}
-
-						#patron list
-						scrollbox = {
-							name = "patrons_scrollarea"
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = expanding
-
-							background = {
-								texture = "gfx/interface/illustrations/event_scenes/temple.dds"
-								margin = { -5 0 }
-								fittype = end
-								alpha = 0.4
-								framesize = { 1200 848 }
-
-								modify_texture = {
-									texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-									blend_mode = alphamultiply
-								}
-							}
-
-							blockoverride "scrollbox_content"
-							{
-								name = "patrons_main_container"
-								spacing = 20
-
-								vbox = {
-									layoutpolicy_horizontal = expanding
-									spacing = 10
-
-									text_single = {
-										datacontext = "[GetScriptedGui('patron_has_no_patrons')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										text = "NO_PATRONS"
-										default_format = "#low;italic"
-									}
-
-									text_label_center = {
-										datacontext = "[GetScriptedGui('patron_has_princes')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										text = "PATRON_DAEDRIC_PRINCES"
-									}
-
-									# Azura #
-									vbox = {
-										name = "patron_azura"
-										datacontext = "[GetScriptedGui('patron_azura_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_azura_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_azura.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_azura_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_azura_long_desc
-											}
-										}
-									}
-
-									# Boethiah #
-									vbox = {
-										name = "patron_boethiah"
-										datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_boethiah.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_boethiah_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_boethiah_long_desc
-											}
-										}
-									}
-
-									# Clavicus Vile #
-									vbox = {
-										name = "patron_clavicus_vile"
-										datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_clavicus_vile_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_clavicus_vile_long_desc
-											}
-										}
-									}
-
-									# Hermaeus Mora #
-									vbox = {
-										name = "patron_hermaeus_mora"
-										datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_hermaeus_mora_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_hermaeus_mora_long_desc
-											}
-										}
-									}
-
-									# Hircine #
-									vbox = {
-										name = "patron_hircine"
-										datacontext = "[GetScriptedGui('patron_hircine_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_hircine_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_hircine.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_hircine_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_hircine_long_desc
-											}
-										}
-									}
-
-									# Jyggalag #
-									vbox = {
-										name = "patron_jyggalag"
-										datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_jyggalag.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_jyggalag_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_jyggalag_long_desc
-											}
-										}
-									}
-
-									# Malacath #
-									vbox = {
-										name = "patron_malacath"
-										datacontext = "[GetScriptedGui('patron_malacath_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_malacath_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_malacath.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_malacath_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_malacath_long_desc
-											}
-										}
-									}
-
-									# Mehrunes Dagon #
-									vbox = {
-										name = "patron_mehrunes_dagon"
-										datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_mehrunes_dagon_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_mehrunes_dagon_long_desc
-											}
-										}
-									}
-
-									# Mephala #
-									vbox = {
-										name = "patron_mephala"
-										datacontext = "[GetScriptedGui('patron_mephala_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_mephala_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_mephala.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_mephala_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_mephala_long_desc
-											}
-										}
-									}
-
-									# Meridia #
-									vbox = {
-										name = "patron_meridia"
-										datacontext = "[GetScriptedGui('patron_meridia_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_meridia_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_meridia.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_meridia_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_meridia_long_desc
-											}
-										}
-									}
-
-									# Molag Bal #
-									vbox = {
-										name = "patron_molag_bal"
-										datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_molag_bal.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_molag_bal_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_molag_bal_long_desc
-											}
-										}
-									}
-
-									# Namira #
-									vbox = {
-										name = "patron_namira"
-										datacontext = "[GetScriptedGui('patron_namira_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_namira_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_namira.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_namira_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_namira_long_desc
-											}
-										}
-									}
-
-									# Nocturnal #
-									vbox = {
-										name = "patron_nocturnal"
-										datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_boethiah.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_nocturnal_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_nocturnal_long_desc
-											}
-										}
-									}
-
-									# Peryite #
-									vbox = {
-										name = "patron_peryite"
-										datacontext = "[GetScriptedGui('patron_peryite_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_peryite_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_peryite.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_peryite_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_peryite_long_desc
-											}
-										}
-									}
-
-									# Sanguine #
-									vbox = {
-										name = "patron_sanguine"
-										datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_sanguine.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_sanguine_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_sanguine_long_desc
-											}
-										}
-									}
-
-									# Sheogorath #
-									vbox = {
-										name = "patron_sheogorath"
-										datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_sheogorath.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_sheogorath_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_sheogorath_long_desc
-											}
-										}
-									}
-
-									# Vaermina #
-									vbox = {
-										name = "patron_vaermina"
-										datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/patrons/patron_vaermina.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = patron_vaermina_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = patron_vaermina_long_desc
-											}
-										}
-									}
-
-									text_label_center = {
-										datacontext = "[GetScriptedGui('patron_has_tribunal')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										text = "PATRON_TRIBUNAL"
-									}
-
-									text_label_center = {
-										datacontext = "[GetScriptedGui('patron_has_pantheon')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										text = "PATRON_PANTHEON"
-									}
-
-									# Divines #
-									vbox = {
-										name = "patron_divines"
-										datacontext = "[GetScriptedGui('patron_divines_shown')]"
-										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-										button_patron_entry = {
-											#datacontext = "[GetScriptedGui('patron_divines_shown')]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-											blockoverride "patron_entry_icon" {
-												texture = "gfx/interface/icons/religion/imperial_cult.dds"
-											}
-											blockoverride "patron_entry_name" {
-												text = pantheon_divines_name
-											}
-											blockoverride "patron_entry_desc" {
-												text = pantheon_divines_long_desc
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-
-					#Interaction Tab
-					vbox = {
-						name = "patron_interaction_tab"
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
-						datacontext = "[GetScriptedGui('patron_interaction_tab_toggle')]"
-						visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-						vbox = {
-							maximumsize = { 520 400 }
-							hbox = {
-								button_back = {
-									name = "patron_button_back"
-									align = top|left
-									position = { 0 0 }
-									shortcut = "go_back"
-									#clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
-
-									using = Animation_ShowHide_Standard
-
-									datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-									tooltip = patron_back_tt
-
-									# block "button_back" {
-									# 	visible = no
-									# }
-								}
-								spacer = {
-									size = { 110 0 }
-								}
-								# Patron Icons #
-								vbox = {
-									#Azura
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_azura_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_azura.dds"
-										}
-									}
-
-									#Boethiah
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_boethiah.dds"
-										}
-									}
-
-									#Clavicus Vile
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
-										}
-									}
-
-									#Hermaeus Mora
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
-										}
-									}
-
-									#Hircine
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_hircine_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_hircine.dds"
-										}
-									}
-
-									#Jyggalag
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_jyggalag.dds"
-										}
-									}
-
-									#Malacath
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_malacath_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_malacath.dds"
-										}
-									}
-
-									#Mehrunes Dagon
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
-										}
-									}
-
-									#Mephala
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_mephala_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_mephala.dds"
-										}
-									}
-
-									#Meridia
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_meridia_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_meridia.dds"
-										}
-									}
-
-									#Molag Bal
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_molag_bal.dds"
-										}
-									}
-
-									#Namira
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_namira_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_namira.dds"
-										}
-									}
-
-									#Nocturnal
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_nocturnal.dds"
-										}
-									}
-
-									#Peryite
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_peryite_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_peryite.dds"
-										}
-									}
-
-									#Sanguine
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_sanguine.dds"
-										}
-									}
-
-									#Sheogorath
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_sheogorath.dds"
-										}
-									}
-
-									#Vaermina
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/patrons/patron_vaermina.dds"
-										}
-									}
-								}
-								spacer = {
-									size = { 140 40 } #+30 compared to other one for button
-									hbox = {
-										size = { 60 50 }
-										#minimumsize = { 100 50 }
-
-										spacer = {
-											size = { 80 0 }
-										}
-
-										text_single = {
-											text = patron_ardor #defined by custom loc
-											align = center
-											fontsize = 16
-										}
-
-										# progressbar_standard = { #doesn't seem to support variables
-										# 	name = "progress_bar_azura"
-										# 	parentanchor = center
-										# 	size = { 100 10 }
-										# 	#visible = "[Holding.IsConstructionInProgress]"
-										# 	#min = 0
-										# 	#max = 1
-										# 	value = @special_mine_tax_base
-										# }
-									}
-								}
-							}
-
-							spacer = {
-								size = { 0 5 }
-							}
-
-							vbox = {
-								size = { 520 160 }
-								background = {
-									margin_left = 50
-									margin_right = 50
-									margin_top = -5
-									margin_bottom = 7
-
-									texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
-									spriteType = Corneredstretched
-									spriteborder = { 40 8 }
-
-									modify_texture = {
-										name = "mask"
-										texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
-										spriteType = Corneredstretched
-										spriteborder = { 0 0 }
-										blend_mode = alphamultiply
-									}
-									modify_texture = {
-										name = "mask"
-										texture = "gfx/interface/component_masks/mask_legacy_track.dds"
-										spriteType = Corneredstretched
-										spriteborder = { 0 0 }
-										blend_mode = alphamultiply
-									}
-								}
-
-								vbox = {
-									size = { 520 160 }
-
-									vbox = {
-										#parentanchor = left
-
-										text_single = {
-											text = selected_patron_name #defined by custom loc
-											align = center
-											fontsize = 32
-										}
-										text_multi = {
-											text = selected_patron_desc #defined by custom loc
-											size = { 450 150 }
-											maximumsize = { 450 150 }
-											align = center
-											fontsize = 20
-											autoresize = yes
-										}
-										spacer = {
-											size = { 0 15 }
-										}
-										text_multi = {
-											text = selected_patron_long_desc #defined by custom loc
-											size = { 450 150 }
-											maximumsize = { 450 150 }
-											align = center
-											fontsize = 16
-											autoresize = yes
-										}
-									}
-								}
-
-							}
-						}
-
-						spacer = {
-							size = { 0 20 }
-						}
-
-						vbox = {
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = expanding
-
-							hbox = { #interaction lists, should be scrollbox somewhere. fire decisions
-								name = "minor_interactions"
-								#size = { 90% 250 }
-								layoutpolicy_horizontal = expanding
-								layoutpolicy_vertical = expanding
-
-								spacer = {
-									size = { 20 0 }
-								}
-
-								vbox = {
-									name = "minor_boons"
-									layoutpolicy_horizontal = expanding
-									layoutpolicy_vertical = expanding
-									#size = { 45% 250}
-									minimumsize = { 0 250 }
-
-									scrollbox = {
-										name = "minor_boons_scrollarea"
-										layoutpolicy_horizontal = expanding
-										layoutpolicy_vertical = expanding
-
-										background = {
-											texture = "gfx/interface/colors/green.dds"
-											spriteType = Corneredtiled
-											spriteborder = { 1 1 }
-											#margin = { -5 0 }
-											#fittype = end
-											alpha = 0.07 #offset for green brightness
-											#framesize = { 260 400 }
-
-											modify_texture = {
-												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-												blend_mode = alphamultiply
-											}
-										}
-
-										blockoverride "scrollbox_content"
-										{
-											name = "minor_boons_container"
-											spacing = 20
-
-											text_label_center = {
-												text = "PATRON_MINOR_BOONS"
-											}
-
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												spacing = 10
-
-												vbox = {
-													name = "patron_boon_gold_decision"
-													datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_decision_entry = {}
-												}
-												vbox = {
-													name = "patron_boon_training_decision"
-													datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_decision_entry = {}
-												}
-												vbox = {
-													name = "patron_boon_horde_decision"
-													datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_decision_entry = {}
-												}
-											}
-										}
-									}
-								}
-
-								spacer = {
-									size = { 15 0 }
-								}
-
-								vbox = {
-									name = "offerings"
-									layoutpolicy_horizontal = expanding
-									layoutpolicy_vertical = expanding
-									#size = { 45% 250}
-									minimumsize = { 0 250 }
-
-									scrollbox = {
-										name = "offerings_scrollarea"
-										layoutpolicy_horizontal = expanding
-										layoutpolicy_vertical = expanding
-
-										background = {
-											texture = "gfx/interface/colors/red.dds"
-											spriteType = Corneredtiled
-											spriteborder = { 1 1 }
-											#margin = { -5 0 }
-											#fittype = end
-											alpha = 0.1
-											#framesize = { 260 400 }
-
-											modify_texture = {
-												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-												blend_mode = alphamultiply
-											}
-										}
-
-										blockoverride "scrollbox_content"
-										{
-											name = "offerings_container"
-											spacing = 20
-
-											text_label_center = {
-												text = "PATRON_OFFERINGS"
-											}
-
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												spacing = 10
-
-												vbox = {
-													name = "patron_offer_gold_decision"
-													datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_decision_entry = {}
-												}
-												vbox = {
-													name = "patron_offer_sacrifice_decision"
-													datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_decision_entry = {}
-												}
-											}
-										}
-									}
-								}
-
-								spacer = {
-									size = { 20 0 }
-								}
-							}
-
-							spacer = {
-								size = { 0 15 }
-							}
-
-							hbox = {
-								layoutpolicy_horizontal = expanding
-								layoutpolicy_vertical = expanding
-
-								spacer = {
-									size = { 20 0 }
-								}
-
-								vbox = {
-									name = "major_boons"
-									#size = { 90% 150}
-									layoutpolicy_horizontal = expanding
-									layoutpolicy_vertical = expanding
-									minimumsize = { 0 150 }
-
-									scrollbox = {
-										name = "major_boons_scrollarea"
-										layoutpolicy_horizontal = expanding
-										layoutpolicy_vertical = expanding
-
-										background = {
-											texture = "gfx/interface/colors/blue.dds"
-											spriteType = Corneredtiled
-											spriteborder = { 1 1 }
-											#margin = { -5 0 }
-											#fittype = end
-											alpha = 0.4
-											#framesize = { 260 400 }
-
-											modify_texture = {
-												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-												blend_mode = alphamultiply
-											}
-											modify_texture = {
-												texture = "gfx/interface/component_masks/mask_fade_halfcircle.dds"
-												rotate_uv = 3
-												blend_mode = alphamultiply
-											}
-										}
-
-										blockoverride "scrollbox_content"
-										{
-											name = "major_boons_container"
-											spacing = 20
-
-											text_label_center = {
-												text = "PATRON_MAJOR_BOONS"
-											}
-
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												spacing = 10
-
-												vbox = {
-													name = "patron_boon_invasion_decision"
-													datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_major_decision_entry = {}
-												}
-												vbox = {
-													name = "patron_offer_sacrifice_decision"
-													datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
-													visible = "[Decision.IsShownForPlayer]"
-													button_patron_major_decision_entry = {}
-												}
-											}
-										}
-									}
-								}
-
-								spacer = {
-									size = { 20 0 }
-								}
-							}
-
-							spacer = {
-								size = { 0 15 }
-							}
-						}
-						# button_frontend = {
-						# 	name = "patron_button_decision_test"
-						# 	position = { 0 5 }
-						# 	size = { 160 40 }
-						# 	text = "COMMUNE"
-						# 	tooltip = patron_decision_test_tt
-
-						# 	datacontext = "[GetScriptedGui('patron_decision_test')]"
-						# 	enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						# 	onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						# 	# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						# }
-
-					}
-
-					#Interaction Tab, Passive
-					vbox = {
-						name = "patron_interaction_passive_tab"
-						layoutpolicy_horizontal = expanding
-						layoutpolicy_vertical = expanding
-						datacontext = "[GetScriptedGui('patron_interaction_passive_tab_toggle')]"
-						visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-						vbox = {
-							maximumsize = { 520 400 }
-							hbox = {
-								button_back = {
-									name = "patron_button_back"
-									align = top|left
-									position = { 0 0 }
-									shortcut = "go_back"
-									#clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
-
-									using = Animation_ShowHide_Standard
-
-									datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
-									onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-									tooltip = patron_back_tt
-
-									# block "button_back" {
-									# 	visible = no
-									# }
-								}
-								spacer = {
-									size = { 110 0 }
-								}
-								# PAntheon Icons #
-								vbox = {
-									#Divines
-									button_patron_icon = {
-										datacontext = "[GetScriptedGui('patron_divines_shown')]"
-										visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-										blockoverride "patron_icon" {
-											texture = "gfx/interface/icons/religion/imperial_cult.dds"
-										}
-									}
-
-									# #Boethiah
-									# button_patron_icon = {
-									# 	datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
-									# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-									# 	blockoverride "patron_icon" {
-									# 		texture = "gfx/interface/patrons/patron_boethiah.dds"
-									# 	}
-									# }
-								}
-								spacer = {
-									size = { 140 0 } #+30 compared to other one for button
-								}
-							}
-
-							spacer = {
-								size = { 0 5 }
-							}
-
-							vbox = {
-								size = { 520 160 }
-								background = {
-									margin_left = 50
-									margin_right = 50
-									margin_top = -5
-									margin_bottom = 7
-
-									texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
-									spriteType = Corneredstretched
-									spriteborder = { 40 8 }
-
-									modify_texture = {
-										name = "mask"
-										texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
-										spriteType = Corneredstretched
-										spriteborder = { 0 0 }
-										blend_mode = alphamultiply
-									}
-									modify_texture = {
-										name = "mask"
-										texture = "gfx/interface/component_masks/mask_legacy_track.dds"
-										spriteType = Corneredstretched
-										spriteborder = { 0 0 }
-										blend_mode = alphamultiply
-									}
-								}
-
-								vbox = {
-									size = { 520 160 }
-
-									vbox = {
-										#parentanchor = left
-
-										text_single = {
-											text = selected_pantheon_name #defined by custom loc
-											align = center
-											fontsize = 32
-										}
-										text_multi = {
-											text = selected_pantheon_desc #defined by custom loc
-											size = { 450 150 }
-											maximumsize = { 450 150 }
-											align = center
-											fontsize = 20
-											autoresize = yes
-										}
-										spacer = {
-											size = { 0 15 }
-										}
-										text_multi = {
-											text = selected_pantheon_long_desc #defined by custom loc
-											size = { 450 150 }
-											maximumsize = { 450 150 }
-											align = center
-											fontsize = 16
-											autoresize = yes
-										}
-									}
-								}
-
-							}
-						}
-
-						spacer = {
-							size = { 0 20 }
-						}
-
-						vbox = {
-							layoutpolicy_horizontal = expanding
-							layoutpolicy_vertical = expanding
-
-							hbox = {
-								size = { 0 120 }
-								layoutpolicy_horizontal = expanding
-								#layoutpolicy_vertical = expanding
-
-								spacer = {
-									size = { 20 0 }
-								}
-
-								hbox = {
-									name = "selected_patron"
-									layoutpolicy_horizontal = expanding
-									layoutpolicy_vertical = expanding
-									minimumsize = { 0 100 }
-
-									background = {
-										using = Background_Area
-									}
-									vbox = {
-										hbox = {
-											spacer = {
-												size = { 9 0 }
-											}
-
-											#icons
-											vbox = {
-												name = "patron_icons"
-												# button_patron_icon = {
-												# 	datacontext = "[GetScriptedGui('patron_divines_shown')]"
-												# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-												# 	blockoverride "patron_icon" {
-												# 		texture = "gfx/interface/icons/religion/imperial_cult.dds"
-												# 	}
-												# }
-												# Akatosh #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_akatosh.dds"
-													}
-												}
-
-												# Arkay #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_arkay_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_arkay.dds"
-													}
-												}
-
-												# Dibella #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_dibella_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_dibella.dds"
-													}
-												}
-
-												# Julianos #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_julianos_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_julianos.dds"
-													}
-												}
-
-												# Kynareth #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_kynareth.dds"
-													}
-												}
-
-												# Mara #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_mara_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_mara.dds"
-													}
-												}
-
-												# Stendarr #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_stendarr.dds"
-													}
-												}
-
-												# Zenithar #
-												button_patron_icon = {
-													datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-													blockoverride "patron_icon" {
-														texture = "gfx/interface/patrons/patron_zenithar.dds"
-													}
-												}
-											}
-
-											# spacer = {
-											# 	size = { 9 0 }
-											# }
-
-											#name + desc
-											vbox = {
-												size = { 200 0 }
-												spacer = {
-													size = { 0 14 }
-												}
-												#layoutpolicy_horizontal = expanding
-												layoutpolicy_vertical = expanding
-												hbox = {
-													layoutpolicy_horizontal = expanding
-													textbox = {
-														font = StandardGameFont
-														fontcolor = { 1 1 1 1 }
-														fontsize = 24
-														text = selected_patron_passive_name
-														autoresize = no
-														layoutpolicy_horizontal = expanding
-														elide = right
-														minimumsize = { -1 16 }
-														align = left
-													}
-												}
-												spacer = {
-													size = { 0 17 }
-												}
-												textbox = {
-													font = StandardGameFont
-													fontcolor = { 0.8 0.8 0.8 1 }
-													fontsize = 16
-													text = selected_patron_passive_modifier
-													#text = "[GetModifier('p_akatosh').GetNameWithTooltip]"
-													autoresize = yes
-													layoutpolicy_horizontal = expanding
-													layoutpolicy_vertical = expanding
-													elide = right
-													multiline = yes
-													align = top|left
-												}
-												spacer = {
-													size = { 0 13 }
-												}
-											}
-
-											spacer = {
-												size = { 9 0 }
-											}
-										}
-										button_frontend = {
-											name = "patron_button_confirm_patron"
-											position = { 0 5 }
-											size = { 160 40 }
-											text = "CONFIRM"
-											#tooltip = confirm_tt
-
-											datacontext = "[GetScriptedGui('patron_confirm_patron')]"
-											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-											tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										}
-										spacer = {
-											size = { 0 5 }
-										}
-									}
-								}
-
-								#duplicate and show patron deity if no mission
-								# vbox = {
-								# 	name = "passive_mission"
-								# 	#size = { 90% 150}
-								# 	layoutpolicy_horizontal = expanding
-								# 	layoutpolicy_vertical = expanding
-								# 	minimumsize = { 0 100 }
-
-								# 	scrollbox = {
-								# 		name = "passive_mission_scrollarea"
-								# 		layoutpolicy_horizontal = expanding
-								# 		layoutpolicy_vertical = expanding
-
-								# 		# background = {
-								# 		# 	texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
-								# 		# 	margin = { -5 0 }
-								# 		# 	fittype = end
-								# 		# 	alpha = 0.4
-								# 		# 	framesize = { 1200 848 }
-
-								# 		# 	modify_texture = {
-								# 		# 		texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-								# 		# 		blend_mode = alphamultiply
-								# 		# 	}
-								# 		# }
-
-								# 		blockoverride "scrollbox_content"
-								# 		{
-								# 			name = "passive_mission_container"
-								# 			spacing = 20
-
-								# 			text_label_center = {
-								# 				text = "PATRON_PASSIVE_MISSION"
-								# 			}
-								# 			vbox = {
-								# 				text_multi = {
-								# 					name = "passive_mission_description"
-								# 					#minimumsize = { 515 -1 }
-								# 					maximumsize = { 480 -1 }
-								# 					align = center
-								# 					margin = { 15 15 }
-								# 					autoresize = yes
-								# 					text = dagoth_the_sharmat
-								# 					using = Font_Size_Small
-								# 				}
-								# 				button_frontend = {
-								# 					name = "patron_button_abandon_mission"
-								# 					position = { 0 5 }
-								# 					size = { 160 40 }
-								# 					text = "ABANDON_MISSION"
-								# 					tooltip = abandon_mission_tt
-
-								# 					#datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
-								# 					#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-								# 					#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-								# 					# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-								# 				}
-
-								# 			}
-
-								# 		}
-								# 	}
-								# }
-
-								spacer = {
-									size = { 20 0 }
-								}
-							}
-
-							spacer = {
-								size = { 0 15 }
-							}
-
-							hbox = { #interaction lists, should be scrollbox somewhere. fire decisions
-								name = "patron_passive_select"
-								#size = { 90% 250 }
-								layoutpolicy_horizontal = expanding
-								layoutpolicy_vertical = expanding
-
-								spacer = {
-									size = { 20 0 }
-								}
-
-								vbox = {
-									layoutpolicy_horizontal = expanding
-									layoutpolicy_vertical = expanding
-									#size = { 45% 250}
-									minimumsize = { 0 200 }
-
-									scrollbox = {
-										name = "patrons_scrollarea"
-										layoutpolicy_horizontal = expanding
-										layoutpolicy_vertical = expanding
-
-										background = {
-											texture = "gfx/interface/illustrations/event_scenes/temple.dds"
-											margin = { -5 0 }
-											fittype = end
-											alpha = 0.4
-											framesize = { 1200 848 }
-
-											modify_texture = {
-												texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-												blend_mode = alphamultiply
-											}
-										}
-
-										blockoverride "scrollbox_content"
-										{
-											name = "patrons_main_container"
-											spacing = 20
-
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												spacing = 10
-
-												# text_single = {
-												# 	datacontext = "[GetScriptedGui('patron_has_no_patrons')]"
-												# 	visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												# 	text = "NO_PATRONS"
-												# 	default_format = "#low;italic"
-												# }
-
-												text_label_center = {
-													datacontext = "[GetScriptedGui('patron_divines_shown')]"
-													visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-													text = "PATRON_THE_DIVINES"
-												}
-
-												# Akatosh #
-												vbox = {
-													name = "patron_akatosh"
-													datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_akatosh.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_akatosh_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_akatosh_long_desc
-														}
-													}
-												}
-
-												# Arkay #
-												vbox = {
-													name = "patron_arkay"
-													datacontext = "[GetScriptedGui('patron_arkay_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_arkay_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_arkay.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_arkay_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_arkay_long_desc
-														}
-													}
-												}
-
-												# Dibella #
-												vbox = {
-													name = "patron_dibella"
-													datacontext = "[GetScriptedGui('patron_dibella_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_dibella_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_dibella.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_dibella_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_dibella_long_desc
-														}
-													}
-												}
-
-												# Julianos #
-												vbox = {
-													name = "patron_julianos"
-													datacontext = "[GetScriptedGui('patron_julianos_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_julianos_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_julianos.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_julianos_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_julianos_long_desc
-														}
-													}
-												}
-
-												# Kynareth #
-												vbox = {
-													name = "patron_kynareth"
-													datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_kynareth.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_kynareth_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_kynareth_long_desc
-														}
-													}
-												}
-
-												# Mara #
-												vbox = {
-													name = "patron_mara"
-													datacontext = "[GetScriptedGui('patron_mara_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_mara_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_mara.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_mara_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_mara_long_desc
-														}
-													}
-												}
-
-												# Stendarr #
-												vbox = {
-													name = "patron_stendarr"
-													datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_stendarr.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_stendarr_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_stendarr_long_desc
-														}
-													}
-												}
-
-												# Zenithar #
-												vbox = {
-													name = "patron_zenithar"
-													datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
-													visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-													button_patron_entry = {
-														size = { 450 100 }
-														#datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
-														onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-														down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-														blockoverride "patron_entry_icon" {
-															texture = "gfx/interface/patrons/patron_zenithar.dds"
-														}
-														blockoverride "patron_entry_name" {
-															text = patron_zenithar_name
-														}
-														blockoverride "patron_entry_desc" {
-															text = patron_zenithar_long_desc
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-
-								spacer = {
-									size = { 20 0 }
-								}
-							}
-
-							spacer = {
-								size = { 0 15 }
-							}
-						}
-
-					}
-				}
-			}
-		}
-	}
+	# widget = {
+	# 	name = "patron_window"
+	# 	parentanchor = top|right
+	# 	layer = windows_layer
+	# 	alwaystransparent = no
+
+	# 	#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
+	# 	#visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 	visible = "[And(GetVariableSystem.Exists( 'patron_window_open' ), Not(GetVariableSystem.Exists( 'societies_window_open' )))]"
+
+	# 	using = Window_Size_MainTab
+	# 	#using = Window_Background
+
+	# 	state = {
+	# 		name = _show
+	# 		using = Animation_FadeIn_Quick
+	# 		using = Sound_WindowShow_Standard
+	# 		using = Window_Position_MainTab
+
+	# 		on_start = "[GetVariableSystem.Set('right_window_open', 'true' )]"
+	# 		on_start = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
+	# 		# datacontext = "[GetScriptedGui('patron_restore')]"
+	# 		# on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 	}
+
+	# 	state = {
+	# 		name = _hide
+	# 		using = Animation_FadeOut_Quick
+	# 		using = Sound_WindowHide_Standard
+	# 		using = Window_Position_MainTab_Hide
+
+	# 		on_start = "[GetVariableSystem.Clear('right_window_open')]"
+	# 		on_start = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+	# 		#datacontext = "[GetScriptedGui('patron_clear')]"
+	# 		#on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 	}
+
+	# 	margin_widget = {
+	# 		size = { 100% 100% }
+	# 		margin = { 0 26 }
+	# 		margin_right = 20
+	# 		alwaystransparent = no
+
+	# 		using = Window_Background
+
+	# 		widget = {
+	# 			size = { 100% 100% }
+	# 			#using = Window_Background
+	# 			#using = Window_Decoration_Thin
+
+	# 			vbox = {
+	# 				using = Window_Margins
+
+	# 				header_with_picture = {
+	# 					layoutpolicy_horizontal = expanding
+
+	# 					blockoverride "header_text"
+	# 					{
+	# 						text = "PATRON_VIEW_TITLE"
+	# 					}
+
+	# 					blockoverride "button_close"
+	# 					{
+	# 						#datacontext = "[GetScriptedGui('patron_gui_close')]"
+	# 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
+	# 						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+	# 					}
+
+	# 					blockoverride "illustration_texture"
+	# 					{
+	# 						texture = "gfx/interface/patron_window/header_patrons.dds" #replace as shrine pic?
+	# 					}
+	# 				}
+
+	# 				#Selection Tab
+	# 				vbox = {
+	# 					name = "patron_selection_tab"
+	# 					layoutpolicy_horizontal = expanding
+	# 					layoutpolicy_vertical = expanding
+	# 					datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
+	# 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 					#patron details
+	# 					spacer = {
+	# 						size = { 0 5 }
+	# 					}
+	# 					hbox = {
+	# 						size = { 520 160 }
+	# 						background = {
+	# 							margin_left = 50
+	# 							margin_right = 50
+	# 							margin_top = 0
+	# 							margin_bottom = 0
+
+	# 							texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
+	# 							spriteType = Corneredstretched
+	# 							spriteborder = { 40 8 }
+
+	# 							modify_texture = {
+	# 								name = "mask"
+	# 								texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+	# 								spriteType = Corneredstretched
+	# 								spriteborder = { 0 0 }
+	# 								blend_mode = alphamultiply
+	# 							}
+	# 							modify_texture = {
+	# 								name = "mask"
+	# 								texture = "gfx/interface/component_masks/mask_legacy_track.dds"
+	# 								spriteType = Corneredstretched
+	# 								spriteborder = { 0 0 }
+	# 								blend_mode = alphamultiply
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 20 0 }
+	# 						}
+
+	# 						# Patron Icons #
+	# 						#Azura
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_azura_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_azura.dds"
+	# 							}
+	# 						}
+
+	# 						#Boethiah
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_boethiah.dds"
+	# 							}
+	# 						}
+
+	# 						#Clavicus Vile
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
+	# 							}
+	# 						}
+
+	# 						#Hermaeus Mora
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
+	# 							}
+	# 						}
+
+	# 						#Hircine
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_hircine_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_hircine.dds"
+	# 							}
+	# 						}
+
+	# 						#Jyggalag
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_jyggalag.dds"
+	# 							}
+	# 						}
+
+	# 						#Malacath
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_malacath_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_malacath.dds"
+	# 							}
+	# 						}
+
+	# 						#Mehrunes Dagon
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
+	# 							}
+	# 						}
+
+	# 						#Mephala
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_mephala_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_mephala.dds"
+	# 							}
+	# 						}
+
+	# 						#Meridia
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_meridia_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_meridia.dds"
+	# 							}
+	# 						}
+
+	# 						#Molag Bal
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_molag_bal.dds"
+	# 							}
+	# 						}
+
+	# 						#Namira
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_namira_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_namira.dds"
+	# 							}
+	# 						}
+
+	# 						#Nocturnal
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_nocturnal.dds"
+	# 							}
+	# 						}
+
+	# 						#Peryite
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_peryite_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_peryite.dds"
+	# 							}
+	# 						}
+
+	# 						#Sanguine
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_sanguine.dds"
+	# 							}
+	# 						}
+
+	# 						#Sheogorath
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_sheogorath.dds"
+	# 							}
+	# 						}
+
+	# 						#Vaermina
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/patrons/patron_vaermina.dds"
+	# 							}
+	# 						}
+
+	# 						#Divines
+	# 						button_patron_icon = {
+	# 							datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 							blockoverride "patron_icon" {
+	# 								texture = "gfx/interface/icons/religion/imperial_cult.dds"
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 8 0 }
+	# 						}
+
+	# 						vbox = {
+	# 							size = { 470 160 }
+
+	# 							vbox = {
+	# 								#parentanchor = left
+
+	# 								text_single = {
+	# 									text = selected_patron_name #defined by custom loc
+	# 									align = center
+	# 									fontsize = 20
+	# 								}
+	# 								text_multi = {
+	# 									text = selected_patron_desc #defined by custom loc
+	# 									size = { 450 150 }
+	# 									maximumsize = { 450 150 }
+	# 									align = center
+	# 									fontsize = 16
+	# 									autoresize = yes
+	# 								}
+	# 								spacer = {
+	# 									size = { 0 15 }
+	# 								}
+	# 								button_frontend = {
+	# 									name = "patron_button_commune"
+	# 									#position = { 0 5 }
+	# 									size = { 160 40 }
+	# 									text = "COMMUNE"
+	# 									tooltip = patron_commune_tt
+
+	# 									datacontext = "[GetScriptedGui('patron_interaction_tab_toggle')]"
+	# 									visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 								}
+	# 								button_frontend = {
+	# 									name = "passive_patron_button_commune"
+	# 									#position = { 0 5 }
+	# 									size = { 160 40 }
+	# 									text = "COMMUNE"
+	# 									tooltip = patron_commune_tt
+
+	# 									datacontext = "[GetScriptedGui('patron_interaction_passive_tab_toggle')]"
+	# 									visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 								}
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 20 0 }
+	# 						}
+	# 					}
+	# 					spacer = {
+	# 						size = { 0 5 }
+	# 					}
+
+	# 					#patron list
+	# 					scrollbox = {
+	# 						name = "patrons_scrollarea"
+	# 						layoutpolicy_horizontal = expanding
+	# 						layoutpolicy_vertical = expanding
+
+	# 						background = {
+	# 							texture = "gfx/interface/illustrations/event_scenes/temple.dds"
+	# 							margin = { -5 0 }
+	# 							fittype = end
+	# 							alpha = 0.4
+	# 							framesize = { 1200 848 }
+
+	# 							modify_texture = {
+	# 								texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 								blend_mode = alphamultiply
+	# 							}
+	# 						}
+
+	# 						blockoverride "scrollbox_content"
+	# 						{
+	# 							name = "patrons_main_container"
+	# 							spacing = 20
+
+	# 							vbox = {
+	# 								layoutpolicy_horizontal = expanding
+	# 								spacing = 10
+
+	# 								text_single = {
+	# 									datacontext = "[GetScriptedGui('patron_has_no_patrons')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									text = "NO_PATRONS"
+	# 									default_format = "#low;italic"
+	# 								}
+
+	# 								text_label_center = {
+	# 									datacontext = "[GetScriptedGui('patron_has_princes')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									text = "PATRON_DAEDRIC_PRINCES"
+	# 								}
+
+	# 								# Azura #
+	# 								vbox = {
+	# 									name = "patron_azura"
+	# 									datacontext = "[GetScriptedGui('patron_azura_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_azura_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_azura.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_azura_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_azura_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Boethiah #
+	# 								vbox = {
+	# 									name = "patron_boethiah"
+	# 									datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_boethiah.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_boethiah_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_boethiah_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Clavicus Vile #
+	# 								vbox = {
+	# 									name = "patron_clavicus_vile"
+	# 									datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_clavicus_vile_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_clavicus_vile_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Hermaeus Mora #
+	# 								vbox = {
+	# 									name = "patron_hermaeus_mora"
+	# 									datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_hermaeus_mora_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_hermaeus_mora_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Hircine #
+	# 								vbox = {
+	# 									name = "patron_hircine"
+	# 									datacontext = "[GetScriptedGui('patron_hircine_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_hircine_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_hircine.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_hircine_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_hircine_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Jyggalag #
+	# 								vbox = {
+	# 									name = "patron_jyggalag"
+	# 									datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_jyggalag.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_jyggalag_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_jyggalag_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Malacath #
+	# 								vbox = {
+	# 									name = "patron_malacath"
+	# 									datacontext = "[GetScriptedGui('patron_malacath_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_malacath_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_malacath.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_malacath_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_malacath_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Mehrunes Dagon #
+	# 								vbox = {
+	# 									name = "patron_mehrunes_dagon"
+	# 									datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_mehrunes_dagon_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_mehrunes_dagon_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Mephala #
+	# 								vbox = {
+	# 									name = "patron_mephala"
+	# 									datacontext = "[GetScriptedGui('patron_mephala_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_mephala_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_mephala.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_mephala_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_mephala_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Meridia #
+	# 								vbox = {
+	# 									name = "patron_meridia"
+	# 									datacontext = "[GetScriptedGui('patron_meridia_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_meridia_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_meridia.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_meridia_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_meridia_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Molag Bal #
+	# 								vbox = {
+	# 									name = "patron_molag_bal"
+	# 									datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_molag_bal.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_molag_bal_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_molag_bal_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Namira #
+	# 								vbox = {
+	# 									name = "patron_namira"
+	# 									datacontext = "[GetScriptedGui('patron_namira_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_namira_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_namira.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_namira_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_namira_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Nocturnal #
+	# 								vbox = {
+	# 									name = "patron_nocturnal"
+	# 									datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_boethiah.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_nocturnal_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_nocturnal_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Peryite #
+	# 								vbox = {
+	# 									name = "patron_peryite"
+	# 									datacontext = "[GetScriptedGui('patron_peryite_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_peryite_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_peryite.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_peryite_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_peryite_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Sanguine #
+	# 								vbox = {
+	# 									name = "patron_sanguine"
+	# 									datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_sanguine.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_sanguine_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_sanguine_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Sheogorath #
+	# 								vbox = {
+	# 									name = "patron_sheogorath"
+	# 									datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_sheogorath.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_sheogorath_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_sheogorath_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								# Vaermina #
+	# 								vbox = {
+	# 									name = "patron_vaermina"
+	# 									datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/patrons/patron_vaermina.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = patron_vaermina_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = patron_vaermina_long_desc
+	# 										}
+	# 									}
+	# 								}
+
+	# 								text_label_center = {
+	# 									datacontext = "[GetScriptedGui('patron_has_tribunal')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									text = "PATRON_TRIBUNAL"
+	# 								}
+
+	# 								text_label_center = {
+	# 									datacontext = "[GetScriptedGui('patron_has_pantheon')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									text = "PATRON_PANTHEON"
+	# 								}
+
+	# 								# Divines #
+	# 								vbox = {
+	# 									name = "patron_divines"
+	# 									datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 									button_patron_entry = {
+	# 										#datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 										blockoverride "patron_entry_icon" {
+	# 											texture = "gfx/interface/icons/religion/imperial_cult.dds"
+	# 										}
+	# 										blockoverride "patron_entry_name" {
+	# 											text = pantheon_divines_name
+	# 										}
+	# 										blockoverride "patron_entry_desc" {
+	# 											text = pantheon_divines_long_desc
+	# 										}
+	# 									}
+	# 								}
+	# 							}
+	# 						}
+	# 					}
+	# 				}
+
+	# 				#Interaction Tab
+	# 				vbox = {
+	# 					name = "patron_interaction_tab"
+	# 					layoutpolicy_horizontal = expanding
+	# 					layoutpolicy_vertical = expanding
+	# 					datacontext = "[GetScriptedGui('patron_interaction_tab_toggle')]"
+	# 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 					vbox = {
+	# 						maximumsize = { 520 400 }
+	# 						hbox = {
+	# 							button_back = {
+	# 								name = "patron_button_back"
+	# 								align = top|left
+	# 								position = { 0 0 }
+	# 								shortcut = "go_back"
+	# 								#clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
+
+	# 								using = Animation_ShowHide_Standard
+
+	# 								datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
+	# 								onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 								tooltip = patron_back_tt
+
+	# 								# block "button_back" {
+	# 								# 	visible = no
+	# 								# }
+	# 							}
+	# 							spacer = {
+	# 								size = { 110 0 }
+	# 							}
+	# 							# Patron Icons #
+	# 							vbox = {
+	# 								#Azura
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_azura_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_azura.dds"
+	# 									}
+	# 								}
+
+	# 								#Boethiah
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_boethiah.dds"
+	# 									}
+	# 								}
+
+	# 								#Clavicus Vile
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_clavicus_vile_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_clavicus_vile.dds"
+	# 									}
+	# 								}
+
+	# 								#Hermaeus Mora
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_hermaeus_mora_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_hermaeus_mora.dds"
+	# 									}
+	# 								}
+
+	# 								#Hircine
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_hircine_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_hircine.dds"
+	# 									}
+	# 								}
+
+	# 								#Jyggalag
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_jyggalag_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_jyggalag.dds"
+	# 									}
+	# 								}
+
+	# 								#Malacath
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_malacath_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_malacath.dds"
+	# 									}
+	# 								}
+
+	# 								#Mehrunes Dagon
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_mehrunes_dagon_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_mehrunes_dagon.dds"
+	# 									}
+	# 								}
+
+	# 								#Mephala
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_mephala_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_mephala.dds"
+	# 									}
+	# 								}
+
+	# 								#Meridia
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_meridia_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_meridia.dds"
+	# 									}
+	# 								}
+
+	# 								#Molag Bal
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_molag_bal_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_molag_bal.dds"
+	# 									}
+	# 								}
+
+	# 								#Namira
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_namira_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_namira.dds"
+	# 									}
+	# 								}
+
+	# 								#Nocturnal
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_nocturnal_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_nocturnal.dds"
+	# 									}
+	# 								}
+
+	# 								#Peryite
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_peryite_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_peryite.dds"
+	# 									}
+	# 								}
+
+	# 								#Sanguine
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_sanguine_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_sanguine.dds"
+	# 									}
+	# 								}
+
+	# 								#Sheogorath
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_sheogorath_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_sheogorath.dds"
+	# 									}
+	# 								}
+
+	# 								#Vaermina
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_vaermina_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/patrons/patron_vaermina.dds"
+	# 									}
+	# 								}
+	# 							}
+	# 							spacer = {
+	# 								size = { 140 40 } #+30 compared to other one for button
+	# 								hbox = {
+	# 									size = { 60 50 }
+	# 									#minimumsize = { 100 50 }
+
+	# 									spacer = {
+	# 										size = { 80 0 }
+	# 									}
+
+	# 									text_single = {
+	# 										text = patron_ardor #defined by custom loc
+	# 										align = center
+	# 										fontsize = 16
+	# 									}
+
+	# 									# progressbar_standard = { #doesn't seem to support variables
+	# 									# 	name = "progress_bar_azura"
+	# 									# 	parentanchor = center
+	# 									# 	size = { 100 10 }
+	# 									# 	#visible = "[Holding.IsConstructionInProgress]"
+	# 									# 	#min = 0
+	# 									# 	#max = 1
+	# 									# 	value = @special_mine_tax_base
+	# 									# }
+	# 								}
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 5 }
+	# 						}
+
+	# 						vbox = {
+	# 							size = { 520 160 }
+	# 							background = {
+	# 								margin_left = 50
+	# 								margin_right = 50
+	# 								margin_top = -5
+	# 								margin_bottom = 7
+
+	# 								texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
+	# 								spriteType = Corneredstretched
+	# 								spriteborder = { 40 8 }
+
+	# 								modify_texture = {
+	# 									name = "mask"
+	# 									texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+	# 									spriteType = Corneredstretched
+	# 									spriteborder = { 0 0 }
+	# 									blend_mode = alphamultiply
+	# 								}
+	# 								modify_texture = {
+	# 									name = "mask"
+	# 									texture = "gfx/interface/component_masks/mask_legacy_track.dds"
+	# 									spriteType = Corneredstretched
+	# 									spriteborder = { 0 0 }
+	# 									blend_mode = alphamultiply
+	# 								}
+	# 							}
+
+	# 							vbox = {
+	# 								size = { 520 160 }
+
+	# 								vbox = {
+	# 									#parentanchor = left
+
+	# 									text_single = {
+	# 										text = selected_patron_name #defined by custom loc
+	# 										align = center
+	# 										fontsize = 32
+	# 									}
+	# 									text_multi = {
+	# 										text = selected_patron_desc #defined by custom loc
+	# 										size = { 450 150 }
+	# 										maximumsize = { 450 150 }
+	# 										align = center
+	# 										fontsize = 20
+	# 										autoresize = yes
+	# 									}
+	# 									spacer = {
+	# 										size = { 0 15 }
+	# 									}
+	# 									text_multi = {
+	# 										text = selected_patron_long_desc #defined by custom loc
+	# 										size = { 450 150 }
+	# 										maximumsize = { 450 150 }
+	# 										align = center
+	# 										fontsize = 16
+	# 										autoresize = yes
+	# 									}
+	# 								}
+	# 							}
+
+	# 						}
+	# 					}
+
+	# 					spacer = {
+	# 						size = { 0 20 }
+	# 					}
+
+	# 					vbox = {
+	# 						layoutpolicy_horizontal = expanding
+	# 						layoutpolicy_vertical = expanding
+
+	# 						hbox = { #interaction lists, should be scrollbox somewhere. fire decisions
+	# 							name = "minor_interactions"
+	# 							#size = { 90% 250 }
+	# 							layoutpolicy_horizontal = expanding
+	# 							layoutpolicy_vertical = expanding
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+
+	# 							vbox = {
+	# 								name = "minor_boons"
+	# 								layoutpolicy_horizontal = expanding
+	# 								layoutpolicy_vertical = expanding
+	# 								#size = { 45% 250}
+	# 								minimumsize = { 0 250 }
+
+	# 								scrollbox = {
+	# 									name = "minor_boons_scrollarea"
+	# 									layoutpolicy_horizontal = expanding
+	# 									layoutpolicy_vertical = expanding
+
+	# 									background = {
+	# 										texture = "gfx/interface/colors/green.dds"
+	# 										spriteType = Corneredtiled
+	# 										spriteborder = { 1 1 }
+	# 										#margin = { -5 0 }
+	# 										#fittype = end
+	# 										alpha = 0.07 #offset for green brightness
+	# 										#framesize = { 260 400 }
+
+	# 										modify_texture = {
+	# 											texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 											blend_mode = alphamultiply
+	# 										}
+	# 									}
+
+	# 									blockoverride "scrollbox_content"
+	# 									{
+	# 										name = "minor_boons_container"
+	# 										spacing = 20
+
+	# 										text_label_center = {
+	# 											text = "PATRON_MINOR_BOONS"
+	# 										}
+
+	# 										vbox = {
+	# 											layoutpolicy_horizontal = expanding
+	# 											spacing = 10
+
+	# 											vbox = {
+	# 												name = "patron_boon_gold_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_decision_entry = {}
+	# 											}
+	# 											vbox = {
+	# 												name = "patron_boon_training_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_decision_entry = {}
+	# 											}
+	# 											vbox = {
+	# 												name = "patron_boon_horde_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_decision_entry = {}
+	# 											}
+	# 										}
+	# 									}
+	# 								}
+	# 							}
+
+	# 							spacer = {
+	# 								size = { 15 0 }
+	# 							}
+
+	# 							vbox = {
+	# 								name = "offerings"
+	# 								layoutpolicy_horizontal = expanding
+	# 								layoutpolicy_vertical = expanding
+	# 								#size = { 45% 250}
+	# 								minimumsize = { 0 250 }
+
+	# 								scrollbox = {
+	# 									name = "offerings_scrollarea"
+	# 									layoutpolicy_horizontal = expanding
+	# 									layoutpolicy_vertical = expanding
+
+	# 									background = {
+	# 										texture = "gfx/interface/colors/red.dds"
+	# 										spriteType = Corneredtiled
+	# 										spriteborder = { 1 1 }
+	# 										#margin = { -5 0 }
+	# 										#fittype = end
+	# 										alpha = 0.1
+	# 										#framesize = { 260 400 }
+
+	# 										modify_texture = {
+	# 											texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 											blend_mode = alphamultiply
+	# 										}
+	# 									}
+
+	# 									blockoverride "scrollbox_content"
+	# 									{
+	# 										name = "offerings_container"
+	# 										spacing = 20
+
+	# 										text_label_center = {
+	# 											text = "PATRON_OFFERINGS"
+	# 										}
+
+	# 										vbox = {
+	# 											layoutpolicy_horizontal = expanding
+	# 											spacing = 10
+
+	# 											vbox = {
+	# 												name = "patron_offer_gold_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_decision_entry = {}
+	# 											}
+	# 											vbox = {
+	# 												name = "patron_offer_sacrifice_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_decision_entry = {}
+	# 											}
+	# 										}
+	# 									}
+	# 								}
+	# 							}
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 15 }
+	# 						}
+
+	# 						hbox = {
+	# 							layoutpolicy_horizontal = expanding
+	# 							layoutpolicy_vertical = expanding
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+
+	# 							vbox = {
+	# 								name = "major_boons"
+	# 								#size = { 90% 150}
+	# 								layoutpolicy_horizontal = expanding
+	# 								layoutpolicy_vertical = expanding
+	# 								minimumsize = { 0 150 }
+
+	# 								scrollbox = {
+	# 									name = "major_boons_scrollarea"
+	# 									layoutpolicy_horizontal = expanding
+	# 									layoutpolicy_vertical = expanding
+
+	# 									background = {
+	# 										texture = "gfx/interface/colors/blue.dds"
+	# 										spriteType = Corneredtiled
+	# 										spriteborder = { 1 1 }
+	# 										#margin = { -5 0 }
+	# 										#fittype = end
+	# 										alpha = 0.4
+	# 										#framesize = { 260 400 }
+
+	# 										modify_texture = {
+	# 											texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 											blend_mode = alphamultiply
+	# 										}
+	# 										modify_texture = {
+	# 											texture = "gfx/interface/component_masks/mask_fade_halfcircle.dds"
+	# 											rotate_uv = 3
+	# 											blend_mode = alphamultiply
+	# 										}
+	# 									}
+
+	# 									blockoverride "scrollbox_content"
+	# 									{
+	# 										name = "major_boons_container"
+	# 										spacing = 20
+
+	# 										text_label_center = {
+	# 											text = "PATRON_MAJOR_BOONS"
+	# 										}
+
+	# 										vbox = {
+	# 											layoutpolicy_horizontal = expanding
+	# 											spacing = 10
+
+	# 											vbox = {
+	# 												name = "patron_boon_invasion_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_major_decision_entry = {}
+	# 											}
+	# 											vbox = {
+	# 												name = "patron_offer_sacrifice_decision"
+	# 												datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+	# 												visible = "[Decision.IsShownForPlayer]"
+	# 												button_patron_major_decision_entry = {}
+	# 											}
+	# 										}
+	# 									}
+	# 								}
+	# 							}
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 15 }
+	# 						}
+	# 					}
+	# 					# button_frontend = {
+	# 					# 	name = "patron_button_decision_test"
+	# 					# 	position = { 0 5 }
+	# 					# 	size = { 160 40 }
+	# 					# 	text = "COMMUNE"
+	# 					# 	tooltip = patron_decision_test_tt
+
+	# 					# 	datacontext = "[GetScriptedGui('patron_decision_test')]"
+	# 					# 	enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 					# 	onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 					# 	# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 					# }
+
+	# 				}
+
+	# 				#Interaction Tab, Passive
+	# 				vbox = {
+	# 					name = "patron_interaction_passive_tab"
+	# 					layoutpolicy_horizontal = expanding
+	# 					layoutpolicy_vertical = expanding
+	# 					datacontext = "[GetScriptedGui('patron_interaction_passive_tab_toggle')]"
+	# 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 					vbox = {
+	# 						maximumsize = { 520 400 }
+	# 						hbox = {
+	# 							button_back = {
+	# 								name = "patron_button_back"
+	# 								align = top|left
+	# 								position = { 0 0 }
+	# 								shortcut = "go_back"
+	# 								#clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
+
+	# 								using = Animation_ShowHide_Standard
+
+	# 								datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
+	# 								onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 								tooltip = patron_back_tt
+
+	# 								# block "button_back" {
+	# 								# 	visible = no
+	# 								# }
+	# 							}
+	# 							spacer = {
+	# 								size = { 110 0 }
+	# 							}
+	# 							# PAntheon Icons #
+	# 							vbox = {
+	# 								#Divines
+	# 								button_patron_icon = {
+	# 									datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 									blockoverride "patron_icon" {
+	# 										texture = "gfx/interface/icons/religion/imperial_cult.dds"
+	# 									}
+	# 								}
+
+	# 								# #Boethiah
+	# 								# button_patron_icon = {
+	# 								# 	datacontext = "[GetScriptedGui('patron_boethiah_shown')]"
+	# 								# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 								# 	blockoverride "patron_icon" {
+	# 								# 		texture = "gfx/interface/patrons/patron_boethiah.dds"
+	# 								# 	}
+	# 								# }
+	# 							}
+	# 							spacer = {
+	# 								size = { 140 0 } #+30 compared to other one for button
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 5 }
+	# 						}
+
+	# 						vbox = {
+	# 							size = { 520 160 }
+	# 							background = {
+	# 								margin_left = 50
+	# 								margin_right = 50
+	# 								margin_top = -5
+	# 								margin_bottom = 7
+
+	# 								texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
+	# 								spriteType = Corneredstretched
+	# 								spriteborder = { 40 8 }
+
+	# 								modify_texture = {
+	# 									name = "mask"
+	# 									texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+	# 									spriteType = Corneredstretched
+	# 									spriteborder = { 0 0 }
+	# 									blend_mode = alphamultiply
+	# 								}
+	# 								modify_texture = {
+	# 									name = "mask"
+	# 									texture = "gfx/interface/component_masks/mask_legacy_track.dds"
+	# 									spriteType = Corneredstretched
+	# 									spriteborder = { 0 0 }
+	# 									blend_mode = alphamultiply
+	# 								}
+	# 							}
+
+	# 							vbox = {
+	# 								size = { 520 160 }
+
+	# 								vbox = {
+	# 									#parentanchor = left
+
+	# 									text_single = {
+	# 										text = selected_pantheon_name #defined by custom loc
+	# 										align = center
+	# 										fontsize = 32
+	# 									}
+	# 									text_multi = {
+	# 										text = selected_pantheon_desc #defined by custom loc
+	# 										size = { 450 150 }
+	# 										maximumsize = { 450 150 }
+	# 										align = center
+	# 										fontsize = 20
+	# 										autoresize = yes
+	# 									}
+	# 									spacer = {
+	# 										size = { 0 15 }
+	# 									}
+	# 									text_multi = {
+	# 										text = selected_pantheon_long_desc #defined by custom loc
+	# 										size = { 450 150 }
+	# 										maximumsize = { 450 150 }
+	# 										align = center
+	# 										fontsize = 16
+	# 										autoresize = yes
+	# 									}
+	# 								}
+	# 							}
+
+	# 						}
+	# 					}
+
+	# 					spacer = {
+	# 						size = { 0 20 }
+	# 					}
+
+	# 					vbox = {
+	# 						layoutpolicy_horizontal = expanding
+	# 						layoutpolicy_vertical = expanding
+
+	# 						hbox = {
+	# 							size = { 0 120 }
+	# 							layoutpolicy_horizontal = expanding
+	# 							#layoutpolicy_vertical = expanding
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+
+	# 							hbox = {
+	# 								name = "selected_patron"
+	# 								layoutpolicy_horizontal = expanding
+	# 								layoutpolicy_vertical = expanding
+	# 								minimumsize = { 0 100 }
+
+	# 								background = {
+	# 									using = Background_Area
+	# 								}
+	# 								vbox = {
+	# 									hbox = {
+	# 										spacer = {
+	# 											size = { 9 0 }
+	# 										}
+
+	# 										#icons
+	# 										vbox = {
+	# 											name = "patron_icons"
+	# 											# button_patron_icon = {
+	# 											# 	datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 											# 	visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 											# 	blockoverride "patron_icon" {
+	# 											# 		texture = "gfx/interface/icons/religion/imperial_cult.dds"
+	# 											# 	}
+	# 											# }
+	# 											# Akatosh #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_akatosh.dds"
+	# 												}
+	# 											}
+
+	# 											# Arkay #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_arkay_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_arkay.dds"
+	# 												}
+	# 											}
+
+	# 											# Dibella #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_dibella_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_dibella.dds"
+	# 												}
+	# 											}
+
+	# 											# Julianos #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_julianos_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_julianos.dds"
+	# 												}
+	# 											}
+
+	# 											# Kynareth #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_kynareth.dds"
+	# 												}
+	# 											}
+
+	# 											# Mara #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_mara_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_mara.dds"
+	# 												}
+	# 											}
+
+	# 											# Stendarr #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_stendarr.dds"
+	# 												}
+	# 											}
+
+	# 											# Zenithar #
+	# 											button_patron_icon = {
+	# 												datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 												blockoverride "patron_icon" {
+	# 													texture = "gfx/interface/patrons/patron_zenithar.dds"
+	# 												}
+	# 											}
+	# 										}
+
+	# 										# spacer = {
+	# 										# 	size = { 9 0 }
+	# 										# }
+
+	# 										#name + desc
+	# 										vbox = {
+	# 											size = { 200 0 }
+	# 											spacer = {
+	# 												size = { 0 14 }
+	# 											}
+	# 											#layoutpolicy_horizontal = expanding
+	# 											layoutpolicy_vertical = expanding
+	# 											hbox = {
+	# 												layoutpolicy_horizontal = expanding
+	# 												textbox = {
+	# 													font = StandardGameFont
+	# 													fontcolor = { 1 1 1 1 }
+	# 													fontsize = 24
+	# 													text = selected_patron_passive_name
+	# 													autoresize = no
+	# 													layoutpolicy_horizontal = expanding
+	# 													elide = right
+	# 													minimumsize = { -1 16 }
+	# 													align = left
+	# 												}
+	# 											}
+	# 											spacer = {
+	# 												size = { 0 17 }
+	# 											}
+	# 											textbox = {
+	# 												font = StandardGameFont
+	# 												fontcolor = { 0.8 0.8 0.8 1 }
+	# 												fontsize = 16
+	# 												text = selected_patron_passive_modifier
+	# 												#text = "[GetModifier('p_akatosh').GetNameWithTooltip]"
+	# 												autoresize = yes
+	# 												layoutpolicy_horizontal = expanding
+	# 												layoutpolicy_vertical = expanding
+	# 												elide = right
+	# 												multiline = yes
+	# 												align = top|left
+	# 											}
+	# 											spacer = {
+	# 												size = { 0 13 }
+	# 											}
+	# 										}
+
+	# 										spacer = {
+	# 											size = { 9 0 }
+	# 										}
+	# 									}
+	# 									button_frontend = {
+	# 										name = "patron_button_confirm_patron"
+	# 										#position = { 0 5 }
+	# 										size = { 160 40 }
+	# 										text = "CONFIRM"
+	# 										#tooltip = confirm_tt
+
+	# 										datacontext = "[GetScriptedGui('patron_confirm_patron')]"
+	# 										enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 										tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 									}
+	# 									spacer = {
+	# 										size = { 0 5 }
+	# 									}
+	# 								}
+	# 							}
+
+	# 							#duplicate and show patron deity if no mission
+	# 							# vbox = {
+	# 							# 	name = "passive_mission"
+	# 							# 	#size = { 90% 150}
+	# 							# 	layoutpolicy_horizontal = expanding
+	# 							# 	layoutpolicy_vertical = expanding
+	# 							# 	minimumsize = { 0 100 }
+
+	# 							# 	scrollbox = {
+	# 							# 		name = "passive_mission_scrollarea"
+	# 							# 		layoutpolicy_horizontal = expanding
+	# 							# 		layoutpolicy_vertical = expanding
+
+	# 							# 		# background = {
+	# 							# 		# 	texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
+	# 							# 		# 	margin = { -5 0 }
+	# 							# 		# 	fittype = end
+	# 							# 		# 	alpha = 0.4
+	# 							# 		# 	framesize = { 1200 848 }
+
+	# 							# 		# 	modify_texture = {
+	# 							# 		# 		texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 							# 		# 		blend_mode = alphamultiply
+	# 							# 		# 	}
+	# 							# 		# }
+
+	# 							# 		blockoverride "scrollbox_content"
+	# 							# 		{
+	# 							# 			name = "passive_mission_container"
+	# 							# 			spacing = 20
+
+	# 							# 			text_label_center = {
+	# 							# 				text = "PATRON_PASSIVE_MISSION"
+	# 							# 			}
+	# 							# 			vbox = {
+	# 							# 				text_multi = {
+	# 							# 					name = "passive_mission_description"
+	# 							# 					#minimumsize = { 515 -1 }
+	# 							# 					maximumsize = { 480 -1 }
+	# 							# 					align = center
+	# 							# 					margin = { 15 15 }
+	# 							# 					autoresize = yes
+	# 							# 					text = dagoth_the_sharmat
+	# 							# 					using = Font_Size_Small
+	# 							# 				}
+	# 							# 				button_frontend = {
+	# 							# 					name = "patron_button_abandon_mission"
+	# 							# 					position = { 0 5 }
+	# 							# 					size = { 160 40 }
+	# 							# 					text = "ABANDON_MISSION"
+	# 							# 					tooltip = abandon_mission_tt
+
+	# 							# 					#datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
+	# 							# 					#enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 							# 					#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 							# 					# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 							# 				}
+
+	# 							# 			}
+
+	# 							# 		}
+	# 							# 	}
+	# 							# }
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 15 }
+	# 						}
+
+	# 						hbox = { #interaction lists, should be scrollbox somewhere. fire decisions
+	# 							name = "patron_passive_select"
+	# 							#size = { 90% 250 }
+	# 							layoutpolicy_horizontal = expanding
+	# 							layoutpolicy_vertical = expanding
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+
+	# 							vbox = {
+	# 								layoutpolicy_horizontal = expanding
+	# 								layoutpolicy_vertical = expanding
+	# 								#size = { 45% 250}
+	# 								minimumsize = { 0 200 }
+
+	# 								scrollbox = {
+	# 									name = "patrons_scrollarea"
+	# 									layoutpolicy_horizontal = expanding
+	# 									layoutpolicy_vertical = expanding
+
+	# 									background = {
+	# 										texture = "gfx/interface/illustrations/event_scenes/temple.dds"
+	# 										margin = { -5 0 }
+	# 										fittype = end
+	# 										alpha = 0.4
+	# 										framesize = { 1200 848 }
+
+	# 										modify_texture = {
+	# 											texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+	# 											blend_mode = alphamultiply
+	# 										}
+	# 									}
+
+	# 									blockoverride "scrollbox_content"
+	# 									{
+	# 										name = "patrons_main_container"
+	# 										spacing = 20
+
+	# 										vbox = {
+	# 											layoutpolicy_horizontal = expanding
+	# 											spacing = 10
+
+	# 											# text_single = {
+	# 											# 	datacontext = "[GetScriptedGui('patron_has_no_patrons')]"
+	# 											# 	visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 											# 	text = "NO_PATRONS"
+	# 											# 	default_format = "#low;italic"
+	# 											# }
+
+	# 											text_label_center = {
+	# 												datacontext = "[GetScriptedGui('patron_divines_shown')]"
+	# 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+	# 												text = "PATRON_THE_DIVINES"
+	# 											}
+
+	# 											# Akatosh #
+	# 											vbox = {
+	# 												name = "patron_akatosh"
+	# 												datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_akatosh_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_akatosh.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_akatosh_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_akatosh_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Arkay #
+	# 											vbox = {
+	# 												name = "patron_arkay"
+	# 												datacontext = "[GetScriptedGui('patron_arkay_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_arkay_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_arkay.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_arkay_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_arkay_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Dibella #
+	# 											vbox = {
+	# 												name = "patron_dibella"
+	# 												datacontext = "[GetScriptedGui('patron_dibella_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_dibella_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_dibella.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_dibella_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_dibella_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Julianos #
+	# 											vbox = {
+	# 												name = "patron_julianos"
+	# 												datacontext = "[GetScriptedGui('patron_julianos_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_julianos_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_julianos.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_julianos_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_julianos_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Kynareth #
+	# 											vbox = {
+	# 												name = "patron_kynareth"
+	# 												datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_kynareth_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_kynareth.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_kynareth_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_kynareth_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Mara #
+	# 											vbox = {
+	# 												name = "patron_mara"
+	# 												datacontext = "[GetScriptedGui('patron_mara_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_mara_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_mara.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_mara_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_mara_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Stendarr #
+	# 											vbox = {
+	# 												name = "patron_stendarr"
+	# 												datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_stendarr_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_stendarr.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_stendarr_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_stendarr_long_desc
+	# 													}
+	# 												}
+	# 											}
+
+	# 											# Zenithar #
+	# 											vbox = {
+	# 												name = "patron_zenithar"
+	# 												datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
+	# 												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+	# 												button_patron_entry = {
+	# 													size = { 450 100 }
+	# 													#datacontext = "[GetScriptedGui('patron_zenithar_shown')]"
+	# 													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+	# 													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+	# 													blockoverride "patron_entry_icon" {
+	# 														texture = "gfx/interface/patrons/patron_zenithar.dds"
+	# 													}
+	# 													blockoverride "patron_entry_name" {
+	# 														text = patron_zenithar_name
+	# 													}
+	# 													blockoverride "patron_entry_desc" {
+	# 														text = patron_zenithar_long_desc
+	# 													}
+	# 												}
+	# 											}
+	# 										}
+	# 									}
+	# 								}
+	# 							}
+
+	# 							spacer = {
+	# 								size = { 20 0 }
+	# 							}
+	# 						}
+
+	# 						spacer = {
+	# 							size = { 0 15 }
+	# 						}
+	# 					}
+
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
 
 	#Societies Window
 	widget = {
 		name = "societies_window"
 		parentanchor = top|right
 		layer = windows_layer
-		movable = no
 		alwaystransparent = no
 
 		#replace w/ system variables
@@ -2732,7 +2730,8 @@ widget = {
 
 	### Outliner Button
 	container = {
-		visible = "[And( Not( IsPauseMenuShown ), And(Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm'))), IsDefaultGUIMode))]"
+		#visible = "[And( Not( IsPauseMenuShown ), And(Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm'))), IsDefaultGUIMode))]"
+		visible = "[And( Not( IsPauseMenuShown ), And(Not(GetVariableSystem.Exists( 'right_window_open')), IsDefaultGUIMode))]"
 		parentanchor = top|right
 		position = { -3 55 }
 
@@ -2779,7 +2778,8 @@ widget = {
 		using = Animation_ShowHide_Quick
 
 		widget = {
-			visible = "[Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm')))]"
+			#visible = "[Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm')))]"
+			visible = "[Not(GetVariableSystem.Exists( 'right_window_open'))]"
 			size = { 100% 100% }
 
 			state = {
@@ -3308,32 +3308,68 @@ widget = {
 					}
 				}
 
-				button_hud_main_tab = {
-					name = "tab_decisions"
-					tooltip = "DECISIONS_BUTTON"
+				hbox = {
+					button_hud_main_tab = {
+						name = "tab_decisions"
+						tooltip = "DECISIONS_BUTTON"
 
-					blockoverride "maintab_button"
-					{
-						texture = "gfx/interface/icons/hud_maintab/maintab_decisions.dds"
+						visible = "[Not(And(IsGameViewOpen('decisions'), GetVariableSystem.Exists( 'patron_window_open' )))]"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						blockoverride "maintab_button"
+						{
+							texture = "gfx/interface/icons/hud_maintab/maintab_decisions.dds"
 
-						onclick = "[ToggleGameView('decisions')]"
-						shortcut = "decision_window"
-						down = "[IsGameViewOpen('decisions')]"
+							#datacontext = "[GetScriptedGui('patron_gui_close')]"
+							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+
+							onclick = "[ToggleGameView('decisions')]"
+							shortcut = "decision_window"
+							down = "[IsGameViewOpen('decisions')]"
+						}
+
+						state = {
+							name = _mouse_hierarchy_enter
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
+						}
+
+						state = {
+							name = _mouse_hierarchy_leave
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
+						}
 					}
+					button_hud_main_tab = {
+						name = "tab_decisions2"
+						tooltip = "DECISIONS_BUTTON"
 
-					state = {
-						name = _mouse_hierarchy_enter
-						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
-					}
+						visible = "[And(IsGameViewOpen('decisions'), GetVariableSystem.Exists( 'patron_window_open' ))]"
 
-					state = {
-						name = _mouse_hierarchy_leave
-						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
+						blockoverride "maintab_button"
+						{
+							texture = "gfx/interface/icons/hud_maintab/maintab_decisions.dds"
+
+							#datacontext = "[GetScriptedGui('patron_gui_close')]"
+							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							datacontext = "[GetScriptedGui('patron_clear')]" #need to add to switch button, also try hide/show in margin widgets
+							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+							#onclick = "[ToggleGameView('decisions')]"
+							shortcut = "decision_window"
+							down = "[IsGameViewOpen('decisions')]"
+						}
+
+						state = {
+							name = _mouse_hierarchy_enter
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
+						}
+
+						state = {
+							name = _mouse_hierarchy_leave
+							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
+						}
 					}
 				}
 			}
@@ -3354,38 +3390,79 @@ widget = {
 			}
 
 			vbox = {
-				button_hud_main_tab = {
-					name = "tab_patron_open"
-					tooltip = "PATRON_BUTTON"
+				hbox = {
+					button_hud_main_tab = {
+						name = "tab_patron_open"
+						tooltip = "PATRON_BUTTON"
 
-					blockoverride "maintab_button"
-					{
-						texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
+						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' ))))]"
 
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						blockoverride "maintab_button"
+						{
+							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
-						datacontext = "[GetScriptedGui('patron_restore')]"
-						onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
+							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-						onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
-						#shortcut = "patron_window"
-						down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+							datacontext = "[GetScriptedGui('patron_restore')]"
+							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+							onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
+							onclick = "[ToggleGameView('decisions')]"
+							#shortcut = "patron_window"
+							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+						}
+
+						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
+						# state = {
+						# 	name = _mouse_hierarchy_enter
+						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
+						# }
+
+						# state = {
+						# 	name = _mouse_hierarchy_leave
+						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
+						# }
 					}
+					button_hud_main_tab = {
+						name = "tab_patron_open2"
+						tooltip = "PATRON_BUTTON"
 
-					#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-					# state = {
-					# 	name = _mouse_hierarchy_enter
-					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-					# }
+						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' )))]"
 
-					# state = {
-					# 	name = _mouse_hierarchy_leave
-					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-					# }
+						blockoverride "maintab_button"
+						{
+							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
+
+							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+
+							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
+							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+							datacontext = "[GetScriptedGui('patron_restore')]"
+							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+							onclick = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
+							#onclick = "[ToggleGameView('decisions')]"
+							#shortcut = "patron_window"
+							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+						}
+
+						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
+						# state = {
+						# 	name = _mouse_hierarchy_enter
+						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
+						# }
+
+						# state = {
+						# 	name = _mouse_hierarchy_leave
+						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
+						# }
+					}
 				}
 				button_hud_main_tab = {
 					name = "tab_societies_open"
@@ -4862,7 +4939,8 @@ widget = {
 	######################################################
 
 	map_modes_debug = {
-		visible = "[And( InDebugMode, And(IsDefaultGUIMode, Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm')))))]"
+		#visible = "[And( InDebugMode, And(IsDefaultGUIMode, Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm')))))]"
+		visible = "[And( InDebugMode, And(IsDefaultGUIMode, Not(GetVariableSystem.Exists( 'right_window_open'))))]"
 		parentanchor = bottom|right
 		position = { 0 -220 }
 
@@ -4873,7 +4951,8 @@ widget = {
 
 	### WARS SCHEMES AND MAPMODES
 	flowcontainer = {
-		visible = "[And(IsDefaultGUIMode, Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm'))))]"
+		#visible = "[And(IsDefaultGUIMode, Not(Or(Or(Or(Or(GetVariableSystem.Exists('societies_window_open'), GetVariableSystem.Exists('patron_window_open')), Or(IsGameViewOpen('council_window'), IsGameViewOpen('court_window'))), Or(Or(IsGameViewOpen('decisions'), IsGameViewOpen('factions_window')), Or(IsGameViewOpen('intrigue_window'), IsGameViewOpen('military')))), IsGameViewOpen('my_realm'))))]"
+		visible = "[And(IsDefaultGUIMode, Not(GetVariableSystem.Exists( 'right_window_open')))]"
 		parentanchor = bottom|right
 		widgetanchor = top|right
 		position = { 0 -155 }
