@@ -183,6 +183,7 @@ window = {
 	}
 
 	margin_widget = {
+		name = "patron_window"
 		size = { 100% 100% }
 		margin = { 0 26 }
 		margin_right = 20
@@ -2200,6 +2201,67 @@ window = {
 			}
 		}
 	}
+
+	margin_widget = {
+		name = "societies_window"
+		size = { 100% 100% }
+		margin = { 0 26 }
+		margin_right = 20
+
+		visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+
+		using = Window_Background
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+			using = Sound_WindowShow_Standard
+			using = Window_Position_MainTab
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Quick
+			using = Sound_WindowHide_Standard
+			using = Window_Position_MainTab_Hide
+		}
+
+		widget = {
+			size = { 100% 100% }
+			#using = Window_Background
+			#using = Window_Decoration_Thin
+
+			vbox = {
+				using = Window_Margins
+
+				header_with_picture = {
+					layoutpolicy_horizontal = expanding
+
+					blockoverride "header_text"
+					{
+						text = "SOCIETIES_VIEW_TITLE"
+					}
+
+					blockoverride "button_close"
+					{
+						#datacontext = "[GetScriptedGui('societies_gui_close')]"
+						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
+						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						onclick = "[DecisionsView.Close]"
+					}
+
+					blockoverride "illustration_texture"
+					{
+						texture = "gfx/interface/patron_window/header_societies.dds" #replace as shrine pic?
+					}
+				}
+
+				#Selection Tab
+
+			}
+		}
+	}
 }
 
 types Decisions
@@ -2295,6 +2357,294 @@ types Decisions
 				name = "not_possible"
 				texture = "gfx/interface/icons/symbols/icon_cross.dds"
 				visible = "[Not(Decision.IsPossibleForPlayer)]"
+			}
+		}
+	}
+}
+Types Patrons
+{
+	Type button_patron_icon = button {
+		size = { 150 150 }
+		alwaystransparent = yes
+
+		background = {
+			texture = "gfx/interface/colors/red.dds"
+			spriteType = Corneredtiled
+			spriteborder = { 6 6 }
+			shaderfile = "gfx/FX/pdxgui_default.shader"
+			alpha = 0.5
+			modify_texture = {
+				name = "mask_1"
+				texture = "gfx/interface/component_masks/mask_glow.dds"
+				blend_mode = alphamultiply
+				rotate_uv = 1
+			}
+			modify_texture = {
+				name = "mask_2"
+				texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+				blend_mode = alphamultiply
+				rotate_uv = 1
+			}
+		}
+		icon = {
+			block "patron_icon" {
+				texture = "gfx/interface/patrons/patron_daedra.dds"
+			}
+			size = { 128 128 }
+			parentanchor = center
+		}
+	}
+
+	Type button_patron_entry = button_standard {
+		size = { 500 100 }
+		maximumsize = { 500 100 }
+
+		hbox = {
+			button = {
+				size = { 100 100 }
+				alwaystransparent = yes
+				background = {
+					texture = "gfx/interface/component_tiles/tile_selected.dds"
+					spriteType = Corneredtiled
+					spriteborder = { 6 6 }
+					shaderfile = "gfx/FX/pdxgui_default.shader"
+				}
+				icon = {
+					block "patron_entry_icon" {
+						texture = "gfx/interface/patrons/patron_daedra.dds"
+					}
+					size = { 84 84 }
+					parentanchor = center
+				}
+				icon = {
+					texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
+					position = { 100 2 }
+					size = { 396 96 }
+					alwaystransparent = yes
+					layer = bottom
+					alpha = 0.7
+					modify_texture = {
+						name = "mask_1"
+						texture = "gfx/interface/component_masks/mask_culture_era_tab.dds"
+						blend_mode = alphamultiply
+						rotate_uv = 0
+					}
+				}
+			}
+
+			spacer = {
+				size = { 9 0 }
+			}
+
+			vbox = {
+				spacer = {
+					size = { 0 4 }
+				}
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					textbox = {
+						font = StandardGameFont
+						fontcolor = { 1 1 1 1 }
+						fontsize = 16
+						block "patron_entry_name" {
+							text = patron_azura_name
+						}
+						autoresize = no
+						layoutpolicy_horizontal = expanding
+						elide = right
+						minimumsize = { -1 16 }
+						align = left
+					}
+				}
+				spacer = {
+					size = { 0 7 }
+				}
+				textbox = {
+					font = StandardGameFont
+					fontcolor = { 0.8 0.8 0.8 1 }
+					fontsize = 12
+					block "patron_entry_desc" {
+						text = patron_azura_long_desc
+					}
+					autoresize = no
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					elide = right
+					multiline = yes
+					align = top|left
+				}
+				spacer = {
+					size = { 0 3 }
+				}
+			}
+			spacer = {
+				size = { 9 0 }
+			}
+		}
+	}
+
+	Type button_patron_decision_entry = button_standard {
+		size = { 200 40 }
+		maximumsize = { 200 40 }
+
+		#text = "[Decision.GetTitleForPlayer]"
+		tooltip = "[Decision.GetShortDescForPlayer]"
+
+		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+
+			size = { 110 38 }
+
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 110 44 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Decision.IsPossibleForPlayer]"
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 110 44 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+
+				effectname = "GreyedOut"
+
+				tintcolor = { 0.6 0.6 0.6 0.7 }
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		hbox = {
+			margin = {10 0 }
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				size = { 14 }
+				align = nobaseline
+			}
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				default_format = "#low"
+				size = { 14 }
+				align = nobaseline
+			}
+		}
+	}
+
+	Type button_patron_major_decision_entry = button_standard {
+		size = { 300 50 }
+		maximumsize = { 300 50 }
+
+		#text = "[Decision.GetTitleForPlayer]"
+		tooltip = "[Decision.GetShortDescForPlayer]"
+
+		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+
+			size = { 165 48 }
+
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 165 66 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Decision.IsPossibleForPlayer]"
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 165 66 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.4
+
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+
+				effectname = "GreyedOut"
+
+				tintcolor = { 0.6 0.6 0.6 0.7 }
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		hbox = {
+			margin = {10 0 }
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				size = { 18 }
+				align = nobaseline
+			}
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				default_format = "#low"
+				size = { 18 }
+				align = nobaseline
 			}
 		}
 	}
