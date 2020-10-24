@@ -27,8 +27,8 @@ window = {
 
 		on_start = "[GetVariableSystem.Clear('right_window_open')]"
 		on_start = "[GetVariableSystem.Clear('patron_window_open')]"
-		datacontext = "[GetScriptedGui('patron_clear')]" #need to add to switch button, also try hide/show in margin widgets
-		on_start = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		#datacontext = "[GetScriptedGui('patron_clear')]" #done this way to avoid error in log about data being an invalid property
+		on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 	}
 
 	margin_widget = {
@@ -1811,10 +1811,10 @@ window = {
 													fontcolor = { 1 1 1 1 }
 													fontsize = 24
 													text = selected_patron_passive_name
-													autoresize = no
+													autoresize = yes
 													layoutpolicy_horizontal = expanding
 													elide = right
-													minimumsize = { -1 16 }
+													#minimumsize = { -1 16 }
 													align = left
 												}
 											}
@@ -1853,7 +1853,7 @@ window = {
 										datacontext = "[GetScriptedGui('patron_confirm_patron')]"
 										enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-										# visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 										tooltip = "[ScriptedGui.BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 									}
 									spacer = {
