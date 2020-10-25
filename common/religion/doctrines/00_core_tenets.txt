@@ -1321,7 +1321,7 @@ doctrine_core_tenets = {
 					trigger = {
 						religion_tag = reach_religion
 					}
-					desc = tenet_witch_worship_alternate_name
+					desc = tenet_witch_worship_reach_religion_name
 				}
 				desc = tenet_witch_worship_name
 			}
@@ -1621,6 +1621,55 @@ doctrine_core_tenets = {
 			allows_worship_meridia_shunned_doctrines_active = yes
 			hostility_override_doctrine_vampirism_accepted = 3
 			hostility_override_doctrine_necromancy_accepted = 3
+		}
+	}
+	
+	tenet_sacred_artifacts = {
+		icon = core_tenet_sword
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sacred_artifacts }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+
+		character_modifier = {
+			dynasty_house_opinion = 10
+			prowess = 2
+		}
+	}
+	
+	tenet_contempt_for_the_weak = {
+		icon = core_tenet_sword
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_contempt_for_the_weak }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			can_claim_weak_land = yes
+			reduced_faction_strong = yes
+			increased_faction_weak = yes
+			election_vote_strong = yes
+		}
+		
+		traits = {
+			virtues = { physique_good }
+			sins = { physique_bad }
 		}
 	}
 
@@ -2534,7 +2583,13 @@ doctrine_core_tenets = {
 					trigger = {
 						religion_tag = aldmer_religion
 					}
-					desc = tenet_legalism_alternate_name
+					desc = tenet_legalism_aldmer_religion_name
+				}
+				triggered_desc = {
+					trigger = {
+						religion_tag = malacath_religion
+					}
+					desc = tenet_legalism_malacath_religion_name
 				}
 				desc = tenet_legalism_name
 			}
@@ -2545,7 +2600,7 @@ doctrine_core_tenets = {
 					trigger = {
 						religion_tag = aldmer_religion
 					}
-					desc = tenet_legalism_alternate_desc
+					desc = tenet_legalism_aldmer_religion_desc
 				}
 				desc = tenet_legalism_desc
 			}
@@ -4217,29 +4272,6 @@ doctrine_core_tenets = {
 
 		parameters = {
 			no_unfaithfulness_penalty_active = yes
-		}
-	}
-	
-	tenet_sacred_artifacts = {
-		icon = core_tenet_sword
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_sacred_artifacts }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			always = yes
-		}
-		
-
-		character_modifier = {
-			dynasty_house_opinion = 10
-			prowess = 2
 		}
 	}
 	
