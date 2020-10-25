@@ -1,0 +1,95 @@
+#######################################
+##                                   ##
+##  Guide to adding Passive Patrons  ##
+##                                   ##
+#######################################
+
+1 - Modifier
+    Create a modifier for the patron, see `common/modifier/ek_patron_gods_modifiers.txt`
+
+2 - Localization
+    2a - Localization
+         Create localization for the following, replaceing [patron] as necessary:
+         p_[patron]:0 "Follower of [patron]"
+         patron_[patron]_name:0 "[patron]"
+         patron_[patron]_long_desc:0 "short description, shouldn't be much longer than thiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiis"
+         patron_[patron]_modifier:0 "[GetModifier('p_[patron]').GetDesc]"
+    2b - Custom Loc
+         Modifify the following in `common/customizable_localization/ek_scripted_gui_custom_loc.txt`:
+         GetPatronPassiveName
+         GetPatronPassiveLongDesc
+         GetPatronPassiveModifier
+         they should all have an entry pointing to the corresponding localisation key with the trigger being `has_variable = patron_[patron]_shown`
+
+3 - Scripted GUI
+    create an entry with the following form:
+    ```
+    patron_[patron]_shown = {
+        scope = character
+
+        is_shown = {
+            patron_[pantheon]_valid = yes
+        }
+
+        is_valid = {
+            OR = {
+                NOT = { has_variable = patron_[patron]_shown }
+            }
+        }
+
+        effect = {
+            patron_passive_clear_variables = yes
+            set_variable = patron_[patron]_shown
+        }
+    }
+    ```
+    The patron_[pantheon]_valid can be exchanged for an appropriate check if a syncretic doctrine adds a patron to a pantheon or other reasons.
+
+4 - Scripted Effect & Triggers
+    Add a line to `patron_passive_clear_variables` in `common/scripted_effect/ek_patron_effects.txt` to remove the variable set in the scripted gui.
+    Create the necessary trigger for `is_shown` if the patron is not part of a pantheon or other reasons..
+
+5 - The GUI
+    5a - Patron Icon
+         Open window_decisions.gui and search for `Interaction Tab, Passive`, this should be the only are you need to edit. (the exception is if there is no pantheon associated with the patron already).
+         From here everything in the first vbox can be ignored, scroll down to the vbox named `patron_icons` in the hbox named `selected_patron`, this is where the icon is assigned.
+         Copy-paste an existing entry and change `datacontext` to the scripted gui created previously and `texture` to the path to the patron icon.
+         ```
+        # [patron] #
+		button_patron_icon = {
+			datacontext = "[GetScriptedGui('patron_[patron]_shown')]"
+			visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+			blockoverride "patron_icon" {
+				texture = "gfx/interface/patrons/patron_[patron].dds"
+			}
+		}
+         ```
+    5b - Selection Entry
+         scroll down to the hbox named `passive_patron_select` then a bit further to the list of patrons. Copy-paste an entry and change `datacontext` and `texture` as above,
+         `patron_entry_name` and `patron_entry_desc` should be changed to the th previously created localization.
+         ```
+        # [patron] #
+		vbox = {
+		    name = "patron_[patron]"
+ 		    datacontext = "[GetScriptedGui('patron_[patron]_shown')]"
+ 		    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+ 		    button_patron_entry = {
+     			size = { 450 100 }
+ 			    #datacontext = "[GetScriptedGui('patron_[patron]_shown')]"
+ 			    onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ 			    down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+ 			    blockoverride "patron_entry_icon" {
+     				texture = "gfx/interface/patrons/patron_[patron].dds"
+ 			    }
+ 			    blockoverride "patron_entry_name" {
+     				text = patron_[patron]_name
+ 			    }
+ 			    blockoverride "patron_entry_desc" {
+     				text = patron_[patron]_long_desc
+ 			    }
+ 		    }
+ 	    }
+         ```

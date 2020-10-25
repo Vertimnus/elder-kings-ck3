@@ -26,10 +26,25 @@
 	}
 }
 
-has_passive_patron_selected = {
+has_pantheon_selected = {
 	OR = {
 		# Pantheons #
 		has_variable = patron_divines_shown #v. wip, mostly here for testing
+	}
+}
+
+has_passive_patron_selected = {
+	OR = {
+		# Divines #
+		has_variable = patron_akatosh_shown
+		has_variable = patron_arkay_shown
+		has_variable = patron_dibella_shown
+		has_variable = patron_julianos_shown
+		has_variable = patron_kynareth_shown
+		has_variable = patron_mara_shown
+		has_variable = patron_stendarr_shown
+		has_variable = patron_talos_shown
+		has_variable = patron_zenithar_shown
 	}
 }
 
@@ -46,6 +61,8 @@ is_worshipping_daedra = {
 		faith = {
 			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
 			OR = {
+				# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
+                has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
                 has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
                 has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
                 has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
