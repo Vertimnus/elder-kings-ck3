@@ -7,12 +7,12 @@
 # Clavicus: Prosperity Worship + Daedric Bargains
 # Hermaeus: Veneration of Knowledge
 # Hircine: Lycan Worship + Ritual Hunts + Sanctity of Nature
-# Malacath: Communal Identity
+# Malacath: Contempt for the Weak
 # Mehrunes: Pursuit of Power
 # Mephala: Shadow Worship + Sanctioned False Conversion + Sacred Lies
 # Meridia: Sanctity of Life
 # Molag: Vampire Worship + Human Sacrifice
-# Namira: Adorcism + Ritual Cannibalism
+# Namira: Adorcism + Ritual Cannibalism + Vows of Squalor
 # Nocturnal:
 # Peryite:
 # Sanguine: Carnal Exaltation + Hedonistic
@@ -1470,11 +1470,31 @@ doctrine_core_tenets = {
 			# TODO: Implement the effects
 			weak_rulers_contest_rule = yes
 			election_vote_strong = yes
+			allows_worship_malacath_shunned_doctrines_active = yes
 		}
 		
 		traits = {
 			virtues = { physique_good }
 			sins = { physique_bad }
+		}
+	}
+	
+	tenet_vows_of_squalor = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_vows_of_squalor }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			# TODO: Just that (copy paste Vows of Poverty I guess)
+			vows_of_squalor_active = yes
+			allows_worship_namira_shunned_doctrines_active = yes
 		}
 	}
 
@@ -1689,7 +1709,6 @@ doctrine_core_tenets = {
 			same_culture_conversion_bonus_active = yes
 			same_faith_promote_culture_bonus_active = yes
 			other_culture_conversion_penalty_active = yes
-			allows_worship_malacath_shunned_doctrines_active = yes
 		}
 
 		character_modifier = {
