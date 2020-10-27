@@ -781,6 +781,229 @@ patron_zenithar_shown = {
     }
 }
 
+patron_shezarr_shown = {
+    scope = character
+
+    is_shown = {
+        patron_divines_valid = yes
+        faith = {
+            NOR = {
+                has_doctrine = tenet_aldmeri_syncretism #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
+                has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
+            }
+        }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_shezarr_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_shezarr_shown
+    }
+}
+
+# Aldmer #
+patron_aldmer_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_aldmer_shown }
+    }
+
+    effect = {
+        patron_clear_variables = yes
+        set_variable = patron_aldmer_shown
+    }
+}
+
+patron_auriel_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_auriel_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_auriel_shown
+    }
+}
+
+patron_jephre_shown = {
+    scope = character
+
+    is_shown = {
+        OR = {
+            patron_aldmer_valid = yes
+            faith = { has_doctrine = tenet_aldmeri_syncretism }
+        }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_jephre_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_jephre_shown
+    }
+}
+
+patron_magnus_shown = {
+    scope = character
+
+    is_shown = {
+        OR = {
+            patron_aldmer_valid = yes
+            faith = { has_doctrine = tenet_aldmeri_syncretism }
+        }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_magnus_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_magnus_shown
+    }
+}
+
+patron_phynaster_shown = {
+    scope = character
+
+    is_shown = {
+        OR = {
+            patron_aldmer_valid = yes
+            faith = { has_doctrine = tenet_aldmeri_syncretism }
+        }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_phynaster_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_phynaster_shown
+    }
+}
+
+patron_syrabane_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_syrabane_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_syrabane_shown
+    }
+}
+
+patron_trinimac_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_trinimac_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_trinimac_shown
+    }
+}
+
+patron_xarxes_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_xarxes_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_xarxes_shown
+    }
+}
+
+patron_xen_shown = {
+    scope = character
+
+    is_shown = {
+        patron_aldmer_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_xen_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_xen_shown
+    }
+}
+
 # patron_decision_test = { #pair w/ ai=no and variable condition so don't appear in decisions normally except for ai
 #     scope = character
 
