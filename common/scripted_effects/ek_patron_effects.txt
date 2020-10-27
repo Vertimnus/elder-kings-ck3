@@ -25,8 +25,9 @@
 
     # Pantheons #
     remove_variable = patron_divines_shown
+    remove_variable = patron_aldmer_shown
 
-    # Tabs # these are here to force close the interaction tab on faith change 
+    # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle
     remove_variable = patron_interaction_passive_tab_toggle
 }
@@ -58,8 +59,9 @@ patron_clear_res_variables = {
 
     # Pantheons #
     remove_variable = patron_divines_shown_res
+    remove_variable = patron_aldmer_shown_res
 
-    # Tabs # these are here to force close the interaction tab on faith change 
+    # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle_res
     remove_variable = patron_interaction_passive_tab_toggle_res
 }
@@ -75,52 +77,108 @@ patron_passive_clear_variables = {
     remove_variable = patron_stendarr_shown
     remove_variable = patron_talos_shown
     remove_variable = patron_zenithar_shown
+    remove_variable = patron_shezarr_shown
+    # Aldmer #
+    remove_variable = patron_auriel_shown
+    remove_variable = patron_jephre_shown
+    remove_variable = patron_magnus_shown
+    remove_variable = patron_phynaster_shown
+    remove_variable = patron_syrabane_shown
+    remove_variable = patron_trinimac_shown
+    remove_variable = patron_xarxes_shown
+    remove_variable = patron_xen_shown
 }
 
 patron_clear_modifiers = {
-    remove_character_modifier = p_akatosh
-    remove_character_modifier = p_arkay
-    remove_character_modifier = p_dibella
-    remove_character_modifier = p_julianos
-    remove_character_modifier = p_kynareth
-    remove_character_modifier = p_mara
-    remove_character_modifier = p_stendarr
-    remove_character_modifier = p_zenithar
+    remove_trait = p_akatosh
+    remove_trait = p_arkay
+    remove_trait = p_dibella
+    remove_trait = p_julianos
+    remove_trait = p_kynareth
+    remove_trait = p_mara
+    remove_trait = p_stendarr
+    remove_trait = p_zenithar
+    remove_trait = p_shezarr
+    remove_trait = p_auriel
+    remove_trait = p_jephre
+    remove_trait = p_magnus
+    remove_trait = p_phynaster
+    remove_trait = p_syrabane
+    remove_trait = p_trinimac
+    remove_trait = p_xarxes
+    remove_trait = p_xen
 }
 
 patron_assign_modifier = {
     # Divines #
     if = {
         limit = { has_variable = patron_akatosh_shown }
-        add_character_modifier = p_akatosh
+        add_trait = p_akatosh
     }
     else_if = {
         limit = { has_variable = patron_arkay_shown }
-        add_character_modifier = p_arkay
+        add_trait = p_arkay
     }
     else_if = {
         limit = { has_variable = patron_dibella_shown }
-        add_character_modifier = p_dibella
+        add_trait = p_dibella
     }
     else_if = {
         limit = { has_variable = patron_julianos_shown }
-        add_character_modifier = p_julianos
+        add_trait = p_julianos
     }
     else_if = {
         limit = { has_variable = patron_kynareth_shown }
-        add_character_modifier = p_kynareth
+        add_trait = p_kynareth
     }
     else_if = {
         limit = { has_variable = patron_mara_shown }
-        add_character_modifier = p_mara
+        add_trait = p_mara
     }
     else_if = {
         limit = { has_variable = patron_stendarr_shown }
-        add_character_modifier = p_stendarr
+        add_trait = p_stendarr
     }
     else_if = {
         limit = { has_variable = patron_zenithar_shown }
-        add_character_modifier = p_zenithar
+        add_trait = p_zenithar
+    }
+    else_if = {
+        limit = { has_variable = patron_shezarr_shown }
+        add_trait = p_shezarr
+    }
+    # Aldmer #
+    else_if = {
+        limit = { has_variable = patron_auriel_shown }
+        add_trait = p_auriel
+    }
+    else_if = {
+        limit = { has_variable = patron_jephre_shown }
+        add_trait = p_jephre
+    }
+    else_if = {
+        limit = { has_variable = patron_magnus_shown }
+        add_trait = p_magnus
+    }
+    else_if = {
+        limit = { has_variable = patron_phynaster_shown }
+        add_trait = p_phynaster
+    }
+    else_if = {
+        limit = { has_variable = patron_syrabane_shown }
+        add_trait = p_syrabane
+    }
+    else_if = {
+        limit = { has_variable = patron_trinimac_shown }
+        add_trait = p_trinimac
+    }
+    else_if = {
+        limit = { has_variable = patron_xarxes_shown }
+        add_trait = p_xarxes
+    }
+    else_if = {
+        limit = { has_variable = patron_xen_shown }
+        add_trait = p_xen
     }
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
