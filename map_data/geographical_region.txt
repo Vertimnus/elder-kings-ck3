@@ -11,47 +11,86 @@
 #	These groups are mutually exclusive on the same tier & should cover every part of the map
 ###########################################################################
 
-#HIGH ROCK
-
+### HIGH ROCK
 mundus_tamriel_high_rock_balfiera = { 
 	duchies = { d_balfiera }
 }
-
 mundus_tamriel_high_rock_betony = {
 	duchies = { d_betony }
 }
 
-mundus_tamriel_high_rock_glenumbra = { 
-	duchies = { d_daggerfall d_ilessan d_daenia d_camlorn d_bhoriane d_anticlere d_kambria }
+## GLENUMBRA: Daggerfall + Camlorn
+mundus_tamriel_high_rock_daggerfall = { 
+	duchies = { d_daggerfall d_daenia d_northmoor d_anticlere }
 	regions = { mundus_tamriel_high_rock_betony }
 }
-
-mundus_tamriel_high_rock_rivenspire = { 
-	duchies = { d_phrygias d_shornhelm d_white_haven d_rivenspire d_northpoint d_lorkrata d_boralis }
-	counties = { c_port_duncreek }
+mundus_tamriel_high_rock_camlorn = { 
+	duchies = { d_camlorn d_kambria d_bhoriane d_cambray }
+}
+mundus_tamriel_high_rock_glenumbra = { 
+	regions = { mundus_tamriel_high_rock_daggerfall mundus_tamriel_high_rock_camlorn mundus_tamriel_high_rock_balfiera }
 }
 
-mundus_tamriel_high_rock_stormhaven = { 
+## RIVENSPIRE : Shornhelm + Northpoint
+mundus_tamriel_high_rock_shornhelm = { 
+	duchies = { d_phrygias d_shornhelm d_rivenspire }
+}
+mundus_tamriel_high_rock_northpoint = { 
+	duchies = { d_boralis d_northpoint d_lorkrata }
+}
+mundus_tamriel_high_rock_rivenspire = { 
+	regions = { mundus_tamriel_high_rock_shornhelm mundus_tamriel_high_rock_northpoint }
+}
+
+## STORMHAVEN: Wayrest
+mundus_tamriel_high_rock_wayrest = { 
 	duchies = { d_wayrest d_alcaire d_koegria d_gavaudon }
 }
-
-mundus_tamriel_high_rock_western_reach = { 
-	duchies = { d_scarp d_jehanna }
-	counties = { c_royan c_dunlain }
+mundus_tamriel_high_rock_stormhaven = { 
+	regions = { mundus_tamriel_high_rock_wayrest }
 }
 
+## WROTHGAR: Wrothgar + Fharun
+mundus_tamriel_high_rock_little_wrothgar = { 
+	duchies = { d_wrothgar d_argent d_shipwreck_coast }
+}
+mundus_tamriel_high_rock_fharun = { 
+	duchies = { d_scarp d_jehanna d_bonerock d_fharun }
+}
 mundus_tamriel_high_rock_wrothgar = { 
-	duchies = { d_wrothgar d_argent d_bonerock }
-	counties = { c_bonerock c_karthgran c_fharun c_shipwreck_coast }
-	regions = { mundus_tamriel_high_rock_western_reach }
+	regions = { mundus_tamriel_high_rock_little_wrothgar mundus_tamriel_high_rock_fharun }
 }
 
-mundus_tamriel_high_rock_upper_bangrokai = { 
+## BANGKORAI: Evermore + Hallin
+mundus_tamriel_high_rock_evermore = { 
 	duchies = { d_evermore d_halcyon d_dunkarn d_viridia d_bangkorai }
 }
-
+mundus_tamriel_hammerfell_hallin = { 
+	duchies = { d_ojwambu d_fallen_wastes d_thorstad d_razak }
+}
+mundus_tamriel_high_rock_bangkorai = { 
+	regions = { mundus_tamriel_high_rock_evermore mundus_tamriel_hammerfell_hallin }
+}
+## COMPLETE HIGH ROCK
 mundus_tamriel_high_rock = { 
-	regions = { mundus_tamriel_high_rock_balfiera mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_upper_bangrokai }
+	regions = { mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_evermore }
+}
+
+## Custom nativity regions
+custom_nativity_glenumbra = {
+	regions = { mundus_tamriel_high_rock_daggerfall mundus_tamriel_high_rock_camlorn mundus_tamriel_high_rock_balfiera }
+}
+custom_nativity_rivenspire = {
+	regions = { mundus_tamriel_high_rock_shornhelm mundus_tamriel_high_rock_northpoint }
+}
+custom_nativity_stormhaven = {
+	regions = { mundus_tamriel_high_rock_stormhaven }
+}
+custom_nativity_wrothgar = {
+	regions = { mundus_tamriel_high_rock_little_wrothgar mundus_tamriel_high_rock_fharun }
+}
+custom_nativity_bangkorai = {
+	regions = { mundus_tamriel_high_rock_evermore mundus_tamriel_hammerfell_hallin }
 }
 
 #HAMMERFELL
@@ -74,6 +113,41 @@ mundus_tamriel_hammerfell_alikr = {
 
 mundus_tamriel_hammerfell = { 
 	regions = { mundus_tamriel_hammerfell_lower_bangrokai mundus_tamriel_hammerfell_alikr }
+}
+
+### CYRODIIL
+## GOLD COAST: Anvil + Kvatch
+mundus_tamriel_cyrodiil_anvil = {
+	duchies = { d_anvil d_sutch d_hastrel d_stirk d_crowhaven }
+}
+mundus_tamriel_cyrodiil_kvatch = {
+	duchies = { d_kvatch d_linchal d_ontus d_dirich d_shardrock }
+}
+mundus_tamriel_cyrodiil_gold_coast = {
+	regions = { mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_kvatch }
+}
+## WEST WEALD: Skingrad
+mundus_tamriel_cyrodiil_skindrad = {
+	duchies = { d_skingrad d_woodenhand d_vlastarus d_nisin d_faregyl }
+}
+mundus_tamriel_cyrodiil_west_weald = {
+	regions = { mundus_tamriel_cyrodiil_skindrad }
+}
+## COLOVIAN HIGHLANDS: Chorrol
+mundus_tamriel_cyrodiil_chorrol = {
+	duchies = { d_chorrol d_glademist d_carmala d_rayles d_greenlake d_sancre_tor }
+}
+mundus_tamriel_cyrodiil_colovian_highlands = {
+	regions = { mundus_tamriel_cyrodiil_chorrol }
+}
+## COLOVIA
+mundus_tamriel_cyrodiil_colovia = {
+	regions = { mundus_tamriel_cyrodiil_gold_coast mundus_tamriel_cyrodiil_west_weald mundus_tamriel_cyrodiil_colovian_highlands }
+}
+
+## COMPLETE CYRODIIL
+mundus_tamriel_cyrodiil = { 
+	regions = { mundus_tamriel_cyrodiil_colovia }
 }
 
 #TAMRIEL
