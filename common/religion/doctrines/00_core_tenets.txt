@@ -2,6 +2,7 @@
 ### TO DO: Edit the tenet cost depending on the faith's philosophy (can check EK1 to get an idea)
 
 ## Daedra-related tenets (unlock the worship of this Prince as a patron deity if the tenet is used & Daedric worship is not a crime)
+## NOTE: When tying a Prince to a specific tenet, don't forget to change the creating_faith_$PRINCE$_shunned_accepted_tenet_doctrine scripted trigger
 # Azura: Esotericism
 # Boethiah: Unrelenting Faith + Sacred Lies
 # Clavicus: Prosperity Worship + Daedric Bargains
@@ -12,12 +13,12 @@
 # Mephala: Shadow Worship + Sanctioned False Conversion + Sacred Lies
 # Meridia: Sanctity of Life
 # Molag: Vampire Worship + Human Sacrifice
-# Namira: Adorcism + Ritual Cannibalism + Vows of Squalor
-# Nocturnal:
+# Namira: Vows of Squalor + Adorcism + Ritual Cannibalism
+# Nocturnal: Shadow Worship
 # Peryite:
 # Sanguine: Carnal Exaltation + Hedonistic
-# Sheogorath:
-# Vaermina:
+# Sheogorath: Radical Detachment
+# Vaermina: Sacred Alchemy + Ritual Nightmares
 
 doctrine_core_tenets = {
 	group = "core_tenets"
@@ -1070,6 +1071,7 @@ doctrine_core_tenets = {
 			# TODO: Actually make that have an effect
 			children_education_intrigue = yes
 			allows_worship_mephala_shunned_doctrines_active = yes
+			allows_worship_nocturnal_shunned_doctrines_active = yes
 		}
 		
 		traits = {
@@ -1495,6 +1497,85 @@ doctrine_core_tenets = {
 			# TODO: Just that (copy paste Vows of Poverty I guess)
 			vows_of_squalor_active = yes
 			allows_worship_namira_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_radical_detachment = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_radical_detachment }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			# TODO: Just that
+			radical_detachment_law_cost_increase = yes
+			allows_worship_sheogorath_shunned_doctrines_active = yes
+		}
+		
+		character_modifier = {
+			stress_gain_mult = -0.25
+		}
+		
+		traits = {
+			virtues = {
+				fickle
+				lunatic = 2
+			}
+			sins = { stubborn }
+		}
+	}
+	
+	tenet_sacred_alchemy = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sacred_alchemy }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			allows_worship_vaermina_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = {
+				lifestyle_physician
+				lifestyle_herbalist = 2
+			}
+		}
+	}
+	
+	tenet_ritual_nightmares = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_ritual_nightmares }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			# TODO: That (take exemple on Meditate in seclusion)
+			intentional_nightmares_mechanics_active = yes
+			allows_worship_vaermina_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = { brave }
+			sins = { craven }
 		}
 	}
 
