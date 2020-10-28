@@ -470,28 +470,42 @@ arrange_marriage_interaction = {
 				is_ai = no
 			}
 			trigger_else = {
-				scope:actor = {
-					OR= {
-						faith = {
-							has_doctrine = doctrine_gender_female_dominated
+				OR = {
+					scope:actor = {
+						OR = {
+							faith = {
+								has_doctrine = doctrine_gender_female_dominated
+							}
+							AND = {
+								is_female = yes
+								faith = { has_doctrine = doctrine_gender_equal }
+							}
+							AND = {
+								exists = scope:secondary_actor
+								scope:actor = scope:secondary_actor
+								is_female = yes
+								is_ai = no
+							}
 						}
-						AND = {
+					}
+					scope:secondary_actor = {
+						is_female = yes
+						is_heir_of = scope:actor
+						faith = { has_doctrine = doctrine_gender_equal }
+					}
+					AND = {
+						scope:secondary_recipient = { 
 							is_female = yes
+							is_heir_of = scope:recipient
 							faith = { has_doctrine = doctrine_gender_equal }
 						}
-						AND = {
-							exists = scope:secondary_actor
-							scope:actor = scope:secondary_actor
-							is_female = yes
-							is_ai = no
-						}
+						scope:secondary_actor = { NOT = { is_heir_of = scope:actor } }
 					}
 				}
 			}
 		}
 	}
 	
-
 	send_option = {
 		is_shown = {
 			scope:secondary_actor = {
@@ -771,21 +785,36 @@ marry_off_interaction = {
 		flag = matrilineal
 		localization = "MATRILINEAL_OFFER"
 		starts_enabled = {
-			scope:actor = {
-				OR= {
-					faith = {
-						has_doctrine = doctrine_gender_female_dominated
+			OR = {
+				scope:actor = {
+					OR = {
+						faith = {
+							has_doctrine = doctrine_gender_female_dominated
+						}
+						AND = {
+							is_female = yes
+							faith = { has_doctrine = doctrine_gender_equal }
+						}
+						AND = {
+							exists = scope:secondary_actor
+							scope:actor = scope:secondary_actor
+							is_female = yes
+							is_ai = no
+						}
 					}
-					AND = {
+				}
+				scope:secondary_actor = {
+					is_female = yes
+					is_heir_of = scope:actor
+					faith = { has_doctrine = doctrine_gender_equal }
+				}
+				AND = {
+					scope:secondary_recipient = { 
 						is_female = yes
+						is_heir_of = scope:recipient
 						faith = { has_doctrine = doctrine_gender_equal }
 					}
-					AND = {
-						exists = scope:secondary_actor
-						scope:actor = scope:secondary_actor
-						is_female = yes
-						is_ai = no
-					}
+					scope:secondary_actor = { NOT = { is_heir_of = scope:actor } }
 				}
 			}
 		}

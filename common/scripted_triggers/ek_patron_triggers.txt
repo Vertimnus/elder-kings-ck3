@@ -29,7 +29,8 @@
 has_pantheon_selected = {
 	OR = {
 		# Pantheons #
-		has_variable = patron_divines_shown #v. wip, mostly here for testing
+		has_variable = patron_divines_shown
+		has_variable = patron_aldmer_shown
 	}
 }
 
@@ -45,6 +46,16 @@ has_passive_patron_selected = {
 		has_variable = patron_stendarr_shown
 		has_variable = patron_talos_shown
 		has_variable = patron_zenithar_shown
+		has_variable = patron_shezarr_shown
+		# Aldmer #
+		has_variable = patron_auriel_shown
+		has_variable = patron_jephre_shown
+		has_variable = patron_magnus_shown
+		has_variable = patron_phynaster_shown
+		has_variable = patron_syrabane_shown
+		has_variable = patron_trinimac_shown
+		has_variable = patron_xarxes_shown
+		has_variable = patron_xen_shown
 	}
 }
 
@@ -168,6 +179,10 @@ patron_divines_valid = {
 	faith = { has_doctrine = doctrine_pantheon_divines }
 }
 
+patron_aldmer_valid = {
+	faith = { has_doctrine = doctrine_pantheon_aedra }
+}
+
 # Aggregate Triggers #
 patron_has_princes = {
 	OR = {
@@ -202,6 +217,7 @@ patron_has_tribunal = {
 patron_has_pantheon = {
 	OR = {
 		patron_divines_valid = yes
+		patron_aldmer_valid = yes
 	}
 }
 
