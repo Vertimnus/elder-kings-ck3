@@ -1,0 +1,101 @@
+﻿
+embrace_duraki_culture_decision = { #create duraki culture as a king
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	desc = embrace_duraki_culture_decision_desc
+	selection_tooltip = embrace_duraki_culture_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_independent_ruler = yes
+		OR = {
+			has_culture_group = culture_group:nedic_group
+			AND = { #lunatic king 🤪
+				has_trait = trait:lunatic
+				highest_held_title_tier = 3
+			}
+		}
+		capital_province.title_province = {
+			geographical_region = { mundus_tamriel_hammerfell_craglorn}
+		}
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_revived_duraki_culture
+			}
+		}
+	}
+
+	is_valid = {
+		has_trait = scholar
+		OR = {
+			has_trait = lunatic_1
+			AND = {
+				has_religion = religion:celestial_religion
+				OR = {
+					prestige_level >= very_high_prestige_level
+					has_title = title:k_craglorn
+				}
+			}
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+		custom_tooltip = embrace_duraki_culture_decision_courtiers_embrace_duraki
+		custom_tooltip = embrace_duraki_culture_decision_provinces_embrace_duraki
+		custom_tooltip = embrace_duraki_culture_decision_capital_embraces_duraki
+		hidden_effect = {
+			every_courtier = {
+				limit = {
+					has_culture = root.culture
+					dynasty = root.dynasty
+				}
+				set_culture = culture:duraki
+			}
+			every_held_title = {
+				limit = {
+					tier = tier_county
+					culture.culture_group = root.culture.culture_group
+					title_province = {
+						geographical_region = { mundus_tamriel_hammerfell_craglorn }
+					}
+				}
+				random = {
+					chance = 60
+					set_county_culture = culture:duraki
+				}
+			}
+			capital_county = { set_county_culture = culture:duraki }
+			culture:duraki = {
+				get_all_innovations_from = root.culture
+				}
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_revived_duraki_culture
+			}
+		}
+		set_culture = culture:duraki
+		add_character_flag = converted_culture_this_lifetime
+		trigger_event = {
+			id = ek_nedic.0001 #informs people this happened + gives vassals option to switch culture
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
