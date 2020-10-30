@@ -2,6 +2,231 @@
 # Root does not exist
 yearly_global_pulse = {
 	effect = {
+		### EK EDIT: Removed the culture splits/shifts
+		# Visigothic culture split
+		# if = {
+			# limit = {
+				# current_date <= 920.1.1 # No need to check this in later starts
+				# NOT = { has_global_variable = visigothic_culture_split }
+				# current_date >= 850.1.1
+			# }
+			# random = {
+				# chance = 0 # No chance the first year of play if starting in 867
+				# modifier = {
+					# add = 10
+					# current_date >= 868.1.1
+				# }
+				# modifier = {
+					# add = 10 # 20% chance
+					# current_date >= 875.1.1
+				# }
+				# modifier = {
+					# add = 10 # 30% chance
+					# current_date >= 890.1.1
+				# }
+				# set_global_variable = {
+					# name = visigothic_culture_split
+					# value = yes
+				# }
+				# trigger_event = {
+					# id = global_culture.0001
+					# days = { 60 300 }
+				# }
+			# }
+		# }
+		# Norse culture split.
+		# if = {
+			# limit = {
+				# current_date < 990.1.1
+				# NOT = { has_global_variable = norse_culture_split }
+				# current_date >= 950.1.1
+			# }
+			# random = {
+				# chance = 10
+				# modifier = {
+					# add = 20 # 30% chance
+					# current_date >= 960.1.1
+				# }
+				# modifier = {
+					# add = 30 # 60% chance
+					# current_date >= 970.1.1
+				# }
+				# modifier = {
+					# add = 40 # 100% chance
+					# current_date >= 980.1.1
+				# }
+				# set_global_variable = {
+					# name = norse_culture_split
+					# value = yes
+				# }
+				# trigger_event = {
+					# id = global_culture.0011
+					# days = { 60 300 }
+				# }
+			# }
+		# }
+		# Suebi -> Portugese Culture Shift
+		# if = {
+			# limit = {
+				# current_date <= 1000.1.1 # No need to check this in later starts
+				# NOT = { has_global_variable = portuguese_culture_creation }
+				# current_date >= 900.1.1
+			# }
+			# random = {
+				# chance = 10
+				# modifier = {
+					# add = 20 # 20% chance
+					# current_date >= 925.1.1
+				# }
+				# modifier = {
+					# add = 30 # 30% chance
+					# current_date >= 950.1.1
+				# }
+				# modifier = {
+					# add = 40 # 100% chance
+					# current_date >= 975.1.1
+				# }
+				# set_global_variable = {
+					# name = portuguese_culture_creation
+					# value = yes
+				# }
+				# trigger_event = {
+					# id = global_culture.0021
+					# days = { 60 300 }
+				# }
+			# }
+		# }
+		# Anglo-Saxon -> Scottish Culture Shift
+		# if = {
+			# limit = {
+				# current_date <= 950.1.1 # No need to check this in later starts
+				# NOT = { has_global_variable = scottish_culture_creation }
+				# current_date >= 850.1.1
+			# }
+			# random = {
+				# chance = 0 # No chance the first year of play if starting in 867
+				# modifier = {
+					# add = 10
+					# current_date >= 868.1.1
+				# }
+				# modifier = {
+					# add = 10 # 20% chance
+					# current_date >= 875.1.1
+				# }
+				# modifier = {
+					# add = 10 # 30% chance
+					# current_date >= 890.1.1
+				# }
+				# set_global_variable = {
+					# name = scottish_culture_creation
+					# value = yes
+				# }
+				# trigger_event = {
+					# id = global_culture.0031
+					# days = { 60 300 }
+				# }
+			# }
+		# }
+		### EK EDIT: Removed the Mongol Empire
+		# Mongol Invasion
+		# if = {
+			# limit = {
+				# has_game_rule = never_mongol_invasion
+			# }
+		# }
+		# else_if = {
+			# limit = {
+				# has_game_rule = random_mongol_invasion
+				# NOT = { has_global_variable = mongols_have_appeared}
+			# }
+			# random = {
+				# chance = temujin_appearance_base_chance
+				# modifier = {
+					# factor = 0.25
+					# current_date < 1180.1.1
+				# }
+				# modifier = {
+					# add = 3
+					# current_date > 1200.1.1
+				# }
+				# modifier = {
+					# add = 5
+					# current_date > 1220.1.1
+				# }
+				# modifier = {
+					# add = 5
+					# current_date > 1235.1.1
+				# }
+				# set_global_variable = {
+					# name = mongols_have_appeared
+					# value = yes
+				# }
+				# debug_log = "Attempting to spawn mongol invasion within 240 days"
+				# trigger_event = {
+					# id = mongol_invasion.0001
+					# days = { 2 240 }
+				# }
+			# }
+		# }
+		# else = {
+			# if = {
+				# limit = {
+					# current_date > 1180.1.1
+					# current_date < 1250.1.1
+					# NOT = { has_global_variable = mongols_have_appeared }
+				# }
+				# debug_log = "Checking for chance of spawning mongols under historical settings"
+				# random = {
+					# chance = temujin_appearance_base_chance
+					# modifier = {
+						# add = 9
+						# current_date > 1200.1.1
+					# }
+					# modifier = {
+						# add = 10
+						# current_date > 1220.1.1
+					# }
+					# modifier = {
+						# add = 20
+						# current_date > 1235.1.1
+					# }
+					# set_global_variable = {
+						# name = mongols_have_appeared
+						# value = yes
+					# }
+					# debug_log = "Attempting to spawn mongol invasion within 240 days"
+					# trigger_event = {
+						# id = mongol_invasion.0001
+						# days = { 2 240 }
+					# }
+				# }
+			# }
+		# }
+		### EK EDIT: Removed the Almohad invasion
+		# Almohad Invasion
+		# if = {
+			# limit = {
+				# current_date >= 1110.1.1
+				# current_date < 1150.1.1
+				# NOT = { has_global_variable = spawned_almohads }
+			# }
+			# random = {
+				# chance = almohad_appearance_base_chance
+				# modifier = {
+					# add = 3
+					# current_date >= 1130.1.1
+				# }
+				# modifier = {
+					# add = 3
+					# current_date >= 1140.1.1
+				# }
+				# debug_log = "Attempting to spawn Almohads within 240 days"
+				# trigger_event = {
+					# id = almohad.0001
+					# days = { 2 240 }
+				# }
+			# }
+		# }
 	}
 }
 
@@ -27,6 +252,8 @@ yearly_playable_pulse = {
 three_year_playable_pulse = {
 	random_events = {
 		800 = 0
+		200 = global_culture.3011
+		600 = global_culture.3012
 	}
 }
 
@@ -45,6 +272,7 @@ five_year_playable_pulse = {
 quarterly_playable_pulse = {
 	on_actions = {
 		realm_maintenance_quarterly_pulse
+		relation_upgrade_quarterly_pulse
 		#Event pools
 		stewardship_lifestyle_progress_pulse
 		intrigue_lifestyle_progress_pulse
@@ -88,9 +316,6 @@ random_yearly_playable_pulse = {
 		1 = lover_ongoing_distance
 		1 = secrets_ongoing
 	}
-	on_actions = {
-		set_liege_distance_pulse
-	}
 }
 
 # Called from code once a year for all characters, at a random point that year (individually for each character)
@@ -100,9 +325,6 @@ random_yearly_everyone_pulse = {
 		yearly_health_pulse
 		stress_pulse
 		prison_maintenance_pulse
-		
-		# ek_race_check_pulse
-		# delay = { days = { 5 10 } }
 	}
 	random_on_action = {
 		chance_of_no_event = {
@@ -111,26 +333,14 @@ random_yearly_everyone_pulse = {
 		1 = assign_trait_events
 	}
 	events = {
+		holy_order.0206 #To increment the years passed since loan
 		marriage_interaction.0007 #One of the betrothed became part of clergy that doesn't allow marriage
 	}
 	random_events = {
 		500 = 0
+		100 = holy_order.0202 #Holy order demands payment
 	}
 }
-
-# ek_race_check_pulse = {
-	# trigger = {
-		# NOR = { 
-			# has_character_flag = race_check 
-			# has_trait = species_mer
-			# has_trait = species_human
-		# }
-	# }
-
-	# events = {	
-		# ek_race.0100 # EK - Species Trait Assignment
-	# }
-# }
 
 # Called from code once every five years for all characters.
 # Root is the character
@@ -278,15 +488,32 @@ on_yearly_events = {
 		#Muslim-specific events (mostly about Islamic centers of learning)
 		100 = yearly.4061 #A wise man visits your court
 		100 = yearly.4071 #You're very educated!
+		100 = yearly.4081 #Sponsor the translation of a book from Greek
 		100 = yearly.4091 #Your ward and you visit scholars
 
+		# Saharan regional flavour events.
+		## Marginally bumped some weightings for regional effect.
+		200 = yearly_saharan.0001 # An organised faith's merchants try to convert a pagan county in your domain.
+		200 = yearly_saharan.0021 # Desert nomads wish to move to one of your non-nomadic Saharan counties.
+		100 = yearly_saharan.0031 # Local slave raids intensify (aggressor).
+		100 = yearly_saharan.0032 # Local slave raids intensify (defender).
+
+		# Persion regional flavor events
+		200 = yearly_persian.1001 # Nowruz, or Persian New Year
+		200 = yearly_persian.1101 # Shu'ubiyya, or Persian Nationalism (From the foreign side)
 
 		# Varangian Guard
+		400 = varangian.0001 # A Courtier wants to join the Varangian Guard
 
 		#Pet story cycles
 		10 = pet_animal.5001 # Rival has cat...
 		10 = pet_animal.5002 # Rival has dog...
 
 		#Holy Order
+		50 = holy_order.2001 # Child wishes to join Holy Order
+		50 = holy_order.2002 # Sibling wants to join a Holy Order
+		50 = holy_order.2003 # Holy Order suggests you send them a child
+		50 = holy_order.2004 # Child returns to pick up the mantle
+		50 = holy_order.2005 # A - Possibly Undesirable - Child Returns Home
 	}
 }

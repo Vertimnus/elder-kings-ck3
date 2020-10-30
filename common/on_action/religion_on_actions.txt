@@ -6,6 +6,9 @@
 on_faith_created = {
 	effect = {
 		scope:old_faith = {
+			if = {
+				limit = { has_doctrine_parameter = unreformed }
+			}
 			set_variable = { name = has_been_reformed }
 		
 			root = { play_music_cue = "mx_cue_faith_conversion" }
@@ -15,6 +18,91 @@ on_faith_created = {
 		root = {
 			add_achievement_flag = { FLAG = achievement_its_not_a_cult_flag }
 		}
+		### EK EDIT: Removed references to vanilla faiths
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = west_african_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_siguic
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = west_african_orisha_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_orisha
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = west_african_bori_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_bori
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = west_african_roog_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_roog_sene
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = akom_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_akom
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = kushitism_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_kushitism
+				# VALUE = yes
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:old_faith = {
+					# religion_tag = waaqism_religion
+					# has_doctrine_parameter = unreformed
+				# }
+			# }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_mother_of_us_all_waaqism
+				# VALUE = yes
+			# }
+		# }
 	}
 
 	events = {
@@ -41,15 +129,19 @@ on_faith_conversion = {
 # Root is the character
 # scope:old_faith is the faith they used to have
 on_character_faith_change = {
-	on_actions = {
-		on_character_faith_change_clear_patrons
-	}
 	effect = {
+		### EK TODO: Update patrons?
 		check_for_equal_doctrine_effect = yes
 	}
 	events = {
 		faith_conversion.0002 # Remove obsolete modifiers
 		faith_conversion.0004 # Convert Theocracies
+		faith_conversion.0005 # Update marriage opinions
+		great_holy_war.0025 # Replace Recipient for ongoing GHW
+		great_holy_war.0029 # Beneficiary converted, remove and replace.
+		great_holy_war.0059 # Clear Crusader traits on conversion.
+		great_holy_war.0084 # Replace fallback ghw recipient
+		great_holy_war.0085 # Remove pledged vassals upon conversion of their liege.
 		false_conversion.0001	# Flag possible false conversions.
 		war_event.3100		# Handles invalidation of religious wars
 	}
@@ -66,6 +158,10 @@ on_faith_monthly = {
 		faith_fervor_events_pulse
 	}
 	events = {
+		great_holy_war.0010 #Great Holy Wars are unlocked for a Faith.
+		great_holy_war.0001
+		great_holy_war.0022 #Pope harasses players for not pledging support to Crusade yet.
+		great_holy_war.0030 #Monthly cleanup for Beneficiaries becoming unfit for various reasons.
 	}
 	
 }
@@ -110,7 +206,8 @@ faith_holy_order_land_acquisition_pulse = {
 faith_heresy_events_pulse = {
 	trigger = {
 		fervor <= 40
-		NOT = {
+		NOR = {
+			has_doctrine = unreformed_faith_doctrine
 			has_variable = current_heresy
 		}
 	}
@@ -138,7 +235,8 @@ faith_heresy_events_pulse = {
 
 faith_fervor_events_pulse = {
 	trigger = {
-		NOT = {
+		NOR = {
+			has_doctrine = unreformed_faith_doctrine
 			has_variable = recent_fervor_event
 		}
 	}
@@ -154,6 +252,34 @@ faith_fervor_events_pulse = {
 pagan_conversion_pulse = {
 	trigger = { #Is the character ready to convert?
 		always = no
+		# is_ai = yes
+		# is_independent_ruler = yes
+		# has_government = tribal_government
+		# has_realm_law = tribal_authority_3
+		# faith = { has_doctrine_parameter = unreformed }
+		# prestige_level >= 2 #lower than the regular requirement to make sure some rulers can convert
+		# capital_province.county = {
+			# development_level >= 8 #lower than the regular requirement to make sure some rulers can convert
+		# }
+
+		# custom_description = { #You need to have ALL (non-regional/unique) tribal innovations!
+			# text = has_all_tribal_innovations
+			# subject = root.culture
+			# culture = {
+				# has_innovation = innovation_motte
+				# has_innovation = innovation_catapult
+				# has_innovation = innovation_barracks
+				# has_innovation = innovation_mustering_grounds
+				# has_innovation = innovation_bannus
+				# has_innovation = innovation_quilted_armor
+				# has_innovation = innovation_gavelkind
+				# has_innovation = innovation_crop_rotation
+				# has_innovation = innovation_city_planning
+				# has_innovation = innovation_casus_belli
+				# has_innovation = innovation_plenary_assemblies
+				# has_innovation = innovation_ledger
+			# }
+		# }
 	}
 
 	events = {
@@ -166,7 +292,7 @@ pagan_conversion_pulse = {
 # Root is the great holy war
 on_potential_great_holy_war_invalidation = {
 	events = {
-
+		great_holy_war.0004
 	}
 }
 
@@ -174,6 +300,7 @@ on_potential_great_holy_war_invalidation = {
 # Root is the great holy war
 on_great_holy_war_invalidation = {
 	events = {
+		great_holy_war.0055 #Send notifications to players.
 	}
 }
 
@@ -181,6 +308,7 @@ on_great_holy_war_invalidation = {
 # Root is the great holy war
 on_great_holy_war_countdown_end = {
 	events = {
+		great_holy_war.0005
 	}
 }
 
@@ -190,5 +318,6 @@ on_great_holy_war_countdown_end = {
 # scope:replacement is the replacement character
 on_great_holy_war_participant_replaced = {
 	events = {
+		great_holy_war.0027 #Refresh Beneficiary for AI.
 	}
 }
