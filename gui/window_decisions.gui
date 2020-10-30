@@ -1235,29 +1235,61 @@ window = {
 							}
 							spacer = {
 								size = { 140 40 } #+30 compared to other one for button
-								hbox = {
-									size = { 60 50 }
-									#minimumsize = { 100 50 }
+								vbox = {
+									hbox = {
+										size = { 60 50 }
+										#minimumsize = { 100 50 }
 
+										# spacer = {
+										# 	size = { 80 0 }
+										# }
+
+										text_single = {
+											text = patron_ardor #defined by custom loc
+											align = center
+											fontsize = 16
+										}
+
+										# progressbar_standard = { #doesn't seem to support variables
+										# 	name = "progress_bar_azura"
+										# 	parentanchor = center
+										# 	size = { 100 10 }
+										# 	#visible = "[Holding.IsConstructionInProgress]"
+										# 	#min = 0
+										# 	#max = 1
+										# 	value = "[GetPlayer.MakeScope.Var('ardor_display').GetValue]"
+										# }
+									}
 									spacer = {
-										size = { 80 0 }
+										size = { 0 10 }
 									}
-
-									text_single = {
-										text = patron_ardor #defined by custom loc
-										align = center
-										fontsize = 16
+									hbox = {
+										button_ardor = {
+											datacontext = "[GetScriptedGui('patron_ardor_1')]" #0
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #0.5
+											down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #1
+										}
+										button_ardor = {
+											datacontext = "[GetScriptedGui('patron_ardor_2')]" #1
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #1.5
+											down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #2
+										}
+										button_ardor = {
+											datacontext = "[GetScriptedGui('patron_ardor_3')]" #2
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #2.5
+											down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #3
+										}
+										button_ardor = {
+											datacontext = "[GetScriptedGui('patron_ardor_4')]" #3
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #3.5
+											down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #4
+										}
+										button_ardor = {
+											datacontext = "[GetScriptedGui('patron_ardor_5')]" #4
+											enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #4.5IsShown
+											down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #5IsValid
+										}
 									}
-
-									# progressbar_standard = { #doesn't seem to support variables
-									# 	name = "progress_bar_azura"
-									# 	parentanchor = center
-									# 	size = { 100 10 }
-									# 	#visible = "[Holding.IsConstructionInProgress]"
-									# 	#min = 0
-									# 	#max = 1
-									# 	value = "[GetPlayer.MakeScope.Var('ardor_azura').GetValue]"
-									# }
 								}
 							}
 						}
@@ -2984,5 +3016,25 @@ Types Patrons
 				align = nobaseline
 			}
 		}
+	}
+	type button_ardor = button_normal
+	{
+		texture = "gfx/interface/patron_window/button_ardor.dds"
+		size = { 32 32 }
+
+		gfxtype = togglepushbuttongfx
+		effectname = "NoHighlight"
+
+		upframe = 2
+		uphoverframe = 2
+		uppressedframe = 2
+		downframe = 3
+		downhoverframe = 3
+		downpressedframe = 3
+		disableframe = 1
+
+		spriteType = Corneredtiled
+		spriteborder = { 3 3 }
+		framesize = { 32 32 }
 	}
 }

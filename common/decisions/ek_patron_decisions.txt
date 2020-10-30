@@ -44,21 +44,15 @@ patron_offer_gold_decision = {
 
     is_valid_showing_failures_only = {
         short_term_gold >= 50
-        NOT = { var:ardor_azura >= 10000 }
+        #NOT = { var:ardor_display >= 10000 }
     }
 
     effect = {
         #show_as_tooltip = { #The effect is actually applied in the event itself
         remove_short_term_gold = 50
         #}
-        if = {
-            limit = { NOT = { has_variable = ardor_azura } } #have initialisation and update as separate effects
-            set_variable = { name = ardor_azura value = 5 }
-            clamp_variable = { name = ardor_azura max = 10000 min = 0 }
-        }
-        else = {
-            change_variable = { name = ardor_azura add = 100 }
-        }
+        change_variable = { name = ardor_display add = medium_ardor_value }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -105,7 +99,7 @@ patron_offer_sacrifice_decision = {
             is_adult = yes
             NOT = { any_heir_title = { count > 0 } }
         }
-        NOT = { var:ardor_azura >= 10000 }
+        #NOT = { var:ardor_display >= 10000 }
     }
 
     effect = {
@@ -123,14 +117,8 @@ patron_offer_sacrifice_decision = {
                 death = { killer = ROOT death_reason = death_execution_blot }
             }
         }
-        if = {
-            limit = { NOT = { has_variable = ardor_azura } }
-            set_variable = { name = ardor_azura value = 5 }
-            clamp_variable = { name = ardor_azura max = 10000 min = 0 }
-        }
-        else = {
-            change_variable = { name = ardor_azura add = 500 }
-        }
+        change_variable = { name = ardor_display add = major_ardor_value }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -178,7 +166,7 @@ patron_boon_gold_decision = { #750
 
     is_valid_showing_failures_only = {
         #	short_term_gold >= 50
-        var:ardor_azura >= 300
+        var:ardor_display >= medium_ardor_value_double
     }
 
     effect = {
@@ -186,7 +174,8 @@ patron_boon_gold_decision = { #750
         add_gold = 50
         #}
         #patron_gain_favor_effect = yes
-        change_variable = { name = ardor_azura subtract = 300 }
+        change_variable = { name = ardor_display subtract = medium_ardor_value_double }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -231,7 +220,7 @@ patron_boon_training_decision = { #5000
             intrigue >= 25
             learning >= 25
         }
-        var:ardor_azura >= 2000
+        var:ardor_display >= massive_ardor_value
     }
 
     effect = {
@@ -295,7 +284,8 @@ patron_boon_training_decision = { #5000
         }
         #}
         #patron_gain_favor_effect = yes
-        change_variable = { name = ardor_azura subtract = 2000 }
+        change_variable = { name = ardor_display subtract = massive_ardor_value }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -336,7 +326,7 @@ patron_boon_horde_decision = { #5000
         # NOT = { #hard cap on number that can be summoned - 3 + 1 per 7 learning? scope to and store in list variable
         #     num hordes >= cap
         # }
-        var:ardor_azura >= 2000 #may add scaling cost for more hordes as soft limit cost * list_size/10
+        var:ardor_display >= massive_ardor_value #may add scaling cost for more hordes as soft limit cost * list_size/10
     }
 
     effect = {
@@ -397,7 +387,8 @@ patron_boon_horde_decision = { #5000
         }
         #}
         #patron_gain_favor_effect = yes
-        change_variable = { name = ardor_azura subtract = 2000 }
+        change_variable = { name = ardor_display subtract = massive_ardor_value }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
@@ -440,7 +431,7 @@ patron_boon_invasion_decision = { #25000
 
     is_valid_showing_failures_only = {
         #has_cult_religion = yes #really dedicated only
-        var:ardor_azura >= 10000
+        var:ardor_display >= monumental_ardor_value
     }
 
     effect = {
@@ -448,7 +439,8 @@ patron_boon_invasion_decision = { #25000
         #add_gold = 50
         #}
         #patron_gain_favor_effect = yes
-        change_variable = { name = ardor_azura subtract = 10000 }
+        change_variable = { name = ardor_display subtract = monumental_ardor_value }
+        patron_ardor_update_actual = yes
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
