@@ -605,38 +605,38 @@ coastal_or_neighboring_county_trigger = {
 # Non-vikings will for the AI just assert it's legal, as the target titles should already have fallen back to only allowing land and sea borders
 neighboring_county_or_viking_conquest_trigger = {
 	always = no
-	# OR = {
-		# trigger_if = {
-			# limit = {
-				# $CHARACTER$ = {
-					# can_use_viking_invasion_cbs_trigger = yes
-				# }
-			# }
-			# is_coastal_county = yes
-			# OR = {
-				# $CHARACTER$ = { is_ai = no }
-				# is_neighbor_to_realm = $CHARACTER$
-				# $CHARACTER$ = {
-					# NOT = {
-						# any_sub_realm_title = {
-							# tier = tier_county
-							# NOT = {
-								# is_connected_to = {
-									# target = $CHARACTER$.capital_province.county
-								# }
-							# }
-						# }
-					# }
-				# }
-			# }
-		# }
-		# trigger_else = {
-			# $CHARACTER$ = { is_ai = no }
-		# }
-		# any_neighboring_county = {
-			# holder = {
-				# target_is_same_character_or_above = $CHARACTER$
-			# }
-		# }
-	# }
+	OR = {
+		trigger_if = {
+			limit = {
+				$CHARACTER$ = {
+					can_use_viking_invasion_cbs_trigger = yes
+				}
+			}
+			is_coastal_county = yes
+			OR = {
+				$CHARACTER$ = { is_ai = no }
+				is_neighbor_to_realm = $CHARACTER$
+				$CHARACTER$ = {
+					NOT = {
+						any_sub_realm_title = {
+							tier = tier_county
+							NOT = {
+								is_connected_to = {
+									target = $CHARACTER$.capital_province.county
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		trigger_else = {
+			$CHARACTER$ = { is_ai = no }
+		}
+		any_neighboring_county = {
+			holder = {
+				target_is_same_character_or_above = $CHARACTER$
+			}
+		}
+	}
 }

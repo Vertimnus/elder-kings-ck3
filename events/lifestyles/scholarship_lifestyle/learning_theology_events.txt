@@ -1,4 +1,6 @@
-﻿namespace = learning_theology
+﻿### EK EDIT: Removed references to vanilla religions
+
+namespace = learning_theology
 
 namespace = learning_theology_special
 
@@ -30,7 +32,15 @@ learning_theology.1301 = {
 	title = learning_theology.1301.t
 	desc = {
 		desc = learning_theology.1301.desc_opening
-		desc = learning_theology.1301.desc
+		first_valid = {
+			# triggered_desc = {
+				# trigger = {
+					# faith = { religion_tag = christianity_religion }
+				# }
+				# desc = learning_theology.1301.desc_regula_pastoralis
+			# }
+			desc = learning_theology.1301.desc
+		}
 		desc = learning_theology.1301.desc_ending
 	}
 	theme = learning_theology_focus
@@ -834,23 +844,22 @@ scripted_trigger learning_theology_3011_building_trigger = {
 	OR = { #To check that you CAN build the next lvl of the building
 		AND = {
 			root.culture = {
-				simple_agricultural_building_requirement_tier_1 = yes
+				has_innovation = innovation_manorialism
 			}
 			has_building = temple_01
 		}
 		AND = {
 			root.culture = {
-				simple_agricultural_building_requirement_tier_2 = yes
+				has_innovation = innovation_windmills
 			}
 			has_building = temple_02
 		}
 		AND = {
 			root.culture = {
-				simple_agricultural_building_requirement_tier_3 = yes
+				has_innovation = innovation_cranes
 			}
 			has_building = temple_03
-		}
-	}
+		
 }
 
 learning_theology.3011 = {
@@ -1034,6 +1043,14 @@ learning_theology.3021 = {
 		}
 		desc = {
 			first_valid = {
+				# triggered_desc = {
+					# trigger = {
+						# faith = {
+							# religion_tag = christianity_religion
+						# }
+					# }
+					# desc = learning_theology.3021.desc_christian
+				# }
 				desc = learning_theology.3021.desc_other
 			}
 		}
@@ -1493,7 +1510,7 @@ learning_theology.3024 = {
 # by Linnéa Thimrén
 ##################################################
 scripted_trigger learning_theology_3031_province_trigger = {
-	NOt = { faith = root.faith }
+	NOt = { religion = root.religion }
 	faith = {
 		faith_hostility_level = {
 		target = root.faith
@@ -1975,6 +1992,7 @@ learning_theology_special.1001 = {
 		faith = {
 			NOR = {
 				exists = var:variable_changed_doctrine_learning_theology_special_1001
+				has_doctrine = unreformed_faith_doctrine
 			}
 		}
 		OR = {
@@ -2365,9 +2383,17 @@ learning_theology_special.1003 = {
 # Learned scholar come to your court
 # by Linnéa Thimrén
 ##################################################
+### EK TODO: Adapt this event chain
 
 scripted_trigger learning_theology_special_1101_rabbi_trigger = {
-	always = no
+	faith = faith:rabbinism
+	OR = {
+		has_trait = education_learning_2
+		has_trait = education_learning_3
+		has_trait = education_learning_4
+	}
+	learning >= medium_skill_rating
+	can_be_clergy_due_to_gender_trigger = yes
 }
 
 learning_theology_special.1101 = {
@@ -2397,6 +2423,14 @@ learning_theology_special.1101 = {
 		is_ruler = yes
 		is_landed = yes
 		always = no
+		# faith = {
+			# OR = {
+				# religion_tag = judaism_religion
+				# religion_tag = christianity_religion
+				# religion_tag = dualism_religion
+				# religion_tag = islam_religion
+			# }
+		# }
 	}
 
 	immediate = {
@@ -2405,6 +2439,84 @@ learning_theology_special.1101 = {
 			days = 200
 		}
 		add_character_flag = had_learning_theology_special_1101_this_lifetime
+		
+		# if = { #If Rashi could have been alive we create him (for players!)
+			# limit = {
+				# game_start_date >= 1040.1.1
+				# game_start_date <= 1105.1.1
+				# is_ai = no
+				# NOT = { #Only spawns once.
+					# is_target_in_global_variable_list = {
+						# name = special_character_list
+						# target = flag:flag_theology_1101_shlomo_yitzchaki
+					# }
+				# }
+			# }
+			# create_character = {
+				# location = root.capital_province
+				# template = scholar_character
+				# faith = faith:rabbinism
+				# culture = culture:french
+				# trait = scholar
+				# trait = diligent
+				# name = "Shlomo Yitzchaki"
+				# gender = male
+				# save_scope_as = scholar
+			# }
+			# save_scope_value_as = {
+				# name = rashi
+				# value = yes
+			# }
+			# add_to_global_variable_list = {
+				# name = special_character_list
+				# target = flag:flag_theology_1101_shlomo_yitzchaki
+			# }
+			# add_character_flag = flag_learning_theology_2020_historical
+		# }
+		# else_if = {
+			# limit = {
+				# exists = root.capital_province
+				# any_pool_character = {
+					# province = root.capital_province
+					# learning_theology_special_1101_rabbi_trigger = yes
+				# }
+			# }
+			# random_pool_character = {
+				# province = root.capital_province
+				# limit = { learning_theology_special_1101_rabbi_trigger = yes }
+				# save_scope_as = scholar
+			# }
+			# save_scope_value_as = {
+				# name = rashi
+				# value = no
+			# }
+		# }
+		# else = {
+			# create_character = {
+				# location = root.capital_province
+				# template = scholar_character
+				# faith = root.faith
+				# culture = root.culture
+				# gender_female_chance = {
+					# if = {
+						# limit = { faith:rabbinism = { has_doctrine_parameter = clergy_must_be_male } }
+						# value = 0
+					# }
+					# else_if = {
+						# limit = { faith:rabbinism = { has_doctrine_parameter = clergy_must_be_female } }
+						# value = 100
+					# }
+					# else = {
+						# value = 50
+					# }
+				# }
+				# save_scope_as = scholar
+			# }
+			# save_scope_value_as = {
+				# name = rashi
+				# value = no
+			# }
+		# }
 	}
 
 	option = { # Let's write commentaries!
