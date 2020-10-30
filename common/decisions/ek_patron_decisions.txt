@@ -7,6 +7,44 @@
 #       -worship from bargains/legal worship -> part of pantheon -> cult religion
 #       -part of pantheon should be default w/ cult getting major boons & slight discount, bargains should have moderate cost inflation
 
+# based on select_personal_deity_decision
+patron_select_patron_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = patron_select_patron_decision_desc
+	selection_tooltip = patron_select_patron_decision_tooltip
+
+	is_shown = {
+        is_adult = yes
+        is_ruler = yes
+		is_ai = yes
+		has_active_patron_selected = no
+        patron_has_princes = yes
+	}
+
+	is_valid = {
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	effect = {
+		custom_tooltip = select_personal_deity_decision_tt
+		trigger_event = patron_decision.001
+	}
+
+	ai_check_interval = 96
+	
+	ai_potential = {
+		piety >= minor_piety_value
+		patron_has_passive_patron_trait = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
 ##########
 # Shared #
 ##########
@@ -30,7 +68,7 @@ patron_offer_gold_decision = {
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
             }
             # AND = {
@@ -56,11 +94,11 @@ patron_offer_gold_decision = {
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
-        always = no
+        always = yes
     }
 
     ai_will_do = {
-        base = 0
+        base = 5
     }
 }
 
@@ -77,7 +115,7 @@ patron_offer_sacrifice_decision = {
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
                 NOR = { #dont care for human sacrifice, based on ek1
                     has_variable = patron_azura_shown
@@ -122,11 +160,11 @@ patron_offer_sacrifice_decision = {
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
-        always = no
+        always = yes
     }
 
     ai_will_do = {
-        base = 0
+        base = 1
     }
 }
 
@@ -152,7 +190,7 @@ patron_boon_gold_decision = { #750
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
             }
             # AND = {
@@ -179,11 +217,11 @@ patron_boon_gold_decision = { #750
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
-        always = no
+        always = yes
     }
 
     ai_will_do = {
-        base = 0
+        base = 10
     }
 }
 
@@ -200,7 +238,7 @@ patron_boon_training_decision = { #5000
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
             }
             # AND = {
@@ -289,11 +327,11 @@ patron_boon_training_decision = { #5000
     }
 
     ai_potential = { #should be able to eventually may handle seperatly
-        always = no
+        always = yes
     }
 
     ai_will_do = {
-        base = 0
+        base = 5
     }
 }
 
@@ -310,7 +348,7 @@ patron_boon_horde_decision = { #5000
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
             }
             # AND = {
@@ -417,7 +455,7 @@ patron_boon_invasion_decision = { #25000
         is_ruler = yes
         OR = {
             AND = {
-                is_ai = no
+                #is_ai = no
                 has_active_patron_selected = yes
             }
             # AND = {
