@@ -708,6 +708,36 @@ task_promote_culture = {
 			}
 		}
 		
+		### EK TODO: Make it so neighbouring provinces have an impact?
+		# if = {
+			# limit = {
+				# scope:county = {
+					# any_neighboring_county = {
+						# count = 1
+						# culture = scope:councillor_liege.culture
+					# }
+				# }
+			# }
+			# multiply = {
+				# value = 1.1
+				# desc = ONE_NEIGHBOUR_REASON
+			# }
+		# }
+		# if = {
+			# limit = {
+				# scope:county = {
+					# any_neighboring_county = {
+						# count = 2
+						# culture = scope:councillor_liege.culture
+					# }
+				# }
+			# }
+			# multiply = {
+				# value = 1.2
+				# desc = TWO_NEIGHBOUR_REASON
+			# }
+		# }
+		
 		### EK EDIT: Slashed the speed of culture conversion, unless you're native to the province
 		### NOTE: WHEN ADDING A NEW REGION NATIVITY/EDITING EXISTING ONES, DON'T FORGET TO PUT IT HERE
 		### NOTE: For now it has to be handled manually, but at one point I'd love to be able to just read a list and use @ or whatnot to have a generic trigger
@@ -1000,11 +1030,12 @@ task_promote_local_culture = {
 	highlight_own_realm = yes
 	
 	effect_desc = {
+		# we'll see if I ever find a way to show the variable in loc
 		first_valid = {
 			triggered_desc = {
 				trigger = {
-					exists = scope:county
-					#scope:county = { has_variable = culture_to_convert }
+					always = no
+					# scope:county = { has_variable = culture_to_convert }
 				}
 				desc = task_promote_local_culture_effect_with_culture_desc
 			}
@@ -1258,37 +1289,90 @@ task_promote_local_culture = {
 			}
 		}
 		# You must have a local culture available (as in: that actually exists. If it does not, you have to create it via decision)
+		# You can't be native to the region the province is in (use the regular Promote Culture job in this case)
+		### High Rock
 		trigger_if = {
-			limit = { scope:councillor_liege.culture_group = culture_group:breton_group }
-			
-			trigger_if = {
-				limit = { scope:county.title_province = { geographical_region = custom_nativity_glenumbra } }
-				is_target_in_global_variable_list = {
-					name = culture_is_alive
-					target = culture:glenumbran
-				}
-				scope:county = { NOT = { culture = culture:glenumbran } }
-			}
-			
-			trigger_else = { always = no }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_glenumbra } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = glenumbra }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = glenumbra } }
 		}
-		
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_rivenspire } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = rivenspire }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = rivenspire } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_stormhaven } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = stormhaven }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = stormhaven } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = bangkorai }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = bangkorai } }
+		}
 		trigger_else = { always = no }
 	}
 	
 	on_start_task_county = {
-		scope:county = {
-			culture:glenumbran = { save_scope_as = culture_to_convert }
-			set_variable = {
-				name = culture_to_convert
-				value = scope:culture_to_convert
+		### High Rock
+		if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_glenumbra } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_glenumbra
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_rivenspire } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_rivenspire
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_stormhaven } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_stormhaven
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_bangkorai
+				}
+				
+				save_scope_as = culture_to_convert
 			}
 		}
 		
 		scope:county = {
-			add_county_modifier = {
-				modifier = steward_task_efficient_taxation_modifier
-				days = 3650
+			set_variable = {
+				name = culture_to_convert
+				value = scope:culture_to_convert
 			}
 		}
 	}

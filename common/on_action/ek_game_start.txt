@@ -2,10 +2,14 @@
 # Empty scope
 ek_on_game_start = {
 	effect = {
-		### Set the dead cultures
-		add_to_global_variable_list = {
-			name = culture_is_alive
-			target = culture:glenumbran
+		### Set which cultures are alive (have some territory)
+		### Again, I have to do it by hand but I hope that one day I'll be able to just iterate through each province and set their culture in the list... Paradox please :'(
+		every_county = {
+			culture = { save_scope_as = culture_to_save }
+			add_to_global_variable_list = {
+				name = culture_is_alive
+				target = scope:culture_to_save
+			}
 		}
 		### Nativity innovations
 		## Build the list
