@@ -9,6 +9,8 @@
 
 	is_shown = {
 		is_landed = yes
+		exists = capital_province
+		capital_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
 		NOT = { exists = title:k_craglorn.holder }
 		NOT = {  #Can only do it once.
 			is_target_in_global_variable_list = {
@@ -16,17 +18,11 @@
 				target = flag:flag_formed_craglorn_kingdom
 			}
 		}
-		#No emperors.
-		highest_held_title_tier < tier_empire
-		capital_province.title_province = {
-			geographical_region = { mundus_tamriel_hammerfell_craglorn }
-		}
 	}
 
 	is_valid = {
 		AND = {
 			completely_controls_region = mundus_tamriel_hammerfell_craglorn
-			capital_province.title_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
 		}
 	}
 
@@ -52,6 +48,70 @@
 			add_to_global_variable_list = {
 				name = unavailable_unique_decisions
 				target = flag:flag_formed_craglorn_kingdom
+			}
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+form_glenumbra_kingdom_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = form_glenumbra_kingdom_decision_desc
+	selection_tooltip = form_glenumbra_kingdom_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		capital_province = { geographical_region = mundus_tamriel_high_rock_glenumbra }
+		NOT = { exists = title:k_glenumbra.holder }
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_formed_glenumbra_kingdom
+			}
+		}
+	}
+
+	is_valid = {
+		AND = {
+			completely_controls_region = mundus_tamriel_high_rock_glenumbra
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	cost = {
+		gold = 500
+	}
+
+	effect = {
+		show_as_tooltip = {
+			form_glenumbra_scripted_effect = yes
+		}
+		# trigger_event = {
+			# id = ektitulartitle.0001
+		# }
+		hidden_effect = {
+			form_glenumbra_scripted_effect = yes
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_formed_glenumbra_kingdom
 			}
 		}
 	}
