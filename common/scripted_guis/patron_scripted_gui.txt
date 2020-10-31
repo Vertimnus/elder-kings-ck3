@@ -1124,3 +1124,85 @@ patron_ardor_5 = {
 # # patron_decision_clear = { #for use in cancel button in confirm/cancel dialog after first click
 # #     scope = character
 # # }
+
+lunar_cycle_masser_new_moon = {
+    is_shown = { #new moon
+        #global_var:lunarphase_masser > 0
+        global_var:lunarphase_masser <= 2
+    }
+    is_valid = { #waxing cresent
+        global_var:lunarphase_masser > 2
+        global_var:lunarphase_masser <= 5
+    }
+}
+lunar_cycle_masser_waxing = {
+    is_shown = { #first quarter
+        global_var:lunarphase_masser > 5
+        global_var:lunarphase_masser <= 8
+    }
+    is_valid = { #waxing gibbous
+        global_var:lunarphase_masser > 8
+        global_var:lunarphase_masser <= 11
+    }
+}
+lunar_cycle_masser_full_moon = {
+    is_shown = { #full moon
+        global_var:lunarphase_masser > 11
+        global_var:lunarphase_masser <= 14
+    }
+    is_valid = { #waning gibbous
+        global_var:lunarphase_masser > 14
+        global_var:lunarphase_masser <= 17
+    }
+}
+lunar_cycle_masser_waning = {
+    is_shown = { #third quarter
+        global_var:lunarphase_masser > 17
+        global_var:lunarphase_masser <= 20
+    }
+    is_valid = { #waning cresent
+        global_var:lunarphase_masser > 20
+        #global_var:lunarphase_masser <= 23
+    }
+}
+
+lunar_cycle_secunda_new_moon = {
+    is_shown = { #new moon
+        #global_var:lunarphase_secunda > 0
+        global_var:lunarphase_secunda <= 3
+    }
+    is_valid = { #waxing cresent
+        global_var:lunarphase_secunda > 3
+        global_var:lunarphase_secunda <= 7
+    }
+}
+lunar_cycle_secunda_waxing = {
+    is_shown = { #first quarter
+        global_var:lunarphase_secunda > 7
+        global_var:lunarphase_secunda <= 11
+    }
+    is_valid = { #waxing gibbous
+        global_var:lunarphase_secunda > 11
+        global_var:lunarphase_secunda <= 15
+    }
+}
+lunar_cycle_secunda_full_moon = {
+    is_shown = { #full moon
+        global_var:lunarphase_secunda > 15
+        global_var:lunarphase_secunda <= 19
+    }
+    is_valid = { #waning gibbous
+        global_var:lunarphase_secunda > 19
+        global_var:lunarphase_secunda <= 23
+    }
+}
+lunar_cycle_secunda_waning = {
+    is_shown = { #third quarter
+        global_var:lunarphase_secunda > 23
+        global_var:lunarphase_secunda <= 27
+    }
+    is_valid = { #waning cresent
+        global_var:lunarphase_secunda > 27
+        #global_var:lunarphase_secunda <= 31
+    }
+}
