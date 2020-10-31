@@ -9,6 +9,8 @@
 
 	is_shown = {
 		is_landed = yes
+		exists = capital_province
+		capital_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
 		NOT = { exists = title:k_craglorn.holder }
 		NOT = {  #Can only do it once.
 			is_target_in_global_variable_list = {
@@ -16,17 +18,11 @@
 				target = flag:flag_formed_craglorn_kingdom
 			}
 		}
-		#No emperors.
-		highest_held_title_tier < tier_empire
-		capital_province.title_province = {
-			geographical_region = { mundus_tamriel_hammerfell_craglorn }
-		}
 	}
 
 	is_valid = {
 		AND = {
 			completely_controls_region = mundus_tamriel_hammerfell_craglorn
-			capital_province.title_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
 		}
 	}
 
