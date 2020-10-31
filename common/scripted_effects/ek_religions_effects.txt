@@ -1,0 +1,43 @@
+### Scripted effects tied to religions & faiths
+update_religions_stress = {
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a stress related tenet
+				faith = {
+					has_doctrine_parameter = stress_gives_piety_active
+				}
+				# You have a stress related modifier
+				has_character_modifier = stress_gives_piety_stress_1
+				has_character_modifier = stress_gives_piety_stress_2
+				has_character_modifier = stress_gives_piety_stress_3
+			}
+		}
+		
+		# Remove the modifiers
+		remove_character_modifier = stress_gives_piety_stress_1
+		remove_character_modifier = stress_gives_piety_stress_2
+		remove_character_modifier = stress_gives_piety_stress_3
+		
+		# Add the ones you need
+		if = {
+			limit = {
+				faith = {
+					has_doctrine_parameter = stress_gives_piety_active
+				}
+			}
+			if = {
+				limit = { stress_level >= 3 }
+				add_character_modifier = stress_gives_piety_stress_3
+			}
+			else_if = {
+				limit = { stress_level >= 2 }
+				add_character_modifier = stress_gives_piety_stress_2
+			}
+			else_if = {
+				limit = { stress_level >= 1 }
+				add_character_modifier = stress_gives_piety_stress_1
+			}
+		}
+	}
+}
