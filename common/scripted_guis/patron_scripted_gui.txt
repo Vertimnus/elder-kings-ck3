@@ -214,6 +214,7 @@ patron_interaction_tab_toggle = { #selection -> interaction
 
     effect = {
         set_variable = patron_interaction_tab_toggle
+        patron_ardor_update_display = yes
     }
 }
 patron_interaction_passive_tab_toggle = { #selection -> interaction passive
@@ -994,6 +995,76 @@ patron_xen_shown = {
     effect = {
         patron_passive_clear_variables = yes
         set_variable = patron_xen_shown
+    }
+}
+
+patron_ardor_1 = {
+    scope = character
+
+    is_valid = {
+        var:ardor_display >= 1000
+        #var:ardor_display >= tiny_ardor_value_double
+    }
+
+    is_shown = {
+        var:ardor_display >= 2000
+        #var:ardor_display >= minor_ardor_value
+    }
+}
+
+patron_ardor_2 = {
+    scope = character
+
+    is_valid = {
+        var:ardor_display >= 3000
+        #var:ardor_display >= minor_ardor_value_double
+    }
+
+    is_shown = {
+        var:ardor_display >= 4000
+        #var:ardor_display >= medium_ardor_value
+    }
+}
+
+patron_ardor_3 = {
+    scope = character
+
+    is_valid = {
+        var:ardor_display >= 5000
+        #var:ardor_display >= medium_ardor_value_double
+    }
+
+    is_shown = {
+        var:ardor_display >= 6000
+        #var:ardor_display >= major_ardor_value
+    }
+}
+
+patron_ardor_4 = {
+    scope = character
+
+    is_valid = {
+        var:ardor_display >= 7000
+        #var:ardor_display >= major_ardor_value_double
+    }
+
+    is_shown = {
+        var:ardor_display >= 8000
+        #var:ardor_display >= massive_ardor_value
+    }
+}
+
+patron_ardor_5 = {
+    scope = character
+
+    is_valid = {
+        var:ardor_display >= 9000
+        #var:ardor_display >= massive_ardor_value_double
+    }
+
+    is_shown = {
+        var:ardor_display >= 10000
+        #var:ardor_display >= monumental_ardor_value
     }
 }
 
