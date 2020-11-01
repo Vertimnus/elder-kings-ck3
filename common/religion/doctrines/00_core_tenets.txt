@@ -1371,6 +1371,33 @@ doctrine_core_tenets = {
 		}
 	}
 	
+		tenet_divine_disease = {
+		icon = core_tenet_flagellant
+
+		piety_cost = {
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_veneration_of_diseases }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			## EK TODO: Can decide to embrace the Corprus disease, earning Piety at the cost of getting the Corprus trait
+			## EK TODO: Passive bonus: health bonus when ill (scaling with Devotion)
+			tyranny_gain_mult = -0.5
+		}
+		
+		# traits = {
+			# virtues = {
+				# corprus
+			# }
+		# }
+	}
+	
 	tenet_ritual_hunts = {
 		icon = core_tenet_festivities
 
