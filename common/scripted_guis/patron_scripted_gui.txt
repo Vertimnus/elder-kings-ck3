@@ -1124,3 +1124,163 @@ patron_ardor_5 = {
 # # patron_decision_clear = { #for use in cancel button in confirm/cancel dialog after first click
 # #     scope = character
 # # }
+
+lunar_cycle_masser_new_moon = {
+    is_shown = { #new moon
+        #global_var:lunarphase_masser > 0
+        global_var:lunarphase_masser <= 3
+    }
+    is_valid = { #waxing cresent
+        global_var:lunarphase_masser > 3
+        global_var:lunarphase_masser <= 6
+    }
+}
+lunar_cycle_masser_waxing = {
+    is_shown = { #first quarter
+        global_var:lunarphase_masser > 6
+        global_var:lunarphase_masser <= 9
+    }
+    is_valid = { #waxing gibbous
+        global_var:lunarphase_masser > 9
+        global_var:lunarphase_masser <= 12
+    }
+}
+lunar_cycle_masser_full_moon = {
+    is_shown = { #full moon
+        global_var:lunarphase_masser > 12
+        global_var:lunarphase_masser <= 16
+    }
+    is_valid = { #waning gibbous
+        global_var:lunarphase_masser > 16
+        global_var:lunarphase_masser <= 19
+    }
+}
+lunar_cycle_masser_waning = {
+    is_shown = { #third quarter
+        global_var:lunarphase_masser > 19
+        global_var:lunarphase_masser <= 22
+    }
+    is_valid = { #waning cresent
+        global_var:lunarphase_masser > 22
+        #global_var:lunarphase_masser <= 25
+    }
+}
+
+lunar_cycle_secunda_new_moon = {
+    is_shown = { #new moon
+        #global_var:lunarphase_secunda > 0
+        global_var:lunarphase_secunda <= 4
+    }
+    is_valid = { #waxing cresent
+        global_var:lunarphase_secunda > 4
+        global_var:lunarphase_secunda <= 8
+    }
+}
+lunar_cycle_secunda_waxing = {
+    is_shown = { #first quarter
+        global_var:lunarphase_secunda > 8
+        global_var:lunarphase_secunda <= 12
+    }
+    is_valid = { #waxing gibbous
+        global_var:lunarphase_secunda > 12
+        global_var:lunarphase_secunda <= 16
+    }
+}
+lunar_cycle_secunda_full_moon = {
+    is_shown = { #full moon
+        global_var:lunarphase_secunda > 16
+        global_var:lunarphase_secunda <= 21
+    }
+    is_valid = { #waning gibbous
+        global_var:lunarphase_secunda > 21
+        global_var:lunarphase_secunda <= 25
+    }
+}
+lunar_cycle_secunda_waning = {
+    is_shown = { #third quarter
+        global_var:lunarphase_secunda > 25
+        global_var:lunarphase_secunda <= 29
+    }
+    is_valid = { #waning cresent
+        global_var:lunarphase_secunda > 29
+        #global_var:lunarphase_secunda <= 33
+    }
+}
+
+stellar_cycle_ritual = {
+    is_shown = {
+        current_month = 1
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_lover = {
+    is_shown = {
+        current_month = 2
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_lord = {
+    is_shown = {
+        current_month = 3
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_mage = {
+    is_shown = {
+        current_month = 4
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_shadow = {
+    is_shown = {
+        current_month = 5
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_steed = {
+    is_shown = {
+        current_month = 6
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_apprentice = {
+    is_shown = {
+        current_month = 7
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_warrior = {
+    is_shown = {
+        current_month = 8
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_lady = {
+    is_shown = {
+        current_month = 9
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_tower = {
+    is_shown = {
+        current_month = 10
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_atronach = {
+    is_shown = {
+        current_month = 11
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_thief = {
+    is_shown = {
+        current_month = 12
+        NOT = { has_global_variable = serpent_active }
+    }
+}
+stellar_cycle_serpent = {
+    is_shown = {
+        has_global_variable = serpent_active
+    }
+}
