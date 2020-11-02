@@ -100,3 +100,18 @@ lunar_cycle_start = {
         add = 334
     }
 }
+
+# each sign should average ~28 days a year as 365/13 is ~28 -> serpent should average 28 days a year active
+# serpent is semi-random in its activity -> use a formula with predicatable outcome, random input
+# formula is (365/x)*a = 28 where a is num active days, x is cycle length x = a*(365/13) ~= a*13
+# x is cycle length, need inactive time -> x = a*12 as 1/13 time spent active
+# changed use cycle time now
+
+serpent_active_days = {
+    integer_range = { min = 3 max = 6 }
+}
+
+serpent_cycle_days = {
+    value = serpent_active_days
+    multiply = 13
+}

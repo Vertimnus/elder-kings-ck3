@@ -8,38 +8,38 @@
 
 lunar_cycle_phase_masser = {
 	if = {
-		limit = { global_var:lunarphase_masser <= 5 }
+		limit = { global_var:lunarphase_masser <= 6 }
 		set_global_variable = { name = phase_masser value = flag:new }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_masser <= 11 }
+		limit = { global_var:lunarphase_masser <= 12 }
 		set_global_variable = { name = phase_masser value = flag:waxing }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_masser <= 17 }
+		limit = { global_var:lunarphase_masser <= 19 }
 		set_global_variable = { name = phase_masser value = flag:full }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_masser <= 23 }
+		limit = { global_var:lunarphase_masser <= 25 }
 		set_global_variable = { name = phase_masser value = flag:waning }
 	}
 }
 
 lunar_cycle_phase_secunda = {
 	if = {
-		limit = { global_var:lunarphase_secunda <= 7 }
+		limit = { global_var:lunarphase_secunda <= 8 }
 		set_global_variable = { name = phase_secunda value = flag:new }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_secunda <= 15 }
+		limit = { global_var:lunarphase_secunda <= 16 }
 		set_global_variable = { name = phase_secunda value = flag:waxing }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_secunda <= 23 }
+		limit = { global_var:lunarphase_secunda <= 25 }
 		set_global_variable = { name = phase_secunda value = flag:full }
 	}
 	else_if = {
-		limit = { global_var:lunarphase_secunda <= 31 }
+		limit = { global_var:lunarphase_secunda <= 33 }
 		set_global_variable = { name = phase_secunda value = flag:waning }
 	}
 }
@@ -65,30 +65,76 @@ lunar_cycle_start = {
 	lunar_cycle_phase_secunda = yes
 	trigger_event = {
 		on_action = lunar_cycle_masser
-		days = 3
+		#days = 3
 	}
 	trigger_event = {
 		on_action = lunar_cycle_secunda
-		days = 4
+		#days = 4
+	}
+	trigger_event = {
+		on_action = stellar_cycle_serpent
+		days = serpent_cycle_days
 	}
 }
 
 lunar_cycle_masser_effect = {
-	change_global_variable = { name = lunarphase_masser	add = 3 }
-	change_global_variable = { name = lunarphase_masser modulo = 24 }
-	lunar_cycle_phase_masser = yes
-	trigger_event = {
-		on_action = lunar_cycle_masser
-		days = 3
+	if = {
+		limit = {
+			OR = {
+				global_var:lunarphase_masser = 0
+				global_var:lunarphase_masser = 13
+			}
+		}
+		change_global_variable = { name = lunarphase_masser	add = 4 }
+		change_global_variable = { name = lunarphase_masser modulo = 26 }
+		lunar_cycle_phase_masser = yes
+		trigger_event = {
+			on_action = lunar_cycle_masser
+			days = 4
+		}
+	}
+	else = {
+		change_global_variable = { name = lunarphase_masser	add = 3 }
+		change_global_variable = { name = lunarphase_masser modulo = 26 }
+		lunar_cycle_phase_masser = yes
+		trigger_event = {
+			on_action = lunar_cycle_masser
+			days = 3
+		}
 	}
 }
 
 lunar_cycle_secunda_effect = {
-	change_global_variable = { name = lunarphase_secunda add = 4 }
-	change_global_variable = { name = lunarphase_secunda modulo = 32 }
-	lunar_cycle_phase_secunda = yes
+	if = {
+		limit = {
+			OR = {
+				global_var:lunarphase_secunda = 0
+				global_var:lunarphase_secunda = 17
+			}
+		}
+		change_global_variable = { name = lunarphase_secunda add = 5 }
+		change_global_variable = { name = lunarphase_secunda modulo = 34 }
+		lunar_cycle_phase_secunda = yes
+		trigger_event = {
+			on_action = lunar_cycle_secunda
+			days = 5
+		}
+	}
+	else = {
+		change_global_variable = { name = lunarphase_secunda add = 4 }
+		change_global_variable = { name = lunarphase_secunda modulo = 34 }
+		lunar_cycle_phase_secunda = yes
+		trigger_event = {
+			on_action = lunar_cycle_secunda
+			days = 4
+		}
+	}
+}
+
+stellar_cycle_serpent_effect = {
+	set_global_variable = { name = serpent_active value = yes days = serpent_active_days }
 	trigger_event = {
-		on_action = lunar_cycle_secunda
-		days = 4
+		on_action = stellar_cycle_serpent
+		days = serpent_cycle_days
 	}
 }

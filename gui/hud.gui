@@ -1591,6 +1591,15 @@ icon = {
 				shortcut = "encyclopedia"
 				using = tooltip_ne
 			}
+
+			button_icon = {
+				name = "astronomy_button"
+				texture = "gfx/interface/icons/lunar_cycle/stars.dds"
+				tooltipwidget = {
+					astronomy_tooltip = {}
+				}
+				using = tooltip_above
+			}
 		}
 
 		hbox = {
@@ -3853,6 +3862,496 @@ types HUD
 				block "csi_text"
 				{
 					text = "AUTOSAVE_IN_PROGRESS"
+				}
+			}
+		}
+	}
+}
+types Astronomy
+{
+	type astronomy_tooltip = widget
+	{
+		alwaystransparent = no
+		using = GeneralTooltipSetup
+		widget = {
+			name = "background"
+			using = DefaultTooltipBackground
+			size = { 100% 100% }
+			alwaystransparent = no
+		}
+		vbox = {
+			set_parent_size_to_minimum = yes
+			margin = { 12 8 }
+			margin_bottom = 16
+			spacing = 4
+
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				margin = { 0 4 }
+				background = {
+					name = "header"
+					texture = "gfx/interface/component_tiles/tile_title_big_top_01.dds"
+					spriteType = Corneredstretched
+					align = vcenter|left
+					modify_texture = {
+						name = "mask"
+						texture = "gfx/interface/component_masks/mask_title_big_top.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 160 0 }
+						blend_mode = alphamultiply
+						alpha = 0.5
+					}
+
+					modify_texture = {
+						name = "overlay"
+						texture = "gfx/interface/component_overlay/overlay_title_big_top.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 0 0 }
+						blend_mode = overlay
+					}
+				}
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					button_icon = {
+						size = { 64 64 }
+						texture = "gfx/interface/icons/lunar_cycle/stars.dds"
+						alwaystransparent = yes
+					}
+
+					spacer = {
+						size = { 32 0 }
+					}
+
+					vbox = {
+						layoutpolicy_vertical = expanding
+						spacer = {
+							size = { 0 6 }
+						}
+						text_single = {
+							layoutpolicy_horizontal = expanding
+							name = "header"
+							text = "astronomy_name"
+							align = left
+							# align = hcenter
+							# elide = middle
+							using = Font_Type_Flavor
+							using = Font_Size_Big
+
+						}
+						expand = {
+							layoutpolicy_vertical = growing
+						}
+					}
+					expand = {
+						layoutpolicy_horizontal = growing
+					}
+				}
+			}
+
+			hbox = {
+				spacing = 2
+				margin = { 2 0 }
+
+				vbox = {
+					spacing = 2
+					layoutpolicy_vertical = expanding
+					hbox = {
+						spacing = 2
+						layoutpolicy_horizontal = expanding
+						vbox = {
+							name = "signs"
+							size = { 64 64 }
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_apprentice')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_apprentice.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_atronach')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_atronach.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_lady')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lady.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_lord')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lord.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_lover')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lover.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_mage')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_mage.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_ritual')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_ritual.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_serpent')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_serpent.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_shadow')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_shadow.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_steed')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_steed.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_thief')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_thief.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_tower')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_tower.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								datacontext = "[GetScriptedGui('stellar_cycle_warrior')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_warrior.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+						}
+						divider_light = {
+							layoutpolicy_vertical = growing
+						}
+						spacer = {
+							size = { 4 0 }
+						}
+						vbox = {
+							text_single = {
+								layoutpolicy_horizontal = growing
+								text = "starsign_desc"
+								align = left
+							}
+						}
+					}
+					divider_light = {
+						layoutpolicy_horizontal = growing
+					}
+					hbox = {
+						spacing = 2
+						layoutpolicy_horizontal = expanding
+						vbox = {
+							name = "masser_phases"
+							size = { 64 64 }
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_new_moon')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 1
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_new_moon')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 2
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_waxing')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 3
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_waxing')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 4
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_full_moon')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								# modify_texture = {
+								#	texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+								# 	size = { 64 64 }
+								# 	blend_mode = multiply
+								# 	alpha = 0.8
+								# 	framesize = { 256 256 }
+								# 	frame = 4
+								# 	rotate_uv = 0
+								# }
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_full_moon')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 3
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_waning')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 4
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_masser_waning')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.8
+									framesize = { 256 256 }
+									frame = 1
+									rotate_uv = 0
+								}
+							}
+						}
+						divider_light = {
+							layoutpolicy_vertical = growing
+						}
+						spacer = {
+							size = { 4 0 }
+						}
+						text_single = {
+							layoutpolicy_horizontal = growing
+							text = "masser_desc"
+							align = left
+						}
+					}
+					divider_light = {
+						layoutpolicy_horizontal = growing
+					}
+					hbox = {
+						spacing = 2
+						layoutpolicy_horizontal = expanding
+						vbox = {
+							name = "secunda_phases"
+							size = { 64 64 }
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_new_moon')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 1
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_new_moon')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 2
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waxing')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 3
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waxing')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 4
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_full_moon')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								# modify_texture = {
+								#	texture = "gfx/interface/icons/lunar_cycle/moon_phases.dds"
+								# 	size = { 64 64 }
+								# 	blend_mode = multiply
+								# 	alpha = 0.9
+								# 	framesize = { 256 256 }
+								# 	frame = 4
+								# 	rotate_uv = 0
+								# }
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_full_moon')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 3
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waning')]"
+								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 4
+									rotate_uv = 0
+								}
+							}
+							icon = {
+								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waning')]"
+								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
+								size = { 64 64 }
+								modify_texture = {
+									texture = "gfx/interface/icons/lunar_cycle/moon_phases_mirror.dds"
+									size = { 64 64 }
+									blend_mode = multiply
+									alpha = 0.9
+									framesize = { 256 256 }
+									frame = 1
+									rotate_uv = 0
+								}
+							}
+						}
+						divider_light = {
+							layoutpolicy_vertical = growing
+						}
+						spacer = {
+							size = { 4 0 }
+						}
+						text_single = {
+							layoutpolicy_horizontal = growing
+							text = "secunda_desc"
+							align = left
+						}
+					}
 				}
 			}
 		}
