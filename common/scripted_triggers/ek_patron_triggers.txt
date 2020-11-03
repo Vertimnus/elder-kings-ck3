@@ -68,15 +68,16 @@ has_passive_patron_selected = {
 
 # Daedra #
 is_worshipping_daedra = {
-	OR = {
-		faith = {
-			NOT = { has_doctrine = doctrine_daedra_worship_forbidden } #cant be criminal
-			OR = {
-				# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-				has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-				has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-				has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
+	faith = {
+		NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
+		OR = {
+			# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
+			has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
+			has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
+			has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
+			AND = {
 				has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
+				has_doctrine_parameter = daedric_worship_accepted
 			}
 		}
 	}
@@ -85,10 +86,13 @@ is_worshipping_daedra = {
 patron_daedra_valid = {
 	# Doctrines and tenets are aligned with $DAEDRA$
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
-	# Faith is not centered around a single Prince
+	# Faith is not centered around a single Prince, or if it is it's around this Prince
 	OR = {
 		faith = { has_doctrine_parameter = allows_worship_$DAEDRA$_only_active }
-		NOT = { has_exclusive_daedric_prince_pantheon = yes }
+		NOR	= {
+			has_exclusive_daedric_prince_pantheon = yes
+			faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active }
+		}
 	}
 }
 
