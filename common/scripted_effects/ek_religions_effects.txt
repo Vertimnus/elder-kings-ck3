@@ -1,4 +1,5 @@
 ### Scripted effects tied to religions & faiths
+# Stuff scaling with stress level
 update_religions_stress = {
 	if = {
 		limit = {
@@ -37,6 +38,66 @@ update_religions_stress = {
 			else_if = {
 				limit = { stress_level >= 1 }
 				add_character_modifier = stress_gives_piety_stress_1
+			}
+		}
+	}
+}
+
+# Stuff scaling with devotion (piety_level)
+update_religions_piety_level = {
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = {
+					has_doctrine_parameter = devotion_gives_popular_opinion
+				}
+				# You have a devotion related modifier
+				has_character_modifier = devotion_gives_popular_opinion_minus_1
+				has_character_modifier = devotion_gives_popular_opinion_1
+				has_character_modifier = devotion_gives_popular_opinion_2
+				has_character_modifier = devotion_gives_popular_opinion_3
+				has_character_modifier = devotion_gives_popular_opinion_4
+			}
+		}
+		
+		# Remove the modifiers
+		remove_character_modifier = devotion_gives_popular_opinion_minus_1
+		remove_character_modifier = devotion_gives_popular_opinion_1
+		remove_character_modifier = devotion_gives_popular_opinion_2
+		remove_character_modifier = devotion_gives_popular_opinion_3
+		remove_character_modifier = devotion_gives_popular_opinion_4
+		
+		# Add the ones you need
+		if = {
+			limit = {
+				faith = {
+					has_doctrine_parameter = devotion_gives_popular_opinion
+				}
+			}
+			if = {
+				limit = { piety_level >= 5 }
+				add_character_modifier = devotion_gives_popular_opinion_5
+			}
+			else_if = {
+				limit = { piety_level >= 4 }
+				add_character_modifier = devotion_gives_popular_opinion_4
+			}
+			else_if = {
+				limit = { piety_level >= 3 }
+				add_character_modifier = devotion_gives_popular_opinion_3
+			}
+			else_if = {
+				limit = { piety_level >= 2 }
+				add_character_modifier = devotion_gives_popular_opinion_2
+			}
+			else_if = {
+				limit = { piety_level >= 1 }
+				#add_character_modifier = devotion_gives_popular_opinion_1
+			}
+			else_if = {
+				limit = { piety_level >= 0 }
+				add_character_modifier = devotion_gives_popular_opinion_0
 			}
 		}
 	}
