@@ -1662,6 +1662,172 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_green_pact = {
+		icon = core_tenet_marriage
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_green_pact }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		traits = {
+			virtues = { cannibal temperate }
+			sins = { gluttonous }
+		}
+		
+		parameters = {
+			cannibalism_legal = yes
+		}
+
+		character_modifier = {
+			forest_advantage = 5
+			forest_attrition_mult = -0.25
+			jungle_advantage = 5
+			jungle_attrition_mult = -0.25
+		}
+	}
+	
+	tenet_mourning_war = {
+		icon = core_tenet_sword
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_mourning_war }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		traits = {
+			virtues = { vengeful }
+		}
+		
+		parameters = {
+			mourning_wars_mechanics_active = yes
+		}
+
+	}
+	
+	tenet_labyrinthine_canon = {
+		icon = core_tenet_bigbook
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_labyrinthine_canon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		traits = {
+			virtues = {
+				education_learning_3
+				education_learning_4
+				scholar
+			}
+		}
+
+		parameters = {
+			literalist_debate_enabled = yes
+		}
+
+		character_modifier = {
+			stewardship = -2
+			learning = 2
+		}
+	}
+	
+	tenet_anti_elven_rhetoric = {
+		icon = core_tenet_sword
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_anti_elven_rhetoric }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+
+		character_modifier = {
+			tolerance_advantage_mod = 1
+			#WIP - Must give negative opinion bonus to elven faiths
+		}
+	}
+	
+	tenet_legacy_of_reman = {
+		icon = core_tenet_sword
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_legacy_of_reman }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		traits = {
+			virtues = { ambitious august }
+		}
+
+		character_modifier = {
+			vassal_limit = 5
+			opinion_of_liege = 10
+		}
+	}
+	
+	tenet_shor_freedom = {
+		icon = core_tenet_birdofprey
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_shor_freedom }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+
+		character_modifier = {
+			stress_gain_mult = -0.2
+			tyranny_gain_mult = -0.2
+			opinion_of_different_faith_liege = -15
+		}
+	}
+	
 	############################
 	# Christian Faith Tenets	#
 	############################
