@@ -24,6 +24,7 @@ doctrine_main_pantheon = {
 		parameters = {
 			pantheon_adds_deities_divines = yes
 			hostility_override_doctrine_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_lorkhan = 1
 			hostility_override_tenet_nedic_nordic_syncretism = 1
 		}
 	}
@@ -39,8 +40,29 @@ doctrine_main_pantheon = {
 			religion_tag = nedic_nordic_religion
 		}
 		parameters = {
-			hostility_override_doctrine_pantheon_the_one = 1
 			pantheon_cannot_be_changed_active = yes
+			hostility_override_doctrine_pantheon_the_one = 1
+			hostility_override_doctrine_pantheon_aedra = 3
+			hostility_override_doctrine_pantheon_green_pact = 3
+		}
+	}
+	doctrine_pantheon_lorkhan = { # Lorkhan
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_lorkhan }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = nedic_nordic_religion
+		}
+		parameters = {
+			pantheon_cannot_be_changed_active = yes
+			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_aedra = 3
+			hostility_override_doctrine_pantheon_green_pact = 3
 		}
 	}
 	## Aldmeri pantheon
@@ -59,6 +81,8 @@ doctrine_main_pantheon = {
 			pantheon_adds_deities_aedra = 1
 			hostility_override_doctrine_pantheon_aedra = 1
 			hostility_override_tenet_aldmeri_syncretism = 1
+			hostility_override_doctrine_pantheon_lorkhan = 3
+			hostility_override_doctrine_pantheon_the_one = 3
 		}
 	}
 	## Bomseri pantheon
