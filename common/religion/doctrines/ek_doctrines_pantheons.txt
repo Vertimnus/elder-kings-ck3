@@ -101,6 +101,8 @@ doctrine_main_pantheon = {
 			pantheon_adds_deities_green_pact = 1
 			hostility_override_doctrine_pantheon_green_pact = 1
 			hostility_override_tenet_green_pact_syncretism = 1
+			hostility_override_doctrine_pantheon_lorkhan = 3
+			hostility_override_doctrine_pantheon_the_one = 3
 		}
 	}
 	## Yokudan pantheon
@@ -174,22 +176,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = azura_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_azura_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_azura_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = azura }
 		}
 		parameters = {
 			allows_worship_azura_only_active = yes
@@ -208,22 +195,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = boethiah_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_boethiah_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_boethiah_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = boethiah }
 		}
 		parameters = {
 			allows_worship_boethiah_only_active = yes
@@ -242,22 +214,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = clavicus_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_clavicus_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_clavicus_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = clavicus }
 		}
 		parameters = {
 			allows_worship_clavicus_only_active = yes
@@ -276,22 +233,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = hermaeus_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_hermaeus_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_hermaeus_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = hermaeus }
 		}
 		parameters = {
 			allows_worship_hermaeus_only_active = yes
@@ -310,22 +252,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = hircine_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_hircine_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_hircine_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = hircine }
 		}
 		parameters = {
 			allows_worship_hircine_only_active = yes
@@ -344,22 +271,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = malacath_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_malacath_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_malacath_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = malacath }
 		}
 		parameters = {
 			allows_worship_malacath_only_active = yes
@@ -378,22 +290,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = mehrunes_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_mehrunes_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_mehrunes_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = mehrunes }
 		}
 		parameters = {
 			allows_worship_mehrunes_only_active = yes
@@ -412,22 +309,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = mephala_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_mephala_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_mephala_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = mephala }
 		}
 		parameters = {
 			allows_worship_mephala_only_active = yes
@@ -446,22 +328,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = meridia_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_meridia_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_meridia_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = meridia }
 		}
 		parameters = {
 			allows_worship_meridia_only_active = yes
@@ -480,22 +347,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = molag_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_molag_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_molag_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = molag }
 		}
 		parameters = {
 			allows_worship_molag_only_active = yes
@@ -514,22 +366,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = namira_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_namira_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_namira_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = namira }
 		}
 		parameters = {
 			allows_worship_namira_only_active = yes
@@ -548,22 +385,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = nocturnal_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_nocturnal_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_nocturnal_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = nocturnal }
 		}
 		parameters = {
 			allows_worship_nocturnal_only_active = yes
@@ -582,22 +404,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = peryite_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_peryite_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_peryite_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = peryite }
 		}
 		parameters = {
 			allows_worship_peryite_only_active = yes
@@ -616,22 +423,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = sanguine_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_sanguine_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_sanguine_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = sanguine }
 		}
 		parameters = {
 			allows_worship_sanguine_only_active = yes
@@ -650,22 +442,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = sheogorath_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_sheogorath_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_sheogorath_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = sheogorath }
 		}
 		parameters = {
 			allows_worship_sheogorath_only_active = yes
@@ -684,22 +461,7 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			OR = {
-				# The religion is dedicated to the Prince
-				religion_tag = vaermina_religion
-				# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi) and has one of their tenets
-				AND = {
-					has_doctrine = daedric_hostility_doctrine
-					NOT = { is_daedric_prince_religion_tag = yes }
-					creating_faith_vaermina_shunned_accepted_tenet_doctrine = yes
-				}
-				# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-				AND = {
-					NOT = { has_doctrine = daedric_hostility_doctrine }
-					NOT = { creating_faith_daedric_worship_criminal = yes }
-					creating_faith_vaermina_shunned_accepted_tenet_doctrine = yes
-				}
-			}
+			can_see_doctrine_pantheon_daedra = { DAEDRA = vaermina }
 		}
 		parameters = {
 			allows_worship_vaermina_only_active = yes
@@ -814,7 +576,6 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			pantheon_adds_deities_nerevar = 1
-			hostility_override_doctrine_daedra_worship_forbidden = 2
 			hostility_override_doctrine_pantheon_nerevar = 1
 			hostility_override_doctrine_pantheon_tribunal = 3
 			hostility_override_doctrine_pantheon_bad_daedra = 3
