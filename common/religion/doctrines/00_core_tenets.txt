@@ -30,7 +30,7 @@ doctrine_core_tenets = {
 	
 	### Syncretism
 	## Aedric
-	tenet_nedic_nordic_syncretism = {
+	tenet_syncretism_pantheon_divines = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -38,7 +38,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_nedic_nordic_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_divines }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -51,7 +51,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_nedic_nordic_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_divines = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -68,7 +68,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_aldmeri_syncretism = {
+	tenet_syncretism_pantheon_aedra = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -76,7 +76,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_aldmeri_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_aedra }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -89,7 +89,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_aldmeri_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_aedra = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -106,7 +106,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_yokudan_syncretism = {
+	tenet_syncretism_pantheon_green_pact = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -114,7 +114,45 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_yokudan_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_green_pact }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			NOT = { religion_tag = bosmeri_religion }
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_other_syncretism_trigger
+				OR = {
+					flag:tenet_syncretism_pantheon_green_pact = { is_in_list = selected_doctrines }
+					NOT = { creating_faith_syncretizes_with_pantheon = yes }
+				}
+			}
+		}
+
+		parameters = {
+			hostility_override_doctrine_pantheon_green_pact = 1
+			additional_personal_gods_active = yes
+		}
+
+		traits = {
+			virtues = { gregarious }
+			sins = { shy }
+		}
+	}
+	
+	tenet_syncretism_pantheon_yokudan = {
+		icon = core_tenet_followers
+
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_syncretism_pantheon_yokudan }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -127,7 +165,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_yokudan_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_yokudan = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -145,7 +183,7 @@ doctrine_core_tenets = {
 	}
 	
 	## Aurbic
-	tenet_celestial_syncretism = {
+	tenet_syncretism_pantheon_celestials = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -153,7 +191,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_celestial_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_celestials }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -171,14 +209,14 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_celestial_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_celestials = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
 		}
 
 		parameters = {
-			hostility_override_doctrine_pantheon_celestial = 1
+			hostility_override_doctrine_pantheon_celestials = 1
 			additional_personal_gods_active = yes
 		}
 
@@ -188,7 +226,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_atmoran_syncretism = {
+	tenet_syncretism_pantheon_atmoran_totems = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -196,7 +234,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_atmoran_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_atmoran_totems }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -209,7 +247,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_atmoran_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_atmoran_totems = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -227,46 +265,8 @@ doctrine_core_tenets = {
 	}
 	
 	## Daedric
-	tenet_reach_syncretism = {
-		icon = core_tenet_followers
-
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_reach_syncretism }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		is_shown = {
-			NOT = { religion_tag = reach_religion }
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = incompatible_tenet_other_syncretism_trigger
-				OR = {
-					flag:tenet_reach_syncretism = { is_in_list = selected_doctrines }
-					NOT = { creating_faith_syncretizes_with_pantheon = yes }
-				}
-			}
-		}
-
-		parameters = {
-			hostility_override_special_doctrine_is_reach_faith = 1
-			additional_personal_gods_active = yes
-		}
-
-		traits = {
-			virtues = { wrathful }
-			sins = { deceitful }
-		}
-	}
-	
 	# These Syncretism allow for the patron deity as long as the faith is polytheistic, no matter the view on Daedric Worship
-	tenet_azura_syncretism = {
+	tenet_syncretism_pantheon_azura = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -274,7 +274,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_azura_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_azura }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -287,7 +287,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_azura_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_azura = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -304,7 +304,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_boethiah_syncretism = {
+	tenet_syncretism_pantheon_boethiah = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -312,7 +312,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_boethiah_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_boethiah }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -325,7 +325,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_boethiah_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_boethiah = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -342,7 +342,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_clavicus_syncretism = {
+	tenet_syncretism_pantheon_clavicus = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -350,7 +350,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_clavicus_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_clavicus }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -363,7 +363,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_clavicus_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_clavicus = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -380,7 +380,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_hermaeus_syncretism = {
+	tenet_syncretism_pantheon_hermaeus = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -388,7 +388,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_hermaeus_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_hermaeus }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -401,7 +401,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_hermaeus_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_hermaeus = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -418,7 +418,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_hircine_syncretism = {
+	tenet_syncretism_pantheon_hircine = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -426,7 +426,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_hircine_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_hircine }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -439,7 +439,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_hircine_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_hircine = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -456,7 +456,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_malacath_syncretism = {
+	tenet_syncretism_pantheon_malacath = {
 		icon = core_tenet_followers
 		name = {
 			first_valid = {
@@ -464,9 +464,9 @@ doctrine_core_tenets = {
 					trigger = {
 						religion_tag = aldmer_religion
 					}
-					desc = tenet_malacath_syncretism_alternate_aldmer_name
+					desc = tenet_syncretism_pantheon_malacath_alternate_aldmer_name
 				}
-				desc = tenet_malacath_syncretism_name
+				desc = tenet_syncretism_pantheon_malacath_name
 			}
 		}
 		desc = {
@@ -475,9 +475,9 @@ doctrine_core_tenets = {
 					trigger = {
 						religion_tag = aldmer_religion
 					}
-					desc = tenet_malacath_syncretism_alternate_aldmer_desc
+					desc = tenet_syncretism_pantheon_malacath_alternate_aldmer_desc
 				}
-				desc = tenet_malacath_syncretism_desc
+				desc = tenet_syncretism_pantheon_malacath_desc
 			}
 		}
 
@@ -486,7 +486,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_malacath_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_malacath }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -499,7 +499,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_malacath_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_malacath = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -516,7 +516,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_mehrunes_syncretism = {
+	tenet_syncretism_pantheon_mehrunes = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -524,7 +524,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_mehrunes_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_mehrunes }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -537,7 +537,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_mehrunes_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_mehrunes = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -554,7 +554,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_mephala_syncretism = {
+	tenet_syncretism_pantheon_mephala = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -562,7 +562,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_mephala_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_mephala }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -575,7 +575,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_mephala_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_mephala = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -592,7 +592,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_meridia_syncretism = {
+	tenet_syncretism_pantheon_meridia = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -600,7 +600,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_meridia_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_meridia }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -613,7 +613,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_meridia_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_meridia = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -630,7 +630,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_molag_syncretism = {
+	tenet_syncretism_pantheon_molag = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -638,7 +638,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_molag_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_molag }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -651,7 +651,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_molag_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_molag = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -668,7 +668,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_namira_syncretism = {
+	tenet_syncretism_pantheon_namira = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -676,7 +676,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_namira_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_namira }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -689,7 +689,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_namira_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_namira = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -707,7 +707,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_nocturnal_syncretism = {
+	tenet_syncretism_pantheon_nocturnal = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -715,7 +715,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_nocturnal_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_nocturnal }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -728,7 +728,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_nocturnal_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_nocturnal = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -745,7 +745,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_peryite_syncretism = {
+	tenet_syncretism_pantheon_peryite = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -753,7 +753,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_peryite_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_peryite }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -766,7 +766,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_peryite_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_peryite = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -783,7 +783,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_sanguine_syncretism = {
+	tenet_syncretism_pantheon_sanguine = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -791,7 +791,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_sanguine_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_sanguine }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -804,7 +804,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_sanguine_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_sanguine = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -821,7 +821,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_sheogorath_syncretism = {
+	tenet_syncretism_pantheon_sheogorath = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -829,7 +829,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_sheogorath_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_sheogorath }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -842,7 +842,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_sheogorath_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_sheogorath = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -859,7 +859,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_vaermina_syncretism = {
+	tenet_syncretism_pantheon_vaermina = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -867,7 +867,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_vaermina_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_vaermina }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -880,7 +880,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_vaermina_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_vaermina = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -951,14 +951,14 @@ doctrine_core_tenets = {
 	}
 	
 	## Stat-tied tenets (boosting lifestyle exp in that stat, making education lvl 3 & 4 virtues, making kids more effective in this education
-	tenet_dip_lifestyle_faith = {
+	tenet_lifestyle_dip_faith = {
 		icon = core_tenet_followers
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_dip_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_dip_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -984,14 +984,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_mar_lifestyle_faith = {
+	tenet_lifestyle_mar_faith = {
 		icon = core_tenet_sword
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_mar_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_mar_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1017,14 +1017,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_ste_lifestyle_faith = {
+	tenet_lifestyle_ste_faith = {
 		icon = core_tenet_handcoin
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_ste_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_ste_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1051,14 +1051,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_int_lifestyle_faith = {
+	tenet_lifestyle_int_faith = {
 		icon = core_tenet_shadyfigure
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_int_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_int_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1086,14 +1086,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_lea_lifestyle_faith = {
+	tenet_lifestyle_lea_faith = {
 		icon = core_tenet_bigbook
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_lea_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_lea_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1207,7 +1207,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_werewolf_worship }
+				limit = { has_doctrine = tenet_lycanthrope_worship }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1306,7 +1306,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_daedric_bargians }
+				limit = { has_doctrine = tenet_daedric_bargains }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1371,7 +1371,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-		tenet_divine_disease = {
+	tenet_divine_disease = {
 		icon = core_tenet_flagellant
 
 		piety_cost = {
@@ -4046,7 +4046,7 @@ doctrine_core_tenets = {
 	# }
 	
 	#################################################
-	# Unusable tenet, here for the error.log 		#
+	# Unusable tenets, here for the error.log 		#
 	#################################################
 	
 	all_daedric_allow_worship = {
@@ -4117,6 +4117,72 @@ doctrine_core_tenets = {
 			allows_worship_sanguine_accepted_doctrines_active = yes
 			allows_worship_sheogorath_accepted_doctrines_active = yes
 			allows_worship_vaermina_accepted_doctrines_active = yes
+		}
+	}
+	
+	tenet_gnosticism = {
+		icon = core_tenet_gnostic
+		piety_cost = {
+			# if = {
+				# limit = {
+					# OR = {
+						# religion_tag = dualism_religion
+						# religion_tag = zoroastrianism_religion
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else_if = {
+				# limit = {
+					# OR = {
+						# religion_tag = judaism_religion
+						# religion_tag = islam_religion
+						# religion_tag = hinduism_religion
+						# has_doctrine = pagan_hostility_doctrine
+					# }
+				# }
+				# value = faith_tenet_cost_high
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_gnosticism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		traits = {
+			virtues = { temperate }
+			sins = { gluttonous }
+		}
+		
+		is_shown = {
+			always = no
+		}
+
+		can_pick = {
+			always = no
+			# custom_description = {
+				# text = incompatible_tenet_eastern_syncretism_trigger
+				# NOT = {
+					# flag:tenet_eastern_syncretism = { is_in_list = selected_doctrines }
+				# }
+			# }
+		}
+
+		parameters = {
+			hostility_override_tenet_gnosticism = 0
+			granting_titles_gives_stress = yes
+		}
+
+		character_modifier = {
+			learning = 2
+			stewardship = -2
 		}
 	}
 }
