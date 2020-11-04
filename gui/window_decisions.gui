@@ -1038,8 +1038,9 @@ window = {
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					vbox = {
-						maximumsize = { 520 400 }
+						maximumsize = { 600 400 }
 						hbox = {
+							size = { 180 100 }
 							button_back = {
 								name = "patron_button_back"
 								align = top|left
@@ -1058,7 +1059,22 @@ window = {
 								# }
 							}
 							spacer = {
-								size = { 110 0 }
+								size = { 10 0 }
+							}
+							spacer = {
+								size = { 140 100 }
+								vbox = {
+									text_single = {
+										text = patron_status #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+									text_single = {
+										text = patron_worship_type #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+								}
 							}
 							# Patron Icons #
 							vbox = {
@@ -1233,68 +1249,45 @@ window = {
 								}
 							}
 							spacer = {
-								size = { 140 40 } #+30 compared to other one for button
+								size = { 170 100 } #+30 compared to other one for button
 								vbox = {
-									hbox = {
-										size = { 60 50 }
-										#minimumsize = { 100 50 }
-
-										# spacer = {
-										# 	size = { 80 0 }
-										# }
-
-										text_single = {
-											text = patron_ardor #defined by custom loc
-											align = center
-											fontsize = 16
-										}
-
-										# progressbar_standard = { #doesn't seem to support variables
-										# 	name = "progress_bar_azura"
-										# 	parentanchor = center
-										# 	size = { 100 10 }
-										# 	min = 0
-										# 	max = 10000
-										# 	#value = "[(CFixedPoint)GetPlayer.MakeScope.Var('ardor_display').GetValue]"
-										# 	value = "[FixedPointToInt(EmptyScope.ScriptValue('ardor_display'))]"
-										# }
-									}
-									spacer = {
-										size = { 0 10 }
-									}
 									# hbox = {
-									# 	button_ardor = {
-									# 		datacontext = "[GetScriptedGui('patron_ardor_1')]" #0
-									# 		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #0.5
-									# 		down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #1
-									# 	}
-									# 	button_ardor = {
-									# 		datacontext = "[GetScriptedGui('patron_ardor_2')]" #1
-									# 		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #1.5
-									# 		down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #2
-									# 	}
-									# 	button_ardor = {
-									# 		datacontext = "[GetScriptedGui('patron_ardor_3')]" #2
-									# 		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #2.5
-									# 		down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #3
-									# 	}
-									# 	button_ardor = {
-									# 		datacontext = "[GetScriptedGui('patron_ardor_4')]" #3
-									# 		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #3.5
-									# 		down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #4
-									# 	}
-									# 	button_ardor = {
-									# 		datacontext = "[GetScriptedGui('patron_ardor_5')]" #4
-									# 		enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #4.5IsShown
-									# 		down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" #5IsValid
-									# 	}
+									# 	size = { 60 50 }
+									#minimumsize = { 100 50 }
+
+									# spacer = {
+									# 	size = { 80 0 }
+									# }
+
+									text_single = {
+										text = patron_ardor #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+
+									# progressbar_standard = { #doesn't seem to support variables
+									# 	name = "progress_bar_azura"
+									# 	parentanchor = center
+									# 	size = { 100 10 }
+									# 	min = 0
+									# 	max = 10000
+									# 	#value = "[(CFixedPoint)GetPlayer.MakeScope.Var('ardor_display').GetValue]"
+									# 	value = "[FixedPointToInt(EmptyScope.ScriptValue('ardor_display'))]"
+									# }
+									# }
+									# spacer = {
+									# 	size = { 0 2 }
 									# }
 									widget = {
-										size = { 230 58 }
+										name = "ardor_widget"
+										size = { 170 58 }
+
+										#tooltip = "patron_ardor"
+										#using = tooltip_ne
 
 										hbox = {
-											size = { 160 20}
-											maximumsize = { 160 20}
+											size = { 100 20}
+											maximumsize = { 100 20}
 											parentanchor = top|left
 											position = { 53 19 }
 
@@ -1538,6 +1531,9 @@ window = {
 										}
 									}
 								}
+							}
+							spacer = {
+								size = { 10 0 }
 							}
 						}
 
