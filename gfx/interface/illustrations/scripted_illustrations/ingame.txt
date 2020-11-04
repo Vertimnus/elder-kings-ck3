@@ -1,4 +1,6 @@
-﻿### Character interior background
+﻿### EK EDIT: Removed references to vanilla religions and regions
+
+### Character interior background
 character_view_bg = {
 
 	######################################
@@ -691,50 +693,17 @@ character_location_exterior = {
 			}
 		}
 	}
-	#new BA terrains
-	texture = {
-		reference = "terrain_types/mountain_valley.dds"
 
-		trigger = {
-			NOT = {
-				exists = liege
-			}
-			exists = location
-			location = {
-				terrain = mountain_valley
-			}
-		}
-	}
-
-	texture = {
-		reference = "terrain_types/desert_hills.dds"
-
-		trigger = {
-			NOT = {
-				exists = liege
-			}
-			exists = location
-			location = {
-				terrain = desert_hills
-			}
-		}
-	}
-	#End of BA
 	texture = {
 		reference = "holding_types/tribe_arid.dds"
 
 		trigger = {
+			always = no
 			has_government = tribal_government
 			exists = capital_province
-			capital_province = {
-				OR = {
-					geographical_region = world_levant
-					geographical_region = world_africa
-					geographical_region = world_mesopotamia
-					geographical_region = world_elam
-				}
-				NOT = { geographical_region = world_nubia }
-			}
+			# capital_province = {
+				# geographical_region = world_africa
+			# }
 		}
 	}
 
@@ -742,11 +711,12 @@ character_location_exterior = {
 		reference = "event_scenes/steppe.dds"
 
 		trigger = {
+			always = no
 			has_government = tribal_government
 			exists = capital_province
-			capital_province = {
-				always = no
-			}
+			# capital_province = {
+				# geographical_region = world_steppe
+			# }
 		}
 	}
 
@@ -754,13 +724,37 @@ character_location_exterior = {
 		reference = "event_scenes/desert.dds"
 
 		trigger = {
+			always = no
 			has_government = tribal_government
 			exists = capital_province
-			capital_province = {
-				OR = {
-					geographical_region = world_nubia
-				}
-			}
+			# capital_province = {
+				# geographical_region = world_middle_east_arabia
+			# }
+		}
+	}
+
+	texture = {
+		reference = "event_scenes/market_east.dds"
+
+		trigger = {
+			always = no
+			has_government = tribal_government
+			exists = capital_province
+			# capital_province = {
+				# geographical_region = world_tibet
+			# }
+		}
+	}
+
+	texture = {
+		reference = "event_scenes/market_east.dds"
+
+		trigger = {
+			always = no
+			exists = capital_province
+			# capital_province = {
+				# geographical_region = world_steppe
+			# }
 		}
 	}
 
@@ -797,6 +791,42 @@ character_location_exterior = {
 religion_interior = {
 
 	texture = {
+		trigger = {
+			always = no
+			# religion = religion:christianity_religion
+		}
+		reference = "event_scenes/church.dds"
+	}
+
+	environment = {
+		reference = "environment_event_church"
+
+		trigger = {
+			always = no
+			# religion = religion:christianity_religion
+		}
+	}
+
+	texture = {
+		trigger = {
+			always = no
+			# religion = religion:islam_religion
+		}
+
+		reference = "event_scenes/mosque.dds"
+	}
+
+
+	environment = {
+		reference = "environment_event_mosque"
+
+		trigger = {
+			always = no
+			# religion = religion:islam_religion
+		}
+	}
+
+	texture = {
 		reference = "event_scenes/temple.dds"
 	}
 
@@ -825,6 +855,21 @@ religion_interior = {
 
 ### Religious holding image
 religion_holding = {
+	texture = {
+		trigger = {
+			always = no
+			# religion = religion:christianity_religion
+		}
+		reference = "holding_types/temple_christian.dds"
+	}
+
+	texture = {
+		trigger = {
+			always = no
+			# religion = religion:islam_religion
+		}
+		reference = "holding_types/temple_islamic.dds"
+	}
 
 	texture = {
 		reference = "holding_types/temple_generic_grass.dds"
@@ -925,6 +970,14 @@ title_holding = {
 					terrain = oasis
 					terrain = steppe
 					terrain = drylands
+					# geographical_region = world_steppe
+					# geographical_region = world_middle_east_persia
+					# geographical_region = world_middle_east_jerusalem
+					# geographical_region = world_steppe
+					# geographical_region = world_middle_east_persia
+					# geographical_region = world_middle_east_jerusalem
+					# geographical_region = world_africa
+					# geographical_region = world_middle_east_arabia
 				}
 			}
 		}
@@ -1004,11 +1057,52 @@ title_holding = {
 		trigger = {
 			title_illustration_save_province_temporary = yes
 			scope:province = {
-				has_holding_type = church_holding
 				always = no
+				has_holding_type = church_holding
+				# faith.religion = religion:christianity_religion
+			}
+		}
+		reference = "holding_types/temple_christian.dds"
+	}
+	texture = {
+		trigger = {
+			title_illustration_save_province_temporary = yes
+			scope:province = {
+				always = no
+				has_holding_type = church_holding
+				# faith.religion = { is_in_family = rf_pagan }
+				# OR = {
+					# faith.religion = religion:baltic_religion
+					# faith.religion = religion:finno_ugric_religion
+					# faith.religion = religion:germanic_religion
+					# faith.religion = religion:paganism_religion
+					# faith.religion = religion:slavic_religion
+				# }
 			}
 		}
 		reference = "holding_types/temple_northern_pagan.dds"
+	}
+	texture = {
+		trigger = {
+			title_illustration_save_province_temporary = yes
+			scope:province = {
+				always = no
+				has_holding_type = church_holding
+				# faith.religion = { is_in_family = rf_eastern }
+			}
+		}
+		reference = "holding_types/temple_india.dds"
+	}
+	texture = {
+		trigger = {
+			title_illustration_save_province_temporary = yes
+			scope:province = {
+				always = no
+				has_holding_type = church_holding
+				# faith.religion = religion:islam_religion
+			}
+		}
+		reference = "holding_types/temple_islamic.dds"
 	}
 	texture = {
 		trigger = {
@@ -1021,6 +1115,14 @@ title_holding = {
 					terrain = oasis
 					terrain = steppe
 					terrain = drylands
+					# geographical_region = world_steppe
+					# geographical_region = world_middle_east_persia
+					# geographical_region = world_middle_east_jerusalem
+					# geographical_region = world_steppe
+					# geographical_region = world_middle_east_persia
+					# geographical_region = world_middle_east_jerusalem
+					# geographical_region = world_africa
+					# geographical_region = world_middle_east_arabia
 				}
 			}
 		}
