@@ -798,10 +798,11 @@ is_heretic_trigger = {
 }
 
 is_heathen_trigger = {
+	always = no
 	NOT = { $WHO$.faith.religion = $TARGET$.faith.religion }
-	$TARGET$.faith = {
-		has_doctrine = pagan_hostility_doctrine
-	}
+	# $TARGET$.faith = {
+		# has_doctrine = pagan_hostility_doctrine
+	# }
 	$WHO$.faith = {
 		faith_hostility_level = {
 			target = $TARGET$.faith
@@ -812,9 +813,9 @@ is_heathen_trigger = {
 
 is_infidel_trigger = {
 	NOT = { $WHO$.faith.religion = $TARGET$.faith.religion }
-	$TARGET$.faith = {
-		NOT = { has_doctrine = pagan_hostility_doctrine }
-	}
+	# $TARGET$.faith = {
+		# NOT = { has_doctrine = pagan_hostility_doctrine }
+	# }
 	$WHO$.faith = {
 		faith_hostility_level = {
 			target = $TARGET$.faith

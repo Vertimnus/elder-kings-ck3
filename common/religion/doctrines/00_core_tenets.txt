@@ -821,7 +821,7 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_sheogorath_syncretism = {
+	tenet_syncretism_pantheon_sheogorath = {
 		icon = core_tenet_followers
 
 		piety_cost = {
@@ -829,7 +829,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_sheogorath_syncretism }
+				limit = { has_doctrine = tenet_syncretism_pantheon_sheogorath }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -842,7 +842,7 @@ doctrine_core_tenets = {
 			custom_description = {
 				text = incompatible_tenet_other_syncretism_trigger
 				OR = {
-					flag:tenet_sheogorath_syncretism = { is_in_list = selected_doctrines }
+					flag:tenet_syncretism_pantheon_sheogorath = { is_in_list = selected_doctrines }
 					NOT = { creating_faith_syncretizes_with_pantheon = yes }
 				}
 			}
@@ -951,14 +951,14 @@ doctrine_core_tenets = {
 	}
 	
 	## Stat-tied tenets (boosting lifestyle exp in that stat, making education lvl 3 & 4 virtues, making kids more effective in this education
-	tenet_dip_lifestyle_faith = {
+	tenet_lifestyle_dip_faith = {
 		icon = core_tenet_followers
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_dip_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_dip_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -984,14 +984,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_mar_lifestyle_faith = {
+	tenet_lifestyle_mar_faith = {
 		icon = core_tenet_sword
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_mar_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_mar_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1017,14 +1017,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_ste_lifestyle_faith = {
+	tenet_lifestyle_ste_faith = {
 		icon = core_tenet_handcoin
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_ste_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_ste_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1051,14 +1051,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_int_lifestyle_faith = {
+	tenet_lifestyle_int_faith = {
 		icon = core_tenet_shadyfigure
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_int_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_int_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1086,14 +1086,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_lea_lifestyle_faith = {
+	tenet_lifestyle_lea_faith = {
 		icon = core_tenet_bigbook
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_lea_lifestyle_faith }
+				limit = { has_doctrine = tenet_lifestyle_lea_faith }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1207,7 +1207,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_werewolf_worship }
+				limit = { has_doctrine = tenet_lycanthrope_worship }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1306,7 +1306,7 @@ doctrine_core_tenets = {
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_daedric_bargians }
+				limit = { has_doctrine = tenet_daedric_bargains }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -4046,7 +4046,7 @@ doctrine_core_tenets = {
 	# }
 	
 	#################################################
-	# Unusable tenet, here for the error.log 		#
+	# Unusable tenets, here for the error.log 		#
 	#################################################
 	
 	all_daedric_allow_worship = {
@@ -4117,6 +4117,72 @@ doctrine_core_tenets = {
 			allows_worship_sanguine_accepted_doctrines_active = yes
 			allows_worship_sheogorath_accepted_doctrines_active = yes
 			allows_worship_vaermina_accepted_doctrines_active = yes
+		}
+	}
+	
+	tenet_gnosticism = {
+		icon = core_tenet_gnostic
+		piety_cost = {
+			# if = {
+				# limit = {
+					# OR = {
+						# religion_tag = dualism_religion
+						# religion_tag = zoroastrianism_religion
+					# }
+				# }
+				# value = faith_tenet_cost_low
+			# }
+			# else_if = {
+				# limit = {
+					# OR = {
+						# religion_tag = judaism_religion
+						# religion_tag = islam_religion
+						# religion_tag = hinduism_religion
+						# has_doctrine = pagan_hostility_doctrine
+					# }
+				# }
+				# value = faith_tenet_cost_high
+			# }
+			# else = {
+				# value = faith_tenet_cost_mid
+			# }
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_gnosticism }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		traits = {
+			virtues = { temperate }
+			sins = { gluttonous }
+		}
+		
+		is_shown = {
+			always = no
+		}
+
+		can_pick = {
+			always = no
+			# custom_description = {
+				# text = incompatible_tenet_eastern_syncretism_trigger
+				# NOT = {
+					# flag:tenet_eastern_syncretism = { is_in_list = selected_doctrines }
+				# }
+			# }
+		}
+
+		parameters = {
+			hostility_override_tenet_gnosticism = 0
+			granting_titles_gives_stress = yes
+		}
+
+		character_modifier = {
+			learning = 2
+			stewardship = -2
 		}
 	}
 }
