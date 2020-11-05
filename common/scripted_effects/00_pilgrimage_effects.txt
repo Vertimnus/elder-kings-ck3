@@ -379,11 +379,13 @@ set_up_next_pilgrimage_event_effect = {
 				}
 			}
 			if = {
-				limit = { exists = scope:activity.var:is_hajj }
-				trigger_event = {
-					on_action = hajj_journey_events
-					days = $DAYS$
-				}
+				### EK EDIT: No Hajj in TES
+				limit = { always = no }
+				# limit = { exists = scope:activity.var:is_hajj }
+				# trigger_event = {
+					# on_action = hajj_journey_events
+					# days = $DAYS$
+				# }
 			}
 			else = {
 				trigger_event = {
