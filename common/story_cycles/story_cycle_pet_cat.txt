@@ -1,9 +1,70 @@
-﻿story_cycle_pet_cat = {
+﻿### EK EDIT: Made it possible to specific the cat's gender and fur color when starting the story
+
+story_cycle_pet_cat = {
 
 	on_setup = {
-		assign_cat_gender_effect = { GENDER = random }
-		assign_cat_fur_color_effect = { COLOR = random }
-		if = { #Has the eye-color already been specified?
+		# Has the gender already been specified?
+		if = { 
+			limit = {
+				story_owner = { exists = var:cat_gender }
+			}
+			if = {
+				limit = {
+					story_owner = { var:cat_gender = flag:male }
+				}
+				assign_cat_gender_effect = { GENDER = male }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:cat_gender = flag:female }
+				}
+				assign_cat_gender_effect = { GENDER = female }
+			}
+		}
+		else = {
+			assign_cat_gender_effect = { GENDER = random }
+		}
+		# Has the fur-color already been specified?
+		if = { 
+			limit = {
+				story_owner = { exists = var:cat_fur_color }
+			}
+			if = {
+				limit = {
+					story_owner = { var:cat_fur_color = flag:brown }
+				}
+				assign_cat_fur_color_effect = { COLOR = brown }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:cat_fur_color = flag:gray }
+				}
+				assign_cat_fur_color_effect = { COLOR = gray }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:cat_fur_color = flag:orange }
+				}
+				assign_cat_fur_color_effect = { COLOR = orange }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:cat_fur_color = flag:black }
+				}
+				assign_cat_fur_color_effect = { COLOR = black }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:cat_fur_color = flag:white }
+				}
+				assign_cat_fur_color_effect = { COLOR = white }
+			}
+		}
+		else = {
+			assign_cat_fur_color_effect = { COLOR = random }
+		}
+		# Has the eye-color already been specified?
+		if = { 
 			limit = {
 				story_owner = { exists = var:cat_eye_color }
 			}
@@ -47,6 +108,8 @@
 		else = {
 			assign_cat_eye_color_effect = { COLOR = random }
 		}
+		
+		### Setup the rest
 		set_variable = {
 			name = cat_age_variable
 			value = 0
