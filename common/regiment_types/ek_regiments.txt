@@ -1,0 +1,73 @@
+# standard costs
+@maa_buy_cost = 150
+@maa_low_maintenance_cost = 1.0
+@maa_high_maintenance_cost = 5.0
+
+#Standard regiments
+battlemage = { ##WIP, gonna make them siege troops that also fight in main
+	type = skirmishers
+	
+	damage = 25
+	toughness = 12
+	pursuit = 5
+	screen = 5
+	
+	siege_tier = 1
+	siege_value = 0.2
+	
+	counters = {
+		heavy_infantry = 1
+	}
+	
+	buy_cost = { gold = onager_recruitment_cost }
+	low_maintenance_cost = { gold = onager_low_maint_cost }
+	high_maintenance_cost = { gold = onager_high_maint_cost }
+	
+	stack = 50
+}
+
+spellsword = { ##can also fight like archers a bit?
+	type = heavy_infantry
+	
+	damage = 35
+	toughness = 22
+	pursuit = 10
+	screen = 0
+	
+	counters = {
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = culture_ai_weight_heavy_infantry }
+	icon = heavy_infantry
+}
+
+# Special regiments
+daedra = {
+	type = heavy_infantry
+	can_recruit = no
+	
+	damage = 40
+	toughness = 30
+	pursuit = 0
+	screen = 24
+	
+	counters = {
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = 50 }
+	low_maintenance_cost = { gold = 0 }
+	high_maintenance_cost = { gold = 1 }
+	
+	max_sub_regiments = 1
+	
+	stack = 100
+	ai_quality = { value = 100 }
+}
+
