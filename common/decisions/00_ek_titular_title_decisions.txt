@@ -1,4 +1,7 @@
-﻿form_craglorn_kingdom_decision = {
+﻿### These titles are based on regions, which are tied to nativity regions
+# Only cultures natives from the region the kingdoms are based on should be able to unite them
+# Iron Orc can unite Craglorn (since they come from here), but Eastmarchers can't
+form_craglorn_kingdom_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
 	desc = form_craglorn_kingdom_decision_desc
@@ -10,6 +13,7 @@
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
+		is_native_to = { REGION = craglorn CULTURE = root.culture }
 		capital_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
 		NOT = { exists = title:k_craglorn.holder }
 		NOT = {  #Can only do it once.
@@ -73,6 +77,7 @@ form_glenumbra_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
+		is_native_to = { REGION = glenumbra CULTURE = root.culture }
 		capital_province = { geographical_region = mundus_tamriel_high_rock_glenumbra }
 		NOT = { exists = title:k_glenumbra.holder }
 		NOT = {  #Can only do it once.
@@ -136,6 +141,7 @@ form_rivenspire_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
+		is_native_to = { REGION = rivenspire CULTURE = root.culture }
 		capital_province = { geographical_region = mundus_tamriel_high_rock_rivenspire }
 		NOT = { exists = title:k_rivenspire.holder }
 		NOT = {  #Can only do it once.
@@ -199,6 +205,7 @@ form_bangkorai_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
+		is_native_to = { REGION = bangkorai CULTURE = root.culture }
 		capital_province = { geographical_region = mundus_tamriel_high_rock_bangkorai }
 		NOT = { exists = title:k_bangkorai.holder }
 		NOT = {  #Can only do it once.
