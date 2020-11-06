@@ -1,0 +1,43 @@
+﻿unify_kingdom_government_trigger = {
+	OR = {
+		has_government = feudal_government
+		has_government = clan_government
+		has_government = tribal_government
+	}
+}
+
+unify_kingdom_law_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				has_government = feudal_government
+				has_government = clan_government
+			}
+		}
+		OR = {
+			has_realm_law = crown_authority_2
+			has_realm_law = crown_authority_3
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			has_government = tribal_government
+		}
+		OR = {
+			has_realm_law = tribal_authority_2
+			has_realm_law = tribal_authority_3
+		}
+	}
+}
+
+can_unify_kingdom_of = {
+	is_native_to = { REGION = $REGION$ CULTURE = root.culture }
+	capital_province = { geographical_region = custom_nativity_$REGION$ }
+	NOT = { exists = title:k_$REGION$.holder }
+	NOT = {  #Can only do it once.
+		is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:flag_formed_$REGION$_kingdom
+		}
+	}
+}
