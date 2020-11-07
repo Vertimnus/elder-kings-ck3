@@ -1,9 +1,96 @@
-﻿story_cycle_pet_dog = {
+﻿### EK EDIT: Made it possible to specific the cat's gender and fur color when starting the story
+
+story_cycle_pet_dog = {
 
 	on_setup = {
-		assign_dog_gender_effect = { GENDER = random }
-		assign_dog_fur_color_effect = { COLOR = random }
-		assign_dog_eye_color_effect = { COLOR = random }
+		# Has the gender already been specified?
+		if = { 
+			limit = {
+				story_owner = { exists = var:dog_gender }
+			}
+			if = {
+				limit = {
+					story_owner = { var:dog_gender = flag:male }
+				}
+				assign_dog_gender_effect = { GENDER = male }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_gender = flag:female }
+				}
+				assign_dog_gender_effect = { GENDER = female }
+			}
+		}
+		else = {
+			assign_dog_gender_effect = { GENDER = random }
+		}
+		# Has the fur-color already been specified?
+		if = { 
+			limit = {
+				story_owner = { exists = var:dog_fur_color }
+			}
+			if = {
+				limit = {
+					story_owner = { var:dog_fur_color = flag:brown }
+				}
+				assign_dog_fur_color_effect = { COLOR = brown }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_fur_color = flag:gray }
+				}
+				assign_dog_fur_color_effect = { COLOR = gray }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_fur_color = flag:black }
+				}
+				assign_dog_fur_color_effect = { COLOR = black }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_fur_color = flag:white }
+				}
+				assign_dog_fur_color_effect = { COLOR = white }
+			}
+		}
+		else = {
+			assign_dog_fur_color_effect = { COLOR = random }
+		}
+		# Has the eye-color already been specified?
+		if = { 
+			limit = {
+				story_owner = { exists = var:dog_eye_color }
+			}
+			if = {
+				limit = {
+					story_owner = { var:dog_eye_color = flag:blue }
+				}
+				assign_dog_eye_color_effect = { COLOR = blue }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_eye_color = flag:amber }
+				}
+				assign_dog_eye_color_effect = { COLOR = amber }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_eye_color = flag:gray }
+				}
+				assign_dog_eye_color_effect = { COLOR = gray }
+			}
+			else_if = {
+				limit = {
+					story_owner = { var:dog_eye_color = flag:brown }
+				}
+				assign_dog_eye_color_effect = { COLOR = brown }
+			}
+		}
+		else = {
+			assign_dog_eye_color_effect = { COLOR = random }
+		}
+		
 		set_variable = {
 			name = dog_age_variable
 			value = 0

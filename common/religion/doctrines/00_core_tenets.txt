@@ -254,7 +254,7 @@ doctrine_core_tenets = {
 		}
 
 		parameters = {
-			hostility_override_doctrine_pantheon_atmoran = 1
+			hostility_override_doctrine_pantheon_atmoran_totems = 1
 			additional_personal_gods_active = yes
 		}
 
@@ -1755,29 +1755,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_anti_elven_rhetoric = {
-		icon = core_tenet_sword
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_anti_elven_rhetoric }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			always = yes
-		}
-		
-
-		character_modifier = {
-			tolerance_advantage_mod = 1
-			#WIP - Must give negative opinion bonus to elven faiths
-		}
-	}
-	
 	tenet_legacy_of_reman = {
 		icon = core_tenet_sword
 		piety_cost = {
@@ -1822,9 +1799,10 @@ doctrine_core_tenets = {
 		
 
 		character_modifier = {
-			stress_gain_mult = -0.2
-			tyranny_gain_mult = -0.2
-			opinion_of_different_faith_liege = -15
+			legalism_reduced_faction_virtues = yes
+			legalism_increased_faction_sins = yes
+			opinion_of_different_faith_liege = -10
+			levy_reinforcement_rate_same_faith = 0.25
 		}
 	}
 	

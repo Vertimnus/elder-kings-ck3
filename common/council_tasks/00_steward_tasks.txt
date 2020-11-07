@@ -750,37 +750,57 @@ task_promote_culture = {
 			limit = {
 				NOR = {
 					### High Rock
-					## Glenumbra
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_glenumbra }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_glenumbra }
 					}
-					## Rivenspire
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_rivenspire }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_rivenspire }
 					}
-					## Stormhaven
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_stormhaven }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_stormhaven }
 					}
-					## Wrothgar
 					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_wrothgar }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_wrothgar }
+						scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_wrothgarian_mountains }
 					}
-					## Bangkorai
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_bangkorai }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_bangkorai }
 					}
 					### Hammerfell
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_craglorn }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_craglorn }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_abecee }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_abecee }
+					}
 					### Cyrodiil
 					## Colovia
 					AND = {
-						scope:county.title_province = { geographical_region = mundus_tamriel_cyrodiil_colovia }
+						scope:county.title_province = { geographical_region = custom_nativity_colovia }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_colovia }
+					}
+					### Skyrim
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_markarth }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_markarth }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_west_skyrim }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_west_skyrim }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_east_skyrim }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_east_skyrim }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_solstheim }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_solstheim }
 					}
 				}
 			}
@@ -1308,10 +1328,54 @@ task_promote_local_culture = {
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = stormhaven } }
 		}
 		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = wrothgarian_mountains }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = wrothgarian_mountains } }
+		}
+		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = bangkorai }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = bangkorai } }
 		}
+		### Hammerfell
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_craglorn } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = craglorn }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = craglorn } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_abecee } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = abecee }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = abecee } }
+		}
+		### Cyrodiil
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_colovia } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = colovia }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = colovia } }
+		}
+		### Skyrim
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_markarth } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = markarth }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = markarth } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_skyrim } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = east_skyrim }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = east_skyrim } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_skyrim } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = west_skyrim }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = west_skyrim } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_solstheim } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = solstheim }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = solstheim } }
+		}
+		### Default (no)
 		trigger_else = { always = no }
 	}
 	
@@ -1357,6 +1421,19 @@ task_promote_local_culture = {
 			}
 		}
 		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_wrothgarian_mountains
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
 			random_in_global_list = {
 				variable = culture_is_alive
@@ -1364,6 +1441,74 @@ task_promote_local_culture = {
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
 					has_innovation = innovation_native_bangkorai
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		### Hammerfell
+		### Cyrodiil
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_colovia } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_colovia
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		### Skyrim
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_markarth } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_markarth
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_skyrim } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_west_skyrim
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_skyrim } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_east_skyrim
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_solstheim } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_solstheim
 				}
 				
 				save_scope_as = culture_to_convert

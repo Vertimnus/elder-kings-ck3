@@ -1,4 +1,7 @@
-﻿form_craglorn_kingdom_decision = {
+﻿### These titles are based on regions, which are tied to nativity regions
+# Only cultures natives from the region the kingdoms are based on should be able to unite them
+# Iron Orc can unite Craglorn (since they come from here), but Eastmarchers can't
+form_craglorn_kingdom_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
 	desc = form_craglorn_kingdom_decision_desc
@@ -10,20 +13,15 @@
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
-		capital_province = { geographical_region = mundus_tamriel_hammerfell_craglorn }
-		NOT = { exists = title:k_craglorn.holder }
-		NOT = {  #Can only do it once.
-			is_target_in_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_craglorn_kingdom
-			}
-		}
+		
+		can_unify_kingdom_of = { REGION = craglorn }
+		
+		unify_kingdom_government_trigger = yes
 	}
 
 	is_valid = {
-		AND = {
-			completely_controls_region = mundus_tamriel_hammerfell_craglorn
-		}
+		completely_controls_region = mundus_tamriel_hammerfell_craglorn
+		unify_kingdom_law_trigger = yes
 	}
 
 	is_valid_showing_failures_only = {
@@ -37,19 +35,13 @@
 	}
 
 	effect = {
-		show_as_tooltip = {
-			form_craglorn_scripted_effect = yes
+		form_craglorn_scripted_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:flag_formed_craglorn_kingdom
 		}
-		trigger_event = {
-			id = ektitulartitle.0001
-		}
-		hidden_effect = {
-			form_craglorn_scripted_effect = yes
-			add_to_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_craglorn_kingdom
-			}
-		}
+		
+		trigger_event = { id = ektitulartitle.0001 }
 	}
 	
 	ai_potential = {
@@ -73,20 +65,15 @@ form_glenumbra_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
-		capital_province = { geographical_region = mundus_tamriel_high_rock_glenumbra }
-		NOT = { exists = title:k_glenumbra.holder }
-		NOT = {  #Can only do it once.
-			is_target_in_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_glenumbra_kingdom
-			}
-		}
+		
+		can_unify_kingdom_of = { REGION = glenumbra }
+		
+		unify_kingdom_government_trigger = yes
 	}
 
 	is_valid = {
-		AND = {
-			completely_controls_region = mundus_tamriel_high_rock_glenumbra
-		}
+		completely_controls_region = mundus_tamriel_high_rock_glenumbra
+		unify_kingdom_law_trigger = yes
 	}
 
 	is_valid_showing_failures_only = {
@@ -100,19 +87,13 @@ form_glenumbra_kingdom_decision = {
 	}
 
 	effect = {
-		show_as_tooltip = {
-			form_glenumbra_scripted_effect = yes
+		form_glenumbra_scripted_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:flag_formed_glenumbra_kingdom
 		}
-		# trigger_event = {
-			# id = ektitulartitle.0001
-		# }
-		hidden_effect = {
-			form_glenumbra_scripted_effect = yes
-			add_to_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_glenumbra_kingdom
-			}
-		}
+		
+		trigger_event = { id = ektitulartitle.0001 }
 	}
 	
 	ai_potential = {
@@ -136,20 +117,15 @@ form_rivenspire_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
-		capital_province = { geographical_region = mundus_tamriel_high_rock_rivenspire }
-		NOT = { exists = title:k_rivenspire.holder }
-		NOT = {  #Can only do it once.
-			is_target_in_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_rivenspire_kingdom
-			}
-		}
+		
+		can_unify_kingdom_of = { REGION = rivenspire }
+		
+		unify_kingdom_government_trigger = yes
 	}
 
 	is_valid = {
-		AND = {
-			completely_controls_region = mundus_tamriel_high_rock_rivenspire
-		}
+		completely_controls_region = mundus_tamriel_high_rock_rivenspire
+		unify_kingdom_law_trigger = yes
 	}
 
 	is_valid_showing_failures_only = {
@@ -163,19 +139,13 @@ form_rivenspire_kingdom_decision = {
 	}
 
 	effect = {
-		show_as_tooltip = {
-			form_rivenspire_scripted_effect = yes
+		form_rivenspire_scripted_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:flag_formed_rivenspire_kingdom
 		}
-		# trigger_event = {
-			# id = ektitulartitle.0001
-		# }
-		hidden_effect = {
-			form_rivenspire_scripted_effect = yes
-			add_to_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_rivenspire_kingdom
-			}
-		}
+		
+		trigger_event = { id = ektitulartitle.0001 }
 	}
 	
 	ai_potential = {
@@ -199,20 +169,15 @@ form_bangkorai_kingdom_decision = {
 	is_shown = {
 		is_landed = yes
 		exists = capital_province
-		capital_province = { geographical_region = mundus_tamriel_high_rock_bangkorai }
-		NOT = { exists = title:k_bangkorai.holder }
-		NOT = {  #Can only do it once.
-			is_target_in_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_bangkorai_kingdom
-			}
-		}
+		
+		can_unify_kingdom_of = { REGION = bangkorai }
+		
+		unify_kingdom_government_trigger = yes
 	}
 
 	is_valid = {
-		AND = {
-			completely_controls_region = mundus_tamriel_high_rock_bangkorai
-		}
+		completely_controls_region = mundus_tamriel_high_rock_bangkorai
+		unify_kingdom_law_trigger = yes
 	}
 
 	is_valid_showing_failures_only = {
@@ -226,19 +191,13 @@ form_bangkorai_kingdom_decision = {
 	}
 
 	effect = {
-		show_as_tooltip = {
-			form_bangkorai_scripted_effect = yes
+		form_bangkorai_scripted_effect = yes
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:flag_formed_bangkorai_kingdom
 		}
-		# trigger_event = {
-			# id = ektitulartitle.0001
-		# }
-		hidden_effect = {
-			form_bangkorai_scripted_effect = yes
-			add_to_global_variable_list = {
-				name = unavailable_unique_decisions
-				target = flag:flag_formed_bangkorai_kingdom
-			}
-		}
+		
+		trigger_event = { id = ektitulartitle.0001 }
 	}
 	
 	ai_potential = {

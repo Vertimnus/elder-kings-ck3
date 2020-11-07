@@ -596,12 +596,76 @@ learning_medicine.2003 = { #by Mathilda Bjarnehed
 # Improve the skills of your court physician
 # by Mathilda Bjarnehed
 ##################################################
+
+### EK EDIT: Removed references to vanilla cultures and religions
+### EK TODO: Add our own
 learning_medicine.2010 = { #by Mathilda Bjarnehed
 	type = character_event
 	title = learning_medicine.2010.t
 	desc = {
 		desc = learning_medicine.2010.start.desc
-		desc = learning_medicine.2010.fallback.desc
+		first_valid = {
+			# random_valid = {
+				# triggered_desc = {
+					# trigger = {
+						# NOR = {
+							# has_culture = culture:greek
+							# scope:court_physician = { has_culture = culture:greek }
+						# }
+					# }
+					# desc = learning_medicine.2010.galen.desc
+				# }
+				# triggered_desc = {
+					# trigger = {
+						# NOR = {
+							# has_culture = culture:greek
+							# scope:court_physician = { has_culture = culture:greek }
+						# }
+					# }
+					# desc = learning_medicine.2010.hippocrates.desc
+				# }
+				# triggered_desc = {
+					# trigger = {
+						# NOR = {
+							# has_culture = culture:greek
+							# scope:court_physician = { has_culture = culture:greek }
+						# }
+					# }
+					# desc = learning_medicine.2010.herophilus.desc
+				# }
+				# triggered_desc = {
+					# trigger = { current_date >= 1120.1.1 }
+					# desc = learning_medicine.2010.hildegard.desc
+				# }
+				# triggered_desc = {
+					# trigger = { current_date >= 1316.12.30 }
+					# desc = learning_medicine.2010.mundinus.desc
+				# }
+				# triggered_desc = {
+					# trigger = {
+						# NOR = {
+							# has_culture_group = culture_group:arabic_group
+							# scope:court_physician = { has_culture_group = culture_group:arabic_group }
+							# faith = { religion_tag = islam_religion }
+							# scope:court_physician.faith = { religion_tag = islam_religion }
+						# }
+						# current_date >= 1225.1.1
+					# }
+					# desc = learning_medicine.2010.avicenna.desc
+				# }
+				# triggered_desc = {
+					# trigger = {
+						# NOR = {
+							# has_culture = culture:italian
+							# scope:court_physician = { has_culture = culture:italian }
+						# }
+						# current_date >= 1150.1.1
+					# }
+					# desc = learning_medicine.2010.trota.desc
+				# }
+			# }
+			desc = learning_medicine.2010.fallback.desc
+		}
 		desc = learning_medicine.2010.end.desc
 	}
 	
@@ -2704,6 +2768,7 @@ scripted_trigger learning_medicine_2110_valid_hashish_vassal_or_liege = {
 	}
 }
 
+### EK EDIT: Removed reference to vanilla regions and religions
 #	A vassal (or your liege) wants to eat some hashish while visiting your capital.
 #		by Ewan Cowhig Croft
 learning_medicine_special.2110 = {
@@ -2733,7 +2798,9 @@ learning_medicine_special.2110 = {
 		is_at_war = no
 		NOT = { has_character_flag = had_event_learning_medicine_2110 }
 		any_vassal = { learning_medicine_2110_valid_hashish_vassal_or_liege = yes }
-		always = no
+		# root.capital_province = {
+			# NOT = {	geographical_region = world_europe }
+		# }
 	}
 
 	weight_multiplier = {
@@ -2896,7 +2963,14 @@ learning_medicine_special.2110 = {
 				target = root
 			}
 		}
-		if = {	#If your faith hates such things, you get a little piety.
+		if = {	#Muslims receive additional piety due to their religion's prohibitions on intoxicants.
+			limit = {
+				always = no
+				# faith = { religion_tag = islam_religion }
+			}
+			add_piety = medium_piety_gain
+		}
+		else_if = {	#If your faith hates such things, you get a little piety.
 			limit = {
 				faith = { trait_is_sin = gluttonous }
 			}
@@ -2992,7 +3066,10 @@ learning_medicine_special.2110 = {
 		if = {
 			limit = {
 				faith = {
-					trait_is_sin = gluttonous
+					OR = {
+						# religion_tag = islam_religion
+						trait_is_sin = gluttonous
+					}
 				}
 			}
 			stress_impact = { zealous = minor_stress_impact_gain }
@@ -3116,7 +3193,10 @@ learning_medicine_special.2110 = {
 		if = {
 			limit = {
 				faith = {
-					trait_is_sin = gluttonous
+					OR = {
+						# religion_tag = islam_religion
+						trait_is_sin = gluttonous
+					}
 				}
 			}
 			stress_impact = { zealous = medium_stress_impact_gain }
@@ -3609,8 +3689,19 @@ learning_medicine_special.1006 = {
 # #2100
 ##################################################
 
+### EK EDIT: Removed references to vanilla regions
 scripted_trigger learning_medicine_special_2100_broad_dreamfish_range = {
 	is_coastal = yes
+	# OR = {
+		# geographical_region = world_europe_west_britannia
+		# geographical_region = world_europe_west_francia
+		# geographical_region = world_europe_west_iberia
+		# geographical_region = world_europe_south
+		# geographical_region = world_asia_minor
+		# geographical_region = world_middle_east_jerusalem
+		# geographical_region = world_africa_north
+		# geographical_region = world_africa_west
+	# }
 }
 
 #	You consume a hallucinogenic fish.

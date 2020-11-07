@@ -16,11 +16,10 @@ ek_nedic.0001 = {
 		# Give vassals the option to convert
 		every_vassal_or_below = {
 			limit = {
-					title_province = {
-						geographical_region = mundus_tamriel_hammerfell_craglorn
-					}
+				exists = capital_province
+				capital_province = { geographical_region = custom_nativity_craglorn }	
 			}
-			trigger_event = ek_nedic.0002
+			trigger_event = ek_nedic.0002 #So they can convert
 		}
 	}
 	option = {
@@ -59,9 +58,7 @@ ek_nedic.0002 = {
 				limit = {
 					tier = tier_county
 					culture.culture_group = root.culture.culture_group
-					title_province = {
-						geographical_region = mundus_tamriel_hammerfell_craglorn
-					}
+					title_province = { geographical_region = custom_nativity_craglorn }
 				}
 				random = {
 					chance = 40
