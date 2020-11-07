@@ -998,289 +998,42 @@ patron_xen_shown = {
     }
 }
 
+patron_ardor_0 = {
+    scope = character
+    is_shown = { ardor_bin_0 = 1 }
+}
+
 patron_ardor_1 = {
     scope = character
-
-    is_valid = {
-        var:ardor_display >= 1000
-        #var:ardor_display >= tiny_ardor_value_double
-    }
-
-    is_shown = {
-        var:ardor_display >= 2000
-        #var:ardor_display >= minor_ardor_value
-    }
+    is_shown = { ardor_bin_1 = 1 }
 }
 
 patron_ardor_2 = {
     scope = character
-
-    is_valid = {
-        var:ardor_display >= 3000
-        #var:ardor_display >= minor_ardor_value_double
-    }
-
-    is_shown = {
-        var:ardor_display >= 4000
-        #var:ardor_display >= medium_ardor_value
-    }
+    is_shown = { ardor_bin_2 = 1 }
 }
 
 patron_ardor_3 = {
     scope = character
-
-    is_valid = {
-        var:ardor_display >= 5000
-        #var:ardor_display >= medium_ardor_value_double
-    }
-
-    is_shown = {
-        var:ardor_display >= 6000
-        #var:ardor_display >= major_ardor_value
-    }
+    is_shown = { ardor_bin_3 = 1 }
 }
 
 patron_ardor_4 = {
     scope = character
-
-    is_valid = {
-        var:ardor_display >= 7000
-        #var:ardor_display >= major_ardor_value_double
-    }
-
-    is_shown = {
-        var:ardor_display >= 8000
-        #var:ardor_display >= massive_ardor_value
-    }
+    is_shown = { ardor_bin_4 = 1 }
 }
 
 patron_ardor_5 = {
     scope = character
-
-    is_valid = {
-        var:ardor_display >= 9000
-        #var:ardor_display >= massive_ardor_value_double
-    }
-
-    is_shown = {
-        var:ardor_display >= 10000
-        #var:ardor_display >= monumental_ardor_value
-    }
+    is_shown = { ardor_bin_5 = 1 }
 }
 
-# patron_decision_test = { #pair w/ ai=no and variable condition so don't appear in decisions normally except for ai
-#     scope = character
-
-#     #is_valid = {
-#     #    can_execute_decision = host_feast_decision
-#     #}
-
-#     effect = {
-#         #execute_decision = host_feast_decision
-#         #set_variable = third_era_start
-#         # add_to_global_variable_list = {
-#         # 	name = era_start
-#         # 	target = flag:third_era_start
-#         # }
-#         set_global_variable = {
-#             name = third_era_start
-#             value = scope:EmptyScope.GetCurrentDate.GetYear #GetCurrentDate.GetYear #yearvalue:Date.GetYear #$YEAR$
-#         }
-#         # if = {
-#         #     limit = { NOT = { has_variable = ardor } }
-#         #     set_variable = { name = ardor value = 100 }
-#         # }
-#         # else = {
-#         #     change_variable = { name = ardor add = 100 }
-#         # }
-#     }
-# }
-
-# patron_decision_test_2 = { #double click version of above/ confirmation button
-#     scope = character
-
-#     is_valid = {
-#         can_execute_decision = host_feast_decision
-#     }
-
-#     is_shown = {
-#         has_variable = patron_host_feast_decision
-#     }
-
-#     effect = {
-#         if = {
-#             limit = {
-#                 has_variable = patron_host_feast_decision
-#             }
-#             remove_variable = patron_host_feast_decision
-#             execute_decision = host_feast_decision
-#         }
-#         else = {
-#             set_variable = patron_host_feast_decision
-#         }
-#     }
-# }
-
-# # patron_decision_clear = { #for use in cancel button in confirm/cancel dialog after first click
-# #     scope = character
-# # }
-
-lunar_cycle_masser_new_moon = {
-    is_shown = { #new moon
-        #global_var:lunarphase_masser > 0
-        global_var:lunarphase_masser <= 3
-    }
-    is_valid = { #waxing cresent
-        global_var:lunarphase_masser > 3
-        global_var:lunarphase_masser <= 6
-    }
-}
-lunar_cycle_masser_waxing = {
-    is_shown = { #first quarter
-        global_var:lunarphase_masser > 6
-        global_var:lunarphase_masser <= 9
-    }
-    is_valid = { #waxing gibbous
-        global_var:lunarphase_masser > 9
-        global_var:lunarphase_masser <= 12
-    }
-}
-lunar_cycle_masser_full_moon = {
-    is_shown = { #full moon
-        global_var:lunarphase_masser > 12
-        global_var:lunarphase_masser <= 16
-    }
-    is_valid = { #waning gibbous
-        global_var:lunarphase_masser > 16
-        global_var:lunarphase_masser <= 19
-    }
-}
-lunar_cycle_masser_waning = {
-    is_shown = { #third quarter
-        global_var:lunarphase_masser > 19
-        global_var:lunarphase_masser <= 22
-    }
-    is_valid = { #waning cresent
-        global_var:lunarphase_masser > 22
-        #global_var:lunarphase_masser <= 25
-    }
+patron_ardor_6 = {
+    scope = character
+    is_shown = { ardor_bin_6 = 1 }
 }
 
-lunar_cycle_secunda_new_moon = {
-    is_shown = { #new moon
-        #global_var:lunarphase_secunda > 0
-        global_var:lunarphase_secunda <= 4
-    }
-    is_valid = { #waxing cresent
-        global_var:lunarphase_secunda > 4
-        global_var:lunarphase_secunda <= 8
-    }
-}
-lunar_cycle_secunda_waxing = {
-    is_shown = { #first quarter
-        global_var:lunarphase_secunda > 8
-        global_var:lunarphase_secunda <= 12
-    }
-    is_valid = { #waxing gibbous
-        global_var:lunarphase_secunda > 12
-        global_var:lunarphase_secunda <= 16
-    }
-}
-lunar_cycle_secunda_full_moon = {
-    is_shown = { #full moon
-        global_var:lunarphase_secunda > 16
-        global_var:lunarphase_secunda <= 21
-    }
-    is_valid = { #waning gibbous
-        global_var:lunarphase_secunda > 21
-        global_var:lunarphase_secunda <= 25
-    }
-}
-lunar_cycle_secunda_waning = {
-    is_shown = { #third quarter
-        global_var:lunarphase_secunda > 25
-        global_var:lunarphase_secunda <= 29
-    }
-    is_valid = { #waning cresent
-        global_var:lunarphase_secunda > 29
-        #global_var:lunarphase_secunda <= 33
-    }
-}
-
-stellar_cycle_ritual = {
-    is_shown = {
-        current_month = 1
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_lover = {
-    is_shown = {
-        current_month = 2
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_lord = {
-    is_shown = {
-        current_month = 3
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_mage = {
-    is_shown = {
-        current_month = 4
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_shadow = {
-    is_shown = {
-        current_month = 5
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_steed = {
-    is_shown = {
-        current_month = 6
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_apprentice = {
-    is_shown = {
-        current_month = 7
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_warrior = {
-    is_shown = {
-        current_month = 8
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_lady = {
-    is_shown = {
-        current_month = 9
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_tower = {
-    is_shown = {
-        current_month = 10
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_atronach = {
-    is_shown = {
-        current_month = 11
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_thief = {
-    is_shown = {
-        current_month = 12
-        NOT = { has_global_variable = serpent_active }
-    }
-}
-stellar_cycle_serpent = {
-    is_shown = {
-        has_global_variable = serpent_active
-    }
+patron_ardor_7 = {
+    scope = character
+    is_shown = { ardor_bin_7 = 1 }
 }
