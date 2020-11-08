@@ -763,8 +763,8 @@ task_promote_culture = {
 						scope:councillor_liege.culture = { has_innovation = innovation_native_stormhaven }
 					}
 					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_wrothgarian_mountains }
+						scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_greater_wrothgar }
 					}
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_bangkorai }
@@ -1328,9 +1328,9 @@ task_promote_local_culture = {
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = stormhaven } }
 		}
 		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = wrothgarian_mountains }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = wrothgarian_mountains } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = greater_wrothgar }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = greater_wrothgar } }
 		}
 		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
@@ -1421,13 +1421,13 @@ task_promote_local_culture = {
 			}
 		}
 		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_wrothgarian_mountains } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar } }
 			random_in_global_list = {
 				variable = culture_is_alive
 				
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_wrothgarian_mountains
+					has_innovation = innovation_native_greater_wrothgar
 				}
 				
 				save_scope_as = culture_to_convert

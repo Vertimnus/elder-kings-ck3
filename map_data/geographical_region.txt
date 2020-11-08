@@ -57,7 +57,7 @@ mundus_tamriel_high_rock_wrothgar = {
 mundus_tamriel_high_rock_fharun = { 
 	duchies = { d_scarp d_jehanna d_bonerock d_fharun }
 }
-mundus_tamriel_high_rock_wrothgarian_mountains = { 
+mundus_tamriel_high_rock_greater_wrothgar = { 
 	regions = { mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_fharun }
 }
 
@@ -74,7 +74,7 @@ mundus_tamriel_high_rock_bangkorai = {
 
 ## COMPLETE HIGH ROCK
 mundus_tamriel_high_rock = { 
-	regions = { mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_wrothgarian_mountains mundus_tamriel_high_rock_evermore }
+	regions = { mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_greater_wrothgar mundus_tamriel_high_rock_evermore }
 }
 
 ### HAMMERFELL
@@ -164,27 +164,6 @@ mundus_tamriel_cyrodiil = {
 	regions = { mundus_tamriel_cyrodiil_colovia }
 }
 
-### THE REACH
-## WEST REACH: Wrothgar + Evermore
-mundus_tamriel_reach_west_reach = {
-	regions = { mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_evermore }
-}
-
-## SOUTHERN REACH: Dragontail
-mundus_tamriel_reach_south_reach = {
-	regions = { mundus_tamriel_hammerfell_dragontail }
-}
-
-## MARKARTH: Markarth (duh)
-mundus_tamriel_reach_markarth = {
-	duchies = { d_markarth d_reachcliff d_sungard d_hroldan d_druadach d_karthwasten d_karthald }
-}
-
-## COMPLETE REACH
-mundus_tamriel_reach = {
-	regions = { mundus_tamriel_reach_west_reach mundus_tamriel_reach_markarth mundus_tamriel_reach_south_reach }
-}
-
 ### SKYRIM
 ## WEST SKYRIM: Whiterun + Falkreath + Hjaalmarch + Haafingar
 mundus_tamriel_skyrim_whiterun = {
@@ -200,7 +179,7 @@ mundus_tamriel_skyrim_haafingar = {
 	duchies = { d_darkfall d_dragon_bridge d_icereach d_northwatch d_ravenscar d_solitude d_volkihar }
 }
 mundus_tamriel_skyrim_west_skyrim = {
-	regions = { mundus_tamriel_reach_markarth mundus_tamriel_skyrim_whiterun mundus_tamriel_skyrim_falkreath mundus_tamriel_skyrim_hjaalmarch mundus_tamriel_skyrim_haafingar }
+	regions = { mundus_tamriel_skyrim_whiterun mundus_tamriel_skyrim_falkreath mundus_tamriel_skyrim_hjaalmarch mundus_tamriel_skyrim_haafingar }
 }
 
 ## EAST SKYRIM: The Rift + Eastmarch + Winterhold + The Pale
@@ -225,14 +204,50 @@ mundus_tamriel_skyrim_solstheim = {
 	duchies = { d_snowfallow d_northshore d_raven_rock }
 }
 
+## MARKARTH: Markarth
+mundus_tamriel_skyrim_markarth = {
+	duchies = { d_markarth d_reachcliff d_sungard d_hroldan d_druadach d_karthwasten d_karthald }
+}
+
 ## COMPLETE SKYRIM
 mundus_tamriel_skyrim = {
-	regions = { mundus_tamriel_skyrim_west_skyrim mundus_tamriel_skyrim_east_skyrim mundus_tamriel_skyrim_solstheim }
+	regions = { mundus_tamriel_skyrim_west_skyrim mundus_tamriel_skyrim_east_skyrim mundus_tamriel_skyrim_solstheim mundus_tamriel_skyrim_markarth }
 }
 
 ### TAMRIEL
 mundus_tamriel = { 
 	regions = { mundus_tamriel_high_rock mundus_tamriel_hammerfell mundus_tamriel_cyrodiil mundus_tamriel_skyrim }
+}
+
+###########################################################################
+# Special regions
+# These regions are used for custom kingdoms and empires
+# They can overlap with already existing regions, but that's not a problem
+###########################################################################
+### THE REACH
+## WEST REACH: Wrothgar + Evermore
+mundus_tamriel_reach_west_reach = {
+	duchies = { d_argent }
+	regions = { mundus_tamriel_high_rock_fharun mundus_tamriel_high_rock_evermore }
+}
+
+## SOUTHERN REACH: Dragontail
+mundus_tamriel_reach_south_reach = {
+	regions = { mundus_tamriel_hammerfell_dragontail }
+}
+
+## EAST REACH: Markarth + North Reach
+mundus_tamriel_reach_north_reach = {
+	duchies = { d_darkfall }
+}
+
+mundus_tamriel_reach_east_reach = {
+	regions = { mundus_tamriel_skyrim_markarth mundus_tamriel_reach_north_reach }
+}
+
+## COMPLETE REACH
+mundus_tamriel_reach = {
+	regions = { mundus_tamriel_reach_west_reach mundus_tamriel_reach_east_reach mundus_tamriel_reach_south_reach }
 }
 
 ###########################################################################
@@ -251,7 +266,7 @@ custom_nativity_rivenspire = {
 custom_nativity_stormhaven = {
 	regions = { mundus_tamriel_high_rock_stormhaven }
 }
-custom_nativity_wrothgarian_mountains = {
+custom_nativity_greater_wrothgar = {
 	regions = { mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_fharun }
 }
 custom_nativity_bangkorai = {
@@ -270,7 +285,7 @@ custom_nativity_colovia = {
 }
 ## Skyrim
 custom_nativity_markarth = {
-	regions = { mundus_tamriel_reach_markarth }
+	regions = { mundus_tamriel_skyrim_markarth }
 }
 custom_nativity_west_skyrim = {
 	regions = { mundus_tamriel_skyrim_west_skyrim }

@@ -145,6 +145,20 @@ form_rivenspire_scripted_effect = {
 	form_kingdom_scripted_effect = yes
 }
 
+form_greater_wrothgar_scripted_effect = {
+	save_scope_as = scoped_ruler
+	title:k_greater_wrothgar = { save_scope_as = new_kingdom }
+	title:k_wrothgar = { save_scope_as = old_kingdom_1 }
+	title:k_fharun = { save_scope_as = old_kingdom_2 }
+	
+	scope:old_kingdom_1 = { add_to_list = old_kingdom_list }
+	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
+	
+	custom_tooltip = form_greater_wrothgar_kingdom_decision_effects_de_jure_tt
+	
+	form_kingdom_scripted_effect = yes
+}
+
 form_bangkorai_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_bangkorai = { save_scope_as = new_kingdom }
@@ -157,4 +171,56 @@ form_bangkorai_scripted_effect = {
 	custom_tooltip = form_bangkorai_kingdom_decision_effects_de_jure_tt
 	
 	form_kingdom_scripted_effect = yes
+}
+
+### Form Empires
+form_reach_empire_scripted_effect = {
+	save_scope_as = founder
+	create_title_and_vassal_change = {
+		type = created
+		save_scope_as = title_change
+		add_claim_on_loss = no
+	}
+	title:e_reach = {
+		change_title_holder = {
+			holder = root
+			change = scope:title_change
+		}
+	}
+	resolve_title_and_vassal_change = scope:title_change
+	
+	### De Jure changes
+	title:k_markarth = { set_de_jure_liege_title = title:e_reach }
+	## TODO: Handle region unification decisions
+	title:k_dragonstar = { set_de_jure_liege_title = title:e_reach }
+	title:k_elinhir = { set_de_jure_liege_title = title:e_reach }
+	title:k_fharun = { set_de_jure_liege_title = title:e_reach }
+	title:k_evermore = { set_de_jure_liege_title = title:e_reach }
+	
+	## If d_darkfall is held but not k_solitude, we integrate it
+	if = {
+		limit = { NOT = { title:k_solitude = { holder = root } } }
+		title:k_wrothgar = { set_de_jure_liege_title = title:e_reach }
+	}
+	title:d_darkfall = { set_de_jure_liege_title = title:k_markarth }
+	## If d_argent is held but not k_wrothgar, we integrate it
+	if = {
+		limit = { NOT = { title:k_wrothgar = { holder = root } } }
+		title:d_argent = { set_de_jure_liege_title = title:k_fharun }
+	}
+	## If k_wrothgar is held, we integrate it
+	if = {
+		limit = { title:k_wrothgar = { holder = root } }
+		title:k_wrothgar = { set_de_jure_liege_title = title:e_reach }
+	}
+	## If k_falkreath is held, we integrate it
+	if = {
+		limit = { title:k_falkreath = { holder = root } }
+		title:k_falkreath = { set_de_jure_liege_title = title:e_reach }
+	}
+	## If k_solitude is held, we integrate it
+	if = {
+		limit = { title:k_solitude = { holder = root } }
+		title:k_solitude = { set_de_jure_liege_title = title:e_reach }
+	}
 }

@@ -1,0 +1,82 @@
+﻿namespace = ektitulartitle
+
+### Forming Kingdoms
+# Unifying your native lands
+ektitulartitle.0001 = { #player forms titular kingdom
+	type = character_event
+	title = ektitulartitle.0001.t
+	desc = ektitulartitle.0001.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+	}
+	option = {
+		name = ektitulartitle.0001.a
+	}
+}
+
+### Forming Empires
+# Reach Empire
+ektitulartitle.1001 = {
+	type = character_event
+	title = ektitulartitle.1001.t
+	desc = ektitulartitle.1001.desc
+	theme = realm
+	left_portrait = {
+		character = scope:founder
+		animation = personality_bold
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_epic_sacral_moment"
+		form_reach_empire_scripted_effect = yes
+	}
+
+	# Take the nickname
+	option = {
+		name = ektitulartitle.1001.a
+		give_nickname = nick_the_great
+		add_prestige_experience = massive_fame_gain
+	}
+	# No thanks on the nickname, more prestige instead please
+	option = {
+		name = ektitulartitle.1001.b
+		add_prestige_experience = monumental_fame_gain
+	}
+}
+
+#Inform any players.
+ektitulartitle.1002 = {
+	type = character_event
+	title = ektitulartitle.1001.t
+	desc = ektitulartitle.1002.desc
+	theme = realm
+	left_portrait = {
+		character = scope:founder
+		animation = personality_bold
+	}
+
+	immediate = {
+		#Empires get rivalry music.
+		if = {
+			limit = { highest_held_title_tier = tier_empire }
+			play_music_cue = "mx_cue_combat_2"
+		}
+	}
+
+	option = {
+		name = { # Empires are less than impressed
+			trigger = { highest_held_title_tier = tier_empire }
+			text = ektitulartitle.1002.a
+		}
+		name = { # Will it stand the test of time?
+			trigger = { NOT = { highest_held_title_tier = tier_empire } }
+			text = ektitulartitle.1002.b
+		}
+	}
+}
