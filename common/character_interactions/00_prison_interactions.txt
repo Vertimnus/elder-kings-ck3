@@ -3202,6 +3202,22 @@ execute_prisoner_interaction = {
 					}
 				}
 			}
+			### EK EDIT: Enthrall
+			if = {
+				limit = { always = scope:execution_enthrall }
+				scope:actor = {
+					custom_tooltip = enthrall_as_execution_tooltip
+					if = {
+						limit = {
+							secret_necromancer_is_valid_trigger = { OWNER = this }
+							NOT = { any_secret = { secret_type = secret_necromancer } }
+							trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = necromancer GENDER_CHARACTER = scope:secret_getter }
+						}
+						custom_tooltip = decision_gives_necromancer_secret_tt
+					}
+					give_necromancer_secret_or_trait_effect = yes
+				}
+			}
 			else = {
 				if = {
 					limit = {
@@ -3273,6 +3289,18 @@ execute_prisoner_interaction = {
 		}
 		flag = execution_devour
 		localization = "EXECUTION_DEVOUR"
+	}
+	
+	### EK EDIT: Enthrall
+	# Necromancer option. Should be treated as a "normal" execution, but you raise the dead body afterwards, getting a loyal (if a bit braindead) servant
+	send_option = {
+		is_shown = {
+			scope:actor = {
+				has_perk = enthrall_prisoner_perk
+			}
+		}
+		flag = execution_enthrall
+		localization = "EXECUTION_ENTHRALL"
 	}
 
 	send_option = {
