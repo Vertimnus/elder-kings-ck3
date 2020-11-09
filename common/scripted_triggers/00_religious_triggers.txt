@@ -312,6 +312,12 @@ trait_is_shunned_in_faith_trigger = {
 			}
 			$FAITH$ = { has_doctrine_parameter = kinslaying_shunned }
 		}
+		### EK EDIT: Necromancer
+		#NECROMANCER
+		AND = {
+			scope:shunned_trait_check = flag:necromancer	
+			$FAITH$ = { has_doctrine_parameter = necromancy_shunned }
+		}
 	}
 }
 
@@ -380,6 +386,12 @@ trait_is_criminal_in_faith_trigger = {
 					$GENDER_CHARACTER$ = { is_male = yes }
 				}
 			}
+		}
+		### EK EDIT: Necromancer
+		#NECROMANCER
+		AND = {
+			scope:shunned_trait_check = flag:necromancer	
+			$FAITH$ = { has_doctrine_parameter = necromancy_criminal }
 		}
 	}	
 }
@@ -469,6 +481,12 @@ has_negative_attitude_towards_trait_trigger = {
 				has_trait = lustful
 				any_relation = { type = lover always = yes }
 			}
+		}
+		### EK EDIT: Necromancer
+		#NECROMANCER
+		AND = {
+			scope:negative_status_check = flag:necromancer
+			any_secret = { secret_type = secret_necromancer }
 		}
 	}
 

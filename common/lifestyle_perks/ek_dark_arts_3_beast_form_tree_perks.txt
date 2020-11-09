@@ -1,0 +1,43 @@
+﻿### DARK ARTS - BEASTFORM PERKS
+
+# Tamed hunger - Reduces stress due to starvation
+tamed_hunger_perk = {
+	lifestyle = dark_arts_lifestyle
+	tree = beastform
+	position = { 0 0 }
+	icon = node_learning
+	
+	auto_selection_weight = {
+		value = 11
+		if = {
+			limit = {
+				has_education_learning_trigger = yes
+			}
+			add = 1989
+		}
+		# if = {
+			# limit = {
+				# has_focus = stewardship_duty_focus
+			# }
+			# multiply = 5
+		# }
+		if = {
+			limit = {
+				can_start_new_lifestyle_tree_trigger = no
+			}
+			multiply = 0
+		}
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			multiply = 0
+		}
+	}
+	
+	effect = {	
+		custom_description_no_bullet = {
+			text = meritocracy_perk_effect
+		}
+	}
+}

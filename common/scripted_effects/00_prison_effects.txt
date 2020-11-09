@@ -79,15 +79,30 @@ execute_prisoner_effect = {
 		save_scope_as = executioner
 	}
 
-	show_as_tooltip = {
-		$VICTIM$ = {
-			death = {
-				death_reason = death_execution
-				killer = $EXECUTIONER$
+	### EK EDIT: Necromancer
+	if = {
+		limit = { NOT = { always = scope:execution_enthrall } }
+		show_as_tooltip = {
+			$VICTIM$ = {
+				death = {
+					death_reason = death_execution
+					killer = $EXECUTIONER$
+				}
 			}
 		}
 	}
-
+	else = {
+		show_as_tooltip = {
+			$VICTIM$ = {
+				add_trait = undead_character
+				add_opinion = {
+					target = $EXECUTIONER$
+					modifier = thrall_opinion
+				}
+			}
+		}
+	}
+	
 	scope:executioner = {
 		if = {
 			limit = {
@@ -305,11 +320,25 @@ execute_prisoner_effect = {
 
 	execute_opinion_effect = { VICTIM = scope:victim EXECUTIONER = scope:executioner }
 
+	### EK EDIT: Enthrall
 	hidden_effect = {
-		$VICTIM$ = {
-			death = {
-				death_reason = death_execution
-				killer = $EXECUTIONER$
+		if = {
+			limit = { NOT = { always = scope:execution_enthrall } }
+			$VICTIM$ = {
+				death = {
+					death_reason = death_execution
+					killer = $EXECUTIONER$
+				}
+			}
+		}
+		else = {
+			# Instead of killing the victim we turn them into an undead and make them blindly loyal to their master
+			$VICTIM$ = {
+				add_trait = undead_character
+				add_opinion = {
+					target = $EXECUTIONER$
+					modifier = thrall_opinion
+				}
 			}
 		}
 	}

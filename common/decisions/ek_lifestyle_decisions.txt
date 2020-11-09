@@ -1,0 +1,56 @@
+﻿### Raise Risen Dead
+# Unlocked by: Risen Dead (Necromancy)
+raise_risen_dead_decision = {
+	ai_check_interval = 0
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = raise_risen_dead_decision_desc
+
+	selection_tooltip = raise_risen_dead_decision_tooltip
+
+	cooldown = { days = 365 }
+
+	is_shown = {
+		has_perk = risen_dead_perk
+		is_at_war = yes
+	}
+
+	is_valid_showing_failures_only = {
+		number_maa_regiments_of_type = {
+			type = risen_dead
+			value = 0
+		}
+	}
+
+	is_valid = {
+		has_perk = risen_dead_perk
+	}
+
+	effect = {
+		if = {
+			limit = {
+				secret_necromancer_is_valid_trigger = { OWNER = this }
+				NOT = { any_secret = { secret_type = secret_necromancer } }
+				trait_is_shunned_or_criminal_in_my_or_lieges_faith_trigger = { TRAIT = necromancer GENDER_CHARACTER = scope:secret_getter }
+			}
+			custom_tooltip = decision_gives_necromancer_secret_tt
+		}
+		give_necromancer_secret_or_trait_effect = yes
+		spawn_army = {
+			levies = 1 # Very important, otherwise the game spawns 100 levies :) Thanks Paradox :)
+			men_at_arms = {
+				type = risen_dead
+				stacks = 1
+			}
+			location = capital_province
+		}
+	}
+	
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
