@@ -31,6 +31,8 @@ faith_conversion.0002 = {
 		remove_character_modifier = excommunication_recently_lifted
 		remove_character_modifier = vow_of_poverty_modifier
 		remove_character_modifier = temporal_condemnation_modifier
+		
+		### EK TODO: REMOVED THE PATRONS TRAITS
 	}
 }
 
@@ -97,13 +99,49 @@ faith_conversion.0003 = {
 	}
 }
 
+### EK EDIT: To use when a government is tied to a religion/culture
 faith_conversion.0004 = {
 	hidden = yes
 
 	trigger = {
-		always = no
+		has_government = theocracy_government
+		is_landed = yes
 	}
 
 	immediate = {
+		if = {
+			limit = {
+				always = no
+				# OR = {
+					# culture_group = culture_group:arabic_group
+					# culture_group = culture_group:iranian_group
+					# culture = culture:turkish
+				# }
+			}
+			change_government = clan_government
+		}	
+		else = {
+			change_government = feudal_government
+		}
+	}
+}
+
+# For softening opinion penalties, e.g., I believed in monogamous faith but was in a polygamous marriage, but now I've been converted to polygamous faith.
+faith_conversion.0005 = {
+	hidden = yes
+
+	trigger = {
+		any_consort = {
+			count >= 1
+		}
+	}
+
+	immediate = {
+		every_consort = {
+			save_scope_as = this_consort
+			root = {
+				update_active_consort_opinion_effect = { PARTNER = scope:this_consort }
+			}
+		}
 	}
 }

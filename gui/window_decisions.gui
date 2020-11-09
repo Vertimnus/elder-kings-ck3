@@ -482,7 +482,6 @@ window = {
 
 							vbox = {
 								#parentanchor = left
-
 								text_single = {
 									text = selected_patron_name #defined by custom loc
 									align = center
@@ -865,7 +864,7 @@ window = {
 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 										blockoverride "patron_entry_icon" {
-											texture = "gfx/interface/patrons/patron_boethiah.dds"
+											texture = "gfx/interface/patrons/patron_nocturnal.dds"
 										}
 										blockoverride "patron_entry_name" {
 											text = patron_nocturnal_name
@@ -1039,8 +1038,9 @@ window = {
 					visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
 					vbox = {
-						maximumsize = { 520 400 }
+						maximumsize = { 600 400 }
 						hbox = {
+							size = { 180 100 }
 							button_back = {
 								name = "patron_button_back"
 								align = top|left
@@ -1059,7 +1059,22 @@ window = {
 								# }
 							}
 							spacer = {
-								size = { 110 0 }
+								size = { 10 0 }
+							}
+							spacer = {
+								size = { 140 100 }
+								vbox = {
+									text_single = {
+										text = patron_status #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+									text_single = {
+										text = patron_worship_type #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+								}
 							}
 							# Patron Icons #
 							vbox = {
@@ -1234,14 +1249,15 @@ window = {
 								}
 							}
 							spacer = {
-								size = { 140 40 } #+30 compared to other one for button
-								hbox = {
-									size = { 60 50 }
+								size = { 170 100 } #+30 compared to other one for button
+								vbox = {
+									# hbox = {
+									# 	size = { 60 50 }
 									#minimumsize = { 100 50 }
 
-									spacer = {
-										size = { 80 0 }
-									}
+									# spacer = {
+									# 	size = { 80 0 }
+									# }
 
 									text_single = {
 										text = patron_ardor #defined by custom loc
@@ -1253,12 +1269,271 @@ window = {
 									# 	name = "progress_bar_azura"
 									# 	parentanchor = center
 									# 	size = { 100 10 }
-									# 	#visible = "[Holding.IsConstructionInProgress]"
-									# 	#min = 0
-									# 	#max = 1
-									# 	value = @special_mine_tax_base
+									# 	min = 0
+									# 	max = 10000
+									# 	#value = "[(CFixedPoint)GetPlayer.MakeScope.Var('ardor_display').GetValue]"
+									# 	value = "[FixedPointToInt(EmptyScope.ScriptValue('ardor_display'))]"
 									# }
+									# }
+									# spacer = {
+									# 	size = { 0 2 }
+									# }
+									widget = {
+										name = "ardor_widget"
+										size = { 170 58 }
+
+										#tooltip = "patron_ardor"
+										#using = tooltip_ne
+
+										hbox = {
+											size = { 100 20}
+											maximumsize = { 100 20}
+											parentanchor = top|left
+											position = { 53 19 }
+
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_0')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 1 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_1')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 2 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_2')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 4 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_3')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 8 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_4')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 16 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_5')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 32 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_6')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 64 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											progressbar_ardor = {
+												datacontext = "[GetScriptedGui('patron_ardor_7')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												size = { 128 20 }
+
+												#using = Animation_ShowHide_Standard
+
+												blockoverride "bar_color"
+												{
+													texture = "gfx/interface/colors/red.dds"
+												}
+
+												blockoverride "bar_color_flow"
+												{
+													texture = "gfx/interface/colors/gold.dds"
+													alpha = 0.7
+												}
+											}
+											#progressbar_ardor_offset = {}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_0')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 1 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_1')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 2 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_2')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 4 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_3')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 8 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_4')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 16 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_5')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 32 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_6')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 64 0 }
+												}
+											}
+											vbox = {
+												layoutpolicy_horizontal = expanding
+												datacontext = "[GetScriptedGui('patron_ardor_7')]"
+												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												spacer = {
+													size = { 128 0 }
+												}
+											}
+										}
+
+										icon = {
+											size = { 100% 100% }
+											texture = "gfx/interface/patron_window/ardor_bg.dds"
+
+											icon = {
+												parentanchor = vcenter
+												position = { 19 2 }
+												size = { 30 30 }
+
+												texture = "gfx/interface/patron_window/icon_ardor.dds"
+
+												# modify_texture = {
+												# 	visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
+												# 	name = "lvl3_glow"
+												# 	texture = "gfx/interface/colors/gold.dds"
+												# 	blend_mode = colordodge
+												# 	alpha = 0
+												# }
+
+												# modify_texture = {
+												# 	name = "lvl_increase"
+												# 	texture = "gfx/interface/colors/gold.dds"
+												# 	blend_mode = colordodge
+												# 	alpha = 0
+												# }
+											}
+										}
+									}
 								}
+							}
+							spacer = {
+								size = { 10 0 }
 							}
 						}
 
@@ -1537,12 +1812,6 @@ window = {
 											vbox = {
 												name = "patron_boon_invasion_decision"
 												datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_major_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_offer_sacrifice_decision"
-												datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
 												visible = "[Decision.IsShownForPlayer]"
 												button_patron_major_decision_entry = {}
 											}
@@ -2880,7 +3149,7 @@ Types Patrons
 		}
 
 		hbox = {
-			margin = {10 0 }
+			margin = { 10 0 }
 
 			text_single = {
 				layoutpolicy_horizontal = growing
@@ -2888,7 +3157,7 @@ Types Patrons
 				text = "[Decision.GetTitleForPlayer]"
 				visible = "[Decision.IsPossibleForPlayer]"
 				default_format = "#clickable"
-				size = { 14 }
+				fontsize = 14
 				align = nobaseline
 			}
 
@@ -2898,7 +3167,7 @@ Types Patrons
 				text = "[Decision.GetTitleForPlayer]"
 				visible = "[Not(Decision.IsPossibleForPlayer)]"
 				default_format = "#low"
-				size = { 14 }
+				fontsize = 14
 				align = nobaseline
 			}
 		}
@@ -2962,7 +3231,7 @@ Types Patrons
 		}
 
 		hbox = {
-			margin = {10 0 }
+			margin = { 10 0 }
 
 			text_single = {
 				layoutpolicy_horizontal = growing
@@ -2970,7 +3239,7 @@ Types Patrons
 				text = "[Decision.GetTitleForPlayer]"
 				visible = "[Decision.IsPossibleForPlayer]"
 				default_format = "#clickable"
-				size = { 18 }
+				fontsize = 18
 				align = nobaseline
 			}
 
@@ -2980,9 +3249,197 @@ Types Patrons
 				text = "[Decision.GetTitleForPlayer]"
 				visible = "[Not(Decision.IsPossibleForPlayer)]"
 				default_format = "#low"
-				size = { 18 }
+				fontsize = 18
 				align = nobaseline
 			}
 		}
 	}
+	Type button_ardor = button_normal
+	{
+		texture = "gfx/interface/patron_window/button_ardor.dds"
+		size = { 32 32 }
+
+		gfxtype = togglepushbuttongfx
+		effectname = "NoHighlight"
+
+		upframe = 2
+		uphoverframe = 2
+		uppressedframe = 2
+		downframe = 3
+		downhoverframe = 3
+		downpressedframe = 3
+		disableframe = 1
+
+		spriteType = Corneredtiled
+		spriteborder = { 3 3 }
+		framesize = { 32 32 }
+	}
+	Type progressbar_ardor = icon
+	{
+		shaderfile = "gfx/FX/repeat_texture.shader"
+		alpha = 0.8
+
+		block "bar_color"
+		{
+			# texture = "gfx/interface/colors/red.dds"
+		}
+
+		modify_texture = {
+			texture = "gfx/interface/patron_window/mask_rough_edges_down_top.dds"
+			spriteType = Corneredtiled
+			spriteborder = { 20 20 }
+			blend_mode = alphamultiply
+			texture_density = 5
+		}
+
+		# modify_texture = {
+		# 	texture = "gfx/interface/component_masks/mask_fade_horizontal.dds"
+		# 	blend_mode = alphamultiply
+		# 	alpha = 0.3
+		# }
+
+		# modify_texture = {
+		# 	texture = "gfx/interface/component_masks/mask_scratches.dds"
+		# 	blend_mode = alphamultiply
+		# 	spriteType = corneredtiled
+		# 	alpha = 0.3
+		# 	texture_density = 3
+		# }
+
+		# modify_texture = {
+		# 	name = "flash"
+		# 	texture = "gfx/interface/colors/white.dds"
+		# 	blend_mode = colordodge
+		# 	alpha = 0
+		# }
+
+		# modify_texture = {
+		# 	name = "clouds"
+		# 	texture = "gfx/interface/component_masks/mask_clouds_solid.dds"
+		# 	blend_mode = mask
+		# 	spriteType = corneredtiled
+		# 	texture_density = 1
+		# }
+
+		modify_texture = {
+			block "bar_color_flow"
+			{
+				# texture = "gfx/interface/colors/yellow.dds"
+				alpha = 0.3
+			}
+			blend_mode = colordodge
+		}
+
+		# state = {
+		# 	name = a
+		# 	next = b
+		# 	trigger_on_create = yes
+
+		# 	modify_texture = {
+		# 		name = "clouds"
+		# 		translate_uv = { 1 0 }
+		# 	}
+		# }
+
+		# state = {
+		# 	name = b
+		# 	next = a
+		# 	duration = 15
+
+		# 	modify_texture = {
+		# 		name = "clouds"
+		# 		translate_uv = { -1 0 }
+		# 	}
+		# }
+	}
+	Type progressbar_ardor_offset = widget
+	{
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_0')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 1 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_1')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 2 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_2')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 4 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_3')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 8 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_4')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 16 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_5')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 32 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_6')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 64 20 }
+			}
+		}
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			datacontext = "[GetScriptedGui('patron_ardor_7')]"
+			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+			spacer = {
+				size = { 128 20 }
+			}
+		}
+	}
 }
+# Types Moon_Phases
+# {
+# 	Type moon_phase = icon
+#     {
+#         modify_texture = {
+#             texture = "gfx/interface/colors/colors_textured.dds"
+#             blend_mode = multiply
+# 			alpha = 0.95
+#             framesize = { 256 256 }
+
+#             block "phase_frame" {
+#                 frame = 3
+#             }
+# 			block "uv_rotate" {
+# 				rotate_uv = 0
+# 			}
+#         }
+#     }
+# 	Type moon_phase_masser = button {
+# 		size = { 64 64 }
+# 		texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
+# 	}
+# }

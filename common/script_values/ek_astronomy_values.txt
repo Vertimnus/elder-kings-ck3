@@ -1,0 +1,70 @@
+﻿lunar_cycle_start = {
+    add = { # year 365, moon cycle 96 (384).
+        value = current_year
+        subtract = 3360
+        multiply = 365
+    }
+    #multiply = 360 # is this needed?
+    #multiply = 12
+    #multiply = 30
+    add = current_day
+    if = {
+        limit = { current_month = 2 }
+        add = 31
+    }
+    else_if = {
+        limit = { current_month = 3 }
+        add = 59
+    }
+    else_if = {
+        limit = { current_month = 4 }
+        add = 90
+    }
+    else_if = {
+        limit = { current_month = 5 }
+        add = 120
+    }
+    else_if = {
+        limit = { current_month = 6 }
+        add = 151
+    }
+    else_if = {
+        limit = { current_month = 7 }
+        add = 181
+    }
+    else_if = {
+        limit = { current_month = 8 }
+        add = 212
+    }
+    else_if = {
+        limit = { current_month = 9 }
+        add = 243
+    }
+    else_if = {
+        limit = { current_month = 10 }
+        add = 273
+    }
+    else_if = {
+        limit = { current_month = 11 }
+        add = 304
+    }
+    else_if = {
+        limit = { current_month = 12 }
+        add = 334
+    }
+}
+
+# each sign should average ~28 days a year as 365/13 is ~28 -> serpent should average 28 days a year active
+# serpent is semi-random in its activity -> use a formula with predicatable outcome, random input
+# formula is (365/x)*a = 28 where a is num active days, x is cycle length x = a*(365/13) ~= a*13
+# x is cycle length, need inactive time -> x = a*12 as 1/13 time spent active
+# changed use cycle time now
+
+serpent_active_days = {
+    integer_range = { min = 3 max = 6 }
+}
+
+serpent_cycle_days = {
+    value = serpent_active_days
+    multiply = 13
+}

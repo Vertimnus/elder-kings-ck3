@@ -1,0 +1,148 @@
+﻿# Called from code after history generation
+# Empty scope
+ek_on_game_start = {
+	effect = {
+		### Set which cultures are alive (have some territory)
+		### Again, I have to do it by hand but I hope that one day I'll be able to just iterate through each province and set their culture in the list... Paradox please :'(
+		every_county = {
+			culture = { save_scope_as = culture_to_save }
+			add_to_global_variable_list = {
+				name = culture_is_alive
+				target = scope:culture_to_save
+			}
+		}
+		### Nativity innovations
+		## Build the list
+		## High Rock
+		# Glenumbra
+		add_to_global_variable_list = {
+			name = culture_innovation_native_glenumbra
+			target = culture:glenumbran
+		}
+		culture:glenumbran = { add_innovation = innovation_native_glenumbra }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_glenumbra
+			target = culture:balfiera
+		}
+		culture:balfiera = { add_innovation = innovation_native_glenumbra }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_glenumbra
+			target = culture:galen
+		}
+		culture:galen = { add_innovation = innovation_native_glenumbra }
+		# Rivenspire
+		add_to_global_variable_list = {
+			name = culture_innovation_native_rivenspire
+			target = culture:northmen
+		}
+		culture:northmen = { add_innovation = innovation_native_rivenspire }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_rivenspire
+			target = culture:galen
+		}
+		culture:galen = { add_innovation = innovation_native_rivenspire }
+		# Stormhaven
+		add_to_global_variable_list = {
+			name = culture_innovation_native_stormhaven
+			target = culture:iliac
+		}
+		culture:iliac = { add_innovation = innovation_native_stormhaven }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_stormhaven
+			target = culture:galen
+		}
+		culture:galen = { add_innovation = innovation_native_stormhaven }
+		# Wrothgar
+		add_to_global_variable_list = {
+			name = culture_innovation_native_greater_wrothgar
+			target = culture:northmen
+		}
+		culture:northmen = { add_innovation = innovation_native_greater_wrothgar }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_greater_wrothgar
+			target = culture:reachfolk
+		}
+		culture:reachfolk = { add_innovation = innovation_native_greater_wrothgar }
+		# Bangkorai
+		add_to_global_variable_list = {
+			name = culture_innovation_native_bangkorai
+			target = culture:bjoule
+		}
+		culture:bjoule = { add_innovation = innovation_native_bangkorai }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_bangkorai
+			target = culture:duraki
+		}
+		culture:duraki = { add_innovation = innovation_native_bangkorai }
+		## Hammerfell
+		# Craglorn
+		add_to_global_variable_list = {
+			name = culture_innovation_native_craglorn
+			target = culture:duraki
+		}
+		culture:duraki = { add_innovation = innovation_native_craglorn }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_craglorn
+			target = culture:iron_orc
+		}
+		culture:iron_orc = { add_innovation = innovation_native_craglorn }
+		# Abecee
+		add_to_global_variable_list = {
+			name = culture_innovation_native_abecee
+			target = culture:abecean
+		}
+		culture:abecean = { add_innovation = innovation_native_abecee }
+		## Cyrodiil
+		# Colovia
+		add_to_global_variable_list = {
+			name = culture_innovation_native_colovia
+			target = culture:perena
+		}
+		culture:perena = { add_innovation = innovation_native_colovia }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_colovia
+			target = culture:colovian
+		}
+		culture:colovian = { add_innovation = innovation_native_colovia }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_colovia
+			target = culture:cyro_nord
+		}
+		culture:cyro_nord = { add_innovation = innovation_native_colovia }
+		## Skyrim
+		# Markarth
+		add_to_global_variable_list = {
+			name = culture_innovation_native_markarth
+			target = culture:reachfolk
+		}
+		culture:reachfolk = { add_innovation = innovation_native_markarth }
+		# West Skyrim
+		add_to_global_variable_list = {
+			name = culture_innovation_native_west_skyrim
+			target = culture:westmarcher
+		}
+		culture:westmarcher = { add_innovation = innovation_native_west_skyrim }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_west_skyrim
+			target = culture:kreath
+		}
+		culture:kreath = { add_innovation = innovation_native_west_skyrim }
+		# East Skyrim
+		add_to_global_variable_list = {
+			name = culture_innovation_native_east_skyrim
+			target = culture:eastmarcher
+		}
+		culture:eastmarcher = { add_innovation = innovation_native_east_skyrim }
+		# Solstheim
+		add_to_global_variable_list = {
+			name = culture_innovation_native_solstheim
+			target = culture:skaal
+		}
+		culture:skaal = { add_innovation = innovation_native_solstheim }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_solstheim
+			target = culture:riekling
+		}
+		culture:riekling = { add_innovation = innovation_native_solstheim }
+	}
+}

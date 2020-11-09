@@ -1,5 +1,20 @@
 ﻿on_character_faith_change_clear_patrons = {
     effect = {
-        patron_clear_variables = yes
+        patron_faith_change_effect = yes
+    }
+}
+
+on_player_faith_change_initialize_patrons = {
+    effect = {
+        if = {
+            limit = { is_ai = no }
+            patron_ardor_initialize = yes
+        }
+    }
+}
+
+on_game_start_players_initialize_patrons = {
+    effect = {
+        every_player = { patron_ardor_initialize = yes }
     }
 }

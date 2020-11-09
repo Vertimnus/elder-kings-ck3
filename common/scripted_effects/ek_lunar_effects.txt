@@ -1,0 +1,243 @@
+﻿
+#day + year * months per year (12) * days per month (30) + offset % 32
+#(day + (year * months * days) + offset) % 32
+#(day + (year * months * days)) % offset -> both on 32 day orbit makes some combinations impossible
+#offset = 3 for masser, -1 for secunda
+# var:phase_[moon] = flag:[phase] is trigger
+
+
+lunar_cycle_phase_masser = {
+	if = {
+		limit = { global_var:lunarphase_masser <= 6 }
+		set_global_variable = { name = phase_masser value = flag:new }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_masser <= 12 }
+		set_global_variable = { name = phase_masser value = flag:waxing }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_masser <= 19 }
+		set_global_variable = { name = phase_masser value = flag:full }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_masser <= 25 }
+		set_global_variable = { name = phase_masser value = flag:waning }
+	}
+}
+
+lunar_cycle_phase_secunda = {
+	if = {
+		limit = { global_var:lunarphase_secunda <= 8 }
+		set_global_variable = { name = phase_secunda value = flag:new }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_secunda <= 16 }
+		set_global_variable = { name = phase_secunda value = flag:waxing }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_secunda <= 25 }
+		set_global_variable = { name = phase_secunda value = flag:full }
+	}
+	else_if = {
+		limit = { global_var:lunarphase_secunda <= 33 }
+		set_global_variable = { name = phase_secunda value = flag:waning }
+	}
+}
+
+lunar_cycle_start = {
+	faith:imperial_cult = { #for some reason current_month requires a scope
+		#save faith scope as global variable and use as loc target?
+		set_global_variable = {
+			name = lunarphase_masser
+			value = {
+				add = lunar_cycle_start
+				modulo = 24
+			}
+		}
+		set_global_variable = {
+			name = lunarphase_secunda
+			value = {
+				add = lunar_cycle_start
+				modulo = 32
+			}
+		}
+	}
+	lunar_cycle_phase_masser = yes
+	lunar_cycle_phase_secunda = yes
+	trigger_event = {
+		on_action = lunar_cycle_masser
+		#days = 3
+	}
+	trigger_event = {
+		on_action = lunar_cycle_secunda
+		#days = 4
+	}
+	trigger_event = {
+		on_action = stellar_cycle_serpent
+		days = serpent_cycle_days
+	}
+}
+
+lunar_cycle_masser_effect = {
+	if = {
+		limit = {
+			OR = {
+				global_var:lunarphase_masser = 0
+				global_var:lunarphase_masser = 13
+			}
+		}
+		change_global_variable = { name = lunarphase_masser	add = 4 }
+		change_global_variable = { name = lunarphase_masser modulo = 26 }
+		lunar_cycle_phase_masser = yes
+		trigger_event = {
+			on_action = lunar_cycle_masser
+			days = 4
+		}
+	}
+	else = {
+		change_global_variable = { name = lunarphase_masser	add = 3 }
+		change_global_variable = { name = lunarphase_masser modulo = 26 }
+		lunar_cycle_phase_masser = yes
+		trigger_event = {
+			on_action = lunar_cycle_masser
+			days = 3
+		}
+	}
+}
+
+lunar_cycle_secunda_effect = {
+	if = {
+		limit = {
+			OR = {
+				global_var:lunarphase_secunda = 0
+				global_var:lunarphase_secunda = 17
+			}
+		}
+		change_global_variable = { name = lunarphase_secunda add = 5 }
+		change_global_variable = { name = lunarphase_secunda modulo = 34 }
+		lunar_cycle_phase_secunda = yes
+		trigger_event = {
+			on_action = lunar_cycle_secunda
+			days = 5
+		}
+	}
+	else = {
+		change_global_variable = { name = lunarphase_secunda add = 4 }
+		change_global_variable = { name = lunarphase_secunda modulo = 34 }
+		lunar_cycle_phase_secunda = yes
+		trigger_event = {
+			on_action = lunar_cycle_secunda
+			days = 4
+		}
+	}
+}
+
+stellar_cycle_serpent_effect = {
+	set_global_variable = { name = serpent_active value = yes days = serpent_active_days }
+	trigger_event = {
+		on_action = stellar_cycle_serpent
+		days = serpent_cycle_days
+	}
+}
+
+assign_birthsign_start_effect = {
+	if = {
+		limit = { has_birthsign = no }
+		random_list = {
+			10 = {
+				add_trait = sign_serpent
+			}
+			10 = {
+				add_trait = sign_ritual
+			}
+			10 = {
+				add_trait = sign_lover
+			}
+			10 = {
+				add_trait = sign_lord
+			}
+			10 = {
+				add_trait = sign_mage
+			}
+			10 = {
+				add_trait = sign_shadow
+			}
+			10 = {
+				add_trait = sign_steed
+			}
+			10 = {
+				add_trait = sign_apprentice
+			}
+			10 = {
+				add_trait = sign_warrior
+			}
+			10 = {
+				add_trait = sign_lady
+			}
+			10 = {
+				add_trait = sign_tower
+			}
+			10 = {
+				add_trait = sign_atronach
+			}
+			10 = {
+				add_trait = sign_thief
+			}
+		}
+	}
+}
+
+assign_birthsign_effect = {
+	if = {
+		limit = { has_global_variable = serpent_active }
+		add_trait = sign_serpent
+	}
+	else_if = {
+		limit = { current_month = 1 }
+		add_trait = sign_ritual
+	}
+	else_if = {
+		limit = { current_month = 2 }
+		add_trait = sign_lover
+	}
+	else_if = {
+		limit = { current_month = 3 }
+		add_trait = sign_lord
+	}
+	else_if = {
+		limit = { current_month = 4 }
+		add_trait = sign_mage
+	}
+	else_if = {
+		limit = { current_month = 5 }
+		add_trait = sign_shadow
+	}
+	else_if = {
+		limit = { current_month = 6 }
+		add_trait = sign_steed
+	}
+	else_if = {
+		limit = { current_month = 7 }
+		add_trait = sign_apprentice
+	}
+	else_if = {
+		limit = { current_month = 8 }
+		add_trait = sign_warrior
+	}
+	else_if = {
+		limit = { current_month = 9 }
+		add_trait = sign_lady
+	}
+	else_if = {
+		limit = { current_month = 10 }
+		add_trait = sign_tower
+	}
+	else_if = {
+		limit = { current_month = 11 }
+		add_trait = sign_atronach
+	}
+	else_if = {
+		limit = { current_month = 12 }
+		add_trait = sign_thief
+	}
+}

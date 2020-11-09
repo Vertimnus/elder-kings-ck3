@@ -1,0 +1,134 @@
+get_cat_test = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_select_patron_decision_desc
+    selection_tooltip = patron_select_patron_decision_tooltip
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        is_ai = no
+    }
+
+    is_valid = {
+    }
+
+    is_valid_showing_failures_only = {
+    }
+
+    effect = {
+        assign_cat_eye_color_effect = { COLOR = random }
+		assign_cat_fur_color_effect = { COLOR = black }
+		assign_cat_gender_effect = { GENDER = male }
+		save_scope_value_as = {
+			name = cat_story
+			value = yes
+		}
+		
+		start_cat_story_cycle_effect = yes
+    }
+
+    ai_check_interval = 96
+
+    ai_potential = {
+		always = no
+    }
+
+    ai_will_do = {
+    }
+}
+
+get_dog_test = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_select_patron_decision_desc
+    selection_tooltip = patron_select_patron_decision_tooltip
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        is_ai = no
+    }
+
+    is_valid = {
+    }
+
+    is_valid_showing_failures_only = {
+    }
+
+    effect = {
+        assign_dog_eye_color_effect = { COLOR = brown }
+		assign_dog_fur_color_effect = { COLOR = black }
+		assign_dog_gender_effect = { GENDER = male }
+		save_scope_value_as = {
+			name = dog_story
+			value = yes
+		}
+		
+		start_dog_story_cycle_effect = yes
+    }
+
+    ai_check_interval = 96
+
+    ai_potential = {
+		always = no
+    }
+
+    ai_will_do = {
+    }
+}
+
+give_e_reach_territory = {
+    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+    desc = patron_select_patron_decision_desc
+    selection_tooltip = patron_select_patron_decision_tooltip
+
+    is_shown = {
+        is_adult = yes
+        is_ruler = yes
+        is_ai = no
+    }
+
+    is_valid = {
+    }
+
+    is_valid_showing_failures_only = {
+    }
+
+    effect = {
+        every_province = {
+			limit = {
+				OR = {
+					geographical_region = mundus_tamriel_reach_west_reach
+					geographical_region = mundus_tamriel_reach_south_reach
+					geographical_region = mundus_tamriel_reach_markarth
+				}
+			}
+			county = {
+				root = {
+					create_title_and_vassal_change = {
+						type = usurped
+						save_scope_as = change
+						add_claim_on_loss = no
+					}
+				}
+				this = {
+					change_title_holder = {
+						holder = root
+						change = scope:change
+					}
+				}
+			}
+		}
+    }
+
+    ai_check_interval = 96
+
+    ai_potential = {
+		always = no
+    }
+
+    ai_will_do = {
+    }
+}

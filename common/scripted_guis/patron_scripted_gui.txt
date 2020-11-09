@@ -214,6 +214,7 @@ patron_interaction_tab_toggle = { #selection -> interaction
 
     effect = {
         set_variable = patron_interaction_tab_toggle
+        patron_ardor_update_display = yes
     }
 }
 patron_interaction_passive_tab_toggle = { #selection -> interaction passive
@@ -286,8 +287,8 @@ patron_confirm_patron = {
     effect = {
         custom_description = {
             text = "confirm_tt"
-            patron_clear_modifiers = yes
-            patron_assign_modifier = yes
+            patron_clear_traits = yes
+            patron_assign_trait = yes
         }
     }
 
@@ -625,7 +626,7 @@ patron_akatosh_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_akatosh_valid = yes
         #always = yes #for testing
     }
 
@@ -646,7 +647,7 @@ patron_arkay_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_arkay_valid = yes
         #always = yes #for testing
     }
 
@@ -667,7 +668,7 @@ patron_dibella_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_dibella_valid = yes
         #always = yes #for testing
     }
 
@@ -688,7 +689,7 @@ patron_julianos_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_julianos_valid = yes
         #always = yes #for testing
     }
 
@@ -709,7 +710,7 @@ patron_kynareth_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_kynareth_valid = yes
         #always = yes #for testing
     }
 
@@ -730,7 +731,7 @@ patron_mara_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_mara_valid = yes
         #always = yes #for testing
     }
 
@@ -751,7 +752,7 @@ patron_stendarr_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_stendarr_valid = yes
         #always = yes #for testing
     }
 
@@ -772,7 +773,7 @@ patron_zenithar_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
+        patron_zenithar_valid = yes
         #always = yes #for testing
     }
 
@@ -793,13 +794,7 @@ patron_shezarr_shown = {
     scope = character
 
     is_shown = {
-        patron_divines_valid = yes
-        faith = {
-            NOR = {
-                has_doctrine = tenet_aldmeri_syncretism #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
-                #has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
-            }
-        }
+        patron_shezarr_valid = yes
         #always = yes #for testing
     }
 
@@ -839,7 +834,7 @@ patron_auriel_shown = {
     scope = character
 
     is_shown = {
-        patron_aldmer_valid = yes
+        patron_auriel_valid = yes
         #always = yes #for testing
     }
 
@@ -860,10 +855,7 @@ patron_jephre_shown = {
     scope = character
 
     is_shown = {
-        OR = {
-            patron_aldmer_valid = yes
-            faith = { has_doctrine = tenet_aldmeri_syncretism }
-        }
+        patron_jephre_valid = yes
         #always = yes #for testing
     }
 
@@ -884,10 +876,7 @@ patron_magnus_shown = {
     scope = character
 
     is_shown = {
-        OR = {
-            patron_aldmer_valid = yes
-            faith = { has_doctrine = tenet_aldmeri_syncretism }
-        }
+        patron_magnus_valid = yes
         #always = yes #for testing
     }
 
@@ -908,10 +897,7 @@ patron_phynaster_shown = {
     scope = character
 
     is_shown = {
-        OR = {
-            patron_aldmer_valid = yes
-            faith = { has_doctrine = tenet_aldmeri_syncretism }
-        }
+        patron_phynaster_valid = yes
         #always = yes #for testing
     }
 
@@ -932,7 +918,7 @@ patron_syrabane_shown = {
     scope = character
 
     is_shown = {
-        patron_aldmer_valid = yes
+        patron_syrabane_valid = yes
         #always = yes #for testing
     }
 
@@ -953,7 +939,7 @@ patron_trinimac_shown = {
     scope = character
 
     is_shown = {
-        patron_aldmer_valid = yes
+        patron_trinimac_valid = yes
         #always = yes #for testing
     }
 
@@ -974,7 +960,7 @@ patron_xarxes_shown = {
     scope = character
 
     is_shown = {
-        patron_aldmer_valid = yes
+        patron_xarxes_valid = yes
         #always = yes #for testing
     }
 
@@ -995,7 +981,7 @@ patron_xen_shown = {
     scope = character
 
     is_shown = {
-        patron_aldmer_valid = yes
+        patron_xen_valid = yes
         #always = yes #for testing
     }
 
@@ -1012,59 +998,42 @@ patron_xen_shown = {
     }
 }
 
-# patron_decision_test = { #pair w/ ai=no and variable condition so don't appear in decisions normally except for ai
-#     scope = character
+patron_ardor_0 = {
+    scope = character
+    is_shown = { ardor_bin_0 = 1 }
+}
 
-#     #is_valid = {
-#     #    can_execute_decision = host_feast_decision
-#     #}
+patron_ardor_1 = {
+    scope = character
+    is_shown = { ardor_bin_1 = 1 }
+}
 
-#     effect = {
-#         #execute_decision = host_feast_decision
-#         #set_variable = third_era_start
-#         # add_to_global_variable_list = {
-#         # 	name = era_start
-#         # 	target = flag:third_era_start
-#         # }
-#         set_global_variable = {
-#             name = third_era_start
-#             value = scope:EmptyScope.GetCurrentDate.GetYear #GetCurrentDate.GetYear #yearvalue:Date.GetYear #$YEAR$
-#         }
-#         # if = {
-#         #     limit = { NOT = { has_variable = ardor } }
-#         #     set_variable = { name = ardor value = 100 }
-#         # }
-#         # else = {
-#         #     change_variable = { name = ardor add = 100 }
-#         # }
-#     }
-# }
+patron_ardor_2 = {
+    scope = character
+    is_shown = { ardor_bin_2 = 1 }
+}
 
-# patron_decision_test_2 = { #double click version of above/ confirmation button
-#     scope = character
+patron_ardor_3 = {
+    scope = character
+    is_shown = { ardor_bin_3 = 1 }
+}
 
-#     is_valid = {
-#         can_execute_decision = host_feast_decision
-#     }
+patron_ardor_4 = {
+    scope = character
+    is_shown = { ardor_bin_4 = 1 }
+}
 
-#     is_shown = {
-#         has_variable = patron_host_feast_decision
-#     }
+patron_ardor_5 = {
+    scope = character
+    is_shown = { ardor_bin_5 = 1 }
+}
 
-#     effect = {
-#         if = {
-#             limit = {
-#                 has_variable = patron_host_feast_decision
-#             }
-#             remove_variable = patron_host_feast_decision
-#             execute_decision = host_feast_decision
-#         }
-#         else = {
-#             set_variable = patron_host_feast_decision
-#         }
-#     }
-# }
+patron_ardor_6 = {
+    scope = character
+    is_shown = { ardor_bin_6 = 1 }
+}
 
-# # patron_decision_clear = { #for use in cancel button in confirm/cancel dialog after first click
-# #     scope = character
-# # }
+patron_ardor_7 = {
+    scope = character
+    is_shown = { ardor_bin_7 = 1 }
+}

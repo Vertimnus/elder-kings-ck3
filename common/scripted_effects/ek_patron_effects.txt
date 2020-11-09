@@ -89,7 +89,7 @@ patron_passive_clear_variables = {
     remove_variable = patron_xen_shown
 }
 
-patron_clear_modifiers = {
+patron_clear_traits = {
     remove_trait = p_akatosh
     remove_trait = p_arkay
     remove_trait = p_dibella
@@ -109,7 +109,7 @@ patron_clear_modifiers = {
     remove_trait = p_xen
 }
 
-patron_assign_modifier = {
+patron_assign_trait = {
     # Divines #
     if = {
         limit = { has_variable = patron_akatosh_shown }
@@ -181,4 +181,354 @@ patron_assign_modifier = {
         add_trait = p_xen
     }
     add_character_flag = { flag = recent_patron_selected years = 5 }
+}
+
+#this one only clears if the patron is no longer valid so nord cult -> imperial cult keeps akatosh
+patron_faith_change_clear_traits = {
+    # Divines #
+    if = {
+        limit = { patron_akatosh_valid = no }
+        remove_trait = p_akatosh
+    }
+    else_if = {
+        limit = { patron_arkay_valid = no }
+        remove_trait = p_arkay
+    }
+    else_if = {
+        limit = { patron_dibella_valid = no }
+        remove_trait = p_dibella
+    }
+    else_if = {
+        limit = { patron_julianos_valid = no }
+        remove_trait = p_julianos
+    }
+    else_if = {
+        limit = { patron_kynareth_valid = no }
+        remove_trait = p_kynareth
+    }
+    else_if = {
+        limit = { patron_mara_valid = no }
+        remove_trait = p_mara
+    }
+    else_if = {
+        limit = { patron_stendarr_valid = no }
+        remove_trait = p_stendarr
+    }
+    else_if = {
+        limit = { patron_zenithar_valid = no }
+        remove_trait = p_zenithar
+    }
+    else_if = {
+        limit = { patron_shezarr_valid = no }
+        remove_trait = p_shezarr
+    }
+    # Aldmer #
+    else_if = {
+        limit = { patron_auriel_valid = no }
+        remove_trait = p_auriel
+    }
+    else_if = {
+        limit = { patron_jephre_valid = no }
+        remove_trait = p_jephre
+    }
+    else_if = {
+        limit = { patron_magnus_valid = no }
+        remove_trait = p_magnus
+    }
+    else_if = {
+        limit = { patron_phynaster_valid = no }
+        remove_trait = p_phynaster
+    }
+    else_if = {
+        limit = { patron_syrabane_valid = no }
+        remove_trait = p_syrabane
+    }
+    else_if = {
+        limit = { patron_trinimac_valid = no }
+        remove_trait = p_trinimac
+    }
+    else_if = {
+        limit = { patron_xarxes_valid = no }
+        remove_trait = p_xarxes
+    }
+    else_if = {
+        limit = { patron_xen_valid = no }
+        remove_trait = p_xen
+    }
+    add_character_flag = { flag = recent_patron_selected years = 5 }
+}
+
+patron_faith_change_effect = {
+    patron_clear_variables = yes
+    patron_clear_res_variables = yes
+    patron_passive_clear_variables = yes
+    patron_faith_change_clear_traits = yes
+}
+
+# Ardor System #
+
+# ardor_[patron] is set to zero on startup and faith change for all valid patrons
+# ardor_display is used as an intermediry for decision costs and display
+# on communing it is assigned to the value of the chosen patron, ardor_[patron] is updated by each decision
+# for ai ardor_display is updated on patron choice decision
+# initializing for the ai is done by patron choice selection - since they access one at a time only need one variable active
+
+# try using get_patron and $PATRON$ on update effects to streamline
+# need to be able to get a return value to make it useful though I think
+
+patron_ardor_initialize = {
+    if = {
+        limit = {
+            patron_azura_valid = yes
+            NOT = { has_variable = ardor_azura }
+        }
+        set_variable = { name = ardor_azura value = 0 }
+    }
+    if = {
+        limit = {
+            patron_boethiah_valid = yes
+            NOT = { has_variable = ardor_boethiah }
+        }
+        set_variable = { name = ardor_boethiah value = 0 }
+    }
+    if = {
+        limit = {
+            patron_clavicus_vile_valid = yes
+            NOT = { has_variable = ardor_clavicus }
+        }
+        set_variable = { name = ardor_clavicus value = 0 }
+    }
+    if = {
+        limit = {
+            patron_hermaeus_mora_valid = yes
+            NOT = { has_variable = ardor_hermaeus }
+        }
+        set_variable = { name = ardor_hermaeus value = 0 }
+    }
+    if = {
+        limit = {
+            patron_hircine_valid = yes
+            NOT = { has_variable = ardor_hircine }
+        }
+        set_variable = { name = ardor_hircine value = 0 }
+    }
+    if = {
+        limit = {
+            patron_malacath_valid = yes
+            NOT = { has_variable = ardor_malacath }
+        }
+        set_variable = { name = ardor_malacath value = 0 }
+    }
+    if = {
+        limit = {
+            patron_mehrunes_dagon_valid = yes
+            NOT = { has_variable = ardor_mehrunes }
+        }
+        set_variable = { name = ardor_mehrunes value = 0 }
+    }
+    if = {
+        limit = {
+            patron_mephala_valid = yes
+            NOT = { has_variable = ardor_mephala }
+        }
+        set_variable = { name = ardor_mephala value = 0 }
+    }
+    if = {
+        limit = {
+            patron_meridia_valid = yes
+            NOT = { has_variable = ardor_meridia }
+        }
+        set_variable = { name = ardor_meridia value = 0 }
+    }
+    if = {
+        limit = {
+            patron_molag_bal_valid = yes
+            NOT = { has_variable = ardor_molag }
+        }
+        set_variable = { name = ardor_molag value = 0 }
+    }
+    if = {
+        limit = {
+            patron_namira_valid = yes
+            NOT = { has_variable = ardor_namira }
+        }
+        set_variable = { name = ardor_namira value = 0 }
+    }
+    if = {
+        limit = {
+            patron_nocturnal_valid = yes
+            NOT = { has_variable = ardor_nocturnal }
+        }
+        set_variable = { name = ardor_nocturnal value = 0 }
+    }
+    if = {
+        limit = {
+            patron_peryite_valid = yes
+            NOT = { has_variable = ardor_peryite }
+        }
+        set_variable = { name = ardor_peryite value = 0 }
+    }
+    if = {
+        limit = {
+            patron_sanguine_valid = yes
+            NOT = { has_variable = ardor_sanguine }
+        }
+        set_variable = { name = ardor_sanguine value = 0 }
+    }
+    if = {
+        limit = {
+            patron_sheogorath_valid = yes
+            NOT = { has_variable = ardor_sheogorath }
+        }
+        set_variable = { name = ardor_sheogorath value = 0 }
+    }
+    if = {
+        limit = {
+            patron_vaermina_valid = yes
+            NOT = { has_variable = ardor_vaermina }
+        }
+        set_variable = { name = ardor_vaermina value = 0 }
+    }
+}
+
+patron_ardor_update_display = {
+    if = {
+        limit = { has_variable = patron_azura_shown }
+        set_variable = { name = ardor_display value = var:ardor_azura }
+    }
+    else_if = {
+        limit = { has_variable = patron_boethiah_shown }
+        set_variable = { name = ardor_display value = var:ardor_boethiah }
+    }
+    else_if = {
+        limit = { has_variable = patron_clavicus_vile_shown }
+        set_variable = { name = ardor_display value = var:ardor_clavicus }
+    }
+    else_if = {
+        limit = { has_variable = patron_hermaeus_mora_shown }
+        set_variable = { name = ardor_display value = var:ardor_hermaeus }
+    }
+    else_if = {
+        limit = { has_variable = patron_hircine_shown }
+        set_variable = { name = ardor_display value = var:ardor_hircine }
+    }
+    else_if = {
+        limit = { has_variable = patron_malacath_shown }
+        set_variable = { name = ardor_display value = var:ardor_malacath }
+    }
+    else_if = {
+        limit = { has_variable = patron_mehrunes_dagon_shown }
+        set_variable = { name = ardor_display value = var:ardor_mehrunes }
+    }
+    else_if = {
+        limit = { has_variable = patron_mephala_shown }
+        set_variable = { name = ardor_display value = var:ardor_mephala }
+    }
+    else_if = {
+        limit = { has_variable = patron_meridia_shown }
+        set_variable = { name = ardor_display value = var:ardor_meridia }
+    }
+    else_if = {
+        limit = { has_variable = patron_molag_bal_shown }
+        set_variable = { name = ardor_display value = var:ardor_molag }
+    }
+    else_if = {
+        limit = { has_variable = patron_namira_shown }
+        set_variable = { name = ardor_display value = var:ardor_namira }
+    }
+    else_if = {
+        limit = { has_variable = patron_nocturnal_shown }
+        set_variable = { name = ardor_display value = var:ardor_nocturnal }
+    }
+    else_if = {
+        limit = { has_variable = patron_peryite_shown }
+        set_variable = { name = ardor_display value = var:ardor_peryite }
+    }
+    else_if = {
+        limit = { has_variable = patron_sanguine_shown }
+        set_variable = { name = ardor_display value = var:ardor_sanguine }
+    }
+    else_if = {
+        limit = { has_variable = patron_sheogorath_shown }
+        set_variable = { name = ardor_display value = var:ardor_sheogorath }
+    }
+    else_if = {
+        limit = { has_variable = patron_vaermina_shown }
+        set_variable = { name = ardor_display value = var:ardor_vaermina }
+    }
+    else = { #this should never fire, in for debugging when it does
+        set_variable = { name = ardor_display value = 0 }
+        set_variable = ardor_display_error
+    }
+}
+
+patron_ardor_update_actual = {
+    if = {
+        limit = { has_variable = patron_azura_shown }
+        set_variable = { name = ardor_azura value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_boethiah_shown }
+        set_variable = { name = ardor_boethiah value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_clavicus_vile_shown }
+        set_variable = { name = ardor_clavicus value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_hermaeus_mora_shown }
+        set_variable = { name = ardor_hermaeus value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_hircine_shown }
+        set_variable = { name = ardor_hircine value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_malacath_shown }
+        set_variable = { name = ardor_malacath value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_mehrunes_dagon_shown }
+        set_variable = { name = ardor_mehrunes value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_mephala_shown }
+        set_variable = { name = ardor_mephala value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_meridia_shown }
+        set_variable = { name = ardor_meridia value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_molag_bal_shown }
+        set_variable = { name = ardor_molag value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_namira_shown }
+        set_variable = { name = ardor_namira value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_nocturnal_shown }
+        set_variable = { name = ardor_nocturnal value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_peryite_shown }
+        set_variable = { name = ardor_peryite value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_sanguine_shown }
+        set_variable = { name = ardor_sanguine value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_sheogorath_shown }
+        set_variable = { name = ardor_sheogorath value = var:ardor_display }
+    }
+    else_if = {
+        limit = { has_variable = patron_vaermina_shown }
+        set_variable = { name = ardor_vaermina value = var:ardor_display }
+    }
+}
+
+patron_ardor_update_gfx = {
+    set_variable = { name = ardor_binary value = ardor_binary }
 }

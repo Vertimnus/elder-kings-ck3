@@ -1,4 +1,6 @@
-﻿elector_self_voting_pattern_feudal_elective_modifier = {
+﻿### EK EDIT: Replaced most of the byzantine culture trigger with the Divine Purity check!
+
+elector_self_voting_pattern_feudal_elective_modifier = {
 	##########################	Elector voting himself	##########################
 	modifier = {
 		add = 15
@@ -1521,13 +1523,13 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 	modifier = {
 		desc = tooltip_feudal_elector_vote_disfigured
 		this_is_martial_society_trigger = no
-		NOT = { has_culture_group = culture_group:byzantine_group }
+		NOT = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
 		scope:candidate = { has_trait = disfigured }
 		add = -15
 	}
 	modifier = {
 		desc = tooltip_feudal_elector_vote_disfigured_byzantine
-		has_culture_group = culture_group:byzantine_group
+		faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active }
 		scope:candidate = { has_trait = disfigured }
 		add = -100
 	}
@@ -1538,7 +1540,7 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		add = {
 			subtract = 5
 			if = {
-				limit = { has_culture_group = culture_group:byzantine_group }
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
 				subtract = 45
 			}
 			if = { #Scandinavian elective more unforgiving.
@@ -1569,13 +1571,14 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 			}
 		}
 	}
-	modifier = {
-		desc = tooltip_feudal_elector_vote_born_in_the_purple
-		NOT = { this = scope:candidate } #Do not judge yourself.
-		has_culture_group = culture_group:byzantine_group
-		scope:candidate = { has_trait = born_in_the_purple }
-		add = 50
-	}
+	### EK TODO: Find a way to repurpose that
+	# modifier = {
+		# desc = tooltip_feudal_elector_vote_born_in_the_purple
+		# NOT = { this = scope:candidate } #Do not judge yourself.
+		# has_culture_group = culture_group:byzantine_group
+		# scope:candidate = { has_trait = born_in_the_purple }
+		# add = 50
+	# }
 	modifier = {
 		desc = tooltip_feudal_elector_vote_genius_diplomat
 		NOT = { this = scope:candidate } #Do not judge yourself.
@@ -1816,10 +1819,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = clubfooted }
 		add = {
 			subtract = 5
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 10
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 10
+			}
 		}
 	}
 	modifier = {
@@ -1829,10 +1832,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = dwarf }
 		add = {
 			subtract = 15
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 20
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 20
+			}
 		}
 	}
 	modifier = {
@@ -1842,10 +1845,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = dwarf }
 		add = {
 			subtract = 30
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 30
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 30
+			}
 			if = { #Scandinavian elective more unforgiving.
 				limit = {
 					scope:title = { has_title_law = scandinavian_elective_succession_law }
@@ -1861,10 +1864,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = {has_trait = hunchbacked }
 		add = {
 			subtract = 15
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 30
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 30
+			}
 		}
 	}
 	modifier = {
@@ -1874,10 +1877,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = hunchbacked }
 		add = {
 			subtract = 30
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 30
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 30
+			}
 			if = { #Scandinavian elective more unforgiving.
 				limit = {
 					scope:title = { has_title_law = scandinavian_elective_succession_law }
@@ -1901,10 +1904,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		}
 		add = {
 			subtract = 15
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 60
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 60
+			}
 		}
 	}
 	modifier = {
@@ -1913,10 +1916,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = lisping }
 		add = {
 			subtract = 5
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 10
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 10
+			}
 		}
 	}
 	modifier = {
@@ -2047,7 +2050,7 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		add = {
 			subtract = 10
 			if = {
-				limit = { has_culture_group = culture_group:byzantine_group }
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
 				subtract = 140
 			}
 		}
@@ -2059,10 +2062,10 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		scope:candidate = { has_trait = blind }
 		add = {
 			subtract = 20
-			# if = {
-				# limit = { has_culture_group = culture_group:byzantine_group }
-				# subtract = 130
-			# }
+			if = {
+				limit = { faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active } }
+				subtract = 130
+			}
 			if = { #Scandinavian elective more unforgiving.
 				limit = {
 					scope:title = { has_title_law = scandinavian_elective_succession_law }
@@ -2075,10 +2078,7 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		desc = tooltip_feudal_elector_vote_eunuch_negative
 		NOT = { this = scope:candidate } #Do not judge yourself.
 		this_is_martial_society_trigger = no
-		# NOR = {
-			# has_culture_group = culture_group:byzantine_group
-			# faith = { religion_tag = islam_religion }
-		# }
+		faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active }
 		scope:candidate = {has_trait = eunuch }
 		add = -25
 	}
@@ -2086,20 +2086,14 @@ elector_voting_pattern_traits_feudal_elective_modifier = {
 		desc = tooltip_feudal_elector_vote_eunuch_negative_warrior
 		NOT = { this = scope:candidate } #Do not judge yourself.
 		this_is_martial_society_trigger = yes
-		# NOR = {
-			# has_culture_group = culture_group:byzantine_group
-			# faith = { religion_tag = islam_religion }
-		# }
+		faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active }
 		scope:candidate = {has_trait = eunuch }
 		add = -50
 	}
 	modifier = { #Shunned for being eunuch
 		desc = tooltip_feudal_elector_vote_eunuch_negative_byzantine
 		NOT = { this = scope:candidate } #Do not judge yourself.
-		# OR = {
-			# has_culture_group = culture_group:byzantine_group
-			# faith = { religion_tag = islam_religion }
-		# }
+		faith = { has_doctrine_parameter = character_impurity_difformity_election_lowers_score_active }
 		scope:candidate = { has_trait = eunuch }
 		add = -150
 	}

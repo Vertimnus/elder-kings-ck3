@@ -432,3 +432,39 @@ witch = {
 		ignore_opinion_value_if_same_trait = yes
 	}
 }
+
+necromancer = {
+	index = 412
+	learning = 2
+	
+	same_opinion = 10
+	
+	dread_baseline_add = 20
+		
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_necromancer_desc
+			}
+			desc = trait_necromancer_character_desc
+		}
+	}
+
+	ai_rationality = -20
+	ai_honor = -10
+	ai_compassion = -10
+	
+	triggered_opinion = {
+		parameter = necromancy_illegal
+		opinion_modifier = necromancy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = necromancy_shunned
+		opinion_modifier = necromancy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}

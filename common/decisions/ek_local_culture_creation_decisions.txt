@@ -1,0 +1,140 @@
+﻿### Decisions to create local cultures
+create_local_culture_craglorn_decision = { # Create Duraki/Iron Orc culture - either personally (capital in Craglorn) or sponsor it (costs more)
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	desc = create_local_culture_craglorn_decision_desc
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_independent_ruler = yes
+		
+		# Is part of a culture group that has a culture native to this province
+		# Since this culture doesn't exist yet, we have to type them by hand for now
+		OR = {
+			AND = {
+				has_culture_group = culture_group:nedic_group
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = culture_is_alive
+						target = culture:duraki
+					}
+				}
+			}
+			AND = {
+				has_culture_group = culture_group:orsimer_group
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = culture_is_alive
+						target = culture:iron_orc
+					}
+				}
+			}
+		}
+		
+		exists = capital_province
+		any_realm_province = { geographical_region = custom_nativity_craglorn }
+	}
+
+	is_valid = {
+		### Two sets of condition
+		# Capital in Craglorn, personal adoption
+		trigger_if = {
+			limit = { capital_province = { geographical_region = custom_nativity_craglorn } }
+			capital_province = { culture_group = root.culture_group }
+		}
+		# Capital not in Craglorn, it'll spawn in vassal land
+		trigger_else = {
+			completely_controls_region = custom_nativity_craglorn
+			any_realm_province = { 
+				geographical_region = custom_nativity_craglorn
+				culture_group = root.culture_group
+			}
+		}
+		
+		has_trait = scholar
+		OR = {
+			# Should we define a faith/religion for each culture to revive?
+			AND = {
+				has_religion = religion:celestial_religion
+				prestige_level >= high_prestige_level
+			}
+			prestige_level >= very_high_prestige_level
+		}
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+		if = {
+			limit = { has_culture_group = culture_group:nedic_group }
+			culture:duraki = { save_scope_as = new_culture }
+		}
+		else_if = {
+			limit = { has_culture_group = culture_group:orsimer_group }
+			culture:iron_orc = { save_scope_as = new_culture }
+		}
+		
+		add_to_global_variable_list = {
+			name = culture_is_alive
+			target = scope:new_culture
+		}
+		
+		### Capital in Craglorn, personally convert culture
+		if = {
+			limit = { capital_province = { geographical_region = custom_nativity_craglorn } }
+			custom_tooltip = create_local_culture_craglorn_decision_courtiers_embrace_new_culture
+			custom_tooltip = create_local_culture_craglorn_decision_capital_embrace_new_culture
+			hidden_effect = {
+				every_courtier = {
+					limit = {
+						has_culture = root.culture
+						dynasty = root.dynasty
+					}
+					set_culture = scope:new_culture
+				}
+				capital_county = { set_county_culture = scope:new_culture }
+				# Problem: This seems to give the navitity innovation
+				# scope:new_culture = { get_all_innovations_from = root.culture }
+				# Really necessary? If the Duraki culture gets re-wiped should it immediately be available, or should it be recreated?
+				
+			}
+			set_culture = scope:new_culture
+			add_character_flag = converted_culture_this_lifetime
+		}
+		
+		### Most of the titles held within the region should convert
+		custom_tooltip = create_local_culture_craglorn_decision_provinces_embrace_new_culture
+		hidden_effect = {
+			every_held_title = {
+				limit = {
+					tier = tier_county
+					culture.culture_group = root.culture.culture_group
+					title_province = { geographical_region = custom_nativity_craglorn }
+				}
+				random = {
+					chance = 60
+					set_county_culture = scope:new_culture
+				}
+			}
+		}
+		trigger_event = {
+			id = ek_nedic.0001 #informs people this happened + gives vassals option to switch culture
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
