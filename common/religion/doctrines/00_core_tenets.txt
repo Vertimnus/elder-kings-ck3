@@ -1120,148 +1120,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	## Abomination worship
-	tenet_witch_worship = {
-		icon = core_tenet_festivities
-		name = {
-			first_valid = {
-				triggered_desc = {
-					trigger = {
-						religion_tag = reach_religion
-					}
-					desc = tenet_witch_worship_reach_religion_name
-				}
-				desc = tenet_witch_worship_name
-			}
-		}
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = witchcraft_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
-					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		parameters = {
-			# TODO: Decision for Witches to become Occultists
-			# Handle Briarhearts somehow?
-			potent_witch_become_occultist = yes
-		}
-		
-		traits = {
-			virtues = { witch }
-		}
-	}
-	
-	tenet_vampire_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_vampire_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = vampirism_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a vampire trait line
-		traits = {
-			virtues = { vampire_character = 2 }
-		}
-		
-		parameters = {
-			allows_worship_molag_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_lycanthrope_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_lycanthrope_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = lycanthropy_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_lycanthropy_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_lycanthropy_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a lycan trait line
-		traits = {
-			virtues = { lycan_character = 2 }
-		}
-		
-		parameters = {
-			allows_worship_hircine_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_necromancy_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_necromancy_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = necromancy_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_necromancy_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a necromancer trait line
-		traits = {
-			virtues = { necromancer_character = 1 }
-			#virtues = { lich = 3 }
-		}
-	}
-	
 	## Other
 	tenet_divine_purity = {
 		icon = core_tenet_bigbook
@@ -1296,6 +1154,7 @@ doctrine_core_tenets = {
 			children_bad_congenital_trait_impure = yes
 			character_impure_foreign_relationships_impure = yes
 			pilgrimage_decision_active = yes
+			character_impurity_difformity_election_lowers_score_active = yes
 		}
 	}
 	
@@ -1371,99 +1230,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_divine_disease = {
-		icon = core_tenet_flagellant
-
-		piety_cost = {
-			
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_divine_disease }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		
-		can_pick = { #no one but Dagoth should want this
-			always = no
-		}
-
-		parameters = {
-			## EK TODO: Can decide to embrace the Corprus disease, earning Piety at the cost of getting the Corprus trait
-			## EK TODO: Passive bonus: health bonus when ill (scaling with Devotion)
-			tyranny_gain_mult = -0.5
-		}
-		
-		# traits = {
-			# virtues = {
-				# corprus
-			# }
-		# }
-	}
-	
-	tenet_ritual_hunts = {
-		icon = core_tenet_festivities
-
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_ritual_hunts }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			piety_from_hunts_active = yes
-			mandatory_hunts_attendance = yes
-			allows_worship_hircine_shunned_doctrines_active = yes
-		}
-		
-		traits = {
-			virtues = {
-				hunter_2
-				hunter_3
-			}
-		}
-	}
-	
-	tenet_sanctity_of_life = {
-		icon = core_tenet_prayer
-
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_sanctity_of_life }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = vampirism_must_be_outlawed
-				flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
-			}
-			custom_description = {
-				text = necromancy_must_be_outlawed
-				flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
-			}
-		}
-
-		parameters = {
-			cheaper_cleanse_abominations_active = yes
-			cheaper_holy_wars_pro_undeath_active = yes
-			bonus_cleanse_abomination_war_piety_active = yes
-			allows_worship_meridia_shunned_doctrines_active = yes
-			hostility_override_doctrine_vampirism_accepted = 3
-			hostility_override_doctrine_necromancy_accepted = 3
-		}
-	}
-	
 	tenet_sacred_artifacts = {
 		icon = core_tenet_sword
 		piety_cost = {
@@ -1484,181 +1250,6 @@ doctrine_core_tenets = {
 		character_modifier = {
 			dynasty_house_opinion = 10
 			prowess = 2
-		}
-	}
-	
-	tenet_contempt_for_the_weak = {
-		icon = core_tenet_sword
-
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_contempt_for_the_weak }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			# TODO: Implement the effects
-			weak_rulers_contest_rule = yes
-			election_vote_strong = yes
-			allows_worship_malacath_shunned_doctrines_active = yes
-		}
-		
-		traits = {
-			virtues = { physique_good }
-			sins = { physique_bad }
-		}
-	}
-	
-	tenet_vows_of_squalor = {
-		icon = core_tenet_meditation
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_vows_of_squalor }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			# TODO: Just that (copy paste Vows of Poverty I guess)
-			vows_of_squalor_active = yes
-			allows_worship_namira_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_radical_detachment = {
-		icon = core_tenet_meditation
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_radical_detachment }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			# TODO: Just that
-			radical_detachment_law_cost_increase = yes
-			allows_worship_sheogorath_shunned_doctrines_active = yes
-		}
-		
-		character_modifier = {
-			stress_gain_mult = -0.25
-		}
-		
-		traits = {
-			virtues = {
-				fickle
-				lunatic = 2
-			}
-			sins = { stubborn }
-		}
-	}
-	
-	tenet_sacred_alchemy = {
-		icon = core_tenet_meditation
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_sacred_alchemy }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		parameters = {
-			allows_worship_vaermina_shunned_doctrines_active = yes
-		}
-		
-		traits = {
-			virtues = {
-				lifestyle_physician
-				lifestyle_herbalist = 2
-			}
-		}
-	}
-	
-	tenet_ritual_nightmares = {
-		icon = core_tenet_meditation
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_ritual_nightmares }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		parameters = {
-			# TODO: That (take exemple on Meditate in seclusion)
-			intentional_nightmares_mechanics_active = yes
-			allows_worship_vaermina_shunned_doctrines_active = yes
-		}
-		
-		traits = {
-			virtues = { brave }
-			sins = { craven }
-		}
-	}
-
-	tenet_veneration_of_diseases = {
-		icon = core_tenet_flagellant
-
-		piety_cost = {
-			
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_veneration_of_diseases }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			## EK TODO: Just that lol (take a look at Exaltation of Pain)
-			## EK TODO: Passive bonus: health bonus when ill (scaling with Devotion)
-			self_disease_active = yes
-			allows_worship_peryite_shunned_doctrines_active = yes
-		}
-		
-		traits = {
-			virtues = {
-				pneumonic
-				leper
-				cancer
-				typhus
-				bubonic_plague = 3
-				smallpox
-			}
-		}
-	}
-	
-	tenet_thriving_in_chaos = {
-		icon = core_tenet_meditation
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_thriving_in_chaos }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		parameters = {
-			stress_gives_piety_active = yes
-			allows_worship_sheogorath_shunned_doctrines_active = yes
 		}
 	}
 	
@@ -1721,6 +1312,10 @@ doctrine_core_tenets = {
 
 	}
 	
+	#################################
+	# Nedic-Nordic Faiths Tenets	#
+	#################################
+	
 	tenet_labyrinthine_canon = {
 		icon = core_tenet_bigbook
 		piety_cost = {
@@ -1732,6 +1327,8 @@ doctrine_core_tenets = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		
+		is_shown = { religion_tag = nedic_nordic_religion }
 
 		can_pick = {
 			always = yes
@@ -1766,6 +1363,8 @@ doctrine_core_tenets = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		
+		is_shown = { religion_tag = nedic_nordic_religion }
 
 		can_pick = {
 			always = yes
@@ -1792,17 +1391,662 @@ doctrine_core_tenets = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		
+		is_shown = { religion_tag = nedic_nordic_religion }
 
 		can_pick = {
 			always = yes
 		}
 		
-
-		character_modifier = {
+		parameters = {
 			legalism_reduced_faction_virtues = yes
 			legalism_increased_faction_sins = yes
+		}
+		
+
+		character_modifier = {
 			opinion_of_different_faith_liege = -10
 			levy_reinforcement_rate_same_faith = 0.25
+		}
+	}
+	
+	#################################
+	# Daedric Faiths Tenets			#
+	#################################
+	
+	tenet_witch_worship = {
+		icon = core_tenet_festivities
+		name = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						religion_tag = reach_religion
+					}
+					desc = tenet_witch_worship_reach_religion_name
+				}
+				desc = tenet_witch_worship_name
+			}
+		}
+		
+		piety_cost = {
+			if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = witchcraft_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
+					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		parameters = {
+			# TODO: Decision for Witches to become Occultists
+			# Handle Briarhearts somehow?
+			potent_witch_become_occultist = yes
+		}
+		
+		traits = {
+			virtues = { witch }
+		}
+	}
+	
+	tenet_vampire_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = molag_religion
+						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a vampire trait line
+		traits = {
+			virtues = { vampire_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_molag_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_lycanthrope_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = hircine_religion
+						flag:doctrine_pantheon_hircine = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_lycanthrope_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = lycanthropy_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_lycanthropy_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_lycanthropy_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a lycan trait line
+		traits = {
+			virtues = { lycan_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_necromancy_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = molag_religion
+						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_necromancy_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = necromancy_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_necromancy_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a necromancer trait line
+		traits = {
+			virtues = { necromancer_character = 1 }
+			#virtues = { lich = 3 }
+		}
+	}
+	
+	tenet_divine_disease = {
+		icon = core_tenet_flagellant
+
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = peryite_religion
+						flag:doctrine_pantheon_peryite = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_divine_disease }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		
+		can_pick = { #no one but Dagoth should want this
+			always = no
+		}
+
+		parameters = {
+			## EK TODO: Can decide to embrace the Corprus disease, earning Piety at the cost of getting the Corprus trait
+			## EK TODO: Passive bonus: health bonus when ill (scaling with Devotion)
+			tyranny_gain_mult = -0.5
+		}
+		
+		# traits = {
+			# virtues = {
+				# corprus
+			# }
+		# }
+	}
+	
+	tenet_ritual_hunts = {
+		icon = core_tenet_festivities
+
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = hircine_religion
+						flag:doctrine_pantheon_hircine = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_ritual_hunts }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			piety_from_hunts_active = yes
+			mandatory_hunts_attendance = yes
+			allows_worship_hircine_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = {
+				hunter_2
+				hunter_3
+			}
+		}
+	}
+	
+	tenet_sanctity_of_life = {
+		icon = core_tenet_prayer
+
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = meridia_religion
+						flag:doctrine_pantheon_meridia = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sanctity_of_life }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_outlawed
+				flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+			}
+			custom_description = {
+				text = necromancy_must_be_outlawed
+				flag:doctrine_necromancy_outlawed = { is_in_list = selected_doctrines }
+			}
+		}
+
+		parameters = {
+			cheaper_cleanse_abominations_active = yes
+			cheaper_holy_wars_pro_undeath_active = yes
+			bonus_cleanse_abomination_war_piety_active = yes
+			allows_worship_meridia_shunned_doctrines_active = yes
+			hostility_override_doctrine_vampirism_accepted = 3
+			hostility_override_doctrine_necromancy_accepted = 3
+		}
+	}
+	
+	tenet_contempt_for_the_weak = {
+		icon = core_tenet_sword
+
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = malacath_religion
+						flag:doctrine_pantheon_malacath = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_contempt_for_the_weak }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			# TODO: Implement the effects
+			weak_rulers_contest_rule = yes
+			election_vote_strong = yes
+			allows_worship_malacath_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = { physique_good }
+			sins = { physique_bad }
+		}
+	}
+	
+	tenet_vows_of_squalor = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = namira_religion
+						flag:doctrine_pantheon_namira = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_vows_of_squalor }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			# TODO: Just that (copy paste Vows of Poverty I guess)
+			vows_of_squalor_active = yes
+			allows_worship_namira_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_radical_detachment = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = sheogorath_religion
+						flag:doctrine_pantheon_sheogorath = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_radical_detachment }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			# TODO: Just that
+			radical_detachment_law_cost_increase = yes
+			allows_worship_sheogorath_shunned_doctrines_active = yes
+		}
+		
+		character_modifier = {
+			stress_gain_mult = -0.25
+		}
+		
+		traits = {
+			virtues = {
+				fickle
+				lunatic = 2
+			}
+			sins = { stubborn }
+		}
+	}
+	
+	tenet_sacred_alchemy = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = vaermina_religion
+						flag:doctrine_pantheon_vaermina = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_sacred_alchemy }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			allows_worship_vaermina_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = {
+				lifestyle_physician
+				lifestyle_herbalist = 2
+			}
+		}
+	}
+	
+	tenet_ritual_nightmares = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = vaermina_religion
+						flag:doctrine_pantheon_vaermina = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_ritual_nightmares }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			# TODO: That (take exemple on Meditate in seclusion)
+			intentional_nightmares_mechanics_active = yes
+			allows_worship_vaermina_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = { brave }
+			sins = { craven }
+		}
+	}
+
+	tenet_veneration_of_diseases = {
+		icon = core_tenet_flagellant
+
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = peryite_religion
+						flag:doctrine_pantheon_peryite = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_veneration_of_diseases }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			## EK TODO: Just that lol (take a look at Exaltation of Pain)
+			## EK TODO: Passive bonus: health bonus when ill (scaling with Devotion)
+			self_disease_active = yes
+			allows_worship_peryite_shunned_doctrines_active = yes
+		}
+		
+		traits = {
+			virtues = {
+				pneumonic
+				leper
+				cancer
+				typhus
+				bubonic_plague = 3
+				smallpox
+			}
+		}
+	}
+	
+	tenet_thriving_in_chaos = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = sheogorath_religion
+						flag:doctrine_pantheon_sheogorath = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_thriving_in_chaos }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		parameters = {
+			stress_gives_piety_active = yes
+			allows_worship_sheogorath_shunned_doctrines_active = yes
 		}
 	}
 	

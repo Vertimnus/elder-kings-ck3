@@ -1,4 +1,5 @@
-﻿
+﻿### EK TODO: Adapt the muslim events? Maybe tie it to some other religion or culture
+
 namespace = yearly
 
 # yearly.4001 - A powerful vassal has angered neighboring ruler
@@ -1725,7 +1726,10 @@ yearly.4022 = {
 
 	immediate = {
 		scope:child = {
-			assign_quirk_effect = yes
+			if = {
+				limit = { root = { is_ai = no }	}
+				assign_quirk_effect = yes
+			}
 			show_as_tooltip = {
 				release_from_prison = yes
 			}
@@ -1771,7 +1775,7 @@ yearly.4022 = {
 
 scripted_trigger yearly_4031_basic_check_trigger = {
 	is_ai = yes
-	is_adult = yes
+	is_physically_able_adult = yes
 }
 
 scripted_trigger yearly_4031_courtier_trigger = {
@@ -1779,11 +1783,11 @@ scripted_trigger yearly_4031_courtier_trigger = {
 	OR = {
 		is_of_major_interest_to_root_trigger = yes
 		is_of_minor_interest_to_root_trigger = yes
-	}
-	OR = {
-		faith = { has_doctrine = doctrine_witchcraft_accepted }
-		is_witch_trigger = yes
 		is_cannibal_trigger = yes
+		AND = {
+			faith = { NOT = { has_doctrine = doctrine_witchcraft_accepted } }
+			is_witch_trigger = yes
+		}
 	}
 }
 
@@ -1889,18 +1893,31 @@ yearly.4031 = {
 		else = {
 			hidden_effect = {
 				random_list = {
-					75 = {
+					40 = {
 						trigger = {
 							exists = player_heir
 							player_heir = {
 								yearly_4031_basic_check_trigger = yes
 							}
 						}
+						modifier = {
+							add = 50
+							player_heir = {
+								OR = {
+									has_trait = sadistic
+									has_trait = callous
+									has_trait = murderer
+									any_secret = {
+										secret_type = secret_murder
+									}
+								}
+							}
+						}
 						player_heir = {
 							save_scope_as = murderer
 						}
 					}
-					50 = {
+					40 = {
 						trigger ={
 							any_relation = {
 								type = nemesis
@@ -1912,26 +1929,53 @@ yearly.4031 = {
 							weight = {
 								base = 1
 								modifier = {
-									add = 50
+									add = 60
 									is_in_the_same_court_as = root
 								}
 								modifier = {
-									add = 10
+									add = 40
 									has_trait = sadistic
 								}
 							}
 							save_scope_as = murderer
 						}
 					}
-					25 = {
+					20 = {
 						trigger = {
 							any_courtier = {
 								yearly_4031_courtier_trigger = yes
 							}
 						}
+						modifier = {
+							add = 60
+							any_courtier = {
+								yearly_4031_courtier_trigger = yes
+								has_trait = sadistic
+								has_trait = callous
+								has_trait = murderer
+								any_secret = {
+									secret_type = secret_murder
+								}
+							}
+						}
 						random_courtier = {
 							limit = {
 								yearly_4031_courtier_trigger = yes
+							}
+							weight = {
+								base = 1
+								ai_value_modifier = {
+									ai_compassion = -1
+								}
+								modifier = {
+									add = 100
+									has_trait = sadistic
+									has_trait = callous
+									has_trait = murderer
+									any_secret = {
+										secret_type = secret_murder
+									}
+								}
 							}
 							save_scope_as = murderer
 						}
@@ -2082,6 +2126,12 @@ yearly.4051 = {
 
 	option = {
 		name = intrigue_scheme_ongoing.5015.a
+		
+		add_character_modifier = {
+			modifier = has_plush_carpet_modifier
+			days = 3650
+		}
+			
 		ai_chance = {
 			base = 1
 			ai_value_modifier = {
@@ -2120,7 +2170,7 @@ yearly.4051 = {
 # A wise man visits your court
 # by Linnéa Thimrén
 #######################
-
+### EK EDIT: Islam doesn't exist in the TES universe
 yearly.4061 = {
 	type = character_event
 	title = yearly.4061.t
@@ -2148,7 +2198,7 @@ yearly.4061 = {
 	}
 	
 	trigger = {
-		always = no
+		# faith.religion = religion:islam_religion
 		NOT = { has_character_flag = had_event_yearly_4061 }
 		NOT = { has_character_modifier = useful_insights_modifier }
 	}
@@ -2286,6 +2336,7 @@ yearly.4061 = {
 # You're very educated!
 # by Linnéa Thimrén
 #######################
+### EK EDIT: No Islam in TES
 
 yearly.4071 = {
 	type = character_event
@@ -2314,6 +2365,7 @@ yearly.4071 = {
 	
 	trigger = {
 		always = no
+		# faith.religion = religion:islam_religion
 		exists = cp:councillor_court_chaplain
 		NOT = { has_character_flag = had_event_yearly_4071 }
 		learning >= medium_skill_rating
@@ -2391,7 +2443,8 @@ yearly.4071 = {
 # Sponsor the translation of a book from Greek
 # by Linnéa Thimrén
 #######################
-
+### EK EDIT: Neither Greek nor Arabic or Islam exist in TES
+### EK TODO: Adapt the event chain?
 yearly.4081 = {
 	type = character_event
 	title = yearly.4081.t
@@ -2403,8 +2456,8 @@ yearly.4081 = {
 	left_portrait = scope:councillor
 	
 	trigger = {
-		always = no
-		has_culture_group = culture_group:arabic_group
+		# faith.religion = religion:islam_religion
+		# has_culture_group = culture_group:arabic_group
 		exists = cp:councillor_court_chaplain
 		NOT = { has_character_flag = had_event_yearly_4081 }
 		learning >= medium_skill_rating
@@ -2517,13 +2570,21 @@ yearly.4081 = {
 # Your ward and you visit scholars
 # by Linnéa Thimrén
 #######################
-
+### EK EDIT: No House of Wisdom or Islam in the TES universe
 yearly.4091 = {
 	type = character_event
 	title = yearly.4091.t
 	desc = {
 		desc = yearly.4091.desc_opening
 		first_valid = {
+			# triggered_desc = {
+				# trigger = {
+					# any_realm_province = {
+						# has_building = house_of_wisdom_01
+					# }
+				# }
+				# desc = yearly.4091.desc_house
+			# }
 			desc = yearly.4091.desc_no_house
 		}
 		desc = yearly.4091.desc
@@ -2533,6 +2594,7 @@ yearly.4091 = {
 	
 	trigger = {
 		always = no
+		# faith.religion = religion:islam_religion
 		NOT = { has_character_flag = had_event_yearly_4091 }
 		any_relation = {
 			type = ward
