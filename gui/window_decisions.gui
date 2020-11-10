@@ -1580,24 +1580,48 @@ window = {
 										align = center
 										fontsize = 32
 									}
-									text_multi = {
-										text = selected_patron_desc #defined by custom loc
-										size = { 450 150 }
-										maximumsize = { 450 150 }
-										align = center
-										fontsize = 20
-										autoresize = yes
+									hbox = {
+										button_expand = {
+											parentanchor = vcenter
+											tooltip = "show_hide_desc"
+											using = tooltip_nw
+											onclick = "[GetVariableSystem.Toggle('patron_hide_desc')]"
+											down = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+										}
+										spacer = {
+											size = { 100 0 }
+										}
+										text_multi = {
+											text = selected_patron_desc #defined by custom loc
+											size = { 450 150 }
+											maximumsize = { 450 150 }
+											align = center
+											fontsize = 20
+											autoresize = yes
+										}
+										spacer = {
+											size = { 118 0 }
+										}
 									}
-									spacer = {
-										size = { 0 15 }
-									}
-									text_multi = {
-										text = selected_patron_long_desc #defined by custom loc
-										size = { 450 150 }
-										maximumsize = { 450 150 }
-										align = center
-										fontsize = 16
-										autoresize = yes
+									vbox = {
+										visible = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+										spacer = {
+											size = { 0 8 }
+										}
+										divider_light = {
+											layoutpolicy_horizontal = expanding
+										}
+										spacer = {
+											size = { 0 6 }
+										}
+										text_multi = {
+											text = selected_patron_long_desc #defined by custom loc
+											size = { 450 150 }
+											maximumsize = { 450 150 }
+											align = center
+											fontsize = 16
+											autoresize = yes
+										}
 									}
 								}
 							}
@@ -1873,9 +1897,16 @@ window = {
 								# }
 							}
 							spacer = {
-								size = { 110 0 }
+								size = { 110 100 }
+								vbox = {
+									text_single = {
+										text = personal_deity #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+								}
 							}
-							# PAntheon Icons #
+							# Pantheon Icons #
 							vbox = {
 								#Divines
 								button_patron_icon = {
@@ -1898,7 +1929,19 @@ window = {
 								}
 							}
 							spacer = {
-								size = { 140 0 } #+30 compared to other one for button
+								size = { 140 100 } #+30 compared to other one for button
+								vbox = {
+									text_single = {
+										text = pilgrimage_status #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+									text_single = {
+										text = toadd_pilgrimage_decision #defined by custom loc
+										align = center
+										fontsize = 16
+									}
+								}
 							}
 						}
 
@@ -1945,24 +1988,48 @@ window = {
 										align = center
 										fontsize = 32
 									}
-									text_multi = {
-										text = selected_pantheon_desc #defined by custom loc
-										size = { 450 150 }
-										maximumsize = { 450 150 }
-										align = center
-										fontsize = 20
-										autoresize = yes
+									hbox = {
+										button_expand = {
+											parentanchor = vcenter
+											tooltip = "show_hide_desc"
+											using = tooltip_nw
+											onclick = "[GetVariableSystem.Toggle('patron_hide_passive_desc')]"
+											down = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+										}
+										spacer = {
+											size = { 100 0 }
+										}
+										text_multi = {
+											text = selected_pantheon_desc #defined by custom loc
+											size = { 450 150 }
+											maximumsize = { 450 150 }
+											align = center
+											fontsize = 20
+											autoresize = yes
+										}
+										spacer = {
+											size = { 118 0 }
+										}
 									}
-									spacer = {
-										size = { 0 15 }
-									}
-									text_multi = {
-										text = selected_pantheon_long_desc #defined by custom loc
-										size = { 450 150 }
-										maximumsize = { 450 150 }
-										align = center
-										fontsize = 16
-										autoresize = yes
+									vbox = {
+										visible = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+										spacer = {
+											size = { 0 8 }
+										}
+										divider_light = {
+											layoutpolicy_horizontal = expanding
+										}
+										spacer = {
+											size = { 0 6 }
+										}
+										text_multi = {
+											text = selected_pantheon_long_desc #defined by custom loc
+											size = { 450 150 }
+											maximumsize = { 450 150 }
+											align = center
+											fontsize = 16
+											autoresize = yes
+										}
 									}
 								}
 							}
