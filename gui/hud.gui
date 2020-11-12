@@ -1594,7 +1594,7 @@ icon = {
 
 			button_icon = {
 				name = "astronomy_button"
-				visible = "[Not(IsObserver)]"
+				#visible = "[Not(IsObserver)]"
 				texture = "gfx/interface/icons/lunar_cycle/stars.dds"
 				tooltipwidget = {
 					astronomy_tooltip = {}
@@ -3964,93 +3964,80 @@ types Astronomy
 							name = "signs"
 							size = { 64 64 }
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_apprentice')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_apprentice.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_atronach')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_atronach.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_lady')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_lady.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_lord')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_lord.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_lover')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_lover.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_mage')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_mage.dds"
-								size = { 64 64 }
-								alwaystransparent = yes
-							}
-							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_ritual')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)1')]"
 								texture = "gfx/interface/icons/lunar_cycle/sign_ritual.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_serpent')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_serpent.dds"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)2')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lover.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_shadow')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)3')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lord.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)4')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_mage.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)5')]"
 								texture = "gfx/interface/icons/lunar_cycle/sign_shadow.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_steed')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)6')]"
 								texture = "gfx/interface/icons/lunar_cycle/sign_steed.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_thief')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_thief.dds"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)7')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_apprentice.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_tower')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)8')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_warrior.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)9')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_lady.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)10')]"
 								texture = "gfx/interface/icons/lunar_cycle/sign_tower.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
 							button_icon = {
-								datacontext = "[GetScriptedGui('stellar_cycle_warrior')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-								texture = "gfx/interface/icons/lunar_cycle/sign_warrior.dds"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)11')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_atronach.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)12')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_thief.dds"
+								size = { 64 64 }
+								alwaystransparent = yes
+							}
+							button_icon = {
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_month'), '(CFixedPoint)13')]"
+								texture = "gfx/interface/icons/lunar_cycle/sign_serpent.dds"
 								size = { 64 64 }
 								alwaystransparent = yes
 							}
@@ -4079,8 +4066,7 @@ types Astronomy
 							name = "masser_phases"
 							size = { 64 64 }
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_new_moon')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)1')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4093,8 +4079,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_new_moon')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)2')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4107,8 +4092,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_waxing')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)3')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4121,8 +4105,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_waxing')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)4')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4135,8 +4118,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_full_moon')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)5')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								# modify_texture = {
@@ -4149,8 +4131,7 @@ types Astronomy
 								# }
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_full_moon')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)6')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4163,8 +4144,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_waning')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)7')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4177,8 +4157,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_masser_waning')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_masser_gui'), '(CFixedPoint)8')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_masser.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4213,8 +4192,7 @@ types Astronomy
 							name = "secunda_phases"
 							size = { 64 64 }
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_new_moon')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)1')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4227,8 +4205,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_new_moon')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)2')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4241,8 +4218,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waxing')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)3')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4255,8 +4231,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waxing')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)4')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4269,8 +4244,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_full_moon')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)5')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								# modify_texture = {
@@ -4283,8 +4257,7 @@ types Astronomy
 								# }
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_full_moon')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)6')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4297,8 +4270,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waning')]"
-								visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)7')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {
@@ -4311,8 +4283,7 @@ types Astronomy
 								}
 							}
 							icon = {
-								datacontext = "[GetScriptedGui('lunar_cycle_secunda_waning')]"
-								visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+								visible = "[EqualTo_CFixedPoint(EmptyScope.ScriptValue('cycle_secunda_gui'), '(CFixedPoint)8')]"
 								texture = "gfx/interface/icons/lunar_cycle/moon_secunda.dds"
 								size = { 64 64 }
 								modify_texture = {

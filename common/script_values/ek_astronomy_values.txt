@@ -68,3 +68,167 @@ serpent_cycle_days = {
     value = serpent_active_days
     multiply = 13
 }
+
+cycle_month = {
+    value = current_month
+    if = {
+        limit = { has_global_variable = serpent_active }
+        value = 13
+    }
+}
+
+cycle_masser = {
+    if = { #new
+        limit = { global_var:lunarphase_masser <= 6 }
+        value = 1
+    }
+    else_if = { #waxing
+        limit = { global_var:lunarphase_masser <= 12 }
+        value = 2
+    }
+    else_if = { #full
+        limit = { global_var:lunarphase_masser <= 19 }
+        value = 3
+    }
+    else_if = { #waning
+        limit = { global_var:lunarphase_masser <= 25 }
+        value = 4
+    }
+}
+
+cycle_secunda = {
+    if = { #new
+        limit = { global_var:lunarphase_secunda <= 8 }
+        value = 1
+    }
+    else_if = { #waxing
+        limit = { global_var:lunarphase_secunda <= 16 }
+        value = 2
+    }
+    else_if = { #full
+        limit = { global_var:lunarphase_secunda <= 25 }
+        value = 3
+    }
+    else_if = { #waning
+        limit = { global_var:lunarphase_secunda <= 33 }
+        value = 4
+    }
+}
+
+cycle_masser_gui = {
+    if = {
+        limit = { #new moon
+            #global_var:lunarphase_masser > 0
+            global_var:lunarphase_masser <= 3
+        }
+        value = 1
+    }
+    else_if = {
+        limit = { #waxing cresent
+            #global_var:lunarphase_masser > 3
+            global_var:lunarphase_masser <= 6
+        }
+        value = 2
+    }
+    else_if = {
+        limit = { #first quarter
+            #global_var:lunarphase_masser > 6
+            global_var:lunarphase_masser <= 9
+        }
+        value = 3
+    }
+    else_if = {
+        limit = { #waxing gibbous
+            #global_var:lunarphase_masser > 9
+            global_var:lunarphase_masser <= 12
+        }
+        value = 4
+    }
+    else_if = {
+        limit = { #full moon
+            #global_var:lunarphase_masser > 12
+            global_var:lunarphase_masser <= 16
+        }
+        value = 5
+    }
+    else_if = {
+        limit = { #waning gibbous
+            #global_var:lunarphase_masser > 16
+            global_var:lunarphase_masser <= 19
+        }
+        value = 6
+    }
+    else_if = {
+        limit = { #third quarter
+            #global_var:lunarphase_masser > 19
+            global_var:lunarphase_masser <= 22
+        }
+        value = 7
+    }
+    else = {
+        # limit = { #waning cresent
+        #     global_var:lunarphase_masser > 22
+        #     #global_var:lunarphase_masser <= 25
+        # }
+        value = 8
+    }
+}
+
+cycle_secunda_gui = {
+    if = {
+        limit = { #new moon
+            #global_var:lunarphase_secunda > 0
+            global_var:lunarphase_secunda <= 4
+        }
+        value = 1
+    }
+    else_if = {
+        limit = { #waxing cresent
+            #global_var:lunarphase_secunda > 4
+            global_var:lunarphase_secunda <= 8
+        }
+        value = 2
+    }
+    else_if = {
+        limit = { #first quarter
+            #global_var:lunarphase_secunda > 8
+            global_var:lunarphase_secunda <= 12
+        }
+        value = 3
+    }
+    else_if = {
+        limit = { #waxing gibbous
+            #global_var:lunarphase_secunda > 12
+            global_var:lunarphase_secunda <= 16
+        }
+        value = 4
+    }
+    else_if = {
+        limit = { #full moon
+            #global_var:lunarphase_secunda > 16
+            global_var:lunarphase_secunda <= 21
+        }
+        value = 5
+    }
+    else_if = {
+        limit = { #waning gibbous
+            #global_var:lunarphase_secunda > 21
+            global_var:lunarphase_secunda <= 25
+        }
+        value = 6
+    }
+    else_if = {
+        limit = { #third quarter
+            #global_var:lunarphase_secunda > 25
+            global_var:lunarphase_secunda <= 29
+        }
+        value = 7
+    }
+    else = {
+        # limit = { #waning cresent
+        #     global_var:lunarphase_secunda > 29
+        #     #global_var:lunarphase_secunda <= 33
+        # }
+        value = 8
+    }
+}
