@@ -12,24 +12,14 @@ create_local_culture_craglorn_decision = { # Create Duraki/Iron Orc culture - ei
 		is_independent_ruler = yes
 		
 		# Is part of a culture group that has a culture native to this province
-		# Since this culture doesn't exist yet, we have to type them by hand for now
-		OR = {
-			AND = {
-				has_culture_group = culture_group:nedic_group
-				NOT = {
-					is_target_in_global_variable_list = {
-						name = culture_is_alive
-						target = culture:duraki
-					}
-				}
-			}
-			AND = {
-				has_culture_group = culture_group:orsimer_group
-				NOT = {
-					is_target_in_global_variable_list = {
-						name = culture_is_alive
-						target = culture:iron_orc
-					}
+		any_in_global_list = {
+			variable = culture_list
+			this.culture_group = root.culture_group
+			has_innovation = innovation_native_craglorn
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = culture_is_alive
+					target = this
 				}
 			}
 		}
@@ -73,15 +63,23 @@ create_local_culture_craglorn_decision = { # Create Duraki/Iron Orc culture - ei
 	}
 
 	effect = {
-		if = {
-			limit = { has_culture_group = culture_group:nedic_group }
-			culture:duraki = { save_scope_as = new_culture }
-		}
-		else_if = {
-			limit = { has_culture_group = culture_group:orsimer_group }
-			culture:iron_orc = { save_scope_as = new_culture }
+		random_in_global_list = {
+			variable = culture_list
+			limit = {
+				this.culture_group = root.culture_group
+				has_innovation = innovation_native_craglorn
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = culture_is_alive
+						target = this
+					}
+				}
+			}
+			
+			save_scope_as = new_culture
 		}
 		
+		# The culture is revived!
 		add_to_global_variable_list = {
 			name = culture_is_alive
 			target = scope:new_culture
