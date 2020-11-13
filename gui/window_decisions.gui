@@ -1264,20 +1264,6 @@ window = {
 										align = center
 										fontsize = 16
 									}
-
-									# progressbar_standard = { #doesn't seem to support variables
-									# 	name = "progress_bar_azura"
-									# 	parentanchor = center
-									# 	size = { 100 10 }
-									# 	min = 0
-									# 	max = 10000
-									# 	#value = "[(CFixedPoint)GetPlayer.MakeScope.Var('ardor_display').GetValue]"
-									# 	value = "[FixedPointToInt(EmptyScope.ScriptValue('ardor_display'))]"
-									# }
-									# }
-									# spacer = {
-									# 	size = { 0 2 }
-									# }
 									widget = {
 										name = "ardor_widget"
 										size = { 170 58 }
@@ -1291,214 +1277,35 @@ window = {
 											parentanchor = top|left
 											position = { 53 19 }
 
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_0')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 1 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_1')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 2 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_2')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 4 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_3')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 8 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_4')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 16 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_5')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 32 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_6')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 64 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											progressbar_ardor = {
-												datacontext = "[GetScriptedGui('patron_ardor_7')]"
-												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												size = { 128 20 }
-
-												#using = Animation_ShowHide_Standard
-
-												blockoverride "bar_color"
-												{
-													texture = "gfx/interface/colors/red.dds"
-												}
-
-												blockoverride "bar_color_flow"
-												{
-													texture = "gfx/interface/colors/gold.dds"
-													alpha = 0.7
-												}
-											}
-											#progressbar_ardor_offset = {}
-											vbox = {
+											#gets the progress bar part
+											widget = {
 												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_0')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 1 0 }
+												layoutpolicy_vertical = expanding
+												layoutstretchfactor_horizontal = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('ardor_display').GetValue), '(float)10000', '(int32)100' )]"
+
+												progressbar_ardor = {
+													#visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
+													size = { 100% 100% }
+
+													using = Animation_ShowHide_Standard
+
+													blockoverride "bar_color"
+													{
+														texture = "gfx/interface/colors/red.dds"
+													}
+
+													blockoverride "bar_color_flow"
+													{
+														texture = "gfx/interface/colors/gold.dds"
+														alpha = 0.7
+													}
 												}
 											}
-											vbox = {
+											#pushes the progress part to left
+											widget = {
 												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_1')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 2 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_2')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 4 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_3')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 8 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_4')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 16 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_5')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 32 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_6')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 64 0 }
-												}
-											}
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												datacontext = "[GetScriptedGui('patron_ardor_7')]"
-												visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-												spacer = {
-													size = { 128 0 }
-												}
+												layoutpolicy_vertical = expanding
+												layoutstretchfactor_horizontal = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('ardor_display').GetValue), '(float)10000', '(int32)100' )]"
 											}
 										}
 
@@ -1512,21 +1319,6 @@ window = {
 												size = { 30 30 }
 
 												texture = "gfx/interface/patron_window/icon_ardor.dds"
-
-												# modify_texture = {
-												# 	visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
-												# 	name = "lvl3_glow"
-												# 	texture = "gfx/interface/colors/gold.dds"
-												# 	blend_mode = colordodge
-												# 	alpha = 0
-												# }
-
-												# modify_texture = {
-												# 	name = "lvl_increase"
-												# 	texture = "gfx/interface/colors/gold.dds"
-												# 	blend_mode = colordodge
-												# 	alpha = 0
-												# }
 											}
 										}
 									}
@@ -3321,26 +3113,6 @@ Types Patrons
 			}
 		}
 	}
-	Type button_ardor = button_normal
-	{
-		texture = "gfx/interface/patron_window/button_ardor.dds"
-		size = { 32 32 }
-
-		gfxtype = togglepushbuttongfx
-		effectname = "NoHighlight"
-
-		upframe = 2
-		uphoverframe = 2
-		uppressedframe = 2
-		downframe = 3
-		downhoverframe = 3
-		downpressedframe = 3
-		disableframe = 1
-
-		spriteType = Corneredtiled
-		spriteborder = { 3 3 }
-		framesize = { 32 32 }
-	}
 	Type progressbar_ardor = icon
 	{
 		shaderfile = "gfx/FX/repeat_texture.shader"
@@ -3359,34 +3131,34 @@ Types Patrons
 			texture_density = 5
 		}
 
-		# modify_texture = {
-		# 	texture = "gfx/interface/component_masks/mask_fade_horizontal.dds"
-		# 	blend_mode = alphamultiply
-		# 	alpha = 0.3
-		# }
+		modify_texture = {
+			texture = "gfx/interface/component_masks/mask_fade_horizontal.dds"
+			blend_mode = alphamultiply
+			alpha = 0.3
+		}
 
-		# modify_texture = {
-		# 	texture = "gfx/interface/component_masks/mask_scratches.dds"
-		# 	blend_mode = alphamultiply
-		# 	spriteType = corneredtiled
-		# 	alpha = 0.3
-		# 	texture_density = 3
-		# }
+		modify_texture = {
+			texture = "gfx/interface/component_masks/mask_scratches.dds"
+			blend_mode = alphamultiply
+			spriteType = corneredtiled
+			alpha = 0.3
+			texture_density = 3
+		}
 
-		# modify_texture = {
-		# 	name = "flash"
-		# 	texture = "gfx/interface/colors/white.dds"
-		# 	blend_mode = colordodge
-		# 	alpha = 0
-		# }
+		modify_texture = {
+			name = "flash"
+			texture = "gfx/interface/colors/white.dds"
+			blend_mode = colordodge
+			alpha = 0
+		}
 
-		# modify_texture = {
-		# 	name = "clouds"
-		# 	texture = "gfx/interface/component_masks/mask_clouds_solid.dds"
-		# 	blend_mode = mask
-		# 	spriteType = corneredtiled
-		# 	texture_density = 1
-		# }
+		modify_texture = {
+			name = "clouds"
+			texture = "gfx/interface/component_masks/mask_clouds_solid.dds"
+			blend_mode = mask
+			spriteType = corneredtiled
+			texture_density = 1
+		}
 
 		modify_texture = {
 			block "bar_color_flow"
@@ -3397,92 +3169,25 @@ Types Patrons
 			blend_mode = colordodge
 		}
 
-		# state = {
-		# 	name = a
-		# 	next = b
-		# 	trigger_on_create = yes
+		state = {
+			name = a
+			next = b
+			trigger_on_create = yes
 
-		# 	modify_texture = {
-		# 		name = "clouds"
-		# 		translate_uv = { 1 0 }
-		# 	}
-		# }
+			modify_texture = {
+				name = "clouds"
+				translate_uv = { 1 0 }
+			}
+		}
 
-		# state = {
-		# 	name = b
-		# 	next = a
-		# 	duration = 15
+		state = {
+			name = b
+			next = a
+			duration = 15
 
-		# 	modify_texture = {
-		# 		name = "clouds"
-		# 		translate_uv = { -1 0 }
-		# 	}
-		# }
-	}
-	Type progressbar_ardor_offset = widget
-	{
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_0')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 1 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_1')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 2 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_2')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 4 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_3')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 8 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_4')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 16 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_5')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 32 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_6')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 64 20 }
-			}
-		}
-		vbox = {
-			layoutpolicy_horizontal = expanding
-			datacontext = "[GetScriptedGui('patron_ardor_7')]"
-			visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-			spacer = {
-				size = { 128 20 }
+			modify_texture = {
+				name = "clouds"
+				translate_uv = { -1 0 }
 			}
 		}
 	}
