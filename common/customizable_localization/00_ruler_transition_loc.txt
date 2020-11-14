@@ -89,7 +89,9 @@ DeathMessageIntro = {
 				}
 				AND = {
 					has_trait = cannibal
-					NOT = { faith = { has_doctrine = tenet_ritual_cannibalism } }
+					NOT = {
+						faith = { has_doctrine_parameter = cannibalism_legal }
+					}
 				}
 				AND = {
 					has_trait = sodomite
@@ -139,10 +141,66 @@ DeathMessageIntro = {
 			}
 		}
 	}
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_CHRISTIANITY_1
+		# trigger = {
+			# faith.religion = faith:catholic.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_CHRISTIANITY_2
+		# trigger = {
+			# faith.religion = faith:catholic.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_ISLAM_1
+		# trigger = {
+			# faith.religion = faith:ashari.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_ISLAM_2
+		# trigger = {
+			# faith.religion = faith:ashari.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_ISLAM_3
+		# trigger = {
+			# faith.religion = faith:ashari.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_NORSE_1
+		# trigger = {
+			# faith.religion = faith:norse_pagan.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_HELLENIC_1
+		# trigger = {
+			# faith.religion = faith:hellenic_pagan.religion
+		# }
+	# }
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_EASTERN_1
+		# trigger = {
+			# OR = {
+				# faith.religion = faith:vaishnavism.religion
+				# faith.religion = faith:theravada.religion
+				# faith.religion = faith:digambara.religion
+			# }
+		# }
+	# }
 	text = {
 		localization_key = SUCCESSION_EVENT_WINDOW_DEAD_INTRO_TRIBAL_1
 		trigger = {
-			has_government = tribal_government
+			OR = {
+				# faith.religion = faith:finnish_pagan.religion
+				# faith.religion = faith:west_african_bori_pagan.religion
+				has_government = tribal_government
+			}
 		}
 	}
 }
@@ -439,7 +497,9 @@ DeathMessageOutro = {
 		localization_key = SUCCESSION_EVENT_WINDOW_DEAD_OUTRO_SCANDAL_CANNIBAL
 		trigger = {
 			has_trait = cannibal
-			NOT = { faith = { has_doctrine = tenet_ritual_cannibalism } }
+			NOT = {
+				faith = { has_doctrine_parameter = cannibalism_legal }
+			}
 		}
 		weight_multiplier = {
 			base = 2
@@ -532,6 +592,17 @@ DeathMessageOutro = {
 			base = 100
 		}
 	}
+	# text = {
+		# localization_key = SUCCESSION_EVENT_WINDOW_DEAD_OUTRO_ACCOMPLISHMENT_RESTORER_ROME
+		# trigger = {
+			# has_trait = augustus
+			# has_title = title:e_roman_empire
+			# has_character_flag = flag_restorer_of_rome #used for Eulogy.
+		# }
+		# weight_multiplier = {
+			# base = 100
+		# }
+	# }
 	text = {
 		localization_key = SUCCESSION_EVENT_WINDOW_DEAD_OUTRO_ACCOMPLISHMENT_CRUSADER
 		trigger = {
@@ -1301,7 +1372,9 @@ HeirMessageInterface = {
 		trigger = {
 			is_adult = yes
 			has_trait = cannibal
-			NOT = { faith = { has_doctrine = tenet_ritual_cannibalism } }
+			NOT = {
+				faith = { has_doctrine_parameter = cannibalism_legal }
+			}
 		}
 	}
 	text = {
@@ -1858,18 +1931,6 @@ GameOverMessageInterfaceSplendor = {
 				dynasty_prestige_level < low_dynasty_prestige_level
 				dynasty_prestige_level >= min_dynasty_prestige_level
 			}
-			years_from_game_start > 1
-		}
-	}
-
-	text = {
-		localization_key = SUCCESSION_EVENT_WINDOW_GAME_OVER_MIN_SPLENDOR_SHORT
-		trigger = {
-			dynasty = {
-				dynasty_prestige_level < low_dynasty_prestige_level
-				dynasty_prestige_level >= min_dynasty_prestige_level
-			}
-			years_from_game_start <= 1
 		}
 	}
 }
