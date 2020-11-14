@@ -1,4 +1,5 @@
-﻿
+﻿### EK EDIT: Removed references to disabled doctrines & tenets
+
 ToleranceValue = {
 	type = character
 
@@ -313,8 +314,21 @@ DefaultBishopTitlePlural = {
 GetUnbelieverName = {
 	type = character
 
+	# text = {
+		# trigger = {
+			# faith = {
+				# has_doctrine = pagan_hostility_doctrine
+			# }
+		# }
+		# localization_key = unbeliever_heathen
+	# }
 	text = {
-		localization_key = unbeliever_heathen
+		trigger = {
+			# faith = {
+				# NOT = { has_doctrine = pagan_hostility_doctrine }
+			# }
+		}
+		localization_key = unbeliever_infidel
 	}
 }
 
@@ -323,8 +337,21 @@ GetUnbelieverName = {
 GetUnbelieverNamePlural = {
 	type = character
 
+	# text = {
+		# trigger = {
+			# faith = {
+				# has_doctrine = pagan_hostility_doctrine
+			# }
+		# }
+		# localization_key = unbeliever_heathen_plural
+	# }
 	text = {
-		localization_key = unbeliever_heathen_plural
+		trigger = {
+			# faith = {
+				# NOT = { has_doctrine = pagan_hostility_doctrine }
+			# }
+		}
+		localization_key = unbeliever_infidel_plural
 	}
 }
 
@@ -463,14 +490,14 @@ GetFaithCreationReaction = {
 					has_doctrine_parameter = great_holy_wars_active_if_reformed
 				}
 				OR = {
-					has_doctrine = tenet_human_sacrifice
-					has_doctrine = tenet_ritual_cannibalism
+					has_doctrine_parameter = cannibalism_legal
+					has_doctrine_parameter = human_sacrifice_active
 				}
 			}
 			NOR = {
 				faith = {
-					has_doctrine = tenet_human_sacrifice
-					has_doctrine = tenet_ritual_cannibalism
+					has_doctrine_parameter = cannibalism_legal
+					has_doctrine_parameter = human_sacrifice_active
 				}
 			}
 		}
@@ -488,6 +515,7 @@ GetFaithCreationReaction = {
 					has_doctrine_parameter = great_holy_wars_active
 					AND = {
 						has_doctrine_parameter = great_holy_wars_active_if_reformed
+						NOT = { has_doctrine_parameter = unreformed }
 					}
 				}
 				faith_hostility_level = {
@@ -562,152 +590,595 @@ GetActualBishopTitle = {
 	}
 
 	# Religion-By-Religion Titles for Bishops based on Liege's Tier.
+	# Zunism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:zun_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_zunism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_kingdom
+			# faith.religion = faith:zun_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_zunism_religion_duchy
+	# }
 
-	#Yokudan
-	text = {
-		trigger = { 
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = no
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_empire
-	}
-	text = {
-		trigger = { 
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = yes 
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_empire_female
-	}
-	text = {
-		trigger = {
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = no
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_kingdom
-	}
-	text = {
-		trigger = {
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = yes
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_kingdom_female
-	}
-	text = {
-		trigger = { 
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier >= tier_duchy
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_duchy
-	}
-	text = {
-		trigger = { 
-			religion = religion:yokudan_religion
-			liege.highest_held_title_tier < tier_duchy
-		}
-		localization_key = councillor_court_chaplain_yokudan_religion_county
-	}
+	# Zoroastrianism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:mazdayasna.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_zoroastrianism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:mazdayasna.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_zoroastrianism_religion_kingdom_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:mazdayasna.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_zoroastrianism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:mazdayasna.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_zoroastrianism_religion_duchy_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:mazdayasna.religion
+		# }
+		# localization_key = councillor_court_chaplain_zoroastrianism_religion_county
+	# }
+	# African Roog
+	# text = {
+		# trigger = {
+			# faith.religion = faith:west_african_roog_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_west_african_roog_religion_duchy
+	# }
+	# African Bori
+	# text = {
+		# trigger = {
+			# faith.religion = faith:west_african_bori_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_west_african_bori_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# faith.religion = faith:west_african_bori_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_west_african_bori_religion_duchy_female
+	# }
+	# African
+	# text = {
+		# trigger = {
+			# faith.religion = faith:west_african_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_west_african_religion_duchy
+	# }
 	
-	#Aldmer
-	text = {
-		trigger = { 
-			religion = religion:aldmer_religion
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = no
-		}
-		localization_key = councillor_court_chaplain_aldmer_religion_empire
-	}
-	text = {
-		trigger = { 
-			religion = religion:aldmer_religion
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = yes 
-		}
-		localization_key = councillor_court_chaplain_aldmer_religion_empire_female
-	}
-	text = {
-		trigger = {
-			religion = religion:aldmer_religion
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = no
-		}
-		localization_key = councillor_court_chaplain_aldmer_religion_kingdom
-	}
-	text = {
-		trigger = {
-			religion = religion:aldmer_religion
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = yes
-		}
-		localization_key = councillor_court_chaplain_aldmer_religion_kingdom_female
-	}
-	text = {
-		trigger = { 
-			religion = religion:aldmer_religion
-			liege.highest_held_title_tier >= tier_duchy
-		}
-		localization_key = councillor_court_chaplain_aldmer_religion_duchy
-	}
+	# Tengrism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:tengri_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_tengrism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:tengri_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_tengrism_religion_duchy
+	# }
+
+	#Taoism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = religion:taoism_religion
+		# }
+		# localization_key = councillor_court_chaplain_taoism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = religion:taoism_religion
+		# }
+		# localization_key = councillor_court_chaplain_taoism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = religion:taoism_religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_taoism_religion_county
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = religion:taoism_religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_taoism_religion_county_female
+	# }
+
+	#Finno-Ugric
+	# text = {
+		# trigger = {
+			# faith.religion = faith:finnish_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_finno_ugric_religion_duchy
+	# }
+	
+	#Slavic
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:slavic_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_slavic_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:slavic_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_slavic_religion_kingdom_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:slavic_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_slavic_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:slavic_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_slavic_religion_duchy_female
+	# }
+
+	#Baltic
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:baltic_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_baltic_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:baltic_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_baltic_religion_duchy_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# is_female = no
+			# OR = {
+				# faith.religion = faith:baltic_pagan.religion
+				# faith.religion = faith:slavic_pagan.religion
+				# faith.religion = faith:finnish_pagan.religion
+				# faith.religion = faith:zun_pagan.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_baltic_religion_county
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# is_female = yes
+			# OR = {
+				# faith.religion = faith:baltic_pagan.religion
+				# faith.religion = faith:slavic_pagan.religion
+				# faith.religion = faith:finnish_pagan.religion
+				# faith.religion = faith:zun_pagan.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_baltic_religion_county_female
+	# }
+
+	#Magyarism
+	# text = {
+		# trigger = {
+			# faith.religion = faith:magyar_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_magyarism_religion_county
+	# }
+
+	#Judaism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_empire
+			# faith.religion = faith:rabbinism.religion
+		# }
+		# localization_key = councillor_court_chaplain_judaism_religion_empire
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:rabbinism.religion
+		# }
+		# localization_key = councillor_court_chaplain_judaism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:rabbinism.religion
+		# }
+		# localization_key = councillor_court_chaplain_judaism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:rabbinism.religion
+		# }
+		# localization_key = councillor_court_chaplain_judaism_religion_county
+	# }
+	
+	#Hellenic
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:hellenic_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_hellenism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:hellenic_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_hellenism_religion_kingdom_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:hellenic_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_hellenism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:hellenic_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_hellenism_religion_county
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:hellenic_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_hellenism_religion_county_female
+	# }
+
+	#Norse
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:norse_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_germanic_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# faith.religion = faith:norse_pagan.religion
+		# }
+		# localization_key = councillor_court_chaplain_germanic_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:norse_pagan.religion
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_germanic_religion_county
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:norse_pagan.religion
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_germanic_religion_county_female
+	# }
+
+	#Dualism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# faith.religion = faith:manichean.religion
+		# }
+		# localization_key = councillor_court_chaplain_dualism_religion_county
+	# }
+
+	#Bon
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# faith.religion = faith:bon.religion
+		# }
+		# localization_key = councillor_court_chaplain_bon_religion_kingdom
+	# }
+
+	#Buddhism/Hinduism/Jainism
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_empire
+			# OR = {
+				# faith.religion = faith:theravada.religion
+				# faith.religion = faith:vaishnavism.religion
+				# faith.religion = faith:digambara.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_buddhism_religion_empire
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# OR = {
+				# faith.religion = faith:theravada.religion
+				# faith.religion = faith:vaishnavism.religion
+				# faith.religion = faith:digambara.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_buddhism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# OR = {
+				# faith.religion = faith:theravada.religion
+				# faith.religion = faith:vaishnavism.religion
+				# faith.religion = faith:digambara.religion
+				# faith.religion = faith:bon.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_buddhism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# OR = {
+				# faith.religion = faith:theravada.religion
+				# faith.religion = faith:vaishnavism.religion
+				# faith.religion = faith:digambara.religion
+				# faith.religion = faith:bon.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_buddhism_religion_county
+	# }
+
+	#Shia
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_empire faith = faith:ismaili }
+		# localization_key = councillor_court_chaplain_ismaili_empire
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_kingdom faith = faith:ismaili }
+		# localization_key = councillor_court_chaplain_ismaili_kingdom
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier < tier_duchy faith = faith:ismaili }
+		# localization_key = councillor_court_chaplain_ismaili_county
+	# }
+
+	#Islam
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_empire faith.religion = faith:ashari.religion }
+		# localization_key = councillor_court_chaplain_islam_empire
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_kingdom faith.religion = faith:ashari.religion }
+		# localization_key = councillor_court_chaplain_islam_kingdom
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_duchy faith.religion = faith:ashari.religion }
+		# localization_key = councillor_court_chaplain_islam_duchy
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier < tier_duchy faith.religion = faith:ashari.religion }
+		# localization_key = councillor_court_chaplain_islam_county
+	# }
+
+	#Yazidi
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_empire faith.religion = faith:yazidi.religion }
+		# localization_key = councillor_court_chaplain_yazidi_empire
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_kingdom faith.religion = faith:yazidi.religion }
+		# localization_key = councillor_court_chaplain_yazidi_kingdom
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_duchy faith.religion = faith:yazidi.religion }
+		# localization_key = councillor_court_chaplain_yazidi_duchy
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier < tier_duchy faith.religion = faith:yazidi.religion }
+		# localization_key = councillor_court_chaplain_yazidi_county
+	# }
+
+	#Orthodox
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_empire
+			# is_female = no
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_empire
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_empire
+			# is_female = yes
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_empire_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# is_female = no
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_kingdom
+			# is_female = yes
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_kingdom_female
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier >= tier_duchy
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_duchy
+	# }
+	# text = {
+		# trigger = {
+			# liege.highest_held_title_tier < tier_duchy
+			# OR = {
+				# faith = faith:orthodox
+				# faith.religion = faith:manichean.religion
+			# }
+		# }
+		# localization_key = councillor_court_chaplain_orthodox_county
+	# }
+
+	#Christian
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_empire is_female = no faith.religion = faith:catholic.religion }
+		# localization_key = councillor_court_chaplain_christian_empire
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_empire is_female = yes faith.religion = faith:catholic.religion }
+		# localization_key = councillor_court_chaplain_christian_empire_female
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_kingdom faith.religion = faith:catholic.religion }
+		# localization_key = councillor_court_chaplain_christian_kingdom
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier >= tier_duchy faith.religion = faith:catholic.religion }
+		# localization_key = councillor_court_chaplain_christian_duchy
+	# }
+	# text = {
+		# trigger = { liege.highest_held_title_tier < tier_duchy faith.religion = faith:catholic.religion }
+		# localization_key = councillor_court_chaplain_christian_county
+	# }
+
+	#Paganism
+	# text = {
+		# trigger = {
+			# faith = { has_doctrine = pagan_hostility_doctrine }
+			# liege.highest_held_title_tier >= tier_kingdom
+			# is_female = no
+		# }
+		# localization_key = councillor_court_chaplain_paganism_religion_kingdom
+	# }
+	# text = {
+		# trigger = {
+			# faith = { has_doctrine = pagan_hostility_doctrine }
+			# liege.highest_held_title_tier >= tier_kingdom
+			# is_female = yes
+		# }
+		# localization_key = councillor_court_chaplain_paganism_religion_kingdom_female
+	# }
+	# text = {
+		# trigger = {
+			# faith = { has_doctrine = pagan_hostility_doctrine }
+			# liege.highest_held_title_tier >= tier_duchy
+		# }
+		# localization_key = councillor_court_chaplain_paganism_religion_duchy
+	# }
+	# text = {
+		# trigger = {
+			# faith = { has_doctrine = pagan_hostility_doctrine }
+			# liege.highest_held_title_tier < tier_duchy
+		# }
+		# localization_key = councillor_court_chaplain_paganism_religion_county
+	# }
 
 	#Fallback
 	text = {
-		trigger = { 
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = no 
-		}
+		trigger = { liege.highest_held_title_tier >= tier_empire is_female = no }
 		localization_key = councillor_court_chaplain_theocrat_empire
 	}
 	text = {
-		trigger = { 
-			liege.highest_held_title_tier >= tier_empire 
-			is_female = yes 
-		}
+		trigger = { liege.highest_held_title_tier >= tier_empire is_female = yes }
 		localization_key = councillor_court_chaplain_theocrat_empire_female
 	}
 	text = {
-		trigger = {
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = no
-		}
+		trigger = { liege.highest_held_title_tier >= tier_kingdom }
 		localization_key = councillor_court_chaplain_theocrat_kingdom
 	}
 	text = {
-		trigger = {
-			liege.highest_held_title_tier >= tier_kingdom
-			is_female = yes
-		}
-		localization_key = councillor_court_chaplain_theocrat_kingdom_female
-	}
-	text = {
-		trigger = { 
-			liege.highest_held_title_tier >= tier_duchy
-			is_female = no
-		}
+		trigger = { liege.highest_held_title_tier >= tier_duchy }
 		localization_key = councillor_court_chaplain_theocrat_duchy
 	}
 	text = {
-		trigger = { 
-			liege.highest_held_title_tier >= tier_duchy
-			is_female = yes
-		}
-		localization_key = councillor_court_chaplain_theocrat_duchy_female
-	}
-	text = {
-		trigger = { 
-			liege.highest_held_title_tier < tier_duchy
-			is_female = no
-		}
+		trigger = { liege.highest_held_title_tier < tier_duchy }
 		localization_key = councillor_court_chaplain_theocrat_county
-	}
-	text = {
-		trigger = { 
-			liege.highest_held_title_tier < tier_duchy
-			is_female = yes
-		}
-		localization_key = councillor_court_chaplain_theocrat_county_female
 	}
 }
 
@@ -729,6 +1200,10 @@ GetBirthOmen = {
 GetTaltosTerm = {
 	type = character
 
+	# text = {
+		# trigger = {	religion = religion:magyar_religion }
+		# localization_key = chosen_one_taltos
+	# }
 	text = {
 		trigger = {
 			always = no
@@ -740,6 +1215,25 @@ GetTaltosTerm = {
 
 GetReligiousRite = {
 	type = character
+
+	# text = {
+		# localization_key = rite_mass
+		# trigger = { faith = { religion = religion:christianity_religion } }
+	# }
+	text = {
+		localization_key = rite_prayer
+		trigger = {
+			faith = {
+				# OR = {
+					# religion = religion:islam_religion
+					# religion = religion:judaism_religion
+					# religion = { is_in_family = rf_eastern }
+				# }
+			}
+		}
+	}
+
+
 
 	text = {
 		trigger = {

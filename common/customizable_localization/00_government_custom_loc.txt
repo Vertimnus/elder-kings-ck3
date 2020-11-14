@@ -1,9 +1,20 @@
-﻿#As a tribe, if I reform, what government will I get?
+﻿### EK EDIT: Replaced religion check with a scripted trigger
+
+#As a tribe, if I reform, what government will I get?
 GetTribalReformGovernment = {
 	type = character
 
 	text = {
 		trigger = {
+			char_should_use_clan_government = yes
+		}
+		localization_key = tribal_reform_clan
+	}
+	text = {
+		trigger = {
+			NOT = {
+				char_should_use_clan_government = yes
+			}
 		}
 		localization_key = tribal_reform_feudal
 	}
