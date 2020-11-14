@@ -2,8 +2,68 @@
 # Empty scope
 ek_on_game_start = {
 	effect = {
+		### Create a list with every culture. Because Paradox has every_faith, but not every_culture :(
+		# Aldmeris
+		save_culture_in_global_list = { CULTURE = culture:ayleid }
+		save_culture_in_global_list = { CULTURE = culture:alinor }
+		save_culture_in_global_list = { CULTURE = culture:auridon }
+		save_culture_in_global_list = { CULTURE = culture:balfiera }
+		# Bosmeris
+		save_culture_in_global_list = { CULTURE = culture:bosmer }
+		save_culture_in_global_list = { CULTURE = culture:cyrobosmer }
+		save_culture_in_global_list = { CULTURE = culture:arenthian }
+		# Breton
+		save_culture_in_global_list = { CULTURE = culture:breton }
+		save_culture_in_global_list = { CULTURE = culture:glenumbran }
+		save_culture_in_global_list = { CULTURE = culture:northmen }
+		save_culture_in_global_list = { CULTURE = culture:iliac }
+		save_culture_in_global_list = { CULTURE = culture:bjoule }
+		# Chimeris
+		save_culture_in_global_list = { CULTURE = culture:chimer }
+		save_culture_in_global_list = { CULTURE = culture:chimeriquey }
+		save_culture_in_global_list = { CULTURE = culture:cantemiric }
+		# Dunmeris
+		save_culture_in_global_list = { CULTURE = culture:dunmer }
+		save_culture_in_global_list = { CULTURE = culture:ashlander }
+		# Goblinken
+		save_culture_in_global_list = { CULTURE = culture:goblin }
+		save_culture_in_global_list = { CULTURE = culture:riekling }
+		# Imperial
+		save_culture_in_global_list = { CULTURE = culture:colovian }
+		save_culture_in_global_list = { CULTURE = culture:nibenese }
+		save_culture_in_global_list = { CULTURE = culture:imperial }
+		save_culture_in_global_list = { CULTURE = culture:gemha }
+		# Khajiiti
+		save_culture_in_global_list = { CULTURE = culture:pellitinian }
+		save_culture_in_global_list = { CULTURE = culture:anequinan }
+		# Nedic
+		save_culture_in_global_list = { CULTURE = culture:reachfolk }
+		save_culture_in_global_list = { CULTURE = culture:kothringi }
+		save_culture_in_global_list = { CULTURE = culture:galen }
+		save_culture_in_global_list = { CULTURE = culture:keptu }
+		save_culture_in_global_list = { CULTURE = culture:duraki }
+		save_culture_in_global_list = { CULTURE = culture:kreath }
+		save_culture_in_global_list = { CULTURE = culture:perena }
+		save_culture_in_global_list = { CULTURE = culture:nede }
+		# Nordic
+		save_culture_in_global_list = { CULTURE = culture:eastmarcher }
+		save_culture_in_global_list = { CULTURE = culture:westmarcher }
+		save_culture_in_global_list = { CULTURE = culture:cyro_nord }
+		save_culture_in_global_list = { CULTURE = culture:atmoran }
+		save_culture_in_global_list = { CULTURE = culture:skaal }
+		# Orsimer
+		save_culture_in_global_list = { CULTURE = culture:mountain_orc }
+		save_culture_in_global_list = { CULTURE = culture:iron_orc }
+		save_culture_in_global_list = { CULTURE = culture:wood_orc }
+		# Yoku
+		save_culture_in_global_list = { CULTURE = culture:yokudan }
+		save_culture_in_global_list = { CULTURE = culture:forebear }
+		save_culture_in_global_list = { CULTURE = culture:crown }
+		save_culture_in_global_list = { CULTURE = culture:lhotunic }
+		save_culture_in_global_list = { CULTURE = culture:alikr }
+		save_culture_in_global_list = { CULTURE = culture:abecean }
+		save_culture_in_global_list = { CULTURE = culture:horsemen }
 		### Set which cultures are alive (have some territory)
-		### Again, I have to do it by hand but I hope that one day I'll be able to just iterate through each province and set their culture in the list... Paradox please :'(
 		every_county = {
 			culture = { save_scope_as = culture_to_save }
 			add_to_global_variable_list = {
@@ -168,5 +228,16 @@ ek_on_game_start = {
 			target = culture:yokudan
 		}
 		culture:yokudan = { add_innovation = innovation_native_ravan }
+		
+		### MAGIC
+		# every_independent_ruler = {
+			# setup_aptitude_effect = yes
+			# every_vassal_or_below = {
+				# setup_aptitude_effect = yes
+				# every_courtier_or_guest = {
+					# setup_aptitude_effect = yes
+				# }
+			# }
+		# }
 	}
 }

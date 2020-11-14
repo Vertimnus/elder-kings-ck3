@@ -35,6 +35,29 @@ MartialTournamentAdjective = {
 
 	text = {
 		trigger = {
+			has_government = feudal_government
+			capital_province = {
+				geographical_region = world_europe_west
+			}
+		}
+		localization_key = tournament_jousting
+	}
+	text = {
+		trigger = {
+			OR = {		
+				has_government = tribal_government
+				faith = {
+					has_doctrine = pagan_hostility_doctrine
+				}
+				capital_province = {
+					geographical_region = world_europe_north
+				}
+			}
+		}
+		localization_key = tournament_wrestling
+	}
+	text = {
+		trigger = {
 			always = no
 		}
 		localization_key = tournament_sparring
@@ -477,7 +500,7 @@ Abortifacient = {
 
 	text = {
 		localization_key = abortifacient_broadleaf_sage
-		#Mediterrenean
+		#Mediterranean
 	}
 
 	text = {
@@ -493,13 +516,13 @@ Abortifacient = {
 	text = {
 		localization_key = abortifacient_bishops_lace
 		#Christian only
-		#Europe and Soutwest Asia
+		#Europe and Southwest Asia
 	}
 
 	text = {
 		localization_key = abortifacient_wild_carrot
 		#Same as Bishop's Lace
-		#Europe and Soutwest Asia
+		#Europe and Southwest Asia
 	}
 
 	text = {
@@ -509,7 +532,7 @@ Abortifacient = {
 
 	text = {
 		localization_key = abortifacient_nutmeg
-		#Moluccas/Indonesia, India
+		#India
 	}
 
 	text = {
@@ -522,10 +545,10 @@ Abortifacient = {
 		#Europe
 	}
 
-	text = {
-		localization_key = abortifacient_mugwort
-		#lesser chance in Europe, rest of Asia
-	}
+	#text = {
+	#	localization_key = abortifacient_mugwort
+	#	#lesser chance in Europe, rest of Asia
+	#}
 
 	text = {
 		localization_key = abortifacient_herb_of_grace
@@ -1052,16 +1075,108 @@ RegionalDrink = {
 
 	text = {
 		localization_key = wine
+		trigger = {
+			faith = {
+				NOT = { religion_tag = islam_religion }
+			}
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					geographical_region = world_europe
+				}
+			}
+		}
 	}
 
 	text = {
 		localization_key = mead
+		trigger = {
+			faith = {
+				NOT = { religion_tag = islam_religion }
+			}
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					geographical_region = world_europe_north
+				}
+			}
+		}
 	}
 	text = {
 		localization_key = expensive_drink_spiced_wine
+		trigger = {
+			faith = {
+				NOT = { religion_tag = islam_religion }
+			}
+		}
 	}
 	text = {
 		localization_key = tea
+		trigger = {
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					NOT = { geographical_region = world_europe }
+				}
+			}
+		}
+	}
+
+	text = {
+		localization_key = soma
+		trigger = {
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					geographical_region = world_india
+				}
+			}
+		}
+	}
+
+	text = {
+		localization_key = expensive_drink_violet_sharbah
+		trigger = {
+			OR = {
+				faith = {
+					religion_tag = islam_religion # As an alternative to alcohol
+				}
+				AND = {
+					exists = liege
+					liege = {
+						exists = capital_province
+						capital_province = {
+							OR = {
+								geographical_region = world_middle_east
+								geographical_region = world_africa_east
+								geographical_region = world_africa_north
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	text = {
+		localization_key = expensive_drink_aribica_coffee
+		trigger = {
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					OR = {
+						geographical_region = world_middle_east
+						geographical_region = world_africa_east
+						geographical_region = world_africa_north
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -1086,6 +1201,11 @@ RegionalGameObject = {
 	text = {
 		localization_key = deck_of_cards
 	}
+
+	text = {
+		localization_key = pachisi_board #indian
+	}
+
 	text = {
 		localization_key = chess_set
 	}
@@ -1094,6 +1214,297 @@ RegionalGameObject = {
 CulturalCurse = {
 	type = character
 	random_valid = yes
+
+	#Christian
+	text = {
+		trigger = { faith.religion = religion:christianity_religion }
+		localization_key = curse_by_the_blood
+	}
+	text = {
+		trigger = { faith.religion = religion:christianity_religion }
+		localization_key = curse_gods_wounds
+	}
+	text = {
+		trigger = { faith.religion = religion:christianity_religion }
+		localization_key = curse_by_gods_nails
+	}
+
+	#Swedish
+	text = {
+		trigger = {
+			OR = {
+				has_culture = culture:norwegian
+				has_culture = culture:swedish
+			}
+		}
+		localization_key = curse_helvete
+	}
+	text = {
+		trigger = { has_culture = culture:swedish }
+		localization_key = curse_helvetes_javla_skit
+	}
+	text = {
+		trigger = { has_culture = culture:swedish }
+		localization_key = curse_skit
+	}
+	text = {
+		trigger = {
+			OR = {
+				has_culture = culture:swedish
+				has_culture = culture:norse
+			}
+			faith = faith:norse_pagan
+		}
+		localization_key = curse_balders_balle
+	}
+
+	#Norse
+	text = {
+		trigger = { has_culture = culture:norse }
+		localization_key = curse_skitr
+	}
+
+	#Scanian
+	text = {
+		trigger = {
+			OR = {
+				has_culture = culture:danish
+				has_culture = culture:swedish
+			}
+			capital_province.duchy = title:d_skane
+		}
+		localization_key = curse_jevla_mog
+	}
+	text = {
+		trigger = {
+			OR = {
+				has_culture = culture:danish
+				has_culture = culture:swedish
+			}
+			capital_province.duchy = title:d_skane
+		}
+		localization_key = curse_alahue
+	}
+
+	#Norwegian
+	text = {
+		trigger = { has_culture = culture:norwegian }
+		localization_key = curse_fy_fanden
+	}
+	text = {
+		trigger = { has_culture = culture:norwegian }
+		localization_key = curse_pokker
+	}
+	text = {
+		trigger = { has_culture = culture:norwegian }
+		localization_key = curse_haestkuk
+	}
+
+
+	#German
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_scheisse
+	}
+	text = {
+		trigger = {culture_group = culture_group:central_germanic_group }
+		localization_key = curse_dreck
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_verdammt
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_gottverdammt
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_zum_teufel
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_himmel_arsch_und_zwirn
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_kreuzdonnerwetter
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_zur_holle
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_was_fur_ein_mist
+	}
+	text = {
+		trigger = { culture_group = culture_group:central_germanic_group }
+		localization_key = curse_was_fur_ein_dreck
+	}
+
+
+	#Dutch
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_godver
+	}
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_godverdomme
+	}
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_tering
+	}
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_godgloeiende
+	}
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_kanker
+	}
+	text = {
+		trigger = { has_culture = culture:dutch }
+		localization_key = curse_vervloekt
+	}
+
+	#Polish
+	text = {
+		trigger = { has_culture = culture:polish }
+		localization_key = curse_niech_mnie_diabli
+	}
+	text = {
+		trigger = { has_culture = culture:polish }
+		localization_key = curse_zaraza
+	}
+
+	#French
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_merde
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_putain
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_fils_de_pute
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_sacrebleu
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_nom_dune_pipe
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_calisse
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_ostie_de_criss_de_tabarnak
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_morbleu
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_diantre
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_peste
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_mortecouille
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_ventre_dieu
+	}
+	text = {
+		trigger = { has_culture = culture:french }
+		localization_key = curse_puterelle
+	}
+
+	#Spanish
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_maldicion
+	}
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_maldita_sea
+	}
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_mierda
+	}
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_habrase_visto
+	}
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_madre_mia
+	}
+	text = {
+		trigger = { has_culture = culture:spanish }
+		localization_key = curse_ay_de_mi
+	}
+
+	#Italian
+	text = {
+		trigger = { has_culture = culture:italian }
+		localization_key = curse_cazzo
+	}
+	text = {
+		trigger = { has_culture = culture:italian }
+		localization_key = curse_minchia
+	}
+	text = {
+		trigger = { has_culture = culture:italian }
+		localization_key = curse_merda
+	}
+	text = {
+		trigger = { has_culture = culture:italian }
+		localization_key = curse_vaffanculo
+	}
+
+	#Russian
+	text = {
+		trigger = { has_culture = culture:russian }
+		localization_key = curse_proklyatie
+	}
+	text = {
+		trigger = { has_culture = culture:russian }
+		localization_key = curse_dyavol
+	}
+	text = {
+		trigger = { has_culture = culture:russian }
+		localization_key = curse_vot_dermo
+	}
+
+	#Lithuanian
+	text = {
+		trigger = { has_culture = culture:lithuanian }
+		localization_key = curse_rupus_miltai
+	}
+	text = {
+		trigger = { has_culture = culture:lithuanian }
+		localization_key = curse_velniai_rautu
+	}
+	text = {
+		trigger = { has_culture = culture:lithuanian }
+		localization_key = curse_rupuze
+	}
 
 	#Fallback (english)
 	text = {
