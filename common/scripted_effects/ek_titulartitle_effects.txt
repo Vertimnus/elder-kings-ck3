@@ -103,6 +103,7 @@ form_kingdom_scripted_effect = {
 	add_prestige = major_prestige_gain
 }
 
+## High Rock
 form_craglorn_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_craglorn = { save_scope_as = new_kingdom }
@@ -116,7 +117,6 @@ form_craglorn_scripted_effect = {
 	
 	form_kingdom_scripted_effect = yes
 }
-
 form_glenumbra_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_glenumbra = { save_scope_as = new_kingdom }
@@ -127,10 +127,17 @@ form_glenumbra_scripted_effect = {
 	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
 	
 	custom_tooltip = form_glenumbra_kingdom_decision_effects_de_jure_tt
+	custom_tooltip = form_glenumbra_kingdom_decision_integrate_balfiera_tt
 	
 	form_kingdom_scripted_effect = yes
+	
+	hidden_effect = {
+		if = {
+			limit = { completely_controls = title:d_balfiera }
+			title:d_balfiera = { set_de_jure_liege_title = scope:new_kingdom }
+		}
+	}
 }
-
 form_rivenspire_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_rivenspire = { save_scope_as = new_kingdom }
@@ -144,7 +151,6 @@ form_rivenspire_scripted_effect = {
 	
 	form_kingdom_scripted_effect = yes
 }
-
 form_greater_wrothgar_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_greater_wrothgar = { save_scope_as = new_kingdom }
@@ -158,7 +164,6 @@ form_greater_wrothgar_scripted_effect = {
 	
 	form_kingdom_scripted_effect = yes
 }
-
 form_bangkorai_scripted_effect = {
 	save_scope_as = scoped_ruler
 	title:k_bangkorai = { save_scope_as = new_kingdom }
@@ -169,6 +174,60 @@ form_bangkorai_scripted_effect = {
 	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
 	
 	custom_tooltip = form_bangkorai_kingdom_decision_effects_de_jure_tt
+	
+	form_kingdom_scripted_effect = yes
+}
+
+## Skyrim
+form_west_ghost_scripted_effect = {
+	save_scope_as = scoped_ruler
+	title:k_west_ghost = { save_scope_as = new_kingdom }
+	title:k_solitude = { save_scope_as = old_kingdom_1 }
+	title:k_morthal = { save_scope_as = old_kingdom_2 }
+	
+	scope:old_kingdom_1 = { add_to_list = old_kingdom_list }
+	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
+	
+	custom_tooltip = form_west_ghost_kingdom_decision_effects_de_jure_tt
+	
+	form_kingdom_scripted_effect = yes
+}
+form_white_river_scripted_effect = {
+	save_scope_as = scoped_ruler
+	title:k_white_river = { save_scope_as = new_kingdom }
+	title:k_whiterun = { save_scope_as = old_kingdom_1 }
+	title:k_falkreath = { save_scope_as = old_kingdom_2 }
+	
+	scope:old_kingdom_1 = { add_to_list = old_kingdom_list }
+	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
+	
+	custom_tooltip = form_white_river_kingdom_decision_effects_de_jure_tt
+	
+	form_kingdom_scripted_effect = yes
+}
+form_east_ghost_scripted_effect = {
+	save_scope_as = scoped_ruler
+	title:k_east_ghost = { save_scope_as = new_kingdom }
+	title:k_winterhold = { save_scope_as = old_kingdom_1 }
+	title:k_dawnstar = { save_scope_as = old_kingdom_2 }
+	
+	scope:old_kingdom_1 = { add_to_list = old_kingdom_list }
+	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
+	
+	custom_tooltip = form_east_ghost_kingdom_decision_effects_de_jure_tt
+	
+	form_kingdom_scripted_effect = yes
+}
+form_dark_water_scripted_effect = {
+	save_scope_as = scoped_ruler
+	title:k_dark_water = { save_scope_as = new_kingdom }
+	title:k_windhelm = { save_scope_as = old_kingdom_1 }
+	title:k_riften = { save_scope_as = old_kingdom_2 }
+	
+	scope:old_kingdom_1 = { add_to_list = old_kingdom_list }
+	scope:old_kingdom_2 = { add_to_list = old_kingdom_list }
+	
+	custom_tooltip = form_dark_water_kingdom_decision_effects_de_jure_tt
 	
 	form_kingdom_scripted_effect = yes
 }

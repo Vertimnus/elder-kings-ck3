@@ -791,12 +791,20 @@ task_promote_culture = {
 						scope:councillor_liege.culture = { has_innovation = innovation_native_markarth }
 					}
 					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_west_skyrim }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_west_skyrim }
+						scope:county.title_province = { geographical_region = custom_nativity_west_ghost }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_west_ghost }
 					}
 					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_east_skyrim }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_east_skyrim }
+						scope:county.title_province = { geographical_region = custom_nativity_white_river }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_white_river }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_east_ghost }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_east_ghost }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_dark_water }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_dark_water }
 					}
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_solstheim }
@@ -1361,14 +1369,24 @@ task_promote_local_culture = {
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = markarth } }
 		}
 		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_skyrim } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = east_skyrim }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = east_skyrim } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_ghost } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = west_ghost }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = west_ghost } }
 		}
 		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_skyrim } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = west_skyrim }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = west_skyrim } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_white_river } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = white_river }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = white_river } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_ghost } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = east_ghost }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = east_ghost } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_dark_water } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = dark_water }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = dark_water } }
 		}
 		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_solstheim } }
