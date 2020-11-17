@@ -165,38 +165,59 @@ mundus_tamriel_cyrodiil = {
 }
 
 ### SKYRIM
-## WEST SKYRIM: Whiterun + Falkreath + Hjaalmarch + Haafingar
-mundus_tamriel_skyrim_whiterun = {
-	duchies = { d_darkmoor d_fairmoor d_greymarch d_rorikstead d_valtheim d_whiterun }
-}
-mundus_tamriel_skyrim_falkreath = {
-	duchies = { d_falkreath d_helgen d_neugrad d_sunderstone }
-}
+## WEST GHOST: Haafingar + Morthal
 mundus_tamriel_skyrim_hjaalmarch = {
 	duchies = { d_chillvale d_drajkmyr d_morthal d_snowhawk d_winstad }
 }
 mundus_tamriel_skyrim_haafingar = {
 	duchies = { d_darkfall d_dragon_bridge d_icereach d_northwatch d_ravenscar d_solitude d_volkihar }
 }
+mundus_tamriel_skyrim_west_ghost = {
+	regions = { mundus_tamriel_skyrim_haafingar mundus_tamriel_skyrim_hjaalmarch }
+}
+
+## WHITE RIVER: Whiterun + Falkreath
+mundus_tamriel_skyrim_whiterun = {
+	duchies = { d_darkmoor d_fairmoor d_greymarch d_rorikstead d_valtheim d_whiterun }
+}
+mundus_tamriel_skyrim_falkreath = {
+	duchies = { d_falkreath d_helgen d_neugrad d_sunderstone }
+}
+mundus_tamriel_skyrim_white_river = {
+	regions = { mundus_tamriel_skyrim_whiterun mundus_tamriel_skyrim_falkreath }
+}
+
+
+## WEST SKYRIM: WEST GHOST + WHITE RIVER
 mundus_tamriel_skyrim_west_skyrim = {
 	regions = { mundus_tamriel_skyrim_whiterun mundus_tamriel_skyrim_falkreath mundus_tamriel_skyrim_hjaalmarch mundus_tamriel_skyrim_haafingar }
 }
 
-## EAST SKYRIM: The Rift + Eastmarch + Winterhold + The Pale
-mundus_tamriel_skyrim_the_rift = {
-	duchies = { d_heartwood d_ivarstead d_nimalten d_riften d_smokefrost d_stony_basin }
-}
-mundus_tamriel_skyrim_eastmarch = {
-	duchies = { d_amol d_ansilvund d_mistwatch d_morvunskar d_aalto d_windhelm }
-}
+## EAST GHOST: Winterhold + The Pale
 mundus_tamriel_skyrim_winterhold = {
 	duchies = { d_anthor d_bleakcoast d_fellhammer d_winterhold }
 }
 mundus_tamriel_skyrim_the_pale = {
 	duchies = { d_dawnstar d_dunstad d_heljarchen d_yorgrim }
 }
+mundus_tamriel_skyrim_east_ghost = {
+	regions = { mundus_tamriel_skyrim_winterhold mundus_tamriel_skyrim_the_pale }
+}
+
+## DARK WATER: Eastmarch + The Rift
+mundus_tamriel_skyrim_the_rift = {
+	duchies = { d_heartwood d_ivarstead d_nimalten d_riften d_smokefrost d_stony_basin }
+}
+mundus_tamriel_skyrim_eastmarch = {
+	duchies = { d_amol d_ansilvund d_mistwatch d_morvunskar d_aalto d_windhelm }
+}
+mundus_tamriel_skyrim_dark_water = {
+	regions = { mundus_tamriel_skyrim_eastmarch mundus_tamriel_skyrim_the_rift }
+}
+
+## EAST SKYRIM: EAST GHOST + DARK WATER
 mundus_tamriel_skyrim_east_skyrim = {
-	regions = { mundus_tamriel_skyrim_the_rift mundus_tamriel_skyrim_eastmarch mundus_tamriel_skyrim_winterhold mundus_tamriel_skyrim_the_pale }
+	regions = { mundus_tamriel_skyrim_east_ghost mundus_tamriel_skyrim_dark_water }
 }
 
 ## SOLSTHEIM: Solstheim
@@ -304,11 +325,17 @@ custom_nativity_colovia = {
 custom_nativity_markarth = {
 	regions = { mundus_tamriel_skyrim_markarth }
 }
-custom_nativity_west_skyrim = {
-	regions = { mundus_tamriel_skyrim_west_skyrim }
+custom_nativity_west_ghost = {
+	regions = { mundus_tamriel_skyrim_haafingar mundus_tamriel_skyrim_hjaalmarch }
 }
-custom_nativity_east_skyrim = {
-	regions = { mundus_tamriel_skyrim_east_skyrim }
+custom_nativity_white_river = {
+	regions = { mundus_tamriel_skyrim_whiterun mundus_tamriel_skyrim_falkreath }
+}
+custom_nativity_east_ghost = {
+	regions = { mundus_tamriel_skyrim_winterhold mundus_tamriel_skyrim_eastmarch }
+}
+custom_nativity_dark_water = {
+	regions = { mundus_tamriel_skyrim_eastmarch mundus_tamriel_skyrim_the_rift }
 }
 custom_nativity_solstheim = {
 	regions = { mundus_tamriel_skyrim_solstheim }

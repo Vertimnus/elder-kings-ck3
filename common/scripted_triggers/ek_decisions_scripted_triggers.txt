@@ -4,6 +4,9 @@
 		has_government = clan_government
 		has_government = tribal_government
 	}
+	
+	highest_held_title_tier <= tier_kingdom
+	highest_held_title_tier >= tier_duchy
 }
 
 unify_kingdom_law_trigger = {
@@ -34,14 +37,19 @@ unify_kingdom_law_trigger = {
 	}
 }
 
-can_unify_kingdom_of = {
+can_unify_kingdom_of_is_shown = {
+	### Iron Orcs can unify Craglorn, but Skaal cannot
 	is_native_to = { REGION = $REGION$ CULTURE = root.culture }
 	capital_province = { geographical_region = custom_nativity_$REGION$ }
+	### The Kingdom can't be already held
 	NOT = { exists = title:k_$REGION$.holder }
-	NOT = {  #Can only do it once.
-		is_target_in_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_$REGION$_kingdom
-		}
-	}
+	### And it can't have been formed recently (as in, hasn't crumbled already)
+	title:k_$REGION$ = { is_titular = yes }
+	### And we need the right government
+	unify_kingdom_government_trigger = yes
+}
+
+can_unify_kingdom_of_is_valid = {
+	completely_controls_region = custom_nativity_$REGION$
+	unify_kingdom_law_trigger = yes
 }

@@ -1,58 +1,8 @@
 ﻿### These titles are based on regions, which are tied to nativity regions
 # Only cultures natives from the region the kingdoms are based on should be able to unite them
 # Iron Orc can unite Craglorn (since they come from here), but Eastmarchers can't
-form_craglorn_kingdom_decision = {
-	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
-	desc = form_craglorn_kingdom_decision_desc
-	selection_tooltip = form_craglorn_kingdom_decision_tooltip
-	major = yes
-
-	ai_check_interval = 120
-
-	is_shown = {
-		is_landed = yes
-		exists = capital_province
-		
-		can_unify_kingdom_of = { REGION = craglorn }
-		
-		unify_kingdom_government_trigger = yes
-	}
-
-	is_valid = {
-		completely_controls_region = mundus_tamriel_hammerfell_craglorn
-		unify_kingdom_law_trigger = yes
-	}
-
-	is_valid_showing_failures_only = {
-		is_capable_adult = yes
-		is_imprisoned = no
-		is_at_war = no
-	}
-
-	cost = {
-		gold = 500
-	}
-
-	effect = {
-		form_craglorn_scripted_effect = yes
-		add_to_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_craglorn_kingdom
-		}
-		
-		trigger_event = { id = ektitulartitle.0001 }
-	}
-	
-	ai_potential = {
-		always = yes
-	}
-
-	ai_will_do = {
-		base = 100
-	}
-}
-
+## High Rock - the kingdoms in High Rock are relatively small (compared to say Skyrim), so some can be combined
 form_glenumbra_kingdom_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
@@ -66,14 +16,11 @@ form_glenumbra_kingdom_decision = {
 		is_landed = yes
 		exists = capital_province
 		
-		can_unify_kingdom_of = { REGION = glenumbra }
-		
-		unify_kingdom_government_trigger = yes
+		can_unify_kingdom_of_is_shown = { REGION = glenumbra }
 	}
 
 	is_valid = {
-		completely_controls_region = mundus_tamriel_high_rock_glenumbra
-		unify_kingdom_law_trigger = yes
+		can_unify_kingdom_of_is_valid = { REGION = glenumbra }
 	}
 
 	is_valid_showing_failures_only = {
@@ -88,10 +35,6 @@ form_glenumbra_kingdom_decision = {
 
 	effect = {
 		form_glenumbra_scripted_effect = yes
-		add_to_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_glenumbra_kingdom
-		}
 		
 		trigger_event = { id = ektitulartitle.0001 }
 	}
@@ -118,14 +61,11 @@ form_rivenspire_kingdom_decision = {
 		is_landed = yes
 		exists = capital_province
 		
-		can_unify_kingdom_of = { REGION = rivenspire }
-		
-		unify_kingdom_government_trigger = yes
+		can_unify_kingdom_of_is_shown = { REGION = rivenspire }
 	}
 
 	is_valid = {
-		completely_controls_region = mundus_tamriel_high_rock_rivenspire
-		unify_kingdom_law_trigger = yes
+		can_unify_kingdom_of_is_valid = { REGION = rivenspire }
 	}
 
 	is_valid_showing_failures_only = {
@@ -140,10 +80,6 @@ form_rivenspire_kingdom_decision = {
 
 	effect = {
 		form_rivenspire_scripted_effect = yes
-		add_to_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_rivenspire_kingdom
-		}
 		
 		trigger_event = { id = ektitulartitle.0001 }
 	}
@@ -170,14 +106,11 @@ form_greater_wrothgar_kingdom_decision = {
 		is_landed = yes
 		exists = capital_province
 		
-		can_unify_kingdom_of = { REGION = greater_wrothgar }
-		
-		unify_kingdom_government_trigger = yes
+		can_unify_kingdom_of_is_shown = { REGION = greater_wrothgar }
 	}
 
 	is_valid = {
-		completely_controls_region = mundus_tamriel_high_rock_greater_wrothgar
-		unify_kingdom_law_trigger = yes
+		can_unify_kingdom_of_is_valid = { REGION = greater_wrothgar }
 	}
 
 	is_valid_showing_failures_only = {
@@ -192,10 +125,6 @@ form_greater_wrothgar_kingdom_decision = {
 
 	effect = {
 		form_greater_wrothgar_scripted_effect = yes
-		add_to_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_greater_wrothgar_kingdom
-		}
 		
 		trigger_event = { id = ektitulartitle.0001 }
 	}
@@ -222,14 +151,11 @@ form_bangkorai_kingdom_decision = {
 		is_landed = yes
 		exists = capital_province
 		
-		can_unify_kingdom_of = { REGION = bangkorai }
-		
-		unify_kingdom_government_trigger = yes
+		can_unify_kingdom_of_is_shown = { REGION = bangkorai }
 	}
 
 	is_valid = {
-		completely_controls_region = mundus_tamriel_high_rock_bangkorai
-		unify_kingdom_law_trigger = yes
+		can_unify_kingdom_of_is_valid = { REGION = bangkorai }
 	}
 
 	is_valid_showing_failures_only = {
@@ -244,10 +170,6 @@ form_bangkorai_kingdom_decision = {
 
 	effect = {
 		form_bangkorai_scripted_effect = yes
-		add_to_global_variable_list = {
-			name = unavailable_unique_decisions
-			target = flag:flag_formed_bangkorai_kingdom
-		}
 		
 		trigger_event = { id = ektitulartitle.0001 }
 	}
@@ -260,6 +182,53 @@ form_bangkorai_kingdom_decision = {
 		base = 100
 	}
 }
+
+## Hammerfell
+form_craglorn_kingdom_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = form_craglorn_kingdom_decision_desc
+	selection_tooltip = form_craglorn_kingdom_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		
+		can_unify_kingdom_of_is_shown = { REGION = craglorn }
+	}
+
+	is_valid = {
+		can_unify_kingdom_of_is_valid = { REGION = craglorn }
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	cost = {
+		gold = 500
+	}
+
+	effect = {
+		form_craglorn_scripted_effect = yes
+		
+		trigger_event = { id = ektitulartitle.0001 }
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
 
 ### Unite the Reach
 form_reach_empire_decision = {
