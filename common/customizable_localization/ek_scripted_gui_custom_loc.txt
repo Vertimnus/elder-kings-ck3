@@ -2188,3 +2188,65 @@ GetPatronWorshipType = {
 # 		localization_key = constellation_thief
 # 	}
 # }
+
+AptitudeLevel = {
+	type = character
+
+	text = {
+		localization_key = SKILL_TERRIBLE
+		trigger = { root.aptitude < { value = terrible_skill_level add = 2 } }
+	}
+
+	text = {
+		localization_key = SKILL_POOR
+		trigger = {
+			root.aptitude >= { value = terrible_skill_level add = 2 }
+			root.aptitude < { value = poor_skill_level add = 2 }
+		}
+	}
+
+	text = {
+		localization_key = SKILL_AVERAGE
+		trigger = {
+			root.aptitude >= { value = poor_skill_level add = 2 }
+			root.aptitude < { value = average_skill_level add = 2 }
+		}
+	}
+
+	text = {
+		localization_key = SKILL_GOOD
+		trigger = {
+			root.aptitude >= { value = average_skill_level add = 2 }
+			root.aptitude < { value = good_skill_level add = 2 }
+		}
+	}
+
+	text = {
+		localization_key = SKILL_EXCELLENT
+		trigger = { root.aptitude >= { value = good_skill_level add = 2 } }
+	}
+}
+
+aptitude_education_learning_aptitude = {
+	type = character
+
+	text = {
+		localization_key = aptitude_education_learning_aptitude_1
+		trigger = { has_trait = education_learning_aptitude_1 }
+	}
+
+	text = {
+		localization_key = aptitude_education_learning_aptitude_2
+		trigger = { has_trait = education_learning_aptitude_2 }
+	}
+
+	text = {
+		localization_key = aptitude_education_learning_aptitude_3
+		trigger = { has_trait = education_learning_aptitude_3 }
+	}
+
+	text = {
+		localization_key = aptitude_education_learning_aptitude_4
+		trigger = { has_trait = education_learning_aptitude_4 }
+	}
+}

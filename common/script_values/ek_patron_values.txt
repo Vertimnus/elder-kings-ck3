@@ -35,3 +35,100 @@ neg_minor_ardor_value_double = { value = 0 subtract = minor_ardor_value_double }
 neg_medium_ardor_value_double = { value = 0 subtract = medium_ardor_value_double }
 neg_major_ardor_value_double = { value = 0 subtract = major_ardor_value_double }
 neg_massive_ardor_value_double = { value = 0 subtract = massive_ardor_value_double }
+
+aptitude_trait_add_1 = 1
+aptitude_trait_add_2 = 2
+aptitude_trait_add_3 = 3
+aptitude_trait_add_4 = 4
+aptitude_trait_add_5 = 5
+aptitude_trait_add_6 = 6
+aptitude_trait_add_8 = 8
+aptitude_trait_add_10 = 10
+aptitude_trait_add_12 = 12
+aptitude_trait_subtract_1 = 1
+aptitude_trait_subtract_2 = 2
+aptitude_trait_subtract_3 = 3
+aptitude_trait_subtract_4 = 4
+aptitude_trait_subtract_5 = 5
+aptitude_trait_subtract_6 = 6
+aptitude_trait_subtract_8 = 8
+aptitude_trait_subtract_10 = 10
+aptitude_trait_subtract_12 = 12
+
+aptitude_base = {
+    value = 0
+    if = {
+        limit = { exists = var:aptitude_base }
+        add = var:aptitude_base
+    }
+}
+
+aptitude_learning = {
+    value = learning
+    multiply = 0.2
+    floor = yes
+}
+
+#trait groups count as one
+# aptitude_example = {
+#     if = {
+#         limit = { has_trait = level_1 }
+#         value = 
+#     }
+#     else_if = {
+#         limit = { has_trait = level_2 }
+#         value = 
+#     }
+#     else_if = {
+#         limit = { has_trait = level_3 }
+#         value = 
+#     }
+# }
+aptitude_trait_education_learning_aptitude_1 = aptitude_trait_add_1
+aptitude_trait_education_learning_aptitude_2 = aptitude_trait_add_2
+aptitude_trait_education_learning_aptitude_3 = aptitude_trait_add_3
+aptitude_trait_education_learning_aptitude_4 = aptitude_trait_add_4
+aptitude_trait_education_learning_aptitude = {
+    if = {
+        limit = { has_trait = education_learning_aptitude_1 }
+        value = aptitude_trait_education_learning_aptitude_1
+    }
+    else_if = {
+        limit = { has_trait = education_learning_aptitude_2 }
+        value = aptitude_trait_education_learning_aptitude_2
+    }
+    else_if = {
+        limit = { has_trait = education_learning_aptitude_3 }
+        value = aptitude_trait_education_learning_aptitude_3
+    }
+    else_if = {
+        limit = { has_trait = education_learning_aptitude_4 }
+        value = aptitude_trait_education_learning_aptitude_4
+    }
+}
+
+aptitude_trait_p_magnus = aptitude_trait_add_2
+
+aptitude = {
+    value = aptitude_base
+    add = aptitude_learning
+    if = {
+        limit = { has_trait = p_magnus }
+        add = aptitude_trait_p_magnus
+    }
+    if = {
+        limit = { has_trait = education_learning_aptitude }
+        add = aptitude_trait_education_learning_aptitude
+    }
+    min = 0
+}
+
+magicka_max = {
+    value = aptitude
+    multiply = 10
+}
+
+magicka_monthly = {
+    value = aptitude
+    multiply = 0.1
+}

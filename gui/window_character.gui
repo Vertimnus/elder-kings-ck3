@@ -749,6 +749,15 @@ window = {
 									texture = "gfx/interface/icons/character_status/icon_health.dds"
 									tooltip = "[Character.GetHealthInfo]"
 								}
+
+								icon = {
+									visible = "[And(Not(Character.IsDeadAndValid), Character.IsRuler)]"
+									size = { 23 23 }
+									#framesize = { 60 60 }
+									#frame = "[Character.GetHealthIconFrame]"
+									texture = "gfx/interface/icons/icon_magicka.dds"
+									tooltip = magicka_value_char_view
+								}
 							}
 
 							expand = {}
@@ -1193,7 +1202,10 @@ window = {
 						}
 
 						vbox = {
-							tooltip = magicka_breakdown
+							#tooltip = aptitude_breakdown
+							tooltipwidget = {
+								aptitude_breakdown_widget = {}
+							}
 							spacing = -3
 
 							using = Animation_Character_Window_Refresh
@@ -1206,7 +1218,8 @@ window = {
 
 							text_single = {
 								name = "magicka_value"
-								text = "[CharacterWindow.GetCharacter.GetProwess|0]"
+								#text = "[CharacterWindow.GetCharacter.GetProwess|0]"
+								text = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]"
 								align = nobaseline
 							}
 						}
@@ -3675,5 +3688,66 @@ template Animation_Character_Window_Refresh_Short
 	state = {
 		using = Animation_Refresh_FadeIn
 		duration = 0.25
+	}
+}
+types Aptitude
+{
+	type aptitude_breakdown_widget = widget
+	{
+		alwaystransparent = no
+		using = GeneralTooltipSetup
+		widget = {
+			name = "background"
+			using = DefaultTooltipBackground
+			size = { 100% 100% }
+			alwaystransparent = no
+		}
+		vbox = {
+			set_parent_size_to_minimum = yes
+			margin = { 20 10 }
+			margin_bottom = 20
+			spacing = 3
+
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				text = "aptitude_title"
+				align = left
+			}
+
+			vbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				#margin = { 0 4 }
+				spacing = -1
+
+				# text_single = {
+				# 	layoutpolicy_horizontal = expanding
+				# 	text = "aptitude_title"
+				# 	align = left
+				# }
+				text_single = {
+					layoutpolicy_horizontal = expanding
+					text = "aptitude_base"
+					align = left
+				}
+				text_single = {
+					layoutpolicy_horizontal = expanding
+					text = "aptitude_learning"
+					align = left
+				}
+				text_single = {
+					visible = "[GetScriptedGui('aptitude_education_learning_aptitude').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
+					layoutpolicy_horizontal = expanding
+					text = "aptitude_education_learning_aptitude"
+					align = left
+				}
+				text_single = {
+					visible = "[GetScriptedGui('aptitude_p_magnus').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
+					layoutpolicy_horizontal = expanding
+					text = "aptitude_p_magnus"
+					align = left
+				}
+			}
+		}
 	}
 }
