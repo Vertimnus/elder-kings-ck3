@@ -780,10 +780,17 @@ task_promote_culture = {
 						scope:councillor_liege.culture = { has_innovation = innovation_native_abecee }
 					}
 					### Cyrodiil
-					## Colovia
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_colovia }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_colovia }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_heartlands }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_heartlands }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_nibenay }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_nibenay }
 					}
 					### Skyrim
 					AND = {
@@ -1362,6 +1369,16 @@ task_promote_local_culture = {
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = colovia }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = colovia } }
 		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_heartlands } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = heartlands }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = heartlands } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_nibenay } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = nibenay }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = nibenay } }
+		}
 		### Skyrim
 		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_markarth } }
@@ -1474,6 +1491,32 @@ task_promote_local_culture = {
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
 					has_innovation = innovation_native_colovia
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_heartlands } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_heartlands
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_nibenay } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_nibenay
 				}
 				
 				save_scope_as = culture_to_convert

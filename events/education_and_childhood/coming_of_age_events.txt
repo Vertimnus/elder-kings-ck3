@@ -299,6 +299,129 @@ coming_of_age.0001 = {
 				rank = 4
 			}
 		}
+		
+		### EK EDIT: Magical ability
+		# Right now it's only for Learning education, but it'd probably be better if anyone could have it (tho it would scale better with a learning education? idk)
+		#Magical ability trait acquisition.
+		if = {
+			limit = {
+				OR = {
+					### If magical studies have been codified, then the child can learn how to wield magic when being educated in learning
+					culture = { has_innovation = innovation_magical_studies }
+					### The guardian can also educate the child in the arts of magicka
+					AND = {
+						exists = scope:educator
+						scope:educator = {
+							culture = { has_innovation = innovation_magical_studies }
+						}
+					}
+				}
+			}
+			#Set a temp variable based on education level and add/subtract based on some traits
+			set_variable = {
+				name = education_magical_ability_variable
+				value = {
+					value = var:education_learning_variable
+					if = {
+						limit = { has_trait = intellect_good_3 }
+						add = education_large_bonus
+					}
+					if = {
+						limit = { has_trait = intellect_good_2 }
+						add = education_medium_bonus
+					}
+					if = {
+						limit = { has_trait = intellect_good_1 }
+						add = education_small_bonus
+					}
+					if = {
+						limit = { has_trait = shrewd }
+						add = education_medium_bonus
+					}
+					if = {
+						limit = { has_trait = intellect_bad_3 }
+						add = education_large_penalty
+					}
+					if = {
+						limit = { has_trait = intellect_bad_2 }
+						add = education_medium_penalty
+					}
+					if = {
+						limit = { has_trait = intellect_bad_1 }
+						add = education_small_penalty
+					}
+					if = {
+						limit = { has_trait = dull }
+						add = education_medium_penalty
+					}
+					if = {
+						limit = { has_trait = inbred }
+						add = education_small_penalty
+					}
+				}
+			}
+
+			#Do a little randomization
+			random_list = {
+				100 = { # Better
+					ai_rationality_target_modifier = { VALUE = 50 }
+					ai_energy_target_modifier = { VALUE = 50 }
+					change_variable = {
+						name = education_magical_ability_variable
+						add = 2
+					}
+				}
+				200 = { } # Nothing
+				100 = { # Worse
+					ai_rationality_target_modifier = { VALUE = -50 }
+					ai_energy_target_modifier = { VALUE = -50 }
+					change_variable = {
+						name = education_magical_ability_variable
+						add = -2
+					}
+				}
+			}
+
+			#Set trait
+			if = {
+				limit = {
+					var:education_magical_ability_variable <= education_level_1
+				}
+				
+				set_trait_rank = {
+					trait = education_magical_ability
+					rank = 1
+				}
+			}
+			else_if = {
+				limit = {
+					var:education_magical_ability_variable <= education_level_2
+				}
+				
+				set_trait_rank = {
+					trait = education_magical_ability
+					rank = 2
+				}
+			}
+			else_if = {
+				limit = {
+					var:education_magical_ability_variable <= education_level_3
+				}
+				
+				set_trait_rank = {
+					trait = education_magical_ability
+					rank = 3
+				}
+			}
+			else = {
+				set_trait_rank = {
+					trait = education_magical_ability
+					rank = 4
+				}
+			}
+		}
+
+		remove_variable = education_magical_ability_variable
 
 		#Chance of gaining Mystic if your religion or educator's religion is esoteric
 		if = {
@@ -1026,11 +1149,11 @@ coming_of_age.0003 = {
 				can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root }
 				OR = {
 					#If the child belongs to a knightly culture, then their martial education includes squirehood.
-					always = no
+					culture = { has_innovation = innovation_knighthood }
 					AND = {	#If the child's guardian belongs to a knightly culture, then they will naturally introduce them to the rigours of squiredom.
 						exists = scope:educator
 						scope:educator = {
-							always = no
+							culture = { has_innovation = innovation_knighthood }
 						}
 					}
 				}
