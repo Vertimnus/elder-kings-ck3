@@ -556,22 +556,3 @@ patron_status_initialize = {
     set_global_variable = { name = status_sheogorath value = flag:nominal }
     set_global_variable = { name = status_vaermina value = flag:nominal }
 }
-
-# add_aptitude_skill = { VALUE = x SUBTRACT = no/yes}
-add_aptitude_skill = {
-    if = {
-        limit = { NOT = { exists = var:aptitude_base } }
-        set_variable = { name = aptitude_base value = 0 }
-    }
-    custom_description = {
-        text = add_aptitude_skill
-        value = $VALUE$
-        change_variable = { name = aptitude_base add = $VALUE$ }
-    }
-}
-
-# custom_description = {
-#             text = patron_ardor_change
-#             value = neg_massive_ardor_value #doesnt auto detect value
-#             change_variable = { name = ardor_display subtract = massive_ardor_value }
-#         }
