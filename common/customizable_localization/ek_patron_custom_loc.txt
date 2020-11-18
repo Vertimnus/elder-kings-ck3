@@ -20,17 +20,17 @@
 	# Clavicus Vile
 	text = {
 		trigger = {
-			has_variable = patron_clavicus_vile_shown
+			has_variable = patron_clavicus_shown
 		}
-		localization_key = patron_clavicus_vile_name
+		localization_key = patron_clavicus_name
 	}
 
 	# Hermaeus Mora
 	text = {
 		trigger = {
-			has_variable = patron_hermaeus_mora_shown
+			has_variable = patron_hermaeus_shown
 		}
-		localization_key = patron_hermaeus_mora_name
+		localization_key = patron_hermaeus_name
 	}
 
 	# Hircine
@@ -60,9 +60,9 @@
 	# Mehrunes Dagon
 	text = {
 		trigger = {
-			has_variable = patron_mehrunes_dagon_shown
+			has_variable = patron_mehrunes_shown
 		}
-		localization_key = patron_mehrunes_dagon_name
+		localization_key = patron_mehrunes_name
 	}
 
 	# Mephala
@@ -84,9 +84,9 @@
 	# Molag Bal
 	text = {
 		trigger = {
-			has_variable = patron_molag_bal_shown
+			has_variable = patron_molag_shown
 		}
-		localization_key = patron_molag_bal_name
+		localization_key = patron_molag_name
 	}
 
 	# Namira
@@ -183,17 +183,17 @@ GetPatronDesc = {
 	# Clavicus Vile
 	text = {
 		trigger = {
-			has_variable = patron_clavicus_vile_shown
+			has_variable = patron_clavicus_shown
 		}
-		localization_key = patron_clavicus_vile_desc
+		localization_key = patron_clavicus_desc
 	}
 
 	# Hermaeus Mora
 	text = {
 		trigger = {
-			has_variable = patron_hermaeus_mora_shown
+			has_variable = patron_hermaeus_shown
 		}
-		localization_key = patron_hermaeus_mora_desc
+		localization_key = patron_hermaeus_desc
 	}
 
 	# Hircine
@@ -223,9 +223,9 @@ GetPatronDesc = {
 	# Mehrunes Dagon
 	text = {
 		trigger = {
-			has_variable = patron_mehrunes_dagon_shown
+			has_variable = patron_mehrunes_shown
 		}
-		localization_key = patron_mehrunes_dagon_desc
+		localization_key = patron_mehrunes_desc
 	}
 
 	# Mephala
@@ -247,9 +247,9 @@ GetPatronDesc = {
 	# Molag Bal
 	text = {
 		trigger = {
-			has_variable = patron_molag_bal_shown
+			has_variable = patron_molag_shown
 		}
-		localization_key = patron_molag_bal_desc
+		localization_key = patron_molag_desc
 	}
 
 	# Namira
@@ -339,17 +339,17 @@ GetPatronLongDesc = {
 	# Clavicus Vile
 	text = {
 		trigger = {
-			has_variable = patron_clavicus_vile_shown
+			has_variable = patron_clavicus_shown
 		}
-		localization_key = patron_clavicus_vile_long_desc
+		localization_key = patron_clavicus_long_desc
 	}
 
 	# Hermaeus Mora
 	text = {
 		trigger = {
-			has_variable = patron_hermaeus_mora_shown
+			has_variable = patron_hermaeus_shown
 		}
-		localization_key = patron_hermaeus_mora_long_desc
+		localization_key = patron_hermaeus_long_desc
 	}
 
 	# Hircine
@@ -379,9 +379,9 @@ GetPatronLongDesc = {
 	# Mehrunes Dagon
 	text = {
 		trigger = {
-			has_variable = patron_mehrunes_dagon_shown
+			has_variable = patron_mehrunes_shown
 		}
-		localization_key = patron_mehrunes_dagon_long_desc
+		localization_key = patron_mehrunes_long_desc
 	}
 
 	# Mephala
@@ -403,9 +403,9 @@ GetPatronLongDesc = {
 	# Molag Bal
 	text = {
 		trigger = {
-			has_variable = patron_molag_bal_shown
+			has_variable = patron_molag_shown
 		}
-		localization_key = patron_molag_bal_long_desc
+		localization_key = patron_molag_long_desc
 	}
 
 	# Namira
@@ -1832,113 +1832,248 @@ GetVaerminaDesc = {
 	}
 }
 
-# MasserPhase = {
-# 	type = character
+GetPatronStatus = {
+	type = character
 
-# 	text = {
-# 		trigger = { global_var:phase_masser = flag:new }
-# 		localization_key = phase_new
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_masser = flag:waxing }
-# 		localization_key = phase_waxing
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_masser = flag:full }
-# 		localization_key = phase_full
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_masser = flag:waning }
-# 		localization_key = phase_waning
-# 	}
+	text = {
+		trigger = {
+			OR = {
+				AND = {
+					has_variable = patron_azura_shown
+					global_var:status_azura = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_boethiah_shown
+					global_var:status_boethiah = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_clavicus_shown
+					global_var:status_clavicus = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_hermaeus_shown
+					global_var:status_hermaeus = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_hircine_shown
+					global_var:status_hircine = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_malacath_shown
+					global_var:status_malacath = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_mehrunes_shown
+					global_var:status_mehrunes = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_mephala_shown
+					global_var:status_mephala = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_meridia_shown
+					global_var:status_meridia = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_molag_shown
+					global_var:status_molag = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_namira_shown
+					global_var:status_namira = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_nocturnal_shown
+					global_var:status_nocturnal = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_peryite_shown
+					global_var:status_peryite = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_sanguine_shown
+					global_var:status_sanguine = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_sheogorath_shown
+					global_var:status_sheogorath = flag:ascendant
+				}
+				AND = {
+					has_variable = patron_vaermina_shown
+					global_var:status_vaermina = flag:ascendant
+				}
+			}
+		}
+		localization_key = patron_status_ascendant
+	}
 
-# 	text = {
-# 		trigger = { always = no }
-# 		fallback = yes
-# 		localization_key = desc_fail
-# 	}
-# }
+	text = {
+		trigger = {
+			OR = {
+				AND = {
+					has_variable = patron_azura_shown
+					global_var:status_azura = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_boethiah_shown
+					global_var:status_boethiah = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_clavicus_shown
+					global_var:status_clavicus = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_hermaeus_shown
+					global_var:status_hermaeus = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_hircine_shown
+					global_var:status_hircine = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_malacath_shown
+					global_var:status_malacath = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_mehrunes_shown
+					global_var:status_mehrunes = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_mephala_shown
+					global_var:status_mephala = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_meridia_shown
+					global_var:status_meridia = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_molag_shown
+					global_var:status_molag = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_namira_shown
+					global_var:status_namira = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_nocturnal_shown
+					global_var:status_nocturnal = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_peryite_shown
+					global_var:status_peryite = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_sanguine_shown
+					global_var:status_sanguine = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_sheogorath_shown
+					global_var:status_sheogorath = flag:convalescing
+				}
+				AND = {
+					has_variable = patron_vaermina_shown
+					global_var:status_vaermina = flag:convalescing
+				}
+			}
+		}
+		localization_key = patron_status_convalescing
+	}
 
-# SecundaPhase = {
-# 	type = character
+	text = {
+		trigger = {
+			OR = {
+				AND = {
+					has_variable = patron_azura_shown
+					global_var:status_azura = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_boethiah_shown
+					global_var:status_boethiah = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_clavicus_shown
+					global_var:status_clavicus = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_hermaeus_shown
+					global_var:status_hermaeus = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_hircine_shown
+					global_var:status_hircine = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_malacath_shown
+					global_var:status_malacath = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_mehrunes_shown
+					global_var:status_mehrunes = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_mephala_shown
+					global_var:status_mephala = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_meridia_shown
+					global_var:status_meridia = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_molag_shown
+					global_var:status_molag = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_namira_shown
+					global_var:status_namira = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_nocturnal_shown
+					global_var:status_nocturnal = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_peryite_shown
+					global_var:status_peryite = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_sanguine_shown
+					global_var:status_sanguine = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_sheogorath_shown
+					global_var:status_sheogorath = flag:cataclysm
+				}
+				AND = {
+					has_variable = patron_vaermina_shown
+					global_var:status_vaermina = flag:cataclysm
+				}
+			}
+		}
+		localization_key = patron_status_cataclysm
+	}
 
-# 	text = {
-# 		trigger = { global_var:phase_secunda = flag:new }
-# 		localization_key = phase_new
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_secunda = flag:waxing }
-# 		localization_key = phase_waxing
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_secunda = flag:full }
-# 		localization_key = phase_full
-# 	}
-# 	text = {
-# 		trigger = { global_var:phase_secunda = flag:waning }
-# 		localization_key = phase_waning
-# 	}
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = patron_status_nominal
+	}
+}
 
-# 	text = {
-# 		trigger = { always = no }
-# 		fallback = yes
-# 		localization_key = desc_fail
-# 	}
-# }
+GetPatronWorshipType = {
+	type = character
 
-# Constellation = {
-# 	type = character
+	text = {
+		trigger = { has_exclusive_daedric_prince_pantheon = yes }
+		localization_key = patron_worship_type_focused
+	}
 
-# 	text = {
-# 		trigger = { has_global_variable = serpent_active }
-# 		localization_key = constellation_serpent
-# 	}
-# 	text = {
-# 		trigger = { current_month = 1 }
-# 		localization_key = constellation_ritual
-# 	}
-# 	text = {
-# 		trigger = { current_month = 2 }
-# 		localization_key = constellation_lover
-# 	}
-# 	text = {
-# 		trigger = { current_month = 3 }
-# 		localization_key = constellation_lord
-# 	}
-# 	text = {
-# 		trigger = { current_month = 4 }
-# 		localization_key = constellation_mage
-# 	}
-# 	text = {
-# 		trigger = { current_month = 5 }
-# 		localization_key = constellation_shadow
-# 	}
-# 	text = {
-# 		trigger = { current_month = 6 }
-# 		localization_key = constellation_steed
-# 	}
-# 	text = {
-# 		trigger = { current_month = 7 }
-# 		localization_key = constellation_apprentice
-# 	}
-# 	text = {
-# 		trigger = { current_month = 8 }
-# 		localization_key = constellation_warrior
-# 	}
-# 	text = {
-# 		trigger = { current_month = 9 }
-# 		localization_key = constellation_lady
-# 	}
-# 	text = {
-# 		trigger = { current_month = 10 }
-# 		localization_key = constellation_tower
-# 	}
-# 	text = {
-# 		trigger = { current_month = 11 }
-# 		localization_key = constellation_atronach
-# 	}
-# 	text = {
-# 		trigger = { current_month = 12 }
-# 		localization_key = constellation_thief
-# 	}
-# }
+	# text = {
+	# 	trigger = {	any_secret = { secret_type = secret_daedra_worship } }
+	# 	localization_key = patron_worship_type_secret
+	# }
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = patron_worship_type_pantheon
+	}
+}

@@ -19,12 +19,12 @@
             set_variable = patron_boethiah_shown_res
         }
         if = {
-            limit = { has_variable = patron_clavicus_vile_shown }
-            set_variable = patron_clavicus_vile_shown_res
+            limit = { has_variable = patron_clavicus_shown }
+            set_variable = patron_clavicus_shown_res
         }
         if = {
-            limit = { has_variable = patron_hermaeus_mora_shown }
-            set_variable = patron_hermaeus_mora_shown_res
+            limit = { has_variable = patron_hermaeus_shown }
+            set_variable = patron_hermaeus_shown_res
         }
         if = {
             limit = { has_variable = patron_hircine_shown }
@@ -39,8 +39,8 @@
             set_variable = patron_malacath_shown_res
         }
         if = {
-            limit = { has_variable = patron_mehrunes_dagon_shown }
-            set_variable = patron_mehrunes_dagon_shown_res
+            limit = { has_variable = patron_mehrunes_shown }
+            set_variable = patron_mehrunes_shown_res
         }
         if = {
             limit = { has_variable = patron_mephala_shown }
@@ -51,8 +51,8 @@
             set_variable = patron_meridia_shown_res
         }
         if = {
-            limit = { has_variable = patron_molag_bal_shown }
-            set_variable = patron_molag_bal_shown_res
+            limit = { has_variable = patron_molag_shown }
+            set_variable = patron_molag_shown_res
         }
         if = {
             limit = { has_variable = patron_namira_shown }
@@ -115,12 +115,12 @@ patron_restore = {
             set_variable = patron_boethiah_shown
         }
         if = {
-            limit = { has_variable = patron_clavicus_vile_shown_res }
-            set_variable = patron_clavicus_vile_shown
+            limit = { has_variable = patron_clavicus_shown_res }
+            set_variable = patron_clavicus_shown
         }
         if = {
-            limit = { has_variable = patron_hermaeus_mora_shown_res }
-            set_variable = patron_hermaeus_mora_shown
+            limit = { has_variable = patron_hermaeus_shown_res }
+            set_variable = patron_hermaeus_shown
         }
         if = {
             limit = { has_variable = patron_hircine_shown_res }
@@ -135,8 +135,8 @@ patron_restore = {
             set_variable = patron_malacath_shown
         }
         if = {
-            limit = { has_variable = patron_mehrunes_dagon_shown_res }
-            set_variable = patron_mehrunes_dagon_shown
+            limit = { has_variable = patron_mehrunes_shown_res }
+            set_variable = patron_mehrunes_shown
         }
         if = {
             limit = { has_variable = patron_mephala_shown_res }
@@ -147,8 +147,8 @@ patron_restore = {
             set_variable = patron_meridia_shown
         }
         if = {
-            limit = { has_variable = patron_molag_bal_shown_res }
-            set_variable = patron_molag_bal_shown
+            limit = { has_variable = patron_molag_shown_res }
+            set_variable = patron_molag_shown
         }
         if = {
             limit = { has_variable = patron_namira_shown_res }
@@ -332,39 +332,39 @@ patron_boethiah_shown = {
     }
 }
 
-patron_clavicus_vile_shown = {
+patron_clavicus_shown = {
     scope = character
 
     is_shown = {
-        patron_clavicus_vile_valid = yes
+        patron_clavicus_valid = yes
         #always = yes #for testing
     }
 
     is_valid = {
-        NOT = { has_variable = patron_clavicus_vile_shown }
+        NOT = { has_variable = patron_clavicus_shown }
     }
 
     effect = {
         patron_clear_variables = yes
-        set_variable = patron_clavicus_vile_shown
+        set_variable = patron_clavicus_shown
     }
 }
 
-patron_hermaeus_mora_shown = {
+patron_hermaeus_shown = {
     scope = character
 
     is_shown = {
-        patron_hermaeus_mora_valid = yes
+        patron_hermaeus_valid = yes
         #always = yes #for testing
     }
 
     is_valid = {
-        NOT = { has_variable = patron_hermaeus_mora_shown }
+        NOT = { has_variable = patron_hermaeus_shown }
     }
 
     effect = {
         patron_clear_variables = yes
-        set_variable = patron_hermaeus_mora_shown
+        set_variable = patron_hermaeus_shown
     }
 }
 
@@ -422,21 +422,21 @@ patron_malacath_shown = {
     }
 }
 
-patron_mehrunes_dagon_shown = {
+patron_mehrunes_shown = {
     scope = character
 
     is_shown = {
-        patron_mehrunes_dagon_valid = yes
+        patron_mehrunes_valid = yes
         #always = yes #for testing
     }
 
     is_valid = {
-        NOT = { has_variable = patron_mehrunes_dagon_shown }
+        NOT = { has_variable = patron_mehrunes_shown }
     }
 
     effect = {
         patron_clear_variables = yes
-        set_variable = patron_mehrunes_dagon_shown
+        set_variable = patron_mehrunes_shown
     }
 }
 
@@ -476,21 +476,21 @@ patron_meridia_shown = {
     }
 }
 
-patron_molag_bal_shown = {
+patron_molag_shown = {
     scope = character
 
     is_shown = {
-        patron_molag_bal_valid = yes
+        patron_molag_valid = yes
         #always = yes #for testing
     }
 
     is_valid = {
-        NOT = { has_variable = patron_molag_bal_shown }
+        NOT = { has_variable = patron_molag_shown }
     }
 
     effect = {
         patron_clear_variables = yes
-        set_variable = patron_molag_bal_shown
+        set_variable = patron_molag_shown
     }
 }
 
@@ -996,44 +996,4 @@ patron_xen_shown = {
         patron_passive_clear_variables = yes
         set_variable = patron_xen_shown
     }
-}
-
-patron_ardor_0 = {
-    scope = character
-    is_shown = { ardor_bin_0 = 1 }
-}
-
-patron_ardor_1 = {
-    scope = character
-    is_shown = { ardor_bin_1 = 1 }
-}
-
-patron_ardor_2 = {
-    scope = character
-    is_shown = { ardor_bin_2 = 1 }
-}
-
-patron_ardor_3 = {
-    scope = character
-    is_shown = { ardor_bin_3 = 1 }
-}
-
-patron_ardor_4 = {
-    scope = character
-    is_shown = { ardor_bin_4 = 1 }
-}
-
-patron_ardor_5 = {
-    scope = character
-    is_shown = { ardor_bin_5 = 1 }
-}
-
-patron_ardor_6 = {
-    scope = character
-    is_shown = { ardor_bin_6 = 1 }
-}
-
-patron_ardor_7 = {
-    scope = character
-    is_shown = { ardor_bin_7 = 1 }
 }

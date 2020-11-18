@@ -2860,6 +2860,72 @@ widget = {
 		widget_stress_sounds = {}
 	}
 
+	container = {
+		parentanchor = bottom|left
+		position = { 160 -42 }
+		alwaystransparent = no
+		widget = {
+			name = "magicka_widget"
+			size = { 113 39 }
+			#parentanchor = bottom|left
+			#position = { 20 -50 }
+
+			tooltip = magicka_value
+			using = tooltip_ne
+
+			hbox = {
+				size = { 66 14}
+				maximumsize = { 66 14}
+				#parentanchor = top|left
+				position = { 35 13 }
+
+				#gets the progress bar part
+				widget = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					layoutstretchfactor_horizontal = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+
+					progressbar_ardor = {
+						#visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
+						size = { 100% 100% }
+
+						using = Animation_ShowHide_Standard
+
+						blockoverride "bar_color"
+						{
+							texture = "gfx/interface/colors/blue.dds"
+						}
+
+						blockoverride "bar_color_flow"
+						{
+							texture = "gfx/interface/colors/blue.dds"
+							alpha = 0.7
+						}
+					}
+				}
+				#pushes the progress part to left
+				widget = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					layoutstretchfactor_horizontal = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+				}
+			}
+
+			icon = {
+				size = { 100% 100% }
+				texture = "gfx/interface/patron_window/ardor_bg.dds"
+
+				icon = {
+					parentanchor = vcenter
+					position = { 13 1 }
+					size = { 20 20 }
+
+					texture = "gfx/interface/patron_window/icon_ardor.dds"
+				}
+			}
+		}
+	}
+
 	######################################################
 	################ MAPMODES AND WARS ###################
 	######################################################
@@ -3968,7 +4034,6 @@ types Astronomy
 								size = { 64 64 }
 								framesize = { 64 64 }
 								frame = "[FixedPointToInt(EmptyScope.ScriptValue('cycle_month'))]"
-								alwaystransparent = yes
 								using = Master_Button_Modify_Texture
 							}
 						}
