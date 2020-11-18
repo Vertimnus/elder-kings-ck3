@@ -1537,26 +1537,52 @@ task_promote_local_culture = {
 			}
 		}
 		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_skyrim } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_ghost } }
 			random_in_global_list = {
 				variable = culture_is_alive
 				
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_west_skyrim
+					has_innovation = innovation_native_west_ghost
 				}
 				
 				save_scope_as = culture_to_convert
 			}
 		}
 		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_skyrim } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_white_river } }
 			random_in_global_list = {
 				variable = culture_is_alive
 				
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_east_skyrim
+					has_innovation = innovation_native_white_river
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_ghost } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_east_ghost
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_dark_water } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_dark_water
 				}
 				
 				save_scope_as = culture_to_convert
