@@ -36,6 +36,26 @@ neg_medium_ardor_value_double = { value = 0 subtract = medium_ardor_value_double
 neg_major_ardor_value_double = { value = 0 subtract = major_ardor_value_double }
 neg_massive_ardor_value_double = { value = 0 subtract = massive_ardor_value_double }
 
+#trait groups count as one
+# aptitude_example = {
+#     if = {
+#         limit = { has_trait = level_1 }
+#         value =
+#     }
+#     else_if = {
+#         limit = { has_trait = level_2 }
+#         value =
+#     }
+#     else_if = {
+#         limit = { has_trait = level_3 }
+#         value =
+#     }
+# }
+
+############
+# Aptitude #
+############
+
 aptitude_trait_add_1 = 1
 aptitude_trait_add_2 = 2
 aptitude_trait_add_3 = 3
@@ -45,45 +65,17 @@ aptitude_trait_add_6 = 6
 aptitude_trait_add_8 = 8
 aptitude_trait_add_10 = 10
 aptitude_trait_add_12 = 12
-aptitude_trait_subtract_1 = 1
-aptitude_trait_subtract_2 = 2
-aptitude_trait_subtract_3 = 3
-aptitude_trait_subtract_4 = 4
-aptitude_trait_subtract_5 = 5
-aptitude_trait_subtract_6 = 6
-aptitude_trait_subtract_8 = 8
-aptitude_trait_subtract_10 = 10
-aptitude_trait_subtract_12 = 12
+aptitude_trait_subtract_1 = -1
+aptitude_trait_subtract_2 = -2
+aptitude_trait_subtract_3 = -3
+aptitude_trait_subtract_4 = -4
+aptitude_trait_subtract_5 = -5
+aptitude_trait_subtract_6 = -6
+aptitude_trait_subtract_8 = -8
+aptitude_trait_subtract_10 = -10
+aptitude_trait_subtract_12 = -12
 
-aptitude_base = {
-    value = 0
-    if = {
-        limit = { exists = var:aptitude_base }
-        add = var:aptitude_base
-    }
-}
-
-aptitude_learning = {
-    value = learning
-    multiply = 0.2
-    floor = yes
-}
-
-#trait groups count as one
-# aptitude_example = {
-#     if = {
-#         limit = { has_trait = level_1 }
-#         value = 
-#     }
-#     else_if = {
-#         limit = { has_trait = level_2 }
-#         value = 
-#     }
-#     else_if = {
-#         limit = { has_trait = level_3 }
-#         value = 
-#     }
-# }
+# Education
 aptitude_trait_education_learning_aptitude_1 = aptitude_trait_add_1
 aptitude_trait_education_learning_aptitude_2 = aptitude_trait_add_2
 aptitude_trait_education_learning_aptitude_3 = aptitude_trait_add_3
@@ -107,21 +99,306 @@ aptitude_trait_education_learning_aptitude = {
     }
 }
 
+# Lifestyle
+aptitude_trait_mystic_1 = aptitude_trait_add_2
+aptitude_trait_mystic_2 = aptitude_trait_add_4
+aptitude_trait_mystic_3 = aptitude_trait_add_6
+aptitude_trait_mystic = {
+    if = {
+        limit = { has_trait = mystic_1 }
+        value = aptitude_trait_mystic_1
+    }
+    else_if = {
+        limit = { has_trait = mystic_2 }
+        value = aptitude_trait_mystic_2
+    }
+    else_if = {
+        limit = { has_trait = mystic_3 }
+        value = aptitude_trait_mystic_3
+    }
+}
+aptitude_trait_scholar = aptitude_trait_add_5
+aptitude_trait_conjurer = aptitude_trait_add_6
+aptitude_trait_soul_magic = aptitude_trait_add_8
+
+# Personality
+aptitude_trait_lazy = aptitude_trait_subtract_1
+aptitude_trait_diligent = aptitude_trait_add_1
+aptitude_trait_patient = aptitude_trait_add_2
+aptitude_trait_impatient = aptitude_trait_subtract_2
+aptitude_trait_shy = aptitude_trait_add_1
+aptitude_trait_ambitious = aptitude_trait_add_1
+
+# Stress
+aptitude_trait_drunkard = aptitude_trait_subtract_2
+aptitude_trait_hashishiyah = aptitude_trait_subtract_3
+aptitude_trait_reclusive = aptitude_trait_add_1
+aptitude_trait_irritable = aptitude_trait_subtract_4
+aptitude_trait_journaller = aptitude_trait_add_1
+
+# Genetic
+aptitude_trait_intellect_bad_1 = aptitude_trait_subtract_2
+aptitude_trait_intellect_bad_2 = aptitude_trait_subtract_4
+aptitude_trait_intellect_bad_3 = aptitude_trait_subtract_8
+aptitude_trait_intellect_good_1 = aptitude_trait_add_1
+aptitude_trait_intellect_good_2 = aptitude_trait_add_3
+aptitude_trait_intellect_good_3 = aptitude_trait_add_5
+aptitude_trait_intellect = {
+    if = {
+        limit = { has_trait = intellect_bad_1 }
+        value = aptitude_trait_intellect_bad_1
+    }
+    else_if = {
+        limit = { has_trait = intellect_bad_2 }
+        value = aptitude_trait_intellect_bad_2
+    }
+    else_if = {
+        limit = { has_trait = intellect_bad_3 }
+        value = aptitude_trait_intellect_bad_3
+    }
+    else_if = {
+        limit = { has_trait = intellect_good_1 }
+        value = aptitude_trait_intellect_good_1
+    }
+    else_if = {
+        limit = { has_trait = intellect_good_2 }
+        value = aptitude_trait_intellect_good_2
+    }
+    else_if = {
+        limit = { has_trait = intellect_good_3 }
+        value = aptitude_trait_intellect_good_3
+    }
+}
+aptitude_trait_inbred = aptitude_trait_subtract_5
+
+# Health
+aptitude_trait_infirm = aptitude_trait_subtract_6
+aptitude_trait_incapable = aptitude_trait_subtract_12
+aptitude_trait_lunatic = aptitude_trait_subtract_3
+aptitude_trait_possessed = aptitude_trait_subtract_2
+
+# Disease
+aptitude_trait_ill = aptitude_trait_subtract_2
+aptitude_trait_pneumonic = aptitude_trait_subtract_5
+aptitude_trait_great_pox = aptitude_trait_subtract_3
+aptitude_trait_consumption = aptitude_trait_subtract_2
+aptitude_trait_typhus = aptitude_trait_subtract_3
+aptitude_trait_bubonic_plague = aptitude_trait_subtract_8
+aptitude_trait_smallpox = aptitude_trait_subtract_6
+
+# Physical
+aptitude_trait_shrewd = aptitude_trait_add_3
+aptitude_trait_dull = aptitude_trait_subtract_3
+
+# Criminal
+aptitude_trait_witch = aptitude_trait_add_5
+aptitude_trait_necromancer = aptitude_trait_add_8
+
+# Other
+aptitude_trait_adventurer = aptitude_trait_add_1
+
+# Patrons & Birthsigns
 aptitude_trait_p_magnus = aptitude_trait_add_2
+aptitude_trait_p_julianos = aptitude_trait_add_2
+aptitude_trait_p_hermaeus = aptitude_trait_add_1
+aptitude_trait_sign_mage = aptitude_trait_add_2
+aptitude_trait_sign_apprentice = aptitude_trait_add_1
+aptitude_trait_sign_atronach = aptitude_trait_add_1
+
+# Aptitude Master
+
+aptitude_base = {
+    value = 0
+    if = {
+        limit = { exists = var:aptitude_base }
+        add = var:aptitude_base
+    }
+}
 
 aptitude = {
     value = aptitude_base
-    add = aptitude_learning
+    # Education
+    if = {
+        limit = { has_trait = education_learning_aptitude }
+        add = aptitude_trait_education_learning_aptitude
+    }
+    # Lifestyle
+    if = {
+        limit = { has_trait = lifestyle_mystic }
+        add = aptitude_trait_mystic
+    }
+    if = {
+        limit = { has_trait = scholar }
+        add = aptitude_trait_scholar
+    }
+    if = {
+        limit = { has_trait = conjurer }
+        add = aptitude_trait_conjurer
+    }
+    if = {
+        limit = { has_trait = soul_magic }
+        add = aptitude_trait_soul_magic
+    }
+    # Personality
+    if = {
+        limit = { has_trait = lazy }
+        add = aptitude_trait_lazy
+    }
+    if = {
+        limit = { has_trait = diligent }
+        add = aptitude_trait_diligent
+    }
+    if = {
+        limit = { has_trait = patient }
+        add = aptitude_trait_patient
+    }
+    if = {
+        limit = { has_trait = impatient }
+        add = aptitude_trait_impatient
+    }
+    if = {
+        limit = { has_trait = shy }
+        add = aptitude_trait_shy
+    }
+    if = {
+        limit = { has_trait = ambitious }
+        add = aptitude_trait_ambitious
+    }
+    # Stress
+    if = {
+        limit = { has_trait = drunkard }
+        add = aptitude_trait_drunkard
+    }
+    if = {
+        limit = { has_trait = hashishiyah }
+        add = aptitude_trait_hashishiyah
+    }
+    if = {
+        limit = { has_trait = reclusive }
+        add = aptitude_trait_reclusive
+    }
+    if = {
+        limit = { has_trait = irritable }
+        add = aptitude_trait_irritable
+    }
+    if = {
+        limit = { has_trait = journaller }
+        add = aptitude_trait_journaller
+    }
+    # Genetic
+    if = {
+        limit = {
+            OR = {
+                has_trait = intellect_bad
+                has_trait = intellect_good
+            }
+        }
+        add = aptitude_trait_intellect
+    }
+    if = {
+        limit = { has_trait = inbred }
+        add = aptitude_trait_inbred
+    }
+    # Health
+    if = {
+        limit = { has_trait = infirm }
+        add = aptitude_trait_infirm
+    }
+    if = {
+        limit = { has_trait = incapable }
+        add = aptitude_trait_incapable
+    }
+    if = {
+        limit = { has_trait = lunatic }
+        add = aptitude_trait_lunatic
+    }
+    if = {
+        limit = { has_trait = possessed }
+        add = aptitude_trait_possessed
+    }
+    # Disease
+    if = {
+        limit = { has_trait = ill }
+        add = aptitude_trait_ill
+    }
+    if = {
+        limit = { has_trait = pneumonic }
+        add = aptitude_trait_pneumonic
+    }
+    if = {
+        limit = { has_trait = great_pox }
+        add = aptitude_trait_great_pox
+    }
+    if = {
+        limit = { has_trait = consumption }
+        add = aptitude_trait_consumption
+    }
+    if = {
+        limit = { has_trait = typhus }
+        add = aptitude_trait_typhus
+    }
+    if = {
+        limit = { has_trait = bubonic_plague }
+        add = aptitude_trait_bubonic_plague
+    }
+    if = {
+        limit = { has_trait = smallpox }
+        add = aptitude_trait_smallpox
+    }
+    # Physical
+    if = {
+        limit = { has_trait = shrewd }
+        add = aptitude_trait_shrewd
+    }
+    if = {
+        limit = { has_trait = dull }
+        add = aptitude_trait_dull
+    }
+    # Criminal
+    if = {
+        limit = { has_trait = witch }
+        add = aptitude_trait_witch
+    }
+    if = {
+        limit = { has_trait = necromancer }
+        add = aptitude_trait_necromancer
+    }
+    # Other
+    if = {
+        limit = { has_trait = adventurer }
+        add = aptitude_trait_adventurer
+    }
+    #Patrons & Birthsigns
     if = {
         limit = { has_trait = p_magnus }
         add = aptitude_trait_p_magnus
     }
     if = {
-        limit = { has_trait = education_learning_aptitude }
-        add = aptitude_trait_education_learning_aptitude
+        limit = { has_trait = p_julianos }
+        add = aptitude_trait_p_julianos
+    }
+    if = {
+        limit = { has_trait = p_hermaeus }
+        add = aptitude_trait_p_hermaeus
+    }
+    if = {
+        limit = { has_trait = sign_mage }
+        add = aptitude_trait_sign_mage
+    }
+    if = {
+        limit = { has_trait = sign_apprentice }
+        add = aptitude_trait_sign_apprentice
+    }
+    if = {
+        limit = { has_trait = sign_atronach }
+        add = aptitude_trait_sign_atronach
     }
     min = 0
 }
+
+###########
+# Magicka #
+###########
 
 magicka_max = {
     value = aptitude
