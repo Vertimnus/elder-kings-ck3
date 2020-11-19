@@ -1,0 +1,27 @@
+﻿witch_become_occultist_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = witch_become_occultist_decision_desc
+	selection_tooltip = witch_become_occultist_decision_tooltip
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = potent_witch_become_occultist }
+		has_trait = witch
+		NOT = { has_trait = occultist }
+	}
+
+	effect = {
+		show_as_tooltip = { witch_become_occultist_effect = yes }
+		
+		custom_tooltip = witch_become_occultist_decision_effect_tooltip
+		
+		trigger_event = { on_action = witch_become_occultist }
+	}
+	
+	ai_check_interval = 120
+
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -1,4 +1,8 @@
-﻿namespace = ek_tenets
+﻿### Range:
+# 0001-0100: Divine purity
+# 0101-0200: Occultist
+
+namespace = ek_tenets
 
 ### Various events tied to your faith's tenets
 
@@ -371,5 +375,136 @@ ek_tenets.0012 = {
 		name = ek_tenets.0012.optA
 		
 		remove_relation_lover = scope:impure_target
+	}
+}
+
+### WITCH WORSHIP
+## Become an Occultist
+ek_tenets.0101 = {
+	type = character_event
+	title = ek_tenets.0101.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_female = yes
+				}
+				desc = ek_tenets.0101.desc_hagraven
+			}
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_male = yes
+				}
+				desc = ek_tenets.0101.desc_briarheart
+			}
+			desc = ek_tenets.0101.desc
+		}
+	}
+	
+	right_portrait = root
+
+	option = { # I am ready...
+		name = ek_tenets.0101.a
+		show_as_tooltip = {
+			random_list = {
+				50 = {
+					desc = ek_tenets.0101.a_success
+					show_chance = no
+					witch_become_occultist_effect = yes
+				}
+				50 = {
+					desc = ek_tenets.0101.a_failure
+					show_chance = no
+					death = { death_reason = death_mysterious }
+				}
+			}
+		}
+		
+		random_list = {
+			50 = {
+				trigger_event = {
+					id = ek_tenets.0102
+					days = 3
+				}
+			}
+			50 = {
+				trigger_event = {
+					id = ek_tenets.0103
+					days = 3
+				}
+			}
+		}
+	}
+
+	option = { # This might be a bit too dangerous
+		name = ek_tenets.0101.b
+	}
+}
+
+ek_tenets.0102 = {
+	type = character_event
+	title = ek_tenets.0101.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_female = yes
+				}
+				desc = ek_tenets.0102.desc_hagraven
+			}
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_male = yes
+				}
+				desc = ek_tenets.0102.desc_briarheart
+			}
+			desc = ek_tenets.0102.desc
+		}
+	}
+	
+	right_portrait = root
+
+	option = { # I can feel the power coursing through my veins...
+		name = ek_tenets.0102.a
+		
+		witch_become_occultist_effect = yes
+	}
+}
+
+ek_tenets.0103 = {
+	type = character_event
+	title = ek_tenets.0101.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_female = yes
+				}
+				desc = ek_tenets.0103.desc_hagraven
+			}
+			triggered_desc = {
+				trigger = {
+					faith = { religion_tag = reach_religion }
+					is_male = yes
+				}
+				desc = ek_tenets.0103.desc_briarheart
+			}
+			desc = ek_tenets.0103.desc
+		}
+	}
+	
+	right_portrait = root
+
+	option = { # NO NO NO
+		name = ek_tenets.0103.a
+		death = { death_reason = death_mysterious }
 	}
 }
