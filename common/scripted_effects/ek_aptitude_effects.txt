@@ -10,3 +10,35 @@ add_aptitude_skill = {
         change_variable = { name = aptitude_base add = $VALUE$ }
     }
 }
+add_magicka = {
+    if = {
+        limit = { NOT = { exists = var:magicka } }
+        set_variable = { name = magicka value = 0 }
+    }
+    custom_description = {
+        text = add_magicka
+        value = $VALUE$
+        change_variable = { name = magicka add = $VALUE$ }
+    }
+    if = {
+        limit = { var:magicka > magicka_max }
+        set_variable = { name = magicka value = magicka_max }
+    }
+}
+add_quarterly_magicka_effect = {
+    trigger_event = {
+		on_action = add_monthly_magicka
+		#days = 0
+	}
+    trigger_event = {
+		on_action = add_monthly_magicka
+		days = 30
+	}
+    trigger_event = {
+		on_action = add_monthly_magicka
+		days = 60
+	}
+}
+add_monthly_magicka_effect = {
+    add_magicka = { VALUE = magicka_monthly }
+}
