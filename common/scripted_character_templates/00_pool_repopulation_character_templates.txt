@@ -33,6 +33,53 @@
 #Random Traits List contains relevant lifestyle traits and all personality traits exist in 1 template
 #Template-specific skill min/max regulated through scripted values
 #Template-specific education trait is weighted
+pool_repopulate_aptitude = {
+	age = { 20 40 }
+	random_traits = yes
+	gender_female_chance = 50
+	culture = root.culture
+	faith = root.faith
+	random_traits_list = {
+		education_learning_1 = { weight = { base = 35 } }
+		education_learning_2 = { weight = { base = 35 } }
+		education_learning_3 = { weight = { base = 20 } }
+		education_learning_4 = { weight = { base = 10 } }
+	}
+	random_traits_list = {
+		count = { 0 1 }
+		mystic_1 = {}
+		mystic_2 = {}
+		mystic_3 = {}
+		scholar = {}
+		patient = {}
+		shy = {}
+		shrewd = {}
+		journaller = {}
+	}
+	dynasty = none
+	after_creation = {
+		random_list = {
+				1 = { add_aptitude_skill = { VALUE = 4 } }
+				1 = { add_aptitude_skill = { VALUE = 5 } }
+				1 = { add_aptitude_skill = { VALUE = 6 } }
+				1 = { add_aptitude_skill = { VALUE = 7 } }
+				1 = { add_aptitude_skill = { VALUE = 8 } }
+			}
+		if = {
+			limit = {
+				culture = {
+					has_innovation = innovation_magical_studies
+				}
+			}
+			random_list = {
+				40 = { add_trait = education_magical_ability_1 }
+				35 = { add_trait = education_magical_ability_2 }
+				20 = { add_trait = education_magical_ability_3 }
+				10 = { add_trait = education_magical_ability_4 }
+			}
+		}
+	}
+}
 
 pool_repopulate_prowess = {
 	age = { 20 40 }
@@ -61,6 +108,21 @@ pool_repopulate_prowess = {
 		athletic = {}
 	}
 	dynasty = none
+	after_creation = {
+		if = {
+			limit = {
+				culture = {
+					has_innovation = innovation_knighthood
+				}
+			}
+			random_list = {
+				40 = { add_trait = education_martial_prowess_1 }
+				35 = { add_trait = education_martial_prowess_2 }
+				20 = { add_trait = education_martial_prowess_3 }
+				10 = { add_trait = education_martial_prowess_4 }
+			}
+		}
+	}
 }
 
 pool_repopulate_diplomacy = {
