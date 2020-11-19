@@ -137,7 +137,18 @@ aptitude_trait_shrewd = aptitude_trait_add_3
 aptitude_trait_dull = aptitude_trait_subtract_3
 
 # Criminal
-aptitude_trait_witch = aptitude_trait_add_5
+aptitude_trait_witch = aptitude_trait_add_4
+aptitude_trait_occultist = aptitude_trait_add_8
+aptitude_trait_witch_group = {
+    if = {
+        limit = { has_trait = witch }
+        value = aptitude_trait_witch
+    }
+    else_if = {
+        limit = { has_trait = occultist }
+        value = aptitude_trait_occultist
+    }
+}
 aptitude_trait_necromancer = aptitude_trait_add_8
 
 # Other
@@ -302,8 +313,8 @@ aptitude = {
     }
     # Criminal
     if = {
-        limit = { has_trait = witch }
-        add = aptitude_trait_witch
+        limit = { has_trait = witch_group }
+        add = aptitude_trait_witch_group
     }
     if = {
         limit = { has_trait = necromancer }

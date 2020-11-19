@@ -950,6 +950,39 @@ childhood_education.9004 = {
 					}
 				}
 			}
+			2 = { # Gain Aptitude
+				send_interface_toast = {
+					title = childhood_education.9004.child_message
+					left_icon = scope:guardian
+					
+					add_aptitude_skill = { VALUE = 1 }
+					if = {
+						limit = {
+							exists = scope:set_friendship
+						}
+						set_relation_friend = scope:guardian
+					}
+				}
+				scope:guardian = {
+					send_interface_message = {
+						type = event_learning_good
+						title = childhood_education.9004.guardian_message
+						left_icon = scope:child
+
+						show_as_tooltip = {
+							scope:child = {
+								add_aptitude_skill = { VALUE = 1 }
+							}
+							if = {
+								limit = {
+									exists = scope:set_friendship
+								}
+								set_relation_friend = scope:child
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

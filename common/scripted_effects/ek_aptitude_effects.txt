@@ -9,6 +9,10 @@ add_aptitude_skill = {
         value = $VALUE$
         change_variable = { name = aptitude_base add = $VALUE$ }
     }
+    if = {
+        limit = { var:aptitude_base < 0 }
+        set_variable = { name = aptitude_base value = 0 }
+    }
 }
 add_magicka = {
     if = {
