@@ -400,7 +400,7 @@ witch = {
 	diplomacy = -1
 	intrigue = 1
 	learning = 1
-	flag = add_aptitude_5
+	flag = add_aptitude_4
 	group = witch
 	level = 1
 
@@ -467,6 +467,64 @@ necromancer = {
 	triggered_opinion = {
 		parameter = necromancy_shunned
 		opinion_modifier = necromancy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}
+
+occultist = {
+	index = 413
+	diplomacy = -2
+	intrigue = 2
+	learning = 2
+	flag = add_aptitude_8
+	group = witch
+	level = 2
+
+	same_opinion = 20
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_occultist
+			}
+			triggered_desc = {
+				trigger = { faith = { religion_tag = reach_religion } is_female = yes }
+				desc = trait_hagraven
+			}
+			triggered_desc = {
+				trigger = { faith = { religion_tag = reach_religion } is_male = yes }
+				desc = trait_briarheart
+			}
+
+			desc = trait_occultist
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_occultist_desc
+			}
+			desc = trait_occultist_character_desc
+		}
+	}
+
+	ai_compassion = very_low_negative_ai_value
+	ai_boldness = very_low_positive_ai_value
+	ai_rationality = very_low_positive_ai_value
+	
+	triggered_opinion = {
+		parameter = witchcraft_illegal
+		opinion_modifier = witchcraft_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = witchcraft_shunned
+		opinion_modifier = witchcraft_intolerant
 		ignore_opinion_value_if_same_trait = yes
 	}
 }
