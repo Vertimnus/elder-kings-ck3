@@ -1,0 +1,909 @@
+﻿
+#######################################################
+############### SPELLBOOK INTERACTION #################
+#######################################################
+
+window = {
+    name = "spellbook_interaction_window"
+    #datacontext = "[MarriageInteractionWindow.GetBaseWindow]"
+    #datacontext = "[MatchmakerInteractionWindow.GetCharacterInteractionConfirmationWindow]"
+    position = { 0 30 }
+    parentanchor = center
+    allow_outside = yes
+    layer = middle
+
+    using = Window_Size_CharacterList
+    using = Window_Background
+    using = Window_Decoration
+
+    state = {
+        name = _show
+        using = Animation_FadeIn_Quick
+        using = Sound_WindowShow_Standard
+    }
+
+    state = {
+        name = _hide
+        using = Animation_FadeOut_Quick
+        using = Sound_WindowHide_Standard
+    }
+
+    vbox = {
+        using = Window_Margins
+        #set_parent_size_to_minimum = yes
+
+        header_standard = {
+            layoutpolicy_horizontal = expanding
+
+            blockoverride "header_text"
+            {
+                text = "SPELLBOOK"
+            }
+
+            blockoverride "button_close"
+            {
+                #onclick = "[MatchmakerInteractionWindow.Close]"
+                onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
+                onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                onclick = "[GetVariableSystem.Clear('restoration_show')]"
+            }
+
+            icon_character_interaction = {}
+        }
+        # datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
+        # datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
+
+        ### Portrait / Info
+
+        hbox = {
+            name = "portraits_and_info"
+            layoutpolicy_horizontal = expanding
+            margin = { 10 5 }
+
+            background = {
+                using = Background_Area
+            }
+
+            #vbox = {
+            #spacing = 12
+            portrait_head = {
+                datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
+                visible = "[Character.IsValid]"
+            }
+            #     hbox = {
+            #         layoutpolicy_horizontal = expanding
+            #         icon = {
+            #             visible = "[And(Not(Character.IsDeadAndValid), Character.IsRuler)]"
+            #             size = { 30 30 }
+            #             texture = "gfx/interface/icons/icon_magicka.dds"
+            #             #tooltip = magicka_value_char_view
+            #         }
+            #         text_single = {
+            #             layoutpolicy_horizontal = growing
+            #             name = "magicka"
+            #             text = magicka_value
+            #             align = left
+            #         }
+            #     }
+            # }
+
+            text_multi = {
+                name = "info_text"
+                multiline = yes
+                autoresize = yes
+                max_width = 250
+                text = "you are casting a spell on self/target"
+                align = center
+                #using = Font_Size_Medium
+            }
+
+            portrait_head = {
+                datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
+                visible = "[And(Character.IsValid, Not(ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char)))]"
+
+                blockoverride "portrait_transformation"
+                {
+                    portrait_scale = { -1 1 }
+                    portrait_offset = { 1 0 }
+                }
+            }
+            spacer = {
+                size = { 110 0 }
+                visible = "[ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char)]"
+            }
+        }
+
+        hbox = {
+            name = "magicka_info"
+            layoutpolicy_horizontal = expanding
+            margin = { 10 5 }
+
+            background = {
+                using = Background_Area
+            }
+        }
+
+        ### List
+        scrollbox = {
+            name = "spells_list"
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+
+            blockoverride "scrollbox_empty"
+            {
+                text = "NO_SPELLS"
+                #visible = "[Not(BlackmailInteractionWindow.HasSecrets)]"
+                visible = no
+            }
+
+            blockoverride "scrollbox_content"
+            {
+                vbox = {
+                    #datamodel = "[BlackmailInteractionWindow.GetSecretItems]" #may be able to use variable list but not sure how to trigger specifiic effect
+                    layoutpolicy_horizontal = expanding
+                    margin = { 15 15 }
+                    spacing = 8
+
+                    # item = {
+                    # 	hbox = {
+                    # 		layoutpolicy_horizontal = expanding
+                    # 		spacing = 8
+                    # 		button_standard = {
+                    # 			layoutpolicy_horizontal = expanding
+                    # 			tooltip = "[BlackmailSecretItem.GetTooltip]"
+                    # 			onclick = "[BlackmailSecretItem.OnClick]"
+                    # 			down = "[BlackmailSecretItem.IsSelected]"
+                    # 			enabled = "[BlackmailSecretItem.IsEnabled]"
+                    # 			text = "[BlackmailSecretItem.GetSecret.GetName]"
+
+                    # 			icon = {
+                    # 				size = { 26 26 }
+                    # 				parentanchor = vcenter
+                    # 				position = { 5 0 }
+                    # 				texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                    # 			}
+                    # 		}
+
+                    # 		icon = {
+                    # 			size = { 26 26 }
+                    # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
+                    # 			framesize = { 40 40 }
+                    # 			frame = 1
+                    # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsWeakHook )]"
+
+                    # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
+                    # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_WEAK_HOOK_TT"
+                    # 		}
+
+                    # 		icon = {
+                    # 			size = { 26 26 }
+                    # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
+                    # 			framesize = { 40 40 }
+                    # 			frame = 2
+                    # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsStrongHook )]"
+
+                    # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
+                    # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_STRONG_HOOK_TT"
+                    # 		}
+                    # 	}
+                    # }
+                    vbox = {
+                        name = "alteration"
+                        layoutpolicy_horizontal = expanding
+                        hbox = {
+                            name = "alteration_group"
+                            layoutpolicy_horizontal = expanding
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+
+                                button_expand = {
+                                    parentanchor = vcenter
+                                    position = { 5 0 }
+                                    # tooltip = "show_hide_desc"
+                                    # using = tooltip_nw
+                                    alwaystransparent = yes
+                                    down = "[GetVariableSystem.Exists('alteration_show')]"
+                                }
+
+                                #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                onclick = "[GetVariableSystem.Toggle('alteration_show')]"
+                                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                                onclick = "[GetVariableSystem.Clear('restoration_show')]"
+                                down = "[GetVariableSystem.Exists('alteration_show')]"
+                                # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                text = "alteration"
+
+                                # icon = {
+                                #     size = { 26 26 }
+                                #     parentanchor = vcenter
+                                #     position = { 5 0 }
+                                #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                # }
+                            }
+                        }
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacer = {
+                                size = { 25 0 }
+                            }
+                            vbox = {
+                                name = "alteration_spells"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 3
+                                visible = "[GetVariableSystem.Exists('alteration_show')]"
+
+                                spacer = {
+                                    size = { 0 3 }
+                                }
+
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
+                                    #down = "[GetVariableSystem.Exists('alteration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "alteration_spell_1"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
+                                    #down = "[GetVariableSystem.Exists('alteration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "alteration_spell_2"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
+                                    #down = "[GetVariableSystem.Exists('alteration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "alteration_spell_3"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                            }
+                        }
+                    }
+                    vbox = {
+                        name = "conjuration"
+                        layoutpolicy_horizontal = expanding
+                        hbox = {
+                            name = "conjuration_group"
+                            layoutpolicy_horizontal = expanding
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+
+                                button_expand = {
+                                    parentanchor = vcenter
+                                    position = { 5 0 }
+                                    # tooltip = "show_hide_desc"
+                                    # using = tooltip_nw
+                                    alwaystransparent = yes
+                                    down = "[GetVariableSystem.Exists('conjuration_show')]"
+                                }
+
+                                #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                                onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
+                                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                                onclick = "[GetVariableSystem.Clear('restoration_show')]"
+                                down = "[GetVariableSystem.Exists('conjuration_show')]"
+                                # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                text = "conjuration"
+
+                                # icon = {
+                                #     size = { 26 26 }
+                                #     parentanchor = vcenter
+                                #     position = { 5 0 }
+                                #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                # }
+                            }
+                        }
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacer = {
+                                size = { 25 0 }
+                            }
+                            vbox = {
+                                name = "conjuration_spells"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 3
+                                visible = "[GetVariableSystem.Exists('conjuration_show')]"
+
+                                spacer = {
+                                    size = { 0 3 }
+                                }
+
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
+                                    #down = "[GetVariableSystem.Exists('conjuration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "conjuration_spell_1"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
+                                    #down = "[GetVariableSystem.Exists('conjuration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "conjuration_spell_2"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
+                                    #down = "[GetVariableSystem.Exists('conjuration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "conjuration_spell_3"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                            }
+                        }
+                    }
+                    vbox = {
+                        name = "destruction"
+                        layoutpolicy_horizontal = expanding
+                        hbox = {
+                            name = "destruction_group"
+                            layoutpolicy_horizontal = expanding
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+
+                                button_expand = {
+                                    parentanchor = vcenter
+                                    position = { 5 0 }
+                                    # tooltip = "show_hide_desc"
+                                    # using = tooltip_nw
+                                    alwaystransparent = yes
+                                    down = "[GetVariableSystem.Exists('destruction_show')]"
+                                }
+
+                                #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                                onclick = "[GetVariableSystem.Toggle('destruction_show')]"
+                                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                                onclick = "[GetVariableSystem.Clear('restoration_show')]"
+                                down = "[GetVariableSystem.Exists('destruction_show')]"
+                                # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                text = "destruction"
+
+                                # icon = {
+                                #     size = { 26 26 }
+                                #     parentanchor = vcenter
+                                #     position = { 5 0 }
+                                #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                # }
+                            }
+                        }
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacer = {
+                                size = { 25 0 }
+                            }
+                            vbox = {
+                                name = "destruction_spells"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 3
+                                visible = "[GetVariableSystem.Exists('destruction_show')]"
+
+                                spacer = {
+                                    size = { 0 3 }
+                                }
+
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('destruction_show')]"
+                                    #down = "[GetVariableSystem.Exists('destruction_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "destruction_spell_1"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('destruction_show')]"
+                                    #down = "[GetVariableSystem.Exists('destruction_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "destruction_spell_2"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('destruction_show')]"
+                                    #down = "[GetVariableSystem.Exists('destruction_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "destruction_spell_3"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                            }
+                        }
+                    }
+                    vbox = {
+                        name = "illusion"
+                        layoutpolicy_horizontal = expanding
+                        hbox = {
+                            name = "illusion_group"
+                            layoutpolicy_horizontal = expanding
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+
+                                button_expand = {
+                                    parentanchor = vcenter
+                                    position = { 5 0 }
+                                    # tooltip = "show_hide_desc"
+                                    # using = tooltip_nw
+                                    alwaystransparent = yes
+                                    down = "[GetVariableSystem.Exists('illusion_show')]"
+                                }
+
+                                #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                                onclick = "[GetVariableSystem.Toggle('illusion_show')]"
+                                onclick = "[GetVariableSystem.Clear('restoration_show')]"
+                                down = "[GetVariableSystem.Exists('illusion_show')]"
+                                # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                text = "illusion"
+
+                                # icon = {
+                                #     size = { 26 26 }
+                                #     parentanchor = vcenter
+                                #     position = { 5 0 }
+                                #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                # }
+                            }
+                        }
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacer = {
+                                size = { 25 0 }
+                            }
+                            vbox = {
+                                name = "illusion_spells"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 3
+                                visible = "[GetVariableSystem.Exists('illusion_show')]"
+
+                                spacer = {
+                                    size = { 0 3 }
+                                }
+
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
+                                    #down = "[GetVariableSystem.Exists('illusion_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "illusion_spell_1"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
+                                    #down = "[GetVariableSystem.Exists('illusion_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "illusion_spell_2"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
+                                    #down = "[GetVariableSystem.Exists('illusion_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "illusion_spell_3"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                            }
+                        }
+                    }
+                    vbox = {
+                        name = "restoration" #a perfectly valid school of magic
+                        layoutpolicy_horizontal = expanding
+                        hbox = {
+                            name = "restoration_group"
+                            layoutpolicy_horizontal = expanding
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+
+                                button_expand = {
+                                    parentanchor = vcenter
+                                    position = { 5 0 }
+                                    # tooltip = "show_hide_desc"
+                                    # using = tooltip_nw
+                                    alwaystransparent = yes
+                                    down = "[GetVariableSystem.Exists('restoration_show')]"
+                                }
+
+                                #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                                onclick = "[GetVariableSystem.Toggle('restoration_show')]"
+                                down = "[GetVariableSystem.Exists('restoration_show')]"
+                                # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                text = "restoration"
+
+                                # icon = {
+                                #     size = { 26 26 }
+                                #     parentanchor = vcenter
+                                #     position = { 5 0 }
+                                #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                # }
+                            }
+                        }
+                        hbox = {
+                            layoutpolicy_horizontal = expanding
+                            spacer = {
+                                size = { 25 0 }
+                            }
+                            vbox = {
+                                name = "restoration_spells"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 3
+                                visible = "[GetVariableSystem.Exists('restoration_show')]"
+
+                                spacer = {
+                                    size = { 0 3 }
+                                }
+
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
+                                    #down = "[GetVariableSystem.Exists('restoration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "restoration_spell_1"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
+                                    #down = "[GetVariableSystem.Exists('restoration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "restoration_spell_2"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                                button_standard = {
+                                    layoutpolicy_horizontal = expanding
+
+                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
+                                    #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
+                                    #down = "[GetVariableSystem.Exists('restoration_show')]"
+                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    text = "restoration_spell_3"
+
+                                    # icon = {
+                                    #     size = { 26 26 }
+                                    #     parentanchor = vcenter
+                                    #     position = { 5 0 }
+                                    #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
+                                    # }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        vbox = {
+            layoutpolicy_horizontal = expanding
+            margin = { 0 10 }
+            margin_bottom = 15
+            spacing = 10
+
+            # vbox_character_interaction_effects = {
+            #     #datacontext = "[CharacterInteractionConfirmationWindow.GetEffectsDescription]"
+            #     #visible = "[BlackmailInteractionWindow.IsBlackmail]"
+            #     maxsize = { 0 200 }
+            #     visible = yes
+            # }
+
+            # hbox_character_interaction_acceptance = {
+            #     #visible = "[And( BlackmailInteractionWindow.IsBlackmail, CharacterInteractionConfirmationWindow.ShouldShowAnswer )]"
+            #     visible = yes
+            #     layoutpolicy_horizontal = expanding
+            # }
+
+            # text_multi_on_decline_summary = {
+            #     #visible = "[BlackmailInteractionWindow.IsBlackmail]"
+            #     visible = yes
+            # }
+
+            vbox = {
+                name = "effects"
+
+                container = {
+                    scrollbox = {
+                        name = "effects_scrollarea"
+                        autoresizescrollarea = yes
+                        maximumsize = { -1 360 }
+                        #visible = "[InteractionEffectsDescription.HasAnyAcceptEffect]"
+
+                        blockoverride "scrollbox_content"
+                        {
+                            set_parent_size_to_minimum = yes
+
+                            block "minimumsize" {
+                                minimumsize = { 640 0 }
+                            }
+
+                            vbox = {
+                                name = "effects"
+                                layoutpolicy_horizontal = expanding
+                                spacing = 10
+
+                                ### Me
+                                vbox = {
+                                    name = "me"
+                                    datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
+                                    #visible = "[InteractionEffectsDescription.HasActorAcceptEffect]"
+                                    layoutpolicy_horizontal = expanding
+                                    margin_bottom = 5
+
+                                    background = {
+                                        using = Background_Area_With_Header
+                                    }
+
+                                    text_single = {
+                                        text = "EFFECTS_ON_ME"
+                                        layoutpolicy_horizontal = expanding
+                                        margin = { 15 4 }
+                                    }
+
+                                    hbox = {
+                                        layoutpolicy_horizontal = expanding
+                                        margin_top = 5
+                                        spacing = 5
+                                        margin_left = 6
+
+                                        portrait_head = {
+                                            blockoverride "opinion_box"
+                                            {}
+                                        }
+
+                                        text_multi = {
+                                            name = "effects_info"
+                                            layoutpolicy_horizontal = expanding
+                                            layoutpolicy_vertical = expanding
+                                            autoresize = yes
+                                            max_width = 375
+                                            margin = { 5 10 }
+                                            text = "me effects"
+                                        }
+
+                                        expand = {}
+                                    }
+                                }
+
+                                ### Recipient
+                                vbox = {
+                                    name = "recipient"
+                                    datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
+                                    #visible = "[InteractionEffectsDescription.HasRecipientAcceptEffect]"
+                                    layoutpolicy_horizontal = expanding
+                                    margin_bottom = 5
+
+                                    background = {
+                                        using = Background_Area_With_Header
+                                    }
+
+                                    text_single = {
+                                        text = "EFFECTS_ON_ME"
+                                        layoutpolicy_horizontal = expanding
+                                        margin = { 15 4 }
+                                    }
+
+                                    hbox = {
+                                        layoutpolicy_horizontal = expanding
+                                        margin_top = 5
+                                        spacing = 5
+                                        margin_left = 10
+                                        margin_right = 6
+
+                                        text_multi = {
+                                            name = "effects_info"
+                                            layoutpolicy_horizontal = expanding
+                                            layoutpolicy_vertical = expanding
+                                            autoresize = yes
+                                            max_width = 375
+                                            margin = { 5 10 }
+                                            text = "them effect"
+                                        }
+
+                                        expand = {}
+
+                                        portrait_head = {
+                                            #datacontext = "[InteractionEffectsDescription.GetRecipient]"
+                                            blockoverride "opinion_box" {}
+                                            blockoverride "portrait_transformation"
+                                            {
+                                                portrait_scale = { -1 1 }
+                                                portrait_offset = { 1 0 }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                ### Others -province armies etc.
+                                # vbox = {
+                                #     name = "other_effects"
+                                #     datamodel = "[InteractionEffectsDescription.GetOtherInteractionAcceptEffects]"
+                                #     layoutpolicy_horizontal = expanding
+
+                                #     item = {
+                                #         hbox = {
+                                #             layoutpolicy_horizontal = expanding
+                                #             margin = { 0 5 }
+                                #             spacing = 10
+
+                                #             portrait_head = {
+                                #                 name = "portrait"
+                                #                 datacontext = "[InteractionOtherEffect.GetCharacter]"
+                                #                 visible = "[InteractionOtherEffect.HasCharacter]"
+                                #             }
+
+                                #             container = {
+                                #                 icon = {
+                                #                     position = { 16 0 }
+                                #                     size = { 50 50 }
+                                #                     texture = "gfx/interface/icons/icon_group_of_characters.dds"
+                                #                     visible = "[InteractionOtherEffect.IsList]"
+                                #                     tooltip = "[InteractionOtherEffect.GetListTooltip]"
+                                #                 }
+                                #             }
+
+                                #             text_multi = {
+                                #                 layoutpolicy_horizontal = expanding
+                                #                 layoutpolicy_vertical = expanding
+                                #                 autoresize = yes
+                                #                 max_width = 375
+                                #                 text = "[InteractionOtherEffect.GetEffect]"
+                                #                 align = left|vcenter
+                                #             }
+
+                                #             expand = {}
+                                #         }
+                                #     }
+                                # }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ### Send Button
+            button_primary = {
+                name = "send_offer_button"
+                size = { 400 42 }
+                #enabled = "[BlackmailInteractionWindow.CanSendOffer]"
+                #onclick = "[BlackmailInteractionWindow.Send]"
+
+                #text = "[SelectLocalization( BlackmailInteractionWindow.IsBlackmail, CharacterInteractionConfirmationWindow.GetSendName, 'INTRIGUE_WINDOW_SECRET_EXPOSE' )]"
+                text = "do a magic"
+                using = Font_Size_Medium
+
+                #tooltip = "[BlackmailInteractionWindow.GetSendOfferTooltip]"
+            }
+        }
+    }
+}
