@@ -297,23 +297,3 @@ give_bubonic_plague_interaction = {
 	}
 	auto_accept = yes
 }
-
-do_a_magic_interaction = {
-	category = interaction_debug_main
-	use_diplomatic_range = no
-	ignores_pending_interaction_block = yes
-	is_shown = {
-		debug_only = yes
-	}
-	
-	on_accept = {
-		#scope:recipient = { save_scope_as = castee }
-		scope:actor = {
-			#save_scope_as = caster
-			set_variable = { name = spell_caster value = scope:actor }
-			set_variable = { name = spell_recipient value = scope:recipient }
-		}
-	}
-	
-	auto_accept = yes
-}

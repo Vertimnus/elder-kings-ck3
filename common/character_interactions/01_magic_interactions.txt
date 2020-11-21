@@ -1,0 +1,17 @@
+﻿do_a_magic_interaction = {
+	category = interaction_category_magic
+	use_diplomatic_range = no
+	ignores_pending_interaction_block = yes
+	is_shown = {
+		#debug_only = yes
+	}
+	
+	on_accept = { #observer in hud.gui actually triggers spellbook widget
+		scope:actor = {
+			set_variable = { name = spell_caster value = scope:actor }
+			set_variable = { name = spell_recipient value = scope:recipient }
+		}
+	}
+	
+	auto_accept = yes
+}

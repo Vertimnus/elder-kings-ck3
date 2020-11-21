@@ -185,11 +185,25 @@ aptitude_sign_atronach = {
     is_shown = { has_trait = sign_atronach }
 }
 
-magicka_casting_spell = {
+magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widget
     scope = character
     is_shown = { has_variable = spell_caster }
     effect = {
         remove_variable = spell_caster
         remove_variable = spell_recipient
+    }
+}
+
+spell_fireball_caster = {
+    scope = character
+    effect = {
+        add_magicka = { VALUE = -10 }
+    }
+}
+
+spell_fireball_recipient = {
+    scope = character
+    effect = {
+        add_aptitude_skill = { VALUE = 2 }
     }
 }
