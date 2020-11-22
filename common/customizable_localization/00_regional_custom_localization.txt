@@ -259,7 +259,7 @@ TerrainType = {
 
 	text = {	
 		trigger = { capital_province = { terrain = mangrove_swamp } }
-		localization_key = terrain_ashlands
+		localization_key = terrain_mangrove_swamp
 	}
 
 	text = {	
@@ -1126,223 +1126,10 @@ MusicalPerformerPossessive = {
 RegionalDrink = {
 	type = character
 	random_valid = yes
-
-	text = {
-		localization_key = wine
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = world_europe
-				# }
-			# }
-		}
-	}
-
-	text = {
-		localization_key = mead
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = world_europe_north
-				# }
-			# }
-		}
-	}
-	text = {
-		localization_key = expensive_drink_spiced_wine
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-		}
-	}
-	text = {
-		localization_key = tea
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# NOT = { geographical_region = world_europe }
-				# }
-			# }
-		}
-	}
-
-	text = {
-		localization_key = soma
-		trigger = {
-			always = no
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = world_india
-				# }
-			# }
-		}
-	}
-
-	text = {
-		localization_key = expensive_drink_violet_sharbah
-		trigger = {
-			always = no
-			# OR = {
-				# faith = {
-					# religion_tag = islam_religion # As an alternative to alcohol
-				# }
-				# AND = {
-					# exists = liege
-					# liege = {
-						# exists = capital_province
-						# capital_province = {
-							# OR = {
-								# geographical_region = world_middle_east
-								# geographical_region = world_africa_east
-								# geographical_region = world_africa_north
-							# }
-						# }
-					# }
-				# }
-			# }
-		}
-	}
-
-	text = {
-		localization_key = expensive_drink_aribica_coffee
-		trigger = {
-			always = no
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# OR = {
-						# geographical_region = world_middle_east
-						# geographical_region = world_africa_east
-						# geographical_region = world_africa_north
-					# }
-				# }
-			# }
-		}
-	}
-}
-
-### EK TODO: Add our own
-### Faiths with the Green Pact pantheon are forbidden from using plant-based drinks, based on vanilla Islam not having alcohol
-### Some drinks are added before the region they are found in are added. As the map gets filled in, uncomment some of these.
-RegionalAlcoholicDrink = {
-	type = character
-	random_valid = yes
-
-	### Beers
+	
 	text = {
 		localization_key = ale
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			exists = liege
-			liege = {
-				exists = capital_province
-				capital_province = {
-					OR = {
-						geographical_region = mundus_tamriel_cyrodiil
-						geographical_region = mundus_tamriel_skyrim
-					}
-				}
-			}
-		}
-	}
-	text = {
-		localization_key = anequina_stout
-		trigger = {
-			always = no
-			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = mundus_tamriel_elsweyr_anequina
-				# }
-			# }
-		}
-	}
-	text = {
-		localization_key = blacklight_ginger_matze
-		trigger = {
-			always = no
-			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = mundus_tamriel_morrowind
-				# }
-			# }
-		}
-	}
-	text = {
-		localization_key = golden_peer_ale
-		trigger = {
-			always = no
-			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# geographical_region = mundus_tamriel_alinor
-				# }
-			# }
-		}
-	}
-	text = {
-		localization_key = matze
-		trigger = {
-			always = no
-			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			# exists = liege
-			# liege = {
-				# exists = capital_province
-				# capital_province = {
-					# OR = {
-						# geographical_region = mundus_tamriel_morrowind
-						# geographical_region = mundus_tamriel_vvardenfell
-					# }
-				# }
-			# }
-		}
-	}
-	text = {
-		localization_key = pint_of_bitters
-		trigger = {
-			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
-			exists = liege
-			liege = {
-				exists = capital_province
-				capital_province = { geographical_region = mundus_tamriel_high_rock }
-			}
-		}
-	}
-	text = {
-		localization_key = sun_dusk_ale
-		trigger = {
-			OR = {
-				faith = { has_doctrine = doctrine_pantheon_green_pact }
-				# exists = liege
-				# liege = {
-					# exists = capital_province
-					# capital_province = { geographical_region = mundus_tamriel_valenwood }
-				# }
-			}
-		}
-	}
-	
-	### Brandies
-	text = {
-		localization_key = aldmeri_brandy
+		weight_multiplier = { base = 3 }
 		trigger = {
 			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
 			exists = liege
@@ -1358,19 +1145,16 @@ RegionalAlcoholicDrink = {
 		}
 	}
 	
-	### Wines
 	text = {
-		localization_key = wine
-	}
-
-	text = {
-		localization_key = mead
+		localization_key = beer
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+		}
 	}
 	
-	### EK EDIT: Some of our own (wip)
-	### They are based on info I got on UESP (thanks UESP!)
 	text = {
 		localization_key = cider
+		weight_multiplier = { base = 3 }
 		trigger = {
 			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
 			exists = liege
@@ -1386,9 +1170,22 @@ RegionalAlcoholicDrink = {
 		}
 	}
 	
-	# To uncomment once we have Valenwood
+	# text = {
+		# localization_key = honey_wine
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_summerset }
+			# }
+		# }
+	# }
+	
 	text = {
 		localization_key = jagga
+		weight_multiplier = { base = 3 }
 		trigger = {
 			OR = {
 				faith = { has_doctrine = doctrine_pantheon_green_pact }
@@ -1398,6 +1195,185 @@ RegionalAlcoholicDrink = {
 					# capital_province = { geographical_region = mundus_tamriel_valenwood }
 				# }
 			}
+		}
+	}
+	
+	text = {
+		localization_key = mead
+		weight_multiplier = { base = 3 }
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = { geographical_region = mundus_tamriel_skyrim }
+			}
+		}
+	}
+	
+	# text = {
+		# localization_key = sujamma
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_morrowind }
+			# }
+		# }
+	# }
+	
+	# text = {
+		# localization_key = theilul
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_black_marsh }
+			# }
+		# }
+	# }
+	
+	text = {
+		localization_key = wine
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+		}
+	}
+	
+	### Put here the non-alcoholic beverages	
+	text = {
+		localization_key = tea
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+		}
+	}
+}
+
+### EK TODO: Add our own
+### Faiths with the Green Pact pantheon are forbidden from using plant-based drinks, based on vanilla Islam not having alcohol
+# Most non-generic drinks (i.e: available everywhere) should have a weight_multiplier = { base = 2 }
+RegionalAlcoholicDrink = {
+	type = character
+	random_valid = yes
+
+	text = {
+		localization_key = ale
+		weight_multiplier = { base = 3 }
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					OR = {
+						geographical_region = mundus_tamriel_cyrodiil
+						geographical_region = mundus_tamriel_skyrim
+					}
+				}
+			}
+		}
+	}
+	
+	text = {
+		localization_key = beer
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+		}
+	}
+	
+	text = {
+		localization_key = cider
+		weight_multiplier = { base = 3 }
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = {
+					OR = {
+						geographical_region = mundus_tamriel_reach
+						geographical_region = mundus_tamriel_high_rock
+					}
+				}
+			}
+		}
+	}
+	
+	# text = {
+		# localization_key = honey_wine
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_summerset }
+			# }
+		# }
+	# }
+	
+	text = {
+		localization_key = jagga
+		weight_multiplier = { base = 3 }
+		trigger = {
+			OR = {
+				faith = { has_doctrine = doctrine_pantheon_green_pact }
+				# exists = liege
+				# liege = {
+					# exists = capital_province
+					# capital_province = { geographical_region = mundus_tamriel_valenwood }
+				# }
+			}
+		}
+	}
+	
+	text = {
+		localization_key = mead
+		weight_multiplier = { base = 3 }
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			exists = liege
+			liege = {
+				exists = capital_province
+				capital_province = { geographical_region = mundus_tamriel_skyrim }
+			}
+		}
+	}
+	
+	# text = {
+		# localization_key = sujamma
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_morrowind }
+			# }
+		# }
+	# }
+	
+	# text = {
+		# localization_key = theilul
+		# weight_multiplier = { base = 3 }
+		# trigger = {
+			# faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
+			# exists = liege
+			# liege = {
+				# exists = capital_province
+				# capital_province = { geographical_region = mundus_tamriel_black_marsh }
+			# }
+		# }
+	# }
+	
+	text = {
+		localization_key = wine
+		trigger = {
+			faith = { NOT = { has_doctrine = doctrine_pantheon_green_pact } }
 		}
 	}
 }
