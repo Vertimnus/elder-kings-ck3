@@ -54,7 +54,6 @@ window = {
 
             icon_character_interaction = {}
         }
-        # datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
         # datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
 
         ### Portrait / Info
@@ -71,8 +70,8 @@ window = {
             #vbox = {
             #spacing = 12
             portrait_head = {
-                datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
-                visible = "[Character.IsValid]"
+                datacontext = "[GetPlayer]"
+                visible = "[GetPlayer.IsValid]"
             }
             #     hbox = {
             #         layoutpolicy_horizontal = expanding
@@ -96,14 +95,14 @@ window = {
                 multiline = yes
                 autoresize = yes
                 max_width = 250
-                text = "you are casting a spell on self/target"
+                text = spell_casting_info
                 align = center
                 #using = Font_Size_Medium
             }
 
             portrait_head = {
                 datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
-                visible = "[And(Character.IsValid, Not(ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char)))]"
+                visible = "[And(Character.IsValid, Not(ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer)))]"
 
                 blockoverride "portrait_transformation"
                 {
@@ -113,7 +112,7 @@ window = {
             }
             spacer = {
                 size = { 110 0 }
-                visible = "[ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char)]"
+                visible = "[ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer)]"
             }
         }
 
@@ -217,7 +216,7 @@ window = {
                                 onclick = "[GetVariableSystem.Clear('restoration_show')]"
                                 down = "[GetVariableSystem.Exists('alteration_show')]"
                                 # enabled = "[BlackmailSecretItem.IsEnabled]"
-                                text = "alteration"
+                                text = alteration
 
                                 # icon = {
                                 #     size = { 26 26 }
@@ -319,7 +318,7 @@ window = {
                                 onclick = "[GetVariableSystem.Clear('restoration_show')]"
                                 down = "[GetVariableSystem.Exists('conjuration_show')]"
                                 # enabled = "[BlackmailSecretItem.IsEnabled]"
-                                text = "conjuration"
+                                text = conjuration
 
                                 # icon = {
                                 #     size = { 26 26 }
@@ -421,7 +420,7 @@ window = {
                                 onclick = "[GetVariableSystem.Clear('restoration_show')]"
                                 down = "[GetVariableSystem.Exists('destruction_show')]"
                                 # enabled = "[BlackmailSecretItem.IsEnabled]"
-                                text = "destruction"
+                                text = destruction
 
                                 # icon = {
                                 #     size = { 26 26 }
@@ -449,10 +448,12 @@ window = {
                                 button_standard = {
                                     layoutpolicy_horizontal = expanding
 
-                                    #tooltip = "[BlackmailSecretItem.GetTooltip]"
-                                    #onclick = "[GetVariableSystem.Toggle('destruction_show')]"
-                                    #down = "[GetVariableSystem.Exists('destruction_show')]"
-                                    # enabled = "[BlackmailSecretItem.IsEnabled]"
+                                    datacontext = "[GetScriptedGui('spell_fireball_caster')]"
+                                    tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    down = "[GetScriptedGui('spell_fireball_recipient').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    
                                     text = "destruction_spell_1"
 
                                     # icon = {
@@ -523,7 +524,7 @@ window = {
                                 onclick = "[GetVariableSystem.Clear('restoration_show')]"
                                 down = "[GetVariableSystem.Exists('illusion_show')]"
                                 # enabled = "[BlackmailSecretItem.IsEnabled]"
-                                text = "illusion"
+                                text = illusion
 
                                 # icon = {
                                 #     size = { 26 26 }
@@ -625,7 +626,7 @@ window = {
                                 onclick = "[GetVariableSystem.Toggle('restoration_show')]"
                                 down = "[GetVariableSystem.Exists('restoration_show')]"
                                 # enabled = "[BlackmailSecretItem.IsEnabled]"
-                                text = "restoration"
+                                text = restoration
 
                                 # icon = {
                                 #     size = { 26 26 }
@@ -755,7 +756,7 @@ window = {
                                 ### Me
                                 vbox = {
                                     name = "me"
-                                    datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
+                                    datacontext = "[GetPlayer]"
                                     #visible = "[InteractionEffectsDescription.HasActorAcceptEffect]"
                                     layoutpolicy_horizontal = expanding
                                     margin_bottom = 5
@@ -789,7 +790,7 @@ window = {
                                             max_width = 375
                                             margin = { 5 10 }
                                             #text = "me effects"
-                                            text = "[GetScriptedGui('spell_fireball_caster').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+                                            text = "[GetScriptedGui('spell_fireball_caster').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                         }
 
                                         expand = {}
@@ -829,7 +830,7 @@ window = {
                                             max_width = 375
                                             margin = { 5 10 }
                                             #text = "them effect" #use custom loc here probably
-                                            text = "[GetScriptedGui('spell_fireball_recipient').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
+                                            text = "[GetScriptedGui('spell_fireball_recipient').ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
                                         }
 
                                         expand = {}

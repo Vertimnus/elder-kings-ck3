@@ -187,23 +187,46 @@ aptitude_sign_atronach = {
 
 magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widget
     scope = character
-    is_shown = { has_variable = spell_caster }
+    is_shown = { has_variable = spell_recipient }
     effect = {
-        remove_variable = spell_caster
+        remove_variable = spell_selected
         remove_variable = spell_recipient
     }
 }
 
 spell_fireball_caster = {
     scope = character
+
+    is_shown = {
+        #spell_knows_fireball = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = 5 }
+        #always = yes #for testing
+    }
+
     effect = {
-        add_magicka = { VALUE = -10 }
+        hidden_effect = {
+            set_variable = { name = spell_selected value = flag:fireball }
+        }
+        show_as_tooltip = {
+            add_magicka = { VALUE = -10 }
+        }
     }
 }
 
 spell_fireball_recipient = {
     scope = character
+
+    is_valid = {
+        var:spell_selected = flag:fireball
+    }
+
     effect = {
-        add_aptitude_skill = { VALUE = 2 }
+        show_as_tooltip = {
+            add_aptitude_skill = { VALUE = 2 }
+        }
     }
 }

@@ -1601,6 +1601,17 @@ icon = {
 				}
 				using = tooltip_above
 			}
+
+			widget = {
+				name = "spell_casting_observer"
+				size = { 0 0 }
+				visible = "[GetScriptedGui('magicka_casting_spell').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				state = {
+					name = _show
+					#on_start = "[ExecuteConsoleCommand('gold 1000')]"
+					on_start = "[ExecuteConsoleCommand('gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window')]"
+				}
+			}
 		}
 
 		hbox = {
@@ -2929,17 +2940,6 @@ widget = {
 					size = { 20 20 }
 
 					texture = "gfx/interface/icons/icon_magicka.dds"
-				}
-			}
-
-			widget = {
-				name = "spell_casting_observer"
-				size = { 0 0 }
-				visible = "[GetScriptedGui('magicka_casting_spell').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				state = {
-					name = _show
-					#on_start = "[ExecuteConsoleCommand('gold 1000')]"
-					on_start = "[ExecuteConsoleCommand('gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window')]"
 				}
 			}
 		}
