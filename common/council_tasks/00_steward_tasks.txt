@@ -794,8 +794,8 @@ task_promote_culture = {
 					}
 					### Skyrim
 					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_markarth }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_markarth }
+						scope:county.title_province = { geographical_region = custom_nativity_karth }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_karth }
 					}
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_west_ghost }
@@ -1381,7 +1381,7 @@ task_promote_local_culture = {
 		}
 		### Skyrim
 		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_markarth } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_karth } }
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = markarth }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = markarth } }
 		}
@@ -1524,13 +1524,13 @@ task_promote_local_culture = {
 		}
 		### Skyrim
 		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_markarth } }
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_karth } }
 			random_in_global_list = {
 				variable = culture_is_alive
 				
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_markarth
+					has_innovation = innovation_native_karth
 				}
 				
 				save_scope_as = culture_to_convert
