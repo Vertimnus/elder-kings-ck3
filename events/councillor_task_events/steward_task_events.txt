@@ -8,6 +8,8 @@ namespace = steward_task
 # by Petter Vilberg
 ####
 # 0301 - Culture Changed in County
+### EK EDIT:
+# 0302 - Culture Changed in County - Local native culture
 
 
 ####
@@ -91,11 +93,18 @@ steward_task.0302 = {
 	}
 	desc = steward_task.0302.county_complete
 	sender = scope:councillor
+	
+	immediate = { # For loc
+		scope:county = {
+			culture = { save_scope_as = old_culture }
+			var:culture_to_convert = { save_scope_as = new_culture }
+		}
+	}
 
 	option = {
 		name = steward_task.0302.a
 		
-		scope:county = { set_county_culture = var:culture_to_convert }
+		scope:county = { set_county_culture = scope:new_culture }
 	}
 
 	after = {

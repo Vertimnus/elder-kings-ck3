@@ -4,10 +4,13 @@ ek_on_game_start = {
 	effect = {
 		### Create a list with every culture. Because Paradox has every_faith, but not every_culture :(
 		# Aldmeris
-		save_culture_in_global_list = { CULTURE = culture:ayleid }
 		save_culture_in_global_list = { CULTURE = culture:alinor }
 		save_culture_in_global_list = { CULTURE = culture:auridon }
 		save_culture_in_global_list = { CULTURE = culture:balfiera }
+		# Ayleidoon
+		save_culture_in_global_list = { CULTURE = culture:ayleid }
+		save_culture_in_global_list = { CULTURE = culture:barsaebic }
+		save_culture_in_global_list = { CULTURE = culture:hectahamic }
 		# Bosmeris
 		save_culture_in_global_list = { CULTURE = culture:bosmer }
 		save_culture_in_global_list = { CULTURE = culture:cyrobosmer }
@@ -179,6 +182,11 @@ ek_on_game_start = {
 			target = culture:imperial
 		}
 		culture:imperial = { add_innovation = innovation_native_heartlands }
+		add_to_global_variable_list = {
+			name = culture_innovation_native_heartlands
+			target = culture:ayleid
+		}
+		culture:ayleid = { add_innovation = innovation_native_heartlands }
 		# Nibenay
 		add_to_global_variable_list = {
 			name = culture_innovation_native_nibenay
