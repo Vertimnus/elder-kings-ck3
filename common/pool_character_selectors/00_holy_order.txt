@@ -6,6 +6,7 @@ pool_holy_order_succession = {
 		is_imprisoned = no
 		scope:base.faith = { has_allowed_gender_for_clergy = root }
 		is_married = no
+		NOT = { has_trait = excommunicated }
 	}
 	
 	character_score = {
@@ -13,7 +14,7 @@ pool_holy_order_succession = {
 		
 		modifier = {
 			add = 1000
-			is_courtier_of = root
+			is_courtier_of = scope:base
 		}
 		compare_modifier = {
 			value = martial
@@ -50,7 +51,6 @@ pool_holy_order_succession = {
 			scope:base.faith = { has_preferred_gender_for_clergy = root }
 		}
 	}
-	
 	
 	config = {
 		background = commander

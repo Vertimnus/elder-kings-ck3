@@ -6,7 +6,10 @@ pool_court_chaplain = {
 		is_capable_adult = yes
 		is_imprisoned = no
 		is_married = no
-		
+
+		# In minimum good standing with faith
+		NOT = { has_trait = excommunicated }
+
 		# Correct gender
 		scope:base.faith = { has_allowed_gender_for_clergy = root }
 		
@@ -46,7 +49,6 @@ pool_court_chaplain = {
 		}
 	}
 	
-	
 	config = {
 		background = clergy
 		age = { 25 55 }
@@ -64,6 +66,7 @@ pool_theocratic_succession = {
 		scope:base.faith = { has_allowed_gender_for_clergy = root }
 		is_imprisoned = no
 		is_married = no
+		NOT = { has_trait = excommunicated }
 	}
 	
 	character_score = {
@@ -90,7 +93,6 @@ pool_theocratic_succession = {
 			scope:base.faith = { has_preferred_gender_for_clergy = root }
 		}
 	}
-	
 	
 	config = {
 		background = clergy
