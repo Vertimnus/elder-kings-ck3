@@ -78,6 +78,14 @@ ImprisonCharacterDeclineSummary = {
 			NOT = { can_be_fired_from_council_trigger = { COURT_OWNER = root.liege } }
 		}
 	}
+	
+	text = {
+		localization_key = imprison_decline_summary_cannot_fire_HoF
+		trigger = {
+			root.liege = { exists = faith.religious_head }
+			root.liege.faith.religious_head = { this = root }
+		}
+	}
 
 	text = {
 		localization_key = imprison_decline_summary_no_war_your_courtier

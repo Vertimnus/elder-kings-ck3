@@ -708,36 +708,6 @@ task_promote_culture = {
 			}
 		}
 		
-		### EK TODO: Make it so neighbouring provinces have an impact?
-		# if = {
-			# limit = {
-				# scope:county = {
-					# any_neighboring_county = {
-						# count = 1
-						# culture = scope:councillor_liege.culture
-					# }
-				# }
-			# }
-			# multiply = {
-				# value = 1.1
-				# desc = ONE_NEIGHBOUR_REASON
-			# }
-		# }
-		# if = {
-			# limit = {
-				# scope:county = {
-					# any_neighboring_county = {
-						# count = 2
-						# culture = scope:councillor_liege.culture
-					# }
-				# }
-			# }
-			# multiply = {
-				# value = 1.2
-				# desc = TWO_NEIGHBOUR_REASON
-			# }
-		# }
-		
 		### EK EDIT: Slashed the speed of culture conversion, unless you're native to the province
 		### NOTE: WHEN ADDING A NEW REGION NATIVITY/EDITING EXISTING ONES, DON'T FORGET TO PUT IT HERE
 		### NOTE: For now it has to be handled manually, but at one point I'd love to be able to just read a list and use @ or whatnot to have a generic trigger
@@ -947,8 +917,13 @@ task_promote_culture = {
 	}
 
 	on_finish_task_county = {
+		scope:county = {
+			set_county_culture = scope:councillor_liege.culture
+		}
+		scope:councillor = {
+			start_default_task = yes
+		}
 		scope:councillor_liege = {
-			trigger_event = steward_task.0301
 			if = {
 				limit = {
 					is_independent_ruler = no
@@ -1611,8 +1586,18 @@ task_promote_local_culture = {
 	}
 
 	on_finish_task_county = {
+		# Culture is converted
+		scope:county = {
+			culture = { save_scope_as = old_culture }
+			var:culture_to_convert = { save_scope_as = new_culture }
+		}
+		scope:county = { set_county_culture = scope:new_culture }
+		scope:councillor = {
+			start_default_task = yes
+		}
+		
 		scope:councillor_liege = {
-			trigger_event = steward_task.0302
+			# trigger_event = steward_task.0302
 			if = {
 				limit = {
 					is_independent_ruler = no
