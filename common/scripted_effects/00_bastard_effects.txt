@@ -374,6 +374,17 @@ bastard_real_father_suspicion_chance_effect = {
 						value = intrigue
 					}
 				}
+				#Very low chance if the potential_father is in fact, a woman and not stupid
+				modifier = {
+					add = -1500
+					is_female = yes
+					NOT = {
+						has_trait_rank = {
+							trait = intellect_bad
+							rank > 2
+						}
+					}
+				}
 				trigger_event = {
 					id = pregnancy.3001
 					days = { 5 20 }
