@@ -11,13 +11,16 @@
 
 drunkard = { # Substance Abuse (Alcohol)
 	index = 176
+	fame = yes
 	stewardship = -2
 	prowess = -2
+	flag = subtract_aptitude_2
 	health = -0.15
 	stress_loss_mult = 0.2
-	flag = subtract_aptitude_2
 
 	same_opinion = 10
+	
+	ruler_designer_cost = -10
 
 	desc = {
 		first_valid = {
@@ -41,12 +44,15 @@ drunkard = { # Substance Abuse (Alcohol)
 
 hashishiyah = { # Substance Abuse (Hashish)
 	index = 177
+	fame = yes
 	stewardship = -2
 	learning = -2
-	stress_loss_mult = 0.2
 	flag = subtract_aptitude_3
+	stress_loss_mult = 0.2
 
 	same_opinion = 10
+	
+	ruler_designer_cost = 5
 
 	desc = {
 		first_valid = {
@@ -69,71 +75,17 @@ hashishiyah = { # Substance Abuse (Hashish)
 
 }
 
-# Compatch 1.1: traits removed
-# opium_addled = { # Substance Abuse (Opium)
-	# index = 178
-	# learning = -2
-	# prowess = -2
-	# health = -0.75
-	# stress_loss_mult = 0.2
-
-	# same_opinion = 10
-
-	# desc = {
-		# first_valid = {
-			# triggered_desc = {
-				# trigger = {
-					# NOT = { exists = this }
-				# }
-				# desc = trait_opium_addled_desc
-			# }
-			# desc = trait_opium_addled_character_desc
-		# }
-	# }
-
-	# ai_energy = -25
-	# ai_vengefulness = -10
-
-	# compatibility = {
-		# diligent = @neg_compat_low
-		# temperate = @neg_compat_low
-	# }	
-# }
-
-# henbane_addict = { # Substance Abuse (Henbane)
-	# index = 179
-	# stress_loss_mult = 0.2
-
-	# same_opinion = 10
-
-	# desc = {
-		# first_valid = {
-			# triggered_desc = {
-				# trigger = {
-					# NOT = { exists = this }
-				# }
-				# desc = trait_henbane_addict_desc
-			# }
-			# desc = trait_henbane_addict_character_desc
-		# }
-	# }
-
-	# ai_rationality = -30
-
-	# compatibility = {
-		# temperate = @neg_compat_low
-	# }
-
-# }
-
 rakish = { # Brothel-frequenter.
-	index = 180
+	index = 178
+	fame = yes
 	intrigue = 1
 	diplomacy = -1
 	stress_loss_mult = 0.2
 
 	same_opinion = 5
 	attraction_opinion = -5
+	
+	ruler_designer_cost = 0
 
 	desc = {
 		first_valid = {
@@ -159,11 +111,14 @@ rakish = { # Brothel-frequenter.
 }
 
 reclusive = { # Hides away from relationships and responsibilities.
-	index = 181
+	index = 179
+	fame = yes
 	diplomacy = -2
 	stewardship = -1
-	stress_loss_mult = 0.2
 	flag = add_aptitude_1
+	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -187,16 +142,19 @@ reclusive = { # Hides away from relationships and responsibilities.
 }
 
 irritable = { # Prone to outbursts and tantrums.
-	index = 182
+	index = 180
+	fame = yes
 	diplomacy = -2
 	martial = -1
 	prowess = 2
+	flag = subtract_aptitude_4
 	dread_gain_mult = 0.1
 	stress_loss_mult = 0.2
-	flag = subtract_aptitude_4
 
 	ai_war_chance = 0.25
 	ai_war_cooldown = -0.25
+	
+	ruler_designer_cost = 0
 
 	desc = {
 		first_valid = {
@@ -226,10 +184,13 @@ irritable = { # Prone to outbursts and tantrums.
 }
 
 flagellant = { # Habitually self-harms; whipping is the 'primary' one but cutting, burning, etc. could also be options.
-	index = 183
+	index = 181
+	fame = yes
 	prowess = -2
 	health = -0.5
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -10
 
 	desc = {
 		first_valid = {
@@ -253,7 +214,8 @@ flagellant = { # Habitually self-harms; whipping is the 'primary' one but cuttin
 }
 
 profligate = { # Subject to compulsive spending. Maybe also gambling?
-	index = 184
+	index = 182
+	fame = yes
 	opposites = {
 		improvident
 	}
@@ -261,6 +223,8 @@ profligate = { # Subject to compulsive spending. Maybe also gambling?
 	monthly_prestige = 0.5
 	monthly_income_mult = -0.10
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = 10
 
 	desc = {
 		first_valid = {
@@ -283,7 +247,8 @@ profligate = { # Subject to compulsive spending. Maybe also gambling?
 }
 
 improvident = { # Habitually gives money to charity.
-	index = 185
+	index = 183
+	fame = yes
 	opposites = {
 		profligate
 	}
@@ -291,6 +256,8 @@ improvident = { # Habitually gives money to charity.
 	monthly_income_mult = -0.10
 	diplomacy = 1
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -315,9 +282,12 @@ improvident = { # Habitually gives money to charity.
 }
 
 contrite = { # Compulsively reveals own/other's Secrets. If no known Secrets, may reveal 'minor secrets', e.g., things which aren't true Secrets but may harm other's Opinions of the character.
-	index = 186
+	index = 184
+	fame = yes
 	intrigue = -2
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -343,13 +313,16 @@ contrite = { # Compulsively reveals own/other's Secrets. If no known Secrets, ma
 }
 
 comfort_eater = { # Eats food to relieve stress.
-	index = 187
+	index = 185
+	fame = yes
 	opposites = {
 		inappetetic
 	}
 
 	stewardship = -1
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -372,7 +345,8 @@ comfort_eater = { # Eats food to relieve stress.
 }
 
 inappetetic = { # Avoids eating food when stressed
-	index = 188
+	index = 186
+	fame = yes
 	opposites = {
 		comfort_eater
 	}
@@ -380,6 +354,8 @@ inappetetic = { # Avoids eating food when stressed
 	diplomacy = -1
 	prowess = -3
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -402,10 +378,13 @@ inappetetic = { # Avoids eating food when stressed
 }
 
 journaller = { # Writes down thoughts to relieve stress (Healthy)
-	index = 189
+	index = 187
+	fame = yes
 	learning = 1
-	stress_loss_mult = 0.2
 	flag = add_aptitude_1
+	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = 15
 
 	desc = {
 		first_valid = {
@@ -423,9 +402,11 @@ journaller = { # Writes down thoughts to relieve stress (Healthy)
 }
 
 confider = { # Has a close friend to relieve stress (Healthy)
-	index = 190
+	index = 188
 	diplomacy = 1
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = 15
 
 	desc = {
 		first_valid = {
@@ -444,10 +425,13 @@ confider = { # Has a close friend to relieve stress (Healthy)
 }
 
 athletic = { # Exercises to relieve stress (Healthy)
-	index = 191
+	index = 189
+	fame = yes
 	prowess = 1
 	health = 0.25
 	stress_loss_mult = 0.2
+	
+	ruler_designer_cost = 40
 	
 	desc = {
 		first_valid = {

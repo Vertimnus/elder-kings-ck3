@@ -11,6 +11,7 @@
 
 celibate = {
 	index = 251
+	fame = yes
 	opposites = {
 		lifestyle_reveler
 		seducer
@@ -20,6 +21,8 @@ celibate = {
 	
 	clergy_opinion = 10
 	opposite_opinion = -10
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -55,9 +58,11 @@ celibate = {
 
 pilgrim = {
 	index = 252
-
+	fame = yes
 	monthly_piety_gain_mult = 0.1
 	same_faith_opinion = 5
+	
+	ruler_designer_cost = 30
 
 	name = {
 		first_valid = {
@@ -65,21 +70,35 @@ pilgrim = {
 				trigger = { NOT = { exists = this } }
 				desc = trait_pilgrim
 			}
-			# triggered_desc = {
-				# trigger = {
-					# is_male = yes
-					# can_perform_the_hajj_trigger = yes
-				# }
-				# desc = trait_hajji
-			# }
-			# triggered_desc = {
-				# trigger = {
-					# is_female = yes
-					# can_perform_the_hajj_trigger = yes
-				# }
-				# desc = trait_hajjah
-			# }
+			triggered_desc = {
+				trigger = {
+					is_male = yes
+					can_perform_the_hajj_trigger = yes
+				}
+				desc = trait_hajji
+			}
+			triggered_desc = {
+				trigger = {
+					is_female = yes
+					can_perform_the_hajj_trigger = yes
+				}
+				desc = trait_hajjah
+			}
 			desc = trait_pilgrim
+		}
+	}
+
+	icon = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = pilgrim.dds
+			}
+			triggered_desc = {
+				trigger = { can_perform_the_hajj_trigger = yes }
+				desc = hajjaj.dds
+			}
+			desc = pilgrim.dds
 		}
 	}
 
@@ -89,10 +108,10 @@ pilgrim = {
 				trigger = { NOT = { exists = this } }
 				desc = trait_pilgrim_desc
 			}
-			# triggered_desc = {
-				# trigger = { can_perform_the_hajj_trigger = yes }
-				# desc = trait_hajjaj_desc
-			# }
+			triggered_desc = {
+				trigger = { can_perform_the_hajj_trigger = yes }
+				desc = trait_hajjaj_desc
+			}
 			desc = trait_pilgrim_character_desc
 		}
 	}
@@ -102,8 +121,10 @@ pilgrim = {
 
 excommunicated = {
 	index = 253
-	
+	fame = yes
 	monthly_piety_gain_mult = -0.5
+	
+	shown_in_ruler_designer = no
 
 	triggered_opinion = {
 		parameter = excommunication_active
@@ -127,6 +148,7 @@ excommunicated = {
 # Monk for christian male, Nun for christian female. Devoted for others.
 devoted = {
 	index = 254
+	fame = yes
 	# potential = {
 		# is_ruler = no
 	# }
@@ -136,6 +158,8 @@ devoted = {
 	
 	flag = can_not_marry
 	can_inherit = no
+	
+	shown_in_ruler_designer = no
 
 	ai_sociability = very_low_negative_ai_value
 
@@ -226,7 +250,12 @@ devoted = {
 # Muslim version of the Blood of the Prophet-trait. Muslim agnatically descended from Muhammed. Female version is localized 'Sayyida'
 sayyid = {
 	index = 255
-
+	fame = yes
+	
+	same_faith_opinion = 5
+	
+	ruler_designer_cost = 25
+	
 	name = {
 		first_valid = {
 			triggered_desc = {
@@ -251,16 +280,14 @@ sayyid = {
 		}
 	}
 
-	same_faith_opinion = 5
-	
 	inherit_chance = 100
 	parent_inheritance_sex = male
 	inherit_from_real_father = no
 }
-
 # Zoroastrian version of the Savior-trait.
 saoshyant = {
 	index = 256
+	fame = yes
 	opposites = {
 		saoshyant_descendant
 	}
@@ -269,6 +296,8 @@ saoshyant = {
 	prowess = 2
 
 	same_faith_opinion = 5
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -288,12 +317,15 @@ saoshyant = {
 # Zoroastrian version of the Divine Blood-trait.
 saoshyant_descendant = {
 	index = 257
+	fame = yes
 	opposites = {
 		saoshyant
 	}
 	learning = 1
 
 	same_faith_opinion = 5
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -312,11 +344,14 @@ saoshyant_descendant = {
 # Generic version of Saoshyant, Mahdi, Messiah, etc.
 savior = {
 	index = 258
+	fame = yes
 	opposites = {
 		divine_blood
 	}
 	
 	same_faith_opinion = 10
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -336,11 +371,14 @@ savior = {
 # Generic version of Descendant of Saoshyant, Mahdi, Messiah, etc. This is automatically granted to all members of a dynasty with "Divine Blood".
 divine_blood = {
 	index = 259
+	fame = yes
 	opposites = {
 		savior
 	}
 	
 	same_faith_opinion = 5
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -359,8 +397,10 @@ divine_blood = {
 # Generic version of Sayyid. Dynasties can now be marked with "Prophetic Blood", which will automatically grant this trait to all members.
 blood_of_prophet = {
 	index = 260
-	
+	fame = yes
 	same_faith_opinion = 5
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -380,11 +420,14 @@ blood_of_prophet = {
 # Generic version of Crusader and Mujahid
 faith_warrior = {
 	index = 261
+	fame = yes
 	martial = 2
-	prowess = 1
+	prowess = 3
 	
 	clergy_opinion = 15
-	same_faith_opinion = 15
+	same_faith_opinion = 5
+	
+	ruler_designer_cost = 50
 
 	icon = {
 		first_valid = {
@@ -392,14 +435,14 @@ faith_warrior = {
 				trigger = { NOT = { exists = this } }
 				desc = faith_warrior.dds
 			}
-			# triggered_desc = {
-				# trigger = { faith = { religion_tag = christianity_religion } }
-				# desc = crusader.dds
-			# }
-			# triggered_desc = {
-				# trigger = { faith = { religion_tag = islam_religion } }
-				# desc = mujahid.dds
-			# }
+			triggered_desc = {
+				trigger = { faith = { religion_tag = christianity_religion } }
+				desc = crusader.dds
+			}
+			triggered_desc = {
+				trigger = { faith = { religion_tag = islam_religion } }
+				desc = mujahid.dds
+			}
 			desc = faith_warrior.dds
 		}
 	}
@@ -467,6 +510,10 @@ faith_warrior = {
 				# desc = trait_crusader_finno_ugric
 			# }
 			# triggered_desc = {
+				# trigger = { faith = { religion_tag = siberian_religion } }
+				# desc = trait_crusader_siberian
+			# }
+			# triggered_desc = {
 				# trigger = { faith = { religion_tag = tengrism_religion } }
 				# desc = trait_crusader_tengrism
 			# }
@@ -500,7 +547,7 @@ faith_warrior = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
 				desc = trait_faith_warrior_desc
-			}
+			# }
 			# triggered_desc = {
 				# trigger = { faith = { religion_tag = islam_religion } }
 				# desc = trait_mujahid_character_desc
@@ -518,7 +565,10 @@ faith_warrior = {
 
 saint = {
 	index = 262
+	fame = yes
 	monthly_piety = 2
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -537,14 +587,16 @@ saint = {
 
 order_member = {
 	index = 263
-
+	fame = yes
 	flag = can_not_marry
 	can_inherit = no
 
 	martial = 1
 	prowess = 4
 
-	same_opinion = 15
+	same_opinion_if_same_faith = 15
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -565,8 +617,11 @@ order_member = {
 
 paragon = {
 	index = 264
+	fame = yes
 
 	religious_vassal_opinion = 20
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -585,8 +640,11 @@ paragon = {
 
 consecrated_blood = {
 	index = 265
+	fame = yes
 
 	religious_vassal_opinion = 10
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -605,10 +663,12 @@ consecrated_blood = {
 
 crusader_king = {
 	index = 266
+	fame = yes
+
 	martial = 3
 	prowess = 2
 	
-	same_opinion = 10
+	same_opinion_if_same_faith = 10
 	same_faith_opinion = 15
 	ignore_negative_culture_opinion = yes
 	monthly_county_control_change_factor = 0.5
@@ -618,6 +678,8 @@ crusader_king = {
 	retreat_losses = -0.2
 	
 	county_opinion_add = 35
+	
+	ruler_designer_cost = 120
 
 	desc = {
 		first_valid = {
@@ -722,6 +784,10 @@ crusader_king = {
 			# triggered_desc = {
 				# trigger = { faith = { religion_tag = finno_ugric_religion } }
 				# desc = trait_crusader_king_finno_ugric_male
+			# }
+			# triggered_desc = {
+				# trigger = { faith = { religion_tag = siberian_religion } }
+				# desc = trait_crusader_king_siberian
 			# }
 			# triggered_desc = {
 				# trigger = {

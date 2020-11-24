@@ -22,6 +22,8 @@ wounded_1 = {
 	dread_loss_mult = 1
 
 	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
 
 	flag = no_message
 
@@ -59,6 +61,8 @@ wounded_2 = {
 	attraction_opinion = -10
 
 	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
 
 	flag = no_message
 
@@ -96,6 +100,8 @@ wounded_3 = {
 	attraction_opinion = -20
 	
 	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
 
 	flag = no_message
 
@@ -137,6 +143,8 @@ maimed = {
 	attraction_opinion = -10
 	
 	same_opinion = 5
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -153,22 +161,16 @@ maimed = {
 
 infirm = {
 	index = 305
-	diplomacy = -3
-	martial = -3
-	stewardship = -3
-	intrigue = -3
-	learning = -3
-	prowess = -6
-	health = -1
-	fertility = -0.3
-	flag = subtract_aptitude_6
-
-	dread_baseline_add = -15
-	dread_loss_mult = 1
-
 	health_trait = yes
+	learning = 1
+	prowess = -2
+	flag = subtract_aptitude_6
+	
+	dread_baseline_add = 10
 
-	disables_combat_leadership = yes
+	attraction_opinion = -5
+	
+	ruler_designer_cost = 10
 	
 	desc = {
 		first_valid = {
@@ -176,13 +178,13 @@ infirm = {
 				trigger = {
 					NOT = { exists = this }
 				}
-				desc = trait_infirm_desc
+				desc = trait_one_eyed_desc
 			}
-			desc = trait_infirm_character_desc
+			desc = trait_one_eyed_character_desc
 		}
 	}
 
-	ai_energy = -30
+	ai_energy = -10
 }
 
 incapable = {
@@ -193,9 +195,9 @@ incapable = {
 	martial = -6
 	learning = -6
 	prowess = -12
+	flag = subtract_aptitude_12
 	health = -3
 	fertility = -0.3
-	flag = subtract_aptitude_12
 	
 	dread_baseline_add = -25
 	dread_loss_mult = 1
@@ -206,6 +208,8 @@ incapable = {
 	can_have_children = no
 
 	disables_combat_leadership = yes
+	
+	shown_in_ruler_designer = no
 	
 	desc = {
 		first_valid = {
@@ -224,6 +228,7 @@ incapable = {
 
 blind = {
 	index = 307
+	health_trait = yes
 	martial = -6
 	stewardship = -2
 	intrigue = -2
@@ -233,6 +238,8 @@ blind = {
 	dread_baseline_add = -10
 
 	attraction_opinion = -10
+	
+	ruler_designer_cost = -10
 
 	desc = {
 		first_valid = {
@@ -245,25 +252,18 @@ blind = {
 			desc = trait_blind_character_desc
 		}
 	}
-
-	# Portrait Modification
-	# dna_modifiers = {
-	#	accessory = {
-	#		mode = replace
-	#		gene = eye_accessory
-	#		template = blind_eyes
-	#	}
-	# }
 }
 
 # Non-genetic impotency
 impotent = {
-	index = 308
+	index = 279
 	
 	fertility = -0.5
 	ai_energy = -10
-	health_trait = yes
-
+	physical = yes
+	
+	shown_in_ruler_designer = no
+	
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -280,15 +280,15 @@ impotent = {
 # Young children only
 sickly = {
 	index = 309
-	potential = {
-		NOT = { age = 6 }
-	}
+	maximum_age = 6
 	health = -2.5
 
 	health_trait = yes
 
 	dread_baseline_add = -20
 	dread_loss_mult = 1
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -311,6 +311,8 @@ pregnant = {
 	prowess = -2
 
 	flag = no_message
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -330,7 +332,7 @@ pregnant = {
 depressed_1 = {
 	index = 311
 	health_trait = yes
-	group = depressed
+	group_equivalence = depressed
 	level = 1
 	
 	diplomacy = -1
@@ -340,6 +342,8 @@ depressed_1 = {
 	health = -0.5
 	
 	fertility = -0.1
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -360,16 +364,19 @@ depressed_1 = {
 lunatic_1 = { # Highly event driven, Schizophrenia
 	index = 312
 
-	group = lunatic
+	group_equivalence = lunatic
 	level = 1
+	
+	flag = subtract_aptitude_3
 	
 	vassal_opinion = -10
 	attraction_opinion = -10
 	same_opinion = 10
 	hostile_scheme_resistance_mult = 0.1
 	health = -0.25
-	flag = subtract_aptitude_3
 	health_trait = yes
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
@@ -391,17 +398,20 @@ lunatic_1 = { # Highly event driven, Schizophrenia
 possessed_1 = { # Highly event driven, Temporal lobe epilepsy
 	index = 313
 
-	group = possessed
+	group_equivalence = possessed
 	level = 1
 
 	health_trait = yes
+	
+	flag = subtract_aptitude_2
 
 	monthly_learning_lifestyle_xp_gain_mult = 0.1
 	health = -0.5
-	flag = subtract_aptitude_2
 
 	attraction_opinion = -10
 	same_opinion = 15
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {

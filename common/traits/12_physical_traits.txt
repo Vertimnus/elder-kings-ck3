@@ -19,6 +19,8 @@ strong = {
 	health = 0.5
 	physical = yes
 	
+	ruler_designer_cost = 50
+	
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -48,7 +50,9 @@ shrewd = {
 	flag = add_aptitude_3
 
 	physical = yes
-		
+	
+	ruler_designer_cost = 50
+	
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -89,6 +93,8 @@ weak = {
 	attraction_opinion = -10
 	vassal_opinion = -10
 	
+	ruler_designer_cost = -10
+	
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -118,6 +124,8 @@ dull = {
 	flag = subtract_aptitude_3
 
 	physical = yes
+	
+	ruler_designer_cost = -20
 
 	desc = {
 		first_valid = {
@@ -147,12 +155,15 @@ dull = {
 
 one_eyed = {
 	index = 380
+	health_trait = yes
 	learning = 1
 	prowess = -2
 	
 	dread_baseline_add = 10
 
 	attraction_opinion = -5
+	
+	ruler_designer_cost = 10
 	
 	desc = {
 		first_valid = {
@@ -171,12 +182,15 @@ one_eyed = {
 
 one_legged = {
 	index = 381
+	health_trait = yes
 	learning = 1
 	prowess = -4
 	
 	dread_baseline_add = -10
 
 	attraction_opinion = -10
+	
+	ruler_designer_cost = -5
 
 	desc = {
 		first_valid = {
@@ -195,13 +209,15 @@ one_legged = {
 
 disfigured = {
 	index = 382
+	health_trait = yes
 	diplomacy = -4
 	fertility = -0.2
 	
 	#No dread loss: you're not actually worse for wear physically or mentally.
 
 	attraction_opinion = -20
-	physical = yes
+	
+	ruler_designer_cost = -10
 
 	desc = {
 		first_valid = {
@@ -218,15 +234,15 @@ disfigured = {
 	ai_sociability = low_negative_ai_value
 }
 
-
-
 # The character is visibly scarred from an old wound
 scarred = {
 	index = 383
 	monthly_prestige = 0.1
 	
 	attraction_opinion = 5
-	physical = yes
+	health_trait = yes
+	
+	ruler_designer_cost = 10
 	
 	desc = {
 		first_valid = {
@@ -239,27 +255,19 @@ scarred = {
 			desc = trait_scarred_character_desc
 		}
 	}
-
-	# Portrait Modification
-	# dna_modifiers = {
-	#	morph = {
-	#		mode = add
-	#		gene = face
-	#		value = 1.0
-	#		template = scar
-	#	}
-	# }
 }
 
 eunuch = {
 	index = 384
-
+	health_trait = yes
 	attraction_opinion = -20
 
 	flag = can_not_marry
 	can_inherit = no
 	blocks_from_claim_inheritance = yes
 	can_have_children = no
+	
+	shown_in_ruler_designer = no
 
 	desc = {
 		first_valid = {
