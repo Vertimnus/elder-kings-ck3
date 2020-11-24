@@ -1,5 +1,5 @@
 ﻿NGame = {
-	END_DATE = "5000.1.1"
+	END_DATE = "5000.1.1"	### EK EDIT
 	GAME_SPEED_TICKS = {	# how many seconds should a day take in every game speed
 		2
 		1
@@ -14,7 +14,7 @@
 	
 	BENCHMARK_TEST_DURATION = 135					# How long, in seconds, should a benchmark test using "-benchmark" last?
 	BENCHMARK_INTERFACE_INTERVAL = 5.0				# How long, in seconds, should the benchmark wait before changing the open UI window?
-	BENCHMARK_OBSERVE_CHARACTER = k_england			# Which character should be observed?
+	BENCHMARK_OBSERVE_CHARACTER = k_daggerfall		# Which character should be observed?	### EK EDIT
 
 	# Where should we pan the camera?
 	BENCHMARK_WAYPOINTS = {
@@ -47,7 +47,7 @@ NSetup = {
 	GENERATED_POOL_CHARACTER_TEMPLATES = {
 		"pool_repopulate_spouse"
 		"pool_repopulate_prowess"
-		"pool_repopulate_aptitude"
+		"pool_repopulate_aptitude"	### EK EDIT
 		"pool_repopulate_diplomacy"
 		"pool_repopulate_martial"
 		"pool_repopulate_stewardship"
@@ -58,7 +58,7 @@ NSetup = {
 	GENERATED_POOL_CHARACTER_TEMPLATE_WEIGHTS = {
 		2
 		5
-		1
+		1	### EK EDIT
 		2
 		2
 		2
@@ -73,7 +73,7 @@ NSetup = {
 NJominiMap = {
 	WORLD_EXTENTS_X = 8191
 	WORLD_EXTENTS_Y = 51
-	WORLD_EXTENTS_Z = 5119
+	WORLD_EXTENTS_Z = 5119	### EK EDIT
 	WATERLEVEL = 3.8
 }
 
@@ -98,7 +98,7 @@ NCharacter = {
 	RANDOM_CHARACTER_LEARNING_MAX = 10
 	RANDOM_CHARACTER_PROWESS_MIN = 0
 	RANDOM_CHARACTER_PROWESS_MAX = 10
-	RANDOM_CHARACTER_MIN_FERTILITY = 0.4
+	RANDOM_CHARACTER_MIN_FERTILITY = 0.5
 	RANDOM_CHARACTER_MAX_FERTILITY = 0.6
 
 	RANDOM_CHARACTER_MIN_HEALTH = 4.0
@@ -170,8 +170,8 @@ NCharacter = {
 		8 #avg
 		12 #good
 		16 #exc
-		70 #nice
-		71 #exc
+		68 #nice
+		69 #exc
 	}
 	SKILL_LEVELS_TEXTS = {
 		"SKILL_TERRIBLE"
@@ -207,9 +207,8 @@ NCharacter = {
 	MAX_POTENTIAL_SPOUSES = 100000 #Number of entries shown in the marry off-interaction
 	MONTHS_OF_INCOME_AT_START = 12 # Rulers will start with this many months worth of income
 	
-	# EK EDIT: Diplomacy Range reduced from 1000/750
-	MAXIMUM_DIPLOMATIC_RANGE = 900
-	MAXIMUM_DIPLOMATIC_RANGE_RESTRICTED = 700	# Used if a game rule with the restricted_diplomatic_range flag is used
+	MAXIMUM_DIPLOMATIC_RANGE = 900	### EK EDIT
+	MAXIMUM_DIPLOMATIC_RANGE_RESTRICTED = 700	# Used if a game rule with the restricted_diplomatic_range flag is used ### EK EDIT
 	HOOK_COOLDOWN_DURATION_YEARS = 5	# How many years do strong hooks go on cooldown when used?
 	MAX_COUNTIES_IN_REALM_AS_DUKE = 30						# As a duke or below, the player (but not the AI) will suffer penalties when they go beyond this # of counties in their realm. They can form a kingdom to get the penalties to go away
 	INCOME_PENALTY_PER_COUNTY_ABOVE_LIMIT = 0.05			# For each county above MAX_COUNTIES_IN_REALM_AS_DUKE, you get 10% less income
@@ -341,7 +340,7 @@ NChildbirth = {
 	EXTRA_CHILDREN_PER_EXTRA_SPOUSE = 2 # Num of extra children per spouse above one before reaching living child limit
 	EXTRA_CHILDREN_PER_EXTRA_CONCUBINE = 2 # Num of extra children per concubine above one before reaching living child limit
 	EXTRA_FERTILITY_FOR_FIRST_CHILD = 0.0 # Extra fertility if the couple are primary spouses and have no children together
-	EXTRA_FERTILITY_FOR_FIRST_RULER_CHILD = 0.25 # Extra fertility if the couple are primary spouses and have no children together, and at least one of them is a ruler
+	EXTRA_FERTILITY_FOR_FIRST_RULER_CHILD = 0.3 # Extra fertility if the couple are primary spouses and have no children together, and at least one of them is a ruler
 	DIVINE_MARRIAGE_FERTILITY_MULTIPLIER = 1 # Multiplier if the couple is close or extended family and their faith allows divine marriage
 	CLOSE_FAMILY_FERTILITY_MULTIPLIER = 0.9 # Multiplier if the couple is close family and their faith does not allow divine marriage
 	EXTENDED_FAMILY_FERTILITY_MULTIPLIER = 1 # Multiplier if the couple is extended family and their faith does not allow divine marriage
@@ -434,8 +433,8 @@ NCharacterOpinion = {
 	NON_RIGHTFUL_LIEGE_LEVY_MULT = 0.5 					# Tax mult when non-rightful liege
 	PARTIALLY_NON_RIGHTFUL_LIEGE_OPINION = -5 			# Opinion penalty for being non-rightful liege
 	NON_RIGHTFUL_LIEGE_OPINION = -5						# Opinion penalty for being partially non-rightful liege
-	MAX_DUCHIES_BEFORE_PENALTY = 3						# How many duchies are vassals fine with you having? If you're a duke, they don't care; only if you're king or above
-	TOO_MANY_DUCHIES_OPINION = -10						# Penalty per duchy too many
+	MAX_DUCHIES_BEFORE_PENALTY = 3						# How many duchies are vassals fine with you having? If you're a duke, they don't care; only if you're king or above	### EK EDIT
+	TOO_MANY_DUCHIES_OPINION = -10						# Penalty per duchy too many	### EK EDIT
 	COUNT_LIEGE_HOLDS_MY_DUCHY = -25					# Penalty with count vassals for whom you hold their dejure duchy (and you're above duchy tier)
 	VASSAL_SIZE_ANGER_THRESHOLD = 0.3						# Ratio of counties in vassal's realm (duke or above) compared to liege's full realm in order for the vassal to get angry at liege
 	VASSAL_SIZE_ANGER_MIN = -5								# Opinion penalty applied at exact threshold
@@ -819,8 +818,8 @@ NCounty = {
 
 NProvince = {
 	BASE_SUPPLY_LIMIT = 2000					# The unmodified base supply limit of a province
-	BARONY_BUILDING_SLOTS = 5
-	COUNTY_BUILDING_SLOTS = 6
+	BARONY_BUILDING_SLOTS = 5	### EK EDIT
+	COUNTY_BUILDING_SLOTS = 6	### EK EDIT
 	SUPPLY_PER_DEVELOPMENT = 150				# Each development adds this much sto the supply limit
 	ACROSS_WATER_PROVINCE_MAX_DISTANCE = 2		# Maximum number of (traversable) water provinces between provinces to be considered "connected across water"
 }
@@ -835,11 +834,11 @@ NCouncil = {
 }
 
 NDynasty = {
-	MONTHLY_PRESTIGE_GAIN_PER_MEMBER = 0.01 # Was 0.2 per year, should be then 0.016 recurring but that is ugly so round to 0.015
-MAX_MONTHLY_PRESTIGE_GAIN_FROM_ALIVE_MEMBERS = 2 # Cap the above number
-	MONTHLY_PRESTIGE_GAIN_PER_TITLE_TIER = { 0 0.1 0.2 0.5 0.75 1 } # When per year was { 0 2 4 6 8 10 }
+	MONTHLY_PRESTIGE_GAIN_PER_MEMBER = 0.02 # Was 0.2 per year, should be then 0.016 recurring but that is ugly so round to 0.015
+	MAX_MONTHLY_PRESTIGE_GAIN_FROM_ALIVE_MEMBERS = 2 # Cap the above number
+	MONTHLY_PRESTIGE_GAIN_PER_TITLE_TIER = { 0 0.125 0.25 0.5 1 2 } # When per year was { 0 2 4 6 8 10 }
 	MONTHLY_PRESTIGE_GAIN_MULT_FOR_VASSALS_OF_SAME_DYNASTY = 0	# Dynasty members who are vassal of below of someone of the same dynasty have their prestige contribution multiplied with this. 0 disables their prestige contribution entirely
-	MONTHLY_PRESTIGE_GAIN_PER_TITLE_TIER_SPOUSE = { 0 0.05 0.1 0.2 0.5 1 } # When per year was { 0 2 4 6 8 10 }
+	MONTHLY_PRESTIGE_GAIN_PER_TITLE_TIER_SPOUSE = { 0 0.1 0.2 0.4 0.8 1.6 } # When per year was { 0 2 4 6 8 10 }
 	MONTHLY_PRESTIGE_GAIN_MULT_FOR_VASSALS_OF_SAME_DYNASTY_SPOUSE = 0	# Dynasty members whose spouse are vassal of below of someone of the same dynasty have their prestige contribution multiplied with this. 0 disables their prestige contribution entirely
 	LEVELS_PRESTIGE = { 300	1000	2000	4000	7000	11000	16000	22000	29000	37000 }
 	LEVEL_DROP_MAX_RETAINED_PROGRESS_PRESTIGE = 0.5
@@ -885,6 +884,7 @@ NDomain = {
 	TAX_AT_ZERO_COUNTY_CONTROL = 0.0			# How much % tax do you get at 0 county control? Interpolated between this value and 100% when between 0 and 100
 	LEVIES_AT_MAX_COUNTY_DEVELOPMENT = 0.5		# How many % levies bonus do you get at 100 county development? Interpolated between this value and 0% when between 0 and 100
 	TAX_AT_MAX_COUNTY_DEVELOPMENT = 0.5			# How much % tax bonus do you get at 100 county development? Interpolated between this value and 0% when between 0 and 100
+	HOLDING_MIN_GARRISON_COUNT = 1				# The minimal amount of garrisons a holding should have if it should have garrisons
 }
 
 NFaction =
@@ -942,7 +942,8 @@ NMercenary = {
 	LEVIES = { 400 800 1200 }				# The base numbers of levies for levels of mercenary bands
 	MAA_REGIMENTS = { 1 2 3 }				# The number of MAA regiments for levels of mercenary bands
 	NUM_KNIGHTS = { 2 3 4 }					# The number of knights for levels of mercenary bands
-	MAA_REGIMENT_SIZES = { 300 300 300 }	# The base sizes of MAA regiments for levels of mercenary bands
+	MAA_REGIMENT_SIZES = { 3 3 3 }	# The base sizes of MAA regiments for levels of mercenary bands, in number of sub-regiments
+	SKIP_CULTURAL_CHANCE = { 0.5 0.33 0.2 }	# The chance that we skip including a cultural MaA in a merc company
 	
 	SIZE_INNOVATIONS_RATIO = 1.0			# How much are mercenary companies growing with the ratio of discovered to all cultural innovations of the culture. 1.0 means +100%
 											# if SIZE_INNOVATIONS_RATIO = 2, the mercenaries will be 3x their original size if all innovations are discovered
@@ -965,11 +966,13 @@ NHolyOrder = {
 	NUM_LEVIES_BASE = 500
 	NUM_LEVIES_PER_HOLDING = 200
 
-	# The holy order starts out with NUM_MAA_BASE Men-At-Arms. These will always try to use the holy_order_maa defined in the religion, if any are available.
-	NUM_MAA_BASE = 200
+	# The holy order starts out with NUM_MAA_BASE Men-At-Arms sub-regiments. These will always try to use the holy_order_maa defined in the religion, if any are available.
+	NUM_MAA_BASE = 2
 
-	# The holy order also gets NUM_MAA_PER_HOLDING additional Men-At-Arms for each holding leased to it.
-	NUM_MAA_PER_HOLDING = 100
+	# The holy order also gets NUM_MAA_PER_HOLDING additional Men-At-Arms sub-regiments for each holding leased to it.
+	NUM_MAA_PER_HOLDING = 1
+	# The MaA from this many holdings will all go into the same regiment
+	NUM_HOLDINGS_PER_MAA_REGIMENT = 3
 	# The regiment type of these additional Men-At-Arms has a chance of RELIGION_MAA_RATIO % (multiplied by 100) to use a religious type, like NUM_MAA_BASE.
 	# Otherwise it will use a random type with the holy_order_fallback = yes flag.
 	RELIGION_MAA_RATIO = 0.7
@@ -1057,6 +1060,7 @@ NGUI = {
 	BATTLE_SUMMARY_BIG_LOSSES = 0.6  # ration of survivors when a battle is a slaughter
 	DEFAULT_FRONT_END_BACKGROUND = "main_menu/frontend_west.dds" # relative to the illustrations folder
 	DYNASTY_TREE_MAX_SIZE = 200  # Limit initial number of character in single dynasty tree
+	PRISONER_MASS_ACTION_REASONS = 5 # maximum number of reasons why a mass prisoner action cannot be done that we want to show in tooltips
 }
 
 NSuggestions = {
@@ -1109,7 +1113,9 @@ NPortrait = {
 	SAVE_GAME_ANIMATION_GROUP_SECONDARY = "frontend_left_idle"		# Which animation group to use for the main menu secondary character taken from saves
 	BOOKMARK_ANIMATION_GROUP = "idle"		# Which animation group to use for the bookmark character
 	WEIGHT_UPDATE_YEAR_INTERVAL = 3 # Years in between portrait updating their current weight towards their target weight
-	WEIGHT_UPDATE_LERP_SCALAR = 0.35 # Scalar for the liner interoplation of the weight update to trend current weight towards target weight
+	WEIGHT_UPDATE_YEAR_INTERVAL_PLAYER = 1 # Years in between portrait updating their current weight towards their target weight (for player characters)
+	WEIGHT_UPDATE_PLAYER_LERP_SCALAR = 0.30 # Scalar for the liner interoplation of the weight update to trend current weight towards target weight, for the player
+	WEIGHT_UPDATE_LERP_SCALAR = 0.40 # Scalar for the liner interoplation of the weight update to trend current weight towards target weight
 	DEFAULT_BASE_WEIGHT_MIN = -35 # Min for starting random base weight inclusive
 	DEFAULT_BASE_WEIGHT_MAX = 35 # Max for starting random base weight inclusive
 	IGNORED_WEIGHT_DEVIATION_FOR_DEAD_WITHOUT_DNA = 10 # Characters that die at between -10 and 10 weight, and have no DNA generated, will get their weight set to 0 to save storage in the save game
