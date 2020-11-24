@@ -185,6 +185,17 @@ castle_01 = {
 				has_government = theocracy_government
 			}
 		}
+
+		modifier = {
+			add = 50
+			county = {
+				NOT = {
+					any_county_province = {
+						has_building_or_higher = castle_01
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -349,7 +360,8 @@ castle_02 = {
 	flag = castle
 	
 	ai_value = {
-		base = 10
+		base = 9
+		ai_general_building_modifier = yes
 		modifier = {
 			factor = 3
 			scope:holder.capital_province = this
@@ -523,14 +535,15 @@ castle_03 = {
 	flag = castle
 	
 	ai_value = {
-		base = 10		
+		base = 8
+		ai_general_building_modifier = yes		
 		modifier = {
 			factor = 3
 			scope:holder.capital_province = this
 		}
 		modifier = {
 			factor = 0.2
-			combined_building_level <= 6
+			combined_building_level <= 9
 			years_from_game_start >= 1
 		}
 	}
@@ -698,14 +711,15 @@ castle_04 = {
 	type_icon = "icon_building_ramparts.dds"
 	
 	ai_value = {
-		base = 10	
+		base = 7
+		ai_general_building_modifier = yes	
 		modifier = {
 			factor = 3
 			scope:holder.capital_province = this
 		}
 		modifier = {
 			factor = 0.2
-			combined_building_level <= 8
+			combined_building_level <= 12
 			years_from_game_start >= 1
 		}
 	}
