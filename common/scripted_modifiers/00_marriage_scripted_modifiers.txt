@@ -150,7 +150,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 			}
 		}
 		add = {
-			value = -15 #EK Value
+			value = -15	### EK EDIT: Tweaked the value
 			if = {
 				limit = {
 					scope:recipient.faith = {
@@ -160,7 +160,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 						}
 					}
 				}
-				subtract = 25 #EK Value
+				subtract = 25	### EK EDIT: Tweaked the value
 			}
 			if = {
 				limit = {
@@ -171,7 +171,7 @@ elopment_ai_accept_modifier = { #Should copy marriage_ai_accept_modifier on rele
 						}
 					}
 				}
-				subtract = 975 #EK Value
+				subtract = 975
 			}
 		}
 		
@@ -366,7 +366,10 @@ marriage_ai_accept_modifier = {
 				limit = {
 					scope:actor = {
 						any_ally = {
-							NOT = { is_vassal_of = scope:actor }
+							NOR = {
+    							target_is_liege_or_above = scope:actor
+    							target_is_vassal_or_below = scope:actor
+							}
 							count >= 2
 						}
 					}
@@ -374,7 +377,10 @@ marriage_ai_accept_modifier = {
 				scope:actor = {
 					every_ally = {
 						limit = {
-							NOT = { is_vassal_of = scope:actor }
+							NOR = {
+    							target_is_liege_or_above = scope:actor
+    							target_is_vassal_or_below = scope:actor
+							}
 						}
 						multiply = 0.5
 					}
@@ -426,7 +432,10 @@ marriage_ai_accept_modifier = {
 				limit = {
 					scope:actor = {
 						any_ally = {
-							NOT = { is_vassal_of = scope:actor }
+							NOR = {
+    							target_is_liege_or_above = scope:actor
+    							target_is_vassal_or_below = scope:actor
+							}
 							count >= 2
 						}
 					}
@@ -434,7 +443,10 @@ marriage_ai_accept_modifier = {
 				scope:actor = {
 					every_ally = {
 						limit = {
-							NOT = { is_vassal_of = scope:actor }
+							NOR = {
+    							target_is_liege_or_above = scope:actor
+    							target_is_vassal_or_below = scope:actor
+							}
 						}
 						multiply = 0.5
 					}
@@ -476,7 +488,10 @@ marriage_ai_accept_modifier = {
 			scope:actor = {
 				every_ally = {
 					limit = {
-						NOT = { is_vassal_of = scope:actor }
+						NOR = {
+    						target_is_liege_or_above = scope:actor
+    						target_is_vassal_or_below = scope:actor
+						}
 					}
 					add = -15
 				}
@@ -484,12 +499,19 @@ marriage_ai_accept_modifier = {
 		}
 		scope:actor = {
 			any_ally = {
-				NOT = { is_vassal_of = scope:actor }
+				NOR = {
+					target_is_vassal_or_below = scope:actor
+					target_is_liege_or_above = scope:actor
+				}
 				count >= 2
 			}
 		}
 		scope:recipient = {
-			NOT = { is_allied_to = scope:actor }
+			NOR = {
+				is_allied_to = scope:actor
+				target_is_vassal_or_below = scope:actor
+				target_is_liege_or_above = scope:actor
+			}
 			yields_alliance = {
 				candidate = scope:secondary_recipient
 				target = scope:actor
@@ -522,7 +544,7 @@ marriage_ai_accept_modifier = {
 		add = {
 			value = scope:actor.highest_held_title_tier
 			subtract = scope:recipient.highest_held_title_tier
-			multiply = 10 #EK Value
+			multiply = 10	### EK EDIT: Tweaked the value
 		}
 		desc = MARRYING_UP_REASON
 	}
@@ -601,12 +623,14 @@ marriage_ai_accept_modifier = {
 			value = 0
 			if = {
 				limit = {
-					exists = father.primary_title
-					trigger_if = {
-						limit = {
-							exists = mother.primary_title
+					scope:secondary_actor = {
+						exists = father.primary_title
+						trigger_if = {
+							limit = {
+								exists = mother.primary_title
+							}
+							father.primary_title.tier >= mother.primary_title.tier
 						}
-						father.primary_title.tier >= mother.primary_title.tier
 					}
 				}
 				add = scope:secondary_actor.father.highest_held_title_tier
@@ -621,12 +645,14 @@ marriage_ai_accept_modifier = {
 			}
 			else_if = {
 				limit = {
-					exists = mother.primary_title
-					trigger_if = {
-						limit = {
-							exists = father.primary_title
+					scope:secondary_actor = {
+						exists = mother.primary_title
+						trigger_if = {
+							limit = {
+								exists = father.primary_title
+							}
+							mother.primary_title.tier >= father.primary_title.tier
 						}
-						mother.primary_title.tier >= father.primary_title.tier
 					}
 				}
 				add = scope:secondary_actor.mother.highest_held_title_tier
@@ -897,7 +923,7 @@ marriage_ai_accept_modifier = {
 	#########
 	modifier = { # A recipient will be reluctant (to differing degrees) to agree to marriages sent from an actor of a different faith
 		add = {
-			value = -20
+			value = -10
 			if = {
 				limit = {
 					scope:recipient.faith = {
@@ -907,7 +933,7 @@ marriage_ai_accept_modifier = {
 						}
 					}
 				}
-				subtract = 25
+				subtract = 15
 			}
 			if = {
 				limit = {
@@ -918,7 +944,7 @@ marriage_ai_accept_modifier = {
 						}
 					}
 				}
-				subtract = 985
+				subtract = 975
 			}
 		}
 
@@ -1602,6 +1628,7 @@ divorce_character_ai_accept_modifier = {
 	}
 	
 	opinion_modifier = { # A lot more likely if Recipient likes Actor
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		who = scope:recipient
 		opinion_target = scope:actor
 		multiplier = 1
@@ -1609,6 +1636,7 @@ divorce_character_ai_accept_modifier = {
 	}
 	
 	opinion_modifier = { # Unlikely if Recipient likes Secondary Recipient
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		who = scope:recipient
 		opinion_target = scope:secondary_recipient
 		multiplier = -1
@@ -1630,8 +1658,25 @@ divorce_character_ai_accept_modifier = {
 			}
 		}
 	}
+		
+	modifier = { # More likely if the spouse is openly incestuous
+		add = 150
+		desc = DIVORCE_OPENLY_INCESTUOUS_SPOUSE
+
+		scope:secondary_recipient = {
+			any_relation = {
+				type = lover
+				NOR = {
+					this = scope:actor
+					this = scope:recipient
+				}
+				relation_with_character_is_incestuous_in_my_faith_trigger = { CHARACTER = scope:secondary_recipient	}
+			}
+		}
+	}
 
 	modifier = { # More likely if the spouse has been unfaithful (lover relation or std)
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		desc = DIVORCE_INFIDELITY
 		add = {
 			# Cheating isn't awful
@@ -1667,6 +1712,7 @@ divorce_character_ai_accept_modifier = {
 	}
 
 	modifier = { # Eunuchs
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		add = 100
 		desc = DIVORCE_IMPOTENT_EUNUCH
 		scope:secondary_recipient = {
@@ -1676,6 +1722,7 @@ divorce_character_ai_accept_modifier = {
 	}
 
 	modifier = { # Very likely if the marriage has turned Polygamous and their faith doesn't support it
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		add = 100
 		desc = DIVORCE_POLYGAMY
 		scope:actor = {
@@ -1692,6 +1739,7 @@ divorce_character_ai_accept_modifier = {
 	
 	
 	modifier = { # Heathens
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		add = 100
 		desc = DIVORCE_HEATHEN
 		NOT = {
@@ -1700,6 +1748,7 @@ divorce_character_ai_accept_modifier = {
 	}
 	
 	modifier = { # Heretic
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		add = 10
 		desc = DIVORCE_HERETIC
 		scope:secondary_recipient.faith.religion = scope:actor.faith.religion
@@ -1722,6 +1771,7 @@ divorce_character_ai_accept_modifier = {
 	}
 	
 	modifier = { # They are a Kinslayer
+		trigger = { NOT = { scope:recipient = scope:secondary_recipient } }
 		add = 50
 		desc = THEY_ARE_A_KINSLAYER
 		scope:secondary_recipient = {
