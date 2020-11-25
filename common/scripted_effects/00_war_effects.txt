@@ -1015,3 +1015,25 @@ notify_players_about_neighboring_war_resolution_effect = {
 		}
 	}
 }
+
+show_pow_release_message_effect = {
+	if = {
+		limit = {
+			any_character_war = {
+				primary_attacker = scope:attacker
+				primary_defender = scope:defender
+			}
+		}
+		every_character_war = {
+			limit = {
+				primary_attacker = scope:attacker
+				primary_defender = scope:defender
+			}
+			save_scope_as = war
+		}
+		if = {
+			limit = { prisoners_of_war_trigger = yes }
+			custom_tooltip = release_pow_at_end_of_war
+		}
+	}
+}
