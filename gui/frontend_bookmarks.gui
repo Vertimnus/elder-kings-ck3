@@ -251,7 +251,7 @@ widget = {
 				name = "pick_any_character_button"
 				parentanchor = bottom|left
 				position = { -50 -140 }
-				size = { 370 195 }
+				size = { 400 195 }
 				scale = 0.8
 
 				enabled = "[GameSetup.IsCurrentBookmarkPlayable]"
@@ -263,6 +263,7 @@ widget = {
 
 				state = {
 					name = _mouse_hierarchy_enter
+					on_start = "[PdxGuiTriggerAllAnimations('unknown_character_hover_enter')]"
 					on_start = "[PdxGuiWidget.FindChild('banner_hover_glow').TriggerAnimation('unknown_character_hover_enter')]"
 					on_start = "[PdxGuiWidget.FindChild('unknown_portrait_glow').TriggerAnimation('unknown_character_hover_enter')]"
 					on_start = "[PdxGuiWidget.FindChild('button_widget').TriggerAnimation('unknown_character_hover_enter')]"
@@ -270,6 +271,7 @@ widget = {
 
 				state = {
 					name = _mouse_hierarchy_leave
+					on_start = "[PdxGuiTriggerAllAnimations('unknown_character_hover_leave')]"
 					on_start = "[PdxGuiWidget.FindChild('banner_hover_glow').TriggerAnimation('unknown_character_hover_leave')]"
 					on_start = "[PdxGuiWidget.FindChild('unknown_portrait_glow').TriggerAnimation('unknown_character_hover_leave')]"
 					on_start = "[PdxGuiWidget.FindChild('button_widget').TriggerAnimation('unknown_character_hover_leave')]"
@@ -325,7 +327,71 @@ widget = {
 
 					icon = {
 						parentanchor = bottom|hcenter
-						position = { 0 -55 }
+						position = { 60 -85 }
+						scale = 0.8
+						size = { 152 188 }
+						texture = "gfx/portraits/unknown_portraits/unknown_shoulders.dds"
+						alpha = 0.7
+
+						icon = {
+							name = "unknown_portrait_glow"
+							size = { 100% 100% }
+							texture = "gfx/portraits/unknown_portraits/button_unknown_shoulders.dds"
+							framesize = { 471 589 }
+							frame = 2
+							alpha = 0
+
+							state = {
+								name = "unknown_character_hover_enter"
+								alpha = 1
+								duration = 0.05
+								using = Animation_Curve_Default
+							}
+
+							state = {
+								name = "unknown_character_hover_leave"
+								alpha = 0
+								duration = 0.2
+								using = Animation_Curve_Default
+							}
+						}
+					}
+
+					icon = {
+						parentanchor = bottom|hcenter
+						position = { -60 -85 }
+						scale = 0.8
+						size = { 152 188 }
+						texture = "gfx/portraits/unknown_portraits/unknown_shoulders.dds"
+						alpha = 0.7
+
+						icon = {
+							name = "unknown_portrait_glow"
+							size = { 100% 100% }
+							texture = "gfx/portraits/unknown_portraits/button_unknown_shoulders.dds"
+							framesize = { 471 589 }
+							frame = 2
+							alpha = 0
+
+							state = {
+								name = "unknown_character_hover_enter"
+								alpha = 1
+								duration = 0.05
+								using = Animation_Curve_Default
+							}
+
+							state = {
+								name = "unknown_character_hover_leave"
+								alpha = 0
+								duration = 0.2
+								using = Animation_Curve_Default
+							}
+						}
+					}
+
+					icon = {
+						parentanchor = bottom|hcenter
+						position = { 0 -85 }
 						size = { 152 188 }
 						texture = "gfx/portraits/unknown_portraits/unknown_shoulders.dds"
 
@@ -356,12 +422,57 @@ widget = {
 					icon = {
 						parentanchor = bottom|hcenter
 						position = { 0 10 }
-						size = { 360 90 }
+						size = { 390 130 }
 						texture = "gfx/interface/icons/banners/banner_brown_left.dds"
-						spriteType = Corneredtiled
-						spriteborder = { 72 0 }
-						spriteborder_right = 114
-						texture_density = 2
+
+						modify_texture = {
+							name = overlay
+							texture = "gfx/interface/component_effects/effect_blue_shine.dds"
+							blend_mode = colordodge
+							translate_uv = { 1 0 }
+						}
+
+						state = {
+							trigger_on_create = yes
+							name = "start"
+							next = "right"
+
+							duration = 0
+							delay = 1.5
+
+							modify_texture = {
+								name = overlay
+								translate_uv = { 0.6 0 }
+								alpha = 0
+							}
+						}
+
+						state = {
+							name = "right"
+							next = "left"
+
+							duration = 2
+							using = Animation_Curve_Default
+
+							modify_texture = {
+								name = overlay
+								translate_uv = { -0.6 0 }
+								alpha = 1
+							}
+						}
+
+						state = {
+							name = "left"
+
+							duration = 0
+							delay = 5
+
+							modify_texture = {
+								name = overlay
+								translate_uv = { 1 0 }
+								alpha = 0
+							}
+						}
 
 						glow = {
 							color = { 0.1 0.1 0.1 0.2 }
@@ -380,10 +491,6 @@ widget = {
 							name = "banner_hover_glow"
 							size = { 100% 100% }
 							texture = "gfx/interface/icons/banners/banner_brown_left_glow.dds"
-							spriteType = Corneredtiled
-							spriteborder = { 72 0 }
-							spriteborder_right = 114
-							texture_density = 2
 							alpha = 0
 
 							state = {
@@ -401,13 +508,52 @@ widget = {
 							}
 						}
 
-						text_single = {
-							parentanchor = center
-							position = { 0 -10 }
+						icon = {
+							name = "ruler_designer_promt_glow"
+							visible = "[ShouldPromptForRulerDesigner]"
+							size = { 100% 100% }
+							texture = "gfx/interface/icons/banners/banner_brown_left_glow.dds"
+							alpha = 0
+
+							state = {
+								name = a
+								next = b
+								trigger_on_create = yes
+								using = Animation_Curve_Default
+
+								alpha = 1
+								duration = 1.5
+
+							}
+
+							state = {
+								name = b
+								using = Animation_Curve_Default
+
+								duration = 0.8
+								delay = 2
+
+								alpha = 0
+							}
+
+						}
+
+						icon = {
+							size = { 40 40 }
+							parentanchor = vcenter
+							position = { 65 -7 }
+							texture = "gfx/interface/icons/flat_icons/edit_text.dds"
+							alpha = 0.65
+						}
+
+						text_multi = {
+							parentanchor = left|vcenter
+							widgetanchor = left
+							position = { 110 -32 }
 							text = "PICK_ANY_CHARACTER"
-							max_width = 235
 							using = Font_Size_Medium
 							default_format = "#light_background"
+							size = { 214 50 }
 						}
 					}
 				}
@@ -577,6 +723,7 @@ widget = {
 				spriteType = Corneredtiled
 				spriteborder = { 100 0 }
 				mirror = vertical
+				texture_density = 2
 			}
 
 
@@ -590,7 +737,7 @@ widget = {
 						icon = {
 							parentanchor = bottom|right
 							position = { 3 -14 }
-							texture = "gfx/interface/component_decoration/stone_corner.dds"
+							texture = "gfx/interface/component_decoration/decoration_stone_corner.dds"
 							size = { 16 16 }
 						}
 					}
@@ -614,7 +761,7 @@ widget = {
 						icon = {
 							parentanchor = bottom|left
 							position = { -3 -14 }
-							texture = "gfx/interface/component_decoration/stone_corner.dds"
+							texture = "gfx/interface/component_decoration/decoration_stone_corner.dds"
 							size = { 16 16 }
 
 							mirror = horizontal
@@ -821,6 +968,29 @@ widget = {
 				texture = "gfx/interface/component_decoration/decoration_frame_top_clean.dds"
 				spriteType = Corneredtiled
 				spriteborder = { 100 0 }
+				texture_density = 2
+			}
+
+			icon = {
+				parentanchor = top|hcenter
+				position = { 0 -16 }
+				texture = "gfx/interface/component_decoration/decoration_frame_top_center.dds"
+				texture_density = 2
+			}
+
+			icon = {
+				parentanchor = top|right
+				position = { 0 -24 }
+				size = { 40 40 }
+				texture = "gfx/interface/component_decoration/decoration_arch.dds"
+			}
+
+			icon = {
+				parentanchor = top|left
+				position = { -3 -24 }
+				size = { 40 40 }
+				texture = "gfx/interface/component_decoration/decoration_arch.dds"
+				mirror = horizontal
 			}
 
 			hbox = {
@@ -912,13 +1082,13 @@ widget = {
 							spacing = 3
 
 							achievements_enabled_icon = {
-								visible = "[And( And( IsIronmanEnabled, IsGameChecksumOk ), Not( JominiGameRules.HasRuleWithFlag( 'blocks_achievements' ) ) )]"
+								visible = "[CanGetAchievements]"
 								size = { 30 30 }
 								tooltip = ACHIEVEMENTS_ENABLED
 							}
 
 							achievements_disabled_icon = {
-								visible = "[Not( And( And( IsIronmanEnabled, IsGameChecksumOk ), Not( JominiGameRules.HasRuleWithFlag( 'blocks_achievements' ) ) ) )]"
+								visible = "[Not( CanGetAchievements )]"
 								size = { 30 30 }
 								tooltip = ACHIEVEMENTS_DISABLED
 								using = tooltip_ne
@@ -1264,6 +1434,7 @@ widget = {
 								spriteType = Corneredtiled
 								spriteborder = { 100 0 }
 								size = { 390 22 }
+								texture_density = 2
 							}
 						}
 
@@ -1385,6 +1556,7 @@ widget = {
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start')]"
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start_selected_character')]"
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_hide_any_character')]"
+							onclick = "[PdxGuiTriggerAllAnimations('start_game_audio')]"
 							enabled = "[GameSetup.CanStart]"
 							tooltip = "[GameSetup.PlayTooltip]"
 
@@ -1584,7 +1756,7 @@ widget = {
 							}
 
 							state = {
-								name = _mouse_release
+								name = start_game_audio
 								start_sound = {
 									soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_start_game"
 								}
@@ -2064,6 +2236,20 @@ types BookmarkPortraits
 						}
 
 						state = {
+							trigger_on_create = yes
+							name = "start"
+							next = "right"
+
+							duration = 0
+
+							modify_texture = {
+								name = overlay
+								translate_uv = { 0.6 0 }
+								alpha = 0.9
+							}
+						}
+
+						state = {
 							name = "right"
 							next = "left"
 
@@ -2087,20 +2273,6 @@ types BookmarkPortraits
 							modify_texture = {
 								name = overlay
 								translate_uv = { 0.9 0 }
-								alpha = 0.9
-							}
-						}
-
-						state = {
-							trigger_on_create = yes
-							name = "start"
-							next = "right"
-
-							duration = 0
-
-							modify_texture = {
-								name = overlay
-								translate_uv = { 0.6 0 }
 								alpha = 0.9
 							}
 						}

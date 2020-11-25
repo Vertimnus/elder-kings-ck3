@@ -346,61 +346,37 @@ window = {
 							margin_left = 15
 						}
 
-						flowcontainer = {
-							direction = vertical
+						vbox = {
+							layoutpolicy_horizontal = expanding
+							margin_right = 15
 							spacing = 15
 
-							flowcontainer = {
-								visible = "[Not(GameMpSetup.IsInvite)]"
-								direction = vertical
-								spacing = 10
+							editbox_standard_with_label = {
+								layoutpolicy_horizontal = expanding
 
-								text_single = {
-									parentanchor = hcenter
+								blockoverride "editbox_label"
+								{
 									text = "JOMINI_MULTIPLAYER_GUI_SERVER_NAME"
 								}
 
-								editbox = {
-									# widget name is referenced in code, please no duplicates in this window
-									name = "game_name"
-									size = { 280 30 }
-									using = Font_Type_Standard
-									using = Font_Size_Small
-									default_format = "#high"
-									alwaystransparent = no
-									focuspolicy = all
-									margin_left = 5
-									text = "[GetDefaultServerName]"
-
-									background =  {
-										using = Background_Area_Border_Solid
-									}
+								blockoverride "editbox_properties" 
+								{
+								    name = "game_name" # widget name is referenced in code, please no duplicates in this window
+								    text = "[GetDefaultServerName]"
 								}
 							}
 
+							editbox_standard_with_label = {
+								layoutpolicy_horizontal = expanding
 
-							flowcontainer = {
-								spacing = 10
-								direction = vertical
-
-								text_single = {
-									parentanchor = hcenter
+								blockoverride "editbox_label"
+								{
 									text = "JOMINI_MULTIPLAYER_GUI_SERVER_PASSWORD"
 								}
 
-								editbox = {
-									# widget name is referenced in code, please no duplicates in this window
-									name = "game_password"
-									size = { 280 30 }
-									using = Font_Type_Standard
-									using = Font_Size_Small
-									default_format = "#high"
-									alwaystransparent = no
-									focuspolicy = all
-									margin_left = 5
-									background =  {
-										using = Background_Area_Border_Solid
-									}
+								blockoverride "editbox_properties" 
+								{
+								    name = "game_password" # widget name is referenced in code, please no duplicates in this window
 								}
 							}
 						}
