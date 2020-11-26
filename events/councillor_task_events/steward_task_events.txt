@@ -8,8 +8,6 @@ namespace = steward_task
 # by Petter Vilberg
 ####
 # 0301 - Culture Changed in County
-### EK EDIT:
-# 0302 - Culture Changed in County - Local native culture
 
 
 ####
@@ -60,60 +58,6 @@ namespace = steward_task
 # Promote Culture Events
 # 0301-0399
 ###########
-
-#Change Culture in County
-# by Petter Vilberg
-steward_task.0301 = {
-	type = letter_event
-	opening = {
-		desc = steward_task.0301.opening
-	}
-	desc = steward_task.0301.county_complete
-	sender = scope:councillor
-
-	option = {
-		name = steward_task.0301.a
-		scope:county = {
-			set_county_culture = scope:councillor_liege.culture
-		}
-	}
-
-	after = {
-		scope:councillor = {
-			start_default_task = yes
-		}
-	}
-}
-
-# Spread local culture
-steward_task.0302 = {
-	type = letter_event
-	opening = {
-		desc = steward_task.0302.opening
-	}
-	desc = steward_task.0302.county_complete
-	sender = scope:councillor
-	
-	immediate = { # For loc
-		scope:county = {
-			culture = { save_scope_as = old_culture }
-			var:culture_to_convert = { save_scope_as = new_culture }
-		}
-	}
-
-	option = {
-		name = steward_task.0302.a
-		
-		scope:county = { set_county_culture = scope:new_culture }
-	}
-
-	after = {
-		scope:councillor = {
-			start_default_task = yes
-		}
-	}
-}
-
 
 
 #####################
