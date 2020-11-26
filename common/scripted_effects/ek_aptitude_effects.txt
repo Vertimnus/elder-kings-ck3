@@ -1,43 +1,93 @@
-﻿# add_aptitude_skill = { VALUE = x SUBTRACT = no/yes}
+﻿# add_aptitude_skill = { VALUE = x }
+# add_aptitude_skill = {
+#     if = {
+#         limit = { NOT = { exists = var:aptitude_base } }
+#         #limit = { NOT = { has_variable = aptitude_base } }
+#         set_variable = { name = aptitude_base value = 0 }
+#     }
+#     custom_description = {
+#         text = add_aptitude_skill
+#         value = $VALUE$
+#         change_variable = { name = aptitude_base add = $VALUE$ }
+#     }
+#     if = {
+#         limit = { var:aptitude_base < 0 }
+#         set_variable = { name = aptitude_base value = 0 }
+#     }
+# }
 add_aptitude_skill = {
-    if = {
-        limit = { NOT = { exists = var:aptitude_base } }
-        set_variable = { name = aptitude_base value = 0 }
-    }
     custom_description = {
         text = add_aptitude_skill
         value = $VALUE$
-        change_variable = { name = aptitude_base add = $VALUE$ }
+        if = {
+            #limit = { NOT = { exists = var:aptitude_base } }
+            limit = { NOT = { has_variable = aptitude_base } }
+            set_variable = { name = aptitude_base value = $VALUE$ }
+            if = { #this is nested to stop the error log having an aneurism if the variable doesn't exist
+                limit = { $VALUE$ < 0 }
+                set_variable = { name = aptitude_base value = 0 }
+            }
+        }
+        else = {
+            change_variable = { name = aptitude_base add = $VALUE$ }
+            if = {
+                limit = { var:aptitude_base < 0 }
+                set_variable = { name = aptitude_base value = 0 }
+            }
+        }
     }
 }
+# add_magicka = {
+#     if = {
+#         limit = { NOT = { exists = var:magicka } }
+#         #limit = { NOT = { has_variable = magicka } }
+#         set_variable = { name = magicka value = 0 }
+#     }
+#     custom_description = {
+#         text = add_magicka
+#         value = $VALUE$
+#         change_variable = { name = magicka add = $VALUE$ }
+#     }
+#     if = {
+#         limit = { var:magicka > magicka_max }
+#         set_variable = { name = magicka value = magicka_max }
+#     }
+# }
 add_magicka = {
-    if = {
-        limit = { NOT = { exists = var:magicka } }
-        set_variable = { name = magicka value = 0 }
-    }
     custom_description = {
         text = add_magicka
         value = $VALUE$
-        change_variable = { name = magicka add = $VALUE$ }
-    }
-    if = {
-        limit = { var:magicka > magicka_max }
-        set_variable = { name = magicka value = magicka_max }
+        if = {
+            #limit = { NOT = { exists = var:magicka } }
+            limit = { NOT = { has_variable = magicka } }
+            set_variable = { name = magicka value = $VALUE$ }
+            if = {
+                limit = { $VALUE$ > magicka_max }
+                set_variable = { name = magicka value = magicka_max }
+            }
+        }
+        else = {
+            change_variable = { name = magicka add = $VALUE$ }
+            if = {
+                limit = { var:magicka > magicka_max }
+                set_variable = { name = magicka value = magicka_max }
+            }
+        }
     }
 }
 add_quarterly_magicka_effect = {
     trigger_event = {
-		on_action = add_monthly_magicka
-		#days = 0
-	}
+        on_action = add_monthly_magicka
+        #days = 0
+    }
     trigger_event = {
-		on_action = add_monthly_magicka
-		days = 30
-	}
+        on_action = add_monthly_magicka
+        months = 1
+    }
     trigger_event = {
-		on_action = add_monthly_magicka
-		days = 60
-	}
+        on_action = add_monthly_magicka
+        months = 2
+    }
 }
 add_monthly_magicka_effect = {
     add_magicka = { VALUE = magicka_monthly }

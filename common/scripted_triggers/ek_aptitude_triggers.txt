@@ -14,11 +14,31 @@ has_aptitude_less_than = {
 	}
 }
 
+# has_magicka = {
+# 	custom_description = {
+# 		text = magicka_greater_or_equal
+# 		value = $VALUE$
+# 		var:magicka >= $VALUE$
+# 	}
+# }
+
+# has_magicka_less_than = {
+# 	custom_description = {
+# 		text = magicka_less_than
+# 		value = $VALUE$
+# 		var:magicka < $VALUE$
+# 	}
+# }
+
 has_magicka = {
 	custom_description = {
 		text = magicka_greater_or_equal
 		value = $VALUE$
-		var:magicka >= $VALUE$
+		trigger_if = {
+			limit = { has_variable = magicka }
+			var:magicka >= $VALUE$
+		}
+		trigger_else = { always = no }
 	}
 }
 
@@ -26,6 +46,10 @@ has_magicka_less_than = {
 	custom_description = {
 		text = magicka_less_than
 		value = $VALUE$
-		var:magicka < $VALUE$
+		trigger_if = {
+			limit = { has_variable = magicka }
+			var:magicka < $VALUE$
+		}
+		trigger_else = { always = yes }
 	}
 }

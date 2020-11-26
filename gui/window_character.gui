@@ -397,7 +397,7 @@ window = {
 					text = "[host|E]"
 				}
 
-				
+
 				portrait_opinion = {
 					name = "liege_opinion"
 					datacontext = "[CharacterWindow.GetCharacter]"
@@ -556,7 +556,7 @@ window = {
 						onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
 						size = { 25 25 }
 						parentanchor = center
-						
+
 						modify_texture = {
 							texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
 							blend_mode = alphamultiply
@@ -743,7 +743,7 @@ window = {
 
 							hbox = {
 								margin_left = 4
-								spacing = -3
+								spacing = 1
 
 								icon = {
 									visible = "[Not(Character.IsDeadAndValid)]"
@@ -880,7 +880,7 @@ window = {
 												{
 													size = { 40 40 }
 												}
-												
+
 												blockoverride "glow_radius"
 												{
 													glow_radius = 4
@@ -1159,21 +1159,17 @@ window = {
 
 							vbox = {
 								icon = {
-									name = "magicka_icon"
+									name = "aptitude_icon"
 									size = { 32 32 }
-									texture = "gfx/interface/icons/icon_magicka.dds"
+									texture = "gfx/interface/icons/icon_aptitude.dds"
 								}
 
 								text_single = {
-									name = "magicka_value"
+									name = "aptitude_value"
 									#text = "[CharacterWindow.GetCharacter.GetProwess|0]"
 									text = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]"
 									align = nobaseline
 								}
-							}
-
-							divider_light = {
-								layoutpolicy_vertical = expanding
 							}
 
 							using = Animation_Character_Window_Refresh
@@ -3113,123 +3109,211 @@ window = {
 			}
 		}
 	}
+}
 
-	######################################################
-	################ TYPES AND TEMPLATES #################
-	######################################################
+######################################################
+################ TYPES AND TEMPLATES #################
+######################################################
 
-	types CharacterWindow
-	{
-		type skill_icon_label_vertical = widget {
-			size = { 40 60 }
-			datacontext = "[SkillItem]"
+types CharacterWindow
+{
+	type skill_icon_label_vertical = widget {
+		size = { 40 60 }
+		datacontext = "[SkillItem]"
 
-			icon = {
-				name = "skill_icon"
-				texture = "gfx/interface/icons/icon_skills.dds"
-				size = { 24 24 }
-				framesize = { 60 60 }
-				position = { -10 17 }
+		icon = {
+			name = "skill_icon"
+			texture = "gfx/interface/icons/icon_skills.dds"
+			size = { 24 24 }
+			framesize = { 60 60 }
+			position = { -10 17 }
 
-				block "icon"
-				{
-					frame = "[SkillItem.GetFrame]"
-				}
-			}
-
-			block "tooltip"
+			block "icon"
 			{
-				tooltip = "SKILL_ITEM_TOOLTIP"
-				using = tooltip_ne
+				frame = "[SkillItem.GetFrame]"
+			}
+		}
+
+		block "tooltip"
+		{
+			tooltip = "SKILL_ITEM_TOOLTIP"
+			using = tooltip_ne
+		}
+
+		text_single = {
+			name = "skill_value"
+			parentanchor = top|hcenter
+			position = { 5 17 }
+			align = center
+
+			block "value"
+			{
+				text = "[SkillItem.GetValue]"
+			}
+		}
+	}
+
+	type icon_row_header_background = icon
+	{
+		size = { 100% 25 }
+
+		texture = "gfx/interface/component_tiles/tile_title_bg_01.dds"
+		spritetype = corneredtiled
+		spriteborder = { 20 0 }
+		texture_density = 2
+		alpha = 0.5
+	}
+
+	type widget_family_row_item = widget
+	{
+		layoutpolicy_horizontal = expanding
+		layoutpolicy_vertical = expanding
+		maximumsize = { -1 110 }
+		scissor = yes
+
+		icon_row_header_background = {}
+
+		hbox = {
+
+			block "item_list"
+			{
 			}
 
-			text_single = {
-				name = "skill_value"
-				parentanchor = top|hcenter
-				position = { 5 17 }
-				align = center
+			expand = {}
+		}
+	}
 
-				block "value"
-				{
-					text = "[SkillItem.GetValue]"
+	type vbox_character_row_item = vbox {
+		spacing = -3
+
+		widget = {
+			layoutpolicy_horizontal = expanding
+			size = { 0 25 }
+			min_width = 110
+
+			block "expand_button" {
+				button_standard_hover = {
+					size = { 100% 100% }
+
+					block "expand_button_inside" {}
 				}
 			}
-		}
-
-		type icon_row_header_background = icon
-		{
-			size = { 100% 25 }
-
-			texture = "gfx/interface/component_tiles/tile_title_bg_01.dds"
-			spritetype = corneredtiled
-			spriteborder = { 20 0 }
-			texture_density = 2
-			alpha = 0.5
-		}
-
-		type widget_family_row_item = widget
-		{
-			layoutpolicy_horizontal = expanding
-			layoutpolicy_vertical = expanding
-			maximumsize = { -1 110 }
-			scissor = yes
-
-			icon_row_header_background = {}
 
 			hbox = {
+				margin = { 10 0 }
 
-				block "item_list"
-				{
+				background = {
+					using = Text_Label_Background
+					alpha = 0.5
+					margin = { 0 -2 }
+				}
+
+				text_single = {
+					align = nobaseline
+					fontsize = 14
+
+					block "header_text"
+					{
+						text = "#D NEEDS TEXT#!"
+					}
 				}
 
 				expand = {}
+
+				text_single = {
+					align = nobaseline
+					default_format = "#weak"
+
+					block "remaining_items" {
+						visible = no
+					}
+				}
 			}
 		}
 
-		type vbox_character_row_item = vbox {
-			spacing = -3
+		hbox = {
+			layoutpolicy_horizontal = expanding
 
-			widget = {
-				layoutpolicy_horizontal = expanding
-				size = { 0 25 }
-				min_width = 110
+			using = Animation_Character_Window_Refresh
 
-				block "expand_button" {
-					button_standard_hover = {
-						size = { 100% 100% }
+			block "gridbox" {
+				fixedgridbox = {
+					flipdirection = yes
+					addcolumn = 85
+					addrow = 90
+					datamodel_wrap = 7
 
-						block "expand_button_inside" {}
+					block "gridbox_slots"
+					{
+						maxverticalslots = 1
+					}
+
+					block "portrait_datamodel" {
+						datamodel = "[CharacterWindow.GetParents]"
+					}
+
+					item = {
+						portrait_head_small = {
+							blockoverride "portrait_button"
+							{
+								using = tooltip_ne
+							}
+							blockoverride "glow_visible"
+							{
+								visible = no
+							}
+						}
 					}
 				}
+			}
+
+			block "find_partner" {}
+
+			expand = {}
+		}
+
+		expand = {}
+	}
+
+	type vbox_titles_claims_box = vbox {
+
+		## Titles
+		vbox = {
+			name = "titles"
+			visible = "[Not( IsDataModelEmpty( CharacterWindow.GetTitles ) )]"
+			layoutpolicy_horizontal = expanding
+
+			button_standard_hover = {
+				layoutpolicy_horizontal = expanding
+				size = { 0 25 }
+				onclick = "[CharacterWindow.ToggleExpandedTitles]"
+				down = "[CharacterWindow.AreTitlesExpanded]"
+				tooltip = "[SelectLocalization( CharacterWindow.AreTitlesExpanded, 'CV_TITLES_HIDE_TT', 'CV_TITLES_SHOW_TT' )]"
 
 				hbox = {
-					margin = { 10 0 }
+					margin = { 5 0 }
+					margin_bottom = 3
+					margin_right = 10
 
-					background = {
-						using = Text_Label_Background
-						alpha = 0.5
-						margin = { 0 -2 }
+					text_label_left = {
+						visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)1' )]"
+						text = "CV_TITLES"
 					}
 
-					text_single = {
-						align = nobaseline
-						fontsize = 14
-
-						block "header_text"
-						{
-							text = "#D NEEDS TEXT#!"
-						}
+					text_label_left = {
+						visible = "[Not(GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)1' ))]"
+						text = "CV_TITLES_SINGULAR"
 					}
 
 					expand = {}
 
 					text_single = {
-						align = nobaseline
-						default_format = "#weak"
-
-						block "remaining_items" {
-							visible = no
+						block "titles_extra_items"
+						{
+							visible = "[GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )]"
+							text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )|=]"
 						}
+						default_format = "#weak"
 					}
 				}
 			}
@@ -3237,61 +3321,59 @@ window = {
 			hbox = {
 				layoutpolicy_horizontal = expanding
 
-				using = Animation_Character_Window_Refresh
+				hbox = {
+					layoutpolicy_horizontal = expanding
 
-				block "gridbox" {
 					fixedgridbox = {
+						datamodel = "[CharacterWindow.GetTitles]"
 						flipdirection = yes
-						addcolumn = 85
-						addrow = 90
-						datamodel_wrap = 7
+						addrow = 60
+						addcolumn = 38
+						maxverticalslots = 1
 
-						block "gridbox_slots"
-						{
-							maxverticalslots = 1
-						}
-
-						block "portrait_datamodel" {
-							datamodel = "[CharacterWindow.GetParents]"
+						block "titles_max_slots" {
+							datamodel_wrap = 2
 						}
 
 						item = {
-							portrait_head_small = {
-								blockoverride "portrait_button"
-								{
-									using = tooltip_ne
-								}
-								blockoverride "glow_visible"
-								{
-									visible = no
+							coa_title_tiny_crown = {
+								datacontext = "[TitleItem.GetTitle]"
+								#	visible = "[GreaterThan_int32( Title.GetTierFrame, '(int32)3' )]"
+								using = tooltip_ne
+
+								icon = {
+									name = "has_laws"
+									visible = "[TitleItem.GetTitle.HasLaws]"
+									parentanchor = bottom|right
+									size = { 25 25 }
+									position = { 5 0 }
+									texture = "gfx/interface/icons/title_status/icon_title_law.dds"
 								}
 							}
 						}
 					}
+
+					expand = {}
 				}
-
-				block "find_partner" {}
-
-				expand = {}
 			}
-
-			expand = {}
 		}
 
-		type vbox_titles_claims_box = vbox {
+		## Claims
+		vbox = {
+			name = "claims"
+			visible = "[Not(IsDataModelEmpty(CharacterWindow.GetClaims))]"
+			layoutpolicy_horizontal = expanding
 
-			## Titles
 			vbox = {
-				name = "titles"
-				visible = "[Not( IsDataModelEmpty( CharacterWindow.GetTitles ) )]"
 				layoutpolicy_horizontal = expanding
 
 				button_standard_hover = {
 					layoutpolicy_horizontal = expanding
+					margin_left = 5
 					size = { 0 25 }
-					onclick = "[CharacterWindow.ToggleExpandedTitles]"
-					down = "[CharacterWindow.AreTitlesExpanded]"
-					tooltip = "[SelectLocalization( CharacterWindow.AreTitlesExpanded, 'CV_TITLES_HIDE_TT', 'CV_TITLES_SHOW_TT' )]"
+					onclick = "[CharacterWindow.ToggleExpandedClaims]"
+					down = "[CharacterWindow.AreClaimsExpanded]"
+					tooltip = "[SelectLocalization( CharacterWindow.AreClaimsExpanded, 'CV_CLAIMS_HIDE_TT', 'CV_CLAIMS_SHOW_TT' )]"
 
 					hbox = {
 						margin = { 5 0 }
@@ -3299,307 +3381,222 @@ window = {
 						margin_right = 10
 
 						text_label_left = {
-							visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)1' )]"
-							text = "CV_TITLES"
+							visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)1' )]"
+							text = "CV_CLAIMS"
 						}
 
 						text_label_left = {
-							visible = "[Not(GreaterThan_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)1' ))]"
-							text = "CV_TITLES_SINGULAR"
+							visible = "[Not(GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)1' ))]"
+							text = "CV_CLAIMS_SINGULAR"
 						}
 
 						expand = {}
 
 						text_single = {
-							block "titles_extra_items"
+							block "claims_extra_items"
 							{
-								visible = "[GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )]"
-								text = "[GetNumberAbove_int32( GetDataModelSize(CharacterWindow.GetTitles), '(int32)8' )|=]"
+								visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )]"
+								text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )|=]"
 							}
 							default_format = "#weak"
 						}
 					}
 				}
 
-				hbox = {
-					layoutpolicy_horizontal = expanding
-
-					hbox = {
-						layoutpolicy_horizontal = expanding
-
-						fixedgridbox = {
-							datamodel = "[CharacterWindow.GetTitles]"
-							flipdirection = yes
-							addrow = 60
-							addcolumn = 38
-							maxverticalslots = 1
-
-							block "titles_max_slots" {
-								datamodel_wrap = 2
-							}
-
-							item = {
-								coa_title_tiny_crown = {
-									datacontext = "[TitleItem.GetTitle]"
-									#	visible = "[GreaterThan_int32( Title.GetTierFrame, '(int32)3' )]"
-									using = tooltip_ne
-
-									icon = {
-										name = "has_laws"
-										visible = "[TitleItem.GetTitle.HasLaws]"
-										parentanchor = bottom|right
-										size = { 25 25 }
-										position = { 5 0 }
-										texture = "gfx/interface/icons/title_status/icon_title_law.dds"
-									}
-								}
-							}
-						}
-
-						expand = {}
-					}
-				}
+				expand = {}
 			}
 
-			## Claims
-			vbox = {
-				name = "claims"
-				visible = "[Not(IsDataModelEmpty(CharacterWindow.GetClaims))]"
+			hbox = {
 				layoutpolicy_horizontal = expanding
-
-				vbox = {
-					layoutpolicy_horizontal = expanding
-
-					button_standard_hover = {
-						layoutpolicy_horizontal = expanding
-						margin_left = 5
-						size = { 0 25 }
-						onclick = "[CharacterWindow.ToggleExpandedClaims]"
-						down = "[CharacterWindow.AreClaimsExpanded]"
-						tooltip = "[SelectLocalization( CharacterWindow.AreClaimsExpanded, 'CV_CLAIMS_HIDE_TT', 'CV_CLAIMS_SHOW_TT' )]"
-
-						hbox = {
-							margin = { 5 0 }
-							margin_bottom = 3
-							margin_right = 10
-
-							text_label_left = {
-								visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)1' )]"
-								text = "CV_CLAIMS"
-							}
-
-							text_label_left = {
-								visible = "[Not(GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)1' ))]"
-								text = "CV_CLAIMS_SINGULAR"
-							}
-
-							expand = {}
-
-							text_single = {
-								block "claims_extra_items"
-								{
-									visible = "[GreaterThan_int32( GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )]"
-									text = "[GetNumberAbove_int32(GetDataModelSize(CharacterWindow.GetClaims), '(int32)10' )|=]"
-								}
-								default_format = "#weak"
-							}
-						}
-					}
-
-					expand = {}
-				}
-
-				hbox = {
-					layoutpolicy_horizontal = expanding
-
-					fixedgridbox = {
-						name = "claims_box"
-						datamodel = "[CharacterWindow.GetClaims]"
-						flipdirection = yes
-						addrow = 60
-						addcolumn = 38
-						maxverticalslots = 1
-
-						block "claims_max_slots" {
-							datamodel_wrap = 8
-						}
-
-						item = {
-							container = {
-								datacontext = "[Claim.GetTitle]"
-								using = tooltip_ne
-								tooltip = "CHARACTER_WINDOW_CLAIM_TOOLTIP"
-
-								coa_title_tiny_crown = {
-									name = "claim"
-									tooltip_enabled = no
-
-
-									highlight_icon = {
-										name = "pressed_claim"
-										visible = "[And(Claim.IsPressed, Not(Claim.IsImplicit))]"
-										texture = "gfx/interface/icons/title_status/icon_claim_pressed.dds"
-										size = { 24 24 }
-										parentanchor = bottom|right
-									}
-
-									highlight_icon = {
-										name = "unpressed_claim"
-										visible = "[And(Not(Claim.IsPressed), Not(Claim.IsImplicit))]"
-										texture = "gfx/interface/icons/title_status/icon_claim_unpressed.dds"
-										size = { 24 24 }
-										parentanchor = bottom|right
-									}
-
-									highlight_icon = {
-										name = "implicit_claim"
-										visible = "[Claim.IsImplicit]"
-										texture = "gfx/interface/icons/title_status/icon_claim_implicit.dds"
-										size = { 24 24 }
-										parentanchor = bottom|right
-									}
-								}
-							}
-						}
-					}
-
-					expand = {}
-				}
-			}
-
-			expand = {}
-		}
-
-		type vbox_diplomacy_box = vbox {
-			name = "diplomacy"
-
-			button_standard_hover = {
-				layoutpolicy_horizontal = expanding
-				size = { 0 25 }
-				onclick = "[CharacterWindow.ToggleExpandedDiplomacy]"
-				down = "[CharacterWindow.AreDiplomacyExpanded]"
-				tooltip = "[SelectLocalization( CharacterWindow.AreDiplomacyExpanded, 'CV_DIPLOMACY_HIDE_TT', 'CV_DIPLOMACY_SHOW_TT' )]"
-
-				hbox = {
-					margin = { 5 0 }
-					margin_left = 10
-					margin_bottom = 3
-
-					text_label_left = {
-						layoutpolicy_horizontal = expanding
-						text = "CV_DIPLOMACY"
-						margin_right = 0
-					}
-				}
-
-				hbox = {
-					margin = { 10 0 }
-					margin_bottom = 3
-
-					expand = {}
-
-					text_single = {
-						default_format = "#weak"
-
-						block "diplomacy_extra_items"
-						{
-							visible = no
-						}
-					}
-				}
-			}
-
-			vbox = {
-				margin_top = 20
-				min_width = 100
 
 				fixedgridbox = {
-					name = "diplomacy_items"
-					datamodel = "[CharacterWindow.GetDiplomacyItems]"
+					name = "claims_box"
+					datamodel = "[CharacterWindow.GetClaims]"
 					flipdirection = yes
-					addrow = 65
-					addcolumn = 50
+					addrow = 60
+					addcolumn = 38
+					maxverticalslots = 1
 
-					block "diplomacy_slots"
-					{
-						maxverticalslots = 2
-						maxhorizontalslots = 2
-						datamodel_wrap = 2
+					block "claims_max_slots" {
+						datamodel_wrap = 8
 					}
 
 					item = {
 						container = {
-							button = {
-								parentanchor = top|hcenter
-								position = { 0 -22 }
-								texture = "gfx/interface/icons/diplomatic_icons.dds"
-								frame = "[DiplomacyItem.GetDiplomacyFrame]"
-								framesize = { 120 120 }
-								size = { 50 50 }
+							datacontext = "[Claim.GetTitle]"
+							using = tooltip_ne
+							tooltip = "CHARACTER_WINDOW_CLAIM_TOOLTIP"
+
+							coa_title_tiny_crown = {
+								name = "claim"
 								tooltip_enabled = no
 
-								text_single = {
-									name = "warscore"
-									visible = "[DiplomacyItem.HasWarScore]"
-									parentanchor = top|hcenter
-									position = { 0 10 }
-									text = "[DiplomacyItem.GetWarScoreFraction|0%=+]"
-									fontsize = 13
-								}
-							}
 
-							coa_realm_small = {
-								datacontext = "[DiplomacyItem.GetTargetCharacter]"
-								tooltip = "[DiplomacyItem.GetTooltip]"
-								using = tooltip_es
-								tooltip_offset = { 0 22 }
-								onrightclick = "[DefaultOnRealmFlagClick(Character.GetID)]"
-
-								state = {
-									name = _mouse_hierarchy_enter
-									start_sound = {
-										soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
-									}
+								highlight_icon = {
+									name = "pressed_claim"
+									visible = "[And(Claim.IsPressed, Not(Claim.IsImplicit))]"
+									texture = "gfx/interface/icons/title_status/icon_claim_pressed.dds"
+									size = { 24 24 }
+									parentanchor = bottom|right
 								}
 
-								blockoverride "coa_button"
-								{
-									onclick = "[DiplomacyItem.OnClick]"
-									button_ignore = none
+								highlight_icon = {
+									name = "unpressed_claim"
+									visible = "[And(Not(Claim.IsPressed), Not(Claim.IsImplicit))]"
+									texture = "gfx/interface/icons/title_status/icon_claim_unpressed.dds"
+									size = { 24 24 }
+									parentanchor = bottom|right
+								}
+
+								highlight_icon = {
+									name = "implicit_claim"
+									visible = "[Claim.IsImplicit]"
+									texture = "gfx/interface/icons/title_status/icon_claim_implicit.dds"
+									size = { 24 24 }
+									parentanchor = bottom|right
 								}
 							}
 						}
 					}
 				}
+
+				expand = {}
+			}
+		}
+
+		expand = {}
+	}
+
+	type vbox_diplomacy_box = vbox {
+		name = "diplomacy"
+
+		button_standard_hover = {
+			layoutpolicy_horizontal = expanding
+			size = { 0 25 }
+			onclick = "[CharacterWindow.ToggleExpandedDiplomacy]"
+			down = "[CharacterWindow.AreDiplomacyExpanded]"
+			tooltip = "[SelectLocalization( CharacterWindow.AreDiplomacyExpanded, 'CV_DIPLOMACY_HIDE_TT', 'CV_DIPLOMACY_SHOW_TT' )]"
+
+			hbox = {
+				margin = { 5 0 }
+				margin_left = 10
+				margin_bottom = 3
+
+				text_label_left = {
+					layoutpolicy_horizontal = expanding
+					text = "CV_DIPLOMACY"
+					margin_right = 0
+				}
 			}
 
-			expand = {}
+			hbox = {
+				margin = { 10 0 }
+				margin_bottom = 3
+
+				expand = {}
+
+				text_single = {
+					default_format = "#weak"
+
+					block "diplomacy_extra_items"
+					{
+						visible = no
+					}
+				}
+			}
 		}
+
+		vbox = {
+			margin_top = 20
+			min_width = 100
+
+			fixedgridbox = {
+				name = "diplomacy_items"
+				datamodel = "[CharacterWindow.GetDiplomacyItems]"
+				flipdirection = yes
+				addrow = 65
+				addcolumn = 50
+
+				block "diplomacy_slots"
+				{
+					maxverticalslots = 2
+					maxhorizontalslots = 2
+					datamodel_wrap = 2
+				}
+
+				item = {
+					container = {
+						button = {
+							parentanchor = top|hcenter
+							position = { 0 -22 }
+							texture = "gfx/interface/icons/diplomatic_icons.dds"
+							frame = "[DiplomacyItem.GetDiplomacyFrame]"
+							framesize = { 120 120 }
+							size = { 50 50 }
+							tooltip_enabled = no
+
+							text_single = {
+								name = "warscore"
+								visible = "[DiplomacyItem.HasWarScore]"
+								parentanchor = top|hcenter
+								position = { 0 10 }
+								text = "[DiplomacyItem.GetWarScoreFraction|0%=+]"
+								fontsize = 13
+							}
+						}
+
+						coa_realm_small = {
+							datacontext = "[DiplomacyItem.GetTargetCharacter]"
+							tooltip = "[DiplomacyItem.GetTooltip]"
+							using = tooltip_es
+							tooltip_offset = { 0 22 }
+							onrightclick = "[DefaultOnRealmFlagClick(Character.GetID)]"
+
+							state = {
+								name = _mouse_hierarchy_enter
+								start_sound = {
+									soundeffect = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
+								}
+							}
+
+							blockoverride "coa_button"
+							{
+								onclick = "[DiplomacyItem.OnClick]"
+								button_ignore = none
+							}
+						}
+					}
+				}
+			}
+		}
+
+		expand = {}
+	}
+}
+
+template Animation_Character_Window_Refresh
+{
+	state = {
+		name = character_window_refresh
+		using = Animation_Refresh_FadeOut
+		alpha = 0.65
 	}
 
-	template Animation_Character_Window_Refresh
-	{
-		state = {
-			name = character_window_refresh
-			using = Animation_Refresh_FadeOut
-			alpha = 0.65
-		}
+	state = {
+		using = Animation_Refresh_FadeIn
+	}
+}
 
-		state = {
-			using = Animation_Refresh_FadeIn
-		}
+template Animation_Character_Window_Refresh_Short
+{
+	state = {
+		name = character_window_refresh
+		using = Animation_Refresh_FadeOut
+		alpha = 0.8
 	}
 
-	template Animation_Character_Window_Refresh_Short
-	{
-		state = {
-			name = character_window_refresh
-			using = Animation_Refresh_FadeOut
-			alpha = 0.8
-		}
-
-		state = {
-			using = Animation_Refresh_FadeIn
-			duration = 0.25
-		}
+	state = {
+		using = Animation_Refresh_FadeIn
+		duration = 0.25
 	}
+}

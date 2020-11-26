@@ -144,9 +144,9 @@ aptitude_dull = {
 }
 
 # Criminal
-aptitude_witch = {
+aptitude_witch_group = {
     scope = character
-    is_shown = { has_trait = witch }
+    is_shown = { has_trait = witch_group }
 }
 aptitude_necromancer = {
     scope = character
@@ -183,4 +183,50 @@ aptitude_sign_apprentice = {
 aptitude_sign_atronach = {
     scope = character
     is_shown = { has_trait = sign_atronach }
+}
+
+magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widget
+    scope = character
+    is_shown = { has_variable = spell_recipient }
+    effect = {
+        remove_variable = spell_selected
+        remove_variable = spell_recipient
+    }
+}
+
+spell_fireball_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_fireball = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = 5 }
+        #always = yes #for testing
+    }
+
+    effect = {
+        hidden_effect = {
+            set_variable = { name = spell_selected value = flag:fireball }
+        }
+        show_as_tooltip = {
+            add_magicka = { VALUE = -10 }
+        }
+    }
+}
+
+spell_fireball_recipient = {
+    scope = character
+
+    is_valid = {
+        var:spell_selected = flag:fireball
+    }
+
+    effect = {
+        show_as_tooltip = {
+            add_aptitude_skill = { VALUE = 2 }
+        }
+    }
 }

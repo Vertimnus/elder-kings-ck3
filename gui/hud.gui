@@ -1548,6 +1548,17 @@ icon = {
 				}
 				using = tooltip_above
 			}
+
+			widget = {
+				name = "spell_casting_observer"
+				size = { 0 0 }
+				visible = "[GetScriptedGui('magicka_casting_spell').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				state = {
+					name = _show
+					#on_start = "[ExecuteConsoleCommand('gold 1000')]"
+					on_start = "[ExecuteConsoleCommand('gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window')]"
+				}
+			}
 		}
 
 		hbox = {
@@ -2822,28 +2833,41 @@ widget = {
 
 	container = {
 		parentanchor = bottom|left
-		position = { 160 -42 }
+		position = { 3 -90 }
 		alwaystransparent = no
+		visible = "[Not(EqualTo_CFixedPoint(GetPlayer.MakeScope.Var('magicka').GetValue, '(CFixedPoint)0'))]"
 		widget = {
 			name = "magicka_widget"
-			size = { 113 39 }
+			size = { 39 113 }
 			#parentanchor = bottom|left
 			#position = { 20 -50 }
 
 			tooltip = magicka_value
 			using = tooltip_ne
 
-			hbox = {
-				size = { 66 14}
-				maximumsize = { 66 14}
+			vbox = {
+				size = { 14 66 }
+				maximumsize = { 14 66 }
 				#parentanchor = top|left
-				position = { 35 13 }
+				#position = { 35 13 }
+				position = { 14 12 }
 
+				background = {
+					texture = "gfx/interface/colors/white.dds"
+					color = { 0.1 0.1 0.1 0.8 }
+				}
+
+				#pushes the progress part to bottom
+				widget = {
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+				}
 				#gets the progress bar part
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_horizontal = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
 
 					progressbar_ardor = {
 						#visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
@@ -2853,7 +2877,7 @@ widget = {
 
 						blockoverride "bar_color"
 						{
-							texture = "gfx/interface/colors/blue.dds"
+							texture = "gfx/interface/colors/light_blue.dds"
 						}
 
 						blockoverride "bar_color_flow"
@@ -2863,21 +2887,16 @@ widget = {
 						}
 					}
 				}
-				#pushes the progress part to left
-				widget = {
-					layoutpolicy_horizontal = expanding
-					layoutpolicy_vertical = expanding
-					layoutstretchfactor_horizontal = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
-				}
 			}
 
 			icon = {
 				size = { 100% 100% }
-				texture = "gfx/interface/patron_window/ardor_bg.dds"
+				texture = "gfx/interface/patron_window/ardor_v_bg.dds"
 
 				icon = {
 					parentanchor = vcenter
-					position = { 13 -1 }
+					#position = { 13 -1 }
+					position = { 10 32 }
 					size = { 20 20 }
 
 					texture = "gfx/interface/icons/icon_magicka.dds"
