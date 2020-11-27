@@ -191,7 +191,13 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
     effect = {
         remove_variable = spell_selected
         remove_variable = spell_recipient
+        remove_variable = spell_cast_enabled
     }
+}
+
+enable_casting = {
+    scope = character
+    effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
 }
 
 spell_flames_caster = {
@@ -208,12 +214,18 @@ spell_flames_caster = {
     }
 
     effect = {
-        hidden_effect = {
-            set_variable = { name = spell_selected value = flag:flames }
-        }
-        custom_label = spell_name_caster
-        show_as_tooltip = {
+        if = { #actual effect here
+            limit = { has_variable = spell_cast_enabled }
             add_magicka = { VALUE = -10 }
+        }
+        else = {
+            hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
+                set_variable = { name = spell_selected value = flag:flames }
+            }
+            custom_label = spell_name_caster
+            show_as_tooltip = { #effect here is for tooltip
+                add_magicka = { VALUE = -10 }
+            }
         }
     }
 }
@@ -221,15 +233,15 @@ spell_flames_caster = {
 spell_flames_recipient = {
     scope = character
 
-    is_valid = {
+    is_shown = {
         var:spell_selected = flag:flames
     }
 
     effect = {
         custom_label = spell_name_castee
-        show_as_tooltip = {
-            add_aptitude_skill = { VALUE = 1 }
-        }
+        #show_as_tooltip = {
+        add_aptitude_skill = { VALUE = 1 }
+        #}
     }
 }
 
@@ -260,7 +272,7 @@ spell_frostbite_caster = {
 spell_frostbite_recipient = {
     scope = character
 
-    is_valid = {
+    is_shown = {
         var:spell_selected = flag:frostbite
     }
 
@@ -299,7 +311,7 @@ spell_sparks_caster = {
 spell_sparks_recipient = {
     scope = character
 
-    is_valid = {
+    is_shown = {
         var:spell_selected = flag:sparks
     }
 

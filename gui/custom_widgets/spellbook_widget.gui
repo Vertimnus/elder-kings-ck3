@@ -452,8 +452,8 @@ window = {
                                     tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                    down = "[GetScriptedGui('spell_flames_recipient').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                    
+                                    down = "[GetScriptedGui('spell_flames_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
                                     text = spell_flames
 
                                     # icon = {
@@ -470,7 +470,7 @@ window = {
                                     tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                    down = "[GetScriptedGui('spell_frostbite_recipient').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    down = "[GetScriptedGui('spell_frostbite_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                                     text = spell_frostbite
 
@@ -488,7 +488,7 @@ window = {
                                     tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                     onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                    down = "[GetScriptedGui('spell_sparks_recipient').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    down = "[GetScriptedGui('spell_sparks_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                                     text = spell_sparks
 
@@ -903,7 +903,17 @@ window = {
                 name = "send_offer_button"
                 size = { 400 42 }
                 enabled = "[Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'unlanded'))]"
-                #onclick = "[BlackmailInteractionWindow.Send]"
+                onclick = "[GetScriptedGui('enable_casting').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_caster' )).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_recipient' )).Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
+
+                onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
+                onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetVariableSystem.Clear('alteration_show')]"
+                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
+                onclick = "[GetVariableSystem.Clear('destruction_show')]"
+                onclick = "[GetVariableSystem.Clear('illusion_show')]"
+                onclick = "[GetVariableSystem.Clear('restoration_show')]"
 
                 #text = "[SelectLocalization( BlackmailInteractionWindow.IsBlackmail, CharacterInteractionConfirmationWindow.GetSendName, 'INTRIGUE_WINDOW_SECRET_EXPOSE' )]"
                 text = spell_confirm
