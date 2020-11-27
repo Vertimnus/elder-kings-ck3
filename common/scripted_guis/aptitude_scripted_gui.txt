@@ -194,7 +194,7 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
     }
 }
 
-spell_fireball_caster = {
+spell_flames_caster = {
     scope = character
 
     is_shown = {
@@ -209,24 +209,104 @@ spell_fireball_caster = {
 
     effect = {
         hidden_effect = {
-            set_variable = { name = spell_selected value = flag:fireball }
+            set_variable = { name = spell_selected value = flag:flames }
         }
+        custom_label = spell_name_caster
         show_as_tooltip = {
             add_magicka = { VALUE = -10 }
         }
     }
 }
 
-spell_fireball_recipient = {
+spell_flames_recipient = {
     scope = character
 
     is_valid = {
-        var:spell_selected = flag:fireball
+        var:spell_selected = flag:flames
     }
 
     effect = {
+        custom_label = spell_name_castee
+        show_as_tooltip = {
+            add_aptitude_skill = { VALUE = 1 }
+        }
+    }
+}
+
+spell_frostbite_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_fireball = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = 5 }
+        #always = yes #for testing
+    }
+
+    effect = {
+        hidden_effect = {
+            set_variable = { name = spell_selected value = flag:frostbite }
+        }
+        custom_label = spell_name_caster
+        show_as_tooltip = {
+            add_magicka = { VALUE = -20 }
+        }
+    }
+}
+
+spell_frostbite_recipient = {
+    scope = character
+
+    is_valid = {
+        var:spell_selected = flag:frostbite
+    }
+
+    effect = {
+        custom_label = spell_name_castee
         show_as_tooltip = {
             add_aptitude_skill = { VALUE = 2 }
+        }
+    }
+}
+
+spell_sparks_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_fireball = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = 5 }
+        #always = yes #for testing
+    }
+
+    effect = {
+        hidden_effect = {
+            set_variable = { name = spell_selected value = flag:sparks }
+        }
+        custom_label = spell_name_caster
+        show_as_tooltip = {
+            add_magicka = { VALUE = -30 }
+        }
+    }
+}
+
+spell_sparks_recipient = {
+    scope = character
+
+    is_valid = {
+        var:spell_selected = flag:sparks
+    }
+
+    effect = {
+        custom_label = spell_name_castee
+        show_as_tooltip = {
+            add_aptitude_skill = { VALUE = 3 }
         }
     }
 }

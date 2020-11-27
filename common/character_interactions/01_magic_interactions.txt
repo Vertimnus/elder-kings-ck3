@@ -5,13 +5,26 @@
 	is_shown = {
 		#debug_only = yes
 	}
-	
+
 	on_accept = { #observer in hud.gui actually triggers spellbook widget
 		scope:actor = {
 			set_variable = { name = spell_selected value = flag:none }
 			set_variable = { name = spell_recipient value = scope:recipient }
+			custom_description_no_bullet = {
+				text = spell_caster
+				object = scope:recipient
+			}
+		}
+		if = {
+			limit = { NOT = { scope:actor = scope:recipient } }
+			scope:recipient = {
+				custom_description_no_bullet = {
+					text = spell_castee
+					object = scope:actor
+				}
+			}
 		}
 	}
-	
+
 	auto_accept = yes
 }

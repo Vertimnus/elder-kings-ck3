@@ -1,6 +1,7 @@
 ﻿l_english:
  game_concept_magicka:0 "Magicka"
  game_concept_magicka_i:0 "@magicka_icon!"
+ game_concept_magicka_desc:1 "$game_concept_magicka$ is used to cast spells. A character's maximum magicka and monthly generation are determined by their [aptitude|E] - each point adds #high 10#! to max magicka and #high 0.1#! to monthly generation."
  game_concept_aptitude:0 "Aptitude"
  game_concept_aptitude_i:0 "@skill_aptitude_icon!"
  game_concept_aptitude_skill:0 "Aptitude Skill"
@@ -146,6 +147,8 @@
 
  interaction_category_magic:0 "Magic"
  do_a_magic_interaction:0 "Open Spellbook"
+ spell_caster:0 "You begin casting a spell on [SelectLocalization( ObjectsEqual(CHARACTER.Self, TARGET_CHARACTER.Self), 'yourself', TARGET_CHARACTER.GetUINameNoTooltip)]"
+ spell_castee:0 "[CHARACTER.GetUINameNoTooltip] will have a spell cast on them by [TARGET_CHARACTER.GetUINameNoTooltip]"
  SPELLBOOK:0 "Spellbook"
  spell_casting_info:0 "#high You#! are casting a spell on #high [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer), 'yourself', GetPlayer.MakeScope.Var('spell_recipient').Char.GetUINameNoTooltip )]#!.\n\n#high You#! currently have: [magicka_i][GetPlayer.MakeScope.Var('magicka').GetValue|V0]/[GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')|V0]"
  alteration:0 "#size:18 Alteration#!"
@@ -153,3 +156,14 @@
  destruction:0 "#size:18 Destruction#!"
  illusion:0 "#size:18 Illusion#!"
  restoration:0 "#size:18 Restoration#!"
+
+ spell_unlanded:0 ""
+ spell_flames:0 "Flames"
+ spell_frostbite:0 "Frostbite"
+ spell_sparks:0 "Sparks"
+
+ spell_name_caster:0 "You cast [Localize(Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ))]"
+ spell_name_castee:0 "[Localize(Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ))] is cast on [GetPlayer.MakeScope.Var('spell_recipient').Char.GetUINameNoTooltip]"
+ spell_caster_effect:0 "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_caster' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+ spell_castee_effect:0 "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_recipient' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
+ spell_confirm:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'unlanded'), 'No Spell Selected', 'Cast ' )][Localize(Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ))]"
