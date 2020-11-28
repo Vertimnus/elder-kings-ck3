@@ -92,3 +92,46 @@ add_quarterly_magicka_effect = {
 add_monthly_magicka_effect = {
     add_magicka = { VALUE = magicka_monthly }
 }
+
+spell_caster_effect = {
+    if = { #actual effect here
+        limit = { has_variable = spell_cast_enabled }
+        #add_magicka = { VALUE = -10 }
+        #add_magicka = { VALUE = spell_$SPELL$_cost }
+        spell_$SPELL$_caster_effect = yes
+    }
+    else = {
+        hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
+            set_variable = { name = spell_selected value = flag:$SPELL$ }
+        }
+        custom_label = spell_name_caster
+        show_as_tooltip = { #effect here is for tooltip
+            #add_magicka = { VALUE = -10 }
+            spell_$SPELL$_caster_effect = yes
+        }
+    }
+}
+spell_castee_effect = {
+    custom_label = spell_name_castee
+    #add_aptitude_skill = { VALUE = 1 }
+    spell_$SPELL$_castee_effect = yes
+}
+
+spell_flames_caster_effect = {
+    add_magicka = { VALUE = -10 }
+}
+spell_flames_castee_effect = {
+    add_aptitude_skill = { VALUE = 1 }
+}
+spell_frostbite_caster_effect = {
+    add_magicka = { VALUE = -20 }
+}
+spell_frostbite_castee_effect = {
+    add_aptitude_skill = { VALUE = 2 }
+}
+spell_sparks_caster_effect = {
+    add_magicka = { VALUE = -30 }
+}
+spell_sparks_castee_effect = {
+    add_aptitude_skill = { VALUE = 3 }
+}
