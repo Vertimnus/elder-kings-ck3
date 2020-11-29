@@ -104,7 +104,13 @@ spell_caster_effect = {
         hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
             set_variable = { name = spell_selected value = flag:$SPELL$ }
         }
-        custom_label = spell_name_caster
+        if = {
+            limit = { $HOSTILE$ = yes }
+            custom_label = spell_name_caster_hostile
+        }
+        else = {
+            custom_label = spell_name_caster
+        }
         show_as_tooltip = { #effect here is for tooltip
             #add_magicka = { VALUE = -10 }
             spell_$SPELL$_caster_effect = yes
@@ -112,26 +118,45 @@ spell_caster_effect = {
     }
 }
 spell_castee_effect = {
-    custom_label = spell_name_castee
+    if = {
+        limit = { $HOSTILE$ = yes }
+        custom_label = spell_name_castee_hostile
+    }
+    else = {
+        custom_label = spell_name_castee
+    }
     #add_aptitude_skill = { VALUE = 1 }
     spell_$SPELL$_castee_effect = yes
 }
 
 spell_flames_caster_effect = {
-    add_magicka = { VALUE = -10 }
+    add_magicka = { VALUE = neg_spell_cost_flames }
 }
 spell_flames_castee_effect = {
     add_aptitude_skill = { VALUE = 1 }
 }
 spell_frostbite_caster_effect = {
-    add_magicka = { VALUE = -20 }
+    add_magicka = { VALUE = neg_spell_cost_frostbite }
 }
 spell_frostbite_castee_effect = {
     add_aptitude_skill = { VALUE = 2 }
 }
 spell_sparks_caster_effect = {
-    add_magicka = { VALUE = -30 }
+    add_magicka = { VALUE = neg_spell_cost_sparks }
 }
 spell_sparks_castee_effect = {
     add_aptitude_skill = { VALUE = 3 }
+}
+
+init_destruction = {
+    add_to_variable_list = { name = spell_list_destruction target = title:b_adamantine.title_province }
+    add_to_variable_list = { name = spell_list_destruction target = title:b_balfiera.title_province }
+    add_to_variable_list = { name = spell_list_destruction target = title:b_gallomarket.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_medora.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_mynisera.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_grimfield.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_stonetooth.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_morisel.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_little_betony.title_province }
+    # add_to_variable_list = { name = spell_list_destruction target = title:b_glenpoint.title_province }
 }
