@@ -125,15 +125,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = conjuration
+                text = school_conjuration
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
-                onclick = "[GetVariableSystem.Clear('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('conjuration_show')]"
+                datacontext = "[GetScriptedGui('spell_school_conjuration')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -143,15 +139,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = destruction
+                text = school_destruction
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Toggle('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
-                onclick = "[GetVariableSystem.Clear('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('destruction_show')]"
+                datacontext = "[GetScriptedGui('spell_school_destruction')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -161,15 +153,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = alteration
+                text = school_alteration
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Toggle('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
-                onclick = "[GetVariableSystem.Clear('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('alteration_show')]"
+                datacontext = "[GetScriptedGui('spell_school_alteration')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -179,15 +167,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = illusion
+                text = school_illusion
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Toggle('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
-                onclick = "[GetVariableSystem.Clear('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('illusion_show')]"
+                datacontext = "[GetScriptedGui('spell_school_illusion')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -197,15 +181,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = restoration
+                text = school_restoration
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Toggle('restoration_show')]"
-                onclick = "[GetVariableSystem.Clear('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('restoration_show')]"
+                datacontext = "[GetScriptedGui('spell_school_restoration')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -215,15 +195,11 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = "Necromancy"
+                text = school_necromancy
                 default_format = "#low"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
-                onclick = "[GetVariableSystem.Toggle('necromancy_show')]"
-                down = "[GetVariableSystem.Exists('necromancy_show')]"
+                datacontext = "[GetScriptedGui('spell_school_necromancy')]"
+                down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 using = tooltip_above
             }
@@ -239,7 +215,7 @@ window = {
                 name = "destruction_list"
                 layoutpolicy_horizontal = expanding
                 layoutpolicy_vertical = expanding
-                visible = "[GetVariableSystem.Exists('destruction_show')]"
+                #visible = "[GetVariableSystem.Exists('destruction_show')]"
 
                 blockoverride "scrollbox_empty"
                 {
@@ -252,7 +228,8 @@ window = {
                 {
                     vbox = {
                         #GuiScope.SetRoot.GetRootScope.GetList or maybe AccessSelf
-                        datamodel = "[GetPlayer.MakeScope.GetList('spell_list_destruction')]" #may be able to use variable list but not sure how to trigger specifiic effect
+                        datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]" #may be able to use variable list but not sure how to trigger specifiic effect
+                        #datamodel = "[GuiScope.GetRootScope.GetList('spell_list_destruction')]" #may be able to use variable list but not sure how to trigger specifiic effect
                         layoutpolicy_horizontal = expanding
                         margin = { 15 15 }
                         spacing = 8
@@ -262,730 +239,21 @@ window = {
                                 layoutpolicy_horizontal = expanding
 
                                 #datacontext = "[GetScriptedGui('spell_flames_caster')]"
-                                datacontext = "[GetScriptedGui(Concatenate(Concatenate('spell_', Localize(Scope.Province.Custom('SpellProvince'))), '_caster'))]" #put the localize section in custom loc spell_$ID$
+                                datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_caster')))]" #put the localize section in custom loc spell_$ID$
                                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                down = "[GetScriptedGui(Concatenate(Concatenate('spell_', Localize(Scope.Province.Custom('SpellProvince'))), '_recipient')).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                down = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_recipient'))).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                                 #text = spell_flames
-                                text = "[Localize(Concatenate('spell_', Localize(Scope.Province.Custom('SpellProvince'))))]"
-                                #text = "[Concatenate( Concatenate( 'spell_flames', aptitude_i ), GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('spell_cost_flames')|V0 )]"
+                                text = "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
+                                #text = "[GetNullCharacter.GetName]"
                             }
                         }
-
-                        # item = {
-                        # 	hbox = {
-                        # 		layoutpolicy_horizontal = expanding
-                        # 		spacing = 8
-                        # 		button_standard = {
-                        # 			layoutpolicy_horizontal = expanding
-                        # 			tooltip = "[BlackmailSecretItem.GetTooltip]"
-                        # 			onclick = "[BlackmailSecretItem.OnClick]"
-                        # 			down = "[BlackmailSecretItem.IsSelected]"
-                        # 			enabled = "[BlackmailSecretItem.IsEnabled]"
-                        # 			text = "[BlackmailSecretItem.GetSecret.GetName]"
-
-                        # 			icon = {
-                        # 				size = { 26 26 }
-                        # 				parentanchor = vcenter
-                        # 				position = { 5 0 }
-                        # 				texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-                        # 			}
-                        # 		}
-
-                        # 		icon = {
-                        # 			size = { 26 26 }
-                        # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
-                        # 			framesize = { 40 40 }
-                        # 			frame = 1
-                        # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsWeakHook )]"
-
-                        # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
-                        # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_WEAK_HOOK_TT"
-                        # 		}
-
-                        # 		icon = {
-                        # 			size = { 26 26 }
-                        # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
-                        # 			framesize = { 40 40 }
-                        # 			frame = 2
-                        # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsStrongHook )]"
-
-                        # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
-                        # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_STRONG_HOOK_TT"
-                        # 		}
-                        # 	}
-                        # }
-                        # vbox = {
-                        #     name = "destruction_group"
-                        #     layoutpolicy_horizontal = expanding
-                        #     hbox = {
-                        #         layoutpolicy_horizontal = expanding
-                        #         spacer = {
-                        #             size = { 25 0 }
-                        #         }
-                        #         vbox = {
-                        #             name = "destruction_spells"
-                        #             layoutpolicy_horizontal = expanding
-                        #             spacing = 3
-                        #             visible = "[GetVariableSystem.Exists('destruction_show')]"
-
-                        #             spacer = {
-                        #                 size = { 0 3 }
-                        #             }
-
-                        #             button_standard = {
-                        #                 layoutpolicy_horizontal = expanding
-
-                        #                 #datacontext = "[GetScriptedGui('spell_flames_caster')]"
-                        #                 datacontext = "[GetScriptedGui(Concatenate('spell_flames_', Localize('spell_1')))]" #put the localize section in custom loc spell_$ID$
-                        #                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 down = "[GetScriptedGui('spell_flames_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-                        #                 #text = spell_flames
-                        #                 text = "[Concatenate('spell_flames_', Localize(GetPlayer.GetCapitalLocation.Custom('SpellProvince')))]"
-                        #                 #text = "[Concatenate( Concatenate( 'spell_flames', aptitude_i ), GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('spell_cost_flames')|V0 )]"
-
-                        #                 # icon = {
-                        #                 #     size = { 26 26 }
-                        #                 #     parentanchor = vcenter
-                        #                 #     position = { 5 0 }
-                        #                 #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-                        #                 # }
-                        #             }
-                        #             button_standard = {
-                        #                 layoutpolicy_horizontal = expanding
-
-                        #                 datacontext = "[GetScriptedGui('spell_frostbite_caster')]"
-                        #                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 down = "[GetScriptedGui('spell_frostbite_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-                        #                 text = spell_frostbite
-
-                        #                 # icon = {
-                        #                 #     size = { 26 26 }
-                        #                 #     parentanchor = vcenter
-                        #                 #     position = { 5 0 }
-                        #                 #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-                        #                 # }
-                        #             }
-                        #             button_standard = {
-                        #                 layoutpolicy_horizontal = expanding
-
-                        #                 datacontext = "[GetScriptedGui('spell_sparks_caster')]"
-                        #                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        #                 down = "[GetScriptedGui('spell_sparks_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-                        #                 text = spell_sparks
-
-                        #                 # icon = {
-                        #                 #     size = { 26 26 }
-                        #                 #     parentanchor = vcenter
-                        #                 #     position = { 5 0 }
-                        #                 #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-                        #                 # }
-                        #             }
-                        #         }
-                        #     }
-                        # }
                     }
                 }
             }
-        }
-
-        ### List
-        # scrollbox = {
-        #     name = "spells_list"
-        #     layoutpolicy_horizontal = expanding
-        #     layoutpolicy_vertical = expanding
-
-        #     blockoverride "scrollbox_empty"
-        #     {
-        #         text = "NO_SPELLS"
-        #         #visible = "[Not(BlackmailInteractionWindow.HasSecrets)]"
-        #         visible = no
-        #     }
-
-        #     blockoverride "scrollbox_content"
-        #     {
-        #         vbox = {
-        #             #datamodel = "[BlackmailInteractionWindow.GetSecretItems]" #may be able to use variable list but not sure how to trigger specifiic effect
-        #             layoutpolicy_horizontal = expanding
-        #             margin = { 15 15 }
-        #             spacing = 8
-
-        #             # item = {
-        #             # 	hbox = {
-        #             # 		layoutpolicy_horizontal = expanding
-        #             # 		spacing = 8
-        #             # 		button_standard = {
-        #             # 			layoutpolicy_horizontal = expanding
-        #             # 			tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #             # 			onclick = "[BlackmailSecretItem.OnClick]"
-        #             # 			down = "[BlackmailSecretItem.IsSelected]"
-        #             # 			enabled = "[BlackmailSecretItem.IsEnabled]"
-        #             # 			text = "[BlackmailSecretItem.GetSecret.GetName]"
-
-        #             # 			icon = {
-        #             # 				size = { 26 26 }
-        #             # 				parentanchor = vcenter
-        #             # 				position = { 5 0 }
-        #             # 				texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #             # 			}
-        #             # 		}
-
-        #             # 		icon = {
-        #             # 			size = { 26 26 }
-        #             # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
-        #             # 			framesize = { 40 40 }
-        #             # 			frame = 1
-        #             # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsWeakHook )]"
-
-        #             # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
-        #             # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_WEAK_HOOK_TT"
-        #             # 		}
-
-        #             # 		icon = {
-        #             # 			size = { 26 26 }
-        #             # 			texture = "gfx/interface/icons/portraits/hook_secret.dds"
-        #             # 			framesize = { 40 40 }
-        #             # 			frame = 2
-        #             # 			visible = "[And( BlackmailInteractionWindow.IsBlackmail, BlackmailSecretItem.IsStrongHook )]"
-
-        #             # 			datacontext = "[CharacterInteractionConfirmationWindow.GetRecipient]"
-        #             # 			tooltip = "INTRIGUE_WINDOW_BLACKMAIL_STRONG_HOOK_TT"
-        #             # 		}
-        #             # 	}
-        #             # }
-        #             vbox = {
-        #                 name = "alteration_group"
-        #                 layoutpolicy_horizontal = expanding
-        #                 # hbox = {
-        #                 #     name = "alteration_group"
-        #                 #     layoutpolicy_horizontal = expanding
-        #                 #     button_standard = {
-        #                 #         layoutpolicy_horizontal = expanding
-
-        #                 #         button_expand = {
-        #                 #             parentanchor = vcenter
-        #                 #             position = { 5 0 }
-        #                 #             # tooltip = "show_hide_desc"
-        #                 #             # using = tooltip_nw
-        #                 #             alwaystransparent = yes
-        #                 #             down = "[GetVariableSystem.Exists('alteration_show')]"
-        #                 #         }
-
-        #                 #         #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                 #         onclick = "[GetVariableSystem.Toggle('alteration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('destruction_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('illusion_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('restoration_show')]"
-        #                 #         down = "[GetVariableSystem.Exists('alteration_show')]"
-        #                 #         # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                 #         text = alteration
-
-        #                 #         # icon = {
-        #                 #         #     size = { 26 26 }
-        #                 #         #     parentanchor = vcenter
-        #                 #         #     position = { 5 0 }
-        #                 #         #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                 #         # }
-        #                 #     }
-        #                 # }
-        #                 hbox = {
-        #                     layoutpolicy_horizontal = expanding
-        #                     spacer = {
-        #                         size = { 25 0 }
-        #                     }
-        #                     vbox = {
-        #                         name = "alteration_spells"
-        #                         layoutpolicy_horizontal = expanding
-        #                         spacing = 3
-        #                         visible = "[GetVariableSystem.Exists('alteration_show')]"
-
-        #                         spacer = {
-        #                             size = { 0 3 }
-        #                         }
-
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('alteration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "alteration_spell_1"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('alteration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "alteration_spell_2"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('alteration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('alteration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "alteration_spell_3"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                     }
-        #                 }
-        #             }
-        #             vbox = {
-        #                 name = "conjuration_group"
-        #                 layoutpolicy_horizontal = expanding
-        #                 # hbox = {
-        #                 #     name = "conjuration_group"
-        #                 #     layoutpolicy_horizontal = expanding
-        #                 #     button_standard = {
-        #                 #         layoutpolicy_horizontal = expanding
-
-        #                 #         button_expand = {
-        #                 #             parentanchor = vcenter
-        #                 #             position = { 5 0 }
-        #                 #             # tooltip = "show_hide_desc"
-        #                 #             # using = tooltip_nw
-        #                 #             alwaystransparent = yes
-        #                 #             down = "[GetVariableSystem.Exists('conjuration_show')]"
-        #                 #         }
-
-        #                 #         #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                 #         onclick = "[GetVariableSystem.Clear('alteration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('destruction_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('illusion_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('restoration_show')]"
-        #                 #         down = "[GetVariableSystem.Exists('conjuration_show')]"
-        #                 #         # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                 #         text = conjuration
-
-        #                 #         # icon = {
-        #                 #         #     size = { 26 26 }
-        #                 #         #     parentanchor = vcenter
-        #                 #         #     position = { 5 0 }
-        #                 #         #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                 #         # }
-        #                 #     }
-        #                 # }
-        #                 hbox = {
-        #                     layoutpolicy_horizontal = expanding
-        #                     spacer = {
-        #                         size = { 25 0 }
-        #                     }
-        #                     vbox = {
-        #                         name = "conjuration_spells"
-        #                         layoutpolicy_horizontal = expanding
-        #                         spacing = 3
-        #                         visible = "[GetVariableSystem.Exists('conjuration_show')]"
-
-        #                         spacer = {
-        #                             size = { 0 3 }
-        #                         }
-
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('conjuration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "conjuration_spell_1"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('conjuration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "conjuration_spell_2"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('conjuration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('conjuration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "conjuration_spell_3"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                     }
-        #                 }
-        #             }
-        #             vbox = {
-        #                 name = "destruction_group"
-        #                 layoutpolicy_horizontal = expanding
-        #                 # hbox = {
-        #                 #     name = "destruction_group"
-        #                 #     layoutpolicy_horizontal = expanding
-        #                 #     button_standard = {
-        #                 #         layoutpolicy_horizontal = expanding
-
-        #                 #         button_expand = {
-        #                 #             parentanchor = vcenter
-        #                 #             position = { 5 0 }
-        #                 #             # tooltip = "show_hide_desc"
-        #                 #             # using = tooltip_nw
-        #                 #             alwaystransparent = yes
-        #                 #             down = "[GetVariableSystem.Exists('destruction_show')]"
-        #                 #         }
-
-        #                 #         #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                 #         onclick = "[GetVariableSystem.Clear('alteration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Toggle('destruction_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('illusion_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('restoration_show')]"
-        #                 #         down = "[GetVariableSystem.Exists('destruction_show')]"
-        #                 #         # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                 #         text = destruction
-
-        #                 #         # icon = {
-        #                 #         #     size = { 26 26 }
-        #                 #         #     parentanchor = vcenter
-        #                 #         #     position = { 5 0 }
-        #                 #         #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                 #         # }
-        #                 #     }
-        #                 # }
-        #                 hbox = {
-        #                     layoutpolicy_horizontal = expanding
-        #                     spacer = {
-        #                         size = { 25 0 }
-        #                     }
-        #                     vbox = {
-        #                         name = "destruction_spells"
-        #                         layoutpolicy_horizontal = expanding
-        #                         spacing = 3
-        #                         visible = "[GetVariableSystem.Exists('destruction_show')]"
-
-        #                         spacer = {
-        #                             size = { 0 3 }
-        #                         }
-
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #datacontext = "[GetScriptedGui('spell_flames_caster')]"
-        #                             datacontext = "[GetScriptedGui(Concatenate('spell_flames_', Localize('spell_1')))]" #put the localize section in custom loc spell_$ID$
-        #                             tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             down = "[GetScriptedGui('spell_flames_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-        #                             #text = spell_flames
-        #                             text = "[Concatenate('spell_flames_', Localize(GetPlayer.GetCapitalLocation.Custom('SpellProvince')))]"
-        #                             #text = "[Concatenate( Concatenate( 'spell_flames', aptitude_i ), GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('spell_cost_flames')|V0 )]"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             datacontext = "[GetScriptedGui('spell_frostbite_caster')]"
-        #                             tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             down = "[GetScriptedGui('spell_frostbite_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-        #                             text = spell_frostbite
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             datacontext = "[GetScriptedGui('spell_sparks_caster')]"
-        #                             tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        #                             down = "[GetScriptedGui('spell_sparks_recipient').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-        #                             text = spell_sparks
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                     }
-        #                 }
-        #             }
-        #             vbox = {
-        #                 name = "illusion_group"
-        #                 layoutpolicy_horizontal = expanding
-        #                 # hbox = {
-        #                 #     name = "illusion_group"
-        #                 #     layoutpolicy_horizontal = expanding
-        #                 #     button_standard = {
-        #                 #         layoutpolicy_horizontal = expanding
-
-        #                 #         button_expand = {
-        #                 #             parentanchor = vcenter
-        #                 #             position = { 5 0 }
-        #                 #             # tooltip = "show_hide_desc"
-        #                 #             # using = tooltip_nw
-        #                 #             alwaystransparent = yes
-        #                 #             down = "[GetVariableSystem.Exists('illusion_show')]"
-        #                 #         }
-
-        #                 #         #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                 #         onclick = "[GetVariableSystem.Clear('alteration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('destruction_show')]"
-        #                 #         onclick = "[GetVariableSystem.Toggle('illusion_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('restoration_show')]"
-        #                 #         down = "[GetVariableSystem.Exists('illusion_show')]"
-        #                 #         # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                 #         text = illusion
-
-        #                 #         # icon = {
-        #                 #         #     size = { 26 26 }
-        #                 #         #     parentanchor = vcenter
-        #                 #         #     position = { 5 0 }
-        #                 #         #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                 #         # }
-        #                 #     }
-        #                 # }
-        #                 hbox = {
-        #                     layoutpolicy_horizontal = expanding
-        #                     spacer = {
-        #                         size = { 25 0 }
-        #                     }
-        #                     vbox = {
-        #                         name = "illusion_spells"
-        #                         layoutpolicy_horizontal = expanding
-        #                         spacing = 3
-        #                         visible = "[GetVariableSystem.Exists('illusion_show')]"
-
-        #                         spacer = {
-        #                             size = { 0 3 }
-        #                         }
-
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
-        #                             #down = "[GetVariableSystem.Exists('illusion_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "illusion_spell_1"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
-        #                             #down = "[GetVariableSystem.Exists('illusion_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "illusion_spell_2"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('illusion_show')]"
-        #                             #down = "[GetVariableSystem.Exists('illusion_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "illusion_spell_3"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                     }
-        #                 }
-        #             }
-        #             vbox = {
-        #                 name = "restoration_group" #a perfectly valid school of magic
-        #                 layoutpolicy_horizontal = expanding
-        #                 # hbox = {
-        #                 #     name = "restoration_group"
-        #                 #     layoutpolicy_horizontal = expanding
-        #                 #     button_standard = {
-        #                 #         layoutpolicy_horizontal = expanding
-
-        #                 #         button_expand = {
-        #                 #             parentanchor = vcenter
-        #                 #             position = { 5 0 }
-        #                 #             # tooltip = "show_hide_desc"
-        #                 #             # using = tooltip_nw
-        #                 #             alwaystransparent = yes
-        #                 #             down = "[GetVariableSystem.Exists('restoration_show')]"
-        #                 #         }
-
-        #                 #         #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                 #         onclick = "[GetVariableSystem.Clear('alteration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('destruction_show')]"
-        #                 #         onclick = "[GetVariableSystem.Clear('illusion_show')]"
-        #                 #         onclick = "[GetVariableSystem.Toggle('restoration_show')]"
-        #                 #         down = "[GetVariableSystem.Exists('restoration_show')]"
-        #                 #         # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                 #         text = restoration
-
-        #                 #         # icon = {
-        #                 #         #     size = { 26 26 }
-        #                 #         #     parentanchor = vcenter
-        #                 #         #     position = { 5 0 }
-        #                 #         #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                 #         # }
-        #                 #     }
-        #                 # }
-        #                 hbox = {
-        #                     layoutpolicy_horizontal = expanding
-        #                     spacer = {
-        #                         size = { 25 0 }
-        #                     }
-        #                     vbox = {
-        #                         name = "restoration_spells"
-        #                         layoutpolicy_horizontal = expanding
-        #                         spacing = 3
-        #                         visible = "[GetVariableSystem.Exists('restoration_show')]"
-
-        #                         spacer = {
-        #                             size = { 0 3 }
-        #                         }
-
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('restoration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "restoration_spell_1"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('restoration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "restoration_spell_2"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                         button_standard = {
-        #                             layoutpolicy_horizontal = expanding
-
-        #                             #tooltip = "[BlackmailSecretItem.GetTooltip]"
-        #                             #onclick = "[GetVariableSystem.Toggle('restoration_show')]"
-        #                             #down = "[GetVariableSystem.Exists('restoration_show')]"
-        #                             # enabled = "[BlackmailSecretItem.IsEnabled]"
-        #                             text = "restoration_spell_3"
-
-        #                             # icon = {
-        #                             #     size = { 26 26 }
-        #                             #     parentanchor = vcenter
-        #                             #     position = { 5 0 }
-        #                             #     texture = "[BlackmailSecretItem.GetSecret.GetType.GetIcon]"
-        #                             # }
-        #                         }
-        #                     }
-        #                 }
-        #             }
-        #         }
-        #     }
-        # }
+        }       
 
         vbox = {
             layoutpolicy_horizontal = expanding
@@ -1163,16 +431,11 @@ window = {
                 size = { 400 42 }
                 enabled = "[Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'unlanded'))]"
                 onclick = "[GetScriptedGui('enable_casting').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                onclick = "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_caster' )).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                onclick = "[GetScriptedGui(Concatenate( Concatenate( 'spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName ), '_recipient' )).Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
+                onclick = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_caster'))).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                onclick = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_recipient'))).Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
 
                 onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
                 onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
 
                 #text = "[SelectLocalization( BlackmailInteractionWindow.IsBlackmail, CharacterInteractionConfirmationWindow.GetSendName, 'INTRIGUE_WINDOW_SECRET_EXPOSE' )]"
                 text = spell_confirm

@@ -192,6 +192,8 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
         remove_variable = spell_selected
         remove_variable = spell_recipient
         remove_variable = spell_cast_enabled
+        remove_variable = spell_school
+        clear_variable_list = spell_list
     }
 }
 
@@ -200,7 +202,73 @@ enable_casting = {
     effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
 }
 
-spell_flames_caster = {
+spell_school_alteration = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:alteration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:alteration }
+        spell_list_school = { SCHOOL = alteration }
+    }
+}
+
+spell_school_conjuration = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:conjuration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:conjuration }
+        spell_list_school = { SCHOOL = conjuration }
+    }
+}
+
+spell_school_destruction = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:destruction } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:destruction }
+        spell_list_school = { SCHOOL = destruction }
+    }
+}
+
+spell_school_illusion = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:illusion } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:illusion }
+        spell_list_school = { SCHOOL = illusion }
+    }
+}
+
+spell_school_restoration = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:restoration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:restoration }
+        spell_list_school = { SCHOOL = restoration }
+    }
+}
+
+spell_school_necromancy = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:necromancy } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:necromancy }
+        spell_list_school = { SCHOOL = necromancy }
+    }
+}
+
+destruction_spell_flames_caster = {
     scope = character
 
     is_shown = {
@@ -219,7 +287,7 @@ spell_flames_caster = {
     }
 }
 
-spell_flames_recipient = {
+destruction_spell_flames_recipient = {
     scope = character
 
     is_shown = {
@@ -231,7 +299,7 @@ spell_flames_recipient = {
     }
 }
 
-spell_frostbite_caster = {
+destruction_spell_frostbite_caster = {
     scope = character
 
     is_shown = {
@@ -250,7 +318,7 @@ spell_frostbite_caster = {
     }
 }
 
-spell_frostbite_recipient = {
+destruction_spell_frostbite_recipient = {
     scope = character
 
     is_shown = {
@@ -262,7 +330,7 @@ spell_frostbite_recipient = {
     }
 }
 
-spell_sparks_caster = {
+destruction_spell_sparks_caster = {
     scope = character
 
     is_shown = {
@@ -280,7 +348,7 @@ spell_sparks_caster = {
     }
 }
 
-spell_sparks_recipient = {
+destruction_spell_sparks_recipient = {
     scope = character
 
     is_shown = {
@@ -289,5 +357,155 @@ spell_sparks_recipient = {
 
     effect = {
         spell_castee_effect = { SPELL = sparks HOSTILE = no }
+    }
+}
+
+alteration_spell_oakflesh_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_oakflesh = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = spell_cost_oakflesh }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = oakflesh HOSTILE = no }
+    }
+}
+
+alteration_spell_oakflesh_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:oakflesh
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = oakflesh HOSTILE = no }
+    }
+}
+
+conjuration_spell_summon_scamp_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_summon_scamp = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = spell_cost_summon_scamp }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = summon_scamp HOSTILE = no }
+    }
+}
+
+conjuration_spell_summon_scamp_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:summon_scamp
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = summon_scamp HOSTILE = no }
+    }
+}
+
+illusion_spell_frenzy_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_frenzy = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = spell_cost_frenzy }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = frenzy HOSTILE = no }
+    }
+}
+
+illusion_spell_frenzy_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:frenzy
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = frenzy HOSTILE = no }
+    }
+}
+
+restoration_spell_heal_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_heal = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = spell_cost_heal }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = heal HOSTILE = no }
+    }
+}
+
+restoration_spell_heal_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:heal
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = heal HOSTILE = no }
+    }
+}
+
+necromancy_spell_raise_dead_caster = {
+    scope = character
+
+    is_shown = {
+        #spell_knows_raise_dead = yes
+        always = yes #for testing
+    }
+
+    is_valid = {
+        has_magicka = { VALUE = spell_cost_raise_dead }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = raise_dead HOSTILE = no }
+    }
+}
+
+necromancy_spell_raise_dead_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:raise_dead
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = raise_dead HOSTILE = no }
     }
 }
