@@ -388,3 +388,30 @@ neg_spell_cost_heal = { value = 0 subtract = spell_cost_heal }
 
 spell_cost_raise_dead = 12
 neg_spell_cost_raise_dead = { value = 0 subtract = spell_cost_raise_dead }
+
+spell_school_bg = {
+    if = {
+        limit = { var:spell_school = flag:conjuration }
+        value = 1
+    }
+    else_if = {
+        limit = { var:spell_school = flag:destruction }
+        value = 3
+    }
+    else_if = {
+        limit = { var:spell_school = flag:alteration }
+        value = 5
+    }
+    else_if = {
+        limit = { var:spell_school = flag:illusion }
+        value = 2
+    }
+    else_if = {
+        limit = { var:spell_school = flag:restoration }
+        value = 4
+    }
+    else_if = {
+        limit = { var:spell_school = flag:necromancy }
+        value = 6
+    }
+}

@@ -125,11 +125,24 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_conjuration
-                default_format = "#low"
+                tooltip = school_conjuration
                 datacontext = "[GetScriptedGui('spell_school_conjuration')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 1
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
+
+                icon = {
+                    size = { 52 52 }
+                    parentanchor = center
+                    alwaystransparent = yes
+                    texture = "gfx/interface/spellbook_widget/school_conjuration.dds"
+                }
 
                 using = tooltip_above
             }
@@ -139,11 +152,24 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_destruction
-                default_format = "#low"
+                tooltip = school_destruction
                 datacontext = "[GetScriptedGui('spell_school_destruction')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 3
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
+
+                icon = {
+                    size = { 52 52 }
+                    parentanchor = center
+                    alwaystransparent = yes
+                    texture = "gfx/interface/spellbook_widget/school_destruction.dds"
+                }
 
                 using = tooltip_above
             }
@@ -153,11 +179,24 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_alteration
-                default_format = "#low"
+                tooltip = school_alteration
                 datacontext = "[GetScriptedGui('spell_school_alteration')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 5
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
+
+                icon = {
+                    size = { 52 52 }
+                    parentanchor = center
+                    alwaystransparent = yes
+                    texture = "gfx/interface/spellbook_widget/school_alteration.dds"
+                }
 
                 using = tooltip_above
             }
@@ -167,11 +206,24 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_illusion
-                default_format = "#low"
+                tooltip = school_illusion
                 datacontext = "[GetScriptedGui('spell_school_illusion')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 2
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
+
+                icon = {
+                    size = { 52 52 }
+                    parentanchor = center
+                    alwaystransparent = yes
+                    texture = "gfx/interface/spellbook_widget/school_illusion.dds"
+                }
 
                 using = tooltip_above
             }
@@ -181,11 +233,24 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_restoration
-                default_format = "#low"
+                tooltip = school_restoration
                 datacontext = "[GetScriptedGui('spell_school_restoration')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 4
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
+
+                icon = {
+                    size = { 52 52 }
+                    parentanchor = center
+                    alwaystransparent = yes
+                    texture = "gfx/interface/spellbook_widget/school_restoration.dds"
+                }
 
                 using = tooltip_above
             }
@@ -195,11 +260,17 @@ window = {
                 size = { 0 70 }
                 layoutpolicy_horizontal = expanding
 
-                text = school_necromancy
-                default_format = "#low"
+                tooltip = school_necromancy
                 datacontext = "[GetScriptedGui('spell_school_necromancy')]"
                 down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = 6
+                    framesize = { 140 70 }
+                    margin = { 0 0 }
+                }
 
                 using = tooltip_above
             }
@@ -217,19 +288,38 @@ window = {
                 layoutpolicy_vertical = expanding
                 #visible = "[GetVariableSystem.Exists('destruction_show')]"
 
+                background = {
+                    texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+                    frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                    framesize = { 140 70 }
+                    spriteType = Corneredstretched
+                    spriteborder = { 1 1 }
+                    #margin = { -5 0 }
+                    #fittype = end
+                    alpha = 0.5
+                    #framesize = { 260 400 }
+
+                    modify_texture = {
+                        texture = "gfx/interface/component_masks/mask_fade_vertical.dds"
+                        blend_mode = alphamultiply
+                    }
+                    modify_texture = {
+                        texture = "gfx/interface/component_masks/mask_fade_halfcircle.dds"
+                        blend_mode = alphamultiply
+                    }
+                }
+
                 blockoverride "scrollbox_empty"
                 {
                     text = "NO_SPELLS"
-                    #visible = "[Not(BlackmailInteractionWindow.HasSecrets)]"
-                    visible = no
+                    visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('spell_list'))]" # might not work, category never empty, use visible/not to create known/unknown spells IsShownTooltip could give how to learn, add brief description at start of tooltip
+                    #alternatively allow selection and block execution wiith cast button, enable replaced with greyout
                 }
 
                 blockoverride "scrollbox_content"
                 {
                     vbox = {
-                        #GuiScope.SetRoot.GetRootScope.GetList or maybe AccessSelf
                         datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]" #may be able to use variable list but not sure how to trigger specifiic effect
-                        #datamodel = "[GuiScope.GetRootScope.GetList('spell_list_destruction')]" #may be able to use variable list but not sure how to trigger specifiic effect
                         layoutpolicy_horizontal = expanding
                         margin = { 15 15 }
                         spacing = 8
@@ -237,23 +327,61 @@ window = {
                         item = {
                             button_standard = {
                                 layoutpolicy_horizontal = expanding
+                                size = { 0 40 }
 
-                                #datacontext = "[GetScriptedGui('spell_flames_caster')]"
                                 datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_caster')))]" #put the localize section in custom loc spell_$ID$
                                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 enabled = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 down = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_recipient'))).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-                                #text = spell_flames
-                                text = "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
-                                #text = "[GetNullCharacter.GetName]"
+                                hbox = {
+                                    layoutpolicy_vertical = expanding
+                                    spacer = {
+                                        size = { 380 0 }
+                                        layoutpolicy_vertical = expanding
+                                        text_single = {
+                                            name = "spell_name"
+                                            parentanchor = vcenter
+                                            text = "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
+                                            layoutpolicy_horizontal = expanding
+                                            align = top|left
+                                            margin = { 15 0 }
+                                        }
+                                    }
+                                    spacer = {
+                                        size = { 150 0 }
+                                        layoutpolicy_vertical = expanding
+                                        text_single = {
+                                            name = "spell_cost"
+                                            parentanchor = vcenter
+                                            text = "[magicka_i][GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|V0]"
+                                            layoutpolicy_horizontal = expanding
+                                            align = top|left
+                                            margin = { 15 0 }
+                                        }
+                                    }
+                                    spacer = {
+                                        size = { 50 0 }
+                                        layoutpolicy_vertical = expanding
+                                        icon = {
+                                            name = "spell_hostile_icon"
+                                            size = { 34 34 }
+                                            texture = "gfx/interface/icons/symbols/icon_warning.dds"
+                                            visible = yes
+                                            parentanchor = center
+                                            #tooltip = spell_hostile
+                                            tooltip = "#N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))] is considered hostile#!"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-        }       
+        }
 
         vbox = {
             layoutpolicy_horizontal = expanding
@@ -429,7 +557,7 @@ window = {
             button_primary = {
                 name = "send_offer_button"
                 size = { 400 42 }
-                enabled = "[Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'unlanded'))]"
+                enabled = "[Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'))]"
                 onclick = "[GetScriptedGui('enable_casting').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                 onclick = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_caster'))).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                 onclick = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_recipient'))).Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
