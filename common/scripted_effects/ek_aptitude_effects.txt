@@ -104,28 +104,14 @@ spell_caster_effect = {
         hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
             set_variable = { name = spell_selected value = flag:$SPELL$ }
         }
-        if = {
-            limit = { $HOSTILE$ = yes }
-            custom_label = spell_name_caster_hostile
-        }
-        else = {
-            custom_label = spell_name_caster
-        }
+        custom_label = spell_name_caster
         show_as_tooltip = { #effect here is for tooltip
-            #add_magicka = { VALUE = -10 }
             spell_$SPELL$_caster_effect = yes
         }
     }
 }
 spell_castee_effect = {
-    if = {
-        limit = { $HOSTILE$ = yes }
-        custom_label = spell_name_castee_hostile
-    }
-    else = {
-        custom_label = spell_name_castee
-    }
-    #add_aptitude_skill = { VALUE = 1 }
+    custom_label = spell_name_castee
     spell_$SPELL$_castee_effect = yes
 }
 
@@ -275,6 +261,6 @@ spell_list_school = {
     clear_variable_list = spell_list
     every_in_global_list = {
         variable = spell_list_$SCHOOL$
-        ROOT = { add_to_variable_list = { name = spell_list target = PREV } }
+        PREV = { add_to_variable_list = { name = spell_list target = PREV } }
     }
 }

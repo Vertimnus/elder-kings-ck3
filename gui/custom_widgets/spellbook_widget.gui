@@ -45,11 +45,6 @@ window = {
                 #onclick = "[MatchmakerInteractionWindow.Close]"
                 onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
                 onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                onclick = "[GetVariableSystem.Clear('alteration_show')]"
-                onclick = "[GetVariableSystem.Clear('conjuration_show')]"
-                onclick = "[GetVariableSystem.Clear('destruction_show')]"
-                onclick = "[GetVariableSystem.Clear('illusion_show')]"
-                onclick = "[GetVariableSystem.Clear('restoration_show')]"
             }
 
             icon_character_interaction = {}
@@ -72,22 +67,6 @@ window = {
                 datacontext = "[GetPlayer]"
                 visible = "[GetPlayer.IsValid]"
             }
-            #     hbox = {
-            #         layoutpolicy_horizontal = expanding
-            #         icon = {
-            #             visible = "[And(Not(Character.IsDeadAndValid), Character.IsRuler)]"
-            #             size = { 30 30 }
-            #             texture = "gfx/interface/icons/icon_magicka.dds"
-            #             #tooltip = magicka_value_char_view
-            #         }
-            #         text_single = {
-            #             layoutpolicy_horizontal = growing
-            #             name = "magicka"
-            #             text = magicka_value
-            #             align = left
-            #         }
-            #     }
-            # }
 
             text_multi = {
                 name = "info_text"
@@ -337,7 +316,7 @@ window = {
                                         }
                                     }
                                     spacer = {
-                                        size = { 340 0 }
+                                        size = { 350 0 }
                                         layoutpolicy_vertical = expanding
                                         text_single = {
                                             name = "spell_name"
@@ -350,7 +329,7 @@ window = {
                                         }
                                     }
                                     spacer = {
-                                        size = { 140 0 }
+                                        size = { 130 0 }
                                         layoutpolicy_vertical = expanding
                                         text_single = {
                                             name = "spell_cost"
@@ -358,8 +337,14 @@ window = {
                                             text = spell_cost
                                             layoutpolicy_horizontal = expanding
                                             align = top|left
-                                            default_format = "#clickable"
-                                            margin = { 15 0 }
+                                            default_format = "#high"
+                                            margin = { 4 0 }
+                                        }
+                                        icon = {
+                                            texture = "gfx/interface/icons/icon_magicka.dds"
+                                            size = { 25 25 }
+                                            parentanchor = vcenter
+                                            alwaystransparent = yes
                                         }
                                     }
                                     spacer = {
@@ -375,6 +360,7 @@ window = {
                                         }
                                     }
                                 }
+
                                 hbox = {
                                     name = "spell_invalid"
                                     visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
@@ -393,7 +379,7 @@ window = {
                                         }
                                     }
                                     spacer = {
-                                        size = { 340 0 }
+                                        size = { 350 0 }
                                         layoutpolicy_vertical = expanding
                                         text_single = {
                                             name = "spell_name"
@@ -406,7 +392,7 @@ window = {
                                         }
                                     }
                                     spacer = {
-                                        size = { 140 0 }
+                                        size = { 130 0 }
                                         layoutpolicy_vertical = expanding
                                         text_single = {
                                             name = "spell_cost"
@@ -415,7 +401,15 @@ window = {
                                             layoutpolicy_horizontal = expanding
                                             align = top|left
                                             default_format = "#low"
-                                            margin = { 15 0 }
+                                            margin = { 4 0 }
+                                        }
+                                        highlight_icon = {
+                                            texture = "gfx/interface/icons/icon_magicka.dds"
+                                            size = { 25 25 }
+                                            tintcolor = { 0.5 0.5 0.5 0.7 }
+                                            parentanchor = vcenter
+                                            alwaystransparent = yes
+                                            effectname = "GreyedOut"
                                         }
                                     }
                                     spacer = {
@@ -452,7 +446,7 @@ window = {
                                 visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
                                 hbox = {
-                                    name = "spell_valid"
+                                    name = "spell_unknown"
                                     layoutpolicy_vertical = expanding
                                     spacer = {
                                         size = { 50 0 }
@@ -467,7 +461,7 @@ window = {
                                         }
                                     }
                                     spacer = {
-                                        size = { 340 0 }
+                                        size = { 350 0 }
                                         layoutpolicy_vertical = expanding
                                         text_single = {
                                             name = "spell_name"
@@ -475,21 +469,28 @@ window = {
                                             text = spell_name
                                             layoutpolicy_horizontal = expanding
                                             align = top|left
-                                            default_format = "#clickable"
+                                            default_format = "#low"
                                             margin = { 0 0 }
                                         }
                                     }
                                     spacer = {
-                                        size = { 140 0 }
-                                        layoutpolicy_vertical = expanding
+                                        size = { 130 0 }
                                         text_single = {
                                             name = "spell_cost"
                                             parentanchor = vcenter
                                             text = spell_cost
                                             layoutpolicy_horizontal = expanding
                                             align = top|left
-                                            default_format = "#clickable"
-                                            margin = { 15 0 }
+                                            default_format = "#low"
+                                            margin = { 4 0 }
+                                        }
+                                        layoutpolicy_vertical = expanding
+                                        icon = {
+                                            texture = "gfx/interface/icons/icon_magicka.dds"
+                                            size = { 25 25 }
+                                            tintcolor = { 0.5 0.5 0.5 0.7 }
+                                            parentanchor = vcenter
+                                            alwaystransparent = yes
                                         }
                                     }
                                     spacer = {
