@@ -399,27 +399,148 @@ window = {
                                         }
                                     }
                                 }
+                            }
+                        }
+                    }
+                    vbox = {
+                        datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]" #may be able to use variable list but not sure how to trigger specifiic effect
+                        layoutpolicy_horizontal = expanding
+                        margin = { 15 15 }
+                        spacing = 8
 
-                                # highlight_icon = {
-                                #     #parentanchor = right|top
-                                #     size = { 100% 100% }
+                        item = {
+                            button_standard = {
+                                layoutpolicy_horizontal = expanding
+                                size = { 0 40 }
 
-                                #     #mirror = horizontal
-                                #     texture = "gfx/interface/component_masks/mask_fade_vertical.dds"
-                                #     alpha = 0.7
+                                datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_caster')))]" #put the localize section in custom loc spell_$ID$
+                                tooltip = spell_invalid
+                                enabled = no
+                                visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                down = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_recipient'))).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
+                                hbox = {
+                                    name = "spell_valid"
+                                    #visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    layoutpolicy_vertical = expanding
+                                    spacer = {
+                                        size = { 50 0 }
+                                        layoutpolicy_vertical = expanding
+                                        icon = {
+                                            name = "spell_school_icon"
+                                            size = { 40 40 }
+                                            texture = "gfx/interface/spellbook_widget/spell_school.dds"
+                                            frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                                            framesize = { 256 256 }
+                                            parentanchor = center
+                                        }
+                                    }
+                                    spacer = {
+                                        size = { 340 0 }
+                                        layoutpolicy_vertical = expanding
+                                        text_single = {
+                                            name = "spell_name"
+                                            parentanchor = vcenter
+                                            text = spell_name
+                                            #text = "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
+                                            layoutpolicy_horizontal = expanding
+                                            align = top|left
+                                            default_format = "#clickable"
+                                            margin = { 0 0 }
+                                        }
+                                    }
+                                    spacer = {
+                                        size = { 140 0 }
+                                        layoutpolicy_vertical = expanding
+                                        text_single = {
+                                            name = "spell_cost"
+                                            parentanchor = vcenter
+                                            text = spell_cost
+                                            #text = "[magicka_i][GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|V0]"
+                                            #tooltip = "Cost: [magicka_i][GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|V0] [magicka]#!"
+                                            layoutpolicy_horizontal = expanding
+                                            align = top|left
+                                            default_format = "#clickable"
+                                            margin = { 15 0 }
+                                        }
+                                    }
+                                    spacer = {
+                                        size = { 50 0 }
+                                        layoutpolicy_vertical = expanding
+                                        icon = {
+                                            name = "spell_hostile_icon"
+                                            size = { 34 34 }
+                                            texture = "gfx/interface/icons/symbols/icon_warning.dds"
+                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            parentanchor = center
+                                            tooltip = spell_hostile
+                                            #tooltip = "#N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))] is considered hostile#!"
+                                        }
+                                    }
+                                }
+                                # hbox = {
+                                #     name = "spell_invalid"
                                 #     visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-
-                                #     effectname = "GreyedOut"
-
-                                #     tintcolor = { 0.6 0.6 0.6 0.7 }
-
-                                #     using = Mask_Rough_Edges
-
-                                #     # modify_texture = {
-                                #     #     texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
-                                #     #     blend_mode = alphamultiply
-                                #     # }
+                                #     layoutpolicy_vertical = expanding
+                                #     spacer = {
+                                #         size = { 50 0 }
+                                #         layoutpolicy_vertical = expanding
+                                #         highlight_icon = {
+                                #             name = "spell_school_icon"
+                                #             size = { 40 40 }
+                                #             texture = "gfx/interface/spellbook_widget/spell_school.dds"
+                                #             frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                                #             framesize = { 256 256 }
+                                #             parentanchor = center
+                                #             effectname = "GreyedOut"
+                                #             #tintcolor = { 0.5 0.5 0.5 0.7 }
+                                #         }
+                                #     }
+                                #     spacer = {
+                                #         size = { 340 0 }
+                                #         layoutpolicy_vertical = expanding
+                                #         text_single = {
+                                #             name = "spell_name"
+                                #             parentanchor = vcenter
+                                #             text = spell_name
+                                #             #text = "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
+                                #             layoutpolicy_horizontal = expanding
+                                #             align = top|left
+                                #             default_format = "#low"
+                                #             margin = { 0 0 }
+                                #         }
+                                #     }
+                                #     spacer = {
+                                #         size = { 140 0 }
+                                #         layoutpolicy_vertical = expanding
+                                #         text_single = {
+                                #             name = "spell_cost"
+                                #             parentanchor = vcenter
+                                #             text = spell_cost
+                                #             #text = "[magicka_i][GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|V0]"
+                                #             #tooltip = "Cost: [magicka_i][GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|V0] [magicka]#!"
+                                #             layoutpolicy_horizontal = expanding
+                                #             align = top|left
+                                #             default_format = "#low"
+                                #             margin = { 15 0 }
+                                #         }
+                                #     }
+                                #     spacer = {
+                                #         size = { 50 0 }
+                                #         layoutpolicy_vertical = expanding
+                                #         highlight_icon = {
+                                #             name = "spell_hostile_icon"
+                                #             size = { 34 34 }
+                                #             texture = "gfx/interface/icons/symbols/icon_warning.dds"
+                                #             visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                #             parentanchor = center
+                                #             tooltip = spell_hostile
+                                #             #tooltip = "#N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))] is considered hostile#!"
+                                #             effectname = "GreyedOut"
+                                #             #tintcolor = { 0.5 0.5 0.5 0.7 }
+                                #         }
+                                #     }
                                 # }
                             }
                         }
