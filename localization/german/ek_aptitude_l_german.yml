@@ -1,4 +1,4 @@
-﻿l_english:
+﻿l_german:
  game_concept_magicka:0 "Magicka"
  game_concept_magicka_i:0 "@magicka_icon!"
  game_concept_magicka_desc:1 "$game_concept_magicka$ is used to cast spells. A character's maximum magicka and monthly generation are determined by their [aptitude|E] - each point adds #high 10#! to max magicka and #high 0.1#! to monthly generation."
@@ -158,13 +158,11 @@
  school_restoration:0 "#T Restoration#!"
  school_necromancy:0 "#T Necromancy#!"
 
+ # Dear future translator, some of these need to remain in english. anything that is school_spell_spellname can be changed to just fine,
+ # as can _caster _castee strings ask Varlatra if you need clarification
+
  NO_SPELLS:0 "No Spells"
  spell_province:0 "[GetPlayer.MakeScope.Var('spell_school').GetFlagName]_spell_[ROOT.Province.GetId]"
-
- spell_name:0 "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]"
- spell_cost:0 "#size:11 [magicka_i] #! [GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|0]"
- spell_hostile:0 "#N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))] is considered hostile#!"
- spell_invalid:0 "#N You have not learned [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]#!"
 
  alteration_spell_1:0 "oakflesh"
  alteration_spell_oakflesh_hostile:0 "no"
@@ -196,16 +194,13 @@
  necromancy_spell_raise_dead_hostile:0 "no"
  necromancy_spell_raise_dead:0 "Raise Dead"
 
- spell_name_caster:0 "[SelectLocalization( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile'))), 'yes'), 'spell_name_caster_hostile', 'spell_name_caster_normal' )]"
- spell_name_caster_normal:0 "You cast [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))]"
+ spell_name_caster:0 "You cast [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))]"
  spell_name_caster_hostile:0 "You cast #N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))]#! #N;italic (hostile)#!"
- spell_name_castee:0 "[SelectLocalization( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile'))), 'yes'), 'spell_name_castee_hostile', 'spell_name_castee_normal' )]"
- spell_name_castee_normal:0 "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))] is cast on [GetPlayer.MakeScope.Var('spell_recipient').Char.GetUINameNoTooltip]"
+ spell_name_castee:0 "[Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))] is cast on [GetPlayer.MakeScope.Var('spell_recipient').Char.GetUINameNoTooltip]"
  spell_name_castee_hostile:0 "#N [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))]#! is cast on [GetPlayer.MakeScope.Var('spell_recipient').Char.GetUINameNoTooltip]"
  spell_caster_effect:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), '', 'spell_caster_effect_desc')]"
  spell_caster_effect_desc:0 "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_caster'))).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
  spell_castee_effect:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), '', 'spell_castee_effect_desc')]"
  spell_castee_effect_desc:0 "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_recipient'))).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
- spell_confirm:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), 'no_spell_selected', 'spell_cast' )]"
- no_spell_selected:0 "No Spell Selected"
+ spell_confirm:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), 'No Spell Selected', 'spell_cast' )]"
  spell_cast:0 "Cast [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', GetPlayer.MakeScope.Var('spell_selected').GetFlagName)))]"

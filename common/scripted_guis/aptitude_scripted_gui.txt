@@ -191,42 +191,371 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
     effect = {
         remove_variable = spell_selected
         remove_variable = spell_recipient
+        remove_variable = spell_cast_enabled
+        remove_variable = spell_school
+        clear_variable_list = spell_list
     }
 }
 
-spell_fireball_caster = {
+enable_casting = {
+    scope = character
+    effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
+}
+
+#############
+## Schools ##
+#############
+
+spell_school_alteration = {
     scope = character
 
-    is_shown = {
-        #spell_knows_fireball = yes
+    is_valid = { NOT = { var:spell_school = flag:alteration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:alteration }
+        spell_list_school = { SCHOOL = alteration }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+alteration_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+spell_school_conjuration = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:conjuration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:conjuration }
+        spell_list_school = { SCHOOL = conjuration }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+conjuration_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+spell_school_destruction = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:destruction } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:destruction }
+        spell_list_school = { SCHOOL = destruction }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+destruction_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+spell_school_illusion = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:illusion } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:illusion }
+        spell_list_school = { SCHOOL = illusion }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+illusion_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+spell_school_restoration = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:restoration } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:restoration }
+        spell_list_school = { SCHOOL = restoration }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+restoration_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+spell_school_necromancy = {
+    scope = character
+
+    is_valid = { NOT = { var:spell_school = flag:necromancy } }
+
+    effect = {
+        set_variable = { name = spell_school value = flag:necromancy }
+        spell_list_school = { SCHOOL = necromancy }
+        set_variable = { name = spell_selected value = flag:no_spell }
+    }
+}
+necromancy_spell_no_spell_caster = {
+    scope = character
+    is_shown = { always = no }
+}
+
+############
+## SPELLS ##
+############
+
+# Alteration
+
+alteration_spell_oakflesh_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_oakflesh = yes
         always = yes #for testing
     }
 
-    is_valid = {
-        has_magicka = { VALUE = 5 }
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_oakflesh }
         #always = yes #for testing
     }
 
     effect = {
-        hidden_effect = {
-            set_variable = { name = spell_selected value = flag:fireball }
-        }
-        show_as_tooltip = {
-            add_magicka = { VALUE = -10 }
-        }
+        spell_caster_effect = { SPELL = oakflesh }
     }
 }
 
-spell_fireball_recipient = {
+alteration_spell_oakflesh_recipient = {
     scope = character
 
-    is_valid = {
-        var:spell_selected = flag:fireball
+    is_shown = {
+        var:spell_selected = flag:oakflesh
     }
 
     effect = {
-        show_as_tooltip = {
-            add_aptitude_skill = { VALUE = 2 }
-        }
+        spell_castee_effect = { SPELL = oakflesh }
+    }
+}
+
+# Conjuration
+
+conjuration_spell_summon_scamp_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_summon_scamp = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_summon_scamp }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = summon_scamp }
+    }
+}
+
+conjuration_spell_summon_scamp_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:summon_scamp
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = summon_scamp }
+    }
+}
+
+# Destruction
+
+destruction_spell_flames_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_flames = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_flames }
+        spell_target_self = yes
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = flames }
+    }
+}
+
+destruction_spell_flames_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:flames
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = flames }
+    }
+}
+
+destruction_spell_frostbite_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_frostbite = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_frostbite }
+        spell_target_self = no
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = frostbite }
+    }
+}
+
+destruction_spell_frostbite_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:frostbite
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = frostbite }
+    }
+}
+
+destruction_spell_sparks_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_sparks = yes
+        always = no #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_sparks }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = sparks }
+    }
+}
+
+destruction_spell_sparks_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:sparks
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = sparks }
+    }
+}
+
+# Illusion
+
+illusion_spell_frenzy_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_frenzy = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_frenzy }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = frenzy }
+    }
+}
+
+illusion_spell_frenzy_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:frenzy
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = frenzy }
+    }
+}
+
+# Restoration
+
+restoration_spell_heal_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_heal = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_heal }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = heal }
+    }
+}
+
+restoration_spell_heal_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:heal
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = heal }
+    }
+}
+
+# Necromancy
+
+necromancy_spell_raise_dead_caster = {
+    scope = character
+
+    is_valid = {
+        #spell_knows_raise_dead = yes
+        always = yes #for testing
+    }
+
+    is_shown = {
+        has_magicka = { VALUE = spell_cost_raise_dead }
+        #always = yes #for testing
+    }
+
+    effect = {
+        spell_caster_effect = { SPELL = raise_dead }
+    }
+}
+
+necromancy_spell_raise_dead_recipient = {
+    scope = character
+
+    is_shown = {
+        var:spell_selected = flag:raise_dead
+    }
+
+    effect = {
+        spell_castee_effect = { SPELL = raise_dead }
     }
 }
