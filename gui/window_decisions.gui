@@ -198,6 +198,8 @@ window = {
 			using = Animation_FadeOut_Quick
 			using = Sound_WindowHide_Standard
 			using = Window_Position_MainTab_Hide
+
+			on_start = "[VariableSystem.Clear( 'patron_decision_button' )]"
 		}
 
 		widget = {
@@ -283,6 +285,7 @@ window = {
 
 							blockoverride "patron_icon" {
 								texture = "gfx/interface/patrons/patron_azura.dds"
+								#texture = "[Concatenate(Concatenate('gfx/interface/patrons/patron_', GetPlayer.MakeScope.Var('patron_selected').GetFlag), '.dds')]"
 							}
 						}
 
@@ -2962,6 +2965,8 @@ Types Patrons
 		tooltip = "[Decision.GetShortDescForPlayer]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+		onclick = "[VariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[VariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
 
 		widget = {
 			scissor = yes

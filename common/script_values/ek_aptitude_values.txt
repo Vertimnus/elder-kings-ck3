@@ -366,3 +366,52 @@ magicka_monthly = {
     value = aptitude
     multiply = 0.1
 }
+
+spell_cost_flames = 10
+neg_spell_cost_flames = { value = 0 subtract = spell_cost_flames }
+spell_cost_frostbite = 20
+neg_spell_cost_frostbite = { value = 0 subtract = spell_cost_frostbite }
+spell_cost_sparks = 30
+neg_spell_cost_sparks = { value = 0 subtract = spell_cost_sparks }
+
+spell_cost_oakflesh = 2
+neg_spell_cost_oakflesh = { value = 0 subtract = spell_cost_oakflesh }
+
+spell_cost_summon_scamp = 4
+neg_spell_cost_summon_scamp = { value = 0 subtract = spell_cost_summon_scamp }
+
+spell_cost_frenzy = 6
+neg_spell_cost_frenzy = { value = 0 subtract = spell_cost_frenzy }
+
+spell_cost_heal = 8
+neg_spell_cost_heal = { value = 0 subtract = spell_cost_heal }
+
+spell_cost_raise_dead = 12
+neg_spell_cost_raise_dead = { value = 0 subtract = spell_cost_raise_dead }
+
+spell_school_bg = {
+    if = {
+        limit = { var:spell_school = flag:conjuration }
+        value = 1
+    }
+    else_if = {
+        limit = { var:spell_school = flag:destruction }
+        value = 3
+    }
+    else_if = {
+        limit = { var:spell_school = flag:alteration }
+        value = 5
+    }
+    else_if = {
+        limit = { var:spell_school = flag:illusion }
+        value = 2
+    }
+    else_if = {
+        limit = { var:spell_school = flag:restoration }
+        value = 4
+    }
+    else_if = {
+        limit = { var:spell_school = flag:necromancy }
+        value = 6
+    }
+}
