@@ -356,7 +356,8 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                             parentanchor = center
                                             tooltip = spell_hostile
                                         }
@@ -423,8 +424,8 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
-                                            parentanchor = center
+                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"                                            parentanchor = center
                                             tooltip = spell_hostile
                                             effectname = "GreyedOut"
                                         }
@@ -506,8 +507,8 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
-                                            parentanchor = center
+                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"                                            parentanchor = center
                                             tooltip = spell_hostile
                                         }
                                     }
@@ -693,7 +694,6 @@ window = {
             button_primary = {
                 name = "send_offer_button"
                 size = { 400 42 }
-                #enabled = "[Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'))]"
                 datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_caster')))]"
                 enabled = "[And(Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' )), ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                 tooltip = "[Select_CString( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' ), '', ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
@@ -706,8 +706,6 @@ window = {
 
                 text = spell_confirm
                 using = Font_Size_Medium
-
-                #tooltip = "[BlackmailInteractionWindow.GetSendOfferTooltip]"
             }
         }
     }

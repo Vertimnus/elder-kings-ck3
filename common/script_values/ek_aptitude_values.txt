@@ -173,11 +173,20 @@ aptitude_base = {
 }
 
 aptitude = {
-    value = aptitude_base
+    #value = aptitude_base
+    add = {
+		value = aptitude_base
+		desc = "BASE_VALUE"
+		format = "BASE_VALUE_FORMAT"
+	}
     # Education
     if = {
         limit = { has_trait = education_magical_ability }
-        add = aptitude_trait_education_magical_ability
+        add = {
+            value = aptitude_trait_education_magical_ability
+            desc = "trait_education_magical_ability_1"
+            format = "APTITUDE_VALUE_FORMAT"
+        }
     }
     # Lifestyle
     if = {

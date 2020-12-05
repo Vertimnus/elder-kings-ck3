@@ -7,6 +7,8 @@
  game_concept_aptitude_skill:0 "Aptitude Skill"
  game_concept_aptitude_skill_desc:1 "$game_concept_aptitude$ is a secondary [skill|E] that reflects the Character's magical ability.\n\nA high Aptitude Skill means they have a larger [magicka|E] pool and access to more powerful spells."
  
+ APTITUDE_VALUE_FORMAT:0 $KEY$: [aptitude_i]$VALUE|=+0$"
+
  #try CHARACTER instead of charwindow
  aptitude_title:0 "#bold;high;size:18 [aptitude|E]: [GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]#! #bold;italic;low;size:18 ([CharacterWindow.GetCharacter.Custom('AptitudeLevel')])#!"
  aptitude_base:0 "Base: #high [GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_base')|0]#!"
@@ -167,33 +169,33 @@
  spell_invalid:0 "#N You have not learned [Localize(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, Concatenate('_spell_', Localize(Scope.Province.Custom('SpellProvince')))))]#!"
 
  alteration_spell_1:0 "oakflesh"
- alteration_spell_oakflesh_hostile:0 "no"
+ alteration_spell_oakflesh_hostile:0 "'(bool)no'"
  alteration_spell_oakflesh:0 "Oakflesh"
  
  conjuration_spell_1:0 "summon_scamp"
- conjuration_spell_summon_scamp_hostile:0 "no"
+ conjuration_spell_summon_scamp_hostile:0 "'(bool)no'"
  conjuration_spell_summon_scamp:0 "Summon Scamp"
 
  destruction_spell_1:0 "flames"
- destruction_spell_flames_hostile:0 "yes"
+ destruction_spell_flames_hostile:0 "'(bool)yes'"
  destruction_spell_flames:0 "Flames"
  destruction_spell_2:0 "frostbite"
- destruction_spell_frostbite_hostile:0 "yes"
+ destruction_spell_frostbite_hostile:0 "'(bool)yes'"
  destruction_spell_frostbite:0 "Frostbite"
  destruction_spell_3:0 "sparks"
- destruction_spell_sparks_hostile:0 "yes"
+ destruction_spell_sparks_hostile:0 "'(bool)yes'"
  destruction_spell_sparks:0 "Sparks"
  
  illusion_spell_1:0 "frenzy"
- illusion_spell_frenzy_hostile:0 "yes"
+ illusion_spell_frenzy_hostile:0 "'(bool)yes'"
  illusion_spell_frenzy:0 "Frenzy"
  
  restoration_spell_1:0 "heal"
- restoration_spell_heal_hostile:0 "no"
+ restoration_spell_heal_hostile:0 "'(bool)no'"
  restoration_spell_heal:0 "Heal"
  
  necromancy_spell_1:0 "raise_dead"
- necromancy_spell_raise_dead_hostile:0 "no"
+ necromancy_spell_raise_dead_hostile:0 "'(bool)no'"
  necromancy_spell_raise_dead:0 "Raise Dead"
 
  spell_name_caster:0 "[SelectLocalization( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile'))), 'yes'), 'spell_name_caster_hostile', 'spell_name_caster_normal' )]"
