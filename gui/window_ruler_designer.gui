@@ -11,7 +11,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-        texture_density = 2
+		texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -24,7 +24,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-        texture_density = 2
+		texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -366,7 +366,7 @@ window = {
 
 									editbox_standard = {
 										layoutpolicy_horizontal = expanding
-										
+
 										blockoverride "editbox_properties"
 										{
 											name = "first_name_editbox" # name used in code
@@ -455,7 +455,7 @@ window = {
 
 										editbox_standard = {
 											layoutpolicy_horizontal = expanding
-											
+
 											blockoverride "editbox_properties"
 											{
 												name = "dynasty_name_editbox" # name used in code
@@ -1108,7 +1108,7 @@ window = {
 							}
 
 							expand = {}
-							
+
 							vbox = {
 								name = "weight"
 								layoutpolicy_horizontal = expanding
@@ -1128,7 +1128,7 @@ window = {
 									layoutpolicy_horizontal = expanding
 								}
 							}
-								
+
 							expand = {}
 						}
 
@@ -1332,12 +1332,12 @@ window = {
 												name = "skill_value"
 
 												datacontext = "[RulerDesignerSkill.GetModifiedValueBreakdown]"
-												
+
 												tooltip_enabled = "[ValueBreakdown.HasTooltip]"
 												tooltipwidget = {
 													widget_value_breakdown_tooltip = {}
 												}
-												
+
 												text = "[ValueBreakdown.GetValue]"
 
 												using = Font_Size_Big
@@ -1634,27 +1634,83 @@ window = {
 							expand = {}
 						}
 
-						scrollbox = {
-							name = "ethinicity_list"
+						vbox = {
 							layoutpolicy_horizontal = expanding
-							minimumsize = { 0 470 }
+							hbox = {
+								name = "race_tabs"
+								layoutpolicy_horizontal = expanding
 
-							blockoverride "scrollbox_content"
-							{
-								vbox = {
-									datamodel = "[GetEthnicities]"
+								button_tab = {
+									name = "man_tab"
 									layoutpolicy_horizontal = expanding
 
-									item = {
-										button_standard_hover = {
-											visible = "[Ethnicity.IsVisible]"
-											layoutpolicy_horizontal = expanding
+									text = "RACE_MAN"
+									#default_format = "#low"
+									onclick = "[VariableSystem.Set( 'ek_race', 'Man' )]"
+									down = "[VariableSystem.HasValue( 'ek_race', 'Man' )]"
 
-											text = "[Ethnicity.GetName]"
-											size = { 0 40 }
-											onclick = "[RulerDesignerWindow.SetEthnicity( Ethnicity.Self )]"
-											onclick = "[PdxGuiTriggerAllAnimations('ruler_designer_portrait_refresh')]"
-											onclick = "[VariableSystem.Set( 'ek_ethnicity', Ethnicity.GetName )]"
+									using = tooltip_above
+								}
+
+								button_tab = {
+									name = "mer_tab"
+									layoutpolicy_horizontal = expanding
+
+									text = "RACE_MER"
+									#default_format = "#low"
+									onclick = "[VariableSystem.Set( 'ek_race', 'Mer' )]"
+									down = "[VariableSystem.HasValue( 'ek_race', 'Mer' )]"
+
+									using = tooltip_above
+								}
+
+								button_tab = {
+									name = "kahjiit_tab"
+									layoutpolicy_horizontal = expanding
+
+									text = "RACE_KAHJIIT"
+									#default_format = "#low"
+									onclick = "[VariableSystem.Set( 'ek_race', 'Kahjiit' )]"
+									down = "[VariableSystem.HasValue( 'ek_race', 'Kahjiit' )]"
+
+									using = tooltip_above
+								}
+
+								button_tab = {
+									name = "argonian_tab"
+									layoutpolicy_horizontal = expanding
+
+									text = "RACE_ARGONIAN"
+									#default_format = "#low"
+									onclick = "[VariableSystem.Set( 'ek_race', 'Argonian' )]"
+									down = "[VariableSystem.HasValue( 'ek_race', 'Argonian' )]"
+
+									using = tooltip_above
+								}
+							}
+
+							scrollbox = {
+								name = "ethinicity_list"
+								layoutpolicy_horizontal = expanding
+								minimumsize = { 0 470 }
+
+								blockoverride "scrollbox_content"
+								{
+									vbox = {
+										datamodel = "[GetEthnicities]"
+										layoutpolicy_horizontal = expanding
+
+										item = {
+											button_standard_hover = {
+												visible = "[And( Ethnicity.IsVisible, Not(EqualTo_string( Ethnicity.GetName, 'no' ))) ]"
+												layoutpolicy_horizontal = expanding
+
+												text = "[Ethnicity.GetName]"
+												size = { 0 40 }
+												onclick = "[RulerDesignerWindow.SetEthnicity( Ethnicity.Self )]"
+												onclick = "[PdxGuiTriggerAllAnimations('ruler_designer_portrait_refresh')]"
+												onclick = "[VariableSystem.Set( 'ek_ethnicity', Ethnicity.GetName )]"
+											}
 										}
 									}
 								}
@@ -1683,7 +1739,7 @@ window = {
 						}
 					}
 
-					
+
 				}
 
 				vbox = {
@@ -1838,7 +1894,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-	
+
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -1867,7 +1923,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-	
+
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -2024,7 +2080,7 @@ window = {
 											layoutpolicy_horizontal = expanding
 											margin = { 10 10 }
 											spacing = 4
-											
+
 											visible = "[GeneCategory.IsType( 'morph' )]"
 
 											background = {
@@ -2473,7 +2529,7 @@ types ruler_designer_types
 						tooltip = "RULER_DESIGNER_ADD_TRAIT_SLOT_TOOLTIP"
 
 						onclick = "[TraitSlotArray.StartEditing]"
-						
+
 						block "plus_onclick"
 						{
 							onclick = "[VariableSystem.Set( 'trait_select_window_open', 'true' )]"
