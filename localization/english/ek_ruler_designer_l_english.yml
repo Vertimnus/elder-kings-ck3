@@ -1,0 +1,16 @@
+﻿l_english:
+ # plan: each gene name has Select_CString with check on culture group (based on ethnicity?) if it is a valid group return the name otherwise 'no' and hide with a visible & sting equal check
+ # race picker: done manually. set system var with race name and use check like genes for race name to return no or actual name
+ race_orsimer:0 "Orc"
+ race_altmer:0 "Altmer"
+
+ #orc_teeth_bottom_size:0 "[Select_CString( EqualTo_string( RulerDesignerWindow.GetEthnicity.GetName, 'Orc' ), 'Lower Teeth Size', 'no' )]"
+ orc_teeth_bottom_size:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Orc' ), 'Lower Teeth Size', 'no' )]"
+ orc_teeth_tusk_size:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Orc' ), 'Tusk Size', 'no' )]"
+ orc_teeth_broken:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Orc' ), 'Teeth Broken', 'no' )]"
+ orc_teeth_outward_angle:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Orc' ), 'Teeth Outward', 'no' )]"
+ orc_teeth_forward_angle:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Orc' ), 'Teeth Forward', 'no' )]"
+ race_gene_mer_ears_01:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Altmer' ), 'Mer Ears 1', 'no' )]"
+ race_gene_mer_ears_02:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Altmer' ), 'Mer Ears 2', 'no' )]"
+ race_gene_mer_eyebrows_01:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Altmer' ), 'Mer Eyebrows', 'no' )]" 
+ #race_gene_mer_eyes:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', 'Altmer' ), 'Lower Teeth Size', 'no' )]" should be uncategorised?
