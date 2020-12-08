@@ -9,7 +9,7 @@
  RACE_ARGONIAN:0 "Argonian"
 
  RACE_SELECTED:0 "Race: [VariableSystem.Get( 'ek_race' )]"
- ETHNICITY_SELECTED:) "Ethnicity: [VariableSystem.Get( 'ek_ethnicity' )]"
+ ETHNICITY_SELECTED:0 "Ethnicity: [VariableSystem.Get( 'ek_ethnicity' )]"
 
  #from vanilla, may need to be in replace
  african:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MAN') ), 'West African', 'no' )]"
@@ -39,6 +39,10 @@
  # Man
  race_kothringi:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MAN') ), 'Kothringi', 'no' )]"
 
+ # anatomy groups
+ RULER_DESIGNER_CATEGORY_tail:0 "Tail"
+
+ # EK genes
  #orc_teeth_bottom_size:0 "[Select_CString( EqualTo_string( RulerDesignerWindow.GetEthnicity.GetName, Localize('race_orsimer_name') ), 'Lower Teeth Size', 'no' )]"
  orc_teeth_bottom_size:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_orsimer_name') ), 'Lower Teeth Size', 'no' )]"
  orc_teeth_tusk_size:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_orsimer_name') ), 'Tusk Size', 'no' )]"
@@ -49,3 +53,9 @@
  race_gene_mer_ears_02:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MER') ), 'Mer Ears 2', 'no' )]"
  race_gene_mer_eyebrows_01:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MER') ), 'Mer Eyebrows', 'no' )]" 
  #race_gene_mer_eyes:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_altmer_name') ), 'Lower Teeth Size', 'no' )]" should be uncategorised?
+
+ # gene templates
+ #default_1:0 "no" #need to rename defualts to be gene specific
+ mer_ears_01:0 "[Select_CString( And( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MER') ), Not( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_orsimer_name') ) ) ), 'Mer Ears 1', 'no' )]"
+ mer_ears_02:0 "[Select_CString( And( GetVariableSystem.HasValue( 'ek_race', Localize('RACE_MER') ), Not( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_orsimer_name') ) ) ), 'Mer Ears 2', 'no' )]"
+ mer_ears_03:0 "[Select_CString( GetVariableSystem.HasValue( 'ek_ethnicity', Localize('race_orsimer_name') ), 'Mer Ears 3', 'no' )]"

@@ -1827,6 +1827,13 @@ window = {
 							down = "[VariableSystem.HasValue( 'appearance_customization_side_tab_open', 'mouth' )]"
 						}
 
+						button_standard = {
+							text = RULER_DESIGNER_CATEGORY_tail
+							onclick = "[VariableSystem.Set( 'appearance_customization_side_tab_open', 'tail' )]"
+							onclick = "[VariableSystem.Set( 'appearance_customization_portrait_view', 'full_body' )]"
+							down = "[VariableSystem.HasValue( 'appearance_customization_side_tab_open', 'tail' )]"
+						}
+
 
 
 						spacer = {
@@ -2321,6 +2328,7 @@ types ruler_designer_types
 			button_standard = {
 				name = "template_button"
 				text = "[GeneTemplate.GetName]"
+				visible = "[Not(EqualTo_string( GeneTemplate.GetName, 'no' ))]"
 				onclick = "[RulerDesignerWindow.OnMorphTemplateSelected( GeneTemplate.Self ) ]"
 				down = "[RulerDesignerWindow.HasMorphTemplateSelected( GeneTemplate.Self ) ]"
 			}
