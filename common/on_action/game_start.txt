@@ -1,4 +1,4 @@
-﻿### EK EDIT: Removed references to vanilla religions cultures and characters
+﻿### EK EDIT: Removed references to vanilla religions cultures and characters, and disabled the achievements tracking
 
 # Called from code after history generation
 # Empty scope
@@ -224,13 +224,13 @@ on_game_start_after_lobby = {
 		}
 
 		### ACHIEVEMENT: FROM RAGS TO RICHES
-		every_player = {
-			limit = { highest_held_title_tier = tier_county }
-			add_achievement_global_variable = {
-				VARIABLE = achievement_rags_to_riches_valid
-				VALUE = yes
-			}
-		}
+		# every_player = {
+			# limit = { highest_held_title_tier = tier_county }
+			# add_achievement_global_variable = {
+				# VARIABLE = achievement_rags_to_riches_valid
+				# VALUE = yes
+			# }
+		# }
 		### ACHIEVEMENT TRACKING FOR STARTING CHARACTERS
 		# if = {
 			# limit = { has_multiple_players = no }
@@ -406,6 +406,69 @@ on_game_start_after_lobby = {
 						# VARIABLE = started_al_andalus_achievement
 						# VALUE = yes
 					# }
+				# }
+				# if = {
+					# limit = { 
+						# exists = character:159137
+						# this = character:159137
+					# }
+					# add_achievement_global_variable = {
+						# VARIABLE = started_almost_there_achievement
+						# VALUE = yes
+					# }
+				# }
+				# if = {
+					# limit = { 
+						# exists = character:109607
+						# this = character:109607
+					# }
+					# add_achievement_global_variable = {
+						# VARIABLE = started_last_count_first_king_achievement
+						# VALUE = yes
+					# }
+				# }
+				# if = {
+					# limit = { 
+						# exists = character:6878
+						# this = character:6878
+					# }
+					# add_achievement_global_variable = {
+						# VARIABLE = started_going_places_achievement
+						# VALUE = yes
+					# }
+				# }
+			
+				### RULER DESIGNER ACHIEVEMENT BLOCKS ###
+				# if = {
+					# limit = {
+						# num_virtuous_traits >= 3
+					# }
+					# add_achievement_flag = { FLAG = rd_character_blocked_paragon_of_virtue_achievement_flag	}	
+				# }
+				# if = {
+					# limit = {
+						# any_child = {
+							# count >= 10
+							# is_alive = yes
+						# }
+					# }
+					# add_achievement_flag = { FLAG = rd_character_blocked_the_succession_is_safe_achievement_flag }	
+				# }
+				# if = {
+					# limit = {
+						# any_child = {
+							# has_trait = inbred
+						# }	
+					# }
+					# add_achievement_flag = { FLAG = rd_character_blocked_keeping_it_in_the_family_achievement_flag }
+				# }
+
+				# if = {
+					# limit = {
+						# highest_held_title_tier >= tier_empire
+						# should_be_naked_trigger = yes	
+					# }
+					# add_achievement_flag = { FLAG = rd_character_blocked_the_emperors_new_clothes_achievement_flag }
 				# }
 			# }
 		# }
