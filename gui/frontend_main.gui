@@ -1,5 +1,4 @@
 # EK MainMenu Tweak
-position = { 0 0 }
 widget = {
 	name = "mainmenu_panel_bottom"
 	parentanchor = center
@@ -8,11 +7,17 @@ widget = {
 	state = {
 		name = _show
 		using = Animation_FadeIn_Standard
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Frontend/sfx_ui_frontend_window_show"
+		}
 	}
 
 	state = {
 		name = _hide
 		using = Animation_FadeOut_Standard
+		start_sound = {
+			soundeffect = "event:/SFX/UI/Frontend/sfx_ui_frontend_window_hide"
+		}
 	}
 
 	widget = {
@@ -33,17 +38,64 @@ widget = {
 			parentanchor = center
 			size = { 100% 100% }
 			texture = "[FrontEndMainView.GetBackground]"
+
+			modify_texture = {
+				name = "fade"
+				texture = "gfx/interface/component_masks/mask_fade_horizontal.dds"
+				blend_mode = alphamultiply
+				translate_uv = { 1 0 }
+				alpha = 0
+			}
+
+			state = {
+				name = "main_menu_continue"
+				duration = 1
+				bezier = { 0.5 0 1 0.5 }
+
+				modify_texture = {
+					name = "fade"
+					translate_uv = { -1 0 }
+					alpha = 1
+				}
+			}
 		}
 
 		icon = {
 			name = "shadow_left"
-			visible = "[FrontEndMainView.ShowSecondaryCharacter]"
+			visible = "[And( FrontEndMainView.ShowSecondaryCharacter, GreaterThan_int32( FrontEndMainView.GetSecondaryCharacterAge, '(int32)1' ) )]"
 			parentanchor = bottom|hcenter
 			position = { 170 -75 }
 			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
 			scale = 0.7
 		}
 
+		icon = {
+			name = "shadow_left_sitting_child"
+			visible = "[And( FrontEndMainView.ShowSecondaryCharacter, LessThanOrEqualTo_int32( FrontEndMainView.GetSecondaryCharacterAge, '(int32)1' ) )]"
+			parentanchor = bottom|hcenter
+			position = { 150 -135 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.35
+		}
+
+		icon = {
+			name = "shadow_center"
+			visible = "[GreaterThan_int32( FrontEndMainView.GetMainCharacterAge, '(int32)1' )]"
+			parentanchor = bottom|hcenter
+			position = { 335 -40 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.7
+		}
+
+		icon = {
+			name = "shadow_center_sitting_child"
+			visible = "[LessThanOrEqualTo_int32( FrontEndMainView.GetMainCharacterAge, '(int32)1' )]"
+			parentanchor = bottom|hcenter
+			position = { 325 -80 }
+			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
+			scale = 0.35
+		}
+		
 		icon = {
 			name = "shadow_right"
 			visible = "[And( FrontEndMainView.ShowHeirCharacter, GreaterThan_int32( FrontEndMainView.GetHeirCharacterAge, '(int32)1' ) )]"
@@ -54,20 +106,12 @@ widget = {
 		}
 
 		icon = {
-			name = "shadow_center"
-			parentanchor = bottom|hcenter
-			position = { 335 -40 }
-			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
-			scale = 0.7
-		}
-
-		icon = {
-			name = "shadow_right_front"
+			name = "shadow_right_sitting_child"
 			visible = "[And( FrontEndMainView.ShowHeirCharacter, LessThanOrEqualTo_int32( FrontEndMainView.GetHeirCharacterAge, '(int32)1' ) )]"
 			parentanchor = bottom|hcenter
-			position = { 505 5 }
+			position = { 490 -45 }
 			texture = "gfx/interface/frontend/portrait_main_menu_shadow.dds"
-			scale = 0.7
+			scale = 0.35
 		}
 
 		@frontend_portrait_y = -240
@@ -75,7 +119,7 @@ widget = {
 		# Secondary
 		portrait_button = {
 			name = "menu_portrait_left"
-			visible = "[FrontEndMainView.ShowSecondaryCharacter]"
+			visible = "[And(FrontEndMainView.ShowSecondaryCharacter , GreaterThan_int32( FrontEndMainView.GetSecondaryCharacterAge, '(int32)1' ))]"
 			parentanchor = center
 			position = { 0 @frontend_portrait_y }
 			using = portrait_base
@@ -83,6 +127,27 @@ widget = {
 			alwaystransparent = yes
 
 			portrait_texture = "[FrontEndMainView.GetSecondaryCharacterTexture('camera_main_menu_secondary', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes'))]"
+			mask = "gfx/portraits/portrait_mask_solid.dds"
+
+			blockoverride "grayscale" {}
+			blockoverride "portrait_button_template_onmouseenter" {}
+			blockoverride "portrait_button_template_onmouseleave" {}
+			blockoverride "portrait_button_template_onclick" {}
+			blockoverride "portrait_button_template_onrightclick" {}
+			blockoverride "portrait_button_template_tooltip" {}
+		}
+
+		# Secondary child, sitting child version
+		portrait_button = {
+			name = "menu_portrait_left_sitting_child"
+			visible = "[And(FrontEndMainView.ShowSecondaryCharacter , LessThanOrEqualTo_int32( FrontEndMainView.GetSecondaryCharacterAge, '(int32)1' ))]"
+			parentanchor = center
+			position = { 0 @frontend_portrait_y }
+			using = portrait_base
+			size = { 1920 1400 }
+			alwaystransparent = yes
+
+			portrait_texture = "[FrontEndMainView.GetSecondaryCharacterTexture('camera_main_menu_secondary_sitting_child', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes'))]"
 			mask = "gfx/portraits/portrait_mask_solid.dds"
 
 			blockoverride "grayscale" {}
@@ -117,6 +182,7 @@ widget = {
 		# Main Character
 		portrait_button = {
 			name = "menu_portrait_center"
+			visible = "[GreaterThan_int32( FrontEndMainView.GetMainCharacterAge, '(int32)1' )]"
 			parentanchor = center
 			position = { 0 @frontend_portrait_y }
 			using = portrait_base
@@ -134,17 +200,38 @@ widget = {
 			blockoverride "portrait_button_template_tooltip" {}
 		}
 
-		# Child Heir
+		# Main Character, sitting child version
 		portrait_button = {
-			name = "menu_portrait_heir_in_front"
-			visible = "[And( FrontEndMainView.ShowHeirCharacter, LessThanOrEqualTo_int32( FrontEndMainView.GetHeirCharacterAge, '(int32)1' ) )]"
+			name = "menu_portrait_center_sitting_child"
+			visible = "[LessThanOrEqualTo_int32( FrontEndMainView.GetMainCharacterAge, '(int32)1' )]"
 			parentanchor = center
-			position = { 0 @[frontend_portrait_y-50] }
+			position = { 0 @frontend_portrait_y }
 			using = portrait_base
 			size = { 1920 1400 }
 			alwaystransparent = yes
 
-			portrait_texture = "[FrontEndMainView.GetHeirCharacterTexture('camera_main_menu_heir_in_front', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes')]"
+			portrait_texture = "[FrontEndMainView.GetMainCharacterTexture('camera_main_menu_main_sitting_child', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes'))]"
+			mask = "gfx/portraits/portrait_mask_solid.dds"
+
+			blockoverride "grayscale" {}
+			blockoverride "portrait_button_template_onmouseenter" {}
+			blockoverride "portrait_button_template_onmouseleave" {}
+			blockoverride "portrait_button_template_onclick" {}
+			blockoverride "portrait_button_template_onrightclick" {}
+			blockoverride "portrait_button_template_tooltip" {}
+		}
+
+		# Heir, sitting child version
+		portrait_button = {
+			name = "menu_portrait_heir_sitting_child"
+			visible = "[And( FrontEndMainView.ShowHeirCharacter, LessThanOrEqualTo_int32( FrontEndMainView.GetHeirCharacterAge, '(int32)1' ) )]"
+			parentanchor = center
+			position = { 0 @[frontend_portrait_y+50] }
+			using = portrait_base
+			size = { 1920 1400 }
+			alwaystransparent = yes
+
+			portrait_texture = "[FrontEndMainView.GetHeirCharacterTexture('camera_main_menu_heir_sitting_child', PdxGetWidgetScreenSize(PdxGuiWidget.Self), '(bool)yes')]"
 			mask = "gfx/portraits/portrait_mask_solid.dds"
 
 			blockoverride "grayscale" {}
@@ -926,29 +1013,4 @@ widget = {
 		parentanchor = bottom|right
 		position = { -80 -90 }
 	}
-}
-
-Types BasicFrontendTypes
-{
-	type clickable_version_number = button_group {
-		name = "copy_build_version"
-
-		onclick = "[CopyBuildVersionInfoToClipboard]"
-		tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
-
-		textbox = {
-			name = "build_version"
-			parentanchor = center
-			autoresize = yes
-			block "version_text" {
-				text = "TOP_BAR_VERSION"
-				align = right
-			}
-
-			default_format = "#medium;glow_color:{0,0,0,1}"
-		}
-
-
-	}
-
 }
