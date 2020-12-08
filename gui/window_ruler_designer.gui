@@ -11,7 +11,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-		texture_density = 2
+        texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -24,7 +24,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-		texture_density = 2
+        texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -42,6 +42,8 @@ window = {
 		on_start = "[GetVariableSystem.Clear( 'appearance_customization_window_open' )]"
 		on_start = "[GetVariableSystem.Clear( 'appearance_customization_side_tab_open' )]"
 		on_start = "[GetVariableSystem.Clear( 'appearance_customization_portrait_view' )]"
+		on_start = "[GetVariableSystem.Clear( 'ek_race' )]"
+		on_start = "[GetVariableSystem.Clear( 'ek_ethnicity' )]"
 	}
 
 	state = {
@@ -366,7 +368,7 @@ window = {
 
 									editbox_standard = {
 										layoutpolicy_horizontal = expanding
-
+										
 										blockoverride "editbox_properties"
 										{
 											name = "first_name_editbox" # name used in code
@@ -455,7 +457,7 @@ window = {
 
 										editbox_standard = {
 											layoutpolicy_horizontal = expanding
-
+											
 											blockoverride "editbox_properties"
 											{
 												name = "dynasty_name_editbox" # name used in code
@@ -1109,7 +1111,7 @@ window = {
 							}
 
 							expand = {}
-
+							
 							vbox = {
 								name = "weight"
 								layoutpolicy_horizontal = expanding
@@ -1129,7 +1131,7 @@ window = {
 									layoutpolicy_horizontal = expanding
 								}
 							}
-
+								
 							expand = {}
 						}
 
@@ -1333,12 +1335,12 @@ window = {
 												name = "skill_value"
 
 												datacontext = "[RulerDesignerSkill.GetModifiedValueBreakdown]"
-
+												
 												tooltip_enabled = "[ValueBreakdown.HasTooltip]"
 												tooltipwidget = {
 													widget_value_breakdown_tooltip = {}
 												}
-
+												
 												text = "[ValueBreakdown.GetValue]"
 
 												using = Font_Size_Big
@@ -1740,7 +1742,7 @@ window = {
 						}
 					}
 
-
+					
 				}
 
 				vbox = {
@@ -1757,6 +1759,18 @@ window = {
 
 					vbox = {
 						spacing = 10
+
+						text_label_left = {
+							layoutpolicy_horizontal = expanding
+
+							text = RACE_SELECTED
+						}
+
+						text_label_left = {
+							layoutpolicy_horizontal = expanding
+
+							text = ETHNICITY_SELECTED
+						}
 
 						text_label_left = {
 							layoutpolicy_horizontal = expanding
@@ -1813,6 +1827,14 @@ window = {
 							down = "[VariableSystem.HasValue( 'appearance_customization_side_tab_open', 'mouth' )]"
 						}
 
+						button_standard = {
+							text = RULER_DESIGNER_CATEGORY_tail
+							visible = "[Or( VariableSystem.HasValue( 'ek_race', Localize('RACE_KAHJIIT') ), VariableSystem.HasValue( 'ek_race', Localize('RACE_ARGONIAN') ) )]"
+							onclick = "[VariableSystem.Set( 'appearance_customization_side_tab_open', 'tail' )]"
+							onclick = "[VariableSystem.Set( 'appearance_customization_portrait_view', 'full_body' )]"
+							down = "[VariableSystem.HasValue( 'appearance_customization_side_tab_open', 'tail' )]"
+						}
+
 
 
 						spacer = {
@@ -1866,6 +1888,8 @@ window = {
 							onclick = "[VariableSystem.Clear( 'appearance_customization_side_tab_open' )]"
 							onclick = "[VariableSystem.Clear( 'appearance_customization_window_open' )]"
 							onclick = "[VariableSystem.Clear( 'appearance_customization_portrait_view' )]"
+							onclick = "[VariableSystem.Clear( 'ek_race' )]"
+							onclick = "[VariableSystem.Clear( 'ek_ethnicity' )]"
 							min_width = 300
 						}
 					}
@@ -1895,7 +1919,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-
+	
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -1924,7 +1948,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-
+	
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -2081,7 +2105,7 @@ window = {
 											layoutpolicy_horizontal = expanding
 											margin = { 10 10 }
 											spacing = 4
-
+											
 											visible = "[GeneCategory.IsType( 'morph' )]"
 
 											background = {
@@ -2305,6 +2329,7 @@ types ruler_designer_types
 			button_standard = {
 				name = "template_button"
 				text = "[GeneTemplate.GetName]"
+				visible = "[Not(EqualTo_string( GeneTemplate.GetName, 'no' ))]"
 				onclick = "[RulerDesignerWindow.OnMorphTemplateSelected( GeneTemplate.Self ) ]"
 				down = "[RulerDesignerWindow.HasMorphTemplateSelected( GeneTemplate.Self ) ]"
 			}
@@ -2530,7 +2555,7 @@ types ruler_designer_types
 						tooltip = "RULER_DESIGNER_ADD_TRAIT_SLOT_TOOLTIP"
 
 						onclick = "[TraitSlotArray.StartEditing]"
-
+						
 						block "plus_onclick"
 						{
 							onclick = "[VariableSystem.Set( 'trait_select_window_open', 'true' )]"
