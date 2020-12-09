@@ -7,13 +7,13 @@
  game_concept_aptitude_skill:0 "Aptitude Skill"
  game_concept_aptitude_skill_desc:1 "$game_concept_aptitude$ is a secondary [skill|E] that reflects the Character's magical ability.\n\nA high Aptitude Skill means they have a larger [magicka|E] pool and access to more powerful spells."
  
- APTITUDE_VALUE_FORMAT:0 $KEY$: "[aptitude_i]$VALUE|=+0$"
+ APTITUDE_VALUE_FORMAT:0 "$KEY$: [aptitude_i]$VALUE|=+0$"
 
  #try CHARACTER instead of charwindow
- aptitude_title:0 "#bold;high;size:18 [aptitude|E]: [GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]#! #bold;italic;low;size:18 ([CharacterWindow.GetCharacter.Custom('AptitudeLevel')])#!"
- aptitude_base:0 "Base: #high [GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_base')|0]#!"
+ aptitude_title:0 "#bold;high;size:18 [aptitude|E]: [GuiScope.SetRoot( Character.MakeScope ).ScriptValue('aptitude')|0]#! #bold;italic;low;size:18 ([Character.Custom('AptitudeLevel')])#!"
+ aptitude_base:0 "Base: #high [GuiScope.SetRoot( Character.MakeScope ).ScriptValue('aptitude_base')|0]#!"
  #education
- aptitude_education_magical_ability:0 "[CharacterWindow.GetCharacter.Custom('aptitude_education_magical_ability')]"
+ aptitude_education_magical_ability:0 "[Character.Custom('aptitude_education_magical_ability')]"
  aptitude_education_magical_ability_1:0 "[GetTrait('education_magical_ability_1').GetName(ROOT.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( ROOT.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_education_magical_ability_1')|0]#!"
  aptitude_education_magical_ability_2:0 "[GetTrait('education_magical_ability_2').GetName(ROOT.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( ROOT.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_education_magical_ability_2')|0]#!"
  aptitude_education_magical_ability_3:0 "[GetTrait('education_magical_ability_3').GetName(ROOT.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( ROOT.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_education_magical_ability_3')|0]#!"
@@ -25,7 +25,7 @@
  aptitude_mystic_3:0 "[GetTrait('mystic_3').GetName(ROOT.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( ROOT.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_mystic_3')|0]#!"
  aptitude_scholar:0 "[GetTrait('scholar').GetName(CharacterWindow.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_scholar')|0]#!"
  aptitude_soul_magic:0 "[GetTrait('soul_magic').GetName(CharacterWindow.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_soul_magic')|0]#!"
- aptitude_conjurer:0 "[GetTrait('conjurer').GetName(CharacterWindow.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_conjurer')|0]#!"
+ aptitude_conjurer:0 "[GetTrait('conjurer').GetName(CHARACTER)]: [aptitude_i]#P +[GuiScope.SetRoot( Character.MakeScope ).ScriptValue('aptitude_trait_conjurer')|0]#!"
  #personality
  aptitude_lazy:0 "[GetTrait('lazy').GetName(CharacterWindow.GetCharacter)]: [aptitude_i]#N [GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_lazy')|0]#!"
  aptitude_diligent:0 "[GetTrait('diligent').GetName(CharacterWindow.GetCharacter)]: [aptitude_i]#P +[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude_trait_diligent')|0]#!"

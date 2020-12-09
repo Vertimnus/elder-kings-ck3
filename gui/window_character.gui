@@ -1158,7 +1158,9 @@ window = {
 
 							vbox = {
 								tooltipwidget = {
-									aptitude_breakdown_widget = {}
+									aptitude_breakdown_widget = {
+										datacontext = "[CharacterWindow.GetCharacter]"
+									}
 								}
 
 								#tooltip = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude').GetValueBreakdown]"
@@ -3614,298 +3616,298 @@ window = {
 		}
 	}
 
-	types Aptitude
-	{
-		type aptitude_breakdown_widget = widget
-		{
-			alwaystransparent = no
-			using = GeneralTooltipSetup
-			widget = {
-				name = "background"
-				using = DefaultTooltipBackground
-				size = { 100% 100% }
-				alwaystransparent = no
-			}
-			vbox = {
-				set_parent_size_to_minimum = yes
-				margin = { 20 10 }
-				margin_bottom = 20
-				spacing = 3
+	# types Aptitude
+	# {
+	# 	type aptitude_breakdown_widget = widget
+	# 	{
+	# 		alwaystransparent = no
+	# 		using = GeneralTooltipSetup
+	# 		widget = {
+	# 			name = "background"
+	# 			using = DefaultTooltipBackground
+	# 			size = { 100% 100% }
+	# 			alwaystransparent = no
+	# 		}
+	# 		vbox = {
+	# 			set_parent_size_to_minimum = yes
+	# 			margin = { 20 10 }
+	# 			margin_bottom = 20
+	# 			spacing = 3
 
-				text_single = {
-					layoutpolicy_horizontal = expanding
-					text = "aptitude_title"
-					align = left
-				}
+	# 			text_single = {
+	# 				layoutpolicy_horizontal = expanding
+	# 				text = "aptitude_title"
+	# 				align = left
+	# 			}
 
-				vbox = {
-					layoutpolicy_horizontal = expanding
-					layoutpolicy_vertical = expanding
-					#margin = { 0 4 }
-					spacing = -1
+	# 			vbox = {
+	# 				layoutpolicy_horizontal = expanding
+	# 				layoutpolicy_vertical = expanding
+	# 				#margin = { 0 4 }
+	# 				spacing = -1
 
-					# text_single = {
-					# 	layoutpolicy_horizontal = expanding
-					# 	text = "aptitude_title"
-					# 	align = left
-					# }
-					text_single = {
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_base"
-						align = left
-					}
-					# Education
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_education_magical_ability').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_education_magical_ability"
-						align = left
-					}
-					# Lifestyles
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_mystic').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_mystic"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_scholar').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_scholar"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_soul_magic').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_soul_magic"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_conjurer').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_conjurer"
-						align = left
-					}
-					# Personailty
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_lazy').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_lazy"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_diligent').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_diligent"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_patient').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_patient"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_impatient').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_impatient"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_shy').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_shy"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_ambitious').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_ambitious"
-						align = left
-					}
-					# Stress
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_drunkard').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_drunkard"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_hashishiyah').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_hashishiyah"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_reclusive').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_reclusive"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_irritable').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_irritable"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_journaller').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_journaller"
-						align = left
-					}
-					# Genetic
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_intellect').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_intellect"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_inbred').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_inbred"
-						align = left
-					}
-					# Health
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_infirm').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_infirm"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_incapable').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_incapable"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_lunatic').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_lunatic"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_possessed').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_possessed"
-						align = left
-					}
-					# Disease
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_ill').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_ill"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_pneumonic').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_pneumonic"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_great_pox').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_great_pox"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_consumption').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_consumption"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_typhus').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_typhus"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_bubonic_plague').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_bubonic_plague"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_smallpox').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_smallpox"
-						align = left
-					}
-					# Physical
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_shrewd').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_shrewd"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_dull').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_dull"
-						align = left
-					}
-					# Criminal
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_witch_group').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_witch_group"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_necromancer').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_necromancer"
-						align = left
-					}
-					# Other
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_adventurer').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_adventurer"
-						align = left
-					}
-					# Patrons & Birthsigns
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_p_magnus').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_p_magnus"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_p_julianos').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_p_julianos"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_p_hermaeus').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_p_hermaeus"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_sign_mage').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_sign_mage"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_sign_apprentice').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_sign_apprentice"
-						align = left
-					}
-					text_single = {
-						visible = "[GetScriptedGui('aptitude_sign_atronach').IsShown(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
-						layoutpolicy_horizontal = expanding
-						text = "aptitude_sign_atronach"
-						align = left
-					}
-				}
-			}
-		}
-	}
+	# 				# text_single = {
+	# 				# 	layoutpolicy_horizontal = expanding
+	# 				# 	text = "aptitude_title"
+	# 				# 	align = left
+	# 				# }
+	# 				text_single = {
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_base"
+	# 					align = left
+	# 				}
+	# 				# Education
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_education_magical_ability').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_education_magical_ability"
+	# 					align = left
+	# 				}
+	# 				# Lifestyles
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_mystic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_mystic"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_scholar').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_scholar"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_soul_magic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_soul_magic"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_conjurer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_conjurer"
+	# 					align = left
+	# 				}
+	# 				# Personailty
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_lazy').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_lazy"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_diligent').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_diligent"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_patient').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_patient"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_impatient').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_impatient"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_shy').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_shy"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_ambitious').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_ambitious"
+	# 					align = left
+	# 				}
+	# 				# Stress
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_drunkard').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_drunkard"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_hashishiyah').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_hashishiyah"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_reclusive').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_reclusive"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_irritable').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_irritable"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_journaller').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_journaller"
+	# 					align = left
+	# 				}
+	# 				# Genetic
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_intellect').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_intellect"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_inbred').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_inbred"
+	# 					align = left
+	# 				}
+	# 				# Health
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_infirm').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_infirm"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_incapable').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_incapable"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_lunatic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_lunatic"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_possessed').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_possessed"
+	# 					align = left
+	# 				}
+	# 				# Disease
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_ill').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_ill"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_pneumonic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_pneumonic"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_great_pox').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_great_pox"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_consumption').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_consumption"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_typhus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_typhus"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_bubonic_plague').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_bubonic_plague"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_smallpox').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_smallpox"
+	# 					align = left
+	# 				}
+	# 				# Physical
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_shrewd').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_shrewd"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_dull').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_dull"
+	# 					align = left
+	# 				}
+	# 				# Criminal
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_witch_group').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_witch_group"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_necromancer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_necromancer"
+	# 					align = left
+	# 				}
+	# 				# Other
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_adventurer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_adventurer"
+	# 					align = left
+	# 				}
+	# 				# Patrons & Birthsigns
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_p_magnus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_p_magnus"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_p_julianos').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_p_julianos"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_p_hermaeus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_p_hermaeus"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_sign_mage').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_sign_mage"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_sign_apprentice').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_sign_apprentice"
+	# 					align = left
+	# 				}
+	# 				text_single = {
+	# 					visible = "[GetScriptedGui('aptitude_sign_atronach').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
+	# 					layoutpolicy_horizontal = expanding
+	# 					text = "aptitude_sign_atronach"
+	# 					align = left
+	# 				}
+	# 			}
+	# 		}
+	# 	}
+	# }
