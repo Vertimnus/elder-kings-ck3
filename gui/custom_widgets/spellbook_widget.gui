@@ -262,8 +262,8 @@ window = {
                                 size = { 0 40 }
 
                                 datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_caster')))]" #put the localize section in custom loc spell_$ID$
-                                tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+                                visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                                 down = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_recipient'))).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
@@ -318,7 +318,7 @@ window = {
                                 widget = {
                                     name = "spell_valid"
                                     size = { 580 40 }
-                                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                                     widget = {
                                         size = { 50 40 }
                                         position = { 0 0 }
@@ -383,7 +383,7 @@ window = {
                                 widget = {
                                     name = "spell_invalid"
                                     size = { 580 40 }
-                                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
                                     widget = {
                                         size = { 50 40 }
                                         position = { 0 0 }
@@ -465,7 +465,7 @@ window = {
                                 datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_caster')))]" #put the localize section in custom loc spell_$ID$
                                 tooltip = spell_invalid
                                 enabled = no
-                                visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                                visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
 
                                 widget = {
                                     name = "spell_unknown"
@@ -713,13 +713,14 @@ window = {
                 name = "send_offer_button"
                 size = { 400 42 }
                 datacontext = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_caster')))]"
-                enabled = "[And(Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' )), ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-                tooltip = "[Select_CString( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' ), '', ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-                onclick = "[GetScriptedGui('enable_casting').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                enabled = "[And(Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' )), ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
+                tooltip = "[Select_CString( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' ), '', ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
+                onclick = "[GetScriptedGui('enable_casting').Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                 onclick = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_recipient'))).Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)]"
 
                 onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
+                onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                 onclick = "[GetScriptedGui('magicka_casting_spell').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                 text = spell_confirm
