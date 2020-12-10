@@ -25,3 +25,71 @@
 		base = 0
 	}
 }
+
+### Vows of Squalor
+take_vow_of_squalor_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = take_vow_of_squalor_decision_desc
+	selection_tooltip = take_vow_of_squalor_decision_tooltip
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = vows_of_squalor_active }
+		NOT = { has_character_modifier = vow_of_squalor_modifier }
+	}
+
+	effect = {
+		add_character_modifier = {
+			modifier = vow_of_squalor_modifier
+		}
+
+		stress_impact = {
+			greedy = major_stress_impact_gain
+			cynical = medium_stress_impact_gain
+			ambitious = minor_stress_impact_gain
+		}
+	}
+	
+	ai_check_interval = 120
+
+	ai_potential = {
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}
+
+renounce_vow_of_squalor_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = renounce_vow_of_squalor_decision_desc
+	selection_tooltip = renounce_vow_of_squalor_decision_tooltip
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = vows_of_squalor_active }
+		has_character_modifier = vow_of_squalor_modifier
+	}
+
+	effect = {
+		add_piety = medium_piety_loss
+		remove_character_modifier = vow_of_squalor_modifier
+
+		stress_impact = {
+			generous = major_stress_impact_gain
+			zealous = medium_stress_impact_gain
+			humble = minor_stress_impact_gain
+		}
+	}
+	
+	ai_check_interval = 60
+
+	ai_potential = {
+	}
+
+	ai_will_do = {
+		base = 0
+	}
+}

@@ -318,3 +318,38 @@ has_changed_contract_obligation_trigger = {
 		}
 	}
 }
+
+recently_converted_faith_trigger = {
+	OR = {
+		has_character_flag = converted_by_heresy_0011_event
+		has_character_flag = converted_by_heresy_0010_event
+		has_character_flag = converted_by_forced_conversion_interaction
+	}
+}
+
+can_touch_someone_trigger = {
+	#This is to check if someone is physically capable and not in risk of disease. Remember to always ask for consent!
+	NOR = {
+		has_trait = leper
+		has_trait = scaly #people with eczema and other skin conditions often got the same treatment as lepers
+		has_trait = smallpox
+		has_trait = bubonic_plague
+
+		#circumstancial
+		has_trait = incapable
+		has_trait = wounded 
+		has_trait = maimed
+		has_trait = typhus 
+
+		# gout happens mostly in the foot, but as someone with inflammatory arthritis, I hate handshakes when my fingers are aching
+		has_trait = gout_ridden
+	}
+}
+
+is_spouse_or_romantic_partner_of_root = {
+	OR = {
+		has_relation_lover = root
+		is_consort_of = root
+		has_relation_soulmate = root
+	}
+}

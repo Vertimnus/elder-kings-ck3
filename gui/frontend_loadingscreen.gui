@@ -22,7 +22,16 @@ types LoadingScreen
 
 			flowcontainer = {
 				ignoreinvisible = yes
-				spacing = 10
+				spacing = 15
+
+				background = {
+					visible = "[ReleaseMode]"
+					texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+					color = { 0.15 0.15 0.15 0.7 }
+					margin = { 0 30 }
+					margin_left = 150
+					margin_right = 80
+				}
 
 				progressbar = {
 					size = { 65 65 }
@@ -59,34 +68,17 @@ types LoadingScreen
 					size = { 200 30 }
 					fontsize = 20
 					font = StandardGameFont
-					default_format = "#medium;glow_color:{0.1,0.1,0.1,1}"
 					align = left|nobaseline
+					default_format = "#medium;glow_color:{0.1,0.1,0.1,1}"
 				}
 			}
 		}
 
-		button = {
-			name = "copy_build_version"
+		clickable_version_number = {
 			visible = "[Not(ReleaseMode)]"
-			parentanchor = top|right
-			position = { -20 10 }
-			size = { 400 80 }
-			onclick = "[CopyBuildVersionInfoToClipboard]"
 
-
-			block "build_tooltip" {}
-
-			textbox = {
-				name = "build_version"
-				size = { 100% 100% }
-				fontsize = 13
-				font = StandardGameFont
-				default_format = "#low"
-				multiline = yes
-				text = "TOP_BAR_VERSION"
-				align = right
-				alpha = 0.5
-			}
+			parentanchor = bottom|right
+			position = { -15 -15 }
 		}
 	}
 }
@@ -120,4 +112,30 @@ template Animation_LoadingScreen_ShowHide
 
 		alpha = 0
 	}
+}
+
+
+Types BasicFrontendTypes
+{
+	type clickable_version_number = button_group {
+		name = "copy_build_version"
+
+		onclick = "[CopyBuildVersionInfoToClipboard]"
+		tooltip = "[GetBuildVersionDescriptionWithClickToCopy]"
+
+		textbox = {
+			name = "build_version"
+			parentanchor = center
+			autoresize = yes
+			block "version_text" {
+				text = "TOP_BAR_VERSION"
+				align = right
+			}
+
+			default_format = "#medium;glow_color:{0,0,0,1}"
+		}
+
+
+	}
+
 }

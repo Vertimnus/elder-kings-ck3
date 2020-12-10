@@ -1,13 +1,18 @@
+### V2! Cause I finally figured out that repeating the numbers like 10 times might be a bad idea.
+### Problem: You have to redo it everytime you add or change a culture... Maybe one day I'll make a V3 where you put it idk in the cultures (I think that's where it's defined?)
+
 ### This was done in about 10 minutes so don't judge thank you very much
 ### How to use:
 ## 1. Put that in your logs folder, where your error.log is generated
-## 2. Delete any already existing name localizing file (elder-kings-ck3\localization\english\names\characters_name_XXX_l_english.yml)
+## 2. Delete any already existing name localizing file (elder-kings-ck3\localization\english\names\ek_character_names_l_english.yml)
 ## 3. Run this script
-## 4. Put the resulting .yml files in the folder your previously emptied
+## 4. Put the resulting .yml file in the folder your previously emptied
 ## 5. Make sure there isn't anything strange
 ## 6. Profit?
 
 reader = open('error.log', 'r')
+
+fileResultName = "ek_character_names_l_english"
 try:
     # Pog, the file is opened
 	print("File opened")
@@ -23,30 +28,24 @@ try:
 	
 	# print(interestingLines)
 	
-	# Now we separate the lines by their culture tag
-	dict_name_cultures = {}
+	# Now we parse them and isolate the name
+	nameList = []
 	
 	for line in interestingLines:
+		# Ugly, but basically we isolate what's between 'Missing loc for name' and 'in culture'
 		name = line.split("Missing loc for name")[1].split("in culture")[0].replace(" \'", '').replace("\' ", '').replace('\n', '')
-		culture = line.split(" in culture ")[1].replace('\'', '').replace('\n', '')
 		
-		# We create a dictionary where each culture is given an array of names
-		if not culture in dict_name_cultures:
-			dict_name_cultures[culture] = []
-			
-		dict_name_cultures[culture].append(name)
+		if not name in nameList:
+			nameList.append(name)
 	
-	# for key in dict_name_cultures:
-		# print(key + ":")
-		# for item in dict_name_cultures[key]:
-			# print(" - " + item)
-			
-	# Ok so now is the fun part! We create a loc file for each culture, in which we do a 1->1 localization of the name, poggers
-	for key in dict_name_cultures:
-		print(key)
-		with open("characters_name_"+key+"_l_english.yml", "w", encoding='utf-8-sig') as file:
+	# We got our names, pogchamp
+	# If we have at least one, we create our file. Otherwise it'd be kinda useless dontcha think
+	if nameList:
+		nameList.sort()
+		
+		with open(fileResultName + ".yml", "w", encoding='utf-8-sig') as file:
 			file.write("l_english:\n")
-			for name in dict_name_cultures[key]:
+			for name in nameList:
 				file.write(" " + name + ":0 \"" + name + "\"\n")
 	
 finally:
