@@ -5,8 +5,6 @@
 
 window = {
     name = "spellbook_interaction_window"
-    #datacontext = "[MarriageInteractionWindow.GetBaseWindow]"
-    #datacontext = "[MatchmakerInteractionWindow.GetCharacterInteractionConfirmationWindow]"
     position = { 0 30 }
     parentanchor = center
     allow_outside = yes
@@ -61,14 +59,32 @@ window = {
                 using = Background_Area
             }
 
-            #vbox = {
-            #spacing = 12
-            portrait_head = {
-                datacontext = "[GetPlayer]"
-                visible = "[GetPlayer.IsValid]"
+            widget = {
+                size = { 110 120 }
+                portrait_head = {
+                    datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
+                    visible = "[Character.IsValid]"
+                }
+
+                button_round = {
+                    size = { 30 30 }
+                    name = "switch_caster"
+                    parentanchor = right
+                    onclick = "[GetScriptedGui('spell_switch_caster').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                    enabled = "[GetScriptedGui('spell_switch_caster').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                    tooltip = "Switch Caster"
+                    using = tooltip_ne
+
+                    button_change = {
+                        size = { 30 30 }
+                        alwaystransparent = yes
+                        parentanchor = center
+                    }
+                }
             }
 
             text_multi = {
+                size = { 250 0 }
                 name = "info_text"
                 multiline = yes
                 autoresize = yes
@@ -78,19 +94,19 @@ window = {
                 #using = Font_Size_Medium
             }
 
-            portrait_head = {
-                datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
-                visible = "[And(Character.IsValid, Not(ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer)))]"
+            widget = {
+                size = { 110 120 }
+                #visible = "[ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer)]"
+                portrait_head = {
+                    datacontext = "[GetPlayer.MakeScope.Var('spell_recipient').Char]"
+                    visible = "[And(Character.IsValid, Not(ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char)))]"
 
-                blockoverride "portrait_transformation"
-                {
-                    portrait_scale = { -1 1 }
-                    portrait_offset = { 1 0 }
+                    blockoverride "portrait_transformation"
+                    {
+                        portrait_scale = { -1 1 }
+                        portrait_offset = { 1 0 }
+                    }
                 }
-            }
-            spacer = {
-                size = { 110 0 }
-                visible = "[ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer)]"
             }
         }
 
@@ -356,8 +372,8 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
-                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
+                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                             parentanchor = center
                                             tooltip = spell_hostile
                                         }
@@ -424,8 +440,9 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
-                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"                                            parentanchor = center
+                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
+                                            parentanchor = center
                                             tooltip = spell_hostile
                                             effectname = "GreyedOut"
                                         }
@@ -507,8 +524,9 @@ window = {
                                             name = "spell_hostile_icon"
                                             size = { 34 34 }
                                             texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                            #visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
-                                            visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"                                            parentanchor = center
+                                            visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes')]"
+                                            #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
+                                            parentanchor = center
                                             tooltip = spell_hostile
                                         }
                                     }
@@ -552,7 +570,7 @@ window = {
                                 ### Me
                                 vbox = {
                                     name = "me"
-                                    datacontext = "[GetPlayer]"
+                                    datacontext = "[GetPlayer.MakeScope.Var('spell_caster').Char]"
                                     #visible = "[InteractionEffectsDescription.HasActorAcceptEffect]"
                                     layoutpolicy_horizontal = expanding
                                     margin_bottom = 5
