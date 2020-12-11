@@ -60,10 +60,13 @@ add_magicka = {
         if = {
             #limit = { NOT = { exists = var:magicka } }
             limit = { NOT = { has_variable = magicka } }
-            set_variable = { name = magicka value = $VALUE$ }
             if = {
-                limit = { $VALUE$ > magicka_max }
-                set_variable = { name = magicka value = magicka_max }
+                limit = { NOT = { $VALUE$ = 0 } }
+                set_variable = { name = magicka value = $VALUE$ }
+                if = {
+                    limit = { $VALUE$ > magicka_max }
+                    set_variable = { name = magicka value = magicka_max }
+                }
             }
         }
         else = {
@@ -91,6 +94,13 @@ add_quarterly_magicka_effect = {
 }
 add_monthly_magicka_effect = {
     add_magicka = { VALUE = magicka_monthly }
+    every_general_councillor = {
+        limit = {
+            has_council_position = councillor_court_mage
+            is_performing_council_task = task_court_mage_default
+        }
+        add_magicka = { VALUE = magicka_monthly }
+    }
 }
 
 spell_caster_effect = {
@@ -114,7 +124,37 @@ spell_castee_effect = {
     custom_label = spell_name_castee
     spell_$SPELL$_castee_effect = yes
 }
+spell_province_effect = {
+    #custom_label = spell_name_castee
+    spell_$SPELL$_province_effect = yes
+}
 
+# Alteration
+spell_oakflesh_caster_effect = {
+    add_magicka = { VALUE = neg_spell_cost_oakflesh }
+}
+spell_oakflesh_castee_effect = {
+    add_aptitude_skill = { VALUE = 3 }
+}
+spell_wards_caster_effect = {
+    add_magicka = { VALUE = neg_spell_cost_wards }
+}
+spell_wards_castee_effect = {
+    add_aptitude_skill = { VALUE = 4 }
+}
+spell_wards_province_effect = {
+    add_county_modifier = invested_in_province_modifier
+}
+
+# Conjuration
+spell_summon_scamp_caster_effect = {
+    add_magicka = { VALUE = neg_spell_cost_summon_scamp }
+}
+spell_summon_scamp_castee_effect = {
+    add_aptitude_skill = { VALUE = 3 }
+}
+
+# Destruction
 spell_flames_caster_effect = {
     add_magicka = { VALUE = neg_spell_cost_flames }
 }
@@ -134,20 +174,7 @@ spell_sparks_castee_effect = {
     add_aptitude_skill = { VALUE = 3 }
 }
 
-spell_oakflesh_caster_effect = {
-    add_magicka = { VALUE = neg_spell_cost_oakflesh }
-}
-spell_oakflesh_castee_effect = {
-    add_aptitude_skill = { VALUE = 3 }
-}
-
-spell_summon_scamp_caster_effect = {
-    add_magicka = { VALUE = neg_spell_cost_summon_scamp }
-}
-spell_summon_scamp_castee_effect = {
-    add_aptitude_skill = { VALUE = 3 }
-}
-
+# Illusion
 spell_frenzy_caster_effect = {
     add_magicka = { VALUE = neg_spell_cost_frenzy }
 }
@@ -155,6 +182,7 @@ spell_frenzy_castee_effect = {
     add_aptitude_skill = { VALUE = 3 }
 }
 
+# Restoration
 spell_heal_caster_effect = {
     add_magicka = { VALUE = neg_spell_cost_heal }
 }
@@ -162,6 +190,7 @@ spell_heal_castee_effect = {
     add_aptitude_skill = { VALUE = 3 }
 }
 
+# Necromancy
 spell_raise_dead_caster_effect = {
     add_magicka = { VALUE = neg_spell_cost_raise_dead }
 }
@@ -186,7 +215,7 @@ init_destruction = {
 init_alteration = {
     clear_global_variable_list = spell_list_alteration
     add_to_global_variable_list = { name = spell_list_alteration target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:2 }
+    add_to_global_variable_list = { name = spell_list_alteration target = province:2 }
     # add_to_global_variable_list = { name = spell_list_alteration target = province:3 }
     # add_to_global_variable_list = { name = spell_list_alteration target = province:4 }
     # add_to_global_variable_list = { name = spell_list_alteration target = province:5 }

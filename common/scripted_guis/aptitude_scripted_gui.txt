@@ -199,6 +199,8 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
 		remove_variable = spell_cast_enabled
 		remove_variable = spell_school
 		clear_variable_list = spell_list
+		remove_variable = spell_county
+		clear_variable_list = spell_counties
 	}
 }
 
@@ -228,6 +230,85 @@ spell_switch_caster = {
 			set_variable = { name = spell_caster value = ROOT }
 		}
 	}
+}
+
+spell_select_province_clear = {
+	scope = character
+
+	effect = {
+		remove_variable = spell_county
+		clear_variable_list = spell_counties
+	}
+}
+
+spell_select_province = {
+	scope = character
+
+	effect = {
+		remove_variable = spell_county
+		clear_variable_list = spell_counties
+		if = {
+			limit = { NOT = { has_variable = spell_county } }
+			var:spell_recipient = {
+				ROOT = { set_variable = { name = spell_county value = PREV.capital_county } }
+				every_held_title = { #ordered_held_title
+					limit = { tier = tier_county } #need an is valid for execution to stop selecting, title being lost, casting
+					ROOT = {
+						add_to_variable_list = { name = spell_counties target = PREV }
+						# if = {
+						# 	limit = { NOT = { has_variable = spell_county } }
+						#	set_variable = { name = spell_county value = PREV }
+						# }
+					}
+				}
+			}
+			#if = {
+			#	limit = { variable_list_size = { name = spell_counties value >= 1 } }
+				# ordered_in_list = {
+				# 	variable = spell_counties
+				# 	order_by = tier
+				# 	set_variable = { name = spell_county value = THIS }
+				# }
+			#}
+		}
+	}
+}
+
+spell_select_province_hostile = {
+	type = character
+
+	effect = {
+		if = {
+			limit = {
+				any_war_enemy = {
+					OR = {
+						is_liege_or_above_of = ROOT.location.province_owner
+						ROOT.location.province_owner = THIS
+					}
+				}
+			}
+			add_to_variable_list = { name = spell_counties target = ROOT.location.county } #need an is valid for execution to stop selecting, moving out of province, casting
+			set_variable = { name = spell_county value = ROOT.location.county }
+		}
+		# if = {
+		# 	limit = { variable_list_size = { name = spell_counties value >= 1 } }
+		# 	ordered_in_list = {
+		# 		variable = spell_counties
+		# 		order_by = tier
+		# 		set_variable = { name = spell_county value = THIS }
+		# 	}
+		# }
+	}
+}
+
+spell_province_pick = {
+	type = character
+
+	saved_scope = {
+		county
+	}
+
+	effect = { set_variable = { name = spell_county value = scope:county } }
 }
 
 enable_casting = {
@@ -368,6 +449,44 @@ alteration_spell_oakflesh_recipient = {
 
 	effect = {
 		spell_castee_effect = { SPELL = oakflesh }
+	}
+}
+
+alteration_spell_wards_caster = {
+	scope = character
+
+	is_valid = {
+		#spell_knows_wards = yes
+		always = yes #for testing
+	}
+
+	is_shown = {
+		has_magicka = { VALUE = spell_cost_wards }
+		#always = yes #for testing
+	}
+
+	effect = {
+		spell_caster_effect = { SPELL = wards }
+	}
+}
+
+alteration_spell_wards_recipient = {
+	scope = character
+
+	is_shown = {
+		var:spell_selected = flag:wards
+	}
+
+	effect = {
+		spell_castee_effect = { SPELL = wards }
+	}
+}
+
+alteration_spell_wards_province = {
+	scope = landed_title
+
+	effect = {
+		spell_province_effect = { SPELL = wards }
 	}
 }
 
