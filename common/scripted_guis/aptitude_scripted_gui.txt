@@ -195,6 +195,7 @@ magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widge
 	effect = {
 		remove_variable = spell_selected
 		remove_variable = spell_recipient
+		remove_variable = spell_recipient_old
 		remove_variable = spell_caster
 		remove_variable = spell_cast_enabled
 		remove_variable = spell_school
@@ -253,23 +254,9 @@ spell_select_province = {
 				ROOT = { set_variable = { name = spell_county value = PREV.capital_county } }
 				every_held_title = { #ordered_held_title
 					limit = { tier = tier_county } #need an is valid for execution to stop selecting, title being lost, casting
-					ROOT = {
-						add_to_variable_list = { name = spell_counties target = PREV }
-						# if = {
-						# 	limit = { NOT = { has_variable = spell_county } }
-						#	set_variable = { name = spell_county value = PREV }
-						# }
-					}
+					ROOT = { add_to_variable_list = { name = spell_counties target = PREV } }
 				}
 			}
-			#if = {
-			#	limit = { variable_list_size = { name = spell_counties value >= 1 } }
-				# ordered_in_list = {
-				# 	variable = spell_counties
-				# 	order_by = tier
-				# 	set_variable = { name = spell_county value = THIS }
-				# }
-			#}
 		}
 	}
 }
@@ -278,26 +265,30 @@ spell_select_province_hostile = {
 	type = character
 
 	effect = {
+		remove_variable = spell_county
+		clear_variable_list = spell_counties
 		if = {
 			limit = {
-				any_war_enemy = {
-					OR = {
-						is_liege_or_above_of = ROOT.location.province_owner
-						ROOT.location.province_owner = THIS
+				ROOT.location.province_owner = {
+					OR = { # is the caster at war with the province owner or any char above them
+						is_at_war_with = ROOT
+						any_liege_or_above = {
+							is_at_war_with = ROOT
+						}
 					}
 				}
+				# any_war_enemy = {
+				# 	OR = {
+				# 		is_liege_or_above_of = ROOT.location.province_owner
+				# 		ROOT.location.province_owner = THIS
+				# 	}
+				# }
 			}
+			set_variable = { name = spell_recipient_old value = var:spell_recipient }
+			set_variable = { name = spell_recipient value = ROOT.location.county.holder } #save old target as temp var then return to previous target on new select
 			add_to_variable_list = { name = spell_counties target = ROOT.location.county } #need an is valid for execution to stop selecting, moving out of province, casting
 			set_variable = { name = spell_county value = ROOT.location.county }
 		}
-		# if = {
-		# 	limit = { variable_list_size = { name = spell_counties value >= 1 } }
-		# 	ordered_in_list = {
-		# 		variable = spell_counties
-		# 		order_by = tier
-		# 		set_variable = { name = spell_county value = THIS }
-		# 	}
-		# }
 	}
 }
 
@@ -329,6 +320,7 @@ spell_school_alteration = {
 		set_variable = { name = spell_school value = flag:alteration }
 		spell_list_school = { SCHOOL = alteration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 alteration_spell_no_spell_caster = {
@@ -345,6 +337,7 @@ spell_school_conjuration = {
 		set_variable = { name = spell_school value = flag:conjuration }
 		spell_list_school = { SCHOOL = conjuration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 conjuration_spell_no_spell_caster = {
@@ -361,6 +354,7 @@ spell_school_destruction = {
 		set_variable = { name = spell_school value = flag:destruction }
 		spell_list_school = { SCHOOL = destruction }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 destruction_spell_no_spell_caster = {
@@ -377,6 +371,7 @@ spell_school_illusion = {
 		set_variable = { name = spell_school value = flag:illusion }
 		spell_list_school = { SCHOOL = illusion }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 illusion_spell_no_spell_caster = {
@@ -393,6 +388,7 @@ spell_school_restoration = {
 		set_variable = { name = spell_school value = flag:restoration }
 		spell_list_school = { SCHOOL = restoration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 restoration_spell_no_spell_caster = {
@@ -409,6 +405,7 @@ spell_school_necromancy = {
 		set_variable = { name = spell_school value = flag:necromancy }
 		spell_list_school = { SCHOOL = necromancy }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		spell_reset_recipient = yes
 	}
 }
 necromancy_spell_no_spell_caster = {
@@ -613,6 +610,44 @@ destruction_spell_sparks_recipient = {
 
 	effect = {
 		spell_castee_effect = { SPELL = sparks }
+	}
+}
+
+destruction_spell_firestorm_caster = {
+	scope = character
+
+	is_valid = {
+		#spell_knows_firestorm = yes
+		always = yes #for testing
+	}
+
+	is_shown = {
+		has_magicka = { VALUE = spell_cost_firestorm }
+		#always = yes #for testing
+	}
+
+	effect = {
+		spell_caster_effect = { SPELL = firestorm }
+	}
+}
+
+destruction_spell_firestorm_recipient = {
+	scope = character
+
+	is_shown = {
+		var:spell_selected = flag:firestorm
+	}
+
+	effect = {
+		spell_castee_effect = { SPELL = firestorm }
+	}
+}
+
+destruction_spell_firestorm_province = {
+	scope = landed_title
+
+	effect = {
+		spell_province_effect = { SPELL = firestorm }
 	}
 }
 

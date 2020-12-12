@@ -113,6 +113,7 @@ spell_caster_effect = {
     else = {
         hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
             set_variable = { name = spell_selected value = flag:$SPELL$ }
+            spell_reset_recipient = yes
         }
         custom_label = spell_name_caster
         show_as_tooltip = { #effect here is for tooltip
@@ -127,6 +128,13 @@ spell_castee_effect = {
 spell_province_effect = {
     #custom_label = spell_name_castee
     spell_$SPELL$_province_effect = yes
+}
+spell_reset_recipient = {
+    if = {
+        limit = { has_variable = spell_recipient_old }
+        set_variable = { name = spell_recipient value = var:spell_recipient_old }
+        remove_variable = spell_recipient_old
+    }
 }
 
 # Alteration
@@ -173,6 +181,15 @@ spell_sparks_caster_effect = {
 spell_sparks_castee_effect = {
     add_aptitude_skill = { VALUE = 3 }
 }
+spell_firestorm_caster_effect = {
+    add_magicka = { VALUE = neg_spell_cost_firestorm }
+}
+spell_firestorm_castee_effect = {
+    add_aptitude_skill = { VALUE = 4 }
+}
+spell_firestorm_province_effect = {
+    add_county_modifier = occupation_modifier #modifier_spell_firestorm
+}
 
 # Illusion
 spell_frenzy_caster_effect = {
@@ -199,19 +216,6 @@ spell_raise_dead_castee_effect = {
 }
 
 # global spell lists up to 45 is fine, after some need to be skipped maybe if wasteland is invalid
-init_destruction = {
-    clear_global_variable_list = spell_list_destruction
-    add_to_global_variable_list = { name = spell_list_destruction target = province:1 }
-    add_to_global_variable_list = { name = spell_list_destruction target = province:2 }
-    add_to_global_variable_list = { name = spell_list_destruction target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:10 }
-}
 init_alteration = {
     clear_global_variable_list = spell_list_alteration
     add_to_global_variable_list = { name = spell_list_alteration target = province:1 }
@@ -237,6 +241,19 @@ init_conjuration = {
     # add_to_global_variable_list = { name = spell_list_conjuration target = province:8 }
     # add_to_global_variable_list = { name = spell_list_conjuration target = province:9 }
     # add_to_global_variable_list = { name = spell_list_conjuration target = province:10 }
+}
+init_destruction = {
+    clear_global_variable_list = spell_list_destruction
+    add_to_global_variable_list = { name = spell_list_destruction target = province:1 }
+    add_to_global_variable_list = { name = spell_list_destruction target = province:2 }
+    add_to_global_variable_list = { name = spell_list_destruction target = province:3 }
+    add_to_global_variable_list = { name = spell_list_destruction target = province:4 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:5 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:6 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:7 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:8 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:9 }
+    # add_to_global_variable_list = { name = spell_list_destruction target = province:10 }
 }
 init_illusion = {
     clear_global_variable_list = spell_list_illusion

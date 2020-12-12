@@ -367,7 +367,7 @@ window = {
                                 tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                                 visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
                                 onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                                onclick = "[PdxGuiTriggerAllAnimations( Select_CString( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_province'))), 'yes'), 'province_select_show', 'province_select_hide' ) )]"
+                                onclick = "[PdxGuiTriggerAllAnimations( SelectLocalization( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_province'))), 'yes'), Select_CString( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile'))), 'yes'), 'province_select_show_hostile', 'province_select_show' ), 'province_select_hide' ) )]"
                                 down = "[GetScriptedGui(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_recipient'))).IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
                                 widget = {
@@ -932,7 +932,12 @@ window = {
 
                 state = {
                     name = province_select_show
-                    on_start = "[GetScriptedGui( Concatenate( 'spell_select_province', SelectLocalization( EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile'))), 'yes'), '_hostile', '' ) ) ).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                    on_start = "[GetScriptedGui( 'spell_select_province' ).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                    on_start = "[GetVariableSystem.Clear('spell_county_list_open')]"
+                }
+                state = {
+                    name = province_select_show_hostile
+                    on_start = "[GetScriptedGui( 'spell_select_province_hostile' ).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                     on_start = "[GetVariableSystem.Clear('spell_county_list_open')]"
                 }
 
