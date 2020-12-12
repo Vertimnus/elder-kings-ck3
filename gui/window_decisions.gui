@@ -22,6 +22,7 @@ window = {
 		on_start = "[GetVariableSystem.Clear('patron_window_open')]"
 		#datacontext = "[GetScriptedGui('patron_clear')]" #done this way to avoid error in log about data being an invalid property
 		on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
 	}
 
 	margin_widget = {
@@ -191,6 +192,8 @@ window = {
 			using = Animation_FadeIn_Quick
 			using = Sound_WindowShow_Standard
 			using = Window_Position_MainTab
+
+			#on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
 		}
 
 		state = {
@@ -199,7 +202,7 @@ window = {
 			using = Sound_WindowHide_Standard
 			using = Window_Position_MainTab_Hide
 
-			on_start = "[VariableSystem.Clear( 'patron_decision_button' )]"
+			on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
 		}
 
 		widget = {
@@ -2965,8 +2968,9 @@ Types Patrons
 		tooltip = "[Decision.GetShortDescForPlayer]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
-		onclick = "[VariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
-		down = "[VariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		#down = "[EqualTo_string( GetVariableSystem.Get( 'patron_decision_button' ), Decision.GetTitleForPlayer )]"
 
 		widget = {
 			scissor = yes
@@ -3049,6 +3053,8 @@ Types Patrons
 		tooltip = "[Decision.GetShortDescForPlayer]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
+		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
 
 		widget = {
 			scissor = yes

@@ -534,12 +534,28 @@ is_religious_war = {
 	}
 }
 
-religious_cb_holder_under_target_can_be_vassalized = {
+conquest_cb_holder_under_target_can_be_vassalized = {
 	# If there is no holder they can't be vassalized!
 	exists = holder
 
 	# We can only vassalize characters of a lower tier than us.
 	holder.highest_held_title_tier < scope:attacker.highest_held_title_tier
+
+	# De Jure Hierarchy Check
+	holder = {
+		# Only (sub)vassals of the defender can be considered for transfer (no poaching vassals from 3rd parties without fighting them!)
+		target_is_liege_or_above = scope:defender
+
+		# *All* of a character's subrealm must be within the target area. If we're attacking for Jerusalem, we don't want to also be stealing parts of Egypt, Syria, etc.
+		any_sub_realm_county = {
+			count = all
+			target_is_de_jure_liege_or_above = scope:target_title
+		}
+	}
+}
+
+religious_cb_holder_under_target_can_be_vassalized = {
+	conquest_cb_holder_under_target_can_be_vassalized = yes
 
 	# Religious Tolerance Check
 	scope:attacker.faith = {
@@ -552,18 +568,6 @@ religious_cb_holder_under_target_can_be_vassalized = {
 
 			# Pluralist faiths always attempt to preserve vassals if possible, even if the vassal follows an Evil faith.
 			has_doctrine_parameter = pluralism_pluralistic_holy_wars_preserve_vassals
-		}
-	}	
-
-	# De Jure Hierarchy Check
-	holder = {
-		# Only (sub)vassals of the defender can be considered for transfer (no poaching vassals from 3rd parties without fighting them!)
-		target_is_liege_or_above = scope:defender
-
-		# *All* of a character's subrealm must be within the target area. If we're holy warring for Jerusalem, we don't want to also be stealing parts of Egypt, Syria, etc.
-		any_sub_realm_county = {
-			count = all
-			target_is_de_jure_liege_or_above = scope:target_title
 		}
 	}
 }
