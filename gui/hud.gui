@@ -74,6 +74,12 @@ widget = {
 	size = { 100% 100% }
 	layer = middle
 
+	state = {
+		name = _show
+		on_start = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('save_loaded'), '', 'effect [{trigger_event = { on_action = ek_on_save_load } }]' ) )]"
+		on_start = "[GetVariableSystem.Set('save_loaded', 'true')]"
+	}
+
 	### Alerts
 	notifications_alerts = {
 		visible = "[Not( IsPauseMenuShown )]"
