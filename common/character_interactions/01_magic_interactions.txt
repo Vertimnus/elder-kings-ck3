@@ -8,7 +8,9 @@
 
 	on_accept = { #observer in hud.gui actually triggers spellbook widget
 		scope:actor = {
+			remove_variable = spell_recipient_old
 			set_variable = { name = spell_recipient value = scope:recipient }
+			set_variable = { name = spell_caster value = scope:actor }
 			set_variable = { name = spell_school value = flag:conjuration }
 			spell_list_school = { SCHOOL = conjuration }
 			set_variable = { name = spell_selected value = flag:no_spell }

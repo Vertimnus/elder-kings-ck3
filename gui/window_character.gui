@@ -756,7 +756,8 @@ window = {
 								}
 
 								icon = {
-									visible = "[And(Not(Character.IsDeadAndValid), Character.IsRuler)]"
+									#visible = "[And( Not( Character.IsDeadAndValid ), Or( And( Character.IsRuler, Not( EqualTo_string( Character.GetTitleTierName, 'Baron' ) ) ), EqualTo_string( Character.GetCouncillorPosition.GetPositionName, Localize( 'councillor_court_mage' ) ) ) )]"
+									visible = "[And( Not( Character.IsDeadAndValid ), Character.MakeScope.Var('magicka').IsSet )]"
 									size = { 23 23 }
 									texture = "gfx/interface/icons/icon_magicka.dds"
 									tooltip = magicka_value_char_view
