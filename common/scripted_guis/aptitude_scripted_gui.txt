@@ -189,20 +189,14 @@ aptitude_sign_atronach = {
 ##  SPELLBOOK  ##
 #################
 
-magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widget
+spell_open = {
 	scope = character
-	is_shown = { has_variable = spell_recipient }
-	effect = {
-		remove_variable = spell_selected
-		remove_variable = spell_recipient
-		remove_variable = spell_recipient_old
-		remove_variable = spell_caster
-		remove_variable = spell_cast_enabled
-		remove_variable = spell_school
-		clear_variable_list = spell_list
-		remove_variable = spell_county
-		clear_variable_list = spell_counties
-	}
+	effect = { remove_variable = spells_open }
+}
+
+spell_cleanup = { #observer in hud.gui actually triggers spellbook widget
+	scope = character
+	effect = { spell_cleanup = yes }
 }
 
 spell_switch_caster = {
@@ -302,6 +296,16 @@ spell_province_pick = {
 	effect = { set_variable = { name = spell_county value = scope:county } }
 }
 
+get_spell_province = {
+	type = character
+
+	saved_scope = {
+		spell_province
+	}
+
+	effect = { set_variable = { name = spell_province value = scope:spell_province } }
+}
+
 enable_casting = {
 	scope = character
 	effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
@@ -320,6 +324,9 @@ spell_school_alteration = {
 		set_variable = { name = spell_school value = flag:alteration }
 		spell_list_school = { SCHOOL = alteration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -337,6 +344,9 @@ spell_school_conjuration = {
 		set_variable = { name = spell_school value = flag:conjuration }
 		spell_list_school = { SCHOOL = conjuration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -354,6 +364,9 @@ spell_school_destruction = {
 		set_variable = { name = spell_school value = flag:destruction }
 		spell_list_school = { SCHOOL = destruction }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -371,6 +384,9 @@ spell_school_illusion = {
 		set_variable = { name = spell_school value = flag:illusion }
 		spell_list_school = { SCHOOL = illusion }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -388,6 +404,9 @@ spell_school_restoration = {
 		set_variable = { name = spell_school value = flag:restoration }
 		spell_list_school = { SCHOOL = restoration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -405,6 +424,9 @@ spell_school_necromancy = {
 		set_variable = { name = spell_school value = flag:necromancy }
 		spell_list_school = { SCHOOL = necromancy }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -416,6 +438,15 @@ necromancy_spell_no_spell_caster = {
 ############
 ## SPELLS ##
 ############
+
+#need char death checks, move check, self/cm check
+#province location check
+#unlanded of block for no valid provinces
+#spell info showing unlanded, spell desc showing invalid/no provinces
+
+# ordered_in_list by script value, script value is any_in_list {limit = object=scope}
+# while loop that increments count, so check first, then second in ordered_list for match
+# scriptvalues evaluate properly for
 
 # Alteration
 
@@ -433,7 +464,7 @@ alteration_spell_oakflesh_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = oakflesh }
+		spell_caster_effect = { SCHOOL = alteration SPELL = oakflesh }
 	}
 }
 
@@ -463,7 +494,7 @@ alteration_spell_wards_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = wards }
+		spell_caster_effect = { SCHOOL = alteration SPELL = wards }
 	}
 }
 
@@ -471,7 +502,7 @@ alteration_spell_wards_recipient = {
 	scope = character
 
 	is_shown = {
-		var:spell_selected = flag:wards
+		var:spell_selected = flag:wards # replaced with system variable
 	}
 
 	effect = {
@@ -503,7 +534,7 @@ conjuration_spell_summon_scamp_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = summon_scamp }
+		spell_caster_effect = { SCHOOL = conjuration SPELL = summon_scamp }
 	}
 }
 
@@ -531,12 +562,12 @@ destruction_spell_flames_caster = {
 
 	is_shown = {
 		has_magicka = { VALUE = spell_cost_flames }
-		spell_target_self = yes
+		spell_target_valid = yes
 		#always = yes #for testing
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = flames }
+		spell_caster_effect = { SCHOOL = destruction SPELL = flames }
 	}
 }
 
@@ -562,12 +593,12 @@ destruction_spell_frostbite_caster = {
 
 	is_shown = {
 		has_magicka = { VALUE = spell_cost_frostbite }
-		spell_target_self = no
+		spell_target_valid = no
 		#always = yes #for testing
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = frostbite }
+		spell_caster_effect = { SCHOOL = destruction SPELL = frostbite }
 	}
 }
 
@@ -597,7 +628,7 @@ destruction_spell_sparks_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = sparks }
+		spell_caster_effect = { SCHOOL = destruction SPELL = sparks }
 	}
 }
 
@@ -627,7 +658,7 @@ destruction_spell_firestorm_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = firestorm }
+		spell_caster_effect = { SCHOOL = destruction SPELL = firestorm }
 	}
 }
 
@@ -667,7 +698,7 @@ illusion_spell_frenzy_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = frenzy }
+		spell_caster_effect = { SCHOOL = illusion SPELL = frenzy }
 	}
 }
 
@@ -699,7 +730,7 @@ restoration_spell_heal_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = heal }
+		spell_caster_effect = { SCHOOL = restoration SPELL = heal }
 	}
 }
 
@@ -731,7 +762,7 @@ necromancy_spell_raise_dead_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = raise_dead }
+		spell_caster_effect = { SCHOOL = necromancy SPELL = raise_dead }
 	}
 }
 

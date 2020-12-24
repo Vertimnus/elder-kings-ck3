@@ -75,10 +75,14 @@ widget = {
 	layer = middle
 
 	state = {
-		name = _show
-		on_start = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('save_loaded'), '', 'effect [{trigger_event = { on_action = ek_on_save_load } }]' ) )]"
-		on_start = "[GetVariableSystem.Set('save_loaded', 'true')]"
+		name = _show # may need to fire cleanup scripted gui for every_player 
+		on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]"
+		#on_start = "[GetVariableSystem.Set('save_loaded', 'true')]" # not actually needed, pause menu doesn't trigger it
 	}
+	# state = { #theoretically clears it when going to the main menu, may be anytime the pause menu is shown though
+	# 	name = _hide
+	# 	on_start = "[GetVariableSystem.Clear('save_loaded')]"
+	# }
 
 	### Alerts
 	notifications_alerts = {
@@ -1552,7 +1556,7 @@ icon = {
 				tooltipwidget = {
 					astronomy_tooltip = {}
 				}
-				using = tooltip_above
+				using = tooltip_above #note can only have one console command per button. extend with state blocks
 				#onclick = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('spells_open'), 'GUI.ClearWidgets spellbook_interaction_window', 'gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window' ) )]"
 				#onclick = "[GetVariableSystem.Toggle('spells_open')]"
 			}
@@ -1560,11 +1564,15 @@ icon = {
 			widget = {
 				name = "spell_casting_observer"
 				size = { 0 0 }
-				visible = "[GetScriptedGui('magicka_casting_spell').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				visible = "[GetPlayer.MakeScope.Var('spells_open').IsSet]"
 				state = {
 					name = _show
+					on_start = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
+					on_start = "[GetScriptedGui('spell_open').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 					on_start = "[GetVariableSystem.Clear('spell_county_list_open')]"
-					on_start = "[ExecuteConsoleCommand('gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window')]"
+                	on_start = "[GetVariableSystem.Clear('spell_select')]"
+					duration = 0.05
+                	on_finish = "[ExecuteConsoleCommand('gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window')]"
 				}
 			}
 		}
@@ -3738,13 +3746,13 @@ types HUD
 		button_normal = {
 			onclick = "[SetMapMode('dejure_duchies')]"
 			shortcut = "map_mode_9"
-			shortcut = "mapmode_duchies_secondary" 
+			shortcut = "mapmode_duchies_secondary"
 		}
 
 		button_normal = {
 			onclick = "[SetMapMode('dejure_kingdoms')]"
 			shortcut = "map_mode_10"
-			shortcut = "mapmode_kingdoms_secondary" 
+			shortcut = "mapmode_kingdoms_secondary"
 
 		}
 
@@ -3753,7 +3761,7 @@ types HUD
 			shortcut = "map_mode_11"
 			shortcut = "mapmode_empires_secondary"
 		}
-			
+
 		button_normal = {
 			onclick = "[SetMapMode('religions')]"
 			shortcut = "map_mode_3"
