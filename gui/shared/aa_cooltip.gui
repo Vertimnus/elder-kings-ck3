@@ -1,0 +1,274 @@
+types CultureTooltips
+{
+    type culture_tooltip = widget
+    {
+        using = GeneralTooltipSetup
+        alwaystransparent = no
+
+        widget = {
+            name = "background"
+            using = DefaultTooltipBackground
+            size = { 100% 100% }
+            alwaystransparent = no
+        }
+
+        vbox = {
+            set_parent_size_to_minimum = yes
+            margin = { 15 5 }
+            margin_bottom = 16
+
+            vbox = {
+                layoutpolicy_horizontal = expanding
+                layoutpolicy_vertical = expanding
+                margin = { 6 4 }
+                margin_bottom = 12
+
+                background = {
+                    name = "header"
+                    texture = "gfx/interface/component_tiles/tile_title_big_top_01.dds"
+                    spriteType = Corneredstretched
+                    align = vcenter|left
+                    margin = { 15 0 }
+                    texture_density = 2
+
+                    modify_texture = {
+                        name = "mask"
+                        texture = "gfx/interface/component_masks/mask_title_big_top.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 160 0 }
+                        blend_mode = alphamultiply
+                        alpha = 0.5
+                    }
+
+                    modify_texture = {
+                        name = "overlay"
+                        texture = "gfx/interface/component_overlay/overlay_title_big_top.dds"
+                        spriteType = Corneredstretched
+                        spriteborder = { 0 0 }
+                        blend_mode = overlay
+                    }
+                }
+                hbox = {
+                    layoutpolicy_horizontal = expanding
+
+                    vbox = {
+                        layoutpolicy_vertical = expanding
+                        text_single = {
+                            layoutpolicy_horizontal = expanding
+                            name = "header"
+                            text = "CULTURE_COOLTIP_GETNAME"
+                            fonttintcolor = "[TooltipInfo.GetTintColor]"
+                            align = top
+                            using = Font_Type_Flavor
+                            using = Font_Size_Big
+
+                        }
+                        hbox = {
+                            text_single = {
+                                fonttintcolor = "[TooltipInfo.GetTintColor]"
+                                text = "CULTURE_RELATION_MY_CULTURE"
+                                visible = "[Culture.IsPlayerCulture]"
+                            }
+
+                            text_single = {
+                                fonttintcolor = "[TooltipInfo.GetTintColor]"
+                                text = "CULTURE_RELATION_MY_CULTURE_GROUP"
+                                visible = "[And(Culture.IsPlayerCultureGroup, Not(Culture.IsPlayerCulture))]"
+                            }
+
+                            text_single = {
+                                fonttintcolor = "[TooltipInfo.GetTintColor]"
+                                text = "CULTURE_RELATION_FOREIGN_CULTURE"
+                                visible = "[And(Not(Culture.IsPlayerCulture), Not(Culture.IsPlayerCultureGroup))]"
+                            }
+
+                            text_single = {
+                                datacontext = "[Culture.GetGroup]"
+                                fonttintcolor = "[TooltipInfo.GetTintColor]"
+                                text = "CULTURE_WINDOW_GROUPS"
+                            }
+                        }
+                        expand = {
+                            layoutpolicy_vertical = growing
+                        }
+                    }
+
+                    text_single = {
+                        layoutpolicy_horizontal = expanding
+                        layoutpolicy_vertical = expanding
+                        text = "[culture|E]"
+                        fonttintcolor = "[TooltipInfo.GetTintColor]"
+                        align = vcenter|right
+                    }
+                }
+            }
+
+            vbox = {
+                spacing = 4
+                margin = { 8 0 }
+                layoutpolicy_horizontal = expanding
+
+                text_single = {
+                    layoutpolicy_horizontal = growing
+                    fonttintcolor = "[TooltipInfo.GetTintColor]"
+                    using = DefaultTooltipText
+                    text = "CULTURE_COOLTIP_HEAD"
+                    visible = "[Culture.GetCultureHead.IsValid]"
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = growing
+                    fonttintcolor = "[TooltipInfo.GetTintColor]"
+                    using = DefaultTooltipText
+                    text = "CULTURE_COOLTIP_NO_HEAD"
+                    visible = "[Not( Culture.GetCultureHead.IsValid )]"
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = growing
+                    fonttintcolor = "[TooltipInfo.GetTintColor]"
+                    using = DefaultTooltipText
+                    text = "CULTURE_COOLTIP_ERA"
+                }
+
+                spacer = {
+                    size = { 0 4 }
+                }
+
+                divider_light = {
+                    layoutpolicy_horizontal = growing
+                }
+
+                hbox = {
+                    visible = "[Culture.HasFascination]"
+                    layoutpolicy_horizontal = expanding
+                    datacontext = "[Culture.GetFascination]"
+
+                    tooltipwidget = culture_innovation_tooltip
+
+                    widget = {
+                        size = { 65 45 }
+                        icon_innovation = {
+                            scale = 0.7
+                        }
+                    }
+                    vbox = {
+                        spacing = 8
+                        layoutpolicy_horizontal = growing
+                        margin_left = 4
+                        text_single = {
+                            layoutpolicy_horizontal = growing
+                            fonttintcolor = "[TooltipInfo.GetTintColor]"
+                            using = DefaultTooltipText
+                            text = "CULTURE_COOLTIP_FASCINATION"
+                        }
+
+                        hbox = {
+                            layoutpolicy_horizontal = growing
+                            progressbar_standard = {
+                                size = { 150 15 }
+                                min = 0
+                                max = 100
+                                value = "[FixedPointToFloat(CultureInnovation.GetProgress)]"
+                            }
+                            expand = {}
+                        }
+
+                        expand = {}
+                    }
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = growing
+                    fonttintcolor = "[TooltipInfo.GetTintColor]"
+                    using = DefaultTooltipText
+                    visible = "[And( Culture.IsPlayerCultureHead, And( ObjectsEqual( GetPlayer.GetCulture, Culture.Self ), Culture.HasAvailableInnovation ) )]"
+                    text = "INGAME_TOPBAR_CULTURE_HEAD"
+                    default_format = "#weak"
+                }
+
+                text_single = {
+                    layoutpolicy_horizontal = growing
+                    fonttintcolor = "[TooltipInfo.GetTintColor]"
+                    using = DefaultTooltipText
+                    visible = "[And( ObjectsEqual( GetPlayer.GetCulture, Culture.Self ), Not( Culture.HasAvailableInnovation ) )]"
+                    text = "CULTURE_COOLTIP_NO_AVAILABLE_INNOVATION"
+                }
+
+                spacer = {
+                    size = { 0 4 }
+                }
+                divider_light = {
+                    layoutpolicy_horizontal = growing
+                }
+                spacer = {
+                    size = { 0 4 }
+                }
+
+                hbox = {
+                    size = { 0 0 }
+                    layoutpolicy_horizontal = expanding
+                    text_multi = {
+                        visible = "[Not( Or( Or( EqualTo_string( Culture.GetNameNoTooltip, 'Jungle Nibenese' ), EqualTo_string( Culture.GetNameNoTooltip, 'Mountain Orc' ) ), Or( EqualTo_string( Culture.GetNameNoTooltip, 'Iron Orc' ), EqualTo_string( Culture.GetNameNoTooltip, 'Wood Orc' ) ) ) )]"
+                        layoutpolicy_horizontal = expanding
+                        text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
+                        autoresize = yes
+                        max_width = 400
+                    }
+
+                    text_multi = {
+                        visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Jungle Nibenese' )]"
+                        layoutpolicy_horizontal = expanding
+                        text = "#F [Localize( 'Jungle_Nibenese_desc' )]#!"
+                        autoresize = yes
+                        max_width = 400
+                    }
+                    text_multi = {
+                        visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Mountain Orc' )]"
+                        layoutpolicy_horizontal = expanding
+                        text = "#F [Localize( 'Mountain_Orc_desc' )]#!"
+                        autoresize = yes
+                        max_width = 400
+                    }
+                    text_multi = {
+                        visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Iron Orc' )]"
+                        layoutpolicy_horizontal = expanding
+                        text = "#F [Localize( 'Iron_Orc_desc' )]#!"
+                        autoresize = yes
+                        max_width = 400
+                    }
+                    text_multi = {
+                        visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Wood Orc' )]"
+                        layoutpolicy_horizontal = expanding
+                        text = "#F [Localize( 'Wood_Orc_desc' )]#!"
+                        autoresize = yes
+                        max_width = 400
+                    }
+                }
+
+                block "extra_info"
+                {
+                }
+            }
+        }
+    }
+
+    type culture_tooltip_click = culture_tooltip
+    {
+        blockoverride "extra_info" {
+            spacer = {
+                size = { 0 4 }
+            }
+            divider_light = {
+                layoutpolicy_horizontal = growing
+            }
+
+            text_single = {
+                layoutpolicy_horizontal = growing
+                text = "CULTURE_COOLTIP_CLICK"
+                margin = { 10 0 }
+            }
+
+        }
+    }
+}

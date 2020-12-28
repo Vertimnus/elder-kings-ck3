@@ -256,7 +256,7 @@ spell_select_province = {
 }
 
 spell_select_province_hostile = {
-	type = character
+	scope = character
 
 	effect = {
 		remove_variable = spell_county
@@ -287,9 +287,9 @@ spell_select_province_hostile = {
 }
 
 spell_province_pick = {
-	type = character
+	scope = character
 
-	saved_scope = {
+	saved_scopes = {
 		county
 	}
 
@@ -297,9 +297,9 @@ spell_province_pick = {
 }
 
 get_spell_province = {
-	type = character
+	scope = character
 
-	saved_scope = {
+	saved_scopes = {
 		spell_province
 	}
 
@@ -775,5 +775,15 @@ necromancy_spell_raise_dead_recipient = {
 
 	effect = {
 		spell_castee_effect = { SPELL = raise_dead }
+	}
+}
+
+reorder_traits = { #should fire for expanded and tiny trait view on show? 
+	scope = character
+	effect = {
+		if = {
+			limit = { has_trait_with_flag = bloodline }
+			bloodline_effect_switch = { EFFECT = reorder_traits }
+		}
 	}
 }
