@@ -39,7 +39,7 @@ desert_hills = {
 	color = hsv { 0.08 1 1 } #{ 225 255 0 }
 	
 	province_modifier = {
-		supply_limit_mult = -0.2
+		supply_limit_mult = -0.3
 		development_growth_factor = -0.3
 	}
 	
@@ -49,6 +49,10 @@ desert_hills = {
 		advantage = 5
 	}
 	
+	defender_modifier = {
+		retreat_losses = -0.1
+	}
+
 	movement_speed = 0.7
 	combat_width = 0.8
 	
@@ -126,11 +130,32 @@ tundra = {
 	color = { 170 230 230 }
 	
 	province_modifier = {
-		supply_limit_mult = -0.2
+		supply_limit_mult = -0.25
 		development_growth_factor = -0.4
 	}
 	
 	movement_speed = 0.8
 	
 	audio_parameter = 2.0
+}
+
+#Taiga Hills, for Skyrim (loads of hilly terrain in its taiga)
+taiga_hills = {
+	color = hsv { 0.45 0.7 0.25 } #0 90 0
+	
+	province_modifier = {
+		supply_limit_mult = -0.2
+		development_growth_factor = -0.2
+	}
+	
+	defender_combat_effects = {
+		name = combat_hills
+		image = combat_hills
+		advantage = 5
+	}
+	
+	movement_speed = 0.7
+	combat_width = 0.8
+	
+	audio_parameter = 1.0
 }
