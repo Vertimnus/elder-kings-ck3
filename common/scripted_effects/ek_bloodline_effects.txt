@@ -1,0 +1,112 @@
+﻿# modifiers for artifacts, hide in normal view if in list ignoreinvisible=yes, have fancy treasury view for them. compare modifiers to global list and add as flag to local list if match
+# same as above but with traits for bloodlines. use genetic active/inactive for bloodline active/inactive
+# use the executetooltip scripted gui hack to get global variable into scope for foundable bloodlines
+#
+
+inherit_all_bloodlines = {
+    bloodline_effect_switch = { EFFECT = inherit_bloodline }
+}
+
+bloodline_effect_switch = {
+    # $EFFECT$ = { TRAIT = test_1 }
+    # $EFFECT$ = { TRAIT = test_2 }
+    # $EFFECT$ = { TRAIT = test_3 }
+    $EFFECT$ = { TRAIT = direnni }
+    $EFFECT$ = { TRAIT = reman }
+}
+
+reorder_traits = {
+    if = {
+        limit = { has_trait = bloodline_$TRAIT$ }
+        remove_trait = bloodline_$TRAIT$
+        add_trait = bloodline_$TRAIT$
+    }
+}
+
+bloodline_set_founder = {
+    set_global_variable = { name = bloodline_$TRAIT$_founder value = ROOT }
+    add_trait = bloodline_$TRAIT$
+}
+
+bloodline_add_member = {
+    if = {
+        limit = { $CHECK$ = no }
+        add_trait = bloodline_$TRAIT$
+    }
+    else = {
+        inherit_bloodline = { TRAIT = $TRAIT$ }
+    }
+}
+
+inherit_bloodline = {
+    # The commented variable lines are for debugging
+    # Inheritance type check
+    if = { #father
+        limit = {
+            ROOT.father = {
+                OR = { #patrilineal or all bloodline or matri bloodline override and patri marriage
+                    has_trait_with_flag = bloodline_$TRAIT$_all
+                    has_trait_with_flag = bloodline_$TRAIT$_patri
+                    AND = {
+                        has_trait_with_flag = bloodline_$TRAIT$_matri #technically not needed?
+                        has_trait_with_flag = bloodline_$TRAIT$_matri_override
+                        patrilinear_marriage = yes
+                    }
+                }
+            }
+        }
+        save_temporary_scope_value_as = { name = inherit value = yes }
+        #set_variable = $TRAIT$_inherit_father
+    }
+    else_if = { #mother
+        limit = {
+            ROOT.mother = {
+                OR = { #matrilineal or all bloodline or patri bloodline override and matri marriage
+                    has_trait_with_flag = bloodline_$TRAIT$_all
+                    has_trait_with_flag = bloodline_$TRAIT$_matri
+                    AND = {
+                        has_trait_with_flag = bloodline_$TRAIT$_patri #technically not needed?
+                        has_trait_with_flag = bloodline_$TRAIT$_matri_override
+                        OR = { #unknown father, mother pass patri bloodlines
+                            matrilinear_marriage = yes
+                            NOT = { exists = ROOT.father }
+                        }
+                    }
+                }
+            }
+        }
+        save_temporary_scope_value_as = { name = inherit value = yes }
+        #set_variable = $TRAIT$_inherit_mother
+    }
+    else = {
+        save_temporary_scope_value_as = { name = inherit value = no }
+        #set_variable = $TRAIT$_not_inherit
+    }
+
+    # Bastard Check
+    if = {
+        limit = {
+            OR = {
+                #NOT = { has_trait_with_flag = illegitimate_bastard } #either not a bastard,
+                scope:is_bastard = no
+                #scope:father = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed
+                #scope:mother = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed
+                any_parent = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed - does this ever go to real_father?
+                faith = { has_doctrine_parameter = bastards_none } #or faith has no bastards
+            }
+        }
+        save_temporary_scope_value_as = { name = bastard value = yes }
+        #set_variable = $TRAIT$_not_bastard
+    }
+    else = {
+        save_temporary_scope_value_as = { name = bastard value = no }
+        #set_variable = $TRAIT$_bastard
+    }
+    if = {
+        limit = { #can add bloodline specific conditions here, eg culture requirement
+            scope:inherit = yes
+            scope:bastard = yes
+        }
+        add_trait = bloodline_$TRAIT$
+    }
+}

@@ -777,13 +777,3 @@ necromancy_spell_raise_dead_recipient = {
 		spell_castee_effect = { SPELL = raise_dead }
 	}
 }
-
-reorder_traits = { #should fire for expanded and tiny trait view on show? 
-	scope = character
-	effect = {
-		if = {
-			limit = { has_trait_with_flag = bloodline }
-			bloodline_effect_switch = { EFFECT = reorder_traits }
-		}
-	}
-}

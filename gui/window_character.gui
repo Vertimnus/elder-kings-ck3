@@ -20,7 +20,7 @@ window = {
 		position_x = 0
 
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
-		#using = Reorder_Bloodlines
+		using = Reorder_Bloodlines
 	}
 
 	state = {
@@ -280,17 +280,24 @@ window = {
 											layoutpolicy_vertical = expanding
 											layoutpolicy_horizontal = expanding
 
-											# vbox = {
-											# 	layoutpolicy_horizontal = expanding
-											# 	size = { 0 30 }
-											# 	margin = { 0 4 }
-
-											text_label_left = {
-												name = "bloodline_name"
+											hbox = {
 												layoutpolicy_horizontal = expanding
-												text = "[Trait.GetNameNoTooltip( Character.Self )]"
-												default_format = "#high"
-												using = Font_Size_Medium
+												text_label_left = {
+													name = "bloodline_name"
+													layoutpolicy_horizontal = expanding
+													text = "[Trait.GetNameNoTooltip( Character.Self )]"
+													default_format = "#high"
+													using = Font_Size_Medium
+												}
+												spacer = {
+													layoutpolicy_horizontal = growing
+												}
+												text_single = {
+													name = "bloodline_founder"
+													text = "Founder: [GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													#default_format = "#low"
+													using = Font_Size_Small
+												}
 											}
 
 											hbox = {
@@ -312,15 +319,26 @@ window = {
 													layoutpolicy_vertical = expanding
 												}
 
-												text_multi = {
-													name = "bloodline_desc"
-													layoutpolicy_vertical = expanding
-													layoutpolicy_horizontal = expanding
-													text = "[Localize( Concatenate( Trait.GetKey, '_desc' ) )]"
-													#text = "[Trait.GetDescription( Character.Self )]"
-													default_format = "#high"
-													using = Font_Size_Small
-												}
+												# vbox = {
+												# 	spacing = 4
+												# 	layoutpolicy_vertical = expanding
+												# 	layoutpolicy_horizontal = expanding
+												# 	text_single = {
+												# 		name = "bloodline_founder"
+												# 		text = "Founder: [GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+												# 		align = top
+												# 		using = Font_Size_small
+												# 	}
+													text_multi = {
+														name = "bloodline_desc"
+														layoutpolicy_vertical = expanding
+														layoutpolicy_horizontal = expanding
+														text = "#F [Localize( Concatenate( Trait.GetKey, '_desc' ) )]#!"
+														#text = "[Trait.GetDescription( Character.Self )]"
+														#default_format = "#high"
+														using = Font_Size_Small
+													}
+												# }
 											}
 										}
 									}
@@ -839,142 +857,140 @@ window = {
 				parentanchor = bottom|left
 				position = { 5 -5 }
 				spacing = 5
-				ignoreinvisible = yes
-				direction = vertical
 
-				button_normal = {
-					name = "open_kill_list"
-					visible = "[Character.HasKillsKnownTo( GetPlayer )]"
+				flowcontainer = {
+					parentanchor = bottom|left
+					#position = { 5 -5 }
+					spacing = 5
+					ignoreinvisible = yes
+					direction = vertical
 
-					size = { 35 35 }
+					button_normal = {
+						name = "open_kill_list"
+						visible = "[Character.HasKillsKnownTo( GetPlayer )]"
 
-					datacontext = "[Character]"
-					tooltip = "OPEN_KILL_LIST_TOOLTIP"
-					using = tooltip_es
+						size = { 35 35 }
 
-					state = {
-						name = close_kill_list
-						on_start = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
-					}
+						datacontext = "[Character]"
+						tooltip = "OPEN_KILL_LIST_TOOLTIP"
+						using = tooltip_es
 
-					icon = {
-						texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-						size = { 100% 100% }
-					}
-
-					button_kill_list = {
-						onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
-						onclick = "[VariableSystem.Clear( 'artifact_open' )]"
-						onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
-						size = { 25 25 }
-						parentanchor = center
-
-						modify_texture = {
-							texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-							blend_mode = alphamultiply
+						state = {
+							name = close_kill_list
+							on_start = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
 						}
-					}
-				}
-
-				container = {
-					visible = "[Character.IsPlayer]"
-					tooltip = "PLAYER_STRESS_TOOLTIP"
-					using = tooltip_es
-
-					widget = {
-						visible = "[Not(GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3'))]"
-						size = { 100% 100%}
-
-						using = Animation_ShowHide_Standard
-
-						background = {
-							texture = "gfx/interface/component_masks/mask_fade_circle.dds"
-							color = { 0.15 0.15 0.15 1 }
-							margin = { 12 12 }
-						}
-					}
-
-					widget = {
-						visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
-						parentanchor = center
-						size = { 180% 180% }
-						using = Animation_ShowHide_Standard
 
 						icon = {
+							texture = "gfx/interface/buttons/button_lifestyles_base.dds"
 							size = { 100% 100% }
-							texture = "gfx/interface/component_masks/mask_fade_circle.dds"
-							using = Color_Red
-							alpha = 0
+						}
+
+						button_kill_list = {
+							onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
+							onclick = "[VariableSystem.Clear( 'artifact_open' )]"
+							onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
+							size = { 25 25 }
+							parentanchor = center
+
+							modify_texture = {
+								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
+								blend_mode = alphamultiply
+							}
+						}
+					}
+
+					container = {
+						visible = "[Character.IsPlayer]"
+						tooltip = "PLAYER_STRESS_TOOLTIP"
+						using = tooltip_es
+
+						widget = {
+							visible = "[Not(GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3'))]"
+							size = { 100% 100%}
+
+							using = Animation_ShowHide_Standard
+
+							background = {
+								texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+								color = { 0.15 0.15 0.15 1 }
+								margin = { 12 12 }
+							}
+						}
+
+						widget = {
+							visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
+							parentanchor = center
+							size = { 180% 180% }
+							using = Animation_ShowHide_Standard
+
+							icon = {
+								size = { 100% 100% }
+								texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+								using = Color_Red
+								alpha = 0
+
+								state = {
+									name = a
+									next = b
+									trigger_on_create = yes
+									alpha = 0.5
+									duration = 0.4
+									using = Animation_Curve_Default
+								}
+
+								state = {
+									name = b
+									next = a
+									alpha = 0
+									duration = 1
+									using = Animation_Curve_Default
+								}
+							}
+						}
+
+
+						icon = {
+							parentanchor = vcenter
+							size = { 35 35 }
+							texture = "gfx/interface/icons/stress/icon_stress_level.dds"
+							framesize = { 70 70 }
+							frame = "[IntToFrameIndex( GetPlayer.GetStressLevel )]"
+
+
+							modify_texture = {
+								visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
+								name = "glow"
+								texture = "gfx/interface/colors/gold.dds"
+								blend_mode = colordodge
+								alpha = 0
+							}
 
 							state = {
 								name = a
 								next = b
-								trigger_on_create = yes
-								alpha = 0.5
 								duration = 0.4
+								trigger_on_create = yes
 								using = Animation_Curve_Default
+
+								modify_texture = {
+									name = "glow"
+									alpha = 0.3
+								}
 							}
 
 							state = {
 								name = b
 								next = a
-								alpha = 0
 								duration = 1
 								using = Animation_Curve_Default
+
+								modify_texture = {
+									name = "glow"
+									alpha = 0
+								}
 							}
 						}
 					}
-
-
-					icon = {
-						parentanchor = vcenter
-						size = { 35 35 }
-						texture = "gfx/interface/icons/stress/icon_stress_level.dds"
-						framesize = { 70 70 }
-						frame = "[IntToFrameIndex( GetPlayer.GetStressLevel )]"
-
-
-						modify_texture = {
-							visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
-							name = "glow"
-							texture = "gfx/interface/colors/gold.dds"
-							blend_mode = colordodge
-							alpha = 0
-						}
-
-						state = {
-							name = a
-							next = b
-							duration = 0.4
-							trigger_on_create = yes
-							using = Animation_Curve_Default
-
-							modify_texture = {
-								name = "glow"
-								alpha = 0.3
-							}
-						}
-
-						state = {
-							name = b
-							next = a
-							duration = 1
-							using = Animation_Curve_Default
-
-							modify_texture = {
-								name = "glow"
-								alpha = 0
-							}
-						}
-					}
-				}
-
-				flowcontainer = {
-					#parentanchor = bottom|left
-					#position = { 5 -5 }
-					spacing = 5
-					ignoreinvisible = yes
-					#direction = horizontal
 
 					button_normal = {
 						name = "open_focus_button"
@@ -1004,6 +1020,46 @@ window = {
 							}
 						}
 					}
+				}
+
+
+				flowcontainer = {
+					parentanchor = bottom|left
+					#position = { 5 -5 }
+					spacing = 5
+					ignoreinvisible = yes
+					direction = vertical
+
+					# button_normal = {
+					# 	name = "open_artifact_grid"
+					# 	#visible = "[Character.HasKillsKnownTo( GetPlayer )]"
+
+					# 	size = { 35 35 }
+
+					# 	datacontext = "[Character]"
+					# 	tooltip = "OPEN_ARTIFACT_GRID_TOOLTIP"
+					# 	using = tooltip_es
+
+
+					# 	icon = {
+					# 		texture = "gfx/interface/buttons/button_lifestyles_base.dds"
+					# 		size = { 100% 100% }
+					# 	}
+
+					# 	button_icon = {
+					# 		texture = "gfx/interface/icons/flat_icons/achievements.dds"
+					# 		onclick = "[VariableSystem.Toggle( 'artifact_open' )]"
+					# 		onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
+					# 		onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('kill_list'), 'close_kill_list', '' ) )]"
+					# 		size = { 25 25 }
+					# 		parentanchor = center
+
+					# 		modify_texture = {
+					# 			texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
+					# 			blend_mode = alphamultiply
+					# 		}
+					# 	}
+					# }
 
 					button_normal = {
 						name = "open_bloodline_list"
@@ -1025,37 +1081,6 @@ window = {
 							texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
 							onclick = "[VariableSystem.Toggle( 'bloodline_open' )]"
 							onclick = "[VariableSystem.Clear( 'artifact_open' )]"
-							onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('kill_list'), 'close_kill_list', '' ) )]"
-							size = { 25 25 }
-							parentanchor = center
-
-							modify_texture = {
-								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-								blend_mode = alphamultiply
-							}
-						}
-					}
-
-					button_normal = {
-						name = "open_artifact_grid"
-						#visible = "[Character.HasKillsKnownTo( GetPlayer )]"
-
-						size = { 35 35 }
-
-						datacontext = "[Character]"
-						tooltip = "OPEN_ARTIFACT_GRID_TOOLTIP"
-						using = tooltip_es
-
-
-						icon = {
-							texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-							size = { 100% 100% }
-						}
-
-						button_icon = {
-							texture = "gfx/interface/icons/flat_icons/achievements.dds"
-							onclick = "[VariableSystem.Toggle( 'artifact_open' )]"
-							onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
 							onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('kill_list'), 'close_kill_list', '' ) )]"
 							size = { 25 25 }
 							parentanchor = center
@@ -1226,26 +1251,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_big"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)5')]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 54
-										#addrow = 55
-										#maxhorizontalslots = 5
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
+										#ignoreinvisible = yes
+										addcolumn = 54
+										addrow = 55
+										maxhorizontalslots = 5
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 55 55 }
@@ -1254,26 +1284,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_medium"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)5'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)7'))]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 39
-										#addrow = 40
-										#maxhorizontalslots = 7
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
+										#ignoreinvisible = yes
+										addcolumn = 39
+										addrow = 40
+										maxhorizontalslots = 7
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 40 40 }
@@ -1287,26 +1322,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_small"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)7'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)10'))]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 28
-										#addrow = 29
-										#maxhorizontalslots = 10
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
+										#ignoreinvisible = yes
+										addcolumn = 28
+										addrow = 29
+										maxhorizontalslots = 10
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 29 29 }
@@ -1320,22 +1360,22 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_tiny"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)10')]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 24
-										#addrow = 25
-										#maxhorizontalslots = 11
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)11' )]"
+										#ignoreinvisible = yes
+										addcolumn = 24
+										addrow = 25
+										maxhorizontalslots = 11
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)11' )]"
 										datamodel_wrap = 11
 										maxverticalslots = 2
 
 										state = {
 											name = _show
-											trigger_on_create = yes
+											#trigger_on_create = yes
 											using = Reorder_Bloodlines
 										}
 
@@ -1395,26 +1435,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_big"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)4')]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 54
-										#addrow = 55
-										#maxhorizontalslots = 5
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
+										#ignoreinvisible = yes
+										addcolumn = 54
+										addrow = 55
+										maxhorizontalslots = 5
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 55 55 }
@@ -1423,26 +1468,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_medium"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)4'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)6'))]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 39
-										#addrow = 40
-										#maxhorizontalslots = 7
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
+										#ignoreinvisible = yes
+										addcolumn = 39
+										addrow = 40
+										maxhorizontalslots = 7
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 40 40 }
@@ -1456,26 +1506,31 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_small"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)6'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)8'))]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 28
-										#addrow = 29
-										#maxhorizontalslots = 10
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
+										#ignoreinvisible = yes
+										addcolumn = 28
+										addrow = 29
+										maxhorizontalslots = 10
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
 										maxverticalslots = 1
 
-										# state = {
-										# 	name = _show
-										# 	using = Reorder_Bloodlines
-										# }
+										state = {
+											name = _show
+											using = Reorder_Bloodlines
+										}
 
 										item = {
 											icon_trait = {
 												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
+												state = {
+													name = reorder
+													trigger_on_create = yes
+													using = Reorder_Bloodlines
+												}
 												blockoverride "icon_size"
 												{
 													size = { 29 29 }
@@ -1489,16 +1544,16 @@ window = {
 										}
 									}
 
-									dynamicgridbox = {
+									fixedgridbox = {
 										name = "traits_tiny"
 										datamodel = "[CharacterWindow.GetTraits]"
 										visible = "[GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)8')]"
 										flipdirection = yes
-										ignoreinvisible = yes
-										#addcolumn = 24
-										#addrow = 25
-										#maxhorizontalslots = 9
-										maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)9' )]"
+										#ignoreinvisible = yes
+										addcolumn = 24
+										addrow = 25
+										maxhorizontalslots = 9
+										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)9' )]"
 										datamodel_wrap = 9
 										maxverticalslots = 2
 
@@ -4060,7 +4115,7 @@ window = {
 
 		state = {
 			using = Animation_Refresh_FadeIn
-			#using = Reorder_Bloodlines
+			using = Reorder_Bloodlines
 		}
 	}
 
@@ -4076,7 +4131,7 @@ window = {
 
 		state = {
 			using = Animation_Refresh_FadeIn
-			#using = Reorder_Bloodlines
+			using = Reorder_Bloodlines
 			duration = 0.25
 		}
 	}
@@ -4085,298 +4140,3 @@ window = {
 		on_start = "[GetScriptedGui('reorder_traits').Execute(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
 	}
 
-	# types Aptitude
-	# {
-	# 	type aptitude_breakdown_widget = widget
-	# 	{
-	# 		alwaystransparent = no
-	# 		using = GeneralTooltipSetup
-	# 		widget = {
-	# 			name = "background"
-	# 			using = DefaultTooltipBackground
-	# 			size = { 100% 100% }
-	# 			alwaystransparent = no
-	# 		}
-	# 		vbox = {
-	# 			set_parent_size_to_minimum = yes
-	# 			margin = { 20 10 }
-	# 			margin_bottom = 20
-	# 			spacing = 3
-
-	# 			text_single = {
-	# 				layoutpolicy_horizontal = expanding
-	# 				text = "aptitude_title"
-	# 				align = left
-	# 			}
-
-	# 			vbox = {
-	# 				layoutpolicy_horizontal = expanding
-	# 				layoutpolicy_vertical = expanding
-	# 				#margin = { 0 4 }
-	# 				spacing = -1
-
-	# 				# text_single = {
-	# 				# 	layoutpolicy_horizontal = expanding
-	# 				# 	text = "aptitude_title"
-	# 				# 	align = left
-	# 				# }
-	# 				text_single = {
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_base"
-	# 					align = left
-	# 				}
-	# 				# Education
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_education_magical_ability').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_education_magical_ability"
-	# 					align = left
-	# 				}
-	# 				# Lifestyles
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_mystic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_mystic"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_scholar').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_scholar"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_soul_magic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_soul_magic"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_conjurer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_conjurer"
-	# 					align = left
-	# 				}
-	# 				# Personailty
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_lazy').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_lazy"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_diligent').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_diligent"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_patient').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_patient"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_impatient').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_impatient"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_shy').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_shy"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_ambitious').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_ambitious"
-	# 					align = left
-	# 				}
-	# 				# Stress
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_drunkard').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_drunkard"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_hashishiyah').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_hashishiyah"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_reclusive').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_reclusive"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_irritable').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_irritable"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_journaller').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_journaller"
-	# 					align = left
-	# 				}
-	# 				# Genetic
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_intellect').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_intellect"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_inbred').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_inbred"
-	# 					align = left
-	# 				}
-	# 				# Health
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_infirm').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_infirm"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_incapable').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_incapable"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_lunatic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_lunatic"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_possessed').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_possessed"
-	# 					align = left
-	# 				}
-	# 				# Disease
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_ill').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_ill"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_pneumonic').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_pneumonic"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_great_pox').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_great_pox"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_consumption').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_consumption"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_typhus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_typhus"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_bubonic_plague').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_bubonic_plague"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_smallpox').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_smallpox"
-	# 					align = left
-	# 				}
-	# 				# Physical
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_shrewd').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_shrewd"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_dull').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_dull"
-	# 					align = left
-	# 				}
-	# 				# Criminal
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_witch_group').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_witch_group"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_necromancer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_necromancer"
-	# 					align = left
-	# 				}
-	# 				# Other
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_adventurer').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_adventurer"
-	# 					align = left
-	# 				}
-	# 				# Patrons & Birthsigns
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_p_magnus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_p_magnus"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_p_julianos').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_p_julianos"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_p_hermaeus').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_p_hermaeus"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_sign_mage').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_sign_mage"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_sign_apprentice').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_sign_apprentice"
-	# 					align = left
-	# 				}
-	# 				text_single = {
-	# 					visible = "[GetScriptedGui('aptitude_sign_atronach').IsShown(GuiScope.SetRoot(Character.MakeScope).End)]"
-	# 					layoutpolicy_horizontal = expanding
-	# 					text = "aptitude_sign_atronach"
-	# 					align = left
-	# 				}
-	# 			}
-	# 		}
-	# 	}
-	# }
