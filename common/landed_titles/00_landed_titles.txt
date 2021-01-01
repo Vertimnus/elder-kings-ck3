@@ -8,7 +8,11 @@ e_tamriel = {
 	color = { 150 0 0 }
 	color2 = { 255 255 255 }
 	
-	capital = c_windhelm
+	capital = c_imperial_city
+
+	ai_primary_priority = {
+		add = @always_primary_score
+	}
 }
 
 e_ghost_sea = {
@@ -23,6 +27,13 @@ e_reach = {
 	color2 = { 255 255 255 }
 	
 	capital = c_markarth
+
+	ai_primary_priority = {
+		if = {
+			limit = { culture_group = culture_group:reachfolk }
+			add = @correct_culture_primary_score
+		}
+	}
 }
 
 # Orsinium - formable via decision
@@ -5746,16 +5757,26 @@ e_high_rock = {
 					color = { 100 255 210 }
 					color2 = { 0 0 0 }
 				}
-				b_pariah_abbey = {
-					province = 175
-					
-					color = { 100 255 195 }
-					color2 = { 0 0 0 }
-				}
 				b_norvulk = {
 					province = 178
 					
 					color = { 100 255 180 }
+					color2 = { 0 0 0 }
+				}
+			}
+			c_pariah_abbey = {					
+				color = { 110 255 200 }
+				color2 = { 0 0 0 }
+
+				# WIP Azura something name for Khajiit and Dunmer
+				#cultural_names = {
+				#
+				#}
+
+				b_pariah_abbey = {
+					province = 175
+					
+					color = { 100 255 195 }
 					color2 = { 0 0 0 }
 				}
 				b_moonlit_maw = {
@@ -5763,6 +5784,12 @@ e_high_rock = {
 					
 					color = { 100 255 225 }
 					color2 = { 0 0 0 }
+				}
+				b_dreamer_hills = {
+					province = 2654
+
+					color = { 100 255 185 }
+					color2 = { 0 0 0 }	
 				}
 			}
 		}
@@ -5785,19 +5812,19 @@ e_high_rock = {
 				b_newgate = {
 					province = 154
 					
-					color = { 140 255 140 }
+					color = { 140 255 135 }
 					color2 = { 0 0 0 }
 				}
 				b_windridge = {
 					province = 159
 					
-					color = { 140 255 140 }
+					color = { 140 255 145 }
 					color2 = { 0 0 0 }
 				}
 				b_gothleigh = {
 					province = 160
 					
-					color = { 140 255 140 }
+					color = { 140 250 140 }
 					color2 = { 0 0 0 }
 				}
 			}
@@ -5858,16 +5885,16 @@ e_high_rock = {
 				color = { 100 150 80 }
 				color2 = { 250 250 250 }
 				
+				b_charham = {
+					province = 2655
+
+					color = { 100 150 80 }
+					color2 = { 250 250 250 }
+				}
 				b_koeglin = {
 					province = 153
 					
-					color = { 100 150 95 }
-					color2 = { 250 250 250 }
-				}
-				b_broadbridge = {
-					province = 155
-					
-					color = { 100 150 110 }
+					color = { 100 150 90 }
 					color2 = { 250 250 250 }
 				}
 				b_vanne = {
@@ -5880,6 +5907,29 @@ e_high_rock = {
 					province = 157
 					
 					color = { 100 150 130 }
+					color2 = { 250 250 250 }
+				}
+			}
+			c_holton = {
+				color = { 100 150 95 }
+				color2 = { 250 250 250 }
+
+				b_cromtower = {
+					province = 2656
+
+					color = { 100 150 95 }
+					color2 = { 250 250 250 }
+				}
+				b_holton = {
+					province = 155
+					
+					color = { 100 150 100 }
+					color2 = { 250 250 250 }
+				}
+				b_galloton = {
+					province = 2657
+
+					color = { 100 150 110 }
 					color2 = { 250 250 250 }
 				}
 			}
@@ -5976,23 +6026,40 @@ e_high_rock = {
 					color = { 145 120 125 }
 					color2 = { 0 0 0 }
 				}
-				b_vermeir = {
-					province = 191
-					
-					color = { 145 120 140 }
-					color2 = { 0 0 0 }
-				}
 				b_wind_keep = {
 					province = 193
 					
 					color = { 145 120 155 }
 					color2 = { 0 0 0 }
 				}
+				b_horcester_hill = {
+					province = 2653
+					
+					color = { 145 100 155 }
+					color2 = { 0 0 0 }
+				}
+			}
+			c_vermeir = {
+				color = { 120 100 120 }
+				color2 = { 0 0 0 }
+
+				b_vermeir = {
+					province = 191
+					
+					color = { 120 100 120 }
+					color2 = { 0 0 0 }
+				}
+				b_arking_hall = {
+					province= 2652
+
+					color = { 120 100 100 }
+					color2 = { 0 0 0 }
+				}
 				b_blackheart = {
 					province = 235
 					
-					color = { 145 120 155 }
-					color2 = { 250 250 250 }
+					color = { 120 100 130 }
+					color2 = { 0 0 0 }
 				}
 			}
 		}
@@ -6826,25 +6893,25 @@ e_high_rock = {
 				}
 			}
 			c_oxshire = {
-				color = { 165 124 137 }
+				color = { 195 224 137 }
 				color2 = { 250 250 250 }
 				
 				b_oxham = {
 					province = 512
 					
-					color = { 165 124 137 }
+					color = { 195 224 127 }
 					color2 = { 250 250 250 }
 				}
 				b_apprentice_rock = {
 					province = 234
 					
-					color = { 165 124 137 }
+					color = { 195 214 127 }
 					color2 = { 250 250 250 }
 				}
 				b_torog_spite = {
 					province = 236
 					
-					color = { 165 124 137 }
+					color = { 185 224 127 }
 					color2 = { 250 250 250 }
 				}
 			}
@@ -15737,6 +15804,10 @@ e_cyrodiil = {
 		color2 = { 255 255 255 }
 
 		capital = c_imperial_city
+
+		ai_primary_priority = {
+			add = @always_primary_score
+		}
 		
 		cultural_names = {
 			ayleid = cn_cyrod
