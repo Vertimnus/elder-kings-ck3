@@ -4,6 +4,18 @@
     }
 }
 
+on_found_bloodline = {
+    effect = {
+        inherit_all_bloodlines = yes
+        every_child = {
+            trigger_event = {
+                on_action = on_found_bloodline
+                days = 1
+            }
+        }
+    }
+}
+
 bloodline_set_founders = {
     effect = {
         set_global_variable = { name = bloodline_direnni_founder value = character:direnni_999 }

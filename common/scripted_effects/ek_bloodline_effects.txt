@@ -43,7 +43,7 @@ inherit_bloodline = {
     # Inheritance type check
     if = { #father
         limit = {
-            ROOT.father = {
+            THIS.father = {
                 OR = { #patrilineal or all bloodline or matri bloodline override and patri marriage
                     has_trait_with_flag = bloodline_$TRAIT$_all
                     has_trait_with_flag = bloodline_$TRAIT$_patri
@@ -60,7 +60,7 @@ inherit_bloodline = {
     }
     else_if = { #mother
         limit = {
-            ROOT.mother = {
+            THIS.mother = {
                 OR = { #matrilineal or all bloodline or patri bloodline override and matri marriage
                     has_trait_with_flag = bloodline_$TRAIT$_all
                     has_trait_with_flag = bloodline_$TRAIT$_matri
@@ -69,7 +69,7 @@ inherit_bloodline = {
                         has_trait_with_flag = bloodline_$TRAIT$_matri_override
                         OR = { #unknown father, mother pass patri bloodlines
                             matrilinear_marriage = yes
-                            NOT = { exists = ROOT.father }
+                            NOT = { exists = PREV.father }
                         }
                     }
                 }
@@ -87,8 +87,8 @@ inherit_bloodline = {
     if = {
         limit = {
             OR = {
-                #NOT = { has_trait_with_flag = illegitimate_bastard } #either not a bastard,
-                scope:is_bastard = no
+                NOT = { has_trait_with_flag = illegitimate_bastard } #either not a bastard,
+                #scope:is_bastard = no
                 #scope:father = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed
                 #scope:mother = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed
                 any_parent = { has_trait_with_flag = bloodline_$TRAIT$_allow_bastards } #or bastard inheritance allowed - does this ever go to real_father?
@@ -102,10 +102,31 @@ inherit_bloodline = {
         save_temporary_scope_value_as = { name = bastard value = no }
         #set_variable = $TRAIT$_bastard
     }
+
+    # Special conditions
     if = {
-        limit = { #can add bloodline specific conditions here, eg culture requirement
+        limit = {
+            trigger_if = {
+                limit = {
+                    any_parent = { has_trait_with_flag = bloodline_$TRAIT$_special_inheritance }
+                }
+                any_parent = { bloodline_$TRAIT$_extra_inherit = yes } # parent religion/culture considered, not child
+            }
+            trigger_else = { always = yes }
+        }
+        save_temporary_scope_value_as = { name = special value = yes }
+        #set_variable = $TRAIT$_special
+    }
+    else = {
+        save_temporary_scope_value_as = { name = special value = no }
+        #set_variable = $TRAIT$_no_special
+    }
+
+    if = {
+        limit = {
             scope:inherit = yes
             scope:bastard = yes
+            scope:special = yes
         }
         add_trait = bloodline_$TRAIT$
     }

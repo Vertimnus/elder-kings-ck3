@@ -106,7 +106,7 @@ window = {
 									name = "bloodline_button"
 									#visible = "[EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' )]"
 									layoutpolicy_horizontal = expanding
-									size = { 0 170 }
+									size = { 0 180 }
 									alwaystransparent = yes
 
 									highlight_icon = {
@@ -138,10 +138,13 @@ window = {
 												texture = "[Trait.GetIcon(Character.Self)]"
 											}
 
-											flowcontainer = {
+											hbox = {
 												name = "bloodline_properties"
-												direction = horizontal
-												spacing = 10
+												#direction = horizontal
+												#ignoreinvisible = yes
+												#spacing = 5
+												margin = { 5 0 }
+												layoutpolicy_horizontal = expanding
 
 												background = {
 													using = Text_Label_Background
@@ -149,7 +152,7 @@ window = {
 													margin = { 12 3 }
 												}
 
-												container = {
+												widget = {
 													name = "inherit_type"
 													size = { 25 25 }
 													icon = {
@@ -157,7 +160,7 @@ window = {
 														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'all' )]"
 														texture = "gfx/interface/icons/flat_icons/heterosexual.dds"
 														tooltip = bloodline_inherit_all
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
@@ -165,7 +168,7 @@ window = {
 														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'patri' )]"
 														texture = "gfx/interface/icons/flat_icons/male.dds"
 														tooltip = bloodline_inherit_patri
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
@@ -173,12 +176,12 @@ window = {
 														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'matri' )]"
 														texture = "gfx/interface/icons/flat_icons/female.dds"
 														tooltip = bloodline_inherit_matri
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 												}
 
-												container = {
+												widget = {
 													name = "matri_override"
 													size = { 25 25 }
 													icon = {
@@ -186,7 +189,7 @@ window = {
 														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' )]"
 														texture = "gfx/interface/character_window/matri_override.dds"
 														tooltip = bloodline_matri_override
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
@@ -206,7 +209,7 @@ window = {
 														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' ) )]"
 														texture = "gfx/interface/character_window/matri_override.dds"
 														tooltip = bloodline_matri_override_not
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
@@ -223,7 +226,7 @@ window = {
 													}
 												}
 
-												container = {
+												widget = {
 													name = "allow_bastards"
 													size = { 25 25 }
 													icon = {
@@ -231,7 +234,7 @@ window = {
 														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' )]"
 														texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
 														tooltip = bloodline_allow_bastards
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
@@ -251,13 +254,58 @@ window = {
 														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' ) )]"
 														texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
 														tooltip = bloodline_allow_bastards_not
-														using = tooltip_ne
+														using = tooltip_se
 														using = Master_Button_Modify_Texture
 													}
 													icon = {
 														size = { 25 25 }
 														position = { 6 6 }
 														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' ) )]"
+														texture = "gfx/interface/icons/flat_icons/cancel_small.dds"
+														alwaystransparent = yes
+														modify_texture = {
+															texture = "gfx/interface/colors/red.dds"
+															blend_mode = add
+															spritetype = corneredtiled
+														}
+													}
+												}
+												widget = {
+													name = "special_condition"
+													size = { 25 25 }
+													visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_special' ) ), 'yes' )]"
+													icon = {
+														size = { 25 25 }
+														visible = "[GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End)]"
+														texture = "gfx/interface/icons/flat_icons/outliner.dds"
+														tooltip = bloodline_special_condition
+														using = tooltip_se
+														using = Master_Button_Modify_Texture
+													}
+													icon = {
+														size = { 25 25 }
+														position = { 6 6 }
+														visible = "[GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End)]"
+														texture = "gfx/interface/character_window/tick.dds"
+														alwaystransparent = yes
+														modify_texture = {
+															texture = "gfx/interface/colors/green.dds"
+															blend_mode = add
+															spritetype = corneredtiled
+														}
+													}
+													icon = {
+														size = { 25 25 }
+														visible = "[Not( GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End) )]"
+														texture = "gfx/interface/icons/flat_icons/outliner.dds"
+														tooltip = bloodline_special_condition_not
+														using = tooltip_se
+														using = Master_Button_Modify_Texture
+													}
+													icon = {
+														size = { 25 25 }
+														position = { 6 6 }
+														visible = "[Not( GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End) )]"
 														texture = "gfx/interface/icons/flat_icons/cancel_small.dds"
 														alwaystransparent = yes
 														modify_texture = {
@@ -280,7 +328,7 @@ window = {
 											layoutpolicy_vertical = expanding
 											layoutpolicy_horizontal = expanding
 
-											hbox = {
+											vbox = {
 												layoutpolicy_horizontal = expanding
 												text_label_left = {
 													name = "bloodline_name"
@@ -289,13 +337,14 @@ window = {
 													default_format = "#high"
 													using = Font_Size_Medium
 												}
-												spacer = {
-													layoutpolicy_horizontal = growing
-												}
+												# spacer = {
+												# 	layoutpolicy_horizontal = growing
+												# }
 												text_single = {
 													name = "bloodline_founder"
+													layoutpolicy_horizontal = expanding
 													text = "Founder: [GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-													#default_format = "#low"
+													align = left
 													using = Font_Size_Small
 												}
 											}
@@ -305,6 +354,36 @@ window = {
 												layoutpolicy_vertical = expanding
 												layoutpolicy_horizontal = expanding
 
+												# scrollbox = {
+												# 	name = "bloodline_modifier_scrollarea"
+												# 	#layoutpolicy_horizontal = expanding
+												# 	layoutpolicy_vertical = expanding
+												# 	size = { 150 0 }
+
+												# 	blockoverride "scrollbox_background" {}
+
+												# 	#blockoverride "scrollbox_margins" {}
+
+												# 	blockoverride "scrollbox_replace_vbox"
+												# 	{
+												# 		hbox = {
+												# 			size = { 0 500 }
+												# 			layoutpolicy_horizontal = expanding
+												# 			layoutpolicy_vertical = expanding
+												# 			text_multi = {
+												# 				name = "bloodline_modifiers"
+												# 				#size = { 150 0 }
+												# 				layoutpolicy_vertical = expanding
+												# 				layoutpolicy_horizontal = expanding
+												# 				text = "[Trait.GetFullDescription( Character.Self, Faith.Self )]"
+												# 				default_format = "#high"
+												# 				using = Font_Size_Small
+												# 			}
+												# 		}
+												# 	}
+
+												# 	blockoverride "scrollbox_background_fade" {}
+												# }
 												text_multi = {
 													name = "bloodline_modifiers"
 													size = { 150 0 }
@@ -319,26 +398,15 @@ window = {
 													layoutpolicy_vertical = expanding
 												}
 
-												# vbox = {
-												# 	spacing = 4
-												# 	layoutpolicy_vertical = expanding
-												# 	layoutpolicy_horizontal = expanding
-												# 	text_single = {
-												# 		name = "bloodline_founder"
-												# 		text = "Founder: [GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-												# 		align = top
-												# 		using = Font_Size_small
-												# 	}
-													text_multi = {
-														name = "bloodline_desc"
-														layoutpolicy_vertical = expanding
-														layoutpolicy_horizontal = expanding
-														text = "#F [Localize( Concatenate( Trait.GetKey, '_desc' ) )]#!"
-														#text = "[Trait.GetDescription( Character.Self )]"
-														#default_format = "#high"
-														using = Font_Size_Small
-													}
-												# }
+												text_multi = {
+													name = "bloodline_desc"
+													layoutpolicy_vertical = expanding
+													layoutpolicy_horizontal = expanding
+													text = "#F [Localize( Concatenate( Trait.GetKey, '_desc' ) )]#!"
+													#text = "[Trait.GetDescription( Character.Self )]"
+													#default_format = "#high"
+													using = Font_Size_Small
+												}
 											}
 										}
 									}
