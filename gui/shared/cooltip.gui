@@ -22,6 +22,7 @@ types CultureTooltips
 				layoutpolicy_vertical = expanding
 				margin = { 6 4 }
 				margin_bottom = 12
+				margin_left = 0
 
 				background = {
 					name = "header"
@@ -50,6 +51,14 @@ types CultureTooltips
 				}
 				hbox = {
 					layoutpolicy_horizontal = expanding
+					spacing = 6
+
+					icon = {
+						size = { 50 50 }
+						visible = "[Not( EqualTo_string( Localize( Concatenate( Culture.GetNameNoTooltip, '_icon' ) ), Concatenate( Culture.GetNameNoTooltip, '_icon' ) ) )]"
+						texture = "[GetIllustration( Localize( Concatenate( Culture.GetNameNoTooltip, '_icon' ) ) ).GetTexture(GetPlayer)]"
+						align = vcenter|left
+					}
 
 					vbox = {
 						layoutpolicy_vertical = expanding
@@ -98,7 +107,7 @@ types CultureTooltips
 						layoutpolicy_vertical = expanding
 						text = "[culture|E]"
 						fonttintcolor = "[TooltipInfo.GetTintColor]"
-						align = vcenter|right
+						align = nobaseline|right #vcenter|right
 					}
 				}
 			}
