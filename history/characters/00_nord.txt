@@ -45,7 +45,7 @@ stuhn_3 = {
 }
 
 stuhn_4 = {
-	name = "Horkvir" #Duke of Ansilvund (Interregnum)
+	name = "Horkvir" #Duke of Ansilvund 
 	dynasty = 70079
 	culture = eastmarcher
 	religion = nord_cult
@@ -53,10 +53,14 @@ stuhn_4 = {
 	
 	3324.1.1 = { birth = yes }
 	#3346.1.1 = { add_spouse = 9177 }
-	3384.1.1 = { death = yes }
+	3382.1.1 = { trait = drunkard }
+	3384.1.1 = { death = {
+		death_reason = death_stress
+		}
+	}
 }
 stuhn_5 = {
-	name = "Asgrim" #Count of Ironbind (Interregnum), Later Duke of Ansilvund
+	name = "Asgrim" #Count of Ironbind , Later Duke of Ansilvund
 	dynasty = 70079
 	culture = eastmarcher
 	religion = nord_cult
@@ -67,6 +71,23 @@ stuhn_5 = {
 	#3367.1.1 = { add_spouse = 9105 }
 	3410.1.1 = { death = yes }
 }
+
+stuhn_401 = {
+	name = "Yngol"
+	dynasty = 70079
+	culture = eastmarcher
+	religion = nord_cult
+	father = stuhn_4
+	#mother = 9177
+
+	3348.1.1 = { birth = yes }
+	3383.12.12 = { death = {
+		death_reason = death_beaten
+		killer = stuhn_4
+		}
+	}
+}
+
 stuhn_6 = { #Marries Blackthorn?
 	name = "Rikke"
 	dynasty = 70079
@@ -151,16 +172,16 @@ stuhn_13 = {
 	dynasty = 70079
 	culture = eastmarcher
 	religion = nord_cult
-	trait = drunkard
 	father = stuhn_12
 
 	3502.1.1 = { birth = yes }
+	3528.1.1 = { trait = drunkard }
 	3563.1.1 = { death = yes }
 }
 
 ##Stuhns that leave Skyrim, becoming Cairn-Breaker
 cairnbreaker_10 = {
-	name = "Hrisskar" #Duke of Frostcrag (Interregnum)
+	name = "Hrisskar" #Duke of Frostcrag 
 	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
@@ -173,7 +194,7 @@ cairnbreaker_10 = {
 	3373.1.1 = { death = yes }
 }
 cairnbreaker_11 = {
-	name = "Regner" #Duke of Horunn (Interregnum)
+	name = "Regner" #Duke of Horunn (Warlords)
 	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
@@ -184,7 +205,7 @@ cairnbreaker_11 = {
 	3408.1.1 = { death = yes }
 }
 cairnbreaker_12 = {
-	name = "Hilde" #Countess of Redruby (Interregnum)
+	name = "Hilde" #Countess of Redruby 
 	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
@@ -231,7 +252,7 @@ cairnbreaker_15 = {
 	3446.1.1 = { death = yes }
 }
 cairnbreaker_16 = {
-	name = "Ogmund" #Duke of Redruby
+	name = "Ogmund" #Count of Red Ruby
 	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
@@ -240,6 +261,30 @@ cairnbreaker_16 = {
 	
 	3421.1.1 = { birth = yes }
 	3486.1.1 = { death = yes }
+}
+cairnbreaker_17 = {
+	name = "Eyja" #Duchess of Frostcrag
+	dynasty = 70079
+	dynasty_house = cyro_stuhn
+	culture = cyro_nord
+	religion = nord_cult
+	female = yes
+	mother = cairnbreaker_14
+	
+	3464.1.1 = { birth = yes }
+	3524.1.1 = { death = yes }
+}
+
+cairnbreaker_18 = {
+	name = "Ergnir" #Duke of Red Ruby/Horunn
+	dynasty = 70079
+	dynasty_house = cyro_stuhn
+	culture = cyro_nord
+	religion = nord_cult
+	mother = cairnbreaker_14
+	
+	3470.1.1 = { birth = yes }
+	3528.1.1 = { death = yes }
 }
 
 #Flamehair
@@ -254,7 +299,7 @@ flamehair_999 = {
 }
 
 flamehair_1000 = {
-	name = "Freydis" #Queen of Eastmarch (Interregnum)
+	name = "Freydis" #Queen of Eastmarch 
 	dynasty = 70435
 	culture = eastmarcher
 	religion = nord_cult
@@ -265,7 +310,7 @@ flamehair_1000 = {
 	3384.1.1 = { death = yes }
 }
 flamehair_1001 = {
-	name = "Thorkild" #Duke of Heljarchen? (Interregnum) Future Cadet Dynasty?
+	name = "Thorkild" #Duke of Heljarchen?  Future Cadet Dynasty?
 	dynasty = 70435
 	culture = eastmarcher
 	religion = nord_cult
@@ -278,7 +323,7 @@ flamehair_1001 = {
 	3405.1.1 = { death = yes }
 }
 flamehair_1002 = {
-	name = "Torbjorn" #Count of Mistwatch (Interregnum)
+	name = "Torbjorn" #Count of Mistwatch 
 	dynasty = 70435
 	culture = eastmarcher
 	religion = nord_cult
@@ -336,7 +381,7 @@ flamehair_1006 = {
 	3429.1.1 = { death = yes }
 }
 flamehair_1007 = {
-	name = "Thorygg" #Heir to Heljarchen? (Interregnum) Future Cadet Dynasty?
+	name = "Thorygg" #Heir to Heljarchen?  Future Cadet Dynasty?
 	dynasty = 70435
 	culture = eastmarcher
 	religion = nord_cult
@@ -417,7 +462,7 @@ flamehair_1013 = {
 	dynasty = 70435
 	culture = eastmarcher
 	religion = nord_cult
-	mother = flamehair_1012
+	mother = flamehair_1011
 	#father = 10102
 	female = yes
 	
@@ -513,6 +558,53 @@ flamehair_1019 = {
 	3551.1.1 = { birth = yes }
 	3622.1.1 = { death = yes }
 }
+
+##Fjalr Cadet Branch
+fjalr_10 = {
+	name = "Narrald" #Duke of Heljarchen
+	dynasty = 70435
+	dynasty_house = flamehair_fjalr
+	culture = eastmarcher
+	religion = nord_cult
+	father = flamehair_1012
+	
+	3465.1.1 = { birth = yes }
+	3527.1.5 = { death = yes }
+}
+fjalr_11 = {
+	name = "Tova" #Duke of Heljarchen
+	dynasty = 70435
+	dynasty_house = flamehair_fjalr
+	culture = eastmarcher
+	religion = nord_cult
+	father = fjalr_10
+	female = yes
+	
+	3490.1.1 = { birth = yes }
+	3552.3.11 = { death = yes }
+}
+fjalr_12 = {
+	name = "Belrud"
+	dynasty = 70435
+	dynasty_house = flamehair_fjalr
+	culture = eastmarcher
+	religion = nord_cult
+	father = fjalr_10
+	
+	3498.1.1 = { birth = yes }
+	3550.2.1 = { death = yes }
+}
+fjalr_13 = {
+	name = "Benjor" 
+	dynasty = 70435
+	dynasty_house = flamehair_fjalr
+	culture = eastmarcher
+	religion = nord_cult
+	father = fjalr_10
+	
+	3501.1.1 = { birth = yes }
+	3560.5.2 = { death = yes }
+}
 #Cursebraid
 cursebraid_998 = {
 	name = "Holmar"
@@ -537,7 +629,8 @@ cursebraid_999 = {
 	3370.1.1 = { death = yes }
 }
 cursebraid_1000 = {
-	name = "Svartr" #King of Solitude (Interregnum)
+	name = "Svartr" #King of Solitude 
+	dna = svartr_dna_entry
 	dynasty = 70152
 	culture = westmarcher
 	religion = nord_cult
