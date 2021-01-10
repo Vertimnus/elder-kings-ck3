@@ -637,6 +637,9 @@ cursebraid_1000 = {
 	dynasty = 70152
 	culture = westmarcher
 	religion = nord_cult
+	trait = fickle
+	trait = deceitful
+	trait = vengeful
 	father = cursebraid_998
 	#mother = 300026
 	
@@ -911,6 +914,65 @@ nightwielder_105 = { #THE Azra Nightwielder, Pioneer of Shadow Magic
 	3600.1.1 = { death = yes } #Locked in a Crystal
 }
 
+##Sword-Poet Dynasty(Custom)
+#House Sword-Poet
+swordpoet_99 = {
+	name = "Viddek" #Count of Silent Isles
+	dynasty = 70417
+	culture = westmarcher
+	religion = totemism
+	trait = intellect_good_1
+	
+	3340.1.1 = { birth = yes }
+	3412.1.1 = { death = yes }
+}
+swordpoet_100 = {
+	name = "Vallkir" #Count of Silent Isles
+	dynasty = 70417
+	culture = westmarcher
+	religion = totemism
+	father = swordpoet_99
+	
+	3358.1.1 = { birth = yes }
+	3443.1.1 = { death = yes }
+}
+swordpoet_101 = {
+	name = "Varric" #Count of Silent Isles
+	dynasty = 70417
+	culture = westmarcher
+	religion = totemism
+	father = swordpoet_100
+	
+	3420.1.1 = { birth = yes }
+	3494.1.1 = { death = yes }
+}
+swordpoet_102 = {
+	name = "Viddek" #Count of Silent Isles ( Alliance War ), Mage
+	dynasty = 70417
+	culture = westmarcher
+	religion = totemism
+	trait = intellect_good_2
+	father = swordpoet_101
+	
+	3480.1.1 = { birth = yes }
+	3562.1.1 = { death = yes }
+}
+swordpoet_103 = {
+	name = "Njordemar" #Brother of Viddek
+	dynasty = 70417
+	culture = westmarcher
+	religion = totemism
+	trait = physique_good_1
+	father = swordpoet_101
+	
+	3482.1.1 = { birth = yes }
+	3538.1.1 = {
+		death = { 
+			death_reason = death_battle
+			killer = swordpoet_102
+			}
+	}
+}
 #Snowhawk Duke, Ghilred Dynasty
 
 ghilred_1000 = {
@@ -963,8 +1025,8 @@ ghilred_1003 = {
 	3451.1.1 = { death = yes }
 }
 
-##Snow-Bourne, Bleakrock ...Duke? Before Dunmer
-
+##Snow-Bourne Dynasty
+#House Snow-Bourne
 snowbourne_99 = {
 	name = "Eiman"
 	dynasty = 70460
@@ -1021,8 +1083,8 @@ snowbourne_102 = {
 	#}
 	3520.1.1 = { death = yes }
 }
-#Blackthorn, former Jarls of Eastmarch
-
+##Blackthorn Dynasty
+#House Blackthorn
 blackthorn_96 = {
 	name = "Stenvar"
 	dynasty = 70123
@@ -1053,8 +1115,7 @@ blackthorn_98 = {
 	#mother = 300015
 	
 	3300.1.1 = { birth = yes }
-	3301.1.1 = { culture = nord }
-	3323.1.1 = { add_spouse = 300016 }
+	#3323.1.1 = { add_spouse = 300016 }
 	3358.1.1 = { death = yes }
 }
 blackthorn_99 = {
@@ -1086,7 +1147,7 @@ blackthorn_100 = { #Marries Doom-Sayers
 	3377.1.1 = { death = yes }
 }
 blackthorn_101 = {
-	name = "Golldir" #Count of Sigilkeep
+	name = "Golldir" #Count of Sigilkeep & Shrouded Grove
 	dynasty = 70123
 	culture = eastmarcher
 	religion = nord_cult
@@ -1111,7 +1172,7 @@ blackthorn_102 = { #Potential Marriage Candidate
 	3399.1.1 = { death = yes }
 }
 blackthorn_103 = {
-	name = "Roggvar" #Count of Sigilkeep
+	name = "Roggvar" #Count of Sigilkeep & Shrouded Grove
 	dynasty = 70123
 	culture = eastmarcher
 	religion = nord_cult
@@ -1124,7 +1185,7 @@ blackthorn_103 = {
 }
 
 blackthorn_104 = {
-	name = "Roggi" #Count of Sigilkeep
+	name = "Roggi" #Count of Sigilkeep & Shrouded Grove
 	dynasty = 70123
 	culture = eastmarcher
 	religion = nord_cult
@@ -1135,7 +1196,7 @@ blackthorn_104 = {
 }
 
 blackthorn_105 = {
-	name = "Iona" #Countess of Sigilkeep
+	name = "Iona" #Countess of Sigilkeep & Shrouded Grove
 	dynasty = 70123
 	culture = eastmarcher
 	religion = nord_cult
@@ -1175,6 +1236,81 @@ blackthorn_107 = {
 
 	3472.1.1 = { birth = yes }
 	3530.1.1 = { death = yes }
+}
+##Blue-Wall Dynasty
+#House Blue-Wall
+bluewall_98 = {
+	name = "Sigaar" #Duke of Valtheim ( Interregnum & Warlords )
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	trait = bastard_founder
+	father = blackthorn_97
+	
+	3312.1.1 = { birth = yes }
+	3380.1.1 = { death = yes }
+}
+bluewall_99 = {
+	name = "Thorgar" #Duke of Valtheim
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_98
+	
+	3340.1.1 = { birth = yes }
+	3421.1.1 = { death = yes }
+}
+bluewall_100 = {
+	name = "Odfel"
+	dynasty = 70131
+	dynasty_house = blackthorn_bluewall
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_98
+	
+	3342.1.1 = { birth = yes }
+	3433.1.1 = { death = yes }
+}
+bluewall_101 = {
+	name = "Thorkell" #Duke of Valtheim
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_99
+	
+	3381.1.1 = { birth = yes }
+	3458.1.1 = { death = yes }
+}
+bluewall_102 = {
+	name = "Adalmor" #Duke of Valtheim ( Alliance War )
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_101
+	
+	3443.1.1 = { birth = yes }
+	3517.1.1 = { death = yes }
+}
+bluewall_103 = {
+	name = "Obetta" #Duke of Valtheim
+	female = yes
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_102
+	
+	3488.1.1 = { birth = yes }
+	3557.1.1 = { death = yes }
+}
+bluewall_104 = {
+	name = "Svenjar"
+	dynasty = 70131
+	culture = westmarcher
+	religion = nord_cult
+	father = bluewall_102
+	
+	3490.1.1 = { birth = yes }
+	3560.1.1 = { death = yes }
 }
 ##Doom-Sayer Dynasty
 #House Doom-Sayer
