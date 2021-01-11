@@ -295,7 +295,12 @@ flamehair_999 = {
 	religion = nord_cult
 	
 	3290.1.1 = { birth = yes }
-	3351.1.1 = { death = yes }
+	3351.1.1 = { 
+		death = {
+				death_reason = death_murder_unkonwn
+				killer = bannertorn_100 #High King Svartr of Western Skyrim
+			}
+	}
 }
 
 flamehair_1000 = {
@@ -923,6 +928,128 @@ snowshod_204 = {
 	3490.1.1 = { birth = yes }
 	3563.1.1 = { death = yes }
 }
+##Banner-Torn
+#House Banner-Torn
+bannertorn_99 = {
+	name = "Joric"
+	culture = westmarcher
+	religion = nord_cult
+
+	3264.1.1 = { birth = yes }
+	3328.1.1 = { death = yes }
+}
+bannertorn_100 = {
+	name = "Gandis" #Becomes Duke of Northwatch, after a task by Svartr
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_99
+
+	3331.1.1 = { birth = yes }
+	3347.1.1 = {
+		employer = cursebraid_1000
+		trait = education_intrigue_4
+		trait = deceitful
+		trait = ambitious
+		give_council_position = councillor_spymaster
+	}
+	3351.1.1 = { 
+		effect = {
+			add_secret = { type = secret_murder target = flamehair_999 } #Temporary thing until a flavor event can be done
+			}
+	} 
+	3351.7.18 = { 
+		dynasty = 70110
+		give_nickname = nick_the_upstart
+		add_spouse = cursebraid_299
+		}
+		
+	3401.1.1 = { death = yes }
+}
+bannertorn_101 = {
+	name = "Logrolf" #Duke of Northwatch
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_100
+	mother = cursebraid_299
+
+	3354.1.1 = { birth = yes }
+	3424.1.1 = { death = yes }
+}
+bannertorn_102 = {
+	name = "Birgitha"
+	female = yes
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_100
+	mother = cursebraid_299
+
+	3357.1.1 = { birth = yes }
+	3430.1.1 = { death = yes }
+}
+bannertorn_103 = {
+	name = "Dagrunn"
+	female = yes
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_100
+	mother = cursebraid_299
+
+	3359.1.1 = { birth = yes }
+	3429.1.1 = { death = yes }
+}
+bannertorn_104 = {
+	name = "Yngvid" #Duke of Northwatch
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_101
+
+	3403.1.1 = { birth = yes }
+	3497.1.1 = { death = yes }
+}
+bannertorn_105 = {
+	name = "Gandis" #Duke of Northwatch ( Alliance War )
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_104
+
+	3444.1.1 = { birth = yes }
+	3507.1.1 = { death = yes }
+}
+bannertorn_106 = {
+	name = "Thelm" #Duke of Northwatch
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_105
+
+	3468.1.1 = { birth = yes }
+	3531.1.1 = { death = yes }
+}
+bannertorn_107 = {
+	name = "Thjordic"
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_105
+
+	3469.1.1 = { birth = yes }
+	3541.1.1 = { death = yes }
+}
+bannertorn_108 = {
+	name = "Thjordic" #Duke of Northwatch
+	dynasty = 70110
+	culture = westmarcher
+	religion = nord_cult
+	father = bannertorn_105
+
+	3491.1.1 = { birth = yes }
+	3566.1.1 = { death = yes }
+}
 
 
 ##Cursebraid Dynasty
@@ -948,6 +1075,17 @@ cursebraid_999 = {
 	
 	3296.1.1 = { birth = yes }
 	3370.1.1 = { death = yes }
+}
+cursebraid_299 = { #Marries Banner-Torn
+	name = "Rennilde"
+	dynasty = 70152
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+	mother = cursebraid_999
+	
+	3334.1.1 = { birth = yes }
+	3404.1.1 = { death = yes }
 }
 cursebraid_1000 = {
 	name = "Svartr" #King of Solitude 
