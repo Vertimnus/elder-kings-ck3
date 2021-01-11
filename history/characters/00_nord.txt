@@ -1,4 +1,4 @@
-#Nord, not fully ported yet
+﻿#Nord, not fully ported yet
 #Stuhn
 stuhn_0 = {
 	name = "Savard"
@@ -309,9 +309,9 @@ flamehair_999 = {
 	3290.1.1 = { birth = yes }
 	3351.1.1 = { 
 		death = {
-				death_reason = death_murder
-				killer = bannertorn_100 #High King Svartr of Western Skyrim
-			}
+			death_reason = death_murder
+			killer = cursebraid_1000 #High King Svartr of Western Skyrim
+		}
 	}
 }
 
@@ -952,29 +952,34 @@ bannertorn_99 = {
 }
 bannertorn_100 = {
 	name = "Gandis" #Becomes Duke of Northwatch, after a task by Svartr
-	culture = westmarcher
+	culture = eastmarcher
 	religion = nord_cult
 	intrigue = 10
 	father = bannertorn_99
 
 	3331.1.1 = { birth = yes }
 	3347.1.1 = {
-		employer = cursebraid_1000
+		employer = flamehair_999
 		trait = education_intrigue_4
 		trait = deceitful
 		trait = ambitious
 		give_council_position = councillor_spymaster
-	}
-	3351.1.1 = { 
+		
+		# Attempted (and failed) to murder his liege
 		effect = {
-			add_secret = { type = secret_murder target = flamehair_999 } #Temporary thing until a flavor event can be done
+			add_secret = {
+				type = secret_murder_attempt
+				target = character:flamehair_999
 			}
-	} 
-	3351.7.18 = { 
+		}
+	}
+	3351.7.18 = { # Logrolf is assinated, he moves to Western Skyrim
+		employer = cursebraid_1000
+		give_council_position = councillor_spymaster
 		dynasty = 70110
 		give_nickname = nick_the_upstart
 		add_spouse = cursebraid_299
-		}
+	}
 		
 	3401.1.1 = { death = yes }
 }
@@ -1114,6 +1119,15 @@ cursebraid_1000 = {
 	
 	3297.1.1 = { birth = yes }
 	#3322.1.1 = { add_spouse = 300030 }
+	3351.1.1 = {
+		# Successfully killed Logrolf, with the help of Gandis
+		effect = {
+			add_secret = {
+				type = secret_murder
+				target = character:flamehair_999
+			}
+		}
+	}
 	3394.1.1 = { death = yes }
 }
 cursebraid_1001 = {
