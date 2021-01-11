@@ -139,13 +139,16 @@ ek_on_game_start = {
 		character:bannertorn_100 = { save_scope_as = logrolf_murderer }
 		character:flamehair_999 = { save_scope_as = hk_logrolf }
 		
-		# The noble first tried, without success, to kill Logrolf... Svartr knows it, and used the hook to force the noble to *again* try to kill his liege. Once the murder was successful, the two strong hooks cancelled each other out.
+		if = {
+			limit = {
+				scope:logrolf_murderer = { is_alive = yes }
+				scope:hk_svartr = { is_alive = yes }
+			}
+			
+			# The noble first tried, without success, to kill Logrolf... Svartr knows it, and used the hook to force the noble to *again* try to kill his liege. Once the murder was successful, the two strong hooks cancelled each other out.
 		
-		# We give the attempted murder secret the the perpetrator
-		scope:logrolf_murderer = {
-			if = {
-				limit = { is_alive = yes }
-				
+			# Svartr knows the murder attempt...
+			scope:logrolf_murderer = {
 				random_secret = {
 					limit = {
 						secret_type = secret_murder_attempt
@@ -161,14 +164,9 @@ ek_on_game_start = {
 					scope:hk_svartr = { remove_hook = { target = scope:logrolf_murderer } }
 				}
 			}
-		}
 		
-		# Svartr led a proper assassination
-		scope:hk_svartr = {
-			if = {
-				limit = { is_alive = yes }
-				
-				# And obviously the main agent knows
+			# And the lowly noble knows who killed Logrolf...
+			scope:hk_svartr = {
 				random_secret = {
 					limit = {
 						secret_type = secret_murder
