@@ -11,7 +11,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-        texture_density = 2
+		texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -24,7 +24,7 @@ window = {
 		spriteType = Corneredtiled
 		spriteborder = { 18 0 }
 		margin = { 20 0 }
-        texture_density = 2
+		texture_density = 2
 
 		modify_texture = {
 			texture = "gfx/interface/component_overlay/overlay_effect.dds"
@@ -368,7 +368,7 @@ window = {
 
 									editbox_standard = {
 										layoutpolicy_horizontal = expanding
-										
+
 										blockoverride "editbox_properties"
 										{
 											name = "first_name_editbox" # name used in code
@@ -457,7 +457,7 @@ window = {
 
 										editbox_standard = {
 											layoutpolicy_horizontal = expanding
-											
+
 											blockoverride "editbox_properties"
 											{
 												name = "dynasty_name_editbox" # name used in code
@@ -886,7 +886,9 @@ window = {
 					text = "RULER_DESIGNER_CHANGE_PORTRAIT"
 					onclick = "[VariableSystem.Set( 'appearance_customization_window_open', 'ethnicity_selection' )]"
 					onclick = "[VariableSystem.Set( 'appearance_customization_portrait_view', 'full_body' )]"
-					onclick = "[VariableSystem.Set( 'ek_race', Localize('RACE_MAN') )]"
+					#onclick = "[VariableSystem.Set( 'ek_race', Localize('RACE_MAN') )]"
+					#onclick = "[VariableSystem.Set( 'ek_ethnicity', Localize(RulerDesignerWindow.GetEthnicity.GetName) )]"
+					onclick = "[PdxGuiTriggerAllAnimations( 'check_ethnicity_man' )]"
 				}
 
 				text_label_center = {
@@ -1111,7 +1113,7 @@ window = {
 							}
 
 							expand = {}
-							
+
 							vbox = {
 								name = "weight"
 								layoutpolicy_horizontal = expanding
@@ -1131,7 +1133,7 @@ window = {
 									layoutpolicy_horizontal = expanding
 								}
 							}
-								
+
 							expand = {}
 						}
 
@@ -1335,12 +1337,12 @@ window = {
 												name = "skill_value"
 
 												datacontext = "[RulerDesignerSkill.GetModifiedValueBreakdown]"
-												
+
 												tooltip_enabled = "[ValueBreakdown.HasTooltip]"
 												tooltipwidget = {
 													widget_value_breakdown_tooltip = {}
 												}
-												
+
 												text = "[ValueBreakdown.GetValue]"
 
 												using = Font_Size_Big
@@ -1643,6 +1645,35 @@ window = {
 								name = "race_tabs"
 								layoutpolicy_horizontal = expanding
 
+								#These get the character race and ethnicity if one is not selected
+								state = {
+									name = check_ethnicity_null
+								}
+								state = {
+									name = check_ethnicity_man
+									on_start = "[VariableSystem.Set( 'ek_race', Localize('RACE_MAN') )]"
+									on_start = "[VariableSystem.Set( 'ek_ethnicity', RulerDesignerWindow.GetEthnicity.GetName )]"
+									on_finish = "[PdxGuiTriggerAllAnimations( Select_CString( VariableSystem.HasValue( 'ek_ethnicity', 'no' ), 'check_ethnicity_mer', 'check_ethnicity_null' ) )]"
+								}
+								state = {
+									name = check_ethnicity_mer
+									on_start = "[VariableSystem.Set( 'ek_race', Localize('RACE_MER') )]"
+									on_start = "[VariableSystem.Set( 'ek_ethnicity', RulerDesignerWindow.GetEthnicity.GetName )]"
+									on_finish = "[PdxGuiTriggerAllAnimations( Select_CString( VariableSystem.HasValue( 'ek_ethnicity', 'no' ), 'check_ethnicity_kahjiit', 'check_ethnicity_null' ) )]"
+								}
+								state = {
+									name = check_ethnicity_kahjiit
+									on_start = "[VariableSystem.Set( 'ek_race', Localize('RACE_KAHJIIT') )]"
+									on_start = "[VariableSystem.Set( 'ek_ethnicity', RulerDesignerWindow.GetEthnicity.GetName )]"
+									on_finish = "[PdxGuiTriggerAllAnimations( Select_CString( VariableSystem.HasValue( 'ek_ethnicity', 'no' ), 'check_ethnicity_argonian', 'check_ethnicity_null' ) )]"
+								}
+								state = {
+									name = check_ethnicity_argonian
+									on_start = "[VariableSystem.Set( 'ek_race', Localize('RACE_ARGONIAN') )]"
+									on_start = "[VariableSystem.Set( 'ek_ethnicity', RulerDesignerWindow.GetEthnicity.GetName )]"
+									on_finish = "[PdxGuiTriggerAllAnimations( Select_CString( VariableSystem.HasValue( 'ek_ethnicity', 'no' ), 'check_ethnicity_null', 'check_ethnicity_null' ) )]"
+								}
+								
 								button_tab = {
 									name = "man_tab"
 									layoutpolicy_horizontal = expanding
@@ -1738,11 +1769,13 @@ window = {
 							text = "RULER_DESIGNER_CUSTOMIZE_APPEARANCE_FURTHER"
 							onclick = "[VariableSystem.Set( 'appearance_customization_window_open', 'main_customizer' )]"
 							onclick = "[VariableSystem.Set( 'appearance_customization_side_tab_open', 'body' )]"
+							onclick = "[PdxGuiTriggerAllAnimations( 'check_ethnicity_man' )]"
+							#enable = "[ethinicity + race match]" # and relevant tooltip
 							min_width = 300
 						}
 					}
 
-					
+
 				}
 
 				vbox = {
@@ -1919,7 +1952,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-	
+
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -1948,7 +1981,7 @@ window = {
 							name = "ruler_designer_portrait_refresh"
 							using = Animation_Refresh_FadeOut
 						}
-	
+
 						state = {
 							using = Animation_Refresh_FadeIn
 						}
@@ -2105,7 +2138,7 @@ window = {
 											layoutpolicy_horizontal = expanding
 											margin = { 10 10 }
 											spacing = 4
-											
+
 											visible = "[GeneCategory.IsType( 'morph' )]"
 
 											background = {
@@ -2555,7 +2588,7 @@ types ruler_designer_types
 						tooltip = "RULER_DESIGNER_ADD_TRAIT_SLOT_TOOLTIP"
 
 						onclick = "[TraitSlotArray.StartEditing]"
-						
+
 						block "plus_onclick"
 						{
 							onclick = "[VariableSystem.Set( 'trait_select_window_open', 'true' )]"
