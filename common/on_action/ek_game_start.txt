@@ -139,6 +139,46 @@ ek_on_game_start = {
 		# Ravan
 		set_culture_native_to = { REGION = ravan CULTURE = culture:yokudan }
 		
+		### Some religious tweaks
+		every_religion_global = {
+			every_faith = {
+				## DOCTRINE_GENDER
+				if = {
+					limit = {
+						OR = {
+							has_doctrine = doctrine_pantheon_daedra
+							# Prince specific
+							has_doctrine = doctrine_pantheon_azura
+							has_doctrine = doctrine_pantheon_boethiah
+							has_doctrine = doctrine_pantheon_clavicus
+							has_doctrine = doctrine_pantheon_hermaeus
+							has_doctrine = doctrine_pantheon_hircine
+							has_doctrine = doctrine_pantheon_malacath
+							has_doctrine = doctrine_pantheon_mehrunes
+							has_doctrine = doctrine_pantheon_mephala
+							has_doctrine = doctrine_pantheon_meridia
+							has_doctrine = doctrine_pantheon_molag
+							has_doctrine = doctrine_pantheon_namira
+							has_doctrine = doctrine_pantheon_nocturnal
+							has_doctrine = doctrine_pantheon_peryite
+							has_doctrine = doctrine_pantheon_sanguine
+							has_doctrine = doctrine_pantheon_sheogorath
+							has_doctrine = doctrine_pantheon_vaermina
+							# Special group of princes
+							has_doctrine = doctrine_pantheon_good_daedra
+							has_doctrine = doctrine_pantheon_bad_daedra
+						}
+						NOT = { has_doctrine = special_doctrine_daedra_worshipper }
+					}
+					add_doctrine = special_doctrine_daedra_worshipper
+				}
+			}
+		}
+		
+		#############
+		# BOOKMARKS #
+		#############
+		
 		### 2E440 BOOKMARK ###
 		## Assassination of Logrolf, the High King of Skyrim, by a lowly noble on the order of Svartr
 		# The lowly noble then joined Western Skyrim and received lands and a wife for his services
