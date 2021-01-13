@@ -138,5 +138,56 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = kasaz_yath CULTURE = culture:yokudan }
 		# Ravan
 		set_culture_native_to = { REGION = ravan CULTURE = culture:yokudan }
+		
+		### 2E440 BOOKMARK ###
+		## Assassination of Logrolf, the High King of Skyrim, by a lowly noble on the order of Svartr
+		# The lowly noble then joined Western Skyrim and received lands and a wife for his services
+		character:cursebraid_1000 = { save_scope_as = hk_svartr }
+		character:bannertorn_100 = { save_scope_as = logrolf_murderer }
+		character:flamehair_999 = { save_scope_as = hk_logrolf }
+		
+		if = {
+			limit = {
+				scope:logrolf_murderer = { is_alive = yes }
+				scope:hk_svartr = { is_alive = yes }
+			}
+			
+			# The noble first tried, without success, to kill Logrolf... Svartr knows it, and used the hook to force the noble to *again* try to kill his liege. Once the murder was successful, the two strong hooks cancelled each other out.
+		
+			# Svartr knows the murder attempt...
+			scope:logrolf_murderer = {
+				random_secret = {
+					limit = {
+						secret_type = secret_murder_attempt
+						NOT = { is_known_by = scope:hk_svartr }
+					}
+					save_scope_as = logrolf_murder_attempt_secret
+					
+					# Svartr knows
+					reveal_to = scope:hk_svartr
+					# Used it to force the agent to kill his liege
+					scope:hk_svartr = { blackmail_target_with_secret_effect = { SECRET = scope:logrolf_murder_attempt_secret TARGET = scope:logrolf_murderer } }
+					# And then the two hooks cancelled each other
+					scope:hk_svartr = { remove_hook = { target = scope:logrolf_murderer } }
+				}
+			}
+		
+			# And the lowly noble knows who killed Logrolf...
+			scope:hk_svartr = {
+				random_secret = {
+					limit = {
+						secret_type = secret_murder
+						NOT = { is_known_by = scope:logrolf_murderer }
+					}
+					save_scope_as = logrolf_murder_proper_secret
+					
+					reveal_to = scope:logrolf_murderer
+					# Mainly so Svartr can't be blackmailed *again*
+					# The safe passage to Western Skyrim and the rewards can be counted as "blackmail"
+					scope:logrolf_murderer = { blackmail_target_with_secret_effect = { SECRET = scope:logrolf_murder_proper_secret TARGET = scope:hk_svartr } }
+					scope:logrolf_murderer = { remove_hook = { target = scope:hk_svartr } }
+				}
+			}
+		}
 	}
 }
