@@ -1864,7 +1864,7 @@ window = {
 							text = RULER_DESIGNER_CATEGORY_tail
 							visible = "[Or( VariableSystem.HasValue( 'ek_race', Localize('RACE_KAHJIIT') ), VariableSystem.HasValue( 'ek_race', Localize('RACE_ARGONIAN') ) )]"
 							onclick = "[VariableSystem.Set( 'appearance_customization_side_tab_open', 'tail' )]"
-							onclick = "[VariableSystem.Set( 'appearance_customization_portrait_view', 'full_body' )]"
+							onclick = "[VariableSystem.Set( 'appearance_customization_portrait_view', 'body_profile' )]"
 							down = "[VariableSystem.HasValue( 'appearance_customization_side_tab_open', 'tail' )]"
 						}
 
@@ -2000,6 +2000,26 @@ window = {
 					size = { 650 1000 }
 					scale = "[ScaleToFitElementInside('(int32)650', '(int32)1100')]"
 					texture = "[RulerDesignerWindow.GetPortrait( 'environment_body', 'camera_ruler_designer', PdxGetWidgetScreenSize( PdxGuiWidget.Self ) )]"
+
+					using = Animation_ShowHide_Standard
+
+					state = {
+						name = "ruler_designer_portrait_refresh"
+						using = Animation_Refresh_FadeOut
+					}
+
+					state = {
+						using = Animation_Refresh_FadeIn
+					}
+				}
+
+				icon = {
+					visible = "[VariableSystem.HasValue( 'appearance_customization_portrait_view', 'body_profile' )]"
+					parentanchor = bottom|hcenter
+					position = { 0 20 }
+					size = { 650 1000 }
+					scale = "[ScaleToFitElementInside('(int32)650', '(int32)1100')]"
+					texture = "[RulerDesignerWindow.GetPortrait( 'environment_body', 'camera_ruler_designer_body_profile', PdxGetWidgetScreenSize( PdxGuiWidget.Self ) )]"
 
 					using = Animation_ShowHide_Standard
 
