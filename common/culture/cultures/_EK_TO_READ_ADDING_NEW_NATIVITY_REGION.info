@@ -1,0 +1,38 @@
+Nativity regions are custom regions defined in the map files. They are exclusive to each other, and should roughly follow geographical and/or political lines.
+
+Each culture within a culture group can be assigned to one or several nativity regions, but only one culture in a culture group should be set as native from a given region.
+If you have culture group A and culture group B, with culture group A having cultures 1 and 2, and culture group B having culture 3, then 1 and 2 CANNOT be set as native from the same region(s). However, culture 1 and 3 or 2 and 3 can be assigned to the same region(s).
+
+The nativity system is much easier to handle if we can assume that only one culture within a culture group is native from a region. It's for my own sanity.
+
+
+To add a new nativity region:
+	* /!\ Be sure to have at least one culture to set as native from this region! /!\
+	
+	* Nativity regions are defined in map_data/geographical_region.txt, within the 'Navitity Regions' block
+	* The nativity regions must have a unique name, formed with custom_nativity_ + the unique name of your region. The game will assume your region has the 'custom_nativity_', so it is very important to use it, otherwise it won't work and might crash the game
+	* They tend to be ordered by province. 'Province' here refers to the big political and geographical blocks of the continent, such as High Rock or Argonia
+	* Nativity regions should reference already existing regions, defined as mundus_CONTINENT_PROVINCE_REGION. They can reference one or several, but each geographical can only be referenced by one nativity region
+	
+	* In elder-kings-ck3\common\on_action\ek_game_start.txt, add the culture(s) to the new nativity region, with set_culture_native_to = { REGION = THE_REGION CULTURE = culture:YOUR_CULTURE }
+	
+	* In elder-kings-ck3\common\culture\innovations\ek_regional_nativity_innovations.txt, create a new innovation that will be given to any culture native from the new region. Copying and pasting an already existing innovation, with just changing the region name in it is perfectly fine, or you can use the template below:
+		innovation_native_REGION = {
+			group = culture_group_regional
+			culture_era = culture_era_tribal
+			potential = {
+				is_target_in_global_variable_list = {
+					name = culture_innovation_native_REGION
+					target = this
+				}
+			}
+			icon = @majesty_01
+			
+			custom = faster_culture_convert_REGION
+			flag = nativity_innovation
+		}
+	* Don't forget to localize the innovation, in elder-kings-ck3\localization\english\culture\ek_cultural_innovations_l_english.yml
+	
+	* Reference it in elder-kings-ck3\common\scripted_triggers\ek_nativity_regions_scripted_triggers.txt, in the 'is_native_from_somewhere' trigger
+	
+	* Reference it in elder-kings-ck3\common\council_tasks\00_steward_tasks.txt, in the task_promote_culture/progress block, task_promote_local_culture/potential_county block, and the task_promote_local_culture/on_start_task_county block

@@ -5,9 +5,7 @@ update_religions_stress = {
 		limit = {
 			OR = {
 				# Your faith has a stress related tenet
-				faith = {
-					has_doctrine_parameter = stress_gives_piety_active
-				}
+				faith = { has_doctrine_parameter = stress_gives_piety_active }
 				# You have a stress related modifier
 				has_character_modifier = stress_gives_piety_stress_1
 				has_character_modifier = stress_gives_piety_stress_2
@@ -23,9 +21,7 @@ update_religions_stress = {
 		# Add the ones you need
 		if = {
 			limit = {
-				faith = {
-					has_doctrine_parameter = stress_gives_piety_active
-				}
+				faith = { has_doctrine_parameter = stress_gives_piety_active }
 			}
 			if = {
 				limit = { stress_level >= 3 }
@@ -45,13 +41,12 @@ update_religions_stress = {
 
 # Stuff scaling with devotion (piety_level)
 update_religions_piety_level = {
+	### POPULAR OPINION WITH DEVOTION
 	if = {
 		limit = {
 			OR = {
 				# Your faith has a devotion related tenet
-				faith = {
-					has_doctrine_parameter = devotion_gives_popular_opinion
-				}
+				faith = { has_doctrine_parameter = devotion_gives_popular_opinion }
 				# You have a devotion related modifier
 				has_character_modifier = devotion_gives_popular_opinion_0
 				has_character_modifier = devotion_gives_popular_opinion_1
@@ -73,9 +68,7 @@ update_religions_piety_level = {
 		# Add the ones you need
 		if = {
 			limit = {
-				faith = {
-					has_doctrine_parameter = devotion_gives_popular_opinion
-				}
+				faith = { has_doctrine_parameter = devotion_gives_popular_opinion }
 			}
 			if = {
 				limit = { piety_level >= 5 }
@@ -100,6 +93,62 @@ update_religions_piety_level = {
 			else_if = {
 				limit = { piety_level >= 0 }
 				add_character_modifier = devotion_gives_popular_opinion_0
+			}
+		}
+	}
+	
+	### CALAVRY EFFECTIVENESS WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_cavalry_effectiveness }
+				# You have a devotion related modifier
+				has_character_modifier = devotion_gives_cavalry_effectiveness_0
+				has_character_modifier = devotion_gives_cavalry_effectiveness_1
+				has_character_modifier = devotion_gives_cavalry_effectiveness_2
+				has_character_modifier = devotion_gives_cavalry_effectiveness_3
+				has_character_modifier = devotion_gives_cavalry_effectiveness_4
+				has_character_modifier = devotion_gives_cavalry_effectiveness_5
+			}
+		}
+		
+		# Remove the modifiers
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_0
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_1
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_2
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_3
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_4
+		remove_character_modifier = devotion_gives_cavalry_effectiveness_5
+		
+		# Add the ones you need
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = devotion_gives_cavalry_effectiveness }
+			}
+			if = {
+				limit = { piety_level >= 5 }
+				add_character_modifier = devotion_gives_cavalry_effectiveness_5
+			}
+			else_if = {
+				limit = { piety_level >= 4 }
+				add_character_modifier = devotion_gives_cavalry_effectiveness_4
+			}
+			else_if = {
+				limit = { piety_level >= 3 }
+				add_character_modifier = devotion_gives_cavalry_effectiveness_3
+			}
+			else_if = {
+				limit = { piety_level >= 2 }
+				add_character_modifier = devotion_gives_cavalry_effectiveness_2
+			}
+			else_if = {
+				limit = { piety_level >= 1 }
+				#add_character_modifier = devotion_gives_cavalry_effectiveness_1
+			}
+			else_if = {
+				limit = { piety_level >= 0 }
+				add_character_modifier = devotion_gives_cavalry_effectiveness_0
 			}
 		}
 	}
