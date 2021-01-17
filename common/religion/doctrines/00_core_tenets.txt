@@ -264,6 +264,66 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_moon_worship = {
+		icon = core_tenet_prayer
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_moon_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+
+			}
+		}
+
+		character_modifier = {
+			
+		}
+	}
+	
+	tenet_clan_mothers = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_clan_mothers }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+
+			}
+		}
+
+		character_modifier = {
+
+		}
+	}
+	
 	## Daedric
 	# These Syncretism allow for the patron deity as long as the faith is polytheistic, no matter the view on Daedric Worship
 	tenet_syncretism_pantheon_azura = {
@@ -1286,14 +1346,14 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_mourning_war = {
-		icon = core_tenet_sword
+	tenet_valenwood_laws = {
+		icon = core_tenet_shadyfigure
 		piety_cost = {
 			value = faith_tenet_cost_mid
 
 			# Multiplier for keeping same tenet
 			if = {
-				limit = { has_doctrine = tenet_mourning_war }
+				limit = { has_doctrine = tenet_valenwood_laws }
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
@@ -1303,10 +1363,11 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = { vengeful }
+			virtues = { vengeful deceitful }
 		}
 		
 		parameters = {
+			piety_gain_from_successful_intrigue_schemes = yes
 			mourning_wars_mechanics_active = yes
 		}
 
@@ -1380,35 +1441,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_shor_freedom = {
-		icon = core_tenet_birdofprey
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_shor_freedom }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		is_shown = { religion_tag = nedic_nordic_religion }
-
-		can_pick = {
-			always = yes
-		}
-		
-		parameters = {
-			legalism_reduced_faction_virtues = yes
-			legalism_increased_faction_sins = yes
-		}
-		
-
-		character_modifier = {
-			opinion_of_different_faith_liege = -10
-			levy_reinforcement_rate_same_faith = 0.25
-		}
-	}
 	
 	#################################
 	# Daedric Faiths Tenets			#
@@ -1660,12 +1692,14 @@ doctrine_core_tenets = {
 		character_modifier = {
 			tyranny_gain_mult = -0.5
 		}
-		
-		# traits = {
-			# virtues = {
-				# corprus
-			# }
-		# }
+
+		traits = {
+			virtues = {
+				#corprus
+				unmourned_blood
+				scarab_blood
+			}
+		}
 	}
 	
 	tenet_ritual_hunts = {
