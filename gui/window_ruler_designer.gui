@@ -1673,7 +1673,7 @@ window = {
 									on_start = "[VariableSystem.Set( 'ek_ethnicity', RulerDesignerWindow.GetEthnicity.GetName )]"
 									on_finish = "[PdxGuiTriggerAllAnimations( Select_CString( VariableSystem.HasValue( 'ek_ethnicity', 'no' ), 'check_ethnicity_null', 'check_ethnicity_null' ) )]"
 								}
-								
+
 								button_tab = {
 									name = "man_tab"
 									layoutpolicy_horizontal = expanding
@@ -2182,10 +2182,72 @@ window = {
 
 											expand = {}
 
+											# scrollbar_gene_template = { # trigger based on model size >= 10 use scroll selector
+											# 	name = "scrollbar_gene_template"
+											# 	visible = "[EqualTo_string( GeneCategory.GetName, 'race_khajiit_fur_white' )]"
+											# }
+
+											scrollarea = {
+												name = "template_scrollarea"
+												visible = "[GreaterThan_int32( GetDataModelSize( RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self ) ), '(int32)8' )]"
+
+												layoutpolicy_horizontal = expanding
+												layoutpolicy_vertical = expanding
+												minimumsize = { -1 180 }
+												maximumsize = { -1 180 }
+
+												scrollbarpolicy_horizontal = always_off
+
+												scrollbar_vertical = {
+													using = Scrollbar_Vertical
+
+													blockoverride "alpha"{
+														alpha = 0.6
+													}
+												}
+
+												scrollwidget = {
+													vbox = {
+														size = { 0 0 }
+														# visible = "[EqualTo_string( GeneCategory.GetName, 'race_khajiit_fur_white' )]"
+														spacing = 3
+														datamodel = "[RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self )]"
+														item = {
+															button_standard = {
+																name = "template_button"
+																text = "[GeneTemplate.GetName]"
+																onclick = "[RulerDesignerWindow.OnMorphTemplateSelected( GeneTemplate.Self ) ]"
+																down = "[RulerDesignerWindow.HasMorphTemplateSelected( GeneTemplate.Self ) ]"
+															}
+														}
+													}
+												}
+											}
+
+											# hbox = {
+											# 	size = { 0 0 }
+											# 	visible = "[EqualTo_string( GeneCategory.GetName, 'race_khajiit_fur_white' )]"
+											# 	spacing = 3
+											# 	datamodel = "[RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self )]"
+											# 	item = {
+											# 		button_standard = {
+											# 			name = "template_button"
+											# 			text = "[GeneTemplate.GetName]"
+											# 			onclick = "[RulerDesignerWindow.OnMorphTemplateSelected( GeneTemplate.Self ) ]"
+											# 			down = "[RulerDesignerWindow.HasMorphTemplateSelected( GeneTemplate.Self ) ]"
+
+											# 			state = {
+											# 				name = _mouse_enter
+											# 				on_start = "[RulerDesignerWindow.OnMorphTemplateSelected( GeneTemplate.Self ) ]"
+											# 			}
+											# 		}
+											# 	}
+											# }
+
 											vbox_morph_gene_template_buttons = {
 												name = "gene_templates"
 
-												visible = "[GreaterThan_int32( GetDataModelSize( RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self ) ), '(int32)1' )]"
+												visible = "[And(GreaterThan_int32( GetDataModelSize( RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self ) ), '(int32)1' ), Not(GreaterThan_int32( GetDataModelSize( RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self ) ), '(int32)8' )))]"
 												datamodel = "[RulerDesignerWindow.GetMorphTemplatesByGene( GeneCategory.Self )]"
 											}
 										}
@@ -2364,15 +2426,22 @@ types ruler_designer_types
 		value = "[IntToFloat( RulerDesignerWindow.GetWeight )]"
 	}
 
-	type scrollbar_morph_gene = scrollbar_value_slider
+	type scrollbar_morph_gene = scrollbar_value_slider #based on this make slider for gene templates that picks based on int range. for hues, need to manipulate min/max. set variable w/ gene name UNLOCALIZED and use to select, or go throuh localization like date system
 	{
 		min = 0 # You should probably not change these min and max values, the code relies on them being uint8s
 		max = 255
 
 		onvaluechanged = "[RulerDesignerWindow.OnMorphGeneChange( GeneCategory.Self, PdxGuiWidget.Self )]"
 		value = "[RulerDesignerWindow.GetMorphGeneValue( GeneCategory.Self )]"
+	}
 
+	type scrollbar_gene_template = scrollbar_value_slider #EK added
+	{
+		min = 0 # You should probably not change these min and max values, the code relies on them being uint8s
+		max = 47 #replace with num template datamodel size
 
+		#onvaluechanged = "[RulerDesignerWindow.OnMorphGeneChange( GeneCategory.Self, PdxGuiWidget.Self )]" #execute anim or something to show template button & on_show select it
+		#value = "[RulerDesignerWindow.GetMorphGeneValue( GeneCategory.Self )]" #use uint8 converter on sys variable?
 	}
 
 	type vbox_morph_gene_template_buttons = vbox

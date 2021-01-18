@@ -1,6 +1,6 @@
 ﻿morph_genes = {
 
-	race_khajiit_features = {
+	race_khajiit_features = { #invis
 		inheritable = yes
 		non_khajiit = {
 			index = 0
@@ -79,7 +79,8 @@
 		}
 	}
 
-	race_khajiit_fur_thickness_1 = {
+	race_khajiit_fur_thickness_1 = { #template invis?
+		group = body
 		no_fur = {
 			index = 0
 			male = {}
@@ -146,6 +147,7 @@
 	}
 
 	race_khajiit_fur_thickness_2 = {
+		group = body
 
 		no_additional_fur = {
 			index = 0
@@ -219,6 +221,7 @@
 
 
 	race_khajiit_fur_tortie = {
+		group = body
 
 		no_tortie = {
 			index = 0
@@ -1111,13 +1114,8 @@
 		}
 	}
 
-
-
-
-
-
-
 	race_khajiit_fur_shading = {
+		group = body
 
 		no_shading = {
 			index = 0
@@ -1397,6 +1395,7 @@
 	}
 
 	race_khajiit_fur_pattern = {
+		group = body
 
 		no_pattern = {
 			index = 0
@@ -1718,6 +1717,7 @@
 	}
 
 	race_khajiit_fur_pointing = {
+		group = body
 
 		no_pointing = {
 			index = 0
@@ -1861,8 +1861,8 @@
 
 	}
 
-
 	race_khajiit_fur_white = {
+		group = body
 
 		no_white = {
 			index = 0
@@ -3896,59 +3896,11 @@
 			boy = male
 			girl = male
 		}
-
-
-
-
-
 	}
 
-	tail_fullness = {
-		inheritable = yes
-
-		tail_end_thickness = {
-			index = 0
-			male = {
-
-				setting = { attribute = "tail_model_end_thickness"	value = { min = 0.0 max = 1.0 }	}
-
-
-
-				decal = { #Fur tufts
-					body_part = torso
-					textures = {
-						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_tail_1.dds"
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						normal = overlay
-
-					}
-					priority = 1
-					age = {
-						mode = add
-						curve = {
-							{ 0.0 -1.0 }
-							{ 0.25 0.0 }
-						}
-					}
-				}
-
-			}
-			female = male
-			boy = male
-			girl = female
-
-		}
-
-
-	}
-
+	#below two are ungrouped. khajiit should always use them
 	race_khajiit_complexion = {
+		#group = face #head_neck?
 
 		no_khajiit_complexion = {
 			index = 0
@@ -4005,6 +3957,7 @@
 	}
 
 	race_khajiit_face_shading = {
+		#group = face
 
 		no_khajiit_face_shading = {
 			index = 0
@@ -4082,6 +4035,53 @@
 			girl = female
 		}
 	}
+
+	## was a semi-dup of one of the tail genes
+	# tail_fullness = {
+	# 	inheritable = yes
+	# 	group = tail
+
+	# 	tail_end_thickness = {
+	# 		index = 0
+	# 		male = {
+
+	# 			setting = { attribute = "tail_model_end_thickness"	value = { min = 0.0 max = 1.0 }	}
+
+
+
+	# 			decal = { #Fur tufts
+	# 				body_part = torso
+	# 				textures = {
+	# 					normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_tail_1.dds"
+	# 				}
+	# 				alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+	# 					#gene strength%, decal alpha
+	# 					{ 0.0  0.0 }
+	# 					{ 1.0  1.0 }
+	# 				}
+	# 				blend_modes = {              #overlay/replace/hard_light/multiply
+	# 					normal = overlay
+
+	# 				}
+	# 				priority = 1
+	# 				age = {
+	# 					mode = add
+	# 					curve = {
+	# 						{ 0.0 -1.0 }
+	# 						{ 0.25 0.0 }
+	# 					}
+	# 				}
+	# 			}
+
+	# 		}
+	# 		female = male
+	# 		boy = male
+	# 		girl = female
+
+	# 	}
+
+
+	# }
 
 
 	tail_fullness = {
@@ -4175,6 +4175,7 @@
 
 	khajiit_tusk_size = {
 		inheritable = yes
+		group = mouth
 		no_tusks = {
 			index = 0
 			male = {}
@@ -4206,6 +4207,7 @@
 
 	khajiit_fangs = {
 		inheritable = yes
+		group = mouth
 
 		no_fangs = {
 			index = 0
@@ -4241,6 +4243,7 @@
 
 	khajiit_whisker_length = {
 		inheritable = yes
+		group = face
 
 		khajiit_whisker_length = {
 			index = 0
@@ -4261,6 +4264,7 @@
 
 	khajiit_whiskers_random_loc = {
 		inheritable = no
+		group = face
 
 		khajiit_whiskers_random_loc = {
 			index = 0
@@ -4275,6 +4279,7 @@
 
 	khajiit_whiskers_droop = {
 		inheritable = no
+		group = face
 
 		khajiit_whiskers_droop = {
 			index = 0
@@ -4300,6 +4305,7 @@
 
 	khajiit_whiskers_fan_out = {
 		inheritable = no
+		group = face
 
 		khajiit_whiskers_fan_out = {
 			index = 0
@@ -4314,6 +4320,7 @@
 
 	khajiit_whiskers_fan_up = {
 		inheritable = no
+		group = face
 
 		khajiit_whiskers_fan_up = {
 			index = 0
@@ -4328,6 +4335,7 @@
 
 	khajiit_whiskers_wavy = {
 		inheritable = yes
+		group = face
 
 		khajiit_whiskers_wavy = {
 			index = 0
@@ -4340,9 +4348,9 @@
 		}
 	}
 
-
 	khajiit_whiskers_density = {
 		inheritable = yes
+		group = face
 
 		full_whiskers = {
 			index = 0
@@ -4353,8 +4361,6 @@
 			boy = male
 			girl = male
 		}
-
-
 
 		khajiit_whiskers_thin_1 = {
 			index = 1
@@ -4400,13 +4406,7 @@
 
 	############################################################################################################################################################################
 
-
-
-
-
-
 	complexion = { #overrides original complexion gene so as not to apply a complexion texture over fur.
-
 		index = 90
 		group = head_neck
 
@@ -5144,7 +5144,6 @@
 			girl = female
 		}
 	}
-
 }
 
 
