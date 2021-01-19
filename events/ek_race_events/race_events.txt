@@ -68,63 +68,11 @@ ek_race.0100 = {
 	hidden = yes
 
 	trigger = {
-		#Let's avoid having more than one stance of the event running or letting it fire unnecessarily
-		NOT = { has_character_flag = mer_check }
+		culture_group = culture_group:khajiiti_group
+		NOT = { has_trait = race_khajiit }
 	}
 
 	immediate = {
-		#Maintenance flag
-		add_character_flag = mer_check
-		
-		#Checks to see if it's a Mer
-		if = {
-			limit = {
-				calc_true_if = {
-					amount >= 2
-					
-					has_gene = {
-						category = race_gene_mer_ears_01
-						template = default_1
-					}
-					has_gene = {
-						category = race_gene_mer_ears_01
-						template = mer_ears_01
-					}
-					has_gene = {
-						category = race_gene_mer_ears_01
-						template = mer_ears_02
-					}
-					has_gene = {
-						category = race_gene_mer_ears_02
-						template = default_1
-					}
-					has_gene = {
-						category = race_gene_mer_ears_02
-						template = mer_ears_01
-					}
-					has_gene = {
-						category = race_gene_mer_ears_02
-						template = mer_ears_02
-					}
-					has_gene = {
-						category = race_gene_mer_eyebrows_01
-						template = default_1
-					}
-					has_gene = {
-						category = race_gene_mer_eyebrows_01
-						template = mer_eyebrows_01
-					}
-					has_gene = {
-						category = race_gene_mer_eyes
-						template = default_1
-					}
-					has_gene = {
-						category = race_gene_mer_eyes
-						template = mer_eyes_01
-					}
-				}
-			}
-			add_trait = lifespan_2
-		}
+		add_trait = race_khajiit
 	}
 }
