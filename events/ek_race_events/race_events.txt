@@ -48,6 +48,7 @@ scripted_trigger ek_race_compatable_trigger = {
 	}
 }
 
+#Ends Pregnancy between two incompatible species
 ek_race.0001 = {
 	hidden = yes
 
@@ -64,10 +65,51 @@ ek_race.0001 = {
 	}
 }
 
+#Assigns Racial traits (if applicable) and elven immortality to randomgen characters
 ek_race.0002 = {
 	hidden = yes
 
 	immediate = {
-		race_traits_effect = yes
+		hidden_effect = {
+			race_traits_effect = yes
+		}
+	}
+}
+
+#Handles inheritance of lifespan traits
+ek_race.0003 = {
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					scope:real_father = { has_trait = lifespan_1 }
+					scope:mother = { has_trait = lifespan_1 }
+				}
+				add_trait = lifespan_1
+			}
+			if = {
+				limit = {
+					scope:real_father = { has_trait = lifespan_1 }
+					scope:mother = { has_trait = lifespan }
+				}
+				add_trait = lifespan_1
+			}
+			if = {
+				limit = {
+					scope:real_father = { has_trait = lifespan }
+					scope:mother = { has_trait = lifespan_1 }
+				}
+				add_trait = lifespan_1
+			}
+			if = {
+				limit = {
+					scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+					scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+				}
+				add_trait = lifespan_2
+			}
+		}
 	}
 }
