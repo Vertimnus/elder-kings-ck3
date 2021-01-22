@@ -498,6 +498,84 @@ coming_of_age.0001 = {
 				}
 			}
 		}
+		
+		### EK EDIT: Added effect from Sacred Alchemy
+		#Chance of gaining Herbalist if your religion or educator's religion has Sacred Alchemy
+		if = {
+			limit = {
+				faith = {
+					has_doctrine_parameter = tenet_sacred_alchemy_herbalist_education
+				}
+			}
+			random = {
+				chance = 5
+				modifier = {
+					add = 5
+					has_trait_rank = {
+						trait = education_learning
+						rank > 1
+					}
+				}
+				modifier = {
+					add = 10
+					has_trait_rank = {
+						trait = education_learning
+						rank > 2
+					}
+				}
+				modifier = {
+					add = 10
+					has_trait_rank = {
+						trait = education_learning
+						rank > 3
+					}
+				}
+				add_trait = lifestyle_herbalist
+			}
+			
+			#Secondary chance if your tutor also has a faith with Sacred Alchemy
+			if = {
+				limit = {
+					NOT = { has_trait = lifestyle_herbalist }
+					exists = scope:educator
+					scope:educator.faith = {
+						has_doctrine_parameter = tenet_sacred_alchemy_herbalist_education
+					}
+				}
+				random = {
+					chance = 5
+					modifier = {
+						add = 5
+						scope:educator = {
+							has_trait_rank = {
+								trait = education_learning
+								rank > 1
+							}
+						}
+					}
+					modifier = {
+						add = 10
+						scope:educator = {
+							has_trait_rank = {
+								trait = education_learning
+								rank > 2
+							}
+						}
+					}
+					modifier = {
+						add = 10
+						scope:educator = {
+							has_trait_rank = {
+								trait = education_learning
+								rank > 3
+							}
+						}
+					}
+					add_trait = lifestyle_herbalist
+				}
+			}
+		}
+		
 		save_childhood_trait_as_variable_effect = yes
 		education_complete_notification_effect = yes
 		wrap_up_education_effect = yes
