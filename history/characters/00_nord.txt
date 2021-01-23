@@ -3,7 +3,7 @@
 
 #House Reachbreaker
 reachbreaker_100 = {
-	name = "Valdemar"
+	name = "Valdemar" #King of Markarth
 	dynasty = 320002
 	culture = westmarcher
 	religion = nord_cult
@@ -12,7 +12,7 @@ reachbreaker_100 = {
 	3320.1.1 = { death = yes }
 }
 reachbreaker_101 = {
-	name = "Lodvar" #King of the Reach
+	name = "Lodvar" #King of Markarth (Warlords)
 	dynasty = 320002
 	culture = westmarcher
 	religion = nord_cult
@@ -22,7 +22,7 @@ reachbreaker_101 = {
 	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
 }
 reachbreaker_102 = {
-	name = "Baldur" #Her to the Reach
+	name = "Baldur" #Heir to Markarth
 	dynasty = 320002
 	culture = westmarcher
 	religion = nord_cult
@@ -53,7 +53,7 @@ reachbreaker_104 = {
 	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
 }
 reachbreaker_105 = {
-	name = "Faoric" #Reach Son, kills his family? Establishes clan in 00_reachfolk
+	name = "Faoric" #Reach Son, kills his family? Establishes clan in 00_reachfolk, Duke of Markarth (Interregnum)
 	dynasty = 320002
 	culture = reachfolk
 	religion = druadach_cult
@@ -61,8 +61,12 @@ reachbreaker_105 = {
 	father = reachbreaker_101
 	
 	3342.1.1 = { birth = yes }
-	3362.1.1 = { dynasty = 500011 }
-	3390.1.1 = { death = yes }
+	3362.1.1 = { 
+	remove_trait = bastard
+	add_trait = bastard_founder
+	dynasty = 500011 
+	}
+	3390.1.1 = { death = { death_reason = death_burned killer = blackdrake_99 } }
 }
 ##Stuhn Dynasty
 
@@ -126,7 +130,7 @@ stuhn_4 = {
 	}
 }
 stuhn_200 = {
-	name = "Horkvir" #Husband to Freydis
+	name = "Daglin" #Husband to Freydis
 	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
@@ -152,7 +156,7 @@ stuhn_5 = {
 }
 
 stuhn_401 = {
-	name = "Yngol"
+	name = "Yngol" #Count of Ironbind, Yorgrim Gate
 	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
