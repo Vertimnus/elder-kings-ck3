@@ -264,6 +264,66 @@ doctrine_core_tenets = {
 		}
 	}
 	
+	tenet_moon_worship = {
+		icon = core_tenet_prayer
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_moon_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+
+			}
+		}
+
+		character_modifier = {
+			
+		}
+	}
+	
+	tenet_clan_mothers = {
+		icon = core_tenet_meditation
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_clan_mothers }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+
+			}
+		}
+
+		character_modifier = {
+
+		}
+	}
+	
 	## Daedric
 	# These Syncretism allow for the patron deity as long as the faith is polytheistic, no matter the view on Daedric Worship
 	tenet_syncretism_pantheon_azura = {
@@ -968,7 +1028,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_diplomacy = yes
 		}
 		
@@ -1001,7 +1060,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_martial = yes
 		}
 		
@@ -1034,7 +1092,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_stewardship = yes
 			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
@@ -1068,7 +1125,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_intrigue = yes
 			allows_worship_mephala_shunned_doctrines_active = yes
 			allows_worship_nocturnal_shunned_doctrines_active = yes
@@ -1103,7 +1159,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_learning = yes
 			allows_worship_hermaeus_shunned_doctrines_active = yes
 		}
@@ -1894,13 +1949,16 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
+			### EK TODO: Give the Herbalist trait like the Mystic trait
+			### EK TODO: Give the Herbalist trait at the end of a pilgrimage
+			tenet_sacred_alchemy_herbalist_education = yes
 			allows_worship_vaermina_shunned_doctrines_active = yes
 		}
 		
 		traits = {
 			virtues = {
 				lifestyle_physician
-				lifestyle_herbalist = 2
+				lifestyle_herbalist
 			}
 		}
 	}
