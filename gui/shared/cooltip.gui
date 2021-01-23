@@ -221,10 +221,11 @@ types CultureTooltips
 						#text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
 						text = "#size:1 [GetScriptedGui('culture_tooltip').BuildTooltip(GuiScope.SetRoot(Culture.MakeScope).End)]#!"
 						#text = "[SelectLocalization( '(bool)no','', 'CULTURE_DESC_ID' )]"
+						#text = "[Concatenate( Culture.GetTemplate.GetName, '_desc' )]" #can set variable flag in culture with key
 						default_format = "#low"
 						autoresize = yes
 						max_width = 400
-						margin_left = -12
+						#margin_left = -12
 					}
 				}
 
@@ -339,7 +340,8 @@ container = {
 		}
 
 		blockoverride "description_text" {
-			text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
+			#text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
+			text = "[SelectLocalization( '(bool)no','', Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
 			default_format = "#low"
 			max_width = 400
 		}
