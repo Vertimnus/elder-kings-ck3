@@ -1931,7 +1931,7 @@ blackthorn_103 = {
 	3431.1.1 = { death = yes }
 }
 blackthorn_200 = {
-	name = "Eris" #Marries Helgen
+	name = "Eris" #Marries Skjoralmor Helgen
 	female = yes
 	dynasty = 300005
 	culture = eastmarcher
@@ -1941,7 +1941,7 @@ blackthorn_200 = {
 	mother = stuhn_6
 	
 	3344.1.1 = { birth = yes }
-	3431.1.1 = { death = yes }
+	3369.1.1 = { death = { death_reason = death_murder killer = skjoralmor_100 } }
 }
 
 blackthorn_104 = {
@@ -2856,6 +2856,17 @@ yngvlar_996 = {
 	3343.1.1 = { birth = yes }
 	#3363.1.1 = { add_spouse = 300024 }
 	#3369.1.1 = { effect = { add_artifact = mount_horse_mountain } }
+	3410.1.1 = { death = yes }
+}
+yngvlar_1997 = {
+	name = "Fjori"
+	female = yes
+	dynasty = 320007
+	culture = westmarcher
+	religion = nord_cult
+	father = yngvlar_995
+	
+	3350.1.1 = { birth = yes }
 	3410.1.1 = { death = yes }
 }
 yngvlar_997 = {
@@ -4125,11 +4136,11 @@ skjoralmor_100 = {
 	3390.1.1 = { death = yes }
 }
 skjoralmor_101 = {
-	name = "Astrid" #King of Falkreath
+	name = "Astrid" #Queen of Falkreath
+	female = yes
 	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
-	female = yes
 	father = skjoralmor_100
 	
 	3350.1.1 = { birth = yes }
@@ -4200,13 +4211,13 @@ skjoralmor_200 = {
 	father = skjoralmor_98
 	
 	3300.1.1 = { birth = yes }
-	3369.1.1 = { death = {
+	3366.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_201 = {
-	name = "Thonnir" #Duke of Helgen (Interregnum)
+	name = "Thonnir" #Goes to Riften
 	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
@@ -4215,28 +4226,37 @@ skjoralmor_201 = {
 	
 	3344.1.1 = { birth = yes }
 	3360.1.1 = { add_spouse = blackthorn_200 }
+	3369.1.1 = { 
+		effect = {
+			set_employer = blackthorn_1000 
+		}
+	}
 	3421.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_202 = {
-	name = "Markus" #Duke of Helgen
+	name = "Markus" 
 	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_201
-	mother = blackthorn_200
 	
 	3399.1.1 = { birth = yes }
+	3400.1.1 = { 
+		effect = {
+			set_employer = blackthorn_103
+		}
+	}
 	3481.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_203 = {
-	name = "Hegris" #Duke of Helgen ( Alliance War )
+	name = "Hegris" 
 	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
@@ -4244,13 +4264,18 @@ skjoralmor_203 = {
 	father = skjoralmor_202
 	
 	3470.1.1 = { birth = yes }
+	3472.1.1 = { 
+		effect = {
+			set_employer = blackthorn_103
+		}
+	}
 	3549.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_204 = {
-	name = "Malsorr" #Duke of Helgen
+	name = "Malsorr" 
 	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
@@ -4258,6 +4283,11 @@ skjoralmor_204 = {
 	father = skjoralmor_203
 	
 	3500.1.1 = { birth = yes }
+	3502.1.1 = {
+	 	effect = {
+			set_employer = blackthorn_107
+		}
+	}
 	3573.1.1 = { death = {
 					death_reason = death_old_age
 				}
@@ -4272,10 +4302,81 @@ skjoralmor_205 = {
 	father = skjoralmor_203
 	
 	3502.1.1 = { birth = yes }
+	3503.1.1 = {
+	 	effect = {
+			set_employer = blackthorn_107
+		}
+	}
 	3577.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
+}
+
+
+#House Raven-Eye
+skjoralmor_1001 = {
+	name = "Heimskr" #Duke of Helgen (Interregnum)
+	dynasty = 340001
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_100
+	
+	3354.1.1 = { birth = yes }
+	3370.1.1 = { add_spouse = yngvlar_1997 }
+	3424.1.1 = { death = yes }
+}
+raveneye_100 = {
+	name = "Frothar" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_1001
+	mother = yngvlar_1997
+	
+	3386.1.1 = { birth = yes }
+	3446.1.1 = { death = yes }
+}
+raveneye_101 = {
+	name = "Abbard"
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_1001
+	mother = yngvlar_1997
+	
+	3388.1.1 = { birth = yes }
+	3451.1.1 = { death = yes }
+}
+raveneye_102 = {
+	name = "Angrenor" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_100
+	
+	3421.1.1 = { birth = yes }
+	3493.1.1 = { death = yes }
+}
+raveneye_103 = {
+	name = "Hroldan" #Duke of Helgen ( Alliance War )
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_102
+	
+	3450.1.1 = { birth = yes }
+	3519.1.1 = { death = yes }
+}
+raveneye_104 = {
+	name = "Logrolf" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_103
+	
+	3474.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
 }
 
 ##Oaken-Sword Dynasty
