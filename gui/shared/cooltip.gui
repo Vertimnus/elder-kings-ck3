@@ -22,6 +22,7 @@ types CultureTooltips
 				layoutpolicy_vertical = expanding
 				margin = { 6 4 }
 				margin_bottom = 12
+				margin_left = 0
 
 				background = {
 					name = "header"
@@ -50,6 +51,13 @@ types CultureTooltips
 				}
 				hbox = {
 					layoutpolicy_horizontal = expanding
+					spacing = 6
+
+					# icon = {
+					# 	size = { 50 50 }
+					# 	visible = "[Not( EqualTo_string( Localize( Concatenate( Culture.GetNameNoTooltip, '_icon' ) ), Concatenate( Culture.GetNameNoTooltip, '_icon' ) ) )]"
+					# 	texture = "[GetIllustration( Localize( Concatenate( Culture.GetNameNoTooltip, '_icon' ) ) ).GetTexture(GetPlayer)]"
+					# }
 
 					vbox = {
 						layoutpolicy_vertical = expanding
@@ -98,7 +106,7 @@ types CultureTooltips
 						layoutpolicy_vertical = expanding
 						text = "[culture|E]"
 						fonttintcolor = "[TooltipInfo.GetTintColor]"
-						align = vcenter|right
+						align = nobaseline|right #vcenter|right
 					}
 				}
 			}
@@ -209,40 +217,15 @@ types CultureTooltips
 					size = { 0 0 }
 					layoutpolicy_horizontal = expanding
 					text_multi = {
-						visible = "[Not( Or( Or( EqualTo_string( Culture.GetNameNoTooltip, 'Jungle Nibenese' ), EqualTo_string( Culture.GetNameNoTooltip, 'Mountain Orc' ) ), Or( EqualTo_string( Culture.GetNameNoTooltip, 'Iron Orc' ), EqualTo_string( Culture.GetNameNoTooltip, 'Wood Orc' ) ) ) )]"
-						layoutpolicy_horizontal = expanding
-						text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
+						layoutpolicy_horizontal = expanding #cutoff right side to remove bullet. position in widget instead of margin. or use size:1 to make dot tiny
+						#text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
+						text = "#size:1 [GetScriptedGui('culture_tooltip').BuildTooltip(GuiScope.SetRoot(Culture.MakeScope).End)]#!"
+						#text = "[SelectLocalization( '(bool)no','', 'CULTURE_DESC_ID' )]"
+						#text = "[Concatenate( Culture.GetTemplate.GetName, '_desc' )]" #can set variable flag in culture with key
+						default_format = "#low"
 						autoresize = yes
 						max_width = 400
-					}
-
-					text_multi = {
-						visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Jungle Nibenese' )]"
-						layoutpolicy_horizontal = expanding
-						text = "#F [Localize( 'Jungle_Nibenese_desc' )]#!"
-						autoresize = yes
-						max_width = 400
-					}
-					text_multi = {
-						visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Mountain Orc' )]"
-						layoutpolicy_horizontal = expanding
-						text = "#F [Localize( 'Mountain_Orc_desc' )]#!"
-						autoresize = yes
-						max_width = 400
-					}
-					text_multi = {
-						visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Iron Orc' )]"
-						layoutpolicy_horizontal = expanding
-						text = "#F [Localize( 'Iron_Orc_desc' )]#!"
-						autoresize = yes
-						max_width = 400
-					}
-					text_multi = {
-						visible = "[EqualTo_string( Culture.GetNameNoTooltip, 'Wood Orc' )]"
-						layoutpolicy_horizontal = expanding
-						text = "#F [Localize( 'Wood_Orc_desc' )]#!"
-						autoresize = yes
-						max_width = 400
+						#margin_left = -12
 					}
 				}
 
@@ -357,7 +340,8 @@ container = {
 		}
 
 		blockoverride "description_text" {
-			text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
+			#text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
+			text = "[SelectLocalization( '(bool)no','', Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
 			default_format = "#low"
 			max_width = 400
 		}
