@@ -552,6 +552,21 @@ PixelShader =
 						OverlayDecal( Target.a, Blend.a ) 
 						);
 					}
+					else if(all(Blend.rgb == float3(0.0f, 1.0f, 0.0f)))
+					{
+
+					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
+					
+					HairColor.z = (HairColor.z * 0.4f);
+					float3 DarkHairColor = saturate(HSVtoRGB(HairColor));
+	
+  					Result = float4( 
+						OverlayDecal( Target.r, (DarkHairColor.r ) ),
+						OverlayDecal( Target.g, (DarkHairColor.g ) ),
+						OverlayDecal( Target.b, (DarkHairColor.b ) ),
+						OverlayDecal( Target.a, Blend.a ) 
+						);
+					}
 					else
 					{
   					Result = float4( 
@@ -604,8 +619,29 @@ PixelShader =
 					// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply multiply blending as usual.
 					if(all(Blend.rgb == float3(1.0f, 0.0f, 0.0f)))
 					{
- 					Result = float4(( Target.r * vPaletteColorHair.r ),( Target.g * vPaletteColorHair.g ),( Target.b * vPaletteColorHair.b ),( Target.a * Blend.a ));
+ 					Result = float4(
+						 ( Target.r * vPaletteColorHair.r ),
+						 ( Target.g * vPaletteColorHair.g ),
+						 ( Target.b * vPaletteColorHair.b ),
+						 ( Target.a * Blend.a )
+						 );
 					}
+						else if(all(Blend.rgb == float3(0.0f, 1.0f, 0.0f)))
+					{
+
+					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
+					
+					HairColor.z = (HairColor.z * 0.7f);
+					float3 DarkHairColor = saturate(HSVtoRGB(HairColor));
+	
+ 					Result = float4(
+						 ( Target.r * DarkHairColor.r ),
+						 ( Target.g * DarkHairColor.g ),
+						 ( Target.b * DarkHairColor.b ),
+						 ( Target.a * Blend.a )
+						 );
+					}
+
 					else
 					{
  					Result = Target * Blend;
