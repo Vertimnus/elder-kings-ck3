@@ -1,8 +1,79 @@
 ﻿#Nord, not fully ported yet
-#Stuhn
+##Reachbreaker Dynasty
+
+#House Reachbreaker
+reachbreaker_100 = {
+	name = "Valdemar" #King of Markarth
+	dynasty = 320002
+	culture = westmarcher
+	religion = nord_cult
+	
+	3250.1.1 = { birth = yes }
+	3320.1.1 = { death = yes }
+}
+reachbreaker_101 = {
+	name = "Lodvar" #King of Markarth (Warlords)
+	dynasty = 320002
+	culture = westmarcher
+	religion = nord_cult
+	father = reachbreaker_100
+	
+	3296.1.1 = { birth = yes }
+	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
+}
+reachbreaker_102 = {
+	name = "Baldur" #Heir to Markarth
+	dynasty = 320002
+	culture = westmarcher
+	religion = nord_cult
+	father = reachbreaker_101
+	
+	3328.1.1 = { birth = yes }
+	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
+}
+reachbreaker_103 = {
+	name = "Kirsten"
+	female = yes
+	dynasty = 320002
+	culture = westmarcher
+	religion = nord_cult
+	father = reachbreaker_101
+	
+	3332.1.1 = { birth = yes }
+	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
+}
+reachbreaker_104 = {
+	name = "Angvild"
+	dynasty = 320002
+	culture = westmarcher
+	religion = nord_cult
+	father = reachbreaker_101
+	
+	3337.1.1 = { birth = yes }
+	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
+}
+reachbreaker_105 = {
+	name = "Faoric" #Reach Son, kills his family? Establishes clan in 00_reachfolk, Duke of Markarth (Interregnum)
+	dynasty = 320002
+	culture = reachfolk
+	religion = druadach_cult
+	trait = bastard
+	father = reachbreaker_101
+	
+	3342.1.1 = { birth = yes }
+	3362.1.1 = { 
+	remove_trait = bastard
+	add_trait = bastard_founder
+	dynasty = 500011 
+	}
+	3390.1.1 = { death = { death_reason = death_burned killer = blackdrake_99 } }
+}
+##Stuhn Dynasty
+
+#House Stuhn
 stuhn_0 = {
 	name = "Savard"
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -12,7 +83,7 @@ stuhn_0 = {
 }
 stuhn_1 = {
 	name = "Idlami"
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_0
@@ -23,7 +94,7 @@ stuhn_1 = {
 
 stuhn_2 = {
 	name = "Valdemar"
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_1
@@ -34,7 +105,7 @@ stuhn_2 = {
 
 stuhn_3 = {
 	name = "Sjorvar"
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_2
@@ -45,12 +116,12 @@ stuhn_3 = {
 
 stuhn_4 = {
 	name = "Horkvir" #Duke of Ansilvund 
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_3
 	
-	3324.1.1 = { birth = yes }
+	3312.1.1 = { birth = yes }
 	#3346.1.1 = { add_spouse = 9177 }
 	3382.1.1 = { trait = drunkard }
 	3384.1.1 = { death = {
@@ -58,9 +129,22 @@ stuhn_4 = {
 		}
 	}
 }
+stuhn_200 = {
+	name = "Daglin" #Husband to Freydis
+	dynasty = 300000
+	culture = eastmarcher
+	religion = nord_cult
+	father = stuhn_3
+	
+	3314.1.1 = { birth = yes }
+	3386.1.1 = { death = {
+		death_reason = death_battle
+		}
+	}
+}
 stuhn_5 = {
 	name = "Asgrim" #Count of Ironbind , Later Duke of Ansilvund
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_4
@@ -72,8 +156,8 @@ stuhn_5 = {
 }
 
 stuhn_401 = {
-	name = "Yngol"
-	dynasty = 70079
+	name = "Yngol" #Count of Ironbind, Yorgrim Gate
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_4
@@ -89,7 +173,7 @@ stuhn_401 = {
 
 stuhn_6 = { #Marries Blackthorn?
 	name = "Rikke"
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_3
@@ -100,7 +184,7 @@ stuhn_6 = { #Marries Blackthorn?
 }
 stuhn_7 = {
 	name = "Thjollod" #Duke of Ansilvund
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_5
@@ -112,7 +196,7 @@ stuhn_7 = {
 
 stuhn_8 = {
 	name = "Arngeir" #Count of Ironbind and Yorgrim Gate, Duke of Yorgrim
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_7
@@ -123,7 +207,7 @@ stuhn_8 = {
 
 stuhn_9 = {
 	name = "Kjoric" #Duke of Ansilvund
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_7
@@ -133,7 +217,7 @@ stuhn_9 = {
 }
 stuhn_10 = {
 	name = "Horik" #Heir to Ansilvund (Kamal)
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_9
@@ -145,7 +229,7 @@ stuhn_10 = {
 
 stuhn_11 = {
 	name = "Brond" #Ansilvund?
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_10
@@ -157,7 +241,7 @@ stuhn_11 = {
 
 stuhn_12 = {
 	name = "Dengeir" #Count of Ironbind and Yorgrim Gate, Duke of Yorgrim
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_8
@@ -168,7 +252,7 @@ stuhn_12 = {
 
 stuhn_13 = {
 	name = "Denskar" #Moves to Falkreath area? Loses Yogrim provinces
-	dynasty = 70079
+	dynasty = 300000
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_12
@@ -181,7 +265,6 @@ stuhn_13 = {
 ##Stuhns that leave Skyrim, becoming Cairn-Breaker
 cairnbreaker_10 = {
 	name = "Hrisskar" #Duke of Frostcrag 
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -194,7 +277,6 @@ cairnbreaker_10 = {
 }
 cairnbreaker_11 = {
 	name = "Regner" #Duke of Horunn (Warlords)
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -205,7 +287,6 @@ cairnbreaker_11 = {
 }
 cairnbreaker_12 = {
 	name = "Hilde" #Countess of Redruby 
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -218,7 +299,6 @@ cairnbreaker_12 = {
 }
 cairnbreaker_13 = {
 	name = "Jorundr" #Duke of Horunn & Frostcrag
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -229,7 +309,6 @@ cairnbreaker_13 = {
 }
 cairnbreaker_14 = {
 	name = "Ingjard" #Duchess of Horunn & Frostcrag (Reachman)
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -241,7 +320,6 @@ cairnbreaker_14 = {
 }
 cairnbreaker_15 = {
 	name = "Thoring" #Count of Redruby
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = imperial_cult
@@ -252,7 +330,6 @@ cairnbreaker_15 = {
 }
 cairnbreaker_16 = {
 	name = "Ogmund" #Count of Red Ruby
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = imperial_cult
@@ -263,7 +340,6 @@ cairnbreaker_16 = {
 }
 cairnbreaker_17 = {
 	name = "Eyja" #Duchess of Frostcrag
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -276,7 +352,6 @@ cairnbreaker_17 = {
 
 cairnbreaker_18 = {
 	name = "Ergnir" #Duke of Red Ruby/Horunn
-	dynasty = 70079
 	dynasty_house = cyro_stuhn
 	culture = cyro_nord
 	religion = nord_cult
@@ -290,7 +365,7 @@ cairnbreaker_18 = {
 #House High-Shoal
 highshoal_99 = {
 	name = "Gorvald" #Count of Snowveil and Shorflow (Warlords)
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -304,7 +379,7 @@ highshoal_99 = {
 }
 highshoal_100 = {
 	name = "Gunar" #Count of Snowveil and Shorflow ( Interregnum )
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
@@ -314,7 +389,7 @@ highshoal_100 = {
 }
 highshoal_101 = {
 	name = "Boward"
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
@@ -324,7 +399,7 @@ highshoal_101 = {
 }
 highshoal_102 = {
 	name = "Rigurt"
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
@@ -334,7 +409,7 @@ highshoal_102 = {
 }
 highshoal_103 = {
 	name = "Galmar" #Count of Snowveil and Shorflow
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_100
@@ -344,7 +419,7 @@ highshoal_103 = {
 }
 highshoal_104 = {
 	name = "Unnvald" #Count of Snowveil and Shorflow
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_103
@@ -354,7 +429,7 @@ highshoal_104 = {
 }
 highshoal_105 = {
 	name = "Boren" #Count of Snowveil and Shorflow ( Alliance War )
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -365,7 +440,7 @@ highshoal_105 = {
 }
 highshoal_106 = {
 	name = "Borald"
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -377,7 +452,7 @@ highshoal_106 = {
 highshoal_107 = {
 	name = "Gerdur" #Count of Snowveil and Shorflow
 	female = yes
-	dynasty = 70230
+	dynasty = 300002
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_105
@@ -389,11 +464,24 @@ highshoal_107 = {
 ##Flame-Hair Dynasty
 
 #House Flame-Hair
-flamehair_998 = {
-name = "Torygg" #Pre Bookmark King of Skyrim
-	dynasty = 70435
+flamehair_997 = {
+	name = "Jurgen" #Pre Bookmark King of Skyrim
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
+	
+	3190.1.1 = { birth = yes }
+	3255.1.1 = { 
+		death = { death_reason = death_old_age }
+	}
+}
+
+flamehair_998 = {
+	name = "Torygg" #Pre Bookmark King of Skyrim
+	dynasty = 300001
+	culture = eastmarcher
+	religion = nord_cult
+	father = flamehair_997
 	
 	3248.1.1 = { birth = yes }
 	3314.1.1 = { 
@@ -402,7 +490,7 @@ name = "Torygg" #Pre Bookmark King of Skyrim
 }
 flamehair_999 = {
 	name = "Logrolf" #Pre Bookmark King of Skyrim
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_998
@@ -418,21 +506,24 @@ flamehair_999 = {
 
 flamehair_1000 = {
 	name = "Freydis" #Queen of Eastmarch 
-	dynasty = 70435
+	dna = freydis_dna_entry
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_999
 	female = yes
 	
 	3314.1.1 = { birth = yes }
+	3330.1.1 = { add_matrilineal_spouse = stuhn_200 }
 	3384.1.1 = { death = yes }
 }
 flamehair_1001 = {
 	name = "Thorkild" #Duke of Heljarchen?  Future Cadet Dynasty?
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	#trait = warlord
+	father = stuhn_200
 	mother = flamehair_1000
 	
 	3331.1.1 = { birth = yes }
@@ -442,9 +533,10 @@ flamehair_1001 = {
 }
 flamehair_1002 = {
 	name = "Torbjorn" #Count of Mistwatch 
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
+	father = stuhn_200
 	mother = flamehair_1000
 	trait = twin
 	
@@ -453,9 +545,10 @@ flamehair_1002 = {
 }
 flamehair_1003 = {
 	name = "Bergljot"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
+	father = stuhn_200
 	mother = flamehair_1000
 	trait = twin
 	female = yes
@@ -465,9 +558,10 @@ flamehair_1003 = {
 }
 flamehair_1004 = {
 	name = "Bodil"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
+	father = stuhn_200
 	mother = flamehair_1000
 	female = yes
 	
@@ -476,9 +570,10 @@ flamehair_1004 = {
 }
 flamehair_1005 = {
 	name = "Bergritte"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
+	father = stuhn_200
 	mother = flamehair_1000
 	female = yes
 	
@@ -487,7 +582,7 @@ flamehair_1005 = {
 }
 flamehair_1006 = {
 	name = "Fryssa"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	trait = beauty_good_1
@@ -500,7 +595,7 @@ flamehair_1006 = {
 }
 flamehair_1007 = {
 	name = "Thorygg" #Heir to Heljarchen?  Future Cadet Dynasty?
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	trait = hunchback
@@ -512,23 +607,23 @@ flamehair_1007 = {
 }
 flamehair_1008 = {
 	name = "Molgrom" #Heir to Eastmarch
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
-	#trait = legitimized_bastard
+	father = stuhn_200
 	mother = flamehair_1000
 
 	3330.1.1 = { birth = yes }
-	#3356.1.1 = { add_spouse = 300019 }
+	3356.1.1 = { add_spouse = nordwife_1002 }
 	3410.1.1 = { death = yes }
 }
 flamehair_1009 = {
-	name = "Molgrom" #King of Eastmarch
-	dynasty = 70435
+	name = "Havil" #King of Eastmarch
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_1008
-	mother = 300019
+	mother = nordwife_1002
 	
 	3357.1.1 = { birth = yes }
 	3380.1.1 = { add_spouse = cruelsea_101 }
@@ -536,7 +631,7 @@ flamehair_1009 = {
 }
 flamehair_1010 = {
 	name = "Eorlund" #King of Eastmarch
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_1009
@@ -549,7 +644,7 @@ flamehair_1011 = {
 	name = "Mabjaarn" #Queen of Eastmarch, the Great Mabjaarn
 	#dna = "ahbjd0fcce0"
 	#properties = "adae0b00000"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_1010
@@ -568,7 +663,7 @@ flamehair_1011 = {
 }
 flamehair_1012 = {
 	name = "Bjorlam" #Duke of Heljarchen? (Reachman) Future Cadet Dynasty?
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_1007
@@ -578,7 +673,7 @@ flamehair_1012 = {
 }
 flamehair_1013 = {
 	name = "Nurnhilde" #Queen of Skyrim
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	mother = flamehair_1011
@@ -595,7 +690,7 @@ flamehair_1013 = {
 }
 flamehair_1014 = {
 	name = "Jorunn" #King of Skyrim/Eastern Skyrim (Kamal)
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -609,7 +704,7 @@ flamehair_1014 = {
 }
 flamehair_1015 = {
 	name = "Fildgor" #Chief of the Stormfist Brigade (Kamal)
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -628,7 +723,7 @@ flamehair_1015 = {
 }
 flamehair_1016 = {
 	name = "Irnskar"
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	father = flamehair_1014
@@ -646,7 +741,7 @@ flamehair_1016 = {
 
 flamehair_1017 = {
 	name = Rigmor
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 
@@ -656,7 +751,7 @@ flamehair_1017 = {
 }
 flamehair_1018 = {
 	name = Elisif
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -667,7 +762,7 @@ flamehair_1018 = {
 }
 flamehair_1019 = {
 	name = Tharsten #Bad ruler, loses land to Solitude
-	dynasty = 70435
+	dynasty = 300001
 	culture = eastmarcher
 	religion = nord_cult
 	trait = gluttonous
@@ -681,7 +776,6 @@ flamehair_1019 = {
 #House Fjalr
 fjalr_10 = {
 	name = "Narrald" #Duke of Heljarchen
-	dynasty = 70435
 	dynasty_house = flamehair_fjalr
 	culture = eastmarcher
 	religion = nord_cult
@@ -692,7 +786,6 @@ fjalr_10 = {
 }
 fjalr_11 = {
 	name = "Tova" #Duke of Heljarchen
-	dynasty = 70435
 	dynasty_house = flamehair_fjalr
 	culture = eastmarcher
 	religion = nord_cult
@@ -704,7 +797,6 @@ fjalr_11 = {
 }
 fjalr_12 = {
 	name = "Belrud"
-	dynasty = 70435
 	dynasty_house = flamehair_fjalr
 	culture = eastmarcher
 	religion = nord_cult
@@ -715,7 +807,6 @@ fjalr_12 = {
 }
 fjalr_13 = {
 	name = "Benjor" 
-	dynasty = 70435
 	dynasty_house = flamehair_fjalr
 	culture = eastmarcher
 	religion = nord_cult
@@ -726,10 +817,11 @@ fjalr_13 = {
 }
 
 ##Bjorga Dynasty
+
 #House Bjorga
 bjorga_97 = {
-	name = "Daric" #Duke of the Rift
-	dynasty = 70005
+	name = "Daric" #Duke of Heartwood
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 
@@ -737,29 +829,29 @@ bjorga_97 = {
 	3356.1.1 = { death = yes }
 }
 bjorga_98 = {
-	name = "Kalthar" #Duke of the Rift ( Warlords. Interregnum: King? )
-	dynasty = 70005
+	name = "Kalthar" #Duke of Heartwood
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_97
 
-	3314.1.1 = { birth = yes }
-	3376.1.1 = { death = yes }
+	3304.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
 }
 bjorga_99 = {
-	name = "Angbar" #King of the Rift
-	dynasty = 70005
+	name = "Angbar" #Duke of Heartwood ( Warlords, Interregnum Count )
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_98
 
 	3340.1.1 = { birth = yes }
-	3411.1.1 = { death = yes }
+	3367.1.1 = { death = yes } # EK TODO, Killed by Orc
 }
 bjorga_100 = {
-	name = "Thonja"
+	name = "Thonja" #Count of Treva ( Interregnum )
 	female = yes
-	dynasty = 70005
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_98
@@ -768,8 +860,8 @@ bjorga_100 = {
 	3417.1.1 = { death = yes }
 }
 bjorga_101 = {
-	name = "Fenrig" #King of the Rift
-	dynasty = 70005
+	name = "Fenrig" #Count of Treva 
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_99
@@ -778,8 +870,8 @@ bjorga_101 = {
 	3477.1.1 = { death = yes }
 }
 bjorga_102 = {
-	name = "Ivandi" #King of the Rift ( Alliance War )
-	dynasty = 70005
+	name = "Ivandi" #Duke of Heartwood ( Alliance War )
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_101
@@ -788,8 +880,8 @@ bjorga_102 = {
 	3511.1.1 = { death = yes }
 }
 bjorga_103 = {
-	name = "Guthrum" #King of the Rift
-	dynasty = 70005
+	name = "Guthrum" #Duke of Heartwood
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_102
@@ -799,7 +891,7 @@ bjorga_103 = {
 }
 bjorga_104 = {
 	name = "Yringor"
-	dynasty = 70005
+	dynasty = 300003
 	culture = eastmarcher
 	religion = nord_cult
 	father = bjorga_102
@@ -812,7 +904,7 @@ bjorga_104 = {
 blackbriar_98 = {
 	name = "Viveka" #Duke of Smokefrost ( Warlords )
 	female = yes
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 
@@ -822,7 +914,7 @@ blackbriar_98 = {
 blackbriar_99 = {
 	name = "Jareki" #Duke of Smokefrost ( Interregnum )
 	female = yes
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 	mother = blackbriar_98
@@ -832,7 +924,7 @@ blackbriar_99 = {
 }
 blackbriar_100 = {
 	name = "Hemming"
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 	mother = blackbriar_98
@@ -842,7 +934,7 @@ blackbriar_100 = {
 }
 blackbriar_101 = {
 	name = "Unnvald" #Duke of Smokefrost
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 	mother = blackbriar_99
@@ -852,7 +944,7 @@ blackbriar_101 = {
 }
 blackbriar_102 = {
 	name = "Angrestag" #Count of Blackbriar ( Alliance War )
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackbriar_101
@@ -862,7 +954,7 @@ blackbriar_102 = {
 }
 blackbriar_103 = {
 	name = "Israk" #Count of Blackbriar
-	dynasty = 70117
+	dynasty = 300004
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackbriar_101
@@ -873,10 +965,11 @@ blackbriar_103 = {
 
 
 ##Snow-Shod Dynasty
+
 #House Snow-Shod
 snowshod_98 = {
-	name = "Bolund"
-	dynasty = 70345
+	name = "Bolund" #Count of Sigilkeep, Shrouded Grove
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 
@@ -884,8 +977,8 @@ snowshod_98 = {
 	3366.1.1 = { death = yes }
 }
 snowshod_99 = {
-	name = "Volk" #Count of Greenwall ( Interregnum )
-	dynasty = 70345
+	name = "Volk" #Count of Sigilkeep, Shrouded Grove ( Interregnum )
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_98
@@ -894,9 +987,9 @@ snowshod_99 = {
 	3418.1.1 = { death = yes }
 }
 snowshod_100 = {
-	name = "Maven" #Count of Greenwall
+	name = "Maven" #Count of Sigilkeep, Shrouded Grove
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_99
@@ -907,7 +1000,7 @@ snowshod_100 = {
 snowshod_101 = {
 	name = "Eris" 
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_99
@@ -916,9 +1009,9 @@ snowshod_101 = {
 	3449.1.1 = { death = yes }
 }
 snowshod_102 = {
-	name = "Minette" #Count of Greenwall
+	name = "Minette" #Count of Sigilkeep, Shrouded Grove
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	mother = snowshod_100
@@ -927,8 +1020,8 @@ snowshod_102 = {
 	3499.1.1 = { death = yes }
 }
 snowshod_103 = {
-	name = "Krant" #Duke of Smokefrost ( Alliance War )
-	dynasty = 70345
+	name = "Krant" #Count of Sigilkeep, Shrouded Grove
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	mother = snowshod_102
@@ -937,8 +1030,8 @@ snowshod_103 = {
 	3519.1.1 = { death = yes }
 }
 snowshod_104 = {
-	name = "Valdur" #Duke of Smokefrost
-	dynasty = 70345
+	name = "Valdur" #Count of Sigilkeep, Shrouded Grove
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_103
@@ -949,7 +1042,7 @@ snowshod_104 = {
 
 snowshod_105 = {
 	name = "Vallric"
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_103
@@ -959,7 +1052,7 @@ snowshod_105 = {
 }
 snowshod_106 = {
 	name = "Sorben"
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_103
@@ -970,7 +1063,7 @@ snowshod_106 = {
 snowshod_107 = {
 	name = "Yrna" #Duke of Smokefrost
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_104
@@ -982,7 +1075,7 @@ snowshod_107 = {
 snowshod_199 = {
 	name = "Eyja" #Count of Snowshod ( Interregnum )
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_98
@@ -993,17 +1086,27 @@ snowshod_199 = {
 snowshod_200 = {
 	name = "Merta" #Count of Snowshod
 	female = yes
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	mother = snowshod_199
 
-	3372.1.1 = { birth = yes }
-	3449.1.1 = { death = yes }
+	3369.1.1 = { birth = yes }
+	3440.1.1 = { death = yes }
+}
+snowshod_2000 = {
+	name = "Logrolf"
+	dynasty = 300006
+	culture = eastmarcher
+	religion = nord_cult
+	mother = snowshod_199
+
+	3370.1.1 = { birth = yes }
+	3438.1.1 = { death = yes }
 }
 snowshod_201 = {
 	name = "Lothson" #Count of Snowshod
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	mother = snowshod_200
@@ -1013,7 +1116,7 @@ snowshod_201 = {
 }
 snowshod_202 = {
 	name = "Podunn" #Count of Snowshod ( Alliance War )
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_201
@@ -1023,7 +1126,7 @@ snowshod_202 = {
 }
 snowshod_203 = {
 	name = "Lodvar" #Count of Snowshod
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_202
@@ -1033,7 +1136,7 @@ snowshod_203 = {
 }
 snowshod_204 = {
 	name = "Gerval"
-	dynasty = 70345
+	dynasty = 300006
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowshod_202
@@ -1043,9 +1146,10 @@ snowshod_204 = {
 }
 ##Banner-Torn
 #House Banner-Torn
+
 bannertorn_99 = {
 	name = "Joric"
-	culture = westmarcher
+	culture = eastmarcher
 	religion = nord_cult
 
 	3264.1.1 = { birth = yes }
@@ -1075,18 +1179,17 @@ bannertorn_100 = {
 		}
 	}
 	3351.7.18 = { # Logrolf is assinated, he moves to Western Skyrim
-		employer = cursebraid_1000
 		give_council_position = councillor_spymaster
-		dynasty = 70110
+		dynasty = 320001
 		give_nickname = nick_the_upstart
 		add_spouse = cursebraid_299
 	}
-		
+	3362.1.1 = { culture = westmarcher }	
 	3401.1.1 = { death = yes }
 }
 bannertorn_101 = {
 	name = "Logrolf" #Duke of Northwatch
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_100
@@ -1098,7 +1201,7 @@ bannertorn_101 = {
 bannertorn_102 = {
 	name = "Birgitha"
 	female = yes
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_100
@@ -1110,7 +1213,7 @@ bannertorn_102 = {
 bannertorn_103 = {
 	name = "Dagrunn"
 	female = yes
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_100
@@ -1121,7 +1224,7 @@ bannertorn_103 = {
 }
 bannertorn_104 = {
 	name = "Yngvid" #Duke of Northwatch
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_101
@@ -1131,7 +1234,7 @@ bannertorn_104 = {
 }
 bannertorn_105 = {
 	name = "Gandis" #Duke of Northwatch ( Alliance War )
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_104
@@ -1141,7 +1244,7 @@ bannertorn_105 = {
 }
 bannertorn_106 = {
 	name = "Thelm" #Duke of Northwatch
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_105
@@ -1151,7 +1254,7 @@ bannertorn_106 = {
 }
 bannertorn_107 = {
 	name = "Thjordic"
-	dynasty = 70110
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_105
@@ -1160,8 +1263,8 @@ bannertorn_107 = {
 	3541.1.1 = { death = yes }
 }
 bannertorn_108 = {
-	name = "Thjordic" #Duke of Northwatch
-	dynasty = 70110
+	name = "Holmar" #Duke of Northwatch
+	dynasty = 320001
 	culture = westmarcher
 	religion = nord_cult
 	father = bannertorn_105
@@ -1175,7 +1278,7 @@ bannertorn_108 = {
 #House Cursebraid
 cursebraid_998 = {
 	name = "Holmar"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 
@@ -1185,7 +1288,7 @@ cursebraid_998 = {
 }
 cursebraid_999 = {
 	name = "Ringvild"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	female = yes
@@ -1197,7 +1300,7 @@ cursebraid_999 = {
 }
 cursebraid_299 = { #Marries Banner-Torn
 	name = "Rennilde"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	female = yes
@@ -1209,7 +1312,7 @@ cursebraid_299 = { #Marries Banner-Torn
 cursebraid_1000 = {
 	name = "Svartr" #King of Solitude 
 	dna = svartr_dna_entry
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	trait = fickle
@@ -1219,7 +1322,7 @@ cursebraid_1000 = {
 	#mother = 300026
 	
 	3297.1.1 = { birth = yes }
-	#3322.1.1 = { add_spouse = 300030 }
+	3322.1.1 = { add_spouse = doomsayer_297 }
 	3351.1.1 = {
 		# Successfully killed Logrolf, with the help of Gandis
 		effect = {
@@ -1233,71 +1336,68 @@ cursebraid_1000 = {
 }
 cursebraid_1001 = {
 	name = "Ulfric" #Count of Lonewatch
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	father = cursebraid_998
-	#mother = 300026
 	
-	3306.1.1 = { birth = yes }
-	#3327.1.1 = { add_spouse = 300028 }
+	3302.1.1 = { birth = yes }
 	3374.1.1 = { death = yes }
 }
 cursebraid_1002 = {
 	name = "Skuli" #Heir to Lonewatch
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
-	trait = fair
+	trait = beauty_good_1
 	father = cursebraid_1001
-	#mother = 300028
 	
 	3329.1.1 = { birth = yes }
-	#3352.1.1 = { add_spouse = 300029 }
 	3388.1.1 = { death = yes }
 }
 cursebraid_1003 = {
 	name = "Lemkil" #Count of Lonewatch
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	trait = beauty_good_1
 	father = cursebraid_1002
-	#mother = 300029
 	
 	3352.1.1 = { birth = yes }
 	3404.1.1 = { death = yes }
 }
 cursebraid_1004 = {
 	name = "Erich" #Heir to Solitude
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	father = cursebraid_1000
-	#mother = 300030
+	mother = doomsayer_297
 	
 	3327.1.1 = { birth = yes }
+	3345.1.1 = { add_spouse = nordwife_1001 }
 	3398.1.1 = { death = yes }
 }
 cursebraid_1005 = {
 	name = "Farengar" #Prince of Solitude
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	father = cursebraid_1000
-	#mother = 300030
+	mother = doomsayer_297
 	
 	3336.1.1 = { birth = yes }
 	3408.1.1 = { death = yes }
 }
 cursebraid_1006 = {
 	name = "Elisif" #Queen of Solitude
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	trait = legitimized_bastard
 	female = yes
 	father = cursebraid_1004
+	mother = nordwife_1001
 	
 	3354.1.1 = { birth = yes }
 	3372.1.1 = {
@@ -1305,9 +1405,20 @@ cursebraid_1006 = {
 	}
 	3418.1.1 = { death = yes }
 }
+cursebraid_2006 = {
+	name = "Ormvard"
+	dynasty = 320000
+	culture = westmarcher
+	religion = nord_cult
+	father = cursebraid_1004
+	mother = nordwife_1001
+	
+	3359.1.1 = { birth = yes }
+	3422.1.1 = { death = yes }
+}
 cursebraid_1007 = {
 	name = "Avulstein" #King of Solitude
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	father = ghilred_1002
@@ -1318,7 +1429,7 @@ cursebraid_1007 = {
 }
 cursebraid_1008 = {
 	name = "Orgnar" #King of Solitude (Reachman)
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	father = cursebraid_1007
@@ -1331,7 +1442,7 @@ cursebraid_1009 = {
 	#dna = "cutxuopumkq"
 	#dna = "ca0da0gcfb0"
 	#properties = "fg00ck00000000"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	martial = 6
@@ -1358,12 +1469,12 @@ cursebraid_1009 = {
 }
 cursebraid_1010 = {
 	name = "Svana"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult	
 	female = yes	
 	father = cursebraid_1009
-	mother = 9306
+	#mother = 9306
 	
 	3479.1.1 = { birth = yes }
 	3500.1.1 = { trait = drunkard }
@@ -1373,7 +1484,7 @@ cursebraid_1010 = {
 cursebraid_1011 = {
 	name = "Thalestris"
 	female = yes
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult	
 	trait = bastard	
@@ -1385,7 +1496,7 @@ cursebraid_1011 = {
 }
 cursebraid_1012 = {
 	name = "Bryngrim"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	trait = bastard
@@ -1397,7 +1508,7 @@ cursebraid_1012 = {
 
 cursebraid_1013 = {
 	name = "Lortheim"
-	dynasty = 70152
+	dynasty = 320000
 	culture = westmarcher
 	religion = nord_cult
 	mother = cursebraid_1010
@@ -1411,7 +1522,6 @@ cursebraid_1013 = {
 
 nightwielder_99 = {
 	name = "Torolf" #Count of Lonewatch
-	dynasty = 70152
 	dynasty_house = cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1424,7 +1534,6 @@ nightwielder_99 = {
 
 nightwielder_100 = {
 	name = "Thonja" #Countess of Lonewatch
-	dynasty = 70152
 	dynasty_house = cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1438,7 +1547,6 @@ nightwielder_100 = {
 
 nightwielder_101 = {
 	name = "Ysolda" #Countess of Lonewatch
-	dynasty = 70152
 	dynasty_house = cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1451,7 +1559,6 @@ nightwielder_101 = {
 
 nightwielder_102 = {
 	name = "Joric" #Count of Lonewatch
-	dynasty = 70152
 	dynasty_house = cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1463,7 +1570,6 @@ nightwielder_102 = {
 
 nightwielder_103 = {
 	name = "Keld" #Count of Lonewatch
-	dynasty = 70152
 	dynasty_house = cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1476,7 +1582,6 @@ nightwielder_103 = {
 nightwielder_104 = {
 	name = "Risi"
 	female = yes
-	dynasty = 70152
 	dynasty_house =  cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1488,7 +1593,6 @@ nightwielder_104 = {
 
 nightwielder_105 = { #THE Azra Nightwielder, Pioneer of Shadow Magic
 	name = "Azra"
-	dynasty = 70152
 	dynasty_house =  cursebraid_nightwielder
 	culture = westmarcher
 	religion = nord_cult
@@ -1503,7 +1607,7 @@ nightwielder_105 = { #THE Azra Nightwielder, Pioneer of Shadow Magic
 #House Thrice-Pierced
 thricepierced_98 = {
 	name = "Ragnar" #Duke of Ravenscar ( Warlords & Interregnum )
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	
@@ -1512,7 +1616,7 @@ thricepierced_98 = {
 }
 thricepierced_99 = {
 	name = "Axdin" #Duke of Ravenscar
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_98
@@ -1522,7 +1626,7 @@ thricepierced_99 = {
 }
 thricepierced_100 = {
 	name = "Leifur" #Duke of Ravenscar
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_99
@@ -1532,7 +1636,7 @@ thricepierced_100 = {
 }
 thricepierced_101 = {
 	name = "Jurgen" #Duke of Ravenscar ( Alliance War )
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_100
@@ -1541,9 +1645,9 @@ thricepierced_101 = {
 	3505.1.1 = { death = yes }
 }
 thricepierced_102 = {
-	name = ""Hrefna #Duke of Ravenscar
+	name = "Hrefna" #Duke of Ravenscar
 	female = yes
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_101
@@ -1554,7 +1658,7 @@ thricepierced_102 = {
 thricepierced_103 = {
 	name = "Una"
 	female = yes
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_101
@@ -1564,7 +1668,7 @@ thricepierced_103 = {
 }
 thricepierced_104 = {
 	name = "Votar" #Count of c_span_isles (Warlords & Interregnum )
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_98
@@ -1574,7 +1678,7 @@ thricepierced_104 = {
 }
 thricepierced_105 = {
 	name = "Borgas" #Count of c_span_isles
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_104
@@ -1584,7 +1688,7 @@ thricepierced_105 = {
 }
 thricepierced_106 = {
 	name = "Leiborn" #Count of c_span_isles ( Alliance War )
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_105
@@ -1594,7 +1698,7 @@ thricepierced_106 = {
 }
 thricepierced_107 = {
 	name = "Mickal" #Count of c_span_isles
-	dynasty = 70386
+	dynasty = 320003
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_106
@@ -1606,11 +1710,9 @@ thricepierced_107 = {
 
 ghilred_1000 = {
 	name = "Odfel" #Duke of Snowhawk
-	dynasty = 70022
+	dynasty = 320004
 	culture = westmarcher
 	religion = nord_cult
-	
-	
 	
 	3335.1.1 = { birth = yes }
 	3400.1.1 = { death = yes }
@@ -1618,11 +1720,10 @@ ghilred_1000 = {
 
 ghilred_1001 = {
 	name = "Hafskjar" #Heir to Snowhawk
-	dynasty = 70022
+	dynasty = 320004
 	culture = westmarcher
 	religion = nord_cult
 	trait = twin
-	
 	father = ghilred_1000
 	
 	3353.1.1 = { birth = yes }
@@ -1631,11 +1732,10 @@ ghilred_1001 = {
 
 ghilred_1002 = {
 	name = "Odfel" #Husband of Queen of Solitude
-	dynasty = 70022
+	dynasty = 320004
 	culture = westmarcher
 	religion = nord_cult
 	trait = twin
-	
 	father = ghilred_1000
 	
 	3353.1.1 = { birth = yes }
@@ -1644,10 +1744,9 @@ ghilred_1002 = {
 
 ghilred_1003 = {
 	name = "Helvard" 
-	dynasty = 70022
+	dynasty = 320004
 	culture = westmarcher
 	religion = nord_cult
-	
 	father = ghilred_1001
 	
 	3382.1.1 = { birth = yes }
@@ -1658,7 +1757,7 @@ ghilred_1003 = {
 #House Snow-Bourne
 snowbourne_99 = {
 	name = "Eiman"
-	dynasty = 70460
+	dynasty = 300007
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -1668,7 +1767,7 @@ snowbourne_99 = {
 
 snowbourne_100 = {
 	name = "Agnar"
-	dynasty = 70460
+	dynasty = 300007
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowbourne_99
@@ -1678,7 +1777,7 @@ snowbourne_100 = {
 }
 snowbourne_101 = {
 	name = "Algot" #The Mad
-	dynasty = 70460
+	dynasty = 300007
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowbourne_100
@@ -1697,7 +1796,7 @@ snowbourne_101 = {
 snowbourne_102 = {
 	name = "Tillrani" #Former ruler of Bleakrock
 	female=yes
-	dynasty = 70460
+	dynasty = 300007
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowbourne_101
@@ -1713,20 +1812,33 @@ snowbourne_102 = {
 	3520.1.1 = { death = yes }
 }
 ##Blackthorn Dynasty
+
 #House Blackthorn
-blackthorn_96 = {
-	name = "Stenvar"
-	dynasty = 70123
+
+blackthorn_95 = {
+	name = "Thorkild" #King of Riften
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
+	
+	3189.1.1 = { birth = yes }
+	3252.1.1 = { death = yes }
+}
+
+blackthorn_96 = {
+	name = "Stenvar" #King of Riften
+	dynasty = 300005
+	culture = eastmarcher
+	religion = nord_cult
+	father = blackthorn_95
 	
 	3242.1.1 = { birth = yes }
 	3308.1.1 = { death = yes }
 }
 
 blackthorn_97 = {
-	name = "Gunder"
-	dynasty = 70123
+	name = "Gunder" #King of Riften
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_96
@@ -1736,8 +1848,8 @@ blackthorn_97 = {
 	3324.1.1 = { death = yes }
 }
 blackthorn_98 = {
-	name = "Alvor"
-	dynasty = 70123
+	name = "Alvor" #King of Riften
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_97
@@ -1749,73 +1861,92 @@ blackthorn_98 = {
 }
 blackthorn_99 = {
 	name = "Hroldar"
-	dynasty = 70123
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_97
 	
 	3303.1.1 = { birth = yes }
-	3324.1.1 = {
-		add_claim = d_eastmarch
-	}
 	3363.1.1 = { death = yes }
 }
 
 blackthorn_100 = { #Marries Doom-Sayers
 	name = "Agnis"
-	dynasty = 70123
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_97
 	female = yes
 	
 	3305.1.1 = { birth = yes }
-	3324.1.1 = {
-		add_claim = d_eastmarch
-	}
 	3377.1.1 = { death = yes }
 }
 blackthorn_101 = {
-	name = "Golldir" #Count of Sigilkeep & Shrouded Grove
-	dynasty = 70123
+	name = "Eorlund" #King of Riften (Warlords)
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_98
 
 	3324.1.1 = { birth = yes }
 	3342.1.1 = { add_spouse = stuhn_6 }
-	3358.1.1 = { add_claim = d_eastmarch }
-	3380.1.1 = { death = yes }
+	3365.1.1 = { death = { death_reason = death_battle } }
 }
 blackthorn_102 = { #Potential Marriage Candidate
 	name = "Aeta"
-	dynasty = 70123
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
-	add_trait = breton
 	father = blackthorn_98
 	
 	female = yes
 	3326.1.1 = { birth = yes }
-	3358.1.1 = { add_claim = d_eastmarch }
 	3399.1.1 = { death = yes }
 }
-blackthorn_103 = {
-	name = "Roggvar" #Count of Sigilkeep & Shrouded Grove
-	dynasty = 70123
+blackthorn_1000 = {
+	name = "Lorod" #Brief King of Riften (Interregnum)
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_101
 	mother = stuhn_6
 	
-	3362.1.1 = { birth = yes }
-	3380.1.1 = { add_claim = d_eastmarch }
+	3343.1.1 = { birth = yes }
+	3362.1.1 = {
+		trait = drunkard
+		trait = arrogant
+		}
+	3372.1.1 = { death = { death_reason = death_battle } }
+}
+blackthorn_103 = {
+	name = "Roggvar" #King of Riften
+	dynasty = 300005
+	culture = eastmarcher
+	religion = nord_cult
+	trait = twin
+	father = blackthorn_101
+	mother = stuhn_6
+	
+	3344.1.1 = { birth = yes }
 	3431.1.1 = { death = yes }
+}
+blackthorn_200 = {
+	name = "Eris" #Marries Skjoralmor Helgen
+	female = yes
+	dynasty = 300005
+	culture = eastmarcher
+	religion = nord_cult
+	trait = twin
+	father = blackthorn_101
+	mother = stuhn_6
+	
+	3344.1.1 = { birth = yes }
+	3369.1.1 = { death = { death_reason = death_murder killer = skjoralmor_100 } }
 }
 
 blackthorn_104 = {
-	name = "Roggi" #Count of Sigilkeep & Shrouded Grove
-	dynasty = 70123
+	name = "Roggi" #King of Riften
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_103
@@ -1825,8 +1956,8 @@ blackthorn_104 = {
 }
 
 blackthorn_105 = {
-	name = "Iona" #Countess of Sigilkeep & Shrouded Grove
-	dynasty = 70123
+	name = "Iona" #King of Riften
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	father = blackthorn_104
@@ -1837,7 +1968,7 @@ blackthorn_105 = {
 }
 blackthorn_106 = {
 	name = "Rigurt"	#Rigurt the Brash
-	dynasty = 70123
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	mother = blackthorn_105
@@ -1857,8 +1988,8 @@ blackthorn_106 = {
 }
 
 blackthorn_107 = {
-	name = "Lodvar" #Count of Sigilkeep
-	dynasty = 70123
+	name = "Lodvar" #King of Riften ( Alliance War )
+	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
 	mother = blackthorn_105
@@ -1866,11 +1997,97 @@ blackthorn_107 = {
 	3472.1.1 = { birth = yes }
 	3530.1.1 = { death = yes }
 }
+
+#House Meadblood # EK TODO, Alliance War characters
+meadblood_99 = {
+	name = "Sjorvar" #Count of Greenwall ( Warlords ) Count of Greenwall, Autumnshade & Shor's Stone ( Interregnum )
+	dynasty_house = blackthorn_meadblood
+	culture = eastmarcher
+	religion = nord_cult
+	father = blackthorn_99
+	
+	3344.1.1 = { birth = yes }
+	3420.1.1 = { death = yes }
+}
+meadblood_100 = {
+	name = "Hrofgar" #Count of Greenwall, Autumnshade & Shor's Stone
+	dynasty_house = blackthorn_meadblood
+	culture = eastmarcher
+	religion = nord_cult
+	father = meadblood_99
+	
+	3360.1.1 = { birth = yes }
+	3448.1.1 = { death = yes }
+}
+meadblood_101 = {
+	name = "Harald" #Count of Greenwall, Autumnshade & Shor's Stone
+	dynasty_house = blackthorn_meadblood
+	culture = eastmarcher
+	religion = nord_cult
+	father = meadblood_100
+	
+	3392.1.1 = { birth = yes }
+	3461.1.1 = { death = yes }
+}
+meadblood_102 = {
+	name = "Hrongar"
+	dynasty_house = blackthorn_meadblood
+	culture = eastmarcher
+	religion = nord_cult
+	father = meadblood_100
+	
+	3396.1.1 = { birth = yes }
+	3466.1.1 = { death = yes }
+}
+
+##Staghorn Dynasty
+
+#House Staghorn
+staghorn_98 = {
+	name = "Faldar" #Faldar I, Count of Autumnshade, Shor's Stone
+	dynasty = 300008
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3281.1.1 = { birth = yes }
+	3346.1.1 = { death = yes }
+}
+staghorn_99 = {
+	name = "Faldar" #Faldar II, Count of Autumnshade, Shor's Stone
+	dynasty = 300008
+	culture = eastmarcher
+	religion = nord_cult
+	father = staghorn_98
+	
+	3326.1.1 = { birth = yes }
+	3367.1.1 = { death = { death_reason = death_battle } }
+}
+staghorn_100 = {
+	name = "Hrundi"
+	dynasty = 300008
+	culture = eastmarcher
+	religion = nord_cult
+	father = staghorn_99
+	
+	3354.1.1 = { birth = yes }
+	3422.1.1 = { death = yes }
+}
+staghorn_101 = {
+	name = "Agnar"
+	dynasty = 300008
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3356.1.1 = { birth = yes }
+	3439.1.1 = { death = yes }
+}
+
 ##Blue-Wall Dynasty
+
 #House Blue-Wall
 bluewall_98 = {
 	name = "Sigaar" #Duke of Valtheim ( Interregnum & Warlords )
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	trait = bastard_founder
@@ -1881,7 +2098,7 @@ bluewall_98 = {
 }
 bluewall_99 = {
 	name = "Thorgar" #Duke of Valtheim
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_98
@@ -1891,8 +2108,7 @@ bluewall_99 = {
 }
 bluewall_100 = {
 	name = "Odfel"
-	dynasty = 70131
-	dynasty_house = blackthorn_bluewall
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_98
@@ -1902,7 +2118,7 @@ bluewall_100 = {
 }
 bluewall_101 = {
 	name = "Thorkell" #Duke of Valtheim
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_99
@@ -1912,7 +2128,7 @@ bluewall_101 = {
 }
 bluewall_102 = {
 	name = "Adalmor" #Duke of Valtheim ( Alliance War )
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_101
@@ -1923,7 +2139,7 @@ bluewall_102 = {
 bluewall_103 = {
 	name = "Obetta" #Duke of Valtheim
 	female = yes
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_102
@@ -1933,7 +2149,7 @@ bluewall_103 = {
 }
 bluewall_104 = {
 	name = "Svenjar"
-	dynasty = 70131
+	dynasty = 320005
 	culture = westmarcher
 	religion = nord_cult
 	father = bluewall_102
@@ -1945,7 +2161,7 @@ bluewall_104 = {
 #House Doom-Sayer
 doomsayer_97 = {
 	name = "Haening" #Duke of Chillvale
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	
@@ -1955,12 +2171,12 @@ doomsayer_97 = {
 
 doomsayer_98 = {
 	name = "Hurnfing" #Duke of Chillvale
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_97
 	
-	3300.1.1 = { birth = yes }
+	3295.1.1 = { birth = yes }
 	3326.1.1 = { add_spouse = blackthorn_100 }
 	3352.1.1 = { 
 		death = { 
@@ -1968,9 +2184,21 @@ doomsayer_98 = {
 		}
 	}
 }
+doomsayer_297 = {
+	name = "Bodil" #Wife of Svartr
+	female = yes
+	dynasty = 320006
+	culture = westmarcher
+	religion = nord_cult
+	father = doomsayer_97
+	
+	3297.1.1 = { birth = yes }
+	3365.1.1 = { death = yes }
+}
+
 doomsayer_99 = {
 	name = "Wulfgar" #Duke of Chillvale ( Warlord & Interregnum )
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_98
@@ -1981,7 +2209,7 @@ doomsayer_99 = {
 }
 doomsayer_100 = {
 	name = "Borri" #Duke of Chillvale
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_99
@@ -1992,7 +2220,7 @@ doomsayer_100 = {
 
 doomsayer_101 = {
 	name = "Birstagg"
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_99
@@ -2002,7 +2230,7 @@ doomsayer_101 = {
 }
 doomsayer_102 = {
 	name = "Borri" #Duke of Chillvale, Borri 2
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_100
@@ -2013,7 +2241,7 @@ doomsayer_102 = {
 
 doomsayer_103 = {
 	name = "Borri" #Duke of Chillvale, Borri 3
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_102
@@ -2024,7 +2252,7 @@ doomsayer_103 = {
 
 doomsayer_104 = {
 	name = "Maela" #Duke of Chillvale ( Alliance War )
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_103
@@ -2035,7 +2263,7 @@ doomsayer_104 = {
 }
 doomsayer_105 = {
 	name = "Holgrim" 
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
 	father = doomsayer_103
@@ -2045,10 +2273,10 @@ doomsayer_105 = {
 }
 doomsayer_106 = {
 	name = "Fafnyr" #Possible Duke of Chillvale, post-ESO
-	dynasty = 70156
+	dynasty = 320006
 	culture = westmarcher
 	religion = nord_cult
-	father = doomsayer_104
+	mother = doomsayer_104
 	
 	3501.1.1 = { birth = yes }
 	3573.1.1 = { death = yes }
@@ -2057,7 +2285,6 @@ doomsayer_106 = {
 #House Winter-Beard
 winterbeard_99 = {
 	name = "Balgruuf" #Count of Duskglow ( Warlords )
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2073,7 +2300,6 @@ winterbeard_99 = {
 
 winterbeard_100 = {
 	name = "Rolf" #Count of Duskglow, Potential Greybeard in the future? (Interregnum)
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2086,7 +2312,6 @@ winterbeard_100 = {
 
 winterbeard_101 = {
 	name = "Brynolf" #Count of Duskglow
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2098,7 +2323,6 @@ winterbeard_101 = {
 
 winterbeard_102 = {
 	name = "Thorulf" #Count of Duskglow
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2110,7 +2334,6 @@ winterbeard_102 = {
 
 winterbeard_103 = {
 	name = "Vigunn" #Count of Duskglow ( Alliance War )
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2125,7 +2348,6 @@ winterbeard_103 = {
 
 winterbeard_104 = {
 	name = "Vigulf" 
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2138,7 +2360,6 @@ winterbeard_104 = {
 winterbeard_105 = {
 	name = "Thyra"
 	female = yes
-	dynasty = 70156
 	dynasty_house = doomsayer_winterbeard
 	culture = eastmarcher
 	religion = nord_cult
@@ -2151,7 +2372,6 @@ winterbeard_105 = {
 #House Silver-Anvil
 silveranvil_99 = {
 	name = "Agnorith" #Count of Neugrad, Marries Iliac woman ( Warlords & Interregnum )
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2165,7 +2385,6 @@ silveranvil_99 = {
 
 silveranvil_100 = {
 	name = "Arnault" #Count of Neugrad
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = iliac
 	religion = breton_cult #Nord father raised
@@ -2183,7 +2402,6 @@ silveranvil_100 = {
 
 silveranvil_101 = {
 	name = "Ormvard"
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2194,14 +2412,13 @@ silveranvil_101 = {
 	3394.1.1 = { 
 		trait = ill
 		death = { 
-			death_reason = death_trait #Might not work
+			death_reason = death_ill
 			}
 	}
 }
 silveranvil_102 = {
 	name = "Aeta" #Count of Neugrad
 	female = yes
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2214,7 +2431,6 @@ silveranvil_102 = {
 silveranvil_103 = {
 	name = "Rona" #Count of Neugrad ( Alliance War )
 	female = yes
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2225,7 +2441,6 @@ silveranvil_103 = {
 }
 silveranvil_104 = {
 	name = "Froki" #Count of Neugrad
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2236,7 +2451,6 @@ silveranvil_104 = {
 }
 silveranvil_105 = {
 	name = "Frodnar"
-	dynasty = 70156
 	dynasty_house = doomsayer_silveranvil
 	culture = cyro_nord
 	religion = nord_cult
@@ -2248,7 +2462,7 @@ silveranvil_105 = {
 ##Salt-Breaker
 saltbreaker_99 = {
 	name = "Gorm" #Count of Jerall
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	
@@ -2257,7 +2471,7 @@ saltbreaker_99 = {
 }
 saltbreaker_100 = {
 	name = "Viri" 
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_99
@@ -2269,7 +2483,7 @@ saltbreaker_100 = {
 
 saltbreaker_101 = {
 	name = "Odar" #Count of Jerall, loses to Imperials or becomes a moth priest
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_99
@@ -2281,7 +2495,7 @@ saltbreaker_101 = {
 
 saltbreaker_102 = {
 	name = "Sten" #Count of Sedor
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_99
@@ -2291,7 +2505,7 @@ saltbreaker_102 = {
 }
 saltbreaker_103 = {
 	name = "Idolaf" #Count of Sedor
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_102
@@ -2301,7 +2515,7 @@ saltbreaker_103 = {
 }
 saltbreaker_104 = {
 	name = "Ingjard"
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_102
@@ -2312,7 +2526,7 @@ saltbreaker_104 = {
 }
 saltbreaker_105 = {
 	name = "Sigaar" #Count of Sedor & Winter's Peak
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_103
@@ -2322,7 +2536,7 @@ saltbreaker_105 = {
 }
 saltbreaker_106 = {
 	name = "Ragna" #Count of Sedor & Winter's Peak
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_105
@@ -2333,7 +2547,7 @@ saltbreaker_106 = {
 }
 saltbreaker_107 = {
 	name = "Njoll"
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	father = saltbreaker_105
@@ -2344,7 +2558,7 @@ saltbreaker_107 = {
 }
 saltbreaker_108 = {
 	name = "Bredin" #Count of Sedor & Winter's Peak
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	trait = twin
@@ -2355,7 +2569,7 @@ saltbreaker_108 = {
 }
 saltbreaker_109 = {
 	name = "Bredrek"
-	dynasty = 70305
+	dynasty = 340000
 	culture = cyro_nord
 	religion = nord_cult
 	trait = twin
@@ -2369,7 +2583,7 @@ saltbreaker_109 = {
 #House Cruel-Sea
 cruelsea_97 = {
 	name = "Gjakil" #King of Winterhold
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_good_2
@@ -2379,7 +2593,7 @@ cruelsea_97 = {
 }
 cruelsea_98 = {
 	name = "Lokir" #King of Winterhold (Warlords)
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_good_2
@@ -2392,7 +2606,7 @@ cruelsea_98 = {
 }
 cruelsea_200 = {
 	name = "Arkasis" #Duke of Bleakcoast
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	trait = arrogant
@@ -2403,7 +2617,7 @@ cruelsea_200 = {
 }
 cruelsea_201 = {
 	name = "Belrud" #Duke of Bleakcoast
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_200
@@ -2413,7 +2627,7 @@ cruelsea_201 = {
 }
 cruelsea_202 = {
 	name = "Hofgrad" #Duke of Bleakcoast
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_201
@@ -2423,7 +2637,7 @@ cruelsea_202 = {
 }
 cruelsea_203 = {
 	name = "Hramdin" #Duke of Bleakcoast
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_202
@@ -2433,7 +2647,7 @@ cruelsea_203 = {
 }
 cruelsea_99 = {
 	name = "Gromm" #King of Winterhold (Interregnum)
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_good_2
@@ -2444,7 +2658,7 @@ cruelsea_99 = {
 }
 cruelsea_100 = {
 	name = "Eiruki" #Heir to Winterhold
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult	
 	father = cruelsea_98
@@ -2456,7 +2670,7 @@ cruelsea_100 = {
 }
 cruelsea_101 = {
 	name = "Thaena" #Princess of Winterhold
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_98
@@ -2468,7 +2682,7 @@ cruelsea_101 = {
 }
 cruelsea_102 = {
 	name = "Larthjar" #Duke of Winterhold
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -2479,7 +2693,7 @@ cruelsea_102 = {
 }
 cruelsea_103 = {
 	name = "Havilstein" #Duke of Winterhold
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_102
@@ -2490,7 +2704,7 @@ cruelsea_103 = {
 cruelsea_104 = {
 	name = "Agnis" #Duke of Winterhold ( Alliance War )
 	female = yes
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	father = cruelsea_103
@@ -2501,7 +2715,7 @@ cruelsea_104 = {
 cruelsea_105 = {
 	name = "Val" #Duke of Winterhold
 	female = yes
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	mother = cruelsea_104
@@ -2511,7 +2725,7 @@ cruelsea_105 = {
 }
 cruelsea_106 = {
 	name = "Havil"
-	dynasty = 70149
+	dynasty = 300009
 	culture = eastmarcher
 	religion = nord_cult
 	mother = cruelsea_104
@@ -2524,7 +2738,6 @@ cruelsea_106 = {
 
 finehair_99 = {
 	name = "Hamvir" #Duke of Anthor/Saarthal
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
@@ -2536,7 +2749,6 @@ finehair_99 = {
 }
 finehair_100 = {
 	name = "Hamras" #Duke of Anthor/Saarthal
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
@@ -2548,7 +2760,6 @@ finehair_100 = {
 }
 finehair_101 = {
 	name = "Hamlof"
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
@@ -2560,7 +2771,6 @@ finehair_101 = {
 finehair_102 = {
 	name = "Astrid" #Duke of Anthor/Saarthal
 	female = yes
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
@@ -2572,7 +2782,6 @@ finehair_102 = {
 }
 finehair_103 = {
 	name = "Aevar" #Duke of Anthor/Saarthal ( Alliance War )
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
@@ -2585,11 +2794,10 @@ finehair_103 = {
 finehair_104 = {
 	name = "Eivor"
 	female = yes
-	dynasty = 70149
 	dynasty_house = cruelsea_finehair
 	culture = eastmarcher
 	religion = nord_cult
-	father = finehair_102
+	mother = finehair_102
 	
 	3486.1.1 = { birth = yes }
 	3548.1.1 = { death = yes }
@@ -2598,7 +2806,7 @@ finehair_104 = {
 #House Yngvlar
 yngvlar_992 = {
 	name = "Olfrid" #Potentially traces descent to the five hundred companions
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	
@@ -2608,7 +2816,7 @@ yngvlar_992 = {
 
 yngvlar_993 = {
 	name = "Vignar" #King of Whiterun
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_992
@@ -2619,7 +2827,7 @@ yngvlar_993 = {
 
 yngvlar_994 = {
 	name = "Sjorvar" #King of Whiterun
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_993
@@ -2629,7 +2837,7 @@ yngvlar_994 = {
 }
 yngvlar_995 = {
 	name = "Torygg" #King of Whiterun ( Warlords )
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_994
@@ -2640,10 +2848,9 @@ yngvlar_995 = {
 }
 yngvlar_996 = {
 	name = "Sjorvar" #King of Whiterun (Interregnum)
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
-	add_trait = nord
 	father = yngvlar_995
 	
 	3343.1.1 = { birth = yes }
@@ -2651,12 +2858,22 @@ yngvlar_996 = {
 	#3369.1.1 = { effect = { add_artifact = mount_horse_mountain } }
 	3410.1.1 = { death = yes }
 }
-yngvlar_997 = {
-	name = "Leifur" #Heir to Whiterun
-	dynasty = 70411
+yngvlar_1997 = {
+	name = "Fjori"
+	female = yes
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
-	add_trait = nord
+	father = yngvlar_995
+	
+	3350.1.1 = { birth = yes }
+	3410.1.1 = { death = yes }
+}
+yngvlar_997 = {
+	name = "Leifur" #Heir to Whiterun
+	dynasty = 320007
+	culture = westmarcher
+	religion = nord_cult
 	father = yngvlar_996
 	
 	3363.1.1 = { birth = yes }
@@ -2664,7 +2881,7 @@ yngvlar_997 = {
 }
 yngvlar_998 = {
 	name = "Balgruuf" #King of Whiterun
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_997
@@ -2674,7 +2891,7 @@ yngvlar_998 = {
 }
 yngvlar_999 = {
 	name = "Thongar" #King of Whiterun
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_998
@@ -2688,7 +2905,7 @@ yngvlar_999 = {
 }
 yngvlar_1000 = {
 	name = "Morryn" #King of Whiterun (Alliance War)
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_999
@@ -2699,13 +2916,13 @@ yngvlar_1000 = {
 	3505.1.1 = { 
 		death = {
 			death_reason = death_battle
-			#killer = 18088
+			#killer = 18088 # EK TODO
 		} 
 	}
 }
 yngvlar_1001 = {
 	name = "Kust" #Heir to Whiterun ( Alliance War )
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = graymane_202
@@ -2720,7 +2937,7 @@ yngvlar_1001 = {
 yngvlar_1002 = {
 	name = "Barri"
 	female = yes
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = graymane_202
@@ -2731,7 +2948,7 @@ yngvlar_1002 = {
 }
 yngvlar_1005 = {
 	name = "Sjorvar"
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_1001
@@ -2748,7 +2965,7 @@ yngvlar_1005 = {
 hodgrym_99 = {
 	name = "Iona" #Duke of Greymarch
 	female = yes
-	dynasty = 70411
+	dynasty = 320007
 	culture = westmarcher
 	religion = nord_cult
 	father = yngvlar_995
@@ -2758,7 +2975,6 @@ hodgrym_99 = {
 }
 hodgrym_100 = {
 	name = "Alvor" #Duke of Greymarch
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2770,7 +2986,6 @@ hodgrym_100 = {
 hodgrym_101 = {
 	name = "Iona" #Duke of Greymarch
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2781,7 +2996,6 @@ hodgrym_101 = {
 }
 hodgrym_102 = {
 	name = "Balgruuf" #Duke of Greymarch ( Alliance War )
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2792,7 +3006,6 @@ hodgrym_102 = {
 }
 hodgrym_103 = {
 	name = "Sjorvar"
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2803,7 +3016,6 @@ hodgrym_103 = {
 }
 hodgrym_104 = {
 	name = "Orgnar" #Duke of Greymarch
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2815,7 +3027,6 @@ hodgrym_104 = {
 hodgrym_200 = {
 	name = "Raena" #Marries Battle-Born
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_hodgrym
 	culture = westmarcher
 	religion = nord_cult
@@ -2827,7 +3038,6 @@ hodgrym_200 = {
 #House Gray-Mane
 graymane_93 = {
 	name = "Sjorvar" #Count of Darkmoor & Krumm's Horn
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2845,7 +3055,6 @@ graymane_93 = {
 
 graymane_94 = {
 	name = "Hadvar" #Count of Darkmoor & Krumm's Horn ( Warlords )
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2857,7 +3066,6 @@ graymane_94 = {
 
 graymane_95 = {
 	name = "Alvor" # Count of Darkmoor & Krumm's Horn (Interregnum ) Starts line of Alvor
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2869,7 +3077,6 @@ graymane_95 = {
 
 graymane_96 = {
 	name = "Ralof" # ( Warlords & Interregnum ) starts line of Ralof
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2881,7 +3088,6 @@ graymane_96 = {
 
 graymane_97 = {
 	name = "Kjeld" # ( Interregnum ) line of Alvor
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2893,7 +3099,6 @@ graymane_97 = {
 
 graymane_98 = {
 	name = "Torkild" # line of Alvor
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2905,7 +3110,6 @@ graymane_98 = {
 graymane_99 = {
 	name = "Alva" # (Alliance War) line of Alvor
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2917,7 +3121,6 @@ graymane_99 = {
 graymane_100 = {
 	name = "Eydis" # (Alliance War) line of Alvor
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2928,7 +3131,6 @@ graymane_100 = {
 }
 graymane_200 = {
 	name = "Knud" # Line of Ralof
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2940,7 +3142,6 @@ graymane_200 = {
 
 graymane_201 = {
 	name = "Sigurd" # (Alliance War) Line of Ralof
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2952,7 +3153,6 @@ graymane_201 = {
 
 graymane_202 = {
 	name = "Eorlund" # (Alliance War) Line of Ralof
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2963,7 +3163,6 @@ graymane_202 = {
 }
 graymane_203 = {
 	name = "Jorgen" # (Alliance War) Line of Ralof
-	dynasty = 70411
 	dynasty_house = yngvlar_graymane
 	culture = westmarcher
 	religion = nord_cult
@@ -2975,7 +3174,6 @@ graymane_203 = {
 #House Battle-Born
 battleborn_93 = {
 	name = "Kust"
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -2992,7 +3190,6 @@ battleborn_93 = {
 }
 battleborn_94 = {
 	name = "Vrost" #Count of Granitehall & North Brittleshin
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3003,7 +3200,6 @@ battleborn_94 = {
 }
 battleborn_95 = {
 	name = "Garuk" #Count of Granitehall & North Brittleshin ( Warlords & Interregnum )
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3014,7 +3210,6 @@ battleborn_95 = {
 }
 battleborn_96 = {
 	name = "Geilir"
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3026,7 +3221,6 @@ battleborn_96 = {
 battleborn_97 = {
 	name = "Bodil" #Count of Granitehall & North Brittleshin
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3038,7 +3232,6 @@ battleborn_97 = {
 battleborn_98 = {
 	name = "Siri"
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3049,7 +3242,6 @@ battleborn_98 = {
 }
 battleborn_99 = {
 	name = "Jon"
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3060,7 +3252,6 @@ battleborn_99 = {
 }
 battleborn_100 = {
 	name = "Olafr" #Count of Granitehall & North Brittleshin ( Alliance War )
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3073,7 +3264,6 @@ battleborn_100 = {
 battleborn_101 = {
 	name = "Fjorna" #Count of Granitehall & North Brittleshin
 	female = yes
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3085,7 +3275,6 @@ battleborn_101 = {
 }
 battleborn_102 = {
 	name = "Kadstig"
-	dynasty = 70411
 	dynasty_house = yngvlar_battleborn
 	culture = westmarcher
 	religion = nord_cult
@@ -3097,10 +3286,11 @@ battleborn_102 = {
 }
 
 ##Hate-Basket Dynasty
+
 #House Hate-Basket
 hatebasket_100 = {
 	name = "Olav" #Duke of Fellhammer ( Warlords & Interregnum )
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -3109,7 +3299,7 @@ hatebasket_100 = {
 }
 hatebasket_101 = {
 	name = "Ald" #Duke of Fellhammer
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = hatebasket_100
@@ -3119,7 +3309,7 @@ hatebasket_101 = {
 }
 hatebasket_102 = {
 	name = "Jorck"
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = hatebasket_100
@@ -3129,7 +3319,7 @@ hatebasket_102 = {
 }
 hatebasket_103 = {
 	name = "Torbald" #Duke of Fellhammer
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = hatebasket_101
@@ -3139,7 +3329,7 @@ hatebasket_103 = {
 }
 hatebasket_104 = {
 	name = "Saerlund" #Duke of Fellhammer
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = hatebasket_103
@@ -3150,7 +3340,7 @@ hatebasket_104 = {
 hatebasket_105 = {
 	name = "Sonje"
 	female = yes
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = hatebasket_103
@@ -3161,7 +3351,7 @@ hatebasket_105 = {
 hatebasket_106 = {
 	name = "Lydia" #Duke of Fellhammer ( Alliance War )
 	female = yes
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	mother = hatebasket_105
@@ -3172,7 +3362,7 @@ hatebasket_106 = {
 }
 hatebasket_107 = {
 	name = "Arkas" #Duke of Fellhammer
-	dynasty = 70223
+	dynasty = 300010
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_106
@@ -3184,7 +3374,7 @@ hatebasket_107 = {
 ##Sweetroll-Stealer Dynasty
 sweetrollstealer_100 = {
 	name = "Hans" #Count of Frostflow
-	dynasty = 70412
+	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
 	trait = lunatic_genetic
@@ -3194,7 +3384,7 @@ sweetrollstealer_100 = {
 }
 sweetrollstealer_101 = {
 	name = "Hans" #Count of Frostflow Hans II
-	dynasty = 70412
+	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
 	trait = lunatic_genetic
@@ -3205,7 +3395,7 @@ sweetrollstealer_101 = {
 }
 sweetrollstealer_102 = {
 	name = "Hans" #Count of Frostflow Hans III
-	dynasty = 70412
+	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
 	trait = lunatic_genetic
@@ -3217,7 +3407,7 @@ sweetrollstealer_102 = {
 sweetrollstealer_103 = {
 	name = "Hanana" #Count of Frostflow ( Alliance War )
 	female = yes
-	dynasty = 70412
+	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
 	trait = lunatic_genetic
@@ -3228,7 +3418,7 @@ sweetrollstealer_103 = {
 }
 sweetrollstealer_104 = {
 	name = "Hans" #Count of Frostflow Hans IV
-	dynasty = 70412
+	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
 	trait = lunatic_genetic
@@ -3237,11 +3427,12 @@ sweetrollstealer_104 = {
 	3480.1.1 = { birth = yes }
 	3546.1.1 = { death = yes }
 }
-##Bell-Striker Dynasty ( Formed from Cruel-Sea )
+##Bell-Striker Dynasty
+
 #House Bell-Striker
 bellstriker_99 = {
 	name = "Olaf" #Count of Bannerwatch, Marries Amber-Shield (Warlords & Interregnum)
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_good_1
@@ -3254,7 +3445,7 @@ bellstriker_99 = {
 }
 bellstriker_100 = {
 	name = "Bormir" #Heir to Bannerwatch
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_good_1
@@ -3267,7 +3458,7 @@ bellstriker_100 = {
 bellstriker_101 = {
 	name = "Arani"
 	female = yes
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_99
@@ -3279,7 +3470,7 @@ bellstriker_101 = {
 
 bellstriker_102 = {
 	name = "Dengeir" #Count of Bannerwatch
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	trait = physique_bad_1
@@ -3290,7 +3481,7 @@ bellstriker_102 = {
 }
 bellstriker_103 = {
 	name = "Norring" #Count of Bannerwatch
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_102
@@ -3300,7 +3491,7 @@ bellstriker_103 = {
 }
 bellstriker_104 = {
 	name = "Ulfberth" #Count of Bannerwatch (Alliance War)
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_103
@@ -3311,7 +3502,7 @@ bellstriker_104 = {
 bellstriker_105 = {
 	name = "Adana" #Count of Bannerwatch
 	female = yes
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_104
@@ -3321,7 +3512,7 @@ bellstriker_105 = {
 }
 bellstriker_106 = {
 	name = "Calder"
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	father = bellstriker_104
@@ -3332,7 +3523,7 @@ bellstriker_106 = {
 bellstriker_107 = {
 	name = "Adelhild"
 	female = yes
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -3344,7 +3535,7 @@ bellstriker_107 = {
 bellstriker_108 = {
 	name = "Jolinne"
 	female = yes
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	trait = twin
@@ -3355,7 +3546,7 @@ bellstriker_108 = {
 }
 bellstriker_109 = {
 	name = "Asgeir" #Count of Bannerwatch
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	mother = bellstriker_105
@@ -3366,7 +3557,7 @@ bellstriker_109 = {
 
 bellstriker_110 = {
 	name = "Daric"
-	dynasty = 70116
+	dynasty = 300012
 	culture = eastmarcher
 	religion = nord_cult
 	mother = bellstriker_105
@@ -3377,7 +3568,7 @@ bellstriker_110 = {
 #Hoar-Blood Dynasty (Strength wanes after married into Fine-Hair )
 hoarblood_10 = {
 	name = "Esbern" #Duke of Anthor
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -3387,7 +3578,7 @@ hoarblood_10 = {
 
 hoarblood_11 = {
 	name = "Einarth" #Duke of Anthor ( Warlords & Interregnum )
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_10
@@ -3398,7 +3589,7 @@ hoarblood_11 = {
 
 hoarblood_12 = {
 	name = "Eimar" #Duke of Anthor
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_11
@@ -3409,7 +3600,7 @@ hoarblood_12 = {
 
 hoarblood_13 = {
 	name = "Thrud" #Duke of Anthor
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_12
@@ -3420,7 +3611,7 @@ hoarblood_13 = {
 hoarblood_14 = { #Marries into Fine-Hair
 	name = "Svari"
 	female = yes
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_13
@@ -3430,7 +3621,7 @@ hoarblood_14 = { #Marries into Fine-Hair
 }
 hoarblood_101 = {
 	name = "Gjalder" #Count of Halfrun & Kastav ( Interregnum )
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_10
@@ -3441,7 +3632,7 @@ hoarblood_101 = {
 hoarblood_15 = {
 	name = "Gretga" #Count of Halfrun & Kastav
 	female = yes
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_13
@@ -3451,7 +3642,7 @@ hoarblood_15 = {
 }
 hoarblood_16 = {
 	name = "Volknar" #Count of Halfrun & Kastav ( Alliance War )
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	mother = hoarblood_15
@@ -3461,7 +3652,7 @@ hoarblood_16 = {
 }
 hoarblood_17 = {
 	name = "Yavni" #Count of Halfrun & Kastav
-	dynasty = 70233
+	dynasty = 300013
 	culture = eastmarcher
 	religion = nord_cult
 	father = hoarblood_16
@@ -3474,7 +3665,7 @@ hoarblood_17 = {
 #House Amber-Shield
 ambershield_96 = {
 	name = "Bulfrek" #Duke of Dawnstar
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	
@@ -3483,7 +3674,7 @@ ambershield_96 = {
 }
 ambershield_97 = {
 	name = "Roeth" #Duke of Dawnstar
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_96
@@ -3495,7 +3686,7 @@ ambershield_97 = {
 ambershield_98 = {
 	name = "Freir" #Marries Olaf Bell-Striker
 	female = yes
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_96
@@ -3505,7 +3696,7 @@ ambershield_98 = {
 }
 ambershield_99 = {
 	name = "Bulfrek" #Duke of Dawnstar ( Warlords ) King of The Pale ( Interregnum )
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_97
@@ -3515,7 +3706,7 @@ ambershield_99 = {
 }
 ambershield_100 = {
 	name = "Logvaar" #Heir to Dawnstar
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_99
@@ -3525,7 +3716,7 @@ ambershield_100 = {
 }
 ambershield_101 = {
 	name = "Thorkell"
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_99
@@ -3535,7 +3726,7 @@ ambershield_101 = {
 }
 ambershield_102 = {
 	name = "Frothar" #Duke of Dawnstar, Marries Mabjaarn Flame-Hair
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_100
@@ -3545,7 +3736,7 @@ ambershield_102 = {
 }
 ambershield_103 = {
 	name = "Bulfrek" #Duke of Dawnstar
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_100
@@ -3555,7 +3746,7 @@ ambershield_103 = {
 }
 ambershield_104 = {
 	name = "Vikord" #Duke of Dawnstar ( Alliance War )
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_103
@@ -3565,7 +3756,7 @@ ambershield_104 = {
 }
 ambershield_105 = {
 	name = "Ylgar"
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_103
@@ -3576,7 +3767,7 @@ ambershield_105 = {
 ambershield_106 = {
 	name = "Hauti"
 	female = yes
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_103
@@ -3589,7 +3780,7 @@ ambershield_106 = {
 snowcrest_96 = {
 	name = "Birna" #Count of Dunstad
 	female = yes
-	dynasty = 70103
+	dynasty = 300014
 	culture = eastmarcher
 	religion = nord_cult
 	father = ambershield_96
@@ -3600,7 +3791,6 @@ snowcrest_96 = {
 snowcrest_97 = {
 	name = "Haelga" #Duke of Dunstad (Warlords & Interregnum)
 	female = yes
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3613,7 +3803,6 @@ snowcrest_97 = {
 snowcrest_98 = {
 	name = "Helgi"
 	female = yes
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3626,7 +3815,6 @@ snowcrest_98 = {
 snowcrest_99 = {
 	name = "Irma" #Duke of Dunstad
 	female = yes
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3638,7 +3826,6 @@ snowcrest_99 = {
 snowcrest_100 = {
 	name = "Else"
 	female = yes
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3649,7 +3836,6 @@ snowcrest_100 = {
 }
 snowcrest_101 = {
 	name = "Burd" #Duke of Dunstad
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3660,7 +3846,6 @@ snowcrest_101 = {
 }
 snowcrest_102 = {
 	name = "Bjald" #Duke of Dunstad (Alliance War)
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3671,7 +3856,6 @@ snowcrest_102 = {
 }
 snowcrest_103 = {
 	name = "Hermrek"
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3682,7 +3866,6 @@ snowcrest_103 = {
 }
 snowcrest_104 = {
 	name = "Thongar"
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3693,7 +3876,6 @@ snowcrest_104 = {
 }
 snowcrest_105 = {
 	name = "Hraldi" #Duke of Dunstad, Potential Bastard Founder?
-	dynasty = 70103
 	dynasty_house = ambershield_snowcrest
 	culture = eastmarcher
 	religion = nord_cult
@@ -3704,11 +3886,14 @@ snowcrest_105 = {
 	3471.1.1 = { birth = yes }
 	3534.1.1 = { death = yes }
 }
+
+
 ##Snow-Whale Dynasty
+
 #House Snow-Whale
 snowwhale_98 = {
 	name = "Hjoruld" #King of Morthal
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	
@@ -3718,7 +3903,7 @@ snowwhale_98 = {
 
 snowwhale_99 = {
 	name = "Hjorta" #King of Morthal ( Warlords & Interregnum )
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	female = yes
@@ -3729,7 +3914,7 @@ snowwhale_99 = {
 }
 snowwhale_100 = {
 	name = "Threki"
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	female = yes
@@ -3740,7 +3925,7 @@ snowwhale_100 = {
 }
 snowwhale_101 = {
 	name = "Frilgeth"
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	female = yes
@@ -3751,7 +3936,7 @@ snowwhale_101 = {
 }
 snowwhale_102 = {
 	name = "Brynjolf" #King of Morthal
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	mother = snowwhale_99
@@ -3761,7 +3946,7 @@ snowwhale_102 = {
 }
 snowwhale_103 = {
 	name = "Hroggar" #King of Morthal
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	father = snowwhale_102
@@ -3771,7 +3956,7 @@ snowwhale_103 = {
 }
 snowwhale_104 = {
 	name = "Grimvar" #King of Morthal
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	father = snowwhale_103
@@ -3781,7 +3966,7 @@ snowwhale_104 = {
 }
 snowwhale_105 = {
 	name = "Reddharn" #King of Morthal ( Alliance War )
-	dynasty = 70347
+	dynasty = 320008
 	culture = westmarcher
 	religion = nord_cult
 	father = snowwhale_104
@@ -3792,7 +3977,6 @@ snowwhale_105 = {
 #House Snow-Braid
 snowbraid_99 = {
 	name = "Eislef" #Duke of Drajkmyr (Warlods & Interregnum)
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3803,7 +3987,6 @@ snowbraid_99 = {
 }
 snowbraid_100 = {
 	name = "Svein" #Duke of Drajkmyr
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3814,7 +3997,6 @@ snowbraid_100 = {
 }
 snowbraid_101 = {
 	name = "Havil"
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3825,7 +4007,6 @@ snowbraid_101 = {
 }
 snowbraid_102 = {
 	name = "Gandis" #Duke of Drajkmyr
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3836,7 +4017,6 @@ snowbraid_102 = {
 }
 snowbraid_103 = {
 	name = "Hoggvir" #Duke of Drajkmyr ( Alliance War )
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3847,7 +4027,6 @@ snowbraid_103 = {
 }
 snowbraid_104 = {
 	name = "Holgunn"
-	dynasty = 70347
 	dynasty_house = snowwhale_snowbraid
 	culture = westmarcher
 	religion = nord_cult
@@ -3858,10 +4037,11 @@ snowbraid_104 = {
 }
 
 ##Sword-Poet Dynasty(Custom)
+
 #House Sword-Poet
 swordpoet_99 = {
 	name = "Viddek" #Count of Silent Isles
-	dynasty = 70417
+	dynasty = 320010
 	culture = westmarcher
 	religion = totemism
 	trait = intellect_good_1
@@ -3871,7 +4051,7 @@ swordpoet_99 = {
 }
 swordpoet_100 = {
 	name = "Vallkir" #Count of Silent Isles
-	dynasty = 70417
+	dynasty = 320010
 	culture = westmarcher
 	religion = totemism
 	father = swordpoet_99
@@ -3881,7 +4061,7 @@ swordpoet_100 = {
 }
 swordpoet_101 = {
 	name = "Varric" #Count of Silent Isles
-	dynasty = 70417
+	dynasty = 320010
 	culture = westmarcher
 	religion = totemism
 	father = swordpoet_100
@@ -3891,7 +4071,7 @@ swordpoet_101 = {
 }
 swordpoet_102 = {
 	name = "Viddek" #Count of Silent Isles ( Alliance War ), Mage
-	dynasty = 70417
+	dynasty = 320010
 	culture = westmarcher
 	religion = totemism
 	trait = intellect_good_2
@@ -3902,7 +4082,7 @@ swordpoet_102 = {
 }
 swordpoet_103 = {
 	name = "Njordemar" #Brother of Viddek
-	dynasty = 70417
+	dynasty = 320010
 	culture = westmarcher
 	religion = totemism
 	trait = physique_good_1
@@ -3916,21 +4096,84 @@ swordpoet_103 = {
 			}
 	}
 }
+##Twice-Stabbed Dynasty
+
+#House Twice-Stabbed
+twicestabbed_98 = {
+	name = "Valdr" #Duke of Karthald (Warlords & Interregnum)
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	
+	3320.1.1 = { birth = yes }
+	3383.1.1 = { death = yes }
+}
+twicestabbed_99 = {
+	name = "Tolgan" #Duke of Karthald
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	father = twicestabbed_98
+	
+	3342.1.1 = { birth = yes }
+	3419.1.1 = { death = yes } #Loses Karthald to Reach
+}
+twicestabbed_100 = {
+	name = "Sond"
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	father = twicestabbed_98
+	
+	3346.1.1 = { birth = yes }
+	3423.1.1 = { death = yes }
+}
+twicestabbed_101 = {
+	name = "Erik" #Count of Chillbain, Chillwind
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	father = twicestabbed_99
+	
+	3386.1.1 = { birth = yes }
+	3462.1.1 = { death = yes }
+}
+twicestabbed_102 = {
+	name = "Aldis" #Duke of Karthald, reclaims Karthald
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	father = twicestabbed_101
+	
+	3422.1.1 = { birth = yes }
+	3494.1.1 = { death = yes }
+}
+twicestabbed_103 = {
+	name = "Olfwenn" #Duke of Karthald (Alliance War)
+	female = yes
+	dynasty = 320011
+	culture = westmarcher
+	religion = nord_cult
+	father = twicestabbed_101
+	
+	3450.1.1 = { birth = yes }
+	3502.9.11 = { death = yes }
+}
 ##Skjoralmor Dynasty
+
 #House Skjoralmor
 skjoralmor_98 = {
 	name = "Thadgeir" #King of Falkreath
-	dynasty = 70457 #Skjoralmor
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
-	father = 11401
 	
 	3275.1.1 = { birth = yes }
 	3345.1.1 = { death = yes }
 }
 skjoralmor_99 = {
 	name = "Falk" #King of Falkreath
-	dynasty = 70457 #Skjoralmor
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
@@ -3945,7 +4188,7 @@ skjoralmor_99 = {
 }
 skjoralmor_100 = {
 	name = "Hakkvild" #King of Falkreath
-	dynasty = 70457
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
 	father = skjoralmor_99
@@ -3955,11 +4198,11 @@ skjoralmor_100 = {
 	3390.1.1 = { death = yes }
 }
 skjoralmor_101 = {
-	name = "Astrid" #King of Falkreath
-	dynasty = 70457
+	name = "Astrid" #Queen of Falkreath
+	female = yes
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
-	female = yes
 	father = skjoralmor_100
 	
 	3350.1.1 = { birth = yes }
@@ -3967,7 +4210,7 @@ skjoralmor_101 = {
 }
 skjoralmor_102 = {
 	name = "Falkal" #King of Falkreath
-	dynasty = 70457
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
 	#father = 6625 #Sossildor, gonna move him up a bit
@@ -3979,7 +4222,7 @@ skjoralmor_102 = {
 }
 skjoralmor_103 = {
 	name = "Cuhlain" #King of Falkreath
-	dynasty = 70457
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
 	father = skjoralmor_102
@@ -3990,7 +4233,7 @@ skjoralmor_103 = {
 }
 skjoralmor_104 = {
 	name = "Halgeir" #King of Falkreath
-	dynasty = 70457
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
 	father = skjoralmor_103
@@ -4000,7 +4243,7 @@ skjoralmor_104 = {
 }
 skjoralmor_105 = {
 	name = "Hjurgol" #King of Falkreath ( Alliance War )
-	dynasty = 70457 
+	dynasty = 340001 
 	culture = cyro_nord
 	religion = nord_cult
 	father = skjoralmor_103
@@ -4011,7 +4254,7 @@ skjoralmor_105 = {
 }
 skjoralmor_106 = {
 name = "Eerika" #King of Falkreath
-	dynasty = 70457
+	dynasty = 340001
 	culture = cyro_nord
 	religion = nord_cult
 	female = yes
@@ -4023,69 +4266,90 @@ name = "Eerika" #King of Falkreath
 }
 skjoralmor_200 = {
 	name = "Engar" #Duke of Helgen (Warlords)
-	dynasty = 70457 #Skjoralmor
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_98
 	
 	3300.1.1 = { birth = yes }
-	3369.1.1 = { death = {
+	3366.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_201 = {
-	name = "Thonnir" #Duke of Helgen (Interregnum)
-	dynasty = 70457 #Skjoralmor
+	name = "Thonnir" #Goes to Riften
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_200
 	
-	3348.1.1 = { birth = yes }
+	3344.1.1 = { birth = yes }
+	3360.1.1 = { add_spouse = blackthorn_200 }
+	3369.1.1 = { 
+		effect = {
+			set_employer = blackthorn_1000 
+		}
+	}
 	3421.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_202 = {
-	name = "Markus" #Duke of Helgen
-	dynasty = 70457 #Skjoralmor
+	name = "Markus" 
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_201
 	
-	3420.1.1 = { birth = yes }
-	3492.1.1 = { death = {
+	3399.1.1 = { birth = yes }
+	3400.1.1 = { 
+		effect = {
+			set_employer = blackthorn_103
+		}
+	}
+	3481.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_203 = {
-	name = "Hegris" #Duke of Helgen ( Alliance War )
-	dynasty = 70457 #Skjoralmor
+	name = "Hegris" 
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_202
 	
 	3470.1.1 = { birth = yes }
+	3472.1.1 = { 
+		effect = {
+			set_employer = blackthorn_103
+		}
+	}
 	3549.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
 }
 skjoralmor_204 = {
-	name = "Malsorr" #Duke of Helgen
-	dynasty = 70457 #Skjoralmor
+	name = "Malsorr" 
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_203
 	
 	3500.1.1 = { birth = yes }
+	3502.1.1 = {
+	 	effect = {
+			set_employer = blackthorn_107
+		}
+	}
 	3573.1.1 = { death = {
 					death_reason = death_old_age
 				}
@@ -4093,17 +4357,584 @@ skjoralmor_204 = {
 }
 skjoralmor_205 = {
 	name = "Gomriss"
-	dynasty = 70457 #Skjoralmor
+	dynasty = 340001 #Skjoralmor
 	culture = cyro_nord
 	religion = nord_cult
 	
 	father = skjoralmor_203
 	
 	3502.1.1 = { birth = yes }
+	3503.1.1 = {
+	 	effect = {
+			set_employer = blackthorn_107
+		}
+	}
 	3577.1.1 = { death = {
 					death_reason = death_old_age
 				}
 		}
+}
+
+#House Raven-Eye
+skjoralmor_1001 = {
+	name = "Heimskr" #Duke of Helgen (Interregnum)
+	dynasty = 340001
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_100
+	
+	3354.1.1 = { birth = yes }
+	3370.1.1 = { add_spouse = yngvlar_1997 }
+	3424.1.1 = { death = yes }
+}
+raveneye_100 = {
+	name = "Frothar" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_1001
+	mother = yngvlar_1997
+	
+	3386.1.1 = { birth = yes }
+	3446.1.1 = { death = yes }
+}
+raveneye_101 = {
+	name = "Abbard"
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = skjoralmor_1001
+	mother = yngvlar_1997
+	
+	3388.1.1 = { birth = yes }
+	3451.1.1 = { death = yes }
+}
+raveneye_102 = {
+	name = "Angrenor" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_100
+	
+	3421.1.1 = { birth = yes }
+	3493.1.1 = { death = yes }
+}
+raveneye_103 = {
+	name = "Hroldan" #Duke of Helgen ( Alliance War )
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_102
+	
+	3450.1.1 = { birth = yes }
+	3519.1.1 = { death = yes }
+}
+raveneye_104 = {
+	name = "Logrolf" #Duke of Helgen
+	dynasty_house = skjoralmor_raveneye
+	culture = cyro_nord
+	religion = nord_cult
+	father = raveneye_103
+	
+	3474.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
+
+##Oaken-Sword Dynasty
+
+#House Oaken-Sword
+oakensword_98 = {
+	name = "Gormlaith" #Knight of Eastmarch
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+
+	3293.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
+}
+oakensword_99 = {
+	name = "Olaf" #Duke of Amol ( Warlords & Interregnum )
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	mother = oakensword_98
+
+	3329.1.1 = { birth = yes }
+	3405.1.1 = { death = yes }
+}
+oakensword_100 = {
+	name = "Bolgeir" #Duke of Amol
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_99
+
+	3355.1.1 = { birth = yes }
+	3428.1.1 = { death = yes }
+}
+oakensword_101 = {
+	name = "Daglin" #Duke of Amol
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_100
+
+	3399.1.1 = { birth = yes }
+	3475.1.1 = { death = yes }
+}
+oakensword_102 = {
+	name = "Gormlaith" #Duke of Amol ( Alliance War )
+	female = yes
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_101
+
+	3453.1.1 = { birth = yes }
+	3519.1.1 = { death = yes }
+}
+oakensword_103 = {
+	name = "Heddic" #Duke of Amol
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	mother = oakensword_102
+
+	3481.1.1 = { birth = yes }
+	3548.1.1 = { death = yes }
+}
+oakensword_104 = {
+	name = "Erling"
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	mother = oakensword_102
+
+	3489.1.1 = { birth = yes }
+	3550.1.1 = { death = yes }
+}
+
+oakensword_200 = {
+	name = "Molgrom" #Count of Darkshade
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_99
+
+	3357.1.1 = { birth = yes }
+	3435.1.1 = { death = yes }
+}
+oakensword_201 = {
+	name = "Horm" #Count of Darkshade ( Alliance War )
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_200
+
+	3430.1.1 = { birth = yes }
+	3503.1.1 = { death = yes }
+}
+oakensword_202 = {
+	name = "Hern" #Count of Darkshade
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	trait = twin
+	father = oakensword_201
+
+	3467.1.1 = { birth = yes }
+	3533.1.1 = { death = yes }
+}
+oakensword_203 = {
+	name = "Herd"
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	trait = twin
+	father = oakensword_201
+
+	3467.1.1 = { birth = yes }
+	3531.1.1 = { death = yes }
+}
+oakensword_204 = {
+	name = "Thaer" #Count of Darkshade
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_200
+
+	3490.1.1 = { birth = yes }
+	3559.1.1 = { death = yes }
+}
+
+oakensword_300 = {
+	name = "Gwendolyn" #Count of Snowgrad
+	female = yes
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_99
+
+	3359.1.1 = { birth = yes }
+	3437.1.1 = { death = yes }
+}
+oakensword_301 = {
+	name = "Fenrig" #Count of Snowgrad
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	mother = oakensword_300
+
+	3421.1.1 = { birth = yes }
+	3437.1.1 = { add_spouse = alescribe_103 }
+	3499.1.1 = { death = yes }
+}
+
+#House Stormstruck
+stormstruck_100 = {
+	name = "Brill" #Duke of Morvunskar ( Alliance War )
+	dynasty_house = oakensword_stormstruck
+	culture = eastmarcher
+	religion = nord_cult
+	father = oakensword_301
+	mother = alescribe_103
+
+	3470.1.1 = { birth = yes }
+	3541.1.1 = { death = yes }
+}
+stormstruck_101 = {
+	name = "Gunjar" #Duke of Morvunskar
+	dynasty_house = oakensword_stormstruck
+	culture = eastmarcher
+	religion = nord_cult
+	father = stormstruck_100
+
+	3492.1.1 = { birth = yes }
+	3564.1.1 = { death = yes }
+}
+##Ale-Scribe Dynasty
+
+#House Ale-Scribe
+alescribe_99 = {
+	name = "Alof" #Duke of Morvunskar ( Warlords & Interregnum )
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3304.1.1 = { birth = yes }
+	3371.1.1 = { death = yes }
+}
+alescribe_100 = {
+	name = "Jorgen" #Duke of Morvunskar
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_99
+	
+	3344.1.1 = { birth = yes }
+	3413.1.1 = { death = yes }
+}
+alescribe_101 = {
+	name = "Hamvir" #Duke of Morvunskar
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_100
+	
+	3360.1.1 = { birth = yes }
+	3429.1.1 = { death = yes }
+}
+alescribe_102 = {
+	name = "Helga" #Duke of Morvunskar, Marries Oaken-Shield
+	female = yes
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_101
+	
+	3420.1.1 = { birth = yes }
+	3491.1.1 = { death = yes }
+}
+alescribe_103 = {
+	name = "Kodlak" #Unlanded
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_101
+	
+	3422.1.1 = { birth = yes }
+	3489.1.1 = { death = yes }
+}
+alescribe_104 = {
+	name = "Hadrik" #Unlanded
+	dynasty = 300016
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_103
+	
+	3467.1.1 = { birth = yes }
+	3534.1.1 = { death = yes }
+}
+
+
+##Wood-Hewn Dynasty
+#House Wood-Hewn
+woodhewn_98 = {
+	name = "Addrald" #Duke of Rorikstead
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+
+	3293.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
+}
+woodhewn_99 = {
+	name = "Markos" #Duke of Rorikstead ( Warlords & Interregnum )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_98
+
+	3324.1.1 = { birth = yes }
+	3399.1.1 = { death = yes }
+}
+woodhewn_100 = {
+	name = "Thromgar" #Count of Moldering ( Warlords )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_98
+
+	3326.1.1 = { birth = yes }
+	3368.1.1 = { death = yes }
+}
+woodhewn_101 = {
+	name = "Marro" #Heir to Rorikstead ( Warlords & Interregnum )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_99
+
+	3350.1.1 = { birth = yes }
+	3421.1.1 = { death = yes }
+}
+woodhewn_102 = {
+	name = "Farkas" #Count of Moldering ( Interregnum )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_100
+
+	3354.1.1 = { birth = yes }
+	3429.1.1 = { death = yes }
+}
+woodhewn_103 = {
+	name = "Odar" #Duke of Rorikstead, Line of Marro
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_101
+
+	3400.1.1 = { birth = yes }
+	3488.1.1 = { death = yes }
+}
+woodhewn_104 = {
+	name = "Marro" #Duke of Rorikstead, Line of Marro ( Alliance War )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_103
+
+	3448.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+woodhewn_105 = {
+	name = "Ulfra" #Heir to Rorikstead, Line of Marro ( Alliance War )
+	female = yes
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_104
+
+	3478.1.1 = { birth = yes }
+	3542.1.1 = { death = yes }
+}
+woodhewn_106 = {
+	name = "Mjorn" #Line of Marro
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_104
+
+	3488.1.1 = { birth = yes }
+	3580.1.1 = { death = yes }
+}
+woodhewn_200 = {
+	name = "Yjarnn" #Heir to Moldering, Line of Farkas ( Interregnum )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_102
+
+	3370.1.1 = { birth = yes }
+	3446.1.1 = { death = yes }
+}
+woodhewn_201 = {
+	name = "Mickal" #Count of Moldering, Line of Farkas
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_200
+
+	3413.1.1 = { birth = yes }
+	3483.1.1 = { death = yes }
+}
+woodhewn_202 = {
+	name = "Hraldi" #Count of Moldering Line of Farkas ( Alliance War )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_201
+
+	3456.1.1 = { birth = yes }
+	3516.1.1 = { death = yes }
+}
+woodhewn_203 = {
+	name = "Harvni" #Heir to Moldering Line of Farkas ( Alliance War )
+	dynasty = 320009
+	culture = westmarcher
+	religion = nord_cult
+	father = woodhewn_200
+
+	3488.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
+
+##Frost-Beard Dynasty
+
+#House Frost-Beard
+frostbeard_97 = {
+	name = "Aenar" #Adventurer
+	dynasty = 340002
+	prowess = 30
+	culture = westmarcher
+	religion = nord_cult
+
+	3253.1.1 = { birth = yes }
+	3299.1.1 = { death = { death_reason = death_battle } }
+}
+frostbeard_98 = {
+	name = "Borvir" #King of Bruma
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_97
+
+	3289.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
+}
+frostbeard_99 = {
+	name = "Harald" #King of Bruma
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_98
+
+	3324.1.1 = { birth = yes }
+	3397.1.1 = { death = yes }
+}
+frostbeard_100 = {
+	name = "Stenvar" #King of Bruma
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_99
+
+	3370.1.1 = { birth = yes }
+	3455.1.1 = { death = yes }
+}
+
+frostbeard_101 = {
+	name = "Aenar" #King of Bruma
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_100
+
+	3392.1.1 = { birth = yes }
+	3461.1.1 = { death = yes }
+}
+frostbeard_102 = {
+	name = "Svari"
+	female = yes
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_100
+
+	3396.1.1 = { birth = yes }
+	3468.1.1 = { death = yes }
+}
+frostbeard_103 = {
+	name = "Knud" #King of Bruma ( Alliance War )
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	mother = frostbeard_102
+
+	3434.1.1 = { birth = yes }
+	3503.1.1 = { death = yes }
+}
+frostbeard_104 = {
+	name = "Igna" #Queen of Bruma
+	female = yes
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_103
+
+	3466.1.1 = { birth = yes }
+	3537.1.1 = { death = yes }
+}
+frostbeard_200 = {
+	name = "Hakon"
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_98
+
+	3324.1.1 = { birth = yes }
+	3397.1.1 = { death = yes }
+}
+frostbeard_201 = {
+	name = "Haknir"
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_200
+
+	3396.1.1 = { birth = yes }
+	3473.1.1 = { death = yes }
+}
+frostbeard_202 = {
+	name = "Hoag"
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_201
+
+	3458.1.1 = { birth = yes }
+	3511.1.1 = { death = yes }
+}
+frostbeard_203 = {
+	name = "Heidmir"
+	dynasty = 340002
+	culture = cyro_nord
+	religion = nord_cult
+	father = frostbeard_200
+
+	3481.1.1 = { birth = yes }
+	3547.1.1 = { death = yes }
 }
 
 
@@ -4119,142 +4950,42 @@ nordwife_1000 = {
 	3461.1.1 = { birth = yes }
 	3496.1.1 = { death = yes }
 }
-
-
-##Wood-Hewn Dynasty
-#House Wood-Hewn
-woodhewn_98 = {
-	name = "Addrald" #Duke of Rorikstead
-	dynasty = 70432
+nordwife_1001 = {
+	name = "Aeri"
 	culture = westmarcher
 	religion = nord_cult
-
-	3293.1.1 = { birth = yes }
-	3359.1.1 = { death = yes }
-}
-woodhewn_99 = {
-	name = "Markos" #Duke of Rorikstead ( Warlords & Interregnum )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_98
-
-	3324.1.1 = { birth = yes }
-	3399.1.1 = { death = yes }
-}
-woodhewn_100 = {
-	name = "Thromgar" #Count of Moldering ( Warlords )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_98
-
-	3326.1.1 = { birth = yes }
-	3368.1.1 = { death = yes }
-}
-woodhewn_101 = {
-	name = "Marro" #Heir to Rorikstead ( Warlords & Interregnum )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_99
-
-	3350.1.1 = { birth = yes }
-	3421.1.1 = { death = yes }
-}
-woodhewn_102 = {
-	name = "Farkas" #Count of Moldering ( Interregnum )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_100
-
-	3354.1.1 = { birth = yes }
-	3429.1.1 = { death = yes }
-}
-woodhewn_103 = {
-	name = "Odar" #Duke of Rorikstead, Line of Marro
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_101
-
-	3400.1.1 = { birth = yes }
-	3488.1.1 = { death = yes }
-}
-woodhewn_104 = {
-	name = "Marro" #Duke of Rorikstead, Line of Marro ( Alliance War )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_103
-
-	3448.1.1 = { birth = yes }
-	3530.1.1 = { death = yes }
-}
-woodhewn_105 = {
-	name = "Ulfra" #Heir to Rorikstead, Line of Marro ( Alliance War )
 	female = yes
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_104
-
-	3478.1.1 = { birth = yes }
-	3542.1.1 = { death = yes }
+	
+	3329.1.1 = { birth = yes }
+	3388.1.1 = { death = yes }
 }
-woodhewn_106 = {
-	name = "Mjorn" #Line of Marro
-	dynasty = 70432
-	culture = westmarcher
+nordwife_1002 = {
+	name = "Rikissa"
+	culture = eastmarcher
 	religion = nord_cult
-	father = woodhewn_104
-
-	3488.1.1 = { birth = yes }
-	3580.1.1 = { death = yes }
-}
-woodhewn_200 = {
-	name = "Yjarnn" #Heir to Moldering, Line of Farkas ( Interregnum )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_102
-
-	3370.1.1 = { birth = yes }
-	3446.1.1 = { death = yes }
-}
-woodhewn_201 = {
-	name = "Mickal" #Count of Moldering, Line of Farkas
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_200
-
-	3413.1.1 = { birth = yes }
-	3483.1.1 = { death = yes }
-}
-woodhewn_202 = {
-	name = "Hraldi" #Count of Moldering Line of Farkas ( Alliance War )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_201
-
-	3456.1.1 = { birth = yes }
-	3516.1.1 = { death = yes }
-}
-woodhewn_203 = {
-	name = "Harvni" #Heir to Moldering Line of Farkas ( Alliance War )
-	dynasty = 70432
-	culture = westmarcher
-	religion = nord_cult
-	father = woodhewn_200
-
-	3488.1.1 = { birth = yes }
-	3538.1.1 = { death = yes }
+	female = yes
+	
+	3330.1.1 = { birth = yes }
+	3388.1.1 = { death = yes }
 }
 
 ##Republics & Theocracies
+pargran_1000 = {
+	name = "Daglin"
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3335.1.1 = { birth = yes }
+	3396.1.1 = { death = yes }
+}
+pargran_1001 = {
+	name = "Jod"
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3460.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
 
 skyborn_1000 = {
 	name = "Abbard"
