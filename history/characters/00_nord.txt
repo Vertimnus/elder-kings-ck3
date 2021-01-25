@@ -4834,7 +4834,7 @@ frostbeard_98 = {
 	3359.1.1 = { death = yes }
 }
 frostbeard_99 = {
-	name = "Harald" #King of Bruma
+	name = "Harald" #King of Bruma (Warlords & Interregnum)
 	dynasty = 340002
 	culture = cyro_nord
 	religion = nord_cult
@@ -4850,8 +4850,8 @@ frostbeard_100 = {
 	religion = nord_cult
 	father = frostbeard_99
 
-	3370.1.1 = { birth = yes }
-	3455.1.1 = { death = yes }
+	3360.1.1 = { birth = yes }
+	3446.1.1 = { death = yes }
 }
 
 frostbeard_101 = {
@@ -4890,54 +4890,141 @@ frostbeard_104 = {
 	female = yes
 	dynasty = 340002
 	culture = cyro_nord
-	religion = nord_cult
+	religion = imperial_cult
 	father = frostbeard_103
 
 	3466.1.1 = { birth = yes }
 	3537.1.1 = { death = yes }
 }
-frostbeard_200 = {
-	name = "Hakon"
+frostbeard_105 = {
+	name = "Bolgeir" #King of Bruma
 	dynasty = 340002
+	culture = cyro_nord
+	religion = imperial_cult
+	father = frostbeard_103
+
+	3483.1.1 = { birth = yes }
+	3552.1.1 = { death = yes }
+}
+#House Gray-Fists
+grayfists_200 = {
+	name = "Hakon" #Duke of Underpall
+	dynasty_house = frostbeard_grayfists
 	culture = cyro_nord
 	religion = nord_cult
 	father = frostbeard_98
 
-	3324.1.1 = { birth = yes }
+	3326.1.1 = { birth = yes }
 	3397.1.1 = { death = yes }
 }
-frostbeard_201 = {
-	name = "Haknir"
-	dynasty = 340002
+grayfists_201 = {
+	name = "Haknir" #Duke of Underpall
+	dynasty_house = frostbeard_grayfists
 	culture = cyro_nord
 	religion = nord_cult
-	father = frostbeard_200
+	father = grayfists_200
 
-	3396.1.1 = { birth = yes }
-	3473.1.1 = { death = yes }
+	3342.1.1 = { birth = yes }
+	3442.1.1 = { death = yes }
 }
-frostbeard_202 = {
-	name = "Hoag"
-	dynasty = 340002
+grayfists_100 = {
+	name = "Solaf"
+	dynasty_house = frostbeard_grayfists
 	culture = cyro_nord
 	religion = nord_cult
-	father = frostbeard_201
+	father = grayfists_200
 
-	3458.1.1 = { birth = yes }
-	3511.1.1 = { death = yes }
+	3357.1.1 = { birth = yes }
+	3429.1.1 = { death = yes }
 }
-frostbeard_203 = {
-	name = "Heidmir"
-	dynasty = 340002
+grayfists_202 = {
+	name = "Esbern" #Duke of Underpall
+	dynasty_house = frostbeard_grayfists
 	culture = cyro_nord
 	religion = nord_cult
-	father = frostbeard_200
+	father = grayfists_201
 
-	3481.1.1 = { birth = yes }
+	3411.1.1 = { birth = yes }
+	3480.1.1 = { death = yes }
+}
+grayfists_203 = {
+	name = "Heidmir" #Duke of Underpall
+	dynasty_house = frostbeard_grayfists
+	culture = cyro_nord
+	religion = nord_cult
+	father = grayfists_202
+
+	3462.1.1 = { birth = yes }
 	3547.1.1 = { death = yes }
 }
+grayfists_204 = {
+	name = "Kjakur" #Duke of Underpall
+	dynasty_house = frostbeard_grayfists
+	culture = cyro_nord
+	religion = nord_cult
+	father = grayfists_203
 
+	3481.1.1 = { birth = yes }
+	3552.1.1 = { death = yes }
+}
+##Star-Song Dynasty (340003)
 
+#House Star-Song
+starsong_99 = {
+	name = "Fraki" #Adventurer
+	dynasty = 340003
+	culture = cyro_nord
+	religion = nord_cult
+
+	3294.1.1 = { birth = yes }
+	3357.1.1 = { death = yes }
+}
+
+starsong_100 = {
+	name = "Lodvar" #Duke of Caractacus (Warlords & Interregnum)
+	dynasty = 340003
+	prowess = 21
+	culture = cyro_nord
+	religion = nord_cult
+	trait = lustful
+	trait = ambitious
+	trait = honest
+	father = starsong_99
+
+	3326.1.1 = { birth = yes }
+	3342.1.1 = { add_spouse = nordwife_1003 }
+	3342.4.5 = { trait = adulterer }
+	3397.1.1 = { death = yes }
+}
+starsong_101 = {
+	name = "Brond" #Duke of Caractacus
+	dynasty = 340003
+	culture = cyro_nord
+	religion = nord_cult
+	trait = bastard
+	trait = beauty_good_1
+	father = starsong_100
+	mother = nib_lowborn_1000
+	
+	3342.4.5 = { birth = yes }
+	3369.1.1 = { 
+		remove_trait = bastard
+		trait = legitimized_bastard
+		}
+	3414.1.1 = { death = yes }
+}
+starsong_102 = {
+	name = "Geilir"
+	dynasty = 340003
+	culture = cyro_nord
+	religion = nord_cult
+	trait = bastard
+	father = starsong_100
+	mother = nib_lowborn_1000
+
+	3346.1.1 = { birth = yes }
+	3415.1.1 = { death = yes }
+}
 
 ##Lowborns, Wifes, Husbands etc.
 
@@ -4968,7 +5055,24 @@ nordwife_1002 = {
 	3330.1.1 = { birth = yes }
 	3388.1.1 = { death = yes }
 }
-
+nordwife_1003 = {
+	name = "Helga"
+	culture = eastmarcher
+	religion = nord_cult
+	trait = beauty_bad_1
+	female = yes
+	
+	3326.1.1 = { birth = yes }
+	3392.1.1 = { death = yes }
+}
+nordhusband_1000 = {
+	name = "Hrolund"
+	culture = cyro_nord
+	religion = nord_cult
+	
+	3340.1.1 = { birth = yes }
+	3422.1.1 = { death = yes }
+}
 ##Republics & Theocracies
 pargran_1000 = {
 	name = "Daglin"

@@ -63,7 +63,18 @@ tor_910 = {
 	culture = colovian
 	father = tor_909
 	
-	3286.1.1 = { birth = yes }
+	3277.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
+}
+tor_wife_100 = {
+	name = "Caelia"
+	female = yes
+	dynasty_house = cyrodiil_tor
+	religion = reman_cult
+	culture = colovian
+	father = tor_909
+	
+	3280.1.1 = { birth = yes }
 	3359.1.1 = { death = yes }
 }
 tor_911 = {
@@ -544,7 +555,11 @@ larich_103 = {
 	father = larich_102
 	
 	3346.1.1 = { birth = yes }
-	3360.1.1 = { add_betorthal = kvinchal_102 }
+	3360.1.1 = { 
+		effect = {
+				create_betrothal = character:kvinchal_102
+			}
+	}
 	3364.1.1 = { add_spouse = kvinchal_102 }
 	3418.1.1 = { death = yes }
 }
@@ -916,6 +931,7 @@ sintav_101 = {
 	dynasty = 100009
 	religion = imperial_cult
 	culture = colovian
+	trait = zealous
 	father = sintav_100
 	
 	3339.1.1 = { birth = yes }
@@ -1006,6 +1022,295 @@ vywich_103 = {
 	
 	3422.1.1 = { birth = yes }
 	3490.1.1 = { death = yes }
+}
+##Vede Dynasty (100011)
+
+#House Vede
+vede_99 = {
+	name = "Pelinal" #Duke of Greenlake, Marries a Tor
+	dynasty = 100011
+	religion = meridia_cult
+	culture = colovian
+	
+	3277.1.1 = { birth = yes }
+	3308.1.1 = { add_spouse = colovianwife_1000 }
+	3312.1.1 = { add_spouse = tor_wife_100 }
+	3341.1.1 = { death = yes }
+}
+vede_100 = {
+	name = "Tractus" #Count of Stoneden & Vlindrel (Warlords)
+	dynasty = 100011
+	religion = meridia_cult
+	culture = colovian
+	trait = beauty_good_1
+	father = vede_99
+	mother = colovianwife_1000
+	
+	3310.1.1 = { birth = yes }
+	3362.1.1 = { trait = kinslayer_3 }
+	3362.9.15 = { death = { death_reason = death_reason = death_murder } }
+}
+vedetor_100 = {
+	name = "Herennius" #Count of Brokenway (Warlords)
+	dynasty = 100011
+	religion = imperial_cult
+	culture = colovian
+	father = vede_99
+	mother = tor_wife_100
+	
+	3319.1.1 = { birth = yes }
+	3362.1.1 = { death = { death_reason = death_reason = death_battle killer = vede_100 } }
+}
+vedetor_101 = {
+	name = "Morihaus" #Count of Brokenway (Interregnum)
+	dynasty = 100011
+	religion = imperial_cult
+	culture = colovian
+	trait = giant
+	trait = physique_good_2
+	father = vedetor_100
+	
+	3337.1.1 = { birth = yes }
+	3410.1.1 = { death = yes }
+}
+vedetor_102 = {
+	name = "Vitel" #Count of Brokenway
+	dynasty = 100011
+	religion = imperial_cult
+	culture = colovian
+	trait = physique_good_1
+	father = vedetor_101
+	
+	3358.1.1 = { birth = yes }
+	3431.1.1 = { death = yes }
+}
+vedetor_103 = {
+	name = "Vandor" #Count of Brokenway
+	dynasty = 100011
+	religion = imperial_cult
+	culture = colovian
+	father = vedetor_101
+	
+	3394.1.1 = { birth = yes }
+	3471.1.1 = { death = yes }
+}
+vede_101 = {
+	name = "Menien" #Count of Stoneden
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_100
+	
+	3340.1.1 = { birth = yes }
+	3408.1.1 = { death = yes }
+}
+vede_102 = {
+	name = "Maxim" #Count of Stoneden
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_101
+	
+	3358.1.1 = { birth = yes }
+	3428.1.1 = { death = yes }
+}
+vede_103 = {
+	name = "Modius"
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_101
+	
+	3360.1.1 = { birth = yes }
+	3432.1.1 = { death = yes }
+}
+vede_104 = {
+	name = "Carisius" #Count of Stoneden & Vlindrel
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_102
+	
+	3396.1.1 = { birth = yes }
+	3469.1.1 = { death = yes }
+}
+vede_105 = {
+	name = "Larian" #Count of Stoneden & Vlindrel (Alliance War)
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_104
+	
+	3438.1.1 = { birth = yes }
+	3506.1.1 = { death = yes }
+}
+vede_106 = {
+	name = "Tractus" #Count of Stoneden & Vlindrel
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	father = vede_104
+	
+	3468.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
+vede_200 = {
+	name = "Maera" #Count of Vlindrel (Interregnum)
+	female = yes
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	trait = beauty_good_1
+	father = vede_100
+	
+	3342.1.1 = { birth = yes }
+	3358.1.1 = { add_matrilineal_spouse = nordhusband_1000 }
+	3369.1.1 = { religion = imperial_cult }
+	3413.1.1 = { death = yes }
+}
+vede_201 = {
+	name = "Helvia" #Count of Vlindrel
+	female = yes
+	dynasty = 100011
+	religion = hero_cult
+	culture = colovian
+	trait = beauty_good_1
+	mother = vede_200
+	
+	3359.1.1 = { birth = yes }
+	3360.1.1 = { # EK TODO, need a betrothal command
+		effect = {
+				create_betrothal_matrilineal = character:grayfists_100
+			}
+	}
+	3369.1.1 = { religion = imperial_cult }
+	3374.1.1 = { religion = meridia_cult }
+	3375.1.1 = { add_matrilineal_spouse = grayfists_100 }
+	3423.1.1 = { death = yes }
+}
+vede_202 = {
+	name = "Caccian" #Count of Vlindrel, moves to Cheydinhal
+	dynasty = 100011
+	religion = meridia_cult
+	culture = colovian
+	father = grayfists_100
+	mother = vede_201
+	
+	3398.1.1 = { birth = yes }
+	#3426.1.1 = { employer = tharn } # EK TODO
+	3457.1.1 = { death = yes }
+}
+aeresius_100 = { #Continues in 00_nibenese
+	name = "Otius"
+	dynasty = 100011
+	religion = meridia_cult
+	culture = colovian
+	trait = bastard
+	father = vede_202
+	
+	3422.1.1 = { birth = yes }
+	3426.1.1 = { 
+		culture = nibenese
+		dynasty = 130001
+		}
+	#3438.1.1 = { add_matrilineal_spouse = tharn } # EK TODO
+	3457.1.1 = { death = yes }
+}
+
+##Jano Dynasty (100013) can be found in 00_olderempires as well
+
+#House Jano
+
+jano_970 = {
+	name = "Vandorallen" #King of Bruma
+	dynasty = 100013
+	culture = colovian
+	religion = imperial_cult
+	father = jano_968
+
+	3244.1.1 = { birth = yes }
+	3305.1.1 = { death = yes }
+}
+jano_971 = { #Last of the Jano Ruler of Bruma
+	name = "Janus"
+	dynasty = 100013
+	prowess = 20
+	culture = colovian
+	religion = imperial_cult
+	father = jano_970
+
+	3273.1.1 = { birth = yes }
+	3289.1.1 = { add_matrilineal_spouse = terentius_100 }
+	3321.4.3 = { death = { death_reason = death_battle killer = frostbeard_98 } }
+}
+jano_972 = {
+	name = "Pellio"
+	dynasty = 100013
+	culture = colovian
+	religion = imperial_cult
+	father = jano_971
+	mother = terentius_100
+
+	3303.1.1 = { birth = yes }
+	3372.1.5 = { death = yes }
+}
+pelliojano_100 = {
+	name = "Ignos"
+	dynasty = 100013
+	culture = colovian
+	religion = imperial_cult
+	father = jano_972
+
+	3339.1.1 = { birth = yes }
+	3408.1.5 = { death = yes }
+}
+jano_973 = {
+	name = "Pedanius"
+	dynasty = 100013
+	culture = imperial
+	religion = imperial_cult
+	father = jano_971
+	mother = terentius_100
+
+	3309.1.1 = { birth = yes }
+	3383.1.1 = { death = yes }
+}
+jano_974 = {
+	name = "Vibenius"
+	dynasty = 100013
+	culture = imperial
+	religion = imperial_cult
+	father = jano_971
+	mother = terentius_100
+
+	3312.1.1 = { birth = yes }
+	3359.1.1 = { death = { death_reason = death_battle killer = starsong_100 } }
+}
+jano_975 = {
+	name = "Adrianus" #Count of Sercen
+	dynasty = 100013
+	culture = imperial
+	religion = imperial_cult
+	father = jano_974
+
+	3338.1.1 = { birth = yes }
+	3378.1.1 = { death = yes }
+}
+
+#Lowborn
+colovianwife_1000 = {
+	name = "Rhea"
+	female = yes
+	religion = imperial_cult
+	culture = colovian
+	trait = beauty_good_2
+	
+	3282.1.1 = { birth = yes }
+	3310.6.6 = { 
+		trait = flu
+		death = { death_reason = death_flu
+		}
+	}
 }
 
 #Republics/Theocracies ( Until future DLC I suppose, mostly only covers BMs )
