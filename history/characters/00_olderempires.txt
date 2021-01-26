@@ -136,6 +136,22 @@ reman_104 = {
 		}
 	}
 }
+reman_juilek_1 = {
+	name = "Juilek" #His death ended the Reman Empire
+	dynasty = 100000 #Reman
+	religion = imperial_cult
+	culture = colovian
+	father = reman_104
+	
+	2869.10.4 = {
+		birth=yes
+	}
+	2920.12.31 = {
+		death = {
+			death_reason = death_murder #Killed by Miramor
+		}
+	}
+}
 
 reman_105 = {
 	name = "Stephanus" #Founder of House Tor
@@ -392,8 +408,345 @@ jano_969 = {
 	dynasty = 100013
 	culture = colovian
 	religion = imperial_cult
-	father = jano_968
+	mother = jano_968
 
 	3212.1.1 = { birth = yes }
 	3277.1.1 = { death = yes }
+}
+##Odiil Dynasty (100012)
+
+#House Odiil
+
+odiil_10 = {
+	name = "Ris" #Duke of Chorrol
+	dynasty = 100012
+	religion = imperial_cult
+	culture = perena
+	
+	334.1.1 = { birth = yes }
+	429.1.1 = { death = yes }
+}
+odiil_11 = {
+	name = "Magius" #King of Chorrol
+	dynasty = 100012
+	religion = imperial_cult
+	culture = perena
+	father = odiil_10
+	
+	363.1.1 = { birth = yes }
+	436.1.1 = { death = yes }
+}
+odiil_12 = {
+	name = "Livius"
+	dynasty = 100012
+	religion = imperial_cult
+	culture = colovian
+	father = odiil_11
+	
+	401.1.1 = { birth = yes }
+	429.1.1 = { death = yes }
+}
+odiil_13 = {
+	name = "Line of Livius" #King of Chorrol
+	dynasty = 100012
+	religion = imperial_cult
+	culture = colovian
+	father = odiil_12
+	trait = line_of_x
+	
+	443.1.1 = { birth = yes }
+	3272.1.1 = { death = yes }
+}
+## Jeril Dynasty (100018)
+
+# House Jeril
+jeril_10 = {
+	name = "Kantus" #King of Chorrol
+	dynasty = 100018
+	religion = imperial_cult
+	culture = perena
+	
+	267.1.1 = { birth = yes }
+	342.1.1 = { death = yes }
+}
+jeril_11 = {
+	name = "Line of Kantus" #Duke of Chorrol
+	dynasty = 100018
+	religion = imperial_cult
+	culture = colovian
+	trait = line_of_x
+	father = jeril_10
+	
+	299.1.1 = { birth = yes }
+	3312.1.1 = { death = yes }
+}
+###Regents of Kvatch
+
+##Kvinchal Dynasty (100006)
+
+#House Kvinchal
+kvinchal_9 = {
+	name = "Bednach" #Regent of Kvatch
+	dynasty = 100006
+	culture = perena
+	religion = imperial_cult
+
+	348.1.1 = { birth = yes }
+	429.1.1 = { death = yes }
+}
+kvinchal_10 = {
+	name = "Justinius" #King of Kvatch
+	dynasty = 100006
+	culture = colovian
+	religion = imperial_cult
+
+	426.1.1 = { birth = yes }
+	489.1.1 = { death = yes }
+}
+kvinchal_11 = {
+	name = "Kastav" #Regent of Kvatch
+	dynasty = 100006
+	culture = colovian
+	religion = imperial_cult
+	father = kvinchal_10
+
+	443.1.1 = { birth = yes }
+	506.1.1 = { death = yes }
+}
+#Occluded
+kvinchal_12 = {
+	name = "Line of Kastav" #Line of Kastav Kvinchal
+	dynasty = 100006
+	culture = colovian
+	religion = imperial_cult
+	father = kvinchal_11
+	trait = line_of_x
+
+	482.1.1 = { birth = yes }
+	3290.1.1 = { death = yes }
+}
+#Non-Occluded
+kvinchal_13 = {
+	name = "Belene" #Princess of Kvatch
+	female = yes
+	dynasty = 100006
+	culture = colovian
+	religion = imperial_cult
+	father = kvinchal_10
+
+	448.1.1 = { birth = yes }
+	489.1.1 = { death = yes }
+}
+##Faleria Dynasty (100014)
+
+#House Faleria
+faleria_9 = {
+	name = "Tettius" #King of Kvatch
+	dynasty = 100014
+	culture = perena
+	religion = imperial_cult
+
+	294.1.1 = { birth = yes }
+	370.1.1 = { death = yes }
+}
+faleria_10 = {
+	name = "Nunex" #Regent of Kvatch
+	dynasty = 100014
+	culture = perena
+	religion = imperial_cult
+	father = faleria_9
+
+	315.1.1 = { birth = yes }
+	331.1.1 = { add_spouse = nenalata_10 }
+	412.6.5 = { death = { death_reason = death_disappearance } } #Actually becomes a Lich at some point
+}
+nenalata_10 = {
+	name = "Creluna"
+	female = yes
+	culture = ayleid
+	religion = meridia_cult
+	
+	250.1.1 = { birth = yes }
+	361.1.1 = { death = { death_reason = death_childbirth } }
+}
+faleria_11 = {
+	name = "Finia"
+	female = yes
+	dynasty = 100014
+	culture = colovian
+	religion = imperial_cult
+	father = faleria_10
+	mother = nenalata_10
+
+	350.1.1 = { birth = yes }
+	370.1.1 = { add_matrilineal_spouse = faleriahusband_1 }
+	432.1.1 = { death = { death_reason = death_disappearance } }
+}
+faleriahusband_1 = {
+	name = "Sildane"
+	culture = ayleid
+	religion = meridia_cult
+
+	310.1.1 = { birth = yes }
+	432.1.1 = { death = { death_reason = death_disappearance } }
+}
+faleria_12 = {
+	name = "Florius"
+	dynasty = 100014
+	culture = colovian
+	religion = imperial_cult
+	father = faleria_10
+	mother = nenalata_10
+
+	354.1.1 = { birth = yes }
+	412.6.5 = { death = { death_reason = death_mysterious killer = faleria_10 } }
+}
+faleria_13 = {
+	name = "Ianus"
+	dynasty = 100014
+	culture = colovian
+	religion = imperial_cult
+	father = faleria_10
+	mother = nenalata_10
+
+	361.1.1 = { birth = yes }
+	412.6.5 = { death = { death_reason = death_mysterious killer = faleria_10 } }
+}
+faleria_14 = {
+	name = "Maxivian"
+	dynasty = 100014
+	culture = colovian
+	religion = imperial_cult
+	father = faleria_13
+
+	384.1.1 = { birth = yes }
+	412.6.5 = { death = { death_reason = death_mysterious killer = faleria_10 } }
+}
+faleria_15 = {
+	name = "Line of Finia"
+	dynasty = 100014
+	culture = colovian
+	religion = imperial_cult
+	father = faleriahusband_1
+	mother = faleria_11
+	trait = line_of_x
+
+	372.1.1 = { birth = yes }
+	3240.1.1 = { death = yes }
+}
+
+##Romuval Dynasty (100017)
+
+#House Romuval
+romuval_9 = {
+	name = "Eppius" #King of Kvatch
+	dynasty = 100017
+	culture = perena
+	religion = imperial_cult
+
+	332.1.1 = { birth = yes }
+	401.1.1 = { death = yes }
+}
+romuval_10 = {
+	name = "Corpulus" #Regent of Kvatch
+	dynasty = 100017
+	culture = colovian
+	religion = imperial_cult
+	father = romuval_9
+
+	426.1.1 = { birth = yes }
+	489.1.1 = { death = yes }
+}
+romuval_11 = {
+	name = "Ancio" #King of Kvatch
+	dynasty = 100017
+	culture = colovian
+	religion = imperial_cult
+	father = romuval_10
+
+	445.1.1 = { birth = yes }
+	506.1.1 = { death = yes }
+}
+romuval_12 = {
+	name = "Pallia"
+	female =  yes
+	dynasty = 100017
+	culture = colovian
+	religion = imperial_cult
+	father = romuval_11
+
+	445.1.1 = { birth = yes }
+	506.1.1 = { death = yes }
+}
+romuval_13 = {
+	name = "Line of Ancio"
+	dynasty = 100017
+	culture = colovian
+	religion = imperial_cult
+	father = romuval_11
+	trait = line_of_x
+
+	445.1.1 = { birth = yes }
+	3240.1.1 = { death = yes }
+}
+
+##End of Kvatch Regency Council
+
+##Larich Dynasty (100005)
+
+#House Larich
+larich_7 = {
+	name = "Mhorus" #King Mhorus of Skingrad
+	dynasty = 100005
+	culture = colovian
+	religion = imperial_cult
+
+	410.1.1 = { birth = yes }
+	426.1.1 = { add_spouse = larich_8 }
+	478.1.1 = { death = { death_reason = death_malnourishment } } #Plague, but Malnourished works
+}
+larich_8 = {
+	name = "Lynada" #Queen Lynada
+	female = yes
+	culture = colovian
+	religion = imperial_cult
+	
+	410.1.1 = { birth = yes }
+	478.1.1 = { death = { death_reason = death_malnourishment } } #Plague, but Malnourished works
+}
+larich_9 = {
+	name = "Dorald" #Ew Dorald, King of Skingrad
+	dynasty = 100005
+	culture = colovian
+	religion = alessian
+	father = larich_7
+	mother = larich_8
+
+	445.1.1 = { birth = yes }
+	478.8.12 = { death = { death_reason = death_execution_killer killer = larich_10 } }
+}
+larich_10 = {
+	name = "Rislav" #Rislav the Righteous
+	dynasty = 100005
+	culture = colovian
+	religion = imperial_cult
+	father = larich_7
+	mother = larich_8
+
+	448.1.1 = { birth = yes }
+	472.1.1 = { add_spouse = kvinchal_13 }
+	478.12.12 = { give_nickname = nick_the_righteous }
+	521.1.1 = { death = { death_reason = death_old_age } }
+}
+larich_11 = {
+	name = "Line of Rislav"
+	dynasty = 100005
+	culture = colovian
+	religion = imperial_cult
+	father = larich_10
+	mother = kvinchal_13
+	trait = line_of_x
+
+	480.1.1 = { birth = yes }
+	3262.1.1 = { death = yes }
 }
