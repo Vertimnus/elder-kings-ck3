@@ -2,6 +2,698 @@
 
 #House Tharn
 
+##Septima & Veraxia Line
+tharn_60 = {
+	name = "Nerius"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_31
+	
+	3250.1.1 = { birth = yes }
+	3308.1.1 = { death = yes }
+}
+tharn_61 = {
+	name = "Zeno"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_60
+	
+	3266.1.1 = { birth = yes }
+	3314.1.1 = { death = yes }
+}
+tharn_62 = {
+	name = "Trenus"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_61
+	
+	3305.1.1 = { birth = yes }
+	3422.1.1 = { death = yes }
+}
+tharn_63 = {
+	name = "Doria"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_62
+	
+	3400.1.1 = { birth = yes }
+	3487.1.1 = { death = yes }
+}
+tharn_64 = {
+	name = "Ravo" #Mage-General Septima Parent 1
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	mother = tharn_63
+	
+	3439.1.1 = { birth = yes }
+	3501.1.1 = { death = yes }
+}
+tharn_65 = {
+	name = "Septima" #Mage-General Septima, Cousin of Clivia
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_64
+	mother = tharn_101
+	
+	3468.1.1 = { birth = yes }
+	3502.9.16 = { death = yes }
+}
+
+##Mother Abnur Line
+tharn_80 = {
+	name = "Marcia"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_31
+	
+	3259.1.1 = { birth = yes }
+	3316.1.1 = { death = yes }
+}
+tharn_81 = {
+	name = "Arrino"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	mother = tharn_80
+	
+	3315.1.1 = { birth = yes }
+	3400.1.1 = { death = yes }
+}
+tharn_82 = {
+	name = "Magnus" 
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_81
+	
+	3366.1.1 = { birth = yes }
+	3444.1.1 = { death = yes }
+}
+tharn_83 = {
+	name = "Rafora" #Marries Abnur's Papa, Mother of Veraxia and Euraxia
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_82
+	
+	3400.1.1 = { birth = yes }
+	3434.1.1 = { add_spouse = tharn_200 }
+	3444.1.1 = { death = yes }
+}
+
+##Main Abnur Line
+tharn_97 = {
+	name = "Knavus"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_18
+	
+	3236.1.1 = { birth = yes }
+	3252.1.1 = { culture = imperial }
+	3271.1.1 = { add_spouse = terentius_80 }
+	3300.1.1 = { death = yes }
+}
+tharn_98 = {
+	name = "Donus"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_97
+	mother = terentius_80
+	
+	3272.1.1 = { birth = yes }
+	3322.1.1 = { death = yes }
+}
+tharn_99 = {
+	name = "Humilio" #Duke of Cheydinhal (Warlords?)
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_98
+	trait = lifespan_2 #Showed the secrets to his son
+	trait = intellect_good_1
+	
+	3321.1.1 = { birth = yes }
+	3337.1.1 = { add_spoues = 
+	3365.1.1 = { trait = denounced } #Declared incapable by Abnur, usurps Cheydinhal
+	3442.1.1 = { death = yes }
+}
+tharn_100 = {
+	name = "Matus"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_99
+	
+	3400.1.1 = { birth = yes }
+	3444.1.1 = { death = yes }
+}
+tharn_101 = {
+	name = "Hestra" #Mage-General Septima Parent
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_100
+	
+	3439.1.1 = { birth = yes }
+	3455.1.1 = { add_spouse = tharn_64 }
+	3499.1.1 = { death = yes }
+}
+tharn_200 = {
+	name = "Abnur" #The one and only Abnur Tharn, Duke of Cheydinhal (Interregnum) / King of Nibenay (Reachman) / (Kamal)
+	#dna = abnur_dna_entry
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = intellect_good_3
+	trait = diligent
+	trait = arrogant
+	trait = deceitful
+	trait = ambitious
+	trait = lifespan_3 #Not technically immortal, but this gives him a life expectancy of around 200 years?
+	father = tharn_99
+	
+	3338.1.1 = { birth = yes }
+	#3370.1.1 = {
+	#	effect = {
+	#		if = { limit = { is_in_society = yes } leave_society = yes }
+	#		join_society = elder_council
+	#	}
+	#}
+	#3385.1.1 = { # 2E465, Abnur becomes High Chancellor
+	#	effect = {
+	#		set_society_grandmaster = yes
+	#	}
+	#}
+	#3400.1.1 = {
+	#	effect = { set_immortal_age = 62 }
+	#}
+	#3503.1.1 = { effect = { add_amulet_of_kings = yes } }
+	3508.1.1 = { remove_trait = lifespan_3 }
+	3517.1.1 = { death = { death_reason = death_disappearance } }
+}
+tharn_201 = {
+	name = "Veraxia" #Duchess of the Imperial Isle, Consort of Durcorach
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = beauty_good_1
+	father = tharn_99
+	mother = tharn_83
+	female = yes
+	
+	3425.1.1 = { birth = yes }
+	3489.1.1 = { death = yes }
+}
+#Abnur's Half-Sister, Euraxia
+tharn_202 = {
+	name = "Euraxia" #Queen of Rimmen
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = ambitious
+	trait = fickle
+	trait = arrogant
+	father = tharn_99
+	mother = tharn_83
+	
+	3452.1.1 = { birth = yes }
+	3483.1.1 = {
+		employer = tharn_200 #Abnur Tharn
+	}
+	3499.1.1 = {
+		religion = molag_cult
+		#trait = necromancer
+	}
+	3503.1.1 = { 
+		death = { 
+			death_reason = death_battle
+		#	killer = 69568
+		} 
+	}
+}
+tharn_203 = {
+	name = "Javad"
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	#father = 3635 #Akavir daddy
+	mother = tharn_202
+	
+	3483.1.1 = { birth = yes }
+	3499.1.1 = {
+		religion = molag_cult
+		#trait = necromancer
+	}
+	3503.1.1 = { death = yes }
+}
+#Abnur's many wives...
+abnurwife_1 = {
+	name = "Arcadia" #Not a healthy spouse
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+	trait = compassionate
+	#father = 3478 #Farragut related?
+	
+	3340.1.1 = { birth = yes }
+	3358.1.1 = { add_spouse = tharn_200 }
+	3363.1.1 = { death = yes }
+}
+abnurwife_2 = {
+	name = "Carlotta" #Gives several children
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+	
+	3341.1.1 = { birth = yes }
+	3367.1.1 = { add_spouse = tharn_200 }
+	3390.1.1 = { death = yes }
+}
+abnurwife_3 = {
+	name = "Fallaise" #Murdered by next spouse
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+
+	3372.1.1 = { birth = yes }
+	3391.1.1 = { add_spouse = tharn_200 }
+	3391.1.2 = { death = yes }
+}
+abnurwife_4 = {
+	name = "Livia" #Gives several children
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+	trait = deceitful
+	
+	3370.1.1 = { birth = yes }
+	3391.6.1 = { add_spouse = tharn_200 }
+	3407.1.1 = { death = yes }
+}
+abnurwife_5 = {
+	name = "Selena" #Has a long and relatively happy marriage
+	female = yes
+	religion = imperial_cult
+	culture = imperial
+	trait = intellect_good_1
+	trait = arrogant
+	trait = gregarious
+	
+	3392.1.1 = { birth = yes }
+	3414.1.1 = { add_spouse = tharn_200 }
+	3449.1.2 = { death = yes }
+}
+abnurwife_6 = {
+	name = "Ariella" #One child, dies in chidlbirth
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+	
+	3426.1.1 = { birth = yes }
+	3443.1.1 = { add_spouse = tharn_200 }
+	3449.1.2 = { death = yes }
+}
+abnurwife_7 = {
+	name = "Pulasia" #Another long and relatively happy marriage, children include the more famous Tharn daughters
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+	trait = fecund
+	health = 8
+	
+	3428.1.1 = { birth = yes }
+	3450.1.2 = { add_spouse = tharn_200 }
+	3502.1.1 = { death = yes }
+}
+#I'm gonna have to add a separate category for this... Abnur's many many daughters tharn_210 - 229
+tharn_210 = {
+	name = "Jastira"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = sickly
+	father = tharn_200
+	mother = abnurwife_1
+	
+	3359.1.1 = {
+		birth = yes 
+	}
+	3360.1.1 = { death = {
+		death_reason = death_sickly
+		}
+	}
+}
+
+tharn_211 = {
+	name = "Cornelia"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = sickly
+	father = tharn_200
+	mother = abnurwife_1
+	
+	3361.1.1 = {
+		birth = yes 
+	}
+	3361.6.1 = { death = {
+		death_reason = death_sickly
+		}
+	}
+}
+
+tharn_212 = {
+	name = "Licinia" #Marries matrilineally in a power play by Abnur and the Duke of Leyawiin
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_200
+	mother = abnurwife_2
+	
+	3372.1.1 = { birth = yes }
+	3395.1.1 = { add_matrilineal_spouse = 3756 } #Olvos Enucci, future Duke of Leyawiin
+	3428.1.1 = { death = yes }
+}
+
+tharn_213 = {
+	name = "Regine" #Dies of complications related to alcoholism
+	female =  yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = drunkard
+	trait = wrathful
+	trait = arbitrary
+	father = tharn_200
+	mother = abnurwife_2
+	
+	3377.1.1 = { birth = yes }
+	3403.1.1 = { death = {
+		death_reason = death_drinking_passive
+		}
+	}
+}
+
+tharn_214 = {
+	name = "Gilfre" #Dies because a magical experiment failed
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = fickle
+	trait = arrogant
+	trait = ambitious
+	father = tharn_200
+	mother = abnurwife_2
+	
+	3384.1.1 = { birth = yes }
+	3402.1.1 = { add_spouse = 3014 } #Duke Vandorallen Caro of Facian
+	3428.1.1 = { death = {
+		death_reason = death_accident
+		}
+	}
+}
+
+tharn_215 = {
+	name = "Pallia"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = shy
+	father = tharn_200
+	mother = abnurwife_4
+	
+	3398.1.1 = { birth = yes }
+	3418.1.1 = { add_spouse = 352 } #Duke Bruscus Quintilius of Virtue
+	3452.1.1 = { death = yes }
+}
+
+tharn_216 = {
+	name = "Theodora"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = sickly
+	father = tharn_200
+	mother = abnurwife_4
+	
+	3400.1.1 = { birth = yes }
+	3403.1.1 = { death = {
+		death_reason = death_sickly
+		}
+	}
+}
+
+tharn_217 = {
+	name = "Marana" #Has a long and uneventful life
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_200
+	mother = abnurwife_4
+	
+	3405.1.1 = { birth = yes }
+	3425.1.1 = { add_spouse = 3701 } #Count Belisario Varo of Entius
+	3483.1.1 = { death = yes }
+}
+
+tharn_218 = {
+	name = "Sibylla" #Dies because an experiment went awry
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = ambitious
+	#trait = necromancer
+	father = tharn_200
+	mother = abnurwife_4
+	
+	3406.1.1 = { birth = yes }
+	3433.1.1 = { death = {
+		death_reason = death_accident
+		}
+	}
+}
+
+tharn_219 = {
+	name = "Rosentia"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3419.1.1 = { birth = yes }
+	3446.1.1 = { add_spouse = 3502 } #Count Briellio Bigano of Fanacas
+	3472.1.1 = { death = yes }
+}
+
+tharn_220 = {
+	name = "Vipsania"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = zealous
+	trait = celibate
+	trait = nun
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3422.1.1 = { birth = yes }
+	3482.1.1 = { death = yes }
+}
+
+tharn_221 = {
+	name = "Fentula" #Dies as a child
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = imperial
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3430.1.1 = { birth = yes }
+	3439.1.1 = { death = yes }
+}
+
+tharn_222 = {
+	name = "Horulia" #Works with the Mages' Guild
+	female = yes
+	dynasty = 130000
+	religion = eight_divines
+	culture = nibenean
+	trait = imperial
+	trait = twin
+	trait = intellect_good_2
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3435.1.1 = { birth = yes }
+	3461.1.1 = {
+		#employer = 300115 #Vanus Galerion of the Mages Guild
+	}
+	3498.1.1 = { death = yes }
+}
+
+tharn_223 = {
+	name = "Avita"
+	female = yes
+	dynasty = 130000
+	religion = eight_divines
+	culture = nibenean
+	sexuality = homosexual
+	trait = twin
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3435.1.1 = { birth = yes }
+	3461.1.1 = {
+		#employer = 300115 #Vanus Galerion of the Mages Guild
+	}
+	3496.1.1 = { death = yes }
+}
+
+tharn_224 = {
+	name = "Depusanis"
+	dynasty = 130000
+	religion = eight_divines
+	culture = imperial
+	trait = intellect_bad_1
+	trait = ambitious
+	father = tharn_200
+	mother = abnurwife_5
+	
+	3441.1.1 = { birth = yes }
+	3458.1.1 = { death = {
+		death_reason = death_accident
+		}
+	}
+}
+
+tharn_225 = {
+	name = "Tavia"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = content
+	father = tharn_200
+	mother = abnurwife_6
+	
+	3449.1.1 = { birth = yes }
+	3470.1.1 = { 
+		#trait = mage_1
+		}
+	3477.1.1 = { add_spouse = 3767 } #Tacito Enucci, Duke of Leyawiin
+	3523.1.1 = { death = yes }
+}
+
+tharn_226 = {
+	name = "Septima" #Abnur's Mage-Daughter, not to be confused with her cousin
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = imperial
+	trait = sadistic
+	trait = arrogant
+	trait = ambitious
+	trait = intellect_good_1
+	father = tharn_200
+	mother = abnurwife_7
+	
+	3450.1.5 = { birth = yes }
+	#3473.1.1 = { 
+	#	trait = mage_3
+	#	trait = battlemage_3
+	#	trait = erudite
+	#	}
+	3499.1.1 = { 
+		religion = daedra_molag
+		employer = tharn_227
+		effect = { set_special_character_title = magus_general }
+	}
+	3503.1.1 = {
+		death = { 
+			death_reason = death_battle
+		 }
+	}
+}
+
+tharn_227 = {
+	name = "Clivia" #Empress-Regent of Cyrodiil
+	#dna="cffbi0idbc0"
+	#properties="ai0e0kcfbbfb"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	trait = arrogant
+	trait = arbitrary
+	trait = callous
+	father = tharn_200
+	mother = abnurwife_7
+	
+	3452.1.1 = { birth = yes }
+	3490.1.1 = { add_spouse = blackdrake_105 } #Leovic
+	#3497.1.1 = { add_spouse = 6103 } #Varen EK TODO
+	3503.1.1 = { death = { death_reason = death_missing } }
+}
+#Non-Canon Daughters
+tharn_228 = {
+	name = "Magna"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult #worm's cult
+	culture = nibenese
+	sexuality = homosexual
+	#trait = necromancer
+	father = tharn_200
+	mother = abnurwife_7
+	
+	3471.1.1 = { birth = yes }
+	3499.1.1 = { religion = daedra_molag }
+	3503.1.1 = { death = yes }
+}
+
+tharn_229 = {
+	name = "Faustina"
+	female = yes
+	dynasty = 130000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_200
+	mother = abnurwife_7
+	
+	3480.1.1 = { birth = yes }
+	3496.1.1 = { 
+		trait = education_intrigue_2
+		}
+	3536.1.1 = { death = yes }
+}
 
 ##Aeresius Dynasty
 
