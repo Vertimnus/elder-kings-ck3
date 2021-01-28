@@ -54,6 +54,8 @@ def test_map():
     province_count = 0
     bad_provinces = 0
     for line in tqdm(definitions):
+        if line[0] == "#":
+            continue
         if line == "0;0;0;0;x;x;":
             continue
         province_info = re.search(definition_regex, line)
