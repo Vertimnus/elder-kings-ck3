@@ -234,6 +234,11 @@ pdxmesh = {
 	#animation = { id = "body_no_animation"			type = "male_body_no_animation.anim" }
 	additive_animation = { id = "body_neutral"			type = "male_body_no_animation.anim" }
 	
+	additive_animation = { id = "male_khajiit_digitigrade_clothes"			type = "male_khajiit_digitigrade_clothes.anim" }
+	blend_shape = { id = "male_khajiit_digitigrade_bs"		type = "blendshapes/male_khajiit_digitigrade_bs.mesh" }
+	blend_shape = { id = "male_khajiit_digitigrade_clothes_counter_shape"		type = "blendshapes/male_khajiit_digitigrade_clothes_counter_shape.mesh" }
+
+	
 	#END EK2 ADDITIONS
 
 	meshsettings = {
@@ -635,7 +640,10 @@ entity = {
 
 	#state = {	name = "no_animation" animation = "body_no_animation" }
 
-	attribute = { name = "bs_khajiit_body"					blend_shape = "male_khajiit_body" }
+	attribute = { name = "bs_khajiit_body"						blend_shape = "male_khajiit_body" }
+	attribute = { name = "khajiit_digitigrade_clothes" 			additive_animation = "male_khajiit_digitigrade_clothes" }
+	attribute = { name = "khajiit_digitigrade_clothes_counter_shape"				blend_shape = "male_khajiit_digitigrade_clothes_counter_shape" }
+	attribute = { name = "khajiit_digitigrade_bs"				blend_shape = "male_khajiit_digitigrade_bs" }
 	
 	attribute = { name = "tail_length" 							additive_animation = "body_neutral" }
 	attribute = { name = "tail_model_base_thickness"			blend_shape = "male_bs_body_neutral" }
@@ -878,17 +886,20 @@ pdxmesh = {
 
 	#EK2 ADDITIONS
 	blend_shape = { id = "male_khajiit_body"		type = "blendshapes/male_khajiit_body.mesh" }
+	blend_shape = { id = "male_khajiit_digitigrade_bs"		type = "blendshapes/male_khajiit_digitigrade_bs.mesh" }
+	blend_shape = { id = "male_khajiit_digitigrade_clothes_counter_shape"		type = "blendshapes/male_khajiit_digitigrade_clothes_counter_shape.mesh" }
 	blend_shape = { id = "male_bs_body_neutral"		type = "blendshapes/male_bs_body_neutral.mesh" }
 	
 	#animation = { id = "body_no_animation"			type = "male_body_no_animation.anim" }
 	additive_animation = { id = "body_neutral"			type = "male_body_no_animation.anim" }
+	additive_animation = { id = "male_khajiit_digitigrade_clothes"			type = "male_khajiit_digitigrade_clothes.anim" }
 	
 	#END EK2 ADDITIONS
 
 	meshsettings = {
 		name = "male_bodyShape"
 		index = 0
-		texture_diffuse = "khajiit_body_diffuse.dds"
+		texture_diffuse = "no_diffuse.dds"
 		texture_normal = "khajiit_body_normal.dds"
 		texture_specular = "khajiit_body_properties.dds"
 		shader = "portrait_skin"
@@ -1284,7 +1295,10 @@ entity = {
 
 	#state = {	name = "no_animation" animation = "body_no_animation" }
 
-	attribute = { name = "bs_khajiit_body"					blend_shape = "male_khajiit_body" }
+	attribute = { name = "bs_khajiit_body"						blend_shape = "male_khajiit_body" }
+	attribute = { name = "khajiit_digitigrade_clothes" 			additive_animation = "male_khajiit_digitigrade_clothes" }
+	attribute = { name = "khajiit_digitigrade_clothes_counter_shape"				blend_shape = "male_khajiit_digitigrade_clothes_counter_shape" }
+	attribute = { name = "khajiit_digitigrade_bs"				blend_shape = "male_khajiit_digitigrade_bs" }
 	
 	attribute = { name = "tail_length" 							additive_animation = "body_neutral" }
 	attribute = { name = "tail_model_base_thickness"			blend_shape = "male_bs_body_neutral" }

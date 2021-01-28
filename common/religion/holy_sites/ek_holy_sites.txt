@@ -3,7 +3,7 @@
 #########################################
 ### Towers
 # Self explanatory, seat of most Empires and where White-Gold has been built
-hs_imperial_city = {
+hs_white_gold = {
 	county = c_imperial_city
 	
 	character_modifier = {
@@ -11,15 +11,15 @@ hs_imperial_city = {
 	}
 }
 # Convention and Adamantine Tower, kind of a big deal
-hs_balfiera = {
+hs_ada_mantia = {
 	county = c_balfiera
 	
 	character_modifier = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
-# Not HH itself (as it's a wasteland), but what leads to it. Seat of the Greybeards, and of Snow-Throat
-hs_high_hrothgar = {
+# Where Alduin was banished, and the power of the Snow Tower is at its apex
+hs_throat_of_the_world = {
 	county = c_ivarstead
 	
 	character_modifier = {
@@ -27,14 +27,40 @@ hs_high_hrothgar = {
 	}
 }
 
-### MISSING: CRYSTAL-LIKE-LAW, GREEN-SAP, RED TOWER, ORICHALC
+## MISSING: CRYSTAL-LIKE-LAW, GREEN-SAP, RED TOWER, ORICHALC
 
-#########################################
-# RELIGION OR FAITH SPECIFIC HOLY SITES	#
-#########################################
+### Important religious thingies
+# In the Imperial City, the biggest religious Temple in Tamriel. Dedicated to the One, but also used under the Reman, and then Septim, line.
+hs_temple_of_the_one = {
+	county = c_imperial_city
+	
+	character_modifier = {
+		flag = visoki_conversion_resistance_bonus # 50% County Conversion Resistance
+	}
+}
+# Not HH itself (as it's a wasteland), but what leads to it. Seat of the Greybeards
+hs_high_hrothgar = {
+	county = c_ivarstead
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
 # Where Reman Cyrodiil died (Reman Mysteries), and where Alessia got her visions and first capital (Hero Cult)
 hs_sancre_tor = {
 	county = c_sancre_tor
+	
+	character_modifier = {
+		monthly_dynasty_prestige_mult = 0.05
+		monthly_prestige_gain_mult = 0.15
+	}
+}
+#########################################
+# RELIGION OR FAITH SPECIFIC HOLY SITES	#
+#########################################
+# Abbey of the Eight
+hs_abbey_eight = {
+	county = c_blessed_water
 	
 	character_modifier = {
 		monthly_piety_gain_mult = 0.2
@@ -53,7 +79,8 @@ hs_sky_haven_temple = {
 	county = c_karthspire
 	
 	character_modifier = {
-		monthly_piety_gain_mult = 0.2
+		knight_effectiveness_mult = 0.2
+		monthly_county_control_change_factor = 0.05
 	}
 }
 # Where Alessia was born
@@ -61,12 +88,31 @@ hs_sardavar = {
 	county = c_sardavar
 	
 	character_modifier = {
-		monthly_piety_gain_mult = 0.2
+		levy_size = 0.1
+		levy_reinforcement_rate = 0.15
 	}
 }
 # Cathedral built by Kaladas, Imperial Saint
 hs_leyawiin = {
 	county = c_leyawiin
+	
+	character_modifier = {
+		stewardship_per_piety_level = 1
+		clergy_opinion = 5
+	}
+}
+# Where the All-Flag Navy launched its attack against Thras, led by Bendu Olo
+hs_stirk = {
+	county = c_stirk
+	
+	character_modifier = {
+		embarkation_cost_mult = -0.1
+		naval_movement_speed_mult = 0.1
+	}
+}
+# Houses the Imperial Library, where hundreds of Scrolls are kept
+hs_elder_library = {
+	county = c_imperial_city
 	
 	character_modifier = {
 		monthly_piety_gain_mult = 0.2
@@ -102,9 +148,8 @@ hs_ghartok = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
-# Where the All-Flag Navy launched its attack against Thras, led by Bendu Olo
-hs_stirk = {
-	county = c_stirk
+hs_ancestor_glade = {
+	county = c_ancestor_glade
 	
 	character_modifier = {
 		monthly_piety_gain_mult = 0.2
@@ -134,7 +179,6 @@ hs_beldama = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
-
 hs_eldergleam = {
 	county = c_darkwater
 	
@@ -142,7 +186,6 @@ hs_eldergleam = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
-
 hs_viridian_woods = {
 	county = c_viridian_woods
 	
@@ -150,7 +193,6 @@ hs_viridian_woods = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
-
 hs_gloomy_cave = {
 	county = c_moesring
 	
