@@ -359,7 +359,16 @@ sosildor_100 = {
 	mother = sosildor_99
 	
 	3332.8.12 = { birth = yes }
-	3350.1.1 = { dynasty = 100001 }	
+	3350.1.1 = { dynasty = 100001 }
+	3350.1.8 = { 
+			effect = {
+				create_alliance = {
+					target = character:valentian_99
+					allied_through_owner = character:sosildor_100
+					allied_through_target = character:valentian_101_wife
+					}
+				}
+			}
 	3368.9.22 = { death = { death_reason = death_battle } }
 }
 sosildor_101 = {
@@ -1881,7 +1890,7 @@ jeril_103 = {
 	3362.1.1 = { birth = yes }
 	3426.1.1 = { death = yes }
 }
-## Olo Dynasty
+## Olo Dynasty (100016)
 
 #House Olo
 olo_97 = {
@@ -1905,13 +1914,22 @@ olo_98 = {
 	3351.1.1 = { death = yes }
 }
 olo_99 = {
-	name = "Vitel" #King of Anvil, Vassal to Snakes (Warlords)
+	name = "Vitel" #King of Anvil, Allied to Snakes (Warlords)
 	dynasty = 100016
 	religion = imperial_cult
 	culture = colovian
 	father = olo_98
 	
 	3321.1.1 = { birth = yes }
+	#3350.4.18 = { ## Can't figure this out just now, supposed to be an alliance marriage through olo_102, sibling and chorak_100's nephew
+	#	effect = {
+	#		create_alliance = {
+	#			target = character:chorak_100
+	#			allied_through_owner = character:chorak_103
+	#			allied_through_target = character:olo_103
+	#			}
+	#	}
+	#}
 	3389.1.1 = { death = yes }
 }
 olo_100 = {
@@ -1937,6 +1955,18 @@ olo_101 = {
 	
 	3358.1.1 = { birth = yes }
 	3430.1.1 = { death = yes }
+}
+olo_102 = {
+	name = "Veresa"
+	female = yes
+	dynasty = 100016
+	religion = imperial_cult
+	culture = colovian
+	father = olo_98
+	
+	3340.1.1 = { birth = yes }
+	3356.1.1 = { add_spouse = chorak_103 }
+	3362.12.4 = { death = { death_reason = death_battle killer = sosildor_100 } }
 }
 
 #House Jarol
