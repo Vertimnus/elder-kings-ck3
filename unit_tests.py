@@ -3,6 +3,8 @@ from glob import glob
 from PIL import Image,ImageChops
 import re
 import os
+import chardet
+from chardet.universaldetector import UniversalDetector
 
 def is_greyscale(im):
     """
@@ -82,7 +84,29 @@ def test_map():
     print(str(province_count) + " provinces loaded, " + str(bad_provinces) + " bad provinces found.")
     return unit_test_failed
     
+def test_localization():
+    unit_test_failed = False
+    print("Unit Test: Localization")
+    detector = UniversalDetector()
+    print("Checking all localization YAMLs for incorrect encoding...")
+    for file in glob('./localization/**/*.yml', recursive=True):
+        file_to_check = open(file, "rb")
+        detector.reset()
+        for line in file_to_check.readlines():
+            detector.feed(line)
+            if detector.done:
+                break
+        detector.close()
+        if not detector.result["encoding"] == "UTF-8-SIG":
+            print("ERROR: File " + file + " not encoded in UTF-8-BOM! This file won't load in game.")
+            unit_test_failed = True
+    print("Completed!")
+    return unit_test_failed
+    
 if __name__ == "__main__":
     map_test_results = test_map()
     if map_test_results:
-        print("Unit test failed! Resolve issues before shipping!")
+        print("Map Unit Test failed! Resolve issues before shipping!")
+    loc_test_results = test_localization()
+    if loc_test_results:
+        print("Localization Unit Test failed! Resolve issues before shipping!")
