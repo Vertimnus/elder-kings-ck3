@@ -215,13 +215,14 @@ types CultureTooltips
 
 				hbox = {
 					size = { 0 0 }
-					layoutpolicy_horizontal = expanding
+					layoutpolicy_horizontal = growing
 					text_multi = {
-						layoutpolicy_horizontal = expanding #cutoff right side to remove bullet. position in widget instead of margin. or use size:1 to make dot tiny
+						layoutpolicy_horizontal = growing #cutoff right side to remove bullet. position in widget instead of margin. or use size:1 to make dot tiny
 						#text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
-						text = "#size:1 [GetScriptedGui('culture_tooltip').BuildTooltip(GuiScope.SetRoot(Culture.MakeScope).End)]#!"
+						#text = "#size:1 [GetScriptedGui('culture_tooltip').BuildTooltip(GuiScope.SetRoot(Culture.MakeScope).End)]#!"
 						#text = "[SelectLocalization( '(bool)no','', 'CULTURE_DESC_ID' )]"
-						#text = "[Concatenate( Culture.GetTemplate.GetName, '_desc' )]" #can set variable flag in culture with key
+						#text = "[Concatenate( Culture.GetTemplate.GetName, '_desc' )]" #can set variable flag in culture with key, need to fix sizing issue, also need to check var exists if not ingame. do template names change? could be exploited if they respond and cultures dont
+						text = "[Localize( Concatenate( Culture.MakeScope.Var('culture_key').GetFlagName, 'desc' ) )]"
 						default_format = "#low"
 						autoresize = yes
 						max_width = 400
