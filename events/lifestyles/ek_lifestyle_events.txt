@@ -1,0 +1,112 @@
+﻿namespace = ek_lifestyles
+
+#############################
+# Commune with a Loved One	#
+# by LeSingeAffame			#
+# 0001 - 0002				#
+#############################
+ek_lifestyles.0001 = {
+	hidden = yes
+	
+	# When someone dies, their soul mates and best friends are noticed
+	trigger = {
+		OR = {
+			any_relation = {
+				type = soulmate
+			}
+			any_relation = {
+				type = best_friend
+			}
+		}
+	}
+
+	immediate = {
+		every_relation = {
+			type = soulmate
+			set_variable = {
+				name = soulmate_to_commune
+				value = root
+				years = 50
+			}
+		}
+		every_relation = {
+			type = best_friend
+			set_variable = {
+				name = best_friend_to_commune
+				value = root
+				years = 50
+			}
+		}
+	}
+}
+ek_lifestyles.0002 = {
+	type = character_event
+	title = ek_lifestyles.0002.t
+	desc = ek_lifestyles.0002.d
+	theme = faith
+
+	left_portrait = {
+		character = var:best_friend_to_commune
+	}
+
+	option = {
+		name = ek_lifestyles.0002.a
+		add_stress = medium_stress_loss
+	}
+
+	after = {
+		remove_variable = best_friend_to_commune
+	}
+}
+ek_lifestyles.0003 = {
+	type = character_event
+	title = ek_lifestyles.0003.t
+	desc = ek_lifestyles.0003.d
+	theme = faith
+
+	left_portrait = {
+		character = var:soulmate_to_commune
+	}
+
+	option = {
+		name = ek_lifestyles.0003.a
+		add_stress = major_stress_gain
+	}
+
+	after = {
+		
+		remove_variable = soulmate_to_commune
+	}
+}
+
+ek_lifestyles.0004 = {
+	hidden = yes
+	
+	# When someone dies, their soul mates and best friends are noticed
+	trigger = {
+		OR = {
+			any_relation = {
+				type = lover
+			}
+			any_relation = {
+				type = friend
+			}
+		}
+	}
+
+	immediate = {
+		save_scope_as = char_1
+		
+		every_relation = {
+			type = lover
+			remove_relation_lover = scope:char_1
+			set_relation_soulmate = scope:char_1
+		}
+		
+		every_relation = {
+			type = friend
+			remove_relation_friend = scope:char_1
+			set_relation_best_friend = scope:char_1
+		}
+	}
+}
