@@ -355,20 +355,23 @@ sosildor_100 = {
 	trait = brave
 	trait = vengeful
 	trait = education_martial_4
+	trait = holy_warrior
 	father = sosildor_98
 	mother = sosildor_99
 	
-	3332.8.12 = { birth = yes }
+	3331.8.12 = { birth = yes }
+	3348.8.14 = { set_relation_friend = character:chiral_1000 }
 	3350.1.1 = { dynasty = 100001 }
-	3350.1.8 = { 
-			effect = {
-				create_alliance = {
-					target = character:valentian_99
-					allied_through_owner = character:sosildor_100
-					allied_through_target = character:valentian_101_wife
-					}
-				}
+	3350.3.1 = { set_relation_lover = character:valentian_101_wife }
+	3350.8.1 = { 
+		effect = {
+			create_alliance = {
+				target = character:valentian_99
+				allied_through_owner = character:sosildor_100
+				allied_through_target = character:valentian_101_wife
 			}
+		}
+	}
 	3368.9.22 = { death = { death_reason = death_battle } }
 }
 sosildor_101 = {
@@ -1426,8 +1429,11 @@ chiral_1000 = {
 	religion = imperial_cult
 	culture = colovian
 	father = chiral_999
+	trait = zealous
+	trait = education_learning_4
 	
 	3300.1.1 = { birth = yes }
+	# 3348.8.12 = { effect = { set_relation_friend = character:sosildor_100 } }
 	3374.1.1 = { death = yes }
 }
 chiral_1001 = {
@@ -1842,8 +1848,8 @@ colovianwife_1000 = {
 	
 	3282.1.1 = { birth = yes }
 	3310.6.6 = { 
-		trait = flu
-		death = { death_reason = death_flu
+		trait = ill
+		death = { death_reason = death_ill
 		}
 	}
 }
