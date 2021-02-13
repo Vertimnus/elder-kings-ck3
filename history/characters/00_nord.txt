@@ -1173,8 +1173,8 @@ bannertorn_100 = {
 		trait = ambitious
 		give_council_position = councillor_spymaster
 		
-		# Attempted (and failed) to murder his liege
 		effect = {
+			# Attempted (and failed) to murder his liege
 			add_secret = {
 				type = secret_murder_attempt
 				target = character:flamehair_999
@@ -1182,6 +1182,7 @@ bannertorn_100 = {
 		}
 	}
 	3351.7.18 = { # Logrolf is assinated, he moves to Western Skyrim
+		employer = cursebraid_1000
 		give_council_position = councillor_spymaster
 		dynasty = 320001
 		give_nickname = nick_the_upstart
@@ -1327,12 +1328,15 @@ cursebraid_1000 = {
 	3297.1.15 = { birth = yes }
 	3322.1.1 = { add_spouse = doomsayer_297 }
 	3351.1.1 = {
-		# Successfully killed Logrolf, with the help of Gandis
 		effect = {
+			# Successfully killed Logrolf, with the help of Gandis
 			add_secret = {
 				type = secret_murder
 				target = character:flamehair_999
 			}
+			
+			# Denies Freydis' crown
+			set_relation_rival = character:flamehair_1000
 		}
 	}
 	3394.1.1 = { death = yes }
