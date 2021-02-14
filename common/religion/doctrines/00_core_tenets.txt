@@ -1068,10 +1068,14 @@ doctrine_core_tenets = {
 		}
 
 		character_modifier = {
+			taiga_hills_advantage = 5
+			taiga_hills_attrition_mult = -0.25
 			taiga_advantage = 5
 			taiga_attrition_mult = -0.25
 			mountains_advantage = 5
 			mountains_attrition_mult = -0.25
+			tundra_advantage = 5
+			tundra_attrition_mult = -0.25
 		}
 	}
 	
@@ -1093,10 +1097,14 @@ doctrine_core_tenets = {
 		}
 
 		character_modifier = {
+			alikr_desert_advantage = 5
+			alikr_desert_attrition_mult = -0.25
 			desert_advantage = 5
 			desert_attrition_mult = -0.25
 			drylands_advantage = 5
 			drylands_attrition_mult = -0.25
+			desert_hills_advantage = 5
+			desert_hills_attrition_mult = -0.25
 		}
 	}
 	
@@ -1326,30 +1334,6 @@ doctrine_core_tenets = {
 			# TODO: Decisions to deal with a Daedric Prince
 			daedric_bargains_active = yes
 			allows_worship_clavicus_shunned_doctrines_active = yes
-		}
-	}
-	
-	tenet_focused_worship = {
-		icon = core_tenet_bhakti
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_focused_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			always = yes
-		}
-		
-		parameters = {
-			no_patron_deities_active = yes
-			resistance_to_heresy_active = yes
-			minimum_fervor = 25
 		}
 	}
 	
