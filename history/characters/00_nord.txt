@@ -19,6 +19,7 @@ reachbreaker_101 = {
 	father = reachbreaker_100
 	
 	3296.1.1 = { birth = yes }
+	3350.1.1 = { set_relation_rival = character:reachbreaker_105 }
 	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
 }
 reachbreaker_102 = {
@@ -61,9 +62,15 @@ reachbreaker_105 = {
 	father = reachbreaker_101
 	
 	3342.1.1 = { birth = yes }
+	3358.1.1 = {
+		trait = vengeful
+		trait = sadistic
+		trait = ambitious
+	}
 	3362.1.1 = { 
 	remove_trait = bastard
 	add_trait = bastard_founder
+	add_trait = kinslayer_3
 	dynasty = 500011 
 	}
 	3390.1.1 = { death = { death_reason = death_burned killer = blackdrake_99 } }
@@ -1166,8 +1173,8 @@ bannertorn_100 = {
 		trait = ambitious
 		give_council_position = councillor_spymaster
 		
-		# Attempted (and failed) to murder his liege
 		effect = {
+			# Attempted (and failed) to murder his liege
 			add_secret = {
 				type = secret_murder_attempt
 				target = character:flamehair_999
@@ -1175,6 +1182,7 @@ bannertorn_100 = {
 		}
 	}
 	3351.7.18 = { # Logrolf is assinated, he moves to Western Skyrim
+		employer = cursebraid_1000
 		give_council_position = councillor_spymaster
 		dynasty = 320001
 		give_nickname = nick_the_upstart
@@ -1316,16 +1324,19 @@ cursebraid_1000 = {
 	trait = vengeful
 	father = cursebraid_998
 	#mother = 300026
-	
-	3297.1.1 = { birth = yes }
+
+	3297.1.15 = { birth = yes }
 	3322.1.1 = { add_spouse = doomsayer_297 }
 	3351.1.1 = {
-		# Successfully killed Logrolf, with the help of Gandis
 		effect = {
+			# Successfully killed Logrolf, with the help of Gandis
 			add_secret = {
 				type = secret_murder
 				target = character:flamehair_999
 			}
+			
+			# Denies Freydis' crown
+			set_relation_rival = character:flamehair_1000
 		}
 	}
 	3394.1.1 = { death = yes }
@@ -1777,7 +1788,7 @@ snowbourne_101 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = snowbourne_100
-	trait = lunatic
+	trait = lunatic_1
 	
 	3397.1.1 = { birth = yes }
 	3440.1.1 = {
@@ -1984,7 +1995,7 @@ blackthorn_106 = {
 }
 
 blackthorn_107 = {
-	name = "Lodvar" #King of Riften ( Alliance War )
+	name = "Thongar" #King of Riften ( Alliance War )
 	dynasty = 300005
 	culture = eastmarcher
 	religion = nord_cult
@@ -2456,11 +2467,21 @@ silveranvil_105 = {
 	3542.1.1 = { death = yes }
 }
 ##Salt-Breaker
+saltbreaker_98 = {
+	name = "Froki" #Adventurer
+	dynasty = 340000
+	culture = cyro_nord
+	religion = nord_cult
+	
+	3339.1.1 = { birth = yes }
+	3398.1.1 = { death = { death_reason = death_battle } }
+}
 saltbreaker_99 = {
 	name = "Gorm" #Count of Jerall
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
+	father = saltbreaker_98
 	
 	3339.1.1 = { birth = yes }
 	3398.1.1 = { death = yes }
@@ -2469,7 +2490,7 @@ saltbreaker_100 = {
 	name = "Viri" 
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_99
 	female=yes
 	
@@ -2481,11 +2502,10 @@ saltbreaker_101 = {
 	name = "Odar" #Count of Jerall, loses to Imperials or becomes a moth priest
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_99
 	
 	3358.1.1 = { birth = yes }
-	3400.1.1 = { religion = moth_cult }
 	3417.1.1 = { death = yes }
 }
 
@@ -2493,7 +2513,7 @@ saltbreaker_102 = {
 	name = "Sten" #Count of Sedor
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_99
 	
 	3360.1.1 = { birth = yes }
@@ -2503,7 +2523,7 @@ saltbreaker_103 = {
 	name = "Idolaf" #Count of Sedor
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_102
 	
 	3394.1.1 = { birth = yes }
@@ -2513,7 +2533,7 @@ saltbreaker_104 = {
 	name = "Ingjard"
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_102
 	female=yes
 	
@@ -2524,7 +2544,7 @@ saltbreaker_105 = {
 	name = "Sigaar" #Count of Sedor & Winter's Peak
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_103
 	
 	3428.1.1 = { birth = yes }
@@ -2534,7 +2554,7 @@ saltbreaker_106 = {
 	name = "Ragna" #Count of Sedor & Winter's Peak
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_105
 	female = yes
 	
@@ -2545,7 +2565,7 @@ saltbreaker_107 = {
 	name = "Njoll"
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	father = saltbreaker_105
 	female = yes
 	
@@ -2556,7 +2576,7 @@ saltbreaker_108 = {
 	name = "Bredin" #Count of Sedor & Winter's Peak
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	trait = twin
 	mother = saltbreaker_106 #Ragna Salt-Breaker
 	
@@ -2567,7 +2587,7 @@ saltbreaker_109 = {
 	name = "Bredrek"
 	dynasty = 340000
 	culture = cyro_nord
-	religion = nord_cult
+	religion = moth_cult
 	trait = twin
 	mother = saltbreaker_106 #Ragna Salt-Breaker
 	
@@ -4987,7 +5007,7 @@ starsong_99 = {
 }
 
 starsong_100 = {
-	name = "Lodvar" #Duke of Caractacus (Warlords & Interregnum)
+	name = "Froki" #Duke of Caractacus (Warlords & Interregnum)
 	dynasty = 340003
 	prowess = 21
 	culture = cyro_nord
@@ -5111,6 +5131,71 @@ stormcatcher_103 = {
 	3392.1.1 = { birth = yes }
 	3463.1.1 = { death = yes }
 }
+
+##Brittleblade Dynasty (340005)
+
+#House Brittleblade
+brittleblade_99 = {
+	name = "Bjalfi"
+	culture = cyro_nord
+	religion = nord_cult
+
+	3249.1.1 = { birth = yes }
+	3331.1.1 = { death = { death_reason = death_old_age } }
+}
+brittleblade_100 = {
+	name = "Eyja" #Count of Eastwatch (Warlords & Interregnum)
+	female = yes
+	dynasty = 340005
+	culture = cyro_nord
+	religion = nord_cult
+	father = brittleblade_99
+
+	3343.1.1 = { birth = yes }
+	3360.1.1 = { add_matrilineal_spouse = brittleblade_husband_100 }
+	3438.1.1 = { death = { death_reason = death_old_age } }
+}
+brittleblade_husband_100 = {
+	name = "Heddic"
+	culture = cyro_nord
+	religion = nord_cult
+
+	3343.1.1 = { birth = yes }
+	3438.1.1 = { death = { death_reason = death_old_age } }
+}
+brittleblade_101 = {
+	name = "Torkild" #Count of Eastwatch
+	dynasty = 340005
+	culture = cyro_nord
+	religion = nord_cult
+	father = brittleblade_husband_100
+	mother = brittleblade_99
+
+	3364.1.1 = { birth = yes }
+	3455.1.1 = { death = { death_reason = death_old_age } }
+}
+brittleblade_102 = {
+	name = "Thonar"
+	dynasty = 340005
+	culture = cyro_nord
+	religion = nord_cult
+	father = brittleblade_husband_100
+	mother = brittleblade_99
+
+	3366.1.1 = { birth = yes }
+	3452.1.1 = { death = { death_reason = death_old_age } }
+}
+brittleblade_103 = {
+	name = "Hoag" #Count of Eastwatch
+	dynasty = 340005
+	culture = cyro_nord
+	religion = nord_cult
+	father = brittleblade_101
+
+	3401.1.1 = { birth = yes }
+	3490.1.1 = { death = { death_reason = death_old_age } }
+}
+
 ##Lowborns, Wifes, Husbands etc.
 
 nordwife_1000 = {
@@ -5297,7 +5382,23 @@ riverwood_1003 = {
 	3484.1.1 = { birth = yes }
 	3538.1.1 = { death = yes }
 }
-
+chim_1000 = {
+	name = "Baldur"
+	culture = cyro_nord
+	religion = nord_cult
+	
+	3335.1.1 = { birth = yes }
+	3396.1.1 = { death = yes }
+}
+chim_1001 = {
+	name = "Frabbi"
+	female = yes
+	culture = westmarcher
+	religion = nord_cult
+	
+	3470.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
 
 goldenglow_1000 = {
 	name = "Sibbi"
