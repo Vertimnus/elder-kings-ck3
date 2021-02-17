@@ -1,0 +1,168 @@
+﻿namespace = north_tamriel
+
+### Skyrim
+### High Rock
+
+# west_skyrim and east_skyrim united
+# Did Eastern Skyrim inherit the other part, or the opposite?
+# Was it by war, inheritance, or other?
+north_tamriel.0001 = {
+	type = character_event
+	title = north_tamriel.0001.t
+	
+	desc = {
+		desc = north_tamriel.0001.desc.intro
+		first_valid = {
+			# Doing it through war
+			triggered_desc = {
+				trigger = {
+					OR = {
+						AND = {
+							scope:title = title:e_western_skyrim
+							title:e_western_skyrim = {
+								recent_history = {
+									type = conquest_claim
+									years = 1
+								}
+							}
+						}
+						AND = {
+							scope:title = title:e_eastern_skyrim
+							title:e_eastern_skyrim = {
+								recent_history = {
+									type = conquest_claim
+									years = 1
+								}
+							}
+						}
+					}
+				}
+				desc = north_tamriel.0001.desc.war
+			}
+			# Doing it in an other way
+			triggered_desc = {
+				trigger = {
+					NOR = {
+						AND = {
+							scope:title = title:e_western_skyrim
+							title:e_western_skyrim = {
+								recent_history = {
+									type = conquest_claim
+									years = 1
+								}
+							}
+						}
+						AND = {
+							scope:title = title:e_eastern_skyrim
+							title:e_eastern_skyrim = {
+								recent_history = {
+									type = conquest_claim
+									years = 1
+								}
+							}
+						}
+					}
+				}
+				desc = north_tamriel.0001.desc.other
+			}
+		}
+		first_valid = {
+			# Doing it as Western Skyrim
+			triggered_desc = {
+				trigger = {
+					scope:title = title:e_eastern_skyrim
+				}
+				desc = north_tamriel.0001.desc.western
+			}
+			# Doing it as Eastern Skyrim
+			triggered_desc = {
+				trigger = {
+					scope:title = title:e_western_skyrim
+				}
+				desc = north_tamriel.0001.desc.eastern
+			}
+		}
+	}
+	
+	theme = war
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	
+	immediate = {
+		root = { save_scope_as = winner }
+		scope:previous_holder = { save_scope_as = loser }
+		
+		### Get the HK of Skyrim
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
+		title:e_skyrim = {
+			change_title_holder = {
+				holder = root
+				change = scope:change
+			}
+		}
+		resolve_title_and_vassal_change = scope:change
+		hidden_effect = { set_primary_title_to = title:e_skyrim }
+	}
+	
+	trigger = {
+		OR = {
+			AND = {
+				scope:title = title:e_western_skyrim
+				has_title = title:e_eastern_skyrim
+			}
+			AND = {
+				scope:title = title:e_eastern_skyrim
+				has_title = title:e_western_skyrim
+			}
+		}
+	}
+
+	option = {
+		name = north_tamriel.0001.a
+		
+		### Destroy Western Skyrim and Eastern Skyrim
+		destroy_title = title:e_western_skyrim
+		destroy_title = title:e_eastern_skyrim
+	}
+}
+
+# k_solstheim gets c_bleakrock and c_japhet_folly
+north_tamriel.0011 = {
+	type = character_event
+	title = north_tamriel.0011.t
+	desc = north_tamriel.0011.desc
+	theme = war
+	
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	
+	trigger = {
+		has_character_flag = flag_solstheim_claim_coast
+		OR = {
+			AND = {
+				scope:title = title:c_bleakrock
+				has_title = title:c_japhet_folly
+			}
+			AND = {
+				scope:title = title:c_japhet_folly
+				has_title = title:c_bleakrock
+			}
+		}
+	}
+
+	option = {
+		name = north_tamriel.0011.a
+		
+		title:c_bleakrock = { set_de_jure_liege_title = title:d_raven_rock }
+		title:c_japhet_folly = { set_de_jure_liege_title = title:d_northshore }
+	}
+}
