@@ -1,0 +1,261 @@
+﻿### Turn the Reach into a proper Nordic hold
+turn_reach_nord_hold_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = turn_reach_nord_hold_decision_desc
+	selection_tooltip = turn_reach_nord_hold_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		has_government = feudal_government
+		
+		culture_group = culture_group:nordic_group
+		OR = {
+			capital_province = { geographical_region = mundus_tamriel_reach_east_reach }
+			capital_province = { geographical_region = mundus_tamriel_reach_north_reach }
+		}
+
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_turned_reach_nord_hold
+			}
+		}
+	}
+
+	is_valid = {
+		# Must completely hold the Skyrim half of the Reach
+		completely_controls_region = mundus_tamriel_reach_east_reach
+		completely_controls_region = mundus_tamriel_reach_north_reach
+		prestige_level >= 3
+		
+		# All of the eastern half of the Reach must have been civilised
+		ROOT = {
+			NOT = {
+				any_realm_province = {
+					OR = {
+						geographical_region = mundus_tamriel_reach_north_reach
+						geographical_region = mundus_tamriel_reach_east_reach
+					}
+					has_holding_type = tribal_holding
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		### EK TODO: Handle it via event instead (still WIP)
+		set_culture_native_to = { REGION = karth CULTURE = culture:westmarcher }
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_turned_reach_nord_hold
+			}
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### WESTERN/EASTERN SKYRIM DIVIDE
+western_skyrim_march_east_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = western_skyrim_march_east_decision_desc
+	selection_tooltip = western_skyrim_march_east_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		has_government = feudal_government
+		
+		culture_group = culture_group:nordic_group
+		
+		has_title = title:e_western_skyrim
+		NOT = { has_claim_on = title:e_eastern_skyrim }
+
+		NOT = { has_character_flag = flag_western_skyrim_march_east }
+	}
+
+	is_valid = {
+		# Must completely hold the New Jarldoms
+		completely_controls = title:k_solitude
+		completely_controls = title:k_morthal
+		completely_controls = title:k_markarth
+		completely_controls = title:k_whiterun
+		completely_controls = title:k_falkreath
+		
+		prestige_level >= 3
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		add_pressed_claim = title:e_eastern_skyrim
+		
+		custom_tooltip = western_skyrim_march_east_decision.claim_eastern_skyrim.tt
+		custom_tooltip = western_skyrim_march_east_decision.no_eastern_skyrim.tt
+		
+		hidden_effect = {
+			add_character_flag = flag_western_skyrim_march_east
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+eastern_skyrim_march_west_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = eastern_skyrim_march_west_decision_desc
+	selection_tooltip = eastern_skyrim_march_west_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		has_government = feudal_government
+		
+		culture_group = culture_group:nordic_group
+		
+		has_title = title:e_eastern_skyrim
+		NOT = { has_claim_on = title:e_western_skyrim }
+
+		NOT = { has_character_flag = flag_eastern_skyrim_march_west }
+	}
+
+	is_valid = {
+		# Must completely hold the Old Jarldoms
+		completely_controls = title:k_winterhold
+		completely_controls = title:k_windhelm
+		completely_controls = title:k_riften
+		completely_controls = title:k_whiterun
+		#completely_controls = title:k_solstheim ?
+		
+		prestige_level >= 3
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		add_pressed_claim = title:e_western_skyrim
+		
+		custom_tooltip = eastern_skyrim_march_west_decision.claim_western_skyrim.tt
+		custom_tooltip = eastern_skyrim_march_west_decision.no_western_skyrim.tt
+		
+		hidden_effect = {
+			add_character_flag = flag_eastern_skyrim_march_west
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### As a joke... unless...?
+solstheim_claim_coast_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = solstheim_claim_coast_decision_desc
+	selection_tooltip = solstheim_claim_coast_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		
+		culture = culture:skaal
+		
+		has_title = title:k_solstheim
+
+		NOT = { has_character_flag = flag_solstheim_claim_coast }
+	}
+
+	is_valid = {
+		completely_controls = title:k_solstheim
+		
+		OR = {
+			prestige_level >= 4
+			AND = {
+				has_government = feudal_government
+				prestige_level >= 3
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		add_pressed_claim = title:c_bleakrock
+		add_pressed_claim = title:c_japhet_folly
+		add_pressed_claim = title:c_windhelm
+		add_pressed_claim = title:c_winterhold
+		
+		hidden_effect = {
+			add_character_flag = flag_solstheim_claim_coast
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
