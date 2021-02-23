@@ -787,7 +787,12 @@ task_promote_culture = {
 						scope:county.title_province = { geographical_region = custom_nativity_solstheim }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_solstheim }
 					}
-					### SUMMERSET ISLES
+					### Yokuda
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_yokuda }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_yokuda }
+					}
+					### Summerset Isles
 					AND = {
 						scope:county.title_province = { geographical_region = custom_nativity_auridon }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_auridon }
@@ -1411,7 +1416,13 @@ task_promote_local_culture = {
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = solstheim }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = solstheim } }
 		}
-		### SUMMERSET ISLES
+		### Yokuda
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_yokuda } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = yokuda }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = yokuda } }
+		}
+		### Summerset Isles
 		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_auridon } }
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = auridon }
@@ -1422,7 +1433,7 @@ task_promote_local_culture = {
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = summerset }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = summerset } }
 		}
-		### VALENWOOD
+		### Valenwood
 		trigger_else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_grahtwood } }
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = grahtwood }
@@ -1634,6 +1645,20 @@ task_promote_local_culture = {
 				save_scope_as = culture_to_convert
 			}
 		}
+		### Yokuda
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_yokuda } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_yokuda
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
 		### Summerset Isles
 		else_if = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_auridon } }
@@ -1656,6 +1681,59 @@ task_promote_local_culture = {
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
 					has_innovation = innovation_native_summerset
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		### Valenwood
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_grahtwood } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_grahtwood
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_greenshade } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_greenshade
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_malabal_tor } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_malabal_tor
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_reaper_march } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_reaper_march
 				}
 				
 				save_scope_as = culture_to_convert
