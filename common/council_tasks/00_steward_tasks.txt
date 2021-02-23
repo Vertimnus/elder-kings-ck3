@@ -718,6 +718,9 @@ task_promote_culture = {
 		# }
 		if = {
 			limit = {
+				# If you're Nomadic you bypass it and get a softer malus instead
+				NOT = { scope:councillor_liege.culture = { has_innovation = innovation_native_nomadic } }
+				# Nativity regions
 				NOR = {
 					### High Rock
 					AND = {
@@ -823,6 +826,26 @@ task_promote_culture = {
 			multiply = {
 				value = 0.1
 				desc = NOT_NATIVE_REGION_REASON
+			}
+		}
+		if = {
+			limit = {
+				# If you're Nomadic you bypass it and get a softer malus instead
+				scope:councillor_liege.culture = { has_innovation = innovation_native_nomadic }
+			}
+			multiply = {
+				value = 0.5
+				desc = NOMADIC_CULTURE_CULTURE_CONVERT_TO
+			}
+		}
+		if = {
+			limit = {
+				# Nomadic cultures are easier to convert
+				scope:county.culture = { has_innovation = innovation_native_nomadic }
+			}
+			multiply = {
+				value = 2
+				desc = NOMADIC_CULTURE_CULTURE_CONVERT_FROM
 			}
 		}
 	}
