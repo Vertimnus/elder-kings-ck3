@@ -396,9 +396,65 @@ mundus_tamriel_valenwood = {
 	regions = { mundus_tamriel_valenwood_grahtwood mundus_tamriel_valenwood_greenshade mundus_tamriel_valenwood_malabal_tor mundus_tamriel_valenwood_arenthia }
 }
 
+### ELSWEYR
+## Dune
+mundus_tamriel_elsweyr_dune = {
+	duchies = { d_dune d_verkaht d_varlozwe }
+}
+
+## Riverhold
+mundus_tamriel_elsweyr_riverhold = {
+	duchies = { d_riverhold d_tardorn d_altadoon }
+}
+
+## Rimmen
+mundus_tamriel_elsweyr_rimmen = {
+	duchies = { d_rimmen d_lynmount d_rim_valley d_ro_jodirr }
+}
+
+## Orcrest
+mundus_tamriel_elsweyr_orcrest = {
+	duchies = { d_orcrest d_anequina d_stitches }
+}
+
+## Torval
+mundus_tamriel_elsweyr_torval = {
+	duchies = { d_orcrest d_anequina d_stitches }
+}
+
+## Corinthe
+mundus_tamriel_elsweyr_corinthe = {
+	duchies = { d_corinthe d_brukreich d_pridehome d_black_heights }
+}
+
+## Alabaster
+mundus_tamriel_elsweyr_alabaster = {
+	duchies = { d_alabaster d_ah_ahjabi d_darkarn d_hallgreen }
+}
+
+## Senchal
+mundus_tamriel_elsweyr_senchal = {
+	duchies = { d_senchal d_eshita d_khenarthi_arch d_shurdan d_khenarthi_roost }
+}
+
+## ANEQUINA: Dune, Riverhold, Rimmen, Orcrest
+mundus_tamriel_elsweyr_anequina = {
+	regions = { mundus_tamriel_elsweyr_dune mundus_tamriel_elsweyr_riverhold mundus_tamriel_elsweyr_rimmen mundus_tamriel_elsweyr_orcrest }
+}
+
+## PELLITINE: Torval, Corinthe, Alabaster, Senchal
+mundus_tamriel_elsweyr_pellitine = {
+	regions = { mundus_tamriel_elsweyr_torval mundus_tamriel_elsweyr_corinthe mundus_tamriel_elsweyr_alabaster mundus_tamriel_elsweyr_senchal }
+}
+
+## COMPLETE ELSWEYR
+mundus_tamriel_elsweyr = {
+	regions = { mundus_tamriel_elsweyr_anequina mundus_tamriel_elsweyr_pellitine }
+}
+
 ### TAMRIEL
 mundus_tamriel = { 
-	regions = { mundus_tamriel_high_rock mundus_tamriel_hammerfell mundus_tamriel_cyrodiil mundus_tamriel_skyrim mundus_tamriel_yokuda }
+	regions = { mundus_tamriel_high_rock mundus_tamriel_hammerfell mundus_tamriel_cyrodiil mundus_tamriel_skyrim mundus_tamriel_yokuda mundus_tamriel_summerset_isles mundus_tamriel_valenwood mundus_tamriel_elsweyr }
 }
 
 ###########################################################################
@@ -512,7 +568,17 @@ custom_nativity_malabal_tor = {
 	regions = { mundus_tamriel_valenwood_malabal_tor }
 }
 custom_nativity_reaper_march = { # Add Dune when it's done
-	regions = { mundus_tamriel_valenwood_arenthia }
+	regions = { mundus_tamriel_valenwood_arenthia mundus_tamriel_elsweyr_dune }
+}
+## Elsweyr
+custom_nativity_anequina = {
+	regions = { mundus_tamriel_elsweyr_riverhold mundus_tamriel_elsweyr_rimmen mundus_tamriel_elsweyr_orcrest }
+}
+custom_nativity_tenmar = {
+	regions = { mundus_tamriel_elsweyr_torval mundus_tamriel_elsweyr_senchal }
+}
+custom_nativity_pellitine = {
+	regions = { mundus_tamriel_elsweyr_corinthe mundus_tamriel_elsweyr_alabaster }
 }
 
 ###########################################################################
@@ -557,9 +623,7 @@ graphical_mediterranean = {
 ### EK TODO: Use that
 # Based on vanilla, some northen Skyrim, Solstheim, and Atmora
 world_innovation_longboats = {
-	regions = {
-		mundus_tamriel_skyrim_solstheim
-	}
+	regions = { mundus_tamriel_skyrim_solstheim mundus_tamriel_skyrim_west_ghost mundus_tamriel_skyrim_east_ghost }
 }
 
 # Akavir?
@@ -571,16 +635,12 @@ world_innovation_elephants = {
 
 # Same as longboats
 world_innovation_mammoths = {
-	regions = {
-		mundus_tamriel_skyrim
-	}
+	regions = { mundus_tamriel_skyrim }
 }
 
 # Hammerfell and Yokuda
 world_innovation_camels = {
-	regions = {
-		mundus_tamriel_hammerfell mundus_tamriel_yokuda
-	}
+	regions = { mundus_tamriel_hammerfell mundus_tamriel_yokuda }
 }
 
 # Illiac Bay and Abecean Sea

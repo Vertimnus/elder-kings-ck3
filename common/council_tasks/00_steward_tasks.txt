@@ -821,6 +821,19 @@ task_promote_culture = {
 						scope:county.title_province = { geographical_region = custom_nativity_reaper_march }
 						scope:councillor_liege.culture = { has_innovation = innovation_native_reaper_march }
 					}
+					### Elsweyr
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_anequina }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_anequina }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_tenmar }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_tenmar }
+					}
+					AND = {
+						scope:county.title_province = { geographical_region = custom_nativity_pellitine }
+						scope:councillor_liege.culture = { has_innovation = innovation_native_pellitine }
+					}
 				}
 			}
 			multiply = {
@@ -1338,6 +1351,17 @@ task_promote_local_culture = {
 				desc = GAME_RULE_FASTER_REASON
 			}
 		}
+		
+		if = {
+			limit = {
+				# Nomadic cultures are easier to convert
+				scope:county.culture = { has_innovation = innovation_native_nomadic }
+			}
+			multiply = {
+				value = 2
+				desc = NOMADIC_CULTURE_CULTURE_CONVERT_FROM
+			}
+		}
 	}
 
 	### There must be a local culture you can convert the province to
@@ -1476,6 +1500,22 @@ task_promote_local_culture = {
 			limit = { scope:county.title_province = { geographical_region = custom_nativity_reaper_march } }
 			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = reaper_march }
 			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = reaper_march } }
+		}
+		### Elsweyr
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_anequina } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = anequina }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = anequina } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_tenmar } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = tenmar }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = tenmar } }
+		}
+		trigger_else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_pellitine } }
+			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = pellitine }
+			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = pellitine } }
 		}
 		### Default (no)
 		trigger_else = { always = no }
@@ -1757,6 +1797,46 @@ task_promote_local_culture = {
 				limit = {
 					culture_group = scope:councillor_liege.culture_group
 					has_innovation = innovation_native_reaper_march
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		### Elsweyr
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_anequina } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_anequina
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_tenmar } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_tenmar
+				}
+				
+				save_scope_as = culture_to_convert
+			}
+		}
+		else_if = {
+			limit = { scope:county.title_province = { geographical_region = custom_nativity_pellitine } }
+			random_in_global_list = {
+				variable = culture_is_alive
+				
+				limit = {
+					culture_group = scope:councillor_liege.culture_group
+					has_innovation = innovation_native_pellitine
 				}
 				
 				save_scope_as = culture_to_convert
