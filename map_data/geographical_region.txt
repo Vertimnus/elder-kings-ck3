@@ -78,12 +78,15 @@ mundus_tamriel_high_rock = {
 }
 
 ### HAMMERFELL
-## ALIK'R: Sentinel
+## ALIK'R: Sentinel + Hegathe
 mundus_tamriel_hammerfell_sentinel = {
 	duchies = { d_sentinel d_tigonus d_lainlyn d_bergama }
 }
+mundus_tamriel_hammerfell_hegathe = { 
+	duchies = { d_hegathe d_pothago d_abidon }
+}
 mundus_tamriel_hammerfell_alikr_desert = {
-	regions = { mundus_tamriel_hammerfell_sentinel }
+	regions = { mundus_tamriel_hammerfell_sentinel mundus_tamriel_hammerfell_hegathe }
 }
 
 ## CRAGLORN: Dragontail + Elinhir
@@ -97,43 +100,43 @@ mundus_tamriel_hammerfell_craglorn = {
 	regions = { mundus_tamriel_hammerfell_dragontail mundus_tamriel_hammerfell_elinhir }
 }
 
-## ABECEE: Abecean + Hew's Bane
+## ABECEE: Abecean + Hew's Bane + Gilane
 mundus_tamriel_hammerfell_abecean = {
 	duchies = { d_stros_mkai d_abecean }
 }
 mundus_tamriel_hammerfell_hew_bane = {
 	duchies = { d_hnas d_no_shira }
 }
-mundus_tamriel_hammerfell_abecee = {
-	regions = { mundus_tamriel_hammerfell_abecean mundus_tamriel_hammerfell_hew_bane }
-}
-
-## HEGATHE
-mundus_tamriel_hammerfell_hegathe = { 
-	duchies = { d_hegathe d_pothago d_abidon }
-}
-
-## GILANE
 mundus_tamriel_hammerfell_gilane = { 
 	duchies = { d_gilane d_vulnim d_riverview }
 }
-
-## Not yet done
-mundus_tamriel_hammerfell_western_alikr = { 
-	duchies = { d_sentinel d_tigonus d_lainlyn d_bergama }
+mundus_tamriel_hammerfell_abecee = { 
+	regions = { mundus_tamriel_hammerfell_abecean mundus_tamriel_hammerfell_hew_bane mundus_tamriel_hammerfell_gilane }
 }
 
-mundus_tamriel_hammerfell_eastern_alikr = { 
-	duchies = { d_ojwambu d_thorstad }
+## Rihad
+mundus_tamriel_hammerfell_rihad = {
+	duchies = { d_rihad d_aidhab d_stonemoor }
 }
 
-mundus_tamriel_hammerfell_alikr = { 
-	regions = { mundus_tamriel_hammerfell_western_alikr mundus_tamriel_hammerfell_eastern_alikr }
+## Taneth
+mundus_tamriel_hammerfell_taneth = {
+	duchies = { d_taneth d_riverpoint }
+}
+
+## Stonedale
+mundus_tamriel_hammerfell_stonedale = {
+	duchies = { d_stonedale d_helland d_vulkneu }
+}
+
+## Sunforge
+mundus_tamriel_hammerfell_sunforge = {
+	duchies = { d_verkarth d_skaven }
 }
 
 ## COMPLETE HAMMERFELL
 mundus_tamriel_hammerfell = {
-	regions = { mundus_tamriel_hammerfell_alikr mundus_tamriel_hammerfell_craglorn mundus_tamriel_hammerfell_abecee }
+	regions = { mundus_tamriel_hammerfell_alikr_desert mundus_tamriel_hammerfell_craglorn mundus_tamriel_hammerfell_abecee mundus_tamriel_hammerfell_rihad mundus_tamriel_hammerfell_taneth mundus_tamriel_hammerfell_stonedale mundus_tamriel_hammerfell_sunforge }
 }
 
 ### CYRODIIL
@@ -514,8 +517,17 @@ custom_nativity_bangkorai = {
 custom_nativity_craglorn = {
 	regions = { mundus_tamriel_hammerfell_craglorn }
 }
+custom_nativity_alikr = {
+	regions = { mundus_tamriel_hammerfell_hegathe mundus_tamriel_hammerfell_sentinel }
+}
+custom_nativity_brena = {
+	regions = { mundus_tamriel_hammerfell_rihad mundus_tamriel_hammerfell_stonedale }
+}
+custom_nativity_sunforge = {
+	regions = { mundus_tamriel_hammerfell_sunforge mundus_tamriel_hammerfell_taneth }
+}
 custom_nativity_abecee = {
-	regions = { mundus_tamriel_hammerfell_abecee }
+	regions = { mundus_tamriel_hammerfell_abecean mundus_tamriel_hammerfell_hew_bane mundus_tamriel_hammerfell_gilane }
 }
 ## Cyrodiil
 custom_nativity_colovia = {
