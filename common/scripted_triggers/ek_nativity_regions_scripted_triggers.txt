@@ -55,4 +55,42 @@ is_native_from_somewhere = {
 			has_innovation = innovation_native_pellitine
 		}
 	}
-}			
+}
+
+### Culture creation decisions
+create_local_culture_decision_is_shown_scripted_trigger = {
+	# Is part of a culture group that has a culture native to this province
+	any_in_global_list = {
+		variable = culture_list
+		this.culture_group = root.culture_group
+		has_innovation = innovation_native_$REGION$
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = culture_is_alive
+				target = this
+			}
+		}
+	}
+	
+	any_realm_province = { geographical_region = custom_nativity_$REGION$ }
+}
+
+create_local_culture_decision_is_valid_scripted_trigger = {
+	### Two sets of condition
+	has_trait = scholar
+	prestige_level >= very_high_prestige_level
+	highest_held_title_tier >= tier_kingdom
+	# Capital in $REGION$, personal adoption
+	trigger_if = {
+		limit = { capital_province = { geographical_region = custom_nativity_$REGION$ } }
+		capital_province = { culture_group = root.culture_group }
+	}
+	# Capital not in $REGION$, it'll spawn in vassal land
+	trigger_else = {
+		completely_controls_region = custom_nativity_$REGION$
+		any_realm_province = { 
+			geographical_region = custom_nativity_$REGION$
+			culture_group = root.culture_group
+		}
+	}
+}
