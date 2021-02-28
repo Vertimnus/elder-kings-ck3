@@ -1,4 +1,4 @@
-regions = ['glenumbra', 'rivenspire', 'stormhaven', 'greater_wrothgar', 'bangkorai', 'craglorn', 'abecee', 'colovia', 'nibenay', 'heartlands', 'karth', 'west_ghost', 'white_river', 'dark_water', 'solstheim', 'yokuda', 'auridon', 'summerset', 'grahtroowd', 'greenshade', 'malabal_tor', 'reaper_march', 'anequina', 'tenmar', 'pellitine']
+regions = ['glenumbra', 'rivenspire', 'stormhaven', 'greater_wrothgar', 'bangkorai', 'craglorn', 'alikr', 'brena', 'sunforge', 'abecee', 'colovia', 'nibenay', 'heartlands', 'karth', 'west_ghost', 'white_river', 'dark_water', 'solstheim', 'yokuda', 'auridon', 'summerset', 'grahtroowd', 'greenshade', 'malabal_tor', 'reaper_march', 'anequina', 'tenmar', 'pellitine']
 
 decisionFile = open("ek_local_culture_creation_decisions.txt", "w+")
 

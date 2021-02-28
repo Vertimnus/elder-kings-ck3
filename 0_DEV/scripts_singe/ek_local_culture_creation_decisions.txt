@@ -286,6 +286,150 @@ create_local_culture_craglorn_decision = {
 	}
 }
 
+create_local_culture_alikr_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	desc = create_local_culture_alikr_decision_desc
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_independent_ruler = yes
+		exists = capital_province
+
+		create_local_culture_decision_is_shown_scripted_trigger = { REGION = alikr }
+	}
+
+	is_valid = {
+		create_local_culture_decision_is_valid_scripted_trigger = { REGION = alikr }
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+		create_local_culture_decision_scripted_effects = { REGION = alikr }
+
+		### Capital in alikr, personally convert culture
+		if = {
+			limit = { capital_province = { geographical_region = custom_nativity_alikr } }
+			custom_tooltip = create_local_culture_alikr_decision_courtiers_embrace_new_culture
+			custom_tooltip = create_local_culture_alikr_decision_capital_embrace_new_culture
+		}
+		custom_tooltip = create_local_culture_alikr_decision_provinces_embrace_new_culture
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+create_local_culture_brena_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	desc = create_local_culture_brena_decision_desc
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_independent_ruler = yes
+		exists = capital_province
+
+		create_local_culture_decision_is_shown_scripted_trigger = { REGION = brena }
+	}
+
+	is_valid = {
+		create_local_culture_decision_is_valid_scripted_trigger = { REGION = brena }
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+		create_local_culture_decision_scripted_effects = { REGION = brena }
+
+		### Capital in brena, personally convert culture
+		if = {
+			limit = { capital_province = { geographical_region = custom_nativity_brena } }
+			custom_tooltip = create_local_culture_brena_decision_courtiers_embrace_new_culture
+			custom_tooltip = create_local_culture_brena_decision_capital_embrace_new_culture
+		}
+		custom_tooltip = create_local_culture_brena_decision_provinces_embrace_new_culture
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+create_local_culture_sunforge_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+
+	desc = create_local_culture_sunforge_decision_desc
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		is_independent_ruler = yes
+		exists = capital_province
+
+		create_local_culture_decision_is_shown_scripted_trigger = { REGION = sunforge }
+	}
+
+	is_valid = {
+		create_local_culture_decision_is_valid_scripted_trigger = { REGION = sunforge }
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_independent_ruler = yes
+		is_at_war = no
+	}
+
+	effect = {
+		create_local_culture_decision_scripted_effects = { REGION = sunforge }
+
+		### Capital in sunforge, personally convert culture
+		if = {
+			limit = { capital_province = { geographical_region = custom_nativity_sunforge } }
+			custom_tooltip = create_local_culture_sunforge_decision_courtiers_embrace_new_culture
+			custom_tooltip = create_local_culture_sunforge_decision_capital_embrace_new_culture
+		}
+		custom_tooltip = create_local_culture_sunforge_decision_provinces_embrace_new_culture
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
 create_local_culture_abecee_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
 
