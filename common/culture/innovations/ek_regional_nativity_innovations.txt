@@ -31,15 +31,44 @@
 
 
 ### Nativity innovations
+## Special - not native from anywhere, nomadic
+# Can bypass some of the non-nativity penalty, but can be very easily displaced too
+innovation_native_nomadic = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	# potential = {
+		# is_target_in_global_variable_list = {
+			# name = culture_innovation_native_nomadic
+			# target = this
+		# }
+	# }
+	can_progress = {
+		always = no
+		hidden_tooltip = { is_in_list_native_to = { REGION = nomadic } }
+	}
+	icon = @majesty_01
+	
+	custom = negate_non_native_penalty
+	custom = easily_displaced_culture
+	flag = nativity_innovation
+}
 ## High Rock
 innovation_native_glenumbra = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_glenumbra
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = glenumbra }
+			is_in_list_native_to = { REGION = rivenspire }
+			is_in_list_native_to = { REGION = stormhaven }
+			is_in_list_native_to = { REGION = greater_wrothgar }
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = glenumbra } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_glenumbra }
 	}
 	icon = @majesty_01
 	
@@ -48,12 +77,20 @@ innovation_native_glenumbra = {
 }
 innovation_native_rivenspire = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_rivenspire
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = glenumbra }
+			is_in_list_native_to = { REGION = rivenspire }
+			is_in_list_native_to = { REGION = stormhaven }
+			is_in_list_native_to = { REGION = greater_wrothgar }
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = rivenspire } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_rivenspire }
 	}
 	icon = @majesty_01
 	
@@ -62,12 +99,20 @@ innovation_native_rivenspire = {
 }
 innovation_native_stormhaven = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_stormhaven
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = glenumbra }
+			is_in_list_native_to = { REGION = rivenspire }
+			is_in_list_native_to = { REGION = stormhaven }
+			is_in_list_native_to = { REGION = greater_wrothgar }
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = stormhaven } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_stormhaven }
 	}
 	icon = @majesty_01
 	
@@ -76,12 +121,20 @@ innovation_native_stormhaven = {
 }
 innovation_native_greater_wrothgar = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_greater_wrothgar
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = glenumbra }
+			is_in_list_native_to = { REGION = rivenspire }
+			is_in_list_native_to = { REGION = stormhaven }
+			is_in_list_native_to = { REGION = greater_wrothgar }
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = greater_wrothgar } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_greater_wrothgar }
 	}
 	icon = @majesty_01
 	
@@ -90,58 +143,164 @@ innovation_native_greater_wrothgar = {
 }
 innovation_native_bangkorai = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_bangkorai
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = glenumbra }
+			is_in_list_native_to = { REGION = rivenspire }
+			is_in_list_native_to = { REGION = stormhaven }
+			is_in_list_native_to = { REGION = greater_wrothgar }
+			is_in_list_native_to = { REGION = bangkorai }
+			
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = abecee }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = bangkorai } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_bangkorai }
 	}
 	icon = @majesty_01
 	
 	custom = faster_culture_convert_bangkorai
 	flag = nativity_innovation
 }
-
 ## Hammerfell
 innovation_native_craglorn = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_craglorn
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = alikr }
+			is_in_list_native_to = { REGION = brena }
+			is_in_list_native_to = { REGION = sunforge }
+			is_in_list_native_to = { REGION = abecee }
+			
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = craglorn } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_craglorn }
 	}
 	icon = @majesty_01
 	
 	custom = faster_culture_convert_craglorn
+}
+innovation_native_alikr = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = alikr }
+			is_in_list_native_to = { REGION = brena }
+			is_in_list_native_to = { REGION = sunforge }
+			is_in_list_native_to = { REGION = abecee }
+			
+			is_in_list_native_to = { REGION = bangkorai }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = alikr } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_alikr }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_alikr
+	flag = nativity_innovation
+}
+innovation_native_brena = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = alikr }
+			is_in_list_native_to = { REGION = brena }
+			is_in_list_native_to = { REGION = sunforge }
+			is_in_list_native_to = { REGION = abecee }
+			
+			is_in_list_native_to = { REGION = bangkorai }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = brena } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_brena }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_brena
+	flag = nativity_innovation
+}
+innovation_native_sunforge = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = alikr }
+			is_in_list_native_to = { REGION = brena }
+			is_in_list_native_to = { REGION = sunforge }
+			is_in_list_native_to = { REGION = abecee }
+			
+			is_in_list_native_to = { REGION = bangkorai }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = sunforge } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_sunforge }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_sunforge
 	flag = nativity_innovation
 }
 innovation_native_abecee = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_abecee
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = craglorn }
+			is_in_list_native_to = { REGION = alikr }
+			is_in_list_native_to = { REGION = brena }
+			is_in_list_native_to = { REGION = sunforge }
+			is_in_list_native_to = { REGION = abecee }
+			
+			is_in_list_native_to = { REGION = bangkorai }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = abecee } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_abecee }
 	}
 	icon = @majesty_01
 	
 	custom = faster_culture_convert_abecee
 	flag = nativity_innovation
 }
-
 ## Cyrodiil
 innovation_native_colovia = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_colovia
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = colovia }
+			is_in_list_native_to = { REGION = heartlands }
+			is_in_list_native_to = { REGION = nibenay }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = colovia } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_colovia }
 	}
 	icon = @majesty_01
 	
@@ -150,12 +309,18 @@ innovation_native_colovia = {
 }
 innovation_native_heartlands = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_heartlands
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = colovia }
+			is_in_list_native_to = { REGION = heartlands }
+			is_in_list_native_to = { REGION = nibenay }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = heartlands } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_heartlands }
 	}
 	icon = @majesty_01
 	
@@ -164,42 +329,65 @@ innovation_native_heartlands = {
 }
 innovation_native_nibenay = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_nibenay
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = colovia }
+			is_in_list_native_to = { REGION = heartlands }
+			is_in_list_native_to = { REGION = nibenay }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = nibenay } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_nibenay }
 	}
 	icon = @majesty_01
 	
 	custom = faster_culture_convert_nibenay
 	flag = nativity_innovation
 }
-
 ## Skyrim
 innovation_native_karth = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_karth
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = karth } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_karth }
 	}
 	icon = @majesty_01
 	
-	custom = faster_culture_convert_markarth
+	custom = faster_culture_convert_karth
 	flag = nativity_innovation
 }
 innovation_native_white_river = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_white_river
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = white_river } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_white_river }
 	}
 	icon = @majesty_01
 	
@@ -208,12 +396,21 @@ innovation_native_white_river = {
 }
 innovation_native_west_ghost = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_west_ghost
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = west_ghost } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_west_ghost }
 	}
 	icon = @majesty_01
 	
@@ -222,12 +419,21 @@ innovation_native_west_ghost = {
 }
 innovation_native_east_ghost = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_east_ghost
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = east_ghost } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_east_ghost }
 	}
 	icon = @majesty_01
 	
@@ -236,12 +442,21 @@ innovation_native_east_ghost = {
 }
 innovation_native_dark_water = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_dark_water
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = dark_water } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_dark_water }
 	}
 	icon = @majesty_01
 	
@@ -250,12 +465,21 @@ innovation_native_dark_water = {
 }
 innovation_native_solstheim = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_solstheim
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = karth }
+			is_in_list_native_to = { REGION = white_river }
+			is_in_list_native_to = { REGION = west_ghost }
+			is_in_list_native_to = { REGION = east_ghost }
+			is_in_list_native_to = { REGION = dark_water }
+			is_in_list_native_to = { REGION = solstheim }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = solstheim } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_solstheim }
 	}
 	icon = @majesty_01
 	
@@ -263,57 +487,38 @@ innovation_native_solstheim = {
 	flag = nativity_innovation
 }
 ### Yokuda
-innovation_native_akos = {
+innovation_native_yokuda = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_akos
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = yokuda }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = yokuda } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_yokuda }
 	}
 	icon = @majesty_01
 	
-	custom = faster_culture_convert_akos
-	flag = nativity_innovation
-}
-innovation_native_kasaz_yath = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_kasaz_yath
-			target = this
-		}
-	}
-	icon = @majesty_01
-	
-	custom = faster_culture_convert_kasaz_yath
-	flag = nativity_innovation
-}
-innovation_native_ravan = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_ravan
-			target = this
-		}
-	}
-	icon = @majesty_01
-	
-	custom = faster_culture_convert_ravan
+	custom = faster_culture_convert_yokuda
 	flag = nativity_innovation
 }
 ### Summerset Isles
 innovation_native_auridon = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_auridon
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = auridon }
+			is_in_list_native_to = { REGION = summerset }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = auridon } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_auridon }
 	}
 	icon = @majesty_01
 	
@@ -322,15 +527,176 @@ innovation_native_auridon = {
 }
 innovation_native_summerset = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_nativity
 	potential = {
-		is_target_in_global_variable_list = {
-			name = culture_innovation_native_summerset
-			target = this
+		OR = {
+			is_in_list_native_to = { REGION = auridon }
+			is_in_list_native_to = { REGION = summerset }
 		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = summerset } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_summerset }
 	}
 	icon = @majesty_01
 	
 	custom = faster_culture_convert_summerset
+	flag = nativity_innovation
+}
+### Valenwood
+innovation_native_grahtwood = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = grahtwood }
+			is_in_list_native_to = { REGION = greenshade }
+			is_in_list_native_to = { REGION = malabal_tor }
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = grahtwood } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_grahtwood }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_grahtwood
+	flag = nativity_innovation
+}
+innovation_native_greenshade = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = grahtwood }
+			is_in_list_native_to = { REGION = greenshade }
+			is_in_list_native_to = { REGION = malabal_tor }
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = greenshade } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_greenshade }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_greenshade
+	flag = nativity_innovation
+}
+innovation_native_malabal_tor = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = grahtwood }
+			is_in_list_native_to = { REGION = greenshade }
+			is_in_list_native_to = { REGION = malabal_tor }
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = malabal_tor } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_malabal_tor }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_malabal_tor
+	flag = nativity_innovation
+}
+innovation_native_reaper_march = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = grahtwood }
+			is_in_list_native_to = { REGION = greenshade }
+			is_in_list_native_to = { REGION = malabal_tor }
+			is_in_list_native_to = { REGION = reaper_march }
+			
+			is_in_list_native_to = { REGION = anequina }
+			is_in_list_native_to = { REGION = tenmar }
+			is_in_list_native_to = { REGION = pellitine }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = reaper_march } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_reaper_march }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_reaper_march
+	flag = nativity_innovation
+}
+### Elsweyr
+innovation_native_anequina = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = anequina }
+			is_in_list_native_to = { REGION = tenmar }
+			is_in_list_native_to = { REGION = pellitine }
+			
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = anequina } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_anequina }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_anequina
+	flag = nativity_innovation
+}
+innovation_native_tenmar = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = anequina }
+			is_in_list_native_to = { REGION = tenmar }
+			is_in_list_native_to = { REGION = pellitine }
+			
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = tenmar } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_tenmar }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_tenmar
+	flag = nativity_innovation
+}
+innovation_native_pellitine = {
+	group = culture_group_regional
+	culture_era = culture_era_nativity
+	potential = {
+		OR = {
+			is_in_list_native_to = { REGION = anequina }
+			is_in_list_native_to = { REGION = tenmar }
+			is_in_list_native_to = { REGION = pellitine }
+			
+			is_in_list_native_to = { REGION = reaper_march }
+		}
+	}
+	can_progress = {
+		hidden_tooltip = { is_in_list_native_to = { REGION = pellitine } }
+		custom_description = { text = nativity_region_hack_tooltip always = no }
+		culture_head = { completely_controls_region = custom_nativity_pellitine }
+	}
+	icon = @majesty_01
+	
+	custom = faster_culture_convert_pellitine
 	flag = nativity_innovation
 }
