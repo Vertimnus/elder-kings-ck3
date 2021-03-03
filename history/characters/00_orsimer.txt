@@ -3,7 +3,7 @@
 #Uzgurn House
 
 uzgurn_997 = {
-	name = "Targoth"
+	name = "Targoth" #ESO
 	dynasty = 800143
 	religion = code_of_malacath
 	culture = mountain_orc
@@ -18,7 +18,7 @@ uzgurn_997 = {
 }
 
 uzgurn_998 = {
-	name = "Yzzgol"
+	name = "Yzzgol" #ESO
 	dynasty = 800143
 	religion = code_of_malacath
 	culture = mountain_orc
@@ -26,12 +26,24 @@ uzgurn_998 = {
 	father = uzgurn_997
 	
 	3300.1.1 = { birth = yes }
+	3319.1.1 = { add_spouse = uzgurn_998b }
 	3350.1.1 = { 
 		death = {
 			death_reason = death_duel
 			killer = uzgurn_999
 		}
 	}
+}
+
+uzgurn_998b = {
+	name = "Othikha" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	
+	3301.1.1 = { birth = yes }
+	3372.1.1 = { death = yes }
 }
 
 uzgurn_999 = {
@@ -41,6 +53,7 @@ uzgurn_999 = {
 	culture = mountain_orc
 	
 	father = uzgurn_998
+	mother = uzgurn_998b
 	
 	3320.1.1 = { birth = yes }
 	3368.1.1 = { 
@@ -60,8 +73,8 @@ uzgurn_1000 = {
 	father = uzgurn_999
 
 	3340.1.1 = { birth = yes }
-	3395.1.1 = { death = 
-		{
+	3395.1.1 = { 
+		death = {
 			death_reason = death_duel
 			killer = uzgurn_1001
 		}
@@ -77,10 +90,10 @@ uzgurn_1001 = {
 	father = uzgurn_1000
 	
 	3378.1.1 = { birth = yes }
-	3431.1.1 = { death = 
-		{
-			death_reason = death_duel
-			killer = uzgurn_1002
+	3431.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1002
 		}
 	}
 }
@@ -94,10 +107,125 @@ uzgurn_1002 = {
 	father = uzgurn_1001
 	
 	3406.1.1 = { birth = yes }
-	3462.1.1 = { death = yes }
+	3462.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1003
+		}
+	}
 }
 
-#Khazor House, Mor Khazgur ( Darkfall? )
+uzgurn_1003 = {
+	name = "Kradauk"
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1002
+	
+	3435.1.1 = { birth = yes }
+	3465.1.1 = { add_spouse = uzgurn_1003b }
+	3489.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1004
+		}
+	}
+}
+
+uzgurn_1003b = {
+	name = "Glurala" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3440.1.1 = { birth = yes }
+	3495.1.1 = { give_nickname = nick_the_wise }
+	3515.1.1 = { death = yes }
+}
+
+uzgurn_1004 = {
+	name = "Tazgol" #ESO
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1003
+	mother = uzgurn_1003b
+	
+	3460.1.1 = { birth = yes }
+	3480.1.1 = { add_spouse = uzgurn_1004b }
+	3482.1.1 = { effect = { make_concubine = uzgurn_1004c } }
+	3484.1.1 = { effect = { make_concubine = uzgurn_1004d } }
+	3512.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1006
+		}
+	}
+}
+
+uzgurn_1004b = {
+	name = "Sholg" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3462.1.1 = { birth = yes }
+	3518.1.1 = { death = yes }
+}
+
+uzgurn_1004c = {
+	name = "Glesh" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3471.1.1 = { birth = yes }
+	3523.1.1 = { death = yes }
+}
+
+uzgurn_1004d = {
+	name = "Lurgush" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3475.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+
+uzgurn_1005 = {
+	name = "Lokra" #ESO
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	father = uzgurn_1004
+	mother = uzgurn_1004b
+	
+	3485.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+
+uzgurn_1006 = {
+	name = "Gruzdash"
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1004
+	mother = uzgurn_1004c
+	
+	3488.1.1 = { birth = yes }
+	3540.1.1 = { death = yes }
+}
+
+##Khazor Dynasty
+
+#House Khazor
+
 khazor_998 = {
 	name = "Kazok"
 	dynasty = 800071
@@ -194,7 +322,7 @@ khazor_1003 = {
 }
 
 khazor_1004 = {
-	name = "Thulsgreg"
+	name = "Thulsgreg" #ESO
 	dynasty = 800071
 	culture = mountain_orc
 	religion = code_of_malacath
