@@ -134,6 +134,28 @@ realm_priest_female = {
 ##############################################
 #Theocracy titles, religious (group) localization.
 
+#Default
+
+#Baron - Priest
+#Baroness - Priestess
+#Barony - Shrine
+
+#Count - High Priest
+#Countess - High Priestess
+#County - Temple
+
+#Duke - Arch-Priest
+#Duchess - Arch-Priestess
+#Duchy - Grand Temple
+
+#King - Prelate
+#Queen - Prelatess
+#Kingdom - Primacy
+
+#Emperor - Arch-Prelate
+#Empress - Arch-Prelatess
+#Empire - Arch-Primacy
+
 #Yokudan Religion
 baron_theocracy_male_yokudan_religion = { #Mullah
 	type = character
@@ -415,7 +437,7 @@ baron_theocracy_female_bosmeri_religion = { #Greenspeaker
 	governments = { theocracy_government }
 	religions = { bosmeri_religion }
 }
-barony_theocracy_bosmeri_religion = { #Grove of
+barony_theocracy_bosmeri_religion = { #Grove
 	type = title
 	tier = barony
 	priority = 10
@@ -430,9 +452,9 @@ count_theocracy_male_bosmeri_religion = { #Keeper
 	priority = 20
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { bosmeri_religion wyrd_religion }
 }
-count_theocracy_female_bosmeri_religion = { #Mufti
+count_theocracy_female_bosmeri_religion = { #Keeper
 	type = character
 	special = holder
 	tier = county
@@ -442,15 +464,14 @@ count_theocracy_female_bosmeri_religion = { #Mufti
 	governments = { theocracy_government }
 	religions = { bosmeri_religion }
 }
-county_theocracy_bosmeri_religion = { #Mosque
+county_theocracy_bosmeri_religion = { #Sacred Grove
 	type = title
 	tier = county
-	top_liege = no
 	priority = 20
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { bosmeri_religion wyrd_religion }
 }
-duke_theocracy_male_bosmeri_religion = { #Allamah
+duke_theocracy_male_bosmeri_religion = { #Diviner
 	type = character
 	special = holder
 	gender = male
@@ -460,7 +481,7 @@ duke_theocracy_male_bosmeri_religion = { #Allamah
 	governments = { theocracy_government }
 	religions = { bosmeri_religion }
 }
-duke_theocracy_female_bosmeri_religion = { #Allamaha
+duke_theocracy_female_bosmeri_religion = { #Diviner
 	type = character
 	special = holder
 	gender = female
@@ -470,15 +491,235 @@ duke_theocracy_female_bosmeri_religion = { #Allamaha
 	governments = { theocracy_government }
 	religions = { bosmeri_religion }
 }
-duchy_theocracy_bosmeri_religion = { #Madrasah
+king_theocracy_male_bosmeri_religion = { #Primate
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+king_theocracy_female_bosmeri_religion = { #Primate
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+kingdom_theocracy_bosmeri_religion = { #Primacy
+	type = title
+	tier = kingdom
+	top_liege = no
+	priority = 50
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+emperor_theocracy_male_bosmeri_religion = { #Arch-Keeper
+	type = character
+	special = holder
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+emperor_theocracy_female_bosmeri_religion = { #Arch-Keeper
+	type = character
+	special = holder
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+empire_theocracy_bosmeri_religion = { #Forest
+	type = title
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+
+#Khajiiti Religion
+baron_theocracy_male_khajiiti_religion = { #Moon-Priest
+	type = character
+	special = holder
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+baron_theocracy_female_khajiiti_religion = { #Moon-Priestess
+	type = character
+	special = holder
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+count_theocracy_male_khajiiti_religion = { #Moon-Bishop
+	type = character
+	special = holder
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+count_theocracy_female_khajiiti_religion = { #Moon-Bishop
+	type = character
+	special = holder
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+duke_theocracy_male_khajiiti_religion = { #Moon-Archbishop
+	type = character
+	special = holder
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+duke_theocracy_female_khajiiti_religion = { #Moon-Archbishop
+	type = character
+	special = holder
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+king_theocracy_male_khajiiti_religion = { #Moon-King
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+king_theocracy_female_khajiiti_religion = { #Moon-Queen
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+emperor_theocracy_male_khajiiti_religion = { #Moon-Emperor
+	type = character
+	special = holder
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+emperor_theocracy_female_khajiiti_religion = { #Moon-Empress
+	type = character
+	special = holder
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+
+#Wyrd Religion
+baron_theocracy_male_wyrd_religion = { #Acolyte
+	type = character
+	special = holder
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+baron_theocracy_female_wyrd_religion = { #Acolyte
+	type = character
+	special = holder
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+count_theocracy_male_wyrd_religion = { #Wyr
+	type = character
+	special = holder
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+count_theocracy_female_wyrd_religion = { #Wyress
+	type = character
+	special = holder
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duke_theocracy_male_wyrd_religion = { #High Wyr
+	type = character
+	special = holder
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duke_theocracy_female_wyrd_religion = { #High Wyress
+	type = character
+	special = holder
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duchy_theocracy_wyrd_religion = { #Wyrd
 	type = title
 	tier = duchy
 	top_liege = no
 	priority = 30
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-king_theocracy_male_bosmeri_religion = { #Caliph
+king_theocracy_male_wyrd_religion = { #Beldam
 	type = character
 	gender = male
 	special = holder
@@ -486,9 +727,9 @@ king_theocracy_male_bosmeri_religion = { #Caliph
 	priority = 50
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-king_theocracy_female_bosmeri_religion = { #Calipha
+king_theocracy_female_wyrd_religion = { #Beldam
 	type = character
 	gender = female
 	special = holder
@@ -496,17 +737,17 @@ king_theocracy_female_bosmeri_religion = { #Calipha
 	priority = 50
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-kingdom_theocracy_bosmeri_religion = { #Caliphate
+kingdom_theocracy_wyrd_religion = { #Coven
 	type = title
 	tier = kingdom
 	top_liege = no
 	priority = 50
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-emperor_theocracy_male_bosmeri_religion = { #Ayatollah
+emperor_theocracy_male_wyrd_religion = { #Supreme
 	type = character
 	special = holder
 	gender = male
@@ -514,9 +755,9 @@ emperor_theocracy_male_bosmeri_religion = { #Ayatollah
 	priority = 105
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-emperor_theocracy_female_bosmeri_religion = { #Ayatollaha
+emperor_theocracy_female_wyrd_religion = { #Supreme
 	type = character
 	special = holder
 	gender = female
@@ -524,15 +765,15 @@ emperor_theocracy_female_bosmeri_religion = { #Ayatollaha
 	priority = 105
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
-empire_theocracy_bosmeri_religion = { #Grand Caliphate
+empire_theocracy_wyrd_religion = { #Realm
 	type = title
 	tier = empire
 	priority = 105
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion }
+	religions = { wyrd_religion }
 }
 
 ##############################################
@@ -810,6 +1051,153 @@ kingdom_feudal_nordic_group_independent = { #Free Hold
 	top_liege = no
 }
 
+#Dunmeris Group
+
+baron_feudal_male_dunmeris_group = { #Sera
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 8
+	governments = { feudal_government }
+	culture_groups = { dunmeris_group }
+	top_liege = no
+}
+baron_feudal_female_dunmeris_group = { #Sera
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 8
+	governments = { feudal_government }
+	culture_groups = { dunmeris_group }
+	top_liege = no
+}
+count_feudal_male_dunmeris_group = { #Muthsera
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 18
+	governments = { feudal_government }
+	culture_groups = { dunmeris_group }
+	top_liege = no
+}
+count_feudal_female_dunmeris_group = { #Muthsera
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 18
+	governments = { feudal_government }
+	culture_groups = { dunmeris_group }
+	top_liege = no
+}
+
+#Chimeris Group (& Ashlander)
+
+#Tribal/Clan
+baron_feudal_male_chimeris_group = { #Gulakhan
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 8
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+baron_feudal_female_chimeris_group = { #Gulakhan
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 8
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+count_feudal_male_chimeris_group = { #Khan
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 18
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+count_feudal_female_chimeris_group = { #Khan
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 18
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+duke_feudal_male_chimeris_group = { #Ashkhan
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 28
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+duke_feudal_female_chimeris_group = { #Ashkhan
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 28
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+king_feudal_male_chimeris_group = { #Kogokhan
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 48
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+king_feudal_female_chimeris_group = { #Kogokhan
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 48
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+emperor_feudal_male_chimeris_group = { #Gahkhan
+	type = character
+	gender = male
+	special = holder
+	tier = empire
+	priority = 102
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+emperor_feudal_female_chimeris_group = { #Gahkhan
+	type = character
+	gender = female
+	special = holder
+	tier = empire
+	priority = 102
+	governments = { tribal_government clan_government }
+	cultures = { chimer chimeriquey cantemiric ashlander }
+	top_liege = no
+}
+
 #Aldmeri Group
 
 #Feudal
@@ -1082,34 +1470,6 @@ duchy_feudal_yokudan_group = { #Grandeza
 	priority = 28
 	top_liege = no
 }
-king_feudal_male_yokudan_group = { #Sultan
-	type = character
-	gender = male
-	special = holder
-	tier = kingdom
-	priority = 48
-	governments = { feudal_government }
-	culture_groups = { yokudan_group }
-	top_liege = no
-}
-king_feudal_female_yokudan_group = { #Sultana
-	type = character
-	gender = female
-	special = holder
-	tier = kingdom
-	priority = 48
-	governments = { feudal_government }
-	culture_groups = { yokudan_group }
-	top_liege = no
-}
-kingdom_feudal_yokudan_group = { #Sultanate
-	type = title
-	tier = kingdom
-	priority = 48
-	governments = { feudal_government }
-	culture_groups = { yokudan_group }
-	top_liege = no
-}
 
 #Republic
 baron_republic_male_yokudan_group = { #Magistrate
@@ -1151,6 +1511,38 @@ count_republic_female_yokudan_group = { #Lady Magistrate
 	top_liege = no
 	governments = { republic_government }
 	culture_groups = { yokudan_group }
+}
+
+#Alik'r
+
+#Feudal
+king_feudal_male_alikr = { #Sultan
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 49
+	governments = { feudal_government }
+	cultures = { alikr }
+	top_liege = no
+}
+king_feudal_female_alikr = { #Sultana
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 49
+	governments = { feudal_government }
+	cultures = { alikr }
+	top_liege = no
+}
+kingdom_feudal_alikr = { #Sultanate
+	type = title
+	tier = kingdom
+	priority = 49
+	governments = { feudal_government }
+	cultures = { alikr }
+	top_liege = no
 }
 
 #Yokudan

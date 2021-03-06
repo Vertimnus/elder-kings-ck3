@@ -29,6 +29,7 @@ doctrine_core_tenets = {
 	#############################
 	
 	### Syncretism
+	### The Syncretism is tied to the *pantheon* rather than the *religion*
 	## Aedric
 	tenet_syncretism_pantheon_divines = {
 		icon = core_tenet_followers
@@ -344,13 +345,15 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = {
-
+			virtues = { 
+				forgiving
 			}
 		}
 
 		character_modifier = {
-			
+			stress_loss_mult = 0.25
+			stress_gain_mult = -0.25
+			build_speed = 0.10
 		}
 	}
 	
@@ -375,12 +378,14 @@ doctrine_core_tenets = {
 		
 		traits = {
 			virtues = {
-
+				paranoid
 			}
 		}
 
 		character_modifier = {
-			
+			stress_loss_mult = -0.25
+			stress_gain_mult = 0.25
+			build_speed = -0.10
 		}
 	}
 	
@@ -1359,28 +1364,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_sacred_artifacts = {
-		icon = core_tenet_sword
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_sacred_artifacts }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			always = yes
-		}
-		
-
-		character_modifier = {
-			dynasty_house_opinion = 10
-			prowess = 2
-		}
-	}
 	
 	tenet_green_pact = {
 		icon = core_tenet_marriage
@@ -1399,7 +1382,7 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = { cannibal temperate }
+			virtues = { temperate }
 			sins = { gluttonous }
 		}
 		
