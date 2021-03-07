@@ -1,4 +1,17 @@
-﻿has_exclusive_daedric_prince_pantheon = {
+﻿### BONUS SCALING WITH DEVOTION
+has_character_modifier_scaling_devotion = {
+	OR = {
+		has_character_modifier = $MODIFIER$_0
+		has_character_modifier = $MODIFIER$_1
+		has_character_modifier = $MODIFIER$_2
+		has_character_modifier = $MODIFIER$_3
+		has_character_modifier = $MODIFIER$_4
+		has_character_modifier = $MODIFIER$_5
+	}
+}
+
+### PANTHEON
+has_exclusive_daedric_prince_pantheon = {
 	faith = {
 		OR = {
 			has_doctrine_parameter = allows_worship_azura_only_active
@@ -39,6 +52,32 @@ is_daedric_prince_religion_tag = {
 		religion_tag = sanguine_religion
 		religion_tag = sheogorath_religion
 		religion_tag = vaermina_religion
+	}
+}
+
+faith_is_centered_daedric_princes = {
+	OR = {
+		has_doctrine = doctrine_pantheon_daedra
+		# Prince specific
+		has_doctrine = doctrine_pantheon_azura
+		has_doctrine = doctrine_pantheon_boethiah
+		has_doctrine = doctrine_pantheon_clavicus
+		has_doctrine = doctrine_pantheon_hermaeus
+		has_doctrine = doctrine_pantheon_hircine
+		has_doctrine = doctrine_pantheon_malacath
+		has_doctrine = doctrine_pantheon_mehrunes
+		has_doctrine = doctrine_pantheon_mephala
+		has_doctrine = doctrine_pantheon_meridia
+		has_doctrine = doctrine_pantheon_molag
+		has_doctrine = doctrine_pantheon_namira
+		has_doctrine = doctrine_pantheon_nocturnal
+		has_doctrine = doctrine_pantheon_peryite
+		has_doctrine = doctrine_pantheon_sanguine
+		has_doctrine = doctrine_pantheon_sheogorath
+		has_doctrine = doctrine_pantheon_vaermina
+		# Special group of princes
+		has_doctrine = doctrine_pantheon_good_daedra
+		has_doctrine = doctrine_pantheon_bad_daedra
 	}
 }
 

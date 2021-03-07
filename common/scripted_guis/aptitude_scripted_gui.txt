@@ -189,20 +189,14 @@ aptitude_sign_atronach = {
 ##  SPELLBOOK  ##
 #################
 
-magicka_casting_spell = { #observer in hud.gui actually triggers spellbook widget
+spell_open = {
 	scope = character
-	is_shown = { has_variable = spell_recipient }
-	effect = {
-		remove_variable = spell_selected
-		remove_variable = spell_recipient
-		remove_variable = spell_recipient_old
-		remove_variable = spell_caster
-		remove_variable = spell_cast_enabled
-		remove_variable = spell_school
-		clear_variable_list = spell_list
-		remove_variable = spell_county
-		clear_variable_list = spell_counties
-	}
+	effect = { remove_variable = spells_open }
+}
+
+spell_cleanup = { #observer in hud.gui actually triggers spellbook widget
+	scope = character
+	effect = { spell_cleanup = yes }
 }
 
 spell_switch_caster = {
@@ -262,7 +256,7 @@ spell_select_province = {
 }
 
 spell_select_province_hostile = {
-	type = character
+	scope = character
 
 	effect = {
 		remove_variable = spell_county
@@ -293,13 +287,23 @@ spell_select_province_hostile = {
 }
 
 spell_province_pick = {
-	type = character
+	scope = character
 
-	saved_scope = {
+	saved_scopes = {
 		county
 	}
 
 	effect = { set_variable = { name = spell_county value = scope:county } }
+}
+
+get_spell_province = {
+	scope = character
+
+	saved_scopes = {
+		spell_province
+	}
+
+	effect = { set_variable = { name = spell_province value = scope:spell_province } }
 }
 
 enable_casting = {
@@ -320,6 +324,9 @@ spell_school_alteration = {
 		set_variable = { name = spell_school value = flag:alteration }
 		spell_list_school = { SCHOOL = alteration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -337,6 +344,9 @@ spell_school_conjuration = {
 		set_variable = { name = spell_school value = flag:conjuration }
 		spell_list_school = { SCHOOL = conjuration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -354,6 +364,9 @@ spell_school_destruction = {
 		set_variable = { name = spell_school value = flag:destruction }
 		spell_list_school = { SCHOOL = destruction }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -371,6 +384,9 @@ spell_school_illusion = {
 		set_variable = { name = spell_school value = flag:illusion }
 		spell_list_school = { SCHOOL = illusion }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -388,6 +404,9 @@ spell_school_restoration = {
 		set_variable = { name = spell_school value = flag:restoration }
 		spell_list_school = { SCHOOL = restoration }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -405,6 +424,9 @@ spell_school_necromancy = {
 		set_variable = { name = spell_school value = flag:necromancy }
 		spell_list_school = { SCHOOL = necromancy }
 		set_variable = { name = spell_selected value = flag:no_spell }
+		remove_variable = spell_province
+		# remove_variable = spell_is_hostile
+		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
 	}
 }
@@ -416,6 +438,15 @@ necromancy_spell_no_spell_caster = {
 ############
 ## SPELLS ##
 ############
+
+#need char death checks, move check, self/cm check
+#province location check
+#unlanded of block for no valid provinces
+#spell info showing unlanded, spell desc showing invalid/no provinces
+
+# ordered_in_list by script value, script value is any_in_list {limit = object=scope}
+# while loop that increments count, so check first, then second in ordered_list for match
+# scriptvalues evaluate properly for
 
 # Alteration
 
@@ -433,7 +464,7 @@ alteration_spell_oakflesh_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = oakflesh }
+		spell_caster_effect = { SCHOOL = alteration SPELL = oakflesh }
 	}
 }
 
@@ -463,7 +494,7 @@ alteration_spell_wards_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = wards }
+		spell_caster_effect = { SCHOOL = alteration SPELL = wards }
 	}
 }
 
@@ -471,7 +502,7 @@ alteration_spell_wards_recipient = {
 	scope = character
 
 	is_shown = {
-		var:spell_selected = flag:wards
+		var:spell_selected = flag:wards # replaced with system variable
 	}
 
 	effect = {
@@ -503,7 +534,7 @@ conjuration_spell_summon_scamp_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = summon_scamp }
+		spell_caster_effect = { SCHOOL = conjuration SPELL = summon_scamp }
 	}
 }
 
@@ -531,12 +562,12 @@ destruction_spell_flames_caster = {
 
 	is_shown = {
 		has_magicka = { VALUE = spell_cost_flames }
-		spell_target_self = yes
+		spell_target_valid = yes
 		#always = yes #for testing
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = flames }
+		spell_caster_effect = { SCHOOL = destruction SPELL = flames }
 	}
 }
 
@@ -562,12 +593,12 @@ destruction_spell_frostbite_caster = {
 
 	is_shown = {
 		has_magicka = { VALUE = spell_cost_frostbite }
-		spell_target_self = no
+		spell_target_valid = no
 		#always = yes #for testing
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = frostbite }
+		spell_caster_effect = { SCHOOL = destruction SPELL = frostbite }
 	}
 }
 
@@ -597,7 +628,7 @@ destruction_spell_sparks_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = sparks }
+		spell_caster_effect = { SCHOOL = destruction SPELL = sparks }
 	}
 }
 
@@ -627,7 +658,7 @@ destruction_spell_firestorm_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = firestorm }
+		spell_caster_effect = { SCHOOL = destruction SPELL = firestorm }
 	}
 }
 
@@ -667,7 +698,7 @@ illusion_spell_frenzy_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = frenzy }
+		spell_caster_effect = { SCHOOL = illusion SPELL = frenzy }
 	}
 }
 
@@ -699,7 +730,7 @@ restoration_spell_heal_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = heal }
+		spell_caster_effect = { SCHOOL = restoration SPELL = heal }
 	}
 }
 
@@ -731,7 +762,7 @@ necromancy_spell_raise_dead_caster = {
 	}
 
 	effect = {
-		spell_caster_effect = { SPELL = raise_dead }
+		spell_caster_effect = { SCHOOL = necromancy SPELL = raise_dead }
 	}
 }
 
@@ -746,3 +777,76 @@ necromancy_spell_raise_dead_recipient = {
 		spell_castee_effect = { SPELL = raise_dead }
 	}
 }
+
+# culture_tooltip = {
+# 	scope = culture
+
+# 	# is_valid = {
+# 	# 	#use this for extinct or not? coul have province and people check sepearte
+# 	# }
+
+# 	effect = {
+# 		switch = {
+# 			trigger = ROOT
+# 			#culture:iliac = { custom_description_no_bullet = { text = "test text" } } #can this take value = flag:something or just a flag as a scope
+# 			#ALDMERI
+# 			culture:alinor = { custom_tooltip = alinor_desc }
+# 			culture:auridon = { custom_tooltip = auridon_desc }
+# 			culture:balfiera = { custom_tooltip = balfiera_desc }
+# 			#AYLEID
+# 			culture:ayleid = { custom_tooltip = ayleid_desc }
+# 			culture:barsaebic = { custom_tooltip = barsaebic_desc }
+# 			culture:hectahamic = { custom_tooltip = hectahamic_desc }
+# 			#BRETON
+# 			culture:glenumbran = { custom_tooltip = glenumbran_desc }
+# 			culture:iliac = { custom_tooltip = iliac_desc }
+# 			culture:northmen = { custom_tooltip = northmen_desc }
+# 			culture:bjoule = { custom_tooltip = bjoule_desc }
+# 			#CHIMERIS
+# 			culture:chimer = { custom_tooltip = chimer_desc }
+# 			culture:chimeriquey = { custom_tooltip = chimeriquey_desc }
+# 			culture:cantemiric = { custom_tooltip = cantemiric_desc }
+# 			#DUNMERIS
+# 			culture:dunmer = { custom_tooltip = dunmer_desc }
+# 			culture:ashlander = { custom_tooltip = ashlander_desc }
+# 			#GOBLIN-KEN
+# 			culture:goblin = { custom_tooltip = goblin_desc }
+# 			culture:riekling = { custom_tooltip = riekling_desc }
+# 			#CYRODIILIC
+# 			culture:heartlander = { custom_tooltip = heartlander_desc }
+# 			culture:colovian = { custom_tooltip = colovian_desc }
+# 			culture:nibenese = { custom_tooltip = nibenese_desc }
+# 			culture:blackwood = { custom_tooltip = blackwood_desc }
+# 			#KHAJIIT
+# 			culture:pellitinian = { custom_tooltip = pellitinian_desc }
+# 			culture:anequinan = { custom_tooltip = anequinan_desc }
+# 			#NEDIC
+# 			culture:reachfolk = { custom_tooltip = reachfolk_desc }
+# 			culture:kothringi = { custom_tooltip = kothringi_desc }
+# 			culture:galen = { custom_tooltip = galen_desc }
+# 			culture:keptu = { custom_tooltip = keptu_desc }
+# 			culture:duraki = { custom_tooltip = duraki_desc }
+# 			culture:kreath = { custom_tooltip = kreath_desc }
+# 			culture:perena = { custom_tooltip = perena_desc }
+# 			culture:nede = { custom_tooltip = nede_desc }
+# 			#NORD
+# 			culture:eastmarcher = { custom_tooltip = eastmarcher_desc }
+# 			culture:westmarcher = { custom_tooltip = westmarcher_desc }
+# 			culture:cyro_nord = { custom_tooltip = cyro_nord_desc }
+# 			culture:skaal = { custom_tooltip = skaal_desc }
+# 			culture:atmoran = { custom_tooltip = atmoran_desc }
+# 			#ORSIMER
+# 			culture:mountain_orc = { custom_tooltip = ountain_orc_desc }
+# 			culture:iron_orc = { custom_tooltip = iron_orc_desc }
+# 			culture:wood_orc = { custom_tooltip = wood_orc_desc }
+# 			#YOKUDAN
+# 			culture:yokudan = { custom_tooltip = yokudan_desc }
+# 			culture:forebear = { custom_tooltip = forebear_desc }
+# 			culture:crown = { custom_tooltip = crown_desc }
+# 			culture:lhotunic = { custom_tooltip = lhotunic_desc }
+# 			culture:alikr = { custom_tooltip = alikr_desc }
+# 			culture:abecean = { custom_tooltip = abecean_desc }
+# 			culture:horsemen = { custom_tooltip = horsemen_desc }
+# 		}
+# 	}
+# }

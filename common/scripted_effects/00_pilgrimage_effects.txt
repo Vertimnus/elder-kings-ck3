@@ -123,6 +123,37 @@ pilgrimage_additional_reward_effect = {
 			}
 		}
 	}
+	### EK EDIT: Added the effect from Sacred Alchemy
+	### Note: Chance nerfed compared to Esotericism, since you only have one Herbalist trait instead of 3
+	# Sacred Alchemy
+	if = {
+		limit = {
+			faith = { has_doctrine = tenet_sacred_alchemy }
+			NOT = { has_trait = lifestyle_herbalist }
+		}
+		custom_description_no_bullet = {
+			text = pilgrimage_because_i_have_tenet_sacred_alchemy
+			subject = root
+		}
+		random_list = {
+			desc = pilgrimage_learn_from_the_bishops
+			25 = {
+				desc = pilgrimage_learn_from_the_bishops_success
+				compare_modifier = {
+					value = learning
+					multiplier = 3
+				}
+				add_trait = lifestyle_herbalist
+			}
+			75 = {
+				desc = pilgrimage_learn_from_the_bishops_failure
+				send_interface_toast = {
+					title = pilgrimage_learn_from_the_bishops_failure
+					left_icon = root
+				}
+			}
+		}
+	}
 }
 
 ### EK EDIT: The Hajj cannot be performed

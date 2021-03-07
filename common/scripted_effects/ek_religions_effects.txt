@@ -5,9 +5,7 @@ update_religions_stress = {
 		limit = {
 			OR = {
 				# Your faith has a stress related tenet
-				faith = {
-					has_doctrine_parameter = stress_gives_piety_active
-				}
+				faith = { has_doctrine_parameter = stress_gives_piety_active }
 				# You have a stress related modifier
 				has_character_modifier = stress_gives_piety_stress_1
 				has_character_modifier = stress_gives_piety_stress_2
@@ -22,11 +20,7 @@ update_religions_stress = {
 		
 		# Add the ones you need
 		if = {
-			limit = {
-				faith = {
-					has_doctrine_parameter = stress_gives_piety_active
-				}
-			}
+			limit = { faith = { has_doctrine_parameter = stress_gives_piety_active } }
 			if = {
 				limit = { stress_level >= 3 }
 				add_character_modifier = stress_gives_piety_stress_3
@@ -44,63 +38,195 @@ update_religions_stress = {
 }
 
 # Stuff scaling with devotion (piety_level)
+clear_religions_piety_level_effect = {
+	remove_character_modifier = $MODIFIER$_0
+	remove_character_modifier = $MODIFIER$_1
+	remove_character_modifier = $MODIFIER$_2
+	remove_character_modifier = $MODIFIER$_3
+	remove_character_modifier = $MODIFIER$_4
+	remove_character_modifier = $MODIFIER$_5
+}
+
+update_religions_piety_level_effect = {
+	clear_religions_piety_level_effect = { MODIFIER = $MODIFIER$ }
+	
+	if = {
+		limit = { faith = { has_doctrine_parameter = $MODIFIER$ } }
+		if = {
+			limit = { piety_level >= 5 }
+			add_character_modifier = $MODIFIER$_5
+		}
+		else_if = {
+			limit = { piety_level >= 4 }
+			add_character_modifier = $MODIFIER$_4
+		}
+		else_if = {
+			limit = { piety_level >= 3 }
+			add_character_modifier = $MODIFIER$_3
+		}
+		else_if = {
+			limit = { piety_level >= 2 }
+			add_character_modifier = $MODIFIER$_2
+		}
+		else_if = {
+			limit = { piety_level >= 1 }
+			#add_character_modifier = $MODIFIER$_1
+		}
+		else_if = {
+			limit = { piety_level >= 0 }
+			add_character_modifier = $MODIFIER$_0
+		}
+	}
+}
+
+### USE IT ONLY IF YOU ALREADY KNOW THE FAITH SUPPORTS THESE MODIFIERS
+# If in doubt, use update_religions_piety_level_effect
+unsafe_update_religions_piety_level_effect = {
+	clear_religions_piety_level_effect = { MODIFIER = $MODIFIER$ }
+	
+	if = {
+		limit = { piety_level >= 5 }
+		add_character_modifier = $MODIFIER$_5
+	}
+	else_if = {
+		limit = { piety_level >= 4 }
+		add_character_modifier = $MODIFIER$_4
+	}
+	else_if = {
+		limit = { piety_level >= 3 }
+		add_character_modifier = $MODIFIER$_3
+	}
+	else_if = {
+		limit = { piety_level >= 2 }
+		add_character_modifier = $MODIFIER$_2
+	}
+	else_if = {
+		limit = { piety_level >= 1 }
+		#add_character_modifier = $MODIFIER$_1
+	}
+	else_if = {
+		limit = { piety_level >= 0 }
+		add_character_modifier = $MODIFIER$_0
+	}
+}
+
 update_religions_piety_level = {
+	### POPULAR OPINION WITH DEVOTION
 	if = {
 		limit = {
 			OR = {
 				# Your faith has a devotion related tenet
-				faith = {
-					has_doctrine_parameter = devotion_gives_popular_opinion
-				}
+				faith = { has_doctrine_parameter = devotion_gives_popular_opinion }
 				# You have a devotion related modifier
-				has_character_modifier = devotion_gives_popular_opinion_0
-				has_character_modifier = devotion_gives_popular_opinion_1
-				has_character_modifier = devotion_gives_popular_opinion_2
-				has_character_modifier = devotion_gives_popular_opinion_3
-				has_character_modifier = devotion_gives_popular_opinion_4
-				has_character_modifier = devotion_gives_popular_opinion_5
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_popular_opinion }
 			}
 		}
 		
-		# Remove the modifiers
-		remove_character_modifier = devotion_gives_popular_opinion_0
-		remove_character_modifier = devotion_gives_popular_opinion_1
-		remove_character_modifier = devotion_gives_popular_opinion_2
-		remove_character_modifier = devotion_gives_popular_opinion_3
-		remove_character_modifier = devotion_gives_popular_opinion_4
-		remove_character_modifier = devotion_gives_popular_opinion_5
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_popular_opinion }
+	}
+	
+	### CALAVRY EFFECTIVENESS WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_cavalry_effectiveness }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_cavalry_effectiveness }
+			}
+		}
 		
-		# Add the ones you need
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_cavalry_effectiveness }
+	}
+	
+	### STAR SIGN POWER WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_star_sign_power }
+				# You have a devotion related modifier
+				### Twelve star signs
+				# Ritual
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_ritual }
+				# Lover
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_lover }
+				# Lord
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_lord }
+				# Mage
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_mage }
+				# Shadow
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_shadow }
+				# Steed
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_steed }
+				# Apprentice
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_apprentice }
+				# Warrior
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_warrior }
+				# Lady
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_lady }
+				# Tower
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_tower }
+				# Atronach
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_atronach }
+				# Thief
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_thief }
+				# Serpent
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_star_sign_power_serpent }
+			}
+		}
+		
 		if = {
-			limit = {
-				faith = {
-					has_doctrine_parameter = devotion_gives_popular_opinion
-				}
-			}
-			if = {
-				limit = { piety_level >= 5 }
-				add_character_modifier = devotion_gives_popular_opinion_5
-			}
-			else_if = {
-				limit = { piety_level >= 4 }
-				add_character_modifier = devotion_gives_popular_opinion_4
-			}
-			else_if = {
-				limit = { piety_level >= 3 }
-				add_character_modifier = devotion_gives_popular_opinion_3
-			}
-			else_if = {
-				limit = { piety_level >= 2 }
-				add_character_modifier = devotion_gives_popular_opinion_2
-			}
-			else_if = {
-				limit = { piety_level >= 1 }
-				#add_character_modifier = devotion_gives_popular_opinion_1
-			}
-			else_if = {
-				limit = { piety_level >= 0 }
-				add_character_modifier = devotion_gives_popular_opinion_0
-			}
+			limit = { has_trait = sign_ritual }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_ritual }
+		}
+		else_if = {
+			limit = { has_trait = sign_lover }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_lover }
+		}
+		else_if = {
+			limit = { has_trait = sign_lord }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_lord }
+		}
+		else_if = {
+			limit = { has_trait = sign_mage }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_mage }
+		}
+		else_if = {
+			limit = { has_trait = sign_shadow }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_shadow }
+		}
+		else_if = {
+			limit = { has_trait = sign_steed }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_steed }
+		}
+		else_if = {
+			limit = { has_trait = sign_apprentice }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_apprentice }
+		}
+		else_if = {
+			limit = { has_trait = sign_warrior }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_warrior }
+		}
+		else_if = {
+			limit = { has_trait = sign_lady }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_lady }
+		}
+		else_if = {
+			limit = { has_trait = sign_tower }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_tower }
+		}
+		else_if = {
+			limit = { has_trait = sign_atronach }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_atronach }
+		}
+		else_if = {
+			limit = { has_trait = sign_thief }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_thief }
+		}
+		else_if = {
+			limit = { has_trait = sign_serpent }
+			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_serpent }
 		}
 	}
 }
