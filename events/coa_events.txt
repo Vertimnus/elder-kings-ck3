@@ -12,5 +12,108 @@ coa.1 = {
 		is_ruler = yes
 	}
 	immediate = {
+		trigger_event = coa.10 # e_reach
+		trigger_event = coa.11 # e_skyrim
+	}
+}
+
+scripted_trigger can_event_change_coa_trigger = {
+	holder = root
+	has_user_set_coa = no
+}
+
+scripted_effect set_coa_suffix_effect = {
+	title:$TITLE$ = { 
+		if = {
+			limit = { can_event_change_coa_trigger = yes }
+			set_coa = $TITLE$_$SUFFIX$
+		}
+	}
+}
+
+scripted_effect reset_coa_effect = {
+	title:$TITLE$ = { 
+		if = {
+			limit = { can_event_change_coa_trigger = yes }
+			set_coa = $TITLE$
+		}
+	}
+}
+
+### For e_reach
+coa.10 = {
+	type = character_event
+	hidden = yes
+	
+	trigger = {
+		title:e_reach = {
+			can_event_change_coa_trigger = yes
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { culture = culture:reachfolk }
+			set_coa_suffix_effect = { TITLE = e_reach SUFFIX = reachfolk }
+		}
+		else = {
+			reset_coa_effect = { TITLE = e_reach }
+		}
+	}
+}
+
+### For e_skyrim: CoA depends on your capital
+coa.11 = {
+	type = character_event
+	hidden = yes
+	
+	trigger = {
+		title:e_skyrim = {
+			can_event_change_coa_trigger = yes
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_haafingar } }
+			title:e_skyrim = { set_coa = e_solitude }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_eastmarch } }
+			title:e_skyrim = { set_coa = e_windhelm }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_whiterun } }
+			title:e_skyrim = { set_coa = e_whiterun }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_karth } }
+			title:e_skyrim = { set_coa = e_markarth }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_winterhold } }
+			title:e_skyrim = { set_coa = e_winterhold }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_hjaalmarch } }
+			title:e_skyrim = { set_coa = e_morthal }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_the_pale } }
+			title:e_skyrim = { set_coa = e_dawnstar }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_falkreath } }
+			title:e_skyrim = { set_coa = e_falkreath }
+		}
+		else_if = {
+			limit = { capital_province = { geographical_region = mundus_tamriel_skyrim_the_rift } }
+			title:e_skyrim = { set_coa = e_riften }
+		}
+		else = {
+			reset_coa_effect = { TITLE = e_skyrim }
+		}
+		
+		# title:e_skyrim = { set_coa = e_windhelm }
 	}
 }

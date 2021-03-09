@@ -3,7 +3,7 @@
 #Uzgurn House
 
 uzgurn_997 = {
-	name = "Targoth"
+	name = "Targoth" #ESO
 	dynasty = 800143
 	religion = code_of_malacath
 	culture = mountain_orc
@@ -18,7 +18,7 @@ uzgurn_997 = {
 }
 
 uzgurn_998 = {
-	name = "Yzzgol"
+	name = "Yzzgol" #ESO
 	dynasty = 800143
 	religion = code_of_malacath
 	culture = mountain_orc
@@ -26,12 +26,24 @@ uzgurn_998 = {
 	father = uzgurn_997
 	
 	3300.1.1 = { birth = yes }
+	3319.1.1 = { add_spouse = uzgurn_998b }
 	3350.1.1 = { 
 		death = {
 			death_reason = death_duel
 			killer = uzgurn_999
 		}
 	}
+}
+
+uzgurn_998b = {
+	name = "Othikha" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	
+	3301.1.1 = { birth = yes }
+	3372.1.1 = { death = yes }
 }
 
 uzgurn_999 = {
@@ -41,6 +53,7 @@ uzgurn_999 = {
 	culture = mountain_orc
 	
 	father = uzgurn_998
+	mother = uzgurn_998b
 	
 	3320.1.1 = { birth = yes }
 	3368.1.1 = { 
@@ -60,8 +73,8 @@ uzgurn_1000 = {
 	father = uzgurn_999
 
 	3340.1.1 = { birth = yes }
-	3395.1.1 = { death = 
-		{
+	3395.1.1 = { 
+		death = {
 			death_reason = death_duel
 			killer = uzgurn_1001
 		}
@@ -77,10 +90,10 @@ uzgurn_1001 = {
 	father = uzgurn_1000
 	
 	3378.1.1 = { birth = yes }
-	3431.1.1 = { death = 
-		{
-			death_reason = death_duel
-			killer = uzgurn_1002
+	3431.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1002
 		}
 	}
 }
@@ -94,10 +107,125 @@ uzgurn_1002 = {
 	father = uzgurn_1001
 	
 	3406.1.1 = { birth = yes }
-	3462.1.1 = { death = yes }
+	3462.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1003
+		}
+	}
 }
 
-#Khazor House, Mor Khazgur ( Darkfall? )
+uzgurn_1003 = {
+	name = "Kradauk"
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1002
+	
+	3435.1.1 = { birth = yes }
+	3465.1.1 = { add_spouse = uzgurn_1003b }
+	3489.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1004
+		}
+	}
+}
+
+uzgurn_1003b = {
+	name = "Glurala" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3440.1.1 = { birth = yes }
+	3495.1.1 = { give_nickname = nick_the_wise }
+	3515.1.1 = { death = yes }
+}
+
+uzgurn_1004 = {
+	name = "Tazgol" #ESO
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1003
+	mother = uzgurn_1003b
+	
+	3460.1.1 = { birth = yes }
+	3480.1.1 = { add_spouse = uzgurn_1004b }
+	3482.1.1 = { effect = { make_concubine = uzgurn_1004c } }
+	3484.1.1 = { effect = { make_concubine = uzgurn_1004d } }
+	3512.1.1 = { 
+		death = {
+				death_reason = death_duel
+				killer = uzgurn_1006
+		}
+	}
+}
+
+uzgurn_1004b = {
+	name = "Sholg" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3462.1.1 = { birth = yes }
+	3518.1.1 = { death = yes }
+}
+
+uzgurn_1004c = {
+	name = "Glesh" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3471.1.1 = { birth = yes }
+	3523.1.1 = { death = yes }
+}
+
+uzgurn_1004d = {
+	name = "Lurgush" #ESO
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	3475.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+
+uzgurn_1005 = {
+	name = "Lokra" #ESO
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	female = yes
+	
+	father = uzgurn_1004
+	mother = uzgurn_1004b
+	
+	3485.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+
+uzgurn_1006 = {
+	name = "Gruzdash"
+	dynasty = 800143
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = uzgurn_1004
+	mother = uzgurn_1004c
+	
+	3488.1.1 = { birth = yes }
+	3540.1.1 = { death = yes }
+}
+
+##Khazor Dynasty
+
+#House Khazor
+
 khazor_998 = {
 	name = "Kazok"
 	dynasty = 800071
@@ -194,7 +322,7 @@ khazor_1003 = {
 }
 
 khazor_1004 = {
-	name = "Thulsgreg"
+	name = "Thulsgreg" #ESO
 	dynasty = 800071
 	culture = mountain_orc
 	religion = code_of_malacath
@@ -392,9 +520,9 @@ yashnag_99 = {
 	
 	3300.1.1 = { birth = yes }
 	3350.1.1 = { death = {
-					death_reason = death_duel
-					killer = yashnag_100
-				}
+			death_reason = death_duel
+			killer = yashnag_100
+		}
 	}
 }
 yashnag_100 = {
@@ -407,6 +535,7 @@ yashnag_100 = {
 	3322.1.1 = { birth = yes }
 	3338.1.1 = {
 		trait = education_martial_4
+		trait = blademaster_1
 		trait = wrathful
 		trait = scarred
 		trait = strong
@@ -450,7 +579,7 @@ yashnag_102 = {
 	
 	3344.1.1 = { birth = yes }
 	3360.1.1 = {
-		add_trait = education_warrior_3
+		add_trait = education_martial_3
 		trait = strong
 		trait = stubborn
 	}
@@ -506,7 +635,7 @@ yashnag_106 = {
 	
 	3368.1.1 = { birth = yes }
 	3384.1.1 = {
-		trait = education_warrior_3
+		trait = education_martial_3
 		trait = strong
 	}
 	3426.1.1 = { death = yes }
@@ -522,7 +651,7 @@ yashnag_107 = {
 	
 	3355.1.1 = { birth = yes }
 	3384.1.1 = {
-		trait = education_warrior_3
+		trait = education_martial_3
 		trait = strong
 	}
 	3387.1.1 = {
@@ -532,3 +661,116 @@ yashnag_107 = {
 		}
 	}
 }
+##Ghorak Dynasty
+
+#Ghorak House
+ghorak_99 = {
+	name = "Duluk"
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	
+	3303.1.1 = { birth = yes }
+	3365.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_100
+				}
+		}
+}
+ghorak_100 = {
+	name = "Rhosh" #Duke of Heartwood (Largash Bur)
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_99
+	
+	3344.1.1 = { birth = yes }
+	3402.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_101
+				}
+		}
+}
+ghorak_101 = {
+	name = "Tharkul" #Duke of Heartwood (Largash Bur)
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_100
+	
+	3360.1.1 = { birth = yes }
+	3411.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_102
+				}
+		}
+}
+ghorak_102 = {
+	name = "Skalguth" #Duke of Heartwood (Largash Bur)
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_100
+	
+	3368.1.1 = { birth = yes }
+	3421.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_103
+				}
+		}
+}
+ghorak_103 = {
+	name = "Garnag" #Duke of Heartwood (Largash Bur)
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_102
+	
+	3400.1.1 = { birth = yes }
+	3466.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_104
+				}
+		}
+}
+ghorak_104 = {
+	name = "Azabesh" #Duke of Heartwood (Largash Bur)
+	female = yes
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_103
+	
+	3448.1.1 = { birth = yes }
+	3490.1.1 = { death = {
+					death_reason = death_battle
+					killer = bjorga_102
+				}
+		}
+}
+ghorak_105 = {
+	name = "Ghorza" #Count of Largash Bur
+	female = yes
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = ghorak_103
+	
+	3450.1.1 = { birth = yes }
+	3501.1.1 = { death = {
+					death_reason = death_duel
+					killer = ghorak_106
+				}
+		}
+}
+ghorak_106 = {
+	name = "Morbash" #Count of Largash Bur (Alliance War)
+	dynasty = 800053
+	culture = mountain_orc
+	religion = code_of_malacath
+	mother = ghorak_105
+	
+	3478.1.1 = { birth = yes }
+	3539.1.1 = { death = yes }
+}
+

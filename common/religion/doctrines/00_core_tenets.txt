@@ -29,6 +29,7 @@ doctrine_core_tenets = {
 	#############################
 	
 	### Syncretism
+	### The Syncretism is tied to the *pantheon* rather than the *religion*
 	## Aedric
 	tenet_syncretism_pantheon_divines = {
 		icon = core_tenet_followers
@@ -321,6 +322,100 @@ doctrine_core_tenets = {
 
 		character_modifier = {
 
+		}
+	}
+	
+	tenet_kuvastei = {
+		icon = core_tenet_prayer
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_kuvastei }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = { 
+				forgiving
+			}
+		}
+
+		character_modifier = {
+			stress_loss_mult = 0.25
+			stress_gain_mult = -0.25
+			build_speed = 0.10
+		}
+	}
+	
+	tenet_shunatei = {
+		icon = core_tenet_prayer
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_shunatei }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+				paranoid
+			}
+		}
+
+		character_modifier = {
+			stress_loss_mult = -0.25
+			stress_gain_mult = 0.25
+			build_speed = -0.10
+		}
+	}
+	
+	tenet_amberhist = {
+		icon = core_tenet_prayer
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_amberhist }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		can_pick = {
+			always = yes
+		}
+		
+		parameters = {
+		}
+		
+		traits = {
+			virtues = {
+
+			}
+		}
+
+		character_modifier = {
+			
 		}
 	}
 	
@@ -978,10 +1073,14 @@ doctrine_core_tenets = {
 		}
 
 		character_modifier = {
+			taiga_hills_advantage = 5
+			taiga_hills_attrition_mult = -0.25
 			taiga_advantage = 5
 			taiga_attrition_mult = -0.25
 			mountains_advantage = 5
 			mountains_attrition_mult = -0.25
+			tundra_advantage = 5
+			tundra_attrition_mult = -0.25
 		}
 	}
 	
@@ -1003,10 +1102,14 @@ doctrine_core_tenets = {
 		}
 
 		character_modifier = {
+			alikr_desert_advantage = 5
+			alikr_desert_attrition_mult = -0.25
 			desert_advantage = 5
 			desert_attrition_mult = -0.25
 			drylands_advantage = 5
 			drylands_attrition_mult = -0.25
+			desert_hills_advantage = 5
+			desert_hills_attrition_mult = -0.25
 		}
 	}
 	
@@ -1028,7 +1131,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_diplomacy = yes
 		}
 		
@@ -1061,7 +1163,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_martial = yes
 		}
 		
@@ -1094,7 +1195,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_stewardship = yes
 			allows_worship_clavicus_shunned_doctrines_active = yes
 		}
@@ -1128,7 +1228,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_intrigue = yes
 			allows_worship_mephala_shunned_doctrines_active = yes
 			allows_worship_nocturnal_shunned_doctrines_active = yes
@@ -1163,7 +1262,6 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Actually make that have an effect
 			children_education_learning = yes
 			allows_worship_hermaeus_shunned_doctrines_active = yes
 		}
@@ -1244,30 +1342,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_focused_worship = {
-		icon = core_tenet_bhakti
-		
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_focused_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			always = yes
-		}
-		
-		parameters = {
-			no_patron_deities_active = yes
-			resistance_to_heresy_active = yes
-			minimum_fervor = 25
-		}
-	}
-	
 	tenet_living_gods = {
 		icon = core_tenet_altar
 		piety_cost = {
@@ -1290,28 +1364,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_sacred_artifacts = {
-		icon = core_tenet_sword
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_sacred_artifacts }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			always = yes
-		}
-		
-
-		character_modifier = {
-			dynasty_house_opinion = 10
-			prowess = 2
-		}
-	}
 	
 	tenet_green_pact = {
 		icon = core_tenet_marriage
@@ -1330,7 +1382,7 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = { cannibal temperate }
+			virtues = { temperate }
 			sins = { gluttonous }
 		}
 		
@@ -1432,7 +1484,7 @@ doctrine_core_tenets = {
 		}
 		
 		traits = {
-			virtues = { ambitious august }
+			virtues = { august dragonborn }
 		}
 
 		character_modifier = {
@@ -1954,13 +2006,16 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
+			### EK TODO: Give the Herbalist trait like the Mystic trait
+			### EK TODO: Give the Herbalist trait at the end of a pilgrimage
+			tenet_sacred_alchemy_herbalist_education = yes
 			allows_worship_vaermina_shunned_doctrines_active = yes
 		}
 		
 		traits = {
 			virtues = {
 				lifestyle_physician
-				lifestyle_herbalist = 2
+				lifestyle_herbalist
 			}
 		}
 	}
