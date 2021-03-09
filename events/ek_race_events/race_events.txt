@@ -50,6 +50,7 @@ scripted_trigger ek_race_compatable_trigger = {
 
 #Ends Pregnancy between two incompatible species
 ek_race.0001 = {
+	type = character_event
 	hidden = yes
 
 	trigger = {
@@ -57,59 +58,49 @@ ek_race.0001 = {
 	}
 
 	immediate = {
-		hidden_effect = {
-			random_dummy_gender_effect = yes
-			end_pregnancy = yes
-			pregnancy_cleanup_effect = yes
-		}
+		random_dummy_gender_effect = yes
+		end_pregnancy = yes
+		pregnancy_cleanup_effect = yes
 	}
 }
 
-#Assigns Racial traits (if applicable) and elven immortality to randomgen characters
+#Delays initial assignment by two days so all family relations are set up first
 ek_race.0002 = {
+	type = empty
 	hidden = yes
 
 	immediate = {
-		hidden_effect = {
-			race_traits_effect = yes
+		every_ruler = {
+			trigger_event = { id = ek_race.0003 days = 2 }
+			every_courtier_or_guest = {
+				trigger_event = { id = ek_race.0003 days = 2 }
+			}
 		}
 	}
 }
 
-#Handles inheritance of lifespan traits
+#Directs characters to the setup effect
 ek_race.0003 = {
+	type = character_event
 	hidden = yes
 
 	immediate = {
-		hidden_effect = {
-			if = {
-				limit = {
-					scope:real_father = { has_trait = lifespan_1 }
-					scope:mother = { has_trait = lifespan_1 }
-				}
-				add_trait = lifespan_1
-			}
-			if = {
-				limit = {
-					scope:real_father = { has_trait = lifespan_1 }
-					scope:mother = { has_trait = lifespan }
-				}
-				add_trait = lifespan_1
-			}
-			if = {
-				limit = {
-					scope:real_father = { has_trait = lifespan }
-					scope:mother = { has_trait = lifespan_1 }
-				}
-				add_trait = lifespan_1
-			}
-			if = {
-				limit = {
-					scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
-					scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
-				}
-				add_trait = lifespan_2
-			}
-		}
+		#First checks for potential inheritances
+		lifespan_traits_inheritance_effect = yes
+		race_traits_inheritance_effect = yes
+		
+		#Then goes for the generic event
+		ek_character_setup_effect = yes
+	}
+}
+
+#Directs newborns directly to the race & lifespan inheritance effect
+ek_race.0004 = {
+	type = character_event
+	hidden = yes
+
+	immediate = {
+		race_traits_inheritance_effect = yes
+		lifespan_traits_inheritance_effect = yes
 	}
 }

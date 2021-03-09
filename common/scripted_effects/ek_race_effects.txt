@@ -1,22 +1,166 @@
-﻿race_traits_effect = {
+﻿#Setup effect used for newly generated characters
+ek_character_setup_effect = {
+
+	#Race traits (only Khajiit and Argonian for now)
+	if = {
+		limit = { 
+			NOT = { 
+				has_trait = race_khajiit
+				has_trait = race_argonian				
+			} 
+		}
+		race_traits_effect = yes
+	}
+	
+	#Lifespan traits
+	if = {
+		limit = { NOT = { has_trait = lifespan } }
+		lifespan_traits_effect = yes
+	}
+	
+	#Birthsigns
+	if = {
+		limit = { NOT = { has_trait = birthsign } }
+		assign_birthsign_start_effect = yes
+	}
+}	
+
+#Race traits
+race_traits_effect = {
+	
+	#Khajiit
 	if = {
 		limit = { culture_group = culture_group:khajiiti_group }
 		add_trait = race_khajiit
 	}
+	
+	#Argonian
+	# if = {
+		# limit = { culture_group = culture_group:argonian_group }
+		# add_trait = race_argonian
+	# }
+}
+
+#Race traits inheritance
+race_traits_inheritance_effect = {
+	
+	#Khajiit
 	if = {
-		limit = { culture_group = culture_group:aldmeris_group }
+		limit = { 
+			OR = {
+				scope:mother = { has_trait = race_khajiit }
+				scope:real_father = { has_trait = race_khajiit }
+			}
+		}
+		add_trait = race_khajiit
+	}
+	
+	#Argonian
+	# if = {
+		# limit = { culture_group = culture_group:argonian_group }
+		# add_trait = race_argonian
+	# }
+}
+
+#Lifespan traits
+lifespan_traits_effect = {
+
+	if = {
+		limit = { 
+			OR = { 
+				culture_group = culture_group:aldmeris_group 
+				culture_group = culture_group:bosmeris_group
+				culture_group = culture_group:chimeris_group
+				culture_group = culture_group:dunmeris_group
+			}
+		}
 		add_trait = lifespan_2
 	}
+}
+
+lifespan_traits_inheritance_effect = {
+	
+	#>1 + >1 = 2
 	if = {
-		limit = { culture_group = culture_group:bosmeris_group }
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+		}
 		add_trait = lifespan_2
 	}
-	if = {
-		limit = { culture_group = culture_group:chimeris_group }
-		add_trait = lifespan_2
+	
+	#>1 + 1 = 1 or 2
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			scope:mother = { has_trait = lifespan_1  }
+		}
+		random_list = {
+			40 = { add_trait = lifespan_2 }
+			60 = { add_trait = lifespan_1 }
+		}
 	}
-	if = {
-		limit = { culture_group = culture_group:dunmeris_group }
-		add_trait = lifespan_2
+	
+	#1 + >1 = 1 or 2
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan_1  }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+		}
+		random_list = {
+			40 = { add_trait = lifespan_2 }
+			60 = { add_trait = lifespan_1 }
+		}
+	}
+	
+	#1 + 1 = 1
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan_1 }
+			scope:mother = { has_trait = lifespan_1 }
+		}
+		add_trait = lifespan_1
+	}
+	
+	#>1 + 0 = 1
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			NOT = { scope:mother = { has_trait = lifespan } }
+		}
+		add_trait = lifespan_1
+	}
+	
+	#0 + >1 = 1
+	else_if = {
+		limit = {
+			NOT = { scope:real_father = { has_trait = lifespan } }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+		}
+		add_trait = lifespan_1
+	}
+	
+	#1 + 0 = 0 or 1
+	else_if = {
+		limit = {
+			NOT = { scope:real_father = { has_trait = lifespan } }
+			scope:mother = { has_trait = lifespan_1 }
+		}
+		random_list = {
+			50 = { add_trait = lifespan_1 }
+			50 = { }
+		}
+	}
+	
+	#0 + 1 = 0 or 1
+	else_if = {
+		limit = {
+			NOT = { scope:real_father = { has_trait = lifespan } }
+			scope:mother = { has_trait = lifespan_1 }
+		}
+		random_list = {
+			50 = { add_trait = lifespan_1 }
+			50 = { }
+		}
 	}
 }
