@@ -1,6 +1,4 @@
-﻿### EK TODO: Long-lived characters
-
-######################
+﻿######################
 # GENERATED FAMILIES #
 ######################
 
@@ -27,6 +25,7 @@ game_rule_create_spouse_and_children = {
 				age = $CHARACTER$.age
 				save_scope_as = spouse
 			}
+			
 
 			if = {
 				limit = { is_male = yes }
@@ -85,6 +84,8 @@ game_rule_create_spouse_and_children = {
 				dynasty = inherit
 				save_scope_as = child_1
 			}
+			
+			
 		}
 
 		#Create child 2 (mother age 25+)
@@ -107,6 +108,7 @@ game_rule_create_spouse_and_children = {
 				dynasty = inherit
 				save_scope_as = child_2
 			}
+			
 		}
 
 		#Create child 3 (mother age 33+)
@@ -129,7 +131,24 @@ game_rule_create_spouse_and_children = {
 				dynasty = inherit
 				save_scope_as = child_3
 			}
+		
 		}
+		
+		#EK EDIT
+		scope:spouse = { ek_character_setup_effect = yes }
+		if = { 
+			limit = { scope:mother.age >= 17 }
+			scope:child_1 = { ek_character_setup_effect = yes }
+		}
+		if = { 
+			limit = { scope:mother.age >= 25 }
+			scope:child_2 = { ek_character_setup_effect = yes }
+		}
+		if = { 
+			limit = { scope:mother.age >= 33 }
+			scope:child_3 = { ek_character_setup_effect = yes }
+		}
+		
 	}
 }
 
