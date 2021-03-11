@@ -1,141 +1,128 @@
 ﻿namespace = ek_race
 
-# scripted_trigger ek_race_compatable_trigger = {
-	# trigger_if = {
-		# limit = {
-			# scope:mother = {
-				# has_trait = race_khajiit
-			# }
-		# }
-		# scope:real_father = { has_trait = race_khajiit }
-	# }
-	# trigger_if = {
-		# limit = {
-			# scope:real_father = {
-				# has_trait = race_khajiit
-			# }
-		# }
-		# scope:mother = { has_trait = race_khajiit }
-	# }
-	# trigger_if = {
-		# limit = {
-			# scope:mother = {
-				# has_trait = race_argonian
-			# }
-		# }
-		# scope:real_father = { has_trait = race_argonian }
-	# }
-	# trigger_if = {
-		# limit = {
-			# scope:real_father = {
-				# has_trait = race_argonian
-			# }
-		# }
-		# scope:mother = { has_trait = race_argonian }
-	# }
-	# trigger_if = {
-		# limit = {
-			# scope:mother = {
-				# NOT = { has_trait = race_khajiit }
-				# NOT = { has_trait = race_argonian }
-			# }
-			# scope:real_father = {
-				# NOT = { has_trait = race_khajiit }
-				# NOT = { has_trait = race_argonian }
-			# }
-		# }
-		# always = yes
-	# }
-# }
+scripted_trigger ek_race_compatable_trigger = {
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				has_trait = race_khajiit
+			}
+		}
+		scope:real_father = { has_trait = race_khajiit }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_khajiit
+			}
+		}
+		scope:mother = { has_trait = race_khajiit }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				has_trait = race_argonian
+			}
+		}
+		scope:real_father = { has_trait = race_argonian }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_argonian
+			}
+		}
+		scope:mother = { has_trait = race_argonian }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				has_trait = race_globinken
+			}
+		}
+		scope:real_father = { has_trait = race_globinken }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_globinken
+			}
+		}
+		scope:mother = { has_trait = race_globinken }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
+				NOT = { has_trait = race_khajiit }
+				NOT = { has_trait = race_argonian }
+				NOT = { has_trait = race_globinken }
+			}
+			scope:real_father = {
+				NOT = { has_trait = race_khajiit }
+				NOT = { has_trait = race_argonian }
+				NOT = { has_trait = race_globinken }
+			}
+		}
+		always = yes
+	}
+}
 
-# ek_race.0001 = {
-	# hidden = yes
+#Ends Pregnancy between two incompatible species
+ek_race.0001 = {
+	type = character_event
+	hidden = yes
 
-	# trigger = {
-		# ek_race_compatable_trigger = no
-	# }
+	trigger = {
+		ek_race_compatable_trigger = no
+	}
 
-	# immediate = {
-		# hidden_effect = {
-			# random_dummy_gender_effect = yes
-			# end_pregnancy = yes
-			# pregnancy_cleanup_effect = yes
-		# }
-	# }
-# }
+	immediate = {
+		end_pregnancy = yes
+		pregnancy_cleanup_effect = yes
+	}
+	
+	after = {
+		if = {
+			limit = { has_trait = pregnant }
+			remove_trait = pregnant
+		}
+	}
+}
 
-# ek_race.0100 = {
-	# hidden = yes
+#Delays initial assignment by two days so all family relations are set up first
+ek_race.0002 = {
+	type = empty
+	hidden = yes
 
-	# trigger = {
-		# #Let's avoid having more than one stance of the event running or letting it fire unnecessarily
-		# NOR = { 
-			# has_character_flag = race_check 
-			# has_trait = species_mer
-			# has_trait = species_human
-		# }
-	# }
+	immediate = {
+		every_living_character = {
+			trigger_event = { id = ek_race.0003 }
+		}
+	}
+}
 
-	# immediate = {
-		# #Maintenance flag
-		# add_character_flag = race_check
-		
-		# #Checks to see if it's a Mer
-		# if = {
-			# limit = {
-				# calc_true_if = {
-					# amount >= 2
-			
-					# has_gene = {
-						# category = race_gene_mer_ears_01
-						# template = default_1
-					# }
-					# has_gene = {
-						# category = race_gene_mer_ears_01
-						# template = mer_ears_01
-					# }
-					# has_gene = {
-						# category = race_gene_mer_ears_01
-						# template = mer_ears_02
-					# }
-					# has_gene = {
-						# category = race_gene_mer_ears_02
-						# template = default_1
-					# }
-					# has_gene = {
-						# category = race_gene_mer_ears_02
-						# template = mer_ears_01
-					# }
-					# has_gene = {
-						# category = race_gene_mer_ears_02
-						# template = mer_ears_02
-					# }
-					# has_gene = {
-						# category = race_gene_mer_eyebrows_01
-						# template = default_1
-					# }
-					# has_gene = {
-						# category = race_gene_mer_eyebrows_01
-						# template = mer_eyebrows_01
-					# }
-					# has_gene = {
-						# category = race_gene_mer_eyes
-						# template = default_1
-					# }
-					# has_gene = {
-						# category = race_gene_mer_eyes
-						# template = mer_eyes_01
-					# }
-				# }
-			# }
-			# add_trait = species_mer
-		# }
-		
-		# else = {
-			# add_trait = species_human
-		# }
-		
-		# #Remove maintenance flag
-		# remove_character_flag = race_check
-	# }
-# }
+#Directs characters to the setup effect (race, lifespan and birthsign)
+ek_race.0003 = {
+	type = character_event
+	hidden = yes
+	
+	trigger = { NOT = { has_character_flag = char_setup } }
+
+	immediate = {
+		hidden_effect = { ek_character_setup_effect = yes }
+	}
+}
+
+#Directs newborns directly to the race & lifespan inheritance effect
+ek_race.0004 = {
+	type = character_event
+	hidden = yes
+
+	trigger = { NOT = { has_character_flag = char_setup } }
+
+	immediate = {
+		hidden_effect = {
+			race_traits_inheritance_effect = yes
+			lifespan_traits_inheritance_effect = yes
+		}
+	}
+}
