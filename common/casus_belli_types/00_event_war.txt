@@ -122,6 +122,9 @@ attrebus_potentate_cb = {
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		scope:attacker = { save_scope_as = attrebus }
+		scope:defender = { save_scope_as = potentate }
 	
 		# lose claims
 		if = {
@@ -130,32 +133,6 @@ attrebus_potentate_cb = {
 				list = target_titles
 				scope:claimant = {
 					remove_claim = prev
-				}
-			}
-		}
-		
-		# Attrebus' realm is shattered
-		scope:defender = {
-			save_scope_as = potentate
-			destroy_title = title:e_colovian_estates
-			
-			imprison = { target = scope:attacker }
-		}
-
-		if = {
-			limit = {
-				NOT = { scope:claimant = scope:attacker }
-				scope:claimant = {
-					can_add_hook = {
-						type = favor_hook
-						target = scope:attacker
-					}
-				}
-			}
-			scope:claimant = {
-				add_hook = {
-					target = scope:attacker
-					type = favor_hook
 				}
 			}
 		}
@@ -189,13 +166,14 @@ attrebus_potentate_cb = {
 		
 		# Event chain, the Potentate won, what to do with that?
 		hidden_effect = {
-			scope:defender = {
+			scope:potentate = {
 				trigger_event = ek_attrebus_potentate.0101
 			}
 		}
 	}
 	
-	on_primary_attacker_death = invalidate # Attrebus' death shatters the Colovian Estates and his cause
+	# on_primary_attacker_death = invalidate # Attrebus' death shatters the Colovian Estates and his cause
+	on_primary_attacker_death = inherit # Invalidated in ek_attrebus_potentate.0201
 	on_primary_defender_death = inherit
 	
 	transfer_behavior = transfer
