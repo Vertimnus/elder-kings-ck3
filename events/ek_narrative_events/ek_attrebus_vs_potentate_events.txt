@@ -93,6 +93,11 @@ ek_attrebus_potentate.0001 = {
 		
 		custom_tooltip = potentate_executed_elder_council_tooltip
 		add_character_flag = attrebus_v_potentate_1_executed_potentate
+		
+		# Prevent the AI from using it while it's being built
+		ai_chance = {
+			base = 0
+		}
 	}
 
 	# Throw him in the dungeon and throw the key!
@@ -110,6 +115,11 @@ ek_attrebus_potentate.0001 = {
 		imprison = { target = scope:potentate }
 		
 		add_character_flag = attrebus_v_potentate_1_imprisoned_potentate
+		
+		# Prevent the AI from using it while it's being built
+		ai_chance = {
+			base = 0
+		}
 	}
 	
 	# Banish him!
@@ -121,30 +131,59 @@ ek_attrebus_potentate.0001 = {
 		scope:potentate = { banish = yes }
 		
 		add_character_flag = attrebus_v_potentate_1_banished_potentate
+		
+		# Prevent the AI from using it while it's being built
+		ai_chance = {
+			base = 0
+		}
 	}
 	
 	# He ded
 	option = {
 		trigger = { scope:potentate = { is_alive = no } }
 		
-		name = ek_attrebus_potentate.0001.e
+		name = ek_attrebus_potentate.0001.d
 		
 		add_character_flag = attrebus_v_potentate_1_dead_potentate
+		
+		# Prevent the AI from using it while it's being built
+		ai_chance = {
+			base = 0
+		}
+	}
+	
+	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
+	option = {
+		name = ek_attrebus_potentate.0001.e
+		
+		add_character_flag = bypassed_attrebus_v_potentate
+		
+		show_as_tooltip = { interregnum_shatter_cyrodiil = yes }
 	}
 	
 	after = {
-		every_player = {
-			limit = { NOT = { this = scope:attrebus } }
+		if = {
+			limit = { NOT = { has_character_flag = bypassed_attrebus_v_potentate } }
+			every_player = {
+				limit = { NOT = { this = scope:attrebus } }
+				trigger_event = {
+					id = ek_attrebus_potentate.0002
+					days = 1
+				}
+			}
+			
+			# Part 2: The Akaviri lords in Cyrodiil
 			trigger_event = {
-				id = ek_attrebus_potentate.0002
-				days = 1
+				id = ek_attrebus_potentate.0003
+				days = 14
 			}
 		}
 		
-		# Part 2: The Akaviri lords in Cyrodiil
-		trigger_event = {
-			id = ek_attrebus_potentate.0003
-			days = 14
+		else = {
+			trigger_event = {
+				id = ek_attrebus_potentate.0011
+				days = 1
+			}
 		}
 	}
 }
@@ -869,166 +908,40 @@ ek_attrebus_potentate.0011 = {
 	
 	# It has been an honour to serve Cyrodiil
 	option = {
-		name = ek_attrebus_potentate.00011.a
+		name = ek_attrebus_potentate.0011.a
 		
-		### We create the vassal in the Imperial Isles (Imperial Commune)
-		create_character = {
-			location = title:c_imperial_city.title_province
-			template = new_commander_character ### EK TODO: Not that (lol)
-			faith = faith:imperial_cult
-			culture = culture:heartlander
-			save_scope_as = title_recipient
-			gender_female_chance = {
-				if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-					add = 0
-				}
-				else_if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-					add = 100
-				}
-				else = {
-					add = 50
-				}
+		interregnum_shatter_cyrodiil = yes
+	}
+	
+	after = {
+		every_player = {
+			trigger_event = {
+				id = ek_attrebus_potentate.0012
+				days = 3
 			}
 		}
-		scope:title_recipient = { ek_character_setup_effect = yes }
-		
-		# We give them everything we own in k_heartlands (they usurp c_imperial_city if needed)
-		title:k_heartlands = { add_to_list = titles_to_give }
-		title:d_imperial_isle = { add_to_list = titles_to_give }
-		title:c_imperial_city.title_province = { add_to_list = titles_to_give }
-		every_held_title = {
-			limit = { target_is_de_jure_liege_or_above = title:k_heartlands }
-			add_to_list = titles_to_give
-		}
-		
-		every_vassal = {
-			limit = { capital_province = { kingdom = title:k_heartlands } }
-			add_to_list = vassals_to_give
-		}
-		
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = no
-		}
-		
-		every_in_list = {
-			list = titles_to_give
-			change_title_holder = {
-				holder = scope:title_recipient
-				change = scope:change
-				take_baronies = yes
-			}
-		}
-		
-		every_in_list = {
-			list = vassals_to_give
-			change_liege = {
-				liege = scope:title_recipient
-				change = scope:change
-			}
-		}
-		
-		resolve_title_and_vassal_change = scope:change
-		
-		# Then they become independent
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = yes
-		}
-		scope:title_recipient = {
-			becomes_independent = {
-				change = scope:change
-			}
-		}
+	}
+}
 
-		resolve_title_and_vassal_change = scope:change
-		
-		
-		## Now we destroy some stuff
-		destroy_title = title:e_cyrodiil
-		
-		primary_title = { save_scope_as = primary_title }
-		
-		### Vassals become independent
-		every_vassal = {
-			limit = { NOT = { this.primary_title = { target_is_de_jure_liege_or_above = scope:primary_title } } }
-			create_title_and_vassal_change = {
-				type = independency
-				save_scope_as = change
-				add_claim_on_loss = yes
-			}
-			becomes_independent = {
-				change = scope:change
-			}
-
-			resolve_title_and_vassal_change = scope:change
-		}
-		
-		### Any county that isn't de Jure under our primary title becomes independent
-		every_held_title = {
-			limit = {
-				NOT = { this = scope:primary_title }
-				NOT = { target_is_de_jure_liege_or_above = scope:primary_title }
-			}
-			add_to_list = titles_to_make_independent
-		}
-		
-		every_in_list = {
-			list = titles_to_make_independent
-			save_scope_as = current_title
-			
-			create_character = {
-				location = scope:current_title.current_title
-				template = new_commander_character ### EK TODO: Not that (lol)
-				faith = scope:current_title.faith
-				culture = scope:current_title.culture
-				save_scope_as = title_recipient
-				gender_female_chance = {
-					if = {
-						limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-						add = 0
-					}
-					else_if = {
-						limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-						add = 100
-					}
-					else = {
-						add = 50
-					}
-				}
-			}
-			scope:title_recipient = { ek_character_setup_effect = yes }
-			
-			# We give them the title
-			create_title_and_vassal_change = {
-				type = independency
-				save_scope_as = change
-				add_claim_on_loss = no
-			}
-
-			change_title_holder = {
-				holder = scope:title_recipient
-				change = scope:change
-				take_baronies = yes
-			}
-			
-			# And we make them independent
-			scope:title_recipient = {
-				becomes_independent = {
-					change = scope:change
-				}
-			}
-			
-			resolve_title_and_vassal_change = scope:change
-		}
-		
-		custom_tooltip = imperial_commune_creation_tooltip
-		custom_tooltip = rest_cyrodiil_indepndent_tooltip
-		custom_tooltip = interregnum_starts_tooltip
+ek_attrebus_potentate.0012 = {
+	title = ek_attrebus_potentate.0012.t
+	
+	desc = ek_attrebus_potentate.0012.desc
+	
+	theme = stewardship_wealth_focus
+	
+	left_portrait = {
+		character = scope:attrebus
+		animation = personality_content
+	}
+	
+	immediate = {
+		show_as_tooltip = { scope:attrebus = { interregnum_shatter_cyrodiil = yes } }
+	}
+	
+	# An interesting development
+	option = {
+		name = ek_attrebus_potentate.0012.a
 	}
 }
 
