@@ -1,5 +1,5 @@
-﻿#Index 601-610 - Racial Traits
-#Index 611-620 - Lifespan Traits
+﻿#Index 601-630 - Racial Traits
+#Index 631-640 - Lifespan Traits
 #Index 621-700 - Species Traits
 
 # #Racial Traits
@@ -25,9 +25,24 @@ race_argonian = {
 race_khajiit = {
 	index = 602
 	
-	group = race
-	level = 1
-	same_opinion = 5
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_race_khajiit_desc
+			}
+			desc = trait_race_khajiit_character_desc
+		}
+	}
+	
+	inherit_chance = 100
+	parent_inheritance_sex = female
+}
+
+race_globinken = {
+	index = 603
 	
 	desc = {
 		first_valid = {
@@ -213,14 +228,15 @@ race_khajiit = {
 	# parent_inheritance_sex = female
 # }
 
-##Immortality Traits
+##Lifespan (& Immortality) Traits
 lifespan_1 = {
 	index = 611
 	life_expectancy = 50
 	monthly_lifestyle_xp_gain_mult = -0.3
-	monthly_prestige_gain_mult = -0.3
-	monthly_piety_gain_mult = -0.3
+	monthly_prestige_gain_mult = -0.15
+	monthly_piety_gain_mult = -0.15
 	stress_gain_mult = 0.15
+	fertility = -0.05
 	
 	shown_in_ruler_designer = no
 	
@@ -247,7 +263,7 @@ lifespan_2 = {
 	monthly_prestige_gain_mult = -0.2
 	monthly_piety_gain_mult = -0.2
 	stress_gain_mult = 0.2
-	fertility = -0.05
+	fertility = -0.1
 	
 	shown_in_ruler_designer = no
 	
@@ -274,7 +290,7 @@ lifespan_3 = {
 	monthly_prestige_gain_mult = -0.25
 	monthly_piety_gain_mult = -0.25
 	stress_gain_mult = 0.25
-	fertility = -0.1
+	fertility = -0.2
 	
 	shown_in_ruler_designer = no
 	
@@ -301,7 +317,7 @@ lifespan_4 = {
 	monthly_prestige_gain_mult = -0.3
 	monthly_piety_gain_mult = -0.3
 	stress_gain_mult = 0.3
-	fertility = -0.2
+	fertility = -0.3
 	
 	shown_in_ruler_designer = no
 	
@@ -328,7 +344,7 @@ lifespan_5 = {
 	monthly_prestige_gain_mult = -0.35
 	monthly_piety_gain_mult = -0.35
 	stress_gain_mult = 0.35
-	fertility = -0.25
+	fertility = -0.4
 	
 	shown_in_ruler_designer = no
 	
@@ -355,7 +371,7 @@ lifespan_6 = {
 	monthly_prestige_gain_mult = -0.4
 	monthly_piety_gain_mult = -0.4
 	stress_gain_mult = 0.4
-	fertility = -0.3
+	fertility = -0.5
 	
 	shown_in_ruler_designer = no
 	
@@ -391,7 +407,7 @@ lifespan_7 = {
 	monthly_prestige_gain_mult = -0.45
 	monthly_piety_gain_mult = -0.45
 	stress_gain_mult = 0.45
-	fertility = -0.35
+	fertility = -0.6
 	
 	shown_in_ruler_designer = no
 	

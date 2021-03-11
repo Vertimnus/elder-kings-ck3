@@ -36,12 +36,30 @@ scripted_trigger ek_race_compatable_trigger = {
 	trigger_if = {
 		limit = {
 			scope:mother = {
+				has_trait = race_globinken
+			}
+		}
+		scope:real_father = { has_trait = race_globinken }
+	}
+	trigger_if = {
+		limit = {
+			scope:real_father = {
+				has_trait = race_globinken
+			}
+		}
+		scope:mother = { has_trait = race_globinken }
+	}
+	trigger_if = {
+		limit = {
+			scope:mother = {
 				NOT = { has_trait = race_khajiit }
 				NOT = { has_trait = race_argonian }
+				NOT = { has_trait = race_globinken }
 			}
 			scope:real_father = {
 				NOT = { has_trait = race_khajiit }
 				NOT = { has_trait = race_argonian }
+				NOT = { has_trait = race_globinken }
 			}
 		}
 		always = yes
@@ -58,9 +76,15 @@ ek_race.0001 = {
 	}
 
 	immediate = {
-		random_dummy_gender_effect = yes
 		end_pregnancy = yes
 		pregnancy_cleanup_effect = yes
+	}
+	
+	after = {
+		if = {
+			limit = { has_trait = pregnant }
+			remove_trait = pregnant
+		}
 	}
 }
 
@@ -70,27 +94,21 @@ ek_race.0002 = {
 	hidden = yes
 
 	immediate = {
-		every_ruler = {
-			trigger_event = { id = ek_race.0003 days = 2 }
-			every_courtier_or_guest = {
-				trigger_event = { id = ek_race.0003 days = 2 }
-			}
+		every_living_character = {
+			trigger_event = { id = ek_race.0003 }
 		}
 	}
 }
 
-#Directs characters to the setup effect
+#Directs characters to the setup effect (race, lifespan and birthsign)
 ek_race.0003 = {
 	type = character_event
 	hidden = yes
+	
+	trigger = { NOT = { has_character_flag = char_setup } }
 
 	immediate = {
-		#First checks for potential inheritances
-		lifespan_traits_inheritance_effect = yes
-		race_traits_inheritance_effect = yes
-		
-		#Then goes for the generic event
-		ek_character_setup_effect = yes
+		hidden_effect = { ek_character_setup_effect = yes }
 	}
 }
 
@@ -99,8 +117,12 @@ ek_race.0004 = {
 	type = character_event
 	hidden = yes
 
+	trigger = { NOT = { has_character_flag = char_setup } }
+
 	immediate = {
-		race_traits_inheritance_effect = yes
-		lifespan_traits_inheritance_effect = yes
+		hidden_effect = {
+			race_traits_inheritance_effect = yes
+			lifespan_traits_inheritance_effect = yes
+		}
 	}
 }

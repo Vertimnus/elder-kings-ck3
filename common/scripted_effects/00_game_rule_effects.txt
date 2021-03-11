@@ -136,9 +136,18 @@ game_rule_create_spouse_and_children = {
 		
 		#EK EDIT
 		scope:spouse = { ek_character_setup_effect = yes }
-		scope:child_1 = { ek_character_setup_effect = yes }
-		scope:child_2 = { ek_character_setup_effect = yes }
-		scope:child_3 = { ek_character_setup_effect = yes }
+		if = { 
+			limit = { scope:mother.age >= 17 }
+			scope:child_1 = { ek_character_setup_effect = yes }
+		}
+		if = { 
+			limit = { scope:mother.age >= 25 }
+			scope:child_2 = { ek_character_setup_effect = yes }
+		}
+		if = { 
+			limit = { scope:mother.age >= 33 }
+			scope:child_3 = { ek_character_setup_effect = yes }
+		}
 		
 	}
 }
