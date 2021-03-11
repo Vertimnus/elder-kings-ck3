@@ -122,6 +122,9 @@ attrebus_potentate_cb = {
 	
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
+		
+		scope:attacker = { save_scope_as = attrebus }
+		scope:defender = { save_scope_as = potentate }
 	
 		# lose claims
 		if = {
@@ -130,111 +133,6 @@ attrebus_potentate_cb = {
 				list = target_titles
 				scope:claimant = {
 					remove_claim = prev
-				}
-			}
-		}
-		
-		# Attrebus' realm is shattered
-		scope:defender = {
-			save_scope_as = potentate
-			destroy_title = title:e_colovian_estates
-			
-			imprison = { target = scope:attacker }
-		}
-		
-		scope:attacker = {
-			save_scope_as = attrebus
-			
-			## Now we destroy some stuff
-			primary_title = { save_scope_as = primary_title }
-			
-			### Vassals become independent
-			every_vassal = {
-				limit = { NOT = { this.primary_title = { target_is_de_jure_liege_or_above = scope:primary_title } } }
-				create_title_and_vassal_change = {
-					type = independency
-					save_scope_as = change
-					add_claim_on_loss = yes
-				}
-				becomes_independent = {
-					change = scope:change
-				}
-
-				resolve_title_and_vassal_change = scope:change
-			}
-			
-			### Any county that isn't de Jure under our primary title becomes independent
-			every_held_title = {
-				limit = {
-					NOT = { this = scope:primary_title }
-					NOT = { target_is_de_jure_liege_or_above = scope:primary_title }
-				}
-				add_to_list = titles_to_make_independent
-			}
-			
-			every_in_list = {
-				list = titles_to_make_independent
-				save_scope_as = current_title
-				
-				create_character = {
-					location = scope:current_title.current_title
-					template = new_commander_character ### EK TODO: Not that (lol)
-					faith = scope:current_title.faith
-					culture = scope:current_title.culture
-					save_scope_as = title_recipient
-					gender_female_chance = {
-						if = {
-							limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-							add = 0
-						}
-						else_if = {
-							limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-							add = 100
-						}
-						else = {
-							add = 50
-						}
-					}
-				}
-				
-				# We give them the title
-				create_title_and_vassal_change = {
-					type = independency
-					save_scope_as = change
-					add_claim_on_loss = no
-				}
-
-				change_title_holder = {
-					holder = scope:title_recipient
-					change = scope:change
-					take_baronies = yes
-				}
-				
-				# And we make them independent
-				scope:title_recipient = {
-					becomes_independent = {
-						change = scope:change
-					}
-				}
-				
-				resolve_title_and_vassal_change = scope:change
-			}
-		}
-
-		if = {
-			limit = {
-				NOT = { scope:claimant = scope:attacker }
-				scope:claimant = {
-					can_add_hook = {
-						type = favor_hook
-						target = scope:attacker
-					}
-				}
-			}
-			scope:claimant = {
-				add_hook = {
-					target = scope:attacker
-					type = favor_hook
 				}
 			}
 		}
@@ -268,7 +166,7 @@ attrebus_potentate_cb = {
 		
 		# Event chain, the Potentate won, what to do with that?
 		hidden_effect = {
-			scope:defender = {
+			scope:potentate = {
 				trigger_event = ek_attrebus_potentate.0101
 			}
 		}
