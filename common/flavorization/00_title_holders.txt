@@ -44,7 +44,7 @@ title_high_king = { #High King
 	gender = male
 	special = holder
 	priority = 120
-	titles = { e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock }
+	titles = { e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock e_valenwood e_summerset e_morrowind e_elsweyr }
 	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
@@ -54,7 +54,7 @@ title_high_queen = { #High Queen
 	gender = female
 	special = holder
 	priority = 120
-	titles = {e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock }
+	titles = {e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock e_valenwood e_summerset e_morrowind e_elsweyr }
 	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
@@ -63,7 +63,7 @@ title_high_kingdom = { #High Kingdom
 	type = title
 	tier = empire
 	priority = 120
-	titles = { e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock }
+	titles = {e_skyrim e_western_skyrim e_eastern_skyrim e_hammerfell e_high_rock e_valenwood e_summerset e_morrowind e_elsweyr }
 	governments = { feudal_government clan_government tribal_government }
 	top_liege = no
 }
@@ -452,7 +452,7 @@ count_theocracy_male_bosmeri_religion = { #Keeper
 	priority = 20
 	top_liege = no
 	governments = { theocracy_government }
-	religions = { bosmeri_religion wyrd_religion }
+	religions = { bosmeri_religion }
 }
 count_theocracy_female_bosmeri_religion = { #Keeper
 	type = character
@@ -546,6 +546,108 @@ empire_theocracy_bosmeri_religion = { #Forest
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { bosmeri_religion }
+}
+
+#Reach Religion
+baron_theocracy_male_reach_religion = { #Brother
+	type = character
+	special = holder
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+baron_theocracy_female_reach_religion = { #Sister
+	type = character
+	special = holder
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+count_theocracy_male_reach_religion = { #Shaman
+	type = character
+	special = holder
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+count_theocracy_female_reach_religion = { #Shaman
+	type = character
+	special = holder
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+duke_theocracy_male_reach_religion = { #Tagh Shaman
+	type = character
+	special = holder
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+duke_theocracy_female_reach_religion = { #Tagh Shaman
+	type = character
+	special = holder
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+king_theocracy_male_reach_religion = { #Martagh Shaman
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+king_theocracy_female_reach_religion = { #Martagh Shaman
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+emperor_theocracy_male_reach_religion = { #Patriarch
+	type = character
+	special = holder
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+emperor_theocracy_female_reach_religion = { #Matriarch
+	type = character
+	special = holder
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
 }
 
 #Khajiiti Religion
@@ -793,7 +895,7 @@ duchy_tribal_tribe = { #Tribe
 	priority = 30
 	only_independent = yes
 	governments = { tribal_government }
-	cultures = { mountain_orc iron_orc wood_orc horsemen reachfolk }
+	cultures = { mountain_orc iron_orc wood_orc horsemen }
 }
 
 #Breton Group
@@ -860,46 +962,65 @@ county_feudal_barony = { #Barony
 
 #Reachmen Culture
 
-duke_feudal_tribal_independent_male_reachmen = { #Chief-of-Chiefs
+duke_feudal_independent_male_reachmen = { #Chief-of-Chiefs
 	type = character
 	special = holder
 	gender = male
 	tier = duchy
 	priority = 28
 	only_independent = yes
-	governments = { feudal_government tribal_government }
+	governments = { feudal_government tribal_government clan_government }
 	cultures = { reachfolk }
 	top_liege = no
 }
-duke_feudal_tribal_independent_female_reachmen = { #Chief-of-Chiefs
+duke_feudal_independent_female_reachmen = { #Chief-of-Chiefs
 	type = character
 	special = holder
 	gender = female
 	tier = duchy
 	priority = 28
 	only_independent = yes
-	governments = { feudal_government tribal_government }
+	governments = { feudal_government tribal_government clan_government }
 	cultures = { reachfolk }
 	top_liege = no
 }
-
-king_feudal_tribal_male_reachmen = { #Ard
+king_feudal_male_reachmen = { #Ard
 	type = character
 	special = holder
 	gender = male
 	tier = kingdom
 	priority = 48
-	governments = { feudal_government tribal_government }
+	governments = { feudal_government tribal_government clan_government }
 	cultures = { reachfolk }
 	top_liege = no
 }
-king_feudal_tribal_female_reachmen = { #Ard
+king_feudal_female_reachmen = { #Ard
 	type = character
 	special = holder
 	gender = female
 	tier = kingdom
 	priority = 48
-	governments = { feudal_government tribal_government }
+	governments = { feudal_government tribal_government clan_government }
+	cultures = { reachfolk }
+	top_liege = no
+}
+emperor_feudal_male_reachmen = { #Tagh Ard
+	type = character
+	gender = male
+	special = holder
+	tier = empire
+	priority = 102
+	governments = { feudal_government tribal_government clan_government }
+	cultures = { reachfolk }
+	top_liege = no
+}
+emperor_feudal_female_reachmen = { #Tagh Ard
+	type = character
+	gender = female
+	special = holder
+	tier = empire
+	priority = 102
+	governments = { feudal_government tribal_government clan_government }
 	cultures = { reachfolk }
 	top_liege = no
 }
@@ -1048,6 +1169,29 @@ kingdom_feudal_nordic_group_independent = { #Free Hold
 	governments = { feudal_government }
 	culture_groups = { nordic_group }
 	priority = 47
+	top_liege = no
+}
+
+#Bosmeris Group
+
+duke_feudal_male_bosmeris_group = { #Treethane
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 28
+	governments = { feudal_government }
+	culture_groups = { bosmeris_group }
+	top_liege = no
+}
+duke_feudal_female_bosmeris_group = { #Treethane
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 28
+	governments = { feudal_government }
+	culture_groups = { bosmeris_group }
 	top_liege = no
 }
 
@@ -1522,7 +1666,7 @@ king_feudal_male_alikr = { #Sultan
 	special = holder
 	tier = kingdom
 	priority = 49
-	governments = { feudal_government }
+	governments = { feudal_government tribal_government }
 	cultures = { alikr }
 	top_liege = no
 }
@@ -1532,7 +1676,7 @@ king_feudal_female_alikr = { #Sultana
 	special = holder
 	tier = kingdom
 	priority = 49
-	governments = { feudal_government }
+	governments = { feudal_government tribal_government }
 	cultures = { alikr }
 	top_liege = no
 }
@@ -1540,7 +1684,7 @@ kingdom_feudal_alikr = { #Sultanate
 	type = title
 	tier = kingdom
 	priority = 49
-	governments = { feudal_government }
+	governments = { feudal_government tribal_government }
 	cultures = { alikr }
 	top_liege = no
 }
