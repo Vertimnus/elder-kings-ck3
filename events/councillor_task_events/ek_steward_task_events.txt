@@ -1,0 +1,124 @@
+﻿namespace = ek_steward_task
+
+ek_steward_task.0001 = {
+	title = ek_steward_task.0001.t
+	desc = ek_steward_task.0001.desc
+	
+	# 4 options: Your own culture, 2 random ones from your culture group native, 1 nomadic, and one reload the event plox
+	
+	immediate = {
+		ROOT.culture = { save_scope_as = own_culture }
+		scope:county = {
+			random_in_list = {
+				variable = native_culture_list
+				limit = {
+					this.culture_group = ROOT.culture_group
+					is_target_in_global_variable_list = {
+						name = culture_is_alive
+						target = this
+					}
+					NOR = { this = scope:own_culture }
+				}
+				save_scope_as = native_culture_1
+			}
+			random_in_list = {
+				variable = native_culture_list
+				limit = {
+					this.culture_group = ROOT.culture_group
+					is_target_in_global_variable_list = {
+						name = culture_is_alive
+						target = this
+					}
+					NOR = { this = scope:own_culture this = scope:native_culture_1 }
+				}
+				save_scope_as = native_culture_2
+			}
+		}
+		random_in_global_list = {
+			variable = culture_list
+			limit = {
+				this.culture_group = ROOT.culture_group
+				is_target_in_global_variable_list = {
+					name = culture_is_alive
+					target = this
+				}
+				has_innovation = innovation_native_nomadic
+			}
+			save_scope_as = nomadic_culture
+		}
+	}
+	
+	option = {
+		name = ek_steward_task.0001.a
+		
+		custom_tooltip = ek_steward_task.0001.convert_own_culture_tooltip
+		# If not native, then we tell it'll be very long
+		if = {
+			limit = {
+				scope:county = {
+					NOT = {
+						is_target_in_variable_list = {
+							name = native_culture_list
+							target = scope:own_culture
+						}
+					}
+				}
+			}
+			custom_tooltip = ek_steward_task.0001.own_culture_not_native_tooltip
+		}
+		
+		scope:county = {
+			set_variable = {
+				name = culture_to_convert
+				value = scope:own_culture
+			}
+		}
+	}
+	
+	option = {
+		trigger = { exists = scope:native_culture_1 }
+		name = ek_steward_task.0001.b
+		
+		custom_tooltip = ek_steward_task.0001.convert_native_culture_1_tooltip
+		scope:county = {
+			set_variable = {
+				name = culture_to_convert
+				value = scope:native_culture_1
+			}
+		}
+	}
+	
+	option = {
+		trigger = { exists = scope:native_culture_2 }
+		name = ek_steward_task.0001.c
+		
+		custom_tooltip = ek_steward_task.0001.convert_native_culture_2_tooltip
+		scope:county = {
+			set_variable = {
+				name = culture_to_convert
+				value = scope:native_culture_2
+			}
+		}
+	}
+	
+	option = {
+		trigger = { exists = scope:nomadic_culture }
+		name = ek_steward_task.0001.d
+		
+		custom_tooltip = ek_steward_task.0001.convert_nomadic_culture_tooltip
+		custom_tooltip = ek_steward_task.0001.nomadic_culture_not_native_tooltip
+		scope:county = {
+			set_variable = {
+				name = culture_to_convert
+				value = scope:nomadic_culture
+			}
+		}
+	}
+	
+	option = {
+		name = ek_steward_task.0001.e
+		
+		custom_tooltip = ek_steward_task.0001.refresh_cultures
+		trigger_event = { id = ek_steward_task.0001 }
+	}
+}

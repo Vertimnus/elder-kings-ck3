@@ -14,13 +14,26 @@ set_culture_native_to = {
 	$CULTURE$ = { add_innovation = innovation_native_$REGION$ }
 }
 
+county_save_native_cultures = {
+	every_in_global_list = {
+		variable = culture_list
+		limit = { is_native_to = { CULTURE = this REGION = $REGION$ } }
+		save_temporary_scope_as = culture_to_save
+		scope:current_county = {
+			add_to_variable_list = {
+				name = native_culture_list
+				target = scope:culture_to_save
+			}
+		}
+	}
+}
+
 create_local_culture_decision_scripted_effects = {
 	random_in_global_list = {
 		variable = culture_list
 		limit = {
 			this.culture_group = root.culture_group
 			is_native_to = { REGION = $REGION$ }
-			has_innovation = innovation_native_$REGION$
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = culture_is_alive
