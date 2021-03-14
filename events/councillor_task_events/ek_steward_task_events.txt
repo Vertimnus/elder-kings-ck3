@@ -2,7 +2,24 @@
 
 ek_steward_task.0001 = {
 	title = ek_steward_task.0001.t
-	desc = ek_steward_task.0001.desc
+	desc = {
+		# Same culture group?
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:county.culture_group = root.culture_group }
+				desc = ek_steward_task.0001.desc.same_culture_group
+			}
+			desc = ek_steward_task.0001.desc.other_culture_group
+		}
+		# Nomadic?
+		triggered_desc = {
+			trigger = { scope:county.culture = { has_innovation = innovation_native_nomadic } }
+			desc = ek_steward_task.0001.desc.nomadic
+		}
+		# Ending
+		desc = ek_steward_task.0001.desc.ending
+	}
+	
 	theme = culture_change
 	
 	left_portrait = {
@@ -13,11 +30,14 @@ ek_steward_task.0001 = {
 	# 4 options: Your own culture, 2 random ones from your culture group native, 1 nomadic, and one reload the event plox
 	
 	immediate = {
+		scope:county.culture = { save_scope_as = county_old_culture }
+		scope:county.duchy = { save_scope_as = de_jure_duchy }
 		ROOT.culture = { save_scope_as = own_culture }
 		scope:county = {
 			random_in_list = {
 				variable = native_culture_list
 				limit = {
+					NOT = { this = scope:county.culture }
 					this.culture_group = ROOT.culture_group
 					is_target_in_global_variable_list = {
 						name = culture_is_alive
@@ -30,6 +50,7 @@ ek_steward_task.0001 = {
 			random_in_list = {
 				variable = native_culture_list
 				limit = {
+					NOT = { this = scope:county.culture }
 					this.culture_group = ROOT.culture_group
 					is_target_in_global_variable_list = {
 						name = culture_is_alive
@@ -43,6 +64,7 @@ ek_steward_task.0001 = {
 		random_in_global_list = {
 			variable = culture_list
 			limit = {
+				NOT = { this = scope:county.culture }
 				this.culture_group = ROOT.culture_group
 				is_target_in_global_variable_list = {
 					name = culture_is_alive
