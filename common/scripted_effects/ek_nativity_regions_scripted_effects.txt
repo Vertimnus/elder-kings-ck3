@@ -1,0 +1,89 @@
+﻿save_culture_in_global_list = {
+	$CULTURE$ = { save_scope_as = culture_to_save }
+	add_to_global_variable_list = {
+		name = culture_list
+		target = scope:culture_to_save
+	}
+}
+
+set_culture_native_to = {
+	add_to_global_variable_list = {
+		name = culture_innovation_native_$REGION$
+		target = $CULTURE$
+	}
+	$CULTURE$ = { add_innovation = innovation_native_$REGION$ }
+}
+
+county_save_native_cultures = {
+	every_in_global_list = {
+		variable = culture_list
+		limit = { is_native_to = { CULTURE = this REGION = $REGION$ } }
+		save_temporary_scope_as = culture_to_save
+		scope:current_county = {
+			add_to_variable_list = {
+				name = native_culture_list
+				target = scope:culture_to_save
+			}
+		}
+	}
+}
+
+create_local_culture_decision_scripted_effects = {
+	random_in_global_list = {
+		variable = culture_list
+		limit = {
+			this.culture_group = root.culture_group
+			is_native_to = { REGION = $REGION$ }
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = culture_is_alive
+					target = this
+				}
+			}
+		}
+		
+		save_scope_as = new_culture
+	}
+	
+	# The culture is revived!
+	add_to_global_variable_list = {
+		name = culture_is_alive
+		target = scope:new_culture
+	}
+	
+	### Capital in $REGION$, personally convert culture
+	if = {
+		limit = { capital_province = { geographical_region = custom_nativity_$REGION$ } }
+		hidden_effect = {
+			every_courtier = {
+				limit = {
+					has_culture = root.culture
+					dynasty = root.dynasty
+				}
+				set_culture = scope:new_culture
+			}
+			capital_county = { set_county_culture = scope:new_culture }
+			# Problem: This seems to give the navitity innovation
+			# scope:new_culture = { get_all_innovations_from = root.culture }
+			# Really necessary? If the Duraki culture gets re-wiped should it immediately be available, or should it be recreated?
+			
+		}
+		set_culture = scope:new_culture
+		add_character_flag = converted_culture_this_lifetime
+	}
+	
+	### Most of the titles held within the region should convert
+	hidden_effect = {
+		every_held_title = {
+			limit = {
+				tier = tier_county
+				culture.culture_group = root.culture.culture_group
+				title_province = { geographical_region = custom_nativity_$REGION$ }
+			}
+			random = {
+				chance = 60
+				set_county_culture = scope:new_culture
+			}
+		}
+	}
+}
