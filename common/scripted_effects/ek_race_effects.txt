@@ -100,7 +100,7 @@ lifespan_traits_effect = {
 				culture_group = culture_group:ayleid_group
 			}
 		}
-		add_trait = lifespan_2
+		add_trait = lifespan_3
 	}
 	
 	add_character_flag = char_setup
@@ -108,23 +108,101 @@ lifespan_traits_effect = {
 
 lifespan_traits_inheritance_effect = {
 	
-	#>2 + >2 = 2 or 3
+	#>2 + >2 = 3 or 4
 	if = {
 		limit = {
 			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
 			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
 		}
 		random_list = {
-			80 = { add_trait = lifespan_2 }
+			95 = { add_trait = lifespan_3 }
+			5 = { add_trait = lifespan_4 }
+		}
+	}
+	
+	#>2 + 2 = 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+			scope:mother = { has_trait = lifespan_2 }
+		}
+		random_list = {
+			60 = { add_trait = lifespan_2 }
+			40 = { add_trait = lifespan_3 }
+		}
+	}
+	
+	#2 + >2 = 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan_2 }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+		}
+		random_list = {
+			60 = { add_trait = lifespan_2 }
+			40 = { add_trait = lifespan_3 }
+		}
+	}
+	
+	#>2 + 1 = 1, 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+			scope:mother = { has_trait = lifespan_1 }
+		}
+		random_list = {
+			20 = { add_trait = lifespan_1 }
+			60 = { add_trait = lifespan_2 }
 			20 = { add_trait = lifespan_3 }
 		}
 	}
 	
-	#>1 + >1 = 2
-	if = {
+	#1 + >2 = 1, 2 or 3
+	else_if = {
 		limit = {
-			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
-			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			scope:real_father = { has_trait = lifespan_1 }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+		}
+		random_list = {
+			20 = { add_trait = lifespan_1 }
+			60 = { add_trait = lifespan_2 }
+			20 = { add_trait = lifespan_3 }
+		}
+	}
+	
+	#>2 + 0 = 0, 1, 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+			scope:mother = { NOT = { has_trait = lifespan } }
+		}
+		random_list = {
+			20 = { }
+			30 = { add_trait = lifespan_1 }
+			30 = { add_trait = lifespan_2 }
+			20 = { add_trait = lifespan_3 }
+		}
+	}
+	
+	#0 + >2 = 0, 1, 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { NOT = { has_trait = lifespan } }
+			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
+		}
+		random_list = {
+			20 = { }
+			30 = { add_trait = lifespan_1 }
+			30 = { add_trait = lifespan_2 }
+			20 = { add_trait = lifespan_3 }
+		}
+	}
+	
+	#2 + 2 = 2 or 3
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan_2 }
+			scope:mother = { has_trait = lifespan_2 }
 		}
 		random_list = {
 			90 = { add_trait = lifespan_2 }
@@ -132,10 +210,10 @@ lifespan_traits_inheritance_effect = {
 		}
 	}
 	
-	#>1 + 1 = 1 or 2
+	#2 + 1 = 1 or 2
 	else_if = {
 		limit = {
-			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			scope:real_father = { has_trait = lifespan_2 }
 			scope:mother = { has_trait = lifespan_1  }
 		}
 		random_list = {
@@ -144,15 +222,41 @@ lifespan_traits_inheritance_effect = {
 		}
 	}
 	
-	#1 + >1 = 1 or 2
+	#1 + 2 = 1 or 2
 	else_if = {
 		limit = {
 			scope:real_father = { has_trait = lifespan_1  }
-			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
+			scope:mother = { has_trait = lifespan_2 }
 		}
 		random_list = {
 			50 = { add_trait = lifespan_2 }
 			50 = { add_trait = lifespan_1 }
+		}
+	}
+	
+	#2 + 0 = 1
+	else_if = {
+		limit = {
+			scope:real_father = { has_trait = lifespan_2 }
+			NOT = { scope:mother = { has_trait = lifespan } }
+		}
+		random_list = {
+			20 = { }
+			60 = { add_trait = lifespan_1 }
+			20 = { add_trait = lifespan_2 }
+		}
+	}
+	
+	#0 + 2 = 1
+	else_if = {
+		limit = {
+			NOT = { scope:real_father = { has_trait = lifespan } }
+			scope:mother = { has_trait = lifespan_2 }
+		}
+		random_list = {
+			20 = { }
+			60 = { add_trait = lifespan_1 }
+			20 = { add_trait = lifespan_2 }
 		}
 	}
 	
@@ -166,24 +270,6 @@ lifespan_traits_inheritance_effect = {
 			85 = { add_trait = lifespan_1 }
 			15 = { add_trait = lifespan_2 }
 		}
-	}
-	
-	#>1 + 0 = 1
-	else_if = {
-		limit = {
-			scope:real_father = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
-			NOT = { scope:mother = { has_trait = lifespan } }
-		}
-		add_trait = lifespan_1
-	}
-	
-	#0 + >1 = 1
-	else_if = {
-		limit = {
-			NOT = { scope:real_father = { has_trait = lifespan } }
-			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 } }
-		}
-		add_trait = lifespan_1
 	}
 	
 	#1 + 0 = 0 or 1
