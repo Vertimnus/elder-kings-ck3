@@ -157,6 +157,26 @@ skaal_hunter = {
 }
 
 ### Cyrodiilic
+armored_legionaires = {
+	type = heavy_infantry
+	
+	damage = 40
+	toughness = 30
+	pursuit = 0
+	screen = 10
+	
+	counters = {
+		pikemen = 1
+	}
+	
+	buy_cost = { gold = @heavy_infantry_maa_recruitment_cost }
+	low_maintenance_cost = { @heavy_infantry_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @heavy_infantry_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_infantry
+}
 nibenese_battlemages = {
 	type = mages
 	
@@ -210,6 +230,34 @@ yokudan_way_of_the_sword = {
 	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = heavy_infantry
+}
+abecean_pirates = {
+	type = skirmishers
+	
+	damage = 15
+	toughness = 20
+	pursuit = 15
+	screen = 20
+	
+	terrain_bonus = {
+		plains = { damage = 6 toughness = 6 }
+		farmlands = { damage = 6 toughness = 6 }
+		floodplains = { damage = 6 toughness = 6 }
+		oasis = { damage = 6 toughness = 6 }
+		drylands = { damage = 6 toughness = 6 }
+	}
+
+	counters = {
+		heavy_infantry = 1
+	}
+
+	buy_cost = { gold = @skirmisher_maa_recruitment_cost }
+	low_maintenance_cost = { @skirmisher_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @skirmisher_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = culture_ai_weight_skirmishers }
+	icon = skirmishers
 }
 
 ### Khajiiti

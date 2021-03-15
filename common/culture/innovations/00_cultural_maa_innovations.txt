@@ -78,13 +78,32 @@ innovation_skaal_hunter = {
 }
 
 ### Cyrodiilic
+innovation_armored_legionaires = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:colovian
+			this = culture:heartlander
+		}
+	}
+
+	unlock_maa = armored_legionaires
+
+	flag = global_maa
+}
 innovation_nibenese_battlemages = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	icon = @special_maa_01
 
 	potential = {
-		this = culture:nibenese
+		OR = {
+			this = culture:nibenese
+			this = culture:heartlander
+		}
 	}
 
 	unlock_maa = nibenese_battlemages
@@ -108,6 +127,29 @@ innovation_way_of_the_sword = {
 	}
 
 	unlock_maa = yokudan_way_of_the_sword
+
+	flag = global_maa
+}
+innovation_abecean_pirates = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:abecean
+		}
+	}
+	
+	modifier = {
+		embarkation_cost_mult = -0.25
+		raid_speed = 0.1
+	}
+	
+	custom = unlocks_naval_raiding
+	custom = unlocks_sailable_major_rivers
+
+	unlock_maa = abecean_pirates
 
 	flag = global_maa
 }
