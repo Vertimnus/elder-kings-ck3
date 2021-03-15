@@ -1,0 +1,85 @@
+﻿# DRAGONBLOOD LEGACIES
+
+dragonblood_legacy_1 = { # Chosen by the Gods
+	legacy = dragonblood_legacy_track
+
+	### EK TODO: Tie that to the Dragonblood
+	#can_be_picked = { always = no }
+	
+	cost = dynasty_legacy_tier_1_cost
+
+	character_modifier = {
+		theocracy_government_opinion_same_faith = 5
+		monthly_prestige_gain_mult = 0.05
+		monthly_piety_gain_mult = 0.05
+	}
+	
+	ai_chance = {
+		value = 11
+		if = {
+			limit = {
+				can_start_new_legacy_track_trigger = no
+			}
+			multiply = 0
+		}
+	}
+}
+
+dragonblood_legacy_2 = { # The Flames of Youth
+	legacy = dragonblood_legacy_track
+
+	cost = dynasty_legacy_tier_2_cost
+
+	### EK TODO: Add that effect
+	effect = {
+		custom_description_no_bullet = {
+			text = dragonblood_legacy_2_effect
+		}
+	}
+}
+
+dragonblood_legacy_3 = { # Right to Rule
+	legacy = dragonblood_legacy_track
+
+	cost = dynasty_legacy_tier_3_cost
+
+	character_modifier = {
+		domain_limit = 1
+		vassal_opinion = 5
+	}
+}
+
+dragonblood_legacy_4 = { # Soul of a Dragon, body of a Dragon
+	legacy = dragonblood_legacy_track
+
+	cost = dynasty_legacy_tier_4_cost
+
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.05
+		
+		diplomacy = 1
+		martial = 1
+		stewardship = 1
+		intrigue = 1
+		learning = 1
+		prowess = 2
+	}
+}
+
+dragonblood_legacy_5 = { # Earth, Mind, Dragon
+	legacy = dragonblood_legacy_track
+
+	cost = dynasty_legacy_tier_5_cost
+	
+	unlock_maa = dovah_vahlok
+
+	character_modifier = {
+		men_at_arms_cap = 1
+	}
+	effect = {
+		trigger_event = ek_legacies.0001
+		custom_description_no_bullet = {
+			text = dragonblood_legacy_5_effect
+		}
+	}
+}
