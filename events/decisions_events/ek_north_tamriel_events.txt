@@ -166,3 +166,55 @@ north_tamriel.0011 = {
 		title:c_japhet_folly = { set_de_jure_liege_title = title:d_northshore }
 	}
 }
+
+# From turn_reach_nord_hold_decision
+north_tamriel.0021 = {
+	type = character_event
+	title = north_tamriel.0021.t
+	desc = north_tamriel.0021.desc
+	theme = war
+	
+	immediate = {
+		root = { save_scope_as = reach_pacifier }
+		title:c_markarth = { save_scope_as = markarth }
+	}
+	
+	left_portrait = {
+		character = scope:reach_pacifier
+		animation = personality_rational
+	}
+
+	option = {
+		name = north_tamriel.0021.a
+		
+		turn_reach_nord_hold_decision_effect = yes
+	}
+	
+	after = {
+		every_player = {
+			# limit = { NOT = { this = root } }
+			trigger_event = north_tamriel.0022
+		}
+	}
+}
+
+### TODO: Give a Reachfolk specific description
+north_tamriel.0022 = {
+	type = character_event
+	title = north_tamriel.0021.t
+	desc = north_tamriel.0022.desc
+	theme = war
+	
+	left_portrait = {
+		character = scope:reach_pacifier
+		animation = personality_rational
+	}
+
+	option = {
+		name = north_tamriel.0022.a
+		
+		show_as_tooltip = {
+			scope:reach_pacifier = { turn_reach_nord_hold_decision_effect = yes }
+		}
+	}
+}
