@@ -1,6 +1,6 @@
 ﻿l_english:
  HOUSE_VIEW_FOUNDED:0 "Founded in [Select_CString( GreaterThan_int32( DynastyHouse.GetFoundYear, '(int32)2920' ), '2E', '1E' )] [Subtract_int32( DynastyHouse.GetFoundYear, Multiply_int32( Subtract_int32( BoolTo1And2( GreaterThan_int32( DynastyHouse.GetFoundYear, '(int32)2920' ) ), '(int32)1' ), '(int32)2920' ) )] by [DynastyHouse.GetFounder.GetName]" # EK Era System
- DYNASTY_VIEW_CONCEPT:3 "[dynasty|E] of House [DynastyHouse.GetBaseNameNoTooltip]"
+ DYNASTY_VIEW_CONCEPT:3 "[dynasty|E] of House [DynastyHouse.GetNameNoTooltip]"
  HOUSE_VIEW_CONCEPT:3 "[SelectLocalization( DynastyHouse.IsPlayerMember, 'HOUSE_VIEW_PLAYER_IS_MEMBER', 'HOUSE_VIEW_NOT_YOUR_HOUSE')]"
  HOUSE_VIEW_NOT_YOUR_HOUSE:0 "Noble [house|E]"
  HOUSE_VIEW_NUM_OF_HOUSE_MEMBERS:0 "[DynastyHouse.GetNumberOfMembers|V] Living Members"
@@ -27,9 +27,9 @@
  DYNASTY_PRESTIGE_BALANCE_TOOLTIP:1 "#T [dynasty_prestige_i][dynasty_prestige]#!\n[Dynasty.GetPrestigeBreakdown|0=+]\n[Dynasty.GetPrestigeProgress]"
  DYNASTY_PRESTIGE_PROGRESS:0 "Progress towards [DYNASTY.GetNextPrestigeLevelName]: $CURRENT|0$/$NEXT|0$"
  DYNASTY_PRESTIGE_AT_MAX_LEVEL:0 "[DYNASTY.GetBaseName] is at the highest Level of Fame"
- HOUSE_VIEW_NAME_WITH_HOUSE:1 "House [DynastyHouse.GetBaseNameNoTooltip]"
+ HOUSE_VIEW_NAME_WITH_HOUSE:1 "House [DynastyHouse.GetNameNoTooltip]"
  #COOLTIP_HOUSE_NAME:0 "" delete this
- HOUSE_TT_NAME:0 "House [DynastyHouse.GetBaseNameNoTooltip]"
+ HOUSE_TT_NAME:0 "House [DynastyHouse.GetNameNoTooltip]"
  HOUSE_VIEW_MOTTO:1 ""[DynastyHouse.GetMotto]""
  HOUSE_VIEW_PLAYER_IS_MEMBER:1 "Your [house|E]"
  DYNASTY_HOUSE_TT_HEAD_OF_HOUSE:1 "[house_head|E]: [DynastyHouse.GetHeadOfHouse.GetShortUIName|U]"
@@ -72,7 +72,7 @@
  DYNASTY_MODIFIERS:1 "Dynasty Modifiers:"
  HOUSE_VIEW_LEGACY_TOOLTIP_HEADER:0 "#T $NAME$#!"
  HOUSE_VIEW_LEGACY_TOOLTIP_ITEM:0 "#T $PERK$#!\n$EFFECT$"
- HOUSE_VIEW_HOUSE_HEAD_OF:0 "[house_head|E] of House [Character.GetDynastyHouseNameNoTooltip]"
+ HOUSE_VIEW_HOUSE_HEAD_OF:0 "[house_head|E] of House [Character.GetDynastyHouse.GetNameNoTooltip]"
  HOUSE_VIEW_MAX_MILITARY_STRENGTH:1 "Maximum Military Strength: @soldier_icon! #high [Character.GetMaxMilitaryStrength|0]#!"
  HOUSE_LIST_HEAD_MAX_MILITARY_STRENGTH:0 "@soldier_icon! [DynastyHouse.GetHeadOfHouse.GetMaxMilitaryStrength|0]"
  HOUSE_LIST_MILITARY_STRENGTH_TT:0 "Max Military Strength of [house_head|E]"
