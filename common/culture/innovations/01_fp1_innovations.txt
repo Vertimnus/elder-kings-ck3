@@ -31,37 +31,38 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
-#culture_group_military
-innovation_magical_studies = {
-	group = culture_group_military
-	culture_era = culture_era_early_medieval
-	icon = @knight	
-
-	custom = education_magical_ability_available
+### EK EDIT: Disabled the innovations
+### EK TODO: Give them to someone else
+# Culture-Specific Innovations
+# innovation_varangian_adventurers = {
+	# group = culture_group_regional
+	# culture_era = culture_era_tribal
+	# icon = @hird
 	
-	unlock_maa = spellswords
+	# potential = {
+		# has_fp1_dlc_trigger = yes
+		# culture_group = culture_group:north_germanic_group
+		# NOT = { has_cultural_era_or_later = culture_era_early_medieval }
+	# }
 	
-	maa_upgrade = {
-		type = mages
-		damage = 3
-	}
+	# custom = unlock_varangian_adventurer_cb
+	
+	# flag = global_regional
+	# flag = tribal_era_regional
+# }
 
-	flag = global_regular
-	flag = early_medieval_era_regular
-}
+# # Regional Innovations
+# innovation_all_things = {
+	# group = culture_group_regional
+	# culture_era = culture_era_tribal
+	# region = world_europe_north
+	# icon = @raised_banner
 
-#culture_group_regional
-innovation_crossroads_cultures_faiths = {
-	group = culture_group_regional
-	culture_era = culture_era_early_medieval
-	region = mundus_tamriel_reach
-	icon = @nobility_02
+	# potential = { has_fp1_dlc_trigger = yes }
 
-	modifier = {
-		different_culture_opinion = 10
-		different_faith_opinion = 10
-	}
+	# custom = unlocks_authority_cooldown_breaking
+	# modifier = { tribal_government_vassal_opinion = 5 }
 
-	flag = global_regional
-	flag = tribal_era_regional
-}
+	# flag = global_regional
+	# flag = tribal_era_regional
+# }
