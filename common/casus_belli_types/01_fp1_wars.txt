@@ -327,273 +327,275 @@ fp1_varangian_adventurer_conquest = {
 				send_interface_toast = {
 					title = fp1_varangian_adventurer_conquest.troops_raised.tt
 					left_icon = scope:attacker
+					
+					### EK EDIT: As it uses vanilla DLC-locked men_at_arms, this is disabled for now
 					# Due to spawn_army parameter limitations and balancing concerns, we have to do this somewhat grossly.
 					## Base Army
-					if = {
-						limit = { fp1_va_eligible_for_scandinavian_troops_trigger = yes }
-						# +100 Varangian Veterans, +100 levies (to keep the count even).
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 1 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 1
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Varangian Veterans
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 2 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Bondi
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 3 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 2
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Bondi
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 4 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Vigmen
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 5 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 2
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Vigmen
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 6 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 4
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Vigmen
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 7 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 6
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Vigmen
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 8 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 8
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Huscarls
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value = 9 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 8
-								}
-								men_at_arms = {
-									type = huscarl
-									stacks = 2
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-						# +200 Huscarls
-						if = {
-							limit = { varangian_adventurers_bonus_levies_value >= 10 }
-							spawn_army = {
-								men_at_arms = {
-									type = varangian_veterans
-									stacks = 3
-								}
-								men_at_arms = {
-									type = bondi
-									stacks = 4
-								}
-								men_at_arms = {
-									type = vigmen
-									stacks = 8
-								}
-								men_at_arms = {
-									type = huscarl
-									stacks = 4
-								}
-								levies = 100
-								inheritable = yes
-								location = scope:attacker.capital_province
-								war = scope:war
-								war_keep_on_attacker_victory = yes
-								save_scope_as = new_army
-								name = scandi_adventurer_event_troops
-							}
-						}
-					}
-					## Perk Army
- 					### +400 Varangian Veterans, +400 Vigmen, +100 Bondi, +100 levies (to keep the count even).
- 					if = {
-						limit = {
-							dynasty = { has_dynasty_perk = fp1_adventure_legacy_1 }
-						}
-						spawn_army = {
-							men_at_arms = {
-								type = varangian_veterans
-								stacks = 4
-							}
-							men_at_arms = {
-								type = vigmen
-								stacks = 4
-							}
-							men_at_arms = {
-								type = bondi
-								stacks = 1
-							}
-							levies = 100
-							inheritable = yes
-							location = scope:attacker.capital_province
-							war = scope:war
-							war_keep_on_attacker_victory = yes
-							save_scope_as = new_army
-							name = scandi_adventurer_event_troops
-						}
-					}
+					# if = {
+						# limit = { fp1_va_eligible_for_scandinavian_troops_trigger = yes }
+						# # +100 Varangian Veterans, +100 levies (to keep the count even).
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 1 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 1
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Varangian Veterans
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 2 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Bondi
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 3 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 2
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Bondi
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 4 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Vigmen
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 5 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 2
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Vigmen
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 6 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 4
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Vigmen
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 7 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 6
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Vigmen
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 8 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 8
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Huscarls
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value = 9 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 8
+								# }
+								# men_at_arms = {
+									# type = huscarl
+									# stacks = 2
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+						# # +200 Huscarls
+						# if = {
+							# limit = { varangian_adventurers_bonus_levies_value >= 10 }
+							# spawn_army = {
+								# men_at_arms = {
+									# type = varangian_veterans
+									# stacks = 3
+								# }
+								# men_at_arms = {
+									# type = bondi
+									# stacks = 4
+								# }
+								# men_at_arms = {
+									# type = vigmen
+									# stacks = 8
+								# }
+								# men_at_arms = {
+									# type = huscarl
+									# stacks = 4
+								# }
+								# levies = 100
+								# inheritable = yes
+								# location = scope:attacker.capital_province
+								# war = scope:war
+								# war_keep_on_attacker_victory = yes
+								# save_scope_as = new_army
+								# name = scandi_adventurer_event_troops
+							# }
+						# }
+					# }
+					# ## Perk Army
+ 					# ### +400 Varangian Veterans, +400 Vigmen, +100 Bondi, +100 levies (to keep the count even).
+ 					# if = {
+						# limit = {
+							# dynasty = { has_dynasty_perk = fp1_adventure_legacy_1 }
+						# }
+						# spawn_army = {
+							# men_at_arms = {
+								# type = varangian_veterans
+								# stacks = 4
+							# }
+							# men_at_arms = {
+								# type = vigmen
+								# stacks = 4
+							# }
+							# men_at_arms = {
+								# type = bondi
+								# stacks = 1
+							# }
+							# levies = 100
+							# inheritable = yes
+							# location = scope:attacker.capital_province
+							# war = scope:war
+							# war_keep_on_attacker_victory = yes
+							# save_scope_as = new_army
+							# name = scandi_adventurer_event_troops
+						# }
+					# }
 				}
 			}
 		}
