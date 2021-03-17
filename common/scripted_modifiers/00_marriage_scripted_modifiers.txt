@@ -1292,7 +1292,7 @@ marriage_ai_accept_modifier = {
 	#########
 	#More likely to accept a preposition that doesn't include them if they fear you
 	modifier = {
-		add = 75
+		add = intimidated_marriage_reason_value
 		scope:recipient = {
 			NOT = { this = scope:secondary_recipient }
 			target_is_liege_or_above = scope:actor
@@ -1304,7 +1304,7 @@ marriage_ai_accept_modifier = {
 		desc = INTIMIDATED_REASON
 	}
 	modifier = {
-		add = 150
+		add = cowed_marriage_reason_value
 		scope:recipient = {
 			NOT = { this = scope:secondary_recipient }
 			target_is_liege_or_above = scope:actor
@@ -1317,7 +1317,7 @@ marriage_ai_accept_modifier = {
 	}
 	
 	modifier = {
-		add = 10
+		add = intimidated_marriage_external_reason_value
 		scope:recipient = {
 			NOT = { this = scope:secondary_recipient }
 			NOT = { target_is_liege_or_above = scope:actor }
@@ -1329,7 +1329,7 @@ marriage_ai_accept_modifier = {
 		desc = INTIMIDATED_REASON
 	}
 	modifier = {
-		add = 20
+		add = cowed_marriage_external_reason_value
 		scope:recipient = {
 			NOT = { this = scope:secondary_recipient }
 			NOT = { target_is_liege_or_above = scope:actor }
@@ -1396,7 +1396,7 @@ marriage_ai_accept_modifier = {
 	}
 	#More likely to accept a marriage proposal from someone they're scared of if they're not the secondary_actor
 	modifier = {
-		add = 25
+		add = intimidated_marriage_not_secondary_reason_value
 		NOT = { scope:actor = scope:secondary_actor }
 		scope:recipient = {
 			this = scope:secondary_recipient
@@ -1408,7 +1408,7 @@ marriage_ai_accept_modifier = {
 		desc = INTIMIDATED_REASON
 	}
 	modifier = {
-		add = 50
+		add = cowed_marriage_not_secondary_reason_value
 		NOT = { scope:actor = scope:secondary_actor }
 		scope:recipient = {
 			this = scope:secondary_recipient
