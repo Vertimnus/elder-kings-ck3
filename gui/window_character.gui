@@ -564,14 +564,7 @@ window = {
 						ignoreinvisible = yes
 
 						text_label_center = {
-							visible = "[Not(CharacterWindow.GetCharacter.IsBetrothed)]"
 							text = "[CharacterWindow.GetSpouseText]"
-							align = nobaseline
-						}
-
-						text_label_center = {
-							visible = "[CharacterWindow.GetCharacter.IsBetrothed]"
-							text = "BETROTHED"
 							align = nobaseline
 						}
 
@@ -1198,13 +1191,13 @@ window = {
 
 							text_single = {
 								name = "character_name"
-								margin_left = 2
 								text = "[Character.GetUINameNotMeNoTooltip], "
-								default_format = "#medium"
+								margin_left = 2
+								max_width = 400
 								fontsize = 20
-								max_width = 388
-								align = nobaseline
 								fontsize_min = 14
+								align = nobaseline
+								default_format = "#medium"
 								tooltip = "[Character.GetUINameNotMeNoTooltip]"
 							}
 
@@ -2082,12 +2075,15 @@ window = {
 							vbox = {
 								visible = "[Character.HasLandedTitles]"
 								datacontext = "[Character.GetPrimaryTitle]"
+								layoutpolicy_horizontal = expanding
+								
 								text_single = {
 									name = "character_title"
 									layoutpolicy_horizontal = expanding
 									text = "[Title.GetNameNoTooltip|U]"
+									autoresize = no
 									max_width = 280
-									#default_format = "#low"
+									default_format = "#low"
 									using = Font_Size_Medium
 									align = nobaseline
 									fontsize_min = 14
@@ -2097,18 +2093,22 @@ window = {
 									name = "faction"
 									visible = "[Title.HasFaction]"
 									layoutpolicy_horizontal = expanding
+									autoresize = no
 									text = "CV_CIVIL_WAR_FACTION"
 									default_format = "#low"
 									align = nobaseline
+									fontsize_min = 14
 								}
 
 								text_single = {
 									name = "government_type"
 									visible = "[Not( Title.HasFaction )]"
 									layoutpolicy_horizontal = expanding
+									autoresize = no
 									text = "CV_REALM_TYPE"
 									default_format = "#low"
 									align = nobaseline
+									fontsize_min = 14
 								}
 							}
 
@@ -2134,10 +2134,12 @@ window = {
 									}
 
 									text_single = {
-										name = "total_gold"
+										name = "total_dread"
 										text = "[Character.GetDread|0]"
 										default_format = "#high"
 										align = center|nobaseline
+										fontsize_min = 12
+										max_width = 50
 									}
 								}
 
@@ -2157,6 +2159,8 @@ window = {
 										text = "[Character.GetGold|0]"
 										default_format = "#high"
 										align = center|nobaseline
+										fontsize_min = 12
+										max_width = 50
 									}
 								}
 
@@ -2176,6 +2180,8 @@ window = {
 										text = "[Character.GetPrestige|0]"
 										default_format = "#high"
 										align = center|nobaseline
+										fontsize_min = 12
+										max_width = 50
 									}
 								}
 
@@ -2195,6 +2201,8 @@ window = {
 										text = "[Character.GetPiety|0]"
 										default_format = "#high"
 										align = center|nobaseline
+										fontsize_min = 12
+										max_width = 50
 									}
 								}
 
@@ -2226,6 +2234,8 @@ window = {
 										text = "[CharacterWindow.GetCachedMilitaryStrengthText]"
 										default_format = "#high"
 										align = center|nobaseline
+										fontsize_min = 12
+										max_width = 80
 
 										progressbar_standard = {
 											name = "soldiers_max"
@@ -2837,6 +2847,7 @@ window = {
 														blockoverride "portrait_button_template_onclick"
 														{
 															onclick = "[CharacterWindow.GetCharacter.OpenPlayerInteraction('find_concubine')]"
+															enabled = "[CharacterWindow.GetCharacter.IsPlayerInteractionValid('find_concubine')]"
 
 															button_plus = {
 																parentanchor = center
@@ -3308,6 +3319,12 @@ window = {
 									# blockoverride "description_relation_text" {
 									# 	text = "[Character.GetSpecialGuestRelationDescription]"
 									# }
+
+									blockoverride "gridbox_items"
+									{
+										datamodel_wrap = 7
+										maxverticalslots = 2
+									}
 
 									blockoverride "action_buttons" {}
 								}
@@ -4082,6 +4099,7 @@ window = {
 					text_label_left = {
 						layoutpolicy_horizontal = expanding
 						text = "CV_DIPLOMACY"
+						autoresize = no
 						margin_right = 0
 					}
 				}

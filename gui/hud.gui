@@ -76,7 +76,7 @@ widget = {
 
 	state = {
 		name = _show # may need to fire cleanup scripted gui for every_player
-		on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]"
+		on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]" #VARTODO - make this script based
 		#on_start = "[GetVariableSystem.Set('save_loaded', 'true')]" # not actually needed, pause menu doesn't trigger it
 	}
 	# state = { #theoretically clears it when going to the main menu, may be anytime the pause menu is shown though
@@ -1155,7 +1155,7 @@ widget = {
 
 						blockoverride "maintab_button"
 						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_decisions.dds"
+							texture = "gfx/interface/skinned/hud_maintab/maintab_decisions.dds"
 
 							#datacontext = "[GetScriptedGui('patron_gui_close')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1185,7 +1185,7 @@ widget = {
 
 						blockoverride "maintab_button"
 						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_decisions.dds"
+							texture = "gfx/interface/skinned/hud_maintab/maintab_decisions.dds"
 
 							#datacontext = "[GetScriptedGui('patron_gui_close')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1237,7 +1237,7 @@ widget = {
 
 						blockoverride "maintab_button"
 						{
-							texture = "gfx/interface/skinned/hud_maintab/maintab_patron.dds"
+							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds" #VARTODO - move to skinned
 
 							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
@@ -1273,7 +1273,7 @@ widget = {
 
 						blockoverride "maintab_button"
 						{
-							texture = "gfx/interface/skinned/hud_maintab/maintab_patron.dds"
+							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
 
 							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
