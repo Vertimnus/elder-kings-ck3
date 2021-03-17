@@ -22,6 +22,9 @@ coa_african_culture_trigger = {
 
 coa_african_religion_trigger = {
 	always = no
+	scope:faith.religion = { 
+		save_temporary_scope_as = religion 
+	}
 	# OR = {
 		# scope:religion = religion:akom_religion
 		# scope:religion = religion:waaqism_religion
@@ -34,7 +37,7 @@ coa_african_religion_trigger = {
 
 coa_bishopric_trigger = {
 	always = no
-	# scope:faith = religion:christianity_religion
+	# scope:faith.religion = religion:christianity_religion
 	# coa_theocratic_trigger = yes
 }
 
@@ -67,7 +70,6 @@ coa_byzantine_trigger = {
 }
 
 coa_castilian_trigger = {
-	always = no
 	OR = {
 		scope:culture = { has_graphical_culture = castilian_coa_gfx }
 		# AND = {
@@ -122,7 +124,22 @@ coa_cross_trigger = {
 # }
 # coa_switch_to_welsh_trigger = {
 	# culture = { has_graphical_culture = welsh_coa_gfx }
-# }
+
+#coa_switch_to_norse_trigger = {
+#	NOT = {
+#		faith.religion = religion:christianity_religion
+#	}
+#	OR = {
+#		faith.religion = religion:germanic_religion
+#		culture = { has_graphical_culture = norse_coa_gfx }
+#	}
+#}
+#coa_switch_from_norse_trigger = {
+#	OR = {
+#		faith.religion = religion:christianity_religion
+#		culture = { NOT = { has_graphical_culture = norse_coa_gfx } }
+#	}
+#}
 
 coa_feudal_trigger = {
 	# scope:faith.religion = religion:christianity_religion
