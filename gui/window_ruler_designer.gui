@@ -2083,7 +2083,7 @@ window = {
 									text = "RULER_DESIGNER_LOAD_DNA_FROM_CLIPBOARD"
 								}
 
-								button_copy = {
+								button_paste = {
 									onclick = "[RulerDesignerWindow.LoadDnaFromClipboard]"
 									onclick = "[PdxGuiTriggerAllAnimations('ruler_designer_portrait_refresh')]"
 								}
@@ -2126,6 +2126,13 @@ window = {
 
 						blockoverride "scrollbox_content"
 						{
+							vbox = {
+								layoutpolicy_horizontal = expanding
+								text_single = {
+									text = "RULER_DESIGNER_CLIPPING_NOTE"
+									default_format = "#weak"
+									margin_bottom = 20
+								}
 							vbox = {
 								datamodel = "[RulerDesignerWindow.GetGenesByGroup( VariableSystem.Get( 'appearance_customization_side_tab_open' ) )]"
 								layoutpolicy_horizontal = expanding
