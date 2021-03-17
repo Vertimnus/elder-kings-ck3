@@ -1076,70 +1076,65 @@ widget = {
 						}
 
 						hbox = {
-							datacontext = "[GetGameRules]"
-							margin = { 0 0 }
+							name = "buttons"
+							visible = "[Not( HasGameStartedForTheFirstTime )]"
 
-							spacing = 3
+							margin_right = 15
 
-							achievements_enabled_icon = {
-								visible = "[CanGetAchievements]"
-								size = { 30 30 }
-								tooltip = ACHIEVEMENTS_ENABLED
+							button_checkbox_label = {
+								visible = "[Not( IsIronmanEnabled )]"
+								onclick = "[SetIronmanEnabledStatus( '(bool)yes' )]"
+
+								blockoverride "checkbox"
+								{
+									checked = "[IsIronmanEnabled]"
+								}
+
+								blockoverride "text"
+								{
+									text = "BOOKMARK_IRONMAN_DISABLED"
+								}
 							}
 
-							achievements_disabled_icon = {
-								visible = "[Not( CanGetAchievements )]"
-								size = { 30 30 }
-								tooltip = ACHIEVEMENTS_DISABLED
-								using = tooltip_ne
+							button_checkbox_label = {
+								visible = "[IsIronmanEnabled]"
+								onclick = "[SetIronmanEnabledStatus( '(bool)no' )]"
+
+								blockoverride "checkbox"
+								{
+									checked = "[IsIronmanEnabled]"
+								}
+
+								blockoverride "text"
+								{
+									text = "BOOKMARK_IRONMAN_ENABLED"
+								}
 							}
-						}
-					}
+						}	
 
-					hbox = {
-						layoutpolicy_vertical = expanding
-						margin = { 5 5 }
-
-						divider_light = {
+						hbox = {
 							layoutpolicy_vertical = expanding
-						}
-					}
+							margin = { 5 5 }
 
-					hbox = {
-						name = "buttons"
-						visible = "[Not( HasGameStartedForTheFirstTime )]"
-
-						button_checkbox_label = {
-							visible = "[Not( IsIronmanEnabled )]"
-							onclick = "[SetIronmanEnabledStatus( '(bool)yes' )]"
-
-							blockoverride "checkbox"
-							{
-								checked = "[IsIronmanEnabled]"
-							}
-
-							blockoverride "text"
-							{
-								text = "BOOKMARK_IRONMAN_DISABLED"
-								min_width = 130
+							divider_light = {
+								layoutpolicy_vertical = expanding
 							}
 						}
 
-						button_checkbox_label = {
-							visible = "[IsIronmanEnabled]"
-							onclick = "[SetIronmanEnabledStatus( '(bool)no' )]"
-
-							blockoverride "checkbox"
+						hbox_achievements_info = {
+							using = tooltip_ne
+							blockoverride "ai_background" 
 							{
-								checked = "[IsIronmanEnabled]"
+								#no background
 							}
 
-							blockoverride "text"
+							blockoverride "ai_icon_size"
 							{
-								text = "BOOKMARK_IRONMAN_ENABLED"
-								min_width = 130
+								size = {36 36}
 							}
-						}
+						}			
+
+								
 					}
 				}
 
