@@ -242,6 +242,10 @@ reckless = {
 	
 	commander = yes
 	
+	opposites = {
+		cautious_leader
+	}
+	
 	min_combat_roll = -4
 	max_combat_roll = 6
 	
@@ -375,6 +379,10 @@ cautious_leader = {
 	
 	commander = yes
 	
+	opposites = {
+		reckless
+	}
+	
 	min_combat_roll = 4
 	max_combat_roll = -2
 	
@@ -412,6 +420,31 @@ organizer = {
 				desc = trait_organizer_desc
 			}
 			desc = trait_organizer_character_desc
+		}
+	}
+}
+
+winter_soldier = {
+	index = 292
+
+	commander = yes
+
+	winter_movement_speed = 0.25
+
+	ruler_designer_cost = 25
+
+	winter_advantage = 6
+	trait_winter_exclusive = yes
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_winter_soldier_desc
+			}
+			desc = trait_winter_soldier_character_desc
 		}
 	}
 }

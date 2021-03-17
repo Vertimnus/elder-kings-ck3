@@ -33,6 +33,8 @@
 #Random Traits List contains relevant lifestyle traits and all personality traits exist in 1 template
 #Template-specific skill min/max regulated through scripted values
 #Template-specific education trait is weighted
+
+### EK EDIT: Added the Aptitude repopulate
 pool_repopulate_aptitude = {
 	age = { 20 40 }
 	random_traits = yes
@@ -58,7 +60,22 @@ pool_repopulate_aptitude = {
 	}
 	dynasty = none
 	after_creation = {
-		#EK EDIT
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 95 = {}
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 		random_list = {
 				1 = { add_aptitude_skill = { VALUE = 4 } }
@@ -111,7 +128,22 @@ pool_repopulate_prowess = {
 	}
 	dynasty = none
 	after_creation = {
-		#EK EDIT
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 95 = {}
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 		if = {
 			limit = {
@@ -158,10 +190,26 @@ pool_repopulate_diplomacy = {
 		compassionate = {}
 		fickle = {}
 		forgiving = {}
+		poet = {}
 	}
 	dynasty = none
-	#EK EDIT
 	after_creation = {
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 85 = {}
+				# 15 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
@@ -190,8 +238,29 @@ pool_repopulate_martial = {
 		impatient = {}
 	}
 	dynasty = none
-	#EK EDIT
 	after_creation = {
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 65 = {}
+				# 15 = {
+					# add_trait = varangian
+				# }
+				# 15 = {
+					# add_trait = berserker
+				# }
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
@@ -223,8 +292,23 @@ pool_repopulate_stewardship = {
 		ambitious = {}
 	}
 	dynasty = none
-	#EK EDIT
 	after_creation = {
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 95 = {}
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
@@ -260,8 +344,23 @@ pool_repopulate_intrigue = {
 		craven = {}
 	}
 	dynasty = none
-	#EK EDIT
 	after_creation = {
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 95 = {}
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
@@ -303,8 +402,6 @@ pool_repopulate_learning = {
 	}
 	dynasty = none
 	after_creation = {
-		#EK EDIT
-		ek_character_setup_effect = yes
 		if = {
 			limit = {
 				faith = {
@@ -318,6 +415,23 @@ pool_repopulate_learning = {
 				}
 			}
 		}
+		# if = {
+			# limit = {
+				# OR = {
+					# culture_group = culture_group:north_germanic_group
+					# religion = religion:germanic_religion
+				# }
+			# }
+			# random_list = {
+				# 95 = {}
+				# 5 = {
+					# add_trait = poet
+				# }
+			# }
+		# }
+		
+		### EK EDIT: Plugged in our own special effects
+		ek_character_setup_effect = yes
 	}
 }
 			
@@ -420,8 +534,23 @@ pool_repopulate_spouse = {
 		beauty_good_1 = {}
 	}
 	dynasty = none
-	#EK EDIT
 	after_creation = {
+		if = {
+			limit = {
+				OR = {
+					culture_group = culture_group:north_germanic_group
+					religion = religion:germanic_religion
+				}
+			}
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
+		
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
@@ -671,7 +800,7 @@ pool_repopulate_local_flavor = {
 	dynasty = none
 	
 	after_creation = {
-		#EK EDIT
+		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 		random_list = {
 			60 = { set_character_faith = faith:old_gods }
@@ -933,6 +1062,9 @@ pool_repopulate_local_flavor = {
 				# 10 = {
 					# add_trait = giant
 				# }
+				# 10 = {
+					# add_trait = poet
+				# }
 				# 450 = {
 					# trigger = {
 						# NOT = {
@@ -943,8 +1075,12 @@ pool_repopulate_local_flavor = {
 				# }
 				# 150 = {
 					# trigger = {
-						# faith = {
+						# # faith = {
 							# has_doctrine = tenet_warmonger
+						# }
+						# OR = {
+							# culture_group = culture_group:north_germanic_group
+							# religion = religion:germanic_religion
 						# }
 						# NOR = {
 							# has_trait = craven
