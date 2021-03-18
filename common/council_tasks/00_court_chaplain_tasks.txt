@@ -1,4 +1,6 @@
-﻿task_religious_relations = {
+﻿### EK EDIT: Removed references to vanilla religions
+
+task_religious_relations = {
 	default_task = yes
 	position = councillor_court_chaplain
 
@@ -561,24 +563,25 @@ task_conversion = {
 				desc = COURT_CHAPLAIN_CONVERSION_LOCAL_COUNTY_MODIFIERS
 			}
 		}
-		if = {
-			limit = {
-				scope:councillor.liege = {
-					OR = {
-						has_character_modifier = defiant_high_king_conversion_boost_modifier
-						has_character_modifier = defiant_high_queen_conversion_boost_modifier
-					}
-					religion = religion:germanic_religion
-				}
-				scope:county.faith = {
-					NOT = { has_doctrine = unreformed_faith_doctrine }
-				}
-			}
-			add = {
-				value = scope:councillor.defiant_high_monarch_conversion_boost_value
-				desc = COURT_CHAPLAIN_CONVERSION_LIEGE_IS_DEFIANT_HIGH_MONARCH
-			}
-		}	
+		### EK EDIT: Disabled that
+		# if = {
+			# limit = {
+				# scope:councillor.liege = {
+					# OR = {
+						# has_character_modifier = defiant_high_king_conversion_boost_modifier
+						# has_character_modifier = defiant_high_queen_conversion_boost_modifier
+					# }
+					# religion = religion:germanic_religion
+				# }
+				# scope:county.faith = {
+					# NOT = { has_doctrine = unreformed_faith_doctrine }
+				# }
+			# }
+			# add = {
+				# value = scope:councillor.defiant_high_monarch_conversion_boost_value
+				# desc = COURT_CHAPLAIN_CONVERSION_LIEGE_IS_DEFIANT_HIGH_MONARCH
+			# }
+		# }
 		
 
 		#Conversion bonuses from certain Holy Sites.

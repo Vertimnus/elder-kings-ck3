@@ -677,12 +677,12 @@ scripted_trigger fp1_jomsviking_raid_source_one_hre_trigger = {
 	}
 }
 
+### EK EDIT: Removed references to vanilla religions
 #	You are singled out as a traitor/viable target.
 fp1_jomsvikings.0011 = {
 	type = character_event
 	title = {
 		first_valid = {
-			### EK EDIT: Removed references to the Asatru
 			# Reformed Asatruans.
 			# triggered_desc = {
 				# trigger = {
@@ -714,10 +714,11 @@ fp1_jomsvikings.0011 = {
 			# Ideological, reformist.
 			triggered_desc = {
 				trigger = {
-					religion = religion:germanic_religion
-					faith = {
-						NOT = { has_doctrine = unreformed_faith_doctrine }
-					}
+					always = no
+					# religion = religion:germanic_religion
+					# faith = {
+						# NOT = { has_doctrine = unreformed_faith_doctrine }
+					# }
 				}
 				desc = fp1_jomsvikings.0011.desc.ideological_reformist
 			}
@@ -769,7 +770,8 @@ fp1_jomsvikings.0011 = {
 		# Extra rage is reserved for Germanic reformists, as they're the traitoriest traitors.
 		modifier = {
 			add = 1
-			religion = religion:germanic_religion
+			always = no
+			# religion = religion:germanic_religion
 			faith = {
 				NOT = { has_doctrine = unreformed_faith_doctrine }
 			}
@@ -782,7 +784,8 @@ fp1_jomsvikings.0011 = {
 		## Reformed Germanics get a shorter cooldown.
 		if = {
 			limit = {
-				religion = religion:germanic_religion
+				always = no
+				# religion = religion:germanic_religion
 				faith = {
 					NOT = { has_doctrine = unreformed_faith_doctrine }
 				}
@@ -2211,18 +2214,18 @@ fp1_jomsvikings.1011 = {
 			name = jomsvikings_autofounded
 			value = yes
 		}
-		every_player = {
-			limit = {
-				OR = {
-					religion = religion:germanic_religion
-					save_temporary_scope_as = neighbouring_players
-					scope:founder = {
-						any_neighboring_and_across_water_top_liege_realm_owner = { this = scope:neighbouring_players }
-					}
-				}
+		# every_player = {
+			# limit = {
+				# OR = {
+					# religion = religion:germanic_religion
+					# save_temporary_scope_as = neighbouring_players
+					# scope:founder = {
+						# any_neighboring_and_across_water_top_liege_realm_owner = { this = scope:neighbouring_players }
+					# }
+				# }
 				# No need to exempt scope:founder, as they're always an AI in this variant.
-			}
-			trigger_event = fp1_major_decisions.0033
-		}
+			# }
+			# trigger_event = fp1_major_decisions.0033
+		# }
 	}
 }

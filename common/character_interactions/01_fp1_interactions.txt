@@ -771,6 +771,7 @@ challenge_to_trial_by_combat_interaction = {
 # Designate a Shieldmaiden
 # by Alexander Oltner
 ##################
+### EK EDIT: Disabled interaction due to vanilla religions and cultures
 designate_shieldmaiden_interaction = {
 	category = interaction_category_friendly
 	common_interaction = yes
@@ -786,10 +787,11 @@ designate_shieldmaiden_interaction = {
 
 	is_shown = {
 		scope:actor = {
+			always = no
 			has_fp1_dlc_trigger = yes
 			is_physically_able_adult = yes
-			religion = religion:germanic_religion
-			culture = culture:norse
+			# religion = religion:germanic_religion
+			# culture = culture:norse
 			NOT = {
 				faith = { has_doctrine = doctrine_gender_equal }
 			}
@@ -893,8 +895,9 @@ designate_shieldmaiden_interaction = {
 	}
 	
 	ai_potential = {
-		religion = religion:germanic_religion
-		culture = culture:norse
+		always = no
+		# religion = religion:germanic_religion
+		# culture = culture:norse
 		prestige > major_prestige_value
 		has_fp1_dlc_trigger = yes
 		is_physically_able_adult = yes
