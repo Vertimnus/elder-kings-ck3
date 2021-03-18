@@ -748,8 +748,7 @@ Effect standardShadow_mapobject
 {
 	VertexShader = "VS_jomini_mapobject_shadow"
 	PixelShader = "PS_jomini_mapobject_shadow"
-	#COMPATCH check if still needed
-	#RasterizerState = ShadowRasterizerState
+	RasterizerState = ShadowRasterizerState
 }
 
 Effect standard_alpha_to_coverage_mapobject
