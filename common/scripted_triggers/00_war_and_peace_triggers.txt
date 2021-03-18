@@ -1,4 +1,4 @@
-﻿### EK EDIT: Removed vanilla innovations and cultures
+﻿### EK EDIT: Removed vanilla innovations and cultures & regions
 
 ###TRIGGER LIST
 #prisoner_gives_warscore_for_trigger - takes WAR and CHARACTER (primary enemy or one of their top 3 player heirs)
@@ -588,6 +588,7 @@ desirable_for_capture_trigger = {
 	}
 }
 
+### EK EDIT: Removed reference to vanilla regions
 can_use_viking_invasion_cbs_trigger = {
 	OR = {
 		# Vanilla behaviour.
@@ -607,14 +608,14 @@ can_use_viking_invasion_cbs_trigger = {
 				#If the host has fp1, then we want Scandis to beat each other up and export the losers overseas, not form huge overseas empires themselves.
 				AND = {
 					can_use_viking_invasion_cbs_dlc_trigger = yes
-					top_liege = {
-						any_realm_county = {
-							count = all
-							title_province = {
-								NOT = { geographical_region = world_europe_north }
-							}
-						}
-					}
+					# top_liege = {
+						# any_realm_county = {
+							# count = all
+							# title_province = {
+								# NOT = { geographical_region = world_europe_north }
+							# }
+						# }
+					# }
 				}
 			}
 		}

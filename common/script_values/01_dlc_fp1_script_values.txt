@@ -1,4 +1,6 @@
-﻿#############
+﻿### EK EDIT: Removed reference to vanilla religions
+
+#############
 # Fury of the Northmen Scripted Values
 #############
 
@@ -13,11 +15,11 @@ defiant_high_monarch_conversion_boost_value = {
 
 hold_gruesome_festival_decision_value = {
 	value = 0
-	if = {
-		limit = { religion = religion:germanic_religion }
-		# This actually probably *isn't* Biblical numerology creeping into accounts of pagan worship, since we have records of fighting in Sweden that was probably about this around every nine years or so between Christians and pagans.
-		add = 9
-	}
+	# if = {
+		# limit = { religion = religion:germanic_religion }
+		# # This actually probably *isn't* Biblical numerology creeping into accounts of pagan worship, since we have records of fighting in Sweden that was probably about this around every nine years or so between Christians and pagans.
+		# add = 9
+	# }
 	else = { add = 10 }
 }
 
@@ -55,34 +57,36 @@ gruesome_festival_key_sacrifice_piety_value = {
 						target = scope:sacrifice.faith
 						value = faith_hostile_level
 					}
+					### EK EDIT: Removed reference to vanilla tenets
+					### EK NOTE: Syncretism gives you the Astray hostility level, so probably okay to not add it here
 					# Exempt faiths/families you syncretise with.
-					NOR = {
-						# Eastern Family syncretism.
-						AND = {
-							has_doctrine = tenet_eastern_syncretism
-							scope:sacrifice.religion = { is_in_family = rf_eastern }
-						}
-						# Unreformed pagans syncretism.
-						AND = {
-							has_doctrine = tenet_unreformed_syncretism
-							scope:sacrifice.faith = { has_doctrine = unreformed_faith_doctrine }
-						}
-						# Christian syncretism.
-						AND = {
-							has_doctrine = tenet_christian_syncretism
-							scope:sacrifice.religion = religion:christianity_religion
-						}
-						# Islamic syncretism.
-						AND = {
-							has_doctrine = tenet_islamic_syncretism
-							scope:sacrifice.religion = religion:islam_religion
-						}
-						# Jewish syncretism.
-						AND = {
-							has_doctrine = tenet_jewish_syncretism
-							scope:sacrifice.religion = religion:judaism_religion
-						}
-					}
+					# NOR = {
+						# # Eastern Family syncretism.
+						# AND = {
+							# has_doctrine = tenet_eastern_syncretism
+							# scope:sacrifice.religion = { is_in_family = rf_eastern }
+						# }
+						# # Unreformed pagans syncretism.
+						# AND = {
+							# has_doctrine = tenet_unreformed_syncretism
+							# scope:sacrifice.faith = { has_doctrine = unreformed_faith_doctrine }
+						# }
+						# # Christian syncretism.
+						# AND = {
+							# has_doctrine = tenet_christian_syncretism
+							# scope:sacrifice.religion = religion:christianity_religion
+						# }
+						# # Islamic syncretism.
+						# AND = {
+							# has_doctrine = tenet_islamic_syncretism
+							# scope:sacrifice.religion = religion:islam_religion
+						# }
+						# # Jewish syncretism.
+						# AND = {
+							# has_doctrine = tenet_jewish_syncretism
+							# scope:sacrifice.religion = religion:judaism_religion
+						# }
+					# }
 				}
 			}
 			add = minor_piety_gain
@@ -777,6 +781,7 @@ fp1_0111_sorcerer_learning_low = mediocre_skill_rating
 ##################################################
 # Wars
 
+### EK EDIT: Removed reference to vanilla region
 varangian_adventurers_standard_levy_cap_value = 2000
 
 varangian_adventurers_bonus_levies_value = {
@@ -785,7 +790,7 @@ varangian_adventurers_bonus_levies_value = {
 	# Add troops for each appropriate county.
 	every_sub_realm_county = {
 		limit = {
-			title_province = { geographical_region = dlc_fp1_region_core_mainland_scandinavia }
+			# title_province = { geographical_region = dlc_fp1_region_core_mainland_scandinavia }
 			culture = scope:attacker.culture
 			faith = scope:attacker.faith
 		}

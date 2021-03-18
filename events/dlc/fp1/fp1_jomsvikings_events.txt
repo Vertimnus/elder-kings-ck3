@@ -1182,6 +1182,7 @@ fp1_jomsvikings.0011 = {
 # 0021 - 0030
 ##################################################
 
+### EK EDIT: Event disabled due to vanilla MaA
 #	The Jomsvikings offer you a force of loyal pirates.
 fp1_jomsvikings.0021 = {
 	type = character_event
@@ -1195,6 +1196,7 @@ fp1_jomsvikings.0021 = {
 	override_background = { event_background = fp1_beached_longships }
 
 	trigger = {
+		always = no
 		# DLC check.
 		has_fp1_dlc_trigger = yes
 		# The Jomsvikings must exist; check this before the usual standard checks for best efficiency.
@@ -1231,16 +1233,16 @@ fp1_jomsvikings.0021 = {
 		# Explanatory tooltip.
 		custom_tooltip = fp1_jomsvikings.0021.a.tt
 		# Give the actual troops.
-		spawn_army = {
-			levies = 250
-			men_at_arms = {
-				type = jomsviking_pirates
-				stacks = 4
-			}
-			location = root.capital_province
-			origin = scope:leader.capital_province
-			name = fp1_jomsvikings_event_troops
-		}
+		# spawn_army = {
+			# levies = 250
+			# men_at_arms = {
+				# type = jomsviking_pirates
+				# stacks = 4
+			# }
+			# location = root.capital_province
+			# origin = scope:leader.capital_province
+			# name = fp1_jomsvikings_event_troops
+		# }
 
 		stress_impact = {
 			ambitious = medium_stress_impact_loss
@@ -1282,16 +1284,16 @@ fp1_jomsvikings.0021 = {
 		# Explanatory tooltip.
 		custom_tooltip = fp1_jomsvikings.0021.b.tt
 		# Give the actual troops.
-		spawn_army = {
-			levies = 250
-			men_at_arms = {
-				type = bondi
-				stacks = 4
-			}
-			location = root.capital_province
-			origin = scope:leader.capital_province
-			name = fp1_jomsvikings_event_troops
-		}
+		# spawn_army = {
+			# levies = 250
+			# men_at_arms = {
+				# type = bondi
+				# stacks = 4
+			# }
+			# location = root.capital_province
+			# origin = scope:leader.capital_province
+			# name = fp1_jomsvikings_event_troops
+		# }
 
 		stress_impact = {
 			ambitious = medium_stress_impact_loss
@@ -2200,10 +2202,10 @@ fp1_jomsvikings.1011 = {
 				location = scope:coup_target.title_province
 				name = fp1_jomsvikings_event_troops
 			}
-			forge_the_jomsvikings_maa_reward_effect = yes
+			# forge_the_jomsvikings_maa_reward_effect = yes
 		}
 		# Create the Jomsvikings.
-		scope:founder = { forge_the_jomsvikings_scripted_effect = yes }
+		# scope:founder = { forge_the_jomsvikings_scripted_effect = yes }
 		# Send out notification events.
 		save_scope_value_as = {
 			name = jomsvikings_autofounded
