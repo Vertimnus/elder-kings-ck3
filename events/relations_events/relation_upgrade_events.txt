@@ -638,12 +638,14 @@ relation_upgrade.0001 = {
 			base = medium_stress_impact_loss
 			drunkard = minor_stress_impact_loss
 		}
-		random = {
+		if = {
 			limit = {
 				NOT = { has_trait = drunkard }
 			}
-			chance = 10
-			add_trait = drunkard
+			random = {
+				chance = 10
+				add_trait = drunkard
+			}
 		}
 	}
 
