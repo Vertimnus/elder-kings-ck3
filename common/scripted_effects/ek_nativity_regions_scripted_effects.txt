@@ -14,13 +14,26 @@ set_culture_native_to = {
 	$CULTURE$ = { add_innovation = innovation_native_$REGION$ }
 }
 
+county_save_native_cultures = {
+	every_in_global_list = {
+		variable = culture_list
+		limit = { is_native_to = { CULTURE = this REGION = $REGION$ } }
+		save_temporary_scope_as = culture_to_save
+		scope:current_county = {
+			add_to_variable_list = {
+				name = native_culture_list
+				target = scope:culture_to_save
+			}
+		}
+	}
+}
+
 create_local_culture_decision_scripted_effects = {
 	random_in_global_list = {
 		variable = culture_list
 		limit = {
 			this.culture_group = root.culture_group
-			is_native_to = { REGION = $REGION$ }
-			has_innovation = innovation_native_$REGION$
+			is_native_to = { CULTURE = this REGION = $REGION$ }
 			NOT = {
 				is_target_in_global_variable_list = {
 					name = culture_is_alive
@@ -71,6 +84,140 @@ create_local_culture_decision_scripted_effects = {
 				chance = 60
 				set_county_culture = scope:new_culture
 			}
+		}
+	}
+}
+
+# Every county gets a list of native cultures
+setup_county_native_cultures_link = {
+	every_county = {
+		save_temporary_scope_as = current_county
+		## First we empty the list
+		clear_variable_list = native_culture_list
+		## Then we go through every nativity region and give to the county the list of cultures native from here
+		# High Rock
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_glenumbra } }
+			county_save_native_cultures = { REGION = glenumbra }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_rivenspire } }
+			county_save_native_cultures = { REGION = rivenspire }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_stormhaven } }
+			county_save_native_cultures = { REGION = stormhaven }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_greater_wrothgar } }
+			county_save_native_cultures = { REGION = greater_wrothgar }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_bangkorai } }
+			county_save_native_cultures = { REGION = bangkorai }
+		}
+		# Hammerfell
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_craglorn } }
+			county_save_native_cultures = { REGION = craglorn }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_alikr } }
+			county_save_native_cultures = { REGION = alikr }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_brena } }
+			county_save_native_cultures = { REGION = brena }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_sunforge } }
+			county_save_native_cultures = { REGION = sunforge }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_abecee } }
+			county_save_native_cultures = { REGION = abecee }
+		}
+		# Cyrodiil
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_colovia } }
+			county_save_native_cultures = { REGION = colovia }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_nibenay } }
+			county_save_native_cultures = { REGION = nibenay }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_heartlands } }
+			county_save_native_cultures = { REGION = heartlands }
+		}
+		# Skyrim
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_karth } }
+			county_save_native_cultures = { REGION = karth }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_west_ghost } }
+			county_save_native_cultures = { REGION = west_ghost }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_white_river } }
+			county_save_native_cultures = { REGION = white_river }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_east_ghost } }
+			county_save_native_cultures = { REGION = east_ghost }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_dark_water } }
+			county_save_native_cultures = { REGION = dark_water }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_solstheim } }
+			county_save_native_cultures = { REGION = solstheim }
+		}
+		# Yokuda
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_yokuda } }
+			county_save_native_cultures = { REGION = yokuda }
+		}
+		# Summerset Isles
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_auridon } }
+			county_save_native_cultures = { REGION = auridon }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_summerset } }
+			county_save_native_cultures = { REGION = summerset }
+		}
+		# Valenwood
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_grahtwood } }
+			county_save_native_cultures = { REGION = grahtwood }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_greenshade } }
+			county_save_native_cultures = { REGION = greenshade }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_malabal_tor } }
+			county_save_native_cultures = { REGION = malabal_tor }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_reaper_march } }
+			county_save_native_cultures = { REGION = reaper_march }
+		}
+		# Elsweyr
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_anequina } }
+			county_save_native_cultures = { REGION = anequina }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_tenmar } }
+			county_save_native_cultures = { REGION = tenmar }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_pellitine } }
+			county_save_native_cultures = { REGION = pellitine }
 		}
 	}
 }

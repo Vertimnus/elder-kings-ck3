@@ -1,9 +1,9 @@
-﻿##Phyllocid Dynasty (2252226)
+﻿##Phyllocid Dynasty (220226)
 
 #House Phyllocid
 phyllocid_1000 = {
 	name = "Ja-Fr"
-	dynasty = 2252226
+	dynasty = 220226
 	religion = tall_papa
 	culture = crown
 
@@ -13,22 +13,22 @@ phyllocid_1000 = {
 
 phyllocid_1001 = {
 	name = "Ar-Azal"
-	dynasty = 2252226
+	dynasty = 220226
 	religion = tall_papa
 	culture = crown
 	
 	father = phyllocid_1000
 
 	3300.1.1 = { birth = yes }
-	3330.1.1 = { add_spouse = nisewan_1001 #Forebear }
-	3331.1.1 = { add_spouse = curetar_1001 #Crown }
-	3384.1.1 = { death = yes }	
+	3330.1.1 = { add_spouse = nisewan_1001 } #Forebear
+	3331.1.1 = { add_spouse = curetar_1001 } #Crown
+	3360.1.1 = { death = yes }	
 }
 
 #House al-Hegathe
 
 hegathe_1000 = {
-	name = "Mirzad"
+	name = "Namasur"
 	dynasty_house = phyllocid_hegathe
 	religion = tall_papa
 	culture = crown
@@ -41,11 +41,10 @@ hegathe_1000 = {
 }
 
 hegathe_1001 = {
-	name = "Nazaneen"
+	name = "Maramal"
 	dynasty_house = phyllocid_hegathe
 	religion = tall_papa
 	culture = crown
-	female = yes
 	
 	father = hegathe_1000
 
@@ -59,7 +58,7 @@ hegathe_1002 = {
 	religion = tall_papa
 	culture = crown
 	
-	mother = hegathe_1001
+	father = hegathe_1001
 
 	3378.1.1 = { birth = yes }
 	3451.1.1 = { death = yes }	
@@ -125,6 +124,18 @@ hegathe_1007 = {
 
 	3450.1.1 = { birth = yes }
 	3527.1.1 = { death = yes }	
+}
+
+hegathe_1007b = {
+	name = "Kahanad"
+	dynasty_house = phyllocid_hegathe
+	religion = tall_papa
+	culture = crown
+	
+	mother = hegathe_1006
+
+	3455.1.1 = { birth = yes }
+	3522.1.1 = { death = yes }	
 }
 
 hegathe_1008 = {
@@ -219,7 +230,8 @@ antyphyllos_1005 = {
 	father = hegathe_1005
 
 	3438.1.1 = { birth = yes }
-	3471.1.1 = { effect = { add_claim = e_hammerfell } }
+	3465.1.1 = { add_spouse = danobia_1001 }
+	3471.1.1 = { effect = { make_claim_strong = e_hammerfell } }
 	3507.1.1 = { death = yes }	
 }
 
@@ -230,10 +242,11 @@ antyphyllos_1006 = {
 	culture = forebear
 	female = yes
 	
-	#mother = antyphyllos_1004
+	mother = danobia_1001
 	father = antyphyllos_1005
 
 	3480.1.1 = { birth = yes }
+	3500.1.1 = { give_nickname = nick_the_jewel }
 	3550.1.1 = { death = yes }	
 }
 
@@ -244,10 +257,11 @@ antyphyllos_1007 = {
 	culture = forebear
 	female = yes
 	
-	#mother = antyphyllos_1004
+	mother = danobia_1001
 	father = antyphyllos_1005
 
 	3481.1.1 = { birth = yes }
+	3500.1.1 = { give_nickname = nick_the_star }
 	3548.1.1 = { death = yes }	
 }
 
@@ -257,19 +271,20 @@ antyphyllos_1008 = {
 	religion = redguard_cult
 	culture = forebear
 	
-	#mother = antyphyllos_1004
+	mother = danobia_1001
 	father = antyphyllos_1005
 
 	3482.1.1 = { birth = yes }
+	3500.1.1 = { give_nickname = nick_the_lion }
 	3554.1.1 = { death = yes }	
 }
 
-##Nisewan Dynasty (225125)
+##Nisewan Dynasty (220125)
 
 #House Nisewan
 nisewan_1000 = {
 	name = "Ebrahim"
-	dynasty = 225125
+	dynasty = 220125
 	religion = redguard_cult
 	culture = forebear
 
@@ -279,7 +294,7 @@ nisewan_1000 = {
 
 nisewan_1001 = {
 	name = "Fereshtah"
-	dynasty = 225125
+	dynasty = 220125
 	religion = redguard_cult
 	culture = forebear
 	female = yes
@@ -291,12 +306,12 @@ nisewan_1001 = {
 	3375.1.1 = { death = yes }	
 }
 
-##Curetar Dynasty (200058)
+##Curetar Dynasty (220227)
 
 #House Curetar
 curetar_1000 = {
 	name = "Murahd"
-	dynasty = 200058
+	dynasty = 220227
 	religion = tall_papa
 	culture = crown
 
@@ -306,7 +321,7 @@ curetar_1000 = {
 
 curetar_1001 = {
 	name = "Arlimahera"
-	dynasty = 200058
+	dynasty = 220227
 	religion = tall_papa
 	culture = crown
 	female = yes
@@ -318,12 +333,39 @@ curetar_1001 = {
 	3400.1.1 = { death = yes }	
 }
 
-##Atuhon Dynasty
+##al-Danobia Dynasty (220086)
+
+#House al-Danobia
+danobia_1000 = {
+	name = "Kalad"
+	dynasty = 220086
+	religion = redguard_cult
+	culture = forebear
+
+	3412.1.1 = { birth = yes }
+	3487.1.1 = { death = yes }	
+}
+
+danobia_1001 = {
+	name = "Za-Rifah"
+	dynasty = 220086
+	religion = redguard_cult
+	culture = forebear
+	female = yes
+	
+	father = danobia_1000
+
+	3440.1.1 = { birth = yes }
+	3460.1.1 = { give_nickname = nick_the_flower }
+	3499.1.1 = { death = yes }	
+}
+
+##Atuhon Dynasty (210025)
 
 #House Atuhon
 atuhon_1000 = {
 	name = "Trithik"
-	dynasty = 200025
+	dynasty = 210025
 	religion = breton_cult
 	culture = forebear
 
@@ -331,12 +373,12 @@ atuhon_1000 = {
 	3384.1.1 = { death = yes }	
 }
 
-##Praren Dynasty
+##Praren Dynasty (210170)
 
 #House Praren
 praren_1000 = {
 	name = "Elusa"
-	dynasty = 200170
+	dynasty = 210170
 	religion = redguard_cult
 	culture = forebear
 
@@ -353,4 +395,16 @@ forebearwife_1000 = {
 
 	3336.1.1 = { birth = yes }
 	3390.1.1 = { death = yes }
+}
+
+##Republics/Theocracies
+
+redguard_cult_1000 = {
+	name = "Doletta"
+	religion = redguard_cult
+	culture = forebear
+	female = yes
+
+	3314.1.1 = { birth = yes }
+	3387.1.1 = { death = yes }
 }

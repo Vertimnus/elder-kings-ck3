@@ -1,4 +1,4 @@
-﻿### EK EDIT: Removed regional MaA
+﻿#### Local Types ####
 @administration_1 = "gfx/interface/icons/culture_innovations/innovation_administration_01.dds"
 @administration_2 = "gfx/interface/icons/culture_innovations/innovation_administration_02.dds"
 @administration_3 = "gfx/interface/icons/culture_innovations/innovation_administration_03.dds"
@@ -15,6 +15,8 @@
 @weapons_and_armor_01 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_01.dds"
 @weapons_and_armor_02 = "gfx/interface/icons/culture_innovations/innovation_weapons_and_armor_02.dds"
 @knight = "gfx/interface/icons/culture_innovations/innovation_knight.dds"
+@hird = "gfx/interface/icons/culture_innovations/innovation_hird.dds"
+@longboats = "gfx/interface/icons/culture_innovations/innovation_longboats.dds"
 @majesty_01 = "gfx/interface/icons/culture_innovations/innovation_majesty_01.dds"
 @majesty_02 = "gfx/interface/icons/culture_innovations/innovation_majesty_02.dds"
 @majesty_03 = "gfx/interface/icons/culture_innovations/innovation_majesty_03.dds"
@@ -69,12 +71,44 @@ innovation_skaal_hunter = {
 	icon = @special_maa_01
 
 	potential = {
-		OR = {
-			this = culture:skaal
-		}
+		this = culture:skaal
 	}
 
 	unlock_maa = skaal_hunter
+
+	flag = global_maa
+}
+
+### Cyrodiilic
+innovation_armored_legionaires = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:colovian
+			this = culture:heartlander
+		}
+	}
+
+	unlock_maa = armored_legionaires
+
+	flag = global_maa
+}
+innovation_nibenese_battlemages = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:nibenese
+			this = culture:heartlander
+		}
+	}
+
+	unlock_maa = nibenese_battlemages
 
 	flag = global_maa
 }
@@ -98,6 +132,29 @@ innovation_way_of_the_sword = {
 
 	flag = global_maa
 }
+innovation_abecean_pirates = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:abecean
+		}
+	}
+	
+	modifier = {
+		embarkation_cost_mult = -0.25
+		raid_speed = 0.1
+	}
+	
+	custom = unlocks_naval_raiding
+	custom = unlocks_sailable_major_rivers
+
+	unlock_maa = abecean_pirates
+
+	flag = global_maa
+}
 
 ### Khajiiti
 innovation_senche_raht = {
@@ -110,6 +167,21 @@ innovation_senche_raht = {
 	}
 
 	unlock_maa = senche_raht
+
+	flag = global_maa
+}
+
+### Akaviri
+innovation_akaviri_dragon_hunters = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:akaviri_group
+	}
+
+	unlock_maa = akaviri_dragon_hunters
 
 	flag = global_maa
 }

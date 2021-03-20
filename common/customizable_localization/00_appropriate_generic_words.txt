@@ -333,6 +333,96 @@ GetExpensiveDrink = {
 	}
 }
 
+GetExpensiveDrink_Singular = {
+	type = character
+
+	random_valid = yes
+
+	text = {
+		trigger = {
+			# faith = {
+				# NOT = { religion_tag = islam_religion }
+			# }
+			exists = liege
+			liege = {
+				exists = capital_province
+				# capital_province = {
+					# geographical_region = world_europe_west
+				# }
+			}
+		}
+		localization_key = expensive_drink_singular_fancy_champagne
+	}
+	text = {
+		trigger = {
+			# faith = {
+				# NOT = { religion_tag = islam_religion }
+			# }
+			# current_date > 1150.1.1 #Distillation not really practiced before this.
+		}
+		localization_key = expensive_drink_singular_foreign_liqueurs
+	}
+	text = {
+		localization_key = expensive_drink_singular_spiced_wine
+		trigger = {
+			# faith = {
+				# NOT = { religion_tag = islam_religion }
+			# }
+		}
+	}
+	text = {
+		localization_key = expensive_drink_singular_premium_tea
+		trigger = {
+			exists = liege
+			liege = {
+				exists = capital_province
+				# capital_province = {
+					# NOT = { geographical_region = world_europe }
+				# }
+			}
+		}
+	}
+	text = {
+		localization_key = expensive_drink_singular_violet_sharbah
+		trigger = {
+			OR = {
+				# faith = {
+					# religion_tag = islam_religion # As an alternative to alcohol
+				# }
+				# AND = {
+					# exists = liege
+					# liege = {
+						# exists = capital_province
+						# capital_province = {
+							# OR = {
+								# geographical_region = world_middle_east
+								# geographical_region = world_africa_east
+								# geographical_region = world_africa_north
+							# }
+						# }
+					# }
+				# }
+			}
+		}
+	}
+	text = {
+		localization_key = expensive_drink_singular_aribica_coffee
+		trigger = {
+			exists = liege
+			liege = {
+				exists = capital_province
+				# capital_province = {
+					# OR = {
+						# geographical_region = world_middle_east
+						# geographical_region = world_africa_east
+						# geographical_region = world_africa_north
+					# }
+				# }
+			}
+		}
+	}
+}
+
 GetShockedExpression = {
 	type = character
 

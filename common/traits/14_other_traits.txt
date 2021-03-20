@@ -109,6 +109,7 @@ berserker = {
 	diplomacy = -2
 	martial = 2
 	prowess = 5
+	dread_baseline_add = 15
 	
 	same_opinion = 10
 	
@@ -204,16 +205,18 @@ adventurer = {
 	index = 432
 	fame = yes
 
-	diplomacy = -1
-	martial = 1
-	prowess = 1
-	flag = add_aptitude_1
+	general_opinion = -10
+	martial_per_prestige_level = 1
+	prowess_per_prestige_level = 1
+	men_at_arms_maintenance = -0.5
+	ignore_negative_culture_opinion = yes
+	ignore_negative_opinion_of_culture = yes
 
-	same_opinion = 10
+	same_opinion = 20
 	
 	ai_war_chance = 1
 	
-	ruler_designer_cost = 20
+	ruler_designer_cost = 50
 	
 	desc = {
 		first_valid = {
@@ -227,8 +230,9 @@ adventurer = {
 		}
 	}
 
-	ai_energy = 10
-	ai_boldness = 10
+	ai_energy = low_positive_ai_value
+	ai_boldness = low_positive_ai_value
+	ai_honor = low_negative_ai_value
 }
 
 heresiarch = {
@@ -295,6 +299,13 @@ lycan_character = {
 
 vampire_character = {
 	index = 437
+	
+	immortal = yes
+	monthly_lifestyle_xp_gain_mult = -0.9
+	monthly_prestige_gain_mult = -0.45
+	monthly_piety_gain_mult = -0.45
+	stress_gain_mult = 0.35
+	fertility = -0.6
 }
 
 necromancer_character = {
@@ -330,4 +341,73 @@ line_of_x = {
 			desc = trait_line_of_x_desc
 		}
 	}
+}
+
+shieldmaiden = {
+	index = 451
+	
+	fame = yes
+	martial = 3
+	prowess = 3
+	
+	same_opinion = 10
+
+	ruler_designer_cost = 40
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_shieldmaiden_female
+			}
+			triggered_desc = {
+				trigger = { is_male = yes }
+				desc = trait_shieldmaiden_male
+			}
+			desc = trait_shieldmaiden_female
+		}
+	}
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_shieldmaiden_desc
+			}
+			triggered_desc = {
+				trigger = { is_male = yes }
+				desc = trait_shieldmaiden_male_character_desc
+			}
+			desc = trait_shieldmaiden_female_character_desc
+		}
+	}
+
+	ai_boldness = high_positive_ai_value
+	ai_energy = high_positive_ai_value
+}
+
+poet = {
+	index = 452
+	diplomacy_per_prestige_level = 1
+	stress_loss_mult = 0.1
+	
+	ruler_designer_cost = 40
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_poet_desc
+			}
+			desc = trait_poet_character_desc
+		}
+	}
+
+	ai_boldness = low_positive_ai_value
+	ai_sociability = low_positive_ai_value
 }

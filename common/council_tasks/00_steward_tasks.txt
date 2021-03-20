@@ -438,7 +438,25 @@ task_promote_culture = {
 	highlight_own_realm = yes
 	
 	effect_desc = {
-		desc = task_promote_culture_effect_desc
+		desc = {
+			triggered_desc = {
+				trigger = {
+					NOT = {
+						exists = scope:county
+						exists = scope:county.var:culture_to_convert
+					}
+				}
+				desc = task_promote_culture_effect_basis_desc
+			}
+			triggered_desc = {
+				trigger = {
+					exists = scope:county
+					exists = scope:county.var:culture_to_convert
+					scope:county.var:culture_to_convert = { save_temporary_scope_as = new_culture }
+				}
+				desc = task_promote_culture_effect_culture_known_desc
+			}
+		}
 		desc = {
 			desc = council_task_possible_side_effects
 			triggered_desc = {
@@ -717,130 +735,189 @@ task_promote_culture = {
 			# scope:councillor_liege.culture = { has_innovation = innovation_native_@REGION }
 		# }
 		if = {
-			limit = {
-				# If you're Nomadic you bypass it and get a softer malus instead
-				NOT = { scope:councillor_liege.culture = { has_innovation = innovation_native_nomadic } }
-				# Nativity regions
-				NOR = {
-					### High Rock
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_glenumbra }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_glenumbra }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_rivenspire }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_rivenspire }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_stormhaven }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_stormhaven }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_greater_wrothgar }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_bangkorai }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_bangkorai }
-					}
-					### Hammerfell
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_craglorn }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_craglorn }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_abecee }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_abecee }
-					}
-					### Cyrodiil
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_colovia }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_colovia }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_heartlands }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_heartlands }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_nibenay }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_nibenay }
-					}
-					### Skyrim
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_karth }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_karth }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_west_ghost }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_west_ghost }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_white_river }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_white_river }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_east_ghost }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_east_ghost }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_dark_water }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_dark_water }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_solstheim }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_solstheim }
-					}
-					### Yokuda
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_yokuda }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_yokuda }
-					}
-					### Summerset Isles
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_auridon }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_auridon }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_summerset }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_summerset }
-					}
-					### Valenwood
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_grahtwood }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_grahtwood }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_greenshade }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_greenshade }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_malabal_tor }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_malabal_tor }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_reaper_march }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_reaper_march }
-					}
-					### Elsweyr
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_anequina }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_anequina }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_tenmar }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_tenmar }
-					}
-					AND = {
-						scope:county.title_province = { geographical_region = custom_nativity_pellitine }
-						scope:councillor_liege.culture = { has_innovation = innovation_native_pellitine }
-					}
+			limit  = {
+				exists = scope:county
+				exists = scope:county.var:culture_to_convert
+			}
+			if = {
+				limit = { scope:county.var:culture_to_convert = { has_innovation = innovation_native_nomadic } }
+				multiply = {
+					value = 0.5
+					desc = NOMADIC_CULTURE_CULTURE_CONVERT_TO
 				}
 			}
-			multiply = {
-				value = 0.1
-				desc = NOT_NATIVE_REGION_REASON
+			else_if = {
+				# Not native from here
+				limit = {
+					scope:county = {
+						NOT = {
+							is_target_in_variable_list = {
+								name = native_culture_list
+								target = scope:county.var:culture_to_convert
+							}
+						}
+					}
+				}
+				multiply = {
+					value = 0.1
+					desc = NOT_NATIVE_REGION_REASON
+				}
+			}
+			else = {}
+		}
+		else_if = {
+			limit  = { exists = scope:county }
+			if = {
+				limit = { scope:councillor_liege.culture = { has_innovation = innovation_native_nomadic } }
+				multiply = {
+					value = 0.5
+					desc = NOMADIC_CULTURE_CULTURE_CONVERT_TO
+				}
+			}
+			if = {
+				# Not native from here
+				limit = {
+					scope:county = {
+						NOT = {
+							any_in_list = {
+								variable = native_culture_list
+								this = scope:councillor_liege.culture
+							}
+						}
+					}
+				}
+				multiply = {
+					value = 0.1
+					desc = NOT_NATIVE_REGION_REASON
+				}
 			}
 		}
+		else = {}
+		# if = {
+			# limit = {
+				# # If you're Nomadic you bypass it and get a softer malus instead
+				# NOT = { scope:councillor_liege.culture = { has_innovation = innovation_native_nomadic } }
+				# # Nativity regions
+				# NOR = {
+					# ### High Rock
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_glenumbra }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_glenumbra }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_rivenspire }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_rivenspire }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_stormhaven }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_stormhaven }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_greater_wrothgar }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_bangkorai }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_bangkorai }
+					# }
+					# ### Hammerfell
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_craglorn }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_craglorn }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_abecee }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_abecee }
+					# }
+					# ### Cyrodiil
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_colovia }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_colovia }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_heartlands }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_heartlands }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_nibenay }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_nibenay }
+					# }
+					# ### Skyrim
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_karth }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_karth }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_west_ghost }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_west_ghost }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_white_river }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_white_river }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_east_ghost }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_east_ghost }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_dark_water }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_dark_water }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_solstheim }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_solstheim }
+					# }
+					# ### Yokuda
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_yokuda }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_yokuda }
+					# }
+					# ### Summerset Isles
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_auridon }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_auridon }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_summerset }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_summerset }
+					# }
+					# ### Valenwood
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_grahtwood }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_grahtwood }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_greenshade }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_greenshade }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_malabal_tor }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_malabal_tor }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_reaper_march }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_reaper_march }
+					# }
+					# ### Elsweyr
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_anequina }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_anequina }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_tenmar }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_tenmar }
+					# }
+					# AND = {
+						# scope:county.title_province = { geographical_region = custom_nativity_pellitine }
+						# scope:councillor_liege.culture = { has_innovation = innovation_native_pellitine }
+					# }
+				# }
+			# }
+			# multiply = {
+				# value = 0.1
+				# desc = NOT_NATIVE_REGION_REASON
+			# }
+		# }
 		if = {
 			limit = {
 				# If you're Nomadic you bypass it and get a softer malus instead
@@ -985,8 +1062,10 @@ task_promote_culture = {
 
 	on_finish_task_county = {
 		scope:county = {
-			set_county_culture = scope:councillor_liege.culture
+			culture = { save_scope_as = old_culture }
+			var:culture_to_convert = { save_scope_as = new_culture }
 		}
+		scope:county = { set_county_culture = scope:new_culture }
 		scope:councillor = {
 			start_default_task = yes
 		}
@@ -1016,6 +1095,10 @@ task_promote_culture = {
 				days = 30
 			}
 		}
+	}
+	
+	on_start_task_county = {
+		scope:councillor_liege = { trigger_event = { id = ek_steward_task.0001 } }
 	}
 
 	on_monthly_county = {
@@ -1082,853 +1165,6 @@ task_promote_culture = {
 			limit = {
 				scope:councillor_liege = { has_character_flag = no_ai_culture_convert }
 			}
-			multiply = 0
-		}
-		if = {
-			# Interrupt this task if you're bankrupt
-			limit = {
-				scope:councillor_liege = {
-					gold < -50
-				}
-			}
-			multiply = 0
-		}
-	}
-}
-
-task_promote_local_culture = {
-	position = councillor_steward
-
-	task_type = task_type_county
-	county_target = realm
-	ai_county_target = realm
-	task_progress = task_progress_percentage
-	restart_on_finish = yes
-	highlight_own_realm = yes
-	
-	effect_desc = {
-		# we'll see if I ever find a way to show the variable in loc
-		desc = task_promote_local_culture_effect_desc
-		# first_valid = {
-			# triggered_desc = {
-				# trigger = {
-					# always = no
-					# scope:county = { has_variable = culture_to_convert }
-				# }
-				# desc = task_promote_local_culture_effect_with_culture_desc
-			# }
-			# desc = task_promote_local_culture_effect_desc
-		# }
-		desc = {
-			desc = council_task_possible_side_effects
-			triggered_desc = {
-				trigger = {
-					stewardship > mediocre_skill_rating
-					trigger_if = {
-						limit = { exists = scope:county }
-						scope:county = {
-							NOT = { has_county_modifier = steward_task_efficient_taxation_modifier }
-						}
-					}
-				}
-				desc = task_promote_culture_improve_county_opinion
-			}
-			triggered_desc = {
-				trigger = {
-					stewardship > mediocre_skill_rating
-					trigger_if = {
-						limit = { exists = scope:county }
-						scope:county = {
-							NOT = { has_county_modifier = steward_task_efficient_taxation_modifier }
-						}
-					}
-				}
-				desc = task_promote_culture_increased_taxes
-			}
-			triggered_desc = {
-				trigger = {
-					stewardship > mediocre_skill_rating
-					trigger_if = {
-						limit = { exists = scope:county }
-						scope:county = {
-							NOT = { has_county_modifier = steward_task_efficient_taxation_modifier }
-						}
-					}
-				}
-				desc = task_promote_culture_increased_levies
-			}
-			triggered_desc = {
-				trigger = {
-					stewardship < high_skill_rating
-					trigger_if = {
-						limit = { exists = scope:county }
-						scope:county = {
-							NOT = { has_county_modifier = steward_settler_resistance_modifier }
-						}
-					}
-				}
-				desc = task_promote_culture_resistance_to_settlers
-			}
-			triggered_desc = {
-				trigger = {
-					stewardship < high_skill_rating
-					trigger_if = {
-						limit = { exists = scope:county }
-						scope:county = {
-							NOT = { has_county_modifier = steward_settler_resistance_modifier }
-						}
-					}
-				}
-				desc = task_promote_culture_resistance_to_administration
-			}
-		}
-	}
-
-	progress = {
-		value = 0
-		add = {
-			value = steward_promote_culture_base
-			desc = STEWARD_PROGRESS_BASE
-		}
-		add = {
-			value = scope:councillor.steward_promote_culture_monthly_increase
-			desc = SCALED_COUNCILLOR_STEWARDSHIP_VALUE
-		}
-		# Relation Bonuses/Penalties
-		if = { # Friend
-			limit = {
-				scope:councillor_liege = {
-					has_relation_friend = scope:councillor
-					NOT = { has_relation_best_friend = scope:councillor }
-				}
-			}
-			add = {
-				value = scope:councillor.steward_promote_culture_monthly_increase_friend_bonus
-				desc = COUNCILLOR_IS_YOUR_FRIEND
-			}
-		}
-		if = { # Best Friend
-			limit = {
-				scope:councillor_liege = {
-					has_relation_best_friend = scope:councillor
-				}
-			}
-			add = {
-				value = scope:councillor.steward_promote_culture_monthly_increase_best_friend_bonus
-				desc = COUNCILLOR_IS_YOUR_BEST_FRIEND
-			}
-		}
-		if = { # Rival
-			limit = {
-				scope:councillor_liege = {
-					has_relation_rival = scope:councillor
-					NOT = { has_relation_nemesis = scope:councillor }
-				}
-			}
-			add = {
-				value = scope:councillor.steward_promote_culture_monthly_increase_rival_bonus
-				desc = COUNCILLOR_IS_YOUR_RIVAL
-			}
-		}
-		if = { # Nemesis
-			limit = {
-				scope:councillor_liege = {
-					has_relation_nemesis = scope:councillor
-				}
-			}
-			add = {
-				value = scope:councillor.steward_promote_culture_monthly_increase_nemesis_bonus
-				desc = COUNCILLOR_IS_YOUR_NEMESIS
-			}
-		}
-		if = {
-			limit = {
-				exists = scope:councillor_liege.dynasty
-				scope:councillor_liege.dynasty = { has_dynasty_perk = erudition_legacy_5 }
-			}
-			add = {
-				value = steward_promote_culture_erudition_bonus
-				desc = ERUDITION_DYNASTY_PERK_BONUS_VALUE
-			}
-		}
-		if = {
-			limit = {
-				exists = scope:county
-				scope:councillor_liege.faith = {
-					has_doctrine_parameter = same_faith_promote_culture_bonus_active
-				}
-				scope:county.faith = scope:councillor_liege.faith
-			}
-			add = {
-				value = scope:councillor.promote_culture_communal_identity_bonus
-				desc = STEWARD_PROMOTE_CULTURE_COMMUNAL_IDENTITY_BONUS_MODIFIER
-			}
-		}
-		### EK EDIT: Vanilla regional innovation
-		# if = {
-			# limit = {
-				# scope:councillor_liege.culture = {
-					# has_innovation = innovation_east_settling
-				# }
-			# }
-			# add = {
-				# value = scope:councillor.promote_culture_east_settling_bonus
-				# desc = STEWARD_PROMOTE_CULTURE_INNOVATION_BONUS_EAST_SETTLING
-			# }
-		# }
-		if = { # Development reduces the speed.
-			limit = {
-				exists = scope:county
-				scope:county = {
-					development_level > 0
-				}
-			}
-			add = {
-				value = scope:county.promote_culture_development_penalty
-				desc = STEWARD_PROMOTE_CULTURE_DEVELOPMENT_PENALTY
-			}
-		}
-		#Reduce for various county modifiers.
-		if = { #Reduced conversion speed if the county has protected traditions.
-			limit = {
-				exists = scope:county
-				scope:county = {
-					has_county_modifier = governance_1073_conversion_resistance_modifier
-				}
-			}
-			add = {
-				value = scope:councillor.promote_culture_local_traditions_respected_penalty
-				desc = STEWARD_PROMOTE_CULTURE_LOCAL_TRADITIONS_RESPECTED
-			}
-		}
-		if = {
-			limit  = {
-				exists = scope:county
-				scope:county = {
-					has_county_modifier = county_shuubiyya_modifier
-				}
-			}
-			add = {
-				value = scope:councillor.promote_culture_shuubiyya_penalty
-				desc = STEWARD_PROMOTE_CULTURE_SHUUBIYYA
-			}
-		}
-		
-		# Conversion speed game rules
-		if = {
-			limit = {
-				has_game_rule = slower_culture_conversion_speed
-			}
-			multiply = {
-				value = slower_game_rule_value
-				desc = GAME_RULE_SLOWER_REASON
-			}
-		}
-		if = {
-			limit = {
-				has_game_rule = significantly_slower_culture_conversion_speed
-			}
-			multiply = {
-				value = significantly_slower_game_rule_value
-				desc = GAME_RULE_SIGNIFICANTLY_SLOWER_REASON
-			}
-		}
-		if = {
-			limit = {
-				has_game_rule = significantly_faster_culture_conversion_speed
-			}
-			multiply = {
-				value = significantly_faster_game_rule_value
-				desc = GAME_RULE_SIGNIFICANTLY_FASTER_REASON
-			}
-		}
-		if = {
-			limit = {
-				has_game_rule = faster_culture_conversion_speed
-			}
-			multiply = {
-				value = faster_game_rule_value
-				desc = GAME_RULE_FASTER_REASON
-			}
-		}
-		
-		if = {
-			limit = {
-				# Nomadic cultures are easier to convert
-				scope:county.culture = { has_innovation = innovation_native_nomadic }
-			}
-			multiply = {
-				value = 2
-				desc = NOMADIC_CULTURE_CULTURE_CONVERT_FROM
-			}
-		}
-	}
-
-	### There must be a local culture you can convert the province to
-	## "Local culture" is a culture within your culture group that is considered native to the region the province is in
-	potential_county = {
-		# Obviously if the province is already of your culture group you can't change it
-		scope:county = { NOT = { culture_group = scope:councillor_liege.culture_group } }
-		# Some restrictions on the AI: Must be independent or a Duke
-		trigger_if = {
-			limit = { scope:councillor_liege = { is_ai = yes } }
-			OR = {
-				is_independent_ruler = yes
-				scope:councillor_liege.primary_title.tier > tier_county
-			}
-		}
-		# You must have a local culture available (as in: that actually exists. If it does not, you have to create it via decision)
-		# You can't be native to the region the province is in (use the regular Promote Culture job in this case)
-		### High Rock
-		trigger_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_glenumbra } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = glenumbra }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = glenumbra } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_rivenspire } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = rivenspire }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = rivenspire } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_stormhaven } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = stormhaven }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = stormhaven } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = greater_wrothgar }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = greater_wrothgar } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = bangkorai }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = bangkorai } }
-		}
-		### Hammerfell
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_craglorn } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = craglorn }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = craglorn } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_abecee } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = abecee }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = abecee } }
-		}
-		### Cyrodiil
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_colovia } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = colovia }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = colovia } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_heartlands } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = heartlands }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = heartlands } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_nibenay } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = nibenay }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = nibenay } }
-		}
-		### Skyrim
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_karth } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = karth }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = karth } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_ghost } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = west_ghost }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = west_ghost } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_white_river } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = white_river }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = white_river } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_ghost } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = east_ghost }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = east_ghost } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_dark_water } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = dark_water }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = dark_water } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_solstheim } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = solstheim }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = solstheim } }
-		}
-		### Yokuda
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_yokuda } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = yokuda }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = yokuda } }
-		}
-		### Summerset Isles
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_auridon } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = auridon }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = auridon } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_summerset } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = summerset }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = summerset } }
-		}
-		### Valenwood
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_grahtwood } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = grahtwood }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = grahtwood } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_greenshade } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = greenshade }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = greenshade } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_malabal_tor } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = malabal_tor }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = malabal_tor } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_reaper_march } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = reaper_march }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = reaper_march } }
-		}
-		### Elsweyr
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_anequina } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = anequina }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = anequina } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_tenmar } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = tenmar }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = tenmar } }
-		}
-		trigger_else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_pellitine } }
-			has_culture_native_to_in_culture_group = { CULTURE_GROUP = scope:councillor_liege.culture_group REGION = pellitine }
-			NOT = { is_native_to = { CULTURE = scope:councillor_liege.culture REGION = pellitine } }
-		}
-		### Default (no)
-		trigger_else = { always = no }
-	}
-	
-	on_start_task_county = {
-		### High Rock
-		if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_glenumbra } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_glenumbra
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_rivenspire } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_rivenspire
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_stormhaven } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_stormhaven
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_greater_wrothgar } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_greater_wrothgar
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_bangkorai } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_bangkorai
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Hammerfell
-		### Cyrodiil
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_colovia } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_colovia
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_heartlands } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_heartlands
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_nibenay } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_nibenay
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Skyrim
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_karth } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_karth
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_west_ghost } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_west_ghost
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_white_river } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_white_river
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_east_ghost } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_east_ghost
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_dark_water } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_dark_water
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_solstheim } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_solstheim
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Yokuda
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_yokuda } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_yokuda
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Summerset Isles
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_auridon } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_auridon
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_summerset } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_summerset
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Valenwood
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_grahtwood } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_grahtwood
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_greenshade } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_greenshade
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_malabal_tor } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_malabal_tor
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_reaper_march } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_reaper_march
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		### Elsweyr
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_anequina } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_anequina
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_tenmar } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_tenmar
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		else_if = {
-			limit = { scope:county.title_province = { geographical_region = custom_nativity_pellitine } }
-			random_in_global_list = {
-				variable = culture_is_alive
-				
-				limit = {
-					culture_group = scope:councillor_liege.culture_group
-					has_innovation = innovation_native_pellitine
-				}
-				
-				save_scope_as = culture_to_convert
-			}
-		}
-		
-		scope:county = {
-			set_variable = {
-				name = culture_to_convert
-				value = scope:culture_to_convert
-			}
-		}
-	}
-
-	on_finish_task_county = {
-		# Culture is converted
-		scope:county = {
-			culture = { save_scope_as = old_culture }
-			var:culture_to_convert = { save_scope_as = new_culture }
-		}
-		scope:county = { set_county_culture = scope:new_culture }
-		scope:councillor = {
-			start_default_task = yes
-		}
-		
-		scope:councillor_liege = {
-			# trigger_event = steward_task.0302
-			if = {
-				limit = {
-					is_independent_ruler = no
-				}
-				add_character_flag = {
-					flag = no_ai_culture_convert
-					years = 50
-				}
-			}
-			else = {
-				add_character_flag = {
-					flag = no_ai_culture_convert
-					years = 20
-				}
-			}
-		}
-	}
-
-	on_start_task = {
-		liege = {
-			add_character_flag = {
-				flag = no_steward_side_effects_first_month
-				days = 30
-			}
-		}
-	}
-
-	on_monthly_county = {
-		scope:councillor_liege = {
-			if = {
-				limit = {
-					has_character_flag = no_steward_side_effects_first_month
-				}
-				remove_character_flag = no_steward_side_effects_first_month
-			}
-			else = {
-				trigger_event = {
-					on_action = task_promote_culture_side_effects
-					days = { 1 30 }
-				}
-			}
-		}
-	}
-	
-	ai_will_do = {
-		value = 0
-		if = {
-			limit = {
-				scope:councillor = {
-					is_performing_council_task = task_promote_local_culture
-				}
-			}
-			add = 10000 # Always keep going if this is already chosen
-		}
-		else_if = {
-			limit = {
-				scope:councillor_liege = {
-					gold >= steward_convert_culture_value
-				}
-			}
-			add = 200
-		}
-		if = {
-			# Don't do this too often
-			limit = { scope:councillor_liege = { has_character_flag = no_ai_culture_convert } }
 			multiply = 0
 		}
 		if = {

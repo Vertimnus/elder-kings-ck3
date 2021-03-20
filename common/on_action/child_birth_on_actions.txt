@@ -7,8 +7,10 @@
 # scope:father is the family father (not the biological)
 on_birth_mother = {
 	events = {
-		birth.0001 #No one dies - hidden event that selects visible birth event based on bastard status and complication rolls
-		birth.3011 #Mother dies
+		### EK EDIT: Birth events will be called after the race compatibility check
+		ek_race.0101
+		#birth.0001 #No one dies - hidden event that selects visible birth event based on bastard status and complication rolls
+		#birth.3011 #Mother dies
 	}
 }
 
@@ -55,8 +57,65 @@ on_birth_child = {
 		# birth.8011 #Born in the Purple
 		trait_specific.0500 #To handle genetic traits not expressed until later in life
 		# debug.0010 # Disease data tracking
+		ek_race.0004 # EK EDIT - Race & Lifespan Inheritance
 	}
 	effect = {
+		# Make sure that children aren't Lowborn if one of their parents are, in fact, of noble stock
+		if = {
+			limit = {
+				scope:is_bastard = no
+				scope:child = {
+					is_lowborn = yes
+				}
+				OR = {
+					AND = {
+						exists = scope:father
+						scope:father = {
+							is_lowborn = no
+						}
+					}
+					scope:mother = {
+						is_lowborn = no
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						exists = scope:father
+					}
+					exists = mother.house
+				}
+				set_house = mother.house
+			}
+			else_if = {
+				limit = {
+					exists = scope:father
+					exists = mother.house
+					scope:father = {
+						OR = {
+							AND = {
+								is_spouse_of = scope:mother
+								matrilinear_marriage = yes
+							}
+							is_concubine_of = scope:mother
+						}
+					}
+				}
+				set_house = mother.house
+			}
+			else_if = {
+				limit = {
+					exists = scope:father
+					exists = father.house
+				}
+				set_house = father.house
+			}
+			else = {
+				set_house = mother.house
+			}
+		}
+		
 		#Add bastardy traits and set correct House
 		if = {
 			limit = {
@@ -271,7 +330,9 @@ on_birth_child = {
 						scope:child.dynasty = {
 							exists = var:blood_legacy_4_albino
 						}
-						has_trait = albino
+						NOT = {
+							has_trait = albino
+						}
 					}
 					random = {
 						chance = blood_legacy_4_chance
@@ -287,7 +348,9 @@ on_birth_child = {
 						scope:child.dynasty = {
 							exists = var:blood_legacy_4_scaly
 						}
-						has_trait = scaly
+						NOT = {
+							has_trait = scaly
+						}
 					}
 					random = {
 						chance = blood_legacy_4_chance
@@ -301,11 +364,6 @@ on_birth_child = {
 			}
 		}
 	}
-	### EK EDIT: WIP race handling
-	# on_actions = {
-		# ek_race_check_pulse
-		# delay = { days = { 5 10 } }
-	# }
 }
 
 # called for the mother when a pregnancy reaches the "revealed" status
@@ -314,13 +372,13 @@ on_birth_child = {
 # scope:real_father is the biological father
 on_pregnancy_mother = {
 	events = {
-		### EK EDIT: WIP race handling
-		#ek_race.0001 # EK - Species Compatibility
-		pregnancy.0001 # Universal hidden maintenance event
-		pregnancy.1001 # Mother gives birth to current husband's child.
-		pregnancy.1101 # Mother gives birth to ex-husband's child.
-		pregnancy.2001 # Unwed mother gives birth to bastard child.
-		pregnancy.2002 # Married mother gives birth to bastard child.
+		#EK-EDIT - pregnancy events will be called after the race compatibility check
+		ek_race.0100
+		#pregnancy.0001 # Universal hidden maintenance event
+		#pregnancy.1001 # Mother gives birth to current husband's child.
+		#pregnancy.1101 # Mother gives birth to ex-husband's child.
+		#pregnancy.2001 # Unwed mother gives birth to bastard child.
+		#pregnancy.2002 # Married mother gives birth to bastard child.
 	}
 }
 

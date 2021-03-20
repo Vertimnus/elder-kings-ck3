@@ -31,6 +31,9 @@ religious_cb_piety_white_peace = -50
 excommunication_cb_piety_change_multiplier = 4
 excommunication_cb_piety_white_peace = -50
 
+religious_cb_piety_discount_against_hof_humsac = 0.5
+hof_humsacd_fervour_gain = major_fervor_value
+
 faith_doctrine_cost_low = 200
 faith_doctrine_cost_mid = 400
 faith_doctrine_cost_high = 600
@@ -417,6 +420,7 @@ ghw_target_stretch = 10
 ghw_target_has_holy_site = 50
 #Targets that should always be priorities if not controlled:
 ghw_target_key_religious_holding = 100
+ghw_target_religious_vengeance = 75
 #Distance modifiers stack:
 ghw_target_distance_01_reduction = 0.8
 ghw_target_distance_02_reduction = 0.8
@@ -3550,6 +3554,26 @@ great_holy_war_target_kingdom_weight = {
 		}
 		multiply = ghw_target_key_religious_holding
 	}
+	#A defender in the region HumSac'd your HoF
+	if = {
+		limit = {
+			any_in_de_jure_hierarchy = {
+				continue = { tier > tier_county }
+				tier = tier_county
+				holder = {
+					AND = {
+						has_variable_list = humsacd_hofs
+						is_target_in_variable_list = {
+							name = humsacd_hofs
+							target = scope:the_faith
+						}
+					}
+					is_hostile_enough_for_holy_war_trigger = { FAITH = top_liege.faith }
+				}
+			}
+		}
+		multiply = ghw_target_religious_vengeance
+	}
 }
 
 great_holy_war_pledge_amount = {
@@ -3681,30 +3705,29 @@ faith_conversion_cost_mult = {
 	###############################################################
 	# Converting TO an unreformed faith often has steep penalties #
 	###############################################################
-	### EK EDIT: Unreformed faiths don't exist
-	# if = {
-		# limit = {
-			# scope:new_faith = {
-				# has_doctrine_parameter = unreformed
-			# }
-		# }
+	if = {
+		limit = {
+			scope:new_faith = {
+				has_doctrine_parameter = unreformed
+			}
+		}
 
 		# Massive penalty if your current faith is reformed.
-		# if = {
-			# limit = {
-				# scope:character = {
-					# faith = {
-						# NOT = { has_doctrine_parameter = unreformed }
-					# }
-				# }
-			# }
-			# add = {
-				# desc = "faith_conversion_cost_reformed_converting_to_unreformed"
-				# format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
-				# value = 5
-			# }
+		if = {
+			limit = {
+				scope:character = {
+					faith = {
+						NOT = { has_doctrine_parameter = unreformed }
+					}
+				}
+			}
+			add = {
+				desc = "faith_conversion_cost_reformed_converting_to_unreformed"
+				format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+				value = 5
+			}
 			
-		# }
+		}
 
 		# Minor stacking penalties depending on (non-tribal) government form.
 		# if = {
@@ -3743,7 +3766,7 @@ faith_conversion_cost_mult = {
 				# value = 0.75
 			# }
 		# }
-	# }
+	}
 
 	##################################
 	# Dead Religion/Faith penalty(s) #
@@ -3909,6 +3932,35 @@ faith_conversion_cost_mult = {
 			value = 1
 		}
 	}
+	
+	#######################################
+	# Misc penalties #
+	#######################################
+
+	# More expensive to convert to a faith who's HoF you HumSac'D/to a faith on good terms with one who's HoF you HumSac'd, unless they're chill with HumSac.
+	if = {
+		limit = {
+			scope:character = {
+				has_variable_list = humsacd_hofs
+				any_in_list = {
+					variable = humsacd_hofs
+					faith_hostility_level = {
+						target = scope:new_faith
+						value <= faith_astray_level
+					}
+				}
+			}
+			# Exemptions for people who already practice HumSac: they're likely not happy, but it's not the ultimate taboo for them.
+			scope:new_faith = {
+				NOT = { has_doctrine_parameter = human_sacrifice_active }
+			}
+		}
+		add = {
+			desc = faith_conversion_cost_sacrificed_hof
+			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+			value = 5
+		}
+	}
 
 	########################
 	# Conversion Discounts #
@@ -3923,31 +3975,30 @@ faith_conversion_cost_mult = {
 				}
 			}
 		}
-		### EK EDIT: Still no unreformed faiths
-		# if = { # Even cheaper if unreformed
-			# limit = {
-				# scope:new_faith = {
-					# NOT = { has_doctrine_parameter = unreformed }
-				# }
-				# scope:character = {
-					# faith = {
-						# has_doctrine_parameter = unreformed
-					# }
-				# }
-			# }
-			# subtract = {
-				# desc = faith_conversion_cost_unreformed_holy_war
-				# format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
-				# value = 2.5
-			# }
-		# }
-		# else = { # But still a sizable discount otherwise.
-			# subtract = {
-				# desc = faith_conversion_cost_holy_war
-				# format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
-				# value = 0.5
-			# }
-		# }
+		if = { # Even cheaper if unreformed
+			limit = {
+				scope:new_faith = {
+					NOT = { has_doctrine_parameter = unreformed }
+				}
+				scope:character = {
+					faith = {
+						has_doctrine_parameter = unreformed
+					}
+				}
+			}
+			subtract = {
+				desc = faith_conversion_cost_unreformed_holy_war
+				format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+				value = 2.5
+			}
+		}
+		else = { # But still a sizable discount otherwise.
+			subtract = {
+				desc = faith_conversion_cost_holy_war
+				format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+				value = 0.5
+			}
+		}
 		
 		subtract = {
 			desc = faith_conversion_cost_holy_war
@@ -4341,7 +4392,7 @@ faith_conversion_cost_mult = {
 reincarnation_chance = 4
 
 holy_sites_to_create_temporal_head_of_faith = 2
-holy_sites_to_create_spiritual_head_of_faith = 1
+holy_sites_to_create_spiritual_head_of_faith = 2
 
 faith_military_strength = {
 	every_ruler = {

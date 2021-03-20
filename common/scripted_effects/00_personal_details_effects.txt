@@ -1,4 +1,6 @@
-﻿#Effects used in parent events
+﻿### EK EDIT: Removed references to vanilla cultures & regions
+
+#Effects used in parent events
 
 
 #####################################################################
@@ -346,7 +348,6 @@ get_quirk_character_effect = {
 }
 
 
-### EK TODO: Add our own (staves, claws, that kind of things)
 #Sets a character's signature weapon effect, if they do not already have one.
 #TODO_CD_P: Add cultural specific items here
 set_signature_weapon_effect = {
@@ -373,6 +374,15 @@ set_signature_weapon_effect = {
 						name = signature_weapon
 						value = flag:axe
 					}
+					# Weight up the axe-bearing foreigners chance of bearing axes.
+					modifier = {
+						add = 150
+						has_trait = varangian
+					}
+					# modifier = {
+						# add = 50
+						# culture_group = culture_group:north_germanic_group
+					# }
 				}
 				5 = {
 					set_variable = {
@@ -474,13 +484,50 @@ pick_servant_romance_target_effect = {
 	}
 }
 
-### EK TODO: Add our own
 set_favorite_treat_effect = {
 	if = {
 		limit = { NOT = { has_variable = favorite_treat } }
 		hidden_effect = {
 			random_list = {
 				10 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
 					set_variable = {
 						name = favorite_treat
 						value = flag:comfit #famous in sicily
@@ -489,10 +536,110 @@ set_favorite_treat_effect = {
 				10 = {
 					set_variable = {
 						name = favorite_treat
-						value = flag:nougat #europeans & arabs
+						value = flag:roasted_almonds
 					}
 				}
 				10 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# OR = {
+									# geographical_region = world_middle_east_persia
+									# geographical_region = world_middle_east
+									# geographical_region = world_asia_minor
+									# geographical_region = world_india
+									# geographical_region = world_africa_north
+									# geographical_region = world_burma
+									# geographical_region = world_europe_south
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# OR = {
+									# geographical_region = world_middle_east_persia
+									# geographical_region = world_middle_east
+									# geographical_region = world_asia_minor
+									# geographical_region = world_india
+									# geographical_region = world_africa_north
+									# geographical_region = world_burma
+									# geographical_region = world_europe_south
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# OR = {
+									# geographical_region = world_middle_east_persia
+									# geographical_region = world_middle_east
+									# geographical_region = world_asia_minor
+									# geographical_region = world_india
+									# geographical_region = world_africa_north
+									# geographical_region = world_burma
+									# geographical_region = world_europe_south
+								# }
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:nougat
+					}
+				}
+				10 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
 					set_variable = {
 						name = favorite_treat
 						value = flag:marzipan #europeans & arabs, possibly eastern asaia
@@ -528,93 +675,140 @@ set_favorite_treat_effect = {
 						value = flag:strawberry_compote
 					}
 				}
-				# 10 = {
-					# trigger = {
-						# trigger_if = {
-							# limit = {
-								# exists = capital_province
-							# }
-							# capital_province = {
-								# OR = {
-									# geographical_region = world_europe
-									# geographical_region = custom_greater_armenia
-								# }
-							# }
-						# }
-						# trigger_else_if = {
-							# limit = {
-								# exists = liege
-							# }
-							# liege.capital_province = {
-								# OR = {
-									# geographical_region = world_europe
-									# geographical_region = custom_greater_armenia
-								# }
-							# }
-						# }
-						# trigger_else_if = {
-							# limit = {
-								# exists = location
-							# }
-							# location = {
-								# OR = {
-									# geographical_region = world_europe
-									# geographical_region = custom_greater_armenia
-								# }
-							# }
-						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:gingerbread #europe, armenia
-					# }
-				# }
-				# 5 = {
-					# trigger = {
-						# trigger_if = {
-							# limit = {
-								# exists = capital_province
-							# }
-							# capital_province = {
-								# geographical_region = world_europe_west
-							# }
-						# }
-						# trigger_else_if = {
-							# limit = {
-								# exists = liege
-							# }
-							# liege.capital_province = {
-								# geographical_region = world_europe_west
-							# }
-						# }
-						# trigger_else_if = {
-							# limit = {
-								# exists = location
-							# }
-							# location = {
-								# geographical_region = world_europe_west
-							# }
-						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:frytour_blaunched #western europe
-					# }
-				# }
 				10 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# OR = {
+									# geographical_region = world_europe
+									# geographical_region = custom_greater_armenia
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# OR = {
+									# geographical_region = world_europe
+									# geographical_region = custom_greater_armenia
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# OR = {
+									# geographical_region = world_europe
+									# geographical_region = custom_greater_armenia
+								# }
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:gingerbread #europe, armenia
+					}
+				}
+				5 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# geographical_region = world_europe_west
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# geographical_region = world_europe_west
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# geographical_region = world_europe_west
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:frytour_blaunched #western europe
+					}
+				}
+				10 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
+						# trigger_if = {
+							# limit = {
+								# exists = capital_province
+							# }
+							# capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = liege
+							# }
+							# liege.capital_province = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						# trigger_else_if = {
+							# limit = {
+								# exists = location
+							# }
+							# location = {
+								# NOT = {
+									# geographical_region = world_europe_north
+								# }
+							# }
+						# }
+						trigger_else = {
+							always = no
+						}
+					}
 					set_variable = {
 						name = favorite_treat
 						value = flag:fig_pie
 					}
 				}
-				# 5 = {
-					# trigger = {
+				5 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
 						# trigger_if = {
 							# limit = {
 								# exists = capital_province
@@ -639,17 +833,20 @@ set_favorite_treat_effect = {
 								# geographical_region = custom_england
 							# }
 						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:pokerounce #england
-					# }
-				# }
-				# 5 = {
-					# trigger = {
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:pokerounce #england
+					}
+				}
+				5 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
 						# trigger_if = {
 							# limit = {
 								# exists = capital_province
@@ -674,17 +871,20 @@ set_favorite_treat_effect = {
 								# geographical_region = world_europe_west
 							# }
 						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:sambocade #western europe
-					# }
-				# }
-				# 5 = {
-					# trigger = {
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:sambocade #western europe
+					}
+				}
+				5 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
 						# trigger_if = {
 							# limit = {
 								# exists = capital_province
@@ -718,17 +918,20 @@ set_favorite_treat_effect = {
 								# }
 							# }
 						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:sesame_cake #africa, middle east
-					# }
-				# }
-				# 2 = {
-					# trigger = {
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:sesame_cake #africa, middle east
+					}
+				}
+				2 = {
+					trigger = {
+						trigger_if = {
+							limit = { always = no }
+						}
 						# trigger_if = {
 							# limit = {
 								# exists = capital_province
@@ -753,15 +956,15 @@ set_favorite_treat_effect = {
 								# geographical_region = world_africa
 							# }
 						# }
-						# trigger_else = {
-							# always = no
-						# }
-					# }
-					# set_variable = {
-						# name = favorite_treat
-						# value = flag:baked_banana #africa
-					# }
-				# }
+						trigger_else = {
+							always = no
+						}
+					}
+					set_variable = {
+						name = favorite_treat
+						value = flag:baked_banana #africa
+					}
+				}
 			}
 		}
 	}

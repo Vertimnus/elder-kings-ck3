@@ -3,8 +3,6 @@
 @maa_low_maintenance_cost = 1.0
 @maa_high_maintenance_cost = 5.0
 
-### EK TODO: Replace these with our own
-
 camel_rider = {
 	type = light_cavalry
 	
@@ -26,6 +24,11 @@ camel_rider = {
 	
 	counters = {
 		archers = 1
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -3 }
+		harsh_winter = { damage = -5 toughness = -2 }
 	}
 	
 	buy_cost = { gold = camel_rider_recruitment_cost }
@@ -59,7 +62,12 @@ war_elephant = {
 		skirmishers = 2
 		heavy_infantry = 2
 	}
-	
+
+	winter_bonus = {
+		normal_winter = { damage = -20 toughness = -5 }
+		harsh_winter = { damage = -40 toughness = -10 }
+	}
+
 	buy_cost = { gold = war_elephant_recruitment_cost }
 	low_maintenance_cost = { gold = war_elephant_low_maint_cost }
 	high_maintenance_cost = { gold = war_elephant_high_maint_cost }

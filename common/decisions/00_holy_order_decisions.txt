@@ -14,6 +14,14 @@
 				}
 			}
 		}
+		### EK EDIT: The Jomsvikings don't exist
+		# # Jomsvikings should use their special decision if appropriate.
+		# trigger_if = {
+			# limit = { has_fp1_dlc_trigger = yes }
+			# faith = {
+				# NOT = { fp1_valid_norse_faith_for_jomsvikings_trigger = yes }
+			# }
+		# }
 	}
 
 	widget = {
@@ -110,6 +118,8 @@
 			}
 		}
 
+		### EK EDIT: Important, make sure that scope:base_char is defined and references the holy order patron
+		root = { save_scope_as = base_char }
 		create_character = {
 			template = holy_order_leader_character
 			location = scope:barony.title_province
@@ -175,10 +185,7 @@
 					}
 				}
 			}
-		}
-		faith = {
-			change_fervor = 10
-		}
+		}create_holy_order_effect = yes
 	}
 	
 	ai_potential = {

@@ -6,12 +6,14 @@
 #Standard regiments
 war_mages = { ##WIP, gonna make them siege troops that also fight in main
 	type = mages
-	fights_in_main_phase = yes
 	
-	damage = 30
-	toughness = 20
-	pursuit = 10
-	screen = 25
+	damage = 25
+	toughness = 15
+	pursuit = 5
+	screen = 20
+	
+	siege_tier = 1
+	siege_value = 0.1
 	
 	counters = {
 		heavy_infantry = 1
@@ -19,11 +21,11 @@ war_mages = { ##WIP, gonna make them siege troops that also fight in main
 		archers = 1
 	}
 	
-	buy_cost = { gold = onager_recruitment_cost }
-	low_maintenance_cost = { gold = onager_low_maint_cost }
-	high_maintenance_cost = { gold = onager_high_maint_cost }
+	buy_cost = { gold = heavy_infantry_recruitment_cost }
+	low_maintenance_cost = { gold = heavy_infantry_low_maint_cost }
+	high_maintenance_cost = { gold = heavy_infantry_high_maint_cost }
 	
-	stack = 50
+	stack = 100
 	icon = mages
 }
 
@@ -96,4 +98,32 @@ risen_dead = {
 	
 	icon = risen_dead
 	can_recruit = no # Spawned by decision
+}
+
+# Should be self explanatory
+dovah_vahlok = {
+	type = dragon
+	
+	damage = 10000
+	toughness = 10000
+	pursuit = 10000
+	screen = 10000
+	
+	counters = {
+		skirmishers = 1
+		heavy_infantry = 1
+		light_cavalry = 1
+		heavy_cavalry = 1
+	}
+	
+	buy_cost = { gold = 50 }
+	low_maintenance_cost = { gold = 0 }
+	high_maintenance_cost = { gold = 1 }
+	
+	max_sub_regiments = 1
+	
+	stack = 10
+	ai_quality = { value = 100 }
+	
+	icon = dovah_vahlok
 }
