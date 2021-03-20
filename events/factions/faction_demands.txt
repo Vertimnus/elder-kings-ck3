@@ -1,4 +1,6 @@
-﻿# Faction demand events
+﻿### EK EDIT: Removed referencesto vanilla title
+
+# Faction demand events
 
 namespace = faction_demand
 
@@ -248,7 +250,6 @@ faction_demand.0101 = {
 		}
 
 		scope:faction = {
-			add_faction_discontent = -200
 			destroy_faction = yes
 		}
 
@@ -904,6 +905,13 @@ faction_demand.2001 = {
 	trigger = {
 		exists = scope:faction
 	}
+	
+	immediate = {
+		set_variable = {
+			name = claimant_faction_sent_demand
+			value = scope:faction_claimant
+		}
+	}
 
 	option = {
 		name = "FACTION_DEMAND_ACCEPT"
@@ -1008,6 +1016,10 @@ faction_demand.2001 = {
 				scope:faction = { faction_power < 40 }
 			}
 		}
+	}
+	
+	after = {
+		remove_variable = claimant_faction_sent_demand
 	}
 }
 
