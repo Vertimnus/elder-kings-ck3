@@ -30,17 +30,16 @@ turn_reach_nord_hold_decision = {
 	is_valid = {
 		# Must completely hold the Skyrim half of the Reach
 		completely_controls_region = mundus_tamriel_reach_east_reach
-		completely_controls_region = mundus_tamriel_reach_north_reach
+		# completely_controls_region = mundus_tamriel_reach_north_reach
 		prestige_level >= 3
 		
 		# All of the eastern half of the Reach must have been civilised
-		ROOT = {
+		custom_description = {
+			text = turn_reach_nord_hold_decision_east_reach_civilised
+			
 			NOT = {
 				any_realm_province = {
-					OR = {
-						geographical_region = mundus_tamriel_reach_north_reach
-						geographical_region = mundus_tamriel_reach_east_reach
-					}
+					geographical_region = mundus_tamriel_reach_east_reach
 					has_holding_type = tribal_holding
 				}
 			}
@@ -56,10 +55,13 @@ turn_reach_nord_hold_decision = {
 	}
 
 	effect = {
-		### EK TODO: Handle it via event instead (still WIP)
-		set_culture_native_to = { REGION = karth CULTURE = culture:westmarcher }
+		show_as_tooltip = { turn_reach_nord_hold_decision_effect = yes }
+		
+		trigger_event = north_tamriel.0021
 		
 		hidden_effect = {
+			setup_county_native_cultures_link = yes
+			
 			add_to_global_variable_list = {
 				name = unavailable_unique_decisions
 				target = flag:flag_turned_reach_nord_hold
