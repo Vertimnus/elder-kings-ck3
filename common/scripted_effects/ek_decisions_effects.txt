@@ -1,0 +1,33 @@
+﻿turn_reach_nord_hold_decision_effect = {
+	# We give the nativity
+	set_culture_native_to = { REGION = karth CULTURE = culture:westmarcher }
+	
+	# Nickname
+	give_nickname = nick_the_peacemaker
+	
+	#Laws, if capital in Markarth
+	if = {
+		limit = {
+			capital_province = { geographical_region = mundus_tamriel_skyrim_karth }
+			primary_title = { tier >= tier_kingdom }
+		}
+		if = {
+			limit = {
+				has_realm_law = crown_authority_0
+			}
+			add_realm_law_skip_effects = crown_authority_1
+		}
+		else_if = {
+			limit = {
+				has_realm_law = crown_authority_1
+			}
+			add_realm_law_skip_effects = crown_authority_2
+		}
+		else_if = {
+			limit = {
+				has_realm_law = crown_authority_2
+			}
+			add_realm_law_skip_effects = crown_authority_3
+		}
+	}
+}

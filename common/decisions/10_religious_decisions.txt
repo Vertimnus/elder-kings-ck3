@@ -257,6 +257,142 @@ select_personal_deity_decision = {
 	}
 }
 
+### EK EDIT: Decisions disabled, use the one above instead
+# select_personal_deity_hinduism_decision = {
+	# picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	# desc = select_personal_deity_hinduism_decision_desc
+	# selection_tooltip = select_personal_deity_hinduism_decision_tooltip
+
+	# is_shown = {
+		# religion = religion:hinduism_religion
+		# faith = {
+			# has_doctrine_parameter = select_personal_god_active
+		# }
+	# }
+
+	# is_valid = {
+	# }
+
+	# is_valid_showing_failures_only = {
+		# # Have to at _least_ not be in piety debt.
+		# piety >= 0
+	# }
+
+	# cooldown = { years = 2 }
+
+	# effect = {
+		# custom_tooltip = select_personal_deity_hinduism_decision_tt
+		# trigger_event = religious_decision.0101
+	# }
+
+	# ai_check_interval = 96
+	
+	# ai_potential = {
+		# piety >= minor_piety_value
+		# NOR = {
+			# has_character_modifier = bhakti_hinduism_ganga
+			# has_character_modifier = bhakti_hinduism_saraswati
+			# has_character_modifier = bhakti_hinduism_kali
+			# has_character_modifier = bhakti_hinduism_kubera
+			# has_character_modifier = bhakti_vaishnavism_lakishmi
+			# has_character_modifier = bhakti_vaishnavism_jagganath
+			# has_character_modifier = bhakti_vaishnavism_hayagriva
+			# has_character_modifier = bhakti_shaivism_parvati
+			# has_character_modifier = bhakti_shaivism_virabhadra
+			# has_character_modifier = bhakti_shaivism_munishwarar
+			# has_character_modifier = bhakti_shaivism_dakshinamoorthy
+			# has_character_modifier = bhakti_smartism_ganesha
+			# has_character_modifier = bhakti_smartism_vishnu
+			# has_character_modifier = bhakti_smartism_shiva
+		# }
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
+# select_personal_deity_germanic_decision = {
+	# picture = "gfx/interface/illustrations/decisions/fp1_decisons_hold_bolt.dds"
+
+	# desc = select_personal_deity_germanic_decision_desc
+	# selection_tooltip = select_personal_deity_germanic_decision_tooltip
+
+	# is_shown = {
+		# # DLC check.
+		# has_fp1_dlc_trigger = yes
+		# # Following a valid religion & faith.
+		# religion = religion:germanic_religion
+		# faith = { has_doctrine_parameter = select_personal_god_active }
+	# }
+
+	# is_valid = {
+	# }
+
+	# is_valid_showing_failures_only = {
+		# # Have to at _least_ not be in piety debt.
+		# piety >= 0
+	# }
+
+	# cooldown = { years = 2 }
+
+	# effect = {
+		# # Show the possible options.
+		# show_as_tooltip = {
+			# random_list = {
+				# desc = select_personal_deity_germanic_decision_tt
+				# 100 = {
+					# show_chance = no
+					# desc = select_personal_deity_germanic_decision.select_odin
+					# add_character_modifier = bhakti_germanic_generic_odin
+				# }
+				# 100 = {
+					# trigger = { is_vaguely_danish_bhakti_trigger = no }
+					# show_chance = no
+					# desc = select_personal_deity_germanic_decision.select_ullr
+					# add_character_modifier = bhakti_germanic_not_danish_ullr
+				# }
+				# 100 = {
+					# trigger = { is_vaguely_danish_bhakti_trigger = yes }
+					# show_chance = no
+					# desc = select_personal_deity_germanic_decision.select_tyr
+					# add_character_modifier = bhakti_germanic_danish_tyr
+				# }
+				# 100 = {
+					# show_chance = no
+					# desc = select_personal_deity_germanic_decision.select_thor
+					# add_character_modifier = bhakti_germanic_generic_thor
+				# }
+				# 100 = {
+					# show_chance = no
+					# desc = select_personal_deity_germanic_decision.select_freyr
+					# add_character_modifier = bhakti_germanic_generic_freyr
+				# }
+			# }
+		# }
+		# # And the actual effect.
+		# trigger_event = religious_decision.0102
+	# }
+
+	# ai_check_interval = 96
+	
+	# ai_potential = {
+		# piety >= minor_piety_value
+		# NOR = {
+			# has_character_modifier = bhakti_germanic_generic_odin
+			# has_character_modifier = bhakti_germanic_not_danish_ullr
+			# has_character_modifier = bhakti_germanic_danish_tyr
+			# has_character_modifier = bhakti_germanic_generic_thor
+			# has_character_modifier = bhakti_germanic_generic_freyr
+		# }
+	# }
+
+	# ai_will_do = {
+		# base = 100
+	# }
+# }
+
 meditate_in_seclusion_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
@@ -356,63 +492,81 @@ give_sky_burial_decision = {
 	}
 }
 
-# raise_runestone_decision = {
-	# picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+### EK EDIT: Tied to the Nordic culture group instead of the Norse faith
+raise_runestone_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-	# desc = raise_runestone_decision_desc
-	# selection_tooltip = raise_runestone_decision_tooltip
+	desc = raise_runestone_decision_desc
+	selection_tooltip = raise_runestone_decision_tooltip
 
-	# is_shown = {
+	is_shown = {
+		culture_group = culture_group:nordic_group
 		# faith = faith:norse_pagan
-		# has_variable = ancestor_to_bury
-		# var:ancestor_to_bury = { dynasty = root.dynasty }
-	# }
+		has_variable = ancestor_to_bury
+		var:ancestor_to_bury = { dynasty = root.dynasty }
+		# Use expanded version if we have FP1.
+		has_fp1_dlc_trigger = no
+	}
 
-	# is_valid = {
-	# }
+	is_valid = {
+	}
 
-	# is_valid_showing_failures_only = {
+	is_valid_showing_failures_only = {
 
-	# }
+	}
 
-	# effect = {
-		# The modifier will only be active if a character of your dynasty holds it
-		# capital_province = {
-			# county = {
-				# set_variable = {
-					# name = ancestor_to_bury
-					# value = root.var:ancestor_to_bury
-				# }
-				# add_county_modifier = {
-					# modifier = county_raised_runestone_modifier
-				# }
-			# }
-		# }
-		# remove_variable = ancestor_to_bury
-		# add_piety = medium_piety_value
-		# every_vassal = {
-			# limit = {
+	effect = {
+		#The modifier will only be active if a character of your dynasty holds it
+		capital_province = {
+			county = {
+				set_variable = {
+					name = ancestor_to_bury
+					value = root.var:ancestor_to_bury
+				}
+				root = {
+					send_interface_toast = {
+						title = raise_runestone_decision_toast
+						left_icon = root
+
+						prev = {
+							add_county_modifier = {
+								modifier = county_raised_runestone_modifier
+							}
+						}
+					}
+				}
+			}
+		}
+		remove_variable = ancestor_to_bury
+		add_piety = medium_piety_value
+		every_vassal = {
+			limit = {
+				culture_group = culture_group:nordic_group
 				# faith = faith:norse_pagan
-			# }
-			# custom = raise_runestone_vassals
-			# add_opinion = {
-				# modifier = pleased_opinion
-				# target = root
-				# opinion = 10
-			# }
-		# }
-	# }
+			}
+			custom = raise_runestone_vassals
+			add_opinion = {
+				modifier = pleased_opinion
+				target = root
+				opinion = 10
+			}
+		}
+		#Show a warning about it being destroyed if someone outside of your dynasty takes over the county it's built in
+		custom_description_no_bullet = {
+			text = raise_runestone_decision_warning
+		}
+	}
 
-	# ai_check_interval = 36
+	ai_check_interval = 36
 	
-	# ai_potential = {
-		# always = yes
-	# }
+	ai_potential = {
+		always = yes
+	}
 
-	# ai_will_do = {
-		# base = 100
-	# }
-# }
+	ai_will_do = {
+		base = 100
+	}
+}
 
 divine_the_stars_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
@@ -908,6 +1062,9 @@ go_on_pilgrimage_decision = {
 					# }
 				# }
 			# }
+		# }
+		# NOT = {
+			# root = root.faith.religious_head
 		# }
 	# }
 

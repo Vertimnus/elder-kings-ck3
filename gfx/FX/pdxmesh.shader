@@ -4,6 +4,7 @@ Includes = {
 	"cw/shadow.fxh"
 	"cw/camera.fxh"
 	"cw/heightmap.fxh"
+	"cw/pdxterrain.fxh"
 	"jomini/jomini_fog.fxh"
 	"jomini/jomini_lighting.fxh"
 	"jomini/jomini_fog_of_war.fxh"
@@ -12,6 +13,7 @@ Includes = {
 	"constants.fxh"
 	"standardfuncsgfx.fxh"
 	"lowspec.fxh"
+	"dynamic_masks.fxh"
 }
 
 PixelShader =
@@ -100,36 +102,36 @@ PixelShader =
 		SampleModeU = "Wrap"
 		SampleModeV = "Wrap"
 	}
-	TextureSampler TerrainDiffuseArray
-	{
-		Ref = PdxTerrainTextures0
-		MagFilter = "Linear"
-		MinFilter = "Linear"
-		MipFilter = "Linear"
-		SampleModeU = "Wrap"
-		SampleModeV = "Wrap"
-		type = "2darray"
-	}
-	TextureSampler TerrainNormalsArray
-	{
-		Ref = PdxTerrainTextures1
-		MagFilter = "Linear"
-		MinFilter = "Linear"
-		MipFilter = "Linear"
-		SampleModeU = "Wrap"
-		SampleModeV = "Wrap"
-		type = "2darray"
-	}
-	TextureSampler TerrainMaterialArray
-	{
-		Ref = PdxTerrainTextures2
-		MagFilter = "Linear"
-		MinFilter = "Linear"
-		MipFilter = "Linear"
-		SampleModeU = "Wrap"
-		SampleModeV = "Wrap"
-		type = "2darray"
-	}
+	#TextureSampler TerrainDiffuseArray
+	#{
+	#	Ref = PdxTerrainTextures0
+	#	MagFilter = "Linear"
+	#	MinFilter = "Linear"
+	#	MipFilter = "Linear"
+	#	SampleModeU = "Wrap"
+	#	SampleModeV = "Wrap"
+	#	type = "2darray"
+	#}
+	#TextureSampler TerrainNormalsArray
+	#{
+	#	Ref = PdxTerrainTextures1
+	#	MagFilter = "Linear"
+	#	MinFilter = "Linear"
+	#	MipFilter = "Linear"
+	#	SampleModeU = "Wrap"
+	#	SampleModeV = "Wrap"
+	#	type = "2darray"
+	#}
+	#TextureSampler TerrainMaterialArray
+	#{
+	#	Ref = PdxTerrainTextures2
+	#	MagFilter = "Linear"
+	#	MinFilter = "Linear"
+	#	MipFilter = "Linear"
+	#	SampleModeU = "Wrap"
+	#	SampleModeV = "Wrap"
+	#	type = "2darray"
+	#}
 	#TextureSampler TerrainColorMapTexture
 	#{
 	#	Ref = PdxTerrainColorMap
@@ -420,7 +422,12 @@ PixelShader =
 					// multiply AO
 					Diffuse.rgb *= Unique.bbb;
 				#endif
-				
+
+				float2 ColorMapCoords =  Input.WorldSpacePos.xz *  WorldSpaceToTerrain0To1;
+				#if defined( APPLY_WINTER )
+					Diffuse.rgb = ApplyDynamicMasksDiffuse( Diffuse.rgb, Normal, ColorMapCoords );
+				#endif
+
 				SMaterialProperties MaterialProps = GetMaterialProperties( Diffuse.rgb, Normal, Properties.a, Properties.g, Properties.b );
 				#if defined( LOW_SPEC_SHADERS )
 					SLightingProperties LightingProps = GetSunLightingProperties( Input.WorldSpacePos, 1.0 );
@@ -514,6 +521,18 @@ Effect standard_usercolorShadow
 	PixelShader = "PixelPdxMeshStandardShadow"
 	RasterizerState = ShadowRasterizerState
 }
+Effect standard_usercolor_winter
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_standard"
+	Defines = { "USER_COLOR" "APPLY_WINTER" }
+}
+Effect standard_usercolor_winterShadow
+{
+	VertexShader = "VertexPdxMeshStandardShadow"
+	PixelShader = "PixelPdxMeshStandardShadow"
+	RasterizerState = ShadowRasterizerState
+}
 
 
 Effect standard_usercolor_alpha
@@ -557,12 +576,24 @@ Effect standard_atlas
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_standard"
-	Defines = { "ATLAS" }
+	Defines = { "ATLAS" "APPLY_WINTER" }
 }
 Effect standard_atlasShadow
 {
 	VertexShader = "VertexPdxMeshStandardShadow"
 	PixelShader = "PixelPdxMeshStandardShadow"		
+	RasterizerState = ShadowRasterizerState
+}
+Effect standard_winter
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_standard"
+	Defines = { "APPLY_WINTER" }
+}
+Effect standard_winterShadow
+{
+	VertexShader = "VertexPdxMeshStandardShadow"
+	PixelShader = "PixelPdxMeshStandardShadow"
 	RasterizerState = ShadowRasterizerState
 }
 Effect sine_flag_animation
@@ -608,7 +639,20 @@ Effect standard_alpha_to_coverageShadow
 	
 	RasterizerState = ShadowRasterizerState
 }
+Effect standard_alpha_to_coverage_winter
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_standard"
+	BlendState = "alpha_to_coverage"
+	Defines = { "APPLY_WINTER" }
+}
+Effect standard_alpha_to_coverage_winterShadow
+{
+	VertexShader = "VertexPdxMeshStandardShadow"
+	PixelShader = "PixelPdxMeshAlphaBlendShadow"
 
+	RasterizerState = ShadowRasterizerState
+}
 
 
 Effect snap_to_terrain
@@ -616,7 +660,7 @@ Effect snap_to_terrain
 	VertexShader = "VS_standard"
 	PixelShader = "PS_standard"
 	
-	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" }
+	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "APPLY_WINTER" }
 }
 Effect snap_to_terrainShadow
 {
@@ -632,7 +676,7 @@ Effect snap_to_terrain_alpha_to_coverage
 	PixelShader = "PS_standard"
 	
 	BlendState = "alpha_to_coverage"
-	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" }
+	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "APPLY_WINTER" }
 }
 Effect snap_to_terrain_alpha_to_coverageShadow
 {
@@ -646,7 +690,7 @@ Effect snap_to_terrain_atlas
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_standard"
-	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "ATLAS" }
+	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "ATLAS" "APPLY_WINTER" }
 }
 Effect snap_to_terrain_atlasShadow
 {
@@ -659,7 +703,7 @@ Effect snap_to_terrain_atlas_usercolor
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_standard"
-	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "ATLAS" "USER_COLOR" }
+	Defines = { "PDX_MESH_SNAP_VERTICES_TO_TERRAIN" "ATLAS" "USER_COLOR" "APPLY_WINTER" }
 }
 Effect snap_to_terrain_atlas_usercolorShadow
 {

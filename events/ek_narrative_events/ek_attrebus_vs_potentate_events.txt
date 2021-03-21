@@ -112,7 +112,7 @@ ek_attrebus_potentate.0001 = {
 		}
 		
 		add_dread = 5
-		imprison = { target = scope:potentate }
+		imprison = { target = scope:potentate type = dungeon }
 		
 		add_character_flag = attrebus_v_potentate_1_imprisoned_potentate
 		
@@ -325,14 +325,14 @@ ek_attrebus_potentate.0003 = {
 				
 				custom_tooltip = remove_all_special_contract_tooltip
 				
-				hidden_tooltip = {
-					vassal_contract_set_obligation_level = { type = special_contract level = special_contract_none }
-					vassal_contract_set_obligation_level = { type = religious_rights level = religious_rights_none }
-					vassal_contract_set_obligation_level = { type = fortification_rights level = fortification_rights_none }
-					vassal_contract_set_obligation_level = { type = coinage_rights level = coinage_rights_none }
-					vassal_contract_set_obligation_level = { type = war_declaration_rights level = war_declaration_rights_default }
-					vassal_contract_set_obligation_level = { type = council_rights level = council_rights_none }
-					vassal_contract_set_obligation_level = { type = title_revocation_rights_default level = special_contract_none }
+				hidden_effect = {
+					vassal_contract_set_obligation_level = { type = special_contract level = 0 }
+					vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
+					vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
+					vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
+					vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
+					vassal_contract_set_obligation_level = { type = council_rights level = 0 }
+					vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
 				}
 			}
 		}
@@ -527,13 +527,13 @@ ek_attrebus_potentate.0004 = {
 		vassal_contract_increase_obligation_level = feudal_government_taxes
 		vassal_contract_increase_obligation_level = feudal_government_levies
 		
-		vassal_contract_set_obligation_level = { type = special_contract level = special_contract_none }
-		vassal_contract_set_obligation_level = { type = religious_rights level = religious_rights_none }
-		vassal_contract_set_obligation_level = { type = fortification_rights level = fortification_rights_none }
-		vassal_contract_set_obligation_level = { type = coinage_rights level = coinage_rights_none }
-		vassal_contract_set_obligation_level = { type = war_declaration_rights level = war_declaration_rights_default }
-		vassal_contract_set_obligation_level = { type = council_rights level = council_rights_none }
-		vassal_contract_set_obligation_level = { type = title_revocation_rights_default level = special_contract_none }
+		vassal_contract_set_obligation_level = { type = special_contract level = 0 }
+		vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
+		vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
+		vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
+		vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
+		vassal_contract_set_obligation_level = { type = council_rights level = 0 }
+		vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
 	}
 	
 	# Let us put all of this behind
@@ -594,7 +594,7 @@ ek_attrebus_potentate.0005 = {
 		name = ek_attrebus_potentate.0005.a
 		
 		# We change the holding type here, and usurp it if needed
-		hidden_tooltip = {
+		hidden_effect = {
 			scope:temple_district.title_province = { set_holding_type = castle_holding }
 			
 			if = {
@@ -884,12 +884,12 @@ ek_attrebus_potentate.0009 = {
 		}
 		
 		# It's treason then.
-		else = {
-			trigger_event = {
-				id = ek_attrebus_potentate.0013
-				days = 14
-			}
-		}
+		# else = {
+			# trigger_event = {
+				# id = ek_attrebus_potentate.0013
+				# days = 14
+			# }
+		# }
 	}
 }
 
@@ -1004,7 +1004,7 @@ ek_attrebus_potentate.0101 = {
 		scope:potentate = {
 			destroy_title = title:e_colovian_estates
 			
-			imprison = { target = scope:attrebus }
+			imprison = { target = scope:attrebus type = dungeon }
 		}
 		
 		scope:attrebus = {
@@ -1136,7 +1136,6 @@ ek_attrebus_potentate.0201 = {
 		
 		primary_heir = {
 			# To ensure that if the player plays Attrebus they get this event
-			limit = { has_primary_title = scope:primary_title }
 			trigger_event = {
 				id = ek_attrebus_potentate.0202
 				days = 3
