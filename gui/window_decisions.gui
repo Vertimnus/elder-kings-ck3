@@ -1382,7 +1382,12 @@ window = {
 											tooltip = "show_hide_desc"
 											using = tooltip_nw
 											onclick = "[GetVariableSystem.Toggle('patron_hide_desc')]"
-											down = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+											#down = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+
+											frame = "[Select_int32( GetVariableSystem.Exists('patron_hide_desc'), '(int32)1', '(int32)2' )]"
+
+											oversound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
+											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_select"
 										}
 										spacer = {
 											size = { 100 0 }
@@ -1479,27 +1484,59 @@ window = {
 											text = "PATRON_MINOR_BOONS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_boon_gold_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_boon_training_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_boon_horde_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "minor_boons"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_boon_gold_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_boon_training_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_boon_horde_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
+											item = {
+												button_patron_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'minor_boon' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1546,21 +1583,53 @@ window = {
 											text = "PATRON_OFFERINGS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_offer_gold_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_offer_sacrifice_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "offerings"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_offer_gold_decision"
-												datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_offer_sacrifice_decision"
-												datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
+											item = {
+												button_patron_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'offering' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1625,15 +1694,47 @@ window = {
 											text = "PATRON_MAJOR_BOONS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_boon_invasion_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_major_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "major_boons"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_boon_invasion_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_major_decision_entry = {}
+											item = {
+												button_patron_major_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'major_boon' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1793,7 +1894,12 @@ window = {
 											tooltip = "show_hide_desc"
 											using = tooltip_nw
 											onclick = "[GetVariableSystem.Toggle('patron_hide_passive_desc')]"
-											down = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+											#down = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+
+											frame = "[Select_int32( GetVariableSystem.Exists('patron_hide_passive_desc'), '(int32)1', '(int32)2' )]"
+
+											oversound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
+											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_select"
 										}
 										spacer = {
 											size = { 100 0 }
@@ -2736,104 +2842,104 @@ window = {
 	}
 }
 
- types Decisions
- {
- 	type button_decision_entry = button_standard {
- 		size = { 300 45 }
- 		tooltip = SHOW_DECISION_TOOLTIP
+types Decisions
+{
+	type button_decision_entry = button_standard {
+		size = { 300 45 }
+		tooltip = SHOW_DECISION_TOOLTIP
 
- 		highlight_icon = {
- 			name = "icon"
- 			position = { 5 5 }
- 			size = { 40 40 }
- 			texture = "[Decision.GetIcon]"
- 			visible = no
- 		}
+		highlight_icon = {
+			name = "icon"
+			position = { 5 5 }
+			size = { 40 40 }
+			texture = "[Decision.GetIcon]"
+			visible = no
+		}
 
 		widget = {
- 			scissor = yes
- 			parentanchor = right|top
+			scissor = yes
+			parentanchor = right|top
 
- 			block "size_illustration" {
- 				size = { 250 43 }
- 			}
+			block "size_illustration" {
+				size = { 250 43 }
+			}
 
- 			icon = {
- 				name = "illustration"
- 				parentanchor = right|top
- 				size = { 250 100 }
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 250 100 }
 
- 				mirror = horizontal
- 				texture = "[Decision.GetPicture]"
- 				alpha = 0.7
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.7
 
- 				visible = "[Decision.IsPossibleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
 
- 				using = Mask_Rough_Edges
+				using = Mask_Rough_Edges
 
- 				modify_texture = {
- 					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
- 					blend_mode = alphamultiply
- 				}
- 			}
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
 
- 			highlight_icon = {
- 				parentanchor = right|top
- 				size = { 250 100 }
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 250 100 }
 
- 				mirror = horizontal
- 				texture = "[Decision.GetPicture]"
- 				alpha = 0.7
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.7
 
- 				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
 
- 				effectname = "GreyedOut"
+				effectname = "GreyedOut"
 
- 				tintcolor = { 0.6 0.6 0.6 0.7 }
+				tintcolor = { 0.6 0.6 0.6 0.7 }
 
- 				using = Mask_Rough_Edges
+				using = Mask_Rough_Edges
 
- 				modify_texture = {
- 					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
- 					blend_mode = alphamultiply
- 				}
- 			}
- 		}
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
 
- 		hbox = {
- 			margin = { 20 0 }
- 			margin_right = 10
+		hbox = {
+			margin = { 20 0 }
+			margin_right = 10
 
- 			text_single = {
- 				layoutpolicy_horizontal = growing
- 				name = "title"
- 				text = "[Decision.GetTitleForPlayer]"
- 				visible = "[Decision.IsPossibleForPlayer]"
- 				default_format = "#clickable"
- 				align = nobaseline
- 			}
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				align = nobaseline
+			}
 
- 			text_single = {
- 				layoutpolicy_horizontal = growing
- 				name = "title2"
- 				text = "[Decision.GetTitleForPlayer]"
- 				visible = "[Not(Decision.IsPossibleForPlayer)]"
- 				block "default_format" {
- 					default_format = "#low"
- 				}
- 				align = nobaseline
- 			}
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				block "default_format" {
+					default_format = "#low"
+				}
+				align = nobaseline
+			}
 
- 			highlight_icon = {
- 				size = { 30 30 }
- 				name = "not_possible"
- 				texture = "gfx/interface/icons/symbols/icon_cross.dds"
- 				visible = "[Not(Decision.IsPossibleForPlayer)]"
- 			}
- 		}
- 	}
- }
- 
+			highlight_icon = {
+				size = { 30 30 }
+				name = "not_possible"
+				texture = "gfx/interface/icons/symbols/icon_cross.dds"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+			}
+		}
+	}
+}
+
 types Court
 {
 	type button_court = button_standard {
@@ -3072,11 +3178,12 @@ Types Patrons
 		maximumsize = { 200 40 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Decision.GetShortDescForPlayer]"
+		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
-		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
-		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[DecisionsViewItem.IsSelected]"
+		#onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		#down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]" #does this get cleared? also is it necessary
 		#down = "[EqualTo_string( GetVariableSystem.Get( 'patron_decision_button' ), Decision.GetTitleForPlayer )]"
 
 		widget = {
@@ -3157,11 +3264,12 @@ Types Patrons
 		maximumsize = { 300 50 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Decision.GetShortDescForPlayer]"
+		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
-		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
-		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[DecisionsViewItem.IsSelected]"
+		#onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		#down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
 
 		widget = {
 			scissor = yes

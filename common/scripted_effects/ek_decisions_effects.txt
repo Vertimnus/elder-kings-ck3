@@ -31,3 +31,76 @@
 		}
 	}
 }
+
+direnni_hegemony_pt_1_decision_effect = {
+	save_scope_as = founder
+	create_title_and_vassal_change = {
+		type = created
+		save_scope_as = title_change
+		add_claim_on_loss = no
+	}
+	title:e_direnni_hegemony = {
+		change_title_holder = {
+			holder = root
+			change = scope:title_change
+		}
+	}
+	resolve_title_and_vassal_change = scope:title_change
+	
+	# Direnni family gets a small bonus
+	if = {
+		limit = { dynasty = dynasty:730000 }
+		dynasty:730000 = {
+			add_dynasty_modifier = {
+				modifier = direnni_reclaim_hegemony_1
+				years = 25
+			}
+		}
+	}
+	
+	capital_county.title_province = {
+		add_province_modifier = {
+			modifier = hegemony_new_capital_temp
+			years = 25
+		}
+	}
+}
+
+direnni_hegemony_pt_2_decision_effect = {
+	custom_tooltip = direnni_hegemony_pt_2_decision_effect_a
+	hidden_effect = {
+		every_kingdom = {
+			limit = { title_capital_county.title_province = { geographical_region = mundus_tamriel_direnni_hegemony_full } }
+			set_de_jure_liege_title = title:e_direnni_hegemony
+		}
+	}
+	
+	# Direnni family gets a special bonus
+	if = {
+		limit = { dynasty = dynasty:730000 }
+		dynasty:730000 = {
+			add_dynasty_modifier = {
+				modifier = direnni_reclaim_hegemony_2
+			}
+		}
+	}
+	
+	else = {
+		dynasty = {
+			add_dynasty_modifier = {
+				modifier = direnni_reclaim_hegemony_3
+			}
+		}
+		dynasty = { save_scope_as = new_hegemon_dynasty }
+		
+		custom_tooltip = direnni_hegemony_pt_2_decision_effect_b # Title named after your dynasty
+	}
+	
+	capital_county.title_province = {
+		add_province_modifier = {
+			modifier = hegemony_new_capital_perm
+		}
+	}
+	
+	custom_tooltip = direnni_hegemony_pt_2_decision_effect_c # Should your dynasty lose the title, it will be destroyed.
+}
