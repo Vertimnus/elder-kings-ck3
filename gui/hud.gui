@@ -963,11 +963,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_my_realm.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameView('my_realm')]"
 						shortcut = "my_realm_window"
 						down = "[IsGameViewOpen('my_realm')]"
@@ -992,11 +987,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_military.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameViewData('military', GetPlayer.GetID)]"
 						shortcut = "military_window"
 						down = "[IsGameViewOpen('military')]"
@@ -1020,11 +1010,6 @@ widget = {
 					blockoverride "maintab_button"
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_council.dds"
-
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 						onclick = "[ToggleGameViewData('council_window', GetPlayer.GetID)]"
 						shortcut = "council_window"
@@ -1067,11 +1052,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_court.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameViewData( 'court_window', GetPlayer.GetID )]"
 						shortcut = "court_window"
 						down = "[IsGameViewOpen( 'court_window' )]"
@@ -1095,11 +1075,6 @@ widget = {
 					blockoverride "maintab_button"
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_intrigue.dds"
-
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 						onclick = "[ToggleGameViewData('intrigue_window', GetPlayer.GetID)]"
 						shortcut = "intrigue_window"
@@ -1125,11 +1100,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_factions.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameView('factions_window')]"
 						shortcut = "factions_window"
 						down = "[IsGameViewOpen('factions_window')]"
@@ -1147,11 +1117,18 @@ widget = {
 				}
 
 				hbox = {
+
+					state = {
+						name = clear_variable
+						trigger_when = "[And( Not(IsGameViewOpen('decisions')), GetVariableSystem.Exists('decision_tab') )]"
+						on_start = "[GetVariableSystem.Clear('decision_tab')]"
+					}
+
 					button_hud_main_tab = {
 						name = "tab_decisions"
 						tooltip = "DECISIONS_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' ))))]"
+						visible = "[Not(And(IsGameViewOpen('decisions'), GetVariableSystem.Exists( 'decision_tab' )))]"
 
 						blockoverride "maintab_button"
 						{
@@ -1159,8 +1136,9 @@ widget = {
 
 							#datacontext = "[GetScriptedGui('patron_gui_close')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
 
 							onclick = "[ToggleGameView('decisions')]"
 							shortcut = "decision_window"
@@ -1181,7 +1159,7 @@ widget = {
 						name = "tab_decisions2"
 						tooltip = "DECISIONS_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+						visible = "[And(IsGameViewOpen('decisions'), GetVariableSystem.Exists( 'decision_tab' ))]"
 
 						blockoverride "maintab_button"
 						{
@@ -1189,8 +1167,9 @@ widget = {
 
 							#datacontext = "[GetScriptedGui('patron_gui_close')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
 							datacontext = "[GetScriptedGui('patron_clear')]" #need to add to switch button, also try hide/show in margin widgets
 							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
@@ -1233,13 +1212,13 @@ widget = {
 						name = "tab_patron_open"
 						tooltip = "PATRON_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' ))))]"
+						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'patron' ))))]"
 
 						blockoverride "maintab_button"
 						{
 							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds" #VARTODO - move to skinned
 
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1248,10 +1227,13 @@ widget = {
 							datacontext = "[GetScriptedGui('patron_restore')]"
 							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-							onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
+							onclick = "[GetVariableSystem.Set( 'decision_tab' Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'patron' ), 'to_clear', 'patron' ) )]"
+							onclick = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+
+							#onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
 							onclick = "[ToggleGameView('decisions')]"
 							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+							down = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 						}
 
 						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
@@ -1269,13 +1251,13 @@ widget = {
 						name = "tab_patron_open2"
 						tooltip = "PATRON_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' )))]"
+						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'patron' )))]"
 
 						blockoverride "maintab_button"
 						{
 							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
 
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1284,10 +1266,10 @@ widget = {
 							datacontext = "[GetScriptedGui('patron_restore')]"
 							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-							onclick = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
+							onclick = "[GetVariableSystem.Set( 'decision_tab', 'patron' )]"
 							#onclick = "[ToggleGameView('decisions')]"
 							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+							down = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 						}
 
 						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
@@ -1307,22 +1289,25 @@ widget = {
 						name = "tab_societies_open"
 						tooltip = "SOCIETIES_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'societies_window_open' ))))]"
+						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'society' ))))]"
 
 						blockoverride "maintab_button"
 						{
 							texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
 
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
 
 							#datacontext = "[GetScriptedGui('societies_gui_toggle')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-							onclick = "[GetVariableSystem.Toggle( 'societies_window_open' )]"
+							onclick = "[GetVariableSystem.Set( 'decision_tab' Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
+							onclick = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+
+							#onclick = "[GetVariableSystem.Toggle( 'societies_window_open' )]"
 							onclick = "[ToggleGameView('decisions')]"
 							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+							down = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 						}
 
 						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
@@ -1340,22 +1325,22 @@ widget = {
 						name = "tab_societies_open2"
 						tooltip = "SOCIETIES_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'societies_window_open' )))]"
+						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'society' )))]"
 
 						blockoverride "maintab_button"
 						{
 							texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
 
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+							#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
 
 							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
 							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-							onclick = "[GetVariableSystem.Set( 'societies_window_open', 'true' )]"
+							onclick = "[GetVariableSystem.Set( 'decision_tab', 'society' )]"
 							#onclick = "[ToggleGameView('decisions')]"
 							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+							down = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 						}
 
 						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?

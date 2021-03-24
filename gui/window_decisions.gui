@@ -19,7 +19,8 @@ window = {
 		#using = Sound_WindowHide_Standard
 		using = Window_Position_MainTab_Hide
 
-		on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		#on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		on_start = "[GetVariableSystem.Clear('decision_tab')]"
 		#datacontext = "[GetScriptedGui('patron_clear')]" #done this way to avoid error in log about data being an invalid property
 		on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
@@ -30,7 +31,8 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		#visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		visible = "[Not(GetVariableSystem.Exists( 'decision_tab' ))]"
 
 		# using = Window_Background
 
@@ -180,7 +182,8 @@ window = {
 		margin_right = 20
 		alwaystransparent = no
 
-		visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 
 		# using = Window_Background
 
@@ -222,8 +225,8 @@ window = {
 					{
 						#datacontext = "[GetScriptedGui('patron_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						onclick = "[GetVariableSystem.Clear('decision_tab')]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -2786,7 +2789,8 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 
 		# using = Window_Background
 
@@ -2825,7 +2829,8 @@ window = {
 						#datacontext = "[GetScriptedGui('societies_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -3178,7 +3183,7 @@ Types Patrons
 		maximumsize = { 200 40 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
 		down = "[DecisionsViewItem.IsSelected]"
@@ -3264,7 +3269,7 @@ Types Patrons
 		maximumsize = { 300 50 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
 		down = "[DecisionsViewItem.IsSelected]"
