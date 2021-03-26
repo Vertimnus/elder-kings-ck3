@@ -1,13 +1,13 @@
 ﻿namespace = ek_race
 
-#Delays initial assignment by two days so everything is set up first
+#If we ever need something to be applied first or to delay the other events
 ek_race.0002 = {
 	type = empty
 	hidden = yes
 
 	immediate = {
 		every_living_character = {
-			trigger_event = { id = ek_race.0003 days = 1 }
+			trigger_event = { id = ek_race.0003 }
 		}
 	}
 }
@@ -47,7 +47,7 @@ ek_race.0100 = {
 			#Race check
 			limit = { ek_race_compatible_trigger = yes }
 			
-			#Vanilla pregnancy on_action
+			#Vanilla pregnancy on_action, the specific triggers are in each event
 			trigger_event = pregnancy.0001 
 			trigger_event = pregnancy.1001 
 			trigger_event = pregnancy.1101 
@@ -70,7 +70,7 @@ ek_race.0101 = {
 			#Race check
 			limit = { ek_race_compatible_trigger = yes } 
 			
-			#Vanilla birth on_action
+			#Vanilla birth on_action, the specific triggers are in each event
 			trigger_event = birth.0001
 			trigger_event = birth.3011
 		}
