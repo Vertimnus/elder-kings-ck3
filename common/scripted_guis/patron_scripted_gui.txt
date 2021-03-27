@@ -86,6 +86,10 @@
             limit = { has_variable = patron_aldmer_shown }
             set_variable = patron_aldmer_shown_res
         }
+        if = {
+            limit = { has_variable = patron_dwemer_ancestors_shown }
+            set_variable = patron_dwemer_ancestors_shown_res
+        }
         # if = {
         #     limit = { has_variable =  }
         #     set_variable = _res
@@ -181,6 +185,10 @@ patron_restore = {
         if = {
             limit = { has_variable = patron_aldmer_shown_res }
             set_variable = patron_aldmer_shown
+        }
+        if = {
+            limit = { has_variable = patron_dwemer_ancestors_shown_res }
+            set_variable = patron_dwemer_ancestors_shown
         }
         patron_clear_res_variables = yes
     }
@@ -995,5 +1003,108 @@ patron_xen_shown = {
     effect = {
         patron_passive_clear_variables = yes
         set_variable = patron_xen_shown
+    }
+}
+
+# Dwemer Ancestors #
+patron_dwemer_ancestors_shown = {
+    scope = character
+
+    is_shown = {
+        patron_dwemer_ancestors_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_dwemer_ancestors_shown }
+    }
+
+    effect = {
+        patron_clear_variables = yes
+        set_variable = patron_dwemer_ancestors_shown
+    }
+}
+
+patron_da_warrior_shown = {
+    scope = character
+
+    is_shown = {
+        patron_da_warrior_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_da_warrior_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_da_warrior_shown
+    }
+}
+
+patron_da_architect_shown = {
+    scope = character
+
+    is_shown = {
+        patron_da_warrior_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_da_architect_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_da_architect_shown
+    }
+}
+
+patron_da_giant_shown = {
+    scope = character
+
+    is_shown = {
+        patron_da_giant_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_da_giant_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_da_giant_shown
+    }
+}
+
+patron_da_lost_king_shown = {
+    scope = character
+
+    is_shown = {
+        patron_da_lost_king_valid = yes
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        OR = {
+            NOT = { has_variable = patron_da_lost_king_shown }
+            #current patron deity selected
+        }
+    }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_da_lost_king_shown
     }
 }
