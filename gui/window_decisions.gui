@@ -472,6 +472,16 @@ window = {
 							}
 						}
 
+						#Dwemer Ancestors
+						button_patron_icon = {
+							datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+							blockoverride "patron_icon" {
+								texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+							}
+						}
+
 						spacer = {
 							size = { 8 0 }
 						}
@@ -1020,6 +1030,29 @@ window = {
 										}
 										blockoverride "patron_entry_desc" {
 											text = pantheon_aldmer_long_desc
+										}
+									}
+								}
+
+								# Dwemer Ancestors #
+								vbox = {
+									name = "patron_dwemer_ancestors"
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+									button_patron_entry = {
+										#datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+										blockoverride "patron_entry_icon" {
+											texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+										}
+										blockoverride "patron_entry_name" {
+											text = pantheon_dwemer_ancestors_name
+										}
+										blockoverride "patron_entry_desc" {
+											text = pantheon_dwemer_ancestors_long_desc
 										}
 									}
 								}
@@ -1830,6 +1863,16 @@ window = {
 										texture = "gfx/interface/icons/faith/auriel.dds"
 									}
 								}
+
+								#Dwemer Ancestors
+								button_patron_icon = {
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+									blockoverride "patron_icon" {
+										texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+									}
+								}
 							}
 							spacer = {
 								size = { 140 100 } #+30 compared to other one for button
@@ -2150,6 +2193,48 @@ window = {
 													texture = "gfx/interface/patrons/patron_xen.dds"
 												}
 											}
+											
+											### Dwemer Ancestors
+
+											# The Architect #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_architect.dds"
+												}
+											}
+
+											# The Warrior #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_warrior.dds"
+												}
+											}
+
+											# The Giant #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_giant.dds"
+												}
+											}
+
+											# The Lost King #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+												}
+											}
 										}
 
 										# spacer = {
@@ -2354,6 +2439,12 @@ window = {
 												datacontext = "[GetScriptedGui('patron_aldmer_shown')]"
 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 												text = "PATRON_THE_AEDRA"
+											}
+
+											text_label_center = {
+												datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												text = "PATRON_THE_DWEMER_ANCESTORS"
 											}
 
 											# Akatosh #
@@ -2760,6 +2851,103 @@ window = {
 													}
 													blockoverride "patron_entry_desc" {
 														text = patron_xen_long_desc
+													}
+												}
+											}
+											
+											### Dwemer Ancestors
+											# The Architect #
+											vbox = {
+												name = "patron_da_architect"
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_architect.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_architect_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_architect_long_desc
+													}
+												}
+											}
+											
+											# The Warrior #
+											vbox = {
+												name = "patron_da_warrior"
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_warrior.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_warrior_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_warrior_long_desc
+													}
+												}
+											}
+											
+											# The Giant #
+											vbox = {
+												name = "patron_da_giant"
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_giant.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_giant_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_giant_long_desc
+													}
+												}
+											}
+											
+											# The Lost King #
+											vbox = {
+												name = "patron_da_lost_king"
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_lost_king_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_lost_king_long_desc
 													}
 												}
 											}

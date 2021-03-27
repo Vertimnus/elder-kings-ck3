@@ -26,6 +26,7 @@
     # Pantheons #
     remove_variable = patron_divines_shown
     remove_variable = patron_aldmer_shown
+    remove_variable = patron_dwemer_ancestors_shown
 
     # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle
@@ -58,8 +59,13 @@ patron_clear_res_variables = {
     remove_variable = patron_vivec_shown_res
 
     # Pantheons #
+	## Nedic-Nordic
     remove_variable = patron_divines_shown_res
+	## Aldmeri
     remove_variable = patron_aldmer_shown_res
+	## Reach
+    remove_variable = patron_dwemer_ancestors_shown_res
+	
 
     # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle_res
@@ -87,6 +93,11 @@ patron_passive_clear_variables = {
     remove_variable = patron_trinimac_shown
     remove_variable = patron_xarxes_shown
     remove_variable = patron_xen_shown
+	# Dwemer Ancestors
+    remove_variable = patron_da_architect_shown
+    remove_variable = patron_da_warrior_shown
+    remove_variable = patron_da_giant_shown
+    remove_variable = patron_da_lost_king_shown
 }
 
 patron_clear_traits = {
@@ -107,6 +118,11 @@ patron_clear_traits = {
     remove_trait = p_trinimac
     remove_trait = p_xarxes
     remove_trait = p_xen
+	# Dwemer Ancestors
+	remove_trait = p_da_architect
+	remove_trait = p_da_warrior
+	remove_trait = p_da_giant
+	remove_trait = p_da_lost_king
 }
 
 patron_assign_trait = {
@@ -180,6 +196,24 @@ patron_assign_trait = {
         limit = { has_variable = patron_xen_shown }
         add_trait = p_xen
     }
+	# Dwemer Ancestors
+    else_if = {
+        limit = { has_variable = patron_da_architect_shown }
+        add_trait = p_da_architect
+    }
+    else_if = {
+        limit = { has_variable = patron_da_warrior_shown }
+        add_trait = p_da_warrior
+    }
+    else_if = {
+        limit = { has_variable = patron_da_giant_shown }
+        add_trait = p_da_giant
+    }
+    else_if = {
+        limit = { has_variable = patron_da_lost_king_shown }
+        add_trait = p_da_lost_king
+    }
+	
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
 
@@ -255,6 +289,24 @@ patron_faith_change_clear_traits = {
         limit = { patron_xen_valid = no }
         remove_trait = p_xen
     }
+	# Dwemer Ancestors
+    else_if = {
+        limit = { patron_da_architect_valid = no }
+        remove_trait = p_da_architect
+    }
+    else_if = {
+        limit = { patron_da_warrior_valid = no }
+        remove_trait = p_da_architect
+    }
+    else_if = {
+        limit = { patron_da_giant_valid = no }
+        remove_trait = p_da_architect
+    }
+    else_if = {
+        limit = { patron_da_lost_king_valid = no }
+        remove_trait = p_da_architect
+    }
+	
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
 
