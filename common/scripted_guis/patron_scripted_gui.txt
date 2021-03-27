@@ -1108,3 +1108,37 @@ patron_da_lost_king_shown = {
         set_variable = patron_da_lost_king_shown
     }
 }
+
+faith_get_patrons = {
+    scope = faith
+
+	saved_scopes = {
+		player_s
+	}
+
+    effect = {
+        scope:player_s = { clear_variable_list = faith_patrons }
+        if = {
+            limit = { has_doctrine = doctrine_pantheon_divines }
+            scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:akatosh } }
+        }
+        if = {
+            limit = { has_doctrine = doctrine_pantheon_divines }
+            scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:arkay } }
+        }
+        if = {
+            limit = { has_doctrine = doctrine_pantheon_divines }
+            scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:dibella } }
+        }
+        if = {
+            limit = { has_doctrine = doctrine_pantheon_divines }
+            scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:julianos } }
+        }
+    }
+}
+
+faith_clear_patrons = {
+    scope = character
+
+    effect = { clear_variable_list = faith_patrons }
+} 
