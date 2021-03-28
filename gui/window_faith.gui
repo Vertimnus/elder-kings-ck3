@@ -25,6 +25,7 @@ window = {
 		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'beliefs' )]"
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
 		on_start = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
+		on_start = "[GetVariableSystem.Clear( 'patron_trait' )]"
 
 		using = Animation_FadeIn_Quick
 		using = Sound_WindowShow_Standard
@@ -1111,222 +1112,259 @@ window = {
 		}
 
 		## PATRONS
-		scrollbox = {
+		vbox = {
 			name = "tab_patrons"
-			visible = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' )]"
 			layoutpolicy_horizontal = expanding
 			layoutpolicy_vertical = expanding
-			datacontext = "[GetIllustration( 'religion_holding' )]"
 
-			blockoverride "scrollbox_background" {}
-			blockoverride "scrollbox_background_fade" {}
+			widget = {
+				size = { 0 45 }
+				layoutpolicy_horizontal = expanding
+				text_multi = {
+					datacontext = "[FaithWindow.GetFaith]"
+					layoutpolicy_horizontal = expanding
+					parentanchor = hcenter
+					size = { 0 45 }
+					text = "Patrons available to [Faith.GetAdherentNamePluralNoTooltip]"
+					default_format = "#weak"
+					fontsize = 18
+					margin = { 0 10 }
+					align = nobaseline
+					max_width = 500
+					autoresize = yes
 
-			state = {
-				name = _show
-				using = Animation_FadeIn_Quick
-				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
-			}
+					state = {
+						name = "faith_view_refresh"
+						using = Animation_Refresh_FadeOut
+					}
 
-			state = {
-				name = _hide
-				alpha = 0
-				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-			}
+					state = {
+						using = Animation_Refresh_FadeIn
+					}
+				}
 
-			state = {
-				name = "faith_view_refresh"
-				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
-			}
+				flowcontainer = {
+					parentanchor = right|vcenter
+					using = tooltip_se
+					margin = { 15 0 }
+					spacing = 5
 
-			background = {
-				texture = "[Illustration.GetTextureForFaith( FaithWindow.GetFaith )]"
-				alpha = 0.5
-				fittype = end
+					text_single = {
+						parentanchor = vcenter
+						align = nobaseline
+						default_format = "#clickable"
+						text = "Effects Only"
+						fontsize = 15
+					}
 
-				modify_texture = {
-					texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
-					blend_mode = alphamultiply
+					button_checkbox = {
+						onclick = "[GetVariableSystem.Set( 'patron_trait' Select_CString( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'to_clear', 'all' ) )]"
+						onclick = "[GetVariableSystem.ClearIf( 'patron_trait', GetVariableSystem.HasValue( 'patron_trait', 'to_clear' ) )]"
+
+						blockoverride "checkbox"
+						{
+							checked = "[GetVariableSystem.HasValue('patron_trait', 'all')]"
+						}
+					}
 				}
 			}
 
-			blockoverride "scrollbox_empty" {
-				text = "No Patrons"
-				visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+			divider = {
+				layoutpolicy_horizontal = expanding
 			}
 
-			blockoverride "scrollbox_content"
-			{
-				vbox = {
-					name = "patrons_list"
-					datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
-					layoutpolicy_horizontal = expanding
+			scrollbox = {
+				name = "scrollbox_patrons"
+				visible = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' )]"
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				datacontext = "[GetIllustration( 'religion_holding' )]"
 
-					# text_multi = {
-					# 	datacontext = "[FaithWindow.GetFaith]"
-					# 	layoutpolicy_horizontal = expanding
-					# 	size = { 0 45 }
-					# 	text = FAITH_HOLY_SITE_EXPLANATION
-					# 	default_format = "#weak"
-					# 	margin = { 0 5 }
-					# 	margin_bottom = 15
-					# 	align = center
-					# 	max_width = 560
-					# 	autoresize = yes
+				blockoverride "scrollbox_background" {}
+				blockoverride "scrollbox_background_fade" {}
 
-					# 	state = {
-					# 		name = "faith_view_refresh"
-					# 		using = Animation_Refresh_FadeOut
-					# 	}
+				state = {
+					name = _show
+					using = Animation_FadeIn_Quick
+					on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
+				}
 
-					# 	state = {
-					# 		using = Animation_Refresh_FadeIn
-					# 	}
-					# }
+				state = {
+					name = _hide
+					alpha = 0
+					on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				}
 
-					item = {
-						vbox = {
-							layoutpolicy_horizontal = expanding
-							#spacing = 3
-							datacontext = "[GetTrait(Concatenate('p', Scope.GetFlagName))]"
+				state = {
+					name = "faith_view_refresh"
+					on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
+				}
 
-							divider_light = {
-								layoutpolicy_horizontal = expanding
-							}
+				background = {
+					texture = "[Illustration.GetTextureForFaith( FaithWindow.GetFaith )]"
+					alpha = 0.5
+					fittype = end
 
+					modify_texture = {
+						texture = "gfx/interface/component_masks/mask_fade_vertical_up.dds"
+						blend_mode = alphamultiply
+					}
+				}
+
+				blockoverride "scrollbox_empty" {
+					text = "No Patrons"
+					visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+				}
+
+				blockoverride "scrollbox_content"
+				{
+					vbox = {
+						name = "patrons_list"
+						datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
+						layoutpolicy_horizontal = expanding
+
+						item = {
 							vbox = {
 								layoutpolicy_horizontal = expanding
-								margin = { 15 7 }
+								#spacing = 3
+								datacontext = "[GetTrait(Concatenate('p', Scope.GetFlagName))]"
 
-								button_standard_list = {
-									name = "patron_button"
+								divider_light = {
 									layoutpolicy_horizontal = expanding
-									size = { 0 140 }
-									#alwaystransparent = yes
+								}
 
-									clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
-									#down = has trait
-									#enabled = not recent
-									#onclick = give trait - this and down need 1.4 commands to pass flags
+								vbox = {
+									layoutpolicy_horizontal = expanding
+									margin = { 15 7 }
 
-									state = {
-										name = _mouse_hierarchy_enter
-										#on_start = "[BookmarkCharacterGUI.HoverStart]"
-										#on_start = "[PdxGuiWidget.FindChild('patron_modifier_scrollarea').Show]"
-										#on_start = "[PdxGuiWidget.FindChild('patron_desc').Hide]"
-										on_start = "[GetVariableSystem.Set('patron_trait', Trait.GetKey)]"
+									#button_standard_list = {
+									button_standard_hover = {
+										name = "patron_button"
+										layoutpolicy_horizontal = expanding
+										size = { 0 140 }
+										#alwaystransparent = yes
 
-										#position = { 0 -6 }
-										duration = 0.05
-										using = Animation_Curve_Default
-									}
+										clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
+										#down = has trait
+										#enabled = not recent
+										#onclick = give trait - this and down need 1.4 commands to pass flags
 
-									state = {
-										name = _mouse_hierarchy_leave
-										#on_start = "[BookmarkCharacterGUI.HoverEnd]"
-										#on_start = "[PdxGuiWidget.FindChild('patron_modifier_scrollarea').Hide]"
-										#on_start = "[PdxGuiWidget.FindChild('patron_desc').Show]"
-										on_start = "[GetVariableSystem.Clear('patron_trait')]"
-
-										#position = { 0 0 }
-										duration = 0.2
-										using = Animation_Curve_Default
-									}
-
-									highlight_icon = {
-										name = "bg"
-										size = { 100% 100% }
-										texture = "gfx/interface/tooltips/tooltip_bg.dds"
-
-										tintcolor = { 0.33 0.24 0.3 0.25 }
-
-										modify_texture = {
-											name = "overlay"
-											texture = "gfx/interface/component_overlay/overlay_window.dds"
-											spriteType = Corneredstretched
-											spriteborder = { 6 6 }
-											blend_mode = overlay
-										}
-									}
-
-									hbox = {
-										layoutpolicy_vertical = expanding
-										margin = { 10 0 }
-										spacing = 7
-
-										icon = {
-											size = { 120 120 }
-											texture = "[Trait.GetIcon(GetDummyMale)]"
+										state = {
+											name = _mouse_hierarchy_enter
+											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_enter_nc' ))]"
 										}
 
-										divider_light = {
+										state = {
+											name = "mouse_enter_nc"
+											on_start = "[GetVariableSystem.Set('patron_trait', Trait.GetKey)]"
+										}
+
+										state = {
+											name = _mouse_hierarchy_leave
+											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_leave_nc' ))]"
+										}
+
+										state = {
+											name = "mouse_leave_nc"
+											on_start = "[GetVariableSystem.Clear('patron_trait')]"
+										}
+
+										# highlight_icon = {
+										# 	name = "bg"
+										# 	size = { 100% 100% }
+										# 	texture = "gfx/interface/tooltips/tooltip_bg.dds"
+
+										# 	tintcolor = { 0.33 0.24 0.3 0.25 }
+
+										# 	modify_texture = {
+										# 		name = "overlay"
+										# 		texture = "gfx/interface/component_overlay/overlay_window.dds"
+										# 		spriteType = Corneredstretched
+										# 		spriteborder = { 6 6 }
+										# 		blend_mode = overlay
+										# 	}
+										# }
+
+										hbox = {
 											layoutpolicy_vertical = expanding
-										}
+											margin = { 10 0 }
+											spacing = 7
 
-										vbox = {
-											margin = { 5 10 }
-											margin_left = 8
-											spacing = 10
-											layoutpolicy_vertical = expanding
-											layoutpolicy_horizontal = expanding
+											icon = {
+												size = { 120 120 }
+												texture = "[Trait.GetIcon(GetDummyMale)]"
+											}
 
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												text_label_left = {
-													name = "patron_name"
-													layoutpolicy_horizontal = expanding
-													text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]"
-													default_format = "#high"
-													using = Font_Size_Medium
-												}
+											divider_light = {
+												layoutpolicy_vertical = expanding
 											}
 
 											vbox = {
-												spacing = 5
+												margin = { 5 10 }
+												margin_left = 8
+												spacing = 10
 												layoutpolicy_vertical = expanding
 												layoutpolicy_horizontal = expanding
 
-												scrollarea = {
-													name = "patron_modifier_scrollarea"
+												vbox = {
 													layoutpolicy_horizontal = expanding
-													layoutpolicy_vertical = expanding
-													alwaystransparent = yes
-													#minimumsize = { 180 -1 }
-													#maximumsize = { 180 -1 }
-
-													visible = "[GetVariableSystem.HasValue('patron_trait', Trait.GetKey)]"
-
-													scrollbarpolicy_horizontal = always_off
-
-													scrollbar_vertical = {
-														using = Scrollbar_Vertical
-
-														blockoverride "alpha"{
-															alpha = 0.6
-														}
-													}
-
-													scrollwidget = {
-														text_multi = {
-															name = "patron_modifiers"
-															size = { 180 -1 }
-															autoresize = yes
-															max_width = 180
-															text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
-															fontsize = 14
-															fontsize_min = 12
-														}
+													text_label_left = {
+														name = "patron_name"
+														layoutpolicy_horizontal = expanding
+														text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]"
+														default_format = "#high"
+														using = Font_Size_Medium
 													}
 												}
 
-												text_multi = {
-													name = "patron_desc"
+												vbox = {
+													spacing = 5
 													layoutpolicy_vertical = expanding
 													layoutpolicy_horizontal = expanding
 
-													visible = "[Not(GetVariableSystem.HasValue('patron_trait', Trait.GetKey))]"
+													scrollarea = {
+														name = "patron_modifier_scrollarea"
+														layoutpolicy_horizontal = expanding
+														layoutpolicy_vertical = expanding
+														alwaystransparent = yes
+														#minimumsize = { 180 -1 }
+														#maximumsize = { 180 -1 }
 
-													text = "#F [SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]#!"
-													using = Font_Size_Small
+														visible = "[Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all'))]"
+
+														scrollbarpolicy_horizontal = always_off
+
+														scrollbar_vertical = {
+															using = Scrollbar_Vertical
+
+															blockoverride "alpha"{
+																alpha = 0.6
+															}
+														}
+
+														scrollwidget = {
+															text_multi = {
+																name = "patron_modifiers"
+																size = { 180 -1 }
+																autoresize = yes
+																max_width = 180
+																text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
+																fontsize = 14
+																fontsize_min = 12
+															}
+														}
+													}
+
+													text_multi = {
+														name = "patron_desc"
+														layoutpolicy_vertical = expanding
+														layoutpolicy_horizontal = expanding
+
+														visible = "[Not(Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all')))]"
+
+														text = "#F [SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]#!"
+														using = Font_Size_Small
+													}
 												}
 											}
 										}
