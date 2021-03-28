@@ -1314,7 +1314,7 @@ window = {
 													text_label_left = {
 														name = "patron_name"
 														layoutpolicy_horizontal = expanding
-														text = "[Localize( Concatenate( 'god', Concatenate( Scope.GetFlagName, '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
+														text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
 														#text = "[GetPlayer.Custom( 'get_akatosh' )]"
 														# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
 														default_format = "#high"
@@ -1367,7 +1367,7 @@ window = {
 
 														visible = "[Not(Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all')))]"
 
-														text = "#F [Localize( Concatenate( 'desc', Scope.GetFlagName ) )]#!"
+														text = "#F [Localize( Concatenate( 'desc', GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														using = Font_Size_Small
 													}

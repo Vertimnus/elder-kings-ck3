@@ -1117,7 +1117,10 @@ faith_get_patrons = {
     }
 
     effect = {
-        scope:player_s = { clear_variable_list = faith_patrons }
+        scope:player_s = {
+            clear_variable_list = faith_patrons
+            set_variable = { name = faith_window value = PREV }
+        }
         # if = {
         #     limit = { has_doctrine = doctrine_pantheon_divines }
         #     scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:akatosh } }
@@ -1178,5 +1181,8 @@ faith_get_patrons = {
 faith_clear_patrons = {
     scope = character
 
-    effect = { clear_variable_list = faith_patrons }
+    effect = {
+        clear_variable_list = faith_patrons
+        remove_variable = faith_window
+    }
 }
