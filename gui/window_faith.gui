@@ -1149,10 +1149,15 @@ window = {
 				}
 			}
 
+			blockoverride "scrollbox_empty" {
+				text = "No Patrons"
+				visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+			}
+
 			blockoverride "scrollbox_content"
 			{
 				vbox = {
-					name = "holy_sites"
+					name = "patrons_list"
 					datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
 					layoutpolicy_horizontal = expanding
 
@@ -1181,269 +1186,153 @@ window = {
 					item = {
 						vbox = {
 							layoutpolicy_horizontal = expanding
-							spacing = 3
+							#spacing = 3
 							datacontext = "[GetTrait(Concatenate('p', Scope.GetFlagName))]"
 
 							divider_light = {
 								layoutpolicy_horizontal = expanding
 							}
 
-							button_standard = {
-								size = { 500 100 }
-								maximumsize = { 500 100 }
+							vbox = {
+								layoutpolicy_horizontal = expanding
+								margin = { 15 7 }
 
-								hbox = {
-									button = {
-										size = { 100 100 }
-										alwaystransparent = yes
-										background = {
-											texture = "gfx/interface/component_tiles/tile_selected.dds"
-											spriteType = Corneredtiled
+								button_standard_list = {
+									name = "patron_button"
+									layoutpolicy_horizontal = expanding
+									size = { 0 140 }
+									#alwaystransparent = yes
+
+									clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
+									#down = has trait
+									#enabled = not recent
+									#onclick = give trait - this and down need 1.4 commands to pass flags
+
+									state = {
+										name = _mouse_hierarchy_enter
+										#on_start = "[BookmarkCharacterGUI.HoverStart]"
+										#on_start = "[PdxGuiWidget.FindChild('patron_modifier_scrollarea').Show]"
+										#on_start = "[PdxGuiWidget.FindChild('patron_desc').Hide]"
+										on_start = "[GetVariableSystem.Set('patron_trait', Trait.GetKey)]"
+
+										#position = { 0 -6 }
+										duration = 0.05
+										using = Animation_Curve_Default
+									}
+
+									state = {
+										name = _mouse_hierarchy_leave
+										#on_start = "[BookmarkCharacterGUI.HoverEnd]"
+										#on_start = "[PdxGuiWidget.FindChild('patron_modifier_scrollarea').Hide]"
+										#on_start = "[PdxGuiWidget.FindChild('patron_desc').Show]"
+										on_start = "[GetVariableSystem.Clear('patron_trait')]"
+
+										#position = { 0 0 }
+										duration = 0.2
+										using = Animation_Curve_Default
+									}
+
+									highlight_icon = {
+										name = "bg"
+										size = { 100% 100% }
+										texture = "gfx/interface/tooltips/tooltip_bg.dds"
+
+										tintcolor = { 0.33 0.24 0.3 0.25 }
+
+										modify_texture = {
+											name = "overlay"
+											texture = "gfx/interface/component_overlay/overlay_window.dds"
+											spriteType = Corneredstretched
 											spriteborder = { 6 6 }
-											shaderfile = "gfx/FX/pdxgui_default.shader"
-										}
-										icon = {
-											texture = "[Trait.GetIcon(GetDummyMale)]"
-											size = { 84 84 }
-											parentanchor = center
-										}
-										icon = {
-											texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
-											position = { 100 2 }
-											size = { 396 96 }
-											alwaystransparent = yes
-											layer = bottom
-											alpha = 0.7
-											modify_texture = {
-												name = "mask_1"
-												texture = "gfx/interface/component_masks/mask_culture_era_tab.dds"
-												blend_mode = alphamultiply
-												rotate_uv = 0
-											}
+											blend_mode = overlay
 										}
 									}
 
-									spacer = {
-										size = { 9 0 }
-									}
-
-									vbox = {
-										spacer = {
-											size = { 0 4 }
-										}
-										layoutpolicy_horizontal = expanding
+									hbox = {
 										layoutpolicy_vertical = expanding
-										hbox = {
+										margin = { 10 0 }
+										spacing = 7
+
+										icon = {
+											size = { 120 120 }
+											texture = "[Trait.GetIcon(GetDummyMale)]"
+										}
+
+										divider_light = {
+											layoutpolicy_vertical = expanding
+										}
+
+										vbox = {
+											margin = { 5 10 }
+											margin_left = 8
+											spacing = 10
+											layoutpolicy_vertical = expanding
 											layoutpolicy_horizontal = expanding
-											textbox = {
-												font = StandardGameFont
-												fontcolor = { 1 1 1 1 }
-												fontsize = 16
-												text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]"
-												autoresize = no
+
+											vbox = {
 												layoutpolicy_horizontal = expanding
-												elide = right
-												minimumsize = { -1 16 }
-												align = left
+												text_label_left = {
+													name = "patron_name"
+													layoutpolicy_horizontal = expanding
+													text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]"
+													default_format = "#high"
+													using = Font_Size_Medium
+												}
+											}
+
+											vbox = {
+												spacing = 5
+												layoutpolicy_vertical = expanding
+												layoutpolicy_horizontal = expanding
+
+												scrollarea = {
+													name = "patron_modifier_scrollarea"
+													layoutpolicy_horizontal = expanding
+													layoutpolicy_vertical = expanding
+													alwaystransparent = yes
+													#minimumsize = { 180 -1 }
+													#maximumsize = { 180 -1 }
+
+													visible = "[GetVariableSystem.HasValue('patron_trait', Trait.GetKey)]"
+
+													scrollbarpolicy_horizontal = always_off
+
+													scrollbar_vertical = {
+														using = Scrollbar_Vertical
+
+														blockoverride "alpha"{
+															alpha = 0.6
+														}
+													}
+
+													scrollwidget = {
+														text_multi = {
+															name = "patron_modifiers"
+															size = { 180 -1 }
+															autoresize = yes
+															max_width = 180
+															text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
+															fontsize = 14
+															fontsize_min = 12
+														}
+													}
+												}
+
+												text_multi = {
+													name = "patron_desc"
+													layoutpolicy_vertical = expanding
+													layoutpolicy_horizontal = expanding
+
+													visible = "[Not(GetVariableSystem.HasValue('patron_trait', Trait.GetKey))]"
+
+													text = "#F [SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]#!"
+													using = Font_Size_Small
+												}
 											}
 										}
-										spacer = {
-											size = { 0 7 }
-										}
-										textbox = {
-											font = StandardGameFont
-											fontcolor = { 0.8 0.8 0.8 1 }
-											fontsize = 12
-											text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]"
-											autoresize = no
-											layoutpolicy_horizontal = expanding
-											layoutpolicy_vertical = expanding
-											elide = right
-											multiline = yes
-											align = top|left
-										}
-										spacer = {
-											size = { 0 3 }
-										}
-									}
-									spacer = {
-										size = { 9 0 }
 									}
 								}
 							}
-
-							# hbox = {
-							# 	name = "faith_list_item"
-							# 	#datacontext = "[Scope.GetFlagName]"
-							# 	datacontext = "[GetTrait(Concatenate('p', Scope.GetFlagName))]"
-							# 	layoutpolicy_horizontal = expanding
-							# 	layoutpolicy_vertical = expanding
-							# 	margin_right = 15
-
-							# 	background = {
-							# 		using = Background_Area
-							# 		alpha = 0.2
-							# 	}
-
-							# 	vbox = {
-							# 		layoutpolicy_vertical = expanding
-							# 		layoutpolicy_horizontal = expanding
-							# 		min_width = 175
-							# 		spacing = 3
-
-							# 		state = {
-							# 			name = "faith_view_refresh"
-							# 			using = Animation_Refresh_FadeOut
-							# 		}
-
-							# 		state = {
-							# 			using = Animation_Refresh_FadeIn
-							# 		}
-
-							# 		hbox = {
-							# 			layoutpolicy_horizontal = expanding
-							# 			spacing = 5
-
-							# 			# text_single = {
-							# 			# 	name = "name_notheld"
-							# 			# 	#visible = "[Not( GuiHolySiteItem.IsHeldByFaith )]"
-							# 			# 	layoutpolicy_horizontal = expanding
-							# 			# 	text = "[Trait.GetNameNoTooltip()]"
-							# 			# 	align = nobaseline
-							# 			# 	default_format = "#low"
-							# 			# 	using = Font_Size_Big
-							# 			# 	autoresize = no
-							# 			# }
-
-							# 			icon = {
-							# 				size = { 120 120 }
-							# 				texture = "[Trait.GetIcon(GetDummyMale)]"
-							# 			}
-
-							# 			vbox = {
-							# 				layoutpolicy_horizontal = expanding
-							# 				text_single = {
-							# 					name = "name"
-							# 					layoutpolicy_horizontal = expanding
-							# 					text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]" # switch to Faith.Custom(patron_FLAG_name)
-							# 					align = nobaseline
-							# 					default_format = "#high"
-							# 					using = Font_Size_Big
-							# 					autoresize = no
-							# 				}
-
-							# 				text_multi = {
-							# 					layoutpolicy_horizontal = expanding
-							# 					size = { 0 45 }
-							# 					text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]"
-							# 					default_format = "#weak"
-							# 					margin = { 0 5 }
-							# 					margin_bottom = 15
-							# 					align = nobaseline
-							# 					max_width = 450
-							# 					autoresize = yes
-							# 				}
-							# 			}
-
-							# 			expand = {}
-							# 		}
-
-							# 		# hbox = {
-							# 		# 	datacontext = "[Title.GetHolder]"
-							# 		# 	tooltip = "FAITH_HOLY_SITE_HOLDER_TOOLTIP"
-
-							# 		# 	background = {
-							# 		# 		visible = "[Not( GuiHolySiteItem.IsHeldByFaith )]"
-							# 		# 		using = Status_Bad
-							# 		# 		margin_top = 3
-							# 		# 		margin_bottom = -1
-							# 		# 		alpha = 0.8
-							# 		# 	}
-
-							# 		# 	background = {
-							# 		# 		visible = "[GuiHolySiteItem.IsHeldByFaith]"
-							# 		# 		using = Background_Area
-							# 		# 		margin_top = 3
-							# 		# 		margin_bottom = -1
-							# 		# 		alpha = 0.8
-							# 		# 	}
-
-							# 		# 	highlight_icon = {
-							# 		# 		name = "faith_button"
-							# 		# 		datacontext = "[Title.GetDeJureLiege.GetHolder.GetFaith]"
-							# 		# 		size = { 45 45 }
-							# 		# 		texture = "[Faith.GetIcon]"
-							# 		# 	}
-
-							# 		# 	coa_realm_small = {
-							# 		# 		visible = "[Title.HasHolder]"
-							# 		# 		datacontext = "[Title.GetHolder.GetTopLiege]"
-							# 		# 	}
-							# 		# }
-
-							# 		expand = {}
-							# 	}
-
-							# 	# vbox = {
-							# 	# 	layoutpolicy_horizontal = expanding
-							# 	# 	layoutpolicy_vertical = expanding
-							# 	# 	margin_top = 15
-
-							# 	# 	hbox = {
-							# 	# 		layoutpolicy_horizontal = expanding
-							# 	# 		margin_left = 20
-
-							# 	# 		vbox = {
-							# 	# 			layoutpolicy_vertical = expanding
-
-							# 	# 			state = {
-							# 	# 				name = "faith_view_refresh"
-							# 	# 				using = Animation_Refresh_FadeOut
-							# 	# 			}
-
-							# 	# 			state = {
-							# 	# 				using = Animation_Refresh_FadeIn
-							# 	# 			}
-
-							# 	# 			text_multi = {
-							# 	# 				name = "effects_notheld"
-							# 	# 				visible = "[Not( GuiHolySiteItem.IsHeldByFaith )]"
-							# 	# 				layoutpolicy_horizontal = expanding
-							# 	# 				text = "[HolySite.GetEffectDesc( GuiHolySiteItem.GetFaith )]"
-							# 	# 				default_format = "#low"
-							# 	# 				format_override = { P low }
-							# 	# 				format_override = { L low }
-							# 	# 				format_override = { E low }
-							# 	# 				format_override = { S low }
-							# 	# 				autoresize = yes
-							# 	# 				max_width = 315
-							# 	# 			}
-
-							# 	# 			text_multi = {
-							# 	# 				name = "effects_held"
-							# 	# 				visible = "[GuiHolySiteItem.IsHeldByFaith]"
-
-							# 	# 				layoutpolicy_horizontal = expanding
-							# 	# 				text = "[HolySite.GetEffectDesc( GuiHolySiteItem.GetFaith )]"
-							# 	# 				autoresize = yes
-							# 	# 				max_width = 315
-							# 	# 			}
-							# 	# 		}
-
-							# 	# 		expand = {
-							# 	# 			layoutpolicy_horizontal = expanding
-							# 	# 		}
-							# 	# 	}
-
-							# 	# 	expand = {}
-							# 	# }
-
-							# 	# button_go_to_my_location = {
-							# 	# 	onclick = "[DefaultOnCoatOfArmsRightClick(Title.GetID)]"
-							# 	# 	tooltip = "GOTO_PROVINCE"
-							# 	# }
-
-							# }
 						}
 					}
 				}
