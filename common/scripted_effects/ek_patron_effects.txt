@@ -59,13 +59,13 @@ patron_clear_res_variables = {
     remove_variable = patron_vivec_shown_res
 
     # Pantheons #
-	## Nedic-Nordic
+    ## Nedic-Nordic
     remove_variable = patron_divines_shown_res
-	## Aldmeri
+    ## Aldmeri
     remove_variable = patron_aldmer_shown_res
-	## Reach
+    ## Reach
     remove_variable = patron_dwemer_ancestors_shown_res
-	
+
 
     # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle_res
@@ -93,7 +93,7 @@ patron_passive_clear_variables = {
     remove_variable = patron_trinimac_shown
     remove_variable = patron_xarxes_shown
     remove_variable = patron_xen_shown
-	# Dwemer Ancestors
+    # Dwemer Ancestors
     remove_variable = patron_da_architect_shown
     remove_variable = patron_da_warrior_shown
     remove_variable = patron_da_giant_shown
@@ -118,11 +118,11 @@ patron_clear_traits = {
     remove_trait = p_trinimac
     remove_trait = p_xarxes
     remove_trait = p_xen
-	# Dwemer Ancestors
-	remove_trait = p_da_architect
-	remove_trait = p_da_warrior
-	remove_trait = p_da_giant
-	remove_trait = p_da_lost_king
+    # Dwemer Ancestors
+    remove_trait = p_da_architect
+    remove_trait = p_da_warrior
+    remove_trait = p_da_giant
+    remove_trait = p_da_lost_king
 }
 
 patron_assign_trait = {
@@ -196,7 +196,7 @@ patron_assign_trait = {
         limit = { has_variable = patron_xen_shown }
         add_trait = p_xen
     }
-	# Dwemer Ancestors
+    # Dwemer Ancestors
     else_if = {
         limit = { has_variable = patron_da_architect_shown }
         add_trait = p_da_architect
@@ -213,7 +213,7 @@ patron_assign_trait = {
         limit = { has_variable = patron_da_lost_king_shown }
         add_trait = p_da_lost_king
     }
-	
+
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
 
@@ -289,7 +289,7 @@ patron_faith_change_clear_traits = {
         limit = { patron_xen_valid = no }
         remove_trait = p_xen
     }
-	# Dwemer Ancestors
+    # Dwemer Ancestors
     else_if = {
         limit = { patron_da_architect_valid = no }
         remove_trait = p_da_architect
@@ -306,7 +306,7 @@ patron_faith_change_clear_traits = {
         limit = { patron_da_lost_king_valid = no }
         remove_trait = p_da_architect
     }
-	
+
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
 
@@ -608,3 +608,65 @@ patron_status_initialize = {
     set_global_variable = { name = status_sheogorath value = flag:nominal }
     set_global_variable = { name = status_vaermina value = flag:nominal }
 }
+
+patron_trait_master_effect = {
+    $EFFECT$ = { TRAIT = _akatosh }
+    $EFFECT$ = { TRAIT = _arkay }
+    $EFFECT$ = { TRAIT = _dibella }
+    $EFFECT$ = { TRAIT = _julianos }
+    $EFFECT$ = { TRAIT = _kynareth }
+    $EFFECT$ = { TRAIT = _mara }
+    $EFFECT$ = { TRAIT = _stendarr }
+    $EFFECT$ = { TRAIT = _zenithar }
+    $EFFECT$ = { TRAIT = _shezarr }
+    $EFFECT$ = { TRAIT = _auriel }
+    $EFFECT$ = { TRAIT = _jephre }
+    $EFFECT$ = { TRAIT = _magnus }
+    $EFFECT$ = { TRAIT = _phynaster }
+    $EFFECT$ = { TRAIT = _syrabane }
+    $EFFECT$ = { TRAIT = _trinimac }
+    $EFFECT$ = { TRAIT = _xarxes }
+    $EFFECT$ = { TRAIT = _xen }
+    $EFFECT$ = { TRAIT = _azura }
+    $EFFECT$ = { TRAIT = _boethiah }
+    $EFFECT$ = { TRAIT = _clavicus }
+    $EFFECT$ = { TRAIT = _hermaeus }
+    $EFFECT$ = { TRAIT = _hircine }
+    $EFFECT$ = { TRAIT = _malacath }
+    $EFFECT$ = { TRAIT = _mehrunes }
+    $EFFECT$ = { TRAIT = _mephala }
+    $EFFECT$ = { TRAIT = _meridia }
+    $EFFECT$ = { TRAIT = _molag }
+    $EFFECT$ = { TRAIT = _namira }
+    $EFFECT$ = { TRAIT = _nocturnal }
+    $EFFECT$ = { TRAIT = _peryite }
+    $EFFECT$ = { TRAIT = _sanguine }
+    $EFFECT$ = { TRAIT = _sheogorath }
+    $EFFECT$ = { TRAIT = _vaermina }
+    $EFFECT$ = { TRAIT = _da_architect }
+    $EFFECT$ = { TRAIT = _da_giant }
+    $EFFECT$ = { TRAIT = _da_lost_king }
+    $EFFECT$ = { TRAIT = _da_warrior }
+}
+
+patron_get_list = {
+    patron_trait_master_effect = { EFFECT = patron_add_to_list }
+}
+
+patron_add_to_list = {
+    if = {
+        limit = { patron$TRAIT$_valid = yes }
+        scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ } }
+    }
+}
+
+# patron_set_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+#     patron_trait_master_effect = { EFFECT = patron_add_trait }
+# }
+
+# patron_add_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+#     if = {
+#         limit = { flag/scope:trait = $TRAIT$ }
+#         add_trait = p$TRAIT$
+#     }
+# }

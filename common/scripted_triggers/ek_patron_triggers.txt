@@ -74,17 +74,15 @@ has_passive_patron_selected = {
 
 # Daedra #
 is_worshipping_daedra = {
-	faith = {
-		NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
-		OR = {
-			# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-			has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-			AND = {
-				has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-				has_doctrine_parameter = daedric_worship_accepted
-			}
+	NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
+	OR = {
+		# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
+		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
+		has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
+		has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
+		AND = {
+			has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
+			has_doctrine_parameter = daedric_worship_accepted
 		}
 	}
 }
@@ -94,11 +92,32 @@ patron_daedra_valid = {
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
 	# Faith is not centered around a single Prince, or if it is it's around this Prince
 	OR = {
-		faith = { has_doctrine_parameter = allows_worship_$DAEDRA$_only_active }
+		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
 		NOR	= {
-			has_exclusive_daedric_prince_pantheon = yes
-			faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active }
+			patron_exclusive_daedra = yes
+			has_doctrine_parameter = pantheon_cannot_be_changed_active
 		}
+	}
+}
+
+patron_exclusive_daedra = {
+	OR = {
+		has_doctrine_parameter = allows_worship_azura_only_active
+		has_doctrine_parameter = allows_worship_boethiah_only_active
+		has_doctrine_parameter = allows_worship_clavicus_only_active
+		has_doctrine_parameter = allows_worship_hermaeus_only_active
+		has_doctrine_parameter = allows_worship_hircine_only_active
+		has_doctrine_parameter = allows_worship_malacath_only_active
+		has_doctrine_parameter = allows_worship_mehrunes_only_active
+		has_doctrine_parameter = allows_worship_mephala_only_active
+		has_doctrine_parameter = allows_worship_meridia_only_active
+		has_doctrine_parameter = allows_worship_molag_only_active
+		has_doctrine_parameter = allows_worship_namira_only_active
+		has_doctrine_parameter = allows_worship_nocturnal_only_active
+		has_doctrine_parameter = allows_worship_peryite_only_active
+		has_doctrine_parameter = allows_worship_sanguine_only_active
+		has_doctrine_parameter = allows_worship_sheogorath_only_active
+		has_doctrine_parameter = allows_worship_vaermina_only_active
 	}
 }
 
@@ -186,15 +205,15 @@ patron_vivec_valid = {
 
 # Pantheons #
 patron_divines_valid = {
-	faith = { has_doctrine = doctrine_pantheon_divines }
+	has_doctrine = doctrine_pantheon_divines
 }
 
 patron_aldmer_valid = {
-	faith = { has_doctrine = doctrine_pantheon_aedra }
+	has_doctrine = doctrine_pantheon_aedra
 }
 
 patron_dwemer_ancestors_valid = {
-	faith = { has_doctrine = doctrine_pantheon_dwemer_ancestors }
+	has_doctrine = doctrine_pantheon_dwemer_ancestors
 }
 
 # Passive Patrons #
@@ -233,11 +252,9 @@ patron_zenithar_valid = {
 
 patron_shezarr_valid = {
 	patron_divines_valid = yes
-	faith = {
-		NOR = {
-			has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
-			#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
-		}
+	NOR = {
+		has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
+		#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
 	}
 }
 
@@ -249,21 +266,21 @@ patron_auriel_valid = {
 patron_jephre_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_magnus_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_phynaster_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 

@@ -295,6 +295,7 @@ window = {
 			button_tab = {
 				layoutpolicy_horizontal = expanding
 				onclick = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]"
+				onclick = "[GetVariableSystem.Clear( 'patron_trait' )]"
 				down = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' )]"
 				text = "FAITH_PATRONS"
 				default_format = "#low"
@@ -1145,7 +1146,7 @@ window = {
 
 				flowcontainer = {
 					parentanchor = right|vcenter
-					using = tooltip_se
+					using = tooltip_e
 					margin = { 15 0 }
 					spacing = 5
 
@@ -1158,7 +1159,7 @@ window = {
 					}
 
 					button_checkbox = {
-						onclick = "[GetVariableSystem.Set( 'patron_trait' Select_CString( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'to_clear', 'all' ) )]"
+						onclick = "[GetVariableSystem.Set( 'patron_trait', Select_CString( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'to_clear', 'all' ) )]"
 						onclick = "[GetVariableSystem.ClearIf( 'patron_trait', GetVariableSystem.HasValue( 'patron_trait', 'to_clear' ) )]"
 
 						blockoverride "checkbox"
@@ -1166,6 +1167,8 @@ window = {
 							checked = "[GetVariableSystem.HasValue('patron_trait', 'all')]"
 						}
 					}
+
+					tooltip = "[SelectLocalization( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'Show descriptions', 'Show patron modifiers' )]" #localize this and probably other bits too
 				}
 			}
 
@@ -1311,7 +1314,9 @@ window = {
 													text_label_left = {
 														name = "patron_name"
 														layoutpolicy_horizontal = expanding
-														text = "[SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_name'))]"
+														text = "[Localize( Concatenate( 'god', Concatenate( Scope.GetFlagName, '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
+														#text = "[GetPlayer.Custom( 'get_akatosh' )]"
+														# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
 														default_format = "#high"
 														using = Font_Size_Medium
 													}
@@ -1362,7 +1367,8 @@ window = {
 
 														visible = "[Not(Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all')))]"
 
-														text = "#F [SelectLocalization('(bool)no','',Concatenate(Concatenate('patron', Scope.GetFlagName), '_long_desc'))]#!"
+														text = "#F [Localize( Concatenate( 'desc', Scope.GetFlagName ) )]#!"
+														#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														using = Font_Size_Small
 													}
 												}
