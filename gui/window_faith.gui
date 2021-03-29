@@ -1146,17 +1146,17 @@ window = {
 			widget = {
 				size = { 0 45 }
 				layoutpolicy_horizontal = expanding
-				text_multi = {
+				text_single = {
 					datacontext = "[FaithWindow.GetFaith]"
-					layoutpolicy_horizontal = expanding
-					parentanchor = hcenter
+					#layoutpolicy_horizontal = expanding
+					parentanchor = center
 					size = { 0 45 }
 					text = "Patrons available to [Faith.GetAdherentNamePluralNoTooltip]"
 					default_format = "#weak"
 					fontsize = 18
 					margin = { 0 10 }
 					align = nobaseline
-					max_width = 500
+					max_width = 330
 					autoresize = yes
 
 					state = {
@@ -1279,22 +1279,6 @@ window = {
 											on_start = "[GetVariableSystem.Clear('patron_trait')]"
 										}
 
-										# highlight_icon = {
-										# 	name = "bg"
-										# 	size = { 100% 100% }
-										# 	texture = "gfx/interface/tooltips/tooltip_bg.dds"
-
-										# 	tintcolor = { 0.33 0.24 0.3 0.25 }
-
-										# 	modify_texture = {
-										# 		name = "overlay"
-										# 		texture = "gfx/interface/component_overlay/overlay_window.dds"
-										# 		spriteType = Corneredstretched
-										# 		spriteborder = { 6 6 }
-										# 		blend_mode = overlay
-										# 	}
-										# }
-
 										hbox = {
 											layoutpolicy_vertical = expanding
 											margin = { 10 0 }
@@ -1377,6 +1361,27 @@ window = {
 														text = "#F [Localize( Concatenate( 'desc', GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														using = Font_Size_Small
+
+														# background = {
+														# 	margin_left = 20
+														# 	margin_right = 20
+														# 	margin_top = 30
+														# 	margin_bottom = 10
+														# 	alpha = 0.5
+
+														# 	texture = "gfx/interface/component_tiles/tile_title_bg_01.dds"
+														# 	spriteType = Corneredtiled
+														# 	spriteborder = { 40 8 }
+														# 	texture_density = 2
+
+														# 	modify_texture = {
+														# 		name = "mask"
+														# 		texture = "gfx/interface/component_masks/mask_culture_era_tab.dds"
+														# 		spriteType = Corneredstretched
+														# 		spriteborder = { 0 0 }
+														# 		blend_mode = alphamultiply
+														# 	}
+														# }
 													}
 												}
 											}
