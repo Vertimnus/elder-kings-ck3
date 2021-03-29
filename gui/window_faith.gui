@@ -1117,6 +1117,24 @@ window = {
 			name = "tab_patrons"
 			layoutpolicy_horizontal = expanding
 			layoutpolicy_vertical = expanding
+			visible = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' )]"
+
+			state = {
+				name = _show
+				using = Animation_FadeIn_Quick
+				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
+			}
+
+			state = {
+				name = _hide
+				alpha = 0
+				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+			}
+
+			state = {
+				name = "faith_view_refresh"
+				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
+			}
 
 			widget = {
 				size = { 0 45 }
@@ -1178,30 +1196,12 @@ window = {
 
 			scrollbox = {
 				name = "scrollbox_patrons"
-				visible = "[GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' )]"
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = expanding
 				datacontext = "[GetIllustration( 'religion_holding' )]"
 
 				blockoverride "scrollbox_background" {}
 				blockoverride "scrollbox_background_fade" {}
-
-				state = {
-					name = _show
-					using = Animation_FadeIn_Quick
-					on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
-				}
-
-				state = {
-					name = _hide
-					alpha = 0
-					on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-				}
-
-				state = {
-					name = "faith_view_refresh"
-					on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
-				}
 
 				background = {
 					texture = "[Illustration.GetTextureForFaith( FaithWindow.GetFaith )]"
@@ -1378,6 +1378,10 @@ window = {
 								}
 							}
 						}
+					}
+
+					divider_light = {
+						layoutpolicy_horizontal = expanding
 					}
 				}
 			}
