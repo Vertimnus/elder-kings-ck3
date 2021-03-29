@@ -20,6 +20,13 @@ window = {
 	}
 
 	state = {
+		name = "patron_important_action" # clicking the map changes the faith but doesnt call the refresh function
+		trigger_when = "[GetPlayer.MakeScope.Var('action_patron').IsSet]"
+		on_start = "[GetScriptedGui('action_patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]"
+	}
+
+	state = {
 		name = _show
 		position = { 0 0 }
 		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'beliefs' )]"
