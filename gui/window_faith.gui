@@ -1151,7 +1151,7 @@ window = {
 					#layoutpolicy_horizontal = expanding
 					parentanchor = center
 					size = { 0 45 }
-					text = "Patrons available to [Faith.GetAdherentNamePluralNoTooltip]"
+					text = PATRONS_AVAILABLE
 					default_format = "#weak"
 					fontsize = 18
 					margin = { 0 10 }
@@ -1179,7 +1179,7 @@ window = {
 						parentanchor = vcenter
 						align = nobaseline
 						default_format = "#clickable"
-						text = "Effects Only"
+						text = EFFECTS_ONLY
 						fontsize = 15
 					}
 
@@ -1193,7 +1193,7 @@ window = {
 						}
 					}
 
-					tooltip = "[SelectLocalization( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'Show descriptions', 'Show patron modifiers' )]" #localize this and probably other bits too
+					tooltip = "[SelectLocalization( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'show_desc', 'show_modifier' )]" #localize this and probably other bits too
 				}
 			}
 
@@ -1222,7 +1222,7 @@ window = {
 				}
 
 				blockoverride "scrollbox_empty" {
-					text = "No Patrons"
+					text = NO_PATRONS
 					visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
 				}
 
@@ -1256,7 +1256,7 @@ window = {
 
 										clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
 										#down = has trait
-										#enabled = not recent
+										#enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
 										#onclick = give trait - this and down need 1.4 commands to pass flags
 
 										state = {
@@ -1277,6 +1277,29 @@ window = {
 										state = {
 											name = "mouse_leave_nc"
 											on_start = "[GetVariableSystem.Clear('patron_trait')]"
+										}
+
+
+										background = {
+											margin = { 100 35 }
+											alpha = 0.35
+											using = Background_Area_Dark
+
+											modify_texture = {
+												name = "mask"
+												texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick_vertical.dds"
+												spriteType = Corneredstretched
+												spriteborder = { 0 0 }
+												blend_mode = alphamultiply
+											}
+
+											modify_texture = {
+												name = "mask2"
+												texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+												spriteType = Corneredstretched
+												spriteborder = { 0 0 }
+												blend_mode = alphamultiply
+											}
 										}
 
 										hbox = {
@@ -1323,8 +1346,6 @@ window = {
 														layoutpolicy_horizontal = expanding
 														layoutpolicy_vertical = expanding
 														alwaystransparent = yes
-														#minimumsize = { 180 -1 }
-														#maximumsize = { 180 -1 }
 
 														visible = "[Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all'))]"
 
@@ -1343,7 +1364,7 @@ window = {
 																name = "patron_modifiers"
 																size = { 180 -1 }
 																autoresize = yes
-																max_width = 180
+																max_width = 340
 																text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
 																fontsize = 14
 																fontsize_min = 12
@@ -1361,27 +1382,6 @@ window = {
 														text = "#F [Localize( Concatenate( 'desc', GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
 														using = Font_Size_Small
-
-														# background = {
-														# 	margin_left = 20
-														# 	margin_right = 20
-														# 	margin_top = 30
-														# 	margin_bottom = 10
-														# 	alpha = 0.5
-
-														# 	texture = "gfx/interface/component_tiles/tile_title_bg_01.dds"
-														# 	spriteType = Corneredtiled
-														# 	spriteborder = { 40 8 }
-														# 	texture_density = 2
-
-														# 	modify_texture = {
-														# 		name = "mask"
-														# 		texture = "gfx/interface/component_masks/mask_culture_era_tab.dds"
-														# 		spriteType = Corneredstretched
-														# 		spriteborder = { 0 0 }
-														# 		blend_mode = alphamultiply
-														# 	}
-														# }
 													}
 												}
 											}
