@@ -1472,112 +1472,6 @@ doctrine_core_tenets = {
 	# Daedric Faiths Tenets			#
 	#################################
 	
-	tenet_witch_worship = {
-		icon = core_tenet_festivities
-		name = {
-			first_valid = {
-				triggered_desc = {
-					trigger = {
-						religion_tag = reach_religion
-					}
-					desc = tenet_witch_worship_reach_religion_name
-				}
-				desc = tenet_witch_worship_name
-			}
-		}
-		
-		piety_cost = {
-			if = {
-				limit = {
-					has_doctrine = daedric_hostility_doctrine
-				}
-				value = faith_tenet_cost_mid
-			}
-			else = {
-				value = faith_tenet_cost_high
-			}
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = witchcraft_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
-					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		parameters = {
-			# TODO: Decision for Witches to become Occultists
-			# Handle Briarhearts somehow?
-			potent_witch_become_occultist = yes
-		}
-		
-		traits = {
-			virtues = {
-				witch
-				occultist = 3
-			}
-		}
-	}
-	
-	tenet_vampire_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			if = {
-				limit = {
-					OR = {
-						religion_tag = molag_religion
-						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else_if = {
-				limit = {
-					has_doctrine = daedric_hostility_doctrine
-				}
-				value = faith_tenet_cost_mid
-			}
-			else = {
-				value = faith_tenet_cost_high
-			}
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = vampirism_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a vampire trait line
-		traits = {
-			virtues = { vampire_character = 2 }
-		}
-		
-		parameters = {
-			allows_worship_molag_shunned_doctrines_active = yes
-		}
-	}
-	
 	tenet_lycanthrope_worship = {
 		icon = core_tenet_festivities
 		
@@ -1672,6 +1566,112 @@ doctrine_core_tenets = {
 		traits = {
 			virtues = { necromancer_character = 1 }
 			#virtues = { lich = 3 }
+		}
+	}
+	
+	tenet_vampire_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = molag_religion
+						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a vampire trait line
+		traits = {
+			virtues = { vampire_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_molag_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_witch_worship = {
+		icon = core_tenet_festivities
+		name = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						religion_tag = reach_religion
+					}
+					desc = tenet_witch_worship_reach_religion_name
+				}
+				desc = tenet_witch_worship_name
+			}
+		}
+		
+		piety_cost = {
+			if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = witchcraft_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
+					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		parameters = {
+			# TODO: Decision for Witches to become Occultists
+			# Handle Briarhearts somehow?
+			potent_witch_become_occultist = yes
+		}
+		
+		traits = {
+			virtues = {
+				witch
+				occultist = 3
+			}
 		}
 	}
 	
@@ -3528,6 +3528,8 @@ doctrine_core_tenets = {
 			increased_dynasty_prestige_marriage_mult = 1
 			increased_dynasty_prestige_long_reign_mult = 0.5
 			pilgrimage_decision_active = yes
+			### EK TODO: Just that
+			rite_of_passage_decision_active = yes
 		}
 
 		character_modifier = {
