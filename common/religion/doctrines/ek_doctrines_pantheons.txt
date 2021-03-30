@@ -24,7 +24,6 @@ doctrine_main_pantheon = {
 		parameters = {
 			pantheon_adds_deities_divines = yes
 			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
@@ -37,13 +36,16 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = marukhati_religion
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			hostility_override_doctrine_pantheon_the_one = 1
 			hostility_override_doctrine_pantheon_aedra = 3
 			hostility_override_doctrine_pantheon_green_pact = 3
+			hostility_override_doctrine_pantheon_good_daedra = 3
+			hostility_override_doctrine_pantheon_tribunal = 3
+			hostility_override_doctrine_pantheon_nerevar = 3
 		}
 	}
 	doctrine_pantheon_lorkhan = { # Lorkhan
@@ -60,12 +62,10 @@ doctrine_main_pantheon = {
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_doctrine_pantheon_divines = 1
 			hostility_override_doctrine_pantheon_aedra = 3
 			hostility_override_doctrine_pantheon_green_pact = 3
 		}
 	}
-	
 	doctrine_pantheon_heroes = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -79,12 +79,10 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_heroes = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
-	
 	doctrine_pantheon_reman = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -98,12 +96,11 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_reman = 1
+			hostility_override_doctrine_pantheon_elemental = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
-	
 	doctrine_pantheon_ancestor_moth = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -117,12 +114,10 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_ancestor_moth = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
-	
 	doctrine_pantheon_nedic_aedra = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -136,8 +131,7 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_nedic_aedra = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
@@ -162,7 +156,6 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_pantheon_the_one = 3
 		}
 	}
-	
 	doctrine_pantheon_trinimac = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -175,11 +168,11 @@ doctrine_main_pantheon = {
 			religion_tag = trinimac_religion
 		}
 		parameters = {
-			pantheon_adds_deities_aedra = 1
 			hostility_override_doctrine_pantheon_aedra = 1
+			hostility_override_doctrine_pantheon_trinimac = 1
 			hostility_override_tenet_syncretism_pantheon_aedra = 1
-			hostility_override_doctrine_pantheon_lorkhan = 3
-			hostility_override_doctrine_pantheon_the_one = 3
+			hostility_override_doctrine_pantheon_malacath = 2
+			hostility_override_doctrine_pantheon_boethiah = 3
 		}
 	}
 	
@@ -201,8 +194,10 @@ doctrine_main_pantheon = {
 			hostility_override_tenet_syncretism_pantheon_green_pact = 1
 			hostility_override_doctrine_pantheon_lorkhan = 3
 			hostility_override_doctrine_pantheon_the_one = 3
+			cannibalism_legal = yes
 		}
 	}
+	
 	## Yokudan pantheon
 	doctrine_pantheon_yokudan = {
 		piety_cost = {
@@ -238,6 +233,7 @@ doctrine_main_pantheon = {
 			pantheon_cannot_be_changed_active = yes
 		}
 	}
+	
 	### Daedric
 	# hidden_is_worshipping_daedra = yes | hidden doctrine parameter (duh) mainly here so doctrine_daedra_worship_forbidden knows what to target
 	doctrine_pantheon_daedra = {
@@ -256,6 +252,7 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_daedra_worship_forbidden = 3
 		}
 	}
+	
 	## Prince specific
 	doctrine_pantheon_azura = {
 		piety_cost = {
@@ -426,6 +423,8 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_daedra_worship_forbidden = 3
 			hostility_override_doctrine_pantheon_meridia = 1
 			hostility_override_tenet_syncretism_pantheon_meridia = 2
+			hostility_override_doctrine_pantheon_mannimarco = 3
+			hostility_override_doctrine_pantheon_ideal_masters = 3
 		}
 	}
 	doctrine_pantheon_molag = {
@@ -561,6 +560,7 @@ doctrine_main_pantheon = {
 			hostility_override_tenet_syncretism_pantheon_vaermina = 2
 		}
 	}
+	
 	## Reach
 	doctrine_pantheon_druadach = {
 		piety_cost = {
@@ -582,6 +582,23 @@ doctrine_main_pantheon = {
 			mountains_attrition_mult = -0.5
 		}
 	}
+	doctrine_pantheon_dwemer_ancestors = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_dwemer_ancestors }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = reach_religion
+		}
+		parameters = {
+			hostility_override_doctrine_pantheon_dwemer_ancestors = 1
+			pantheon_adds_deities_dwemer_ancestors = 1
+		}
+	}
+	
 	## Velothi
 	# Special combination of Daedra
 	doctrine_pantheon_good_daedra = {
@@ -674,6 +691,7 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_pantheon_bad_daedra = 3
 		}
 	}
+	
 	### Aurbic
 	## Atmoran
 	doctrine_pantheon_atmoran_totems = {
@@ -728,6 +746,23 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_pantheon_all_maker = 1
 		}
 	}
+	doctrine_pantheon_ternion_totems = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_ternion_totems }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = atmoran_pantheon
+		}
+		parameters = {
+			pantheon_adds_deities_ternion_totems = yes
+			hostility_override_doctrine_pantheon_ternion_totems = 1
+		}
+	}
+	
 	## Celestials
 	doctrine_pantheon_celestials = {
 		piety_cost = {
@@ -761,6 +796,7 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_pantheon_celestial_serpent = 1
 		}
 	}
+	
 	## Wyrd
 	doctrine_pantheon_jephre = {
 		piety_cost = {
@@ -789,12 +825,13 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = akaviri_religion
 		}
 		parameters = {
 			pantheon_adds_deities_divines = yes
 			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
+			hostility_override_doctrine_pantheon_elemental = 1
+			hostility_override_doctrine_pantheon_reman = 1
 			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
@@ -809,16 +846,13 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = khajiiti_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_azura = 1
+			hostility_override_doctrine_pantheon_riddlethar = 1
 		}
 	}
-	
 	doctrine_pantheon_khajiiti = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -828,16 +862,13 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = khajiiti_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_azura = 1
+			hostility_override_doctrine_pantheon_khajiiti = 1
 		}
 	}
-	
 	doctrine_pantheon_baandar = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -847,13 +878,11 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = khajiiti_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_azura = 1
+			hostility_override_doctrine_pantheon_baandar = 1
 		}
 	}
 	
@@ -867,13 +896,10 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = deepones_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+		hostility_override_doctrine_pantheon_deepones = 1
 		}
 	}
 	
@@ -887,16 +913,13 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = hist_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_amber_hist = 3
+			hostility_override_doctrine_pantheon_hist = 1
 		}
 	}
-	
 	doctrine_pantheon_amber_hist = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -906,13 +929,11 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = hist_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_hist = 3
+			hostility_override_doctrine_pantheon_amber_hist = 1
 		}
 	}
 	
@@ -926,13 +947,10 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = sithis_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_sithis = 1
 		}
 	}
 	
@@ -946,16 +964,17 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = necromantic_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_divines = 3
+			hostility_override_doctrine_pantheon_aedra = 3
+			hostility_override_tenet_syncretism_pantheon_divines = 3
+			hostility_override_tenet_syncretism_pantheon_aedra = 3
+			hostility_override_doctrine_pantheon_mannimarco = 1
+			hostility_override_doctrine_pantheon_meridia = 3
 		}
 	}
-	
 	doctrine_pantheon_ideal_masters = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -965,13 +984,11 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			religion_tag = nedic_nordic_religion
+			religion_tag = necromantic_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
-			hostility_override_doctrine_pantheon_lorkhan = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
+			hostility_override_doctrine_pantheon_ideal_masters = 1
+			hostility_override_doctrine_pantheon_meridia = 3
 		}
 	}
 }

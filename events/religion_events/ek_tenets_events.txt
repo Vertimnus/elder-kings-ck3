@@ -15,7 +15,7 @@ ek_tenets.0001 = {
 	
 	trigger = {
 		# Must have the Divine Purity tenet
-		faith = { has_doctrine = tenet_divine_purity }
+		faith = { has_doctrine_parameter = children_bad_congenital_trait_impure }
 		
 		OR = {
 			# Has their body tainted
@@ -249,140 +249,143 @@ ek_tenets.0002 = {
 	}
 }
 
+### EK TODO: Removed for now, needs more work once I know how to properly handle it
 ### Fired by the on_set_relation_lover_ek effect
 # You have a new lover, but this relationship is impure...
-ek_tenets.0010 = {
-	type = character_event
+# ek_tenets.0010 = {
+	# type = character_event
 	
-	title = ek_tenets.0010.title
-	desc = ek_tenets.0010.desc
+	# title = ek_tenets.0010.title
+	# desc = ek_tenets.0010.desc
 	
-	left_portrait = {
-		character = scope:impure_target
-		animation = shame
-	}
+	# left_portrait = {
+		# character = scope:impure_target
+		# animation = shame
+	# }
 	
-	right_portrait = {
-		character = scope:impure_source
-		animation = shame
-	}
+	# right_portrait = {
+		# character = scope:impure_source
+		# animation = shame
+	# }
 	
-	trigger = {
-		# Must have the Divine Purity tenet, and not be already considered Impure
-		faith = { has_doctrine = tenet_divine_purity }
-		NOT = { has_trait = impure }
+	# trigger = {
+		# # Must have the Divine Purity tenet, and not be already considered Impure
+		# faith = { has_doctrine = tenet_divine_purity }
+		# NOT = { has_trait = impure }
 		
-		# Must have any lover this is an infidel or Impure
-		any_relation = { 
-			type = lover
-			OR = {
-				has_trait = impure
-				NOT = { has_faith = scope:root.faith }
-			}
-		}
-	}
+		# # Must have any lover this is an infidel or Impure
+		# any_relation = { 
+			# type = lover
+			# OR = {
+				# has_trait = impure
+				# NOT = { has_faith = scope:root.faith }
+			# }
+		# }
+	# }
 	
-	immediate = {
-		save_scope_as = impure_target
+	# immediate = {
+		# save_scope_as = impure_target
 		
-		random_relation = { 
-			type = lover
-			limit = {
-				OR = {
-					has_trait = impure
-					NOT = { has_faith = scope:root.faith }
-				}
-			}
+		# random_relation = { 
+			# type = lover
+			# limit = {
+				# OR = {
+					# has_trait = impure
+					# NOT = { has_faith = scope:root.faith }
+				# }
+			# }
 			
-			save_scope_as = impure_source
-		}
-	}
+			# save_scope_as = impure_source
+		# }
+	# }
 	
-	theme = faith
+	# theme = faith
 	
-	# Own it. Keep the relationship, but become Impure
-	option = {
-		name = ek_tenets.0010.optA
+	# # Own it. Keep the relationship, but become Impure
+	# option = {
+		# name = ek_tenets.0010.optA
 		
-		add_trait = impure
-		add_piety_level = -1
+		# add_trait = impure
+		# add_piety_level = -1
 		
-		scope:impure_source = { trigger_event = { id = ek_tenets.0011 } }
-	}
+		# scope:impure_source = { trigger_event = { id = ek_tenets.0011 } }
+	# }
 	
-	# Break up
-	option = {
-		name = ek_tenets.0010.optB
+	# # Break up
+	# option = {
+		# name = ek_tenets.0010.optB
 		
-		show_as_tooltip = { remove_relation_lover = scope:impure_source }
-		scope:impure_source = { trigger_event = { id = ek_tenets.0012 } }
-	}
-}
+		# show_as_tooltip = { remove_relation_lover = scope:impure_source }
+		# scope:impure_source = { trigger_event = { id = ek_tenets.0012 } }
+	# }
+# }
 
-# Your lover will stay with you, even if they are despised by their brethren
-ek_tenets.0011 = {
-	type = character_event
+# # Your lover will stay with you, even if they are despised by their brethren
+# ek_tenets.0011 = {
+	# type = character_event
 	
-	title = ek_tenets.0011.title
-	desc = ek_tenets.0011.desc
+	# title = ek_tenets.0011.title
+	# desc = ek_tenets.0011.desc
 	
-	left_portrait = {
-		character = scope:impure_target
-		animation = personality_bold
-	}
+	# left_portrait = {
+		# character = scope:impure_target
+		# animation = personality_bold
+	# }
 	
-	right_portrait = {
-		character = scope:impure_source
-		animation = admiration
-	}
+	# right_portrait = {
+		# character = scope:impure_source
+		# animation = admiration
+	# }
 	
-	theme = faith
+	# theme = faith
 	
-	# We will keep loving each other, no matter what.
-	option = {
-		name = ek_tenets.0011.optA
+	# # We will keep loving each other, no matter what.
+	# option = {
+		# name = ek_tenets.0011.optA
 		
-		scope:impure_target = {
-			show_as_tooltip = {
-				add_trait_force_tooltip = impure
-				add_piety_level = -1
-			}
-		}
-	}
-}
+		# scope:impure_target = {
+			# show_as_tooltip = {
+				# add_trait_force_tooltip = impure
+				# add_piety_level = -1
+			# }
+		# }
+	# }
+# }
 
-# Your lover broke up with you to keep their purity
-ek_tenets.0012 = {
-	type = character_event
+# # Your lover broke up with you to keep their purity
+# ek_tenets.0012 = {
+	# type = character_event
 	
-	title = ek_tenets.0012.title
-	desc = ek_tenets.0012.desc
+	# title = ek_tenets.0012.title
+	# desc = ek_tenets.0012.desc
 	
-	left_portrait = {
-		character = scope:impure_target
-		animation = sadness
-	}
+	# left_portrait = {
+		# character = scope:impure_target
+		# animation = sadness
+	# }
 	
-	right_portrait = {
-		character = scope:impure_source
-		animation = disbelief
-	}
+	# right_portrait = {
+		# character = scope:impure_source
+		# animation = disbelief
+	# }
 	
-	theme = faith
+	# theme = faith
 	
-	# So be it...
-	option = {
-		name = ek_tenets.0012.optA
+	# # So be it...
+	# option = {
+		# name = ek_tenets.0012.optA
 		
-		remove_relation_lover = scope:impure_target
-	}
-}
+		# remove_relation_lover = scope:impure_target
+	# }
+# }
 
 ### WITCH WORSHIP
 ## Become an Occultist
 ek_tenets.0101 = {
 	type = character_event
 	title = ek_tenets.0101.t
+	
+	theme = witchcraft
 	
 	desc = {
 		first_valid = {
@@ -448,6 +451,8 @@ ek_tenets.0102 = {
 	type = character_event
 	title = ek_tenets.0101.t
 	
+	theme = witchcraft
+	
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -480,6 +485,8 @@ ek_tenets.0102 = {
 ek_tenets.0103 = {
 	type = character_event
 	title = ek_tenets.0101.t
+	
+	theme = witchcraft
 	
 	desc = {
 		first_valid = {

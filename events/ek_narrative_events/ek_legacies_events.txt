@@ -1,0 +1,72 @@
+﻿# Narrative events tied to powerful legacies
+
+namespace = ek_legacies
+
+
+########################
+# Unlocked the last Dragonblood perk
+# 0001-0010
+########################
+
+### The dynasty head gets the event
+ek_legacies.0001 = {
+	title = ek_legacies.0001.t
+	desc = ek_legacies.0001.desc
+	
+	theme = war
+	
+	left_portrait = {
+		character = scope:dragon_master
+		animation = war_over_win
+	}
+	
+	right_portrait = {
+		character = scope:vassal_1
+		animation = fear
+	}
+	
+	immediate = {
+		save_scope_as = dragon_master
+		capital_province = { barony = { save_scope_as = capital } }
+		
+		random_vassal = {
+			save_scope_as = vassal_1
+		}
+	}
+
+	# The world will be brought to its knees!
+	option = {
+		name = ek_legacies.0001.a
+		
+		custom_tooltip = ek_legacies.0001.unlock_dovah_vahzol
+		
+		every_player = {
+			limit = { NOT = { this = scope:dragon_master } }
+			trigger_event = ek_legacies.0002
+		}
+	}
+}
+
+# People get the news
+ek_legacies.0002 = {
+	title = ek_legacies.0001.t
+	desc = ek_legacies.0002.desc
+	
+	theme = war
+	
+	left_portrait = {
+		character = scope:dragon_master
+		animation = war_over_win
+	}
+	
+	right_portrait = {
+		character = root
+		animation = worry
+	}
+
+	option = {
+		name = ek_legacies.0002.a
+		
+		custom_tooltip = ek_legacies.0002.unlock_dovah_vahzol
+	}
+}

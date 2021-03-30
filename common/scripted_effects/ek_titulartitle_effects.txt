@@ -248,6 +248,12 @@ form_reach_empire_scripted_effect = {
 	}
 	resolve_title_and_vassal_change = scope:title_change
 	
+	### We save the scopes for the loc
+	title:e_reach = { save_scope_as = reach_empire }
+	title:k_wrothgar = { save_scope_as = wrothgar }
+	title:k_falkreath = { save_scope_as = falkreath }
+	title:k_solitude = { save_scope_as = solitude }
+	
 	### De Jure changes
 	custom_tooltip = form_reach_empire_effect_de_jure_tt
 	hidden_effect = {
@@ -261,9 +267,9 @@ form_reach_empire_scripted_effect = {
 		## If d_darkfall is held but not k_solitude, we integrate it
 		if = {
 			limit = { NOT = { title:k_solitude = { holder = root } } }
-			title:k_wrothgar = { set_de_jure_liege_title = title:e_reach }
+			title:d_darkfall = { set_de_jure_liege_title = title:k_markarth }
 		}
-		title:d_darkfall = { set_de_jure_liege_title = title:k_markarth }
+		# title:d_darkfall = { set_de_jure_liege_title = title:k_markarth }
 		## If d_argent is held but not k_wrothgar, we integrate it
 		if = {
 			limit = { NOT = { title:k_wrothgar = { holder = root } } }
@@ -285,4 +291,7 @@ form_reach_empire_scripted_effect = {
 			title:k_solitude = { set_de_jure_liege_title = title:e_reach }
 		}
 	}
+	
+	custom_tooltip = form_reach_empire_effect_de_jure_tt_a
+	custom_tooltip = form_reach_empire_effect_de_jure_tt_b
 }

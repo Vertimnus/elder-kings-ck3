@@ -17,8 +17,8 @@ ek_on_game_start = {
 		startup_culture_effect = { CULTURE = barsaebic }
 		startup_culture_effect = { CULTURE = hectahamic }
 		# Bosmeris
-		startup_culture_effect = { CULTURE = bosmer }
-		startup_culture_effect = { CULTURE = cyrobosmer }
+		startup_culture_effect = { CULTURE = pactbosmer }
+		startup_culture_effect = { CULTURE = civicbosmer }
 		startup_culture_effect = { CULTURE = arenthian }
 		# Breton
 		startup_culture_effect = { CULTURE = glenumbran }
@@ -136,6 +136,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = heartlands CULTURE = culture:ayleid }
 		# Nibenay
 		set_culture_native_to = { REGION = nibenay CULTURE = culture:nibenese }
+		set_culture_native_to = { REGION = nibenay CULTURE = culture:blackwood }
 		set_culture_native_to = { REGION = nibenay CULTURE = culture:gemha }
 		## Skyrim
 		# Karth
@@ -144,6 +145,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = west_ghost CULTURE = culture:westmarcher }
 		# White River
 		set_culture_native_to = { REGION = white_river CULTURE = culture:westmarcher }
+		set_culture_native_to = { REGION = white_river CULTURE = culture:cyro_nord }
 		set_culture_native_to = { REGION = white_river CULTURE = culture:kreath }
 		# East Ghost
 		set_culture_native_to = { REGION = east_ghost CULTURE = culture:eastmarcher }
@@ -161,16 +163,19 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = summerset CULTURE = culture:alinor }
 		## Valenwood
 		# Grahtwood
-		set_culture_native_to = { REGION = grahtwood CULTURE = culture:bosmer }
+		set_culture_native_to = { REGION = grahtwood CULTURE = culture:pactbosmer }
+		set_culture_native_to = { REGION = grahtwood CULTURE = culture:civicbosmer }
 		set_culture_native_to = { REGION = grahtwood CULTURE = culture:wood_orc }
 		set_culture_native_to = { REGION = grahtwood CULTURE = culture:hectahamic }
 		# Greenshade
-		set_culture_native_to = { REGION = greenshade CULTURE = culture:bosmer }
+		set_culture_native_to = { REGION = greenshade CULTURE = culture:pactbosmer }
+		set_culture_native_to = { REGION = greenshade CULTURE = culture:civicbosmer }
 		# Malabal Tor
-		set_culture_native_to = { REGION = malabal_tor CULTURE = culture:bosmer }
+		set_culture_native_to = { REGION = malabal_tor CULTURE = culture:pactbosmer }
+		set_culture_native_to = { REGION = malabal_tor CULTURE = culture:civicbosmer }
 		set_culture_native_to = { REGION = malabal_tor CULTURE = culture:wood_orc }
 		# Reaper's March
-		set_culture_native_to = { REGION = reaper_march CULTURE = culture:bosmer }
+		set_culture_native_to = { REGION = reaper_march CULTURE = culture:arenthian }
 		set_culture_native_to = { REGION = reaper_march CULTURE = culture:anequinan }
 		## Elsweyr
 		# Anequina
@@ -180,6 +185,9 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = tenmar CULTURE = culture:pellitinian }
 		# Pellitine
 		set_culture_native_to = { REGION = pellitine CULTURE = culture:pellitinian }
+		
+		### Now that we know which cultures are native from which region, we can save every native culture in the county scope (genius, really)
+		setup_county_native_cultures_link = yes
 		
 		### Some religious tweaks
 		every_religion_global = {
@@ -218,6 +226,7 @@ ek_on_game_start = {
 		}
 		
 		### Innovations
+		# Cultural & regional
 		culture:alinor = { add_innovation = innovation_moonstone_armor }
 		culture:auridon = { add_innovation = innovation_moonstone_armor }
 		culture:balfiera = { add_innovation = innovation_moonstone_armor }
@@ -226,9 +235,21 @@ ek_on_game_start = {
 		culture:nibenese = { add_innovation = innovation_seat_of_empires }
 		culture:colovian = { add_innovation = innovation_seat_of_empires }
 		
+		# Cultural MaA
+		culture:skaal = { add_innovation = innovation_skaal_hunter }
+		
+		culture:colovian = { add_innovation = innovation_armored_legionaires }
+		culture:nibenese = { add_innovation = innovation_nibenese_battlemages }
+		culture:heartlander = { add_innovation = innovation_armored_legionaires }
+		culture:heartlander = { add_innovation = innovation_nibenese_battlemages }
+		
 		culture:yokudan = { add_innovation = innovation_way_of_the_sword }
 		culture:forebear = { add_innovation = innovation_way_of_the_sword }
 		culture:crown = { add_innovation = innovation_way_of_the_sword }
+		culture:alikr = { add_innovation = innovation_way_of_the_sword }
+		culture:abecean = { add_innovation = innovation_abecean_pirates }
+		
+		culture:tsaesci = { add_innovation = innovation_akaviri_dragon_hunters }
 		
 		#############
 		# BOOKMARKS #

@@ -1308,11 +1308,11 @@ doctrine_core_tenets = {
 		}
 		
 		parameters = {
-			# TODO: Give Impure traits to foreign close relationships
 			children_bad_congenital_trait_impure = yes
-			character_impure_foreign_relationships_impure = yes
 			pilgrimage_decision_active = yes
 			character_impurity_difformity_election_lowers_score_active = yes
+			### EK TODO: Give Impure traits to foreign close relationships
+			# character_impure_foreign_relationships_impure = yes
 		}
 	}
 	
@@ -1398,32 +1398,6 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	tenet_valenwood_laws = {
-		icon = core_tenet_shadyfigure
-		piety_cost = {
-			value = faith_tenet_cost_mid
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_valenwood_laws }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-
-		can_pick = {
-			always = yes
-		}
-		
-		traits = {
-			virtues = { vengeful deceitful }
-		}
-		
-		parameters = {
-			piety_gain_from_successful_intrigue_schemes = yes
-			mourning_wars_mechanics_active = yes
-		}
-
-	}
 	
 	#################################
 	# Nedic-Nordic Faiths Tenets	#
@@ -1497,112 +1471,6 @@ doctrine_core_tenets = {
 	#################################
 	# Daedric Faiths Tenets			#
 	#################################
-	
-	tenet_witch_worship = {
-		icon = core_tenet_festivities
-		name = {
-			first_valid = {
-				triggered_desc = {
-					trigger = {
-						religion_tag = reach_religion
-					}
-					desc = tenet_witch_worship_reach_religion_name
-				}
-				desc = tenet_witch_worship_name
-			}
-		}
-		
-		piety_cost = {
-			if = {
-				limit = {
-					has_doctrine = daedric_hostility_doctrine
-				}
-				value = faith_tenet_cost_mid
-			}
-			else = {
-				value = faith_tenet_cost_high
-			}
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = witchcraft_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
-					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		parameters = {
-			# TODO: Decision for Witches to become Occultists
-			# Handle Briarhearts somehow?
-			potent_witch_become_occultist = yes
-		}
-		
-		traits = {
-			virtues = {
-				witch
-				occultist = 3
-			}
-		}
-	}
-	
-	tenet_vampire_worship = {
-		icon = core_tenet_festivities
-		
-		piety_cost = {
-			if = {
-				limit = {
-					OR = {
-						religion_tag = molag_religion
-						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
-					}
-				}
-				value = faith_tenet_cost_low
-			}
-			else_if = {
-				limit = {
-					has_doctrine = daedric_hostility_doctrine
-				}
-				value = faith_tenet_cost_mid
-			}
-			else = {
-				value = faith_tenet_cost_high
-			}
-
-			# Multiplier for keeping same tenet
-			if = {
-				limit = { has_doctrine = tenet_witch_worship }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		
-		can_pick = {
-			custom_description = {
-				text = vampirism_must_be_fully_accepted
-				NOR = {
-					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
-					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
-				}
-			}
-		}
-		
-		# TODO: Update when we have a vampire trait line
-		traits = {
-			virtues = { vampire_character = 2 }
-		}
-		
-		parameters = {
-			allows_worship_molag_shunned_doctrines_active = yes
-		}
-	}
 	
 	tenet_lycanthrope_worship = {
 		icon = core_tenet_festivities
@@ -1698,6 +1566,112 @@ doctrine_core_tenets = {
 		traits = {
 			virtues = { necromancer_character = 1 }
 			#virtues = { lich = 3 }
+		}
+	}
+	
+	tenet_vampire_worship = {
+		icon = core_tenet_festivities
+		
+		piety_cost = {
+			if = {
+				limit = {
+					OR = {
+						religion_tag = molag_religion
+						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
+					}
+				}
+				value = faith_tenet_cost_low
+			}
+			else_if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = vampirism_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_vampirism_outlawed = { is_in_list = selected_doctrines }
+					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		# TODO: Update when we have a vampire trait line
+		traits = {
+			virtues = { vampire_character = 2 }
+		}
+		
+		parameters = {
+			allows_worship_molag_shunned_doctrines_active = yes
+		}
+	}
+	
+	tenet_witch_worship = {
+		icon = core_tenet_festivities
+		name = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						religion_tag = reach_religion
+					}
+					desc = tenet_witch_worship_reach_religion_name
+				}
+				desc = tenet_witch_worship_name
+			}
+		}
+		
+		piety_cost = {
+			if = {
+				limit = {
+					has_doctrine = daedric_hostility_doctrine
+				}
+				value = faith_tenet_cost_mid
+			}
+			else = {
+				value = faith_tenet_cost_high
+			}
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_witch_worship }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		can_pick = {
+			custom_description = {
+				text = witchcraft_must_be_fully_accepted
+				NOR = {
+					flag:doctrine_witchcraft_crime = { is_in_list = selected_doctrines }
+					flag:doctrine_witchcraft_shunned = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+		
+		parameters = {
+			# TODO: Decision for Witches to become Occultists
+			# Handle Briarhearts somehow?
+			potent_witch_become_occultist = yes
+		}
+		
+		traits = {
+			virtues = {
+				witch
+				occultist = 3
+			}
 		}
 	}
 	
@@ -2652,6 +2626,12 @@ doctrine_core_tenets = {
 				text = incompatible_tenet_armed_pilgrimages_trigger
 				NOT = { flag:tenet_armed_pilgrimages = { is_in_list = selected_doctrines } }
 			}
+			custom_description = {
+				text = incompatible_tenet_gruesome_festivals_trigger
+				NOT = {
+					flag:tenet_gruesome_festivals = { is_in_list = selected_doctrines }
+				}
+			}
 		}
 
 		parameters = {
@@ -3548,6 +3528,8 @@ doctrine_core_tenets = {
 			increased_dynasty_prestige_marriage_mult = 1
 			increased_dynasty_prestige_long_reign_mult = 0.5
 			pilgrimage_decision_active = yes
+			### EK TODO: Just that
+			rite_of_passage_decision_active = yes
 		}
 
 		character_modifier = {
@@ -3702,6 +3684,7 @@ doctrine_core_tenets = {
 		}
 
 		is_shown = {
+			# No HumSac for Abrahamics: 'tis literally the religion-namer.
 			# NOR = {
 				# religion_tag = christianity_religion
 				# religion_tag = judaism_religion
@@ -3718,6 +3701,12 @@ doctrine_core_tenets = {
 				# text = incompatible_tenet_dharmic_pacifism_trigger
 				# NOT = { flag:tenet_dharmic_pacifism = { is_in_list = selected_doctrines } }
 			# }
+			custom_description = {
+				text = incompatible_tenet_gruesome_festivals_trigger
+				NOT = {
+					flag:tenet_gruesome_festivals = { is_in_list = selected_doctrines }
+				}
+			}
 		}
 
 		parameters = {
@@ -4003,6 +3992,89 @@ doctrine_core_tenets = {
 		character_modifier = {
 			ai_war_chance = 0.5
 			ai_war_cooldown = -0.25
+		}
+	}
+	
+	tenet_gruesome_festivals = {
+		name = {
+			first_valid = {
+				# triggered_desc = {
+					# trigger = { religion_tag = germanic_religion }
+					# desc = tenet_gruesome_festivals_blot_name
+				# }
+				desc = tenet_gruesome_festivals_name
+			}
+		}
+
+		icon = core_tenet_blood_bowl
+
+		piety_cost = {
+			# # If you've already got human sacrifice, this is a nice and easy jump.
+			# if = {
+				# limit = { has_doctrine = tenet_human_sacrifice }
+				# value = faith_tenet_cost_low
+			# }
+			# # Otherwise, follow the same pricing tiers as tenet_human_sacrifice.
+			# else_if = {
+				# limit = {
+					# has_doctrine = pagan_hostility_doctrine
+				# }
+				# value = faith_tenet_cost_mid
+			# }
+			# else_if = {
+				# limit = {
+					# religion_tag = hinduism_religion
+				# }
+				# value = faith_tenet_cost_high
+			# }
+			# else = {
+				# value = faith_tenet_cost_massive
+			# }
+			
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_gruesome_festivals }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+
+		is_shown = {
+			# # No HumSac for Abrahamics: 'tis literally the religion-namer.
+			# NOR = {
+				# religion_tag = christianity_religion
+				# religion_tag = judaism_religion
+				# religion_tag = islam_religion
+			# }
+			# And DLC required.
+			has_fp1_dlc_trigger = yes
+		}
+
+		can_pick = {
+			custom_description = {
+				text = incompatible_tenet_pacifism_trigger
+				NOT = {
+					flag:tenet_pacifism = { is_in_list = selected_doctrines }
+				}
+			}
+			# custom_description = {
+				# text = incompatible_tenet_dharmic_pacifism_trigger
+				# NOT = {
+					# flag:tenet_dharmic_pacifism = { is_in_list = selected_doctrines }
+				# }
+			# }
+			custom_description = {
+				text = incompatible_tenet_human_sacrifice_trigger
+				NOT = {
+					flag:tenet_human_sacrifice = { is_in_list = selected_doctrines }
+				}
+			}
+		}
+
+		parameters = {
+			human_sacrifice_active = yes
+			gruesome_festivals_active = yes
 		}
 	}
 

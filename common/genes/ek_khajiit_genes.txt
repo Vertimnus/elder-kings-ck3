@@ -1,0 +1,5651 @@
+﻿morph_genes = {
+
+	race_khajiit_features = {
+		inheritable = yes
+
+		non_khajiit = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		khajiit_features = {
+			index = 1
+			male = {
+
+				setting = { attribute = "khajiit_teeth"	value = { min = 1.0 max = 1.0 }	}
+
+				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
+
+				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
+
+
+				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
+
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = 	"gfx/models/portraits/male_body/khajiit_textures/no_diffuse.dds"
+					normal = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_normal.dds"
+					specular = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_properties.dds"
+				}
+
+				eye_hsv_shift_curve = {
+					curve = {
+						{ 0.0   { 0.0 0.0 0.0 } }
+						{ 1.0   { 0.0 1.0 0.0 } }
+					}
+				}
+
+				decal = { #nose/nails
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_nose.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_nose_normal.dds"
+
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 6
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #nose/nails
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/khajiit_body_paws.dds"
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_paws_normal.dds"
+
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 6
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/male_head/khajiit_textures/khajiit_head_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 5
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/male_body/khajiit_textures/khajiit_body_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 5
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+
+			female = {
+
+				skin_hsv_shift_curve = {
+					curve = {
+						{ 0.0   { 0.0 0.0 0.0 } }
+						{ 1.0   { 0.0 -0.2 -0.1 } }
+					}
+				}
+
+				eye_hsv_shift_curve = {
+					curve = {
+						{ 0.0   { 0.0 0.0 0.0 } }
+						{ 1.0   { 0.0 1.0 0.0 } }
+					}
+				}
+
+				setting = { attribute = "khajiit_teeth"	value = { min = 1.0 max = 1.0 }	}
+
+				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
+
+				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
+
+
+				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
+
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = 	"gfx/models/portraits/male_body/khajiit_textures/no_diffuse.dds"
+					normal = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_normal.dds"
+					specular = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_properties.dds"
+				}
+
+				decal = { #nose/nails
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_nose.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_nose_normal.dds"
+
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 6
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #nose/nails
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/khajiit_body_paws.dds"
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_paws_normal.dds"
+
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 6
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/male_head/khajiit_textures/khajiit_head_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 5
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/male_body/khajiit_textures/khajiit_body_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 5
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	gene_eye_scale = {
+		inheritable = yes
+		default_eye_scale = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+		eye_scale = {
+			index = 1
+			male = {
+				setting = { attribute = "head_eye_scale"	value = { min = 0.0 max = 0.8 }	}
+				setting = { attribute = "eye_depth"	value = { min = 0.0 max = 0.6 }	}
+
+			}
+			female = {
+				setting = { attribute = "head_eye_scale"	value = { min = 0.0 max = 1.0 }	}
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	race_khajiit_chin = {
+		inheritable = yes
+		no_chin_hair = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+		khajiit_chin = {
+			index = 1
+			male = {
+				setting = {
+					attribute = "khajiit_chin"	value = { min = 0.5 max = 1.0 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+			}
+			female = {
+				setting = {
+					attribute = "khajiit_chin"	value = { min = 0.15 max = 0.3 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	race_khajiit_sideburns = {
+		inheritable = yes
+		no_sideburns = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+		khajiit_sideburns_1 = {
+			index = 1
+			male = {
+				setting = {
+					attribute = "khajiit_sideburns_1"	value = { min = 0.5 max = 1.0 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_1_diffuse.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_1_normal.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.5 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 2
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 0.8 }
+							{ 0.50 0.8 }
+							{ 1.0 1.0 }
+						}
+					}
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+			}
+			female = {
+				setting = {
+					attribute = "khajiit_sideburns_1"	value = { min = 0.25 max = 0.5 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_1_diffuse.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_1_normal.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.5 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 2
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 0.8 }
+							{ 0.50 0.8 }
+							{ 1.0 1.0 }
+						}
+					}
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			boy = male
+			girl = female
+		}
+
+		khajiit_sideburns_2 = {
+			index = 2
+			male = {
+				setting = {
+					attribute = "khajiit_sideburns_2"	value = { min = 0.6 max = 1.0 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_2_diffuse.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_2_normal.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.5 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 2
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 0.8 }
+							{ 0.50 0.8 }
+							{ 1.0 1.0 }
+						}
+					}
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+			}
+			female = {
+				setting = {
+					attribute = "khajiit_sideburns_2"	value = { min = 0.4 max = 0.8 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_2_diffuse.dds"
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_sideburns_2_normal.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.5 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+						normal = replace
+					}
+					priority = 2
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 0.8 }
+							{ 0.50 0.8 }
+							{ 1.0 1.0 }
+						}
+					}
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	race_khajiit_ear_tufts = {
+		inheritable = yes
+		no_ear_tufts = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+		khajiit_ear_tufts = {
+			index = 1
+			male = {
+				setting = {
+					attribute = "khajiit_ear_tufts"	value = { min = 0.7 max = 1.0 }
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.0 }
+							{ 0.18 1.0 }
+						}
+					}
+				}
+
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	race_khajiit_fur_thickness_1 = {
+		no_fur = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		fur_thickness = {
+			index = 1
+			male = {
+				decal = { #Fur tufts
+					body_part = head
+					textures = {
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_thick_fur_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+						}
+					}
+				}
+
+				decal = { #Fur tufts
+					body_part = torso
+					textures = {
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_fur_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+						}
+					}
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	race_khajiit_fur_thickness_2 = {
+
+		no_additional_fur = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		fur_thickness = {
+			index = 1
+			male = {
+				decal = { #all over the body fur length
+					body_part = head
+					textures = {
+						normal = "gfx/models/portraits/decals/male_head/khajiit_head_thick_fur_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+							{ 0.5 0.0 }
+							{ 1.0 1.0 }
+						}
+					}
+				}
+
+				decal = { #all over the body fur length
+					body_part = torso
+					textures = {
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_fur_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+							{ 0.5 0.0 }
+							{ 1.0 1.0 }
+						}
+					}
+				}
+
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	race_khajiit_fur_tortie = {
+
+		no_tortie = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_1 = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_2 = {
+			index = 2
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+		tortie_3 = {
+			index = 3
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_4 = {
+			index = 4
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_5 = {
+			index = 5
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+		tortie_6 = {
+			index = 6
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_7 = {
+			index = 7
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_8 = {
+			index = 8
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_8.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_8.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_9 = {
+			index = 9
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_9.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_9.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_10 = {
+			index = 10
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_10.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_10.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_11 = {
+			index = 11
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_11.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_11.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_12 = {
+			index = 12
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_12.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_12.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_13 = {
+			index = 13
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_13.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_13.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_14 = {
+			index = 14
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_14.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_14.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_15 = {
+			index = 15
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_15.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_15.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_16 = {
+			index = 16
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_16.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_16.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_17 = {
+			index = 17
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_17.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_17.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_18 = {
+			index = 18
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_18.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_18.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_19 = {
+			index = 19
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_19.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_19.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		tortie_20 = {
+			index = 20
+			male = {
+				decal = { #cheetah fur highlights
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/tortie/khajiit_head_tortie_20.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = { #cheetah fur highlights
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/tortie/khajiit_body_tortie_20.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	race_khajiit_fur_shading = {
+
+		no_shading = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		shading_1 = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		shading_2 = {
+			index = 2
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		shading_3 = {
+			index = 3
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+
+		shading_4 = {
+			index = 4
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+
+
+	}
+
+	race_khajiit_fur_pattern = {
+
+		no_pattern = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_1 = {
+			index = 1
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_2 = {
+			index = 2
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_3 = {
+			index = 3
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+
+		pattern_4 = {
+			index = 4
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_5 = {
+			index = 5
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_6 = {
+			index = 6
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pattern_7 = {
+			index = 7
+			male = {
+				decal = { #Fur pattern
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pattern/khajiit_head_pattern_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur pattern
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pattern/khajiit_body_pattern_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = overlay
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	race_khajiit_fur_pointing = {
+
+		no_pointing = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pointing_1 = {
+			index = 1
+			male = {
+				decal = { #Fur pointing
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pointing/khajiit_head_pointing_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+
+				decal = { #Fur pointing
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pointing/khajiit_body_pointing_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pointing_2 = {
+			index = 2
+			male = {
+				decal = { #Fur pointing
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pointing/khajiit_head_pointing_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+
+				decal = { #Fur pointing
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pointing/khajiit_body_pointing_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pointing_3 = {
+			index = 3
+			male = {
+				decal = { #Fur pointing
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pointing/khajiit_head_pointing_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+
+				decal = { #Fur pointing
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/pointing/khajiit_body_pointing_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 3
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = {
+						mode = multiply
+						curve = {
+							{ 0.0 0.0 }
+							{ 0.1 0.8 }
+							{ 0.4 1.0 }
+						}
+					}
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pointing_4 = {
+			index = 4
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		pointing_5 = {
+			index = 5
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/shading/khajiit_body_shading_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+	}
+
+	race_khajiit_fur_white = {
+
+		no_white = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_1 = {
+			index = 1
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_2 = {
+			index = 2
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_3 = {
+			index = 3
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_3.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_4 = {
+			index = 4
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_4.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+		white_5 = {
+			index = 5
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_5.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_6 = {
+			index = 6
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_6.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_7 = {
+			index = 7
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_8 = {
+			index = 8
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_8.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_8.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_9 = {
+			index = 9
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_9.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_9.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_10 = {
+			index = 10
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_10.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_10.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_11 = {
+			index = 11
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_11.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_11.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_12 = {
+			index = 12
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_12.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_12.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_13 = {
+			index = 13
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_13.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_13.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_14 = {
+			index = 14
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_14.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_14.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_15 = {
+			index = 15
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_15.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_15.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_16 = {
+			index = 16
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_16.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_16.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_17 = {
+			index = 17
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_17.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_17.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_18 = {
+			index = 18
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_18.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_18.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_19 = {
+			index = 19
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_19.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_19.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_20 = {
+			index = 20
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_20.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_20.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_21 = {
+			index = 21
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_21.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_21.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_22 = {
+			index = 22
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_22.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_22.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_23 = {
+			index = 23
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_23.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_23.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_24 = {
+			index = 24
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_24.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_24.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_25 = {
+			index = 25
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_25.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_25.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_26 = {
+			index = 26
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_26.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_26.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_27 = {
+			index = 27
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_27.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_27.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_28 = {
+			index = 28
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_28.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_28.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_29 = {
+			index = 29
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_29.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_29.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_30 = {
+			index = 30
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_30.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_30.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_31 = {
+			index = 31
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_31.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_31.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_32 = {
+			index = 32
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_32.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_32.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_33 = {
+			index = 33
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_33.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_33.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_34 = {
+			index = 34
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_34.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_34.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_35 = {
+			index = 35
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_35.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_35.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_36 = {
+			index = 36
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_36.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_36.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_37 = {
+			index = 37
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_37.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_37.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_38 = {
+			index = 38
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_38.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_38.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_39 = {
+			index = 39
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_39.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_39.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_40 = {
+			index = 40
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_40.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_40.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_41 = {
+			index = 41
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_41.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_41.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_42 = {
+			index = 42
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_42.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_42.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_43 = {
+			index = 43
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_43.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_43.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_44 = {
+			index = 44
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_44.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_44.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_45 = {
+			index = 45
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_45.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_45.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		white_46 = {
+			index = 46
+			male = {
+				decal = { #Fur white
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/white/khajiit_head_white_46.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+
+				decal = { #Fur white
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/white/khajiit_body_white_46.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					age = age_preset_child_features_wide_range
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+
+
+
+	}
+
+	tail_fullness = {
+		inheritable = yes
+
+		tail_end_thickness = {
+			index = 0
+			male = {
+
+				setting = { attribute = "tail_model_end_thickness"	value = { min = 0.0 max = 1.0 }	}
+
+
+
+				decal = { #Fur tufts
+					body_part = torso
+					textures = {
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_tail_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+						}
+					}
+				}
+
+			}
+			female = male
+			boy = male
+			girl = female
+
+		}
+
+
+	}
+
+	race_khajiit_complexion = {
+
+		no_khajiit_complexion = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		khajiit_complexion = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_nose_black.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+
+					}
+					priority = 6
+
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -0.8 }
+							{ 0.18 0.0 }
+						}
+					}
+
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = torso
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_body/khajiit_body_paws_black.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+
+					}
+					priority = 6
+
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -0.8 }
+							{ 0.18 0.0 }
+						}
+					}
+
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	race_khajiit_face_shading = {
+
+		no_khajiit_face_shading = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		khajiit_face_shading = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/shading/khajiit_head_shading_7.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+
+					}
+					priority = 4
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+	}
+
+	############################################################################################################################################################
+	################		     	################
+	#TAIL GENES			######			##########   	########	 	###
+	####						##########
+	############################################################################################################################################################
+
+	tail_length = {
+		inheritable = yes
+
+		tail_length = {
+			index = 0
+			male = {
+
+				setting = { attribute = "tail_length"	value = { min = 1.0 max = 0.0 }	}
+				setting = { attribute = "tail_model_thick"	value = { min = 1.0 max = 0.0 }	}
+			}
+
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	tail_base_thickness = {
+		inheritable = yes
+
+		tail_base_thickness = {
+			index = 0
+			male = {
+
+				setting = { attribute = "tail_model_base_thickness"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	tail_fullness = {
+		inheritable = yes
+
+		tail_end_thickness = {
+			index = 0
+			male = {
+
+				setting = { attribute = "tail_model_end_thickness"	value = { min = 0.0 max = 1.0 }	}
+
+
+
+				decal = { #Fur tufts
+					body_part = torso
+					textures = {
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_tail_1.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+						}
+					}
+				}
+
+			}
+			female = male
+			boy = male
+			girl = female
+
+		}
+
+		tail_end_tuft = {
+			index = 1
+			male = {
+
+				setting = { attribute = "tail_model_end_tuft"	value = { min = 0.0 max = 1.0 }	}
+
+				decal = { #Fur tufts
+					body_part = torso
+					textures = {
+						normal = "gfx/models/portraits/decals/male_body/khajiit_body_thick_tail_2.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						normal = overlay
+
+					}
+					priority = 1
+					age = {
+						mode = add
+						curve = {
+							{ 0.0 -1.0 }
+							{ 0.25 0.0 }
+						}
+					}
+				}
+			}
+
+			female = male
+			boy = male
+			girl = female
+
+		}
+	}
+
+	############################################################################################################################################################
+
+	#LEGS
+
+	############################################################################################################################################################
+
+	leg_shape = {
+		inheritable = yes
+
+		human_legs = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = female
+
+		}
+
+		khajiit_digitigrade_legs = {
+			index = 1
+			male = {
+				#setting = { attribute = "khajiit_digitigrade"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "khajiit_digitigrade_bs"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "khajiit_digitigrade_clothes_counter_shape"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "khajiit_digitigrade_clothes"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	############################################################################################################################################################
+
+	#FANG GENES
+
+	############################################################################################################################################################
+
+	khajiit_tusk_size = {
+		inheritable = yes
+		no_tusks = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+		tusk_size = {
+			index = 1
+			male = {
+				setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.1 max = 0.6 }	age = age_preset_child_features_wide_range }
+
+
+
+			}
+			female = {
+				setting = { attribute = "bs_orc_teeth_tusk_size"	value = { min = 0.1 max = 0.4 }	age = age_preset_child_features_wide_range }
+
+
+
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_fangs = {
+		inheritable = yes
+
+		no_fangs = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		khajiit_fang_length = {
+			index = 1
+			male = {
+				setting = { attribute = "khajiit_fangs"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "mouth_lower_lip_size"	value = { min = 0.0 max = 0.7 } }
+			}
+			female = {
+				setting = { attribute = "khajiit_fangs"	value = { min = 0.0 max = 0.7 }	}
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	############################################################################################################################################################################
+
+	# WHISKERS
+
+	############################################################################################################################################################################
+
+	khajiit_whisker_length = {
+		inheritable = yes
+
+		khajiit_whisker_length = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_length"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "whiskers_scale"	value = { min = 1.0 max = 0.0 }	}
+
+			}
+			female = {
+				setting = { attribute = "whiskers_length"	value = { min = 0.0 max = 0.8 }	}
+				setting = { attribute = "whiskers_scale"	value = { min = 0.8 max = 0.0 }	}
+
+			}
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_random_loc = {
+		inheritable = no
+
+		khajiit_whiskers_random_loc = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_random_loc"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_droop = {
+		inheritable = no
+
+		khajiit_whiskers_droop = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_droop"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+
+		khajiit_whiskers_sweep_back = {
+			index = 1
+			male = {
+				setting = { attribute = "whiskers_sweep_back"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_fan_out = {
+		inheritable = no
+
+		khajiit_whiskers_fan_out = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_fan_out"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_fan_up = {
+		inheritable = no
+
+		khajiit_whiskers_fan_up = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_fan_up"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_wavy = {
+		inheritable = yes
+
+		khajiit_whiskers_wavy = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_wavy"	value = { min = 0.0 max = 1.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	khajiit_whiskers_density = {
+		inheritable = yes
+
+		full_whiskers = {
+			index = 0
+			male = {
+				setting = { attribute = "whiskers_thickness"	value = { min = 1.0 max = 0.0 }	}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+
+
+		khajiit_whiskers_thin_1 = {
+			index = 1
+			male = {
+				setting = { attribute = "whiskers_thin_1"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "whiskers_thickness"	value = { min = 1.0 max = 0.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+		khajiit_whiskers_thin_2 = {
+			index = 2
+			male = {
+				setting = { attribute = "whiskers_thin_2"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "whiskers_thickness"	value = { min = 1.0 max = 0.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+		khajiit_whiskers_thin_3 = {
+			index = 3
+			male = {
+				setting = { attribute = "whiskers_thin_1"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "whiskers_thin_2"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "whiskers_thickness"	value = { min = 1.0 max = 0.0 }	}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	############################################################################################################################################################################
+
+	# COMPLEXION OVERWRITE
+
+	############################################################################################################################################################################
+
+	complexion = { #overrides original complexion gene so as not to apply a complexion texture over fur.
+
+		index = 90
+		group = head_neck
+
+		complexion_1 = {
+			index = 0
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_2 = {
+			index = 1
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_02_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_02_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_02_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_3 = {
+			index = 2
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_03_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_03_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_03_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_4 = {
+			index = 3
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_04_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_04_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_04_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_5 = {
+			index = 4
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_05_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_05_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_05_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_6 = {
+			index = 5
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_06_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_06_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_06_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_7 = {
+			index = 6
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_07_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_07_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_07_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.7 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+		}
+
+		complexion_beauty_1 = {
+			index = 7
+			visible = no
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_beauty_01_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.2 }
+						{ 1.0  0.8 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_beauty_01_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.5 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = female
+		}
+
+		complexion_ugly_1 = {
+			index = 8
+			visible = no
+			male = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/male_head/male_head_ugly_01_diffuse.dds"
+					normal = "gfx/models/portraits/male_head/male_head_normal.dds"
+					specular = "gfx/models/portraits/male_head/male_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.5 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			female = {
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = "gfx/models/portraits/female_head/female_head_ugly_01_diffuse.dds"
+					normal = "gfx/models/portraits/female_head/female_head_normal.dds"
+					specular = "gfx/models/portraits/female_head/female_head_properties.dds"
+				}
+				decal = { #Lip color
+
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/female_head/decal_female_head_lips_01_diffuse.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  0.5 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = overlay
+						# properties =
+					}
+					priority = 1
+					# age = age_preset_aging_definition_male
+				}
+			}
+			boy = male
+			girl = female
+		}
+
+		complexion_no_face = {
+			index = 9
+			visible = no
+			male = {}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+}

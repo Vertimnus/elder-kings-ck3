@@ -1,4 +1,100 @@
-﻿### Turn the Reach into a proper Nordic hold
+﻿#############
+# THE REACH #
+#############
+### Unite the Reach
+form_reach_empire_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = form_reach_empire_decision_desc
+	selection_tooltip = form_reach_empire_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		highest_held_title_tier <= tier_kingdom
+		exists = capital_province
+		unify_kingdom_government_trigger = yes
+		
+		OR = {
+			AND = {
+				is_native_to = { REGION = karth CULTURE = root.culture }
+				capital_province = { geographical_region = custom_nativity_karth }
+			}
+			AND = {
+				is_native_to = { REGION = craglorn CULTURE = root.culture }
+				capital_province = { geographical_region = custom_nativity_craglorn }
+			}
+			AND = {
+				is_native_to = { REGION = greater_wrothgar CULTURE = root.culture }
+				capital_province = { geographical_region = custom_nativity_greater_wrothgar }
+			}
+		}
+		
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_created_reach_empire
+			}
+		}
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_reach_east_reach
+		completely_controls_region = mundus_tamriel_reach_west_reach
+		completely_controls_region = mundus_tamriel_reach_north_reach
+		completely_controls_region = mundus_tamriel_reach_south_reach
+		unify_kingdom_law_trigger = yes
+		highest_held_title_tier = tier_kingdom
+		prestige_level >= 3
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		# Based on Revive Greater Armenia
+		prestige = 2000
+		piety = 1000
+	}
+
+	effect = {
+		show_as_tooltip = {
+			form_reach_empire_scripted_effect = yes
+		}
+		save_scope_as = founder
+		trigger_event = {
+			id = ektitulartitle.1001
+		}
+		#Notify other players.
+		every_player = {
+			limit = {
+				### TODO: Uncomment it
+				# NOT = { this = root }
+				is_within_diplo_range = { CHARACTER = root }
+			}
+			trigger_event = ektitulartitle.1002
+		}
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_created_reach_empire
+			}
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### Turn the Reach into a proper Nordic hold
 turn_reach_nord_hold_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
@@ -30,17 +126,16 @@ turn_reach_nord_hold_decision = {
 	is_valid = {
 		# Must completely hold the Skyrim half of the Reach
 		completely_controls_region = mundus_tamriel_reach_east_reach
-		completely_controls_region = mundus_tamriel_reach_north_reach
+		# completely_controls_region = mundus_tamriel_reach_north_reach
 		prestige_level >= 3
 		
 		# All of the eastern half of the Reach must have been civilised
-		ROOT = {
+		custom_description = {
+			text = turn_reach_nord_hold_decision_east_reach_civilised
+			
 			NOT = {
 				any_realm_province = {
-					OR = {
-						geographical_region = mundus_tamriel_reach_north_reach
-						geographical_region = mundus_tamriel_reach_east_reach
-					}
+					geographical_region = mundus_tamriel_reach_east_reach
 					has_holding_type = tribal_holding
 				}
 			}
@@ -56,10 +151,13 @@ turn_reach_nord_hold_decision = {
 	}
 
 	effect = {
-		### EK TODO: Handle it via event instead (still WIP)
-		set_culture_native_to = { REGION = karth CULTURE = culture:westmarcher }
+		show_as_tooltip = { turn_reach_nord_hold_decision_effect = yes }
+		
+		trigger_event = north_tamriel.0021
 		
 		hidden_effect = {
+			setup_county_native_cultures_link = yes
+			
 			add_to_global_variable_list = {
 				name = unavailable_unique_decisions
 				target = flag:flag_turned_reach_nord_hold
@@ -76,6 +174,9 @@ turn_reach_nord_hold_decision = {
 	}
 }
 
+##########
+# SKYRIM #
+##########
 ### WESTERN/EASTERN SKYRIM DIVIDE
 western_skyrim_march_east_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
@@ -199,7 +300,7 @@ eastern_skyrim_march_west_decision = {
 	}
 }
 
-### As a joke... unless...?
+## As a joke... unless...?
 solstheim_claim_coast_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
@@ -248,6 +349,185 @@ solstheim_claim_coast_decision = {
 		
 		hidden_effect = {
 			add_character_flag = flag_solstheim_claim_coast
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+####################
+# DIRENNI HEGEMONY #
+####################
+## Direnni Hegemony part 1: get the titular title
+direnni_hegemony_pt_1_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = direnni_hegemony_pt_1_decision_direnni_desc
+			}
+			desc = direnni_hegemony_pt_1_decision_desc
+		}
+	}
+	selection_tooltip = direnni_hegemony_pt_1_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		has_government = feudal_government
+		
+		capital_province = { geographical_region = mundus_tamriel_direnni_hegemony_core }
+		
+		calc_true_if = {
+			amount >= 2
+			dynasty = dynasty:730000
+			culture = culture:balfiera
+			faith = faith:mainland_auriel
+		}
+		
+		NOT = { exists = title:e_direnni_hegemony.holder }
+
+		NOT = { # If you lost if after having claimed it, too bad
+			has_character_flag = direnni_hegemony_pt_1 # Applied below
+		}
+	}
+
+	is_valid = {
+		calc_true_if = {
+			amount >= 2
+			dynasty = dynasty:730000
+			culture = culture:balfiera
+			faith = faith:mainland_auriel
+		}
+		
+		completely_controls_region = mundus_tamriel_direnni_hegemony_core
+		
+		OR = {
+			completely_controls_region = mundus_tamriel_direnni_hegemony_form_a
+			completely_controls_region = mundus_tamriel_direnni_hegemony_form_b
+		}
+		
+		prestige_level >= 3
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		show_as_tooltip = { direnni_hegemony_pt_1_decision_effect = yes }
+		trigger_event = north_tamriel.1001
+		
+		hidden_effect = {
+			add_character_flag = {
+				flag = direnni_hegemony_pt_1
+			}
+		}
+	}
+	
+	confirm_text = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = direnni_hegemony_pt_1_decision_direnni_confirm
+			}
+			desc = direnni_hegemony_pt_1_decision_confirm
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+## Direnni Hegemony part 2: Become a full blown de Jure empire
+direnni_hegemony_pt_2_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = direnni_hegemony_pt_2_decision_direnni_title
+			}
+			desc = direnni_hegemony_pt_2_decision_title
+		}
+	}
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = direnni_hegemony_pt_2_decision_direnni_desc
+			}
+			desc = direnni_hegemony_pt_2_decision_desc
+		}
+	}
+
+	desc = direnni_hegemony_pt_2_decision_desc
+	selection_tooltip = direnni_hegemony_pt_2_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		has_government = feudal_government
+		
+		exists = title:e_direnni_hegemony.holder
+		has_primary_title = title:e_direnni_hegemony
+
+		NOT = {  #Can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_direnni_hegemony_pt_2
+			}
+		}
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_direnni_hegemony_full
+		
+		prestige_level >= 3
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	effect = {
+		show_as_tooltip = { direnni_hegemony_pt_2_decision_effect = yes }
+		trigger_event = north_tamriel.1011
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:flag_direnni_hegemony_pt_2
+			}
 		}
 	}
 	

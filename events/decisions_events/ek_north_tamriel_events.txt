@@ -1,7 +1,11 @@
 ﻿namespace = north_tamriel
 
 ### Skyrim
+# north_tamriel.0001 - 0010: West & East Skyrim reunited
+# north_tamriel.0011 - 0020: West, East Skyrim and Solstheim (??) claim territory
+# north_tamriel.0021 - 0030: The Reach becomes a proper Nord hold
 ### High Rock
+# north_tamriel.1001 - 1010: Reforging the Direnni Hegemony
 
 # west_skyrim and east_skyrim united
 # Did Eastern Skyrim inherit the other part, or the opposite?
@@ -166,3 +170,174 @@ north_tamriel.0011 = {
 		title:c_japhet_folly = { set_de_jure_liege_title = title:d_northshore }
 	}
 }
+
+# From turn_reach_nord_hold_decision
+north_tamriel.0021 = {
+	type = character_event
+	title = north_tamriel.0021.t
+	desc = north_tamriel.0021.desc
+	theme = war
+	
+	immediate = {
+		root = { save_scope_as = reach_pacifier }
+		title:c_markarth = { save_scope_as = markarth }
+	}
+	
+	left_portrait = {
+		character = scope:reach_pacifier
+		animation = personality_rational
+	}
+
+	option = {
+		name = north_tamriel.0021.a
+		
+		turn_reach_nord_hold_decision_effect = yes
+	}
+	
+	after = {
+		every_player = {
+			limit = { NOT = { this = root } }
+			trigger_event = north_tamriel.0022
+		}
+	}
+}
+
+### TODO: Give a Reachfolk specific description
+north_tamriel.0022 = {
+	type = character_event
+	title = north_tamriel.0021.t
+	desc = north_tamriel.0022.desc
+	theme = war
+	
+	left_portrait = {
+		character = scope:reach_pacifier
+		animation = personality_rational
+	}
+
+	option = {
+		name = north_tamriel.0022.a
+		
+		show_as_tooltip = {
+			scope:reach_pacifier = { turn_reach_nord_hold_decision_effect = yes }
+		}
+	}
+}
+
+##### HIGH ROCK
+# From direnni_hegemony_pt_1_decision
+north_tamriel.1001 = {
+	type = character_event
+	title = north_tamriel.1001.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = north_tamriel.1001.desc_direnni
+			}
+			desc = north_tamriel.1001.desc
+		}
+	}
+	
+	theme = war
+	
+	immediate = {
+		root = { save_scope_as = direnni_hegemony_claimant }
+		capital_county = { save_scope_as = capital_county }
+	}
+	
+	left_portrait = {
+		character = scope:direnni_hegemony_claimant
+		animation = personality_bold
+	}
+
+	option = {
+		name = north_tamriel.1001.a
+		
+		direnni_hegemony_pt_1_decision_effect = yes
+	}
+	
+	# after = {
+		# every_player = {
+			# limit = { NOT = { this = root } }
+			# trigger_event = north_tamriel.1002
+		# }
+	# }
+}
+
+# north_tamriel.1002 = {
+	# type = character_event
+	# title = north_tamriel.1001.t
+	# desc = north_tamriel.1002.desc
+	# theme = war
+	
+	# left_portrait = {
+		# character = scope:direnni_hegemony_claimant
+		# animation = personality_bold
+	# }
+
+	# option = {
+		# name = north_tamriel.1002.a
+		
+		# show_as_tooltip = { scope:direnni_hegemony_claimant = { direnni_hegemony_pt_1_decision_effect = yes } }
+	# }
+# }
+
+# From direnni_hegemony_pt_2_decision
+north_tamriel.1011 = {
+	type = character_event
+	title = north_tamriel.1011.t
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { dynasty = dynasty:730000 }
+				desc = north_tamriel.1011.desc_direnni
+			}
+			desc = north_tamriel.1011.desc
+		}
+	}
+	
+	theme = war
+	
+	immediate = {
+		root = { save_scope_as = direnni_hegemony_reformer }
+		capital_county = { save_scope_as = capital_county }
+	}
+	
+	left_portrait = {
+		character = scope:direnni_hegemony_reformer
+		animation = personality_bold
+	}
+
+	option = {
+		name = north_tamriel.1011.a
+		
+		direnni_hegemony_pt_2_decision_effect = yes
+	}
+	
+	# after = {
+		# every_player = {
+			# limit = { NOT = { this = root } }
+			# trigger_event = north_tamriel.1012
+		# }
+	# }
+}
+
+# north_tamriel.1012 = {
+	# type = character_event
+	# title = north_tamriel.1011.t
+	# desc = north_tamriel.1012.desc
+	# theme = war
+	
+	# left_portrait = {
+		# character = scope:direnni_hegemony_reformer
+		# animation = personality_bold
+	# }
+
+	# option = {
+		# name = north_tamriel.1012.a
+		
+		# show_as_tooltip = { scope:direnni_hegemony_reformer = { direnni_hegemony_pt_2_decision_effect = yes } }
+	# }
+# }

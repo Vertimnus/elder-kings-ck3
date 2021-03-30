@@ -1,4 +1,6 @@
-﻿#Scripted Modifiers based on a character's Religion or Faith.
+﻿### EK EDIT: Removed references to vanilla religions
+
+#Scripted Modifiers based on a character's Religion or Faith.
 religion_scaled_virtuous_traits_modifier = {
 	modifier = {
 		add = {
@@ -23,6 +25,7 @@ religion_scaled_sinful_traits_modifier = {
 	}
 }
 
+### EK EDIT: Islam doesn't exist
 religion_demand_conversion_default_modifier = {
 	opinion_modifier = {
 		opinion_target = scope:actor
@@ -152,7 +155,7 @@ religion_demand_conversion_default_modifier = {
 	}
 		
 	modifier = {
-		add = 10
+		add = intimidated_external_reason_value
 		scope:recipient = {
 			has_dread_level_towards = {
 				target = scope:actor
@@ -162,7 +165,7 @@ religion_demand_conversion_default_modifier = {
 		desc = INTIMIDATED_REASON
 	}
 	modifier = {
-		add = 20
+		add = cowed_external_reason_value
 		scope:recipient = {
 			has_dread_level_towards = {
 				target = scope:actor
@@ -170,6 +173,15 @@ religion_demand_conversion_default_modifier = {
 			}
 		}
 		desc = COWED_REASON
+	}
+
+	modifier = {
+		add = 50
+		scope:recipient = {
+			exists = dynasty
+			dynasty = { has_dynasty_perk = fp1_adventure_legacy_3 }
+		}
+		desc = FP1_ADVENTURE_LEGACY_3_REASON
 	}
 }
 

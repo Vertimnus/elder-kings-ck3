@@ -31,6 +31,7 @@ has_pantheon_selected = {
 		# Pantheons #
 		has_variable = patron_divines_shown
 		has_variable = patron_aldmer_shown
+		has_variable = patron_dwemer_ancestors_shown
 	}
 }
 
@@ -56,6 +57,11 @@ has_passive_patron_selected = {
 		has_variable = patron_trinimac_shown
 		has_variable = patron_xarxes_shown
 		has_variable = patron_xen_shown
+		# Dwemer Ancestors
+		has_variable = patron_da_architect_shown
+		has_variable = patron_da_warrior_shown
+		has_variable = patron_da_giant_shown
+		has_variable = patron_da_lost_king_shown
 	}
 }
 
@@ -187,6 +193,10 @@ patron_aldmer_valid = {
 	faith = { has_doctrine = doctrine_pantheon_aedra }
 }
 
+patron_dwemer_ancestors_valid = {
+	faith = { has_doctrine = doctrine_pantheon_dwemer_ancestors }
+}
+
 # Passive Patrons #
 # Divines #
 patron_akatosh_valid = {
@@ -273,6 +283,20 @@ patron_xen_valid = {
 	patron_aldmer_valid = yes
 }
 
+# Dwemer Ancestors #
+patron_da_architect_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_warrior_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_giant_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_lost_king_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+
 # Aggregate Triggers #
 patron_has_princes = {
 	OR = {
@@ -308,6 +332,7 @@ patron_has_pantheon = {
 	OR = {
 		patron_divines_valid = yes
 		patron_aldmer_valid = yes
+		patron_dwemer_ancestors_valid = yes
 	}
 }
 

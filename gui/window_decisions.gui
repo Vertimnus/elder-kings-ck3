@@ -19,7 +19,8 @@ window = {
 		#using = Sound_WindowHide_Standard
 		using = Window_Position_MainTab_Hide
 
-		on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		#on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		on_start = "[GetVariableSystem.Clear('decision_tab')]"
 		#datacontext = "[GetScriptedGui('patron_clear')]" #done this way to avoid error in log about data being an invalid property
 		on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
@@ -30,9 +31,10 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		#visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		visible = "[Not(GetVariableSystem.Exists( 'decision_tab' ))]"
 
-		using = Window_Background
+		# using = Window_Background
 
 		state = {
 			name = _show
@@ -51,8 +53,6 @@ window = {
 		widget = {
 			size = { 100% 100% }
 
-			# using = Window_Decoration_Thin
-
 			vbox = {
 				using = Window_Margins
 
@@ -70,14 +70,13 @@ window = {
 					}
 				}
 
-
 				scrollbox = {
 					name = "decision_scrollarea"
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
 
 					background = {
-						texture = "gfx/interface/illustrations/event_scenes/councilchamber.dds"
+						texture = "gfx/interface/skinned/illustrations/decisions.dds"
 						margin = { -5 0 }
 						fittype = end
 						alpha = 0.4
@@ -183,9 +182,10 @@ window = {
 		margin_right = 20
 		alwaystransparent = no
 
-		visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 
-		using = Window_Background
+		# using = Window_Background
 
 		state = {
 			name = _show
@@ -225,8 +225,8 @@ window = {
 					{
 						#datacontext = "[GetScriptedGui('patron_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						onclick = "[GetVariableSystem.Clear('decision_tab')]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -458,7 +458,7 @@ window = {
 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 							blockoverride "patron_icon" {
-								texture = "gfx/interface/icons/religion/imperial_cult.dds"
+								texture = "gfx/interface/icons/faith/imperial_cult.dds"
 							}
 						}
 
@@ -468,7 +468,17 @@ window = {
 							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 							blockoverride "patron_icon" {
-								texture = "gfx/interface/icons/religion/auriel.dds"
+								texture = "gfx/interface/icons/faith/auriel.dds"
+							}
+						}
+
+						#Dwemer Ancestors
+						button_patron_icon = {
+							datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+							blockoverride "patron_icon" {
+								texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
 							}
 						}
 
@@ -990,7 +1000,7 @@ window = {
 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 										blockoverride "patron_entry_icon" {
-											texture = "gfx/interface/icons/religion/imperial_cult.dds"
+											texture = "gfx/interface/icons/faith/imperial_cult.dds"
 										}
 										blockoverride "patron_entry_name" {
 											text = pantheon_divines_name
@@ -1013,13 +1023,36 @@ window = {
 										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 										blockoverride "patron_entry_icon" {
-											texture = "gfx/interface/icons/religion/auriel.dds"
+											texture = "gfx/interface/icons/faith/auriel.dds"
 										}
 										blockoverride "patron_entry_name" {
 											text = pantheon_aldmer_name
 										}
 										blockoverride "patron_entry_desc" {
 											text = pantheon_aldmer_long_desc
+										}
+									}
+								}
+
+								# Dwemer Ancestors #
+								vbox = {
+									name = "patron_dwemer_ancestors"
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+									button_patron_entry = {
+										#datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+										blockoverride "patron_entry_icon" {
+											texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+										}
+										blockoverride "patron_entry_name" {
+											text = pantheon_dwemer_ancestors_name
+										}
+										blockoverride "patron_entry_desc" {
+											text = pantheon_dwemer_ancestors_long_desc
 										}
 									}
 								}
@@ -1385,7 +1418,12 @@ window = {
 											tooltip = "show_hide_desc"
 											using = tooltip_nw
 											onclick = "[GetVariableSystem.Toggle('patron_hide_desc')]"
-											down = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+											#down = "[Not(GetVariableSystem.Exists('patron_hide_desc'))]"
+
+											frame = "[Select_int32( GetVariableSystem.Exists('patron_hide_desc'), '(int32)1', '(int32)2' )]"
+
+											oversound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
+											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_select"
 										}
 										spacer = {
 											size = { 100 0 }
@@ -1482,27 +1520,59 @@ window = {
 											text = "PATRON_MINOR_BOONS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_boon_gold_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_boon_training_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_boon_horde_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "minor_boons"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_boon_gold_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_gold_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_boon_training_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_training_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_boon_horde_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_horde_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
+											item = {
+												button_patron_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'minor_boon' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1549,21 +1619,53 @@ window = {
 											text = "PATRON_OFFERINGS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_offer_gold_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# 	vbox = {
+										# 		name = "patron_offer_sacrifice_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "offerings"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_offer_gold_decision"
-												datacontext = "[GetDecisionWithKey('patron_offer_gold_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
-											}
-											vbox = {
-												name = "patron_offer_sacrifice_decision"
-												datacontext = "[GetDecisionWithKey('patron_offer_sacrifice_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_decision_entry = {}
+											item = {
+												button_patron_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'offering' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1628,15 +1730,47 @@ window = {
 											text = "PATRON_MAJOR_BOONS"
 										}
 
+										# vbox = {
+										# 	layoutpolicy_horizontal = expanding
+										# 	spacing = 10
+
+										# 	vbox = {
+										# 		name = "patron_boon_invasion_decision"
+										# 		datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
+										# 		visible = "[Decision.IsShownForPlayer]"
+										# 		button_patron_major_decision_entry = {}
+										# 	}
+										# }
 										vbox = {
+											name = "major_boons"
+											datamodel = "[DecisionsView.GetDecisions]"
 											layoutpolicy_horizontal = expanding
 											spacing = 10
 
-											vbox = {
-												name = "patron_boon_invasion_decision"
-												datacontext = "[GetDecisionWithKey('patron_boon_invasion_decision')]"
-												visible = "[Decision.IsShownForPlayer]"
-												button_patron_major_decision_entry = {}
+											item = {
+												button_patron_major_decision_entry = {
+													datacontext = "[DecisionsViewItem.GetDecision]"
+													visible = "[EqualTo_string( Localize(Concatenate( Decision.GetShortDescForPlayer, 'type' )), 'major_boon' )]"
+												}
+
+												# button_decision_entry = {
+												# 	datacontext = "[DecisionsViewItem.GetDecision]"
+												# 	visible = "[Decision.IsMajor]"
+												# 	layoutpolicy_horizontal = expanding
+												# 	size = { -1 55 }
+
+												# 	blockoverride "size_illustration" {
+												# 		size = { 250 53 }
+												# 	}
+
+												# 	onclick = "[DecisionsViewItem.OnSelect]"
+												# 	onclick = "[PdxGuiTriggerAllAnimations('decisions_detail_refresh')]"
+												# 	down = "[DecisionsViewItem.IsSelected]"
+
+												# 	blockoverride "default_format" {
+												# 		default_format = "#medium"
+												# 	}
+												# }
 											}
 										}
 									}
@@ -1716,7 +1850,7 @@ window = {
 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 									blockoverride "patron_icon" {
-										texture = "gfx/interface/icons/religion/imperial_cult.dds"
+										texture = "gfx/interface/icons/faith/imperial_cult.dds"
 									}
 								}
 
@@ -1726,7 +1860,17 @@ window = {
 									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 									blockoverride "patron_icon" {
-										texture = "gfx/interface/icons/religion/auriel.dds"
+										texture = "gfx/interface/icons/faith/auriel.dds"
+									}
+								}
+
+								#Dwemer Ancestors
+								button_patron_icon = {
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+									blockoverride "patron_icon" {
+										texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
 									}
 								}
 							}
@@ -1796,7 +1940,12 @@ window = {
 											tooltip = "show_hide_desc"
 											using = tooltip_nw
 											onclick = "[GetVariableSystem.Toggle('patron_hide_passive_desc')]"
-											down = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+											#down = "[Not(GetVariableSystem.Exists('patron_hide_passive_desc'))]"
+
+											frame = "[Select_int32( GetVariableSystem.Exists('patron_hide_passive_desc'), '(int32)1', '(int32)2' )]"
+
+											oversound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_pointer_over"
+											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_icon_select"
 										}
 										spacer = {
 											size = { 100 0 }
@@ -2044,6 +2193,48 @@ window = {
 													texture = "gfx/interface/patrons/patron_xen.dds"
 												}
 											}
+											
+											### Dwemer Ancestors
+
+											# The Architect #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_architect.dds"
+												}
+											}
+
+											# The Warrior #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_warrior.dds"
+												}
+											}
+
+											# The Giant #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_giant.dds"
+												}
+											}
+
+											# The Lost King #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+												}
+											}
 										}
 
 										# spacer = {
@@ -2248,6 +2439,12 @@ window = {
 												datacontext = "[GetScriptedGui('patron_aldmer_shown')]"
 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 												text = "PATRON_THE_AEDRA"
+											}
+
+											text_label_center = {
+												datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												text = "PATRON_THE_DWEMER_ANCESTORS"
 											}
 
 											# Akatosh #
@@ -2657,6 +2854,103 @@ window = {
 													}
 												}
 											}
+											
+											### Dwemer Ancestors
+											# The Architect #
+											vbox = {
+												name = "patron_da_architect"
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_architect.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_architect_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_architect_long_desc
+													}
+												}
+											}
+											
+											# The Warrior #
+											vbox = {
+												name = "patron_da_warrior"
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_warrior.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_warrior_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_warrior_long_desc
+													}
+												}
+											}
+											
+											# The Giant #
+											vbox = {
+												name = "patron_da_giant"
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_giant.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_giant_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_giant_long_desc
+													}
+												}
+											}
+											
+											# The Lost King #
+											vbox = {
+												name = "patron_da_lost_king"
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_lost_king_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_lost_king_long_desc
+													}
+												}
+											}
 										}
 									}
 								}
@@ -2683,9 +2977,10 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 
-		using = Window_Background
+		# using = Window_Background
 
 		state = {
 			name = _show
@@ -2722,7 +3017,8 @@ window = {
 						#datacontext = "[GetScriptedGui('societies_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -2777,6 +3073,116 @@ types Decisions
 				modify_texture = {
 					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
 					blend_mode = alphamultiply
+				}
+			}
+
+			highlight_icon = {
+				parentanchor = right|top
+				size = { 250 100 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.7
+
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+
+				effectname = "GreyedOut"
+
+				tintcolor = { 0.6 0.6 0.6 0.7 }
+
+				using = Mask_Rough_Edges
+
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+					blend_mode = alphamultiply
+				}
+			}
+		}
+
+		hbox = {
+			margin = { 20 0 }
+			margin_right = 10
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Decision.IsPossibleForPlayer]"
+				default_format = "#clickable"
+				align = nobaseline
+			}
+
+			text_single = {
+				layoutpolicy_horizontal = growing
+				name = "title2"
+				text = "[Decision.GetTitleForPlayer]"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+				block "default_format" {
+					default_format = "#low"
+				}
+				align = nobaseline
+			}
+
+			highlight_icon = {
+				size = { 30 30 }
+				name = "not_possible"
+				texture = "gfx/interface/icons/symbols/icon_cross.dds"
+				visible = "[Not(Decision.IsPossibleForPlayer)]"
+			}
+		}
+	}
+}
+
+types Court
+{
+	type button_court = button_standard {
+		size = { 300 45 }
+		tooltip = SHOW_DECISION_TOOLTIP
+
+		highlight_icon = {
+			name = "icon"
+			position = { 5 5 }
+			size = { 40 40 }
+			texture = "[Decision.GetIcon]"
+			visible = no
+		}
+
+		widget = {
+			scissor = yes
+			parentanchor = right|top
+
+			block "size_illustration" {
+				size = { 250 43 }
+			}
+
+			icon = {
+				name = "illustration"
+				parentanchor = right|top
+				size = { 250 100 }
+
+				mirror = horizontal
+				texture = "[Decision.GetPicture]"
+				alpha = 0.7
+
+				visible = "[Decision.IsPossibleForPlayer]"
+
+				using = Mask_Rough_Edges
+
+				# modify_texture = {
+				# 	texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+				# 	blend_mode = alphamultiply
+				# }
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_right.dds"
+					blend_mode = alphamultiply
+					alpha = 1
+
+				}
+				modify_texture = {
+					texture = "gfx/interface/component_masks/mask_fade_horizontal_right.dds"
+					blend_mode = alphamultiply
+					alpha = 0.5
+
 				}
 			}
 
@@ -2965,11 +3371,12 @@ Types Patrons
 		maximumsize = { 200 40 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Decision.GetShortDescForPlayer]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
-		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
-		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[DecisionsViewItem.IsSelected]"
+		#onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		#down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]" #does this get cleared? also is it necessary
 		#down = "[EqualTo_string( GetVariableSystem.Get( 'patron_decision_button' ), Decision.GetTitleForPlayer )]"
 
 		widget = {
@@ -3050,11 +3457,12 @@ Types Patrons
 		maximumsize = { 300 50 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Decision.GetShortDescForPlayer]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
-		onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
-		down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		down = "[DecisionsViewItem.IsSelected]"
+		#onclick = "[GetVariableSystem.Set( 'patron_decision_button', Decision.GetTitleForPlayer )]"
+		#down = "[GetVariableSystem.HasValue( 'patron_decision_button', Decision.GetTitleForPlayer )]"
 
 		widget = {
 			scissor = yes
