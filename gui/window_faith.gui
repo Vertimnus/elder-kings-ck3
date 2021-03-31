@@ -20,7 +20,7 @@ window = {
 	}
 
 	state = {
-		name = "patron_important_action" # clicking the map changes the faith but doesnt call the refresh function
+		name = "patron_important_action" # get the correct tab for the action
 		trigger_when = "[GetPlayer.MakeScope.Var('action_patron').IsSet]"
 		on_start = "[GetScriptedGui('action_patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]"
@@ -1186,11 +1186,7 @@ window = {
 					button_checkbox = {
 						onclick = "[GetVariableSystem.Set( 'patron_trait', Select_CString( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'to_clear', 'all' ) )]"
 						onclick = "[GetVariableSystem.ClearIf( 'patron_trait', GetVariableSystem.HasValue( 'patron_trait', 'to_clear' ) )]"
-
-						blockoverride "checkbox"
-						{
-							checked = "[GetVariableSystem.HasValue('patron_trait', 'all')]"
-						}
+						checked = "[GetVariableSystem.HasValue('patron_trait', 'all')]"
 					}
 
 					tooltip = "[SelectLocalization( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'show_desc', 'show_modifier' )]" #localize this and probably other bits too
@@ -1247,17 +1243,8 @@ window = {
 									layoutpolicy_horizontal = expanding
 									margin = { 15 7 }
 
-									#button_standard_list = {
-									button_standard_hover = {
-										name = "patron_button"
+									vbox = {
 										layoutpolicy_horizontal = expanding
-										size = { 0 140 }
-										#alwaystransparent = yes
-
-										clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
-										#down = has trait
-										#enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
-										#onclick = give trait - this and down need 1.4 commands to pass flags
 
 										state = {
 											name = _mouse_hierarchy_enter
@@ -1279,109 +1266,121 @@ window = {
 											on_start = "[GetVariableSystem.Clear('patron_trait')]"
 										}
 
+										button_standard_hover = {
+											name = "patron_button"
+											layoutpolicy_horizontal = expanding
+											size = { 0 140 }
+											#alwaystransparent = yes
 
-										background = {
-											margin = { 100 35 }
-											alpha = 0.35
-											using = Background_Area_Dark
+											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
+											#down = has trait
+											enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
+											#onclick = give trait - this and down need 1.4 commands to pass flags
 
-											modify_texture = {
-												name = "mask"
-												texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick_vertical.dds"
-												spriteType = Corneredstretched
-												spriteborder = { 0 0 }
-												blend_mode = alphamultiply
+
+											background = {
+												margin = { 100 35 }
+												alpha = 0.35
+												using = Background_Area_Dark
+
+												modify_texture = {
+													name = "mask"
+													texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick_vertical.dds"
+													spriteType = Corneredstretched
+													spriteborder = { 0 0 }
+													blend_mode = alphamultiply
+												}
+
+												modify_texture = {
+													name = "mask2"
+													texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+													spriteType = Corneredstretched
+													spriteborder = { 0 0 }
+													blend_mode = alphamultiply
+												}
 											}
 
-											modify_texture = {
-												name = "mask2"
-												texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
-												spriteType = Corneredstretched
-												spriteborder = { 0 0 }
-												blend_mode = alphamultiply
-											}
-										}
-
-										hbox = {
-											layoutpolicy_vertical = expanding
-											margin = { 10 0 }
-											spacing = 7
-
-											icon = {
-												size = { 120 120 }
-												texture = "[Trait.GetIcon(GetDummyMale)]"
-											}
-
-											divider_light = {
+											hbox = {
 												layoutpolicy_vertical = expanding
-											}
+												margin = { 10 0 }
+												spacing = 7
 
-											vbox = {
-												margin = { 5 10 }
-												margin_left = 8
-												spacing = 10
-												layoutpolicy_vertical = expanding
-												layoutpolicy_horizontal = expanding
+												icon = {
+													size = { 120 120 }
+													texture = "[Trait.GetIcon(GetDummyMale)]"
+												}
 
-												vbox = {
-													layoutpolicy_horizontal = expanding
-													text_label_left = {
-														name = "patron_name"
-														layoutpolicy_horizontal = expanding
-														text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
-														#text = "[GetPlayer.Custom( 'get_akatosh' )]"
-														# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
-														default_format = "#high"
-														using = Font_Size_Medium
-													}
+												divider_light = {
+													layoutpolicy_vertical = expanding
 												}
 
 												vbox = {
-													spacing = 5
+													margin = { 5 10 }
+													margin_left = 8
+													spacing = 10
 													layoutpolicy_vertical = expanding
 													layoutpolicy_horizontal = expanding
 
-													scrollarea = {
-														name = "patron_modifier_scrollarea"
+													vbox = {
 														layoutpolicy_horizontal = expanding
-														layoutpolicy_vertical = expanding
-														alwaystransparent = yes
-
-														visible = "[Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all'))]"
-
-														scrollbarpolicy_horizontal = always_off
-
-														scrollbar_vertical = {
-															using = Scrollbar_Vertical
-
-															blockoverride "alpha"{
-																alpha = 0.6
-															}
-														}
-
-														scrollwidget = {
-															text_multi = {
-																name = "patron_modifiers"
-																size = { 180 -1 }
-																autoresize = yes
-																max_width = 340
-																text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
-																fontsize = 14
-																fontsize_min = 12
-															}
+														text_label_left = {
+															name = "patron_name"
+															layoutpolicy_horizontal = expanding
+															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
+															#text = "[GetPlayer.Custom( 'get_akatosh' )]"
+															# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
+															default_format = "#high"
+															using = Font_Size_Medium
 														}
 													}
 
-													text_multi = {
-														name = "patron_desc"
+													vbox = {
+														spacing = 5
 														layoutpolicy_vertical = expanding
 														layoutpolicy_horizontal = expanding
 
-														visible = "[Not(Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all')))]"
+														scrollarea = {
+															name = "patron_modifier_scrollarea"
+															layoutpolicy_horizontal = expanding
+															layoutpolicy_vertical = expanding
+															alwaystransparent = yes
 
-														text = "#F [Localize( Concatenate( 'desc', GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
-														#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
-														using = Font_Size_Small
+															visible = "[Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all'))]"
+
+															scrollbarpolicy_horizontal = always_off
+
+															scrollbar_vertical = {
+																using = Scrollbar_Vertical
+
+																blockoverride "alpha"{
+																	alpha = 0.6
+																}
+															}
+
+															scrollwidget = {
+																text_multi = {
+																	name = "patron_modifiers"
+																	size = { 180 -1 }
+																	autoresize = yes
+																	max_width = 340
+																	text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
+																	fontsize = 14
+																	fontsize_min = 12
+																}
+															}
+														}
+
+														text_multi = {
+															name = "patron_desc"
+															layoutpolicy_vertical = expanding
+															layoutpolicy_horizontal = expanding
+
+															visible = "[Not(Or(GetVariableSystem.HasValue('patron_trait', Trait.GetKey), GetVariableSystem.HasValue('patron_trait', 'all')))]"
+
+															text = "#F [Localize( Concatenate( 'desc', GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
+															#text = "#F [Localize( Concatenate( 'desc', Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ) ) )]#!"
+															using = Font_Size_Small
+														}
 													}
 												}
 											}
