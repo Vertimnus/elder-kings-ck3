@@ -333,7 +333,7 @@ tharn_101 = {
 }
 tharn_200 = {
 	name = "Abnur" #The one and only Abnur Tharn, Duke of Cheydinhal (Interregnum) / King of Nibenay (Reachman) / (Kamal)
-	#dna = abnur_dna_entry
+	dna = abnur_dna_entry
 	dynasty = 110000
 	religion = imperial_cult
 	culture = nibenese
@@ -344,7 +344,12 @@ tharn_200 = {
 	trait = lifespan_3 #Not technically immortal, but this gives him a life expectancy of around 200 years?
 	father = tharn_99
 	
-	3338.1.1 = { birth = yes }
+	3338.1.1 = { 
+		birth = yes
+		effect = {
+			add_character_flag = has_scripted_appearance
+			}
+		}
 	#3370.1.1 = {
 	#	effect = {
 	#		if = { limit = { is_in_society = yes } leave_society = yes }
