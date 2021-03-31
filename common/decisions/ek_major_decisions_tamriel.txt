@@ -1,0 +1,75 @@
+﻿##############
+# HAMMERFELL #
+##############
+form_pirate_confederacy_the_isles_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+	
+	desc = form_pirate_confederacy_the_isles_decision_desc
+	selection_tooltip = form_pirate_confederacy_the_isles_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		has_government = pirate_government
+		NOT = { exists = title:k_the_isles.holder }
+		highest_held_title_tier >= tier_duchy
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_pirate_conf_the_isles
+				
+		custom_description = {
+			text = has_raided_for_a_thousand_gold_ct
+			var:total_loot = { compare_value >= 1000 }
+		}
+		
+		OR = {
+			highest_held_title_tier = tier_duchy
+			has_primary_title = title:k_hew_bane
+			has_primary_title = title:k_abecean
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		save_scope_as = founder
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = title_change
+			add_claim_on_loss = no
+		}
+		title:k_the_isles = {
+			change_title_holder = {
+				holder = root
+				change = scope:title_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:title_change
+		
+		custom_tooltip = form_pirate_confederacy_the_isles_de_jure_tt
+		hidden_effect = {
+			every_duchy = {
+				limit = { title_capital_county.title_province = { geographical_region = mundus_tamriel_pirate_conf_the_isles } }
+				set_de_jure_liege_title = title:k_the_isles
+			}
+		}
+	}
+
+	cost = {
+		prestige = 2000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
