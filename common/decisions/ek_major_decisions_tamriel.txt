@@ -13,12 +13,19 @@ form_pirate_confederacy_the_isles_decision = {
 	is_shown = {
 		has_government = pirate_government
 		NOT = { exists = title:k_the_isles.holder }
-		highest_held_title_tier >= tier_duchy
+		
+		OR = {
+			highest_held_title_tier = tier_duchy
+			has_primary_title = title:k_hew_bane
+			has_primary_title = title:k_abecean
+		}
+		
+		any_realm_province = { geographical_region = mundus_tamriel_pirate_conf_the_isles }
 	}
 
 	is_valid = {
 		completely_controls_region = mundus_tamriel_pirate_conf_the_isles
-				
+		
 		custom_description = {
 			text = has_raided_for_a_thousand_gold_ct
 			var:total_loot = { compare_value >= 1000 }
