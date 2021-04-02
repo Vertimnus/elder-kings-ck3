@@ -2773,13 +2773,13 @@ widget = {
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max').End), '(int32)66' )]" # no .End apparently causes memory leak. emptyscope might be better
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]" # no .End apparently causes memory leak. emptyscope might be better
 				}
 				#gets the progress bar part
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max').End), '(int32)66' )]"
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
 
 					progressbar_ardor = {
 						#visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
