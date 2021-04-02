@@ -2808,7 +2808,7 @@ types PortraitEditorTypes
 
 			scrollwidget = {
 				fixedgridbox = {
-					position = { 0 0 }
+					position = { 0 50 }
 					size = { 1300 810 }
 					maximumsize = { 1300 810 }
 					addcolumn = 1300
@@ -2820,14 +2820,14 @@ types PortraitEditorTypes
 							size = { 1300 180 }
 							icon = {
 								size = { 100% 100% }
-								position = { 0 75 }
+								position = { 0 0 }
 								shaderfile = "gfx/FX/pdxgui_default.shader"
 								texture = "gfx/editor_gui/editor_dropdown_list.dds"
 								spriteType = CorneredTiled
 								spriteborder = { 8 8 }
 							}
 							fixedgridbox = {
-								position = { 0 100 }
+								position = { 0 25 }
 								addcolumn = 200
 								addrow = 130
 								size = { 1300 130 }
@@ -2850,9 +2850,9 @@ types PortraitEditorTypes
 											{
 												onclick = "[ChildItem.CopyDnaToClipboard]"
 											}
-											alwaystransparent = no
+											alwaystransparent = yes
 											tooltip_enabled = yes
-											tooltip = "Click to copy DNA to clipboard"
+											#tooltip = "Click to copy DNA to clipboard"
 										}
 										textbox = {
 											text = "#bold;color:{0.0,0.0,0.0} Random #!"
@@ -2878,6 +2878,37 @@ types PortraitEditorTypes
 											size = { 90 30 }
 											parentanchor = top|right
 											onclick = "[ChildItem.CopyDnaToClipboard]"
+											tooltip = "Click to copy DNA to clipboard"
+										}
+										button = {
+											using = editor_button
+											text = "Pers-DNA M"
+											tooltip = "Copy Persistent DNA (male) to clipboard"
+											position = { -2 35 }
+											size = { 90 30 }
+											parentanchor = top|right
+											onclick = "[ChildItem.CopyDnaToClipboard]"
+											onclick = "[PdxGuiWidget.TriggerAnimation('child_dna_m')]"
+											state = {
+												name = child_dna_m
+												on_start = "[PortraitEditorWindow.OnPasteDNA]"
+												on_finish = "[PortraitEditorWindow.OnCopyPersistentPortraitInfo('male')]"
+											}
+										}
+										button = {
+											using = editor_button
+											text = "Pers-DNA F"
+											tooltip = "Copy Persistent DNA (female) to clipboard"
+											position = { -2 68 }
+											size = { 90 30 }
+											parentanchor = top|right
+											onclick = "[ChildItem.CopyDnaToClipboard]"
+											onclick = "[PdxGuiWidget.TriggerAnimation('child_dna_f')]"
+											state = {
+												name = child_dna_f
+												on_start = "[PortraitEditorWindow.OnPasteDNA]"
+												on_finish = "[PortraitEditorWindow.OnCopyPersistentPortraitInfo('female')]"
+											}
 										}
 									}
 								}

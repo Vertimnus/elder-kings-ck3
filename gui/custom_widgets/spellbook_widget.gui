@@ -3,6 +3,10 @@
 ############### SPELLBOOK INTERACTION #################
 #######################################################
 
+#story cycles for ai and player? spells. can store variable info there and if owner dies who cares?
+#
+#ordered_province = {position = 5234}
+
 window = {
     name = "spellbook_interaction_window"
     datacontext = "[GetVariableSystem]"
@@ -17,6 +21,7 @@ window = {
 
     state = {
         name = _show
+        trigger_on_create = yes
         using = Animation_FadeIn_Quick
         using = Sound_WindowShow_Standard
         on_start = "[VariableSystem.Clear('spell_county_list_open')]"
