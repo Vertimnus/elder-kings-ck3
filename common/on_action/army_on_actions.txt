@@ -270,63 +270,9 @@ on_raid_loot_delivered = {
 				}
 			}
 			
-			while = {
-				limit = { var:dev_points_left > 0 }
-				
-				save_scope_value_as = {
-					name = dev_points_left
-					value = var:dev_points_left
-				}
-				
-				ordered_county = {
-					limit = { this.holder = scope:raider }
-					order_by = development_towards_level_increase
-					
-					save_scope_as = checked_county
-					
-					### We check how much dev points would have to be given for the county to get an additional dev 
-					set_variable = {
-						name = dev_needed
-						value = 100
-					}
-					
-					change_variable = {
-						name = dev_needed
-						subtract = scope:checked_county.development_towards_level_increase
-					}
-					
-					save_scope_value_as = {
-						name = dev_needed
-						value = var:dev_needed
-					}
-					
-					### Can we give that, or will the county have the settle with less?
-					if = {
-						limit = { scope:dev_points_left = { compare_value >= scope:dev_needed } }
-						save_scope_value_as = {
-							name = dev_given
-							value = scope:dev_needed
-						}
-					}
-					
-					else = {
-						save_scope_value_as = {
-							name = dev_given
-							value = scope:dev_points_left
-						}
-					}
-					
-					### Now that we know how much dev the county will get, give it
-					change_development_progress = scope:dev_given
-				}
-				
-				### And since we used some development, we subtract that value from the available dev points
-				change_variable = {
-					name = dev_points_left
-					subtract = scope:dev_given
-				}
-				clear_saved_scope = scope:dev_points_left
-				clear_saved_scope = scope:dev_needed
+			spend_dev_progress_own_counties = {
+				DEV_POINTS = var:dev_points_left
+				OWNER = scope:raider
 			}
 		}
 		
