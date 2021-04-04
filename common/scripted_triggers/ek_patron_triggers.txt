@@ -31,6 +31,7 @@ has_pantheon_selected = {
 		# Pantheons #
 		has_variable = patron_divines_shown
 		has_variable = patron_aldmer_shown
+		has_variable = patron_dwemer_ancestors_shown
 	}
 }
 
@@ -56,6 +57,11 @@ has_passive_patron_selected = {
 		has_variable = patron_trinimac_shown
 		has_variable = patron_xarxes_shown
 		has_variable = patron_xen_shown
+		# Dwemer Ancestors
+		has_variable = patron_da_architect_shown
+		has_variable = patron_da_warrior_shown
+		has_variable = patron_da_giant_shown
+		has_variable = patron_da_lost_king_shown
 	}
 }
 
@@ -68,17 +74,15 @@ has_passive_patron_selected = {
 
 # Daedra #
 is_worshipping_daedra = {
-	faith = {
-		NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
-		OR = {
-			# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-			has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-			AND = {
-				has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-				has_doctrine_parameter = daedric_worship_accepted
-			}
+	NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
+	OR = {
+		# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
+		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
+		has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
+		has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
+		AND = {
+			has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
+			has_doctrine_parameter = daedric_worship_accepted
 		}
 	}
 }
@@ -88,11 +92,32 @@ patron_daedra_valid = {
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
 	# Faith is not centered around a single Prince, or if it is it's around this Prince
 	OR = {
-		faith = { has_doctrine_parameter = allows_worship_$DAEDRA$_only_active }
+		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
 		NOR	= {
-			has_exclusive_daedric_prince_pantheon = yes
-			faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active }
+			patron_exclusive_daedra = yes
+			has_doctrine_parameter = pantheon_cannot_be_changed_active
 		}
+	}
+}
+
+patron_exclusive_daedra = {
+	OR = {
+		has_doctrine_parameter = allows_worship_azura_only_active
+		has_doctrine_parameter = allows_worship_boethiah_only_active
+		has_doctrine_parameter = allows_worship_clavicus_only_active
+		has_doctrine_parameter = allows_worship_hermaeus_only_active
+		has_doctrine_parameter = allows_worship_hircine_only_active
+		has_doctrine_parameter = allows_worship_malacath_only_active
+		has_doctrine_parameter = allows_worship_mehrunes_only_active
+		has_doctrine_parameter = allows_worship_mephala_only_active
+		has_doctrine_parameter = allows_worship_meridia_only_active
+		has_doctrine_parameter = allows_worship_molag_only_active
+		has_doctrine_parameter = allows_worship_namira_only_active
+		has_doctrine_parameter = allows_worship_nocturnal_only_active
+		has_doctrine_parameter = allows_worship_peryite_only_active
+		has_doctrine_parameter = allows_worship_sanguine_only_active
+		has_doctrine_parameter = allows_worship_sheogorath_only_active
+		has_doctrine_parameter = allows_worship_vaermina_only_active
 	}
 }
 
@@ -180,11 +205,15 @@ patron_vivec_valid = {
 
 # Pantheons #
 patron_divines_valid = {
-	faith = { has_doctrine = doctrine_pantheon_divines }
+	has_doctrine = doctrine_pantheon_divines
 }
 
 patron_aldmer_valid = {
-	faith = { has_doctrine = doctrine_pantheon_aedra }
+	has_doctrine = doctrine_pantheon_aedra
+}
+
+patron_dwemer_ancestors_valid = {
+	has_doctrine = doctrine_pantheon_dwemer_ancestors
 }
 
 # Passive Patrons #
@@ -223,11 +252,9 @@ patron_zenithar_valid = {
 
 patron_shezarr_valid = {
 	patron_divines_valid = yes
-	faith = {
-		NOR = {
-			has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
-			#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
-		}
+	NOR = {
+		has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
+		#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
 	}
 }
 
@@ -239,21 +266,21 @@ patron_auriel_valid = {
 patron_jephre_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_magnus_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_phynaster_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
@@ -271,6 +298,20 @@ patron_xarxes_valid = {
 
 patron_xen_valid = {
 	patron_aldmer_valid = yes
+}
+
+# Dwemer Ancestors #
+patron_da_architect_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_warrior_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_giant_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_lost_king_valid = {
+	patron_dwemer_ancestors_valid = yes
 }
 
 # Aggregate Triggers #
@@ -308,6 +349,7 @@ patron_has_pantheon = {
 	OR = {
 		patron_divines_valid = yes
 		patron_aldmer_valid = yes
+		patron_dwemer_ancestors_valid = yes
 	}
 }
 
@@ -348,3 +390,60 @@ patron_has_ardor = {
 		var:ardor_display >= $ARDOR$
 	}
 }
+
+patron_trait_master_trigger = {
+    $TRIGGER$ = { TRAIT = _akatosh }
+    $TRIGGER$ = { TRAIT = _arkay }
+    $TRIGGER$ = { TRAIT = _dibella }
+    $TRIGGER$ = { TRAIT = _julianos }
+    $TRIGGER$ = { TRAIT = _kynareth }
+    $TRIGGER$ = { TRAIT = _mara }
+    $TRIGGER$ = { TRAIT = _stendarr }
+    $TRIGGER$ = { TRAIT = _zenithar }
+    $TRIGGER$ = { TRAIT = _shezarr }
+    $TRIGGER$ = { TRAIT = _auriel }
+    $TRIGGER$ = { TRAIT = _jephre }
+    $TRIGGER$ = { TRAIT = _magnus }
+    $TRIGGER$ = { TRAIT = _phynaster }
+    $TRIGGER$ = { TRAIT = _syrabane }
+    $TRIGGER$ = { TRAIT = _trinimac }
+    $TRIGGER$ = { TRAIT = _xarxes }
+    $TRIGGER$ = { TRAIT = _xen }
+    $TRIGGER$ = { TRAIT = _azura }
+    $TRIGGER$ = { TRAIT = _boethiah }
+    $TRIGGER$ = { TRAIT = _clavicus }
+    $TRIGGER$ = { TRAIT = _hermaeus }
+    $TRIGGER$ = { TRAIT = _hircine }
+    $TRIGGER$ = { TRAIT = _malacath }
+    $TRIGGER$ = { TRAIT = _mehrunes }
+    $TRIGGER$ = { TRAIT = _mephala }
+    $TRIGGER$ = { TRAIT = _meridia }
+    $TRIGGER$ = { TRAIT = _molag }
+    $TRIGGER$ = { TRAIT = _namira }
+    $TRIGGER$ = { TRAIT = _nocturnal }
+    $TRIGGER$ = { TRAIT = _peryite }
+    $TRIGGER$ = { TRAIT = _sanguine }
+    $TRIGGER$ = { TRAIT = _sheogorath }
+    $TRIGGER$ = { TRAIT = _vaermina }
+    $TRIGGER$ = { TRAIT = _da_architect }
+    $TRIGGER$ = { TRAIT = _da_giant }
+    $TRIGGER$ = { TRAIT = _da_lost_king }
+    $TRIGGER$ = { TRAIT = _da_warrior }
+}
+
+patron_has_any_trait = {
+	patron_trait_master_trigger = { TRIGGER = patron_has_trait }
+}
+
+patron_has_trait = {
+	has_trait = p$TRAIT$
+}
+
+# patron_has_specific_trait = {
+# 	patron_trait_master_trigger = { TRIGGER = patron_has_given_trait }
+# }
+
+# patron_has_given_trait = {
+# 	flag/scope:trait = $TRAIT$
+# 	has_trait = p$TRAIT$
+# }

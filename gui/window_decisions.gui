@@ -19,7 +19,8 @@ window = {
 		#using = Sound_WindowHide_Standard
 		using = Window_Position_MainTab_Hide
 
-		on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		#on_start = "[GetVariableSystem.Clear('patron_window_open')]"
+		on_start = "[GetVariableSystem.Clear('decision_tab')]"
 		#datacontext = "[GetScriptedGui('patron_clear')]" #done this way to avoid error in log about data being an invalid property
 		on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 		on_start = "[GetVariableSystem.Clear( 'patron_decision_button' )]"
@@ -30,7 +31,8 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		#visible = "[Not(Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+		visible = "[Not(GetVariableSystem.Exists( 'decision_tab' ))]"
 
 		# using = Window_Background
 
@@ -180,7 +182,8 @@ window = {
 		margin_right = 20
 		alwaystransparent = no
 
-		visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'patron_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 
 		# using = Window_Background
 
@@ -222,8 +225,8 @@ window = {
 					{
 						#datacontext = "[GetScriptedGui('patron_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
+						onclick = "[GetVariableSystem.Clear('decision_tab')]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -466,6 +469,16 @@ window = {
 
 							blockoverride "patron_icon" {
 								texture = "gfx/interface/icons/faith/auriel.dds"
+							}
+						}
+
+						#Dwemer Ancestors
+						button_patron_icon = {
+							datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+							visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+							blockoverride "patron_icon" {
+								texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
 							}
 						}
 
@@ -1017,6 +1030,29 @@ window = {
 										}
 										blockoverride "patron_entry_desc" {
 											text = pantheon_aldmer_long_desc
+										}
+									}
+								}
+
+								# Dwemer Ancestors #
+								vbox = {
+									name = "patron_dwemer_ancestors"
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+									button_patron_entry = {
+										#datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+										onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+										down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+										blockoverride "patron_entry_icon" {
+											texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+										}
+										blockoverride "patron_entry_name" {
+											text = pantheon_dwemer_ancestors_name
+										}
+										blockoverride "patron_entry_desc" {
+											text = pantheon_dwemer_ancestors_long_desc
 										}
 									}
 								}
@@ -1827,6 +1863,16 @@ window = {
 										texture = "gfx/interface/icons/faith/auriel.dds"
 									}
 								}
+
+								#Dwemer Ancestors
+								button_patron_icon = {
+									datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+									visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+									blockoverride "patron_icon" {
+										texture = "gfx/interface/icons/faith/dwemer_ancestors.dds"
+									}
+								}
 							}
 							spacer = {
 								size = { 140 100 } #+30 compared to other one for button
@@ -2147,6 +2193,48 @@ window = {
 													texture = "gfx/interface/patrons/patron_xen.dds"
 												}
 											}
+											
+											### Dwemer Ancestors
+
+											# The Architect #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_architect.dds"
+												}
+											}
+
+											# The Warrior #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_warrior.dds"
+												}
+											}
+
+											# The Giant #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_giant.dds"
+												}
+											}
+
+											# The Lost King #
+											button_patron_icon = {
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+												blockoverride "patron_icon" {
+													texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+												}
+											}
 										}
 
 										# spacer = {
@@ -2351,6 +2439,12 @@ window = {
 												datacontext = "[GetScriptedGui('patron_aldmer_shown')]"
 												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 												text = "PATRON_THE_AEDRA"
+											}
+
+											text_label_center = {
+												datacontext = "[GetScriptedGui('patron_dwemer_ancestors_shown')]"
+												visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+												text = "PATRON_THE_DWEMER_ANCESTORS"
 											}
 
 											# Akatosh #
@@ -2760,6 +2854,103 @@ window = {
 													}
 												}
 											}
+											
+											### Dwemer Ancestors
+											# The Architect #
+											vbox = {
+												name = "patron_da_architect"
+												datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_architect_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_architect.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_architect_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_architect_long_desc
+													}
+												}
+											}
+											
+											# The Warrior #
+											vbox = {
+												name = "patron_da_warrior"
+												datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_warrior_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_warrior.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_warrior_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_warrior_long_desc
+													}
+												}
+											}
+											
+											# The Giant #
+											vbox = {
+												name = "patron_da_giant"
+												datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_giant_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_giant.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_giant_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_giant_long_desc
+													}
+												}
+											}
+											
+											# The Lost King #
+											vbox = {
+												name = "patron_da_lost_king"
+												datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+												visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
+												button_patron_entry = {
+													size = { 450 100 }
+													#datacontext = "[GetScriptedGui('patron_da_lost_king_shown')]"
+													onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+													down = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+
+													blockoverride "patron_entry_icon" {
+														texture = "gfx/interface/patrons/patron_da_lost_king.dds"
+													}
+													blockoverride "patron_entry_name" {
+														text = patron_da_lost_king_name
+													}
+													blockoverride "patron_entry_desc" {
+														text = patron_da_lost_king_long_desc
+													}
+												}
+											}
 										}
 									}
 								}
@@ -2786,7 +2977,8 @@ window = {
 		margin = { 0 26 }
 		margin_right = 20
 
-		visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		#visible = "[GetVariableSystem.Exists( 'societies_window_open' )]"
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 
 		# using = Window_Background
 
@@ -2825,7 +3017,8 @@ window = {
 						#datacontext = "[GetScriptedGui('societies_gui_close')]"
 						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 						#onclick = "[GetVariableSystem.Clear('right_window_open')]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						#onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
+						onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
 						onclick = "[DecisionsView.Close]"
 					}
 
@@ -3178,7 +3371,7 @@ Types Patrons
 		maximumsize = { 200 40 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
 		down = "[DecisionsViewItem.IsSelected]"
@@ -3264,7 +3457,7 @@ Types Patrons
 		maximumsize = { 300 50 }
 
 		#text = "[Decision.GetTitleForPlayer]"
-		tooltip = "[Localize(Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
+		tooltip = "[SelectLocalization('(bool)no','',Concatenate( Decision.GetShortDescForPlayer, 'tooltip' ))]"
 
 		onclick = "[OpenDecisionDetailView(Decision.Self)]"
 		down = "[DecisionsViewItem.IsSelected]"

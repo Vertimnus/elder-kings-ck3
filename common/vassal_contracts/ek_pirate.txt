@@ -1,0 +1,153 @@
+﻿### How much raid do they send to their liege as tribute? None - 5% - 10% - 15% - 20%
+pirate_government_tribute = {
+	display_mode = tree
+	icon = gold_icon
+	obligation_levels = {
+		pirate_tribute_none = {
+			position = { 0 0 }
+			
+			# tax = raid_everyone
+			vassal_opinion = 10
+
+			ai_liege_desire = 1
+			ai_vassal_desire = 5
+		}
+		pirate_tribute_low = {
+			parent = pirate_tribute_none
+			position = { 1 0 }
+			
+			flag = vassal_contract_low_tribute
+
+			# tax = normal_feudal_tax
+			vassal_opinion = 5
+
+			ai_liege_desire = 2
+			ai_vassal_desire = 4
+		}
+		pirate_tribute_medium = {
+			default = yes
+			parent = pirate_tribute_low
+			position = { 2 0 }
+			
+			flag = vassal_contract_medium_tribute
+			
+			# tax = high_feudal_tax
+
+			ai_liege_desire = 3
+			ai_vassal_desire = 3
+		}
+		pirate_tribute_high = {
+			parent = pirate_tribute_medium
+			position = { 3 0 }
+			
+			flag = vassal_contract_high_tribute
+			
+			# tax = high_feudal_tax
+			vassal_opinion = -10
+
+			ai_liege_desire = 4
+			ai_vassal_desire = 2
+		}
+		pirate_tribute_very_high = {
+			parent = pirate_tribute_high
+			position = { 4 0 }
+			
+			flag = vassal_contract_very_high_tribute
+			
+			# tax = high_feudal_tax
+			vassal_opinion = -20
+
+			ai_liege_desire = 5
+			ai_vassal_desire = 1
+		}
+	}
+}
+
+### Who can they raid? Foreign - Enemies - Forbidden
+pirate_government_raid = {
+	display_mode = tree
+	icon = gold_icon
+	obligation_levels = {
+		pirate_raid_any = {
+			default = yes
+			position = { 0 0 }
+			
+			# tax = raid_everyone
+			# vassal_opinion = 5
+
+			ai_liege_desire = 1
+			ai_vassal_desire = 4
+		}
+		pirate_raid_foreign = {
+			default = yes
+			parent = pirate_raid_any
+			position = { 1 0 }
+			
+			# tax = raid_everyone
+			# vassal_opinion = 5
+
+			ai_liege_desire = 2
+			ai_vassal_desire = 3
+		}
+		pirate_raid_enemies = {
+			parent = pirate_raid_foreign
+			position = { 2 0 }
+			
+			flag = vassal_contract_raid_enemies
+
+			# tax = normal_feudal_tax
+
+			ai_liege_desire = 3
+			ai_vassal_desire = 2
+		}
+		pirate_raid_forbidden = {
+			parent = pirate_raid_enemies
+			position = { 3 0 }
+			
+			flag = vassal_contract_no_raiding
+			
+			vassal_opinion = -10
+			
+			# tax = high_feudal_tax
+			# vassal_opinion = -15
+
+			ai_liege_desire = 4
+			ai_vassal_desire = 1
+		}
+	}
+}
+
+### Privateering allows a vassal pirate to raid even when at war, against the enemies of their liege (if possible)
+privateering_rights = {
+	display_mode = checkbox
+	obligation_levels = {
+		privateering_rights_default = {
+			default = yes
+			position = { 0 0 }
+			
+			ai_liege_desire = 1
+			ai_vassal_desire = 0
+		}
+		privateering_rights_protected = {
+			parent = privateering_rights_default
+			position = { 1 0 }
+			
+			vassal_modifier = {
+				embarkation_cost_mult = -0.05
+				raid_speed = 0.25
+				naval_movement_speed_mult = 0.25
+			}
+			
+			liege_modifier = {
+				general_opinion = -5
+				courtier_and_guest_opinion = 5
+				vassal_opinion = 5
+				embarkation_cost_mult = 0.05
+				naval_movement_speed_mult = -0.25
+			}
+			
+			ai_liege_desire = 0
+			ai_vassal_desire = @ai_standard_vassal_desire
+		}
+	}
+}
