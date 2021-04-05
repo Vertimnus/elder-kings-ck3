@@ -178,3 +178,154 @@ interregnum_shatter_cyrodiil = {
 	custom_tooltip = rest_cyrodiil_indepndent_tooltip
 	custom_tooltip = interregnum_starts_tooltip
 }
+
+### To easily apply the effects of the Plunderer perks
+calculate_bonus_resources_from_loot = {
+	### EK EDIT: Grand Raider - Loot * 1.25
+	if = {
+		limit = { $RAIDER$ = { has_perk = grand_raider_perk } }
+		
+		change_variable = {
+			name = raid_loot
+			multiply = 1.25
+		}
+	}
+	
+	### EK EDIT: Loot & Prisoners - Loot / 5
+	set_variable = {
+		name = bonus_dev
+		value = {
+			value = var:raid_loot
+			divide = 5
+		}
+	}
+	
+	### EK EDIT: Raider blood - Loot / 10
+	set_variable = {
+		name = bonus_renown
+		value = {
+			value = var:raid_loot
+			divide = 10
+		}
+	}
+}
+
+### ! Requires you to use calculate_bonus_resources_from_loot at some point before
+get_resources_from_loot = {
+	### EK EDIT: Grand Raider - Loot * 1.25
+	if = {
+		limit = { $RAIDER$ = { has_perk = grand_raider_perk } }
+		
+		change_variable = {
+			name = $LOOT$
+			multiply = 1.25
+		}
+	}
+	
+	### EK EDIT: Loot & Prisoners - Loot / 5
+	set_variable = {
+		name = bonus_dev
+		value = {
+			value = $LOOT$
+			divide = 5
+		}
+	}
+	
+	### EK EDIT: Raider blood - Loot / 10
+	set_variable = {
+		name = bonus_renown
+		value = {
+			value = $LOOT$
+			divide = 10
+		}
+	}
+	
+	hidden_effect = { add_prestige = $LOOT$ }
+
+	### EK EDIT: Gold is added differently, so we add the smol bonus here directly
+	set_variable = {
+		name = bonus_resources_gained
+		value = {
+			value = $LOOT$
+			divide = 4
+		}
+	}
+	hidden_effect = { add_gold = var:bonus_resources_gained }
+	### EK EDIT: Sacred Raids - Give piety too
+	if = { 
+		limit = { has_perk = sacred_raids_perk }
+		hidden_effect = { add_piety = $LOOT$ }
+	}
+	### EK EDIT: Raider Blood - Give renown too
+	if = {
+		limit = { has_perk = raider_blood_perk exists = $RAIDER$.dynasty }
+		hidden_effect = { $RAIDER$.dynasty = { add_dynasty_prestige = $RAIDER$.var:bonus_renown } }
+	}
+}
+
+### Spends the development progress stored in the variable in your counties, giving it in priority to the counties closer to growing
+spend_dev_progress_own_counties = {
+	set_variable = {
+		name = loc_dev_points
+		value = $DEV_POINTS$
+	}
+	
+	while = {
+		limit = { $DEV_POINTS$ > 0 }
+		
+		save_scope_value_as = {
+			name = dev_points_left
+			value = var:loc_dev_points
+		}
+		
+		ordered_county = {
+			limit = { this.holder = $OWNER$ }
+			order_by = development_towards_level_increase
+			
+			save_scope_as = checked_county
+			
+			### We check how much dev points would have to be given for the county to get an additional dev 
+			set_variable = {
+				name = dev_needed
+				value = 100
+			}
+			
+			change_variable = {
+				name = dev_needed
+				subtract = scope:checked_county.development_towards_level_increase
+			}
+			
+			save_scope_value_as = {
+				name = dev_needed
+				value = var:dev_needed
+			}
+			
+			### Can we give that, or will the county have the settle with less?
+			if = {
+				limit = { scope:dev_points_left = { compare_value >= scope:dev_needed } }
+				save_scope_value_as = {
+					name = dev_given
+					value = scope:dev_needed
+				}
+			}
+			
+			else = {
+				save_scope_value_as = {
+					name = dev_given
+					value = scope:dev_points_left
+				}
+			}
+			
+			### Now that we know how much dev the county will get, give it
+			change_development_progress = scope:dev_given
+		}
+		
+		### And since we used some development, we subtract that value from the available dev points
+		change_variable = {
+			name = loc_dev_points
+			subtract = scope:dev_given
+		}
+		clear_saved_scope = scope:dev_points_left
+		clear_saved_scope = scope:dev_needed
+	}
+}
