@@ -90,6 +90,10 @@
             limit = { has_variable = patron_dwemer_ancestors_shown }
             set_variable = patron_dwemer_ancestors_shown_res
         }
+        if = {
+            limit = { has_variable = patron_atmoran_totems_shown }
+            set_variable = patron_atmoran_totems_shown_res
+        }
         # if = {
         #     limit = { has_variable =  }
         #     set_variable = _res
@@ -189,6 +193,10 @@ patron_restore = {
         if = {
             limit = { has_variable = patron_dwemer_ancestors_shown_res }
             set_variable = patron_dwemer_ancestors_shown
+        }
+        if = {
+            limit = { has_variable = patron_atmoran_totems_shown_res }
+            set_variable = patron_atmoran_totems_shown
         }
         patron_clear_res_variables = yes
     }
@@ -1109,6 +1117,143 @@ patron_da_lost_king_shown = {
     }
 }
 
+# Atmoran Totems #
+patron_atmoran_totems_shown = {
+	scope = character
+
+    is_shown = {
+        faith = { patron_atmoran_totems_valid = yes }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_atmoran_totems_shown }
+    }
+
+    effect = {
+        patron_clear_variables = yes
+        set_variable = patron_atmoran_totems_shown
+    }
+}
+
+patron_at_hawk_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_hawk_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_hawk_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_hawk_shown
+    }
+}
+
+patron_at_wolf_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_wolf_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_wolf_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_wolf_shown
+    }
+}
+
+patron_at_snake_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_snake_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_snake_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_snake_shown
+    }
+}
+
+patron_at_moth_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_moth_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_moth_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_moth_shown
+    }
+}
+
+patron_at_owl_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_owl_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_owl_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_owl_shown
+    }
+}
+
+patron_at_whale_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_whale_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_whale_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_whale_shown
+    }
+}
+
+patron_at_bear_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_bear_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_bear_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_bear_shown
+    }
+}
+
+patron_at_fox_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_fox_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_fox_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_fox_shown
+    }
+}
+
+patron_at_dragon_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_at_dragon_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_at_dragon_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_at_dragon_shown
+    }
+}
+
+# Patrons done #
 faith_get_patrons = {
     scope = faith
 

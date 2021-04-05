@@ -1,5 +1,5 @@
 ﻿##########
-# Imperial City
+# Imperial City - IC (duh)
 ##########
 imperial_city_01 = {
 	construction_time = very_slow_construction_time
@@ -36,6 +36,237 @@ imperial_city_01 = {
 	type = duchy_capital
 }
 
+temple_of_the_one_01 = {
+	asset = {
+		type = pdxmesh
+		name = "building_special_cathedral_generic_mesh"
+	}
+
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_cologne_cathedral.dds"
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+		scope:holder = {
+			culture = {
+				has_innovation = innovation_crop_rotation
+			}
+		}
+	}
+	
+	is_enabled = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	cost_gold = 1000
+
+	character_modifier = {
+		monthly_piety = 0.25
+		monthly_dynasty_prestige_mult = 0.05
+		holy_order_hire_cost_mult = -0.15
+		clergy_opinion = 5
+		monthly_county_control_change_factor = 0.05
+	}
+	
+	county_modifier = {
+		tax_mult = 0.2
+		development_growth_factor = 0.2
+		development_growth = 0.1
+	}
+	
+	province_modifier = {
+		monthly_income = 2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+### Owned by a baron-tier vassal, will have to handle it differently
+imperial_city_arena_01 = {
+	asset = {
+		type = pdxmesh
+		name = "building_special_colosseum_mesh"
+	}
+	
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_colosseum.dds"
+	
+	can_construct_potential = {
+		barony = title:b_arena_district
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = 3000
+	
+	character_modifier = {
+		knight_limit = 2
+		knight_effectiveness_mult = 0.2
+		army_maintenance_mult = -0.1
+		men_at_arms_limit = 1
+	}
+	province_modifier = {
+		monthly_income = 2
+	}
+	county_modifier = {
+		tax_mult = 0.15
+		levy_size = 0.15
+		county_opinion_add = 5
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+the_bastion_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_tower_of_london.dds"
+	
+	can_construct_potential = {
+		barony = title:b_fort_legion
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+
+	character_modifier = {
+		dread_gain_mult = 0.3
+		dread_decay_mult = -0.25
+		dread_baseline_add = 15
+	}
+	garrison = good_building_garrison_tier_3
+	province_modifier = {
+		defender_holding_advantage = normal_building_advantage_tier_3
+		fort_level = good_building_fort_level_tier_3
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+imperial_city_harbor_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_building_tradeport.dds"
+	
+	can_construct_potential = {
+		barony = title:b_waterfront
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+	}
+	character_modifier = {
+		monthly_stewardship_lifestyle_xp_gain_mult = 0.1
+		cultural_head_fascination_mult = 0.1
+	}
+	province_modifier = {
+		monthly_income = 2
+	}
+	county_modifier = {
+		development_growth = 0.3
+		development_growth_factor = 0.4
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+port_hestra_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_building_tradeport.dds"
+	
+	can_construct_potential = {
+		barony = title:b_port_hestra
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+	
+	character_modifier = {
+		naval_movement_speed_mult = 0.25
+		embarkation_cost_mult = -0.1
+		supply_limit_mult = 0.25
+		diplomatic_range_mult = 0.3
+	}
+	province_modifier = {
+		fort_level = 2
+		garrison_size = 0.25
+		defender_holding_advantage = 5
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+arcane_university_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_grand_library_of_baghdad.dds"
+	
+	can_construct_potential = {
+		barony = title:b_arcane_university
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.15
+		cultural_head_fascination_mult = 0.15
+		
+		learning_per_prestige_level = 2
+		
+		mages_max_size_add = 2
+		mages_damage_mult = 0.2
+		mages_pursuit_mult = 0.2
+		mages_toughness_mult = 0.2
+		mages_screen_mult = 0.2
+	}
+	province_modifier = {
+		tax_mult = 0.2
+		development_growth_factor = 0.2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
 ##########
 # Understone Keep
 ##########
@@ -59,7 +290,95 @@ understone_keep_01 = {
 	province_modifier = {
 		fort_level = 3
 		garrison_size = 0.5
-		defender_advantage = 10
+		defender_holding_advantage = 10
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+##########
+# Sacred Walls of Solitude
+##########
+solitude_holy_walls_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_aurelian_walls.dds"
+	
+	can_construct_potential = {
+		barony = title:b_blue_palace
+		building_requirement_tribal = no
+	}
+	
+	cost_gold = 1000
+	
+	garrison = 150
+	
+	county_modifier = {
+		hostile_raid_time = 0.1
+		development_growth_factor = 0.1
+	}
+	province_modifier = {
+		fort_level = 1
+		garrison_size = 0.1
+		defender_holding_advantage = 2
+	}
+	
+	next_building = solitude_holy_walls_02
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
+solitude_holy_walls_02 = { # The old divine enchantments have been refined and strengthened
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_aurelian_walls.dds"
+	
+	can_construct = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	is_enabled = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	cost_gold = 1000
+	cost_piety = 1000
+	
+	garrison = 500
+	
+	character_modifier = {
+		monthly_piety = 0.25
+		holy_order_hire_cost_mult = -0.15
+		clergy_opinion = 5
+		monthly_county_control_change_factor = 0.05
+	}
+	county_modifier = {
+		hostile_raid_time = 0.5
+		development_growth_factor = 0.2
+		development_growth = 0.1
+	}
+	province_modifier = {
+		fort_level = 3
+		garrison_size = 0.25
+		defender_holding_advantage = 10
 	}
 	
 	ai_value = {
@@ -603,69 +922,6 @@ crystal_tower_04 = {
 ################################
 #          HOLY SITES          #
 ################################
-temple_of_the_one_01 = {
-	asset = {
-		type = pdxmesh
-		name = "building_special_cathedral_generic_mesh"
-	}
-
-	construction_time = very_slow_construction_time
-
-	type_icon = "icon_structure_cologne_cathedral.dds"
-	
-	can_construct_potential = {
-		building_requirement_tribal = no
-	}
-	
-	can_construct = {
-		custom_description = {
-			text = holy_site_building_trigger
-			barony = {
-				is_holy_site_of = scope:holder.faith
-			}
-		}
-		scope:holder = {
-			culture = {
-				has_innovation = innovation_crop_rotation
-			}
-		}
-	}
-	
-	is_enabled = {
-		custom_description = {
-			text = holy_site_building_trigger
-			barony = {
-				is_holy_site_of = scope:holder.faith
-			}
-		}
-	}
-	
-	cost_gold = 1000
-
-	character_modifier = {
-		monthly_piety = 0.25
-		monthly_dynasty_prestige_mult = 0.05
-		holy_order_hire_cost_mult = -0.15
-		clergy_opinion = 5
-		monthly_county_control_change_factor = 0.05
-	}
-	
-	county_modifier = {
-		tax_mult = 0.2
-		development_growth_factor = 0.2
-		development_growth = 0.1
-	}
-	
-	province_modifier = {
-		monthly_income = 2
-	}
-	
-	ai_value = {
-		base = 100
-	}
-	
-	type = special
-}
 
 ##########
 # Daedric Shrines
