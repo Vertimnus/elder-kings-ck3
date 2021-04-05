@@ -213,6 +213,43 @@ patron_assign_trait = {
         limit = { has_variable = patron_da_lost_king_shown }
         add_trait = p_da_lost_king
     }
+	# Atmoran Totems
+	else_if = {
+        limit = { has_variable = patron_at_hawk_shown }
+        add_trait = p_at_hawk
+    }
+	else_if = {
+        limit = { has_variable = patron_at_wolf_shown }
+        add_trait = p_at_wolf
+    }
+	else_if = {
+        limit = { has_variable = patron_at_snake_shown }
+        add_trait = p_at_snake
+    }
+	else_if = {
+        limit = { has_variable = patron_at_moth_shown }
+        add_trait = p_at_moth
+    }
+	else_if = {
+        limit = { has_variable = patron_at_owl_shown }
+        add_trait = p_at_owl
+    }
+	else_if = {
+        limit = { has_variable = patron_at_whale_shown }
+        add_trait = p_at_whale
+    }
+	else_if = {
+        limit = { has_variable = patron_at_bear_shown }
+        add_trait = p_at_bear
+    }
+	else_if = {
+        limit = { has_variable = patron_at_fox_shown }
+        add_trait = p_at_fox
+    }
+	else_if = {
+        limit = { has_variable = patron_at_dragon_shown }
+        add_trait = p_at_dragon
+    }
 
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
@@ -610,6 +647,7 @@ patron_status_initialize = {
 }
 
 patron_trait_master_effect = {
+	# Divines
     $EFFECT$ = { TRAIT = _akatosh }
     $EFFECT$ = { TRAIT = _arkay }
     $EFFECT$ = { TRAIT = _dibella }
@@ -619,6 +657,7 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _stendarr }
     $EFFECT$ = { TRAIT = _zenithar }
     $EFFECT$ = { TRAIT = _shezarr }
+	# Aeda
     $EFFECT$ = { TRAIT = _auriel }
     $EFFECT$ = { TRAIT = _jephre }
     $EFFECT$ = { TRAIT = _magnus }
@@ -627,6 +666,7 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _trinimac }
     $EFFECT$ = { TRAIT = _xarxes }
     $EFFECT$ = { TRAIT = _xen }
+	# Daedra
     $EFFECT$ = { TRAIT = _azura }
     $EFFECT$ = { TRAIT = _boethiah }
     $EFFECT$ = { TRAIT = _clavicus }
@@ -643,10 +683,21 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _sanguine }
     $EFFECT$ = { TRAIT = _sheogorath }
     $EFFECT$ = { TRAIT = _vaermina }
+	# Dwemer Ancestors
     $EFFECT$ = { TRAIT = _da_architect }
     $EFFECT$ = { TRAIT = _da_giant }
     $EFFECT$ = { TRAIT = _da_lost_king }
     $EFFECT$ = { TRAIT = _da_warrior }
+	# Atmoran Totems
+    $EFFECT$ = { TRAIT = _at_hawk }
+    $EFFECT$ = { TRAIT = _at_wolf }
+    $EFFECT$ = { TRAIT = _at_snake }
+    $EFFECT$ = { TRAIT = _at_moth }
+    $EFFECT$ = { TRAIT = _at_owl }
+    $EFFECT$ = { TRAIT = _at_whale }
+    $EFFECT$ = { TRAIT = _at_bear }
+    $EFFECT$ = { TRAIT = _at_fox }
+    $EFFECT$ = { TRAIT = _at_dragon }
 }
 
 patron_get_list = {
