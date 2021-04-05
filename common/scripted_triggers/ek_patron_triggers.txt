@@ -204,16 +204,26 @@ patron_vivec_valid = {
 }
 
 # Pantheons #
+patron_PANTHEON_valid = { has_doctrine_parameter = pantheon_adds_deities_$PANTHEON$ }
+
 patron_divines_valid = {
-	has_doctrine = doctrine_pantheon_divines
+	patron_PANTHEON_valid = { PANTHEON = divines }
 }
 
 patron_aldmer_valid = {
-	has_doctrine = doctrine_pantheon_aedra
+	patron_PANTHEON_valid = { PANTHEON = aedra }
 }
 
 patron_dwemer_ancestors_valid = {
-	has_doctrine = doctrine_pantheon_dwemer_ancestors
+	patron_PANTHEON_valid = { PANTHEON = dwemer_ancestors }
+}
+
+patron_atmoran_totems_valid = {
+	patron_PANTHEON_valid = { PANTHEON = atmoran_totems }
+}
+
+patron_ternion_totems_valid = {
+	patron_PANTHEON_valid = { PANTHEON = ternion_totems }
 }
 
 # Passive Patrons #
@@ -312,6 +322,44 @@ patron_da_giant_valid = {
 }
 patron_da_lost_king_valid = {
 	patron_dwemer_ancestors_valid = yes
+}
+
+# Atmoran Totems
+patron_at_hawk_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_wolf_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_snake_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_moth_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_owl_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_whale_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_bear_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_fox_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_dragon_valid = {
+	patron_atmoran_totems_valid = yes
 }
 
 # Aggregate Triggers #
