@@ -139,6 +139,20 @@ update_religions_piety_level = {
 		update_religions_piety_level_effect = { MODIFIER = devotion_gives_cavalry_effectiveness }
 	}
 	
+	### DEVELOPMENT GROWTH WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_development_progress }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_development_progress }
+			}
+		}
+		
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_development_progress }
+	}
+	
 	### STAR SIGN POWER WITH DEVOTION
 	if = {
 		limit = {
