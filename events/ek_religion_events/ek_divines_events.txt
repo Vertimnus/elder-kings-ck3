@@ -1,0 +1,203 @@
+﻿namespace = divines
+
+###Sybil of Dibella### 
+
+#Sybil dies
+divines.0001 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		OR = {
+			has_character_modifier = sybil_of_dibella_modifier
+			has_character_flag = potential_sybil_of_dibella
+		}
+	}
+	
+	immediate = {
+		
+		#Saving her scope for later use
+		save_scope_as = dead_sybil_of_dibella
+		
+		#Warns potentially interested players
+		if = {
+			limit = { has_character_modifier = sybil_of_dibella_modifier }
+			
+			every_ruler = {
+				limit = {
+					OR = {
+						is_liege_or_above_of = scope:dead_sybil_of_dibella
+						is_in_the_same_court_as = scope:dead_sybil_of_dibella
+						has_trait = p_dibella
+					}
+				}
+				
+				trigger_event = divines.0002
+			}
+		}
+			
+		#Chooses a new Sybil
+		random_living_character = {
+			limit = {
+				#Not already a Sybil
+				NOT = { has_character_modifier = sybil_of_dibella_modifier }
+				#Is a female
+				is_female = yes
+				#Is not a ruler
+				is_ruler = no
+				#Is not married
+				is_married = no
+				#Is young
+				age <= 20
+				#Follows a Dibellan religion
+				OR = {
+					has_faith = faith:imperial_cult
+					has_faith = faith:breton_cult
+					has_faith = faith:redguard_cult
+					has_faith = faith:nord_cult
+					has_faith = faith:old_gods
+				}
+				#Is not ugly, deformed or incapable
+				NOR = {
+					has_trait = leper
+					has_trait = maimed
+					has_trait = incapable
+					has_trait = eunuch
+					has_trait = lisping
+					has_trait = one_eyed
+					has_trait = scaly
+					has_trait = one_legged
+					has_trait = disfigured
+					has_trait = wounded_3
+					has_trait = lovers_pox
+					#has_trait = knahaten_flu
+					has_trait = clubfooted
+					has_trait = hunchbacked
+					has_trait = inbred
+					has_trait = beauty_bad
+					has_trait = dwarf
+					has_trait = infirm
+				}
+			}
+			
+			#Making the random choice more interesting
+			weight = {
+				base = 1 
+				
+				modifier = {
+					add = 30
+					has_trait = beauty_good
+				}
+				modifier = {
+					add = 25
+					has_trait = p_dibella
+				}
+				modifier = {
+					add = 20
+					has_trait = lustful
+				}
+				modifier = {
+					add = 15
+					age < 16
+				}
+				modifier = {
+					add = 10
+					NOT = { culture = culture:dead_sybil_of_dibella }
+				}
+				modifier = {
+					add = 10
+					has_government = theocracy_government
+				}
+				modifier = {
+					add = -20
+					is_lowborn = yes
+				}
+				modifier = {
+					add = -25
+					has_trait = cynical
+				}
+				modifier = {
+					add = -50
+					is_lowborn = yes
+					NOT = { has_government = theocracy_government }
+				}
+			}
+			
+			#Saving her scope for later use
+			save_scope_as = new_sybil_of_dibella
+			
+			#Mark her as potential Sybil
+			add_character_flag = potential_sybil_of_dibella
+		
+			trigger_event = {
+				id = divines.0003
+				months = { 12 48 }
+			}
+		}
+	}
+}
+
+#Warns players of Sybil's death
+divines.0002 = {
+	type = character_event
+	title = divines.0002.t
+	desc = divines.0002.desc
+	theme = faith
+
+	left_portrait = { 	
+		character = scope:dead_sybil_of_dibella
+		animation = personality_zealous
+	}
+	
+	option = {
+		name = divines.0002.a
+	}
+}
+
+#New Sybil chosen
+divines.0003 = {
+	type = character_event
+	hidden = yes
+	
+	immediate = {
+		
+		#Reveal her as Sybil
+		add_character_modifier = { modifier = sybil_of_dibella_modifier }
+		
+		#Make sure she follows Dibella
+		add_trait = p_dibella 
+		
+		#She renounces earthly (nirnly?) possessions
+		add_trait = devoted 
+		
+		#Warns interested players
+		every_ruler = {
+			limit = {
+				OR = {
+					is_liege_or_above_of = scope:new_sybil_of_dibella
+					is_in_the_same_court_as = scope:new_sybil_of_dibella
+					has_trait = p_dibella
+				}
+			}
+			
+			trigger_event = divines.0004 
+		}
+	}
+}
+
+#Warns interested players that a new Sybil was found
+divines.0004 = {
+type = character_event
+title = divines.0004.t
+desc = divines.0004.desc
+theme = faith
+
+	left_portrait = { 	
+		character = scope:new_sybil_of_dibella
+		animation = personality_zealous
+	}
+	
+	option = {
+		name = divines.0004.a
+	}
+}
