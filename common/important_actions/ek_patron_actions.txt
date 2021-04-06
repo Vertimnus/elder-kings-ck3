@@ -1,0 +1,26 @@
+﻿action_pick_patron = {
+	type = alert
+	check_create_action = {
+		if = {
+			limit = {
+				is_adult = yes
+				NOT = { patron_has_any_trait = yes }
+			}
+			try_create_important_action = {
+				important_action_type = action_pick_patron
+				actor = root
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			faith = {
+				open_view_data = {
+					view = faith
+				}
+			}
+			set_variable = action_patron
+		}
+	}
+}

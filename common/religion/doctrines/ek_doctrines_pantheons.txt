@@ -594,8 +594,8 @@ doctrine_main_pantheon = {
 			religion_tag = reach_religion
 		}
 		parameters = {
-			hostility_override_doctrine_pantheon_dwemer_ancestors = 1
 			pantheon_adds_deities_dwemer_ancestors = 1
+			hostility_override_doctrine_pantheon_dwemer_ancestors = 1
 		}
 	}
 	
@@ -795,6 +795,10 @@ doctrine_main_pantheon = {
 		parameters = {
 			hostility_override_doctrine_pantheon_celestial_serpent = 1
 		}
+		character_modifier = {
+			martial_per_piety_level = 1
+			learning_per_piety_level = 1
+		}
 	}
 	
 	## Wyrd
@@ -828,11 +832,8 @@ doctrine_main_pantheon = {
 			religion_tag = akaviri_religion
 		}
 		parameters = {
-			pantheon_adds_deities_divines = yes
-			hostility_override_doctrine_pantheon_divines = 1
+			pantheon_adds_deities_elemental = yes
 			hostility_override_doctrine_pantheon_elemental = 1
-			hostility_override_doctrine_pantheon_reman = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
 	
@@ -899,7 +900,9 @@ doctrine_main_pantheon = {
 			religion_tag = deepones_religion
 		}
 		parameters = {
-		hostility_override_doctrine_pantheon_deepones = 1
+			hostility_override_doctrine_pantheon_deepones = 1
+			devotion_gives_development_progress = yes
+			pantheon_cannot_be_changed_active = yes
 		}
 	}
 	
@@ -951,6 +954,21 @@ doctrine_main_pantheon = {
 		}
 		parameters = {
 			hostility_override_doctrine_pantheon_sithis = 1
+		}
+	}
+	doctrine_pantheon_ghost_snake = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_ghost_snake }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = sithis_religion
+		}
+		parameters = {
+			hostility_override_doctrine_pantheon_ghost_snake = 1
 		}
 	}
 	

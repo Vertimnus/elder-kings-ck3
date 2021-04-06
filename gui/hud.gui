@@ -1200,7 +1200,7 @@ widget = {
 					state = {
 						name = patron_closed
 						on_start = "[GetScriptedGui('patron_restore').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						on_start = "[GetVariableSystem.Set( 'decision_tab' Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'patron' ), 'to_clear', 'patron' ) )]"
+						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'patron' ), 'to_clear', 'patron' ) )]"
 						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
 						on_start = "[ToggleGameView('decisions')]"
 					}
@@ -1238,7 +1238,7 @@ widget = {
 
 					state = {
 						name = society_closed
-						on_start = "[GetVariableSystem.Set( 'decision_tab' Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
+						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
 						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
 						on_start = "[ToggleGameView('decisions')]"
 					}
@@ -2773,7 +2773,7 @@ widget = {
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]" # no .End apparently causes memory leak. emptyscope might be better
 				}
 				#gets the progress bar part
 				widget = {
