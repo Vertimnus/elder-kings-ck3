@@ -1453,7 +1453,7 @@ garclay_999 = {
 	father = garclay_998
 	
 	3306.1.1 = { birth = yes }
-	3326.1.1 = { add_spouse = 15928 }
+	#3326.1.1 = { add_spouse = 15928 }
 	3367.1.1 = { death = yes }
 }
 
@@ -3204,15 +3204,29 @@ ysciele_1001 = {
 
 #House Dumonte
 
+dumonte_998 = {
+	name = "Zacharie"
+	dynasty = 420016
+	religion = breton_cult
+	culture = iliac
+
+	3236.1.1 = { birth = yes }
+	3260.1.1 = { add_spouse = direnni_999b1 }
+	3300.1.1 = { death = yes }
+}
+
 dumonte_999 = {
 	name = "Amberic"
 	dynasty = 420016
 	religion = breton_cult
 	culture = iliac
+	trait = lifespan_2
+	
+	father = dumonte_998
+	mother = direnni_999b1
 
-	3296.1.1 = { birth = yes }
-	3330.1.1 = { add_spouse = direnni_1000c }
-	3355.1.1 = { death = yes }
+	3266.1.1 = { birth = yes }
+	3355.1.1 = { death = { death_reason = death_battle } }
 }
 
 dumonte_999b = {
@@ -3224,7 +3238,6 @@ dumonte_999b = {
 	female = yes
 	
 	father = dumonte_999
-	mother = direnni_1000c
 	
 	3330.1.1 = { birth = yes }
 	3452.1.1 = { death = yes }
@@ -3238,7 +3251,6 @@ dumonte_1000 = {
 	trait = lifespan_1
 	
 	father = dumonte_999
-	mother = direnni_1000c
 	
 	3332.1.1 = { birth = yes }
 	3398.1.1 = { death = yes }
@@ -3534,13 +3546,11 @@ guimard_990 = {
 	dynasty = 430000
 	culture = bjoule
 	religion = breton_cult
-	female = yes
 	mother = guimard_989
-	#occluded = yes #EK WIP occluded doesn't work anymore, we'll have to figure out something else
-	trait = line_of_x #EK EDIT this sets the chracter to be obfuscated like Muhammad in vanilla
+	trait = line_of_x 
 	
 	2320.1.1 = { birth = yes }
-	3000.1.1 = { death = yes }
+	3001.1.1 = { death = yes }
 }
 guimard_991 = {
 	name = "Gregory"

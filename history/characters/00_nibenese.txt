@@ -333,7 +333,7 @@ tharn_101 = {
 }
 tharn_200 = {
 	name = "Abnur" #The one and only Abnur Tharn, Duke of Cheydinhal (Interregnum) / King of Nibenay (Reachman) / (Kamal)
-	#dna = abnur_dna_entry
+	dna = abnur_dna_entry
 	dynasty = 110000
 	religion = imperial_cult
 	culture = nibenese
@@ -344,7 +344,12 @@ tharn_200 = {
 	trait = lifespan_3 #Not technically immortal, but this gives him a life expectancy of around 200 years?
 	father = tharn_99
 	
-	3338.1.1 = { birth = yes }
+	3338.1.1 = { 
+		birth = yes
+		effect = {
+			add_character_flag = has_scripted_appearance
+			}
+		}
 	#3370.1.1 = {
 	#	effect = {
 	#		if = { limit = { is_in_society = yes } leave_society = yes }
@@ -360,8 +365,8 @@ tharn_200 = {
 	#	effect = { set_immortal_age = 62 }
 	#}
 	#3503.1.1 = { effect = { add_amulet_of_kings = yes } }
-	3508.1.1 = { remove_trait = lifespan_3 }
-	3517.1.1 = { death = { death_reason = death_disappearance } }
+	3502.6.12 = { remove_trait = lifespan_3 }
+	3502.9.12 = { death = { death_reason = death_disappearance } }
 }
 tharn_201 = {
 	name = "Veraxia" #Duchess of the Imperial Isle, Consort of Durcorach
@@ -854,27 +859,126 @@ tharn_229 = {
 ##Aeresius Dynasty (110001)
 
 #House Aeresius
-aeresius_101 = {
-	name = "Amilos" #Duke of Arrius
-	dynasty = 110001
-	religion = imperial_cult
-	culture = nibenese
-	father = aeresius_100
-	#mother = tharn # EK TODO
-	
-	3441.1.1 = { birth = yes }
-	3500.1.1 = { death = yes }
-}
-aeresius_102 = {
-	name = "Caelia" #Queen of Cheydinhal (Post-Alliance War)
+
+aeresius_98 = {
+	name = "Caelia" #Count of Quickwater
 	female = yes
 	dynasty = 110001
 	religion = imperial_cult
 	culture = nibenese
-	father = aeresius_101
 	
-	3464.1.1 = { birth = yes }
-	3544.1.1 = { death = yes }
+	3266.1.1 = { birth = yes }
+	3334.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_98_husband = {
+	name = "Priscus"
+	dynasty = 110000
+	religion = imperial_cult
+	culture = nibenese
+	father = tharn_97
+	mother = terentius_80
+	
+	3274.1.1 = { birth = yes }
+	3294.1.1 = { add_matrilineal_spouse = aeresius_98 }
+	3322.1.1 = { death = yes }
+}
+aeresius_99 = {
+	name = "Justus" #Count of Quickwater
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	mother = aeresius_98
+	father = aeresius_98_husband
+	
+	3295.1.1 = { birth = yes }
+	3368.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_100 = {
+	name = "Tasellis"
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	mother = aeresius_98
+	father = aeresius_98_husband
+	
+	3300.1.1 = { birth = yes }
+	3369.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_101 = {
+	name = "Sentius" #Count of Quickwater
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	trait = twin
+	father = aeresius_99
+	
+	3331.1.1 = { birth = yes }
+	3379.1.1 = { death = { death_reason = death_poison killer = aeresius_102 } }
+}
+aeresius_102 = {
+	name = "Senna" #Count of Quickwater
+	female = yes
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	trait = twin
+	father = aeresius_99
+	
+	3331.1.1 = { birth = yes }
+	3347.1.1 = { add_trait = education_intrigue_4 }
+	3401.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_103 = {
+	name = "Trebellius" #Count of Quickwater
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	mother = aeresius_102
+	
+	3360.1.1 = { birth = yes }
+	3429.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_104 = {
+	name = "Pavo" #Count of Quickwater
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	father = aeresius_103
+	
+	3400.1.1 = { birth = yes }
+	3473.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_105 = {
+	name = "Reberio" #Count of Quickwater
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	father = aeresius_103
+	
+	3439.1.1 = { birth = yes }
+	3500.1.1 = { death = { death_reason = death_battle } }
+}
+aeresius_106 = {
+	name = "Caelia" #Count of Quickwater, Queen of Cheydinhal in Alliance War
+	female = yes
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	father = aeresius_103
+	
+	3468.1.1 = { birth = yes }
+	3536.1.1 = { death = { death_reason = death_old_age } }
+}
+aeresius_150 = {
+	name = "Cassia"
+	female = yes
+	dynasty = 110001
+	religion = imperial_cult
+	culture = nibenese
+	father = aeresius_100
+	
+	3329.1.1 = { birth = yes }
+	3399.1.1 = { death = { death_reason = death_old_age } }
 }
 
 ##Cidian Dynasty (110002)
@@ -901,7 +1005,7 @@ cidianwife_1 = {
 }
 cidian_99 = {
 	name = "Otto" #Count of Kingscrest
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	trait = legitimized_bastard
@@ -912,7 +1016,7 @@ cidian_99 = {
 }
 cidian_100 = {
 	name = "Herebanus" #Count of Kingscrest (Warlords)
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	father = cidian_98
@@ -924,7 +1028,7 @@ cidian_100 = {
 }
 cidian_101 = {
 	name = "Otto" #Duke of Farragut (Interregnum)
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	father = cidian_100
@@ -936,7 +1040,7 @@ cidian_101 = {
 }
 cidian_102 = {
 	name = "Salonia" #Duchess of Farragut
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	female = yes
@@ -948,7 +1052,7 @@ cidian_102 = {
 }
 cidian_103 = {
 	name = "Lucina"
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	female = yes
@@ -960,7 +1064,7 @@ cidian_103 = {
 }
 cidian_104 = {
 	name = "Adonato"
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	father = cidian_101
@@ -971,7 +1075,7 @@ cidian_104 = {
 }
 cidian_105 = {
 	name = "Numonius" #Duke of Farragut
-	dynasty = 130002
+	dynasty = 110002
 	religion = imperial_cult
 	culture = nibenese
 	mother = cidian_102
@@ -980,12 +1084,12 @@ cidian_105 = {
 	3436.1.1 = { death = yes }
 }
 
-## Tremellian Dynasty (110367)
+## Tremellian Dynasty (110003)
 
 # House Tremellian
 tremellian_99 = {
 	name = "Otto" #Duke of Farragut
-	dynasty = 110367
+	dynasty = 110003
 	religion = imperial_cult
 	culture = nibenese
 	trait = legitimized_bastard
@@ -996,7 +1100,7 @@ tremellian_99 = {
 tremellian_100 = {
 	name = "Selvia" #Duke of Farragut (Warlords)
 	female = yes
-	dynasty = 130003
+	dynasty = 110003
 	religion = imperial_cult
 	culture = nibenese
 	father = tremellian_99
@@ -1006,7 +1110,7 @@ tremellian_100 = {
 }
 tremellian_101 = {
 	name = "Tertius" #Count of Farragut
-	dynasty = 130003
+	dynasty = 110003
 	religion = imperial_cult
 	culture = nibenese
 	father = tremellian_99
@@ -1016,7 +1120,7 @@ tremellian_101 = {
 }
 tremellian_102 = {
 	name = "Julio" #Count of Farragut (Interregnum)
-	dynasty = 130003
+	dynasty = 110003
 	religion = imperial_cult
 	culture = nibenese
 	father = tremellian_99
@@ -1049,7 +1153,7 @@ helian_99_wife = {
 }
 helian_100 = {
 	name = "Amilio" #Count of Bethal, Darkgrove
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	father = helian_99
@@ -1060,7 +1164,7 @@ helian_100 = {
 }
 helian_101 = {
 	name = "Cato"
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	father = helian_99
@@ -1071,7 +1175,7 @@ helian_101 = {
 }
 helian_102 = {
 	name = "Caesina"
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	trait = bastard
@@ -1082,7 +1186,7 @@ helian_102 = {
 }
 helian_103 = {
 	name = "Viro" #Count of Bethal, Darkgrove
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	father = helian_100
@@ -1093,7 +1197,7 @@ helian_103 = {
 helian_104 = {
 	name = "Cinia"
 	female = yes
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	father = helian_101
@@ -1103,7 +1207,7 @@ helian_104 = {
 }
 helian_105 = {
 	name = "Helvo" #Duke of Wyril
-	dynasty = 130004
+	dynasty = 110007
 	religion = niben_cult
 	culture = nibenese
 	father = helian_100
@@ -1127,7 +1231,7 @@ valentian_98 = {
 }
 valentian_99 = {
 	name = "Liodes" #Duke of Sundercliff (Warlords)
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	mother = valentian_98
@@ -1137,7 +1241,7 @@ valentian_99 = {
 }
 valentian_100 = {
 	name = "Turedus" #Count of Malada (Warlords) Malada & Ondo (Interregnum)
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	mother = valentian_98
@@ -1147,7 +1251,7 @@ valentian_100 = {
 }
 valentian_101 = {
 	name = "Jagar" #Duke of Sundercliff (Interregnum)
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_99
@@ -1158,7 +1262,7 @@ valentian_101 = {
 valentian_101_wife = {
 	name = "Vesta"
 	female = yes
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_99
@@ -1175,7 +1279,7 @@ valentian_101_wife = {
 }
 valentian_102 = {
 	name = "Vandor" #Count of Malada & Ondo
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_100
@@ -1185,7 +1289,7 @@ valentian_102 = {
 }
 valentian_103 = {
 	name = "Nolus" #Count of Malada & Ondo
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_102
@@ -1195,7 +1299,7 @@ valentian_103 = {
 }
 valentian_104 = {
 	name = "Savio"
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_102
@@ -1205,7 +1309,7 @@ valentian_104 = {
 }
 valentian_105 = {
 	name = "Javad" #Duke of Sundercliff
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_101
@@ -1215,7 +1319,7 @@ valentian_105 = {
 }
 valentian_106 = {
 	name = "Isidorus" #Duke of Sundercliff
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_105
@@ -1225,7 +1329,7 @@ valentian_106 = {
 }
 valentian_107 = {
 	name = "Clasomo" #Count of Malada & Ondo
-	dynasty = 130005
+	dynasty = 110008
 	religion = imperial_cult
 	culture = nibenese
 	father = valentian_103
@@ -1248,7 +1352,7 @@ facian_100 = {
 }
 facian_101 = {
 	name = "Gavros" #Count of Valus
-	dynasty = 130006
+	dynasty = 110009
 	religion = imperial_cult
 	culture = nibenese
 	father = facian_100
@@ -1258,7 +1362,7 @@ facian_101 = {
 }
 facian_102 = {
 	name = "Justinius"
-	dynasty = 130006
+	dynasty = 110009
 	religion = imperial_cult
 	culture = nibenese
 	father = facian_100
@@ -1268,7 +1372,7 @@ facian_102 = {
 }
 facian_103 = {
 	name = "Florentius" #Count of Valus
-	dynasty = 130006
+	dynasty = 110009
 	religion = imperial_cult
 	culture = nibenese
 	father = facian_101
@@ -1291,7 +1395,7 @@ caro_100 = {
 }
 caro_101 = {
 	name = "Artamus" #Count of Mergedia
-	dynasty = 130007
+	dynasty = 110010
 	religion = imperial_cult
 	culture = nibenese
 	father = caro_100
@@ -1301,7 +1405,7 @@ caro_101 = {
 }
 caro_102 = {
 	name = "Naspis"
-	dynasty = 130007
+	dynasty = 110010
 	religion = imperial_cult
 	culture = nibenese
 	father = caro_100
@@ -1312,7 +1416,7 @@ caro_102 = {
 caro_103 = {
 	name = "Ariela" #Count of Mergedia
 	female = yes
-	dynasty = 130007
+	dynasty = 110010
 	religion = imperial_cult
 	culture = nibenese
 	father = caro_101
@@ -1322,7 +1426,7 @@ caro_103 = {
 }
 caro_104 = {
 	name = "Savlian" #Count of Mergedia
-	dynasty = 130007
+	dynasty = 110010
 	religion = imperial_cult
 	culture = nibenese
 	father = caro_101
@@ -1332,7 +1436,7 @@ caro_104 = {
 }
 caro_105 = {
 	name = "Melus" #Count of Mergedia
-	dynasty = 130007
+	dynasty = 110010
 	religion = imperial_cult
 	culture = nibenese
 	father = caro_101
@@ -1620,7 +1724,7 @@ crestbridge_1000 = {
 }
 crestbridge_1001 = {
 	name = "Cephorus"
-	dynasty = 110006
+	dynasty = 110005
 	religion = imperial_cult
 	culture = nibenese
 	father = crestbridge_1000
@@ -1630,7 +1734,7 @@ crestbridge_1001 = {
 }
 crestbridge_1002 = {
 	name = "Dolcettus"
-	dynasty = 110006
+	dynasty = 110005
 	religion = imperial_cult
 	culture = nibenese
 	father = crestbridge_1001
@@ -1731,6 +1835,184 @@ cedrian_106 = {
 	
 	3390.1.1 = { birth = yes }
 	3469.1.1 = { death = yes }
+}
+##Sartos Dynasty
+
+#House Sartos
+sartos_99 = {
+	name = "Natolo" #Duke of Harm
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	
+	3289.1.1 = { birth = yes }
+	3350.1.1 = { death = { death_reason = death_battle killer = stormcatcher_99 } }
+}
+sartos_100 = {
+	name = "Nero" #Count of Belda
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_99
+	trait = twin
+	
+	3326.1.1 = { birth = yes }
+	3393.1.1 = { death = yes }
+}
+sartos_101 = {
+	name = "Chaero" #Count of Cephoriad (Warlords, Interregnum)
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_99
+	trait = twin
+	
+	3326.1.1 = { birth = yes }
+	3399.1.1 = { death = yes }
+}
+sartos_102 = {
+	name = "Aburius" #Count of Belda
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_100
+	
+	3352.1.1 = { birth = yes }
+	3424.1.1 = { death = yes }
+}
+sartos_103 = {
+	name = "Fabia"
+	female = yes
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_100
+	
+	3356.1.1 = { birth = yes }
+	3420.1.1 = { death = yes }
+}
+sartos_104 = {
+	name = "Proventus" #Count of Belda
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	mother = sartos_103
+	
+	3382.1.1 = { birth = yes }
+	3455.1.1 = { death = yes }
+}
+sartos_105 = {
+	name = "Lentidius" #Count of Belda
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_104
+	
+	3418.1.1 = { birth = yes }
+	3490.1.1 = { death = yes }
+}
+sartos_106 = {
+	name = "Maro" #Count of Belda (Alliance War)
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_105
+	
+	3451.1.1 = { birth = yes }
+	3520.1.1 = { death = yes }
+}
+sartos_107 = {
+	name = "Otius" #Count of Belda
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_106
+	
+	3479.1.1 = { birth = yes }
+	3545.1.1 = { death = yes }
+}
+sartos_201 = {
+	name = "Milphio" #Count of Cephoriad
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_101
+	
+	3344.1.1 = { birth = yes }
+	3415.1.1 = { death = yes }
+}
+sartos_202 = {
+	name = "Otho" #Count of Cephoriad
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_201
+	
+	3360.1.1 = { birth = yes }
+	3437.1.1 = { death = yes }
+}
+sartos_203 = {
+	name = "Tasel"
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_201
+	
+	3366.1.1 = { birth = yes }
+	3437.1.1 = { death = yes }
+}
+sartos_204 = {
+	name = "Sertorius" #Count of Cephoriad
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_202
+	
+	3387.1.1 = { birth = yes }
+	3456.1.1 = { death = yes }
+}
+sartos_205 = {
+	name = "Doria" #Count of Cephoriad
+	female = yes
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_204
+	
+	3420.1.1 = { birth = yes }
+	3489.1.1 = { death = yes }
+}
+sartos_206 = {
+	name = "Adelaisa" #Count of Cephoriad
+	female = yes
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	father = sartos_204
+	
+	3426.1.1 = { birth = yes }
+	3489.1.1 = { death = yes }
+}
+sartos_207 = {
+	name = "Marcella" #Count of Cephoriad (Alliance War)
+	female = yes
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	mother = sartos_206
+	
+	3456.1.1 = { birth = yes }
+	3525.1.1 = { death = yes }
+}
+sartos_208 = {
+	name = "Munatius" #Count of Cephoriad
+	dynasty = 110013
+	religion = imperial_cult
+	culture = nibenese
+	mother = sartos_207
+	
+	3481.1.1 = { birth = yes }
+	3547.1.1 = { death = yes }
 }
 
 ## Lowborn

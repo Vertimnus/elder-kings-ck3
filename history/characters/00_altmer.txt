@@ -38,7 +38,7 @@ direnni_101b = {
 	father = direnni_100
 	
 	215.1.1 = { birth = yes }
-	602.1.1 = { death = yes }
+	600.1.1 = { death = yes }
 }
 
 direnni_101b1 = {
@@ -47,12 +47,42 @@ direnni_101b1 = {
 	religion = auriel
 	culture = balfiera
 	trait = lifespan_3
+	trait = twin
 	female = yes
 	
 	father = direnni_101b
 	
 	320.1.1 = { birth = yes }
-	602.1.1 = { death = yes }
+	602.1.1 = { death = { death_reason = death_duel killer = direnni_101b2 } }
+}
+
+direnni_101b2 = {
+	name = "Selenwe" #Lore
+	dynasty = 730000
+	religion = auriel
+	culture = balfiera
+	trait = lifespan_3
+	trait = twin
+	female = yes
+	
+	father = direnni_101b
+	
+	320.1.1 = { birth = yes }
+	650.1.1 = { death = yes }
+}
+
+direnni_101b2b = {
+	name = "Line of Selenwe"
+	dynasty = 730000
+	religion = auriel
+	culture = balfiera
+	trait = lifespan_3
+	trait = line_of_x
+	
+	mother = direnni_101b2
+	
+	640.1.1 = { birth = yes }
+	3100.1.1 = { death = yes }
 }
 
 direnni_101c = {
@@ -110,7 +140,7 @@ direnni_104 = {
 }
 
 direnni_900 = {
-	name = "Line of"
+	name = "Line of Aiden"
 	dynasty = 730000
 	religion = mainland_auriel
 	culture = balfiera
@@ -176,6 +206,25 @@ direnni_998 = {
 	3154.1.1 = { death = yes }
 }
 
+direnni_998b = {
+	name = "Ingerien"
+	dynasty = 730000
+	religion = mainland_auriel
+	culture = balfiera
+	trait = lifespan_3
+	female = yes
+	
+	father = direnni_997
+	
+	2950.1.1 = { birth = yes }
+	3300.1.1 = { 
+		trait = disinherited 
+		trait = vampire_character
+		effect = { set_immortal_age = 50 }
+	}
+	3503.1.1 = { death = yes }
+}
+
 direnni_999 = {
 	name = "Hesolmo"
 	dynasty = 730000
@@ -190,21 +239,30 @@ direnni_999 = {
 }
 
 direnni_999b = {
-	name = "Ingerien"
+	name = "Nenaron"
+	dynasty = 730000
+	religion = mainland_auriel
+	culture = balfiera
+	trait = lifespan_3
+	
+	mother = direnni_998
+	
+	3045.1.1 = { birth = yes }
+	3293.1.1 = { death = yes }
+}
+
+direnni_999b1 = {
+	name = "Camandil"
 	dynasty = 730000
 	religion = mainland_auriel
 	culture = balfiera
 	trait = lifespan_3
 	female = yes
 	
-	mother = direnni_998
+	father = direnni_999b
 	
-	3112.1.1 = { birth = yes }
-	3300.1.1 = { 
-		add_trait = disinherited 
-		add_trait = vampire_character 
-	}
-	3503.1.1 = { death = yes }
+	3201.1.1 = { birth = yes }
+	3362.1.1 = { death = yes }
 }
 
 direnni_1000 = {
@@ -235,7 +293,7 @@ direnni_1000b = {
 	3550.1.1 = { death = yes }
 }
 
-direnni_1000c = {
+direnni_1000b1 = {
 	name = "Calanye"
 	dynasty = 730000
 	religion = mainland_auriel
@@ -250,7 +308,7 @@ direnni_1000c = {
 	3427.1.1 = { death = yes }
 }
 
-direnni_1000d = {
+direnni_1000b2 = {
 	name = "Arantar"
 	dynasty = 730000
 	religion = mainland_auriel
@@ -288,7 +346,7 @@ direnni_1002 = {
 	father = direnni_1000
 	
 	3313.1.1 = { birth = yes }
-	3350.1.1 = { add_matrilineal_spouse = direnni_1000d }
+	3350.1.1 = { add_matrilineal_spouse = direnni_1000b2 }
 	3513.1.1 = { death = yes }
 }
 
@@ -299,7 +357,7 @@ direnni_1002b = {
 	culture = balfiera
 	trait = lifespan_3
 	
-	father = direnni_1000d
+	father = direnni_1000b2
 	mother = direnni_1002
 	
 	3359.1.1 = { birth = yes }
@@ -346,6 +404,61 @@ direnni_breto_1003 = {
 	3513.1.1 = { death = yes }
 }
 
+#House Direnni-Tyrigel
+
+direnni_tyrigel_1000 = {
+	name = "Rimintil"
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	
+	father = direnni_101b2b
+
+	3090.1.1 = { birth = yes }
+	3205.1.1 = { death = yes }
+}
+
+direnni_tyrigel_1001 = {
+	name = "Minwerdil"
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	female = yes
+	
+	father = direnni_tyrigel_1000
+
+	3130.1.1 = { birth = yes }
+	3355.1.1 = { death = yes }
+}
+
+direnni_tyrigel_1002 = {
+	name = "Duperil"
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	
+	mother = direnni_tyrigel_1001
+
+	3195.1.1 = { birth = yes }
+	3368.1.1 = { death = yes }
+}
+
+direnni_tyrigel_1003 = {
+	name = "Tauryon"
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	
+	father = direnni_tyrigel_1002
+
+	3280.1.1 = { birth = yes }
+	3412.1.1 = { death = yes }
+}
+
 ##Ravenn Dynasty (730001)
 
 #House Ravenn
@@ -359,7 +472,7 @@ ravenn_1000 = {
 	trait = lifespan_3
 	
 	3217.1.1 = { birth = yes }
-	3300.1.1 = { add_trait = vampire_character }
+	3300.1.1 = { trait = vampire_character }
 	3504.1.1 = { death = yes }
 }
 
