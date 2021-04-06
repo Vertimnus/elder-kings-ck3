@@ -40,7 +40,10 @@ divines.0001 = {
 		random_living_character = {
 			limit = {
 				#Not already a Sybil
-				NOT = { has_character_modifier = sybil_of_dibella_modifier }
+				NOR = { 
+					has_character_modifier = sybil_of_dibella_modifier
+					has_character_flag = potential_sybil_of_dibella
+				}
 				#Is a female
 				is_female = yes
 				#Is not a ruler
@@ -48,7 +51,7 @@ divines.0001 = {
 				#Is not married
 				is_married = no
 				#Is young
-				age <= 20
+				age < 20
 				#Follows a Dibellan religion
 				OR = {
 					has_faith = faith:imperial_cult
@@ -95,18 +98,23 @@ divines.0001 = {
 				modifier = {
 					add = 20
 					has_trait = lustful
+					NOT = { age < 18 }
 				}
 				modifier = {
-					add = 15
+					add = 20
 					age < 16
 				}
 				modifier = {
 					add = 10
-					NOT = { culture = culture:dead_sybil_of_dibella }
+					NOT = { culture = scope:dead_sybil_of_dibella.culture }
 				}
 				modifier = {
 					add = 10
 					has_government = theocracy_government
+				}
+				modifier = {
+					add = 5
+					has_government 
 				}
 				modifier = {
 					add = -20
@@ -117,7 +125,7 @@ divines.0001 = {
 					has_trait = cynical
 				}
 				modifier = {
-					add = -50
+					add = -30
 					is_lowborn = yes
 					NOT = { has_government = theocracy_government }
 				}
@@ -142,7 +150,7 @@ divines.0002 = {
 	type = character_event
 	title = divines.0002.t
 	desc = divines.0002.desc
-	theme = faith
+	theme = death
 
 	left_portrait = { 	
 		character = scope:dead_sybil_of_dibella

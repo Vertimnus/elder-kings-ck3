@@ -98,6 +98,22 @@ patron_passive_clear_variables = {
     remove_variable = patron_da_warrior_shown
     remove_variable = patron_da_giant_shown
     remove_variable = patron_da_lost_king_shown
+	# Atmoran Totems #
+    remove_variable = patron_at_hawk_shown
+    remove_variable = patron_at_wolf_shown
+    remove_variable = patron_at_snake_shown
+    remove_variable = patron_at_moth_shown
+    remove_variable = patron_at_owl_shown
+    remove_variable = patron_at_whale_shown
+    remove_variable = patron_at_bear_shown
+    remove_variable = patron_at_fox_shown
+    remove_variable = patron_at_dragon_shown
+	# Elemental Gods #
+	remove_variable = patron_eg_myn_shown
+	remove_variable = patron_eg_zisa_shown
+	remove_variable = patron_eg_nyfa_shown
+	remove_variable = patron_eg_ilni_shown
+	remove_variable = patron_eg_tam_shown
 }
 
 patron_clear_traits = {
@@ -123,6 +139,22 @@ patron_clear_traits = {
     remove_trait = p_da_warrior
     remove_trait = p_da_giant
     remove_trait = p_da_lost_king
+	# Atmoran Totems
+	remove_trait = p_at_hawk
+	remove_trait = p_at_wolf
+	remove_trait = p_at_snake
+	remove_trait = p_at_moth
+	remove_trait = p_at_owl
+	remove_trait = p_at_whale
+	remove_trait = p_at_bear
+	remove_trait = p_at_fox
+	remove_trait = p_at_dragon
+	# Elemental Gods
+	remove_trait = p_eg_myn
+	remove_trait = p_eg_zisa
+	remove_trait = p_eg_nyfa
+	remove_trait = p_eg_ilni
+	remove_trait = p_eg_tam
 }
 
 patron_assign_trait = {
@@ -250,6 +282,27 @@ patron_assign_trait = {
         limit = { has_variable = patron_at_dragon_shown }
         add_trait = p_at_dragon
     }
+	# Elemental Gods
+	else_if = {
+        limit = { has_variable = patron_eg_myn_shown }
+        add_trait = p_eg_myn
+    }
+	else_if = {
+        limit = { has_variable = patron_eg_zisa_shown }
+        add_trait = p_eg_zisa
+    }
+	else_if = {
+        limit = { has_variable = patron_eg_nyfa_shown }
+        add_trait = p_eg_nyfa
+    }
+	else_if = {
+        limit = { has_variable = patron_eg_ilni_shown }
+        add_trait = p_eg_ilni
+    }
+	else_if = {
+        limit = { has_variable = patron_eg_tam_shown }
+        add_trait = p_eg_tam
+    }
 
     add_character_flag = { flag = recent_patron_selected years = 5 }
 }
@@ -342,6 +395,64 @@ patron_faith_change_clear_traits = {
     else_if = {
         limit = { patron_da_lost_king_valid = no }
         remove_trait = p_da_architect
+    }
+	# Atmoran Totems
+	else_if = {
+        limit = { patron_at_hawk_valid = no }
+        remove_trait = p_at_hawk
+    }
+	else_if = {
+        limit = { patron_at_wolf_valid = no }
+        remove_trait = p_at_wolf
+    }
+	else_if = {
+        limit = { patron_at_snake_valid = no }
+        remove_trait = p_at_snake
+    }
+	else_if = {
+        limit = { patron_at_moth_valid = no }
+        remove_trait = p_at_moth
+    }
+	else_if = {
+        limit = { patron_at_owl_valid = no }
+        remove_trait = p_at_owl
+    }
+	else_if = {
+        limit = { patron_at_whale_valid = no }
+        remove_trait = p_at_whale
+    }
+	else_if = {
+        limit = { patron_at_bear_valid = no }
+        remove_trait = p_at_bear
+    }
+	else_if = {
+        limit = { patron_at_fox_valid = no }
+        remove_trait = p_at_fox
+    }
+	else_if = {
+        limit = { patron_at_dragon_valid = no }
+        remove_trait = p_at_dragon
+    }
+	# Elemental Gods
+	else_if = {
+        limit = { patron_eg_myn_valid = no }
+        remove_trait = p_eg_myn
+    }
+	else_if = {
+        limit = { patron_eg_zisa_valid = no }
+        remove_trait = p_eg_zisa
+    }
+	else_if = {
+        limit = { patron_eg_nyfa_valid = no }
+        remove_trait = p_eg_nyfa
+    }
+	else_if = {
+        limit = { patron_eg_ilni_valid = no }
+        remove_trait = p_eg_ilni
+    }
+	else_if = {
+        limit = { patron_eg_tam_valid = no }
+        remove_trait = p_eg_tam
     }
 
     add_character_flag = { flag = recent_patron_selected years = 5 }
@@ -698,6 +809,12 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _at_snake }
     $EFFECT$ = { TRAIT = _at_whale }
     $EFFECT$ = { TRAIT = _at_wolf }
+	# Elemental Gods
+    $EFFECT$ = { TRAIT = _eg_myn }
+    $EFFECT$ = { TRAIT = _eg_zisa }
+    $EFFECT$ = { TRAIT = _eg_nyfa }
+    $EFFECT$ = { TRAIT = _eg_ilni }
+    $EFFECT$ = { TRAIT = _eg_tam }
 }
 
 patron_get_list = {
