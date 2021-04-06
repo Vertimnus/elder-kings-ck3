@@ -46,11 +46,50 @@ daguer_1003 = {
 
 #House Deleyn
 
+deleyn_900 = {
+	name = "Erric" #Lore
+	dynasty = 400001
+	religion = breton_cult
+	culture = glenumbran
+	
+	990.1.1 = { birth = yes }
+	1028.1.1 = { give_nickname = nick_the_ivory_lord }
+	1029.1.1 = { death = { death_reason = death_battle } }
+}
+
+deleyn_996 = {
+	name = "Line of"
+	dynasty = 400001
+	religion = breton_cult
+	culture = glenumbran
+	trait = line_of_x
+	
+	father = deleyn_900
+	
+	1027.1.1 = { birth = yes }
+	3260.1.1 = { death = yes }
+}
+
+deleyn_997 = {
+	name = "Genevieve" #Lore
+	dynasty = 400001
+	religion = breton_cult
+	culture = glenumbran
+	female = yes
+	
+	father = deleyn_996
+	
+	3255.1.1 = { birth = yes }
+	3327.1.1 = { death = yes }
+}
+
 deleyn_998 = {
 	name = "Donel" #Lore
 	dynasty = 400001
 	religion = breton_cult
 	culture = glenumbran
+	
+	father = deleyn_996
 	
 	3240.1.1 = { birth = yes }
 	3288.1.1 = { add_spouse = garclay_997 }
@@ -116,7 +155,7 @@ deleyn_1001 = {
 }
 
 deleyn_1002 = {
-	name = "Casimir" #Lore
+	name = "Casimir"
 	dynasty = 400001
 	religion = breton_cult
 	culture = glenumbran
@@ -293,18 +332,21 @@ blanche_1000 = {
 	culture = glenumbran
 	
 	3327.1.1 = { birth = yes }
+	3358.1.1 = { add_spouse = dumonte_999b }
 	3385.1.1 = { death = yes }
 }
 
 blanche_1001 = {
-	name = "Felyx"
+	name = "Andre"
 	dynasty = 400004
 	religion = breton_cult
 	culture = glenumbran
+	trait = lifespan_1
 	
 	father = blanche_1000
+	mother = dumonte_999b
 	
-	3361.1.1 = { birth = yes }
+	3359.1.1 = { birth = yes }
 	3422.1.1 = { death = yes }
 }
 
@@ -1161,7 +1203,7 @@ lariat_1006 = {
 ##Stroud Dynasty (400007)
 
 stroud_996 = {
-	name = "Edwyrick"
+	name = "Serge" #Lore
 	dynasty = 400007
 	religion = breton_cult
 	culture = glenumbran
@@ -1169,6 +1211,7 @@ stroud_996 = {
 	father = lariat_997
 	
 	3270.1.1 = { birth = yes }
+	3290.1.1 = { add_spouse = deleyn_997 }
 	3330.1.1 = { death = yes }
 }
 
@@ -1179,6 +1222,7 @@ stroud_997 = {
 	culture = glenumbran
 	
 	father = stroud_996
+	mother = deleyn_997
 	
 	3302.1.1 = { birth = yes }
 	3365.1.1 = { death = yes }
@@ -1191,6 +1235,7 @@ stroud_998 = {
 	culture = glenumbran
 	
 	father = stroud_996
+	mother = deleyn_997
 	
 	3304.1.1 = { birth = yes }
 	3364.1.1 = { death = yes }
@@ -1293,6 +1338,71 @@ stroud_1006 = {
 	
 	3481.1.1 = { birth = yes }
 	3535.1.1 = { death = yes }
+}
+
+##Noellaume Dynasty (400002)
+
+#House Noellaume
+
+noellaume_1000 = {
+	name = "Topheric"
+	dynasty = 400002
+	religion = breton_cult
+	culture = glenumbran
+	
+	3365.1.1 = { birth = yes }
+	3420.1.1 = { death = yes }
+}
+
+noellaume_1001 = {
+	name = "Agata"
+	dynasty = 400002
+	religion = breton_cult
+	culture = glenumbran
+	female = yes
+	
+	father = noellaume_1000
+	
+	3386.1.1 = { birth = yes }
+	3442.1.1 = { death = yes }
+}
+
+noellaume_1002 = {
+	name = "Dracien"
+	dynasty = 400002
+	religion = breton_cult
+	culture = glenumbran
+	
+	mother = noellaume_1001
+	
+	3411.1.1 = { birth = yes }
+	3472.1.1 = { death = yes }
+}
+
+noellaume_1003 = {
+	name = "Arcady" #ESO
+	dynasty = 400002
+	religion = breton_cult
+	culture = glenumbran
+	
+	father = noellaume_1002
+	
+	4450.1.1 = { birth = yes }
+	#3490.1.1 = { add_spouse = eloise }
+	3518.1.1 = { death = yes }
+}
+
+noellaume_1004 = {
+	name = "Diana"
+	dynasty = 400002
+	religion = breton_cult
+	culture = glenumbran
+	female = yes
+	
+	father = noellaume_1003
+	
+	4478.1.1 = { birth = yes }
+	3532.1.1 = { death = yes }
 }
 
 ##Garclay Dynasty (400018)
@@ -2870,8 +2980,8 @@ horley_1000 = {
 	religion = breton_cult
 	culture = iliac
 	
-	3300.1.1 = { birth = yes }
-	3371.1.1 = { death = yes }
+	3310.1.1 = { birth = yes }
+	3375.1.1 = { death = yes }
 }
 
 horley_1001 = {
@@ -2909,7 +3019,7 @@ oldland_1000 = {
 	religion = breton_cult
 	culture = iliac
 	
-	3300.1.1 = { birth = yes }
+	3302.1.1 = { birth = yes }
 	3371.1.1 = { death = yes }
 }
 
@@ -2922,7 +3032,7 @@ oldland_1001 = {
 	father = oldland_1000
 	
 	3330.1.1 = { birth = yes }
-	3390.1.1 = { death = yes }
+	3393.1.1 = { death = yes }
 }
 
 ##Montaine Dynasty (420014)
@@ -3064,7 +3174,7 @@ cumberland_1005 = {
 	3500.1.1 = { death = yes }
 }
 
-##Ysciele Dynasty
+##Ysciele Dynasty (420000)
 
 #House Ysciele
 
@@ -3074,8 +3184,8 @@ ysciele_1000 = {
 	religion = breton_cult
 	culture = iliac
 	
-	3332.1.1 = { birth = yes }
-	3398.1.1 = { death = yes }
+	3326.1.1 = { birth = yes }
+	3381.1.1 = { death = yes }
 }
 
 ysciele_1001 = {
@@ -3086,7 +3196,63 @@ ysciele_1001 = {
 	
 	father = ysciele_1000
 	
-	3371.1.1 = { birth = yes }
+	3349.1.1 = { birth = yes }
+	3412.1.1 = { death = yes }
+}
+
+##Dumonte Dynasty (420016)
+
+#House Dumonte
+
+dumonte_999 = {
+	name = "Amberic"
+	dynasty = 420016
+	religion = breton_cult
+	culture = iliac
+
+	3296.1.1 = { birth = yes }
+	3330.1.1 = { add_spouse = direnni_1000c }
+	3355.1.1 = { death = yes }
+}
+
+dumonte_999b = {
+	name = "Rosalie"
+	dynasty = 420016
+	religion = breton_cult
+	culture = iliac
+	trait = lifespan_2
+	female = yes
+	
+	father = dumonte_999
+	mother = direnni_1000c
+	
+	3330.1.1 = { birth = yes }
+	3452.1.1 = { death = yes }
+}
+
+dumonte_1000 = {
+	name = "Enri"
+	dynasty = 420016
+	religion = breton_cult
+	culture = iliac
+	trait = lifespan_1
+	
+	father = dumonte_999
+	mother = direnni_1000c
+	
+	3332.1.1 = { birth = yes }
+	3398.1.1 = { death = yes }
+}
+
+dumonte_1001 = {
+	name = "Geon"
+	dynasty = 420016
+	religion = breton_cult
+	culture = iliac
+	
+	father = dumonte_1000
+	
+	3351.1.1 = { birth = yes }
 	3448.1.1 = { death = yes }
 }
 
@@ -3201,7 +3367,7 @@ moile_994 = {
 	#mother = 300079
 	
 	3281.1.1 = { birth = yes }
-	3300.1.1 = { add_spouse = 300083 }
+	#3300.1.1 = { add_spouse = 300083 }
 	3337.1.1 = { death = yes }
 }
 moile_995 = {
@@ -4115,15 +4281,6 @@ vermeir_1000 = {
 	
 	3338.1.1 = { birth = yes }
 	3410.1.1 = { death = yes }
-}
-
-northglen_1000 = {
-	name = "Alodie"
-	religion = breton_cult
-	culture = iliac
-	
-	3320.1.1 = { birth = yes }
-	3377.1.1 = { death = yes }
 }
 
 pelin_1000 = {
