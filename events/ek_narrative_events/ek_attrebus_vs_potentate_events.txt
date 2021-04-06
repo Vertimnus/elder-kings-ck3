@@ -40,6 +40,46 @@ ek_attrebus_potentate.0001 = {
 	}
 	
 	immediate = {
+		scope:defender = { save_scope_as = potentate }
+		root = { save_scope_as = attrebus }
+		
+		# Setup the deal with Liodes - Give them all the counties within any duchy they hold land in
+		every_in_list = {
+			list = zenas_ally
+			
+			save_scope_as = current_zenas_ally
+			
+			hidden_effect = {
+				every_realm_de_jure_duchy = {
+					every_in_de_jure_hierarchy = {
+						limit = { tier = tier_county holder.top_liege = scope:potentate }
+						add_to_list = zenas_ally_give_land
+					}
+				}
+				
+				create_title_and_vassal_change = {
+					type = conquest
+					save_scope_as = change
+					add_claim_on_loss = yes
+				}
+				
+				every_in_list = {
+					list = zenas_ally_give_land
+					change_title_holder = {
+						holder = scope:current_zenas_ally
+						change = scope:change
+						take_baronies = yes
+					}
+				}
+
+				resolve_title_and_vassal_change = scope:change
+			}
+			
+			custom_tooltip = attrebus_potentate_cb_victory_with_current_zenas_ally_desc
+			
+			clear_variable_list = zenas_ally_give_land
+		}
+		
 		## There are some stuff to take care of before usurping the titles, so we do that here and not in the cb
 		# We save all the vassals of the former Potentate
 		scope:defender = {
@@ -68,11 +108,7 @@ ek_attrebus_potentate.0001 = {
 			resolve_title_and_vassal_change = scope:change
 		}
 		
-		ROOT = {
-			save_scope_as = attrebus
-			destroy_title = title:e_colovian_estates
-		}
-		scope:defender = { save_scope_as = potentate }
+		ROOT = { destroy_title = title:e_colovian_estates }
 	}
 
 	# Off with the Snake's head!
