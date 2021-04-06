@@ -40,6 +40,9 @@ ek_attrebus_potentate.0001 = {
 	}
 	
 	immediate = {
+		scope:defender = { save_scope_as = potentate }
+		root = { save_scope_as = attrebus }
+		
 		# Setup the deal with Liodes - Give them all the counties within any duchy they hold land in
 		every_in_list = {
 			list = zenas_ally
@@ -49,7 +52,7 @@ ek_attrebus_potentate.0001 = {
 			hidden_effect = {
 				every_realm_de_jure_duchy = {
 					every_in_de_jure_hierarchy = {
-						limit = { tier = tier_county NOT = { holder.top_liege = scope:current_zenas_ally } }
+						limit = { tier = tier_county holder.top_liege = scope:potentate }
 						add_to_list = zenas_ally_give_land
 					}
 				}
@@ -105,11 +108,7 @@ ek_attrebus_potentate.0001 = {
 			resolve_title_and_vassal_change = scope:change
 		}
 		
-		ROOT = {
-			save_scope_as = attrebus
-			destroy_title = title:e_colovian_estates
-		}
-		scope:defender = { save_scope_as = potentate }
+		ROOT = { destroy_title = title:e_colovian_estates }
 	}
 
 	# Off with the Snake's head!
