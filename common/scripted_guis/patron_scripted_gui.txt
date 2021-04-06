@@ -94,6 +94,10 @@
             limit = { has_variable = patron_atmoran_totems_shown }
             set_variable = patron_atmoran_totems_shown_res
         }
+        if = {
+            limit = { has_variable = patron_elemental_shown }
+            set_variable = patron_elemental_shown_res
+        }
         # if = {
         #     limit = { has_variable =  }
         #     set_variable = _res
@@ -197,6 +201,10 @@ patron_restore = {
         if = {
             limit = { has_variable = patron_atmoran_totems_shown_res }
             set_variable = patron_atmoran_totems_shown
+        }
+        if = {
+            limit = { has_variable = patron_elemental_shown_res }
+            set_variable = patron_elemental_shown
         }
         patron_clear_res_variables = yes
     }
@@ -658,7 +666,6 @@ patron_akatosh_shown = {
         set_variable = patron_akatosh_shown
     }
 }
-
 patron_arkay_shown = {
     scope = character
 
@@ -679,7 +686,6 @@ patron_arkay_shown = {
         set_variable = patron_arkay_shown
     }
 }
-
 patron_dibella_shown = {
     scope = character
 
@@ -700,7 +706,6 @@ patron_dibella_shown = {
         set_variable = patron_dibella_shown
     }
 }
-
 patron_julianos_shown = {
     scope = character
 
@@ -721,7 +726,6 @@ patron_julianos_shown = {
         set_variable = patron_julianos_shown
     }
 }
-
 patron_kynareth_shown = {
     scope = character
 
@@ -742,7 +746,6 @@ patron_kynareth_shown = {
         set_variable = patron_kynareth_shown
     }
 }
-
 patron_mara_shown = {
     scope = character
 
@@ -763,7 +766,6 @@ patron_mara_shown = {
         set_variable = patron_mara_shown
     }
 }
-
 patron_stendarr_shown = {
     scope = character
 
@@ -784,7 +786,6 @@ patron_stendarr_shown = {
         set_variable = patron_stendarr_shown
     }
 }
-
 patron_zenithar_shown = {
     scope = character
 
@@ -805,7 +806,6 @@ patron_zenithar_shown = {
         set_variable = patron_zenithar_shown
     }
 }
-
 patron_shezarr_shown = {
     scope = character
 
@@ -866,7 +866,6 @@ patron_auriel_shown = {
         set_variable = patron_auriel_shown
     }
 }
-
 patron_jephre_shown = {
     scope = character
 
@@ -887,7 +886,6 @@ patron_jephre_shown = {
         set_variable = patron_jephre_shown
     }
 }
-
 patron_magnus_shown = {
     scope = character
 
@@ -908,7 +906,6 @@ patron_magnus_shown = {
         set_variable = patron_magnus_shown
     }
 }
-
 patron_phynaster_shown = {
     scope = character
 
@@ -929,7 +926,6 @@ patron_phynaster_shown = {
         set_variable = patron_phynaster_shown
     }
 }
-
 patron_syrabane_shown = {
     scope = character
 
@@ -950,7 +946,6 @@ patron_syrabane_shown = {
         set_variable = patron_syrabane_shown
     }
 }
-
 patron_trinimac_shown = {
     scope = character
 
@@ -971,7 +966,6 @@ patron_trinimac_shown = {
         set_variable = patron_trinimac_shown
     }
 }
-
 patron_xarxes_shown = {
     scope = character
 
@@ -992,7 +986,6 @@ patron_xarxes_shown = {
         set_variable = patron_xarxes_shown
     }
 }
-
 patron_xen_shown = {
     scope = character
 
@@ -1053,7 +1046,6 @@ patron_da_warrior_shown = {
         set_variable = patron_da_warrior_shown
     }
 }
-
 patron_da_architect_shown = {
     scope = character
 
@@ -1074,7 +1066,6 @@ patron_da_architect_shown = {
         set_variable = patron_da_architect_shown
     }
 }
-
 patron_da_giant_shown = {
     scope = character
 
@@ -1095,7 +1086,6 @@ patron_da_giant_shown = {
         set_variable = patron_da_giant_shown
     }
 }
-
 patron_da_lost_king_shown = {
     scope = character
 
@@ -1148,7 +1138,6 @@ patron_at_hawk_shown = {
         set_variable = patron_at_hawk_shown
     }
 }
-
 patron_at_wolf_shown = {
     scope = character
 
@@ -1161,7 +1150,6 @@ patron_at_wolf_shown = {
         set_variable = patron_at_wolf_shown
     }
 }
-
 patron_at_snake_shown = {
     scope = character
 
@@ -1174,7 +1162,6 @@ patron_at_snake_shown = {
         set_variable = patron_at_snake_shown
     }
 }
-
 patron_at_moth_shown = {
     scope = character
 
@@ -1187,7 +1174,6 @@ patron_at_moth_shown = {
         set_variable = patron_at_moth_shown
     }
 }
-
 patron_at_owl_shown = {
     scope = character
 
@@ -1200,7 +1186,6 @@ patron_at_owl_shown = {
         set_variable = patron_at_owl_shown
     }
 }
-
 patron_at_whale_shown = {
     scope = character
 
@@ -1213,7 +1198,6 @@ patron_at_whale_shown = {
         set_variable = patron_at_whale_shown
     }
 }
-
 patron_at_bear_shown = {
     scope = character
 
@@ -1226,7 +1210,6 @@ patron_at_bear_shown = {
         set_variable = patron_at_bear_shown
     }
 }
-
 patron_at_fox_shown = {
     scope = character
 
@@ -1239,7 +1222,6 @@ patron_at_fox_shown = {
         set_variable = patron_at_fox_shown
     }
 }
-
 patron_at_dragon_shown = {
     scope = character
 
@@ -1250,6 +1232,86 @@ patron_at_dragon_shown = {
     effect = {
         patron_passive_clear_variables = yes
         set_variable = patron_at_dragon_shown
+    }
+}
+
+# Elemental Gods
+patron_elemental_shown = {
+	scope = character
+
+    is_shown = {
+        faith = { patron_elemental_valid = yes }
+        #always = yes #for testing
+    }
+
+    is_valid = {
+        NOT = { has_variable = patron_elemental_shown }
+    }
+
+    effect = {
+        patron_clear_variables = yes
+        set_variable = patron_elemental_shown
+    }
+}
+
+patron_eg_myn_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_eg_myn_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_eg_myn_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_eg_myn_shown
+    }
+}
+patron_eg_zisa_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_eg_zisa_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_eg_zisa_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_eg_zisa_shown
+    }
+}
+patron_eg_nyfa_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_eg_nyfa_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_eg_nyfa_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_eg_nyfa_shown
+    }
+}
+patron_eg_ilni_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_eg_ilni_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_eg_ilni_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_eg_ilni_shown
+    }
+}
+patron_eg_tam_shown = {
+    scope = character
+
+    is_shown = { faith = { patron_eg_tam_valid = yes } }
+
+    is_valid = {  NOT = { has_variable = patron_eg_tam_shown }  }
+
+    effect = {
+        patron_passive_clear_variables = yes
+        set_variable = patron_eg_tam_shown
     }
 }
 
