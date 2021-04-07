@@ -1,0 +1,52 @@
+﻿pet_parrot_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+
+	desc = pet_parrot_decision_desc
+	selection_tooltip = pet_parrot_decision_tooltip
+
+	ai_check_interval = 120
+
+	cooldown = { days = 1825 }
+
+	is_shown = {
+		any_owned_story = {
+			story_type = story_cycle_pet_parrot
+			exists = story_owner.var:story_cycle_parrot_name
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available = yes
+	}
+
+	effect = {
+		custom_tooltip = pet_decision_effect_tooltip
+
+		trigger_event = {
+			on_action = story_cycle_cat_parrot_decision_on_actions
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 25
+			stress > low_medium_stress
+		}
+
+		modifier = {
+			add = 50
+			stress > medium_stress
+		}
+
+		modifier = {
+			add = 50
+			stress > high_stress
+		}
+	}
+}
