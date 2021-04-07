@@ -10,7 +10,7 @@ pirate_elective = {
 	elector_vote_strength = {
 		base = 0
 		modifier = { # The voting power of a Pirate ruler is tied to the taxes of their counties, modified by their popular opinion there
-			desc = tooltip_pirate_elective_development
+			desc = tooltip_pirate_elective_taxes
 			is_landed = yes
 			domain_size >= 1
 			# If the duchy title has de Jure vassals, then only count them. Otherwise, count everything
@@ -32,18 +32,12 @@ pirate_elective = {
 							target_is_de_jure_liege_or_above = scope:title
 						}
 					}
-					add = {
-						value = this.title_province.monthly_income
-						# if = {
-							# limit = { this.county_opinion > 0 }
-							# multiply = this.county_opinion_times_100
-						# }
-						# else_if = {
-							# limit = { this.county_opinion < 0 }
-							# multiply = this.county_opinion_times_100
-							# multiply = -1
-						# }
-						min = 0
+					every_in_de_jure_hierarchy = {
+						limit = { tier = tier_barony }
+						add = {
+							value = this.title_province.monthly_income
+							min = 0
+						}
 					}
 				}
 			}
@@ -111,12 +105,6 @@ pirate_elective = {
 			type = holder_close_or_extended_family
 			limit = {
 				feudal_elective_potential_landless_dynastic_candidate_trigger = yes
-			}
-		}
-		add = {
-			type = type_test
-			limit = {
-				is_knight_of = scope:holder
 			}
 		}
 	}
