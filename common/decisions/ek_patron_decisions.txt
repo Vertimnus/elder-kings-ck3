@@ -37,7 +37,7 @@ patron_select_patron_decision = {
 
     ai_potential = {
         piety >= minor_piety_value
-        patron_has_passive_patron_trait = no
+        patron_has_any_trait = no
     }
 
     ai_will_do = {
@@ -161,7 +161,7 @@ patron_offer_sacrifice_decision = {
             if = {
                 limit = {
                     ROOT = {
-                        exists = patron_shown
+                        exists = var:patron_shown
                         var:patron_shown = flag:namira
                     }
                 }
