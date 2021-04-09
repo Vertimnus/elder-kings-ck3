@@ -208,7 +208,6 @@ patron_vaermina_valid = {
 	patron_daedra_valid = { DAEDRA = vaermina }
 }
 
-
 # Tribunal #
 patron_almalexia_valid = {
 	always = no
@@ -332,27 +331,33 @@ patron_xen_valid = {
 patron_da_architect_valid = {
 	patron_dwemer_ancestors_valid = yes
 }
-patron_da_warrior_valid = {
-	patron_dwemer_ancestors_valid = yes
-}
 patron_da_giant_valid = {
 	patron_dwemer_ancestors_valid = yes
 }
 patron_da_lost_king_valid = {
 	patron_dwemer_ancestors_valid = yes
 }
+patron_da_warrior_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
 
 # Atmoran Totems
-patron_at_hawk_valid = {
-	patron_atmoran_totems_valid = yes
-}
-patron_at_wolf_valid = {
+patron_at_bear_valid = {
 	OR = {
 		patron_atmoran_totems_valid = yes
 		patron_ternion_totems_valid = yes
 	}
 }
-patron_at_snake_valid = {
+patron_at_dragon_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_fox_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_hawk_valid = {
 	patron_atmoran_totems_valid = yes
 }
 patron_at_moth_valid = {
@@ -361,23 +366,17 @@ patron_at_moth_valid = {
 patron_at_owl_valid = {
 	patron_atmoran_totems_valid = yes
 }
+patron_at_snake_valid = {
+	patron_atmoran_totems_valid = yes
+}
 patron_at_whale_valid = {
 	patron_atmoran_totems_valid = yes
 }
-patron_at_bear_valid = {
+patron_at_wolf_valid = {
 	OR = {
 		patron_atmoran_totems_valid = yes
 		patron_ternion_totems_valid = yes
 	}
-}
-patron_at_fox_valid = {
-	OR = {
-		patron_atmoran_totems_valid = yes
-		patron_ternion_totems_valid = yes
-	}
-}
-patron_at_dragon_valid = {
-	patron_atmoran_totems_valid = yes
 }
 
 # Elemntal Gods
@@ -429,16 +428,16 @@ patron_has_tribunal = {
 	}
 }
 
-patron_has_pantheon = {
-	OR = {
-		patron_divines_valid = yes
-		patron_aldmer_valid = yes
-		patron_dwemer_ancestors_valid = yes
-		patron_atmoran_totems_valid = yes
-		patron_ternion_totems_valid = yes
-		patron_elemental_valid = yes
-	}
-}
+# patron_has_pantheon = {
+# 	OR = {
+# 		patron_divines_valid = yes
+# 		patron_aldmer_valid = yes
+# 		patron_dwemer_ancestors_valid = yes
+# 		patron_atmoran_totems_valid = yes
+# 		patron_ternion_totems_valid = yes
+# 		patron_elemental_valid = yes
+# 	}
+# }
 
 patron_has_patron = {
 	OR = {
@@ -448,48 +447,48 @@ patron_has_patron = {
 	}
 }
 
-patron_has_passive_patron_trait = {
-	OR = {
-		has_trait = p_akatosh
-		has_trait = p_arkay
-		has_trait = p_dibella
-		has_trait = p_julianos
-		has_trait = p_kynareth
-		has_trait = p_mara
-		has_trait = p_stendarr
-		has_trait = p_zenithar
-		has_trait = p_shezarr
-		has_trait = p_auriel
-		has_trait = p_jephre
-		has_trait = p_magnus
-		has_trait = p_phynaster
-		has_trait = p_syrabane
-		has_trait = p_trinimac
-		has_trait = p_xarxes
-		has_trait = p_xen
-		# Dwemer Ancestors
-		has_trait = p_da_architect
-		has_trait = p_da_giant
-		has_trait = p_da_lost_king
-		has_trait = p_da_warrior
-		# Atmoran Totems
-		has_trait = p_at_hawk
-		has_trait = p_at_wolf
-		has_trait = p_at_snake
-		has_trait = p_at_moth
-		has_trait = p_at_owl
-		has_trait = p_at_whale
-		has_trait = p_at_bear
-		has_trait = p_at_fox
-		has_trait = p_at_dragon
-		# Elemental Gods
-		has_trait = p_eg_myn
-		has_trait = p_eg_zisa
-		has_trait = p_eg_nyfa
-		has_trait = p_eg_ilni
-		has_trait = p_eg_tam
-	}
-}
+# patron_has_passive_patron_trait = {
+# 	OR = {
+# 		has_trait = p_akatosh
+# 		has_trait = p_arkay
+# 		has_trait = p_dibella
+# 		has_trait = p_julianos
+# 		has_trait = p_kynareth
+# 		has_trait = p_mara
+# 		has_trait = p_stendarr
+# 		has_trait = p_zenithar
+# 		has_trait = p_shezarr
+# 		has_trait = p_auriel
+# 		has_trait = p_jephre
+# 		has_trait = p_magnus
+# 		has_trait = p_phynaster
+# 		has_trait = p_syrabane
+# 		has_trait = p_trinimac
+# 		has_trait = p_xarxes
+# 		has_trait = p_xen
+# 		# Dwemer Ancestors
+# 		has_trait = p_da_architect
+# 		has_trait = p_da_giant
+# 		has_trait = p_da_lost_king
+# 		has_trait = p_da_warrior
+# 		# Atmoran Totems
+# 		has_trait = p_at_hawk
+# 		has_trait = p_at_wolf
+# 		has_trait = p_at_snake
+# 		has_trait = p_at_moth
+# 		has_trait = p_at_owl
+# 		has_trait = p_at_whale
+# 		has_trait = p_at_bear
+# 		has_trait = p_at_fox
+# 		has_trait = p_at_dragon
+# 		# Elemental Gods
+# 		has_trait = p_eg_myn
+# 		has_trait = p_eg_zisa
+# 		has_trait = p_eg_nyfa
+# 		has_trait = p_eg_ilni
+# 		has_trait = p_eg_tam
+# 	}
+# }
 
 patron_has_ardor = {
 	custom_description = {
@@ -501,6 +500,7 @@ patron_has_ardor = {
 
 patron_trait_master_trigger = {
 	OR = {
+		# Divines
 		$TRIGGER$ = { TRAIT = _akatosh }
 		$TRIGGER$ = { TRAIT = _arkay }
 		$TRIGGER$ = { TRAIT = _dibella }
@@ -510,6 +510,7 @@ patron_trait_master_trigger = {
 		$TRIGGER$ = { TRAIT = _stendarr }
 		$TRIGGER$ = { TRAIT = _zenithar }
 		$TRIGGER$ = { TRAIT = _shezarr }
+		# Aedra
 		$TRIGGER$ = { TRAIT = _auriel }
 		$TRIGGER$ = { TRAIT = _jephre }
 		$TRIGGER$ = { TRAIT = _magnus }
@@ -518,6 +519,7 @@ patron_trait_master_trigger = {
 		$TRIGGER$ = { TRAIT = _trinimac }
 		$TRIGGER$ = { TRAIT = _xarxes }
 		$TRIGGER$ = { TRAIT = _xen }
+		# Daedra
 		$TRIGGER$ = { TRAIT = _azura }
 		$TRIGGER$ = { TRAIT = _boethiah }
 		$TRIGGER$ = { TRAIT = _clavicus }
@@ -540,15 +542,15 @@ patron_trait_master_trigger = {
 		$TRIGGER$ = { TRAIT = _da_lost_king }
 		$TRIGGER$ = { TRAIT = _da_warrior }
 		# Atmoran Totems
+		$TRIGGER$ = { TRAIT = _at_bear }
+		$TRIGGER$ = { TRAIT = _at_dragon }
+		$TRIGGER$ = { TRAIT = _at_fox }
 		$TRIGGER$ = { TRAIT = _at_hawk }
-		$TRIGGER$ = { TRAIT = _at_wolf }
-		$TRIGGER$ = { TRAIT = _at_snake }
 		$TRIGGER$ = { TRAIT = _at_moth }
 		$TRIGGER$ = { TRAIT = _at_owl }
+		$TRIGGER$ = { TRAIT = _at_snake }
 		$TRIGGER$ = { TRAIT = _at_whale }
-		$TRIGGER$ = { TRAIT = _at_bear }
-		$TRIGGER$ = { TRAIT = _at_fox }
-		$TRIGGER$ = { TRAIT = _at_dragon }
+		$TRIGGER$ = { TRAIT = _at_wolf }
 		# Elemental Gods
 		$TRIGGER$ = { TRAIT = _eg_myn }
 		$TRIGGER$ = { TRAIT = _eg_zisa }
