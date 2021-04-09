@@ -947,13 +947,17 @@ window = {
 
 								using = Animation_ShowHide_Standard
 
-								datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]"
+								datacontext = "[GetScriptedGui('patron_selection_tab_toggle')]" #need close desision detail view
 								onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+								onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('decision_detail'), 'decision_detail_close', '' ) )]"
+
 								tooltip = patron_back_tt
 
-								# block "button_back" {
-								# 	visible = no
-								# }
+								state = {
+									name = "decision_detail_close"
+
+									on_start = "[ToggleGameView('decision_detail')]"
+								}
 							}
 							spacer = {
 								size = { 10 0 }
