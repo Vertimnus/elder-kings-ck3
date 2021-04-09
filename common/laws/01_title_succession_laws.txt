@@ -180,6 +180,10 @@ title_succession_laws = {
 	### EK EDIT
 	# Pirate election
 	pirate_elective_succession_law = {
+		can_keep = {
+			has_government = pirate_government
+			highest_held_title_tier >= tier_duchy
+		}
 		can_have = {
 			has_government = pirate_government
 			highest_held_title_tier >= tier_duchy
@@ -190,10 +194,11 @@ title_succession_laws = {
 		can_title_have = {
 			can_title_have_law_general_trigger = yes
 		}
-		should_start_with = {
-			has_government = pirate_government
-			highest_held_title_tier >= tier_duchy
-		}
+		# Handled in on_game_start
+		# should_start_with = {
+			# has_government = pirate_government
+			# highest_held_title_tier >= tier_duchy
+		# }
 		succession = {
 			order_of_succession = election
 			election_type = pirate_elective
