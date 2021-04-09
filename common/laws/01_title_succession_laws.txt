@@ -176,4 +176,40 @@ title_succession_laws = {
 			order_of_succession = player_heir
 		}
 	}
+	
+	### EK EDIT
+	# Pirate election
+	pirate_elective_succession_law = {
+		can_keep = {
+			has_government = pirate_government
+			highest_held_title_tier >= tier_duchy
+		}
+		can_have = {
+			has_government = pirate_government
+			highest_held_title_tier >= tier_duchy
+		}
+		can_pass = {
+			can_change_title_law_trigger = yes
+		}
+		can_title_have = {
+			can_title_have_law_general_trigger = yes
+		}
+		# Handled in on_game_start
+		# should_start_with = {
+			# has_government = pirate_government
+			# highest_held_title_tier >= tier_duchy
+		# }
+		succession = {
+			order_of_succession = election
+			election_type = pirate_elective
+		}
+		flag = elective_succession_law
+		title_allegiance_opinion = 5
+		revoke_cost = {
+			prestige = change_title_succession_law_prestige_cost
+		}
+		pass_cost = {
+			prestige = change_title_succession_law_prestige_cost
+		}
+	}
 }

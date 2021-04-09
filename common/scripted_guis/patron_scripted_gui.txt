@@ -78,14 +78,6 @@
             limit = { has_variable = patron_vaermina_shown }
             set_variable = patron_vaermina_shown_res
         }
-        if = {
-            limit = { has_variable = patron_divines_shown }
-            set_variable = patron_divines_shown_res
-        }
-        if = {
-            limit = { has_variable = patron_aldmer_shown }
-            set_variable = patron_aldmer_shown_res
-        }
         # if = {
         #     limit = { has_variable =  }
         #     set_variable = _res
@@ -174,14 +166,6 @@ patron_restore = {
             limit = { has_variable = patron_vaermina_shown_res }
             set_variable = patron_vaermina_shown
         }
-        if = {
-            limit = { has_variable = patron_divines_shown_res }
-            set_variable = patron_divines_shown
-        }
-        if = {
-            limit = { has_variable = patron_aldmer_shown_res }
-            set_variable = patron_aldmer_shown
-        }
         patron_clear_res_variables = yes
     }
 }
@@ -237,7 +221,7 @@ patron_has_no_patrons = {
     scope = character
 
     is_shown = {
-        patron_has_patron = no
+        faith = { patron_has_patron = no }
     }
 }
 
@@ -245,7 +229,7 @@ patron_has_princes = {
     scope = character
 
     is_shown = {
-        patron_has_princes = yes #testing
+        faith = { patron_has_princes = yes } #testing
     }
 }
 
@@ -253,15 +237,7 @@ patron_has_tribunal = {
     scope = character
 
     is_shown = {
-        patron_has_tribunal = yes
-    }
-}
-
-patron_has_pantheon = {
-    scope = character
-
-    is_shown = {
-        patron_has_pantheon = yes
+        faith = { patron_has_tribunal = yes }
     }
 }
 
@@ -300,7 +276,7 @@ patron_azura_shown = {
     scope = character
 
     is_shown = {
-        patron_azura_valid = yes
+        faith = { patron_azura_valid = yes }
         #always = yes #for testing
     }
 
@@ -318,7 +294,7 @@ patron_boethiah_shown = {
     scope = character
 
     is_shown = {
-        patron_boethiah_valid = yes
+        faith = { patron_boethiah_valid = yes }
         #always = yes #for testing
     }
 
@@ -336,7 +312,7 @@ patron_clavicus_shown = {
     scope = character
 
     is_shown = {
-        patron_clavicus_valid = yes
+        faith = { patron_clavicus_valid = yes }
         #always = yes #for testing
     }
 
@@ -354,7 +330,7 @@ patron_hermaeus_shown = {
     scope = character
 
     is_shown = {
-        patron_hermaeus_valid = yes
+        faith = { patron_hermaeus_valid = yes }
         #always = yes #for testing
     }
 
@@ -372,7 +348,7 @@ patron_hircine_shown = {
     scope = character
 
     is_shown = {
-        patron_hircine_valid = yes
+        faith = { patron_hircine_valid = yes }
         #always = yes #for testing
     }
 
@@ -390,7 +366,7 @@ patron_jyggalag_shown = {
     scope = character
 
     is_shown = {
-        patron_jyggalag_valid = yes
+        faith = { patron_jyggalag_valid = yes }
         #always = yes #for testing
     }
 
@@ -408,7 +384,7 @@ patron_malacath_shown = {
     scope = character
 
     is_shown = {
-        patron_malacath_valid = yes
+        faith = { patron_malacath_valid = yes }
         #always = yes #for testing
     }
 
@@ -426,7 +402,7 @@ patron_mehrunes_shown = {
     scope = character
 
     is_shown = {
-        patron_mehrunes_valid = yes
+        faith = { patron_mehrunes_valid = yes }
         #always = yes #for testing
     }
 
@@ -444,7 +420,7 @@ patron_mephala_shown = {
     scope = character
 
     is_shown = {
-        patron_mephala_valid = yes
+        faith = { patron_mephala_valid = yes }
         #always = yes #for testing
     }
 
@@ -462,7 +438,7 @@ patron_meridia_shown = {
     scope = character
 
     is_shown = {
-        patron_meridia_valid = yes
+        faith = { patron_meridia_valid = yes }
         #always = yes #for testing
     }
 
@@ -480,7 +456,7 @@ patron_molag_shown = {
     scope = character
 
     is_shown = {
-        patron_molag_valid = yes
+        faith = { patron_molag_valid = yes }
         #always = yes #for testing
     }
 
@@ -498,7 +474,7 @@ patron_namira_shown = {
     scope = character
 
     is_shown = {
-        patron_namira_valid = yes
+        faith = { patron_namira_valid = yes }
         #always = yes #for testing
     }
 
@@ -516,7 +492,7 @@ patron_nocturnal_shown = {
     scope = character
 
     is_shown = {
-        patron_nocturnal_valid = yes
+        faith = { patron_nocturnal_valid = yes }
         #always = yes #for testing
     }
 
@@ -534,7 +510,7 @@ patron_peryite_shown = {
     scope = character
 
     is_shown = {
-        patron_peryite_valid = yes
+        faith = { patron_peryite_valid = yes }
         #always = yes #for testing
     }
 
@@ -552,7 +528,7 @@ patron_sanguine_shown = {
     scope = character
 
     is_shown = {
-        patron_sanguine_valid = yes
+        faith = { patron_sanguine_valid = yes }
         #always = yes #for testing
     }
 
@@ -570,7 +546,7 @@ patron_sheogorath_shown = {
     scope = character
 
     is_shown = {
-        patron_sheogorath_valid = yes
+        faith = { patron_sheogorath_valid = yes }
         #always = yes #for testing
     }
 
@@ -588,7 +564,7 @@ patron_vaermina_shown = {
     scope = character
 
     is_shown = {
-        patron_vaermina_valid = yes
+        faith = { patron_vaermina_valid = yes }
         #always = yes #for testing
     }
 
@@ -602,398 +578,39 @@ patron_vaermina_shown = {
     }
 }
 
-# Passive Patrons #
-# Divines #
-patron_divines_shown = {
-    scope = character
+# Patrons done #
+faith_get_patrons = {
+    scope = faith
 
-    is_shown = {
-        patron_divines_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        NOT = { has_variable = patron_divines_shown }
+    saved_scopes = {
+        player_s
     }
 
     effect = {
-        patron_clear_variables = yes
-        set_variable = patron_divines_shown
-    }
-}
-
-patron_akatosh_shown = {
-    scope = character
-
-    is_shown = {
-        patron_akatosh_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_akatosh_shown }
-            #current patron deity selected
+        scope:player_s = {
+            clear_variable_list = faith_patrons
+            set_variable = { name = faith_window value = PREV }
         }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_akatosh_shown
+        patron_get_list = yes
     }
 }
 
-patron_arkay_shown = {
+faith_clear_patrons = {
     scope = character
 
-    is_shown = {
-        patron_arkay_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_arkay_shown }
-            #current patron deity selected
-        }
-    }
-
     effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_arkay_shown
+        clear_variable_list = faith_patrons
+        remove_variable = faith_window
     }
 }
 
-patron_dibella_shown = {
+action_patron_clear = {
     scope = character
 
-    is_shown = {
-        patron_dibella_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_dibella_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_dibella_shown
-    }
+    effect = { remove_variable = action_patron }
 }
 
-patron_julianos_shown = {
-    scope = character
-
-    is_shown = {
-        patron_julianos_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_julianos_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_julianos_shown
-    }
-}
-
-patron_kynareth_shown = {
-    scope = character
-
-    is_shown = {
-        patron_kynareth_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_kynareth_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_kynareth_shown
-    }
-}
-
-patron_mara_shown = {
-    scope = character
-
-    is_shown = {
-        patron_mara_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_mara_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_mara_shown
-    }
-}
-
-patron_stendarr_shown = {
-    scope = character
-
-    is_shown = {
-        patron_stendarr_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_stendarr_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_stendarr_shown
-    }
-}
-
-patron_zenithar_shown = {
-    scope = character
-
-    is_shown = {
-        patron_zenithar_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_zenithar_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_zenithar_shown
-    }
-}
-
-patron_shezarr_shown = {
-    scope = character
-
-    is_shown = {
-        patron_shezarr_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_shezarr_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_shezarr_shown
-    }
-}
-
-# Aldmer #
-patron_aldmer_shown = {
-    scope = character
-
-    is_shown = {
-        patron_aldmer_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        NOT = { has_variable = patron_aldmer_shown }
-    }
-
-    effect = {
-        patron_clear_variables = yes
-        set_variable = patron_aldmer_shown
-    }
-}
-
-patron_auriel_shown = {
-    scope = character
-
-    is_shown = {
-        patron_auriel_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_auriel_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_auriel_shown
-    }
-}
-
-patron_jephre_shown = {
-    scope = character
-
-    is_shown = {
-        patron_jephre_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_jephre_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_jephre_shown
-    }
-}
-
-patron_magnus_shown = {
-    scope = character
-
-    is_shown = {
-        patron_magnus_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_magnus_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_magnus_shown
-    }
-}
-
-patron_phynaster_shown = {
-    scope = character
-
-    is_shown = {
-        patron_phynaster_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_phynaster_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_phynaster_shown
-    }
-}
-
-patron_syrabane_shown = {
-    scope = character
-
-    is_shown = {
-        patron_syrabane_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_syrabane_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_syrabane_shown
-    }
-}
-
-patron_trinimac_shown = {
-    scope = character
-
-    is_shown = {
-        patron_trinimac_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_trinimac_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_trinimac_shown
-    }
-}
-
-patron_xarxes_shown = {
-    scope = character
-
-    is_shown = {
-        patron_xarxes_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_xarxes_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_xarxes_shown
-    }
-}
-
-patron_xen_shown = {
-    scope = character
-
-    is_shown = {
-        patron_xen_valid = yes
-        #always = yes #for testing
-    }
-
-    is_valid = {
-        OR = {
-            NOT = { has_variable = patron_xen_shown }
-            #current patron deity selected
-        }
-    }
-
-    effect = {
-        patron_passive_clear_variables = yes
-        set_variable = patron_xen_shown
-    }
-}
+# Since Blackninja might remove concatenation, may need to pass flags to sgui, then pass those (through provinces as saved scopes?)
+# to custom_description_no_bullet and concatenate there, then call sgui.EffectTooltip
+# could also use a loc string :0 "[thing]_[thing2]" and call it
+# Localize is apparently going to be fixed to work properly

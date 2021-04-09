@@ -211,7 +211,7 @@
  destruction_spell_3:0 "sparks"
  #destruction_spell_sparks_hostile:0 "yes"
  destruction_spell_sparks_name:0 "Sparks"
- #destruction_spell_sparks:0 "Sparks [GetPlayer.MakeScope.Var('magicka').GetValue]" #doesn't work? clue to other parts not working
+ #destruction_spell_sparks:0 "Sparks [GetPlayer.MakeScope.Var('magicka').GetValue]" #doesn't work? clue to other parts not working. probably because it is Localize()
  destruction_spell_4:0 "firestorm"
  #destruction_spell_firestorm_hostile:0 "yes"
  #destruction_spell_firestorm_province:0 "yes"
@@ -243,3 +243,5 @@
  spell_confirm:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), 'no_spell_selected', 'spell_cast' )]"
  no_spell_selected:0 "No Spell Selected"
  spell_cast:0 "Cast [Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))]"
+
+ # "$[GetPlayer.MakeScope.Var('spell_name').GetFlagName]_name$" to localize stuff w/o concatenate?

@@ -74,6 +74,16 @@ attrebus_potentate_cb = {
 	on_victory = {
 		scope:attacker = { show_pow_release_message_effect = yes }
 		
+		scope:attacker = {
+			every_war_ally = {
+				limit = { dynasty = dynasty:130005 }
+				add_to_list = zenas_ally
+			}
+		}
+		
+		character:valentian_99 = { save_scope_as = liodes }
+		custom_tooltip = attrebus_potentate_cb_victory_with_liodes_desc
+		
 		custom_tooltip = attrebus_potentate_cb_seize_potentate_held_land
 		# The usurpation is done in the event
 		

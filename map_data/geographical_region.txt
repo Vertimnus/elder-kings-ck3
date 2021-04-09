@@ -126,7 +126,7 @@ mundus_tamriel_hammerfell_taneth = {
 
 ## Stonedale
 mundus_tamriel_hammerfell_stonedale = {
-	duchies = { d_stonedale d_helland d_vulkneu }
+	duchies = { d_stonedale d_hadaf d_vulkneu }
 }
 
 ## Sunforge
@@ -496,7 +496,7 @@ mundus_tamriel = {
 
 ## SOUTHERN REACH: Dragontail
 	mundus_tamriel_reach_south_reach = {
-		regions = { mundus_tamriel_hammerfell_dragontail }
+		regions = { mundus_tamriel_hammerfell_dragontail mundus_tamriel_hammerfell_elinhir }
 	}
 
 ## EAST REACH: Markarth + North Reach
@@ -513,6 +513,31 @@ mundus_tamriel = {
 		regions = { mundus_tamriel_reach_west_reach mundus_tamriel_reach_east_reach mundus_tamriel_reach_south_reach }
 	}
 
+### DIRENNI HEGEMONY
+## CORE TERRITORY: Balfiera + Wrothgar + Fharun + Wayrest + Evermore
+	mundus_tamriel_direnni_hegemony_core = {
+		regions = { mundus_tamriel_high_rock_balfiera mundus_tamriel_high_rock_wrothgar mundus_tamriel_high_rock_fharun mundus_tamriel_high_rock_wayrest mundus_tamriel_high_rock_evermore }
+	}
+## CORE TERRITORY A: Camlorn
+	mundus_tamriel_direnni_hegemony_form_a = {
+		regions = { mundus_tamriel_high_rock_camlorn }
+	}
+## CORE TERRITORY B: The Reach
+	mundus_tamriel_direnni_hegemony_form_b = {
+		regions = { mundus_tamriel_skyrim_karth }
+	}
+
+## FULL TERRITORY: Core + Core A + Core B + Daggerfall + Shornhelm + Northpoint + Hallin + Dragontail + Elinhir
+	mundus_tamriel_direnni_hegemony_full = {
+		regions = { mundus_tamriel_direnni_hegemony_core mundus_tamriel_direnni_hegemony_form_a mundus_tamriel_direnni_hegemony_form_b mundus_tamriel_high_rock_daggerfall mundus_tamriel_high_rock_shornhelm mundus_tamriel_high_rock_northpoint mundus_tamriel_hammerfell_hallin mundus_tamriel_hammerfell_dragontail mundus_tamriel_hammerfell_elinhir }
+	}
+	
+ ### PIRATE CONFEDERACY OF THE ISLES
+	mundus_tamriel_pirate_conf_the_isles = {
+		regions = { mundus_tamriel_hammerfell_hew_bane mundus_tamriel_hammerfell_abecean }
+		duchies = { d_systres d_stirk }
+	}
+	
 ###########################################################################
 # Navitity Regions
 # Each region should have an associated innovation
@@ -686,9 +711,68 @@ world_innovation_camels = {
 }
 
 # Illiac Bay and Abecean Sea
-world_innovation_gunpowder = {
+world_innovation_gunpowder = { # Cannons are canon
 	regions = {
 		mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_bangkorai mundus_tamriel_hammerfell_alikr_desert  mundus_tamriel_hammerfell_abecee
+	}
+}
+
+# Counties in it are islands (small and surrounded by the sea)
+mundus_islands = {
+	duchies = {
+		# e_yokuda
+		# e_hammerfell
+		d_abecean
+		d_stros_mkai
+		# e_high_rock
+		d_betony
+		d_balfiera
+		d_grayhome
+		# e_skyrim
+		d_volkihar
+		# e_cyrodiil
+		d_stirk
+		# e_valenwood
+		d_rictus
+		# e_summerset
+		d_systres
+		# e_elsweyr
+		d_khenarthi_roost
+		# e_morrowind
+		# e_black_marsh
+	}
+	
+	counties = {
+		# e_yokuda
+		c_kardesh
+		c_klithi
+		c_siuol_yelir
+		c_bahia
+		c_moni
+		c_kevalla
+		# e_hammerfell
+		# e_high_rock
+		c_caecilly
+		# e_skyrim
+		c_icereach
+		c_silent_isles
+		c_dawn_isles
+		c_japhet_folly
+		c_bleakrock
+		# e_cyrodiil
+		# e_valenwood
+		# e_summerset
+		c_errinorne
+		c_silatar
+		c_wasten_coraldale
+		c_sapiarchis
+		c_sea_viper
+		c_belport
+		c_calluis_lar
+		# e_elsweyr
+		c_tideholm
+		# e_morrowind
+		# e_black_marsh
 	}
 }
 
@@ -696,3 +780,11 @@ world_innovation_gunpowder = {
 # Vanilla redefinitions (we might reuse them later?)
 ##############################
 world_steppe = { }
+
+###########################################################################
+# Climate Regions - Tie some commander traits to there
+###########################################################################
+mundus_climate_winter = {
+	regions = { mundus_tamriel_skyrim mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_wrothgar } # Add Sheogorad once it's in
+	duchies = { d_blacklight }
+}
