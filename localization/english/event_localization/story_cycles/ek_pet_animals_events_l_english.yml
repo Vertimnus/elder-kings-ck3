@@ -1,9 +1,13 @@
 ﻿l_english:
-##############
-## PARROT
-##############
+ ##############
+ #   PARROT   #
+ ##############
  parrot_story_modifier:0 "Pet Parrot"
  parrot_story_modifier_desc:0 "This character enjoys the company of an exotic bird, flying around them wherever they go"
+ parrot_story_eating_fruit_modifier:0 "Fresh Fruits and Parrot"
+ parrot_story_eating_fruit_modifier_desc:0 "This character enjoys sharing fresh fruits with their parrot"
+ parrot_story_fighting_with_you_modifier:0 "Battle Parrot"
+ parrot_story_fighting_with_you_modifier_desc:0 "In battle, this character can always be seen with their parrot not far from them, distracting enemies and even sometimes hurting them."
  
  parrot_gender_her:0 "her"
  parrot_gender_his:0 "his"
@@ -28,8 +32,27 @@
  ek_pet_animal.0001.t:0 "The Parrot"
  ek_pet_animal.0001.desc:1 "As the parrot flies in the room, happily singing, I ponder what I should name [ROOT.Char.Custom('ParrotStoryHerHim')]. Something historical? Something alluding to [ROOT.Char.Custom('ParrotStoryHerHis')] [ROOT.Char.Custom('ParrotPlumageColor')] plumage? Something to describe the soothing feeling I experience when [ROOT.Char.Custom('ParrotStorySheHe')] sings around me?\n\nOh, I know! I will name [ROOT.Char.Custom('ParrotStoryHerHim')]..."
  ek_pet_animal.0001.a:1 "What a great name!"
-
-#Parrot dies :(
+ 
+ ### Random parrot events
+ # You eat some fruits with your parrots, smol health modifier
+ ek_pet_animal.0101.t:0 "[ROOT.Char.Custom('ParrotStoryName')]: Fresh Fruits"
+ ek_pet_animal.0101.desc:0 "I have taken the habit to spend some time with [ROOT.Char.Custom('ParrotStoryName')] at the end of the day, sharing some fresh fruits with [ROOT.Char.Custom('ParrotStoryHerHim')].\n\nI don't know if that's because of the fruits or [ROOT.Char.Custom('ParrotStoryName')], but I feel more energetic and healthy!"
+ ek_pet_animal.0101.a:0 "Leave some for me [ROOT.Char.Custom('ParrotStoryName')]!"
+ 
+ # Your parrot goes with you into battle!
+ ek_pet_animal.0102.t:0 "[ROOT.Char.Custom('ParrotStoryName')]: Beak and Claws"
+ ek_pet_animal.0102.desc:0 "It seems that the bravery of [ROOT.Char.Custom('ParrotStoryName')] knows no bound! Be it in large scale battles, small skirmishes, or even in singular duels, [ROOT.Char.Custom('ParrotStorySheHe')] never leaves your side and fights with you.\n\nYour opponents, friendly or not, seem to even be frightened of [ROOT.Char.Custom('ParrotStoryHerHim')], and more than one were defeated because [ROOT.Char.Custom('ParrotStoryName')] distracted them with [ROOT.Char.Custom('ParrotStoryHerHis')] [ROOT.Char.Custom('ParrotPlumageColor')] plumage, or even because [ROOT.Char.Custom('ParrotStorySheHe')] pecked them!"
+ ek_pet_animal.0102.a:0 "With me, into battle!"
+ 
+ # Your parrot attacked a vassal! Wound or possibly an eye removal
+ ek_pet_animal.0103.t:0 "[ROOT.Char.Custom('ParrotStoryName')]: Pecking the Eyes"
+ ek_pet_animal.0103.desc_wounded:0 "Horror in the thronechamber! As [vassal.GetName] was awaiting an audience with you, [ROOT.Char.Custom('ParrotStoryName')], seemingly out of nowhere, decided to attack [vassal.GetHerHim]!\n\n[vassal.GetFirstName] managed to flee the room, but not before your parrot could severly hurt [vassal.GetHerHim]..."
+ ek_pet_animal.0103.desc_eye_removed_not_one_eyed:0 "Horror in the thronechamber! As [vassal.GetName] was awaiting an audience with you, [ROOT.Char.Custom('ParrotStoryName')], seemingly out of nowhere, decided to attack [vassal.GetHerHim]!\n\nAn intense scream was soon heard, and after [ROOT.Char.Custom('ParrotStoryName')] was put back into [ROOT.Char.Custom('ParrotStoryHerHis')] cage [vassal.GetFirstName] could be seen holding [vassal.GetHerHis] hand near [vassal.GetHerHis] one of her eyes... with blood dripping."
+ ek_pet_animal.0103.desc_eye_removed_one_eyed:0 "Horror in the thronechamber! As [vassal.GetName] was awaiting an audience with you, [ROOT.Char.Custom('ParrotStoryName')], seemingly out of nowhere, decided to attack [vassal.GetHerHim]!\n\nAn intense scream was soon heard, and after [ROOT.Char.Custom('ParrotStoryName')] was put back into [ROOT.Char.Custom('ParrotStoryHerHis')] cage [vassal.GetFirstName] could be seen holding [vassal.GetHerHis] hand near [vassal.GetHerHis] only remaining eye... with blood dripping.\n\n'I CAN'T SEE' could [vassal.GetSheHe] be heard screaming. 'THIS IS ALL YOUR FAULT, YOU AND YOUR STUPID BIRD!'"
+ ek_pet_animal.0103.a:0 "I hope [vassal.GetFirstName] will be all right..."
+ ek_pet_animal.0103.b:0 "Oh no..."
+ 
+ # Parrot dies :(
  ek_pet_animal.0199.t:0 "[ROOT.Char.Custom('ParrotStoryName')]: Day of Sorrow"
  ek_pet_animal.0199.desc:0 "[ROOT.Char.Custom('ParrotStoryName')] is not as young as [ROOT.Char.Custom('ParrotStorySheHe')] once was, and I can hear it in [ROOT.Char.Custom('ParrotStoryHerHis')] singing, not as strong and stable as it was some years ago.\n\nI gently pet [ROOT.Char.Custom('ParrotStoryHerHis')] [ROOT.Char.Custom('ParrotPlumageColor')] plumage and listen to [ROOT.Char.Custom('ParrotStoryHerHim')] softly sing and try to flap [ROOT.Char.Custom('ParrotStoryHerHis')] wings, but as silence falls I know that [ROOT.Char.Custom('ParrotStoryHerHis')] morning song won't wake me up again."
  ek_pet_animal.0199.a:0 "I will miss you, [ROOT.Char.Custom('ParrotStoryName')]!"
@@ -39,6 +62,7 @@
  pet_parrot_decision_tooltip:0 "Pet your parrot"
  pet_parrot_decision_confirm:0 "Pet your parrot"
  
+ # You pet your parrot :)
  ek_pet_animal.0501.t:0 "A nice time with [ROOT.Char.Custom('ParrotStoryName')]"
  ek_pet_animal.0501.desc:0 "As you enter your room, you can immediatly hear [ROOT.Char.Custom('ParrotStoryName')] chirp in excitment.\nWith a smile on your face you open [ROOT.Char.Custom('ParrotStoryHerHis')] cage and let [ROOT.Char.Custom('ParrotStoryHerHim')] open [ROOT.Char.Custom('ParrotStoryHerHis')] wings before taking off.\n[ROOT.Char.Custom('ParrotStoryName')] flies around the room for a few moments, before landing in your hand and cuddling your neck with [ROOT.Char.Custom('ParrotStoryHerHis')] head.\n\nAs you laugh, you feel the weight of the world already lifting from your shoulders."
  ek_pet_animal.0501.a:0 "You're tickling me!"

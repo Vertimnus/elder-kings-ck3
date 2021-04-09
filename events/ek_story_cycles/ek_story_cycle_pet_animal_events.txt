@@ -3,16 +3,20 @@
 namespace = ek_pet_animal
 
 ###########################################
-# PARROT (0001-0999), by Singe
+# PARROT (0001-0999)
 #	ek_pet_animal.0001 - Name your parrot!
 #
-# Other events for your cat, by Linnéa Thimrén
-#	ek_pet_animal.0101 - Random encounter, get some gold
-#	ek_pet_animal.0199 - Parrot dies
+# Other events for your parrot
+#	ek_pet_animal.0101 - Share some healthy fruits with your parrot, smol health bonus
+#	ek_pet_animal.0102 - Your parrot follows you in battle, prowess bonus
+#	ek_pet_animal.0103 - Your parrot hurts a vassal (wounded, small chance for one-eyed/blinded)
+#
+#	ek_pet_animal.0199 - Parrot dies :(
 #
 #
-# CAT DECISION EVENTS
+# PARROT DECISION EVENTS
 #	ek_pet_animal.0501 - You pet your parrot
+#	ek_pet_animal.0502 - You pet your parrot v2
 #
 ###########################################
 
@@ -121,6 +125,202 @@ ek_pet_animal.0001 = {
 	}
 }
 
+###########################################
+# Other events for your parrot
+#	0100-0199
+###########################################
+
+# Share some healthy fruits with your parrot, smol health bonus
+ek_pet_animal.0101 = {
+	type = character_event
+	title = ek_pet_animal.0101.t
+	desc = ek_pet_animal.0101.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	override_background = {
+		event_background = bedchamber
+	}
+	
+	trigger = {
+		NOT = { has_character_flag = had_ek_pet_animal_0101_event }
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = had_ek_pet_animal_0101_event
+			years = 10
+		}
+	}
+
+	option = { # Hey, leave some for me!
+		name = ek_pet_animal.0101.a
+		
+		add_character_modifier = {
+			modifier = parrot_story_eating_fruit_modifier
+			days = 3650
+		}
+	}
+}
+
+# Your parrot follows you in battle, prowess bonus
+ek_pet_animal.0102 = {
+	type = character_event
+	title = ek_pet_animal.0102.t
+	desc = ek_pet_animal.0102.desc
+	theme = pet
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	override_background = {
+		event_background = army_camp
+	}
+	
+	trigger = {
+		NOT = { has_character_flag = had_ek_pet_animal_0102_event }
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = had_ek_pet_animal_0102_event
+			years = 10
+		}
+	}
+
+	option = { # With me, into battle!
+		name = ek_pet_animal.0102.a
+		
+		add_character_modifier = {
+			modifier = parrot_story_fighting_with_you_modifier
+			days = 3650
+		}
+	}
+}
+
+# Your parrot hurts a vassal (wounded, small chance for one-eyed/blinded)
+ek_pet_animal.0103 = {
+	type = character_event
+	title = ek_pet_animal.0103.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { local_var:ek_pet_animal_0103_result = flag:wounded }
+				desc = ek_pet_animal.0103.desc_wounded
+			}
+			triggered_desc = {
+				trigger = {
+					local_var:ek_pet_animal_0103_result = flag:eye_removed
+					scope:vassal = { NOT = { has_trait = one_eyed } }
+				}
+				desc = ek_pet_animal.0103.desc_eye_removed_not_one_eyed
+			}
+			triggered_desc = { # That will hurt
+				trigger = {
+					local_var:ek_pet_animal_0103_result = flag:eye_removed
+					scope:vassal = { has_trait = one_eyed }
+				}
+				desc = ek_pet_animal.0103.desc_eye_removed_one_eyed
+			}
+		}
+	}
+	theme = pet
+	override_background = {
+		event_background = throne_room
+	}
+	left_portrait = {
+		character = scope:vassal
+		animation = severelywounded
+	}
+	right_portrait = {
+		character = root
+		animation = shock
+	}
+	
+	trigger = {
+		NOT = { has_character_flag = had_ek_pet_animal_0103_event }
+		any_vassal = {
+			is_available_ai = yes
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				is_available_ai = yes
+				NOT = { has_trait = blind }
+			}
+			weight = {
+				base = 50
+			}
+			save_scope_as = vassal
+		}
+		add_character_flag = {
+			flag = had_ek_pet_animal_0103_event
+			years = 10
+		}
+		# Do we just wound or remove an eye?
+		random_list = {
+			80 = {
+				set_local_variable = {
+					name = ek_pet_animal_0103_result
+					value = flag:wounded
+				}
+			}
+			20 = {
+				set_local_variable = {
+					name = ek_pet_animal_0103_result
+					value = flag:eye_removed
+				}
+			}
+		}
+	}
+	
+	# Just wounded
+	option = {
+		trigger = { local_var:ek_pet_animal_0103_result = flag:wounded }
+		
+		name = ek_pet_animal.0103.a
+
+		scope:vassal = {
+			add_opinion = {
+				modifier = scared_opinion
+				target = root
+				opinion = -30
+			}
+			
+			increase_wounds_effect = { REASON = attacked }
+		}
+	}
+	
+	# Eye(s) pecked
+	option = {
+		trigger = { local_var:ek_pet_animal_0103_result = flag:eye_removed }
+		
+		name = ek_pet_animal.0103.b
+
+		# Push towards becoming Nemesis
+		progress_towards_rival_effect = {
+			CHARACTER = scope:vassal
+			OPINION = no
+		}
+		
+		# Remove one eye
+		scope:vassal = {
+			if = {
+				limit = { has_trait = one_eyed }
+				remove_trait = one_eyed
+				add_trait = blind
+			}
+			else = {
+				add_trait_force_tooltip = one_eyed
+			}
+		}
+	}
+}
+
 #Parrot dies
 ek_pet_animal.0199 = {
 	type = character_event
@@ -209,13 +409,13 @@ ek_pet_animal.0502 = {
 		base = 1
 		modifier = { #No blockage, so the decision is available, but very unlikely with repetition
 			add = -0.9
-			has_character_flag = had_ek_pet_animal_0501_event
+			has_character_flag = had_ek_pet_animal_0502_event
 		}
 	}
 
 	immediate = {
 		add_character_flag = {
-			flag = had_ek_pet_animal_0501_event
+			flag = had_ek_pet_animal_0502_event
 			years = 10
 		}
 	}
