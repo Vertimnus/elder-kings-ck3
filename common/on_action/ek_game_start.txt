@@ -225,63 +225,6 @@ ek_on_game_start = {
 			}
 		}
 		
-		### Holy Sites buildings
-		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
-		every_religion_global = {
-			every_faith = {
-				limit = { has_doctrine = doctrine_pantheon_jephre }
-				every_holy_site = {
-					limit = {
-						title_province = {
-							has_special_building_slot = no
-						}
-					}
-					title_province = {
-						add_special_building_slot = great_wyrd_tree_01
-					}
-				}
-			}
-			every_faith = {
-				limit = { has_doctrine = special_doctrine_daedra_worshipper }
-				every_holy_site = {
-					limit = {
-						title_province = {
-							has_special_building_slot = no
-						}
-					}
-					title_province = {
-						add_special_building_slot = daedric_shrine_01
-					}
-				}
-			}
-			every_faith = {
-				limit = { has_doctrine = doctrine_pantheon_dragons }
-				every_holy_site = {
-					limit = {
-						title_province = {
-							has_special_building_slot = no
-						}
-					}
-					title_province = {
-						add_special_building_slot = dragon_temple_01
-					}
-				}
-			}
-			# Very generic
-			every_faith = {
-				every_holy_site = {
-					limit = {
-						title_province = {
-							has_special_building_slot = no
-						}
-					}
-					title_province = {
-						add_special_building_slot = holy_site_other_grand_temple_01
-					}
-				}
-			}
-		}
-		
 		### Innovations
 		# Cultural & regional
 		culture:alinor = { add_innovation = innovation_moonstone_armor }
