@@ -1,0 +1,78 @@
+﻿# Wound in exchange for freedom
+extract_blood_price_interaction = {
+	category = interaction_category_prison
+
+	desc = extract_blood_price_interaction_desc
+	highlighted_reason = HIGHLIGHTED_HAS_IMPRISONMENT_REASON
+	
+	is_shown = {
+		scope:actor = { culture = { has_innovation = innovation_blood_price } }
+		scope:recipient = {
+			is_imprisoned_by = scope:actor
+			is_adult = yes
+		}
+	}
+	
+	is_highlighted = {
+		scope:recipient = {
+			is_imprisoned = yes
+		}
+		scope:actor = {
+			OR = {
+				has_imprisonment_reason = scope:recipient
+				has_execute_reason = scope:recipient
+			}
+		}
+	}
+
+	auto_accept = yes
+	
+	on_accept = {
+		scope:recipient = {
+			show_as_tooltip = {
+				if = { # No reason? Small health penalty
+					limit = {
+						scope:actor = {
+							NOR = {
+								has_imprisonment_reason = scope:recipient
+								has_execute_reason = scope:recipient
+							}
+						}
+					}
+					
+					custom_tooltip = extract_blood_price_effect_no_reason_tooltip
+					add_character_modifier = {
+						modifier = small_blood_price_modifier
+						years = 5
+					}
+				}
+				else_if = { # Imprisonment reason? +1 Wound
+					limit = { scope:actor = { NOT = { has_execute_reason = scope:recipient } } }
+					
+					custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
+					
+					increase_wounds_effect = { REASON = blood_price }
+				}
+				else = { # Execution reason? +2 Wound
+					custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
+					
+					increase_wounds_two_times_effect = { REASON = blood_price }
+				}
+				
+				consume_all_criminal_reasons_effect = {
+					LIEGE = scope:actor
+					CRIMINAL = scope:recipient
+				}
+				
+				custom_tooltip = extract_blood_price_effect_survival_release_tooltip
+			}
+		}
+		
+		scope:recipient = {
+			trigger_event = {
+				id = ek_prison.1001
+				days = 1
+			}
+		}
+	}
+}

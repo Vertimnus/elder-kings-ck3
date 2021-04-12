@@ -1,0 +1,194 @@
+﻿namespace = ek_prison
+
+#1001-1009 - Blood Price
+
+# I pay the Blood Price
+ek_prison.1001 = {
+	type = character_event
+	title = ek_prison.1001.t
+	desc = {
+		# Intro: I have to pay the blood price
+		desc = ek_prison.1001.desc_intro
+		# Second: How much do I have to pay (depends on the crime)
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:actor = { has_execute_reason = scope:recipient } }
+				desc = ek_prison.1001.desc_execution_reason
+			}
+			triggered_desc = {
+				trigger = { scope:actor = { has_imprisonment_reason = scope:recipient } }
+				desc = ek_prison.1001.desc_imprisonment_reason
+			}
+			desc = ek_prison.1001.desc_no_reason
+		}
+		# Three: What's the result
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_1 }
+				desc = ek_prison.1001.desc_wounded_1
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_2 }
+				desc = ek_prison.1001.desc_wounded_2
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_3 }
+				desc = ek_prison.1001.desc_wounded_3
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_death }
+				desc = ek_prison.1001.desc_death
+			}
+			desc = ek_prison.1001.desc_no_wound
+		}
+	}
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	right_portrait = {
+		character = scope:actor
+		animation = schadenfreude
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_prison"
+		
+		# For the loc
+		scope:actor.culture = { save_scope_as = jailor_culture }
+		
+		# We calculate the result here
+		if = {
+			limit = {
+				OR = {
+					scope:actor = { has_execute_reason = scope:recipient }
+					scope:actor = { has_imprisonment_reason = scope:recipient }
+				}
+			}
+			if = { # Death
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 3
+						}
+						AND = {
+							scope:actor = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank >= 2
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_death
+			}
+			else_if = { # wounded_3
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 2
+						}
+						AND = {
+							scope:actor = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank = 1
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_wounded_3
+			}
+			else_if = { # wounded_2
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 1
+						}
+						AND = {
+							scope:actor = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank < 1 # Isn't wounded
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_wounded_2
+			}
+			else = { # wounded_1
+				add_character_flag = blood_price_wounded_1
+			}
+		}
+		
+	}
+	
+	option = {
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_1 }
+			text = ek_prison.1001.a
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_2 }
+			text = ek_prison.1001.b
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_3 }
+			text = ek_prison.1001.c
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_death }
+			text = ek_prison.1001.d
+		}
+		name = {
+			trigger = {
+				NOR = {
+					has_character_flag = blood_price_wounded_1
+					has_character_flag = blood_price_wounded_2
+					has_character_flag = blood_price_wounded_3
+					has_character_flag = blood_price_death
+				}
+			}
+			text = ek_prison.1001.e
+		}
+		
+		if = { # No reason? Small health penalty
+			limit = {
+				scope:actor = {
+					NOR = {
+						has_imprisonment_reason = scope:recipient
+						has_execute_reason = scope:recipient
+					}
+				}
+			}
+			
+			add_character_modifier = {
+				modifier = small_blood_price_modifier
+				years = 5
+			}
+		}
+		else_if = { # Imprisonment reason? +1 Wound
+			limit = { scope:actor = { NOT = { has_execute_reason = scope:recipient } } }
+			
+			increase_wounds_effect = { REASON = execution_blood_price }
+		}
+		else = { # Execution reason? +2 Wound
+			increase_wounds_two_times_effect = { REASON = execution_blood_price }
+		}
+		
+		if = {
+			limit = { NOT = { has_character_flag = blood_price_death } }
+		
+			consume_all_criminal_reasons_effect = {
+				LIEGE = scope:actor
+				CRIMINAL = scope:recipient
+			}
+			
+			release_from_prison = yes
+		}
+	}
+}
