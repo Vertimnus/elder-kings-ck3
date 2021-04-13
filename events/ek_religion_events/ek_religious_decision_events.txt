@@ -227,7 +227,35 @@ ek_religious_decision.0101 = {
 	option = {
 		name = ek_religious_decision.0101.a
 		
-		trigger_event = ek_religious_decision.0102
+		custom_tooltip = ek_religious_decision.0101.a.tt
+		
+		duel = {
+			skill = learning
+			value = 10
+			50 = {
+				desc = ek_religious_decision.0101.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				add_character_flag = {
+					flag = has_found_totem_place
+					days = 10
+				}
+				custom_tooltip = ek_religious_decision.0101.a.tt_success
+			}
+			50 = {
+				desc = ek_religious_decision.0101.a.failure
+				custom_tooltip = ek_religious_decision.0101.a.tt_failure
+			}
+		}
+	}
+	
+	after = {
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 7
+		}
 	}
 }
 
@@ -235,21 +263,165 @@ ek_religious_decision.0101 = {
 ek_religious_decision.0102 = {
 	type = character_event
 	title = ek_religious_decision.0101.t
-	desc = ek_religious_decision.0102.desc
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_character_flag = has_found_totem_place }
+				desc = ek_religious_decision.0102.desc_success
+			}
+			desc = ek_religious_decision.0102.desc_failure
+		}
+	}
+	
 	theme = faith
 	override_background = {
-		event_background = wilderness_forest_pine
+		event_background = wilderness_scope
+	}
+	
+	immediate = {
+		if = {
+			limit = { NOT = { exists = scope:totem_barony } }
+			### Take a random faith revering the All-Maker or Hircine
+			every_religion_global = {
+				every_faith = {
+					if = {
+						limit = {
+							OR = {
+								has_doctrine = doctrine_pantheon_all_maker
+								has_doctrine = doctrine_pantheon_hircine
+							}
+							num_county_followers >= 1
+						}
+						add_to_list = faiths_list
+					}
+				}
+			}
+			
+			random_in_list = {
+				list = faiths_list
+				save_scope_as = totem_faith
+			}
+			
+			### Target a random holy site of the above faith, or a regular random province if it doesn't have one
+			random_barony = {
+				limit = {
+					is_holy_site_of = scope:totem_faith
+				}
+				alternative_limit = {
+					this.faith = scope:totem_faith
+				}
+				
+				save_scope_as = totem_barony
+				title_province = { save_scope_as = background_wilderness_scope }
+			}
+		}
 	}
 	
 	right_portrait = {
 		character = root
-		animation = personality_zealous
+		
+		triggered_animation = {
+			trigger = { has_character_flag = has_found_totem_place }
+			animation = personality_zealous
+		}
+		triggered_animation = {
+			trigger = { NOT = { has_character_flag = has_found_totem_place } }
+			animation = worry
+		}
 	}
 
 	option = {
+		trigger = { has_character_flag = has_found_totem_place }
 		name = ek_religious_decision.0102.a
 		
 		trigger_event = ek_religious_decision.0103
+	}
+
+	option = { # Pay some prestige (lead if yourself)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.b
+		
+		add_prestige = -100
+		custom_tooltip = ek_religious_decision.0102.b.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			shy = minor_stress_gain
+			gregarious = minor_stress_loss
+			humble = minor_stress_gain
+			arrogant = minor_stress_loss
+		}
+	}
+
+	option = { # Pay some piety (pray to the All-Maker)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.c
+		
+		add_piety = -100
+		custom_tooltip = ek_religious_decision.0102.c.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			cynical = minor_stress_gain
+			zealous = minor_stress_loss
+		}
+	}
+
+	option = { # Pay some gold (bribe the locals)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.d
+		
+		add_gold = -25
+		custom_tooltip = ek_religious_decision.0102.d.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			greedy = minor_stress_gain
+		}
+	}
+
+	option = { # Drop it
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.e
+		
+		custom_tooltip = ek_religious_decision.0102.stop
+		
+		trigger_event = {
+			id = ek_religious_decision.0105
+			days = 3
+		}
+		
+		stress_impact = {
+			ambitious = minor_stress_gain
+			diligent = minor_stress_gain
+		}
 	}
 }
 
@@ -260,7 +432,7 @@ ek_religious_decision.0103 = {
 	desc = ek_religious_decision.0103.desc
 	theme = faith
 	override_background = {
-		event_background = wilderness_forest_pine
+		event_background = wilderness_scope
 	}
 	
 	right_portrait = {
@@ -271,7 +443,81 @@ ek_religious_decision.0103 = {
 	option = {
 		name = ek_religious_decision.0103.a
 		
-		trigger_event = ek_religious_decision.0104
+		duel = {
+			skill = prowess
+			value = 10
+			25 = { # Ez
+				desc = ek_religious_decision.0103.a.success_1
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				compare_modifier = {
+					value = martial
+					multiplier = 2
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				add_prestige = 50
+				
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # Some losses but okay
+				desc = ek_religious_decision.0103.a.success_2
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.66
+				}
+				compare_modifier = {
+					value = martial
+					multiplier = 1
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # You're wounded but triumphant
+				desc = ek_religious_decision.0103.a.success_3
+				compare_modifier = { # If you're not very bold you have a lower chance of trying that
+					trigger = {
+						ai_boldness < 0
+					}
+					target = root
+					value = {
+						add = ai_boldness
+						multiply = 0.2
+					}
+				}
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.33
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				increase_wounds_effect = { REASON = viciously_dismembered }
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # You have been unable to defeat the Spirit Bear
+				desc = ek_religious_decision.0103.a.failure
+				custom_tooltip = ek_religious_decision.0103.a.tt_failure
+				
+				increase_wounds_two_times_effect = { REASON = viciously_dismembered }
+				
+				trigger_event = {
+					id = ek_religious_decision.105
+					days = 3
+				}
+			}
+		}
 	}
 }
 
@@ -282,7 +528,7 @@ ek_religious_decision.0104 = {
 	desc = ek_religious_decision.0104.desc
 	theme = faith
 	override_background = {
-		event_background = wilderness_forest_pine
+		event_background = wilderness_scope
 	}
 	
 	right_portrait = {
@@ -293,9 +539,45 @@ ek_religious_decision.0104 = {
 	option = {
 		name = ek_religious_decision.0104.a
 		
+		custom_tooltip = ek_religious_decision.0104.tt
+		
 		add_character_modifier = {
 			modifier = performed_ristaag_modifier
 			years = 10
+		}
+		
+		stress_impact = {
+			zealous = minor_stress_loss
+		}
+		
+		add_piety = 100
+	}
+}
+
+# We have to stop early
+ek_religious_decision.0105 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0105.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	right_portrait = {
+		character = root
+		animation = shame
+	}
+
+	option = {
+		name = ek_religious_decision.0105.a
+		
+		custom_tooltip = ek_religious_decision.0105.tt
+		
+		stress_impact = {
+			base = minor_stress_gain
+			zealous = minor_stress_gain
+			cynical = minor_stress_loss
 		}
 	}
 }
