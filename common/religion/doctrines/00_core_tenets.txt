@@ -1852,19 +1852,22 @@ doctrine_core_tenets = {
 			# TODO: Implement the effects
 			weak_rulers_contest_rule = yes
 			election_vote_strong = yes
+			rule_by_might_succession_active = yes
 			allows_worship_malacath_shunned_doctrines_active = yes
 		}
 		
 		traits = {
 			virtues = {
-				physique_good_1 = 1
+				physique_good_1
+				strong
 				physique_good_2 = 2
-				physique_good_3 = 3
+				physique_good_3 = 2
 			}
 			sins = {
-				physique_bad_1 = 1
+				physique_bad_1
+				weak
 				physique_bad_2 = 2
-				physique_bad_3 = 3
+				physique_bad_3 = 2
 			}
 		}
 	}
@@ -2298,9 +2301,35 @@ doctrine_core_tenets = {
 		}
 	}
 	
-	############################
+	#############################
+	# Aurbic Faith Tenets		#
+	#############################
+	
+	tenet_all_maker_sacred_rituals = {
+		icon = core_tenet_festivities
+		piety_cost = {
+			value = faith_tenet_cost_mid
+
+			# Multiplier for keeping same tenet
+			if = {
+				limit = { has_doctrine = tenet_all_maker_sacred_rituals }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		is_shown = {
+			flag:doctrine_pantheon_all_maker = { is_in_list = selected_doctrines }
+		}
+		
+		parameters = {
+			allows_ristaag_decision_active = yes
+			allows_ritual_of_the_gifts_decision_active = yes
+		}
+	}
+	
+	#############################
 	# Christian Faith Tenets	#
-	############################
+	#############################
 
 	tenet_aniconism = {
 		icon = core_tenet_altar
@@ -2427,6 +2456,15 @@ doctrine_core_tenets = {
 			same_culture_conversion_bonus_active = yes
 			same_faith_promote_culture_bonus_active = yes
 			other_culture_conversion_penalty_active = yes
+			
+			### WIP tests
+			# same_culture_group_conversion_bonus_active = yes
+			# same_faith_promote_culture_group_bonus_active = yes
+			# other_culture_group_conversion_penalty_active = yes
+			
+			# same_exclusive_culture_conversion_bonus_active = yes
+			# same_faith_promote_exclusive_culture_bonus_active = yes
+			# other_exclusive_culture_conversion_penalty_active = yes
 		}
 
 		character_modifier = {

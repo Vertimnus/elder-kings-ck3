@@ -291,10 +291,32 @@ peasant_leader = {
 
 undead_character = {
 	index = 435
+	
+	triggered_opinion = {
+		parameter = undeath_criminal
+		opinion_modifier = necromancy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	# triggered_opinion = {
+		# parameter = undeath_shunned
+		# opinion_modifier = necromancy_intolerant
+		# ignore_opinion_value_if_same_trait = yes
+	# }
 }
 
 lycan_character = {
 	index = 436
+	
+	triggered_opinion = {
+		parameter = lycanthropy_criminal
+		opinion_modifier = lycanthropy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = lycanthropy_shunned
+		opinion_modifier = lycanthropy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
 }
 
 vampire_character = {
@@ -306,10 +328,32 @@ vampire_character = {
 	monthly_piety_gain_mult = -0.45
 	stress_gain_mult = 0.35
 	fertility = -0.6
+	
+	triggered_opinion = {
+		parameter = vampirism_criminal
+		opinion_modifier = vampirism_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = vampirism_shunned
+		opinion_modifier = vampirism_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
 }
 
 necromancer_character = {
 	index = 438
+	
+	triggered_opinion = {
+		parameter = necromancy_criminal
+		opinion_modifier = necromancy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = necromancy_shunned
+		opinion_modifier = necromancy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
 }
 
 line_of_x = {
@@ -405,6 +449,35 @@ poet = {
 				desc = trait_poet_desc
 			}
 			desc = trait_poet_character_desc
+		}
+	}
+
+	ai_boldness = low_positive_ai_value
+	ai_sociability = low_positive_ai_value
+}
+
+### EK specific trait
+pirate = {
+	index = 453
+	
+	can_inherit = no
+	blocks_from_claim_inheritance = yes
+	fame = yes
+	diplomacy = -1
+	martial_per_prestige_level = 1
+	raid_speed = 0.5
+	
+	ruler_designer_cost = 40
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_pirate_desc
+			}
+			desc = trait_pirate_character_desc
 		}
 	}
 
