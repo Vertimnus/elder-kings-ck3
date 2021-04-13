@@ -182,3 +182,45 @@ start_ristaag_decision = {
 		### EK TODO: Make it scale based on the average (if possible?) county opinion and control
 	}
 }
+
+### Summon Dragons
+# When at war, can spend a heavy piety cost to summon Dragons, very powerful non-regenerating troops. They bail once the war is over.
+summon_dragons_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	ai_check_interval = 12
+	
+	major = yes
+
+	desc = summon_dragons_decision_desc
+	selection_tooltip = summon_dragons_decision_tooltip
+	
+	cooldown = { months = 12 }
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = can_use_summon_dragons_active }
+	}
+	
+	is_valid = {
+		is_at_war = yes
+	}
+	
+	cost = {
+		piety = summon_dragons_cost
+	}
+
+	effect = {
+		custom_tooltip = summon_dragons_decision_effect_tooltip
+		custom_tooltip = summon_dragons_decision_effect_tooltip_2
+		
+		trigger_event = ek_religious_decision.0301
+	}
+
+	ai_potential = {
+		is_landed = yes
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
