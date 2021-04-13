@@ -1,7 +1,7 @@
 ﻿namespace = game_rule
 
-# Generated families 	- 1001
-# Gender equality 		- 1010
+# # Generated families 	- 1001
+# # Gender equality 		- 1010
 
 scripted_trigger de_jure_liege_title_to_destroy = {
 	tier > tier_county
@@ -9,7 +9,7 @@ scripted_trigger de_jure_liege_title_to_destroy = {
 	is_landless_type_title = no
 	NOT = { exists = controlled_faith }
 	save_temporary_scope_as = de_jure_liege_title
-	
+
 	NOT = {
 		ROOT = {
 			any_sub_realm_title = {
@@ -18,7 +18,7 @@ scripted_trigger de_jure_liege_title_to_destroy = {
 			}
 		}
 	}
-	
+
 	NAND = {
 		has_game_rule = on_limited_de_jure_requirement
 		holder = {
@@ -30,7 +30,7 @@ scripted_trigger de_jure_liege_title_to_destroy = {
 
 game_rule.1 = { # De Jure Requirement
 	hidden = yes
-	
+
 	trigger = {
 		NOT = { has_game_rule = off_de_jure_requirement }
 		any_held_title = {
@@ -60,9 +60,9 @@ game_rule.1 = { # De Jure Requirement
 }
 
 
-######################
-# GENERATED FAMILIES #
-######################
+# ######################
+# # GENERATED FAMILIES #
+# ######################
 
 scripted_trigger only_ai_if_ai_only_trigger = {
 	trigger_if = {
@@ -103,7 +103,7 @@ game_rule.1000 = {
 game_rule.1001 = { #by Mathilda Bjarnehed
 	type = character_event
 	hidden = yes
-	
+
 	trigger = {
 		is_from_ruler_designer = no # Do not modify the family of somoene from the ruler designer
 		#Is in need of family
@@ -131,13 +131,13 @@ game_rule.1001 = { #by Mathilda Bjarnehed
 			has_government = theocracy_government
 			### EK EDIT: Matilda Canossa does not exist
 			# AND = {
-				# exists = character:7757
-				# this = character:7757 #Matilda Canossa, her bookmark start is about overcoming the issue of no heir
+			# exists = character:7757
+			# this = character:7757 #Matilda Canossa, her bookmark start is about overcoming the issue of no heir
 			# }
 		}
 	}
 
-	
+
 
 	immediate = {
 		if = {
@@ -158,25 +158,25 @@ game_rule.1001 = { #by Mathilda Bjarnehed
 			}
 			player_heir = {
 				save_scope_as = childless_heir
-			 	game_rule_create_spouse_and_children = { CHARACTER = scope:childless_heir }
+				game_rule_create_spouse_and_children = { CHARACTER = scope:childless_heir }
 			}
 		}
 	}
 }
 
-########################
-# EXCLAVE INDEPENDENCE #
-########################
+# ########################
+# # EXCLAVE INDEPENDENCE #
+# ########################
 
 game_rule.2 = { # Exclave Independence, on death
 	hidden = yes
-	
+
 	trigger = {
 		exclave_independence_trigger = yes
 	}
 
 	immediate = {
-	
+
 		if = { # None
 			limit = {
 				has_game_rule = off_exclave_independence
@@ -212,7 +212,7 @@ game_rule.2 = { # Exclave Independence, on death
 
 game_rule.3 = { # Exclave Independence, on war end
 	hidden = yes
-	
+
 	trigger = {
 		exclave_independence_trigger = yes
 	}
@@ -234,9 +234,9 @@ game_rule.3 = { # Exclave Independence, on war end
 	}
 }
 
-#######################
-# HUNGARIAN MIGRATION #
-#######################
+# #######################
+# # HUNGARIAN MIGRATION #
+# #######################
 
 ### EK EDIT: The Hungarians do not exist
 # game_rule.1011 = {
@@ -310,7 +310,7 @@ game_rule.3 = { # Exclave Independence, on war end
 					# }
 				# }
 			# }
-		}
+		# }
 		#There must be a suitable Eastern European Mogyer ruler around.
 		# any_county_in_region = {
 			# region = world_europe_east

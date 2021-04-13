@@ -4,7 +4,9 @@
 		if = {
 			limit = {
 				is_adult = yes
-				NOT = { patron_has_any_trait = yes }
+				patron_has_any_trait = no
+				NOT = { has_character_flag = recent_patron_selected }
+
 			}
 			try_create_important_action = {
 				important_action_type = action_pick_patron
@@ -20,7 +22,7 @@
 					view = faith
 				}
 			}
-			set_variable = action_patron
+			set_variable = action_patron #replace with create widget when available
 		}
 	}
 }

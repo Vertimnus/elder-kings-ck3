@@ -37,7 +37,7 @@ patron_select_patron_decision = {
 
     ai_potential = {
         piety >= minor_piety_value
-        patron_has_passive_patron_trait = no
+        patron_has_any_trait = no
     }
 
     ai_will_do = {
@@ -124,11 +124,15 @@ patron_offer_sacrifice_decision = {
             AND = {
                 #is_ai = no
                 has_active_patron_selected = yes
-                NOR = { #dont care for human sacrifice, based on ek1
-                    has_variable = patron_azura_shown
-                    has_variable = patron_meridia_shown
-                    has_variable = patron_sanguine_shown
+                trigger_if = {
+                    limit = { exists = var:patron_shown }
+                    NOR = { #dont care for human sacrifice, based on ek1
+                        var:patron_shown = flag:azura
+                        var:patron_shown = flag:meridia
+                        var:patron_shown = flag:sanguine
+                    }
                 }
+                trigger_else = { always = no }
             }
             # AND = {
             #     is_ai = yes
@@ -155,7 +159,12 @@ patron_offer_sacrifice_decision = {
                 NOT = { any_heir_title = { count > 0 } }
             }
             if = {
-                limit = { ROOT = { has_variable = patron_namira_shown } }
+                limit = {
+                    ROOT = {
+                        exists = var:patron_shown
+                        var:patron_shown = flag:namira
+                    }
+                }
                 death = { killer = ROOT death_reason = death_eaten }
             }
             else = {
