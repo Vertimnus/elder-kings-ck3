@@ -1,0 +1,306 @@
+﻿namespace = ek_religious_decision
+
+#########################
+# RITE OF PASSAGE		#
+# 0001-0009				#
+#########################
+
+scripted_effect select_rite_of_passage_generic = {
+	random_list = {
+		# Big pilgrimage
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:glorified_pilgrimage_flag }
+			}
+			set_local_variable = {
+				name = glorified_pilgrimage_flag
+				value = yes
+			}
+		}
+		# Fight a big monster
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:fight_scary_monster_flag }
+			}
+			set_local_variable = {
+				name = fight_scary_monster_flag
+				value = yes
+			}
+		}
+	}
+}
+
+scripted_effect select_rite_of_passage_special = {
+	random_list = {
+		### Negative (fight)
+		# Kill a lycanthrope
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:kill_lycanthrope_flag }
+				NOT = { faith = { has_doctrine = doctrine_lycanthropy_accepted } }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = kill_lycanthrope_flag
+				value = yes
+			}
+			# If Lycan are shunned but not outlawed, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = doctrine_lycanthropy_outlawed } }
+			}
+		}
+		# Kill a vampire
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:kill_vampire_flag }
+				NOT = { faith = { has_doctrine = doctrine_vampirism_accepted } }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = kill_vampire_flag
+				value = yes
+			}
+			# If Vampirism are shunned but not outlawed, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = doctrine_vampirism_outlawed } }
+			}
+		}
+		### Positive (gain potential virtue)
+		# Become a cannibal
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_cannibal_flag }
+				faith = { has_doctrine = tenet_ritual_cannibalism }
+				NOT = { has_trait = cannibal }
+			}
+			set_local_variable = {
+				name = become_cannibal_flag
+				value = yes
+			}
+		}
+		# Become a lycanthrope
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_lycanthrope_flag }
+				faith = { has_doctrine = doctrine_lycanthropy_accepted }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = become_lycanthrope_flag
+				value = yes
+			}
+			# If Lycan are accepted but not worshipped, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = tenet_lycanthrope_worship } }
+			}
+		}
+		# Become a vampire
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_vampire_flag }
+				faith = { has_doctrine = doctrine_vampirism_accepted }
+				NOT = { is_vampire = yes }
+			}
+			set_local_variable = {
+				name = become_vampire_flag
+				value = yes
+			}
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = tenet_vampire_worship } }
+			}
+		}
+		### Fallback
+		1 = {
+			select_rite_of_passage_generic = yes
+		}
+	}
+}
+
+
+scripted_effect select_rite_of_passage = {
+	### Heavily inspired by how duel moves are setup
+	random_list = {
+		### Generic
+		50 = {
+			select_rite_of_passage_generic = yes
+		}
+		
+		### Specific - Terrain or region
+		
+		### Specific - Religion (we try to mainly have those)
+		100 = {
+			select_rite_of_passage_special = yes
+		}
+	}
+}
+
+# Start the Rite of Passage, what do we do?
+ek_religious_decision.0001 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { religion = religion:aldmer_religion }
+				desc = ek_religious_decision.0001.t.athen_vialen
+			}
+			desc = ek_religious_decision.0001.t.fallback
+		}
+	}
+	desc = ek_religious_decision.0001.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = personality_zealous
+	}
+	
+	# Draw three possible rites (that means we need at least 3 generic rites lol)
+	immediate = {
+		save_scope_as = starts_rite_of_passage
+		
+		select_rite_of_passage = yes
+		select_rite_of_passage = yes
+		select_rite_of_passage = yes
+	}
+
+	### Generic
+	option = {
+		trigger = { exists = local_var:glorified_pilgrimage_flag }
+		name = single_combat.0001.glorified_pilgrimage
+	}
+	option = {
+		trigger = { exists = local_var:fight_scary_monster_flag }
+		name = single_combat.0001.fight_scary_monster
+	}
+	
+	### Specific
+	# Negative (fight)
+	option = {
+		trigger = { exists = local_var:kill_lycanthrope_flag }
+		name = single_combat.0001.kill_lycanthrope
+	}
+	option = {
+		trigger = { exists = local_var:kill_vampire_flag }
+		name = single_combat.0001.kill_vampire
+	}
+	
+	# Positive (gain potential virtue)
+	option = {
+		trigger = { exists = local_var:become_cannibal_flag }
+		name = single_combat.0001.become_cannibal
+	}
+	option = {
+		trigger = { exists = local_var:become_lycanthrope_flag }
+		name = single_combat.0001.become_lycanthrope
+	}
+	option = {
+		trigger = { exists = local_var:become_vampire_flag }
+		name = single_combat.0001.become_vampire
+	}
+}
+
+#########################
+# RISTAAG				#
+# 0101-0199				#
+#########################
+
+# Begin the Ristaag!
+ek_religious_decision.0101 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0101.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_forest_pine
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	# Search for the Totem of Claw and Fang!
+	option = {
+		name = ek_religious_decision.0101.a
+		
+		trigger_event = ek_religious_decision.0102
+	}
+}
+
+# Totems of Claw and Fang found, find the Spirit Bear!
+ek_religious_decision.0102 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0102.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_forest_pine
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	option = {
+		name = ek_religious_decision.0102.a
+		
+		trigger_event = ek_religious_decision.0103
+	}
+}
+
+# Spirit Bear found, slay it!
+ek_religious_decision.0103 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0103.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_forest_pine
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	option = {
+		name = ek_religious_decision.0103.a
+		
+		trigger_event = ek_religious_decision.0104
+	}
+}
+
+# gg, All-Maker rewards you
+ek_religious_decision.0104 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0104.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_forest_pine
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	option = {
+		name = ek_religious_decision.0104.a
+		
+		add_character_modifier = {
+			modifier = performed_ristaag_modifier
+			years = 10
+		}
+	}
+}
+
+#########################
+# RITUAL OFT THE GIFTS	#
+# 0201-0299				#
+#########################
