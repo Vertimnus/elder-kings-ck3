@@ -24,7 +24,7 @@
  PATRON_THE_AEDRA:0 "The Aedra"
  PATRON_THE_DWEMER_ANCESTORS:0 "The Dwemer Ancestors"
  CONFIRM:0 "Confirm"
- show_hide_desc:0 "Show/Hide Description"
+ show_hide_desc:0 "[Select_CString( GetVariableSystem.Exists('patron_hide_desc'), 'Hide', 'Show' )] Description"
  confirm_tt:0 "Take [GetPlayer.Custom('GetPatronPassiveName')] as your patron"
  confirm_recent_select:0 "Cannot change patron due to recent selection"
  gain_ardor_effect:0 "You gain $VALUE|+0$ Ardor@ardor_icon!"
@@ -328,3 +328,15 @@
  action_pick_patron_label:0 "$action_pick_patron$"
  action_pick_patron_desc:2 "You have no patron.\n\n#help Your [faith|E] has patron traits. Each trait gives you a bonus of some form.#!"
  action_pick_patron_click:0 "#I Click to view potential patrons for your faith#!"
+
+
+# Skyrim Elective - normally jarldom heir inherit high kingship (high vote weight 'see no reason to not support')
+#                 - can go to other jarl if heir unfit (kinslayer, weak, child, religious difference)
+#                 - on ruler death "assumed heir" gains e_skyrim
+# The Moot - called automatically for non-dynastic heirs
+#          - may be called for dynastic heirs by any jarl under e_skyrim or by the assumed heir (now high king/queen) for 3(?) months following succession
+#          - if not called assumed heir is automatically considered approved by moot
+#          - if called activity/story cycle/event chain/something used to challenge assumed heir - duel? debate?
+#              - can result in high kingship being upheld
+#              - other jarl being elected/assumed heir rejected by moot
+#              - partitioning into east/west skyrim

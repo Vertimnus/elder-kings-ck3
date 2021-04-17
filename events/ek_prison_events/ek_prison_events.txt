@@ -1,0 +1,732 @@
+﻿namespace = ek_prison
+
+#1001-1009 - Blood Price
+
+# I pay the Blood Price
+ek_prison.1001 = {
+	type = character_event
+	title = ek_prison.1001.t
+	desc = {
+		# I have to pay the blood price
+		desc = ek_prison.1001.desc_intro
+		# How much do I have to pay (depends on the crime)
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:imprisoner = { has_execute_reason = scope:recipient } }
+				desc = ek_prison.1001.desc_execution_reason
+			}
+			triggered_desc = {
+				trigger = { scope:imprisoner = { has_imprisonment_reason = scope:recipient } }
+				desc = ek_prison.1001.desc_imprisonment_reason
+			}
+			desc = ek_prison.1001.desc_no_reason
+		}
+		# What's the result
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_1 }
+				desc = ek_prison.1001.desc_wounded_1
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_2 }
+				desc = ek_prison.1001.desc_wounded_2
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_wounded_3 }
+				desc = ek_prison.1001.desc_wounded_3
+			}
+			triggered_desc = {
+				trigger = { has_character_flag = blood_price_death }
+				desc = ek_prison.1001.desc_death
+			}
+			desc = ek_prison.1001.desc_no_wound
+		}
+	}
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+	right_portrait = {
+		character = scope:imprisoner
+		animation = schadenfreude
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_prison"
+		
+		# For the loc
+		scope:imprisoner.culture = { save_scope_as = jailor_culture }
+		
+		# We calculate the result here
+		if = {
+			limit = {
+				OR = {
+					scope:imprisoner = { has_execute_reason = scope:recipient }
+					scope:imprisoner = { has_imprisonment_reason = scope:recipient }
+				}
+			}
+			if = { # Death
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 3
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank >= 2
+							}
+						}
+					}
+				}
+				add_character_flag = { flag = blood_price_death days = 7 }
+			}
+			else_if = { # wounded_3
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 2
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank = 1
+							}
+						}
+					}
+				}
+				add_character_flag = { flag = blood_price_wounded_3 days = 7 }
+			}
+			else_if = { # wounded_2
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 1
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:recipient }
+							has_trait_rank = {
+								trait = wounded
+								rank < 1 # Isn't wounded
+							}
+						}
+					}
+				}
+				add_character_flag = { flag = blood_price_wounded_2 days = 7 }
+			}
+			else = { # wounded_1
+				add_character_flag = { flag = blood_price_wounded_1 days = 7 }
+			}
+		}
+	}
+	
+	option = {
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_1 }
+			text = ek_prison.1001.a
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_2 }
+			text = ek_prison.1001.b
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_wounded_3 }
+			text = ek_prison.1001.c
+		}
+		name = {
+			trigger = { has_character_flag = blood_price_death }
+			text = ek_prison.1001.d
+		}
+		name = {
+			trigger = {
+				NOR = {
+					has_character_flag = blood_price_wounded_1
+					has_character_flag = blood_price_wounded_2
+					has_character_flag = blood_price_wounded_3
+					has_character_flag = blood_price_death
+				}
+			}
+			text = ek_prison.1001.e
+		}
+		
+		if = { # No reason? Small health penalty
+			limit = {
+				scope:imprisoner = {
+					NOR = {
+						has_imprisonment_reason = scope:recipient
+						has_execute_reason = scope:recipient
+					}
+				}
+			}
+			
+			add_character_modifier = {
+				modifier = small_blood_price_modifier
+				years = 5
+			}
+		}
+		else_if = { # Imprisonment reason? +1 Wound
+			limit = { scope:imprisoner = { NOT = { has_execute_reason = scope:recipient } } }
+			
+			increase_wounds_effect = { REASON = execution_blood_price }
+		}
+		else = { # Execution reason? +2 Wound
+			increase_wounds_two_times_effect = { REASON = execution_blood_price }
+		}
+		
+		if = {
+			limit = { NOT = { has_character_flag = blood_price_death } }
+		
+			consume_all_criminal_reasons_effect = {
+				LIEGE = scope:imprisoner
+				CRIMINAL = scope:recipient
+			}
+			
+			release_from_prison = yes
+		}
+	}
+}
+
+### IMPRISONMENT
+## The prisoner gets the first event, chooses what they ask
+## The jailor sees what the prisoner wants, can accept or force the other option
+## The prisoner gets the last response and what happens - send a toast unless they pay in blood
+
+# We have been imprisoned by someone who has the Blood Price innovation - should we cough up gold or accept to lose some blood?
+ek_prison.1002 = {
+	type = character_event
+	title = ek_prison.1001.t
+	desc = ek_prison.1002.desc
+	theme = prison
+	left_portrait = {
+		character = scope:prisoner
+		animation = prison_dungeon
+	}
+	right_portrait = {
+		character = scope:imprisoner
+		animation = schadenfreude
+	}
+	
+	trigger {
+		scope:imprisoner.culture = { has_innovation = innovation_blood_price }
+	}
+	
+	immediate = {
+		### Taken from prison_notification.0001
+		save_scope_as = prisoner
+
+		# Figure out who needs to be notified about this character being imprisoned.
+		every_player = {
+			save_scope_as = this_player
+			if = { # If prisoner is a player's heir or spouse, send them a full pop-up event.
+				limit = {
+					OR = {
+						AND = {
+							exists = player_heir
+							player_heir = scope:prisoner
+						}
+						AND = {
+							exists = primary_heir
+							primary_heir = scope:prisoner
+						}
+						is_consort_of = scope:prisoner
+					}
+				}
+				trigger_event = prison_notification.0002
+			}
+			else_if = { # Otherwise, if they are of interest to a player, send the player a notification
+				limit = {
+					scope:prisoner = {
+						has_any_relation_trigger = { CHARACTER = scope:this_player }
+					}
+				}
+				trigger_event = prison_notification.0003
+			}
+		}
+		
+		### That's my content now
+		## PAY UP
+		# Save how much we would have to pay
+		if = {
+			limit = { # Exorbitant price
+				scope:imprisoner = {
+					exists = dynasty
+					dynasty = {
+						has_dynasty_perk = fp1_pillage_legacy_3
+					}
+				}
+			}
+			if = { # We can pay
+				limit = { gold >= scope:prisoner.increased_ransom_cost_value }
+				set_variable = {
+					name = blood_price_gold_price
+					value = scope:prisoner.increased_ransom_cost_value
+				}
+			}
+			else_if = { # We can't pay, but we have some gold!
+				limit = { gold > 0 }
+				set_variable = {
+					name = blood_price_gold_price
+					value = scope:prisoner.gold
+				}
+			}
+		}
+		if = {
+			limit = { # Normal price
+				scope:imprisoner = {
+					OR = {
+						is_lowborn = yes
+						NOT = {
+							dynasty = {
+								has_dynasty_perk = fp1_pillage_legacy_3
+							}
+						}
+					}
+				}
+			}
+			if = { # We can pay
+				limit = { gold >= scope:prisoner.ransom_cost_value }
+				set_variable = {
+					name = blood_price_gold_price
+					value = scope:prisoner.ransom_cost_value
+				}
+			}
+			else_if = { # We can't pay, but we have some gold!
+				limit = { gold > 0 }
+				set_variable = {
+					name = blood_price_gold_price
+					value = scope:prisoner.gold
+				}
+			}
+		}
+		
+		## LOSE SOME BLOOD
+		# We calculate the result here
+		if = {
+			limit = {
+				OR = {
+					scope:imprisoner = { has_execute_reason = scope:prisoner }
+					scope:imprisoner = { has_imprisonment_reason = scope:prisoner }
+				}
+			}
+			if = { # Death
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 3
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:prisoner }
+							has_trait_rank = {
+								trait = wounded
+								rank >= 2
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_death
+			}
+			else_if = { # wounded_3
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 2
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:prisoner }
+							has_trait_rank = {
+								trait = wounded
+								rank = 1
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_wounded_3
+			}
+			else_if = { # wounded_2
+				limit = {
+					OR = {
+						has_trait_rank = {
+							trait = wounded
+							rank = 1
+						}
+						AND = {
+							scope:imprisoner = { has_execute_reason = scope:prisoner }
+							has_trait_rank = {
+								trait = wounded
+								rank < 1 # Isn't wounded
+							}
+						}
+					}
+				}
+				add_character_flag = blood_price_wounded_2
+			}
+			else = { # wounded_1
+				add_character_flag = blood_price_wounded_1
+			}
+		}
+	}
+	
+	option = { # Take my riches
+		trigger = {
+			var:blood_price_gold_price = { compare_value > 0 } # Check if that works
+			NOR = {
+				has_relation_friend = scope:imprisoner
+				has_relation_best_friend = scope:imprisoner
+				has_relation_lover = scope:imprisoner
+				has_relation_soulmate = scope:imprisoner
+			}
+		}
+		
+		name = ek_prison.1002.a
+		
+		show_as_tooltip = {
+			scope:prisoner = {
+				pay_short_term_gold = {
+					target = scope:imprisoner
+					gold = scope:prisoner.var:blood_price_gold_price
+				}
+			}
+		}
+		
+		add_character_flag = blood_price_wanted_pay_gold
+		
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_greed = -0.5 # Does not want to lose money
+				ai_boldness = -0.5 # Can definitely take it
+				ai_rationality = 0.5 # Would rather not get hurt over nothing
+			}
+			modifier = { # Taking the blood price will kill you
+				fimprisoner = 2
+				has_character_flag = blood_price_death
+			}
+			modifier = { # Taking the blood price will hurt a lot
+				fimprisoner = 2
+				has_character_flag = blood_price_wounded_3
+			}
+			modifier = { # Taking the blood price will hurt
+				fimprisoner = 2
+				has_character_flag = blood_price_wounded_2
+			}
+			modifier = { # Taking the blood price will hurt a bit
+				fimprisoner = 2
+				has_character_flag = blood_price_wounded_1
+			}
+		}
+	}
+	
+	option = { # You want blood, and I have more than enough.
+		trigger = {
+			NOR = {
+				has_relation_friend = scope:imprisoner
+				has_relation_best_friend = scope:imprisoner
+				has_relation_lover = scope:imprisoner
+				has_relation_soulmate = scope:imprisoner
+			}
+		}
+		
+		name = ek_prison.1002.b
+		
+		if = {
+			limit = { has_character_flag = blood_price_death }
+			custom_tooltip = ek_prison.1002.blood_price_wanted_pay_blood_death # WARNING, THIS WILL KILL YOU
+		}
+		else_if = {
+			limit = { has_character_flag = blood_price_wounded_3 }
+			custom_tooltip = ek_prison.1002.blood_price_wanted_pay_blood_wounded_3
+		}
+		else_if = {
+			limit = { has_character_flag = blood_price_wounded_2 }
+			custom_tooltip = ek_prison.1002.blood_price_wanted_pay_blood_wounded_2
+		}
+		else_if = {
+			limit = { has_character_flag = blood_price_wounded_1 }
+			custom_tooltip = ek_prison.1002.blood_price_wanted_pay_blood_wounded_1
+		}
+		else = {
+			custom_tooltip = ek_prison.1002.blood_price_wanted_pay_blood_health_penalty
+		}
+		
+		add_character_flag = blood_price_wanted_pay_blood
+		
+		ai_chance = {
+			base = 50
+		}
+	}
+	
+	option = { # We're friends/lovers/family, surely you will just let me go? - Only VERY sadistic AI (or players) would refuse
+		trigger = {
+			OR = {
+				has_relation_friend = scope:imprisoner
+				has_relation_best_friend = scope:imprisoner
+				has_relation_lover = scope:imprisoner
+				has_relation_soulmate = scope:imprisoner
+				is_close_family_of = scope:imprisoner
+			}
+		}
+		
+		name = ek_prison.1002.c
+		
+		custom_tooltip = ek_prison.1002.blood_price_wanted_freedom
+		
+		add_character_flag = blood_price_wanted_freedom
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+	
+	after = {
+		scope:imprisoner = {
+			trigger_event = ek_prison.1003
+		}
+	}
+}
+
+### EK TODO: Tell the prisoner that nope, they will stay here :)
+# The prisoner sent you their choice
+ek_prison.1003 = {
+	type = character_event
+	title = ek_prison.1001.t
+	desc = {
+		# They've been captured
+		desc = ek_prison.1003.desc_intro
+		# What do they want?
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:prisoner = { has_character_flag = blood_price_wanted_pay_gold } }
+				desc = ek_prison.1003.desc_pay_gold
+			}
+			triggered_desc = {
+				trigger = { scope:prisoner = { has_character_flag = blood_price_wanted_pay_blood } }
+				desc = ek_prison.1003.desc_pay_blood
+			}
+			triggered_desc = {
+				trigger = { scope:prisoner = { has_character_flag = blood_price_wanted_freedom } }
+				desc = ek_prison.1003.desc_freedom
+			}
+		}
+	}
+	
+	theme = prison
+	left_portrait = {
+		character = scope:prisoner
+		animation = prison_dungeon
+	}
+	right_portrait = {
+		character = scope:imprisoner
+		animation = schadenfreude
+	}
+	
+	option = { # It will be gold
+		name = ek_prison.1003.a
+	
+		send_interface_toast = {
+			title = ek_prison.1003.imprisoner_pay_gold
+			left_icon = root
+			show_as_tooltip = {
+				scope:prisoner = {
+					pay_short_term_gold = {
+						target = scope:imprisoner
+						gold = scope:prisoner.var:blood_price_gold_price
+					}
+				
+					consume_all_criminal_reasons_effect = {
+						LIEGE = scope:imprisoner
+						CRIMINAL = scope:prisoner
+					}
+					
+					release_from_prison = yes
+				}
+			}
+		}
+		
+		hidden_effect = {
+			scope:prisoner = {
+				send_interface_toast = {
+					title = ek_prison.1003.pay_gold
+					left_icon = root
+					scope:prisoner = {
+						pay_short_term_gold = {
+							target = scope:imprisoner
+							gold = scope:prisoner.var:blood_price_gold_price
+						}
+					}
+					
+					consume_all_criminal_reasons_effect = {
+						LIEGE = scope:imprisoner
+						CRIMINAL = scope:prisoner
+					}
+					
+					release_from_prison = yes
+				}
+			}
+		}
+		
+		stress_impact = {
+			greedy = minor_stress_loss
+			
+			wrathful = minor_stress_gain
+			callous = minor_stress_gain
+			sadistic = minor_stress_gain
+			vengeful = minor_stress_gain
+		}
+		
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_greed = 0.5 # Money is cool
+			}
+			# More likely to give them what they want
+			modifier = {
+				fimprisoner = 2
+				scope:prisoner = { has_character_flag = blood_price_wanted_pay_gold }
+			}
+		}
+	}
+	
+	option = { # It will be blood
+		name = ek_prison.1003.b
+		
+		scope:prisoner = {
+			trigger_event = ek_prison.1001
+		}
+		
+		scope:prisoner = {
+			show_as_tooltip = {
+				if = { # No reason? Small health penalty
+					limit = {
+						scope:imprisoner = {
+							NOR = {
+								has_imprisonment_reason = scope:prisoner
+								has_execute_reason = scope:prisoner
+							}
+						}
+					}
+					
+					custom_tooltip = extract_blood_price_effect_no_reason_tooltip
+					add_character_modifier = {
+						modifier = small_blood_price_modifier
+						years = 5
+					}
+				}
+				else_if = { # Imprisonment reason? +1 Wound
+					limit = { scope:imprisoner = { NOT = { has_execute_reason = scope:prisoner } } }
+					
+					custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
+					
+					increase_wounds_effect = { REASON = blood_price }
+				}
+				else = { # Execution reason? +2 Wound
+					custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
+					
+					increase_wounds_two_times_effect = { REASON = blood_price }
+				}
+				
+				consume_all_criminal_reasons_effect = {
+					LIEGE = scope:imprisoner
+					CRIMINAL = scope:prisoner
+				}
+				
+				custom_tooltip = extract_blood_price_effect_survival_release_tooltip
+			}
+		}
+		
+		stress_impact = {
+			greedy = minor_stress_gain
+			
+			wrathful = minor_stress_loss
+			callous = minor_stress_loss
+			sadistic = minor_stress_loss
+			vengeful = minor_stress_loss
+		}
+		
+		ai_chance = {
+			base = 50
+			# I want to hurt you
+			modifier = {
+				fimprisoner = 2
+				OR = {
+					has_trait = wrathful
+					has_trait = callous
+					has_trait = sadistic
+					has_trait = vengeful
+				}
+			}
+			# I hate you and would love to see you suffer
+			modifier = {
+				fimprisoner = 2
+				OR = {
+					has_relation_rival = scope:prisoner
+					has_relation_nemesis = scope:prisoner
+				}
+			}
+			# More likely to give them what they want
+			modifier = {
+				fimprisoner = 2
+				scope:prisoner = { has_character_flag = blood_price_wanted_pay_blood }
+			}
+		}
+	}
+	
+	option = { # Actually, just go - rare unless the jailor is very close to the target, or very kind. Higher chance if this would kill the target
+		trigger = {
+			OR = {
+				trait = compassionate
+				scope:prisoner = { has_character_flag = blood_price_wanted_freedom }
+			}
+		}
+		
+		name = ek_prison.1003.c
+		
+		send_interface_toast = {
+			title = ek_prison.1003.imprisoner_freedom
+			left_icon = root
+			
+			show_as_tooltip = {
+				scope:prisoner = {
+					consume_all_criminal_reasons_effect = {
+						LIEGE = scope:imprisoner
+						CRIMINAL = scope:prisoner
+					}
+					
+					release_from_prison = yes
+				}
+			}
+		}
+		
+		hidden_effect = {
+			scope:prisoner = {
+				send_interface_toast = {
+					title = ek_prison.1003.freedom
+					left_icon = root
+					
+					consume_all_criminal_reasons_effect = {
+						LIEGE = scope:imprisoner
+						CRIMINAL = scope:prisoner
+					}
+					
+					release_from_prison = yes
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 10
+			# That would kill you
+			modifier = {
+				fimprisoner = 2
+				scope:prisoner = { has_character_flag = blood_price_death }
+			}
+		}
+	}
+}
