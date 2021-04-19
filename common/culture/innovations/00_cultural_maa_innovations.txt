@@ -157,14 +157,95 @@ innovation_abecean_pirates = {
 	flag = global_maa
 }
 
-### Khajiiti
-innovation_senche_raht = {
+### Khajiiti - Each subform is an innovation :)
+# Unlocks the basic ones
+innovation_lunar_lattice = {
 	group = culture_group_regional
-	culture_era = culture_era_high_medieval
+	culture_era = culture_era_tribal
 	icon = @special_maa_02
 
 	potential = {
 		this.culture_group = culture_group:khajiiti_group
+	}
+
+	unlock_maa = cathay
+	unlock_maa = suthay
+	unlock_maa = ohmes
+	unlock_maa = senche
+	
+	# custom = unlocks_other_maa_innovations
+
+	flag = global_maa
+}
+# War Mages
+innovation_alfiq = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+	}
+	
+	can_progress = {
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_lunar_lattice"
+			has_innovation = innovation_lunar_lattice
+		}
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_war_magic"
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	unlock_maa = alfiq
+
+	flag = global_maa
+}
+# Heavy Infantry
+innovation_pahmar = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+	}
+	
+	can_progress = {
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_lunar_lattice"
+			has_innovation = innovation_lunar_lattice
+		}
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_quilted_armor"
+			has_innovation = innovation_quilted_armor
+		}
+	}
+
+	unlock_maa = pahmar
+
+	flag = global_maa
+}
+# Heavy Cavalry
+innovation_senche_raht = {
+	group = culture_group_regional
+	culture_era = culture_era_early_medieval
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+	}
+	
+	can_progress = {
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_lunar_lattice"
+			has_innovation = innovation_lunar_lattice
+		}
+		custom_description = {
+			text = "innovation_unlocked_by_innovation_arched_saddle"
+			has_innovation = innovation_arched_saddle
+		}
 	}
 
 	unlock_maa = senche_raht
