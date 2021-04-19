@@ -24,34 +24,106 @@ doctrine_hidden_daedra_blanket = {
 doctrine_azura = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_azura_pantheon = {
 		parameters = {
 			adds_azura_pantheon_active = yes
 			worship_azura_allowed_active = yes
+			hostility_override_doctrine_azura_shunned = 2
+			hostility_override_doctrine_azura_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_azura_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_azura_allowed = {
 		parameters = {
 			worship_azura_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_azura_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### Azura's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_azura_shunned = {
 		parameters = {
 			worship_azura_shunned_active = yes
 			hostility_override_doctrine_pantheon_azura = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_azura_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_azura_criminal = {
 		parameters = {
 			worship_azura_criminal_active = yes
 			hostility_override_doctrine_pantheon_azura = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_azura_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_azura_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -59,34 +131,106 @@ doctrine_azura = {
 doctrine_boethiah = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_boethiah_pantheon = {
 		parameters = {
 			adds_boethiah_pantheon_active = yes
 			worship_boethiah_allowed_active = yes
+			hostility_override_doctrine_boethiah_shunned = 2
+			hostility_override_doctrine_boethiah_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_boethiah_allowed = {
 		parameters = {
 			worship_boethiah_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### boethiah's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_boethiah_shunned = {
 		parameters = {
 			worship_boethiah_shunned_active = yes
 			hostility_override_doctrine_pantheon_boethiah = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_boethiah_criminal = {
 		parameters = {
 			worship_boethiah_criminal_active = yes
 			hostility_override_doctrine_pantheon_boethiah = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_boethiah_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -94,34 +238,106 @@ doctrine_boethiah = {
 doctrine_clavicus = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_clavicus_pantheon = {
 		parameters = {
 			adds_clavicus_pantheon_active = yes
 			worship_clavicus_allowed_active = yes
+			hostility_override_doctrine_clavicus_shunned = 2
+			hostility_override_doctrine_clavicus_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_clavicus_allowed = {
 		parameters = {
 			worship_clavicus_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### clavicus's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_clavicus_shunned = {
 		parameters = {
 			worship_clavicus_shunned_active = yes
 			hostility_override_doctrine_pantheon_clavicus = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_clavicus_criminal = {
 		parameters = {
 			worship_clavicus_criminal_active = yes
 			hostility_override_doctrine_pantheon_clavicus = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_clavicus_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -129,34 +345,106 @@ doctrine_clavicus = {
 doctrine_hermaeus = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_hermaeus_pantheon = {
 		parameters = {
 			adds_hermaeus_pantheon_active = yes
 			worship_hermaeus_allowed_active = yes
+			hostility_override_doctrine_hermaeus_shunned = 2
+			hostility_override_doctrine_hermaeus_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_hermaeus_allowed = {
 		parameters = {
 			worship_hermaeus_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### hermaeus's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_hermaeus_shunned = {
 		parameters = {
 			worship_hermaeus_shunned_active = yes
 			hostility_override_doctrine_pantheon_hermaeus = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_hermaeus_criminal = {
 		parameters = {
 			worship_hermaeus_criminal_active = yes
 			hostility_override_doctrine_pantheon_hermaeus = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hermaeus_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -164,34 +452,106 @@ doctrine_hermaeus = {
 doctrine_hircine = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_hircine_pantheon = {
 		parameters = {
 			adds_hircine_pantheon_active = yes
 			worship_hircine_allowed_active = yes
+			hostility_override_doctrine_hircine_shunned = 2
+			hostility_override_doctrine_hircine_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hircine_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_hircine_allowed = {
 		parameters = {
 			worship_hircine_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hircine_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### hircine's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_hircine_shunned = {
 		parameters = {
 			worship_hircine_shunned_active = yes
 			hostility_override_doctrine_pantheon_hircine = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hircine_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_hircine_criminal = {
 		parameters = {
 			worship_hircine_criminal_active = yes
 			hostility_override_doctrine_pantheon_hircine = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_hircine_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_hircine_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -199,34 +559,106 @@ doctrine_hircine = {
 doctrine_malacath = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_malacath_pantheon = {
 		parameters = {
 			adds_malacath_pantheon_active = yes
 			worship_malacath_allowed_active = yes
+			hostility_override_doctrine_malacath_shunned = 2
+			hostility_override_doctrine_malacath_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_malacath_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_malacath_allowed = {
 		parameters = {
 			worship_malacath_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_malacath_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### malacath's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_malacath_shunned = {
 		parameters = {
 			worship_malacath_shunned_active = yes
 			hostility_override_doctrine_pantheon_malacath = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_malacath_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_malacath_criminal = {
 		parameters = {
 			worship_malacath_criminal_active = yes
 			hostility_override_doctrine_pantheon_malacath = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_malacath_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_malacath_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -234,34 +666,106 @@ doctrine_malacath = {
 doctrine_mehrunes = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_mehrunes_pantheon = {
 		parameters = {
 			adds_mehrunes_pantheon_active = yes
 			worship_mehrunes_allowed_active = yes
+			hostility_override_doctrine_mehrunes_shunned = 2
+			hostility_override_doctrine_mehrunes_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_mehrunes_allowed = {
 		parameters = {
 			worship_mehrunes_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### mehrunes's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_mehrunes_shunned = {
 		parameters = {
 			worship_mehrunes_shunned_active = yes
 			hostility_override_doctrine_pantheon_mehrunes = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_mehrunes_criminal = {
 		parameters = {
 			worship_mehrunes_criminal_active = yes
 			hostility_override_doctrine_pantheon_mehrunes = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mehrunes_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -269,34 +773,106 @@ doctrine_mehrunes = {
 doctrine_mephala = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_mephala_pantheon = {
 		parameters = {
 			adds_mephala_pantheon_active = yes
 			worship_mephala_allowed_active = yes
+			hostility_override_doctrine_mephala_shunned = 2
+			hostility_override_doctrine_mephala_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mephala_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_mephala_allowed = {
 		parameters = {
 			worship_mephala_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mephala_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### mephala's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_mephala_shunned = {
 		parameters = {
 			worship_mephala_shunned_active = yes
 			hostility_override_doctrine_pantheon_mephala = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mephala_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_mephala_criminal = {
 		parameters = {
 			worship_mephala_criminal_active = yes
 			hostility_override_doctrine_pantheon_mephala = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_mephala_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_mephala_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -304,34 +880,106 @@ doctrine_mephala = {
 doctrine_meridia = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_meridia_pantheon = {
 		parameters = {
 			adds_meridia_pantheon_active = yes
 			worship_meridia_allowed_active = yes
+			hostility_override_doctrine_meridia_shunned = 2
+			hostility_override_doctrine_meridia_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_meridia_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_meridia_allowed = {
 		parameters = {
 			worship_meridia_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_meridia_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### meridia's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_meridia_shunned = {
 		parameters = {
 			worship_meridia_shunned_active = yes
 			hostility_override_doctrine_pantheon_meridia = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_meridia_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_meridia_criminal = {
 		parameters = {
 			worship_meridia_criminal_active = yes
 			hostility_override_doctrine_pantheon_meridia = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_meridia_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_meridia_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -339,34 +987,106 @@ doctrine_meridia = {
 doctrine_molag = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_molag_pantheon = {
 		parameters = {
 			adds_molag_pantheon_active = yes
 			worship_molag_allowed_active = yes
+			hostility_override_doctrine_molag_shunned = 2
+			hostility_override_doctrine_molag_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_molag_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_molag_allowed = {
 		parameters = {
 			worship_molag_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_molag_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### molag's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_molag_shunned = {
 		parameters = {
 			worship_molag_shunned_active = yes
 			hostility_override_doctrine_pantheon_molag = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_molag_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_molag_criminal = {
 		parameters = {
 			worship_molag_criminal_active = yes
 			hostility_override_doctrine_pantheon_molag = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_molag_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_molag_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -374,34 +1094,106 @@ doctrine_molag = {
 doctrine_namira = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_namira_pantheon = {
 		parameters = {
 			adds_namira_pantheon_active = yes
 			worship_namira_allowed_active = yes
+			hostility_override_doctrine_namira_shunned = 2
+			hostility_override_doctrine_namira_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_namira_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_namira_allowed = {
 		parameters = {
 			worship_namira_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_namira_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### namira's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_namira_shunned = {
 		parameters = {
 			worship_namira_shunned_active = yes
 			hostility_override_doctrine_pantheon_namira = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_namira_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_namira_criminal = {
 		parameters = {
 			worship_namira_criminal_active = yes
 			hostility_override_doctrine_pantheon_namira = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_namira_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_namira_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -409,34 +1201,106 @@ doctrine_namira = {
 doctrine_nocturnal = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_nocturnal_pantheon = {
 		parameters = {
 			adds_nocturnal_pantheon_active = yes
 			worship_nocturnal_allowed_active = yes
+			hostility_override_doctrine_nocturnal_shunned = 2
+			hostility_override_doctrine_nocturnal_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_nocturnal_allowed = {
 		parameters = {
 			worship_nocturnal_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### nocturnal's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_nocturnal_shunned = {
 		parameters = {
 			worship_nocturnal_shunned_active = yes
 			hostility_override_doctrine_pantheon_nocturnal = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_nocturnal_criminal = {
 		parameters = {
 			worship_nocturnal_criminal_active = yes
 			hostility_override_doctrine_pantheon_nocturnal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_nocturnal_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -444,34 +1308,106 @@ doctrine_nocturnal = {
 doctrine_peryite = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_peryite_pantheon = {
 		parameters = {
 			adds_peryite_pantheon_active = yes
 			worship_peryite_allowed_active = yes
+			hostility_override_doctrine_peryite_shunned = 2
+			hostility_override_doctrine_peryite_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_peryite_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_peryite_allowed = {
 		parameters = {
 			worship_peryite_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_peryite_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### peryite's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_peryite_shunned = {
 		parameters = {
 			worship_peryite_shunned_active = yes
 			hostility_override_doctrine_pantheon_peryite = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_peryite_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_peryite_criminal = {
 		parameters = {
 			worship_peryite_criminal_active = yes
 			hostility_override_doctrine_pantheon_peryite = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_peryite_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_peryite_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -479,34 +1415,106 @@ doctrine_peryite = {
 doctrine_sanguine = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_sanguine_pantheon = {
 		parameters = {
 			adds_sanguine_pantheon_active = yes
 			worship_sanguine_allowed_active = yes
+			hostility_override_doctrine_sanguine_shunned = 2
+			hostility_override_doctrine_sanguine_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_sanguine_allowed = {
 		parameters = {
 			worship_sanguine_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### sanguine's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_sanguine_shunned = {
 		parameters = {
 			worship_sanguine_shunned_active = yes
 			hostility_override_doctrine_pantheon_sanguine = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_sanguine_criminal = {
 		parameters = {
 			worship_sanguine_criminal_active = yes
 			hostility_override_doctrine_pantheon_sanguine = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sanguine_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -514,34 +1522,106 @@ doctrine_sanguine = {
 doctrine_sheogorath = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_sheogorath_pantheon = {
 		parameters = {
 			adds_sheogorath_pantheon_active = yes
 			worship_sheogorath_allowed_active = yes
+			hostility_override_doctrine_sheogorath_shunned = 2
+			hostility_override_doctrine_sheogorath_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_sheogorath_allowed = {
 		parameters = {
 			worship_sheogorath_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### sheogorath's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_sheogorath_shunned = {
 		parameters = {
 			worship_sheogorath_shunned_active = yes
 			hostility_override_doctrine_pantheon_sheogorath = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_sheogorath_criminal = {
 		parameters = {
 			worship_sheogorath_criminal_active = yes
 			hostility_override_doctrine_pantheon_sheogorath = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_sheogorath_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }
@@ -549,34 +1629,106 @@ doctrine_sheogorath = {
 doctrine_vaermina = {
 	group = "daedric_princes"
 
-	### Adds it to your faith's pantheon
+	# Adds it to your faith's pantheon
 	doctrine_vaermina_pantheon = {
 		parameters = {
 			adds_vaermina_pantheon_active = yes
 			worship_vaermina_allowed_active = yes
+			hostility_override_doctrine_vaermina_shunned = 2
+			hostility_override_doctrine_vaermina_criminal = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_massive
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_pantheon }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_shunned }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_criminal }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 	
-	### Makes it just okay but not much more
+	# Makes it just okay but not much more
 	doctrine_vaermina_allowed = {
 		parameters = {
 			worship_vaermina_allowed_active = yes
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_allowed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_criminal }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### vaermina's worship is kinda yikes tbh
+	# Its worship is kinda yikes tbh
 	doctrine_vaermina_shunned = {
 		parameters = {
 			worship_vaermina_shunned_active = yes
 			hostility_override_doctrine_pantheon_vaermina = 2
 		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_shunned }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+		}
 	}
 	
-	### They are CRIMINAL, and you hate them
+	# They are CRIMINAL, and you hate them
 	doctrine_vaermina_criminal = {
 		parameters = {
 			worship_vaermina_criminal_active = yes
 			hostility_override_doctrine_pantheon_vaermina = 3
+		}
+		
+		piety_cost = {
+			value = faith_doctrine_cost_high
+
+			# Multiplier for keeping same doctrine
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_criminal }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_allowed }
+				multiply = faith_changed_doctrine_cost_mult_two_step
+			}
+			
+			if = {
+				limit = { has_doctrine = doctrine_vaermina_pantheon }
+				multiply = faith_changed_doctrine_cost_mult_three_step
+			}
 		}
 	}
 }

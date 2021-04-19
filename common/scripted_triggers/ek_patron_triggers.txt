@@ -37,16 +37,9 @@
 
 # Daedra #
 is_worshipping_daedra = {
-	NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
 	OR = {
-		# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-		has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-		has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-		AND = {
-			has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-			has_doctrine_parameter = daedric_worship_accepted
-		}
+		has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
+		has_doctrine_parameter = worship_$DAEDRA$_allowed_active
 	}
 }
 
@@ -54,34 +47,7 @@ patron_daedra_valid = {
 	# Doctrines and tenets are aligned with $DAEDRA$
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
 	# Faith is not centered around a single Prince, or if it is it's around this Prince
-	OR = {
-		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-		NOR	= {
-			patron_exclusive_daedra = yes
-			has_doctrine_parameter = pantheon_cannot_be_changed_active
-		}
-	}
-}
-
-patron_exclusive_daedra = {
-	OR = {
-		has_doctrine_parameter = allows_worship_azura_only_active
-		has_doctrine_parameter = allows_worship_boethiah_only_active
-		has_doctrine_parameter = allows_worship_clavicus_only_active
-		has_doctrine_parameter = allows_worship_hermaeus_only_active
-		has_doctrine_parameter = allows_worship_hircine_only_active
-		has_doctrine_parameter = allows_worship_malacath_only_active
-		has_doctrine_parameter = allows_worship_mehrunes_only_active
-		has_doctrine_parameter = allows_worship_mephala_only_active
-		has_doctrine_parameter = allows_worship_meridia_only_active
-		has_doctrine_parameter = allows_worship_molag_only_active
-		has_doctrine_parameter = allows_worship_namira_only_active
-		has_doctrine_parameter = allows_worship_nocturnal_only_active
-		has_doctrine_parameter = allows_worship_peryite_only_active
-		has_doctrine_parameter = allows_worship_sanguine_only_active
-		has_doctrine_parameter = allows_worship_sheogorath_only_active
-		has_doctrine_parameter = allows_worship_vaermina_only_active
-	}
+	has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
 }
 
 patron_azura_valid = {
