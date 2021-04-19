@@ -244,3 +244,82 @@ update_religions_piety_level = {
 		}
 	}
 }
+
+### FAITH'S VIEW ON THE DAEDRIC PRINCES
+faith_give_view_daedric_prince = {
+	if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_allowed }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+		}
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_shunned }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+		}
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_criminal }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+		}
+	}
+}
+
+faith_give_view_daedric_princes = {
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = azura }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = boethiah }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = clavicus }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = hermaeus }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = hircine }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = malacath }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = mehrunes }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = mephala }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = meridia }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = molag }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = namira }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = nocturnal }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = peryite }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = sanguine }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = sheogorath }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = vaermina }
+	
+	# Remove the doctrines
+	if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_allowed }
+		remove_doctrine = doctrine_hidden_daedra_allowed
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_shunned }
+		remove_doctrine = doctrine_hidden_daedra_shunned
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_criminal }
+		remove_doctrine = doctrine_hidden_daedra_criminal
+	}
+}
