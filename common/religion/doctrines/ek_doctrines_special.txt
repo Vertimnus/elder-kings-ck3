@@ -41,15 +41,37 @@ hidden_doctrine_worshipping_daedra = {
 
 # Based on special_doctrine_ecumenical_christian
 special_tolerance = {
-	group = "main_group"
+	group = "main_group_special"
 	
-	is_available_on_create = {
-		always = no # Goes away when creating a new Faith
-	}
+	is_available_on_create = { always = no }
 	
 	special_doctrine_cyrodiilic_cult = {
 		parameters = {
 			hostility_override_special_doctrine_cyrodiilic_cult = 1
+		}
+	}
+}
+
+special_faith_group_council_of_the_eight = {
+	group = "main_group_special"
+	is_available_on_create = { always = no }
+	
+	# HoF will be the de Jure liege of the other (makes the HoF a king-tier title)
+	special_faith_group_council_of_the_eight_leader = {
+		parameters = {
+			hof_king_tier_title = 1
+			hof_de_jure_liege_other = 1
+			doctrines_change_trickle_down = 1
+			council_of_the_eight_holy_war_defense = 1
+		}
+	}
+	
+	# Faiths within the group with high fervor will boost the fervor of others
+	special_faith_group_council_of_the_eight_member = {
+		parameters = {
+			part_council_of_the_eight_active = 1
+			doctrines_change_trickle_down_from_leader = 1
+			council_of_the_eight_holy_war_defense = 1
 		}
 	}
 }

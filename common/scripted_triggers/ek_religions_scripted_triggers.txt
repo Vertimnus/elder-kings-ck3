@@ -86,18 +86,8 @@ can_see_doctrine_pantheon_daedra = {
 	OR = {
 		# The religion is dedicated to the Prince
 		religion_tag = $DAEDRA$_religion
-		# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-		AND = {
-			has_doctrine = daedric_hostility_doctrine
-			NOT = { is_daedric_prince_religion_tag = yes }
-			creating_faith_$DAEDRA$_shunned_accepted_tenet_doctrine = yes
-		}
-		# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-		AND = {
-			NOT = { has_doctrine = daedric_hostility_doctrine }
-			NOT = { creating_faith_daedric_worship_criminal = yes }
-			creating_faith_$DAEDRA$_shunned_accepted_tenet_doctrine = yes
-		}
+		flag:doctrine_$DAEDRA$_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_$DAEDRA$_allowed = { is_in_list = selected_doctrines }
 	}
 }
 

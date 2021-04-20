@@ -32,13 +32,15 @@
 	doctrine = doctrine_adultery_men_accepted
 	doctrine = doctrine_adultery_women_accepted
 	doctrine = doctrine_homosexuality_accepted
-	doctrine = doctrine_daedra_worship_accepted
 	doctrine = doctrine_lycanthropy_outlawed
 	doctrine = doctrine_vampirism_outlawed
 	doctrine = doctrine_necromancy_pragmatic
 
 	#Special Doctrine for Malacath Syncretism
 	doctrine = doctrine_pantheon_malacath
+	
+	doctrine = doctrine_hidden_daedra_allowed
+	doctrine = doctrine_malacath_pantheon
 
 	traits = {
 		virtues = { brave wrathful vengeful }
@@ -373,9 +375,15 @@
 			doctrine = doctrine_pluralism_fundamentalist
 			
 			#Tenets
-			doctrine = tenet_gruesome_festivals
 			doctrine = tenet_warmonger
 			doctrine = tenet_contempt_for_the_weak
+			
+			# Gruesome Festivals, else Human Sacrifice.
+			doctrine_selection_pair = {
+				requires_dlc_flag = the_northern_lords
+				doctrine = tenet_gruesome_festivals
+				fallback_doctrine = tenet_human_sacrifice
+			}
 		}
 	}
 }
