@@ -95,6 +95,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:baandari }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:goblin }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:bjoule }
+		set_culture_native_to = { REGION = nomadic CULTURE = culture:tsaesci }
 		## High Rock
 		# Glenumbra
 		set_culture_native_to = { REGION = glenumbra CULTURE = culture:glenumbran }
@@ -236,7 +237,7 @@ ek_on_game_start = {
 		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
 		every_religion_global = {
 			every_faith = {
-				limit = { has_doctrine = doctrine_pantheon_jephre }
+				limit = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -249,7 +250,7 @@ ek_on_game_start = {
 				}
 			}
 			every_faith = {
-				limit = { has_doctrine = special_doctrine_daedra_worshipper }
+				limit = { has_doctrine_parameter = faith_uses_daedric_shrines }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -262,7 +263,7 @@ ek_on_game_start = {
 				}
 			}
 			every_faith = {
-				limit = { has_doctrine = doctrine_pantheon_dragons }
+				limit = { has_doctrine_parameter = faith_uses_dragon_temples }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -271,6 +272,19 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = dragon_temple_01
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_cathedrals }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = grand_cathedral_01
 					}
 				}
 			}
