@@ -37,7 +37,7 @@ patron_select_patron_decision = {
 
     ai_potential = {
         piety >= minor_piety_value
-        patron_has_passive_patron_trait = no
+        patron_has_any_trait = no
     }
 
     ai_will_do = {
@@ -59,7 +59,8 @@ patron_offer_gold_decision = {
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_offer_gold_decision_desc
-    selection_tooltip = patron_offer_gold_decision_tooltip
+    # selection_tooltip = patron_offer_gold_decision_tooltip
+    selection_tooltip = patron_offer_gold_decision_
 
     ai_check_interval = 3
 
@@ -111,7 +112,8 @@ patron_offer_sacrifice_decision = {
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_offer_sacrifice_decision_desc
-    selection_tooltip = patron_offer_sacrifice_decision_tooltip
+    # selection_tooltip = patron_offer_sacrifice_decision_tooltip
+    selection_tooltip = patron_offer_sacrifice_decision_
 
     ai_check_interval = 3
 
@@ -122,11 +124,15 @@ patron_offer_sacrifice_decision = {
             AND = {
                 #is_ai = no
                 has_active_patron_selected = yes
-                NOR = { #dont care for human sacrifice, based on ek1
-                    has_variable = patron_azura_shown
-                    has_variable = patron_meridia_shown
-                    has_variable = patron_sanguine_shown
+                trigger_if = {
+                    limit = { exists = var:patron_shown }
+                    NOR = { #dont care for human sacrifice, based on ek1
+                        var:patron_shown = flag:azura
+                        var:patron_shown = flag:meridia
+                        var:patron_shown = flag:sanguine
+                    }
                 }
+                trigger_else = { always = no }
             }
             # AND = {
             #     is_ai = yes
@@ -153,7 +159,12 @@ patron_offer_sacrifice_decision = {
                 NOT = { any_heir_title = { count > 0 } }
             }
             if = {
-                limit = { ROOT = { has_variable = patron_namira_shown } }
+                limit = {
+                    ROOT = {
+                        exists = var:patron_shown
+                        var:patron_shown = flag:namira
+                    }
+                }
                 death = { killer = ROOT death_reason = death_eaten }
             }
             else = {
@@ -191,7 +202,8 @@ patron_boon_gold_decision = { #750
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_gold_decision_desc
-    selection_tooltip = patron_boon_gold_decision_tooltip
+    # selection_tooltip = patron_boon_gold_decision_tooltip
+    selection_tooltip = patron_boon_gold_decision_
 
     ai_check_interval = 3
 
@@ -219,7 +231,7 @@ patron_boon_gold_decision = { #750
         #     value = medium_ardor_value_double
         #     var:ardor_display >= medium_ardor_value_double
         # }
-        patron_has_ardor = { ARDOR = medium_ardor_value_double }
+        #patron_has_ardor = { ARDOR = medium_ardor_value_double }
     }
 
     effect = {
@@ -249,7 +261,8 @@ patron_boon_training_decision = { #5000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_training_decision_desc
-    selection_tooltip = patron_boon_training_decision_tooltip
+    # selection_tooltip = patron_boon_training_decision_tooltip
+    selection_tooltip = patron_boon_training_decision_
 
     ai_check_interval = 3
 
@@ -283,7 +296,7 @@ patron_boon_training_decision = { #5000
         #     value = massive_ardor_value
         #     var:ardor_display >= massive_ardor_value
         # }
-        patron_has_ardor = { ARDOR = massive_ardor_value }
+        #patron_has_ardor = { ARDOR = massive_ardor_value }
     }
 
     effect = {
@@ -369,7 +382,8 @@ patron_boon_horde_decision = { #5000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_horde_decision_desc
-    selection_tooltip = patron_boon_horde_decision_tooltip
+    # selection_tooltip = patron_boon_horde_decision_tooltip
+    selection_tooltip = patron_boon_horde_decision_
 
     ai_check_interval = 3
 
@@ -399,7 +413,7 @@ patron_boon_horde_decision = { #5000
         #     value = massive_ardor_value
         #     var:ardor_display >= massive_ardor_value
         # } #may add scaling cost for more hordes as soft limit cost * list_size/10
-        patron_has_ardor = { ARDOR = massive_ardor_value }
+        #patron_has_ardor = { ARDOR = massive_ardor_value }
     }
 
     effect = {
@@ -489,7 +503,8 @@ patron_boon_invasion_decision = { #25000
     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
     desc = patron_boon_invasion_decision_desc
-    selection_tooltip = patron_boon_invasion_decision_tooltip
+    # selection_tooltip = patron_boon_invasion_decision_tooltip
+    selection_tooltip = patron_boon_invasion_decision_
 
     ai_check_interval = 3
 
@@ -517,7 +532,7 @@ patron_boon_invasion_decision = { #25000
         #     value = monumental_ardor_value
         #     var:ardor_display >= monumental_ardor_value
         # }
-        patron_has_ardor = { ARDOR = monumental_ardor_value }
+        #patron_has_ardor = { ARDOR = monumental_ardor_value }
     }
 
     effect = {
@@ -543,70 +558,71 @@ patron_boon_invasion_decision = { #25000
     }
 }
 
-test_add_aptitude = {
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+# test_add_aptitude = {
+#     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = test
-    selection_tooltip = test
+#     desc = test
+#     selection_tooltip = test
 
-    ai_check_interval = 3
+#     ai_check_interval = 3
 
-    is_shown = {
-        always = yes
-    }
+#     is_shown = {
+#         always = yes
+#     }
 
-    cooldown = { days = 0 }
+#     cooldown = { days = 0 }
 
-    is_valid_showing_failures_only = {
-        has_aptitude_less_than = { VALUE = 15 }
-    }
+#     is_valid_showing_failures_only = {
+#         has_aptitude_less_than = { VALUE = 15 }
+#     }
 
-    effect = {
-        add_aptitude_skill = { VALUE = 1 }
-        # set_global_variable = { name = bloodline_test_1_founder value = ROOT }
-        # set_global_variable = { name = bloodline_test_2_founder value = ROOT }
-        # set_global_variable = { name = bloodline_test_3_founder value = ROOT }
-    }
+#     effect = {
+#         add_aptitude_skill = { VALUE = 1 }
+#         # set_global_variable = { name = bloodline_test_1_founder value = ROOT }
+#         # set_global_variable = { name = bloodline_test_2_founder value = ROOT }
+#         # set_global_variable = { name = bloodline_test_3_founder value = ROOT }
+#         custom_tooltip = test_key
+#     }
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = no
-    }
+#     ai_potential = { #should be able to eventually may handle seperatly
+#         always = no
+#     }
 
-    ai_will_do = {
-        base = 0
-    }
-}
+#     ai_will_do = {
+#         base = 0
+#     }
+# }
 
-test_subtract_aptitude = {
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+# test_subtract_aptitude = {
+#     picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = test
-    selection_tooltip = test
+#     desc = test
+#     selection_tooltip = test
 
-    ai_check_interval = 3
+#     ai_check_interval = 3
 
-    is_shown = {
-        always = yes
-    }
+#     is_shown = {
+#         always = yes
+#     }
 
-    cooldown = { days = 0 }
+#     cooldown = { days = 0 }
 
-    is_valid_showing_failures_only = {
-        always = yes
-    }
+#     is_valid_showing_failures_only = {
+#         always = yes
+#     }
 
-    effect = {
-        add_aptitude_skill = { VALUE = -1 }
-    }
+#     effect = {
+#         add_aptitude_skill = { VALUE = -1 }
+#     }
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = no
-    }
+#     ai_potential = { #should be able to eventually may handle seperatly
+#         always = no
+#     }
 
-    ai_will_do = {
-        base = 0
-    }
-}
+#     ai_will_do = {
+#         base = 0
+#     }
+# }
 
 ##########
 # Unique #

@@ -1,63 +1,32 @@
 ﻿has_active_patron_selected = {
-	OR = {
-		# Daedra #
-		has_variable = patron_azura_shown
-		has_variable = patron_boethiah_shown
-		has_variable = patron_clavicus_shown
-		has_variable = patron_hermaeus_shown
-		has_variable = patron_hircine_shown
-		has_variable = patron_jyggalag_shown
-		has_variable = patron_malacath_shown
-		has_variable = patron_mehrunes_shown
-		has_variable = patron_mephala_shown
-		has_variable = patron_meridia_shown
-		has_variable = patron_molag_shown
-		has_variable = patron_namira_shown
-		has_variable = patron_nocturnal_shown
-		has_variable = patron_peryite_shown
-		has_variable = patron_sanguine_shown
-		has_variable = patron_sheogorath_shown
-		has_variable = patron_vaermina_shown
+	exists = var:patron_shown
+	# OR = {
+	# 	# Daedra #
+	# 	has_variable = patron_azura_shown
+	# 	has_variable = patron_boethiah_shown
+	# 	has_variable = patron_clavicus_shown
+	# 	has_variable = patron_hermaeus_shown
+	# 	has_variable = patron_hircine_shown
+	# 	has_variable = patron_jyggalag_shown
+	# 	has_variable = patron_malacath_shown
+	# 	has_variable = patron_mehrunes_shown
+	# 	has_variable = patron_mephala_shown
+	# 	has_variable = patron_meridia_shown
+	# 	has_variable = patron_molag_shown
+	# 	has_variable = patron_namira_shown
+	# 	has_variable = patron_nocturnal_shown
+	# 	has_variable = patron_peryite_shown
+	# 	has_variable = patron_sanguine_shown
+	# 	has_variable = patron_sheogorath_shown
+	# 	has_variable = patron_vaermina_shown
 
-		# Tribunal #
-		has_variable = patron_almalexia_shown
-		has_variable = patron_sotha_sil_shown
-		has_variable = patron_vivec_shown
-	}
+	# 	# Tribunal #
+	# 	has_variable = patron_almalexia_shown
+	# 	has_variable = patron_sotha_sil_shown
+	# 	has_variable = patron_vivec_shown
+	# }
 }
 
-has_pantheon_selected = {
-	OR = {
-		# Pantheons #
-		has_variable = patron_divines_shown
-		has_variable = patron_aldmer_shown
-	}
-}
-
-has_passive_patron_selected = {
-	OR = {
-		# Divines #
-		has_variable = patron_akatosh_shown
-		has_variable = patron_arkay_shown
-		has_variable = patron_dibella_shown
-		has_variable = patron_julianos_shown
-		has_variable = patron_kynareth_shown
-		has_variable = patron_mara_shown
-		has_variable = patron_stendarr_shown
-		has_variable = patron_talos_shown
-		has_variable = patron_zenithar_shown
-		has_variable = patron_shezarr_shown
-		# Aldmer #
-		has_variable = patron_auriel_shown
-		has_variable = patron_jephre_shown
-		has_variable = patron_magnus_shown
-		has_variable = patron_phynaster_shown
-		has_variable = patron_syrabane_shown
-		has_variable = patron_trinimac_shown
-		has_variable = patron_xarxes_shown
-		has_variable = patron_xen_shown
-	}
-}
 
 # Valid Triggers - tenets, doctrines and anything alse allowing a patron should be here
 
@@ -68,18 +37,9 @@ has_passive_patron_selected = {
 
 # Daedra #
 is_worshipping_daedra = {
-	faith = {
-		NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
-		OR = {
-			# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-			has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-			has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-			AND = {
-				has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-				has_doctrine_parameter = daedric_worship_accepted
-			}
-		}
+	OR = {
+		has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
+		has_doctrine_parameter = worship_$DAEDRA$_allowed_active
 	}
 }
 
@@ -87,13 +47,7 @@ patron_daedra_valid = {
 	# Doctrines and tenets are aligned with $DAEDRA$
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
 	# Faith is not centered around a single Prince, or if it is it's around this Prince
-	OR = {
-		faith = { has_doctrine_parameter = allows_worship_$DAEDRA$_only_active }
-		NOR	= {
-			has_exclusive_daedric_prince_pantheon = yes
-			faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active }
-		}
-	}
+	has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
 }
 
 patron_azura_valid = {
@@ -164,7 +118,6 @@ patron_vaermina_valid = {
 	patron_daedra_valid = { DAEDRA = vaermina }
 }
 
-
 # Tribunal #
 patron_almalexia_valid = {
 	always = no
@@ -179,12 +132,25 @@ patron_vivec_valid = {
 }
 
 # Pantheons #
-patron_divines_valid = {
-	faith = { has_doctrine = doctrine_pantheon_divines }
-}
+patron_PANTHEON_valid = { has_doctrine_parameter = pantheon_adds_deities_$PANTHEON$ }
 
+patron_divines_valid = {
+	patron_PANTHEON_valid = { PANTHEON = divines }
+}
 patron_aldmer_valid = {
-	faith = { has_doctrine = doctrine_pantheon_aedra }
+	patron_PANTHEON_valid = { PANTHEON = aedra }
+}
+patron_dwemer_ancestors_valid = {
+	patron_PANTHEON_valid = { PANTHEON = dwemer_ancestors }
+}
+patron_atmoran_totems_valid = {
+	patron_PANTHEON_valid = { PANTHEON = atmoran_totems }
+}
+patron_ternion_totems_valid = {
+	patron_PANTHEON_valid = { PANTHEON = ternion_totems }
+}
+patron_elemental_valid = {
+	patron_PANTHEON_valid = { PANTHEON = elemental }
 }
 
 # Passive Patrons #
@@ -223,11 +189,9 @@ patron_zenithar_valid = {
 
 patron_shezarr_valid = {
 	patron_divines_valid = yes
-	faith = {
-		NOR = {
-			has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
-			#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
-		}
+	NOR = {
+		has_doctrine = tenet_syncretism_pantheon_aedra #bretons sheor = bad technically from fall of sarthal but aldmeri influence of lorkan = bad close enough
+		#has_doctrine = tenet_desert_traditions #redguard sep = bad from yokudan influence
 	}
 }
 
@@ -239,21 +203,21 @@ patron_auriel_valid = {
 patron_jephre_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_magnus_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
 patron_phynaster_valid = {
 	OR = {
 		patron_aldmer_valid = yes
-		faith = { has_doctrine = tenet_syncretism_pantheon_aedra }
+		has_doctrine = tenet_syncretism_pantheon_aedra
 	}
 }
 
@@ -271,6 +235,76 @@ patron_xarxes_valid = {
 
 patron_xen_valid = {
 	patron_aldmer_valid = yes
+}
+
+# Dwemer Ancestors #
+patron_da_architect_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_giant_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_lost_king_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+patron_da_warrior_valid = {
+	patron_dwemer_ancestors_valid = yes
+}
+
+# Atmoran Totems
+patron_at_bear_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_dragon_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_fox_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+patron_at_hawk_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_moth_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_owl_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_snake_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_whale_valid = {
+	patron_atmoran_totems_valid = yes
+}
+patron_at_wolf_valid = {
+	OR = {
+		patron_atmoran_totems_valid = yes
+		patron_ternion_totems_valid = yes
+	}
+}
+
+# Elemntal Gods
+patron_eg_myn_valid = {
+	patron_elemental_valid = yes
+}
+patron_eg_zisa_valid = {
+	patron_elemental_valid = yes
+}
+patron_eg_nyfa_valid = {
+	patron_elemental_valid = yes
+}
+patron_eg_ilni_valid = {
+	patron_elemental_valid = yes
+}
+patron_eg_tam_valid = {
+	patron_elemental_valid = yes
+	has_doctrine = tenet_syncretism_pantheon_divines
 }
 
 # Aggregate Triggers #
@@ -304,42 +338,67 @@ patron_has_tribunal = {
 	}
 }
 
-patron_has_pantheon = {
-	OR = {
-		patron_divines_valid = yes
-		patron_aldmer_valid = yes
-	}
-}
+# patron_has_pantheon = {
+# 	OR = {
+# 		patron_divines_valid = yes
+# 		patron_aldmer_valid = yes
+# 		patron_dwemer_ancestors_valid = yes
+# 		patron_atmoran_totems_valid = yes
+# 		patron_ternion_totems_valid = yes
+# 		patron_elemental_valid = yes
+# 	}
+# }
 
 patron_has_patron = {
 	OR = {
 		patron_has_princes = yes
 		patron_has_tribunal = yes
-		patron_has_pantheon = yes
+		#patron_has_pantheon = yes
 	}
 }
 
-patron_has_passive_patron_trait = {
-	OR = {
-		has_trait = p_akatosh
-		has_trait = p_arkay
-		has_trait = p_dibella
-		has_trait = p_julianos
-		has_trait = p_kynareth
-		has_trait = p_mara
-		has_trait = p_stendarr
-		has_trait = p_zenithar
-		has_trait = p_shezarr
-		has_trait = p_auriel
-		has_trait = p_jephre
-		has_trait = p_magnus
-		has_trait = p_phynaster
-		has_trait = p_syrabane
-		has_trait = p_trinimac
-		has_trait = p_xarxes
-		has_trait = p_xen
-	}
-}
+# patron_has_passive_patron_trait = {
+# 	OR = {
+# 		has_trait = p_akatosh
+# 		has_trait = p_arkay
+# 		has_trait = p_dibella
+# 		has_trait = p_julianos
+# 		has_trait = p_kynareth
+# 		has_trait = p_mara
+# 		has_trait = p_stendarr
+# 		has_trait = p_zenithar
+# 		has_trait = p_shezarr
+# 		has_trait = p_auriel
+# 		has_trait = p_jephre
+# 		has_trait = p_magnus
+# 		has_trait = p_phynaster
+# 		has_trait = p_syrabane
+# 		has_trait = p_trinimac
+# 		has_trait = p_xarxes
+# 		has_trait = p_xen
+# 		# Dwemer Ancestors
+# 		has_trait = p_da_architect
+# 		has_trait = p_da_giant
+# 		has_trait = p_da_lost_king
+# 		has_trait = p_da_warrior
+# 		# Atmoran Totems
+# 		has_trait = p_at_hawk
+# 		has_trait = p_at_wolf
+# 		has_trait = p_at_snake
+# 		has_trait = p_at_moth
+# 		has_trait = p_at_owl
+# 		has_trait = p_at_whale
+# 		has_trait = p_at_bear
+# 		has_trait = p_at_fox
+# 		has_trait = p_at_dragon
+# 		# Elemental Gods
+# 		has_trait = p_eg_myn
+# 		has_trait = p_eg_zisa
+# 		has_trait = p_eg_nyfa
+# 		has_trait = p_eg_ilni
+# 		has_trait = p_eg_tam
+# 	}
+# }
 
 patron_has_ardor = {
 	custom_description = {
@@ -348,3 +407,82 @@ patron_has_ardor = {
 		var:ardor_display >= $ARDOR$
 	}
 }
+
+patron_trait_master_trigger = {
+	OR = {
+		# Divines
+		$TRIGGER$ = { TRAIT = _akatosh }
+		$TRIGGER$ = { TRAIT = _arkay }
+		$TRIGGER$ = { TRAIT = _dibella }
+		$TRIGGER$ = { TRAIT = _julianos }
+		$TRIGGER$ = { TRAIT = _kynareth }
+		$TRIGGER$ = { TRAIT = _mara }
+		$TRIGGER$ = { TRAIT = _stendarr }
+		$TRIGGER$ = { TRAIT = _zenithar }
+		$TRIGGER$ = { TRAIT = _shezarr }
+		# Aedra
+		$TRIGGER$ = { TRAIT = _auriel }
+		$TRIGGER$ = { TRAIT = _jephre }
+		$TRIGGER$ = { TRAIT = _magnus }
+		$TRIGGER$ = { TRAIT = _phynaster }
+		$TRIGGER$ = { TRAIT = _syrabane }
+		$TRIGGER$ = { TRAIT = _trinimac }
+		$TRIGGER$ = { TRAIT = _xarxes }
+		$TRIGGER$ = { TRAIT = _xen }
+		# Daedra
+		$TRIGGER$ = { TRAIT = _azura }
+		$TRIGGER$ = { TRAIT = _boethiah }
+		$TRIGGER$ = { TRAIT = _clavicus }
+		$TRIGGER$ = { TRAIT = _hermaeus }
+		$TRIGGER$ = { TRAIT = _hircine }
+		$TRIGGER$ = { TRAIT = _malacath }
+		$TRIGGER$ = { TRAIT = _mehrunes }
+		$TRIGGER$ = { TRAIT = _mephala }
+		$TRIGGER$ = { TRAIT = _meridia }
+		$TRIGGER$ = { TRAIT = _molag }
+		$TRIGGER$ = { TRAIT = _namira }
+		$TRIGGER$ = { TRAIT = _nocturnal }
+		$TRIGGER$ = { TRAIT = _peryite }
+		$TRIGGER$ = { TRAIT = _sanguine }
+		$TRIGGER$ = { TRAIT = _sheogorath }
+		$TRIGGER$ = { TRAIT = _vaermina }
+		# Dwemer Ancestors
+		$TRIGGER$ = { TRAIT = _da_architect }
+		$TRIGGER$ = { TRAIT = _da_giant }
+		$TRIGGER$ = { TRAIT = _da_lost_king }
+		$TRIGGER$ = { TRAIT = _da_warrior }
+		# Atmoran Totems
+		$TRIGGER$ = { TRAIT = _at_bear }
+		$TRIGGER$ = { TRAIT = _at_dragon }
+		$TRIGGER$ = { TRAIT = _at_fox }
+		$TRIGGER$ = { TRAIT = _at_hawk }
+		$TRIGGER$ = { TRAIT = _at_moth }
+		$TRIGGER$ = { TRAIT = _at_owl }
+		$TRIGGER$ = { TRAIT = _at_snake }
+		$TRIGGER$ = { TRAIT = _at_whale }
+		$TRIGGER$ = { TRAIT = _at_wolf }
+		# Elemental Gods
+		$TRIGGER$ = { TRAIT = _eg_myn }
+		$TRIGGER$ = { TRAIT = _eg_zisa }
+		$TRIGGER$ = { TRAIT = _eg_nyfa }
+		$TRIGGER$ = { TRAIT = _eg_ilni }
+		$TRIGGER$ = { TRAIT = _eg_tam }
+	}
+}
+
+patron_has_any_trait = {
+	patron_trait_master_trigger = { TRIGGER = patron_has_trait }
+}
+
+patron_has_trait = {
+	has_trait = p$TRAIT$
+}
+
+# patron_has_specific_trait = {
+# 	patron_trait_master_trigger = { TRIGGER = patron_has_given_trait }
+# }
+
+# patron_has_given_trait = {
+# 	flag/scope:trait = $TRAIT$
+# 	has_trait = p$TRAIT$
+# }

@@ -1,4 +1,7 @@
-﻿###################################
+﻿### EK EDIT: Removed references to vanilla religions & cultures
+### EK EDIT: Replaced all "culture = culture:norse" by "ek_fp1_use_norse_animations = yes"
+
+###################################
 # Default Personality Animations  #
 ###################################
 
@@ -20,7 +23,7 @@ idle = {
 		# }
 
 		AI_idle_infant = {
-			animation = { head = "idle" torso = "idleInfant_entry" }
+			animation = { head = "idle" torso = "idle_entry" }
 
 			weight = {
 				base = 0
@@ -45,42 +48,6 @@ idle = {
 				}
 			}
 		}
-
-##########################################################################################################################################################################################
-##########################################################################################################################################################################################
-
-
-		AI_pregnant_armor = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
-
-			weight = {
-				base = 0
-
-				modifier = {
-					add = 100
-					OR = {
-						has_trait = dwarf
-						portrait_wear_armor_trigger = yes
-					}
-					has_trait = pregnant
-				}
-			}
-		}
-
-		AI_pregnant = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
-
-			weight = {
-				base = 0
-
-				modifier = {
-					add = 100
-					has_trait = pregnant
-					NOT = { has_trait = dwarf }
-				}
-			}
-		}
-
 
 ##########################################################################################################################################################################################
 ##########################################################################################################################################################################################
@@ -572,6 +539,45 @@ idle = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 
+		AI_greedy_pregnant_armor_dwarf = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSeriousFatDwarf_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_greed
+					}
+					OR = {
+						has_trait = dwarf
+						portrait_wear_armor_trigger = yes
+					}
+					ai_greed >= high_positive_ai_value
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}
+		}
+
+		AI_greedy_pregnant = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSerious_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_greed
+					}
+					ai_greed >= high_positive_ai_value
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}
+		}
 
 		AI_greedy = {
 			animation = { head = "AI_greedy_entry" torso = "AI_greedy_entry" }
@@ -590,7 +596,7 @@ idle = {
 					NOT = { has_trait = dwarf }
 					NOT = { has_trait = pregnant }
 					portrait_wear_armor_trigger = no
-					portrait_mena_clothing_trigger = no                                             
+					portrait_mena_clothing_trigger = no
 				}
 			}
 
@@ -789,6 +795,46 @@ idle = {
 
 ############################################################################################################################################################
 ############################################################################################################################################################
+
+		AI_vengeful_pregnant_armor_or_dwarf = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSeriousFatDwarf_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_vengefulness
+					}
+					OR = {
+						has_trait = dwarf
+						portrait_wear_armor_trigger = yes
+					}
+					ai_vengefulness >= medium_positive_ai_value
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}
+		}
+
+		AI_vengeful_pregnant = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSerious_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_vengefulness
+					}
+					ai_vengefulness >= medium_positive_ai_value
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}
+		}
 
 		AI_vengeful = {
 			animation = { head = "AI_vengeful_entry" torso = "AI_vengeful_entry" }
@@ -1350,6 +1396,51 @@ idle = {
 ############################################################################################################################################################
 ############################################################################################################################################################
 
+		AI_callous_pregnant_armor_or_dwarf = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSeriousFatDwarf_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = {
+							value = ai_compassion
+							multiply = -1
+						}
+					}
+					OR = {
+						has_trait = dwarf
+						portrait_wear_armor_trigger = yes
+					}
+					ai_compassion <= max_negative_compassion
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }                                              
+				}
+			}
+		}
+
+		AI_callous_pregnant = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSerious_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = {
+							value = ai_compassion
+							multiply = -1
+						}
+					}
+					ai_compassion <= max_negative_compassion
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }                                              
+				}
+			}
+		}
 
 		AI_callous = {
 			animation = { head = "AI_callous_entry" torso = "AI_callous_entry" }
@@ -1498,7 +1589,46 @@ idle = {
 
 ############################################################################################################################################################
 ############################################################################################################################################################
-	
+
+		AI_zealous_pregnant_dwarf_or_armor = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSeriousFatDwarf_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_zeal
+					}
+					OR = {
+						has_trait = dwarf
+						portrait_wear_armor_trigger = yes
+					}
+					ai_zeal >= high_positive_zeal
+					has_trait = pregnant
+				}
+			}		
+		}
+
+		AI_zealous_pregnant = {
+			animation = { head = "misc_pregnantSerious_entry" torso = "misc_pregnantSerious_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = {
+						value = 100
+						add = ai_zeal
+					}
+					ai_zeal >= high_positive_zeal
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}		
+		}
+
 		AI_zealous_muscular = {
 			animation = { head = "AI_zealous_entry" torso = "AI_zealousFat_entry" }
 
@@ -1620,6 +1750,7 @@ idle = {
 
 #####################################################################################################################################################################
 #####################################################################################################################################################################
+
 		AI_cynical_muscular = {
 			animation = { head = "AI_cynical_entry" torso = "AI_cynicalFat_entry" }
 
@@ -1787,12 +1918,54 @@ idle = {
 				animations = AI_cynical_decal				# One or multiple portrait modifier overrides
 			}
 		}
+
+##########################################################################################################################################################################################################################################################################################################################################
+##########################################################################################################################################################################################################################################################################################################################################
+
+# misc_pregnantSerious_entry (above) is for characeters with negative traits
+#
+# misc_pregnant_entry (below) is for characters with positive traits
+#
+# we had to put pregnant triggers all the way down here because we need to prioritize playing misc_pregnantSerious_entry. hence, you can find misc_pregnantSerious_entry above.
+# 
+
+ 		AI_pregnant_dwarf_or_armor = {
+			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					OR = {
+						has_trait = dwarf
+						portrait_wear_armor_trigger = yes
+					}
+					has_trait = pregnant
+				}
+			}
+		}
+
+		AI_pregnant = {
+			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					has_trait = pregnant
+					NOT = { has_trait = dwarf }
+				}
+			}
+		}
     }
 
 	boy = male
 	female = male
 	girl = male
 }
+
 
 #####################################################################################################################################################################
 #####################################################################################################################################################################
@@ -1849,6 +2022,104 @@ chancellor = {
 					age <= 9
 
 				}
+			}
+		}
+
+		council_fp1_chancellor = {
+			animation = { head = "council_chancellor" torso = "council_chancellor" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 50
+						NOT = { has_trait = dwarf } 
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = chancellor_fp1_prop
+				animations = council_chancellor_decal
+			}
+		}
+
+		council_fp1_chancellor_fat = {
+			animation = { head = "council_chancellor" torso = "council_chancellorFat" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 50
+						NOT = { has_trait = dwarf }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = chancellor_fp1_prop
+				animations = council_chancellor_decal
+			}
+		}
+
+		council_fp1_chancellor_dwarf = {
+			animation = { head = "council_chancellor" torso = "council_chancellorFat" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 65
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes                    
+					}					
+				}
+			}
+		
+			portrait_modifier = {							
+				animations_props = chancellor_fp1_prop
+				animations = council_chancellor_decal
+			}
+		}
+
+		council_fp1_chancellor_fat_dwarf = {
+			animation = { head = "council_chancellor" torso = "council_chancellorFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 65
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = chancellor_fp1_prop
+				animations = council_chancellor_decal
 			}
 		}
 
@@ -2267,6 +2538,104 @@ marshal = {
 			}
 		}
 
+		council_fp1_marshal = {
+			animation = { head = "council_marshal" torso = "council_marshal" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 65
+						NOT = { has_trait = dwarf }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = marshal_fp1_prop
+				animations = council_marshal_decal
+			}
+		}
+
+		council_fp1_marshal_fat = {
+			animation = { head = "council_marshal" torso = "council_marshalFat" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 65
+						NOT = { has_trait = dwarf }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = marshal_fp1_prop
+				animations = council_marshal_decal
+			}
+		}
+
+		council_fp1_marshal_dwarf = {
+			animation = { head = "council_marshal" torso = "council_marshalFat" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 60
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes					                 
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = marshal_fp1_prop
+				animations = council_marshal_decal
+			}
+		}
+
+		council_fp1_marshal_fat_dwarf = {
+			animation = { head = "council_marshal" torso = "council_marshalFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 60
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes                     
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = marshal_fp1_prop
+				animations = council_marshal_decal
+			}
+		}
+
 		council_marshal = {
 			animation = { head = "council_marshal" torso = "council_marshal" }
 
@@ -2279,7 +2648,7 @@ marshal = {
 						age >= 10
 						current_weight < 65
 						NOT = { has_trait = dwarf }
-                        
+						NOT = { has_trait = pregnant }
 					}
 				}
 			}
@@ -2302,7 +2671,7 @@ marshal = {
 						age >= 10
 						current_weight > 65
 						NOT = { has_trait = dwarf }
-                        
+						NOT = { has_trait = pregnant }                        
 					}					
 				}
 			}
@@ -2448,7 +2817,7 @@ spymaster = {
 			}
 		}
 
-		council_chancellor_infant = {
+		council_spymaster_infant = {
 			animation = { head = "idle" torso = "idleInfant_entry" }
 
 			weight = {
@@ -2461,7 +2830,7 @@ spymaster = {
 			}
 		}
 
-		council_chancellor_child = {
+		council_spymaster_child = {
 			animation = { head = "idle_entry" torso = "idle_entry" }
 
 			weight = {
@@ -2472,6 +2841,177 @@ spymaster = {
 					age <= 9
 
 				}
+			}
+		}
+
+		council_fp1_spymaster = {
+			animation = { head = "council_spymaster" torso = "council_spymaster" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 60
+						NOT = { has_trait = dwarf }            
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes 
+					}
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+		council_fp1_spymaster_fat = {
+			animation = { head = "council_spymaster" torso = "council_spymaster" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 60
+						NOT = { has_trait = dwarf }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+		council_fp1_spymaster_dwarf = {
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight < 35
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes                  
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+		council_fp1_spymaster_fat_dwarf = {
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						age >= 10
+						current_weight > 35
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+		council_fp1_spymaster_pregnant = {
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 45
+						has_trait = pregnant
+						NOT = { has_trait = dwarf }
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+
+		council_fp1_spymaster_pregnant_dwarf = {
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 60
+						has_trait = pregnant
+						has_trait = dwarf
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
+			}
+		}
+
+		council_fp1_spymaster_pregnant_fat_dwarf = {
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight > 60
+						has_trait = pregnant
+						has_trait = dwarf
+				   	 	has_dlc_feature = the_northern_lords
+				    	ek_fp1_use_norse_animations = yes
+					}					
+				}
+			}
+
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
 			}
 		}
 
@@ -2486,7 +3026,8 @@ spymaster = {
 					AND = {
 						age >= 10
 						current_weight < 60
-						NOT = { has_trait = dwarf }             
+						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }
 					}
 				}
 			}
@@ -2509,7 +3050,7 @@ spymaster = {
 						age >= 10
 						current_weight > 60
 						NOT = { has_trait = dwarf }
-                        
+						NOT = { has_trait = pregnant }
 					}					
 				}
 			}
@@ -2567,7 +3108,7 @@ spymaster = {
 		}
 
 		council_spymaster_pregnant = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
 
 			weight = {
 				base = 0
@@ -2582,14 +3123,15 @@ spymaster = {
 				}
 			}
 
-			portrait_modifier = {
-				animations = emotion_happy_decal
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
 			}
 		}
 
 
 		council_spymaster_pregnant_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
 
 			weight = {
 				base = 0
@@ -2604,13 +3146,14 @@ spymaster = {
 				}
 			}
 
-			portrait_modifier = {
-				animations = emotion_happy_decal
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
 			}
 		}
 
 		council_spymaster_pregnant_fat_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFatDwarf_entry" }
+			animation = { head = "council_spymaster" torso = "council_spymasterFatDwarf" }
 
 			weight = {
 				base = 0
@@ -2624,9 +3167,10 @@ spymaster = {
 					}					
 				}
 			}
-
-			portrait_modifier = {
-				animations = emotion_happy_decal
+			
+			portrait_modifier = {							
+				animations_props = spymaster_fp1_prop
+				animations = council_spymaster_decal
 			}
 		}
     }
@@ -2695,12 +3239,13 @@ chaplain = {
 						age >= 10
 						current_weight < 65
 						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }                        
 					}
 				}
 			}
 		}
 
-		council_chaplain = {
+		council_chaplain_fat = {
 			animation = { head = "council_chaplain" torso = "council_chaplainFat" }
 
 			weight = {
@@ -2712,6 +3257,7 @@ chaplain = {
 						age >= 10
 						current_weight > 65
 						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }                        
 					}
 				}
 			}
@@ -4282,6 +4828,24 @@ shame = {
 			}
 		}
 
+		emotion_fp1_shame = {
+			animation = { head = "emotion_shame_entry" torso = "emotion_shameFat_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 60
+						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }
+						portrait_fp1_norse_clothing_trigger = yes
+					}
+				}
+			}
+		}
+
 		emotion_shame = {
 			animation = { head = "emotion_shame_entry" torso = "emotion_shame_entry" }
 
@@ -4294,7 +4858,7 @@ shame = {
 						current_weight < 60
 						NOT = { has_trait = dwarf }
 						NOT = { has_trait = pregnant }
-                        
+						portrait_fp1_norse_clothing_trigger = no
 					}
 				}
 			}
@@ -4312,7 +4876,7 @@ shame = {
 						current_weight > 40
 						NOT = { has_trait = dwarf }
 						NOT = { has_trait = pregnant }
-                        
+						portrait_fp1_norse_clothing_trigger = no         
 					}					
 				}
 			}
@@ -4329,7 +4893,8 @@ shame = {
 					AND = {
 						current_weight < 65
 						has_trait = dwarf
-						NOT = { has_trait = pregnant }                        
+						NOT = { has_trait = pregnant }
+						portrait_fp1_norse_clothing_trigger = no
 					}					
 				}
 			}
@@ -4346,7 +4911,8 @@ shame = {
 					AND = {
 						current_weight > 65
 						has_trait = dwarf
-						NOT = { has_trait = pregnant }                        
+						NOT = { has_trait = pregnant }
+						portrait_fp1_norse_clothing_trigger = no                        
 					}					
 				}
 			}
@@ -4364,6 +4930,7 @@ shame = {
 						current_weight < 45
 						has_trait = pregnant
 						NOT = { has_trait = dwarf }
+						portrait_fp1_norse_clothing_trigger = no
 					}					
 				}
 			}
@@ -4385,6 +4952,7 @@ shame = {
 						current_weight < 60
 						has_trait = pregnant
 						has_trait = dwarf
+						portrait_fp1_norse_clothing_trigger = no
 					}					
 				}
 			}
@@ -4406,6 +4974,7 @@ shame = {
 						current_weight > 60
 						has_trait = pregnant
 						has_trait = dwarf
+						portrait_fp1_norse_clothing_trigger = no
 					}					
 				}
 			}
@@ -7420,6 +7989,209 @@ pain = {
 }
 
 
+#####################################################################################################################################################################
+#####################################################################################################################################################################
+
+poison = {
+	male = {
+		default = { head = "emotion_poison" torso = "emotion_poison" }
+		
+		# emotion_pain_hunchbacked = {
+		# 	animation = { head = "idle_entry" torso = "idle_entry" }
+
+		# 	weight = {
+		# 		base = 0
+
+		# 		modifier = {
+		# 			add = 110
+		# 			has_trait = hunchbacked
+		# 		}
+		# 	}
+		# }
+
+		emotion_poison_infant = {
+			animation = { head = "idle" torso = "idleInfant_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					age <= 5
+				}
+			}
+		}
+
+		emotion_poison_child = {
+			animation = { head = "idle_entry" torso = "idle_entry" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					age <= 9
+
+				}
+			}
+		}
+
+		emotion_poison = {
+			animation = { head = "emotion_poison" torso = "emotion_poison" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 50
+						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }
+                        
+					}
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}	
+
+		emotion_poison_fat = {
+			animation = { head = "emotion_poison" torso = "emotion_poison" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight > 50
+						NOT = { has_trait = dwarf }
+						NOT = { has_trait = pregnant }
+                        
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+
+		emotion_poison_dwarf = {
+			animation = { head = "emotion_poison" torso = "emotion_poisonFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 50
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }                        
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+
+		emotion_poison_fat_dwarf = {
+			animation = { head = "emotion_poison" torso = "emotion_poisonFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight > 50
+						has_trait = dwarf
+						NOT = { has_trait = pregnant }                        
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+
+		emotion_poison_pregnant = {
+			animation = { head = "emotion_poison" torso = "emotion_poison" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 45
+						has_trait = pregnant
+						NOT = { has_trait = dwarf }
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+
+		emotion_poison_pregnant_dwarf = {
+			animation = { head = "emotion_poison" torso = "emotion_poisonFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight < 60
+						has_trait = pregnant
+						has_trait = dwarf
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+
+		emotion_poison_pregnant_fat_dwarf = {
+			animation = { head = "emotion_poison" torso = "emotion_poisonFatDwarf" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					AND = {
+						current_weight > 60
+						has_trait = pregnant
+						has_trait = dwarf
+					}					
+				}
+			}
+
+			portrait_modifier = {
+				animations = emotion_poison_decal
+			}
+		}
+	}
+
+	boy = male
+	female = male
+	girl = male	
+}
+
+
 #######################################
 #######################################
 #######################################
@@ -8362,16 +9134,16 @@ war_over_win = {
 			weight = {
 				base = 0
 
-				modifier = {
-					add = 110
-					OR = {
-						is_theocratic_lessee = yes
-						has_government = theocracy_government
-					}
-					### EK EDIT: No Christians in TES
+				### EK EDIT: Removed reference to vanilla faiths
+				# modifier = {
+					# add = 110
+					# OR = {
+						# is_theocratic_lessee = yes
+						# has_government = theocracy_government
+					# }
 					# religion = religion:christianity_religion
 					# NOT = { faith = faith:orthodox }
-				}
+				# }
 			}
 		}
 
@@ -11184,6 +11956,19 @@ frontend_center_idle = {
 
 				modifier = {
 					add = 100
+					age <= 1
+				}
+			}
+		}
+
+		frontEnd_middle_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
 					age <= 4
 				}
 			}
@@ -11343,6 +12128,19 @@ frontend_center_idle = {
 
 				modifier = {
 					add = 100
+					age <= 1
+				}
+			}
+		}
+
+		frontEnd_middle_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
 					age <= 4
 				}
 			}
@@ -11466,7 +12264,7 @@ frontend_center_idle = {
 		}
 
 		frontEnd_middle_pregnant = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnant" }
 
 			weight = {
 				base = 0
@@ -11487,7 +12285,7 @@ frontend_center_idle = {
 		}
 
 		frontEnd_middle_pregnant_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFat" }
 
 			weight = {
 				base = 0
@@ -11508,7 +12306,7 @@ frontend_center_idle = {
 		}
 
 		frontEnd_middle_pregnant_fat_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFatDwarf_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFatDwarf" }
 
 			weight = {
 				base = 0
@@ -11542,6 +12340,19 @@ frontend_left_idle = {
 
 		frontEnd_left_infant = {
 			animation = { head = "frontEnd_infant" torso = "frontEnd_infant" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					age <= 1
+				}
+			}
+		}
+
+		frontEnd_left_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
 
 			weight = {
 				base = 0
@@ -11680,6 +12491,19 @@ frontend_left_idle = {
 
 				modifier = {
 					add = 100
+					age <= 1
+				}
+			}
+		}
+
+		frontEnd_left_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
 					age <= 4
 				}
 			}
@@ -11773,7 +12597,7 @@ frontend_left_idle = {
 		}
 
 		frontEnd_left_pregnant = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnant" }
 
 			weight = {
 				base = 0
@@ -11794,7 +12618,7 @@ frontend_left_idle = {
 		}
 
 		frontEnd_left_pregnant_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFat" }
 
 			weight = {
 				base = 0
@@ -11815,7 +12639,7 @@ frontend_left_idle = {
 		}
 
 		frontEnd_left_pregnant_fat_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFatDwarf_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFatDwarf" }
 
 			weight = {
 				base = 0
@@ -11849,6 +12673,19 @@ frontend_right_idle = {
 
 		frontEnd_right_infant = {
 			animation = { head = "frontEnd_infant" torso = "frontEnd_infant" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
+					age <= 1
+				}
+			}
+		}
+
+		frontEnd_right_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
 
 			weight = {
 				base = 0
@@ -11970,6 +12807,20 @@ frontend_right_idle = {
 
 				modifier = {
 					add = 100
+					age <= 1
+				}
+			}
+		}
+
+
+		frontEnd_right_infant_2 = {
+			animation = { head = "frontEnd_infant2" torso = "frontEnd_infant2" }
+
+			weight = {
+				base = 0
+
+				modifier = {
+					add = 100
 					age <= 4
 				}
 			}
@@ -12077,7 +12928,7 @@ frontend_right_idle = {
 		}
 
 		frontEnd_right_pregnant = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnant_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnant" }
 
 			weight = {
 				base = 0
@@ -12098,7 +12949,7 @@ frontend_right_idle = {
 		}
 
 		frontEnd_right_pregnant_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFat_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFat" }
 
 			weight = {
 				base = 0
@@ -12119,7 +12970,7 @@ frontend_right_idle = {
 		}
 
 		frontEnd_right_pregnant_fat_dwarf = {
-			animation = { head = "misc_pregnant_entry" torso = "misc_pregnantFatDwarf_entry" }
+			animation = { head = "frontEnd_pregnant" torso = "frontEnd_pregnantFatDwarf" }
 
 			weight = {
 				base = 0

@@ -1,0 +1,165 @@
+﻿#Effects used in animal events
+
+
+#####################################################################
+# EFFECT LIST
+#####################################################################
+# !!! Remember to add all new effects here !!!
+#
+
+# PARROT
+#start_parrot_story_cycle_effect
+#assign_name_options_parrot_story_cycle_effect
+#assign_parrot_gender_effect
+#assign_parrot_plumage_color_effect
+#remove_parrot_story_modifiers_effect
+
+######################################################################
+# EFFECTS
+######################################################################
+
+########
+# PARROT
+########
+
+#Effect to start the story and show the right modifier
+start_parrot_story_cycle_effect = {
+	show_as_tooltip = {
+		add_character_modifier = {
+			modifier = parrot_story_modifier
+		}
+	}
+	hidden_effect = {
+		create_story = story_cycle_pet_parrot
+	}
+}
+
+#Pick out name options to show
+assign_name_options_parrot_story_cycle_effect = {
+	random_list = {
+		10 = { # Parrot shown in Redguard
+			trigger = { NOT = { has_character_flag = name_orsone } }
+			add_character_flag = name_orsone
+		}
+		10 = {
+			trigger = { NOT = { has_character_flag = name_coco } }
+			add_character_flag = name_coco
+		}
+		10 = {
+			trigger = { NOT = { has_character_flag = name_abby } }
+			add_character_flag = name_abby
+		}
+	}
+}
+
+#Assign the gender of the parrot
+assign_parrot_gender_effect = {
+	save_temporary_scope_value_as = {
+		name = gender
+		value = flag:$GENDER$
+	}
+	if = {
+		limit = { scope:gender = flag:random }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_variable = {
+						name = parrot_gender
+						value = flag:female
+					}
+				}
+				50 = {
+					set_variable = {
+						name = parrot_gender
+						value = flag:male
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:gender = flag:male
+				scope:gender = flag:female
+			}
+		}
+		set_variable = {
+			name = parrot_gender
+			value = flag:$GENDER$
+		}
+	}
+}
+
+#Assign the plumage-color of the parrot
+assign_parrot_plumage_color_effect = {
+	save_temporary_scope_value_as = {
+		name = plumage_color
+		value = flag:$COLOR$
+	}
+	if = {
+		limit = { scope:plumage_color = flag:random }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_variable = {
+						name = parrot_plumage_color
+						value = flag:red
+					}
+				}
+				50 = {
+					set_variable = {
+						name = parrot_plumage_color
+						value = flag:green
+					}
+				}
+				50 = {
+					set_variable = {
+						name = parrot_plumage_color
+						value = flag:blue
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				scope:plumage_color = flag:red
+				scope:plumage_color = flag:green
+				scope:plumage_color = flag:blue
+			}
+		}
+		set_variable = {
+			name = parrot_plumage_color
+			value = flag:$COLOR$
+		}
+	}
+}
+
+#Remove everything related to the story
+remove_parrot_story_modifiers_effect = {
+	if = {
+		limit = {
+			has_character_modifier = parrot_story_modifier
+		}
+		remove_character_modifier = parrot_story_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = parrot_story_eating_fruit_modifier
+		}
+		remove_character_modifier = parrot_story_eating_fruit_modifier
+	}
+	if = {
+		limit = {
+			has_character_modifier = parrot_story_fighting_with_you_modifier
+		}
+		remove_character_modifier = parrot_story_fighting_with_you_modifier
+	}
+}
+
+remove_parrot_name_effect = {
+	remove_variable = story_cycle_parrot_name
+	remove_localized_text = story_cycle_parrot_name
+}

@@ -3,6 +3,32 @@
 ############### SPELLBOOK INTERACTION #################
 #######################################################
 
+#story cycles for ai and player? spells. can store variable info there and if owner dies who cares?
+#
+#ordered_province = {position = 5234}
+# testf = {
+#     save_scope_value_as = {
+#         name = x
+#         value = 2
+#     }
+#     every_province = {
+#         limit = {index < 10}
+#         set_variable = {
+#             name = x
+#             value = scope:x.add1
+#         }
+#         save_scope_value_as = {
+#             name = x
+#             value = var:x
+#         }
+#         prev = {
+#             add_prestige = scope:x
+#         }
+#     }
+# }
+
+# event on successful cast? event if player saying no longer under effect of spell x for timed modifiers - use triggered event/on_action with delay=modifier duration
+
 window = {
     name = "spellbook_interaction_window"
     datacontext = "[GetVariableSystem]"
@@ -17,6 +43,7 @@ window = {
 
     state = {
         name = _show
+        trigger_on_create = yes
         using = Animation_FadeIn_Quick
         using = Sound_WindowShow_Standard
         on_start = "[VariableSystem.Clear('spell_county_list_open')]"
@@ -432,13 +459,22 @@ window = {
                                     widget = {
                                         size = { 50 40 }
                                         position = { 0 0 }
+                                        # icon = {
+                                        #     name = "spell_school_icon"
+                                        #     size = { 40 40 }
+                                        #     texture = "gfx/interface/spellbook_widget/spell_school.dds"
+                                        #     frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                                        #     framesize = { 256 256 }
+                                        #     parentanchor = center
+                                        # }
                                         icon = {
                                             name = "spell_school_icon"
-                                            size = { 40 40 }
-                                            texture = "gfx/interface/spellbook_widget/spell_school.dds"
+                                            size = { 32 32 }
+                                            texture = "gfx/interface/spellbook_widget/spell_tier.dds"
                                             frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                            framesize = { 256 256 }
+                                            framesize = { 128 128 }
                                             parentanchor = center
+                                            using = Master_Button_Modify_Texture
                                         }
                                     }
                                     widget = {

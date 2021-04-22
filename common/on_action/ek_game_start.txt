@@ -74,6 +74,8 @@ ek_on_game_start = {
 		startup_culture_effect = { CULTURE = alikr }
 		startup_culture_effect = { CULTURE = abecean }
 		startup_culture_effect = { CULTURE = horsemen }
+		# Argonian
+		startup_culture_effect = { CULTURE = saxhleel }
 		
 		### Set which cultures are alive (have some territory)
 		every_county = {
@@ -93,6 +95,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:baandari }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:goblin }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:bjoule }
+		set_culture_native_to = { REGION = nomadic CULTURE = culture:tsaesci }
 		## High Rock
 		# Glenumbra
 		set_culture_native_to = { REGION = glenumbra CULTURE = culture:glenumbran }
@@ -191,8 +194,8 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
+			# This faith is considered a Daedra worshipper
 			every_faith = {
-				## DOCTRINE_GENDER
 				if = {
 					limit = {
 						OR = {
@@ -223,6 +226,81 @@ ek_on_game_start = {
 					add_doctrine = special_doctrine_daedra_worshipper
 				}
 			}
+			
+			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
+			every_faith = {
+				faith_give_view_daedric_princes = yes
+			}
+		}
+		
+		### Holy Sites buildings
+		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
+		every_religion_global = {
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = great_wyrd_tree_01
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_daedric_shrines }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = daedric_shrine_01
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_dragon_temples }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = dragon_temple_01
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_cathedrals }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = grand_cathedral_01
+					}
+				}
+			}
+			# Very generic
+			every_faith = {
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = holy_site_other_grand_temple_01
+					}
+				}
+			}
 		}
 		
 		### Innovations
@@ -250,6 +328,18 @@ ek_on_game_start = {
 		culture:abecean = { add_innovation = innovation_abecean_pirates }
 		
 		culture:tsaesci = { add_innovation = innovation_akaviri_dragon_hunters }
+		
+		### Laws & stuff
+		# If you're a pirate gov and are at least a duke, every duchy has an election
+		every_ruler = {
+			if = {
+				limit = { has_government = pirate_government highest_held_title_tier >= tier_duchy }
+				every_held_title = {
+					limit = { tier >= tier_duchy }
+					add_title_law = pirate_elective_succession_law
+				}
+			}
+		}
 		
 		#############
 		# BOOKMARKS #

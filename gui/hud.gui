@@ -77,7 +77,7 @@ widget = {
 	state = {
 		name = _show # may need to fire cleanup scripted gui for every_player
 		#on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]" #VARTODO - make this script based
-		on_start = "[GetScriptedGui('on_save_load').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" 
+		on_start = "[GetScriptedGui('on_save_load').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 	}
 	# state = { #theoretically clears it when going to the main menu, may be anytime the pause menu is shown though
 	# 	name = _hide
@@ -434,7 +434,7 @@ widget = {
 						margin_left = -2
 						margin_top = 4
 						texture_density = 2
-						spritetype = corneredtiled
+						spritetype = corneredstretched
 					}
 
 					button_group = {
@@ -963,11 +963,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_my_realm.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameView('my_realm')]"
 						shortcut = "my_realm_window"
 						down = "[IsGameViewOpen('my_realm')]"
@@ -992,11 +987,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_military.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameViewData('military', GetPlayer.GetID)]"
 						shortcut = "military_window"
 						down = "[IsGameViewOpen('military')]"
@@ -1020,11 +1010,6 @@ widget = {
 					blockoverride "maintab_button"
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_council.dds"
-
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 						onclick = "[ToggleGameViewData('council_window', GetPlayer.GetID)]"
 						shortcut = "council_window"
@@ -1067,11 +1052,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_court.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameViewData( 'court_window', GetPlayer.GetID )]"
 						shortcut = "court_window"
 						down = "[IsGameViewOpen( 'court_window' )]"
@@ -1095,11 +1075,6 @@ widget = {
 					blockoverride "maintab_button"
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_intrigue.dds"
-
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
 
 						onclick = "[ToggleGameViewData('intrigue_window', GetPlayer.GetID)]"
 						shortcut = "intrigue_window"
@@ -1125,11 +1100,6 @@ widget = {
 					{
 						texture = "gfx/interface/skinned/hud_maintab/maintab_factions.dds"
 
-						#datacontext = "[GetScriptedGui('patron_gui_close')]"
-						#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-						onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
 						onclick = "[ToggleGameView('factions_window')]"
 						shortcut = "factions_window"
 						down = "[IsGameViewOpen('factions_window')]"
@@ -1146,68 +1116,46 @@ widget = {
 					}
 				}
 
-				hbox = {
-					button_hud_main_tab = {
-						name = "tab_decisions"
-						tooltip = "DECISIONS_BUTTON"
+				button_hud_main_tab = {
+					name = "tab_decisions"
+					tooltip = "DECISIONS_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' ))))]"
-
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/skinned/hud_maintab/maintab_decisions.dds"
-
-							#datacontext = "[GetScriptedGui('patron_gui_close')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
-							onclick = "[ToggleGameView('decisions')]"
-							shortcut = "decision_window"
-							down = "[IsGameViewOpen('decisions')]"
-						}
-
-						state = {
-							name = _mouse_hierarchy_enter
-							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
-						}
-
-						state = {
-							name = _mouse_hierarchy_leave
-							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
-						}
+					state = {
+						name = clear_variable
+						trigger_when = "[And( Not(IsGameViewOpen('decisions')), GetVariableSystem.Exists('decision_tab') )]"
+						on_start = "[GetVariableSystem.Clear('decision_tab')]"
 					}
-					button_hud_main_tab = {
-						name = "tab_decisions2"
-						tooltip = "DECISIONS_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Or(GetVariableSystem.Exists( 'patron_window_open' ), GetVariableSystem.Exists( 'societies_window_open' )))]"
+					blockoverride "maintab_button"
+					{
+						texture = "gfx/interface/skinned/hud_maintab/maintab_decisions.dds"
 
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/skinned/hud_maintab/maintab_decisions.dds"
+						onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), GetVariableSystem.Exists( 'decision_tab' )), 'decisions_open', 'decisions_closed' ) )]"
 
-							#datacontext = "[GetScriptedGui('patron_gui_close')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-							datacontext = "[GetScriptedGui('patron_clear')]" #need to add to switch button, also try hide/show in margin widgets
-							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						shortcut = "decision_window"
+						down = "[IsGameViewOpen('decisions')]"
+					}
 
-							#onclick = "[ToggleGameView('decisions')]"
-							shortcut = "decision_window"
-							down = "[IsGameViewOpen('decisions')]"
-						}
+					state = {
+						name = decisions_open
+						on_start = "[GetVariableSystem.Clear( 'decision_tab' )]"
+						on_start = "[GetScriptedGui('patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+					}
 
-						state = {
-							name = _mouse_hierarchy_enter
-							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
-						}
+					state = {
+						name = decisions_closed
+						on_start = "[GetVariableSystem.Clear( 'decision_tab' )]"
+						on_start = "[ToggleGameView('decisions')]"
+					}
 
-						state = {
-							name = _mouse_hierarchy_leave
-							on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
-						}
+					state = {
+						name = _mouse_hierarchy_enter
+						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_leave','hud_tab_glow_decisions_enter')]"
+					}
+
+					state = {
+						name = _mouse_hierarchy_leave
+						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_decisions_enter','hud_tab_glow_decisions_leave')]"
 					}
 				}
 			}
@@ -1228,147 +1176,83 @@ widget = {
 			}
 
 			vbox = {
-				hbox = {
-					button_hud_main_tab = {
-						name = "tab_patron_open"
-						tooltip = "PATRON_BUTTON"
+				button_hud_main_tab = {
+					name = "tab_patron_open"
+					tooltip = "PATRON_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' ))))]"
+					blockoverride "maintab_button"
+					{
+						texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds" #VARTODO - move to skinned
 
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds" #VARTODO - move to skinned
+						onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'patron' ))), 'patron_open', 'patron_closed' ) )]"
+						onclick = "[PdxGuiTriggerAllAnimations( 'detail_close' )]"
 
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
-							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							datacontext = "[GetScriptedGui('patron_restore')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							onclick = "[GetVariableSystem.Toggle( 'patron_window_open' )]"
-							onclick = "[ToggleGameView('decisions')]"
-							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
-						}
-
-						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-						# state = {
-						# 	name = _mouse_hierarchy_enter
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-						# }
-
-						# state = {
-						# 	name = _mouse_hierarchy_leave
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-						# }
+						#shortcut = "patron_window"
+						down = "[GetVariableSystem.HasValue( 'decision_tab', 'patron' )]"
 					}
-					button_hud_main_tab = {
-						name = "tab_patron_open2"
-						tooltip = "PATRON_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'patron_window_open' )))]"
-
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_patron.dds"
-
-							onclick = "[GetVariableSystem.Clear( 'societies_window_open' )]"
-
-							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							datacontext = "[GetScriptedGui('patron_restore')]"
-							onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							onclick = "[GetVariableSystem.Set( 'patron_window_open', 'true' )]"
-							#onclick = "[ToggleGameView('decisions')]"
-							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'patron_window_open' )]"
-						}
-
-						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-						# state = {
-						# 	name = _mouse_hierarchy_enter
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-						# }
-
-						# state = {
-						# 	name = _mouse_hierarchy_leave
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-						# }
+					state = {
+						name = patron_open
+						on_start = "[GetScriptedGui('patron_restore').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						on_start = "[GetVariableSystem.Set( 'decision_tab', 'patron' )]"
 					}
+
+					state = {
+						name = patron_closed
+						on_start = "[GetScriptedGui('patron_restore').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'patron' ), 'to_clear', 'patron' ) )]"
+						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+						on_start = "[ToggleGameView('decisions')]"
+					}
+
+					#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
+					# state = {
+					# 	name = _mouse_hierarchy_enter
+					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
+					# }
+
+					# state = {
+					# 	name = _mouse_hierarchy_leave
+					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
+					# }
 				}
-				hbox = {
-					button_hud_main_tab = {
-						name = "tab_societies_open"
-						tooltip = "SOCIETIES_BUTTON"
+				button_hud_main_tab = {
+					name = "tab_societies_open"
+					tooltip = "SOCIETIES_BUTTON"
 
-						visible = "[Not(And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'societies_window_open' ))))]"
+					blockoverride "maintab_button"
+					{
+						texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
 
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
+						onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'society' ))), 'society_open', 'society_closed' ) )]"
+						onclick = "[PdxGuiTriggerAllAnimations( 'detail_close' )]"
 
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-
-							#datacontext = "[GetScriptedGui('societies_gui_toggle')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							onclick = "[GetVariableSystem.Toggle( 'societies_window_open' )]"
-							onclick = "[ToggleGameView('decisions')]"
-							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'societies_window_open' )]"
-						}
-
-						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-						# state = {
-						# 	name = _mouse_hierarchy_enter
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-						# }
-
-						# state = {
-						# 	name = _mouse_hierarchy_leave
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-						# }
+						#shortcut = "patron_window"
+						down = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
 					}
-					button_hud_main_tab = {
-						name = "tab_societies_open2"
-						tooltip = "SOCIETIES_BUTTON"
 
-						visible = "[And(IsGameViewOpen('decisions'), Not(GetVariableSystem.Exists( 'societies_window_open' )))]"
-
-						blockoverride "maintab_button"
-						{
-							texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
-
-							onclick = "[GetVariableSystem.Clear( 'patron_window_open' )]"
-
-							#datacontext = "[GetScriptedGui('patron_gui_toggle')]"
-							#onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-							#down = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-
-							onclick = "[GetVariableSystem.Set( 'societies_window_open', 'true' )]"
-							#onclick = "[ToggleGameView('decisions')]"
-							#shortcut = "patron_window"
-							down = "[GetVariableSystem.Exists( 'societies_window_open' )]"
-						}
-
-						#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-						# state = {
-						# 	name = _mouse_hierarchy_enter
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-						# }
-
-						# state = {
-						# 	name = _mouse_hierarchy_leave
-						# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-						# }
+					state = {
+						name = society_open
+						on_start = "[GetVariableSystem.Set( 'decision_tab', 'society' )]"
 					}
+
+					state = {
+						name = society_closed
+						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
+						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+						on_start = "[ToggleGameView('decisions')]"
+					}
+
+					#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
+					# state = {
+					# 	name = _mouse_hierarchy_enter
+					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
+					# }
+
+					# state = {
+					# 	name = _mouse_hierarchy_leave
+					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
+					# }
 				}
 			}
 
@@ -1573,7 +1457,7 @@ icon = {
 					}
 					using = tooltip_above #note can only have one console command per button. extend with state blocks
 					#onclick = "[ExecuteConsoleCommand( Select_CString( GetVariableSystem.Exists('spells_open'), 'GUI.ClearWidgets spellbook_interaction_window', 'gui.createwidget gui/custom_widgets/spellbook_widget.gui spellbook_interaction_window' ) )]"
-					#onclick = "[GetVariableSystem.Toggle('spells_open')]" 
+					#onclick = "[GetVariableSystem.Toggle('spells_open')]"
 				}
 
 				widget = {
@@ -2889,7 +2773,7 @@ widget = {
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]" # no .End apparently causes memory leak. emptyscope might be better
 				}
 				#gets the progress bar part
 				widget = {

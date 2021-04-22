@@ -14,3 +14,83 @@ debt_ec_raised_taxes = {
 	county_opinion_add = -10
 	tax_mult = -0.25
 }
+
+# When the Direnni (and only them) creates e_direnni_hegemony
+direnni_reclaim_hegemony_1 = {
+	icon = prestige_positive
+	title_creation_cost_mult = -0.2
+	#custom = cb_discount_10 # EK TODO: That (10% discount on all CBs)
+}
+
+# When the Direnni (and only them) gets the full de Jure e_direnni_hegemony
+direnni_reclaim_hegemony_2 = {
+	icon = prestige_positive
+	monthly_prestige_gain_mult = 0.2
+	stewardship = 1
+	martial = 1
+	direct_vassal_opinion = 5
+	same_culture_opinion = 5
+}
+
+# When someone other than the Direnni gets the full de Jure e_direnni_hegemony
+direnni_reclaim_hegemony_3 = {
+	icon = prestige_positive
+	monthly_prestige_gain_mult = 0.2
+	stewardship = 1
+	martial = 1
+	direct_vassal_opinion = 5
+}
+
+# Temporary bonus for the new capital of the flourishing Direnni Hegemony
+hegemony_new_capital_temp = {
+	icon = county_modifier_development_positive
+	development_growth_factor = 0.15
+	county_opinion_add = 5
+}
+
+# Temporary bonus for the new capital of the flourishing Direnni Hegemony
+hegemony_new_capital_perm = {
+	icon = county_modifier_development_positive
+	development_growth_factor = 0.25
+	county_opinion_add = 10
+	monthly_prestige_gain_mult = 0.05
+	monthly_dynasty_prestige_mult = 0.05
+}
+
+### Pirate modifiers
+# A pirate hunting fleet forces you to stay low for a while (cannot use pirate cbs too!)
+ek_pirate_1001_stay_low_modifier = {
+	icon = prowess_negative
+	
+	monthly_prestige_gain_mult = -0.25
+	monthly_income_mult = -0.15
+	max_loot_mult = -0.5
+	pirate_government_opinion = -10
+	pirate_government_tax_contribution_mult = -0.5
+}
+# You upheld your authority over a pirate hunting fleet, forcind the respect from any other pirate
+ek_pirate_1001_authority_upheld_modifier = {
+	icon = prowess_positive
+	
+	martial = 1
+	pirate_government_opinion = 5
+	pirate_government_tax_contribution_mult = 0.1
+}
+# You won a duel against a Pirate hunter
+ek_pirate_1001_won_duel_pirate_hunter_modifier = {
+	icon = prowess_positive
+	
+	prowess = 1
+	martial = 1
+	monthly_prestige = 0.15
+}
+
+### Misc
+# Inflicted during a Blood Price Extraction if you have no imprisonment reason
+small_blood_price_modifier = {
+	icon = prowess_negative
+	
+	health = -0.5
+	prowess = -1
+	dread_baseline_add = -5
+}

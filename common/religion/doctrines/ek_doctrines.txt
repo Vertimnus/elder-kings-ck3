@@ -1,57 +1,4 @@
 ﻿### Crimes
-doctrine_daedra_worship = {
-	group = "crimes"
-	
-	doctrine_daedra_worship_forbidden = {
-		piety_cost = {
-			value = faith_doctrine_cost_mid
-			if = {
-				limit = { has_doctrine = doctrine_daedra_worship_forbidden }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-			else_if = {
-				limit = { has_doctrine = doctrine_daedra_worship_accepted }
-				multiply = faith_changed_doctrine_cost_mult_two_step
-			}
-		}
-		parameters = {
-			daedric_worship_criminal = yes
-			hostility_override_special_doctrine_daedra_worshipper = 3
-		}
-	}
-
-	doctrine_daedra_worship_shunned = {
-		piety_cost = {
-			value = faith_doctrine_cost_mid
-			if = {
-				limit = { has_doctrine = doctrine_daedra_worship_shunned }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-		}
-		parameters = {
-			daedric_worship_shunned = yes
-		}
-	}
-
-	doctrine_daedra_worship_accepted = {
-		piety_cost = {
-			value = faith_doctrine_cost_mid
-			if = {
-				limit = { has_doctrine = doctrine_daedra_worship_accepted }
-				multiply = faith_unchanged_doctrine_cost_mult
-			}
-			else_if = {
-				limit = { has_doctrine = doctrine_daedra_worship_forbidden }
-				multiply = faith_changed_doctrine_cost_mult_two_step
-			}
-		}
-		parameters = {
-			daedric_worship_accepted = yes
-			additional_personal_gods_active = yes
-		}
-	}
-}
-
 doctrine_lycanthropy = {
 	group = "crimes"
 	
@@ -84,6 +31,8 @@ doctrine_lycanthropy = {
 		parameters = {
 			benevolent_lycanthropy_shunned = yes
 			evil_lycanthropy_criminal = yes
+			# WIP
+			lycanthropy_shunned = yes
 		}
 	}
 
@@ -137,6 +86,8 @@ doctrine_vampirism = {
 		parameters = {
 			benevolent_vampirism_shunned = yes
 			evil_vampirism_criminal = yes
+			# WIP
+			vampirism_shunned = yes
 		}
 	}
 

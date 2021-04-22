@@ -3,8 +3,85 @@
 	multiply = 12
 }
 
+county_yearly_income = {
+	value = monthly_income
+	multiply = 12
+}
+
+county_three_months_income = {
+	value = monthly_income
+	multiply = 3
+}
+
 half_development = {
 	value = county.development_level
 	divide = 2
 	multiply = -100
+}
+
+county_opinion_times_100 = {
+	value = this.county_opinion
+	add = 100
+	divide = 100
+}
+
+low_tribute_extracted_wealth = {
+	value = this
+	# multiply = 100
+	multiply = 5
+	divide = 100
+}
+
+medium_tribute_extracted_wealth = {
+	value = this
+	# multiply = 100
+	multiply = 10
+	divide = 100
+}
+
+high_tribute_extracted_wealth = {
+	value = this
+	# multiply = 100
+	multiply = 15
+	divide = 100
+}
+
+very_high_tribute_extracted_wealth = {
+	value = this
+	# multiply = 100
+	multiply = 20
+	divide = 100
+}
+
+summon_dragons_cost = {
+	value = {
+		add = 5000
+		# Devotion
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = devotion_gives_reduced_cost_summon_dragons_active }
+			}
+			if = {
+				limit = { piety_level = 0 }
+				multiply = 1.1
+			}
+			else_if = {
+				limit = { piety_level = 2 }
+				multiply = 0.9
+			}
+			else_if = {
+				limit = { piety_level = 3 }
+				multiply = 0.8
+			}
+			else_if = {
+				limit = { piety_level = 4 }
+				multiply = 0.7
+			}
+			else_if = {
+				limit = { piety_level = 5 }
+				multiply = 0.6
+			}
+		}
+		### EK TODO: Add the effect of Dragon Temples
+	}
 }
