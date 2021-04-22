@@ -84,7 +84,6 @@ doctrine_main_pantheon = {
 			pantheon_adds_deities_divines = yes
 			faith_uses_cathedrals = yes
 			hostility_override_doctrine_pantheon_heroes = 1
-			hostility_override_tenet_syncretism_pantheon_divines = 1
 		}
 	}
 	doctrine_pantheon_reman = {
@@ -257,7 +256,10 @@ doctrine_main_pantheon = {
 			}
 		}
 		is_shown = {
-			has_doctrine = daedric_hostility_doctrine
+			OR = {
+				has_doctrine = daedric_hostility_doctrine
+				creating_faith_has_daedric_prince_pantheon = yes
+			}
 		}
 		parameters = {
 			pantheon_adds_deities_daedra = yes
@@ -272,6 +274,13 @@ doctrine_main_pantheon = {
 			if = {
 				limit = { has_doctrine = doctrine_pantheon_azura }
 				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
 			}
 		}
 		is_shown = {
@@ -290,6 +299,13 @@ doctrine_main_pantheon = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = boethiah }
 		}
@@ -304,6 +320,13 @@ doctrine_main_pantheon = {
 			if = {
 				limit = { has_doctrine = doctrine_pantheon_clavicus }
 				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_clavicus_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
 			}
 		}
 		is_shown = {
@@ -325,6 +348,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = hermaeus }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_hermaeus_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -340,6 +370,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = hircine }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_hircine_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -357,6 +394,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = malacath }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_malacath_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -372,6 +416,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = mehrunes }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_mehrunes_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -389,6 +440,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = mephala }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_mephala_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -404,6 +462,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = meridia }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_meridia_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -423,6 +488,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = molag }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_molag_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -438,6 +510,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = namira }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_namira_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -455,6 +534,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = nocturnal }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_nocturnal_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -470,6 +556,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = peryite }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_peryite_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -487,6 +580,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = sanguine }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_sanguine_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -503,6 +603,13 @@ doctrine_main_pantheon = {
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = sheogorath }
 		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_sheogorath_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
+		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
 			faith_uses_daedric_shrines = yes
@@ -518,6 +625,13 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			can_see_doctrine_pantheon_daedra = { DAEDRA = vaermina }
+		}
+		can_pick = {
+			custom_description = {
+				text = faith_must_allow_daedric_patrons_trigger
+				flag:doctrine_vaermina_pantheon = { is_in_list = selected_doctrines }
+				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			}
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
