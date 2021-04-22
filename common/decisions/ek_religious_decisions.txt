@@ -1,4 +1,216 @@
-﻿witch_become_occultist_decision = {
+﻿### Change what kind of holy site you can build in a province
+change_holy_site_type_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = change_holy_site_type_decision_desc
+	selection_tooltip = change_holy_site_type_decision_tooltip
+
+	is_shown = {
+		always = no # WAITING FOR PARADOX TO ADD A WAY TO REMOVE BUILDINGS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
+		is_ruler = yes
+		# One of the holy sites of your faith that you control has a holy site building that you can't use
+		any_sub_realm_barony = {
+			is_holy_site_of = root.faith
+			title_province = {
+				OR = {
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
+						OR = {
+							# exists = var:grand_cathedral
+							# has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							# exists = var:daedric_shrine
+							# has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							# exists = var:great_wyrd_tree
+							# has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							# exists = var:dragon_temple
+							# has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							# exists = var:holy_site_other_grand_temple
+							# has_building = holy_site_other_grand_temple_01
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	cost = {
+		gold = 250
+		piety = 150
+	}
+
+	effect = {
+		# Pay some gold, destroy the holy site building (if needed), lay ground for one of your own
+		random_sub_realm_barony = {
+			limit = {
+				is_holy_site_of = root.faith
+				title_province = {
+					OR = {
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
+							OR = {
+								# exists = var:grand_cathedral
+								# has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								# exists = var:daedric_shrine
+								# has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								# exists = var:great_wyrd_tree
+								# has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								# exists = var:dragon_temple
+								# has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								# exists = var:holy_site_other_grand_temple
+								# has_building = holy_site_other_grand_temple_01
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+				title_province = { add_special_building = grand_cathedral_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+				title_province = { add_special_building = daedric_shrine_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+				title_province = { add_special_building = great_wyrd_tree_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+				title_province = { add_special_building = dragon_temple_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_grand_temples } }
+				title_province = { add_special_building = holy_site_other_grand_temple_01 }
+			}
+		}
+	}
+	
+	ai_check_interval = 120
+}
+
+### Sacred Witches, upgrade your Witch trait
+witch_become_occultist_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
 	desc = witch_become_occultist_decision_desc
