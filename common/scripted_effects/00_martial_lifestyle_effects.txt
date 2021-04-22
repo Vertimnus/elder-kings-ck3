@@ -63,17 +63,14 @@ give_random_commander_trait_effect = {
 		100 = {
 			trigger = {
 				NOT = { has_trait = winter_soldier }
-				# any_sub_realm_barony = {
-					# title_province = {
-						# OR = {
-							# terrain = taiga
-							# geographical_region = world_tibet
-							# geographical_region = world_europe_north
-							# geographical_region = world_europe_east
-							# geographical_region = world_steppe
-						# }
-					# }
-				# }
+				any_sub_realm_barony = {
+					title_province = {
+						OR = {
+							terrain = taiga
+							geographical_region = mundus_climate_winter
+						}
+					}
+				}
 			}
 			add_trait = winter_soldier
 		}
@@ -379,15 +376,12 @@ discover_new_commander_trait_to_teach = {
 		1 = {
 			trigger = {
 				exists = scope:teacher.location
-				# scope:teacher.location = {
-					# OR = {
-						# terrain = taiga
-						# geographical_region = world_tibet
-						# geographical_region = world_europe_north
-						# geographical_region = world_europe_east
-						# geographical_region = world_steppe
-					# }
-				# }
+				scope:teacher.location = {
+					OR = {
+						terrain = taiga
+						geographical_region = mundus_climate_winter
+					}
+				}
 				NOT = { has_trait = winter_soldier }
 			}
 			set_variable = {

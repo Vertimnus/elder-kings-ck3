@@ -1,0 +1,632 @@
+﻿namespace = ek_religious_decision
+
+#########################
+# RITE OF PASSAGE		#
+# 0001-0009				#
+#########################
+
+scripted_effect select_rite_of_passage_generic = {
+	random_list = {
+		# Big pilgrimage
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:glorified_pilgrimage_flag }
+			}
+			set_local_variable = {
+				name = glorified_pilgrimage_flag
+				value = yes
+			}
+		}
+		# Fight a big monster
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:fight_scary_monster_flag }
+			}
+			set_local_variable = {
+				name = fight_scary_monster_flag
+				value = yes
+			}
+		}
+	}
+}
+
+scripted_effect select_rite_of_passage_special = {
+	random_list = {
+		### Negative (fight)
+		# Kill a lycanthrope
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:kill_lycanthrope_flag }
+				NOT = { faith = { has_doctrine = doctrine_lycanthropy_accepted } }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = kill_lycanthrope_flag
+				value = yes
+			}
+			# If Lycan are shunned but not outlawed, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = doctrine_lycanthropy_outlawed } }
+			}
+		}
+		# Kill a vampire
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:kill_vampire_flag }
+				NOT = { faith = { has_doctrine = doctrine_vampirism_accepted } }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = kill_vampire_flag
+				value = yes
+			}
+			# If Vampirism are shunned but not outlawed, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = doctrine_vampirism_outlawed } }
+			}
+		}
+		### Positive (gain potential virtue)
+		# Become a cannibal
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_cannibal_flag }
+				faith = { has_doctrine = tenet_ritual_cannibalism }
+				NOT = { has_trait = cannibal }
+			}
+			set_local_variable = {
+				name = become_cannibal_flag
+				value = yes
+			}
+		}
+		# Become a lycanthrope
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_lycanthrope_flag }
+				faith = { has_doctrine = doctrine_lycanthropy_accepted }
+				NOT = { is_lycan = yes }
+			}
+			set_local_variable = {
+				name = become_lycanthrope_flag
+				value = yes
+			}
+			# If Lycan are accepted but not worshipped, less common
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = tenet_lycanthrope_worship } }
+			}
+		}
+		# Become a vampire
+		100 = {
+			trigger = {
+				NOT = { exists = local_var:become_vampire_flag }
+				faith = { has_doctrine = doctrine_vampirism_accepted }
+				NOT = { is_vampire = yes }
+			}
+			set_local_variable = {
+				name = become_vampire_flag
+				value = yes
+			}
+			modifier = {
+				add = -50
+				NOT = { faith = { has_doctrine = tenet_vampire_worship } }
+			}
+		}
+		### Fallback
+		1 = {
+			select_rite_of_passage_generic = yes
+		}
+	}
+}
+
+
+scripted_effect select_rite_of_passage = {
+	### Heavily inspired by how duel moves are setup
+	random_list = {
+		### Generic
+		50 = {
+			select_rite_of_passage_generic = yes
+		}
+		
+		### Specific - Terrain or region
+		
+		### Specific - Religion (we try to mainly have those)
+		100 = {
+			select_rite_of_passage_special = yes
+		}
+	}
+}
+
+# Start the Rite of Passage, what do we do?
+ek_religious_decision.0001 = {
+	type = character_event
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { religion = religion:aldmer_religion }
+				desc = ek_religious_decision.0001.t.athen_vialen
+			}
+			desc = ek_religious_decision.0001.t.fallback
+		}
+	}
+	desc = ek_religious_decision.0001.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = personality_zealous
+	}
+	
+	# Draw three possible rites (that means we need at least 3 generic rites lol)
+	immediate = {
+		save_scope_as = starts_rite_of_passage
+		
+		select_rite_of_passage = yes
+		select_rite_of_passage = yes
+		select_rite_of_passage = yes
+	}
+
+	### Generic
+	option = {
+		trigger = { exists = local_var:glorified_pilgrimage_flag }
+		name = single_combat.0001.glorified_pilgrimage
+	}
+	option = {
+		trigger = { exists = local_var:fight_scary_monster_flag }
+		name = single_combat.0001.fight_scary_monster
+	}
+	
+	### Specific
+	# Negative (fight)
+	option = {
+		trigger = { exists = local_var:kill_lycanthrope_flag }
+		name = single_combat.0001.kill_lycanthrope
+	}
+	option = {
+		trigger = { exists = local_var:kill_vampire_flag }
+		name = single_combat.0001.kill_vampire
+	}
+	
+	# Positive (gain potential virtue)
+	option = {
+		trigger = { exists = local_var:become_cannibal_flag }
+		name = single_combat.0001.become_cannibal
+	}
+	option = {
+		trigger = { exists = local_var:become_lycanthrope_flag }
+		name = single_combat.0001.become_lycanthrope
+	}
+	option = {
+		trigger = { exists = local_var:become_vampire_flag }
+		name = single_combat.0001.become_vampire
+	}
+}
+
+#########################
+# RISTAAG				#
+# 0101-0199				#
+#########################
+
+# Begin the Ristaag!
+ek_religious_decision.0101 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0101.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_forest_pine
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	# Search for the Totem of Claw and Fang!
+	option = {
+		name = ek_religious_decision.0101.a
+		
+		custom_tooltip = ek_religious_decision.0101.a.tt
+		
+		duel = {
+			skill = learning
+			value = 10
+			50 = {
+				desc = ek_religious_decision.0101.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				add_character_flag = {
+					flag = has_found_totem_place
+					days = 10
+				}
+				custom_tooltip = ek_religious_decision.0101.a.tt_success
+			}
+			50 = {
+				desc = ek_religious_decision.0101.a.failure
+				custom_tooltip = ek_religious_decision.0101.a.tt_failure
+			}
+		}
+	}
+	
+	after = {
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 7
+		}
+	}
+}
+
+# Totems of Claw and Fang found, find the Spirit Bear!
+ek_religious_decision.0102 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { has_character_flag = has_found_totem_place }
+				desc = ek_religious_decision.0102.desc_success
+			}
+			desc = ek_religious_decision.0102.desc_failure
+		}
+	}
+	
+	theme = faith
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	immediate = {
+		if = {
+			limit = { NOT = { exists = scope:totem_barony } }
+			### Take a random faith revering the All-Maker or Hircine
+			every_religion_global = {
+				every_faith = {
+					if = {
+						limit = {
+							OR = {
+								has_doctrine = doctrine_pantheon_all_maker
+								has_doctrine = doctrine_pantheon_hircine
+							}
+							num_county_followers >= 1
+						}
+						add_to_list = faiths_list
+					}
+				}
+			}
+			
+			random_in_list = {
+				list = faiths_list
+				save_scope_as = totem_faith
+			}
+			
+			### Target a random holy site of the above faith, or a regular random province if it doesn't have one
+			random_barony = {
+				limit = {
+					is_holy_site_of = scope:totem_faith
+				}
+				alternative_limit = {
+					this.faith = scope:totem_faith
+				}
+				
+				save_scope_as = totem_barony
+				title_province = { save_scope_as = background_wilderness_scope }
+			}
+		}
+	}
+	
+	right_portrait = {
+		character = root
+		
+		triggered_animation = {
+			trigger = { has_character_flag = has_found_totem_place }
+			animation = personality_zealous
+		}
+		triggered_animation = {
+			trigger = { NOT = { has_character_flag = has_found_totem_place } }
+			animation = worry
+		}
+	}
+
+	option = {
+		trigger = { has_character_flag = has_found_totem_place }
+		name = ek_religious_decision.0102.a
+		
+		trigger_event = ek_religious_decision.0103
+	}
+
+	option = { # Pay some prestige (lead if yourself)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.b
+		
+		add_prestige = -100
+		custom_tooltip = ek_religious_decision.0102.b.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			shy = minor_stress_gain
+			gregarious = minor_stress_loss
+			humble = minor_stress_gain
+			arrogant = minor_stress_loss
+		}
+	}
+
+	option = { # Pay some piety (pray to the All-Maker)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.c
+		
+		add_piety = -100
+		custom_tooltip = ek_religious_decision.0102.c.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			cynical = minor_stress_gain
+			zealous = minor_stress_loss
+		}
+	}
+
+	option = { # Pay some gold (bribe the locals)
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.d
+		
+		add_gold = -25
+		custom_tooltip = ek_religious_decision.0102.d.tt_success
+		
+		add_character_flag = {
+			flag = has_found_totem_place
+			days = 10
+		}
+		
+		trigger_event = {
+			id = ek_religious_decision.0102
+			days = 3
+		}
+		
+		stress_impact = {
+			greedy = minor_stress_gain
+		}
+	}
+
+	option = { # Drop it
+		trigger = { NOT = { has_character_flag = has_found_totem_place } }
+		name = ek_religious_decision.0102.e
+		
+		custom_tooltip = ek_religious_decision.0102.stop
+		
+		trigger_event = {
+			id = ek_religious_decision.0105
+			days = 3
+		}
+		
+		stress_impact = {
+			ambitious = minor_stress_gain
+			diligent = minor_stress_gain
+		}
+	}
+}
+
+# Spirit Bear found, slay it!
+ek_religious_decision.0103 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0103.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	option = {
+		name = ek_religious_decision.0103.a
+		
+		duel = {
+			skill = prowess
+			value = 10
+			25 = { # Ez
+				desc = ek_religious_decision.0103.a.success_1
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				compare_modifier = {
+					value = martial
+					multiplier = 2
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				add_prestige = 50
+				
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # Some losses but okay
+				desc = ek_religious_decision.0103.a.success_2
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.66
+				}
+				compare_modifier = {
+					value = martial
+					multiplier = 1
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # You're wounded but triumphant
+				desc = ek_religious_decision.0103.a.success_3
+				compare_modifier = { # If you're not very bold you have a lower chance of trying that
+					trigger = {
+						ai_boldness < 0
+					}
+					target = root
+					value = {
+						add = ai_boldness
+						multiply = 0.2
+					}
+				}
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 0.33
+				}
+				custom_tooltip = ek_religious_decision.0103.a.tt_success
+		
+				increase_wounds_effect = { REASON = viciously_dismembered }
+				trigger_event = {
+					id = ek_religious_decision.0104
+					days = 3
+				}
+			}
+			25 = { # You have been unable to defeat the Spirit Bear
+				desc = ek_religious_decision.0103.a.failure
+				custom_tooltip = ek_religious_decision.0103.a.tt_failure
+				
+				increase_wounds_two_times_effect = { REASON = viciously_dismembered }
+				
+				trigger_event = {
+					id = ek_religious_decision.105
+					days = 3
+				}
+			}
+		}
+	}
+}
+
+# gg, All-Maker rewards you
+ek_religious_decision.0104 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0104.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	right_portrait = {
+		character = root
+		animation = personality_zealous
+	}
+
+	option = {
+		name = ek_religious_decision.0104.a
+		
+		custom_tooltip = ek_religious_decision.0104.tt
+		
+		add_character_modifier = {
+			modifier = performed_ristaag_modifier
+			years = 10
+		}
+		
+		stress_impact = {
+			zealous = minor_stress_loss
+		}
+		
+		add_piety = 100
+	}
+}
+
+# We have to stop early
+ek_religious_decision.0105 = {
+	type = character_event
+	title = ek_religious_decision.0101.t
+	desc = ek_religious_decision.0105.desc
+	theme = faith
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	right_portrait = {
+		character = root
+		animation = shame
+	}
+
+	option = {
+		name = ek_religious_decision.0105.a
+		
+		custom_tooltip = ek_religious_decision.0105.tt
+		
+		stress_impact = {
+			base = minor_stress_gain
+			zealous = minor_stress_gain
+			cynical = minor_stress_loss
+		}
+	}
+}
+
+#########################
+# RITUAL OFT THE GIFTS	#
+# 0201-0299				#
+#########################
+
+#########################
+# SUMMON A DRAGON		#
+# 0301-0399				#
+#########################
+
+ek_religious_decision.0301 = {
+	type = character_event
+	title = ek_religious_decision.0301.t
+	desc = ek_religious_decision.0301.desc
+	
+	theme = war
+	override_background = {
+		event_background = wilderness_scope
+	}
+	
+	right_portrait = {
+		character = root
+		animation = war_over_win
+	}
+	
+	immediate = {
+		capital_province = { save_scope_as = background_wilderness_scope }
+	}
+
+	option = {
+		name = ek_religious_decision.0301.a
+		
+		custom_tooltip = ek_religious_decision.0301.a.tt
+		custom_tooltip = summon_dragons_decision_effect_tooltip_2
+		
+		hidden_effect = {
+			spawn_army = {
+				levies = 1 # Will be obsolete in 1.3.x !!!!!
+				men_at_arms = {
+					type = dragons
+					stacks = 1
+				}
+				inheritable = no
+				location = capital_province
+			}
+		}
+	}
+}

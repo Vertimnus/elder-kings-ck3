@@ -259,8 +259,159 @@ abecean_pirates = {
 	icon = skirmishers
 }
 
-### Khajiiti
-senche_raht = {
+### Khajiiti - Cathay, Ohmes, Suthay, Tojay - Dagi (special)
+# Alfiq: War Mages
+# Cathay: Skirmishers
+# Suthay: Bowmen
+# Ohmes: Pikemen
+# Pahmar: Heavy Infantry
+# Senche: Light Cavalry
+# Senche-Raht: Light Cavalry
+
+alfiq = {
+	type = mages
+	
+	damage = 25
+	toughness = 15
+	pursuit = 5
+	screen = 20
+	
+	siege_tier = 1
+	siege_value = 0.1
+	
+	counters = {
+		heavy_infantry = 1
+		pikemen = 1
+		archers = 1
+	}
+
+	buy_cost = { gold = @mages_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @mages_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @mages_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = mages
+}
+
+cathay = {
+	type = skirmishers
+	
+	damage = 10
+	toughness = 16
+	pursuit = 10
+	screen = 16
+	
+	terrain_bonus = {
+		forest = { damage = 4 toughness = 6 }
+		taiga = { damage = 4 toughness = 6 }
+		jungle = { damage = 4 toughness = 6 }
+		desert = { damage = 4 toughness = 6 }
+		desert_hills = { damage = 2 toughness = 3 }
+		desert_mountains = { damage = 2 toughness = 3 }
+	}
+
+	counters = {
+		heavy_infantry = 1
+	}
+
+	buy_cost = { gold = @skirmisher_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @skirmisher_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @skirmisher_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = skirmishers
+}
+
+suthay = {
+	type = archers
+	
+	damage = 25
+	toughness = 10
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		hills = { damage = 10 toughness = 4 }
+		desert = { damage = 10 toughness = 4 }
+		desert_mountains = { damage = 7 toughness = 3 }
+		desert_hills = { damage = 5 toughness = 2 }
+		forest = { toughness = 4 screen = 4 }
+		taiga = { toughness = 4 screen = 4 }
+	}
+
+	counters = {
+		skirmishers = 1
+	}
+
+	buy_cost = { gold = @archers_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @archers_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @archers_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = bowmen
+}
+
+ohmes = {
+	type = pikemen
+	
+	damage = 22
+	toughness = 24
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		desert_mountains = { damage = 6 toughness = 18 }
+		desert_hills = { damage = 4 toughness = 12 }
+		desert = { damage = 3 toughness = 9 }
+		mountains = { toughness = 12 }
+		hills = { toughness = 8 }
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+	}
+
+	buy_cost = { gold = @pikemen_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @pikemen_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @pikemen_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = pikemen
+}
+
+pahmar = {
+	type = heavy_infantry
+	
+	damage = 32
+	toughness = 22
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		desert = { damage = 15 toughness = 12 }
+		desert_hills = { damage = 10 toughness = 8 }
+		desert_mountains = { damage = 5 toughness = 4 }
+	}
+	
+	counters = {
+		pikemen = 1
+	}
+
+	buy_cost = { gold = @heavy_infantry_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @heavy_infantry_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @heavy_infantry_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_infantry
+}
+
+senche = {
 	type = light_cavalry
 	
 	damage = 40
@@ -289,6 +440,37 @@ senche_raht = {
 	stack = 100
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = light_cavalry
+}
+
+senche_raht = {
+	type = heavy_cavalry
+	
+	damage = 100
+	toughness = 35
+	pursuit = 20
+	screen = 0
+	
+	terrain_bonus = {
+		plains = { damage = 30 }
+		drylands = { damage = 30 }
+		desert = { damage = 10 }
+		hills = { damage = -20 }
+		desert_mountains = { damage = -50 }
+		mountains = { damage = -75 }
+		wetlands = { damage = -75 toughness = -10 pursuit = -10 }
+	}
+
+	counters = {
+		archers = 1
+	}
+
+	buy_cost = { gold = @heavy_cavalry_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @heavy_cavalry_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @heavy_cavalry_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_cavalry
 }
 
 ### Akaviri

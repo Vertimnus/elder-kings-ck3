@@ -18,7 +18,7 @@
 
 	#Crimes
 	doctrine = doctrine_kinslaying_accepted
-	doctrine = doctrine_deviancy_accepted
+	doctrine = doctrine_deviancy_shunned
 	doctrine = doctrine_witchcraft_accepted
 
 	#Clerical Functions
@@ -32,13 +32,15 @@
 	doctrine = doctrine_adultery_men_accepted
 	doctrine = doctrine_adultery_women_accepted
 	doctrine = doctrine_homosexuality_accepted
-	doctrine = doctrine_daedra_worship_accepted
-	doctrine = doctrine_lycanthropy_accepted
-	doctrine = doctrine_vampirism_accepted
-	doctrine = doctrine_necromancy_accepted
+	doctrine = doctrine_lycanthropy_outlawed
+	doctrine = doctrine_vampirism_outlawed
+	doctrine = doctrine_necromancy_pragmatic
 
 	#Special Doctrine for Malacath Syncretism
 	doctrine = doctrine_pantheon_malacath
+	
+	doctrine = doctrine_hidden_daedra_allowed
+	doctrine = doctrine_malacath_pantheon
 
 	traits = {
 		virtues = { brave wrathful vengeful }
@@ -229,7 +231,7 @@
 			
 			#Tenets
 			doctrine = tenet_legalism # It's literally called *Code* of Malacath
-			doctrine = tenet_communal_identity
+			doctrine = tenet_contempt_for_the_weak
 			doctrine = tenet_unrelenting_faith
 		}
 		
@@ -360,6 +362,27 @@
 				NegativeAfterLife = ashpit_name
 				DeathDeityName = god_muluk_name
 				DeathDeityNamePossessive = god_muluk_name_possessive
+			}
+		}
+		
+		malacath_brutal_breed = { # Formed after the fall of Orsinium around 1E1000, believes that every Breton and Redguard should be slaughtered
+			color = { 0.4 0.60 0.2 }
+			icon = malacath3
+			
+			# Doctrines
+			doctrine = doctrine_spiritual_head
+			doctrine = doctrine_gender_male_dominated
+			doctrine = doctrine_pluralism_fundamentalist
+			
+			#Tenets
+			doctrine = tenet_warmonger
+			doctrine = tenet_contempt_for_the_weak
+			
+			# Gruesome Festivals, else Human Sacrifice.
+			doctrine_selection_pair = {
+				requires_dlc_flag = the_northern_lords
+				doctrine = tenet_gruesome_festivals
+				fallback_doctrine = tenet_human_sacrifice
 			}
 		}
 	}

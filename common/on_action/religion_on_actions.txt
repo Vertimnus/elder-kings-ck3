@@ -119,6 +119,10 @@ on_faith_created = {
 # Root is the converter
 # scope:old_faith is the faith they used to have
 on_faith_conversion = {
+	on_actions = { # think this should work, stops patron window being accessible until a day after converting
+		on_character_faith_change_clear_patrons
+		on_player_faith_change_initialize_patrons
+	}
 	events = {
 		faith_conversion.0001	# Convert capital county
 		faith_conversion.0003	# Convert close family

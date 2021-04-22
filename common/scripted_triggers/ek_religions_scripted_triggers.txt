@@ -86,18 +86,8 @@ can_see_doctrine_pantheon_daedra = {
 	OR = {
 		# The religion is dedicated to the Prince
 		religion_tag = $DAEDRA$_religion
-		# Is part of any Daedric faith that isn't already dedicated to a specific Prince (Reach, Velothi)
-		AND = {
-			has_doctrine = daedric_hostility_doctrine
-			NOT = { is_daedric_prince_religion_tag = yes }
-			creating_faith_$DAEDRA$_shunned_accepted_tenet_doctrine = yes
-		}
-		# Is part of a non-Daedric faith that considers Daedric worship Shunned/Accepted and has one of their tenets
-		AND = {
-			NOT = { has_doctrine = daedric_hostility_doctrine }
-			NOT = { creating_faith_daedric_worship_criminal = yes }
-			creating_faith_$DAEDRA$_shunned_accepted_tenet_doctrine = yes
-		}
+		flag:doctrine_$DAEDRA$_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_$DAEDRA$_allowed = { is_in_list = selected_doctrines }
 	}
 }
 
@@ -227,6 +217,84 @@ creating_faith_vaermina_shunned_accepted_tenet_doctrine = {
 		flag:tenet_syncretism_pantheon_vaermina = { is_in_list = selected_doctrines }
 		flag:tenet_sacred_alchemy = { is_in_list = selected_doctrines }
 		flag:tenet_ritual_nightmares = { is_in_list = selected_doctrines }
+	}
+}
+
+## Does this faith allow Daedric patrons
+creating_faith_allow_daedric_patrons = {
+	NOT = { creating_faith_pantheon_cannot_be_changed_active = yes}
+}
+
+## Any pantheon doctrine with pantheon_cannot_be_changed_active = yes
+creating_faith_pantheon_cannot_be_changed_active = {
+	OR = {
+		flag:doctrine_pantheon_deepones = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_jephre = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_all_maker = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_dragons = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_druadach = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_vaermina = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_sheogorath = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_sanguine = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_peryite = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_nocturnal = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_namira = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_meridia = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_mephala = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_mehrunes = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_malacath = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_hircine = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_hermaeus = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_clavicus = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_boethiah = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_azura = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_herd_mother = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_lorkhan = { is_in_list = selected_doctrines }
+		flag:doctrine_pantheon_the_one = { is_in_list = selected_doctrines }
+	}
+}
+
+creating_faith_has_daedric_prince_pantheon = {
+	OR = {
+		flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_clavicus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hermaeus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hircine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_malacath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mehrunes_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mephala_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_meridia_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_molag_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_namira_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_nocturnal_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_peryite_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sanguine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sheogorath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_vaermina_pantheon = { is_in_list = selected_doctrines }
+	}
+}
+
+creating_faith_has_several_daedric_princes_pantheon = {
+	calc_true_if = {
+		amount >= 2
+		flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_clavicus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hermaeus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hircine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_malacath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mehrunes_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mephala_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_meridia_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_molag_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_namira_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_nocturnal_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_peryite_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sanguine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sheogorath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_vaermina_pantheon = { is_in_list = selected_doctrines }
 	}
 }
 

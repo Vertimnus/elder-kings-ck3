@@ -1,13 +1,13 @@
 ﻿#Setup effect used for newly generated characters
 ek_character_setup_effect = {
 
-	#Race traits (only Khajiit and Argonian for now)
+	#Race flags
 	if = {
 		limit = { 
 			NOT = { 
-				has_trait = race_khajiit
-				has_trait = race_argonian
-				has_trait = race_globinken
+				has_character_flag = race_khajiit
+				has_character_flag = race_argonian
+				has_character_flag = race_goblinken
 			} 
 		}
 		race_traits_effect = yes
@@ -34,53 +34,58 @@ race_traits_effect = {
 	#Khajiit
 	if = {
 		limit = { culture_group = culture_group:khajiiti_group }
-		add_trait = race_khajiit
+		add_character_flag = race_khajiit
 	}
 	
 	#goblinken
 	if = {
 		limit = { culture_group = culture_group:goblinken_group }
-		add_trait = race_globinken
+		add_character_flag = race_goblinken
 	}
 	
 	#Argonian
 	# if = {
 		# limit = { culture_group = culture_group:argonian_group }
-		# add_trait = race_argonian
+		# add_character_flag = race_argonian
 	# }
 	
 	add_character_flag = char_setup
 }
 
-#Race traits inheritance
+#Race flags inheritance
 race_traits_inheritance_effect = {
 	
 	#Khajiit
 	if = {
 		limit = { 
 			OR = {
-				scope:mother = { has_trait = race_khajiit }
-				scope:real_father = { has_trait = race_khajiit }
+				scope:mother = { has_character_flag = race_khajiit }
+				scope:real_father = { has_character_flag = race_khajiit }
 			}
 		}
-		add_trait = race_khajiit
+		add_character_flag = race_khajiit
 	}
 	
 	#Goblinken
 	if = {
 		limit = { 
 			OR = {
-				scope:mother = { has_trait = race_globinken }
-				scope:real_father = { has_trait = race_globinken }
+				scope:mother = { has_character_flag = race_goblinken }
+				scope:real_father = { has_character_flag = race_goblinken }
 			}
 		}
-		add_trait = race_globinken
+		add_character_flag = race_goblinken
 	}
 	
 	#Argonian
 	# if = {
-		# limit = { culture_group = culture_group:argonian_group }
-		# add_trait = race_argonian
+		# limit = { 
+			# OR = {
+				# scope:mother = { has_character_flag = race_argonian }
+				# scope:real_father = { has_character_flag = race_argonian }
+			# }
+		# }
+		# add_character_flag = race_argonian
 	# }
 	
 	add_character_flag = char_setup
