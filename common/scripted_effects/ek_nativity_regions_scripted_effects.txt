@@ -74,10 +74,19 @@ create_local_culture_decision_scripted_effects = {
 	
 	### Most of the titles held within the region should convert
 	hidden_effect = {
+		random_held_title = {
+			limit = {
+				tier = tier_county
+				culture.culture_group = root.culture.culture_group
+				title_province = { geographical_region = custom_nativity_$REGION$ }
+			}
+			set_county_culture = scope:new_culture
+		}
 		every_held_title = {
 			limit = {
 				tier = tier_county
 				culture.culture_group = root.culture.culture_group
+				NOT = { culture = scope:new_culture }
 				title_province = { geographical_region = custom_nativity_$REGION$ }
 			}
 			random = {
@@ -86,6 +95,8 @@ create_local_culture_decision_scripted_effects = {
 			}
 		}
 	}
+	
+	trigger_event = ek_culture_creation_decision.0001
 }
 
 # Every county gets a list of native cultures
