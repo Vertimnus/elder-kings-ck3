@@ -2339,6 +2339,11 @@ weapon = {
 			}
 		}
 	}
+	staff = {
+		weight  {
+			value = 3000
+		}
+	}
 }
 
 the_weapon = {
@@ -2408,6 +2413,11 @@ the_weapon = {
 			}
 		}
 	}
+	the_staff = {
+		weight  {
+			value = 3000
+		}
+	}
 }
 
 creature = {
@@ -2416,6 +2426,18 @@ creature = {
 	bear = {
 	}
 	eagle = {
+		weight = {
+			value = 1000
+			if = {
+				limit = {
+					OR = {
+						has_culture_group = culture_group:aldmeris_group
+						has_culture_group = culture_group:ayleidoon_group
+					}
+				}
+				multiply = 5
+			}
+		}
 	}
 	ox = {
 	}
@@ -2448,11 +2470,7 @@ creature = {
 	}
 	tiger = {
 		trigger = {
-			always = no
-			# OR = {
-				# has_culture_group = culture_group:dravidian_group
-				# has_culture_group = culture_group:indo_aryan_group
-			# }
+			has_culture = blackood
 		}
 	}
 	elephant = {
@@ -2475,18 +2493,17 @@ creature = {
 		# }
 	}
 	horse = {
-		# weight = {
-			# value = 1000
-			# if = {
-				# limit = {
-					# OR = {
-						# has_culture_group = culture_group:mongolic_group
-						# has_culture_group = culture_group:turkic_group
-					# }
-				# }
-				# multiply = 5
-			# }
-		# }
+		weight = {
+			value = 1000
+			if = {
+				limit = {
+					OR = {
+						has_culture = culture:horsemen
+					}
+				}
+				multiply = 5
+			}
+		}
 	}
 	leopard = {
 		trigger = {
@@ -2539,22 +2556,171 @@ creature = {
 			# }
 		# }
 	}
+	guar = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+				has_culture = culture:kothringi
+			}
+		}
+	}
+	alit = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+				has_culture_group = culture_group:khajiit_group
+				has_culture = culture:kothringi
+			}
+		}
+	}
+	netch = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+			}
+		}
+	}
+	ice_wraith = {
+		trigger = {
+			has_culture_group = culture_group:nordic_group
+		}
+	}
+	sabertooth = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:nordic_group
+				has_culture_group = culture_group:breton_group
+				has_culture = culture:mountain_orc
+				has_culture = culture:reachfolk
+			}
+		}
+	}
+	indrik = {
+		trigger = {
+			has_culture_group = culture_group:aldmeris_group
+		}
+	}
+	senche_lion = {
+		trigger = {
+			has_culture_group = culture_group:khajiit_group
+		}
+	}
+	dreugh = {
+	}
+	durzog = {
+		trigger = {
+			has_culture = culture:goblin
+		}
+	}
+	echatere = {
+		trigger = {
+			OR = {
+				has_culture = culture:mountain_orc
+				has_culture = culture:iron_orc
+			}
+		}
+	}
+	minotaur = {
+		trigger = {
+			has_culture_group = culture_group:cyrodiilic_group
+			has_culture = culture:reachfolk
+			has_culture = culture:westmarcher
+		}
+	}
+	moth = {
+		trigger = {
+			has_culture_group = culture_group:cyrodiilic_group
+		}
+	}
+	wormmouth = {
+		trigger = {
+			OR = {
+				has_culture = culture:iron_orc
+				has_culture = culture:bjoule
+			}
+		}
+	}
+	sep_adder = {
+		trigger = {
+				has_culture_group = culture_group:yoku_group
+		}
+	}
+	samara_scarab = {
+		trigger = {
+			OR = {
+				has_culture = culture:yokudan
+				has_culture = culture:alikr
+			}
+		}
+	}
+	wamasu = {
+		trigger = {
+			OR = {
+				has_culture = culture:kothringi
+				#has_culture_group = culture_group:argonian
+			}
+		}
+	}
+	monkey = {
+		trigger = {
+			has_culture_group = culture_group:bosmeris_group
+		}
+	}
+	mammoth = {
+		trigger = {
+			has_culture_group = culture_group:nordic_group
+		}
+	}
+	bristleback = {
+		trigger = {
+			has_culture = culture:riekling
+		}
+	}
+	grummite = {
+		trigger = {
+			has_trait = lunatic
+		}
+	}
 }
 
 the_creature = {
 	the_wolf = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_bear = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_eagle = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_ox = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_unicorn = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_dragon = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_boar = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_giant_snail = {
 		trigger = {
@@ -2562,8 +2728,14 @@ the_creature = {
 		}
 	}
 	the_lion = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_fox = {
+		trigger = {
+			always = yes
+		}
 	}
 	the_tiger = {
 		trigger = {
@@ -2588,6 +2760,9 @@ the_creature = {
 		}
 	}
 	the_hound = {
+		trigger = {
+			always = yes
+		}
 		# trigger = {
 			# faith = {
 				# NOT = {
@@ -2597,6 +2772,9 @@ the_creature = {
 		# }
 	}
 	the_horse = {
+		trigger = {
+			always = yes
+		}
 		# weight = {
 			# value = 1000
 			# if = {
@@ -2660,6 +2838,134 @@ the_creature = {
 			# }
 		# }
 	}
+	the_guar = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+				has_culture = culture:kothringi
+			}
+		}
+	}
+	the_alit = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+				has_culture_group = culture_group:khajiit_group
+				has_culture = culture:kothringi
+			}
+		}
+	}
+	the_netch = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:chimeris_group
+				has_culture_group = culture_group:dunmeris_gorup
+			}
+		}
+	}
+	the_ice_wraith = {
+		trigger = {
+			has_culture_group = culture_group:nordic_group
+		}
+	}
+	the_sabertooth = {
+		trigger = {
+			OR = {
+				has_culture_group = culture_group:nordic_group
+				has_culture_group = culture_group:breton_group
+				has_culture = culture:mountain_orc
+				has_culture = culture:reachfolk
+			}
+		}
+	}
+	the_indrik = {
+		trigger = {
+			has_culture_group = culture_group:aldmeris_group
+		}
+	}
+	the_senche_lion = {
+		trigger = {
+			has_culture_group = culture_group:khajiit_group
+		}
+	}
+	the_dreugh = {
+	}
+	the_durzog = {
+		trigger = {
+			has_culture = culture:goblin
+		}
+	}
+	the_echatere = {
+		trigger = {
+			OR = {
+				has_culture = culture:mountain_orc
+				has_culture = culture:iron_orc
+			}
+		}
+	}
+	the_minotaur = {
+		trigger = {
+			has_culture_group = culture_group:cyrodiilic_group
+			has_culture = culture:reachfolk
+			has_culture = culture:westmarcher
+		}
+	}
+	the_moth = {
+		trigger = {
+			has_culture_group = culture_group:cyrodiilic_group
+		}
+	}
+	the_wormmouth = {
+		trigger = {
+			OR = {
+				has_culture = culture:iron_orc
+				has_culture = culture:bjoule
+			}
+		}
+	}
+	the_sep_adder = {
+		trigger = {
+				has_culture_group = culture_group:yoku_group
+		}
+	}
+	the_samara_scarab = {
+		trigger = {
+			OR = {
+				has_culture = culture:yokudan
+				has_culture = culture:alikr
+			}
+		}
+	}
+	the_wamasu = {
+		trigger = {
+			OR = {
+				has_culture = culture:kothringi
+				#has_culture_group = culture_group:argonian
+			}
+		}
+	}
+	the_monkey = {
+		trigger = {
+			has_culture_group = culture_group:bosmeris_group
+		}
+	}
+	the_mammoth = {
+		trigger = {
+			has_culture_group = culture_group:nordic_group
+		}
+	}
+	the_bristleback = {
+		trigger = {
+			has_culture = culture:riekling
+		}
+	}
+	the_grummite = {
+		trigger = {
+			has_trait = lunatic
+		}
+	}
 }
 
 annoying_action_verb = {
@@ -2693,6 +2999,7 @@ negative_noun = {
 	}
 	fear = {
 		trigger = {
+			always = yes
 		}
 	}
 	doubt = {

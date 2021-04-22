@@ -1,0 +1,46 @@
+﻿namespace = ek_culture_creation_decision
+
+ek_culture_creation_decision.0001 = {
+    type = character_event
+    title = ek_culture_creation_decision.0001.t
+
+	desc = {
+		### EK TODO: Either old culture to revive, or new culture to create
+		desc = ek_culture_creation_decision.0001.desc_intro
+		
+		desc = ek_culture_creation_decision.0001.desc_mid
+		
+		# Some more text if you personally convert
+		triggered_desc = {
+			trigger = { root.culture = scope:new_culture }
+			desc = ek_culture_creation_decision.0001.desc_personal
+		}
+	}
+	
+    theme = culture_change
+	
+    left_portrait = {
+        character = root
+        animation = personality_rational
+    }
+	
+	immediate = {
+		random_held_title = {
+			limit = {
+				tier = tier_county
+				culture = scope:new_culture
+			}
+			duchy = { save_scope_as = new_culture_duchy }
+		}
+	}
+	
+    option = {
+		trigger = { NOT = { root.culture = scope:new_culture } }
+        name = ek_culture_creation_decision.0001.a
+    }
+
+    option = {
+		trigger = { root.culture = scope:new_culture }
+        name = ek_culture_creation_decision.0001.b
+    }
+}
