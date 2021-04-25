@@ -140,9 +140,10 @@ pelletine_002 = {
     dynasty_house = zatani_tasluz
     religion = twomoonsdance
     culture = pellitinian
-	rival = eshita_001
+	set_relation_rival = character:eshita_001
 
     3314.1.1 = { birth = yes }
+	3333.1.1 = { set_relation_rival = character:eshita_001 }
 	3410.1.1 = { death = yes }
 }
 
@@ -191,10 +192,22 @@ khenarthi_001 = {
 	3300.1.1 = {death = yes}
 }
 khenarthi_002 = {
+	name = "Hussiri"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty = 1100002
+	mother = khenarthi_001
+	father = corinawl_001
+
+	3231.1.1 = {birth = yes}
+	3306.1.1 = {death = yes}
+}
+khenarthi_003 = {
 	name = "Bhisathra"
 	culture = pellitinian
 	religion = twomoonsdance
 	dynasty = 1100002
+	father = khenarthi_002
 
 	3297.1.1 = {birth = yes}
 	3363.1.1 = {death = yes}
@@ -211,24 +224,39 @@ corinawl_001 = {
 	3290.1.1 = {death = yes}
 }
 corinawl_002 = {
+	name = "Shoiq"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty = 1100002
+	father = corinawl_001
+	mother = khenarthi_001
+
+	3229.1.1 = {birth = yes}
+	3320.1.1 = {death = yes}
+}
+corinawl_003 = {
 	name = "Dro'enji"
 	culture = pellitinian
 	religion = twomoonsdance
 	dynasty = 1100002
+	father = corinawl_002
 
 	3288.1.1 = {birth = yes}
 	3361.1.1 = {death = yes}
 }
 
-#Tideholm Custodians
-tideholm_001 = {
-	name = "Ra'qanar"
+#Potentate's Retreat Court
+zhenasf_001 = {
+	name = "Dra'tsabi"
 	culture = pellitinian
 	religion = twomoonsdance
-	dynasty_house = zatan_rasin
+	female = yes
+	lowborn = yes
 
-	3334.1.1 = {birth = yes}
-	3375.1.1 = {death = yes}
+	3310.1.1 = {birth = yes}
+	3333.1.1 = { set_relation_friend = character:pelletine_002 }
+	3350.1.1 = {employer = zhenas_002}
+	3430.1.1 = {death = yes}
 }
 
 #Southguard Lords
@@ -258,21 +286,74 @@ eshita_001 = {
 	culture = pellitinian
 	religion = twomoonsdance
 	dynasty = 1100001
-	rival = pelletine_002
 
 	3313.1.1 = {birth = yes}
+	3333.1.1 = {set_relation_rival = character:pelletine_002}
 	3370.1.1 = {death = yes}
 }
 
 #Sihnai (Western Senchal) Family
 sihnai_001 = {
-	name = "Jo'saad"
+	name = "Dar'fazir"
 	culture = pellitinian
 	religion = twomoonsdance
 	dynasty = 1100003
 
+	3269.1.1 = {birth = yes}
+	3347.1.1 = {death = yes}
+}
+sihnai_wife_001 = {
+	name = "Ka'sihnai"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty = 1100003
+
+	3258.1.1 = {birth = yes}
+	3334.1.1 = {death ={death_reason = death_suicide}}
+}
+sihnai_wife_002 = {
+	name = "La'velk"
+	culture = pellitinian
+	religion = twomoonsdance
+	lowborn = yes
+
+	3278.1.1 = {birth = yes}
+	3334.1.1 = {death = {death_reason = death_murder killer = sihnai_wife_001}}
+}
+sihnai_002 = {
+	name = "Ja'saad"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty = 1100003
+	father = sihnai_001
+	mother = sihnai_wife_001
+
 	3322.1.1 = {birth = yes}
-	3342.1.1 = {death = yes}
+	3442.1.1 = {death = {death_reason = murder killer = anard_001}}
+}
+
+sihnai_003 = {
+	name = "Ja'dirr"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty_house = sihnai_catalca
+	trait = bastard
+	father = sihnai_001
+	mother = sihnai_wife_002
+
+	3334.1.1 = {birth = yes}
+	3390.1.1 = {death = yes}
+}
+
+sihnai_004 = {
+	name = "M'dirr"
+	culture = pellitinian
+	religion = twomoonsdance
+	dynasty_house = sihnai_catalca
+	father = sihnai_003
+
+	3342.1.1 = {birth = yes}
+	3417.1.1 = {death = yes}
 }
 
 #Anard meridians
@@ -283,7 +364,7 @@ anard_001 = {
 	lowborn = yes
 
 	3312.1.1 = {birth = yes}
-	3353.1.1 = {death = yes}
+	3363.1.1 = {death = yes}
 }
 
 #Highmane holders
@@ -295,4 +376,14 @@ highmane_001 = {
 
 	3283.1.1 = {birth = yes}
 	3365.1.1 = {death = yes}
+}
+
+moonlit_cove_001 = {
+	name = "Ko'tsala"
+	culture = pellitinian
+	religion = twomoonsdance
+	lowborn = yes
+
+	3301.1.1 = {birth = yes}
+	3401.1.1 = {death = yes}
 }
