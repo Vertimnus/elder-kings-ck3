@@ -194,39 +194,6 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
-			# This faith is considered a Daedra worshipper
-			every_faith = {
-				if = {
-					limit = {
-						OR = {
-							has_doctrine = doctrine_pantheon_daedra
-							# Prince specific
-							has_doctrine = doctrine_pantheon_azura
-							has_doctrine = doctrine_pantheon_boethiah
-							has_doctrine = doctrine_pantheon_clavicus
-							has_doctrine = doctrine_pantheon_hermaeus
-							has_doctrine = doctrine_pantheon_hircine
-							has_doctrine = doctrine_pantheon_malacath
-							has_doctrine = doctrine_pantheon_mehrunes
-							has_doctrine = doctrine_pantheon_mephala
-							has_doctrine = doctrine_pantheon_meridia
-							has_doctrine = doctrine_pantheon_molag
-							has_doctrine = doctrine_pantheon_namira
-							has_doctrine = doctrine_pantheon_nocturnal
-							has_doctrine = doctrine_pantheon_peryite
-							has_doctrine = doctrine_pantheon_sanguine
-							has_doctrine = doctrine_pantheon_sheogorath
-							has_doctrine = doctrine_pantheon_vaermina
-							# Special group of princes
-							has_doctrine = doctrine_pantheon_good_daedra
-							has_doctrine = doctrine_pantheon_bad_daedra
-						}
-						NOT = { has_doctrine = special_doctrine_daedra_worshipper }
-					}
-					add_doctrine = special_doctrine_daedra_worshipper
-				}
-			}
-			
 			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 			every_faith = {
 				faith_give_view_daedric_princes = yes
@@ -246,6 +213,10 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = great_wyrd_tree_01
+						set_variable = { # If we want to change it later
+							name = great_wyrd_tree
+							value = yes
+						}
 					}
 				}
 			}
@@ -259,6 +230,10 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = daedric_shrine_01
+						set_variable = { # If we want to change it later
+							name = daedric_shrine
+							value = yes
+						}
 					}
 				}
 			}
@@ -272,6 +247,10 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = dragon_temple_01
+						set_variable = { # If we want to change it later
+							name = dragon_temple
+							value = yes
+						}
 					}
 				}
 			}
@@ -285,6 +264,10 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = grand_cathedral_01
+						set_variable = { # If we want to change it later
+							name = grand_cathedral
+							value = yes
+						}
 					}
 				}
 			}
@@ -298,6 +281,10 @@ ek_on_game_start = {
 					}
 					title_province = {
 						add_special_building_slot = holy_site_other_grand_temple_01
+						set_variable = { # If we want to change it later
+							name = holy_site_other_grand_temple
+							value = yes
+						}
 					}
 				}
 			}
