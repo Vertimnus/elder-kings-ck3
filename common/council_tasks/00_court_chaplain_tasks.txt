@@ -563,6 +563,19 @@ task_conversion = {
 			}
 		}
 		
+		### EK EDIT: Members of the Council of the Eight have trouble converting other members or the leader
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = members_coe_conversion_penalty_active }
+				scope:county.faith = { has_doctrine_parameter = members_coe_conversion_penalty_active }
+			}
+			multiply = {
+				value = 0.75
+				desc = MEMBERS_COUNCIL_OF_THE_EIGHT_CONVERSION_MALUS
+			}
+		}
+		
 		if = {
 			limit = {
 				exists = scope:county

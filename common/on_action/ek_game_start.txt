@@ -194,9 +194,27 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
-			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 			every_faith = {
+				# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 				faith_give_view_daedric_princes = yes
+				
+				# We need to save the leader of the Council of the Eight
+				if = {
+					limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+					set_global_variable = {
+						name = leader_council_eight
+						value = this
+					}
+					
+					# Remember what is the current/former hof title
+					set_global_variable = {
+						name = leader_council_eight_former_title
+						value = this.religious_head_title
+					}
+					
+					# Set k_council_of_the_eight as its religious title
+					set_religious_head_title = k_council_of_the_eight
+				}
 			}
 		}
 		
