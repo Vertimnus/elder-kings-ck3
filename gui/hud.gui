@@ -74,16 +74,6 @@ widget = {
 	size = { 100% 100% }
 	layer = middle
 
-	state = {
-		name = _show # may need to fire cleanup scripted gui for every_player
-		#on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]" #VARTODO - make this script based
-		on_start = "[GetScriptedGui('on_save_load').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-	}
-	# state = { #theoretically clears it when going to the main menu, may be anytime the pause menu is shown though
-	# 	name = _hide
-	# 	on_start = "[GetVariableSystem.Clear('save_loaded')]"
-	# }
-
 	### Alerts
 	notifications_alerts = {
 		visible = "[Not( IsPauseMenuShown )]"

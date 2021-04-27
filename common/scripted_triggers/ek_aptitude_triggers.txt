@@ -62,135 +62,8 @@ spell_target_valid = { # same realm or neigboring realm. can't do hostile spells
 
 # PREFIX = "knows_" SCHOOL = "" POSTFIX = " = yes" or PREFIX = "can_cast = { SPELL = " SCHOOL = " SCHOOL = $SCHOOL$" POSTFIX = " }" "this allows spaces" "" should give empty acn use to get "spell_knows_flames = yes" and "spell_can_cast = { SPELL = flames }" need school for can cast trigger
 # spell_knows_flames = yes can_cast = { SPELL = flames }
-# master_spell_trigger = {
-# 	switch = {
-# 		trigger = var:spell_school
-# 		flag:alteration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$oakflesh$SCHOOL$$POSTFIX$ }
-# 				province:2 = { spell_$PREFIX$wards$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:conjuration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$summon_scamp$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:destruction = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$flames$SCHOOL$$POSTFIX$ }
-# 				province:2 = { spell_$PREFIX$frostbite$SCHOOL$$POSTFIX$ }
-# 				province:3 = { spell_$PREFIX$sparks$SCHOOL$$POSTFIX$ }
-# 				province:4 = { spell_$PREFIX$firestorm$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:illusion = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$frenzy$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:restoration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$heal$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:necromancy = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$raise_dead$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 	}
-# }
-
-alteration_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$oakflesh$POSTFIX$ }
-		province:2 = { spell_$PREFIX$wards$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-conjuration_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$summon_scamp$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-destruction_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$flames$POSTFIX$ }
-		province:2 = { spell_$PREFIX$frostbite$POSTFIX$ }
-		province:3 = { spell_$PREFIX$sparks$POSTFIX$ }
-		province:4 = { spell_$PREFIX$firestorm$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-illusion_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$frenzy$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-restoration_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$heal$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-necromancy_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$raise_dead$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-
-spell_known_trigger = {
-	switch = {
-		trigger = var:spell_school
-		flag:alteration = { alteration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = alteration }" } }
-		flag:conjuration = { conjuration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = conjuration }" } }
-		flag:destruction = { destruction_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = destruction }" } }
-		flag:illusion = { illusion_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = illusion }" } }
-		flag:restoration = { restoration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = restoration }" } }
-		flag:necromancy = { necromancy_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = necromancy }" } }
-	}
-}
-
 #known based on edu traits, aptitude, perks. actual check is perk vs defined spell level as number 1-5. perk check against education. aptitude implicit in cost
 #                                                                              use switch trigger = scriptval 1={has_perk}
-
-spell_can_cast_trigger = {
-	switch = {
-		trigger = var:spell_school
-		flag:alteration = { alteration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = alteration }" } }
-		flag:conjuration = { conjuration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = conjuration }" } }
-		flag:destruction = { destruction_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = destruction }" } }
-		flag:illusion = { illusion_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = illusion }" } }
-		flag:restoration = { restoration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = restoration }" } }
-		flag:necromancy = { necromancy_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = necromancy }" } }
-	}
-}
-
-spell_known = {
-
-}
 
 spell_can_cast = {
 	var:spell_caster = { has_magicka = { VALUE = spell_cost_$SPELL$ } }
@@ -221,4 +94,78 @@ spell_can_cast = {
 			var:spell_province = { has_variable = $SCHOOL$_province }
 		}
 	}
+}
+
+school_spell_master_trigger = {
+    switch = {
+        trigger = var:spell_school
+
+        flag:alteration = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:oakflesh = { $TRIGGER$ = { SCHOOL = alteration SPELL = oakflesh } }
+                flag:wards = { $TRIGGER$ = { SCHOOL = alteration SPELL = wards } }
+            }
+        }
+
+        flag:conjuration = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:summon_scamp = { $TRIGGER$ = { SCHOOL = conjuration SPELL = summon_scamp } }
+            }
+        }
+
+        flag:destruction = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:flames = { $TRIGGER$ = { SCHOOL = destruction SPELL = flames } }
+                flag:frostbite = { $TRIGGER$ = { SCHOOL = destruction SPELL = frostbite } }
+                flag:sparks = { $TRIGGER$ = { SCHOOL = destruction SPELL = sparks } }
+                flag:firestorm = { $TRIGGER$ = { SCHOOL = destruction SPELL = firestorm } }
+            }
+        }
+
+        flag:illusion = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:frenzy = { $TRIGGER$ = { SCHOOL = illusion SPELL = frenzy } }
+            }
+        }
+
+        flag:restoration = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:heal = { $TRIGGER$ = { SCHOOL = restoration SPELL = heal } }
+            }
+        }
+
+        flag:necromancy = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:raise_dead = { $TRIGGER$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
+            }
+        }
+    }
+}
+
+spell_known_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_known }
+}
+spell_known = { # really need a better naming scheme for these pairs
+	switch = {
+		trigger = $SPELL$_level
+		1 = { has_perk = $SCHOOL$_novice_perk }
+		2 = { has_perk = $SCHOOL$_apprentice_perk }
+		3 = { has_perk = $SCHOOL$_journeyman_perk }
+		4 = { has_perk = $SCHOOL$_expert_perk }
+		5 = { has_perk = $SCHOOL$_master_perk }
+	}
+}
+
+spell_castable_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_castable }
+}
+spell_castable = {
+	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+	has_magicka = { VALUE = $SPELL$_cost }
 }

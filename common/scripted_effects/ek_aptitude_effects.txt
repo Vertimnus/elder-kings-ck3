@@ -254,118 +254,37 @@ spell_raise_dead_castee_effect = {
 # global spell lists up to 45 is fine, after some need to be skipped maybe if wasteland is invalid
 
 add_spell = {
-    add_to_global_variable_list = { name = spell_list_$SCHOOL$ target = THIS }
-    if = {
-        limit = { $HOSTILE$ = yes }
-        set_variable = $SCHOOL$_hostile
-    }
-    else = {
-        remove_variable = $SCHOOL$_hostile
-    }
-    if = {
-        limit = { $PROVINCE$ = yes }
-        set_variable = $SCHOOL$_province
-    }
-    else = {
-        remove_variable = $SCHOOL$_province
-    }
+    PREV = { add_to_variable_list = { name = spell_list target = PREV } }
+    set_variable = { name = spell value = flag:$NAME$ }
 }
 
 init_alteration = {
-    clear_global_variable_list = spell_list_alteration
-    province:1 = { add_spell = { SCHOOL = alteration HOSTILE = no PROVINCE = no } }
-    province:2 = { add_spell = { SCHOOL = alteration HOSTILE = no PROVINCE = yes } }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_alteration target = province:10 }
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = oakflesh } }
+    province:2 = { add_spell = { NAME = wards } }
 }
 init_conjuration = {
-    clear_global_variable_list = spell_list_conjuration
-    province:1 = { add_spell = { SCHOOL = conjuration HOSTILE = no PROVINCE = no } }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_conjuration target = province:10 }
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = summon_scamp } }
 }
 init_destruction = {
-    clear_global_variable_list = spell_list_destruction
-    province:1 = { add_spell = { SCHOOL = destruction HOSTILE = yes PROVINCE = no } }
-    province:2 = { add_spell = { SCHOOL = destruction HOSTILE = yes PROVINCE = no } }
-    province:3 = { add_spell = { SCHOOL = destruction HOSTILE = yes PROVINCE = no } }
-    province:4 = { add_spell = { SCHOOL = destruction HOSTILE = yes PROVINCE = yes } }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_destruction target = province:10 }
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = flames } }
+    province:2 = { add_spell = { NAME = frostbite } }
+    province:3 = { add_spell = { NAME = sparks } }
+    province:4 = { add_spell = { NAME = firestorm } }
 }
 init_illusion = {
-    clear_global_variable_list = spell_list_illusion
-    province:1 = { add_spell = { SCHOOL = illusion HOSTILE = yes PROVINCE = no } }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_illusion target = province:10 }
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = frenzy } }
 }
 init_restoration = {
-    clear_global_variable_list = spell_list_restoration
-    province:1 = { add_spell = { SCHOOL = restoration HOSTILE = no PROVINCE = no } }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_restoration target = province:10 }
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = heal } }
 }
 init_necromancy = {
-    clear_global_variable_list = spell_list_necromancy
-    province:1 = { add_spell = { SCHOOL = necromancy HOSTILE = no PROVINCE = no } }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:1 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:2 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:3 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:4 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:5 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:6 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:7 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:8 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:9 }
-    # add_to_global_variable_list = { name = spell_list_necromancy target = province:10 }
-}
-init_spell_lists = {
-    init_alteration = yes
-    init_conjuration = yes
-    init_destruction = yes
-    init_illusion = yes
-    init_restoration = yes
-    init_necromancy = yes
+    clear_variable_list = spell_list
+    province:1 = { add_spell = { NAME = raise_dead } }
 }
 
 spell_list_school = {
@@ -378,34 +297,60 @@ spell_list_school = {
 
 school_spell_master_effect = {
     switch = {
-        trigger = $SCHOOL$
-        
+        trigger = var:spell_school
+
         flag:alteration = {
             switch = {
-                trigger = $SPELL$
-                flag:transmutation = { $EFFECT$ = { SCHOOL = alteration SPELL = transmutation } }
+                trigger = scope:spell.var:spell
+                flag:oakflesh = { $EFFECT$ = { SCHOOL = alteration SPELL = oakflesh } }
+                flag:wards = { $EFFECT$ = { SCHOOL = alteration SPELL = wards } }
             }
         }
-        
+
         flag:conjuration = {
-
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:summon_scamp = { $EFFECT$ = { SCHOOL = conjuration SPELL = summon_scamp } }
+            }
         }
-        
+
         flag:destruction = {
-
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:flames = { $EFFECT$ = { SCHOOL = destruction SPELL = flames } }
+                flag:frostbite = { $EFFECT$ = { SCHOOL = destruction SPELL = frostbite } }
+                flag:sparks = { $EFFECT$ = { SCHOOL = destruction SPELL = sparks } }
+                flag:firestorm = { $EFFECT$ = { SCHOOL = destruction SPELL = firestorm } }
+            }
         }
-        
+
         flag:illusion = {
-
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:frenzy = { $EFFECT$ = { SCHOOL = illusion SPELL = frenzy } }
+            }
         }
-        
+
         flag:restoration = {
-
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:heal = { $EFFECT$ = { SCHOOL = restoration SPELL = heal } }
+            }
         }
-        
-        flag:necromancy = {
 
+        flag:necromancy = {
+            switch = {
+                trigger = scope:spell.var:spell
+                flag:raise_dead = { $EFFECT$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
+            }
         }
     }
 }
 
+# spell_select_effect = {
+#     school_spell_master_effect = { EFFECT = spell_select }
+# }
+# spell_select = {
+#     save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+# 	set_variable = { VALUE = $SPELL$_cost }
+# }

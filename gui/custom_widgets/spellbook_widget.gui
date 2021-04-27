@@ -105,7 +105,7 @@ window = {
 
                 blockoverride "scrollbox_empty"
                 {
-                    text = "No Valid Counties"
+                    text = NO_VALID_COUNTIES
                     visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('spell_counties'))]" #blocked at the button, shouldn't see this
                 }
 
@@ -116,14 +116,6 @@ window = {
                         margin = { 15 15 }
                         spacing = 8
 
-                        # item = {
-                        #     button_standard = {
-                        #         layoutpolicy_horizontal = expanding
-                        #         size = { 0 40 }
-
-                        #         text = "[Scope.Title.GetName]"
-                        #     }
-                        # }
                         item = {
                             button_standard_list = {
                                 name = "title_button"
@@ -393,16 +385,16 @@ window = {
                                 layoutpolicy_horizontal = expanding
                                 size = { 0 40 }
 
-                                datacontext = "[GetScriptedGui( Concatenate( Scope.Province.Custom( 'SpellStemProv' ), '_caster' ) )]" #put the localize section in custom loc spell_$ID$
-                                tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
-                                visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
-                                onclick = "[GetScriptedGui( 'get_spell_province' ).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('spell_province', Scope.Province.MakeScope ).End)]"
-                                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                                datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
+                                tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
+                                visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
+                                #onclick = "[GetScriptedGui( 'get_spell_province' ).Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('spell_province', Scope.Province.MakeScope ).End)]"
+                                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
 
-                                onclick = "[PdxGuiTriggerAllAnimations( SelectLocalization( Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet, Select_CString( Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet, 'province_select_show_hostile', 'province_select_show' ), 'province_select_hide' ) )]"
+                                onclick = "[PdxGuiTriggerAllAnimations( SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_province')), '(CFixedPoint)1' ), Select_CString( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_hostile')), '(CFixedPoint)1' ), 'province_select_show_hostile', 'province_select_show' ), 'province_select_hide' ) )]"
 
-                                onclick = "[VariableSystem.Set( 'spell_select', Scope.Province.Custom( 'SpellStemProv' ) )]"
-                                down = "[VariableSystem.HasValue( 'spell_select', Scope.Province.Custom( 'SpellStemProv' ) )]"
+                                onclick = "[VariableSystem.Set( 'spell_select', Scope.Var('spell').GetFlagName )]"
+                                down = "[VariableSystem.HasValue( 'spell_select', Scope.Var('spell').GetFlagName )]"
 
                                 widget = {
                                     scissor = yes
@@ -411,7 +403,7 @@ window = {
                                     icon = {
                                         size = { 420 70 }
                                         position = { -40 -5 }
-                                        visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+                                        visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
 
                                         texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
                                         frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
@@ -431,7 +423,7 @@ window = {
                                     highlight_icon = {
                                         size = { 420 70 }
                                         position = { -40 -5 }
-                                        visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
+                                        visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
 
                                         texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
                                         frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
@@ -455,26 +447,19 @@ window = {
                                 widget = {
                                     name = "spell_valid"
                                     size = { 580 40 }
-                                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+                                    visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
                                     widget = {
                                         size = { 50 40 }
                                         position = { 0 0 }
-                                        # icon = {
-                                        #     name = "spell_school_icon"
-                                        #     size = { 40 40 }
-                                        #     texture = "gfx/interface/spellbook_widget/spell_school.dds"
-                                        #     frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                        #     framesize = { 256 256 }
-                                        #     parentanchor = center
-                                        # }
                                         icon = {
-                                            name = "spell_school_icon"
+                                            name = "spell_level_icon"
                                             size = { 32 32 }
                                             texture = "gfx/interface/spellbook_widget/spell_tier.dds"
-                                            frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                                            frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
                                             framesize = { 128 128 }
                                             parentanchor = center
                                             using = Master_Button_Modify_Texture
+                                            tooltip = spell_tier
                                         }
                                     }
                                     widget = {
@@ -533,30 +518,22 @@ window = {
                                         # }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -40 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellProvinceProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
                                             icon = {
                                                 name = "spell_province_icon"
                                                 size = { 32 32 }
                                                 texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_type_province
                                             }
                                         }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -5 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellHostileProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
                                             icon = {
                                                 name = "spell_hostile_icon"
                                                 size = { 34 34 }
                                                 texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_hostile
                                             }
@@ -567,18 +544,21 @@ window = {
                                 widget = {
                                     name = "spell_invalid"
                                     size = { 580 40 }
-                                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
+                                    visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
                                     widget = {
                                         size = { 50 40 }
                                         position = { 0 0 }
                                         highlight_icon = {
-                                            name = "spell_school_icon"
-                                            size = { 40 40 }
-                                            texture = "gfx/interface/spellbook_widget/spell_school.dds"
-                                            frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                            framesize = { 256 256 }
+                                            name = "spell_level_icon"
+                                            size = { 32 32 }
+                                            texture = "gfx/interface/spellbook_widget/spell_tier.dds"
+                                            frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
+                                            framesize = { 128 128 }
                                             parentanchor = center
+                                            tintcolor = { 0.7 0.7 0.7 0.7 }
+                                            using = Master_Button_Modify_Texture
                                             effectname = "GreyedOut"
+                                            tooltip = spell_tier
                                         }
                                     }
                                     widget = {
@@ -639,16 +619,12 @@ window = {
                                         # }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -40 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellProvinceProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
                                             highlight_icon = {
                                                 name = "spell_province_icon"
                                                 size = { 32 32 }
                                                 tintcolor = { 0.7 0.7 0.7 0.7 }
                                                 texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_type_province
                                                 effectname = "GreyedOut"
@@ -656,15 +632,11 @@ window = {
                                         }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -5 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellHostileProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
                                             highlight_icon = {
                                                 name = "spell_hostile_icon"
                                                 size = { 34 34 }
                                                 texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_hostile
                                                 effectname = "GreyedOut"
@@ -676,7 +648,7 @@ window = {
                         }
                     }
                     vbox = {
-                        datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]" #may be able to use variable list but not sure how to trigger specifiic effect
+                        datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]"
                         layoutpolicy_horizontal = expanding
                         margin = { 15 15 }
                         spacing = 8
@@ -686,10 +658,10 @@ window = {
                                 layoutpolicy_horizontal = expanding
                                 size = { 0 40 }
 
-                                datacontext = "[GetScriptedGui( Concatenate( Scope.Province.Custom( 'SpellStemProv' ), '_caster' ) )]" #put the localize section in custom loc spell_$ID$
+                                datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
                                 tooltip = spell_invalid
                                 enabled = no
-                                visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End))]"
+                                visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
 
                                 widget = {
                                     name = "spell_unknown"
@@ -698,12 +670,15 @@ window = {
                                         size = { 50 40 }
                                         position = { 0 0 }
                                         icon = {
-                                            name = "spell_school_icon"
-                                            size = { 40 40 }
-                                            texture = "gfx/interface/spellbook_widget/spell_school.dds"
-                                            frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                            framesize = { 256 256 }
+                                            name = "spell_level_icon"
+                                            size = { 32 32 }
+                                            texture = "gfx/interface/spellbook_widget/spell_tier.dds"
+                                            frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
+                                            framesize = { 128 128 }
                                             parentanchor = center
+                                            tintcolor = { 0.7 0.7 0.7 0.7 }
+                                            using = Master_Button_Modify_Texture
+                                            tooltip = spell_tier
                                         }
                                     }
                                     widget = {
@@ -762,31 +737,23 @@ window = {
                                         # }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -40 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellProvinceProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
                                             icon = {
                                                 name = "spell_province_icon"
                                                 size = { 32 32 }
                                                 tintcolor = { 0.7 0.7 0.7 0.7 }
                                                 texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_type_province
                                             }
                                         }
                                         widget = {
                                             size = { 40 40 }
-                                            #parentanchor = right
-                                            #position = { -5 0 }
-                                            #visible = "[EqualTo_string(Scope.Province.Custom( 'SpellHostileProv' ), 'yes')]"
-                                            visible = "[Scope.Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet]"
+                                            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
                                             icon = {
                                                 name = "spell_hostile_icon"
                                                 size = { 34 34 }
                                                 texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
                                                 parentanchor = center
                                                 tooltip = spell_hostile
                                             }

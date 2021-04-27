@@ -393,3 +393,15 @@ action_patron_clear = {
 # to custom_description_no_bullet and concatenate there, then call sgui.EffectTooltip
 # could also use a loc string :0 "[thing]_[thing2]" and call it
 # Localize is apparently going to be fixed to work properly
+
+culture_group_cultures = {
+    scope = culture_group
+
+    effect = {
+        every_in_global_list = { #TODO replace w/ every/ordered_culture_global when 1.3.x
+            variable = culture_list
+            limit = { ROOT = THIS.culture_group }
+            custom_tooltip = "[THIS.Culture.GetName]"
+        }
+    }
+}
