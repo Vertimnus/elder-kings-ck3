@@ -7,13 +7,22 @@
  aurbic_hostility_doctrine_name:0 "Aurbic"
  aurbic_hostility_doctrine_desc:0 "The following religions are Aurbic:\n[GetReligionFamily('rf_aurbis').GetReligions]"
  
- doctrine_parameter_same_culture_group_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +50%#!"
+ doctrine_parameter_same_culture_group_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +25%#!"
  doctrine_parameter_same_faith_promote_culture_group_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +25%#!"
  doctrine_parameter_other_culture_group_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -50%#!"
+ COURT_CHAPLAIN_CONVERSION_CG_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_cg').GetBaseName]"
  
- doctrine_parameter_same_exclusive_culture_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +100%#!"
- doctrine_parameter_same_faith_promote_exclusive_culture_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +100%#!"
- doctrine_parameter_other_exclusive_culture_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -100%#!"
+ doctrine_parameter_same_culture_group_exclusive_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +50%#!"
+ doctrine_parameter_same_faith_promote_culture_group_exclusive_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +50%#!"
+ doctrine_parameter_other_culture_group_exclusive_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -100%#!"
+ COURT_CHAPLAIN_CONVERSION_CG_EXCLUSIVE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_cg_exclusive').GetBaseName]"
+ 
+ COURT_CHAPLAIN_CONVERSION_CULTURE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_culture').GetBaseName]"
+ 
+ doctrine_parameter_same_culture_exclusive_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture|E]: #P +100%#!"
+ doctrine_parameter_same_faith_promote_culture_exclusive_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +100%#!"
+ doctrine_parameter_other_culture_exclusive_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture|E]: #N -100%#!"
+ COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_culture_exclusive').GetBaseName]"
  
  doctrine_parameter_faith_uses_cathedrals:0 "Uses Grand Cathedrals as [holy_sites|E] [special_building|E]"
  doctrine_parameter_faith_uses_grand_temples:0 "Uses Grand Temples as [holy_sites|E] [special_building|E]"
@@ -34,6 +43,7 @@
  doctrine_pantheon_lorkhan_name:0 "Lorkhan"
     doctrine_pantheon_lorkhan_desc:0 "Even after his death, the Missing God fought by our side so we could be free. We will chant his name wherever we go, until all of Mankind is liberated from its oppressors!"
  doctrine_pantheon_heroes_name:0 "Cyrodiilic Heroes"
+    doctrine_parameter_pantheon_adds_deities_cyrodiilic_heroes:0 "Adds the following Gods to the [pantheon|E]: Alessia, Pelinal, Morihaus, Reman, Bendu Olo"
     doctrine_pantheon_heroes_desc:0 "Alessia. Pelinal. Morihaus. Reman. These are the names of legendary heroes known across all of Tamriel, but for some in Cyrodiil, they have a special importance on par with the Gods themselves. "
  doctrine_pantheon_reman_name:0 "Reman"
     doctrine_pantheon_reman_desc:0 "Reman 'Light-of-Man' Cyrodiil was a Dragonborn hero of the First Era and founder of Tamriel's Second Empire. His worship began amongst the Akaviri invaders he famously defeated - who had come to Tamriel in search of one of the Dragon Blood like him - but has since spread to the land's native populace."
@@ -414,6 +424,19 @@
  doctrine_pantheon_ideal_masters_name:0 "Ideal Masters"
     doctrine_pantheon_ideal_masters_desc:0 "The Ideal Masters are a mysterious group of spirits who rule over the Soul Cairn, a realm where they imprison souls for their own unknown purposes."
     
+ ### Main
+ doctrine_cultural_identity_name:0 "Cultural Identity"
+ doctrine_cultural_identity_none_name:0 "No Cultural Ties"
+    doctrine_cultural_identity_none_desc:0 "Our rites and beliefs can be shared to anyone, no matter their heritage. What truly matters is who, and what, they believe in."
+ doctrine_cultural_identity_cg_name:0 "Cultural Identity"
+    doctrine_cultural_identity_cg_desc:0 "Our culture evolved alongside our faith, and the two are linked together. Outsiders can still learn our rites and integrate our faith, but they have to understand that our beliefs were codified without them."
+ doctrine_cultural_identity_cg_exclusive_name:0 "Strong Cultural Identity"
+    doctrine_cultural_identity_cg_exclusive_desc:0 "The traditions of our people at large are intrinsically tied to our faith, and it is almost unthinkable for someone who does not share our traditions and heritage to adopt our beliefs and rites."
+ doctrine_cultural_identity_culture_name:0 "Communal Identity"
+    doctrine_cultural_identity_culture_desc:0 "The traditions and beliefs of our people have been tied together for centuries, and even those that could see us as their cousins might struggle at understanding our faith. But with time, even they could see the light."
+ doctrine_cultural_identity_culture_exclusive_name:0 "Strong Communal Identity"
+    doctrine_cultural_identity_culture_exclusive_desc:0 "It is almost unthinkable that someone outside of our close community could understand the very basics of our faith. Our traditions and rites are seen as an anomaly by anyone outside of our group, but we hold them as core tenets of our identity."
+ 
  ### Crimes
  doctrine_adultery_name:0 "Adultery"
  doctrine_adultery_crime_name:0 "Criminal"
@@ -809,6 +832,8 @@
  
  tenet_all_maker_sacred_rituals_name:0 "Ristaag and Ritual of Gifts"
     tenet_all_maker_sacred_rituals_desc:0 "When the land and our people are in need, we have to ways to reinforce our bound to the All-Maker.\nThe Ristaag is a great hunt to cleanse, bless the land, and show our gratitute towards the All-Maker.\nThe Ritual of Gifts is a sacred pilgrimage to restore the Oneness of the land.\n\nBoth restore peace in Solstheim, in their own way."
+    doctrine_parameter_allows_ristaag_decision_active:0 "Enables the '$start_ristaag_decision$' [decision|E]"
+    doctrine_parameter_allows_ritual_of_the_gifts_decision_active:0 "Enables the '$start_ritual_of_the_gifts_decision$' [decision|E]"
     
  ## Vanilla edits
  tenet_legalism_aldmer_religion_name:0 "Path to Alaxon"
