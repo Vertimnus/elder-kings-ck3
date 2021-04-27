@@ -255,11 +255,10 @@ doctrine_main_pantheon = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
-		is_shown = {
-			OR = {
-				has_doctrine = daedric_hostility_doctrine
-				creating_faith_has_daedric_prince_pantheon = yes
-			}
+		# Everyone can see it, but you need to include a Daedra to use it
+		can_pick = {
+			# NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
+			# creating_faith_has_daedric_prince_pantheon = yes
 		}
 		parameters = {
 			pantheon_adds_deities_daedra = yes
@@ -276,15 +275,15 @@ doctrine_main_pantheon = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		is_shown = {
+			can_see_doctrine_pantheon_daedra = { DAEDRA = azura }
+		}
 		can_pick = {
 			custom_description = {
 				text = faith_must_allow_daedric_patrons_trigger
 				flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
 				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
 			}
-		}
-		is_shown = {
-			can_see_doctrine_pantheon_daedra = { DAEDRA = azura }
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -299,15 +298,15 @@ doctrine_main_pantheon = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		is_shown = {
+			can_see_doctrine_pantheon_daedra = { DAEDRA = boethiah }
+		}
 		can_pick = {
 			custom_description = {
 				text = faith_must_allow_daedric_patrons_trigger
 				flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
 				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
 			}
-		}
-		is_shown = {
-			can_see_doctrine_pantheon_daedra = { DAEDRA = boethiah }
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -322,15 +321,15 @@ doctrine_main_pantheon = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		is_shown = {
+			can_see_doctrine_pantheon_daedra = { DAEDRA = clavicus }
+		}
 		can_pick = {
 			custom_description = {
 				text = faith_must_allow_daedric_patrons_trigger
 				flag:doctrine_clavicus_pantheon = { is_in_list = selected_doctrines }
 				NOT = { creating_faith_has_several_daedric_princes_pantheon = yes }
 			}
-		}
-		is_shown = {
-			can_see_doctrine_pantheon_daedra = { DAEDRA = clavicus }
 		}
 		parameters = {
 			pantheon_cannot_be_changed_active = yes
@@ -691,12 +690,12 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			OR = {
-				religion_tag = velothi_faiths
-				AND = {
-					creating_faith_azura_shunned_accepted_tenet_doctrine = yes
-					creating_faith_boethiah_shunned_accepted_tenet_doctrine = yes
-					creating_faith_mephala_shunned_accepted_tenet_doctrine = yes
-				}
+				flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_azura_allowed = { is_in_list = selected_doctrines }
+				flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_boethiah_allowed = { is_in_list = selected_doctrines }
+				flag:doctrine_mephala_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_mephala_allowed = { is_in_list = selected_doctrines }
 			}
 		}
 		can_pick = {
@@ -730,13 +729,14 @@ doctrine_main_pantheon = {
 		}
 		is_shown = {
 			OR = {
-				religion_tag = velothi_faiths
-				AND = {
-					creating_faith_malacath_shunned_accepted_tenet_doctrine = yes
-					creating_faith_mehrunes_shunned_accepted_tenet_doctrine = yes
-					creating_faith_molag_shunned_accepted_tenet_doctrine = yes
-					creating_faith_sheogorath_shunned_accepted_tenet_doctrine = yes
-				}
+				flag:doctrine_malacath_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_malacath_allowed = { is_in_list = selected_doctrines }
+				flag:doctrine_mehrunes_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_mehrunes_allowed = { is_in_list = selected_doctrines }
+				flag:doctrine_molag_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_molag_allowed = { is_in_list = selected_doctrines }
+				flag:doctrine_sheogorath_pantheon = { is_in_list = selected_doctrines }
+				flag:doctrine_sheogorath_allowed = { is_in_list = selected_doctrines }
 			}
 		}
 		can_pick = {
