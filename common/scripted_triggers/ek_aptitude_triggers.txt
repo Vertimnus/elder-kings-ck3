@@ -54,9 +54,9 @@ has_magicka_less_than = {
 	}
 }
 
-spell_target_valid = { # same realm or neigboring realm. can't do hostile spells on self or family like murder plots - unless sadistic -cm also will not cast on you or their family
-	ROOT = var:spell_recipient
-}
+# spell_target_valid = { # same realm or neigboring realm. can't do hostile spells on self or family like murder plots - unless sadistic -cm also will not cast on you or their family
+# 	ROOT = var:spell_recipient
+# }
 
 # single gui, check if root = spell_caster to determine effects also need root = recipient & caster somewhere
 
@@ -65,21 +65,124 @@ spell_target_valid = { # same realm or neigboring realm. can't do hostile spells
 #known based on edu traits, aptitude, perks. actual check is perk vs defined spell level as number 1-5. perk check against education. aptitude implicit in cost
 #                                                                              use switch trigger = scriptval 1={has_perk}
 
-spell_can_cast = {
-	var:spell_caster = { has_magicka = { VALUE = spell_cost_$SPELL$ } }
+# spell_can_cast = {
+# 	var:spell_caster = { has_magicka = { VALUE = spell_cost_$SPELL$ } }
+# 	trigger_if = {
+# 		limit = { #hostile province, should stop other checks
+# 			var:spell_province = { has_variable = $SCHOOL$_hostile }
+# 			var:spell_province = { has_variable = $SCHOOL$_province }
+# 		}
+# 	}
+# 	trigger_else_if = {
+# 		limit = { #hostile no province, canot cast on self+children
+# 			var:spell_province = { has_variable = $SCHOOL$_hostile }
+# 		}
+# 		NOR = {
+# 			var:spell_recipient = ROOT # cant cast on self
+# 			var:spell_recipient = var:spell_caster # cant order cm to cast on self
+# 			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
+# 				limit = {
+# 					is_parent_of = var:spell_recipient
+# 					NOT = { has_trait_with_flag = can_murder_own_children }
+# 				}
+# 				is_parent_of = var:spell_recipient
+# 			}
+# 		}
+# 	}
+# 	trigger_else_if = {
+# 		limit = { #province no hostile,
+# 			var:spell_province = { has_variable = $SCHOOL$_province }
+# 		}
+# 	}
+# }
+
+school_spell_master_trigger = {
+	switch = {
+		trigger = var:spell_school
+
+		flag:alteration = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:oakflesh = { $TRIGGER$ = { SCHOOL = alteration SPELL = oakflesh } }
+				flag:wards = { $TRIGGER$ = { SCHOOL = alteration SPELL = wards } }
+			}
+		}
+
+		flag:conjuration = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:summon_scamp = { $TRIGGER$ = { SCHOOL = conjuration SPELL = summon_scamp } }
+			}
+		}
+
+		flag:destruction = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:flames = { $TRIGGER$ = { SCHOOL = destruction SPELL = flames } }
+				flag:frostbite = { $TRIGGER$ = { SCHOOL = destruction SPELL = frostbite } }
+				flag:sparks = { $TRIGGER$ = { SCHOOL = destruction SPELL = sparks } }
+				flag:firestorm = { $TRIGGER$ = { SCHOOL = destruction SPELL = firestorm } }
+			}
+		}
+
+		flag:illusion = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:frenzy = { $TRIGGER$ = { SCHOOL = illusion SPELL = frenzy } }
+			}
+		}
+
+		flag:restoration = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:heal = { $TRIGGER$ = { SCHOOL = restoration SPELL = heal } }
+			}
+		}
+
+		flag:necromancy = {
+			switch = {
+				trigger = scope:spell.var:spell
+				flag:raise_dead = { $TRIGGER$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
+			}
+		}
+	}
+}
+
+spell_known_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_known }
+}
+spell_known = { # really need a better naming scheme for these pairs
+	var:spell_caster = {
+		switch = {
+			trigger = $SPELL$_level
+			1 = { has_perk = $SCHOOL$_novice_perk }
+			2 = { has_perk = $SCHOOL$_apprentice_perk }
+			3 = { has_perk = $SCHOOL$_journeyman_perk }
+			4 = { has_perk = $SCHOOL$_expert_perk }
+			5 = { has_perk = $SCHOOL$_master_perk }
+		}
+	}
+}
+
+spell_castable_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_castable }
+}
+spell_castable = {
+	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+	var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
 	trigger_if = {
 		limit = { #hostile province, should stop other checks
-			var:spell_province = { has_variable = $SCHOOL$_hostile }
-			var:spell_province = { has_variable = $SCHOOL$_province }
+			$SPELL$_hostile = 1
+			$SPELL$_province = 1
 		}
 	}
 	trigger_else_if = {
 		limit = { #hostile no province, canot cast on self+children
-			var:spell_province = { has_variable = $SCHOOL$_hostile }
+			$SPELL$_hostile = 1
 		}
 		NOR = {
 			var:spell_recipient = ROOT # cant cast on self
-			var:spell_recipient = var:spell_caster # cant order cm to cast on self 
+			var:spell_recipient = var:spell_caster # cant order cm to cast on self
 			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
 				limit = {
 					is_parent_of = var:spell_recipient
@@ -90,82 +193,8 @@ spell_can_cast = {
 		}
 	}
 	trigger_else_if = {
-		limit = { #province no hostile, 
-			var:spell_province = { has_variable = $SCHOOL$_province }
+		limit = { #province no hostile,
+			$SPELL$_province = 1
 		}
 	}
-}
-
-school_spell_master_trigger = {
-    switch = {
-        trigger = var:spell_school
-
-        flag:alteration = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:oakflesh = { $TRIGGER$ = { SCHOOL = alteration SPELL = oakflesh } }
-                flag:wards = { $TRIGGER$ = { SCHOOL = alteration SPELL = wards } }
-            }
-        }
-
-        flag:conjuration = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:summon_scamp = { $TRIGGER$ = { SCHOOL = conjuration SPELL = summon_scamp } }
-            }
-        }
-
-        flag:destruction = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:flames = { $TRIGGER$ = { SCHOOL = destruction SPELL = flames } }
-                flag:frostbite = { $TRIGGER$ = { SCHOOL = destruction SPELL = frostbite } }
-                flag:sparks = { $TRIGGER$ = { SCHOOL = destruction SPELL = sparks } }
-                flag:firestorm = { $TRIGGER$ = { SCHOOL = destruction SPELL = firestorm } }
-            }
-        }
-
-        flag:illusion = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:frenzy = { $TRIGGER$ = { SCHOOL = illusion SPELL = frenzy } }
-            }
-        }
-
-        flag:restoration = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:heal = { $TRIGGER$ = { SCHOOL = restoration SPELL = heal } }
-            }
-        }
-
-        flag:necromancy = {
-            switch = {
-                trigger = scope:spell.var:spell
-                flag:raise_dead = { $TRIGGER$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
-            }
-        }
-    }
-}
-
-spell_known_trigger = {
-	school_spell_master_trigger = { TRIGGER = spell_known }
-}
-spell_known = { # really need a better naming scheme for these pairs
-	switch = {
-		trigger = $SPELL$_level
-		1 = { has_perk = $SCHOOL$_novice_perk }
-		2 = { has_perk = $SCHOOL$_apprentice_perk }
-		3 = { has_perk = $SCHOOL$_journeyman_perk }
-		4 = { has_perk = $SCHOOL$_expert_perk }
-		5 = { has_perk = $SCHOOL$_master_perk }
-	}
-}
-
-spell_castable_trigger = {
-	school_spell_master_trigger = { TRIGGER = spell_castable }
-}
-spell_castable = {
-	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
-	has_magicka = { VALUE = $SPELL$_cost }
 }

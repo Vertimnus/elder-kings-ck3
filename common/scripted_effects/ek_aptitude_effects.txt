@@ -103,53 +103,37 @@ add_monthly_magicka_effect = {
     }
 }
 
-spell_caster_effect = {
-    if = { #actual effect here
-        limit = { has_variable = spell_cast_enabled }
-        #add_magicka = { VALUE = -10 }
-        #add_magicka = { VALUE = spell_$SPELL$_cost }
-        var:spell_caster = { spell_$SPELL$_caster_effect = yes }
-        var:spell_recipient = { spell_$SPELL$_castee_effect = yes }
-        if = {
-            limit = { var:spell_province = { has_variable = $SCHOOL$_province } }
-            var:spell_recipient = { spell_$SPELL$_province_effect = yes }
-        }
-    }
-    else = {
-        hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
-            set_variable = { name = spell_selected value = flag:$SPELL$ }
-            spell_reset_recipient = yes
-            # var:spell_province = {
-            #     if = {
-            #         limit = { has_variable = $SCHOOL$_hostile }
-            #         PREV = { set_variable = spell_is_hostile }
-            #     }
-            #     else = {
-            #         PREV = { remove_variable = spell_is_hostile }
-            #     }
-            #     if = {
-            #         limit = { has_variable = $SCHOOL$_province }
-            #         PREV = { set_variable = spell_is_province }
-            #     }
-            #     else = {
-            #         PREV = { remove_variable = spell_is_province }
-            #     }
-            # }
-        }
-        custom_label = spell_name_caster
-        show_as_tooltip = { #effect here is for tooltip
-            spell_$SPELL$_caster_effect = yes
-        }
-    }
-}
-spell_castee_effect = {
-    custom_label = spell_name_castee
-    spell_$SPELL$_castee_effect = yes
-}
-spell_province_effect = {
-    #custom_label = spell_name_castee
-    spell_$SPELL$_province_effect = yes
-}
+# spell_caster_effect = {
+#     if = { #actual effect here
+#         limit = { has_variable = spell_cast_enabled }
+#         #add_magicka = { VALUE = -10 }
+#         #add_magicka = { VALUE = spell_$SPELL$_cost }
+#         var:spell_caster = { spell_$SPELL$_caster_effect = yes }
+#         var:spell_recipient = { spell_$SPELL$_castee_effect = yes }
+#         if = {
+#             limit = { var:spell_province = { has_variable = $SCHOOL$_province } }
+#             var:spell_recipient = { spell_$SPELL$_province_effect = yes }
+#         }
+#     }
+#     else = {
+#         hidden_effect = { #move to recipient and have is_valid and execute check for not variable clear on cast
+#             set_variable = { name = spell_selected value = flag:$SPELL$ }
+#             spell_reset_recipient = yes
+#         }
+#         custom_label = spell_name_caster
+#         show_as_tooltip = { #effect here is for tooltip
+#             spell_$SPELL$_caster_effect = yes
+#         }
+#     }
+# }
+# spell_castee_effect = {
+#     custom_label = spell_name_castee
+#     spell_$SPELL$_castee_effect = yes
+# }
+# spell_province_effect = {
+#     #custom_label = spell_name_castee
+#     spell_$SPELL$_province_effect = yes
+# }
 spell_reset_recipient = {
     if = {
         limit = { has_variable = spell_recipient_old }
@@ -354,3 +338,40 @@ school_spell_master_effect = {
 #     save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
 # 	set_variable = { VALUE = $SPELL$_cost }
 # }
+
+spell_caster_effect = {
+    school_spell_master_effect = { EFFECT = spell_caster }
+}
+spell_caster = {
+    save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+    var:spell_caster = {
+        custom_label = spell_name_caster
+        save_temporary_scope_value_as = { name = cost value = { value = 0 subtract = $SPELL$_cost } }
+        add_magicka = { VALUE = scope:cost }
+    }
+}
+
+spell_castee_effect = {
+    school_spell_master_effect = { EFFECT = spell_castee }
+}
+spell_castee = {
+    save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+    var:spell_recipient = {
+        custom_label = spell_name_castee
+        if = {
+            limit = { $SPELL$_province = 0 } #cast on the castee if not a province spell
+            spell_$SPELL$_castee_effect = yes
+            if = {
+                limit = { $SPELL$_hostile = 1 } #opinion malus for casting hostile spells
+                add_opinion = { target = PREV modifier = cast_hostile_spell }
+            }
+        }
+    }
+    if = {
+        limit = { #cast on the selected county for province spells. no special treatment for hostile currently
+            $SPELL$_province = 1
+            exists = var:spell_county #need to check against current location for hostile. may just use current location directly
+        }
+        var:spell_county = { spell_$SPELL$_province_effect = yes }
+    }
+}

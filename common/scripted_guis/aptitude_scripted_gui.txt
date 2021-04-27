@@ -2,7 +2,7 @@
 	scope = character
 	effect = { trigger_event = { on_action = ek_on_save_load } }
 }
- 
+
 # Education
 aptitude_education_magical_ability = {
 	scope = character
@@ -268,7 +268,8 @@ spell_select_province_hostile = {
 		clear_variable_list = spell_counties
 		if = {
 			limit = {
-				ROOT.location.province_owner = {
+				#ROOT.location.province_owner = {
+				ROOT.location.barony_controller = {
 					OR = { # is the caster at war with the province owner or any char above them
 						is_at_war_with = ROOT
 						any_liege_or_above = {
@@ -301,20 +302,10 @@ spell_province_pick = {
 	effect = { set_variable = { name = spell_county value = scope:county } }
 }
 
-get_spell_province = {
-	scope = character
-
-	saved_scopes = {
-		spell_province
-	}
-
-	effect = { set_variable = { name = spell_province value = scope:spell_province } }
-}
-
-enable_casting = {
-	scope = character
-	effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
-}
+# enable_casting = {
+# 	scope = character
+# 	effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
+# }
 
 #############
 ## Schools ##
@@ -435,13 +426,37 @@ spell_list_item = {
 
 	is_valid = { spell_known_trigger = yes }
 	is_shown = { spell_castable_trigger = yes }
-	effect = { set_variable = { name = spell_selected value = scope:spell.var:spell } }
+	effect = {
+		set_variable = { name = spell_selected value = scope:spell.var:spell }
+		set_variable = { name = spell_province value = scope:spell } #tempory until can pass flags. needed to pass to effect execution
+		spell_reset_recipient = yes
+	}
 }
 
-# spell_cast_confirm = { #need 2nd for caster/castee effects
-# 	scope = character
+spell_cast_confirm = { #need 2nd for caster/castee effects. or use bool scope to switch which to execute. emulate by feeding player or not and checking exists
+	scope = character
+	saved_scopes = { castee province }
 
-# 	is_valid = { selected_spell_castable_trigger = yes } # save scope and use same effect?
-# 	#is_shown = { spell_castable_trigger = yes }
-# 	effect = { selected_spell_effect = yes }
-# }
+	#is_valid = { selected_spell_castable_trigger = yes } # save scope and use same effect?
+	is_shown = {
+		var:spell_province = { save_temporary_scope_as = spell }
+		spell_castable_trigger = yes
+	}
+	#effect = { selected_spell_effect = yes }
+	effect = {
+		var:spell_province = { save_temporary_scope_as = spell }
+		show_as_tooltip = {
+			if = { #effects for tooltip generation
+				limit = { exists = scope:castee }
+				spell_castee_effect = yes
+			}
+			else = {
+				spell_caster_effect = yes
+			}
+		}
+		hidden_effect = { #actual effects for execution
+			spell_castee_effect = yes
+			spell_caster_effect = yes
+		}
+	}
+}
