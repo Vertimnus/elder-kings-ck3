@@ -1,4 +1,90 @@
-﻿### Crimes
+﻿### Main
+doctrine_cultural_identity = {
+	group = "main_group"
+	
+	doctrine_cultural_identity_none = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_none }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+	}
+	
+	doctrine_cultural_identity_cg = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_cg }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_group_conversion_bonus_active = yes
+			same_faith_promote_culture_group_bonus_active = yes
+			other_culture_group_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_cg_exclusive = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_cg_exclusive }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_group_exclusive_conversion_bonus_active = yes
+			same_faith_promote_culture_group_exclusive_bonus_active = yes
+			other_culture_group_exclusive_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_culture = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_culture }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_conversion_bonus_active = yes
+			same_faith_promote_culture_bonus_active = yes
+			other_culture_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_culture_exclusive = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_culture_exclusive }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_exclusive_conversion_bonus_active = yes
+			same_faith_promote_culture_exclusive_bonus_active = yes
+			other_culture_exclusive_conversion_penalty_active = yes
+		}
+		
+		character_modifier = {
+			different_culture_opinion = -10
+			different_culture_opinion = -10
+			opinion_of_different_culture = -10
+			same_culture_opinion = 10
+		}
+	}
+}
+
+### Crimes
 doctrine_lycanthropy = {
 	group = "crimes"
 	

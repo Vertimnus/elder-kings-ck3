@@ -463,19 +463,106 @@ task_conversion = {
 				desc = COURT_CHAPLAIN_CONVERSION_MENDICANT_PREACHERS_MODIFIER
 			}
 		}
+		### EK EDIT: The same/different culture bonus/maluses are now a doctrine instead of a tenet
+		## Bonuses
+		# Culture Group ties
 		if = {
 			limit = {
 				exists = scope:county
-				scope:councillor.faith = {
-					has_doctrine_parameter = same_culture_conversion_bonus_active
-				}
+				scope:councillor.faith = { has_doctrine_parameter = same_culture_group_conversion_bonus_active }
+				scope:county.culture_group = scope:councillor.liege.culture_group
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_bonus_cg
+				desc = COURT_CHAPLAIN_CONVERSION_CG_TIES_MODIFIER
+			}
+		}
+		# Culture Group ties - strong
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.faith = { has_doctrine_parameter = same_culture_group_exclusive_conversion_bonus_active }
+				scope:county.culture_group = scope:councillor.liege.culture_group
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_bonus_cg_exclusive
+				desc = COURT_CHAPLAIN_CONVERSION_CG_EXCLUSIVE_TIES_MODIFIER
+			}
+		}
+		# Culture ties
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.faith = { has_doctrine_parameter = same_culture_conversion_bonus_active }
 				scope:county.culture = scope:councillor.liege.culture
 			}
 			add = {
-				value = scope:councillor.conversion_communal_identity_bonus
-				desc = COURT_CHAPLAIN_CONVERSION_COMMUNAL_IDENTITY_BONUS_MODIFIER
+				value = scope:councillor.conversion_communal_identity_bonus_culture
+				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_TIES_MODIFIER
 			}
 		}
+		# Culture ties - strong
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.faith = { has_doctrine_parameter = same_culture_exclusive_conversion_bonus_active }
+				scope:county.culture = scope:councillor.liege.culture
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_bonus_culture_exclusive
+				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER
+			}
+		}
+		## Maluses
+		# Culture Group ties
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_group_conversion_penalty_active }
+				NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_resistance_cg
+				desc = COURT_CHAPLAIN_CONVERSION_CG_TIES_MODIFIER
+			}
+		}
+		# Culture Group ties - strong
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_group_exclusive_conversion_penalty_active }
+				NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_resistance_cg_exclusive
+				desc = COURT_CHAPLAIN_CONVERSION_CG_EXCLUSIVE_TIES_MODIFIER
+			}
+		}
+		# Culture ties
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_conversion_penalty_active }
+				NOT = { scope:county.culture = scope:councillor.liege.culture }
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_resistance_culture
+				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_TIES_MODIFIER
+			}
+		}
+		# Culture ties - strong
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_exclusive_conversion_penalty_active }
+				NOT = { scope:county.culture = scope:councillor.liege.culture }
+			}
+			add = {
+				value = scope:councillor.conversion_communal_identity_resistance_culture
+				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER
+			}
+		}
+		
 		if = {
 			limit = {
 				exists = scope:county
