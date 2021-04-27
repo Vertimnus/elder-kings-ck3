@@ -1,55 +1,36 @@
-﻿### There is a slight problem when trying to determine who is worshipping a Daedra
-# Basing it solely on religious group will include the Tribunal, and exclude some of the Wyrd faiths
-# Basing it on pantheon gives like 15 lines when changing your stance towards Daedra worshipping
-# So the "solution" is to add this custom doctrine to any faith dedicated to the Daedra in a startup event
-# This is based on **your pantheon** but with the upside of not listing every single pantheon
-
-hidden_doctrine_worshipping_daedra = {
-	group = "special"
-	is_available_on_create = {
-		OR = {
-			has_doctrine = doctrine_pantheon_daedra
-			# Prince specific
-			has_doctrine = doctrine_pantheon_azura
-			has_doctrine = doctrine_pantheon_boethiah
-			has_doctrine = doctrine_pantheon_clavicus
-			has_doctrine = doctrine_pantheon_hermaeus
-			has_doctrine = doctrine_pantheon_hircine
-			has_doctrine = doctrine_pantheon_malacath
-			has_doctrine = doctrine_pantheon_mehrunes
-			has_doctrine = doctrine_pantheon_mephala
-			has_doctrine = doctrine_pantheon_meridia
-			has_doctrine = doctrine_pantheon_molag
-			has_doctrine = doctrine_pantheon_namira
-			has_doctrine = doctrine_pantheon_nocturnal
-			has_doctrine = doctrine_pantheon_peryite
-			has_doctrine = doctrine_pantheon_sanguine
-			has_doctrine = doctrine_pantheon_sheogorath
-			has_doctrine = doctrine_pantheon_vaermina
-			# Special group of princes
-			has_doctrine = doctrine_pantheon_good_daedra
-			has_doctrine = doctrine_pantheon_bad_daedra
-		}
-	}
-
-	special_doctrine_daedra_worshipper = {
-		parameters = {
-			special_is_worshipping_daedra = yes
-		}
-	}
-}
-
-# Based on special_doctrine_ecumenical_christian
+﻿# Based on special_doctrine_ecumenical_christian
 special_tolerance = {
-	group = "main_group"
+	group = "main_group_special"
 	
-	is_available_on_create = {
-		always = no # Goes away when creating a new Faith
-	}
+	is_available_on_create = { always = no }
 	
 	special_doctrine_cyrodiilic_cult = {
 		parameters = {
 			hostility_override_special_doctrine_cyrodiilic_cult = 1
+		}
+	}
+}
+
+special_faith_group_council_of_the_eight = {
+	group = "main_group_special"
+	is_available_on_create = { always = no }
+	
+	# HoF will be the de Jure liege of the other (makes the HoF a king-tier title)
+	special_faith_group_council_of_the_eight_leader = {
+		parameters = {
+			hof_king_tier_title = 1
+			hof_de_jure_liege_other = 1
+			doctrines_change_trickle_down = 1
+			council_of_the_eight_holy_war_defense = 1
+		}
+	}
+	
+	# Faiths within the group with high fervor will boost the fervor of others
+	special_faith_group_council_of_the_eight_member = {
+		parameters = {
+			part_council_of_the_eight_active = 1
+			doctrines_change_trickle_down_from_leader = 1
+			council_of_the_eight_holy_war_defense = 1
 		}
 	}
 }

@@ -52,3 +52,36 @@ very_high_tribute_extracted_wealth = {
 	multiply = 20
 	divide = 100
 }
+
+summon_dragons_cost = {
+	value = {
+		add = 5000
+		# Devotion
+		if = {
+			limit = {
+				faith = { has_doctrine_parameter = devotion_gives_reduced_cost_summon_dragons_active }
+			}
+			if = {
+				limit = { piety_level = 0 }
+				multiply = 1.1
+			}
+			else_if = {
+				limit = { piety_level = 2 }
+				multiply = 0.9
+			}
+			else_if = {
+				limit = { piety_level = 3 }
+				multiply = 0.8
+			}
+			else_if = {
+				limit = { piety_level = 4 }
+				multiply = 0.7
+			}
+			else_if = {
+				limit = { piety_level = 5 }
+				multiply = 0.6
+			}
+		}
+		### EK TODO: Add the effect of Dragon Temples
+	}
+}

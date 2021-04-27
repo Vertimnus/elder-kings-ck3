@@ -1,0 +1,51 @@
+﻿promote_culture_communal_identity_bonus_cg = {
+	value = 0
+	if = {
+		limit = {
+			exists = scope:county
+			scope:councillor.liege.faith = { has_doctrine_parameter = same_faith_promote_culture_group_bonus_active }
+			scope:county.faith = scope:councillor.liege.faith
+		}
+		add = steward_promote_culture_base_total
+		multiply = 0.25
+	}
+}
+
+promote_culture_communal_identity_bonus_cg_exclusive = {
+	value = 0
+	if = {
+		limit = {
+			exists = scope:county
+			scope:councillor.liege.faith = { has_doctrine_parameter = same_faith_promote_culture_group_exclusive_bonus_active }
+			scope:county.faith = scope:councillor.liege.faith
+		}
+		add = steward_promote_culture_base_total
+		multiply = 0.5
+	}
+}
+
+promote_culture_communal_identity_bonus_culture = {
+	value = 0
+	if = {
+		limit = {
+			exists = scope:county
+			scope:councillor.liege.faith = { has_doctrine_parameter = same_faith_promote_culture_bonus_active }
+			scope:county.faith = scope:councillor.liege.faith
+		}
+		add = steward_promote_culture_base_total
+		multiply = 0.50
+	}
+}
+
+promote_culture_communal_identity_bonus_culture_exclusive = {
+	value = 0
+	if = {
+		limit = {
+			exists = scope:county
+			scope:councillor.liege.faith = { has_doctrine_parameter = same_faith_promote_culture_exclusive_bonus_active }
+			scope:county.faith = scope:councillor.liege.faith
+		}
+		add = steward_promote_culture_base_total
+		multiply = 1
+	}
+}

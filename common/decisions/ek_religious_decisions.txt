@@ -1,4 +1,216 @@
-﻿witch_become_occultist_decision = {
+﻿### Change what kind of holy site you can build in a province
+change_holy_site_type_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = change_holy_site_type_decision_desc
+	selection_tooltip = change_holy_site_type_decision_tooltip
+
+	is_shown = {
+		always = no # WAITING FOR PARADOX TO ADD A WAY TO REMOVE BUILDINGS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
+		is_ruler = yes
+		# One of the holy sites of your faith that you control has a holy site building that you can't use
+		any_sub_realm_barony = {
+			is_holy_site_of = root.faith
+			title_province = {
+				OR = {
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
+						OR = {
+							# exists = var:grand_cathedral
+							# has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							# exists = var:daedric_shrine
+							# has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							# exists = var:great_wyrd_tree
+							# has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							# exists = var:dragon_temple
+							# has_building = dragon_temple_01
+							exists = var:holy_site_other_grand_temple
+							has_building = holy_site_other_grand_temple_01
+						}
+					}
+					AND = {
+						root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
+						OR = {
+							exists = var:grand_cathedral
+							has_building = grand_cathedral_01
+							exists = var:daedric_shrine
+							has_building = daedric_shrine_01
+							exists = var:great_wyrd_tree
+							has_building = great_wyrd_tree_01
+							exists = var:dragon_temple
+							has_building = dragon_temple_01
+							# exists = var:holy_site_other_grand_temple
+							# has_building = holy_site_other_grand_temple_01
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	cost = {
+		gold = 250
+		piety = 150
+	}
+
+	effect = {
+		# Pay some gold, destroy the holy site building (if needed), lay ground for one of your own
+		random_sub_realm_barony = {
+			limit = {
+				is_holy_site_of = root.faith
+				title_province = {
+					OR = {
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
+							OR = {
+								# exists = var:grand_cathedral
+								# has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								# exists = var:daedric_shrine
+								# has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								# exists = var:great_wyrd_tree
+								# has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								# exists = var:dragon_temple
+								# has_building = dragon_temple_01
+								exists = var:holy_site_other_grand_temple
+								has_building = holy_site_other_grand_temple_01
+							}
+						}
+						AND = {
+							root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
+							OR = {
+								exists = var:grand_cathedral
+								has_building = grand_cathedral_01
+								exists = var:daedric_shrine
+								has_building = daedric_shrine_01
+								exists = var:great_wyrd_tree
+								has_building = great_wyrd_tree_01
+								exists = var:dragon_temple
+								has_building = dragon_temple_01
+								# exists = var:holy_site_other_grand_temple
+								# has_building = holy_site_other_grand_temple_01
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+				title_province = { add_special_building = grand_cathedral_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+				title_province = { add_special_building = daedric_shrine_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+				title_province = { add_special_building = great_wyrd_tree_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+				title_province = { add_special_building = dragon_temple_01 }
+			}
+			else_if = {
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_grand_temples } }
+				title_province = { add_special_building = holy_site_other_grand_temple_01 }
+			}
+		}
+	}
+	
+	ai_check_interval = 120
+}
+
+### Sacred Witches, upgrade your Witch trait
+witch_become_occultist_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
 	desc = witch_become_occultist_decision_desc
@@ -91,5 +303,136 @@ renounce_vow_of_squalor_decision = {
 
 	ai_will_do = {
 		base = 0
+	}
+}
+
+### Rite of Passage
+rite_of_passage_decision = {
+	title = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { religion = religion:aldmer_religion }
+				desc = rite_of_passage_decision_athel_vialen_name
+			}
+			desc = rite_of_passage_decision_fallback_name
+		}
+	}
+	picture = "gfx/interface/illustrations/decisions/fp1_decisons_hold_bolt.dds"
+	desc = rite_of_passage_decision_desc
+	selection_tooltip = rite_of_passage_decision_tooltip
+	major = yes
+
+	is_shown = {
+		always = no # WIP
+		faith = { has_doctrine_parameter = rite_of_passage_decision_active }
+	}
+
+	is_valid = {
+		is_ai = no
+	}
+
+	effect = {
+		custom_tooltip = rite_of_passage_decision_tt
+		custom_tooltip = rite_of_passage_decision_religion_specific_tt
+		
+		### Religion & tenet specific
+		if = {
+			limit = { faith = { has_doctrine_parameter = cannibalism_legal } }
+			custom_tooltip = rite_of_passage_decision_cannibalism_legal_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_lycanthropy_accepted } }
+			custom_tooltip = rite_of_passage_decision_lycanthropy_legal_tt
+		}
+		
+		trigger_event = ek_religious_decision.0001
+	}
+
+	cost = { prestige = 50 }
+
+	ai_check_interval = 60
+	
+	ai_potential = {
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### Skaal sacred rituals
+# Ristaag - Ritual hunt to bless & cleanse the land, and hopefully please the All-Maker
+# Small event chain with how to deal with the hunt, before finding the Spirit Bear
+start_ristaag_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	ai_check_interval = 60
+
+	desc = start_ristaag_decision_desc
+	selection_tooltip = start_ristaag_decision_tooltip
+	
+	cooldown = { years = pilgrimage_cooldown_year_amount }
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = allows_ristaag_decision_active }
+	}
+
+	effect = {
+		custom_tooltip = start_ristaag_decision_effect_tooltip
+		
+		trigger_event = ek_religious_decision.0101
+	}
+
+	ai_potential = {
+		is_landed = yes
+	}
+
+	ai_will_do = {
+		base = 20
+		
+		### EK TODO: Make it scale based on the average (if possible?) county opinion and control
+	}
+}
+
+### Summon Dragons
+# When at war, can spend a heavy piety cost to summon Dragons, very powerful non-regenerating troops. They bail once the war is over.
+summon_dragons_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	ai_check_interval = 12
+	
+	major = yes
+
+	desc = summon_dragons_decision_desc
+	selection_tooltip = summon_dragons_decision_tooltip
+	
+	cooldown = { months = 12 }
+
+	is_shown = {
+		is_ruler = yes
+		faith = { has_doctrine_parameter = can_use_summon_dragons_active }
+	}
+	
+	is_valid = {
+		is_at_war = yes
+	}
+	
+	cost = {
+		piety = summon_dragons_cost
+	}
+
+	effect = {
+		custom_tooltip = summon_dragons_decision_effect_tooltip
+		custom_tooltip = summon_dragons_decision_effect_tooltip_2
+		
+		trigger_event = ek_religious_decision.0301
+	}
+
+	ai_potential = {
+		is_landed = yes
+	}
+
+	ai_will_do = {
+		base = 20
 	}
 }

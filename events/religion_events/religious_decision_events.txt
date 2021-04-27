@@ -555,33 +555,13 @@ religious_decision.0002 = {
 # 0101-0120				#
 #########################
 
-### EK EDIT: Event disabled
+### EK EDIT: handled in patron window for players, this for ai - Varlatra
 religious_decision.0101 = {
 	type = character_event
 	title = religious_decision.0101.t
 	desc = {
 		desc = religious_decision.0101.desc.start
-		first_valid = {
-			# triggered_desc = {
-				# trigger = {
-					# faith = faith:vaishnavism
-				# }
-				# desc = religious_decision.0101.desc.vaishnavism
-			# }
-			# triggered_desc = {
-				# trigger = {
-					# faith = faith:shaivism
-				# }
-				# desc = religious_decision.0101.desc.shaivism
-			# }
-			# triggered_desc = {
-				# trigger = {
-					# faith = faith:smartism
-				# }
-				# desc = religious_decision.0101.desc.smartism
-			# }
-			desc = religious_decision.0101.desc.generic
-		}
+		desc = religious_decision.0101.desc.generic
 		desc = religious_decision.0101.desc.end
 	}
 	theme = faith
@@ -590,153 +570,112 @@ religious_decision.0101 = {
 		animation = personality_rational
 	}
 
-	# 'Generic' Hinduism
-	# option = {
-		# name = religious_decision.0101.ganga
-		# trigger = {
-			# NOR = {
-				# # vaishnavism includes this one
-				# faith = faith:shaivism
-				# faith = faith:smartism
-				# has_character_modifier = bhakti_hinduism_ganga
-			# }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_hinduism_ganga }
-	# }
+	# 8 Divines
+	option = {
+		name = religious_decision.0101.p_akatosh
+		trigger = { patron_akatosh_valid = yes }
+		add_trait = p_akatosh
+	}
 
-	# option = {
-		# name = religious_decision.0101.saraswati
-		# trigger = {
-			# NOR = {
-				# faith = faith:vaishnavism
-				# faith = faith:shaivism
-				# faith = faith:smartism
-				# has_character_modifier = bhakti_hinduism_saraswati
-			# }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_hinduism_saraswati }
-	# }
+	option = {
+		name = religious_decision.0101.p_arkay
+		trigger = { patron_arkay_valid = yes }
+		add_trait = p_arkay
+	}
 
-	# option = {
-		# name = religious_decision.0101.kali
-		# trigger = {
-			# NOR = {
-				# faith = faith:vaishnavism
-				# faith = faith:shaivism
-				# faith = faith:smartism
-				# has_character_modifier = bhakti_hinduism_kali
-			# }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_hinduism_kali }
-	# }
+	option = {
+		name = religious_decision.0101.p_dibella
+		trigger = { patron_dibella_valid = yes }
+		add_trait = p_dibella
+	}
 
-	# option = {
-		# name = religious_decision.0101.kubera
-		# trigger = {
-			# NOR = {
-				# faith = faith:vaishnavism
-				# faith = faith:shaivism
-				# # smartism includes this one
-				# has_character_modifier = bhakti_hinduism_kubera
-			# }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_hinduism_kubera }
-	# }
+	option = {
+		name = religious_decision.0101.p_julianos
+		trigger = { patron_julianos_valid = yes }
+		add_trait = p_julianos
+	}
 
-	# # Vaishnavism
-	# option = {
-		# name = religious_decision.0101.lakishmi
-		# trigger = {
-			# faith = faith:vaishnavism
-			# NOT = { has_character_modifier = bhakti_vaishnavism_lakishmi }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_vaishnavism_lakishmi }
-	# }
+	option = {
+		name = religious_decision.0101.p_kynareth
+		trigger = { patron_kynareth_valid = yes }
+		add_trait = p_kynareth
+	}
 
-	# option = {
-		# name = religious_decision.0101.jagganath
-		# trigger = {
-			# faith = faith:vaishnavism
-			# NOT = { has_character_modifier = bhakti_vaishnavism_jagganath }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_vaishnavism_jagganath }
-	# }
+	option = {
+		name = religious_decision.0101.p_mara
+		trigger = { patron_mara_valid = yes }
+		add_trait = p_mara
+	}
 
-	# option = {
-		# name = religious_decision.0101.hayagriva
-		# trigger = {
-			# faith = faith:vaishnavism
-			# NOT = { has_character_modifier = bhakti_vaishnavism_hayagriva }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_vaishnavism_hayagriva }
-	# }
+	option = {
+		name = religious_decision.0101.p_stendarr
+		trigger = { patron_stendarr_valid = yes }
+		add_trait = p_stendarr
+	}
 
-	# # Shaivism
-	# option = {
-		# name = religious_decision.0101.parvati
-		# trigger = {
-			# faith = faith:shaivism
-			# NOT = { has_character_modifier = bhakti_shaivism_parvati }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_shaivism_parvati }
-	# }
+	option = {
+		name = religious_decision.0101.p_zenithar
+		trigger = { patron_zenithar_valid = yes }
+		add_trait = p_zenithar
+	}
 
-	# option = {
-		# name = religious_decision.0101.virabhadra
-		# trigger = {
-			# faith = faith:shaivism
-			# NOT = { has_character_modifier = bhakti_shaivism_virabhadra }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_shaivism_virabhadra }
-	# }
+	option = {
+		name = religious_decision.0101.p_shezarr
+		trigger = { patron_shezarr_valid = yes }
+		add_trait = p_shezarr
+	}
 
-	# option = {
-		# name = religious_decision.0101.munishwarar
-		# trigger = {
-			# faith = faith:shaivism
-			# NOT = { has_character_modifier = bhakti_shaivism_munishwarar }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_shaivism_munishwarar }
-	# }
+	# Aldmer
+	option = {
+		name = religious_decision.0101.p_auriel
+		trigger = { patron_auriel_valid = yes }
+		add_trait = p_auriel
+	}
 
-	# option = {
-		# name = religious_decision.0101.dakshinamoorthy
-		# trigger = {
-			# faith = faith:shaivism
-			# NOT = { has_character_modifier = bhakti_shaivism_dakshinamoorthy }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_shaivism_dakshinamoorthy }
-	# }
+	option = {
+		name = religious_decision.0101.p_jephre
+		trigger = { patron_jephre_valid = yes }
+		add_trait = p_jephre
+	}
 
-	# # Smartism		
-	# option = {
-		# name = religious_decision.0101.ganesha
-		# trigger = {
-			# faith = faith:smartism
-			# NOT = { has_character_modifier = bhakti_smartism_ganesha }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_smartism_ganesha }
-	# }														
+	option = {
+		name = religious_decision.0101.p_magnus
+		trigger = { patron_magnus_valid = yes }
+		add_trait = p_magnus
+	}
 
-	# option = {
-		# name = religious_decision.0101.vishnu
-		# trigger = {
-			# faith = faith:smartism
-			# NOT = { has_character_modifier = bhakti_smartism_vishnu }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_smartism_vishnu }
-	# }
+	option = {
+		name = religious_decision.0101.p_phynaster
+		trigger = { patron_phynaster_valid = yes }
+		add_trait = p_phynaster
+	}
 
-	# option = {
-		# name = religious_decision.0101.shiva
-		# trigger = {
-			# faith = faith:smartism
-			# NOT = { has_character_modifier = bhakti_smartism_shiva }
-		# }
-		# set_bhakti_effect = { BHAKTI = bhakti_smartism_shiva }
-	# }
+	option = {
+		name = religious_decision.0101.p_syrabane
+		trigger = { patron_syrabane_valid = yes }
+		add_trait = p_syrabane
+	}
 
-	# Opt-Out
+	option = {
+		name = religious_decision.0101.p_trinimac
+		trigger = { patron_trinimac_valid = yes }
+		add_trait = p_trinimac
+	}
+
+	option = {
+		name = religious_decision.0101.p_xarxes
+		trigger = { patron_xarxes_valid = yes }
+		add_trait = p_xarxes
+	}
+
+	option = {
+		name = religious_decision.0101.p_xen
+		trigger = { patron_xen_valid = yes }
+		add_trait = p_xen
+	}
+
+	## EK TODO: someone (Singe) should add other patrons. also probably a trigger so ai with patronless faiths dont try to take the decision
+
 	option = {
 		name = religious_decision.0101.optout
 		flavor = religious_decision.0101.flavor

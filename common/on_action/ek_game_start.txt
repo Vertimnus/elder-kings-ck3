@@ -74,6 +74,8 @@ ek_on_game_start = {
 		startup_culture_effect = { CULTURE = alikr }
 		startup_culture_effect = { CULTURE = abecean }
 		startup_culture_effect = { CULTURE = horsemen }
+		# Argonian
+		startup_culture_effect = { CULTURE = saxhleel }
 		
 		### Set which cultures are alive (have some territory)
 		every_county = {
@@ -93,6 +95,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:baandari }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:goblin }
 		set_culture_native_to = { REGION = nomadic CULTURE = culture:bjoule }
+		set_culture_native_to = { REGION = nomadic CULTURE = culture:tsaesci }
 		## High Rock
 		# Glenumbra
 		set_culture_native_to = { REGION = glenumbra CULTURE = culture:glenumbran }
@@ -191,36 +194,98 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
+			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 			every_faith = {
-				## DOCTRINE_GENDER
-				if = {
+				faith_give_view_daedric_princes = yes
+			}
+		}
+		
+		### Holy Sites buildings
+		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
+		every_religion_global = {
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+				every_holy_site = {
 					limit = {
-						OR = {
-							has_doctrine = doctrine_pantheon_daedra
-							# Prince specific
-							has_doctrine = doctrine_pantheon_azura
-							has_doctrine = doctrine_pantheon_boethiah
-							has_doctrine = doctrine_pantheon_clavicus
-							has_doctrine = doctrine_pantheon_hermaeus
-							has_doctrine = doctrine_pantheon_hircine
-							has_doctrine = doctrine_pantheon_malacath
-							has_doctrine = doctrine_pantheon_mehrunes
-							has_doctrine = doctrine_pantheon_mephala
-							has_doctrine = doctrine_pantheon_meridia
-							has_doctrine = doctrine_pantheon_molag
-							has_doctrine = doctrine_pantheon_namira
-							has_doctrine = doctrine_pantheon_nocturnal
-							has_doctrine = doctrine_pantheon_peryite
-							has_doctrine = doctrine_pantheon_sanguine
-							has_doctrine = doctrine_pantheon_sheogorath
-							has_doctrine = doctrine_pantheon_vaermina
-							# Special group of princes
-							has_doctrine = doctrine_pantheon_good_daedra
-							has_doctrine = doctrine_pantheon_bad_daedra
+						title_province = {
+							has_special_building_slot = no
 						}
-						NOT = { has_doctrine = special_doctrine_daedra_worshipper }
 					}
-					add_doctrine = special_doctrine_daedra_worshipper
+					title_province = {
+						add_special_building_slot = great_wyrd_tree_01
+						set_variable = { # If we want to change it later
+							name = great_wyrd_tree
+							value = yes
+						}
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_daedric_shrines }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = daedric_shrine_01
+						set_variable = { # If we want to change it later
+							name = daedric_shrine
+							value = yes
+						}
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_dragon_temples }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = dragon_temple_01
+						set_variable = { # If we want to change it later
+							name = dragon_temple
+							value = yes
+						}
+					}
+				}
+			}
+			every_faith = {
+				limit = { has_doctrine_parameter = faith_uses_cathedrals }
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = grand_cathedral_01
+						set_variable = { # If we want to change it later
+							name = grand_cathedral
+							value = yes
+						}
+					}
+				}
+			}
+			# Very generic
+			every_faith = {
+				every_holy_site = {
+					limit = {
+						title_province = {
+							has_special_building_slot = no
+						}
+					}
+					title_province = {
+						add_special_building_slot = holy_site_other_grand_temple_01
+						set_variable = { # If we want to change it later
+							name = holy_site_other_grand_temple
+							value = yes
+						}
+					}
 				}
 			}
 		}

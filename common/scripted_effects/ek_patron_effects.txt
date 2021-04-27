@@ -1,125 +1,22 @@
 ﻿patron_clear_variables = {
     # Daedra #
-    remove_variable = patron_azura_shown
-    remove_variable = patron_boethiah_shown
-    remove_variable = patron_clavicus_shown
-    remove_variable = patron_hermaeus_shown
-    remove_variable = patron_hircine_shown
-    remove_variable = patron_jyggalag_shown
-    remove_variable = patron_malacath_shown
-    remove_variable = patron_mehrunes_shown
-    remove_variable = patron_mephala_shown
-    remove_variable = patron_meridia_shown
-    remove_variable = patron_molag_shown
-    remove_variable = patron_namira_shown
-    remove_variable = patron_nocturnal_shown
-    remove_variable = patron_peryite_shown
-    remove_variable = patron_sanguine_shown
-    remove_variable = patron_sheogorath_shown
-    remove_variable = patron_vaermina_shown
-
-    # Tribunal #
-    remove_variable = patron_almalexia_shown
-    remove_variable = patron_sotha_sil_shown
-    remove_variable = patron_vivec_shown
-
-    # Pantheons #
-    remove_variable = patron_divines_shown
-    remove_variable = patron_aldmer_shown
-    remove_variable = patron_dwemer_ancestors_shown
+    remove_variable = patron_shown
 
     # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle
-    remove_variable = patron_interaction_passive_tab_toggle
 }
 
 patron_clear_res_variables = {
     # Daedra #
-    remove_variable = patron_azura_shown_res
-    remove_variable = patron_boethiah_shown_res
-    remove_variable = patron_clavicus_shown_res
-    remove_variable = patron_hermaeus_shown_res
-    remove_variable = patron_hircine_shown_res
-    remove_variable = patron_jyggalag_shown_res
-    remove_variable = patron_malacath_shown_res
-    remove_variable = patron_mehrunes_shown_res
-    remove_variable = patron_mephala_shown_res
-    remove_variable = patron_meridia_shown_res
-    remove_variable = patron_molag_shown_res
-    remove_variable = patron_namira_shown_res
-    remove_variable = patron_nocturnal_shown_res
-    remove_variable = patron_peryite_shown_res
-    remove_variable = patron_sanguine_shown_res
-    remove_variable = patron_sheogorath_shown_res
-    remove_variable = patron_vaermina_shown_res
-
-    # Tribunal #
-    remove_variable = patron_almalexia_shown_res
-    remove_variable = patron_sotha_sil_shown_res
-    remove_variable = patron_vivec_shown_res
-
-    # Pantheons #
-    ## Nedic-Nordic
-    remove_variable = patron_divines_shown_res
-    ## Aldmeri
-    remove_variable = patron_aldmer_shown_res
-    ## Reach
-    remove_variable = patron_dwemer_ancestors_shown_res
-
+    remove_variable = patron_shown_res
 
     # Tabs # these are here to force close the interaction tab on faith change
     remove_variable = patron_interaction_tab_toggle_res
-    remove_variable = patron_interaction_passive_tab_toggle_res
-}
-
-patron_passive_clear_variables = {
-    # Divines #
-    remove_variable = patron_akatosh_shown
-    remove_variable = patron_arkay_shown
-    remove_variable = patron_dibella_shown
-    remove_variable = patron_julianos_shown
-    remove_variable = patron_kynareth_shown
-    remove_variable = patron_mara_shown
-    remove_variable = patron_stendarr_shown
-    remove_variable = patron_talos_shown
-    remove_variable = patron_zenithar_shown
-    remove_variable = patron_shezarr_shown
-    # Aldmer #
-    remove_variable = patron_auriel_shown
-    remove_variable = patron_jephre_shown
-    remove_variable = patron_magnus_shown
-    remove_variable = patron_phynaster_shown
-    remove_variable = patron_syrabane_shown
-    remove_variable = patron_trinimac_shown
-    remove_variable = patron_xarxes_shown
-    remove_variable = patron_xen_shown
-    # Dwemer Ancestors
-    remove_variable = patron_da_architect_shown
-    remove_variable = patron_da_warrior_shown
-    remove_variable = patron_da_giant_shown
-    remove_variable = patron_da_lost_king_shown
-    # Atmoran Totems #
-    remove_variable = patron_at_hawk_shown
-    remove_variable = patron_at_wolf_shown
-    remove_variable = patron_at_snake_shown
-    remove_variable = patron_at_moth_shown
-    remove_variable = patron_at_owl_shown
-    remove_variable = patron_at_whale_shown
-    remove_variable = patron_at_bear_shown
-    remove_variable = patron_at_fox_shown
-    remove_variable = patron_at_dragon_shown
-    # Elemental Gods #
-    remove_variable = patron_eg_myn_shown
-    remove_variable = patron_eg_zisa_shown
-    remove_variable = patron_eg_nyfa_shown
-    remove_variable = patron_eg_ilni_shown
-    remove_variable = patron_eg_tam_shown
 }
 
 patron_faith_change_effect = {
     patron_clear_variables = yes
     patron_clear_res_variables = yes
-    patron_passive_clear_variables = yes
     patron_faith_change_clear_traits = yes
 }
 
@@ -249,141 +146,51 @@ patron_ardor_initialize = {
     }
 }
 
-patron_ardor_update_display = {
-    if = {
-        limit = { has_variable = patron_azura_shown }
-        set_variable = { name = ardor_display value = var:ardor_azura }
+patron_ardor_update_display = { # will be redundant when flag replacement done
+    switch = {
+        trigger = var:patron_shown
+        flag:azura = { set_variable = { name = ardor_display value = var:ardor_azura } }
+        flag:boethiah = { set_variable = { name = ardor_display value = var:ardor_boethiah } }
+        flag:clavicus = { set_variable = { name = ardor_display value = var:ardor_clavicus } }
+        flag:hermaeus = { set_variable = { name = ardor_display value = var:ardor_hermaeus } }
+        flag:hircine = { set_variable = { name = ardor_display value = var:ardor_hircine } }
+        flag:malacath = { set_variable = { name = ardor_display value = var:ardor_malacath } }
+        flag:mehrunes = { set_variable = { name = ardor_display value = var:ardor_mehrunes } }
+        flag:mephala = { set_variable = { name = ardor_display value = var:ardor_mephala } }
+        flag:meridia = { set_variable = { name = ardor_display value = var:ardor_meridia } }
+        flag:molag = { set_variable = { name = ardor_display value = var:ardor_molag } }
+        flag:namira = { set_variable = { name = ardor_display value = var:ardor_namira } }
+        flag:nocturnal = { set_variable = { name = ardor_display value = var:ardor_nocturnal } }
+        flag:peryite = { set_variable = { name = ardor_display value = var:ardor_peryite } }
+        flag:sanguine = { set_variable = { name = ardor_display value = var:ardor_sanguine } }
+        flag:sheogorath = { set_variable = { name = ardor_display value = var:ardor_sheogorath } }
+        flag:vaermina = { set_variable = { name = ardor_display value = var:ardor_vaermina } }
     }
-    else_if = {
-        limit = { has_variable = patron_boethiah_shown }
-        set_variable = { name = ardor_display value = var:ardor_boethiah }
-    }
-    else_if = {
-        limit = { has_variable = patron_clavicus_shown }
-        set_variable = { name = ardor_display value = var:ardor_clavicus }
-    }
-    else_if = {
-        limit = { has_variable = patron_hermaeus_shown }
-        set_variable = { name = ardor_display value = var:ardor_hermaeus }
-    }
-    else_if = {
-        limit = { has_variable = patron_hircine_shown }
-        set_variable = { name = ardor_display value = var:ardor_hircine }
-    }
-    else_if = {
-        limit = { has_variable = patron_malacath_shown }
-        set_variable = { name = ardor_display value = var:ardor_malacath }
-    }
-    else_if = {
-        limit = { has_variable = patron_mehrunes_shown }
-        set_variable = { name = ardor_display value = var:ardor_mehrunes }
-    }
-    else_if = {
-        limit = { has_variable = patron_mephala_shown }
-        set_variable = { name = ardor_display value = var:ardor_mephala }
-    }
-    else_if = {
-        limit = { has_variable = patron_meridia_shown }
-        set_variable = { name = ardor_display value = var:ardor_meridia }
-    }
-    else_if = {
-        limit = { has_variable = patron_molag_shown }
-        set_variable = { name = ardor_display value = var:ardor_molag }
-    }
-    else_if = {
-        limit = { has_variable = patron_namira_shown }
-        set_variable = { name = ardor_display value = var:ardor_namira }
-    }
-    else_if = {
-        limit = { has_variable = patron_nocturnal_shown }
-        set_variable = { name = ardor_display value = var:ardor_nocturnal }
-    }
-    else_if = {
-        limit = { has_variable = patron_peryite_shown }
-        set_variable = { name = ardor_display value = var:ardor_peryite }
-    }
-    else_if = {
-        limit = { has_variable = patron_sanguine_shown }
-        set_variable = { name = ardor_display value = var:ardor_sanguine }
-    }
-    else_if = {
-        limit = { has_variable = patron_sheogorath_shown }
-        set_variable = { name = ardor_display value = var:ardor_sheogorath }
-    }
-    else_if = {
-        limit = { has_variable = patron_vaermina_shown }
-        set_variable = { name = ardor_display value = var:ardor_vaermina }
-    }
-    else = { #this should never fire, in for debugging when it does
-        set_variable = { name = ardor_display value = 0 }
-        set_variable = ardor_display_error
-    }
+    # else = { #this should never fire, in for debugging when it does
+    #     set_variable = { name = ardor_display value = 0 }
+    #     set_variable = ardor_display_error
+    # }
 }
 
 patron_ardor_update_actual = {
-    if = {
-        limit = { has_variable = patron_azura_shown }
-        set_variable = { name = ardor_azura value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_boethiah_shown }
-        set_variable = { name = ardor_boethiah value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_clavicus_shown }
-        set_variable = { name = ardor_clavicus value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_hermaeus_shown }
-        set_variable = { name = ardor_hermaeus value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_hircine_shown }
-        set_variable = { name = ardor_hircine value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_malacath_shown }
-        set_variable = { name = ardor_malacath value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_mehrunes_shown }
-        set_variable = { name = ardor_mehrunes value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_mephala_shown }
-        set_variable = { name = ardor_mephala value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_meridia_shown }
-        set_variable = { name = ardor_meridia value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_molag_shown }
-        set_variable = { name = ardor_molag value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_namira_shown }
-        set_variable = { name = ardor_namira value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_nocturnal_shown }
-        set_variable = { name = ardor_nocturnal value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_peryite_shown }
-        set_variable = { name = ardor_peryite value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_sanguine_shown }
-        set_variable = { name = ardor_sanguine value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_sheogorath_shown }
-        set_variable = { name = ardor_sheogorath value = var:ardor_display }
-    }
-    else_if = {
-        limit = { has_variable = patron_vaermina_shown }
-        set_variable = { name = ardor_vaermina value = var:ardor_display }
+    switch = {
+        trigger = var:patron_shown
+        flag:azura = { set_variable = { name = ardor_azura value = var:ardor_display } }
+        flag:boethiah = { set_variable = { name = ardor_boethiah value = var:ardor_display } }
+        flag:clavicus = { set_variable = { name = ardor_clavicus value = var:ardor_display } }
+        flag:hermaeus = { set_variable = { name = ardor_hermaeus value = var:ardor_display } }
+        flag:hircine = { set_variable = { name = ardor_hircine value = var:ardor_display } }
+        flag:malacath = { set_variable = { name = ardor_malacath value = var:ardor_display } }
+        flag:mehrunes = { set_variable = { name = ardor_mehrunes value = var:ardor_display } }
+        flag:mephala = { set_variable = { name = ardor_mephala value = var:ardor_display } }
+        flag:meridia = { set_variable = { name = ardor_meridia value = var:ardor_display } }
+        flag:molag = { set_variable = { name = ardor_molag value = var:ardor_display } }
+        flag:namira = { set_variable = { name = ardor_namira value = var:ardor_display } }
+        flag:nocturnal = { set_variable = { name = ardor_nocturnal value = var:ardor_display } }
+        flag:peryite = { set_variable = { name = ardor_peryite value = var:ardor_display } }
+        flag:sanguine = { set_variable = { name = ardor_sanguine value = var:ardor_display } }
+        flag:sheogorath = { set_variable = { name = ardor_sheogorath value = var:ardor_display } }
+        flag:vaermina = { set_variable = { name = ardor_vaermina value = var:ardor_display } }
     }
 }
 
@@ -473,6 +280,12 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _eg_nyfa }
     $EFFECT$ = { TRAIT = _eg_ilni }
     $EFFECT$ = { TRAIT = _eg_tam }
+	# Cyrodiilic Heroes
+    $EFFECT$ = { TRAIT = _ch_alessia }
+    $EFFECT$ = { TRAIT = _ch_pelinal }
+    $EFFECT$ = { TRAIT = _ch_morihaus }
+    $EFFECT$ = { TRAIT = _ch_reman }
+    $EFFECT$ = { TRAIT = _ch_bendu }
 }
 
 patron_get_list = {
@@ -508,7 +321,7 @@ patron_faith_change_clear_traits = {
 
 patron_faith_change_clear_trait = {
     if = {
-        limit = { patron$TRAIT$_valid = no }
+        limit = { faith = { patron$TRAIT$_valid = no } }
         remove_trait = p$TRAIT$
     }
 }

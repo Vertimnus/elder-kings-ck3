@@ -1,88 +1,32 @@
 ﻿has_active_patron_selected = {
-	OR = {
-		# Daedra #
-		has_variable = patron_azura_shown
-		has_variable = patron_boethiah_shown
-		has_variable = patron_clavicus_shown
-		has_variable = patron_hermaeus_shown
-		has_variable = patron_hircine_shown
-		has_variable = patron_jyggalag_shown
-		has_variable = patron_malacath_shown
-		has_variable = patron_mehrunes_shown
-		has_variable = patron_mephala_shown
-		has_variable = patron_meridia_shown
-		has_variable = patron_molag_shown
-		has_variable = patron_namira_shown
-		has_variable = patron_nocturnal_shown
-		has_variable = patron_peryite_shown
-		has_variable = patron_sanguine_shown
-		has_variable = patron_sheogorath_shown
-		has_variable = patron_vaermina_shown
+	exists = var:patron_shown
+	# OR = {
+	# 	# Daedra #
+	# 	has_variable = patron_azura_shown
+	# 	has_variable = patron_boethiah_shown
+	# 	has_variable = patron_clavicus_shown
+	# 	has_variable = patron_hermaeus_shown
+	# 	has_variable = patron_hircine_shown
+	# 	has_variable = patron_jyggalag_shown
+	# 	has_variable = patron_malacath_shown
+	# 	has_variable = patron_mehrunes_shown
+	# 	has_variable = patron_mephala_shown
+	# 	has_variable = patron_meridia_shown
+	# 	has_variable = patron_molag_shown
+	# 	has_variable = patron_namira_shown
+	# 	has_variable = patron_nocturnal_shown
+	# 	has_variable = patron_peryite_shown
+	# 	has_variable = patron_sanguine_shown
+	# 	has_variable = patron_sheogorath_shown
+	# 	has_variable = patron_vaermina_shown
 
-		# Tribunal #
-		has_variable = patron_almalexia_shown
-		has_variable = patron_sotha_sil_shown
-		has_variable = patron_vivec_shown
-	}
+	# 	# Tribunal #
+	# 	has_variable = patron_almalexia_shown
+	# 	has_variable = patron_sotha_sil_shown
+	# 	has_variable = patron_vivec_shown
+	# }
 }
 
-has_pantheon_selected = {
-	OR = {
-		# Pantheons #
-		has_variable = patron_divines_shown
-		has_variable = patron_aldmer_shown
-		has_variable = patron_dwemer_ancestors_shown
-		has_variable = patron_atmoran_totems_shown
-		has_variable = patron_ternion_totems_shown
-		has_variable = patron_elemental_shown
-	}
-}
-
-has_passive_patron_selected = {
-	OR = {
-		# Divines #
-		has_variable = patron_akatosh_shown
-		has_variable = patron_arkay_shown
-		has_variable = patron_dibella_shown
-		has_variable = patron_julianos_shown
-		has_variable = patron_kynareth_shown
-		has_variable = patron_mara_shown
-		has_variable = patron_stendarr_shown
-		has_variable = patron_talos_shown
-		has_variable = patron_zenithar_shown
-		has_variable = patron_shezarr_shown
-		# Aldmer #
-		has_variable = patron_auriel_shown
-		has_variable = patron_jephre_shown
-		has_variable = patron_magnus_shown
-		has_variable = patron_phynaster_shown
-		has_variable = patron_syrabane_shown
-		has_variable = patron_trinimac_shown
-		has_variable = patron_xarxes_shown
-		has_variable = patron_xen_shown
-		# Dwemer Ancestors
-		has_variable = patron_da_architect_shown
-		has_variable = patron_da_warrior_shown
-		has_variable = patron_da_giant_shown
-		has_variable = patron_da_lost_king_shown
-		# Atmoran Totems
-		has_variable = patron_at_hawk_shown
-		has_variable = patron_at_wolf_shown
-		has_variable = patron_at_snake_shown
-		has_variable = patron_at_moth_shown
-		has_variable = patron_at_owl_shown
-		has_variable = patron_at_whale_shown
-		has_variable = patron_at_bear_shown
-		has_variable = patron_at_fox_shown
-		has_variable = patron_at_dragon_shown
-		# Elemental Gods
-		has_variable = patron_eg_myn_shown
-		has_variable = patron_eg_zisa_shown
-		has_variable = patron_eg_nyfa_shown
-		has_variable = patron_eg_ilni_shown
-		has_variable = patron_eg_tam_shown
-	}
-}
 
 # Valid Triggers - tenets, doctrines and anything alse allowing a patron should be here
 
@@ -93,16 +37,9 @@ has_passive_patron_selected = {
 
 # Daedra #
 is_worshipping_daedra = {
-	NOT = { has_doctrine_parameter = daedric_worship_criminal } #cant be criminal
 	OR = {
-		# Most Daedric faiths should have at least one tenet or doctrine bringing their Prince in the pantheon, but just in case
-		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-		has_doctrine_parameter = allows_worship_$DAEDRA$_all_doctrines_active
-		has_doctrine_parameter = allows_worship_$DAEDRA$_shunned_doctrines_active
-		AND = {
-			has_doctrine_parameter = allows_worship_$DAEDRA$_accepted_doctrines_active
-			has_doctrine_parameter = daedric_worship_accepted
-		}
+		has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
+		has_doctrine_parameter = worship_$DAEDRA$_allowed_active
 	}
 }
 
@@ -110,34 +47,7 @@ patron_daedra_valid = {
 	# Doctrines and tenets are aligned with $DAEDRA$
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
 	# Faith is not centered around a single Prince, or if it is it's around this Prince
-	OR = {
-		has_doctrine_parameter = allows_worship_$DAEDRA$_only_active
-		NOR	= {
-			patron_exclusive_daedra = yes
-			has_doctrine_parameter = pantheon_cannot_be_changed_active
-		}
-	}
-}
-
-patron_exclusive_daedra = {
-	OR = {
-		has_doctrine_parameter = allows_worship_azura_only_active
-		has_doctrine_parameter = allows_worship_boethiah_only_active
-		has_doctrine_parameter = allows_worship_clavicus_only_active
-		has_doctrine_parameter = allows_worship_hermaeus_only_active
-		has_doctrine_parameter = allows_worship_hircine_only_active
-		has_doctrine_parameter = allows_worship_malacath_only_active
-		has_doctrine_parameter = allows_worship_mehrunes_only_active
-		has_doctrine_parameter = allows_worship_mephala_only_active
-		has_doctrine_parameter = allows_worship_meridia_only_active
-		has_doctrine_parameter = allows_worship_molag_only_active
-		has_doctrine_parameter = allows_worship_namira_only_active
-		has_doctrine_parameter = allows_worship_nocturnal_only_active
-		has_doctrine_parameter = allows_worship_peryite_only_active
-		has_doctrine_parameter = allows_worship_sanguine_only_active
-		has_doctrine_parameter = allows_worship_sheogorath_only_active
-		has_doctrine_parameter = allows_worship_vaermina_only_active
-	}
+	has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
 }
 
 patron_azura_valid = {
@@ -241,6 +151,9 @@ patron_ternion_totems_valid = {
 }
 patron_elemental_valid = {
 	patron_PANTHEON_valid = { PANTHEON = elemental }
+}
+patron_cyrodiilic_heroes_valid = {
+	patron_PANTHEON_valid = { PANTHEON = cyrodiilic_heroes }
 }
 
 # Passive Patrons #
@@ -379,7 +292,7 @@ patron_at_wolf_valid = {
 	}
 }
 
-# Elemntal Gods
+# Elemental Gods
 patron_eg_myn_valid = {
 	patron_elemental_valid = yes
 }
@@ -395,6 +308,23 @@ patron_eg_ilni_valid = {
 patron_eg_tam_valid = {
 	patron_elemental_valid = yes
 	has_doctrine = tenet_syncretism_pantheon_divines
+}
+
+# Cyrodiilic Heroes
+patron_ch_alessia_valid = {
+	patron_cyrodiilic_heroes_valid = yes
+}
+patron_ch_pelinal_valid = {
+	patron_cyrodiilic_heroes_valid = yes
+}
+patron_ch_morihaus_valid = {
+	patron_cyrodiilic_heroes_valid = yes
+}
+patron_ch_reman_valid = {
+	patron_cyrodiilic_heroes_valid = yes
+}
+patron_ch_bendu_valid = {
+	patron_cyrodiilic_heroes_valid = yes
 }
 
 # Aggregate Triggers #
@@ -443,7 +373,7 @@ patron_has_patron = {
 	OR = {
 		patron_has_princes = yes
 		patron_has_tribunal = yes
-		patron_has_pantheon = yes
+		#patron_has_pantheon = yes
 	}
 }
 
@@ -557,6 +487,12 @@ patron_trait_master_trigger = {
 		$TRIGGER$ = { TRAIT = _eg_nyfa }
 		$TRIGGER$ = { TRAIT = _eg_ilni }
 		$TRIGGER$ = { TRAIT = _eg_tam }
+		# Cyrodiilic Heroes
+		$TRIGGER$ = { TRAIT = _ch_alessia }
+		$TRIGGER$ = { TRAIT = _ch_pelinal }
+		$TRIGGER$ = { TRAIT = _ch_morihaus }
+		$TRIGGER$ = { TRAIT = _ch_reman }
+		$TRIGGER$ = { TRAIT = _ch_bendu }
 	}
 }
 

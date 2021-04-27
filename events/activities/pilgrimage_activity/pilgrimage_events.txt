@@ -3554,6 +3554,81 @@ scripted_trigger pilgrimage_is_to = {
 	# }
 # }
 
+
+# Sancre Tor
+pilgrimage.10001 = {
+	type = character_event
+	title = pilgrimage.10001.t
+	desc = {
+		desc = pilgrimage.10001.desc_beginning
+		# Has the holy site been repaired?
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:destination_title.title_province = { has_building = sancre_tor_02 } }
+				desc = pilgrimage.10001.desc_sancre_tor_repaired
+			}
+			desc = pilgrimage.10001.desc_sancre_tor_ruined
+		}
+		desc = pilgrimage.10001.desc_mid
+		# What tombstone do you read?
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:tombstone_text = { compare_value = 1 } }
+				desc = pilgrimage.10001.desc_tombstone_1
+			}
+			triggered_desc = {
+				trigger = { var:tombstone_text = { compare_value = 2 } }
+				desc = pilgrimage.10001.desc_tombstone_2
+			}
+			triggered_desc = {
+				trigger = { var:tombstone_text = { compare_value = 3 } }
+				desc = pilgrimage.10001.desc_tombstone_3
+			}
+			desc = pilgrimage.10001.desc_tombstone_0
+		}
+		desc = pilgrimage.10001.desc_end
+	}
+	theme = pilgrimage_activity
+	
+	left_portrait = {
+		character = root
+		animation = ecstasy
+	}
+
+	trigger = {
+		pilgrimage_is_to = { DESTINATION = c_sancre_tor }
+	}
+
+	immediate = {
+		save_holy_site_for_loc_effect = yes
+		
+		random_list = {
+			33 = { set_variable = { name = tombstone_text value = 1 } }
+			33 = { set_variable = { name = tombstone_text value = 2 } }
+			33 = { set_variable = { name = tombstone_text value = 3 } }
+		}
+	}
+	
+	option = {
+		name = pilgrimage.10001.a
+		trigger = { NOT = { has_trait = cynical } }
+		give_pilgrimage_reward_effect = yes
+	}
+	
+	option = {
+		name = pilgrimage.10001.b
+		trigger = { has_trait = cynical }
+		give_pilgrimage_reward_effect = yes
+	}
+
+	after = {
+		trigger_event = {
+			on_action = pilgrimage_return_events
+			days = 30
+		}
+	}
+}
+
 	# Sanctity of Nature
 # Sacred Groves
 pilgrimage.5921 = {
