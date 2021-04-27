@@ -175,6 +175,10 @@ spell_castable = {
 			$SPELL$_hostile = 1
 			$SPELL$_province = 1
 		}
+		trigger_if = { #some issues with selection. may need separate execute trigger
+			limit = { exists = var:spell_county }
+			var:spell_county = ROOT.location.county #need to be there to cast
+		}
 	}
 	trigger_else_if = {
 		limit = { #hostile no province, canot cast on self+children
@@ -196,5 +200,6 @@ spell_castable = {
 		limit = { #province no hostile,
 			$SPELL$_province = 1
 		}
+		variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
 	}
 }

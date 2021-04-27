@@ -356,21 +356,29 @@ spell_castee_effect = {
 }
 spell_castee = {
     save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
-    var:spell_recipient = {
-        custom_label = spell_name_castee
+
+    custom_label = spell_name_castee
+    if = {
+        limit = { $SPELL$_province = 0 } #cast on the castee if not a province spell
+        var:spell_recipient = { spell_$SPELL$_castee_effect = yes }
         if = {
-            limit = { $SPELL$_province = 0 } #cast on the castee if not a province spell
-            spell_$SPELL$_castee_effect = yes
-            if = {
-                limit = { $SPELL$_hostile = 1 } #opinion malus for casting hostile spells
-                add_opinion = { target = PREV modifier = cast_hostile_spell }
+            limit = { #opinion malus for casting hostile spells
+                $SPELL$_hostile = 1
+                NOR = {
+                    var:spell_recipient = ROOT # cant cast on self
+                    var:spell_recipient = var:spell_caster # cant order cm to cast on self
+                }
             }
+            var:spell_recipient = { add_opinion = { target = PREV modifier = cast_hostile_spell } }
         }
     }
     if = {
         limit = { #cast on the selected county for province spells. no special treatment for hostile currently
             $SPELL$_province = 1
             exists = var:spell_county #need to check against current location for hostile. may just use current location directly
+            # trigger_if = { #need to block if no valid counties. exists should work
+            #     limit = { variable_list_size = { name = spell_counties value > 0 } }
+            # }
         }
         var:spell_county = { spell_$SPELL$_province_effect = yes }
     }

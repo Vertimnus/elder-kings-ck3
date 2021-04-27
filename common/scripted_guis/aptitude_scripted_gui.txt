@@ -229,6 +229,12 @@ spell_switch_caster = {
 		else = {
 			set_variable = { name = spell_caster value = ROOT }
 		}
+		if = { #reset selection if new caster doesn know spell.
+			limit = { spell_known_trigger = no }
+			set_variable = { name = spell_selected value = flag:no_spell }
+			remove_variable = spell_province
+			spell_reset_recipient = yes
+		}
 	}
 }
 
@@ -268,21 +274,14 @@ spell_select_province_hostile = {
 		clear_variable_list = spell_counties
 		if = {
 			limit = {
-				#ROOT.location.province_owner = {
 				ROOT.location.barony_controller = {
-					OR = { # is the caster at war with the province owner or any char above them
+					OR = { # is the caster at war with the province controller or any char above them
 						is_at_war_with = ROOT
 						any_liege_or_above = {
 							is_at_war_with = ROOT
 						}
 					}
 				}
-				# any_war_enemy = {
-				# 	OR = {
-				# 		is_liege_or_above_of = ROOT.location.province_owner
-				# 		ROOT.location.province_owner = THIS
-				# 	}
-				# }
 			}
 			set_variable = { name = spell_recipient_old value = var:spell_recipient }
 			set_variable = { name = spell_recipient value = ROOT.location.county.holder } #save old target as temp var then return to previous target on new select
@@ -295,17 +294,10 @@ spell_select_province_hostile = {
 spell_province_pick = {
 	scope = character
 
-	saved_scopes = {
-		county
-	}
+	saved_scopes = { county }
 
 	effect = { set_variable = { name = spell_county value = scope:county } }
 }
-
-# enable_casting = {
-# 	scope = character
-# 	effect = { set_variable = spell_cast_enabled } #very tempory variable. if it is visible on the character something has gone wrong
-# }
 
 #############
 ## Schools ##
@@ -435,7 +427,7 @@ spell_list_item = {
 
 spell_cast_confirm = { #need 2nd for caster/castee effects. or use bool scope to switch which to execute. emulate by feeding player or not and checking exists
 	scope = character
-	saved_scopes = { castee province }
+	saved_scopes = { castee }
 
 	#is_valid = { selected_spell_castable_trigger = yes } # save scope and use same effect?
 	is_shown = {
