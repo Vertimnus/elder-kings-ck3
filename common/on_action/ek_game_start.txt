@@ -194,42 +194,27 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
-			# This faith is considered a Daedra worshipper
 			every_faith = {
-				if = {
-					limit = {
-						OR = {
-							has_doctrine = doctrine_pantheon_daedra
-							# Prince specific
-							has_doctrine = doctrine_pantheon_azura
-							has_doctrine = doctrine_pantheon_boethiah
-							has_doctrine = doctrine_pantheon_clavicus
-							has_doctrine = doctrine_pantheon_hermaeus
-							has_doctrine = doctrine_pantheon_hircine
-							has_doctrine = doctrine_pantheon_malacath
-							has_doctrine = doctrine_pantheon_mehrunes
-							has_doctrine = doctrine_pantheon_mephala
-							has_doctrine = doctrine_pantheon_meridia
-							has_doctrine = doctrine_pantheon_molag
-							has_doctrine = doctrine_pantheon_namira
-							has_doctrine = doctrine_pantheon_nocturnal
-							has_doctrine = doctrine_pantheon_peryite
-							has_doctrine = doctrine_pantheon_sanguine
-							has_doctrine = doctrine_pantheon_sheogorath
-							has_doctrine = doctrine_pantheon_vaermina
-							# Special group of princes
-							has_doctrine = doctrine_pantheon_good_daedra
-							has_doctrine = doctrine_pantheon_bad_daedra
-						}
-						NOT = { has_doctrine = special_doctrine_daedra_worshipper }
-					}
-					add_doctrine = special_doctrine_daedra_worshipper
-				}
-			}
-			
-			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
-			every_faith = {
+				# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 				faith_give_view_daedric_princes = yes
+				
+				# We need to save the leader of the Council of the Eight
+				if = {
+					limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+					set_global_variable = {
+						name = leader_council_eight
+						value = this
+					}
+					
+					# Remember what is the current/former hof title
+					set_global_variable = {
+						name = leader_council_eight_former_title
+						value = this.religious_head_title
+					}
+					
+					# Set k_council_of_the_eight as its religious title
+					set_religious_head_title = k_council_of_the_eight
+				}
 			}
 		}
 		
