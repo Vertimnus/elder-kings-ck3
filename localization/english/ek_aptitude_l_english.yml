@@ -163,7 +163,11 @@
  spell_casting_info_castee:0 "[SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_province')), '(CFixedPoint)1' ), 'spell_casting_info_castee_prov', 'spell_casting_info_castee_char' )]"
  #spell_casting_info_castee_char:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char), '#high yourself#!', GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip )]" # fails for cm player->player -> you, yourself | cm->player -> name, you | cm->cm -> name, themself | player->other/cm -> you, name | cm->other -> | name, name | caster=recipient(caster=player(yourself,themself),recipient=player(you,name)) 
  spell_casting_info_castee_char:0 "#high [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char), Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), 'yourself', 'themself' ), GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip )]#!" # caster=recipient(caster=player(yourself,themself),recipient=player(you,name)) 
- spell_casting_info_castee_prov:0 "the #high [GetPlayer.MakeScope.Var('spell_county').Title.GetName]#!" #need to block this for unlanded/invalid chars
+ spell_casting_info_castee_prov:0 "[SelectLocalization( GetPlayer.MakeScope.Var('spell_county').IsSet, 'spell_casting_info_castee_prov_valid', 'spell_casting_info_castee_prov_invalid' )]"
+ spell_casting_info_castee_prov_valid:0 "the #high [GetPlayer.MakeScope.Var('spell_county').Title.GetName]#!" #need to block this for unlanded/invalid chars
+ spell_casting_info_castee_prov_invalid:0 "one of [GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINamePossessive|U] [counties|E], but [SelectLocalization( GetPlayer.MakeScope.Var('spell_recipient').Char.IsRuler, 'spell_casting_info_castee_prov_none_valid', 'spell_casting_info_castee_prov_has_none' )]"
+ spell_casting_info_castee_prov_none_valid:0 "none are valid"
+ spell_casting_info_castee_prov_has_none:0 "[GetPlayer.MakeScope.Var('spell_recipient').Char.GetSheHe] has none"
  spell_casting_info_magicka:0 "#high [GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip]#! currently [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), 'have', 'has')]: [magicka_i][GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope.Var('magicka').GetValue|V0]/[GuiScope.SetRoot( GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope ).ScriptValue('magicka_max')|V0]"
  school_alteration:0 "#T Alteration#!"
  school_conjuration:0 "#T Conjuration#!"
@@ -233,3 +237,6 @@
  # trigger player notification for spells "x is no longer effected by y" or "you are no longer effected by y"
  # have delay -1 of duration, check spell modifiers add to list, then use list in effect/event chain +1 of duration to find missing (not tragrt in list), use in toast localisation
  # or if scopes persist in on_action/event chain just use that in toast localization. preferably this
+
+ modifier_spell_firestorm:0 "Firestorm"
+ modifier_spell_firestorm_desc:0 "This [county|E] has been ravaged by a conjured firestorm."

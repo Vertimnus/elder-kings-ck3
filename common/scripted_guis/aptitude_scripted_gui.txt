@@ -274,14 +274,22 @@ spell_select_province_hostile = {
 		clear_variable_list = spell_counties
 		if = {
 			limit = {
-				ROOT.location.barony_controller = {
-					OR = { # is the caster at war with the province controller or any char above them
-						is_at_war_with = ROOT
-						any_liege_or_above = {
-							is_at_war_with = ROOT
-						}
+				#is_commanding_army = yes
+				exists = commanding_army
+				commanding_army = {
+					OR = {
+						is_army_in_siege = yes
+						is_army_in_raid = yes
 					}
 				}
+				# ROOT.location.barony_controller = {
+				# 	OR = { # is the caster at war with the province controller or any char above them
+				# 		is_at_war_with = ROOT
+				# 		any_liege_or_above = {
+				# 			is_at_war_with = ROOT
+				# 		}
+				# 	}
+				# }
 			}
 			set_variable = { name = spell_recipient_old value = var:spell_recipient }
 			set_variable = { name = spell_recipient value = ROOT.location.county.holder } #save old target as temp var then return to previous target on new select
@@ -417,7 +425,7 @@ spell_list_item = {
 	saved_scopes = { spell }
 
 	is_valid = { spell_known_trigger = yes }
-	is_shown = { spell_castable_trigger = yes }
+	is_shown = { spell_selectable_trigger = yes }
 	effect = {
 		set_variable = { name = spell_selected value = scope:spell.var:spell }
 		set_variable = { name = spell_province value = scope:spell } #tempory until can pass flags. needed to pass to effect execution
@@ -431,8 +439,14 @@ spell_cast_confirm = { #need 2nd for caster/castee effects. or use bool scope to
 
 	#is_valid = { selected_spell_castable_trigger = yes } # save scope and use same effect?
 	is_shown = {
-		var:spell_province = { save_temporary_scope_as = spell }
-		spell_castable_trigger = yes
+		trigger_if = {
+			limit = { exists = var:spell_province }
+			var:spell_province = { save_temporary_scope_as = spell }
+			spell_castable_trigger = yes
+		}
+		trigger_else = { always = no }
+		# var:spell_province = { save_temporary_scope_as = spell }
+		# spell_castable_trigger = yes
 	}
 	#effect = { selected_spell_effect = yes }
 	effect = {
