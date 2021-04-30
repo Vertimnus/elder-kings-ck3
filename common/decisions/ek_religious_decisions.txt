@@ -323,7 +323,7 @@ rite_of_passage_decision = {
 	major = yes
 
 	is_shown = {
-		always = no # WIP
+		# always = no # WIP
 		faith = { has_doctrine_parameter = rite_of_passage_decision_active }
 	}
 
@@ -344,6 +344,21 @@ rite_of_passage_decision = {
 		if = {
 			limit = { faith = { has_doctrine = doctrine_lycanthropy_accepted } }
 			custom_tooltip = rite_of_passage_decision_lycanthropy_legal_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_lycanthropy_outlawed } }
+			custom_tooltip = rite_of_passage_decision_lycanthropy_outlawed_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirism_accepted } }
+			custom_tooltip = rite_of_passage_decision_vampirism_legal_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirism_outlawed } }
+			custom_tooltip = rite_of_passage_decision_vampirism_outlawed_tt
 		}
 		
 		trigger_event = ek_religious_decision.0001
@@ -376,6 +391,11 @@ start_ristaag_decision = {
 	is_shown = {
 		is_ruler = yes
 		faith = { has_doctrine_parameter = allows_ristaag_decision_active }
+	}
+	
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
 	}
 
 	effect = {
@@ -426,6 +446,98 @@ summon_dragons_decision = {
 		custom_tooltip = summon_dragons_decision_effect_tooltip_2
 		
 		trigger_event = ek_religious_decision.0301
+	}
+
+	ai_potential = {
+		is_landed = yes
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+### Council of the Eight - Assume leadership
+# Control at least 3 holy sites, be liked by your religious head (or have none), and have your faith be in more counties than the leader
+council_of_the_eight_assume_leadership_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	ai_check_interval = 120
+	
+	major = yes
+
+	desc = council_of_the_eight_assume_leadership_decision_desc
+	selection_tooltip = council_of_the_eight_assume_leadership_decision_tooltip
+
+	is_shown = {
+		is_ruler = yes
+		is_landed = yes
+		is_independent_ruler = yes
+		faith = { has_doctrine = special_faith_group_council_of_the_eight_member } # Ok for that one I'll use a direct reference to the doctrine, even if I don't like it...
+		
+		# You control at least one holy site of your faith
+		any_realm_county = {
+			any_in_de_jure_hierarchy = {
+				tier = tier_barony
+				is_holy_site_of = root.faith
+			}
+		}
+		
+		highest_held_title_tier >= tier_kingdom
+		
+		# Yeah, if the HoF doesn't exist it might lead to some weird stuff that I don't want to deal with rn
+		exists = faith.religious_head
+	}
+	
+	is_valid = {
+		trigger_if = {
+			limit = { exists = faith.religious_head }
+			faith.religious_head = {
+				opinion = {
+					target = root
+					value >= 50
+				}
+			}
+			piety_level >= very_high_piety_level
+		}
+		trigger_else = {
+			piety_level >= max_piety_level
+		}
+		
+		# You need 3 holy sites of your faith
+		any_realm_county = {
+			count = 3
+			custom_description = {
+				text = has_3_holy_site_your_faith
+				any_in_de_jure_hierarchy = {
+					tier = tier_barony
+					is_holy_site_of = root.faith
+				}
+			}
+		}
+		
+		custom_description = { # If we can have the numbers in the tooltip
+			text = faith_has_more_county_followers_leader_council
+			root.faith = { num_county_followers > global_var:leader_council_eight.num_county_followers }
+		}
+		root.faith = { num_county_followers > global_var:leader_council_eight.num_county_followers }
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+	}
+
+	effect = {
+		title:k_council_of_the_eight = { save_scope_as = council_of_the_eight_title }
+		global_var:leader_council_eight_former_title = { save_scope_as = leader_council_eight_former_title }
+		global_var:leader_council_eight = { save_scope_as = leader_council_eight }
+		faith.religious_head = { save_scope_as = current_hof }
+		scope:leader_council_eight.religious_head = { save_scope_as = former_hof }
+		
+		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_1
+		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_2
+		
+		trigger_event = ek_religious_decision.0401
 	}
 
 	ai_potential = {
