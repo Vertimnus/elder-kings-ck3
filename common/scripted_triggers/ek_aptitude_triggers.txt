@@ -170,17 +170,25 @@ spell_selectable_trigger = {
 spell_selectable = {
 	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
 	var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
+	# trigger_if = {
+	# 	limit = { exists = var:spell_recipient_old }
+	# 	var:spell_recipient_old = { save_temporary_scope_as = castee }
+	# }
+	# trigger_else = { var:spell_recipient = { save_temporary_scope_as = castee } }
 	trigger_if = {
 		limit = { #hostile province, should stop other checks
 			$SPELL$_hostile = 1
 			$SPELL$_province = 1
 		}
 		# is_commanding_army = yes
-		exists = commanding_army
-		commanding_army = {
-			OR = {
-				is_army_in_siege = yes
-				is_army_in_raid = yes
+		custom_description = {
+			text = "must be leading an army in a seige or raid"
+			exists = commanding_army
+			commanding_army = {
+				OR = {
+					is_army_in_siege = yes
+					is_army_in_raid = yes
+				}
 			}
 		}
 		# ROOT.location.barony_controller = { #need to account for raiding - leading raid army?
@@ -197,8 +205,17 @@ spell_selectable = {
 			$SPELL$_hostile = 1
 		}
 		NOR = {
-			var:spell_recipient = ROOT # cant cast on self
-			var:spell_recipient = var:spell_caster # cant order cm to cast on self
+			custom_description = {
+				text = "You cant cast a hostile spell on yourself"
+				var:spell_recipient = ROOT # cant cast on self
+			}
+			trigger_if = {
+				limit = { NOT = { var:spell_recipient = ROOT } }
+				custom_description = {
+					text = "You cant order the cm to cast a hostile spell on themself"
+					var:spell_recipient = var:spell_caster # cant order cm to cast on self
+				}
+			}
 			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
 				limit = {
 					is_parent_of = var:spell_recipient
@@ -220,39 +237,58 @@ spell_castable_trigger = {
 	school_spell_master_trigger = { TRIGGER = spell_castable }
 }
 spell_castable = {
-	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
-	var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
+	spell_selectable = { SCHOOL = $SCHOOL$ SPELL = $SPELL$ }
+	#save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+	#var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
 	trigger_if = {
 		limit = { #hostile province, should stop other checks
 			$SPELL$_hostile = 1
 			$SPELL$_province = 1
 		}
-		variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		custom_description = {
+			text = "No valid counties!"
+			variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		}
 		trigger_if = { #some issues with selection. may need separate execute trigger
 			limit = { exists = var:spell_county }
-			var:spell_county = ROOT.location.county #need to be there to cast
-		}
-	}
-	trigger_else_if = {
-		limit = { #hostile no province, canot cast on self+children
-			$SPELL$_hostile = 1
-		}
-		NOR = {
-			var:spell_recipient = ROOT # cant cast on self
-			var:spell_recipient = var:spell_caster # cant order cm to cast on self
-			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
-				limit = {
-					is_parent_of = var:spell_recipient
-					NOT = { has_trait_with_flag = can_murder_own_children }
-				}
-				is_parent_of = var:spell_recipient
+			custom_description = {
+				text = "You must be there!"
+				var:spell_county = ROOT.location.county #need to be there to cast
 			}
 		}
 	}
+	# trigger_else_if = {
+	# 	limit = { #hostile no province, canot cast on self+children
+	# 		$SPELL$_hostile = 1
+	# 	}
+	# 	# NOR = {
+	# 	# 	custom_tooltip = {
+	# 	# 		text = "You cant cast a hostile spell on yourself"
+	# 	# 		var:spell_recipient = ROOT # cant cast on self
+	# 	# 	}
+	# 	# 	trigger_if = {
+	# 	# 		limit = { var:spell_recipient != ROOT }
+	# 	# 		custom_tooltip = {
+	# 	# 			text = "You cant order the cm to cast a hostile spell on themself"
+	# 	# 			var:spell_recipient = var:spell_caster # cant order cm to cast on self
+	# 	# 		}
+	# 	# 	}
+	# 	# 	trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
+	# 	# 		limit = {
+	# 	# 			is_parent_of = var:spell_recipient
+	# 	# 			NOT = { has_trait_with_flag = can_murder_own_children }
+	# 	# 		}
+	# 	# 		is_parent_of = var:spell_recipient
+	# 	# 	}
+	# 	# }
+	# }
 	trigger_else_if = {
 		limit = { #province no hostile,
 			$SPELL$_province = 1
 		}
-		variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		custom_description = {
+			text = "No valid counties!"
+			variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		}
 	}
 }

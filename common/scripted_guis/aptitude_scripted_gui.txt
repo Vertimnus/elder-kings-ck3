@@ -230,7 +230,11 @@ spell_switch_caster = {
 			set_variable = { name = spell_caster value = ROOT }
 		}
 		if = { #reset selection if new caster doesn know spell.
-			limit = { spell_known_trigger = no }
+			limit = {
+				exists = var:spell_province
+				var:spell_province = { save_temporary_scope_as = spell }
+				spell_known_trigger = no #throws an error because scope not set
+			}
 			set_variable = { name = spell_selected value = flag:no_spell }
 			remove_variable = spell_province
 			spell_reset_recipient = yes
