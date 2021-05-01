@@ -153,6 +153,34 @@ update_religions_piety_level = {
 		update_religions_piety_level_effect = { MODIFIER = devotion_gives_development_progress }
 	}
 	
+	### LIFESTYLE EXPERIENCE WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_lifestyle_experience }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_lifestyle_experience }
+			}
+		}
+		
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_lifestyle_experience }
+	}
+	
+	### CONTROL GROWTH WITH WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_control_growth }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_control_growth }
+			}
+		}
+		
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_control_growth }
+	}
+	
 	### STAR SIGN POWER WITH DEVOTION
 	if = {
 		limit = {

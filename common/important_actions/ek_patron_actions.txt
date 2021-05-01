@@ -6,7 +6,8 @@
 				is_adult = yes
 				patron_has_any_trait = no
 				NOT = { has_character_flag = recent_patron_selected }
-
+				# If a faith's pantheon cannot be changed, it means it's monotheist
+				NOT = { faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active } }
 			}
 			try_create_important_action = {
 				important_action_type = action_pick_patron
