@@ -258,6 +258,43 @@ abecean_pirates = {
 	ai_quality = { value = culture_ai_weight_skirmishers }
 	icon = skirmishers
 }
+light_grazing_horde_akos = {
+	type = light_cavalry
+	
+	damage = 25
+	toughness = 15
+	pursuit = 35
+	screen = 25
+	
+	terrain_bonus = {
+		desert = { damage = 10 pursuit = 5 }
+		alikr_desert = { damage = 10 pursuit = 5 }
+		oasis = { damage = 10 }
+		plains = { damage = 10 }
+		drylands = { damage = 10 }
+		hills = { damage = -5 pursuit = 5 }
+		desert_mountains = { damage = -10 pursuit = -15 }
+		mountains = { damage = -10 pursuit = -20 }
+		wetlands = { damage = -15 toughness = -10 pursuit = -30 screen = -30 }
+	}
+
+	counters = {
+		archers = 1
+		heavy_infantry = 1
+	}
+
+	winter_bonus = {
+		harsh_winter = { damage = -5 toughness = -2 }
+	}
+
+	buy_cost = { gold = @light_cavalry_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @light_cavalry_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @light_cavalry_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = culture_ai_weight_light_cavalry }
+	icon = light_cavalry
+}
 
 ### Khajiiti - Cathay, Ohmes, Suthay, Tojay - Dagi (special)
 # Alfiq: War Mages
@@ -293,7 +330,6 @@ alfiq = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = mages
 }
-
 cathay = {
 	type = skirmishers
 	
@@ -323,7 +359,6 @@ cathay = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = skirmishers
 }
-
 suthay = {
 	type = archers
 	
@@ -353,7 +388,6 @@ suthay = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = bowmen
 }
-
 ohmes = {
 	type = pikemen
 	
@@ -383,7 +417,6 @@ ohmes = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = pikemen
 }
-
 pahmar = {
 	type = heavy_infantry
 	
@@ -410,7 +443,6 @@ pahmar = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = heavy_infantry
 }
-
 senche = {
 	type = light_cavalry
 	
@@ -441,7 +473,6 @@ senche = {
 	ai_quality = { value = @cultural_maa_extra_ai_score }
 	icon = light_cavalry
 }
-
 senche_raht = {
 	type = heavy_cavalry
 	
