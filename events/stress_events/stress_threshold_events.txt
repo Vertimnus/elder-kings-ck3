@@ -13126,30 +13126,46 @@ stress_threshold.2501 = {
 		OR = {
 			# Personality traits
 			AND = {
-				has_trait = lustful				# Sanguine/Mephala
+				has_trait = ambitious
+				can_secretly_worship_mehrunes = yes
+			}
+			AND = {
+				has_trait = deceitful	
+				OR = {
+					can_secretly_worship_boethiah = yes
+					can_secretly_worship_mephala = yes
+					can_secretly_worship_nocturnal = yes
+				}
+			}
+			AND = {
+				has_trait = lustful
 				OR = {
 					can_secretly_worship_mephala = yes
 					can_secretly_worship_sanguine = yes
 				}
 			}
 			AND = {
-				has_trait = ambitious			# Mehrunes Dagon
-				can_secretly_worship_mehrunes = yes
+				has_trait = sadistic
+				can_secretly_worship_molag = yes
 			}
 			AND = {
-				has_trait = sadistic			# Molag Bal
-				can_secretly_worship_molag = yes
+				has_trait = zealous
+				can_secretly_worship_meridia = yes
 			}
 			
 			# Lifestyles
 			AND = {
-				has_trait = lifestyle_hunter	# Hircine
+				has_trait = lifestyle_hunter
 				can_secretly_worship_hircine = yes
+			}
+			AND = {
+				has_trait = lifestyle_herbalist
+				can_secretly_worship_vaermina = yes
 			}
 			
 			# Special traits
 			AND = {
-				has_trait = lunatic				# Sheogorath
+				has_trait = lunatic
 				can_secretly_worship_sheogorath = yes
 			}
 		}
@@ -13157,6 +13173,10 @@ stress_threshold.2501 = {
 
 	weight_multiplier = {
 		base = 1
+		modifier = {
+			multiply = 0.33
+			is_secretly_worshipping_daedra = yes
+		}
 	}
 	
 	widget = {
@@ -13423,6 +13443,9 @@ stress_threshold.2501 = {
 		stress_threshold_event_aftereffects = yes #Perform stress threshold event clean-up and preparation for future stress threshold events.
 		# Personality
 		remove_character_flag = stress_ambitious_mehrunes
+		remove_character_flag = stress_deceitful_boethiah
+		remove_character_flag = stress_deceitful_mephala
+		remove_character_flag = stress_deceitful_nocturnal
 		remove_character_flag = stress_lustful_mephala
 		remove_character_flag = stress_lustful_sanguine
 		remove_character_flag = stress_sadistic_molag
