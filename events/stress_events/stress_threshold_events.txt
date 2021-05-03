@@ -1,4 +1,5 @@
 ﻿### EK EDIT: Removed references to vanilla religions
+### EK EDIT: Added new events and options (like with Daedra :D)
 
 namespace = stress_threshold
 
@@ -836,42 +837,20 @@ stress_threshold.1011 = {
 
 			add_character_flag = stress_threshold_option_conversion
 			# Only faiths where Lustful is a sin qualify for this conversion (which is brought on by lustful thoughts).
-			# hidden_effect = {
-				# random_list = {
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:catholic }
-							# NOT = { faith = faith:orthodox }
-						# }
-						# faith:catholic = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:orthodox }
-							# NOT = { faith = faith:catholic }
-						# }
-						# faith:orthodox = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:paulician }
-						# }
-						# faith:paulician = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:nestorian }
-						# }
-						# faith:nestorian = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:karaism }
-						# }
-						# faith:karaism = { save_scope_as = new_faith }
-					# }
-				# }
-			# }
+			### EK EDIT: Redid the block from scratch to get an anti-Lustful faith
+			every_religion_global = {
+				every_faith = {
+					if = {
+						limit = { trait_is_sin = lustful }
+						add_to_list = anti_lustful_faiths
+					}
+				}
+			}
+			random_in_list = {
+				limit = { NOT = { root.faith = this } }
+				list = anti_lustful_faiths
+				save_scope_as = new_faith
+			}
 		}
 		if = {
 			limit = {
@@ -996,36 +975,10 @@ stress_threshold.1011 = {
 	option = { # Option C-2: Convert to another Faith (different Religion), massive stress loss.
 		trigger = {
 			has_character_flag = stress_threshold_option_conversion
-			NOT = { faith.religion = scope:new_faith.religion}
+			NOT = { faith.religion = scope:new_faith.religion }
 		}
-		# name = { # Special event option name if converting from an Abrahamic faith to hardline Judaism.
-			# trigger = {
-				# faith = {
-					# has_doctrine = abrahamic_hostility_doctrine
-				# }
-				# scope:new_faith = faith:karaism
-			# }
-			# text = stress_threshold.1011.conversion.judaism
-		# }		
-		# name = { # Special event option name if converting from non-Christianity to Christianity.
-			# trigger = {
-				# faith = {
-					# NOT = { religion_tag = christianity_religion }
-				# }
-				# scope:new_faith = {
-					# religion_tag = christianity_religion
-				# }
-			# }
-			# text = stress_threshold.1011.conversion.christianity
-		# }
-		name = { # Fallback event option when converting from a non-Abrahamic faith to an Abrahamic one.
-			# trigger = {
-				# faith = {
-					# NOT = { has_doctrine = abrahamic_hostility_doctrine }
-				# }
-			# }
-			text = stress_threshold.1011.conversion.intrafaith
-		}
+		name = stress_threshold.1011.conversion.intrafaith
+		
 		ai_chance = {
 			base = 1
 			modifier = {
@@ -1101,6 +1054,16 @@ stress_threshold.1011 = {
 				has_trait = stubborn  
 			}
 		}
+	}
+	
+	option = { # EK Option F: Secretly worship Hermaeus Mora, surely that will help
+		trigger = { can_secretly_worship_hermaeus = yes }
+		
+		name = stress_threshold.1011.hermaeus
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		
+		add_stress = medium_stress_impact_loss
 	}
 
 	after = {
@@ -13133,6 +13096,345 @@ stress_threshold.2351 = {
 	}
 }
 
+##################################################
+# Daedric Whispers
+# #2501
+##################################################
+
+# You feel the whispers of the Daedric Princes, preying on your sins and weaknesses...
+# Pick 3 Princes based on your traits
+stress_threshold.2501 = {
+	type = character_event
+	title = stress_threshold.2501.t
+	desc = stress_threshold.2501.desc
+	theme = mental_break
+	
+	override_background = {
+		event_background = throne_room
+	}
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+
+	trigger = {
+		#Landless characters & barons don't need fancy events.
+		is_landed = yes
+		primary_title.tier >= tier_county
+		
+		# You need at least one relevant trait and the ability to worship one Prince in secret
+		OR = {
+			# Personality traits
+			AND = {
+				has_trait = lustful				# Sanguine/Mephala
+				OR = {
+					can_secretly_worship_mephala = yes
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = ambitious			# Mehrunes Dagon
+				can_secretly_worship_mehrunes = yes
+			}
+			AND = {
+				has_trait = sadistic			# Molag Bal
+				can_secretly_worship_molag = yes
+			}
+			
+			# Lifestyles
+			AND = {
+				has_trait = lifestyle_hunter	# Hircine
+				can_secretly_worship_hircine = yes
+			}
+			
+			# Special traits
+			AND = {
+				has_trait = lunatic				# Sheogorath
+				can_secretly_worship_sheogorath = yes
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+	}
+	
+	widget = {
+		gui = "event_window_widget_stress"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		root = { save_scope_as = stress_character } #For stress widget.
+
+		set_while_counter_variable_effect = yes
+		#Event option set-up to determine which event options we want to offer to the player.
+		while = {
+			limit = { var:while_counter < 3 }
+			random_list = {
+				# Personality traits
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_ambitious_mehrunes }
+						AND = {
+							has_trait = ambitious
+							can_secretly_worship_mehrunes = yes
+						}
+					}
+					add_character_flag = stress_ambitious_mehrunes
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_deceitful_boethiah }
+						AND = {
+							has_trait = deceitful
+							can_secretly_worship_boethiah = yes
+						}
+					}
+					add_character_flag = stress_deceitful_boethiah
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_deceitful_mephala }
+						AND = {
+							has_trait = deceitful
+							can_secretly_worship_mephala = yes
+						}
+					}
+					add_character_flag = stress_deceitful_mephala
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_deceitful_nocturnal }
+						AND = {
+							has_trait = deceitful
+							can_secretly_worship_nocturnal = yes
+						}
+					}
+					add_character_flag = stress_deceitful_nocturnal
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_lustful_mephala }
+						AND = {
+							has_trait = lustful
+							can_secretly_worship_mephala = yes
+						}
+					}
+					add_character_flag = stress_lustful_mephala
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_lustful_sanguine }
+						AND = {
+							has_trait = lustful
+							can_secretly_worship_sanguine = yes
+						}
+					}
+					add_character_flag = stress_lustful_sanguine
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_sadistic_molag }
+						AND = {
+							has_trait = sadistic
+							can_secretly_worship_molag = yes
+						}
+					}
+					add_character_flag = stress_sadistic_molag
+				}
+				20 = {
+					trigger = {
+						NOT = { has_character_flag = stress_zealous_meridia }
+						AND = {
+							has_trait = zealous
+							can_secretly_worship_meridia = yes
+						}
+					}
+					add_character_flag = stress_zealous_meridia
+				}
+				# Lifestyles
+				40 = {
+					trigger = {
+						NOT = { has_character_flag = stress_herbalist_vaermina }
+						AND = {
+							has_trait = lifestyle_herbalist
+							can_secretly_worship_vaermina = yes
+						}
+					}
+					add_character_flag = stress_herbalist_vaermina
+				}
+				40 = {
+					trigger = {
+						NOT = { has_character_flag = stress_hunter_hircine }
+						AND = {
+							has_trait = lifestyle_hunter
+							can_secretly_worship_hircine = yes
+						}
+					}
+					add_character_flag = stress_hunter_hircine
+				}
+				# Special
+				40 = {
+					trigger = {
+						NOT = { has_character_flag = stress_lunatic_sheogorath }
+						AND = {
+							has_trait = lunatic
+							can_secretly_worship_sheogorath = yes
+						}
+					}
+					add_character_flag = stress_lunatic_sheogorath
+				}
+			}
+			increase_while_counter_variable_effect = yes
+		}
+		remove_while_counter_variable_effect = yes
+		
+		stress_threshold_event_post_immediate = yes
+	}
+	
+	# Personality traits
+	option = { # Ambitious - Mehrunes Dagon
+		trigger = { has_character_flag = stress_ambitious_mehrunes }
+		name = stress_threshold.2501.stress_ambitious_mehrunes
+		
+		trait = ambitious
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Deceitful - Boethiah
+		trigger = { has_character_flag = stress_deceitful_mephala }
+		name = stress_threshold.2501.stress_deceitful_mephala
+		
+		trait = deceitful
+		
+		give_boethiah_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Deceitful - Nocturnal
+		trigger = { has_character_flag = stress_deceitful_nocturnal }
+		name = stress_threshold.2501.stress_deceitful_nocturnal
+		
+		trait = deceitful
+		
+		give_nocturnal_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Deceitful - Mephala
+		trigger = { has_character_flag = stress_lustful_mephala }
+		name = stress_threshold.2501.stress_lustful_mephala
+		
+		trait = deceitful
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Lustful - Mephala
+		trigger = { has_character_flag = stress_lustful_mephala }
+		name = stress_threshold.2501.stress_lustful_mephala
+		
+		trait = lustful
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Lustful - Sanguine
+		trigger = { has_character_flag = stress_lustful_sanguine }
+		name = stress_threshold.2501.stress_lustful_sanguine
+		
+		trait = lustful
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Sadistic - Molag Bal
+		trigger = { has_character_flag = stress_sadistic_molag }
+		name = stress_threshold.2501.stress_sadistic_molag
+		
+		trait = sadistic
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Zealous - Meridia
+		trigger = { has_character_flag = stress_zealous_meridia }
+		name = stress_threshold.2501.stress_zealous_meridia
+		
+		trait = zealous
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Lifestyles
+	option = { # Herbalist - Vaermina
+		trigger = { has_character_flag = stress_herbalist_vaermina }
+		name = stress_threshold.2501.stress_herbalist_vaermina
+		
+		trait = lifestyle_herbalist
+		
+		give_vaermina_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	option = { # Hunter - Hircine
+		trigger = { has_character_flag = stress_hunter_hircine }
+		name = stress_threshold.2501.stress_hunter_hircine
+		
+		trait = hunter_1
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Special
+	option = { # Lunatic - Sheogorath
+		trigger = { has_character_flag = stress_lunatic_sheogorath }
+		name = stress_threshold.2501.stress_lunatic_sheogorath
+		
+		trait = lunatic_1
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+
+	#Grit your teeth and push through.
+	option = {
+		name = stress_threshold.2501.no
+
+		#Account for stress.
+		stress_impact = {
+			base = medium_stress_impact_gain
+			zealous = minor_stress_impact_loss
+		}
+
+		ai_chance = { base = 0 }	#AI should never opt for stress.
+	}
+
+	after = {
+		stress_threshold_event_aftereffects = yes #Perform stress threshold event clean-up and preparation for future stress threshold events.
+		# Personality
+		remove_character_flag = stress_ambitious_mehrunes
+		remove_character_flag = stress_lustful_mephala
+		remove_character_flag = stress_lustful_sanguine
+		remove_character_flag = stress_sadistic_molag
+		remove_character_flag = stress_zealous_meridia
+		# Lifestyles
+		remove_character_flag = stress_herbalist_vaermina
+		remove_character_flag = stress_hunter_hircine
+		# Special
+		remove_character_flag = stress_lunatic_sheogorath
+	}
+}
+
 ##################################################################################################################################################################
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ TIER 3 STRESS EVENTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 ##################################################################################################################################################################
@@ -13218,6 +13520,17 @@ stress_threshold.3001 = {
 		add_prestige_level = -1
 		add_stress = major_stress_impact_loss
 	}	
+	
+	# EK Option C: Sheogorath is the answer, of course
+	option = {
+		trigger = { can_secretly_worship_sheogorath = yes }
+		
+		name = stress_threshold.3001.sheogorath
+
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+
+		add_stress = medium_stress_impact_loss
+	}
 	
 	after = {
 		stress_threshold_event_aftereffects = yes # Perform stress threshold event clean-up and preparation for future stress threshold events.
@@ -14374,6 +14687,17 @@ stress_threshold.3401 = {
 		ai_chance = { base = 0 }	#AI should never opt for stress.
 	}
 
+	# EK Option: Mephala and her Spinning Web will help
+	option = {
+		trigger = { can_secretly_worship_mephala = yes }
+		
+		name = stress_threshold.3401.mephala
+
+		give_mephala_worshipper_secret_or_trait_effect = yes
+
+		add_stress = medium_stress_impact_loss
+	}
+	
 	after = {
 		stress_threshold_event_aftereffects = yes #Perform stress threshold event clean-up and preparation for future stress threshold events.
 
