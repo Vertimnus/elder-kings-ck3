@@ -1270,13 +1270,21 @@ window = {
 											name = "patron_button"
 											layoutpolicy_horizontal = expanding
 											size = { 0 140 }
-											#alwaystransparent = yes
+
+											# state = {
+											# 	name = _mouse_hierarchy_enter
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_enter')]"
+											# }
+
+											# state = {
+											# 	name = _mouse_hierarchy_leave
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_leave')]"
+											# }
 
 											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
 											#down = has trait
 											enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
 											#onclick = give trait - this and down need 1.4 commands to pass flags
-
 
 											background = {
 												margin = { 100 35 }
@@ -1306,9 +1314,27 @@ window = {
 												spacing = 7
 
 												highlight_icon = {
+													name = "patron_icon"
 													size = { 120 120 }
 													texture = "[Trait.GetIcon(GetNullCharacter)]"
-													#texture = "[Trait.GetIcon(GetPlayer.MakeScope.Var('dummy_var').Char)]" #global for 1.4
+
+													# state = {
+													# 	name = "patron_glow_hover_enter"
+													# 	glow_alpha = 0.25
+													# }
+													# state = {
+													# 	name = "patron_glow_hover_leave"
+													# 	glow_alpha = 0.0
+													# }
+
+													# glow = {
+													# 	name = "patron_icon_glow"
+													# 	alpha = 0
+													# 	using = Color_Orange
+													# 	using = Glow_Standard
+
+													# 	glow_radius = 2
+													# }
 												}
 
 												divider_light = {
