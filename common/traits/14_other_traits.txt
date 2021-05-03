@@ -7,10 +7,10 @@
 @neg_compat_medium = -15
 @neg_compat_low = -5
 
-# Index range: 426-500
+# Index range: 451-500
 
 chakravarti = {
-	index = 426
+	index = 451
 	fame = yes
 
 	diplomacy = 2
@@ -40,7 +40,7 @@ chakravarti = {
 }
 
 greatest_of_khans = {
-	index = 427
+	index = 452
 	fame = yes
 
 	diplomacy = 2
@@ -75,7 +75,7 @@ greatest_of_khans = {
 }
 
 augustus = {
-	index = 428
+	index = 453
 	
 	vassal_opinion = 10
 	fame = yes
@@ -97,7 +97,7 @@ augustus = {
 }
 
 berserker = {
-	index = 429
+	index = 454
 	#potential = {
 		#OR = {
 			#religion = norse_pagan
@@ -133,7 +133,7 @@ berserker = {
 }
 
 varangian = {
-	index = 430
+	index = 455
 	fame = yes
 	diplomacy = 1
 	martial = 2
@@ -160,7 +160,7 @@ varangian = {
 }
 
 viking = {
-	index = 431
+	index = 456
 	fame = yes
 
 	martial = 2
@@ -203,7 +203,7 @@ viking = {
 }
 
 adventurer = {
-	index = 432
+	index = 457
 	fame = yes
 
 	general_opinion = -10
@@ -237,7 +237,7 @@ adventurer = {
 }
 
 heresiarch = {
-	index = 433
+	index = 458
 	fame = yes
 	martial = 2
 	learning = 2
@@ -267,8 +267,8 @@ heresiarch = {
 }
 
 peasant_leader = {
-	index = 434
-		fame = yes
+	index = 459
+	fame = yes
 
 	same_opinion = 25
 	general_opinion = -10
@@ -290,106 +290,8 @@ peasant_leader = {
 	}
 }
 
-undead_character = {
-	index = 435
-	
-	triggered_opinion = {
-		parameter = undeath_criminal
-		opinion_modifier = necromancy_crime
-		ignore_opinion_value_if_same_trait = yes
-	}
-	# triggered_opinion = {
-		# parameter = undeath_shunned
-		# opinion_modifier = necromancy_intolerant
-		# ignore_opinion_value_if_same_trait = yes
-	# }
-}
-
-lycan_character = {
-	index = 436
-	
-	triggered_opinion = {
-		parameter = lycanthropy_criminal
-		opinion_modifier = lycanthropy_crime
-		ignore_opinion_value_if_same_trait = yes
-	}
-	triggered_opinion = {
-		parameter = lycanthropy_shunned
-		opinion_modifier = lycanthropy_intolerant
-		ignore_opinion_value_if_same_trait = yes
-	}
-}
-
-vampire_character = {
-	index = 437
-	
-	immortal = yes
-	monthly_lifestyle_xp_gain_mult = -0.9
-	monthly_prestige_gain_mult = -0.45
-	monthly_piety_gain_mult = -0.45
-	stress_gain_mult = 0.35
-	fertility = -0.6
-	
-	triggered_opinion = {
-		parameter = vampirism_criminal
-		opinion_modifier = vampirism_crime
-		ignore_opinion_value_if_same_trait = yes
-	}
-	triggered_opinion = {
-		parameter = vampirism_shunned
-		opinion_modifier = vampirism_intolerant
-		ignore_opinion_value_if_same_trait = yes
-	}
-}
-
-necromancer_character = {
-	index = 438
-	
-	triggered_opinion = {
-		parameter = necromancy_criminal
-		opinion_modifier = necromancy_crime
-		ignore_opinion_value_if_same_trait = yes
-	}
-	triggered_opinion = {
-		parameter = necromancy_shunned
-		opinion_modifier = necromancy_intolerant
-		ignore_opinion_value_if_same_trait = yes
-	}
-}
-
-line_of_x = {
-	index = 450
-	
-	shown_in_ruler_designer = no
-	shown_in_encyclopedia = no
-
-	name = {
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					NOT = { exists = this }
-				}
-				desc = trait_line_of_x_null
-			}
-			desc = trait_line_of_x
-		}
-	}
-
-	desc = {
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					NOT = { exists = this }
-				}
-				desc = trait_line_of_x_null_desc
-			}
-			desc = trait_line_of_x_desc
-		}
-	}
-}
-
 shieldmaiden = {
-	index = 451
+	index = 460
 	
 	fame = yes
 	martial = 3
@@ -435,7 +337,7 @@ shieldmaiden = {
 }
 
 poet = {
-	index = 452
+	index = 461
 	diplomacy_per_prestige_level = 1
 	stress_loss_mult = 0.1
 	
@@ -471,9 +373,109 @@ poet = {
 	ai_sociability = low_positive_ai_value
 }
 
-### EK specific trait
+### EK NOTE: Enough space to add 4 more vanilla traits if needed
+### EK EDIT: Added our own traits
+
+line_of_x = {
+	index = 466
+	
+	shown_in_ruler_designer = no
+	shown_in_encyclopedia = no
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_line_of_x_null
+			}
+			desc = trait_line_of_x
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_line_of_x_null_desc
+			}
+			desc = trait_line_of_x_desc
+		}
+	}
+}
+
+undead_character = {
+	index = 467
+	
+	triggered_opinion = {
+		parameter = undeath_criminal
+		opinion_modifier = necromancy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	# triggered_opinion = {
+		# parameter = undeath_shunned
+		# opinion_modifier = necromancy_intolerant
+		# ignore_opinion_value_if_same_trait = yes
+	# }
+}
+
+lycan_character = {
+	index = 468
+	
+	triggered_opinion = {
+		parameter = lycanthropy_criminal
+		opinion_modifier = lycanthropy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = lycanthropy_shunned
+		opinion_modifier = lycanthropy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}
+
+vampire_character = {
+	index = 469
+	
+	immortal = yes
+	monthly_lifestyle_xp_gain_mult = -0.9
+	monthly_prestige_gain_mult = -0.45
+	monthly_piety_gain_mult = -0.45
+	stress_gain_mult = 0.35
+	fertility = -0.6
+	
+	triggered_opinion = {
+		parameter = vampirism_criminal
+		opinion_modifier = vampirism_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = vampirism_shunned
+		opinion_modifier = vampirism_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}
+
+necromancer_character = {
+	index = 470
+	
+	triggered_opinion = {
+		parameter = necromancy_criminal
+		opinion_modifier = necromancy_crime
+		ignore_opinion_value_if_same_trait = yes
+	}
+	triggered_opinion = {
+		parameter = necromancy_shunned
+		opinion_modifier = necromancy_intolerant
+		ignore_opinion_value_if_same_trait = yes
+	}
+}
+
 pirate = {
-	index = 453
+	index = 471
 	
 	can_inherit = no
 	blocks_from_claim_inheritance = yes
