@@ -30,44 +30,56 @@
 
 # Valid Triggers - tenets, doctrines and anything alse allowing a patron should be here
 
-#You also cannot consider Daedric Worship criminal
-#If Daedric worship is shunned they you can only access the patrons defined in your pantheon
-#If Daedric worship is totally accepted then you can interact with all the Princes, but it'll be far easier to get stuff from those in your pantheon (handled in desicions - trigger prince_in_pantheon)
-#Or if you have the Daedric Bargains tenet, syncretism or associated
+# If your faith allows the Daedric Prince's worship, then you're good
+# If not, you need the relevant secret or trait
 
 # Daedra #
 is_worshipping_daedra = {
-	OR = {
-		has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
-		has_doctrine_parameter = worship_$DAEDRA$_allowed_active
+	faith = {
+		OR = {
+			has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
+			has_doctrine_parameter = worship_$DAEDRA$_allowed_active
+		}
 	}
 }
 
 patron_daedra_valid = {
-	# Doctrines and tenets are aligned with $DAEDRA$
 	is_worshipping_daedra = { DAEDRA = $DAEDRA$ }
-	# Faith is not centered around a single Prince, or if it is it's around this Prince
-	has_doctrine_parameter = adds_$DAEDRA$_pantheon_active
 }
 
 patron_azura_valid = {
-	patron_daedra_valid = { DAEDRA = azura }
+	OR = {
+		patron_daedra_valid = { DAEDRA = azura }
+		is_secretly_worshipping_azura = yes
+	}
 }
 
 patron_boethiah_valid = {
-	patron_daedra_valid = { DAEDRA = boethiah }
+	OR = {
+		patron_daedra_valid = { DAEDRA = boethiah }
+		is_secretly_worshipping_boethiah = yes
+	}
 }
 
 patron_clavicus_valid = {
-	patron_daedra_valid = { DAEDRA = clavicus }
+	OR = {
+		patron_daedra_valid = { DAEDRA = clavicus }
+		is_secretly_worshipping_clavicus = yes
+	}
 }
 
 patron_hermaeus_valid = {
-	patron_daedra_valid = { DAEDRA = hermaeus }
+	OR = {
+		patron_daedra_valid = { DAEDRA = hermaeus }
+		is_secretly_worshipping_hermaeus = yes
+	}
 }
 
 patron_hircine_valid = {
-	patron_daedra_valid = { DAEDRA = hircine }
+	OR = {
+		patron_daedra_valid = { DAEDRA = hircine }
+		is_secretly_worshipping_hircine = yes
+	}
 }
 
 patron_jyggalag_valid = {
@@ -75,47 +87,80 @@ patron_jyggalag_valid = {
 }
 
 patron_malacath_valid = {
-	patron_daedra_valid = { DAEDRA = malacath }
+	OR = {
+		patron_daedra_valid = { DAEDRA = malacath }
+		is_secretly_worshipping_malacath = yes
+	}
 }
 
 patron_mehrunes_valid = {
-	patron_daedra_valid = { DAEDRA = mehrunes }
+	OR = {
+		patron_daedra_valid = { DAEDRA = mehrunes }
+		is_secretly_worshipping_mehrunes = yes
+	}
 }
 
 patron_mephala_valid = {
-	patron_daedra_valid = { DAEDRA = mephala }
+	OR = {
+		patron_daedra_valid = { DAEDRA = mephala }
+		is_secretly_worshipping_mephala = yes
+	}
 }
 
 patron_meridia_valid = {
-	patron_daedra_valid = { DAEDRA = meridia }
+	OR = {
+		patron_daedra_valid = { DAEDRA = meridia }
+		is_secretly_worshipping_meridia = yes
+	}
 }
 
 patron_molag_valid = {
-	patron_daedra_valid = { DAEDRA = molag }
+	OR = {
+		patron_daedra_valid = { DAEDRA = molag }
+		is_secretly_worshipping_molag = yes
+	}
 }
 
 patron_namira_valid = {
-	patron_daedra_valid = { DAEDRA = namira }
+	OR = {
+		patron_daedra_valid = { DAEDRA = namira }
+		is_secretly_worshipping_namira = yes
+	}
 }
 
 patron_nocturnal_valid = {
-	patron_daedra_valid = { DAEDRA = nocturnal }
+	OR = {
+		patron_daedra_valid = { DAEDRA = nocturnal }
+		is_secretly_worshipping_nocturnal = yes
+	}
 }
 
 patron_peryite_valid = {
-	patron_daedra_valid = { DAEDRA = peryite }
+	OR = {
+		patron_daedra_valid = { DAEDRA = peryite }
+		is_secretly_worshipping_peryite = yes
+	}
 }
 
 patron_sanguine_valid = {
-	patron_daedra_valid = { DAEDRA = sanguine }
+	OR = {
+		patron_daedra_valid = { DAEDRA = sanguine }
+		is_secretly_worshipping_sanguine = yes
+	}
 }
 
 patron_sheogorath_valid = {
-	patron_daedra_valid = { DAEDRA = sheogorath }
+	OR = {
+		patron_daedra_valid = { DAEDRA = sheogorath }
+		is_secretly_worshipping_sheogorath = yes
+	}
 }
 
 patron_vaermina_valid = {
-	patron_daedra_valid = { DAEDRA = vaermina }
+	OR = {
+		patron_daedra_valid = { DAEDRA = vaermina }
+		is_secretly_worshipping_vaermina = yes
+	}
 }
 
 # Tribunal #
