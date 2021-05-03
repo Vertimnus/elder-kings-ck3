@@ -170,36 +170,177 @@ ek_religious_decision.0001 = {
 	### Generic
 	option = {
 		trigger = { exists = local_var:glorified_pilgrimage_flag }
-		name = single_combat.0001.glorified_pilgrimage
+		name = ek_religious_decision.0001.glorified_pilgrimage
+		custom_tooltip = ek_religious_decision.0001.glorified_pilgrimage.tt
 	}
 	option = {
 		trigger = { exists = local_var:fight_scary_monster_flag }
-		name = single_combat.0001.fight_scary_monster
+		name = ek_religious_decision.0001.fight_scary_monster
+		custom_tooltip = ek_religious_decision.0001.fight_scary_monster.tt
 	}
 	
 	### Specific
 	# Negative (fight)
 	option = {
 		trigger = { exists = local_var:kill_lycanthrope_flag }
-		name = single_combat.0001.kill_lycanthrope
+		name = ek_religious_decision.0001.kill_lycanthrope
+		custom_tooltip = ek_religious_decision.0001.kill_lycanthrope.tt
 	}
 	option = {
 		trigger = { exists = local_var:kill_vampire_flag }
-		name = single_combat.0001.kill_vampire
+		name = ek_religious_decision.0001.kill_vampire
+		custom_tooltip = ek_religious_decision.0001.kill_vampire.tt
+		
+		trigger_event = ek_religious_decision.0014
 	}
 	
 	# Positive (gain potential virtue)
 	option = {
 		trigger = { exists = local_var:become_cannibal_flag }
-		name = single_combat.0001.become_cannibal
+		name = ek_religious_decision.0001.become_cannibal
+		custom_tooltip = ek_religious_decision.0001.become_cannibal.tt
 	}
 	option = {
 		trigger = { exists = local_var:become_lycanthrope_flag }
-		name = single_combat.0001.become_lycanthrope
+		name = ek_religious_decision.0001.become_lycanthrope
+		custom_tooltip = ek_religious_decision.0001.become_lycanthrope.tt
 	}
 	option = {
 		trigger = { exists = local_var:become_vampire_flag }
-		name = single_combat.0001.become_vampire
+		name = ek_religious_decision.0001.become_vampire
+		custom_tooltip = ek_religious_decision.0001.become_vampire.tt
+	}
+}
+
+# We picked 'Kill a Vampire'
+ek_religious_decision.0014 = {
+	type = character_event
+	title = ek_religious_decision.0014.t
+	desc = ek_religious_decision.0014.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = personality_zealous
+	}
+	
+	# Fight the Vampire one on one
+	option = {
+		name = ek_religious_decision.0014.a
+		custom_tooltip = ek_religious_decision.0014.a.tt
+		
+		duel = {
+			skill = prowess
+			value = 10
+			25 = { # ez win
+				desc = ek_religious_decision.0014.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				custom_tooltip = ek_religious_decision.0014.a.tt_success
+				add_prestige = medium_prestige_gain
+				set_local_variable = {
+					name = rite_of_passage_success
+					value = yes
+				}
+			}
+			25 = { # win but wounded
+				desc = ek_religious_decision.0014.a.success_wounded
+				custom_tooltip = ek_religious_decision.0014.a.tt_success_wounded
+				add_prestige = medium_prestige_gain
+				increase_wounds_effect = { REASON = death_heart_ripped_out }
+				set_local_variable = {
+					name = rite_of_passage_success
+					value = yes
+				}
+			}
+			25 = { # win but maimed
+				desc = ek_religious_decision.0014.a.success_maimed
+				custom_tooltip = ek_religious_decision.0014.a.tt_success_maimed
+				add_prestige = medium_prestige_gain
+				increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+				set_local_variable = {
+					name = rite_of_passage_success
+					value = yes
+				}
+			}
+			25 = { # loss and maimed
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -1
+				}
+				desc = ek_religious_decision.0014.a.failure
+				custom_tooltip = ek_religious_decision.0014.a.tt_failure
+				increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+			}
+		}
+	}
+	# Rouse up some locals to fight with you
+	# Convince the vampire to leave the area
+	# Yeah, actually that sounds like a stupid idea
+	
+	after = {
+		if = {
+			limit = { exists = local_var:rite_of_passage_success }
+			trigger_event = ek_religious_decision.0050
+		}
+		else = { trigger_event = ek_religious_decision.0051 }
+	}
+}
+
+## Rite of Passage - Success
+# Have a special desc for each type of trial
+ek_religious_decision.0050 = {
+	type = character_event
+	title = ek_religious_decision.0050.t
+	desc = ek_religious_decision.0050.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = personality_zealous
+	}
+	
+	option = {
+		name = ek_religious_decision.0050.a
+		
+		add_prestige = medium_prestige_gain
+		add_piety = medium_piety_gain
+		add_dynasty_prestige = miniscule_dynasty_prestige_gain
+		
+		add_character_modifier = {
+			modifier = rite_of_passage_sucess_modifier
+			years = 10
+		}
+		
+		stress_impact = {
+			zealous = minor_stress_loss
+		}
+	}
+}
+
+## Rite of Passage - Failure
+# Have a special desc for each type of trial
+ek_religious_decision.0051 = {
+	type = character_event
+	title = ek_religious_decision.0051.t
+	desc = ek_religious_decision.0051.desc
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = personality_zealous
+	}
+	
+	option = {
+		name = ek_religious_decision.0051.a
+		add_prestige = minor_prestige_loss
+		add_piety = minor_piety_loss
+		
+		stress_impact = {
+			zealous = minor_stress_gain
+		}
 	}
 }
 
@@ -669,7 +810,7 @@ ek_religious_decision.0401 = {
 				}
 				scope:leader_council_eight_former_title = {
 					change_title_holder = {
-						holder = prev
+						holder = scope:former_hof
 						change = scope:change
 					}
 				}

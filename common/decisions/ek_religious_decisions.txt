@@ -323,7 +323,7 @@ rite_of_passage_decision = {
 	major = yes
 
 	is_shown = {
-		always = no # WIP
+		# always = no # WIP
 		faith = { has_doctrine_parameter = rite_of_passage_decision_active }
 	}
 
@@ -344,6 +344,21 @@ rite_of_passage_decision = {
 		if = {
 			limit = { faith = { has_doctrine = doctrine_lycanthropy_accepted } }
 			custom_tooltip = rite_of_passage_decision_lycanthropy_legal_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_lycanthropy_outlawed } }
+			custom_tooltip = rite_of_passage_decision_lycanthropy_outlawed_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirism_accepted } }
+			custom_tooltip = rite_of_passage_decision_vampirism_legal_tt
+		}
+		
+		if = {
+			limit = { faith = { has_doctrine = doctrine_vampirism_outlawed } }
+			custom_tooltip = rite_of_passage_decision_vampirism_outlawed_tt
 		}
 		
 		trigger_event = ek_religious_decision.0001
@@ -491,12 +506,19 @@ council_of_the_eight_assume_leadership_decision = {
 		# You need 3 holy sites of your faith
 		any_realm_county = {
 			count = 3
-			any_in_de_jure_hierarchy = {
-				tier = tier_barony
-				is_holy_site_of = root.faith
+			custom_description = {
+				text = has_3_holy_site_your_faith
+				any_in_de_jure_hierarchy = {
+					tier = tier_barony
+					is_holy_site_of = root.faith
+				}
 			}
 		}
 		
+		custom_description = { # If we can have the numbers in the tooltip
+			text = faith_has_more_county_followers_leader_council
+			root.faith = { num_county_followers > global_var:leader_council_eight.num_county_followers }
+		}
 		root.faith = { num_county_followers > global_var:leader_council_eight.num_county_followers }
 	}
 	
