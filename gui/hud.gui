@@ -74,16 +74,6 @@ widget = {
 	size = { 100% 100% }
 	layer = middle
 
-	state = {
-		name = _show # may need to fire cleanup scripted gui for every_player
-		#on_start = "[ExecuteConsoleCommand( 'effect [{trigger_event = { on_action = ek_on_save_load } }]' )]" #VARTODO - make this script based
-		on_start = "[GetScriptedGui('on_save_load').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-	}
-	# state = { #theoretically clears it when going to the main menu, may be anytime the pause menu is shown though
-	# 	name = _hide
-	# 	on_start = "[GetVariableSystem.Clear('save_loaded')]"
-	# }
-
 	### Alerts
 	notifications_alerts = {
 		visible = "[Not( IsPauseMenuShown )]"
@@ -189,7 +179,7 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										visible = "[GreaterThanOrEqualTo_CFixedPoint(GetPlayer.GetGold, '(CFixedPoint)0')]"
 										text = "[GetPlayer.GetGold|0]"
-										max_width = 50
+										max_width = 45
 										default_format = "#high"
 										using = Font_Size_Medium
 									}
@@ -201,7 +191,7 @@ widget = {
 
 
 										text = "[GetPlayer.GetGold|0]"
-										max_width = 50
+										max_width = 45
 										default_format = "#N"
 										using = Font_Size_Medium
 									}
@@ -213,7 +203,7 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										text = "CURRENT_BALANCE"
 
-										max_width = 50
+										max_width = 45
 										default_format = "#low"
 									}
 
@@ -224,7 +214,7 @@ widget = {
 										layoutpolicy_horizontal = expanding
 										text = "CURRENT_BALANCE"
 
-										max_width = 50
+										max_width = 45
 										default_format = "#N"
 									}
 								}
@@ -263,7 +253,7 @@ widget = {
 								text_single = {
 									name = "prestige_value"
 									text = "[GetPlayer.GetPrestige|0]"
-									max_width = 50
+									max_width = 45
 									default_format = "#high"
 									using = Font_Size_Medium
 								}
@@ -317,7 +307,7 @@ widget = {
 										name = "piety_value"
 										text = "[GetPlayer.GetPiety|0]"
 
-										max_width = 50
+										max_width = 45
 										default_format = "#high"
 										using = Font_Size_Medium
 									}
@@ -377,7 +367,7 @@ widget = {
 										name = "prestige_value"
 										text = "[GetPlayer.GetDynasty.GetPrestige|0]"
 
-										max_width = 50
+										max_width = 45
 										default_format = "#high"
 										using = Font_Size_Medium
 									}
@@ -395,7 +385,7 @@ widget = {
 										name = "prestige_value_nodynast"
 										text = "[GetPlayer.GetDynasty.GetPrestige|0]"
 
-										max_width = 50
+										max_width = 45
 										default_format = "#low"
 										using = Font_Size_Medium
 									}

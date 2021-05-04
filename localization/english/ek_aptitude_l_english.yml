@@ -157,12 +157,17 @@
  spell_caster:0 "You begin casting a spell on [SelectLocalization( ObjectsEqual(CHARACTER.Self, TARGET_CHARACTER.Self), 'yourself', TARGET_CHARACTER.GetShortUINameNoTooltip)]"
  spell_castee:0 "[CHARACTER.GetShortUINameNoTooltip] will have a spell cast on them by [TARGET_CHARACTER.GetShortUINameNoTooltip]"
  SPELLBOOK:0 "Spellbook"
+ NO_VALID_COUNTIES:0 "No Valid Counties"
  spell_casting_info:0 "$spell_casting_info_caster$ casting a spell on $spell_casting_info_castee$.\n\n$spell_casting_info_magicka$"
  spell_casting_info_caster:0 "#high [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), 'You#! are', Concatenate(GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip, '#! is'))]"
- spell_casting_info_castee:0 "[SelectLocalization( GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet, 'spell_casting_info_castee_prov', 'spell_casting_info_castee_char' )]"
+ spell_casting_info_castee:0 "[SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_province')), '(CFixedPoint)1' ), 'spell_casting_info_castee_prov', 'spell_casting_info_castee_char' )]"
  #spell_casting_info_castee_char:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char), '#high yourself#!', GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip )]" # fails for cm player->player -> you, yourself | cm->player -> name, you | cm->cm -> name, themself | player->other/cm -> you, name | cm->other -> | name, name | caster=recipient(caster=player(yourself,themself),recipient=player(you,name)) 
  spell_casting_info_castee_char:0 "#high [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_recipient').Char, GetPlayer.MakeScope.Var('spell_caster').Char), Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), 'yourself', 'themself' ), GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip )]#!" # caster=recipient(caster=player(yourself,themself),recipient=player(you,name)) 
- spell_casting_info_castee_prov:0 "the #high [GetPlayer.MakeScope.Var('spell_county').Title.GetName]#!" #need to block this for unlanded/invalid chars
+ spell_casting_info_castee_prov:0 "[SelectLocalization( GetPlayer.MakeScope.Var('spell_county').IsSet, 'spell_casting_info_castee_prov_valid', 'spell_casting_info_castee_prov_invalid' )]"
+ spell_casting_info_castee_prov_valid:0 "the #high [GetPlayer.MakeScope.Var('spell_county').Title.GetName]#!" #need to block this for unlanded/invalid chars
+ spell_casting_info_castee_prov_invalid:0 "one of [GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINamePossessive|U] [counties|E], but [SelectLocalization( GetPlayer.MakeScope.Var('spell_recipient').Char.IsRuler, 'spell_casting_info_castee_prov_none_valid', 'spell_casting_info_castee_prov_has_none' )]"
+ spell_casting_info_castee_prov_none_valid:0 "none are valid"
+ spell_casting_info_castee_prov_has_none:0 "[GetPlayer.MakeScope.Var('spell_recipient').Char.GetSheHe] has none"
  spell_casting_info_magicka:0 "#high [GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip]#! currently [Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), 'have', 'has')]: [magicka_i][GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope.Var('magicka').GetValue|V0]/[GuiScope.SetRoot( GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope ).ScriptValue('magicka_max')|V0]"
  school_alteration:0 "#T Alteration#!"
  school_conjuration:0 "#T Conjuration#!"
@@ -175,73 +180,63 @@
  change_county_target:0 "Change Target County"
 
  NO_SPELLS:0 "No Spells"
- spell_province:0 "[GetPlayer.MakeScope.Var('spell_school').GetFlagName]_spell_[ROOT.Province.GetId]" # SpellProvince
- spell_stem_char:0 "[GetPlayer.MakeScope.Var('spell_school').GetFlagName]_spell_[GetPlayer.MakeScope.Var('spell_selected').GetFlagName]" # SpellStemChar
- spell_stem_prov:0 "[GetPlayer.MakeScope.Var('spell_school').GetFlagName]_spell_[Localize( ROOT.Province.Custom('SpellProvince') )]" # SpellStemProv
- spell_is_hostile_char:0 "[Localize( Concatenate( Localize( GetPlayer.Custom( 'SpellStemChar' ) ), '_hostile' ) )]" # SpellHostileChar
- spell_is_hostile_prov:0 "[Localize( Concatenate( Localize( ROOT.Province.Custom('SpellStemProv') ), '_hostile' ) )]" # SpellHostileProv
- spell_is_province_char:0 "[Localize( Concatenate( Localize( GetPlayer.Custom( 'SpellStemChar' ) ), '_province' ) )]" # SpellProvinceChar
- spell_is_province_prov:0 "[Localize( Concatenate( Localize( ROOT.Province.Custom('SpellStemProv') ), '_province' ) )]" # SpellProvinceProv
 
- spell_name:0 "[Localize( Concatenate( Localize( Scope.Province.Custom('SpellStemProv') ), '_name' ) )]"
- spell_cost:0 "#size:11 [magicka_i] #! [GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue(Concatenate('spell_cost_', Localize(Scope.Province.Custom('SpellProvince'))))|0]"
- spell_hostile:0 "#N [Localize( Concatenate( Localize( Scope.Province.Custom('SpellStemProv') ), '_name' ) )] is considered hostile#!"
- spell_type_province:0 "[Localize( Concatenate( Localize( Scope.Province.Custom('SpellStemProv') ), '_name' ) )] is cast on a [county|E]"
- spell_invalid:0 "#N You have not learned [Localize( Concatenate( Localize( Scope.Province.Custom('SpellStemProv') ), '_name' ) )]#!"
+ spell_name:0 "[Localize( Concatenate(  Scope.Var('spell').GetFlagName, '_name' ) )]"
+ spell_cost:0 "#size:11 [magicka_i] #! [EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_cost' ))|0]"
+ spell_hostile:0 "#N [Localize( Concatenate(  Scope.Var('spell').GetFlagName, '_name' ) )] is considered hostile#!"
+ spell_province:0 "[Localize( Concatenate(  Scope.Var('spell').GetFlagName, '_name' ) )] is cast on a [county|E]"
+ spell_tier:0 "[Localize( Concatenate(  Scope.Var('spell').GetFlagName, '_name' ) )] is a $spell_tier_name$ level spell"
+ spell_tier_name:0 "[AddTextIf( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_level')), '(CFixedPoint)1' ), '$spell_tier_1$')][AddTextIf( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_level')), '(CFixedPoint)2' ), '$spell_tier_2$')][AddTextIf( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_level')), '(CFixedPoint)3' ), '$spell_tier_3$')][AddTextIf( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_level')), '(CFixedPoint)4' ), '$spell_tier_4$')][AddTextIf( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_level')), '(CFixedPoint)5' ), '$spell_tier_5$')]"
+ spell_tier_1:0 "Novice"
+ spell_tier_2:0 "Apprentice"
+ spell_tier_3:0 "Journeyman"
+ spell_tier_4:0 "Expert"
+ spell_tier_5:0 "Master"
 
- # _hostile:0 "'(bool)yes/no'" no longer works. does (bool)Localize('key') work if key is yes/no? gui file was also weird with parentanchor being on same line as visible for hostile icon. happened between "hboxs -> widgets" "a few small changes"
- alteration_spell_1:0 "oakflesh"
- #alteration_spell_oakflesh_hostile:0 "no"
- alteration_spell_oakflesh_name:0 "Oakflesh"
- alteration_spell_2:0 "wards"
- #alteration_spell_wards_hostile:0 "yes"
- #alteration_spell_wards_province:0 "yes"
- alteration_spell_wards_name:0 "Wards"
+ #Alteration
+ oakflesh_name:0 "Oakflesh"
+ wards_name:0 "Wards"
  
- conjuration_spell_1:0 "summon_scamp"
- #conjuration_spell_summon_scamp_hostile:0 "no"
- conjuration_spell_summon_scamp_name:0 "Summon Scamp"
+ #Conjuration
+ summon_scamp_name:0 "Summon Scamp"
 
- destruction_spell_1:0 "flames"
- #destruction_spell_flames_hostile:0 "yes"
- destruction_spell_flames_name:0 "Flames"
- destruction_spell_2:0 "frostbite"
- #destruction_spell_frostbite_hostile:0 "yes"
- destruction_spell_frostbite_name:0 "Frostbite"
- destruction_spell_3:0 "sparks"
- #destruction_spell_sparks_hostile:0 "yes"
- destruction_spell_sparks_name:0 "Sparks"
- #destruction_spell_sparks:0 "Sparks [GetPlayer.MakeScope.Var('magicka').GetValue]" #doesn't work? clue to other parts not working. probably because it is Localize()
- destruction_spell_4:0 "firestorm"
- #destruction_spell_firestorm_hostile:0 "yes"
- #destruction_spell_firestorm_province:0 "yes"
- destruction_spell_firestorm_name:0 "Firestorm"
+ #Destruction
+ flames_name:0 "Flames"
+ frostbite_name:0 "Frostbite"
+ sparks_name:0 "Sparks"
+ firestorm_name:0 "Firestorm"
  
- illusion_spell_1:0 "frenzy"
- #illusion_spell_frenzy_hostile:0 "yes"
- illusion_spell_frenzy_name:0 "Frenzy"
+ #Illusion
+ frenzy_name:0 "Frenzy"
  
- restoration_spell_1:0 "heal"
- #restoration_spell_heal_hostile:0 "no"
- restoration_spell_heal_name:0 "Heal"
+ #Restoration
+ heal_name:0 "Heal"
  
- necromancy_spell_1:0 "raise_dead"
- #necromancy_spell_raise_dead_hostile:0 "no"
- necromancy_spell_raise_dead_name:0 "Raise Dead"
+ #Necromancy
+ raise_dead_name:0 "Raise Dead"
 
- spell_name_caster:0 "[SelectLocalization( GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet, 'spell_name_caster_hostile', 'spell_name_caster_normal' )]"
- spell_name_caster_normal:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), '#high You#! cast', Concatenate(GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip, ' casts'))] [Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))]"
- spell_name_caster_hostile:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), '#high You#! cast', Concatenate(GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip, ' casts'))] #N [Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))]#! #N;italic (hostile)#!"
- spell_name_castee:0 "[SelectLocalization( GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_hostile' ) ).IsSet, 'spell_name_castee_hostile', 'spell_name_castee_normal' )]"
- spell_name_castee_normal:0 "[Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))] is cast on [SelectLocalization( GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet, 'spell_casting_info_castee_prov', Concatenate( '#high ', Concatenate(GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip, '#! ' ) ) )]"
- spell_name_castee_hostile:0 "#N [Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))]#! is cast on [SelectLocalization( GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet, 'spell_casting_info_castee_prov', Concatenate( '#high ', Concatenate(GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip, '#! ' ) ) )]"
+ spell_name_caster:0 "[SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile')), '(CFixedPoint)1' ), 'spell_name_caster_hostile', 'spell_name_caster_normal' )]"
+ spell_name_caster_normal:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), '#high You#! cast', Concatenate(GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip, ' casts'))] [Localize(Concatenate( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_name' ))]"
+ spell_name_caster_hostile:0 "[Select_CString( ObjectsEqual(GetPlayer.MakeScope.Var('spell_caster').Char, GetPlayer), '#high You#! cast', Concatenate(GetPlayer.MakeScope.Var('spell_caster').Char.GetShortUINameNoTooltip, ' casts'))] #N [Localize(Concatenate( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_name' ))]#! #N;italic (hostile)#!"
+
+ spell_name_castee:0 "[SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_hostile')), '(CFixedPoint)1' ), 'spell_name_castee_hostile', 'spell_name_castee_normal' )]"
+ spell_name_castee_normal:0 "[Localize(Concatenate( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_name' ))] is cast on [SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_province')), '(CFixedPoint)1' ), 'spell_casting_info_castee_prov', Concatenate( '#high ', Concatenate(GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip, '#! ' ) ) )]"
+ spell_name_castee_hostile:0 "#N [Localize(Concatenate( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_name' ))]#! is cast on [SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_province')), '(CFixedPoint)1' ), 'spell_casting_info_castee_prov', Concatenate( '#high ', Concatenate(GetPlayer.MakeScope.Var('spell_recipient').Char.GetShortUINameNoTooltip, '#! ' ) ) )]"
+
  spell_caster_effect:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), '', 'spell_caster_effect_desc')]"
- spell_caster_effect_desc:0 "[GetScriptedGui( Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_caster' ) ).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_caster').Char.MakeScope).End)]"
+ spell_caster_effect_desc:0 "[GetScriptedGui( 'spell_cast_confirm' ).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+
  spell_castee_effect:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), '', 'spell_castee_effect_desc')]"
- spell_castee_effect_desc:0 "[GetScriptedGui( Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_recipient' ) ).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_recipient').Char.MakeScope).End)][SelectLocalization(GetPlayer.MakeScope.Var( 'spell_province' ).Var( Concatenate( GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_province' ) ).IsSet, Localize('spell_province_effect'), '')]"
- spell_province_effect:0 "\n[Select_CString( IsDataModelEmpty(GetPlayer.MakeScope.GetList('spell_counties')), '', GetScriptedGui( Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_province' ) ).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope.Var('spell_county').Title.MakeScope).End) )]"
+ spell_castee_effect_desc:0 "[GetScriptedGui( 'spell_cast_confirm' ).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'castee', GetPlayer.MakeScope ).End)]" 
+
  spell_confirm:0 "[SelectLocalization( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell'), 'no_spell_selected', 'spell_cast' )]"
  no_spell_selected:0 "No Spell Selected"
- spell_cast:0 "Cast [Localize(Concatenate( GetPlayer.Custom( 'SpellStemChar' ), '_name' ))]"
+ spell_cast:0 "Cast [Localize(Concatenate( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, '_name' ))]"
 
  # "$[GetPlayer.MakeScope.Var('spell_name').GetFlagName]_name$" to localize stuff w/o concatenate?
+ # trigger player notification for spells "x is no longer effected by y" or "you are no longer effected by y"
+ # have delay -1 of duration, check spell modifiers add to list, then use list in effect/event chain +1 of duration to find missing (not tragrt in list), use in toast localisation
+ # or if scopes persist in on_action/event chain just use that in toast localization. preferably this
+
+ modifier_spell_firestorm:0 "Firestorm"
+ modifier_spell_firestorm_desc:0 "This [county|E] has been ravaged by a conjured firestorm."

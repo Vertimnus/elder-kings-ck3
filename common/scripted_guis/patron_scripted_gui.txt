@@ -123,8 +123,10 @@ patron_azura_shown = {
     scope = character
 
     is_shown = {
-        patron_azura_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_azura_valid = yes }
+            is_secretly_worshipping_azura = yes
+        }
     }
 
     effect = {
@@ -137,8 +139,10 @@ patron_boethiah_shown = {
     scope = character
 
     is_shown = {
-        patron_boethiah_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_boethiah_valid = yes }
+            is_secretly_worshipping_boethiah = yes
+        }
     }
 
     effect = {
@@ -151,8 +155,10 @@ patron_clavicus_shown = {
     scope = character
 
     is_shown = {
-        patron_clavicus_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_clavicus_valid = yes }
+            is_secretly_worshipping_clavicus = yes
+        }
     }
 
     effect = {
@@ -165,8 +171,10 @@ patron_hermaeus_shown = {
     scope = character
 
     is_shown = {
-        patron_hermaeus_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_hermaeus_valid = yes }
+            is_secretly_worshipping_hermaeus = yes
+        }
     }
 
     effect = {
@@ -179,8 +187,10 @@ patron_hircine_shown = {
     scope = character
 
     is_shown = {
-        patron_hircine_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_hircine_valid = yes }
+            is_secretly_worshipping_hircine = yes
+        }
     }
 
     effect = {
@@ -193,8 +203,7 @@ patron_jyggalag_shown = {
     scope = character
 
     is_shown = {
-        patron_jyggalag_valid = yes
-        #always = yes #for testing
+        always = no
     }
 
     effect = {
@@ -207,8 +216,10 @@ patron_malacath_shown = {
     scope = character
 
     is_shown = {
-        patron_malacath_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_malacath_valid = yes }
+            is_secretly_worshipping_malacath = yes
+        }
     }
 
     effect = {
@@ -221,8 +232,10 @@ patron_mehrunes_shown = {
     scope = character
 
     is_shown = {
-        patron_mehrunes_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_mehrunes_valid = yes }
+            is_secretly_worshipping_mehrunes = yes
+        }
     }
 
     effect = {
@@ -235,8 +248,10 @@ patron_mephala_shown = {
     scope = character
 
     is_shown = {
-        patron_mephala_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_mephala_valid = yes }
+            is_secretly_worshipping_mephala = yes
+        }
     }
 
     effect = {
@@ -249,8 +264,10 @@ patron_meridia_shown = {
     scope = character
 
     is_shown = {
-        patron_meridia_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_meridia_valid = yes }
+            is_secretly_worshipping_meridia = yes
+        }
     }
 
     effect = {
@@ -263,8 +280,10 @@ patron_molag_shown = {
     scope = character
 
     is_shown = {
-        patron_molag_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_molag_valid = yes }
+            is_secretly_worshipping_molag = yes
+        }
     }
 
     effect = {
@@ -277,8 +296,10 @@ patron_namira_shown = {
     scope = character
 
     is_shown = {
-        patron_namira_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_namira_valid = yes }
+            is_secretly_worshipping_namira = yes
+        }
     }
 
     effect = {
@@ -291,8 +312,10 @@ patron_nocturnal_shown = {
     scope = character
 
     is_shown = {
-        patron_nocturnal_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_nocturnal_valid = yes }
+            is_secretly_worshipping_nocturnal = yes
+        }
     }
 
     effect = {
@@ -305,8 +328,10 @@ patron_peryite_shown = {
     scope = character
 
     is_shown = {
-        patron_peryite_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_peryite_valid = yes }
+            is_secretly_worshipping_peryite = yes
+        }
     }
 
     effect = {
@@ -319,8 +344,10 @@ patron_sanguine_shown = {
     scope = character
 
     is_shown = {
-        patron_sanguine_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_sanguine_valid = yes }
+            is_secretly_worshipping_sanguine = yes
+        }
     }
 
     effect = {
@@ -333,8 +360,10 @@ patron_sheogorath_shown = {
     scope = character
 
     is_shown = {
-        patron_sheogorath_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_sheogorath_valid = yes }
+            is_secretly_worshipping_sheogorath = yes
+        }
     }
 
     effect = {
@@ -347,8 +376,10 @@ patron_vaermina_shown = {
     scope = character
 
     is_shown = {
-        patron_vaermina_valid = yes
-        #always = yes #for testing
+        OR = {
+            faith = { patron_vaermina_valid = yes }
+            is_secretly_worshipping_vaermina = yes
+        }
     }
 
     effect = {
@@ -393,3 +424,15 @@ action_patron_clear = {
 # to custom_description_no_bullet and concatenate there, then call sgui.EffectTooltip
 # could also use a loc string :0 "[thing]_[thing2]" and call it
 # Localize is apparently going to be fixed to work properly
+
+culture_group_cultures = {
+    scope = culture_group
+
+    effect = {
+        every_in_global_list = { #TODO replace w/ every/ordered_culture_global when 1.3.x
+            variable = culture_list
+            limit = { ROOT = THIS.culture_group }
+            custom_tooltip = "[THIS.Culture.GetName]"
+        }
+    }
+}

@@ -19,7 +19,7 @@ patron_select_patron_decision = {
         is_ruler = yes
         is_ai = yes
         has_active_patron_selected = no
-        patron_has_princes = yes
+        faith = { patron_has_princes = yes }
     }
 
     is_valid = {
@@ -555,6 +555,21 @@ patron_boon_invasion_decision = { #25000
 
     ai_will_do = {
         base = 0
+    }
+}
+
+debug_mode_toggle_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+    is_shown = { always = yes }
+    is_valid = { always = no }
+
+    effect = {
+        custom_tooltip = "Use button to toggle debug mode"
+    }
+
+    widget = {
+        gui = "decision_view_widget_toggle_debug"
     }
 }
 

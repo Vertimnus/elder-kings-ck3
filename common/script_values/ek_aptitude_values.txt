@@ -175,10 +175,10 @@ aptitude_base = {
 aptitude = {
     #value = aptitude_base
     add = {
-		value = aptitude_base
-		desc = "BASE_VALUE"
-		format = "BASE_VALUE_FORMAT"
-	}
+        value = aptitude_base
+        desc = "BASE_VALUE"
+        format = "BASE_VALUE_FORMAT"
+    }
     # Education
     if = {
         limit = { has_trait = education_magical_ability }
@@ -376,37 +376,70 @@ magicka_monthly = {
     multiply = 0.1
 }
 
-# Alteration
-spell_cost_oakflesh = 2
-neg_spell_cost_oakflesh = { value = 0 subtract = spell_cost_oakflesh }
-spell_cost_wards = 3
-neg_spell_cost_wards = { value = 0 subtract = spell_cost_wards }
+no_spell_hostile = 0
+no_spell_province = 0
 
-# Conjuration
-spell_cost_summon_scamp = 4
-neg_spell_cost_summon_scamp = { value = 0 subtract = spell_cost_summon_scamp }
+### Alteration ###
+#oakflesh
+oakflesh_cost = 2 #save as scope multiply = -1
+oakflesh_level = 1
+oakflesh_hostile = 0
+oakflesh_province = 0
+#wards
+wards_cost = 3
+wards_level = 5
+wards_hostile = 0
+wards_province = 1
 
-# Destruction
-spell_cost_flames = 10
-neg_spell_cost_flames = { value = 0 subtract = spell_cost_flames }
-spell_cost_frostbite = 20
-neg_spell_cost_frostbite = { value = 0 subtract = spell_cost_frostbite }
-spell_cost_sparks = 30
-neg_spell_cost_sparks = { value = 0 subtract = spell_cost_sparks }
-spell_cost_firestorm = 25
-neg_spell_cost_firestorm = { value = 0 subtract = spell_cost_firestorm }
+### Conjuration ###
+#summon_scamp
+summon_scamp_cost = 4
+summon_scamp_level = 1
+summon_scamp_hostile = 0
+summon_scamp_province = 0
 
-# Illusion
-spell_cost_frenzy = 6
-neg_spell_cost_frenzy = { value = 0 subtract = spell_cost_frenzy }
+### Destruction ###
+#flames
+flames_cost = 10
+flames_level = 1
+flames_hostile = 1
+flames_province = 0
+#frostbite
+frostbite_cost = 20
+frostbite_level = 2
+frostbite_hostile = 1
+frostbite_province = 0
+#sparks
+sparks_cost = 30
+sparks_level = 3
+sparks_hostile = 1
+sparks_province = 0
+#firestorm
+firestorm_cost = 25
+firestorm_level = 4
+firestorm_hostile = 1
+firestorm_province = 1
 
-# Restoration
-spell_cost_heal = 8
-neg_spell_cost_heal = { value = 0 subtract = spell_cost_heal }
+### Illusion ###
+#frenzy
+frenzy_cost = 6
+frenzy_level = 2
+frenzy_hostile = 1
+frenzy_province = 0
 
-# Necromancy
-spell_cost_raise_dead = 12
-neg_spell_cost_raise_dead = { value = 0 subtract = spell_cost_raise_dead }
+### Restoration ###
+#heal
+heal_cost = 8
+heal_level = 2
+heal_hostile = 0
+heal_province = 0
+
+### Necromancy ###
+#raise_dead
+raise_dead_cost = 12
+raise_dead_level = 3
+raise_dead_hostile = 0
+raise_dead_province = 0
 
 spell_school_bg = {
     if = {

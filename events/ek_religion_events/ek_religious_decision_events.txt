@@ -128,9 +128,9 @@ scripted_effect select_rite_of_passage = {
 		50 = {
 			select_rite_of_passage_generic = yes
 		}
-		
+
 		### Specific - Terrain or region
-		
+
 		### Specific - Religion (we try to mainly have those)
 		100 = {
 			select_rite_of_passage_special = yes
@@ -152,16 +152,16 @@ ek_religious_decision.0001 = {
 	}
 	desc = ek_religious_decision.0001.desc
 	theme = faith
-	
+
 	right_portrait = {
 		character = scope:starts_rite_of_passage
 		animation = personality_zealous
 	}
-	
+
 	# Draw three possible rites (that means we need at least 3 generic rites lol)
 	immediate = {
 		save_scope_as = starts_rite_of_passage
-		
+
 		select_rite_of_passage = yes
 		select_rite_of_passage = yes
 		select_rite_of_passage = yes
@@ -178,7 +178,7 @@ ek_religious_decision.0001 = {
 		name = ek_religious_decision.0001.fight_scary_monster
 		custom_tooltip = ek_religious_decision.0001.fight_scary_monster.tt
 	}
-	
+
 	### Specific
 	# Negative (fight)
 	option = {
@@ -190,10 +190,10 @@ ek_religious_decision.0001 = {
 		trigger = { exists = local_var:kill_vampire_flag }
 		name = ek_religious_decision.0001.kill_vampire
 		custom_tooltip = ek_religious_decision.0001.kill_vampire.tt
-		
+
 		trigger_event = ek_religious_decision.0014
 	}
-	
+
 	# Positive (gain potential virtue)
 	option = {
 		trigger = { exists = local_var:become_cannibal_flag }
@@ -218,17 +218,17 @@ ek_religious_decision.0014 = {
 	title = ek_religious_decision.0014.t
 	desc = ek_religious_decision.0014.desc
 	theme = faith
-	
+
 	right_portrait = {
 		character = scope:starts_rite_of_passage
 		animation = personality_zealous
 	}
-	
+
 	# Fight the Vampire one on one
 	option = {
 		name = ek_religious_decision.0014.a
 		custom_tooltip = ek_religious_decision.0014.a.tt
-		
+
 		duel = {
 			skill = prowess
 			value = 10
@@ -279,7 +279,7 @@ ek_religious_decision.0014 = {
 	# Rouse up some locals to fight with you
 	# Convince the vampire to leave the area
 	# Yeah, actually that sounds like a stupid idea
-	
+
 	after = {
 		if = {
 			limit = { exists = local_var:rite_of_passage_success }
@@ -296,24 +296,24 @@ ek_religious_decision.0050 = {
 	title = ek_religious_decision.0050.t
 	desc = ek_religious_decision.0050.desc
 	theme = faith
-	
+
 	right_portrait = {
 		character = scope:starts_rite_of_passage
 		animation = personality_zealous
 	}
-	
+
 	option = {
 		name = ek_religious_decision.0050.a
-		
+
 		add_prestige = medium_prestige_gain
 		add_piety = medium_piety_gain
 		add_dynasty_prestige = miniscule_dynasty_prestige_gain
-		
+
 		add_character_modifier = {
 			modifier = rite_of_passage_sucess_modifier
 			years = 10
 		}
-		
+
 		stress_impact = {
 			zealous = minor_stress_loss
 		}
@@ -327,17 +327,17 @@ ek_religious_decision.0051 = {
 	title = ek_religious_decision.0051.t
 	desc = ek_religious_decision.0051.desc
 	theme = faith
-	
+
 	right_portrait = {
 		character = scope:starts_rite_of_passage
 		animation = personality_zealous
 	}
-	
+
 	option = {
 		name = ek_religious_decision.0051.a
 		add_prestige = minor_prestige_loss
 		add_piety = minor_piety_loss
-		
+
 		stress_impact = {
 			zealous = minor_stress_gain
 		}
@@ -358,7 +358,7 @@ ek_religious_decision.0101 = {
 	override_background = {
 		event_background = wilderness_forest_pine
 	}
-	
+
 	right_portrait = {
 		character = root
 		animation = personality_zealous
@@ -367,9 +367,9 @@ ek_religious_decision.0101 = {
 	# Search for the Totem of Claw and Fang!
 	option = {
 		name = ek_religious_decision.0101.a
-		
+
 		custom_tooltip = ek_religious_decision.0101.a.tt
-		
+
 		duel = {
 			skill = learning
 			value = 10
@@ -391,7 +391,7 @@ ek_religious_decision.0101 = {
 			}
 		}
 	}
-	
+
 	after = {
 		trigger_event = {
 			id = ek_religious_decision.0102
@@ -413,12 +413,12 @@ ek_religious_decision.0102 = {
 			desc = ek_religious_decision.0102.desc_failure
 		}
 	}
-	
+
 	theme = faith
 	override_background = {
 		event_background = wilderness_scope
 	}
-	
+
 	immediate = {
 		if = {
 			limit = { NOT = { exists = scope:totem_barony } }
@@ -437,12 +437,12 @@ ek_religious_decision.0102 = {
 					}
 				}
 			}
-			
+
 			random_in_list = {
 				list = faiths_list
 				save_scope_as = totem_faith
 			}
-			
+
 			### Target a random holy site of the above faith, or a regular random province if it doesn't have one
 			random_barony = {
 				limit = {
@@ -451,16 +451,16 @@ ek_religious_decision.0102 = {
 				alternative_limit = {
 					this.faith = scope:totem_faith
 				}
-				
+
 				save_scope_as = totem_barony
 				title_province = { save_scope_as = background_wilderness_scope }
 			}
 		}
 	}
-	
+
 	right_portrait = {
 		character = root
-		
+
 		triggered_animation = {
 			trigger = { has_character_flag = has_found_totem_place }
 			animation = personality_zealous
@@ -474,27 +474,27 @@ ek_religious_decision.0102 = {
 	option = {
 		trigger = { has_character_flag = has_found_totem_place }
 		name = ek_religious_decision.0102.a
-		
+
 		trigger_event = ek_religious_decision.0103
 	}
 
 	option = { # Pay some prestige (lead if yourself)
 		trigger = { NOT = { has_character_flag = has_found_totem_place } }
 		name = ek_religious_decision.0102.b
-		
+
 		add_prestige = -100
 		custom_tooltip = ek_religious_decision.0102.b.tt_success
-		
+
 		add_character_flag = {
 			flag = has_found_totem_place
 			days = 10
 		}
-		
+
 		trigger_event = {
 			id = ek_religious_decision.0102
 			days = 3
 		}
-		
+
 		stress_impact = {
 			shy = minor_stress_gain
 			gregarious = minor_stress_loss
@@ -506,20 +506,20 @@ ek_religious_decision.0102 = {
 	option = { # Pay some piety (pray to the All-Maker)
 		trigger = { NOT = { has_character_flag = has_found_totem_place } }
 		name = ek_religious_decision.0102.c
-		
+
 		add_piety = -100
 		custom_tooltip = ek_religious_decision.0102.c.tt_success
-		
+
 		add_character_flag = {
 			flag = has_found_totem_place
 			days = 10
 		}
-		
+
 		trigger_event = {
 			id = ek_religious_decision.0102
 			days = 3
 		}
-		
+
 		stress_impact = {
 			cynical = minor_stress_gain
 			zealous = minor_stress_loss
@@ -529,20 +529,20 @@ ek_religious_decision.0102 = {
 	option = { # Pay some gold (bribe the locals)
 		trigger = { NOT = { has_character_flag = has_found_totem_place } }
 		name = ek_religious_decision.0102.d
-		
+
 		add_gold = -25
 		custom_tooltip = ek_religious_decision.0102.d.tt_success
-		
+
 		add_character_flag = {
 			flag = has_found_totem_place
 			days = 10
 		}
-		
+
 		trigger_event = {
 			id = ek_religious_decision.0102
 			days = 3
 		}
-		
+
 		stress_impact = {
 			greedy = minor_stress_gain
 		}
@@ -551,14 +551,14 @@ ek_religious_decision.0102 = {
 	option = { # Drop it
 		trigger = { NOT = { has_character_flag = has_found_totem_place } }
 		name = ek_religious_decision.0102.e
-		
+
 		custom_tooltip = ek_religious_decision.0102.stop
-		
+
 		trigger_event = {
 			id = ek_religious_decision.0105
 			days = 3
 		}
-		
+
 		stress_impact = {
 			ambitious = minor_stress_gain
 			diligent = minor_stress_gain
@@ -575,7 +575,7 @@ ek_religious_decision.0103 = {
 	override_background = {
 		event_background = wilderness_scope
 	}
-	
+
 	right_portrait = {
 		character = root
 		animation = personality_zealous
@@ -583,7 +583,7 @@ ek_religious_decision.0103 = {
 
 	option = {
 		name = ek_religious_decision.0103.a
-		
+
 		duel = {
 			skill = prowess
 			value = 10
@@ -598,9 +598,9 @@ ek_religious_decision.0103 = {
 					multiplier = 2
 				}
 				custom_tooltip = ek_religious_decision.0103.a.tt_success
-		
+
 				add_prestige = 50
-				
+
 				trigger_event = {
 					id = ek_religious_decision.0104
 					days = 3
@@ -617,7 +617,7 @@ ek_religious_decision.0103 = {
 					multiplier = 1
 				}
 				custom_tooltip = ek_religious_decision.0103.a.tt_success
-		
+
 				trigger_event = {
 					id = ek_religious_decision.0104
 					days = 3
@@ -640,7 +640,7 @@ ek_religious_decision.0103 = {
 					multiplier = 0.33
 				}
 				custom_tooltip = ek_religious_decision.0103.a.tt_success
-		
+
 				increase_wounds_effect = { REASON = viciously_dismembered }
 				trigger_event = {
 					id = ek_religious_decision.0104
@@ -650,9 +650,9 @@ ek_religious_decision.0103 = {
 			25 = { # You have been unable to defeat the Spirit Bear
 				desc = ek_religious_decision.0103.a.failure
 				custom_tooltip = ek_religious_decision.0103.a.tt_failure
-				
+
 				increase_wounds_two_times_effect = { REASON = viciously_dismembered }
-				
+
 				trigger_event = {
 					id = ek_religious_decision.105
 					days = 3
@@ -671,7 +671,7 @@ ek_religious_decision.0104 = {
 	override_background = {
 		event_background = wilderness_scope
 	}
-	
+
 	right_portrait = {
 		character = root
 		animation = personality_zealous
@@ -679,18 +679,18 @@ ek_religious_decision.0104 = {
 
 	option = {
 		name = ek_religious_decision.0104.a
-		
+
 		custom_tooltip = ek_religious_decision.0104.tt
-		
+
 		add_character_modifier = {
 			modifier = performed_ristaag_modifier
 			years = 10
 		}
-		
+
 		stress_impact = {
 			zealous = minor_stress_loss
 		}
-		
+
 		add_piety = 100
 	}
 }
@@ -704,7 +704,7 @@ ek_religious_decision.0105 = {
 	override_background = {
 		event_background = wilderness_scope
 	}
-	
+
 	right_portrait = {
 		character = root
 		animation = shame
@@ -712,9 +712,9 @@ ek_religious_decision.0105 = {
 
 	option = {
 		name = ek_religious_decision.0105.a
-		
+
 		custom_tooltip = ek_religious_decision.0105.tt
-		
+
 		stress_impact = {
 			base = minor_stress_gain
 			zealous = minor_stress_gain
@@ -737,27 +737,25 @@ ek_religious_decision.0301 = {
 	type = character_event
 	title = ek_religious_decision.0301.t
 	desc = ek_religious_decision.0301.desc
-	
+
 	theme = war
 	override_background = {
 		event_background = wilderness_scope
 	}
-	
+
 	right_portrait = {
 		character = root
 		animation = war_over_win
 	}
-	
+
 	immediate = {
 		capital_province = { save_scope_as = background_wilderness_scope }
-	}
+		ROOT = { save_scope_as = dragon_owner }
 
-	option = {
-		name = ek_religious_decision.0301.a
-		
-		custom_tooltip = ek_religious_decision.0301.a.tt
-		custom_tooltip = summon_dragons_decision_effect_tooltip_2
-		
+		scope:dragon_owner = {
+			get_dragon_name = yes
+		}
+
 		hidden_effect = {
 			spawn_army = {
 				levies = 1 # Will be obsolete in 1.3.x !!!!!
@@ -767,8 +765,17 @@ ek_religious_decision.0301 = {
 				}
 				inheritable = no
 				location = capital_province
+				save_scope_as = summoned_dragon
+				name = summoned_dragon_name
 			}
 		}
+	}
+
+	option = {
+		name = ek_religious_decision.0301.a
+
+		custom_tooltip = ek_religious_decision.0301.a.tt
+		custom_tooltip = summon_dragons_decision_effect_tooltip_2
 	}
 }
 
@@ -781,26 +788,26 @@ ek_religious_decision.0401 = {
 	type = character_event
 	title = ek_religious_decision.0401.t
 	desc = ek_religious_decision.0401.desc
-	
+
 	theme = faith
-	
+
 	left_portrait = {
 		character = scope:current_hof
 		animation = personality_zealous
 	}
-	
+
 	right_portrait = {
 		character = scope:former_hof
 		animation = disbelief
 	}
-	
+
 	immediate = {
 		root = { save_scope_as = secular_ruler }
-		
+
 		scope:leader_council_eight = {
 			remove_doctrine = special_faith_group_council_of_the_eight_leader
 			add_doctrine = special_faith_group_council_of_the_eight_member
-			
+
 			# The former leader loses the k_ title and gets back its d_ title
 			religious_head = {
 				create_title_and_vassal_change = {
@@ -816,32 +823,32 @@ ek_religious_decision.0401 = {
 				}
 				resolve_title_and_vassal_change = scope:change
 			}
-			
+
 			set_religious_head_title = scope:leader_council_eight_former_title
 		}
-		
+
 		root.faith = {
 			remove_doctrine = special_faith_group_council_of_the_eight_member
 			add_doctrine = special_faith_group_council_of_the_eight_leader
-			
+
 			set_global_variable = {
 				name = leader_council_eight
 				value = this
 			}
-			
+
 			# Save the current rel head title for later
 			religious_head_title = { save_scope_as = rel_head_title }
-			
+
 			# Remember what is the current/former hof title
 			set_global_variable = {
 				name = leader_council_eight_former_title
 				value = this.religious_head_title
 			}
-			
+
 			# The new leader gets the k_ title and loses the d_ title
 			religious_head = {
 				save_scope_as = new_coe_leader
-				
+
 				create_title_and_vassal_change = {
 					type = usurped
 					save_scope_as = change
@@ -852,13 +859,13 @@ ek_religious_decision.0401 = {
 						holder = scope:new_coe_leader
 						change = scope:change
 					}
-					
+
 					set_capital_county = scope:rel_head_title.title_capital_county
 				}
 				resolve_title_and_vassal_change = scope:change
-				
+
 				destroy_title = scope:rel_head_title
-				
+
 				# To prevent the de Jure vassals from leaving
 				create_title_and_vassal_change = {
 					type = swear_fealty
@@ -877,7 +884,7 @@ ek_religious_decision.0401 = {
 				}
 				resolve_title_and_vassal_change = scope:change
 			}
-			
+
 			# Set k_council_of_the_eight as its religious title
 			set_religious_head_title = k_council_of_the_eight
 		}
@@ -886,7 +893,7 @@ ek_religious_decision.0401 = {
 	option = {
 		name = ek_religious_decision.0401.a
 	}
-	
+
 	after = {
 		every_player = {
 			limit = { NOT = { this = root } }
@@ -899,14 +906,14 @@ ek_religious_decision.0402 = {
 	type = character_event
 	title = ek_religious_decision.0401.t
 	desc = ek_religious_decision.0402.desc
-	
+
 	theme = faith
-	
+
 	left_portrait = {
 		character = scope:current_hof
 		animation = personality_zealous
 	}
-	
+
 	right_portrait = {
 		character = scope:former_hof
 		animation = disbelief
@@ -914,7 +921,7 @@ ek_religious_decision.0402 = {
 
 	option = {
 		name = ek_religious_decision.0402.a
-		
+
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_1
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_2
 	}
