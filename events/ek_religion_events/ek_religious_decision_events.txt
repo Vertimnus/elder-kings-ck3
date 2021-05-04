@@ -190,8 +190,8 @@ ek_religious_decision.0001 = {
 		trigger = { exists = local_var:kill_vampire_flag }
 		name = ek_religious_decision.0001.kill_vampire
 		custom_tooltip = ek_religious_decision.0001.kill_vampire.tt
-
-		trigger_event = ek_religious_decision.0014
+		
+		trigger_event = { id = ek_religious_decision.0014 days = 7 }
 	}
 
 	# Positive (gain potential virtue)
@@ -221,25 +221,62 @@ ek_religious_decision.0014 = {
 
 	right_portrait = {
 		character = scope:starts_rite_of_passage
-		animation = personality_zealous
+		animation = war_attacker
 	}
-
-	# Fight the Vampire one on one
+	
+	left_portrait = {
+		character = scope:hostile_vampire
+		animation = rage
+	}
+	
+	immediate = {
+		# Generate the Vampire
+		# In the future, plug the duel module in there, for now a simple duel = {} will be enough
+		# Hmm, probably also pick a nearby province? And throw a random pro-vampirism religion?
+		# Add a risk to get Sanguinare Vampiris if you're wounded - and worse if you're maimed
+		hidden_effect = {
+			create_character = {
+				location = scope:starts_rite_of_passage.location
+				template = hostile_vampire_character
+				gender_female_chance = 50
+				faith = scope:starts_rite_of_passage.location.faith
+				culture = scope:starts_rite_of_passage.location.culture
+				dynasty = none
+				save_scope_as = hostile_vampire
+			}
+		}
+	}
+	
+	# Fight the Vampire one on one - Risky, prowess check, but gain prestige if you win
 	option = {
 		name = ek_religious_decision.0014.a
 		custom_tooltip = ek_religious_decision.0014.a.tt
-
+		
+		set_local_variable = {
+			name = rite_of_passage_vampire_solo_fight
+			value = yes
+		}
+		
 		duel = {
 			skill = prowess
-			value = 10
+			value = scope:hostile_vampire.prowess
 			25 = { # ez win
 				desc = ek_religious_decision.0014.a.success
 				compare_modifier = {
 					value = scope:duel_value
 					multiplier = 1
 				}
-				custom_tooltip = ek_religious_decision.0014.a.tt_success
-				add_prestige = medium_prestige_gain
+				send_interface_toast = {
+					title = ek_religious_decision.0014.a.tt_success
+					left_icon = root
+					add_prestige = medium_prestige_gain
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_solo_win
+					value = yes
+				}
+				
 				set_local_variable = {
 					name = rite_of_passage_success
 					value = yes
@@ -247,9 +284,18 @@ ek_religious_decision.0014 = {
 			}
 			25 = { # win but wounded
 				desc = ek_religious_decision.0014.a.success_wounded
-				custom_tooltip = ek_religious_decision.0014.a.tt_success_wounded
-				add_prestige = medium_prestige_gain
-				increase_wounds_effect = { REASON = death_heart_ripped_out }
+				send_interface_toast = {
+					title = ek_religious_decision.0014.a.tt_success_wounded
+					left_icon = root
+					add_prestige = medium_prestige_gain
+					increase_wounds_effect = { REASON = death_heart_ripped_out }
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_solo_wound
+					value = yes
+				}
+				
 				set_local_variable = {
 					name = rite_of_passage_success
 					value = yes
@@ -257,35 +303,296 @@ ek_religious_decision.0014 = {
 			}
 			25 = { # win but maimed
 				desc = ek_religious_decision.0014.a.success_maimed
-				custom_tooltip = ek_religious_decision.0014.a.tt_success_maimed
-				add_prestige = medium_prestige_gain
-				increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+				send_interface_toast = {
+					title = ek_religious_decision.0014.a.tt_success_maimed
+					left_icon = root
+					add_prestige = medium_prestige_gain
+					increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_solo_maim
+					value = yes
+				}
+				
 				set_local_variable = {
 					name = rite_of_passage_success
 					value = yes
 				}
 			}
 			25 = { # loss and maimed
+				desc = ek_religious_decision.0014.a.failure
 				compare_modifier = {
 					value = scope:duel_value
 					multiplier = -1
 				}
-				desc = ek_religious_decision.0014.a.failure
-				custom_tooltip = ek_religious_decision.0014.a.tt_failure
-				increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+				send_interface_toast = {
+					title = ek_religious_decision.0014.a.tt_failure
+					left_icon = root
+					increase_wounds_two_times_effect = { REASON = death_heart_ripped_out }
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_solo_failure
+					value = yes
+				}
 			}
 		}
 	}
+	
+	# Rouse up some locals to fight with you - Less risky, get a martial bonus on the prowess check
+	# Convince the vampire to leave the area - Diplomacy check, if the vampire accepts you're good, otherwise you may get attacked
+	option = {
+		name = ek_religious_decision.0014.c
+		custom_tooltip = ek_religious_decision.0014.c.tt
+		
+		set_local_variable = {
+			name = rite_of_passage_vampire_convince_to_leave
+			value = yes
+		}
+		
+		duel = {
+			skill = diplomacy
+			value = 10 # Don't base it on the vampire stat, however its ai stats will impact the result
+			33 = { # You convince the vampire to leave the area
+				desc = ek_religious_decision.0014.c.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				compare_modifier = { # Honorful vampire? In my province? It's more likely than you think
+					target = scope:hostile_vampire
+					value = {
+						add = ai_honor
+						multiply = 0.1
+					}
+				}
+				compare_modifier = { # Maybe they're kind
+					target = scope:hostile_vampire
+					value = {
+						add = ai_compassion
+						multiply = 0.2
+					}
+				}
+				compare_modifier = { # They just want a friend
+					target = scope:hostile_vampire
+					value = {
+						add = ai_sociability
+						multiply = 0.1
+					}
+				}
+				send_interface_toast = {
+					title = ek_religious_decision.0014.c.tt_success
+					left_icon = root
+					add_prestige = medium_prestige_gain
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_diplo_success
+					value = yes
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_success
+					value = yes
+				}
+			}
+			33 = { # The vampire refuses to leave
+				desc = ek_religious_decision.0014.c.failure
+				compare_modifier = { # Would rather stay there
+					target = scope:hostile_vampire
+					value = {
+						add = ai_greed
+						multiply = 0.1
+					}
+				}
+				send_interface_toast = {
+					title = ek_religious_decision.0014.c.tt_failure
+					left_icon = root
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_diplo_failure
+					value = yes
+				}
+			}
+			33 = { # The vampire attacks you!
+				desc = ek_religious_decision.0014.c.critical_failure
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = -1
+				}
+				compare_modifier = { # Might be feral
+					target = scope:hostile_vampire
+					value = {
+						add = ai_rationality
+						multiply = -0.2
+					}
+				}
+				compare_modifier = { # It just doesn't like you
+					target = scope:hostile_vampire
+					value = {
+						add = ai_vengefulness
+						multiply = 0.1
+					}
+				}
+				compare_modifier = { # It probably can kick your ass
+					target = scope:hostile_vampire
+					value = {
+						add = ai_boldness
+						multiply = 0.1
+					}
+				}
+				send_interface_toast = {
+					title = ek_religious_decision.0014.c.tt_critical_failure
+					left_icon = root
+					increase_wounds_effect = { REASON = death_heart_ripped_out }
+				}
+				
+				set_local_variable = {
+					name = rite_of_passage_vampire_diplo_attacked
+					value = yes
+				}
+			}
+		}
+	}
+	# Yeah, actually that sounds like a stupid idea - Fail the Rite of Passage
+	
+	after = {
+		trigger_event = { id = ek_religious_decision.0015 days = 3 }
+	}
+}
+
+# We picked 'Kill a Vampire' - Result
+# We know if you triumphed or lost with the "rite_of_passage_success" flag
+ek_religious_decision.0015 = {
+	type = character_event
+	title = ek_religious_decision.0014.t
+	desc = {
+		desc = ek_religious_decision.0015.intro # Yes, it is a vampire
+		first_valid = { # How you decided to deal with it
+			triggered_desc = {
+				trigger = { exists = local_var:rite_of_passage_vampire_solo_fight }
+				desc = ek_religious_decision.0015.desc_solo_fight
+			}
+			triggered_desc = {
+				trigger = { exists = local_var:rite_of_passage_vampire_convince_to_leave }
+				desc = ek_religious_decision.0015.desc_convince_to_leave
+			}
+		}
+		first_valid = { # What's the result
+			triggered_desc = { # Result from a 1v1 fight
+				trigger = { exists = local_var:rite_of_passage_vampire_solo_fight }
+				desc = {
+					first_valid = {
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_solo_win }
+							desc = ek_religious_decision.0015.desc_solo_win
+						}
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_solo_wound }
+							desc = ek_religious_decision.0015.desc_solo_wound
+						}
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_solo_maim }
+							desc = ek_religious_decision.0015.desc_solo_maim
+						}
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_solo_failure }
+							desc = ek_religious_decision.0015.desc_solo_failure
+						}
+					}
+				}
+			}
+			triggered_desc = { # Result from a dip check
+				trigger = { exists = local_var:rite_of_passage_vampire_convince_to_leave }
+				desc = {
+					first_valid = {
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_diplo_success }
+							desc = ek_religious_decision.0015.desc_diplo_success
+						}
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_diplo_failure }
+							desc = ek_religious_decision.0015.desc_diplo_failure
+						}
+						triggered_desc = {
+							trigger = { exists = local_var:rite_of_passage_vampire_diplo_attacked }
+							desc = ek_religious_decision.0015.desc_diplo_attacked
+						}
+					}
+				}
+			}
+		}
+		# You can go back home proud/shameful
+		first_valid = { # How you decided to deal with it
+			triggered_desc = {
+				trigger = { exists = local_var:rite_of_passage_success }
+				desc = ek_religious_decision.0015.desc_success
+			}
+			desc = ek_religious_decision.0015.desc_failure
+		}
+	}
+	theme = faith
+	
+	right_portrait = {
+		character = scope:starts_rite_of_passage
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:hostile_vampire
+		animation = rage
+	}
+	
+	# We won!
+	option = {
+		trigger = { exists = local_var:rite_of_passage_success }
+		name = ek_religious_decision.0015.a
+		
+		# Put that in a scripted effect at one point
+		show_as_tooltip = {
+			add_prestige = medium_prestige_gain
+			add_piety = medium_piety_gain
+			add_dynasty_prestige = miniscule_dynasty_prestige_gain
+			
+			add_character_modifier = {
+				modifier = rite_of_passage_sucess_modifier
+				years = 10
+			}
+			
+			stress_impact = {
+				zealous = minor_stress_loss
+			}
+		}
+	}
+	
+	# Shame takes me...
+	option = {
+		trigger = { NOT = { exists = local_var:rite_of_passage_success } }
+		name = ek_religious_decision.0015.b
+		
+		# Put that in a scripted effect at one point
+		show_as_tooltip = {
+			add_prestige = minor_prestige_loss
+			add_piety = minor_piety_loss
+			
+			stress_impact = {
+				zealous = minor_stress_gain
+			}
+		}
+	}
+	
 	# Rouse up some locals to fight with you
 	# Convince the vampire to leave the area
 	# Yeah, actually that sounds like a stupid idea
-
+	
 	after = {
 		if = {
 			limit = { exists = local_var:rite_of_passage_success }
-			trigger_event = ek_religious_decision.0050
+			trigger_event = { id = ek_religious_decision.0050 days = 7 }
 		}
-		else = { trigger_event = ek_religious_decision.0051 }
+		else = { trigger_event = { id = ek_religious_decision.0051 days = 7 } }
 	}
 }
 
@@ -330,7 +637,7 @@ ek_religious_decision.0051 = {
 
 	right_portrait = {
 		character = scope:starts_rite_of_passage
-		animation = personality_zealous
+		animation = shame
 	}
 
 	option = {
@@ -924,5 +1231,81 @@ ek_religious_decision.0402 = {
 
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_1
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_2
+	}
+}
+
+#########################
+# CATH BEDRAUD CEMETARY	#
+# 0501-0599				#
+#########################
+ek_religious_decision.0501 = {
+	hidden = yes
+	
+	# Faiths with Sky Burial need to have this character saved as a variable on their successor.
+	trigger = {
+		exists = player_heir
+		faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+	}
+
+	immediate = {
+		player_heir = {
+			if = {
+				limit = {
+					faith = root.faith
+					OR = {
+						is_child_of = root
+						is_grandchild_of = root
+						is_great_grandchild_of = root
+					}
+				}
+				set_variable = {
+					name = ancestor_to_bury
+					value = root
+					years = 5
+				}
+			}
+		}
+	}
+}
+
+ek_religious_decision.0502 = {
+	type = character_event
+	title = ek_religious_decision.0502.t
+	desc = ek_religious_decision.0502.desc
+	theme = faith
+	event_background = temple
+
+	left_portrait = {
+		character = var:ancestor_to_bury
+	}
+
+	immediate = {
+		add_dynasty_prestige = minor_dynasty_prestige_value
+		if = {
+			limit = {
+				any_vassal = {
+					faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+				}
+			}
+			every_vassal = {
+				limit = {
+					faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+				}
+				custom = give_cath_bedraud_burial_vassals
+				add_opinion = {
+					modifier = pleased_opinion
+					target = root
+					opinion = 20
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ek_religious_decision.0502.a
+	}
+
+	after = {
+		remove_variable = ancestor_to_bury
 	}
 }

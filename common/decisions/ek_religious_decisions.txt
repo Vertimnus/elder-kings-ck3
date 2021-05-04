@@ -548,3 +548,56 @@ council_of_the_eight_assume_leadership_decision = {
 		base = 20
 	}
 }
+
+### Bury an ancestor in Cath Bedraud
+bury_in_cath_bedraud_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = bury_in_cath_bedraud_decision_desc
+	selection_tooltip = bury_in_cath_bedraud_decision_tooltip
+
+	is_shown = {
+		faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+		has_variable = ancestor_to_bury
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_at_war = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			add_dynasty_prestige = minor_dynasty_prestige_value
+			if = {
+				limit = {
+					any_vassal = {
+						faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+					}
+				}
+				every_vassal = {
+					limit = {
+						faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+					}
+					custom = give_cath_bedraud_burial_vassals
+					add_opinion = {
+						modifier = pleased_opinion
+						target = root
+						opinion = 20
+					}
+				}
+			}
+		}
+		trigger_event = ek_religious_decision.0502
+	}
+
+	ai_check_interval = 36
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
