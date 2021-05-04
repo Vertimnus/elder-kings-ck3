@@ -1486,66 +1486,6 @@ spymaster_task.0352 = {
 	}
 }
 
-### EK EDIT: Necromancer
-#Spymaster found Secret Necromancer
-spymaster_task.0353 = {
-	type = character_event
-	title = spymaster_task.0353.t
-	desc = {
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					root = scope:councillor_liege
-				}
-				desc = spymaster_task.0311.councillor_liege_opening
-			}
-			desc = spymaster_task.0311.spymaster_opening
-		}
-		first_valid = {
-			triggered_desc = {
-				trigger = {
-					OR = {
-						has_trait = necromancer
-						any_secret = {	
-							secret_type = secret_necromancer
-						}
-					}
-				}
-				desc = spymaster_task.0311.secret_necromancer.shared
-			}
-			desc = spymaster_task.0311.secret_necromancer
-		}
-	}
-	theme = intrigue
-	left_portrait = {
-		character = scope:councillor
-		animation = shock
-	}
-	right_portrait = {
-		character = scope:secret_holder
-		animation = dismissal
-	}
-	
-	trigger = {
-		scope:secret_to_reveal = {
-			secret_type = secret_necromancer
-		}
-	}
-
-	option = {
-		name = {
-			text = spymaster_task.0353.a.necromancer
-			trigger = {
-				has_trait = necromancer
-			}
-		}
-		name = spymaster_task.0353.a
-		scope:secret_to_reveal = {
-			reveal_to = root
-		}
-	}
-}
-
 #Spymaster found something - FALLBACK
 spymaster_task.0359 = {
 	type = character_event

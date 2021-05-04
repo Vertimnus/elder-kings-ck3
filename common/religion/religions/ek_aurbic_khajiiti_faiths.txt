@@ -9,6 +9,7 @@
 	doctrine = doctrine_gender_equal
 	doctrine = doctrine_pluralism_righteous
 	doctrine = doctrine_theocracy_temporal
+	doctrine = doctrine_cultural_identity_cg
 
 	#Marriage
 	doctrine = doctrine_monogamy
@@ -26,30 +27,31 @@
 	doctrine = doctrine_clerical_gender_either
 	doctrine = doctrine_clerical_marriage_allowed
 	doctrine = doctrine_clerical_succession_temporal_fixed_appointment
-	
+
 	### EK Doctrines
 	# doctrine = doctrine_adultery_shunned
 	doctrine = doctrine_adultery_men_shunned
 	doctrine = doctrine_adultery_women_shunned
 	doctrine = doctrine_homosexuality_accepted
-	doctrine = doctrine_daedra_worship_accepted
 	doctrine = doctrine_lycanthropy_pragmatic
 	doctrine = doctrine_vampirism_pragmatic
 	doctrine = doctrine_necromancy_pragmatic
 
+	# The Khajiiti Pantheon is uh difficult
+	doctrine = doctrine_hidden_daedra_shunned
 
 	traits = {
 		virtues = { }
 		sins = { }
 	}
-	
+
 ###virtues = { drugs catnip moon }
-	
+
 	reserved_male_names = {
-		
+
 	}
 	reserved_female_names = {
-		
+
 	}
 
 	custom_faith_icons = {
@@ -71,11 +73,11 @@
 		HighGodHerHis = CHARACTER_HERHIS_HIS
 
 		#Creator
-		HighGodName = god_nirni_name
-		HighGodNamePossessive = god_nirni_name_possessive
-		HighGodNameSheHe = CHARACTER_SHEHE_SHE
-		HighGodHerselfHimself = CHARACTER_HERSELF
-		HighGodHerHis = CHARACTER_HERHIS_HER
+		CreatorName = god_nirni_name
+		CreatorNamePossessive = god_nirni_name_possessive
+		CreatorNameSheHe = CHARACTER_SHEHE_SHE
+		CreatorHerselfHimself = CHARACTER_HERSELF
+		CreatorHerHis = CHARACTER_HERHIS_HER
 
 		#HealthGod
 		HealthGodName = god_azurah_name
@@ -227,7 +229,7 @@
 		GHWNamePlural = ghw_crusades
 
 	}
-	
+
 	piety_icon_group = "christian"
 
 	faiths = {
@@ -235,13 +237,19 @@
 			color = { 1.0 1.0 0.8 }
 			icon = Khajiit_mane
 
+			religious_head = k_mane
+
 			#Tenets
 			doctrine = tenet_moon_worship
 			doctrine = tenet_clan_mothers
 			doctrine = tenet_hedonistic
-			
+
 			doctrine = doctrine_pantheon_riddlethar
-			
+
+			doctrine = doctrine_hidden_daedra_criminal
+			doctrine = doctrine_azura_allowed
+			doctrine = doctrine_hircine_shunned
+
 			localization = {
 				#HighGod
 				HighGodName = god_riddlethar_name
@@ -251,11 +259,11 @@
 				HighGodHerHis = CHARACTER_HERHIS_THEIR
 
 				#Creator
-				HighGodName = god_nirni_name
-				HighGodNamePossessive = god_nirni_name_possessive
-				HighGodNameSheHe = CHARACTER_SHEHE_SHE
-				HighGodHerselfHimself = CHARACTER_HERSELF
-				HighGodHerHis = CHARACTER_HERHIS_HER
+				CreatorName = god_nirni_name
+				CreatorNamePossessive = god_nirni_name_possessive
+				CreatorNameSheHe = CHARACTER_SHEHE_SHE
+				CreatorHerselfHimself = CHARACTER_HERSELF
+				CreatorHerHis = CHARACTER_HERHIS_HER
 
 				#HealthGod
 				HealthGodName = god_azurah_name
@@ -333,7 +341,7 @@
 					god_azurah_name
 					god_khenarthi_name
 					god_jone_name
-					god_jode_name	
+					god_jode_name
 					god_hircine_name
 					god_nirni_name
 					god_alkosh_name
@@ -355,47 +363,63 @@
 				}
 			}
 		}
-		
+
 		manypathsdance = {
 			color = { 1.0 1.0 0.4 }
 			icon = Alkosh
 
 			#Tenets
-			doctrine = tenet_esotericism 
+			doctrine = tenet_esotericism
 			doctrine = tenet_clan_mothers
 			doctrine = tenet_lifestyle_mar_faith
-			
-			doctrine = doctrine_no_head 
+
+			doctrine = doctrine_no_head
 			doctrine = doctrine_bastardry_all
 			doctrine = doctrine_witchcraft_shunned
 			doctrine = doctrine_clerical_function_recruitment
 			doctrine = doctrine_clerical_succession_temporal_appointment
-			
+
 			doctrine = doctrine_pantheon_khajiiti
-			
+
+			doctrine = doctrine_azura_pantheon
+			doctrine = doctrine_boethiah_pantheon
+			doctrine = doctrine_hermaeus_pantheon
+			doctrine = doctrine_hircine_pantheon
+			doctrine = doctrine_mephala_pantheon
+			doctrine = doctrine_nocturnal_pantheon
+			doctrine = doctrine_sanguine_shunned
+			doctrine = doctrine_malacath_criminal
+			doctrine = doctrine_mehrunes_criminal
+			doctrine = doctrine_molag_criminal
+			doctrine = doctrine_meridia_criminal
+			doctrine = doctrine_namira_criminal
+			doctrine = doctrine_vaermina_criminal
+			doctrine = doctrine_sheogorath_criminal
 		}
-		
+
 		baandari = {
 			color = { 0.87 0.65 0.45 }
 			icon = baandar
+
+			doctrine = doctrine_no_head
+			doctrine = doctrine_pluralism_pluralistic
+			doctrine = doctrine_clerical_succession_temporal_appointment
+			doctrine = doctrine_cultural_identity_culture_exclusive
+
+			doctrine = doctrine_kinslaying_shunned
+			doctrine = doctrine_deviancy_shunned
+			doctrine = doctrine_witchcraft_accepted
+			# doctrine = doctrine_adultery_accepted
+			doctrine = doctrine_adultery_men_accepted
+			doctrine = doctrine_adultery_women_accepted
 
 			#Tenets
 			doctrine = tenet_moon_worship
 			doctrine = tenet_sacred_shadows
 			doctrine = tenet_hedonistic
-	
-			doctrine = doctrine_no_head
-			doctrine = doctrine_pluralism_pluralistic
-			doctrine = doctrine_kinslaying_shunned
-			doctrine = doctrine_deviancy_shunned
-			doctrine = doctrine_witchcraft_accepted
-			doctrine = doctrine_clerical_succession_temporal_appointment
-			# doctrine = doctrine_adultery_accepted
-			doctrine = doctrine_adultery_men_accepted
-			doctrine = doctrine_adultery_women_accepted
-			
+
 			doctrine = doctrine_pantheon_baandar
-			
+
 			localization = {
 				#HighGod
 				HighGodName = god_baandar_name
@@ -405,11 +429,11 @@
 				HighGodHerHis = CHARACTER_HERHIS_HIS
 
 				#Creator
-				HighGodName = god_baandar_name
-				HighGodNamePossessive = god_baandar_name_possessive
-				HighGodNameSheHe = CHARACTER_SHEHE_HE
-				HighGodHerselfHimself = CHARACTER_HIMSELF
-				HighGodHerHis = CHARACTER_HERHIS_HIS
+				CreatorName = god_baandar_name
+				CreatorNamePossessive = god_baandar_name_possessive
+				CreatorNameSheHe = CHARACTER_SHEHE_HE
+				CreatorHerselfHimself = CHARACTER_HIMSELF
+				CreatorHerHis = CHARACTER_HERHIS_HIS
 
 				#HealthGod
 				HealthGodName = god_baandar_name
@@ -494,6 +518,33 @@
 				DeathDeitySheHe = CHARACTER_SHEHE_HE
 				DeathDeityHerHis = CHARACTER_HERHIS_HIS
 			}
+		}
+
+		order_new_moon = {
+			color = { 0.22 1.0 0.08 }
+			icon = Khajiit_mane
+
+			# Doctrines
+			doctrine = doctrine_clerical_function_recruitment
+
+			doctrine = doctrine_lycanthropy_outlawed
+			doctrine = doctrine_vampirism_outlawed
+			doctrine = doctrine_necromancy_accepted
+
+			doctrine = doctrine_hidden_daedra_criminal
+
+			#Tenets
+			doctrine = tenet_religious_legal_pronouncements
+			doctrine = tenet_unrelenting_faith
+
+			# Gruesome Festivals, else Human Sacrifice.
+			doctrine_selection_pair = {
+				requires_dlc_flag = the_northern_lords
+				doctrine = tenet_gruesome_festivals
+				fallback_doctrine = tenet_human_sacrifice
+			}
+
+			doctrine = doctrine_pantheon_dragons
 		}
 	}
 }

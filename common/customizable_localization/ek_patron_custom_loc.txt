@@ -752,21 +752,275 @@ GetPatronStatus = {
 
 GetPatronWorshipType = {
 	type = character
-
+	
 	text = {
-		trigger = { has_exclusive_daedric_prince_pantheon = yes }
+		trigger = {
+			OR = {
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:azura
+					faith = { has_doctrine_parameter = worship_azura_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:boethiah
+					faith = { has_doctrine_parameter = worship_boethiah_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:clavicus
+					faith = { has_doctrine_parameter = worship_clavicus_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hermaeus
+					faith = { has_doctrine_parameter = worship_hermaeus_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hircine
+					faith = { has_doctrine_parameter = worship_hircine_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:malacath
+					faith = { has_doctrine_parameter = worship_malacath_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mehrunes
+					faith = { has_doctrine_parameter = worship_mehrunes_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mephala
+					faith = { has_doctrine_parameter = worship_mephala_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:meridia
+					faith = { has_doctrine_parameter = worship_meridia_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:molag
+					faith = { has_doctrine_parameter = worship_molag_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:namira
+					faith = { has_doctrine_parameter = worship_namira_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:nocturnal
+					faith = { has_doctrine_parameter = worship_nocturnal_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:peryite
+					faith = { has_doctrine_parameter = worship_peryite_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sanguine
+					faith = { has_doctrine_parameter = worship_sanguine_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sheogorath
+					faith = { has_doctrine_parameter = worship_sheogorath_focused_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:vaermina
+					faith = { has_doctrine_parameter = worship_vaermina_focused_active }
+				}
+			}
+		}
 		localization_key = patron_worship_type_focused
 	}
 
-	# text = {
-	# 	trigger = {	any_secret = { secret_type = secret_daedra_worship } }
-	# 	localization_key = patron_worship_type_secret
-	# }
+	text = {
+		trigger = {
+			OR = {
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:azura
+					faith = { has_doctrine_parameter = adds_azura_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:boethiah
+					faith = { has_doctrine_parameter = adds_boethiah_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:clavicus
+					faith = { has_doctrine_parameter = adds_clavicus_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hermaeus
+					faith = { has_doctrine_parameter = adds_hermaeus_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hircine
+					faith = { has_doctrine_parameter = adds_hircine_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:malacath
+					faith = { has_doctrine_parameter = adds_malacath_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mehrunes
+					faith = { has_doctrine_parameter = adds_mehrunes_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mephala
+					faith = { has_doctrine_parameter = adds_mephala_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:meridia
+					faith = { has_doctrine_parameter = adds_meridia_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:molag
+					faith = { has_doctrine_parameter = adds_molag_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:namira
+					faith = { has_doctrine_parameter = adds_namira_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:nocturnal
+					faith = { has_doctrine_parameter = adds_nocturnal_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:peryite
+					faith = { has_doctrine_parameter = adds_peryite_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sanguine
+					faith = { has_doctrine_parameter = adds_sanguine_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sheogorath
+					faith = { has_doctrine_parameter = adds_sheogorath_pantheon_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:vaermina
+					faith = { has_doctrine_parameter = adds_vaermina_pantheon_active }
+				}
+			}
+		}
+		localization_key = patron_worship_type_pantheon
+	}
+	
+	text = {
+		trigger = {
+			OR = {
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:azura
+					faith = { has_doctrine_parameter = worship_azura_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:boethiah
+					faith = { has_doctrine_parameter = worship_boethiah_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:clavicus
+					faith = { has_doctrine_parameter = worship_clavicus_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hermaeus
+					faith = { has_doctrine_parameter = worship_hermaeus_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:hircine
+					faith = { has_doctrine_parameter = worship_hircine_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:malacath
+					faith = { has_doctrine_parameter = worship_malacath_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mehrunes
+					faith = { has_doctrine_parameter = worship_mehrunes_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:mephala
+					faith = { has_doctrine_parameter = worship_mephala_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:meridia
+					faith = { has_doctrine_parameter = worship_meridia_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:molag
+					faith = { has_doctrine_parameter = worship_molag_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:namira
+					faith = { has_doctrine_parameter = worship_namira_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:nocturnal
+					faith = { has_doctrine_parameter = worship_nocturnal_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:peryite
+					faith = { has_doctrine_parameter = worship_peryite_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sanguine
+					faith = { has_doctrine_parameter = worship_sanguine_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:sheogorath
+					faith = { has_doctrine_parameter = worship_sheogorath_allowed_active }
+				}
+				AND = {
+					exists = var:patron_shown
+					var:patron_shown = flag:vaermina
+					faith = { has_doctrine_parameter = worship_vaermina_allowed_active }
+				}
+			}
+		}
+		localization_key = patron_worship_type_allowed
+	}
 
 	text = {
 		trigger = { always = no }
 		fallback = yes
-		localization_key = patron_worship_type_pantheon
+		localization_key = patron_worship_type_secret
 	}
 }
 
@@ -1919,6 +2173,148 @@ GetEgTamDesc = {
 		localization_key = desc_eg_tam
 	}
 }
+
+# Cyrodiilic Heroes
+get_ch_alessia = {
+	type = character #replace faith
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "_ch_alessia"
+	}
+}
+GetChAlessiaName = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = god_ch_alessia_name
+	}
+}
+GetChAlessiaDesc = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = desc_ch_alessia
+	}
+}
+
+get_ch_pelinal = {
+	type = character #replace faith
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "_ch_pelinal"
+	}
+}
+GetChPelinalName = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = god_ch_pelinal_name
+	}
+}
+GetChPelinalDesc = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = desc_ch_pelinal
+	}
+}
+
+get_ch_morihaus = {
+	type = character #replace faith
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "_ch_morihaus"
+	}
+}
+GetChMorihausName = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = god_ch_morihaus_name
+	}
+}
+GetChMorihausDesc = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = desc_ch_morihaus
+	}
+}
+
+get_ch_reman = {
+	type = character #replace faith
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "_ch_reman"
+	}
+}
+GetChRemanName = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = god_ch_reman_name
+	}
+}
+GetChRemanDesc = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = desc_ch_reman
+	}
+}
+
+get_ch_bendu = {
+	type = character #replace faith
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "_ch_bendu"
+	}
+}
+GetChBenduName = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = god_ch_bendu_name
+	}
+}
+GetChBenduDesc = {
+	type = character
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = desc_ch_bendu
+	}
+}
+
 
 # Daedra
 get_azura = {

@@ -102,6 +102,68 @@ title_confederacy = { #Confederacy
 	top_liege = no
 }
 
+title_custodian = {
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 119
+	titles = {c_potentate_retreat}
+	governments = { feudal_government clan_government republic_government }
+	top_liege = no
+}
+
+title_custodian_female = {
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 119
+	titles = {c_potentate_retreat}
+	governments = { feudal_government clan_government republic_government }
+	top_liege = no
+}
+
+title_custodianship = {
+	type = title
+	tier = county
+	priority = 119
+	titles = {c_potentate_retreat}
+	governments = { feudal_government clan_government republic_government }
+	top_liege = no
+}
+
+title_clan_mother = {
+	type = character
+	gender = female
+	special = holder
+	priority = 200
+	tier = county
+	governments = { theocracy_government }
+	faiths = { twomoonsdance manypathsdance }
+	top_liege = no
+}
+
+title_mane_male = {
+	type = character
+	gender = male
+	special = holder
+	priority = 200
+	titles = {k_mane}
+	religion = { twomoonsdance }
+	top_liege = no
+}
+
+title_mane_female = {
+	type = character
+	gender = female
+	special = holder
+	priority = 200
+	titles = {k_mane}
+	religion = { twomoonsdance }
+	top_liege = no
+}
+
 #Special consort titles for characters that shouldn't carry their spouse's title
 
 title_general_consort_male = { #Lord
@@ -175,12 +237,12 @@ realm_priest_female = {
 #Duchess - Arch-Priestess
 #Duchy - Grand Temple
 
-#King - Prelate
-#Queen - Prelatess
+#King - Primate
+#Queen - Primate
 #Kingdom - Primacy
 
-#Emperor - Arch-Prelate
-#Empress - Arch-Prelatess
+#Emperor - Arch-Primate
+#Empress - Arch-Primate
 #Empire - Arch-Primacy
 
 #Aldmeri Religion
@@ -563,6 +625,25 @@ emperor_theocracy_female_reach_religion = { #Matriarch
 	top_liege = no
 	governments = { theocracy_government }
 	religions = { reach_religion }
+}
+
+#Nedic-Nord Religion
+head_of_faith_eight_divines_male = {
+	type = character
+	gender = male
+	special = head_of_faith
+	faiths = { imperial_cult redguard_cult breton_cult nord_cult }
+	priority = 301
+	top_liege = no
+}
+
+head_of_faith_eight_divines_female = {
+	type = character
+	gender = female
+	special = head_of_faith
+	faiths = { imperial_cult redguard_cult breton_cult nord_cult }
+	priority = 301
+	top_liege = no
 }
 
 #Khajiiti Religion
@@ -1124,6 +1205,68 @@ kingdom_feudal_nordic_group_independent = { #Free Hold
 	only_independent = yes
 	governments = { feudal_government }
 	culture_groups = { nordic_group }
+	priority = 47
+	top_liege = no
+}
+
+#Imperial Group
+
+king_feudal_male_cyrodiil_group = { #Count
+	type = character
+	special = holder
+	gender = male
+	tier = kingdom
+	priority = 46
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
+	top_liege = no
+}
+king_feudal_female_cyrodiil_group = { #Countess
+	type = character
+	special = holder
+	gender = female
+	tier = kingdom
+	priority = 46
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
+	top_liege = no
+}
+kingdom_feudal_cyrodiil_group = { #County
+	type = title
+	tier = kingdom
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
+	priority = 46
+	top_liege = no
+}
+king_feudal_male_cyrodiil_group_independent = { #King
+	type = character
+	special = holder
+	gender = male
+	tier = kingdom
+	priority = 47
+	only_independent = yes
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
+	top_liege = no
+}
+king_feudal_female_cyrodiil_group_independent = { #Queen
+	type = character
+	special = holder
+	gender = female
+	tier = kingdom
+	priority = 47
+	only_independent = yes
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
+	top_liege = no
+}
+kingdom_feudal_cyrodiil_group_independent = { #Kingdom
+	type = title
+	tier = kingdom
+	only_independent = yes
+	governments = { feudal_government }
+	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
 	priority = 47
 	top_liege = no
 }
@@ -1830,7 +1973,7 @@ county_feudal_independent = {
 	governments = { feudal_government }
 	culture_groups = { breton_group }
 	top_liege = no
-}	
+}
 duke_feudal_male = {
 	type = character
 	gender = male
@@ -1908,7 +2051,7 @@ king_feudal_female = {
 kingdom_feudal = {
 	type = title
 	tier = kingdom
-	priority = 46
+	priority = 45
 	governments = { feudal_government }
 	top_liege = no
 }
@@ -1990,7 +2133,7 @@ baron_pirate_female = { #Captain
 }
 barony_pirate = {
 	type = title
-	tier = county
+	tier = barony
 	priority = 50
 	governments = { pirate_government }
 }

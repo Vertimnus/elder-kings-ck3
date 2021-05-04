@@ -31,6 +31,8 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
+@moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
+
 
 #culture_group_military
 innovation_war_magic = {
@@ -60,6 +62,7 @@ innovation_alchemy = {
 }
 
 #culture_group_regional
+# Region based
 innovation_war_mammoths = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
@@ -91,7 +94,7 @@ innovation_moonstone_armor = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	region = mundus_tamriel_summerset_isles
-	icon = @weapons_and_armor_01
+	icon = @moonstone_armor_01
 
 	modifier = {
 		prowess = 1
@@ -112,6 +115,7 @@ innovation_moonstone_armor = {
 	flag = tribal_era_regional
 }
 
+# Culture/culture group based
 innovation_blood_price = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
@@ -126,6 +130,64 @@ innovation_blood_price = {
 	
 	modifier = {
 		county_opinion_add = 5
+	}
+	
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_knightly_orders = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @nobility_01
+	
+	potential = {
+		# Bretons only
+		this.culture_group = culture_group:breton_group
+	}
+	
+	modifier = {
+		knight_limit = 1
+		knight_effectiveness_mult = 0.2
+		monthly_prestige_gain_per_knight_mult = 0.01
+	}
+	
+	custom = students_of_knighthood
+	
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_skald_tradition = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @nobility_01
+	
+	potential = {
+		# Nords only
+		this.culture_group = culture_group:nordic_group
+	}
+	
+	custom = unlocks_high_diplomacy_gives_poet
+	custom = unlocks_poet_guests
+	
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_rite_of_theft = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @weapons_and_armor_01
+	
+	potential = {
+		# Bosmer only
+		this = culture:pactbosmer
+	}
+	
+	modifier = {
+		raid_speed = 0.1
+		max_loot_mult = 0.25
 	}
 	
 	flag = global_regional

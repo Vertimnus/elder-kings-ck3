@@ -153,6 +153,34 @@ update_religions_piety_level = {
 		update_religions_piety_level_effect = { MODIFIER = devotion_gives_development_progress }
 	}
 	
+	### LIFESTYLE EXPERIENCE WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_lifestyle_experience }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_lifestyle_experience }
+			}
+		}
+		
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_lifestyle_experience }
+	}
+	
+	### CONTROL GROWTH WITH WITH DEVOTION
+	if = {
+		limit = {
+			OR = {
+				# Your faith has a devotion related tenet
+				faith = { has_doctrine_parameter = devotion_gives_control_growth }
+				# You have a devotion related modifier
+				has_character_modifier_scaling_devotion = { MODIFIER = devotion_gives_control_growth }
+			}
+		}
+		
+		update_religions_piety_level_effect = { MODIFIER = devotion_gives_control_growth }
+	}
+	
 	### STAR SIGN POWER WITH DEVOTION
 	if = {
 		limit = {
@@ -242,5 +270,84 @@ update_religions_piety_level = {
 			limit = { has_trait = sign_serpent }
 			unsafe_update_religions_piety_level_effect = { MODIFIER = devotion_gives_star_sign_power_serpent }
 		}
+	}
+}
+
+### FAITH'S VIEW ON THE DAEDRIC PRINCES
+faith_give_view_daedric_prince = {
+	if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_allowed }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+		}
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_shunned }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+		}
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_criminal }
+		if = {
+			limit = {
+				NOR = {
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_pantheon
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_allowed
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_shunned
+					has_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+				}
+			}
+			add_doctrine = doctrine_$DAEDRIC_PRINCE$_criminal
+		}
+	}
+}
+
+faith_give_view_daedric_princes = {
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = azura }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = boethiah }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = clavicus }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = hermaeus }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = hircine }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = malacath }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = mehrunes }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = mephala }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = meridia }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = molag }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = namira }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = nocturnal }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = peryite }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = sanguine }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = sheogorath }
+	faith_give_view_daedric_prince = { DAEDRIC_PRINCE = vaermina }
+	
+	# Remove the doctrines
+	if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_allowed }
+		remove_doctrine = doctrine_hidden_daedra_allowed
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_shunned }
+		remove_doctrine = doctrine_hidden_daedra_shunned
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_hidden_daedra_criminal }
+		remove_doctrine = doctrine_hidden_daedra_criminal
 	}
 }
