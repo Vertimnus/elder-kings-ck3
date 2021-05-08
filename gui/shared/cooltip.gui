@@ -213,7 +213,7 @@
 					size = { 0 4 }
 				}
 
-				hbox = {
+				vbox = {
 					size = { 0 0 }
 					layoutpolicy_horizontal = growing
 					text_multi = {
@@ -227,6 +227,20 @@
 						autoresize = yes
 						max_width = 450
 						#margin_left = -12
+					}
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						autoresize = yes
+						fontsize_min = 14
+						using = Font_Size_Small
+						text = NATIVE_TO
+					}
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						autoresize = yes
+						fontsize_min = 14
+						using = Font_Size_Small
+						text = "[GetScriptedGui('culture_nativity').ExecuteTooltip(GuiScope.SetRoot(Culture.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]" #TODO see if can list inovations directly
 					}
 				}
 
@@ -366,14 +380,14 @@ container = {
 			# vbox = {
 			# 	layoutpolicy_horizontal = expanding
 			# 	layoutpolicy_vertical = expanding
-			# 	datamodel = "[GetDummyMale.MakeScope.Var(GameConceptTooltip.GetDescription).CultureGroup.GetCultures]"
+			# 	datamodel = "[GetDummyMale.MakeScope.Var(GameConceptTooltip.GetDescription).CultureGroup.MakeScope.GetList('cultures')]"
 			# 	item = {
 			# 		text_single = {
 			# 			layoutpolicy_horizontal = expanding
 			# 			autoresize = yes
 			# 			fontsize_min = 14
 			# 			using = Font_Size_Small
-			# 			text = "$EFFECT_LIST_BULLET$[CultureTemplate.GetName]"
+			# 			text = "$EFFECT_LIST_BULLET$[Culture.GetName]"
 			# 		}
 			# 	}
 			# }
