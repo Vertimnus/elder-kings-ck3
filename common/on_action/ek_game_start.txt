@@ -212,6 +212,10 @@ ek_on_game_start = {
 						value = this.religious_head_title
 					}
 					
+					# Destroy the current HoF title (is given back if someone usurps the leadership of the Council)
+					religious_head_title = { save_scope_as = rel_head_title }
+					religious_head = { destroy_title = scope:rel_head_title }
+					
 					# Set k_council_of_the_eight as its religious title
 					set_religious_head_title = k_council_of_the_eight
 				}
