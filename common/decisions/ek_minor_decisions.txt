@@ -50,3 +50,61 @@
 		}
 	}
 }
+
+# Coping mechanism
+stress_loss_skooma_drinker_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	desc = stress_loss_skooma_drinker_decision_desc
+	selection_tooltip = stress_loss_skooma_drinker_decision_tooltip
+
+	ai_check_interval = 120
+
+	cooldown = { days = 1095 }
+
+	is_shown = {
+		has_trait = skooma_drinker
+	}
+
+	is_valid_showing_failures_only = {
+		is_available = yes
+	}
+
+	effect = {
+		
+		custom_tooltip = stress_loss_drunkard_decision_effect_tooltip
+
+		show_as_tooltip = { #The effect is actually applied in the event itself
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 2
+			}
+		}
+
+		trigger_event = {
+			on_action = stress_loss_skooma_drinker
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 25
+			stress > low_medium_stress
+		}
+
+		modifier = {
+			add = 50
+			stress > medium_stress
+		}
+
+		modifier = {
+			add = 50
+			stress > high_stress
+		}
+	}
+}

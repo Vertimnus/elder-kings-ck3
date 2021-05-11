@@ -1,4 +1,4 @@
-﻿### EK EDIT: Removed vanilla faiths & regions
+﻿### EK EDIT: Removed vanilla faiths & regions, replaced hardcoded references to traits with is_substance_abuser = yes
 ### EK TODO: Coping mechanisms
 
 # This trigger is used when offering the player a choice between two stress outlets for a stress threshold event.
@@ -23,15 +23,16 @@ has_two_stress_threshold_options = {
 		has_character_flag = stress_threshold_option_athletic
 		has_character_flag = stress_threshold_option_conversion
 		has_character_flag = stress_threshold_option_depression
+		# EK additions
+		has_character_flag = stress_threshold_option_skooma_drinker
 	}
 }
 
 # Check if the player already has two stress coping traits ( we don't want to give any more than that! )
+### EK Note: For this one we may have to list them by hand instead of using is_substance_abuser, to check
 has_two_stress_coping_traits_trigger = {
 	calc_true_if = {
 		amount >= 2
-		has_trait = drunkard
-		has_trait = hashishiyah
 		has_trait = rakish
 		has_trait = reclusive
 		has_trait = irritable
@@ -44,13 +45,16 @@ has_two_stress_coping_traits_trigger = {
 		has_trait = journaller
 		has_trait = confider
 		has_trait = athletic
+		
+		### EK EDIT: Substance abuses go there
+		has_trait = drunkard
+		has_trait = hashishiyah
+		has_trait = skooma_drinker
 	}
 }
 
 has_a_stress_coping_trait_trigger = {
 	OR = {
-		has_trait = drunkard
-		has_trait = hashishiyah
 		has_trait = rakish
 		has_trait = reclusive
 		has_trait = irritable
@@ -63,14 +67,16 @@ has_a_stress_coping_trait_trigger = {
 		has_trait = journaller
 		has_trait = confider
 		has_trait = athletic
+		
+		### EK EDIT: Substance abuses go there
+		is_substance_abuser = yes
 	}
 }
 
 can_be_drunkard = {
 	is_adult = yes
 	NOR = { # Can not be Temperate or already have a Substance Abuse trait.
-		has_trait = drunkard
-		has_trait = hashishiyah
+		is_substance_abuser = yes
 		has_trait = temperate
 	}
 	# faith = { # Can not be Muslim ( some Muslims did actually drink, but ideally we want Muslims to be Hashishiyahs instead of Drunkards because it is more thematic).
@@ -83,8 +89,7 @@ can_be_drunkard = {
 can_be_hashishiyah = {
 	is_adult = yes
 	NOR = { # Can not be Temperate or already have a Substance Abuse trait.
-		has_trait = drunkard
-		has_trait = hashishiyah
+		is_substance_abuser = yes
 		has_trait = temperate
 	}
 
