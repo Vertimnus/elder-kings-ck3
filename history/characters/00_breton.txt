@@ -207,14 +207,40 @@ deleyn_1005 = {
 
 #House Rielle
 
+rielle_999 = {
+	name = "Mesalinie"
+	dynasty = 400003
+	religion = breton_cult
+	culture = glenumbran
+	female = yes
+
+	3307.1.1 = { birth = yes }
+	3353.1.1 = { death = yes }
+}
+
+rielle_999b = {
+	name = "Aditte"
+	dynasty = 400003
+	religion = breton_cult
+	culture = glenumbran
+	female = yes
+	
+	mother = rielle_999
+
+	3334.1.1 = { birth = yes }
+	3387.1.1 = { death = yes }
+}
+
 rielle_1000 = {
 	name = "Mariette"
 	dynasty = 400003
 	religion = breton_cult
 	culture = glenumbran
 	female = yes
+	
+	mother = rielle_999
 
-	3330.1.1 = { birth = yes }
+	3329.1.1 = { birth = yes }
 	3390.1.1 = { death = yes }
 }
 
@@ -320,6 +346,29 @@ rielle_1006 = {
 
 	3480.1.1 = { birth = yes }
 	3541.1.1 = { death = yes }
+}
+
+##Spenard Dynasty (410012)
+
+#House Spenard
+
+spenard_1000 = {
+	name = "Frestrien" #Lore
+	dynasty = 410012
+	religion = breton_cult
+	culture = northmen
+
+	200.1.1 = { birth = yes }
+	240.1.1 = { 
+		trait = vampire_character
+		effect = { set_immortal_age = 40 }
+	}	
+	567.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = flowdys_1001
+		}
+	}
 }
 
 ##Blanche Dynasty
@@ -1266,6 +1315,7 @@ stroud_1000 = {
 	father = stroud_998
 
 	3328.1.1 = { birth = yes }
+	3350.1.1 = { add_spouse = rielle_999b }
 	3389.1.1 = { death = yes }
 }
 
@@ -1276,6 +1326,7 @@ stroud_1001 = {
 	culture = glenumbran
 
 	father = stroud_1000
+	mother = rielle_999b
 
 	3356.1.1 = { birth = yes }
 	3412.1.1 = { death = yes }
@@ -1289,6 +1340,7 @@ stroud_1002 = {
 	female = yes
 
 	father = stroud_1000
+	mother = rielle_999b
 
 	3359.1.1 = { birth = yes }
 	3421.1.1 = { death = yes }
@@ -2209,13 +2261,53 @@ flowdys_1000 = { #Lore
 	965.1.1 = { death = yes }
 }
 
+flowdys_1001 = { #Lore
+	name = "Line of Yric"
+	dynasty_house = dorell_flowdys
+	religion = breton_cult
+	culture = northmen
+	trait = line_of_x
+	
+	father = flowdys_1000
+
+	964.1.1 = { birth = yes }
+	3325.1.1 = { death = yes }
+}
+
 #House Dorell
+
+dorell_998 = {
+	name = "Weynon"
+	dynasty = 410006
+	religion = breton_cult
+	culture = northmen
+	
+	father = flowdys_1001
+
+	3281.1.1 = { birth = yes }
+	3342.1.1 = { death = yes }
+}
+
+dorell_999 = {
+	name = "Lucie"
+	dynasty = 410006
+	religion = breton_cult
+	culture = northmen
+	female = yes
+	
+	father = dorell_998
+
+	3305.1.1 = { birth = yes }
+	3357.1.1 = { death = yes }
+}
 
 dorell_1000 = {
 	name = "Weynon"
 	dynasty = 410006
 	religion = breton_cult
 	culture = northmen
+	
+	mother = dorell_999
 
 	3324.1.1 = { birth = yes }
 	3385.1.1 = { death = yes }
@@ -2486,11 +2578,11 @@ edrald_1001 = {
 	3383.1.1 = { death = yes }
 }
 
-##Merowald Dynasty
+##Aurmine Dynasty
 
-#House Merowald
+#House Aurmine
 
-merowald_1000 = {
+aurmine_1000 = {
 	name = "Barthel"
 	dynasty = 410007
 	religion = breton_cult
@@ -2500,13 +2592,13 @@ merowald_1000 = {
 	3388.1.1 = { death = yes }
 }
 
-merowald_1001 = {
+aurmine_1001 = {
 	name = "Ambroise"
 	dynasty = 410007
 	religion = breton_cult
 	culture = northmen
 
-	father = merowald_1000
+	father = aurmine_1000
 
 	3356.1.1 = { birth = yes }
 	3412.1.1 = { death = yes }
