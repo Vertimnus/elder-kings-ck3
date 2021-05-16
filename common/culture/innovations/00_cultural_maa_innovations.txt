@@ -31,56 +31,165 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
-### Nedic
-innovation_witch_knight = {
-	group = culture_group_regional
-	culture_era = culture_era_early_medieval
-	icon = @special_maa_01
+@moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
+@high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
 
-	potential = {
-		OR = {
-			this = culture:reachfolk
-		}
-	}
-
-	unlock_maa = witch_knight
-
-	flag = global_maa
-}
-
-### Nord
-innovation_huscarl = {
-	group = culture_group_regional
-	culture_era = culture_era_early_medieval
-	icon = @special_maa_01
-
-	potential = {
-		OR = {
-			this = culture:eastmarcher
-			this = culture:westmarcher
-		}
-	}
-
-	unlock_maa = huscarl
-
-	flag = global_maa
-}
-innovation_skaal_hunter = {
+### Akaviri
+innovation_lacquered_goldscale = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
-	icon = @special_maa_01
+	icon = @special_maa_02
 
 	potential = {
-		this = culture:skaal
+		this.culture_group = culture_group:akaviri_group
 	}
 
-	unlock_maa = skaal_hunter
+	unlock_maa = akaviri_dragon_hunters
 
 	flag = global_maa
 }
 
+### Aldmeris
+innovation_refined_moonstone_plate = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @moonstone_armor_01
+
+	potential = {
+		this.culture_group = culture_group:aldmeris_group
+		NOT = { this = culture:balfiera }
+	}
+
+	unlock_maa = summerset_justiciars
+
+	flag = global_maa
+}
+# For the Balfieri, focus on sorcerers
+innovation_mnemolichite_foci = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this = culture:balfiera
+	}
+
+	unlock_maa = direnni_sorcerers
+
+	flag = global_maa
+}
+
+### Argonian
+innovation_ka_deelith_instructions = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:argonian_group
+	}
+
+	unlock_maa = saxhleel_reel_ka
+
+	flag = global_maa
+}
+
+### Ayleidon
+innovation_welkynd_stone_foci = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:ayleidon_group
+	}
+
+	unlock_maa = ayleid_sorcerers
+
+	flag = global_maa
+}
+
+### Bosmeris
+innovation_bone_sinew_cuirboulli = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:bosmeris_group
+	}
+
+	unlock_maa = bosmer_stalkers
+
+	flag = global_maa
+}
+
+### Breton (break it down into like 4 innovations)
+# if Bretic and Northmen get Highlanders, and Iliacs get Iliac Companies (working title), and Bjoule get Horse Nomads, this only leaves Glenumbrans with Breton Hedge Knights.
+innovation_adamantine_plate_forging = { # Uh, change that? Heave cavalry maybe?
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this = culture:glenumbran
+	}
+
+	unlock_maa = breton_hedge_knights
+
+	flag = global_maa
+}
+innovation_molybdenum_polearms_expertise = { # Ah, Storm Knights are from the Iliac, that's where Stormhaven is
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this = culture:iliac
+	}
+
+	unlock_maa = breton_pikemen_companies
+
+	flag = global_maa
+}
+innovation_breton_hills_gladiators = { # Based on dëëp Arena löre
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		OR = {
+			this = culture:northmen
+			this = culture:bretic
+		}
+	}
+
+	unlock_maa = breton_highlanders
+
+	flag = global_maa
+}
+# For the Bjoule, focus on horses
+innovation_yoku_braided_stirrups = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		OR = {
+			this = culture:bjoule
+			this = culture:horsemen
+		}
+	}
+
+	unlock_maa = light_grazing_horde
+
+	flag = global_maa
+}
+
+### Chimeris
+
 ### Cyrodiilic
-innovation_armored_legionaires = {
+innovation_colovian_steel_lorica = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	icon = @special_maa_01
@@ -96,7 +205,7 @@ innovation_armored_legionaires = {
 
 	flag = global_maa
 }
-innovation_nibenese_battlemages = {
+innovation_ancestor_silk_robes = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	icon = @special_maa_01
@@ -112,65 +221,52 @@ innovation_nibenese_battlemages = {
 
 	flag = global_maa
 }
-
-### Yoku
-innovation_way_of_the_sword = {
+innovation_newtscale_cloaks = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	icon = @special_maa_01
 
 	potential = {
 		OR = {
-			this = culture:yokudan
-			this = culture:forebear
-			this = culture:crown
-			this = culture:alikr
+			this = culture:blackwood
+			this = culture:gemha
 		}
 	}
 
-	unlock_maa = yokudan_way_of_the_sword
+	unlock_maa = ut_nibenu_bowmen
 
 	flag = global_maa
 }
-innovation_abecean_pirates = {
+
+### Dunmeris
+innovation_heavy_bonemold_casts = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
-	icon = @special_maa_01
+	icon = @special_maa_02
 
 	potential = {
-		OR = {
-			this = culture:abecean
-		}
+		this = culture:dunmer
 	}
-	
-	modifier = {
-		embarkation_cost_mult = -0.25
-		raid_speed = 0.1
-	}
-	
-	custom = unlocks_raiding
-	custom = unlocks_naval_raiding
-	custom = unlocks_sailable_major_rivers
 
-	unlock_maa = abecean_pirates
+	unlock_maa = dunmer_oathmen
 
 	flag = global_maa
 }
-innovation_light_grazing_horde_akos = {
+innovation_netch_leather_protection = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
-	icon = @special_maa_01
+	icon = @special_maa_02
 
 	potential = {
-		OR = {
-			this = culture:horsemen
-		}
+		this = culture:ashlander
 	}
 
-	unlock_maa = light_grazing_horde_akos
+	unlock_maa = ashlander_champions
 
 	flag = global_maa
 }
+
+### Goblin-ken
 
 ### Khajiiti - Each subform is an innovation :)
 # Unlocks the basic ones
@@ -195,7 +291,7 @@ innovation_lunar_lattice = {
 # War Mages
 innovation_alfiq = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_early_medieval
 	icon = @special_maa_02
 
 	potential = {
@@ -220,7 +316,7 @@ innovation_alfiq = {
 # Heavy Infantry
 innovation_pahmar = {
 	group = culture_group_regional
-	culture_era = culture_era_tribal
+	culture_era = culture_era_early_medieval
 	icon = @special_maa_02
 
 	potential = {
@@ -268,17 +364,133 @@ innovation_senche_raht = {
 	flag = global_maa
 }
 
-### Akaviri
-innovation_akaviri_dragon_hunters = {
+### Nedic
+# Reachfolk
+innovation_bloodforged_arms = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
-	icon = @special_maa_02
+	icon = @special_maa_01
 
 	potential = {
-		this.culture_group = culture_group:akaviri_group
+		OR = {
+			this = culture:reachfolk
+			this = culture:karth
+		}
 	}
 
-	unlock_maa = akaviri_dragon_hunters
+	unlock_maa = witch_knight
+
+	flag = global_maa
+}
+# Kothringi
+# Galen
+# Keptu + Duraki + Perena
+innovation_nirnblooded_metals = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:keptu
+			this = culture:duraki
+			this = culture:perena
+		}
+	}
+
+	unlock_maa = deathlands_slayers
+
+	flag = global_maa
+}
+# Men-of-Kreath
+# Nede
+
+### Nord
+innovation_nordic_steelcarving = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:eastmarcher
+			this = culture:westmarcher
+		}
+	}
+
+	unlock_maa = huscarl
+
+	flag = global_maa
+}
+innovation_stahlrim_reinforced_furs = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		this = culture:skaal
+	}
+
+	unlock_maa = skaal_hunter
+
+	flag = global_maa
+}
+
+### Orsimer
+innovation_orichalc_master_smiths = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		this.culture_group = culture_group:orsimer_group
+	}
+
+	unlock_maa = orc_marauders
+
+	flag = global_maa
+}
+
+### Yoku
+innovation_shehai_sword_lore = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:yokudan
+			this = culture:forebear
+			this = culture:crown
+			this = culture:alikr
+		}
+	}
+
+	unlock_maa = yokudan_way_of_the_sword
+
+	flag = global_maa
+}
+innovation_corsair_traditions = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @special_maa_01
+
+	potential = {
+		OR = {
+			this = culture:abecean
+		}
+	}
+	
+	modifier = {
+		embarkation_cost_mult = -0.25
+		raid_speed = 0.1
+	}
+	
+	custom = unlocks_raiding
+	custom = unlocks_naval_raiding
+	custom = unlocks_sailable_major_rivers
+
+	unlock_maa = abecean_pirates
 
 	flag = global_maa
 }

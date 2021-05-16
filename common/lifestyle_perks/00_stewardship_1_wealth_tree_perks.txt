@@ -1,4 +1,5 @@
-﻿
+﻿### EK EDIT: Added possible swap names depending on game rules
+
 ### STEWARDSHIP - WEALTH PERKS
 
 
@@ -38,13 +39,28 @@ golden_obligations_perk = {
 	}
 }
 
-
+### EK EDIT: Possible name swap
 # Heregeld
 heregeld_perk = {
 	lifestyle = stewardship_lifestyle
 	tree = wealth
 	position = { 0 1.25 }
 	icon = node_stewardship
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_game_rule = ek_necessary_renames
+						has_game_rule = ek_extensive_renames
+					}
+				}
+				desc = heregeld_perk_alternate_name
+			}
+			desc = heregeld_perk_name
+		}
+	}
 	
 	parent = golden_obligations_perk
 	
