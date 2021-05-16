@@ -518,3 +518,57 @@ is_secretly_worshipping_sheogorath = {
 is_secretly_worshipping_vaermina = {
 	is_secretly_worshipping_prince = { PRINCE = vaermina }
 }
+
+### Holy buildings scripted triggers
+province_has_holy_building_slot = { # Slot here means either just the var, or the building itself
+	$PROVINCE$ = {
+		OR = {
+			exists = var:$BUILDING$
+			has_building = $BUILDING$_01
+		}
+	}
+}
+
+province_has_any_holy_building_slot = { # Slot here means either just the var, or the building itself
+	OR = {
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = grand_cathedral }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = daedric_shrine }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = great_wyrd_tree }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = dragon_temple }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = holy_site_other_grand_temple }
+	}
+}
+
+province_has_right_holy_building_slot = { # Checks if CHAR faith aligns with $PROVINCE$ holy building slot
+	$CHAR$.faith = { has_doctrine_parameter = faith_uses_$BUILDING$ }
+	province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = $BUILDING$ }
+}
+
+province_has_wrong_holy_building_slot = { # Checks if CHAR faith DOESN'T align with $PROVINCE$ holy building slot
+	trigger_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = grand_cathedral } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = daedric_shrine } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = great_wyrd_tree } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = dragon_temple } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_holy_site_other_grand_temple } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = holy_site_other_grand_temple } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else = { always = no }
+}
