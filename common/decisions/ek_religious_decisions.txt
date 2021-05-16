@@ -504,6 +504,12 @@ bury_in_cath_bedraud_decision = {
 
 	is_shown = {
 		faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+		root.faith = {
+			controls_holy_site = hs_cath_bedraud
+		}
+		title:b_cath_bedraud = {
+			is_holy_site_of = root.faith
+		}
 		has_variable = ancestor_to_bury
 	}
 
@@ -518,12 +524,22 @@ bury_in_cath_bedraud_decision = {
 			if = {
 				limit = {
 					any_vassal = {
-						faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+						this.faith = {
+							controls_holy_site = hs_cath_bedraud
+						}
+						title:b_cath_bedraud = {
+							is_holy_site_of = this.faith
+						}
 					}
 				}
 				every_vassal = {
 					limit = {
-						faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+						this.faith = {
+							controls_holy_site = hs_cath_bedraud
+						}
+						title:b_cath_bedraud = {
+							is_holy_site_of = this.faith
+						}
 					}
 					custom = give_cath_bedraud_burial_vassals
 					add_opinion = {
