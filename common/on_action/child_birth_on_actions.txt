@@ -171,6 +171,25 @@ on_birth_child = {
 				}
 			}
 		}
+		
+		### EK EDIT: Added the effect of the Hegemon legacy line
+		if = {
+			limit = {
+				hegemon_legacy_5
+				exists = scope:child.dynasty
+				scope:child.dynasty.dynast = { is_alive = yes }
+				NOT = {
+					scope:child = scope:child.dynasty.dynast # If the dynasty dies out, a posthumous child can revive it
+				}
+				#No need to check if the hook can be added, the kid was just born
+			}
+			scope:child.dynasty.dynast = {
+				add_hook_no_toast = {
+					type = house_head_hook
+					target = scope:child
+				}
+			}
+		}
 
 		if = {
 			limit = {
