@@ -346,8 +346,9 @@ spell_caster = {
     save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
     var:spell_caster = {
         custom_label = spell_name_caster
-        save_temporary_scope_value_as = { name = cost value = { value = 0 subtract = $SPELL$_cost } }
-        add_magicka = { VALUE = scope:cost }
+        #save_temporary_scope_value_as = { name = cost value = { value = 0 subtract = $SPELL$_cost } }
+        #add_magicka = { VALUE = scope:cost }
+        add_magicka = { VALUE = $SPELL$_cost.negate }
     }
 }
 

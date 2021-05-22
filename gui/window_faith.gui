@@ -13,13 +13,6 @@ window = {
 	using = Window_Background_Sidebar
 
 	state = {
-		name = "map_click_check" # clicking the map changes the faith but doesnt call the refresh function
-		trigger_when = "[Not(EqualTo_string( GetVariableSystem.Get( 'faith_name_check' ), Faith.GetNameNoTooltip ))]"
-		on_start = "[PdxGuiTriggerAllAnimations('faith_view_refresh')]"
-		on_finish = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
-	}
-
-	state = {
 		name = "patron_important_action" # get the correct tab for the action
 		trigger_when = "[GetPlayer.MakeScope.Var('action_patron').IsSet]"
 		on_start = "[GetScriptedGui('action_patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -31,7 +24,6 @@ window = {
 		position = { 0 0 }
 		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'beliefs' )]"
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
-		on_start = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
 		on_start = "[GetVariableSystem.Clear( 'patron_trait' )]"
 
 		using = Animation_FadeIn_Quick
@@ -1206,7 +1198,8 @@ window = {
 			}
 
 			state = {
-				name = "faith_view_refresh"
+				name = "patron_get_patrons"
+				trigger_when = "[Not(FaithWindow.GetFaith.MakeScope.Var('faith_patrons_set').IsSet)]" #trigger when list doesnt exist - assume empty list exists still
 				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
@@ -1286,14 +1279,14 @@ window = {
 
 				blockoverride "scrollbox_empty" {
 					text = NO_PATRONS
-					visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+					visible = "[IsDataModelEmpty(FaithWindow.GetFaith.MakeScope.GetList('faith_patrons'))]"
 				}
 
 				blockoverride "scrollbox_content"
 				{
 					vbox = {
 						name = "patrons_list"
-						datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
+						datamodel = "[FaithWindow.GetFaith.MakeScope.GetList('faith_patrons')]"
 						layoutpolicy_horizontal = expanding
 
 						item = {

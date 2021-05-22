@@ -349,10 +349,23 @@ faith_get_patrons = {
     }
 
     effect = {
-        scope:player_s = {
-            clear_variable_list = faith_patrons
-            set_variable = { name = faith_window value = PREV }
+        scope:player_s = { set_variable = { name = faith_window value = PREV } }
+        every_religion_global = {
+            every_faith = {
+                limit = {
+                    has_variable = faith_patrons_set
+                    NOT = {
+                        any_player = { #dont clear if other player viewing
+                            exists = var:faith_window
+                            var:faith_window = PREV
+                        }
+                    }
+                }
+                remove_variable = faith_patrons_set
+                clear_variable_list = faith_patrons
+            }
         }
+        set_variable = faith_patrons_set
         patron_get_list = yes
     }
 }
@@ -361,8 +374,22 @@ faith_clear_patrons = {
     scope = character
 
     effect = {
-        clear_variable_list = faith_patrons
         remove_variable = faith_window
+        every_religion_global = {
+            every_faith = {
+                limit = {
+                    has_variable = faith_patrons_set
+                    NOT = {
+                        any_player = { #dont clear if other player viewing
+                            exists = var:faith_window
+                            var:faith_window = PREV
+                        }
+                    }
+                }
+                remove_variable = faith_patrons_set
+                clear_variable_list = faith_patrons
+            }
+        }
     }
 }
 
@@ -372,7 +399,5 @@ action_patron_clear = {
     effect = { remove_variable = action_patron }
 }
 
-# Since Blackninja might remove concatenation, may need to pass flags to sgui, then pass those (through provinces as saved scopes?)
-# to custom_description_no_bullet and concatenate there, then call sgui.EffectTooltip
 # could also use a loc string :0 "[thing]_[thing2]" and call it
 # Localize is apparently going to be fixed to work properly
