@@ -295,7 +295,8 @@ patron_get_list = {
 patron_add_to_list = { #variant of this for local list for ai to select
     if = {
         limit = { patron$TRAIT$_valid = yes }
-        scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ } }
+        #scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ } }
+        add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ }
     }
 }
 
