@@ -1,0 +1,49 @@
+﻿is_substance_abuser = {
+	OR = {
+		has_trait = drunkard
+		has_trait = hashishiyah
+		
+		# EK additions
+		has_trait = skooma_drinker
+	}
+}
+
+can_be_skooma_drinker = {
+	is_adult = yes
+	NOR = { # Can not be Temperate or already have a Substance Abuse trait.
+		is_substance_abuser = yes
+		has_trait = temperate
+	}
+
+	OR = {
+		### Khajiits can always get skooma
+		faith = {
+			religion_tag = khajiiti_religion
+		}
+		culture_group = culture_group:khajiiti_group
+		
+		### And those who live in Elsweyr too
+		AND = {
+			OR = {
+				AND = {
+					exists = capital_province
+					capital_province = {
+						save_temporary_scope_as = my_home_province
+					}
+				}
+				AND = {
+					exists = liege
+					exists = liege.capital_province
+					liege = {
+						capital_province = {
+							save_temporary_scope_as = my_home_province
+						}
+					}
+				}
+			}
+			scope:my_home_province = {
+				geographical_region = mundus_tamriel_elsweyr
+			}
+		}
+	}
+}

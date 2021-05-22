@@ -1090,7 +1090,7 @@ ek_religious_decision.0301 = {
 # COUNCIL OF THE EIGHT	#
 # 0401-0499				#
 #########################
-
+### Assume Leadership of the Council of the Eight
 ek_religious_decision.0401 = {
 	type = character_event
 	title = ek_religious_decision.0401.t
@@ -1231,6 +1231,472 @@ ek_religious_decision.0402 = {
 
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_1
 		custom_tooltip = council_of_the_eight_assume_leadership_decision_effect_2
+	}
+}
+
+### Ask to join the Council of the Eight
+ek_religious_decision.0410 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = {
+		desc = ek_religious_decision.0410.desc_intro
+		triggered_desc = {
+			trigger = { NOT = { faith = { has_doctrine_parameter = spiritual_head_of_faith } } }
+			desc = ek_religious_decision.0410.not_spiritual_hof
+		}
+	}
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = personality_zealous
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_rational
+	}
+
+	immediate = {
+		root = { save_scope_as = secular_ruler }
+		global_var:leader_council_eight = { save_scope_as = leader_council_eight }
+		scope:leader_council_eight.religious_head = { save_scope_as = coe_leader }
+		faith = { save_scope_as = faith_add_council }
+	}
+
+	option = {
+		name = ek_religious_decision.0410.a
+		
+		show_as_tooltip = {
+			random_list = {
+				50 = {
+					show_chance = no
+					desc = ek_religious_decision.0410.a.tt_success
+					faith = { add_doctrine = special_faith_group_council_of_the_eight_member }
+				}
+				50 = {
+					show_chance = no
+					desc = ek_religious_decision.0410.a.tt_failure
+					faith = { change_fervor = -10 }
+				}
+				50 = {
+					trigger = {
+						NOT = { faith = { has_doctrine_parameter = spiritual_head_of_faith } }
+					}
+					show_chance = no
+					desc = ek_religious_decision.0410.a.tt_change_hof
+					custom_tooltip = ek_religious_decision.0410.a.change_hof
+				}
+			}
+		}
+	}
+
+	after = {
+		scope:coe_leader = { trigger_event = { id = ek_religious_decision.0411 days = 5 } }
+	}
+}
+
+# The Arch-Primate gets the letter
+ek_religious_decision.0411 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0411.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+
+	right_portrait = {
+		character = scope:secular_ruler
+		animation = personality_rational
+	}
+
+	# Yes
+	option = {
+		name = ek_religious_decision.0411.a
+		
+		show_as_tooltip = {
+			scope:secular_ruler = {
+				faith = { add_doctrine = special_faith_group_council_of_the_eight_member }
+			}
+		}
+		
+		scope:secular_ruler = { trigger_event = { id = ek_religious_decision.0412 days = 5 } }
+	}
+	
+	# No
+	option = {
+		trigger = { is_ai = no }
+		name = ek_religious_decision.0411.b
+		
+		show_as_tooltip = {
+			scope:secular_ruler = {
+				faith = { change_fervor = -10 }
+			}
+		}
+		
+		scope:secular_ruler = { trigger_event = { id = ek_religious_decision.0413 days = 5 } }
+	}
+	
+	# Maybe, if... (religious leader)
+	option = {
+		name = ek_religious_decision.0411.c
+		
+		custom_tooltip = ek_religious_decision.0411.a.change_hof
+		
+		scope:secular_ruler = { trigger_event = { id = ek_religious_decision.0414 days = 5 } }
+	}
+}
+
+# RESULT: Yes
+ek_religious_decision.0412 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0412.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = happiness
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+	
+	immediate = {
+		faith = {
+			add_doctrine = special_faith_group_council_of_the_eight_member
+		}
+	}
+
+	# PogChamp
+	option = {
+		name = ek_religious_decision.0412.a
+		
+		every_player = {
+			limit = { NOT = { this = root } }
+			trigger_event = ek_religious_decision.0418
+		}
+	}
+}
+
+# RESULT: No
+ek_religious_decision.0413 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0413.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = anger
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+
+	# W-What?!
+	option = {
+		name = ek_religious_decision.0413.a
+		
+		faith = {
+			change_fervor = -10
+		}
+		
+		every_player = {
+			limit = { NOT = { this = root } }
+			trigger_event = ek_religious_decision.0419
+		}
+	}
+}
+
+# RESULT: Change your religious head doctrine
+ek_religious_decision.0414 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0414.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = happiness
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+
+	# Yes
+	option = {
+		name = ek_religious_decision.0412.a
+		
+		faith = {
+			if = {
+				limit = { has_doctrine = doctrine_no_head }
+				remove_doctrine = doctrine_no_head
+			}
+			else_if = {
+				limit = { has_doctrine = doctrine_temporal_head }
+				remove_doctrine = doctrine_temporal_head
+			}
+			
+			add_doctrine = doctrine_spiritual_head
+		}
+		
+		# Based on faith_creation.0002
+		if = {
+			limit = {
+				faith = {
+					NOT = { exists = religious_head_title }
+				}
+			}
+			faith = {
+				save_scope_as = my_faith
+			}
+			create_dynamic_title = {
+				tier = duchy
+				name = REL_HEAD_TITLE_NAME
+			}
+
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			
+			if = {
+				limit = {
+					any_theocratic_vassal = {
+						faith = root.faith
+					}
+				}
+				ordered_theocratic_vassal = {
+					limit = {
+						faith = root.faith
+					}
+					order_by = head_of_faith_selection_weight
+					save_scope_as = new_religious_head
+				}
+			}
+			else = {	
+				create_character = {
+					location = root.capital_province
+					age = { 30 50 }
+					gender_female_chance = root_faith_clergy_gender_female_chance
+					trait = education_learning_4
+					faith = root.faith
+					culture = root.culture
+					learning = { 14 22 }
+					save_scope_as = new_religious_head
+				}
+			}
+			
+			# As not having a religious head requires you to hold at least 1 holy site to petition for a place in the CoE, we can use that
+			scope:my_faith = {
+				random_holy_site = {
+					limit = {
+						county.holder = root
+					}
+					alternative_limit = {
+						county.holder = {
+							target_is_liege_or_above = root
+						}
+					}
+					save_scope_as = holy_site
+				}
+			}
+			
+			scope:new_title = {
+				set_capital_county = scope:holy_site.county
+				set_landless_title = yes
+				set_destroy_if_invalid_heir = yes
+				set_no_automatic_claims = yes
+				set_definitive_form = yes
+				set_always_follows_primary_heir = yes
+				change_title_holder = {
+					holder = scope:new_religious_head
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change
+			faith = {
+				set_religious_head_title = scope:new_title
+			}
+			scope:new_title = { generate_coa = religious_title }
+			scope:new_religious_head = {
+				add_realm_law_skip_effects = same_faith_theocratic_succession_law
+			}
+		}
+		# Based on faith_creation.0012
+		else = {
+			faith = {
+				religious_head_title = {
+					save_scope_as = my_hof_title
+				}
+			}
+
+			if = {
+				limit = {
+					any_theocratic_vassal = {
+						faith = root.faith
+					}
+				}
+				ordered_theocratic_vassal = {
+					limit = {
+						faith = root.faith
+					}
+					order_by = head_of_faith_selection_weight
+					save_scope_as = new_religious_head
+				}
+			}
+			else = {	
+				create_character = {
+					location = root.capital_province
+					age = { 30 50 }
+					gender_female_chance = root_faith_clergy_gender_female_chance
+					trait = education_learning_4
+					faith = root.faith
+					culture = root.culture
+					learning = { 14 22 }
+					save_scope_as = new_religious_head
+				}
+			}
+
+			create_title_and_vassal_change = {
+				type = created
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			scope:my_hof_title = {
+				change_title_holder = {
+					holder = scope:new_religious_head
+					change = scope:change
+				}
+			}
+			resolve_title_and_vassal_change = scope:change	
+		}
+		
+		every_player = {
+			# limit = { NOT = { this = root } }
+			trigger_event = ek_religious_decision.0418
+		}
+	}
+
+	# No
+	option = {
+		trigger = { is_ai = no }
+		name = ek_religious_decision.0412.b
+		
+		faith = {
+			change_fervor = -10
+		}
+		
+		every_player = {
+			limit = { NOT = { this = root } }
+			trigger_event = ek_religious_decision.0419
+		}
+	}
+}
+
+# A faith joined the Council of the Eight
+ek_religious_decision.0418 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0418.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = happiness
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+
+	# A new member!
+	option = {
+		trigger = {
+			faith = {
+				OR = {
+					has_doctrine = special_faith_group_council_of_the_eight_leader
+					has_doctrine = special_faith_group_council_of_the_eight_member
+				}
+			}
+		}
+		name = ek_religious_decision.0418.a
+	}
+
+	# They are getting stronger...
+	option = {
+		trigger = {
+			faith = {
+				NOR = {
+					has_doctrine = special_faith_group_council_of_the_eight_leader
+					has_doctrine = special_faith_group_council_of_the_eight_member
+				}
+			}
+		}
+		name = ek_religious_decision.0418.b
+	}
+}
+
+# A faith was forbidden to join the Council of the Eight
+ek_religious_decision.0419 = {
+	type = character_event
+	title = ek_religious_decision.0410.t
+	desc = ek_religious_decision.0419.desc
+
+	theme = faith
+
+	left_portrait = {
+		character = scope:secular_ruler
+		animation = happiness
+	}
+
+	right_portrait = {
+		character = scope:coe_leader
+		animation = personality_zealous
+	}
+
+	# Maybe they would have been a good addition...
+	option = {
+		trigger = {
+			faith = {
+				OR = {
+					has_doctrine = special_faith_group_council_of_the_eight_leader
+					has_doctrine = special_faith_group_council_of_the_eight_member
+				}
+			}
+		}
+		name = ek_religious_decision.0419.a
+	}
+
+	# How does that concern us?
+	option = {
+		trigger = {
+			faith = {
+				NOR = {
+					has_doctrine = special_faith_group_council_of_the_eight_leader
+					has_doctrine = special_faith_group_council_of_the_eight_member
+				}
+			}
+		}
+		name = ek_religious_decision.0419.b
 	}
 }
 

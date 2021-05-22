@@ -88,3 +88,12 @@ has_students_magicka_background = {
 		has_students_magicka_faith = yes
 	}
 }
+
+### When choosing a Daedra to trigger Daedric Whispers
+can_get_combo_trait_daedra = {
+	NOT = { has_character_flag = stress_$TRAIT$_$DAEDRA$ }
+	AND = {
+		has_trait = $TRAIT$
+		can_secretly_worship_$DAEDRA$ = yes
+	}
+}

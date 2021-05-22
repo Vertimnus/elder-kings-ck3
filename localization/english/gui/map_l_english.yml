@@ -40,9 +40,11 @@
  IMPASSIBLE_PROVINCE_TOOLTIP:0 "#T [PROVINCE.GetName]#!\nImpassable Terrain#!"
  IMPASSPABLE_SEA_PROVINCE_TOOLTIP:0 "#T [PROVINCE.GetName]#!\nUncharted Waters#!"
  SEA_PROVINCE_TOOLTIP:1 "#T [PROVINCE.GetName]#!\nSea"
+ # EK EDIT: Unnavigable Rivers
  LAKE_PROVINCE_TOOLTIP:0 "#T [PROVINCE.GetName]#!\nLake or unnavigable  River#!"
  RIVER_PROVINCE_TOOLTIP:1 "#T [PROVINCE.GetName]#!\nMajor River"
- PROVINCE_TOOLTIP_HEADER:0 "#T [PROVINCE.GetTitle.GetNameNoTooltip]#!"
+ # EK EDIT: Terrain of Province naming scheme
+ PROVINCE_TOOLTIP_HEADER:0 "#T [SelectLocalization(PROVINCE.GetTitle.GetHolder.IsValid, PROVINCE.GetTitle.GetNameNoTooltip, PROVINCE.GetTerrain.GetNameNoTooltip)] [SelectLocalization(PROVINCE.GetTitle.GetHolder.IsValid, '', 'of')] [SelectLocalization(PROVINCE.GetTitle.GetHolder.IsValid, '', PROVINCE.GetNameNoTooltip)]#!"
  PROVINCE_TOOLTIP_HOLDER:0 "Holder: [CHARACTER.GetUINameNoTooltip|UV]"
  PROVINCE_TOOLTIP_LESSEE:0 "Lessee: [CHARACTER.GetUINameNoTooltip|UV]"
  PROVINCE_TOOLTIP_OCCUPIED:0 "Occupied by: [CHARACTER.GetUINameNoTooltip|UV]"
