@@ -349,13 +349,19 @@ faith_get_patrons = {
     }
 
     effect = {
-        scope:player_s = { set_variable = { name = faith_window value = PREV } }
-        every_religion_global = {
-            every_faith = {
+        scope:player_s = {
+            if = {
+                limit = { exists = var:faith_window }
+                var:faith_window = { save_temporary_scope_as = faith_window_prev }
+            }
+            set_variable = { name = faith_window value = PREV }
+        }
+        scope:faith_window_prev = {
+            if = {
                 limit = {
                     has_variable = faith_patrons_set
                     NOT = {
-                        any_player = { #dont clear if other player viewing
+                        any_player = { #dont clear if other player viewing. try faith_window_prev or something
                             exists = var:faith_window
                             var:faith_window = PREV
                         }
@@ -371,24 +377,26 @@ faith_get_patrons = {
 }
 
 faith_clear_patrons = {
-    scope = character
+    scope = faith
+
+    saved_scopes = {
+        player_s
+    }
 
     effect = {
-        remove_variable = faith_window
-        every_religion_global = {
-            every_faith = {
-                limit = {
-                    has_variable = faith_patrons_set
-                    NOT = {
-                        any_player = { #dont clear if other player viewing
-                            exists = var:faith_window
-                            var:faith_window = PREV
-                        }
+        scope:player_s = { remove_variable = faith_window }
+        if = {
+            limit = {
+                has_variable = faith_patrons_set
+                NOT = {
+                    any_player = { #dont clear if other player viewing
+                        exists = var:faith_window
+                        var:faith_window = PREV
                     }
                 }
-                remove_variable = faith_patrons_set
-                clear_variable_list = faith_patrons
             }
+            remove_variable = faith_patrons_set
+            clear_variable_list = faith_patrons
         }
     }
 }

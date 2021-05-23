@@ -34,7 +34,7 @@ window = {
 		name = _hide
 		position = { -60 0 }
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
-		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 
 		using = Animation_FadeOut_Quick
 		using = Sound_WindowHide_Standard
@@ -1194,7 +1194,7 @@ window = {
 			state = {
 				name = _hide
 				alpha = 0
-				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
 			state = {
