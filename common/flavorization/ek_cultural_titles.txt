@@ -61,6 +61,69 @@ county_feudal_earldom = { #Earldom
 	top_liege = no
 }
 
+#Count -> Baron for k_northpoint
+
+count_feudal_male_baron = { #Baron
+	type = character
+	special = holder
+	gender = male
+	tier = county
+	priority = 20
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+count_feudal_female_baron = { #Baroness
+	type = character
+	special = holder
+	gender = female
+	tier = county
+	priority = 20
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+county_feudal_barony = { #Barony
+	type = title
+	tier = county
+	priority = 20
+	governments = { feudal_government }
+	de_jure_liege = { k_northpoint }
+	top_liege = no
+}
+
+duke_feudal_independent_male = { #Petty King
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 35
+	only_independent = yes
+	governments = { feudal_government }
+	culture_groups = { breton_group }
+	top_liege = no
+}
+duke_feudal_independent_female = { #Petty Queen
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 35
+	only_independent = yes
+	governments = { feudal_government }
+	culture_groups = { breton_group }
+	top_liege = no
+}
+duchy_feudal_independent = { #Petty Kingdom
+	type = title
+	tier = duchy
+	governments = { feudal_government }
+	culture_groups = { breton_group }
+	only_independent = yes
+	priority = 35
+	top_liege = no
+}
+
 #Globin-ken Culture
 king_feudal_male_goblinken = { #Chief-King
 	type = character
@@ -207,34 +270,34 @@ county_feudal_nordic_group = { #Thanedom
 	culture_groups = { nordic_group }
 	top_liege = no
 }
-# duchy_feudal_male_nordic_group = { #d_rank
-	# type = character
-	# special = holder
-	# gender = male
-	# tier = duchy
-	# priority = 28
-	# governments = { feudal_government }
-	# culture_groups = { nordic_group }
-	# top_liege = no
-# }
-# duchy_feudal_female_nordic_group = { #d_rank
-	# type = character
-	# special = holder
-	# gender = female
-	# tier = duchy
-	# priority = 28
-	# governments = { feudal_government }
-	# culture_groups = { nordic_group }
-	# top_liege = no
-# }
-# duchy_feudal_nordic_group = { #d_rankdom
-	# type = title
-	# tier = duchy
-	# priority = 28
-	# governments = { feudal_government }
-	# culture_groups = { nordic_group }
-	# top_liege = no
-# }
+duchy_feudal_male_nordic_group = { #High Thane
+	type = character
+	special = holder
+	gender = male
+	tier = duchy
+	priority = 28
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	top_liege = no
+}
+duchy_feudal_female_nordic_group = { #High Thane
+	type = character
+	special = holder
+	gender = female
+	tier = duchy
+	priority = 28
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	top_liege = no
+}
+duchy_feudal_nordic_group = { #High Thanedom
+	type = title
+	tier = duchy
+	priority = 28
+	governments = { feudal_government }
+	culture_groups = { nordic_group }
+	top_liege = no
+}
 king_feudal_male_nordic_group = { #Jarl
 	type = character
 	special = holder
@@ -291,8 +354,9 @@ duke_feudal_male_cyrodiilic_group = { #Viscount
 	gender = male
 	special = holder
 	priority = 28
-	titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
-	culture_groups = { cyrodiilic_group }
+	#titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
+	de_jure_liege = { e_cyrodiil }
+	cultures = { cyro_nord heartlander nibenese colovian }
 	governments = { feudal_government }
 	top_liege = no
 }
@@ -302,8 +366,9 @@ duke_feudal_female_cyrodiilic_group = { #Viscountess
 	gender = female
 	special = holder
 	priority = 28
-	titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
-	culture_groups = { cyrodiilic_group }
+	#titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
+	de_jure_liege = { e_cyrodiil }
+	cultures = { cyro_nord heartlander nibenese colovian }
 	governments = { feudal_government }
 	top_liege = no
 }
@@ -311,14 +376,15 @@ duchy_feudal_cyrodiilic_group = { #Viscounty
 	type = title
 	tier = duchy
 	governments = { feudal_government }
-	titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye d_leyawiin d_blackwood d_bulwark d_blankenmarsh d_redmane d_artemon d_nomore }
-	culture_groups = { cyrodiilic_group nordic_group yokudan_group }
+	#titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye d_leyawiin d_blackwood d_bulwark d_blankenmarsh d_redmane d_artemon d_nomore }
+	de_jure_liege = { e_cyrodiil }
+	cultures = { cyro_nord heartlander nibenese colovian }
 	governments = { feudal_government }
 	priority = 33
 	top_liege = no
 }
 
-king_feudal_male_cyrodiil = { #Count (of Cyrodiil)
+king_feudal_male_cyrodiil = { #Imperial Count (of Cyrodiil)
 	type = character
 	tier = kingdom
 	special = holder
@@ -328,7 +394,7 @@ king_feudal_male_cyrodiil = { #Count (of Cyrodiil)
 	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
 	top_liege = no
 }
-king_feudal_female_cyrodiil = { #Countess (of Cyrodiil)
+king_feudal_female_cyrodiil = { #Imperial Countess (of Cyrodiil)
 	type = character
 	tier = kingdom
 	special = holder
@@ -338,7 +404,7 @@ king_feudal_female_cyrodiil = { #Countess (of Cyrodiil)
 	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
 	top_liege = no
 }
-kingdom_feudal_cyrodiil = { #County (of Cyrodiil)
+kingdom_feudal_cyrodiil = { #Imperial County (of Cyrodiil)
 	type = title
 	tier = kingdom
 	governments = { feudal_government }
@@ -348,31 +414,31 @@ kingdom_feudal_cyrodiil = { #County (of Cyrodiil)
 }
 
 #Colovian
-duke_feudal_male_colovian_independant = { #Warlord
+duke_feudal_male_colovian_independent = { #Warlord (of Cyrodiil)
 	type = character
 	tier = duchy
 	cultures = { colovian }
 	gender = male
 	special = holder
+	de_jure_liege = { e_cyrodiil }
 	only_independent = yes
 	priority = 38
-	titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
-	governments = { feudal_government }
+	governments = { feudal_government clan_government tribal_government }
 }
-duke_feudal_female_colovian_independant = { #Warlady
+duke_feudal_female_colovian_independent = { #Warlady (of Cyrodiil)
 	type = character
 	tier = duchy
 	cultures = { colovian }
 	gender = female
 	special = holder
+	de_jure_liege = { e_cyrodiil }
 	only_independent = yes
 	priority = 38
-	titles = { d_imperial_isle d_stirk d_anvil d_crowhaven d_hastrel d_sutch d_kvatch d_linchal d_ontus d_shardrock d_dirich d_skingrad d_grayrock d_vlastarus d_woodenhand d_nisin d_faregyl d_chorrol d_carmala d_greenlake d_rayles d_sancre_tor d_glademist d_underpall d_bruma d_cloudruler d_bleaker_way d_red_ruby d_frostcrag d_cheydinhal d_arrius d_harm d_blueroad d_sejanus d_cropsford d_farragut d_ghartok d_scinia d_drakelowe d_bethal d_mir_corrup d_facian d_caer_suvio d_entius d_bravil d_irony d_grief d_cuptor d_sundercliff d_redwater d_nikel d_caractacus d_urasek d_magia d_variela d_homestead d_virtue d_weye }
 	governments = { feudal_government clan_government tribal_government }
 }
 
 #Nibenese
-king_feudal_male_nibenese_independant_cyrodiil = { #Overlord (of Cyrodiil)
+king_feudal_male_nibenese_independent_cyrodiil = { #Overlord (of Cyrodiil)
 	type = character
 	tier = kingdom
 	special = holder
@@ -384,7 +450,7 @@ king_feudal_male_nibenese_independant_cyrodiil = { #Overlord (of Cyrodiil)
 	titles = { k_chorrol k_skingrad k_anvil k_cheydinhal k_leyawiin k_bravil k_kvatch k_bruma }
 	top_liege = no
 }
-king_feudal_female_nibenese_independant_cyrodiil = { #Overlady (of Cyrodiil)
+king_feudal_female_nibenese_independent_cyrodiil = { #Overlady (of Cyrodiil)
 	type = character
 	tier = kingdom
 	special = holder
@@ -1008,39 +1074,41 @@ emperor_feudal_female_akaviri_group = { #Potentate
 #Overriders
 
 #Independent Duchies (overrides vassal duchies)
-duke_feudal_male_independent = { #Duke
+
+duke_feudal_male_cyro_nord_independent = { #Petty Jarl
 	type = character
 	special = holder
 	gender = male
 	tier = duchy
-	priority = 32
+	priority = 38
 	only_independent = yes
 	governments = { feudal_government }
-	culture_groups = { nordic_group cyrodiilic_group }
+	cultures = { cyro_nord }
 	top_liege = no
 }
-duke_feudal_female_independent = { #Duchess
+duke_feudal_female_cyro_nord_independent = { #Petty Jarl
 	type = character
 	special = holder
 	gender = female
 	tier = duchy
-	priority = 32
+	priority = 38
 	only_independent = yes
 	governments = { feudal_government }
-	culture_groups = { nordic_group cyrodiilic_group }
+	cultures = { cyro_nord }
 	top_liege = no
 }
-duchy_feudal_independent = { #Duchy
+duchy_feudal_cyro_nord_independent = { #Petty Jarldom
 	type = title
 	tier = duchy
 	only_independent = yes
 	governments = { feudal_government }
-	culture_groups = { nordic_group cyrodiilic_group }
-	priority = 32
+	cultures = { cyro_nord }
+	priority = 38
 	top_liege = no
 }
 
 #Independent Kingdoms (overrides vassal kingdoms)
+
 king_feudal_male_independent = { #King
 	type = character
 	special = holder
