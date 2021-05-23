@@ -1147,4 +1147,21 @@ doctrine_main_pantheon = {
 			hostility_override_doctrine_pantheon_meridia = 3
 		}
 	}
+	
+	## Osh Ornim
+	doctrine_pantheon_stones = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_pantheon_stones }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		is_shown = {
+			religion_tag = stone_religion
+		}
+		parameters = {
+			faith_uses_holy_site_other_grand_temple = yes
+		}
+	}
 }
