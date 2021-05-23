@@ -5,9 +5,9 @@
  baron:0 "Lord"
  baron_female:0 "Lady"
  barony:0 "Lot"
- count:0 "Count"
- count_female:0 "Countess"
- county:0 "County"
+ count:0 "Baron"
+ count_female:0 "Baroness"
+ county:0 "Barony"
  duke:0 "Duke"
  duke_female:0 "Duchess"
  duchy:0 "Duchy"
@@ -19,7 +19,7 @@
  empire:0 "Empire"
 
  baron_plural:0 "Lords"
- count_plural:0 "Counts"
+ count_plural:0 "Barons"
  duke_plural:0 "Dukes"
  king_plural:0 "Kings"
  emperor_plural:0 "Emperors"
@@ -32,6 +32,8 @@
  title_confederacy: "Confederacy"
  title_general: "General"
  title_general_female: "General"
+ title_general_consort_male:1 "Lord"
+ title_general_consort_female:1 "Lady"
  title_legate: "Legate"
  title_legate_female: "Legate"
  title_custodian:0 "Custodian"
@@ -39,13 +41,9 @@
  title_custodianship:0 "Custodianship"
  title_warden:0 "Warden"
  title_warden_female:0 "Warden"
- title_clan_mother:0 "Clan Mother"
+ 
  arch_primate:1 "Arch-Primate"
  arch_prelate:1 "Arch-Prelate"
-
- #Consort names:
- title_general_consort_male:1 "Lord"
- title_general_consort_female:1 "Lady"
 
  #Default Feudal tiers
  #Default Republic tiers
@@ -62,18 +60,12 @@
  baron_feudal_male:0 "Lord"
  baron_feudal_female:0 "Lady"
  barony_feudal:0 "Lordship"
- count_feudal_male:0 "Count"
- count_feudal_female:0 "Countess"
- county_feudal:0 "County"
- count_feudal_independent_male:0 "Count"
- count_feudal_independent_female:0 "Countess"
- county_feudal_independent:0 "County"
+ count_feudal_male:0 "Baron"
+ count_feudal_female:0 "Baroness"
+ county_feudal:0 "Barony"
  duke_feudal_male:0 "Duke"
  duke_feudal_female:0 "Duchess"
  duchy_feudal:0 "Duchy"
- duke_feudal_independent_male:0 "Petty King"
- duke_feudal_independent_female:0 "Petty Queen"
- duchy_feudal_independent:0 "Petty Kingdom"
  king_feudal_male:0 "King"
  king_feudal_female:0 "Queen"
  kingdom_feudal:0 "Kingdom"
@@ -83,6 +75,14 @@
  emperor_feudal_male:0 "Emperor"
  emperor_feudal_female:0 "Empress"
  empire_feudal:0 "Empire"
+ 
+ #Feudal Overriders
+ duke_feudal_male_independent:0 "Duke"
+ duke_feudal_female_independent:0 "Duchess"
+ duchy_feudal_independent:0 "Duchy"
+ king_feudal_male_independent:0 "King"
+ king_feudal_female_independent:0 "Queen"
+ kingdom_feudal_independent:0 "Kingdom"
 
  #Default Pirate tiers
  baron_pirate_male:0 "Captain"
@@ -127,16 +127,6 @@
  emperor_republic_male:0 "Potentate"
  emperor_republic_female:0 "Potentate"
  empire_republic:0 "Potentate"
- baron_republic_male_consort:1 ""
- baron_republic_female_consort:1 ""
- count_republic_male_consort:1 ""
- count_republic_female_consort:1 ""
- duke_republic_male_consort:1 ""
- duke_republic_female_consort:1 ""
- king_republic_male_consort:1 ""
- king_republic_female_consort:1 ""
- emperor_republic_male_consort:1 ""
- emperor_republic_female_consort:1 ""
 
  #Default Theocracy tiers
  baron_theocracy_male:0 "Priest"
@@ -154,16 +144,6 @@
  emperor_theocracy_male:0 "Arch-Primate"
  emperor_theocracy_female:0 "Arch-Primate"
  empire_theocracy:0 "Arch-Primacy"
- baron_theocracy_male_consort:1 ""
- baron_theocracy_female_consort:1 ""
- count_theocracy_male_consort:1 ""
- count_theocracy_female_consort:1 ""
- duke_theocracy_male_consort:1 ""
- duke_theocracy_female_consort:1 ""
- king_theocracy_male_consort:1 ""
- king_theocracy_female_consort:1 ""
- emperor_theocracy_male_consort:1 ""
- emperor_theocracy_female_consort:1 ""
 
  #Default Clan tiers
  baron_clan_male:0 "Chief"
@@ -305,6 +285,8 @@
  head_of_faith_eight_divines_female:1 "[CHARACTER.Custom('HeadOfFaith')|U]"
  
  #Khajiiti Religion
+ khajiiti_religious_head_title:1 "Mane"
+ 
  baron_theocracy_male_khajiiti_religion:0 "Moon-Priest"
  baron_theocracy_female_khajiiti_religion:0 "Moon-Priestess"
  count_theocracy_male_khajiiti_religion:0 "Moon-Bishop"
@@ -367,46 +349,39 @@ count_feudal_male_earl:0 "Earl"
 count_feudal_female_earl:0 "Earl"
 county_feudal_earldom:0 "Earldom"
 
-# Count -> Baron for Northmen
-count_feudal_male_baron:0 "Baron"
-count_feudal_female_baron:0 "Baroness"
-county_feudal_barony:0 "Barony"
-
 #Nordic Group
 # baron_feudal_male_nordic_group:0 "Lendmann"
 # baron_feudal_female_nordic_group:0 "Lendwif"
 # barony_feudal_nordic_group:0 "Lend"
-duchy_feudal_male_nordic_group:0 "Thane"
-duchy_feudal_female_nordic_group:0 "Thane"
-duchy_feudal_nordic_group:0 "Thanedom"
-count_feudal_male_nordic_group:0 "c_tier"
-count_feudal_female_nordic_group:0 "c_tier"
-county_feudal_nordic_group:0 "c_tier_holding"
-# duke_feudal_male_nordic_group:0 "Drott"
-# duke_feudal_female_nordic_group:0 "Drottning"
-# duchy_feudal_nordic_group:0 "Minor Hold"
+count_feudal_male_nordic_group:0 "Thane"
+count_feudal_female_nordic_group:0 "Thane"
+county_feudal_nordic_group:0 "Thanedom"
+# duchy_feudal_male_nordic_group:0 "d_rank"
+# duchy_feudal_female_nordic_group:0 "d_rank"
+# duchy_feudal_nordic_group:0 "d_rankdom"
 king_feudal_male_nordic_group:0 "Jarl"
 king_feudal_female_nordic_group:0 "Jarl"
 kingdom_feudal_nordic_group:0 "Hold"
-king_feudal_male_nordic_group_independent:0 "King"
-king_feudal_female_nordic_group_independent:0 "Queen"
-kingdom_feudal_nordic_group_independent:0 "Kingdom"
 emperor_feudal_male_nordic_group:0 "High King"
 emperor_feudal_female_nordic_group:0 "High Queen"
 empire_feudal_nordic_group:0 "High Kingdom"
 
-#Cyrodiil Group
-king_feudal_male_cyrodiil_group:0 "Count"
-king_feudal_female_cyrodiil_group:0 "Countess"
-kingdom_feudal_cyrodiil_group:0 "County"
-king_feudal_male_cyrodiil_group_independent:0 "Overlord"
-king_feudal_female_cyrodiil_group_independent:0 "Overlady"
-kingdom_feudal_cyrodiil_group_independent:0 "Kingdom"
-title_viscount_independant:0 "Warlord"
-title_viscount_female_independant:0 "Warlord"
-title_viscount:0 "Viscount"
-title_viscount_female:0 "Vicecountess"
-title_viscount_feudal:0 "Viscounty"
+#Cyrodiilic Group
+king_feudal_male_cyrodiil:0 "Count"
+king_feudal_female_cyrodiil:0 "Countess"
+kingdom_feudal_cyrodiil:0 "County"
+
+duke_feudal_male_cyrodiilic_group:0 "Viscount"
+duke_feudal_female_cyrodiilic_group:0 "Viscountess"
+duchy_feudal_cyrodiilic_grup:0 "Viscounty"
+
+#Colovian 
+duke_feudal_male_colovian_independant:1 "Warlord"
+duke_feudal_female_colovian_independant:1 "Warlady"
+
+#Nibenese
+king_feudal_male_nibenese_independant_cyrodiil:0 "Overlord"
+king_feudal_female_nibenese_independant_cyrodiil:0 "Overlady"
 
 #Orsimer Group
 baron_feudal_male_orsimer:0 "Chief"
