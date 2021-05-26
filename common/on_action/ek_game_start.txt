@@ -76,6 +76,8 @@ ek_on_game_start = {
 		startup_culture_effect = { CULTURE = horsemen }
 		# Argonian
 		startup_culture_effect = { CULTURE = saxhleel }
+		# Dremora
+		startup_culture_effect = { CULTURE = dremora }
 		
 		### Set which cultures are alive (have some territory)
 		every_county = {
@@ -194,9 +196,31 @@ ek_on_game_start = {
 		
 		### Some religious tweaks
 		every_religion_global = {
-			# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 			every_faith = {
+				# Goes from a blanket view of the Daedric Princes to the sixteen specific ones
 				faith_give_view_daedric_princes = yes
+				
+				# We need to save the leader of the Council of the Eight
+				if = {
+					limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+					set_global_variable = {
+						name = leader_council_eight
+						value = this
+					}
+					
+					# Remember what is the current/former hof title
+					set_global_variable = {
+						name = leader_council_eight_former_title
+						value = this.religious_head_title
+					}
+					
+					# Destroy the current HoF title (is given back if someone usurps the leadership of the Council)
+					religious_head_title = { save_scope_as = rel_head_title }
+					religious_head = { destroy_title = scope:rel_head_title }
+					
+					# Set k_council_of_the_eight as its religious title
+					set_religious_head_title = k_council_of_the_eight
+				}
 			}
 		}
 		
@@ -204,7 +228,7 @@ ek_on_game_start = {
 		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
 		every_religion_global = {
 			every_faith = {
-				limit = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
+				limit = { has_doctrine_parameter = faith_uses_great_wyrd_tree }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -221,7 +245,7 @@ ek_on_game_start = {
 				}
 			}
 			every_faith = {
-				limit = { has_doctrine_parameter = faith_uses_daedric_shrines }
+				limit = { has_doctrine_parameter = faith_uses_daedric_shrine }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -238,7 +262,7 @@ ek_on_game_start = {
 				}
 			}
 			every_faith = {
-				limit = { has_doctrine_parameter = faith_uses_dragon_temples }
+				limit = { has_doctrine_parameter = faith_uses_dragon_temple }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -255,7 +279,7 @@ ek_on_game_start = {
 				}
 			}
 			every_faith = {
-				limit = { has_doctrine_parameter = faith_uses_cathedrals }
+				limit = { has_doctrine_parameter = faith_uses_grand_cathedral }
 				every_holy_site = {
 					limit = {
 						title_province = {
@@ -300,21 +324,7 @@ ek_on_game_start = {
 		culture:nibenese = { add_innovation = innovation_seat_of_empires }
 		culture:colovian = { add_innovation = innovation_seat_of_empires }
 		
-		# Cultural MaA
-		culture:skaal = { add_innovation = innovation_skaal_hunter }
-		
-		culture:colovian = { add_innovation = innovation_armored_legionaires }
-		culture:nibenese = { add_innovation = innovation_nibenese_battlemages }
-		culture:heartlander = { add_innovation = innovation_armored_legionaires }
-		culture:heartlander = { add_innovation = innovation_nibenese_battlemages }
-		
-		culture:yokudan = { add_innovation = innovation_way_of_the_sword }
-		culture:forebear = { add_innovation = innovation_way_of_the_sword }
-		culture:crown = { add_innovation = innovation_way_of_the_sword }
-		culture:alikr = { add_innovation = innovation_way_of_the_sword }
-		culture:abecean = { add_innovation = innovation_abecean_pirates }
-		
-		culture:tsaesci = { add_innovation = innovation_akaviri_dragon_hunters }
+		culture:pactbosmer = { add_innovation = innovation_rite_of_theft }
 		
 		### Laws & stuff
 		# If you're a pirate gov and are at least a duke, every duchy has an election
@@ -436,5 +446,9 @@ ek_on_game_start = {
 				}
 			}
 		}
+	}
+
+	events = {
+		ek_legacies.0011 # Starts the dynasty legacies modifiers event
 	}
 }

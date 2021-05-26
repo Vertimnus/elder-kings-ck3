@@ -62,6 +62,15 @@ form_kingdom_scripted_effect = {
 		save_scope_as = change
 		add_claim_on_loss = no
 	}
+	### Copy title history if one of the two old k_ is our primary title
+	if = {
+		limit = { has_primary_title = scope:old_kingdom_1 }
+		scope:new_kingdom = { copy_title_history = scope:old_kingdom_1 }
+	}
+	else_if = {
+		limit = { has_primary_title = scope:old_kingdom_2 }
+		scope:new_kingdom = { copy_title_history = scope:old_kingdom_2 }
+	}
 	scope:new_kingdom = {
 		change_title_holder = {
 			holder = root
@@ -73,7 +82,6 @@ form_kingdom_scripted_effect = {
 	
 	hidden_effect = {
 		### Drift all the duchies under the old kingdoms into the new one
-		
 		every_in_list = {
 			list = old_kingdom_list
 			

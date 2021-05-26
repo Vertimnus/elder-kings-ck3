@@ -70,3 +70,28 @@ ek_legacies.0002 = {
 		custom_tooltip = ek_legacies.0002.unlock_dovah_vahzol
 	}
 }
+
+########################
+# Event fired every month to update the dynasty legacies modifiers
+# Each dynasty that gets one of these modifiers has to be added to the dynasties_with_legacies_modifiers_to_update global list
+# This event fires the dynasty_update_legacies_modifiers_effect for each member of this list, which wipes all their modifiers and recalculates it, based on the dynasty level of Splendor
+# This is a workaround, as there is no dynasty_prestige_level related on action
+########################
+ek_legacies.0011 = {
+	hidden = yes
+	
+	type = none
+	
+	immediate = {
+		# every_player = { add_prestige = 100 }
+		every_in_global_list = {
+			variable = dynasties_with_legacies_modifiers_to_update
+			save_scope_as = current_dynasty
+			
+			dynasty_update_legacies_modifiers_effect = { DYNASTY = scope:current_dynasty }
+		}
+		
+		# trigger_event = { id = ek_legacies.0011 days = 30 } # Fires every month
+		trigger_event = { id = ek_legacies.0011 days = 7 } # Fires every month
+	}
+}

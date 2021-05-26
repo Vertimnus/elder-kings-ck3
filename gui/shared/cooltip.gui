@@ -213,7 +213,7 @@
 					size = { 0 4 }
 				}
 
-				hbox = {
+				vbox = {
 					size = { 0 0 }
 					layoutpolicy_horizontal = growing
 					text_multi = {
@@ -227,6 +227,20 @@
 						autoresize = yes
 						max_width = 450
 						#margin_left = -12
+					}
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						autoresize = yes
+						fontsize_min = 14
+						using = Font_Size_Small
+						text = NATIVE_TO
+					}
+					text_single = {
+						layoutpolicy_horizontal = expanding
+						autoresize = yes
+						fontsize_min = 14
+						using = Font_Size_Small
+						text = "[GetScriptedGui('culture_nativity').ExecuteTooltip(GuiScope.SetRoot(Culture.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]" #TODO see if can list inovations directly
 					}
 				}
 
@@ -347,6 +361,37 @@ container = {
 			max_width = 400
 		}
 		# store culture groups in a list, check if desc matches, use to get list of cultures in group
+		blockoverride "extra_data_below_desc" {
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				autoresize = yes
+				fontsize_min = 14
+				using = Font_Size_Small
+				text = CULTURES_IN_GROUP
+			}
+			text_single = {
+				layoutpolicy_horizontal = expanding
+				autoresize = yes
+				fontsize_min = 14
+				using = Font_Size_Small
+				text = "[GetScriptedGui('culture_group_cultures').ExecuteTooltip(GuiScope.SetRoot(GetDummyMale.MakeScope.Var(GameConceptTooltip.GetDescription).CultureGroup.MakeScope).End)]" #TODO switch to global variable for 1.3.x
+			}
+
+			# vbox = {
+			# 	layoutpolicy_horizontal = expanding
+			# 	layoutpolicy_vertical = expanding
+			# 	datamodel = "[GetDummyMale.MakeScope.Var(GameConceptTooltip.GetDescription).CultureGroup.MakeScope.GetList('cultures')]"
+			# 	item = {
+			# 		text_single = {
+			# 			layoutpolicy_horizontal = expanding
+			# 			autoresize = yes
+			# 			fontsize_min = 14
+			# 			using = Font_Size_Small
+			# 			text = "$EFFECT_LIST_BULLET$[Culture.GetName]"
+			# 		}
+			# 	}
+			# }
+		}
 
 		blockoverride "bg_texture"
 		{
@@ -751,7 +796,6 @@ types GameTooltipTypes
 				}
 			}
 
-
 			block "extra_data" {}
 
 			textbox = {
@@ -776,6 +820,8 @@ types GameTooltipTypes
 				fonttintcolor = "[TooltipInfo.GetTintColor]"
 				alwaystransparent = no
 			}
+
+			block "extra_data_below_desc" {}
 
 			# Things like "click to X", hotkeys etc
 			textbox = {
@@ -3925,115 +3971,3 @@ container = {
 		}
 	}
 }
-
-
-# types IconTypes
-# {
-#     type icon_trait = container
-#     {
-#         # state = { # the hidding part works, but the reorder is not done. might be able to use triggeranim from refresh/fadein template but would be quite laggy w// lists
-#         #     #name = _show
-#         #     trigger_on_create = yes
-#         #     # using = Reorder_Bloodlines
-#         #     on_start = "[GetScriptedGui('reorder_traits').Execute(GuiScope.SetRoot(Character.MakeScope).End)]"
-#         # }
-#         container = {
-#             visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-#             state = {
-#                 name = reorder
-#                 #trigger_on_create = yes
-#                 # using = Reorder_Bloodlines
-#                 on_start = "[GetScriptedGui('reorder_traits').Execute(GuiScope.SetRoot(Character.MakeScope).End)]"
-#             }
-#             # state = {
-#             #     name = _hide
-#             #     trigger_on_create = yes
-#             #     # using = Reorder_Bloodlines
-#             #     on_start = "[GetScriptedGui('reorder_traits').Execute(GuiScope.SetRoot(Character.MakeScope).End)]"
-#             # }
-
-#             block "faith_context"
-#             {
-#                 datacontext = "[Character.GetFaith]"
-#             }
-
-#             trait_icon_base = {
-#                 name = "normal_trait"
-#                 visible = "[Not( Or( Or( Or( Trait.IsGenetic, Trait.IsInheritable ), Faith.IsTraitVirtue( Trait.Self ) ), Faith.IsTraitSin( Trait.Self ) ) )]"
-#             }
-#             trait_icon_base = {
-#                 name = "inheritable_trait"
-#                 visible = "[Or( Trait.IsGenetic, Trait.IsInheritable )]"
-
-#                 block "glow"
-#                 {
-#                     glow = {
-#                         using = Color_Blue
-#                         using = Glow_Standard
-#                         block "glow_radius"
-#                         {
-#                             glow_radius = 5
-#                         }
-#                     }
-#                 }
-#             }
-#             trait_icon_base = {
-#                 name = "virtue_trait"
-#                 visible = "[Faith.IsTraitVirtue( Trait.Self )]"
-
-#                 block "glow"
-#                 {
-#                     glow = {
-#                         using = Color_Green
-#                         using = Glow_Standard
-#                         block "glow_radius"
-#                         {
-#                             glow_radius = 5
-#                         }
-#                     }
-#                 }
-#             }
-#             trait_icon_base = {
-#                 name = "sin_trait"
-#                 visible = "[Faith.IsTraitSin( Trait.Self )]"
-
-#                 block "glow"
-#                 {
-#                     glow = {
-#                         using = Color_Red
-#                         using = Glow_Standard
-#                         block "glow_radius"
-#                         {
-#                             glow_radius = 5
-#                         }
-#                     }
-#                 }
-#             }
-#         }
-#     }
-# }
-
-# template Animation_FadeIn_Standard
-# {
-#     using = Animation_Curve_Default
-#     duration = 0.25
-
-#     alpha = 1
-#     on_start = "[PdxGuiTriggerAllAnimations('reorder')]"
-# }
-# template Animation_FadeIn_Quick
-# {
-#     using = Animation_Curve_Default
-#     duration = 0.15
-
-#     alpha = 1
-#     on_start = "[PdxGuiTriggerAllAnimations('reorder')]"
-# }
-# template Animation_Refresh_FadeIn
-# {
-#     name = "fadein"
-#     alpha = 1
-#     duration = 0.4
-#     bezier = { 0.5 0 1 0.5 }
-#     on_start = "[PdxGuiTriggerAllAnimations('reorder')]"
-# }

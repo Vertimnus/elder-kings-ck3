@@ -3,7 +3,10 @@
 # Boethiah: Shrine of Boethiah (Oblivion), Sacellum of Boethiah (Skyrim), Shrine of Boethiah (Morrowind), Dragonstar Arena (ESO), ?
 # Clavicus Vile: Shrine of Clavicus (Oblivion), Haemar's Shame (Skyrim), Odious Chapel (ESO), ?, ?
 # Hermaeus Mora: Shrine of Mora (Oblivion), Vault of Memories (ESO), Bisnensel (ESO), Seeker's Archive (ESO), Unnamed Shrine in Khenarti's Roost (ESO)
-# Hircine: Shrine of Hircine (Oblivion), Bloated Man's Grotto (Skyrim), March of Sacrifices (ESO), Hunter's Glade (ESO), Fallen Grotto (ESO) 
+# Hircine: Shrine of Hircine (Oblivion), Bloated Man's Grotto (Skyrim), March of Sacrifices (ESO), Hunter's Glade (ESO), Fallen Grotto (ESO)
+# Malacath: Shrine of Malacath (Oblivion), Assurdirapal (Morrowind), Blackbriar county (Skyrim), Malacath Sanctuary - Fahrun (ESO), Abamath (ESO)
+# Mehrunes Dagon: Lake Arrius Caverns (Oblivion), Shrines of Mehrunes (Skyrim), Yasammidan (Morrowind), Darkpool Mine (ESO), ?
+# Mephala: Shrine of Mephala (Oblivion), Hidden Morag Tong Shrine of Mephala (Morrowind), Crypt of Hearts (ESO), Falinesti Autumn Site (ESO), ?
 ## Group of Princes
 # Good Daedra: Shrine of Azura (Morrowind), Eidolon's Hollow (ESO), Shrine of Boethiah (Morrowind), ?, ?
 
@@ -68,7 +71,7 @@ hs_sancre_tor = {
 	county = c_sancre_tor
 	
 	character_modifier = {
-		monthly_dynasty_prestige_mult = 0.05
+		martial_per_piety_level = 1
 		monthly_prestige_gain_mult = 0.15
 	}
 }
@@ -239,6 +242,108 @@ hs_fallen_grotto = {
 		monthly_piety_gain_mult = 0.2
 	}
 }
+### Malacath
+# Dusk Watch, Shrine of Malacath in Cyrodiil
+hs_duskwatch = {
+	county = c_duskwatch
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Giant's Grove, the Shrine of Malacath in Skyrim (impassable, Blackbriar county)
+hs_giant_grove = {
+	county = c_blackbriar
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Shrine of Malacath in Vvardenfell (pending implementation)
+# Sanctuary of Malacath in Fahrun
+hs_fahrun = {
+	county = c_fharun
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Sanctuary of Mauloch (eh) in Valenwood
+hs_abamath = {
+	county = c_abamath
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+### Mehrunes Dagon
+# Shrine of Dagon in Oblivion, where you stop the Mythic Dawn
+hs_lake_arrius = {
+	county = c_arrius
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Shrine of Dagon in Skyrim
+hs_skyborn = {
+	county = c_skyborn
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Shrine of Dagon in Vvardenfell
+hs_yasamidan = {
+	county = c_ald_velothi
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Dark Pool Mine in Elsweyr, built for Mehrunes Dagon by Darloc Brae
+hs_darkpool_mine = {
+	county = c_darkpool
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# ?
+### Mehpala
+# Shrine of Mephala in Oblivion
+hs_anga = {
+	county = c_anga
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Hidden Shrine of Mephala in the Morag Tong main hq, in Vvardenfell
+hs_canalworks = {
+	county = c_vivec
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# Crypt of Hearts, taken over by Mephala, in Rivenspire
+hs_crypt_of_hearts = {
+	county = c_westmark_moor
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# A hidden temple of Mephala in the Falinest Autumn Site, held by the Arborndawn cult
+hs_temple_in_the_tunnels = {
+	county = c_autumnsite
+	
+	character_modifier = {
+		monthly_piety_gain_mult = 0.2
+	}
+}
+# ?
 #########################################
 # RELIGION OR FAITH SPECIFIC HOLY SITES	#
 #########################################
@@ -264,9 +369,11 @@ hs_cath_bedraud = {
 	county = c_cath_bedraud
 	
 	character_modifier = {
-		monthly_dynasty_prestige_mult = 0.05
+		diplomacy_per_piety_level = 1
 		dynasty_house_opinion = 5
 	}
+	
+	flag = is_used_for_cath_bedraud_burial # Activates the "Bury X in Cath Bedraud" decision
 }
 # Bangkorai Garrison, where Saint Pelin died to push back the Gray Host
 hs_ysgramor_crypt = {

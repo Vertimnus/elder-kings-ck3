@@ -690,16 +690,17 @@ doctrine_core_tenets = {
 			}
 		}
 
-		# can_pick = {
-			# custom_description = {
-				# text = daedric_worship_must_not_be_criminal
-				# NOT = { flag:doctrine_daedra_worship_forbidden = { is_in_list = selected_doctrines } }
-			# }
-		# }
+		can_pick = {
+			custom_description = {
+				text = faith_must_have_one_daedric_prince_allowed
+				creating_faith_has_daedric_prince_allowed = yes
+			}
+		}
 		
 		parameters = {
 			# TODO: Decisions to deal with a Daedric Prince
-			daedric_bargains_active = yes
+			reduces_cost_daedric_boons_active = yes
+			increases_effectiveness_daedric_sacrifices_active = yes
 		}
 	}
 	
@@ -881,10 +882,6 @@ doctrine_core_tenets = {
 			}
 		}
 		
-		parameters = {
-			hostility_override_doctrine_lycanthropy_outlawed = 2
-		}
-		
 		# TODO: Update when we have a lycan trait line
 		traits = {
 			virtues = { lycan_character = 2 }
@@ -930,10 +927,6 @@ doctrine_core_tenets = {
 			}
 		}
 		
-		parameters = {
-			hostility_override_doctrine_necromancy_outlawed = 2
-		}
-		
 		# TODO: Update when we have a necromancer trait line
 		traits = {
 			virtues = { necromancer_character = 1 }
@@ -977,10 +970,6 @@ doctrine_core_tenets = {
 					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
 				}
 			}
-		}
-		
-		parameters = {
-			hostility_override_doctrine_vampirism_outlawed = 2
 		}
 		
 		# TODO: Update when we have a vampire trait line
@@ -1033,7 +1022,6 @@ doctrine_core_tenets = {
 			# TODO: Decision for Witches to become Occultists
 			# Handle Briarhearts somehow?
 			potent_witch_become_occultist = yes
-			hostility_override_doctrine_witchcraft_crime = 2
 		}
 		
 		traits = {
@@ -1178,8 +1166,14 @@ doctrine_core_tenets = {
 			cheaper_cleanse_abominations_active = yes
 			cheaper_holy_wars_pro_undeath_active = yes
 			bonus_cleanse_abomination_war_piety_active = yes
-			hostility_override_doctrine_vampirism_accepted = 3
-			hostility_override_doctrine_necromancy_accepted = 3
+		}
+		
+		traits = {
+			sins = {
+				vampire_character = 3
+				necromancer_character = 3
+				undead_character = 3
+			}
 		}
 	}
 	

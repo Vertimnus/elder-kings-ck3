@@ -429,3 +429,320 @@ increase_wounds_two_times_effect = {
 		}
 	}
 }
+
+#generate a three part name for summoned dragons
+get_dragon_name = {
+    save_scope_value_as = { name = max_length value = { integer_range = { min = 13 max = 16 } } } #13-16 feels good. longest named dragon is 14, location is 15
+
+    # save length scopes for maths, need them to exist
+    save_scope_value_as = { name = part_1_length value = 0 }
+    save_scope_value_as = { name = part_2_length value = 0 }
+    save_scope_value_as = { name = part_3_length value = 0 }
+
+    # get part sizes and numbers
+    get_dragon_name_part_size = { X = 1 }
+    get_dragon_name_part_size = { X = 2 }
+    get_dragon_name_part_size = { X = 3 }
+
+    # if any are the same, get another
+    # also some filtering
+    while = { #part 1. 'the'/'of' dont tend to fit at the start
+        limit = {
+            OR = {
+                AND = { #The
+                    scope:part_1_length = 3
+                    scope:part_1 = 5
+                }
+                AND = { #Of
+                    scope:part_1_length = 2
+                    scope:part_1 = 11
+                }
+            }
+        }
+        save_scope_value_as = { name = part_1_length value = 0 }
+        get_dragon_name_part_size = { X = 1 }
+    }
+    while = { #part 2. cant be same as part 1
+        limit = {
+            scope:part_2_length = { compare_value = scope:part_1_length }
+            scope:part_2 = { compare_value = scope:part_1 }
+        }
+        save_scope_value_as = { name = part_2_length value = 0 }
+        get_dragon_name_part_size = { X = 2 }
+    }
+    while = { #part 3. 'the'/'of' dont tend to fit at the end, cant be same as part 1 or 2
+        limit = {
+            OR = {
+                AND = {
+                    scope:part_3_length = { compare_value = scope:part_1_length }
+                    scope:part_3 = { compare_value = scope:part_1 }
+                }
+                AND = {
+                    scope:part_3_length = { compare_value = scope:part_2_length }
+                    scope:part_3 = { compare_value = scope:part_2 }
+                }
+                AND = { #The
+                    scope:part_3_length = 3
+                    scope:part_3 = 5
+                }
+                AND = { #Of
+                    scope:part_3_length = 2
+                    scope:part_3 = 11
+                }
+            }
+        }
+        save_scope_value_as = { name = part_3_length value = 0 }
+        get_dragon_name_part_size = { X = 3 }
+    }
+
+    # convert number to name flag with switch
+    set_dragon_name_part = { X = 1 }
+    set_dragon_name_part = { X = 2 }
+    set_dragon_name_part = { X = 3 }
+}
+get_dragon_name_part_size = {
+    save_scope_value_as = { #save current length
+        name = current_length
+        value = {
+            value = scope:part_1_length
+            add = scope:part_2_length
+            add = scope:part_3_length
+        }
+    }
+
+    random_list = {
+        100 = {
+            trigger = { #would any of the options go over the max length? add 2 as min part length
+                save_temporary_scope_value_as = { name = trig_0 value = { value = scope:current_length add = 2 } }
+                scope:max_length = { compare_value < scope:trig_0 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 0 }
+            save_scope_value_as = { name = part_$X$ value = 0 }
+        }
+        14 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_2 value = { value = scope:current_length add = 2 } }
+                scope:max_length = { compare_value >= scope:trig_2 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 2 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 14 } } }
+        }
+        40 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_3 value = { value = scope:current_length add = 3 } }
+                scope:max_length = { compare_value >= scope:trig_3 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 3 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 40 } } }
+        }
+        41 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_4 value = { value = scope:current_length add = 4 } }
+                scope:max_length = { compare_value >= scope:trig_4 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 4 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 41 } } }
+        }
+        10 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_5 value = { value = scope:current_length add = 5 } }
+                scope:max_length = { compare_value >= scope:trig_5 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 5 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 10 } } }
+        }
+        6 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_6 value = { value = scope:current_length add = 6 } }
+                scope:max_length = { compare_value >= scope:trig_6 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 6 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 6 } } }
+        }
+        2 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_7 value = { value = scope:current_length add = 7 } }
+                scope:max_length = { compare_value >= scope:trig_7 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 7 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 2 } } }
+        }
+        1 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_8 value = { value = scope:current_length add = 8 } }
+                scope:max_length = { compare_value >= scope:trig_8 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 8 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 1 } } }
+        }
+    }
+}
+set_dragon_name_part = {
+    switch = {
+        trigger = scope:part_$X$_length
+
+        0 = { set_variable = { name = name$X$ value = flag:dn_blank days = 1 } } #Blank
+
+        2 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_ag days = 1 } } #Burn
+                2 = { set_variable = { name = name$X$ value = flag:dn_ah days = 1 } } #Hunter
+                3 = { set_variable = { name = name$X$ value = flag:dn_al days = 1 } } #Destroyer
+                4 = { set_variable = { name = name$X$ value = flag:dn_du days = 1 } } #Devour
+                5 = { set_variable = { name = name$X$ value = flag:dn_fo days = 1 } } #Frost
+                6 = { set_variable = { name = name$X$ value = flag:dn_in days = 1 } } #Master
+                7 = { set_variable = { name = name$X$ value = flag:dn_lo days = 1 } } #Deceive
+                8 = { set_variable = { name = name$X$ value = flag:dn_od days = 1 } } #Snow
+                9 = { set_variable = { name = name$X$ value = flag:dn_on days = 1 } } #Spirit
+                10 = { set_variable = { name = name$X$ value = flag:dn_qo days = 1 } } #Lightning
+                11 = { set_variable = { name = name$X$ value = flag:dn_se days = 1 } } #Of
+                12 = { set_variable = { name = name$X$ value = flag:dn_su days = 1 } } #Air
+                13 = { set_variable = { name = name$X$ value = flag:dn_tu days = 1 } } #Hammer
+                14 = { set_variable = { name = name$X$ value = flag:dn_ul days = 1 } } #Eternity
+            }
+        }
+
+        3 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_bah days = 1 } } #Wrath
+                2 = { set_variable = { name = name$X$ value = flag:dn_dun days = 1 } } #Grace
+                3 = { set_variable = { name = name$X$ value = flag:dn_dur days = 1 } } #Curse
+                4 = { set_variable = { name = name$X$ value = flag:dn_fel days = 1 } } #Feral
+                5 = { set_variable = { name = name$X$ value = flag:dn_fin days = 1 } } #The
+                6 = { set_variable = { name = name$X$ value = flag:dn_fus days = 1 } } #Force
+                7 = { set_variable = { name = name$X$ value = flag:dn_hah days = 1 } } #Mind
+                8 = { set_variable = { name = name$X$ value = flag:dn_iiz days = 1 } } #Ice
+                9 = { set_variable = { name = name$X$ value = flag:dn_jot days = 1 } } #Maw
+                10 = { set_variable = { name = name$X$ value = flag:dn_kah days = 1 } } #Pride
+                11 = { set_variable = { name = name$X$ value = flag:dn_kro days = 1 } } #Sorcerer
+                12 = { set_variable = { name = name$X$ value = flag:dn_kun days = 1 } } #Moonlight
+                13 = { set_variable = { name = name$X$ value = flag:dn_lok days = 1 } } #Rise
+                14 = { set_variable = { name = name$X$ value = flag:dn_lot days = 1 } } # Great
+                15 = { set_variable = { name = name$X$ value = flag:dn_luv days = 1 } } #Tear
+                16 = { set_variable = { name = name$X$ value = flag:dn_mah days = 1 } } #Fall/Fell
+                17 = { set_variable = { name = name$X$ value = flag:dn_mir days = 1 } } #Allegiance
+                18 = { set_variable = { name = name$X$ value = flag:dn_mul days = 1 } } #Strong
+                19 = { set_variable = { name = name$X$ value = flag:dn_nah days = 1 } } #Fury
+                20 = { set_variable = { name = name$X$ value = flag:dn_nax days = 1 } } #Cruelty
+                21 = { set_variable = { name = name$X$ value = flag:dn_neh days = 1 } } #Never
+                22 = { set_variable = { name = name$X$ value = flag:dn_nin days = 1 } } #Sting
+                23 = { set_variable = { name = name$X$ value = flag:dn_nir days = 1 } } #Hunt
+                24 = { set_variable = { name = name$X$ value = flag:dn_nos days = 1 } } #Strike
+                25 = { set_variable = { name = name$X$ value = flag:dn_qah days = 1 } } #Armor
+                26 = { set_variable = { name = name$X$ value = flag:dn_rel days = 1 } } #Domination
+                27 = { set_variable = { name = name$X$ value = flag:dn_rot days = 1 } } #Word
+                28 = { set_variable = { name = name$X$ value = flag:dn_sah days = 1 } } #Phantom
+                29 = { set_variable = { name = name$X$ value = flag:dn_sot days = 1 } } #White
+                30 = { set_variable = { name = name$X$ value = flag:dn_sov days = 1 } } #Shock
+                31 = { set_variable = { name = name$X$ value = flag:dn_sul days = 1 } } #Day
+                32 = { set_variable = { name = name$X$ value = flag:dn_vah days = 1 } } #Spring
+                33 = { set_variable = { name = name$X$ value = flag:dn_ved days = 1 } } #Black
+                34 = { set_variable = { name = name$X$ value = flag:dn_vey days = 1 } } #Cut
+                35 = { set_variable = { name = name$X$ value = flag:dn_vol days = 1 } } #Horror
+                36 = { set_variable = { name = name$X$ value = flag:dn_vul days = 1 } } #Dark
+                37 = { set_variable = { name = name$X$ value = flag:dn_vur days = 1 } } #Valor
+                38 = { set_variable = { name = name$X$ value = flag:dn_yol days = 1 } } #Fire
+                39 = { set_variable = { name = name$X$ value = flag:dn_zii days = 1 } } #Spirit
+                40 = { set_variable = { name = name$X$ value = flag:dn_zin days = 1 } } #Honor
+            }
+        }
+
+        4 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_brii days = 1 } } #Beauty
+                2 = { set_variable = { name = name$X$ value = flag:dn_brit days = 1 } } #Beautiful
+                3 = { set_variable = { name = name$X$ value = flag:dn_daan days = 1 } } #Doom
+                4 = { set_variable = { name = name$X$ value = flag:dn_drog days = 1 } } #Lord
+                5 = { set_variable = { name = name$X$ value = flag:dn_duul days = 1 } } #Crown
+                6 = { set_variable = { name = name$X$ value = flag:dn_feyn days = 1 } } #Bane
+                7 = { set_variable = { name = name$X$ value = flag:dn_fiik days = 1 } } #Mirror
+                8 = { set_variable = { name = name$X$ value = flag:dn_frin days = 1 } } #Hot
+                9 = { set_variable = { name = name$X$ value = flag:dn_gaaf days = 1 } } #Ghost
+                10 = { set_variable = { name = name$X$ value = flag:dn_gaar days = 1 } } #Unleash/Release
+                11 = { set_variable = { name = name$X$ value = flag:dn_golz days = 1 } } #Stone
+                12 = { set_variable = { name = name$X$ value = flag:dn_grah days = 1 } } #Battle
+                13 = { set_variable = { name = name$X$ value = flag:dn_gron days = 1 } } #Bind
+                14 = { set_variable = { name = name$X$ value = flag:dn_heyv days = 1 } } #Duty
+                15 = { set_variable = { name = name$X$ value = flag:dn_jiid days = 1 } } #Moon
+                16 = { set_variable = { name = name$X$ value = flag:dn_kaal days = 1 } } #Champion
+                17 = { set_variable = { name = name$X$ value = flag:dn_kein days = 1 } } #War
+                18 = { set_variable = { name = name$X$ value = flag:dn_kest days = 1 } } #Tempest
+                19 = { set_variable = { name = name$X$ value = flag:dn_kren days = 1 } } #Break
+                20 = { set_variable = { name = name$X$ value = flag:dn_krif days = 1 } } #Fight
+                21 = { set_variable = { name = name$X$ value = flag:dn_krii days = 1 } } #Kill
+                22 = { set_variable = { name = name$X$ value = flag:dn_kril days = 1 } } #Brave
+                23 = { set_variable = { name = name$X$ value = flag:dn_krin days = 1 } } #Courageous
+                24 = { set_variable = { name = name$X$ value = flag:dn_laas days = 1 } } #Life
+                25 = { set_variable = { name = name$X$ value = flag:dn_liiv days = 1 } } #Wither
+                26 = { set_variable = { name = name$X$ value = flag:dn_maar days = 1 } } #Terror
+                27 = { set_variable = { name = name$X$ value = flag:dn_moro days = 1 } } #Glory
+                28 = { set_variable = { name = name$X$ value = flag:dn_naak days = 1 } } #Eat
+                29 = { set_variable = { name = name$X$ value = flag:dn_odus days = 1 } } #Snowy
+                30 = { set_variable = { name = name$X$ value = flag:dn_onik days = 1 } } #Wise
+                31 = { set_variable = { name = name$X$ value = flag:dn_paar days = 1 } } #Ambition
+                32 = { set_variable = { name = name$X$ value = flag:dn_paaz days = 1 } } #Fair
+                33 = { set_variable = { name = name$X$ value = flag:dn_qeth days = 1 } } #Bone
+                34 = { set_variable = { name = name$X$ value = flag:dn_ruth days = 1 } } #Rage
+                35 = { set_variable = { name = name$X$ value = flag:dn_thur days = 1 } } #Overlord
+                36 = { set_variable = { name = name$X$ value = flag:dn_tiid days = 1 } } #Time
+                37 = { set_variable = { name = name$X$ value = flag:dn_vaaz days = 1 } } #Tear
+                38 = { set_variable = { name = name$X$ value = flag:dn_viin days = 1 } } #Shine
+                39 = { set_variable = { name = name$X$ value = flag:dn_viir days = 1 } } #Dying
+                40 = { set_variable = { name = name$X$ value = flag:dn_zind days = 1 } } #Triumph
+                41 = { set_variable = { name = name$X$ value = flag:dn_zoor days = 1 } } #Legend
+            }
+        }
+
+        5 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_ahzid days = 1 } } #Bitter
+                2 = { set_variable = { name = name$X$ value = flag:dn_hevno days = 1 } } #Brutal
+                3 = { set_variable = { name = name$X$ value = flag:dn_kriid days = 1 } } #Slayer
+                4 = { set_variable = { name = name$X$ value = flag:dn_munax days = 1 } } #Cruel
+                5 = { set_variable = { name = name$X$ value = flag:dn_okaaz days = 1 } } #Sea
+                6 = { set_variable = { name = name$X$ value = flag:dn_revak days = 1 } } #Sacred
+                7 = { set_variable = { name = name$X$ value = flag:dn_strun days = 1 } } #Storm
+                8 = { set_variable = { name = name$X$ value = flag:dn_viing days = 1 } } #Wing
+                9 = { set_variable = { name = name$X$ value = flag:dn_vokun days = 1 } } #Shadow
+                10 = { set_variable = { name = name$X$ value = flag:dn_yuvon days = 1 } } #Gold/Golden
+            }
+        }
+
+        6 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_boziik days = 1 } } #Bold(ly)
+                2 = { set_variable = { name = name$X$ value = flag:dn_kinzon days = 1 } } #Sharp
+                3 = { set_variable = { name = name$X$ value = flag:dn_nonvul days = 1 } } #Noble
+                4 = { set_variable = { name = name$X$ value = flag:dn_rovaan days = 1 } } #Wander
+                5 = { set_variable = { name = name$X$ value = flag:dn_sahrot days = 1 } } #Mighty
+                6 = { set_variable = { name = name$X$ value = flag:dn_vahlok days = 1 } } #Guardian
+            }
+        }
+
+        7 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_bahlaan days = 1 } } #Worthy
+                2 = { set_variable = { name = name$X$ value = flag:dn_kruziik days = 1 } } #Ancient
+            }
+        }
+
+        8 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { set_variable = { name = name$X$ value = flag:dn_nahkriin days = 1 } } #Vengeance
+            }
+        }
+    }
+}
+
+### Daedric whispers - Give the right combo of trait and daedra
+# Flag
+set_combo_trait_daedra_flag = {
+	add_character_flag = stress_$TRAIT$_$DAEDRA$
+}

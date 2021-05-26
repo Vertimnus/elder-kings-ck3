@@ -1,0 +1,179 @@
+﻿# Elder Kings events for handling the Hunt activity
+
+namespace = ek_hunt
+
+#######################
+#	You find a secluded shrine to Hircine...
+#######################
+### EK TODO: When Ardor is in, give a small Ardor bump if you usher a small prayer to Hircine
+ek_hunt.1001 = {
+	type = character_event
+	title = ek_hunt.1001.t
+	desc = ek_hunt.1001.desc
+	theme = hunt_activity
+	right_portrait = root
+
+
+	option = { # Destroy it!
+		trigger = { # Hircine shunned/criminal in your faith
+			faith = {
+				OR = {
+					has_doctrine_parameter = worship_hircine_shunned_active
+					has_doctrine_parameter = worship_hircine_criminal_active
+				}
+			}
+		}
+
+		name = ek_hunt.1001.a
+		add_piety = medium_piety_gain
+		
+		custom_tooltip = ek_hunt.1001.a.tt
+		hidden_effect = {
+			change_variable = {
+				name = hunt_outcome
+				add = -1
+			}
+		}
+		stress_impact = {
+			zealous = minor_stress_impact_loss
+			cynical = minor_stress_impact_gain
+		}
+		
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_zeal = 0.5
+			}
+		}
+	}
+
+	option = { # Do not disturb it
+		name = ek_hunt.1001.b
+		
+		custom_tooltip = ek_hunt.1001.b.tt
+		stress_impact = {
+			compassionate = minor_stress_impact_loss
+		}
+		
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_compassion = 0.5
+			}
+		}
+	}
+
+	option = { # Issue a small prayer to Hircine, for a good hunt (Hircine disallowed)
+		trigger = { # Hircine shunned/criminal in your faith
+			faith = {
+				OR = {
+					has_doctrine_parameter = worship_hircine_shunned_active
+					has_doctrine_parameter = worship_hircine_criminal_active
+				}
+			}
+		}
+		
+		name = ek_hunt.1001.c1
+		
+		custom_tooltip = ek_hunt.1001.c.tt
+		change_variable = {
+			name = hunt_outcome
+			add = 2
+		}
+		stress_impact = {
+			zealous = minor_stress_impact_gain
+		}
+		add_piety = minor_piety_loss
+		
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_zeal = -0.5
+			}
+		}
+	}
+
+	option = { # Issue a small prayer to Hircine, for a good hunt (Hircine ok)
+		trigger = { # Hircine is okay but not worshipped
+			faith = { has_doctrine_parameter = worship_hircine_allowed_active }
+			NOT = { faith = { has_doctrine_parameter = adds_hircine_pantheon_active } }
+		}
+		name = ek_hunt.1001.c2
+		
+		custom_tooltip = ek_hunt.1001.c.tt
+		change_variable = {
+			name = hunt_outcome
+			add = 2
+		}
+		
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { # Issue a small prayer to Hircine, for a good hunt (Hircine worshipped)
+		trigger = { # Hircine shunned/criminal in your faith
+			faith = { has_doctrine_parameter = adds_hircine_pantheon_active }
+		}
+		name = ek_hunt.1001.c3
+		
+		custom_tooltip = ek_hunt.1001.c.tt
+		change_variable = {
+			name = hunt_outcome
+			add = 2
+		}
+		stress_impact = {
+			zealous = minor_stress_impact_loss
+			cynical = minor_stress_impact_gain
+		}
+		add_piety = minor_piety_gain
+		
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_zeal = 0.5
+			}
+		}
+	}
+
+	option = { # Take not of where the shrine is, to come back later... (gives you the Worshipper of Hircine secret)
+		trigger = {
+			# You can't be allowed to openly worship Hircine
+			faith = {
+				OR = {
+					has_doctrine_parameter = worship_hircine_shunned_active
+					has_doctrine_parameter = worship_hircine_criminal_active
+				}
+			}
+			# You can't be already worshipping him
+			NOR = {
+				has_trait = hircine_worshipper
+				any_secret = { secret_type = secret_hircine_worshipper }
+			}
+		}
+		name = ek_hunt.1001.d
+		
+		custom_tooltip = ek_hunt.1001.d.tt
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		
+		add_stress = medium_stress_gain
+		stress_impact = {
+			zealous = minor_stress_impact_gain
+			cynical = minor_stress_impact_loss
+		}
+		
+		ai_chance = {
+			base = 50
+			ai_value_modifier = {
+				ai_zeal = -1
+			}
+		}
+	}
+	
+	after = {
+		trigger_event = {
+			id = hunt.9001 #To complete the activity
+			days = { 14 20 }
+		}
+	}
+}

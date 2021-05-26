@@ -34,3 +34,66 @@ is_vampire = {
 is_necromancer = {
 	has_trait = necromancer_character
 }
+
+### To reference culture & religions more easily for some effects
+# Poet
+has_poet_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_skald_tradition
+		}
+	}
+}
+has_poet_faith = {
+	always = no
+}
+has_poet_background = {
+	OR = {
+		has_poet_culture = yes
+		has_poet_faith = yes
+	}
+}
+# Knighthood
+has_knighthood_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_knightly_orders
+			has_innovation = innovation_knighthood
+		}
+	}
+}
+has_knighthood_faith = {
+	always = no
+}
+has_knighthood_background = {
+	OR = {
+		has_knighthood_culture = yes
+		has_knighthood_faith = yes
+	}
+}
+# Students of Magicka
+has_students_magicka_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_magical_studies
+		}
+	}
+}
+has_students_magicka_faith = {
+	always = no
+}
+has_students_magicka_background = {
+	OR = {
+		has_students_magicka_culture = yes
+		has_students_magicka_faith = yes
+	}
+}
+
+### When choosing a Daedra to trigger Daedric Whispers
+can_get_combo_trait_daedra = {
+	NOT = { has_character_flag = stress_$TRAIT$_$DAEDRA$ }
+	AND = {
+		has_trait = $TRAIT$
+		can_secretly_worship_$DAEDRA$ = yes
+	}
+}

@@ -247,6 +247,27 @@ creating_faith_pantheon_cannot_be_changed_active = {
 	}
 }
 
+creating_faith_has_daedric_prince_allowed = {
+	OR = {
+		flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_boethiah_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_clavicus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hermaeus_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_hircine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_malacath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mehrunes_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_mephala_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_meridia_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_molag_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_namira_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_nocturnal_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_peryite_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sanguine_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_sheogorath_pantheon = { is_in_list = selected_doctrines }
+		flag:doctrine_vaermina_pantheon = { is_in_list = selected_doctrines }
+	}
+}
+
 creating_faith_has_daedric_prince_pantheon = {
 	OR = {
 		flag:doctrine_azura_pantheon = { is_in_list = selected_doctrines }
@@ -303,4 +324,251 @@ creating_faith_syncretizes_with_pantheon = {
 		flag:tenet_syncretism_pantheon_atmoran_totems = { is_in_list = selected_doctrines }
 		## Daedric
 	}
+}
+
+### Secret Daedric Worship
+# Can you secretly worship X daedra
+can_secretly_worship_daedra = { # Can you secretly worship at least one Daedric Prince
+	OR = {
+		can_secretly_worship_azura = yes
+		can_secretly_worship_boethiah = yes
+		can_secretly_worship_clavicus = yes
+		can_secretly_worship_hermaeus = yes
+		can_secretly_worship_hircine = yes
+		can_secretly_worship_malacath = yes
+		can_secretly_worship_mehrunes = yes
+		can_secretly_worship_mephala = yes
+		can_secretly_worship_meridia = yes
+		can_secretly_worship_molag = yes
+		can_secretly_worship_namira = yes
+		can_secretly_worship_nocturnal = yes
+		can_secretly_worship_peryite = yes
+		can_secretly_worship_sanguine = yes
+		can_secretly_worship_sheogorath = yes
+		can_secretly_worship_vaermina = yes
+	}
+}
+
+can_secretly_worship_prince = {
+	faith = {
+		OR = {
+			has_doctrine_parameter = worship_$PRINCE$_shunned_active
+			has_doctrine_parameter = worship_$PRINCE$_criminal_active
+		}
+	}
+	NOR = {
+		has_trait = $PRINCE$_worshipper
+		any_secret = { secret_type = secret_$PRINCE$_worshipper }
+	}
+}
+
+can_secretly_worship_azura = {
+	can_secretly_worship_prince = { PRINCE = azura }
+}
+
+can_secretly_worship_boethiah = {
+	can_secretly_worship_prince = { PRINCE = boethiah }
+}
+
+can_secretly_worship_clavicus = {
+	can_secretly_worship_prince = { PRINCE = clavicus }
+}
+
+can_secretly_worship_hermaeus = {
+	can_secretly_worship_prince = { PRINCE = hermaeus }
+}
+
+can_secretly_worship_hircine = {
+	can_secretly_worship_prince = { PRINCE = hircine }
+}
+
+can_secretly_worship_malacath = {
+	can_secretly_worship_prince = { PRINCE = malacath }
+}
+
+can_secretly_worship_mehrunes = {
+	can_secretly_worship_prince = { PRINCE = mehrunes }
+}
+
+can_secretly_worship_mephala = {
+	can_secretly_worship_prince = { PRINCE = mephala }
+}
+
+can_secretly_worship_meridia = {
+	can_secretly_worship_prince = { PRINCE = meridia }
+}
+
+can_secretly_worship_molag = {
+	can_secretly_worship_prince = { PRINCE = molag }
+}
+
+can_secretly_worship_namira = {
+	can_secretly_worship_prince = { PRINCE = namira }
+}
+
+can_secretly_worship_nocturnal = {
+	can_secretly_worship_prince = { PRINCE = nocturnal }
+}
+
+can_secretly_worship_peryite = {
+	can_secretly_worship_prince = { PRINCE = peryite }
+}
+
+can_secretly_worship_sanguine = {
+	can_secretly_worship_prince = { PRINCE = sanguine }
+}
+
+can_secretly_worship_sheogorath = {
+	can_secretly_worship_prince = { PRINCE = sheogorath }
+}
+
+can_secretly_worship_vaermina = {
+	can_secretly_worship_prince = { PRINCE = vaermina }
+}
+
+# Are you currently worshipping X daedra
+is_secretly_worshipping_daedra = { # Is currently secretly worshipping at least one Daedric Prince
+	OR = {
+		is_secretly_worshipping_azura = yes
+		is_secretly_worshipping_boethiah = yes
+		is_secretly_worshipping_clavicus = yes
+		is_secretly_worshipping_hermaeus = yes
+		is_secretly_worshipping_hircine = yes
+		is_secretly_worshipping_malacath = yes
+		is_secretly_worshipping_mehrunes = yes
+		is_secretly_worshipping_mephala = yes
+		is_secretly_worshipping_meridia = yes
+		is_secretly_worshipping_molag = yes
+		is_secretly_worshipping_namira = yes
+		is_secretly_worshipping_nocturnal = yes
+		is_secretly_worshipping_peryite = yes
+		is_secretly_worshipping_sanguine = yes
+		is_secretly_worshipping_sheogorath = yes
+		is_secretly_worshipping_vaermina = yes
+	}
+}
+
+is_secretly_worshipping_prince = {
+	OR = {
+		has_trait = $PRINCE$_worshipper
+		any_secret = { secret_type = secret_$PRINCE$_worshipper }
+	}
+}
+
+is_secretly_worshipping_azura = {
+	is_secretly_worshipping_prince = { PRINCE = azura }
+}
+
+is_secretly_worshipping_boethiah = {
+	is_secretly_worshipping_prince = { PRINCE = boethiah }
+}
+
+is_secretly_worshipping_clavicus = {
+	is_secretly_worshipping_prince = { PRINCE = clavicus }
+}
+
+is_secretly_worshipping_hermaeus = {
+	is_secretly_worshipping_prince = { PRINCE = hermaeus }
+}
+
+is_secretly_worshipping_hircine = {
+	is_secretly_worshipping_prince = { PRINCE = hircine }
+}
+
+is_secretly_worshipping_malacath = {
+	is_secretly_worshipping_prince = { PRINCE = malacath }
+}
+
+is_secretly_worshipping_mehrunes = {
+	is_secretly_worshipping_prince = { PRINCE = mehrunes }
+}
+
+is_secretly_worshipping_mephala = {
+	is_secretly_worshipping_prince = { PRINCE = mephala	}
+}
+
+is_secretly_worshipping_meridia = {
+	is_secretly_worshipping_prince = { PRINCE = meridia }
+}
+
+is_secretly_worshipping_molag = {
+	is_secretly_worshipping_prince = { PRINCE = molag }
+}
+
+is_secretly_worshipping_namira = {
+	is_secretly_worshipping_prince = { PRINCE = namira }
+}
+
+is_secretly_worshipping_nocturnal = {
+	is_secretly_worshipping_prince = { PRINCE = nocturnal }
+}
+
+is_secretly_worshipping_peryite = {
+	is_secretly_worshipping_prince = { PRINCE = peryite }
+}
+
+is_secretly_worshipping_sanguine = {
+	is_secretly_worshipping_prince = { PRINCE = sanguine }
+}
+
+is_secretly_worshipping_sheogorath = {
+	is_secretly_worshipping_prince = { PRINCE = sheogorath }
+}
+
+is_secretly_worshipping_vaermina = {
+	is_secretly_worshipping_prince = { PRINCE = vaermina }
+}
+
+### Holy buildings scripted triggers
+province_has_holy_building_slot = { # Slot here means either just the var, or the building itself
+	$PROVINCE$ = {
+		OR = {
+			exists = var:$BUILDING$
+			has_building = $BUILDING$_01
+		}
+	}
+}
+
+province_has_any_holy_building_slot = { # Slot here means either just the var, or the building itself
+	OR = {
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = grand_cathedral }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = daedric_shrine }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = great_wyrd_tree }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = dragon_temple }
+		province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = holy_site_other_grand_temple }
+	}
+}
+
+province_has_right_holy_building_slot = { # Checks if CHAR faith aligns with $PROVINCE$ holy building slot
+	$CHAR$.faith = { has_doctrine_parameter = faith_uses_$BUILDING$ }
+	province_has_holy_building_slot = { PROVINCE = $PROVINCE$ BUILDING = $BUILDING$ }
+}
+
+province_has_wrong_holy_building_slot = { # Checks if CHAR faith DOESN'T align with $PROVINCE$ holy building slot
+	trigger_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = grand_cathedral } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = daedric_shrine } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = great_wyrd_tree } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = dragon_temple } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else_if = {
+		limit = { $CHAR$.faith = { has_doctrine_parameter = faith_uses_holy_site_other_grand_temple } }
+		NOT = { province_has_right_holy_building_slot = { CHAR = $CHAR$ PROVINCE = $PROVINCE$ BUILDING = holy_site_other_grand_temple } }
+		province_has_any_holy_building_slot = { PROVINCE = $PROVINCE$ }
+	}
+	trigger_else = { always = no }
 }

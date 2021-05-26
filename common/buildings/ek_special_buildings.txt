@@ -1928,6 +1928,61 @@ sancre_tor_02 = { # The city has been rebuilt and the tombs renovated
 	type = special
 }
 
+##########
+# Cath Bedraud: Ancient cemetary, holding most of High Rock's former royalty and great heroes
+##########
+cath_bedraud_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_building_hall_of_heroes.dds"
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	is_enabled = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = 1000
+
+	character_modifier = {
+		monthly_piety = 0.25
+		monthly_dynasty_prestige_mult = 0.1
+		dynasty_opinion = 5
+		same_faith_opinion = 5
+	}
+	county_modifier = {
+		tax_mult = 0.2
+		development_growth_factor = 0.2
+		development_growth = 0.1
+	}
+	province_modifier = {
+		monthly_income = 2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
 
 ############
 # Generic  #
@@ -1947,7 +2002,7 @@ grand_cathedral_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -1968,7 +2023,7 @@ grand_cathedral_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
 	}
 	
 	show_disabled = yes
@@ -2011,7 +2066,7 @@ daedric_shrine_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2032,7 +2087,7 @@ daedric_shrine_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
 	}
 	
 	show_disabled = yes
@@ -2075,7 +2130,7 @@ great_wyrd_tree_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2096,7 +2151,7 @@ great_wyrd_tree_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
 	}
 	
 	show_disabled = yes
@@ -2117,6 +2172,8 @@ great_wyrd_tree_01 = {
 	}
 	
 	type = special
+	
+	flag = is_used_for_cath_bedraud_burial
 }
 
 ##########
@@ -2133,7 +2190,7 @@ dragon_temple_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2154,7 +2211,7 @@ dragon_temple_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
 	}
 	
 	show_disabled = yes

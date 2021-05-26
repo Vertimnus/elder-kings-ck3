@@ -1,0 +1,992 @@
+﻿# Elder Kings events related to the Spymaster's tasks
+
+namespace = ek_spymaster_task
+
+### EK Secrets
+# Spymaster found Secret Necromancer
+ek_spymaster_task.0001 = {
+	type = character_event
+	title = ek_spymaster_task.0001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = necromancer
+						any_secret = {	
+							secret_type = secret_necromancer
+						}
+					}
+				}
+				desc = ek_spymaster_task.0001.secret_necromancer.shared
+			}
+			desc = ek_spymaster_task.0001.secret_necromancer
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_necromancer
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0001.a.necromancer
+			trigger = {
+				has_trait = necromancer
+			}
+		}
+		name = ek_spymaster_task.0001.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+# Daedric Worship
+ek_spymaster_task.0002 = {
+	type = character_event
+	title = ek_spymaster_task.0002.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = azura_worshipper
+						any_secret = {	
+							secret_type = secret_azura_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0002.secret_azura_worshipper.shared
+			}
+			desc = ek_spymaster_task.0002.secret_azura_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_azura_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0002.a.azura_worshipper
+			trigger = {
+				has_trait = azura_worshipper
+			}
+		}
+		name = ek_spymaster_task.0002.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0003 = {
+	type = character_event
+	title = ek_spymaster_task.0003.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = boethiah_worshipper
+						any_secret = {	
+							secret_type = secret_boethiah_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0003.secret_boethiah_worshipper.shared
+			}
+			desc = ek_spymaster_task.0003.secret_boethiah_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_boethiah_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0003.a.boethiah_worshipper
+			trigger = {
+				has_trait = boethiah_worshipper
+			}
+		}
+		name = ek_spymaster_task.0003.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0004 = {
+	type = character_event
+	title = ek_spymaster_task.0004.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = clavicus_worshipper
+						any_secret = {	
+							secret_type = secret_clavicus_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0004.secret_clavicus_worshipper.shared
+			}
+			desc = ek_spymaster_task.0004.secret_clavicus_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_clavicus_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0004.a.clavicus_worshipper
+			trigger = {
+				has_trait = clavicus_worshipper
+			}
+		}
+		name = ek_spymaster_task.0004.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0005 = {
+	type = character_event
+	title = ek_spymaster_task.0005.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = hermaeus_worshipper
+						any_secret = {	
+							secret_type = secret_hermaeus_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0005.secret_hermaeus_worshipper.shared
+			}
+			desc = ek_spymaster_task.0005.secret_hermaeus_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_hermaeus_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0005.a.hermaeus_worshipper
+			trigger = {
+				has_trait = hermaeus_worshipper
+			}
+		}
+		name = ek_spymaster_task.0005.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0006 = {
+	type = character_event
+	title = ek_spymaster_task.0006.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = hircine_worshipper
+						any_secret = {	
+							secret_type = secret_hircine_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0006.secret_hircine_worshipper.shared
+			}
+			desc = ek_spymaster_task.0006.secret_hircine_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_hircine_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0006.a.hircine_worshipper
+			trigger = {
+				has_trait = hircine_worshipper
+			}
+		}
+		name = ek_spymaster_task.0006.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0007 = {
+	type = character_event
+	title = ek_spymaster_task.0007.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = malacath_worshipper
+						any_secret = {	
+							secret_type = secret_malacath_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0007.secret_malacath_worshipper.shared
+			}
+			desc = ek_spymaster_task.0007.secret_malacath_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_malacath_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0007.a.malacath_worshipper
+			trigger = {
+				has_trait = malacath_worshipper
+			}
+		}
+		name = ek_spymaster_task.0007.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0008 = {
+	type = character_event
+	title = ek_spymaster_task.0008.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = mehrunes_worshipper
+						any_secret = {	
+							secret_type = secret_mehrunes_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0008.secret_mehrunes_worshipper.shared
+			}
+			desc = ek_spymaster_task.0008.secret_mehrunes_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_mehrunes_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0008.a.mehrunes_worshipper
+			trigger = {
+				has_trait = mehrunes_worshipper
+			}
+		}
+		name = ek_spymaster_task.0008.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0009 = {
+	type = character_event
+	title = ek_spymaster_task.0009.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = mephala_worshipper
+						any_secret = {	
+							secret_type = secret_mephala_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0009.secret_mephala_worshipper.shared
+			}
+			desc = ek_spymaster_task.0009.secret_mephala_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_mephala_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0009.a.mephala_worshipper
+			trigger = {
+				has_trait = mephala_worshipper
+			}
+		}
+		name = ek_spymaster_task.0009.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0010 = {
+	type = character_event
+	title = ek_spymaster_task.0010.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = meridia_worshipper
+						any_secret = {	
+							secret_type = secret_meridia_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0010.secret_meridia_worshipper.shared
+			}
+			desc = ek_spymaster_task.0010.secret_meridia_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_meridia_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0010.a.meridia_worshipper
+			trigger = {
+				has_trait = meridia_worshipper
+			}
+		}
+		name = ek_spymaster_task.0010.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0011 = {
+	type = character_event
+	title = ek_spymaster_task.0011.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = molag_worshipper
+						any_secret = {	
+							secret_type = secret_molag_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0011.secret_molag_worshipper.shared
+			}
+			desc = ek_spymaster_task.0011.secret_molag_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_molag_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0011.a.molag_worshipper
+			trigger = {
+				has_trait = molag_worshipper
+			}
+		}
+		name = ek_spymaster_task.0011.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0012 = {
+	type = character_event
+	title = ek_spymaster_task.0012.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = namira_worshipper
+						any_secret = {	
+							secret_type = secret_namira_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0012.secret_namira_worshipper.shared
+			}
+			desc = ek_spymaster_task.0012.secret_namira_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_namira_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0012.a.namira_worshipper
+			trigger = {
+				has_trait = namira_worshipper
+			}
+		}
+		name = ek_spymaster_task.0012.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0013 = {
+	type = character_event
+	title = ek_spymaster_task.0013.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = nocturnal_worshipper
+						any_secret = {	
+							secret_type = secret_nocturnal_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0013.secret_nocturnal_worshipper.shared
+			}
+			desc = ek_spymaster_task.0013.secret_nocturnal_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_nocturnal_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0013.a.nocturnal_worshipper
+			trigger = {
+				has_trait = nocturnal_worshipper
+			}
+		}
+		name = ek_spymaster_task.0013.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0014 = {
+	type = character_event
+	title = ek_spymaster_task.0014.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = peyite_worshipper
+						any_secret = {	
+							secret_type = secret_peyite_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0014.secret_peyite_worshipper.shared
+			}
+			desc = ek_spymaster_task.0014.secret_peyite_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_peyite_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0014.a.peyite_worshipper
+			trigger = {
+				has_trait = peyite_worshipper
+			}
+		}
+		name = ek_spymaster_task.0014.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0015 = {
+	type = character_event
+	title = ek_spymaster_task.0015.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = sanguine_worshipper
+						any_secret = {	
+							secret_type = secret_sanguine_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0015.secret_sanguine_worshipper.shared
+			}
+			desc = ek_spymaster_task.0015.secret_sanguine_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_sanguine_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0015.a.sanguine_worshipper
+			trigger = {
+				has_trait = sanguine_worshipper
+			}
+		}
+		name = ek_spymaster_task.0015.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0016 = {
+	type = character_event
+	title = ek_spymaster_task.0016.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = sheogorath_worshipper
+						any_secret = {	
+							secret_type = secret_sheogorath_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0016.secret_sheogorath_worshipper.shared
+			}
+			desc = ek_spymaster_task.0016.secret_sheogorath_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_sheogorath_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0016.a.sheogorath_worshipper
+			trigger = {
+				has_trait = sheogorath_worshipper
+			}
+		}
+		name = ek_spymaster_task.0016.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}
+
+ek_spymaster_task.0017 = {
+	type = character_event
+	title = ek_spymaster_task.0017.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					root = scope:councillor_liege
+				}
+				desc = spymaster_task.0311.councillor_liege_opening
+			}
+			desc = spymaster_task.0311.spymaster_opening
+		}
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					OR = {
+						has_trait = vaermina_worshipper
+						any_secret = {	
+							secret_type = secret_vaermina_worshipper
+						}
+					}
+				}
+				desc = ek_spymaster_task.0017.secret_vaermina_worshipper.shared
+			}
+			desc = ek_spymaster_task.0017.secret_vaermina_worshipper
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = scope:councillor
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:secret_holder
+		animation = dismissal
+	}
+	
+	trigger = {
+		scope:secret_to_reveal = {
+			secret_type = secret_vaermina_worshipper
+		}
+	}
+
+	option = {
+		name = {
+			text = ek_spymaster_task.0017.a.vaermina_worshipper
+			trigger = {
+				has_trait = vaermina_worshipper
+			}
+		}
+		name = ek_spymaster_task.0017.a
+		scope:secret_to_reveal = {
+			reveal_to = root
+		}
+	}
+}

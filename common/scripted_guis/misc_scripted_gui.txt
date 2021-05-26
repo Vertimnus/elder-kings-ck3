@@ -1,0 +1,166 @@
+﻿culture_group_cultures = {
+    scope = culture_group
+
+    effect = {
+        every_in_global_list = { #TODO replace w/ every/ordered_culture_global when 1.3.x
+            variable = culture_list
+            limit = { ROOT = THIS.culture_group }
+            if = {
+                #limit = { any_county = { culture = PREV.PREV } }
+                limit = {
+                    is_target_in_global_variable_list = {
+                        name = culture_is_alive
+                        target = this
+                    }
+                }
+                custom_tooltip = CULTURE_NAME
+            }
+            else = { custom_tooltip = CULTURE_NAME_DEAD }
+        }
+    }
+}
+
+# culture_is_nomadic = {
+#     scope = culture
+
+#     is_visible = { has_innovation = innovation_native_nomadic }
+# }
+
+culture_nativity = {
+    scope = culture
+    saved_scopes = { player_s } #useing player as scope to avoid <culture>: & effects indenting
+
+    effect = {
+        if = {
+            limit = { is_native_from_somewhere = { CULTURE = THIS } }
+            if = {
+                limit = { has_innovation = innovation_native_glenumbra }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_glenumbra').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_rivenspire }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_rivenspire').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_stormhaven }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_stormhaven').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_greater_wrothgar }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_greater_wrothgar').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_bangkorai }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_bangkorai').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_craglorn }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_craglorn').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_alikr }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_alikr').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_brena }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_brena').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_sunforge }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_sunforge').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_abecee }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_abecee').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_colovia }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_colovia').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_heartlands }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_heartlands').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_nibenay }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_nibenay').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_karth }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_karth').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_white_river }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_white_river').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_west_ghost }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_west_ghost').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_east_ghost }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_east_ghost').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_dark_water }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_dark_water').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_solstheim }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_solstheim').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_yokuda }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_yokuda').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_auridon }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_auridon').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_summerset }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_summerset').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_grahtwood }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_grahtwood').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_greenshade }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_greenshade').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_malabal_tor }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_malabal_tor').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_reaper_march }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_reaper_march').GetName]" }
+            }
+
+            if = {
+                limit = { has_innovation = innovation_native_anequina }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_anequina').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_tenmar }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_tenmar').GetName]" }
+            }
+            if = {
+                limit = { has_innovation = innovation_native_pellitine }
+                scope:player_s = { custom_tooltip = "[GetGeographicalRegion('custom_nativity_pellitine').GetName]" }
+            }
+        }
+        else_if = {
+            limit = { has_innovation = innovation_native_nomadic }
+            custom_tooltip = NATIVE_NOMADIC
+        }
+        else = { custom_tooltip = NATIVE_NOWHERE }
+    }
+}

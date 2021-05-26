@@ -439,17 +439,18 @@ task_conversion = {
 				desc = COURT_CHAPLAIN_CONVERSION_PASTORAL_ISOLATION_MODIFIER
 			}
 		}
-		if = {
-			limit = {
-				scope:councillor.liege.faith = { has_doctrine = tenet_communal_identity }
-				exists = scope:county
-				NOT = { scope:county.culture = scope:councillor.liege.culture }
-			}
-			add = {
-				value = scope:councillor.conversion_communal_identity_resistance
-				desc = COURT_CHAPLAIN_CONVERSION_COMMUNAL_IDENTITY_PENALTY_MODIFIER
-			}
-		}
+		### EK EDIT: Disabled tenet
+		# if = {
+			# limit = {
+				# scope:councillor.liege.faith = { has_doctrine = tenet_communal_identity }
+				# exists = scope:county
+				# NOT = { scope:county.culture = scope:councillor.liege.culture }
+			# }
+			# add = {
+				# value = scope:councillor.conversion_communal_identity_resistance
+				# desc = COURT_CHAPLAIN_CONVERSION_COMMUNAL_IDENTITY_PENALTY_MODIFIER
+			# }
+		# }
 
 		#Conversion bonuses for Character Faith Tenets
 		if = {
@@ -560,6 +561,19 @@ task_conversion = {
 			add = {
 				value = scope:councillor.conversion_communal_identity_resistance_culture
 				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER
+			}
+		}
+		
+		### EK EDIT: Members of the Council of the Eight have trouble converting other members or the leader
+		if = {
+			limit = {
+				exists = scope:county
+				scope:councillor.liege.faith = { has_doctrine_parameter = members_coe_conversion_penalty_active }
+				scope:county.faith = { has_doctrine_parameter = members_coe_conversion_penalty_active }
+			}
+			multiply = {
+				value = 0.75
+				desc = MEMBERS_COUNCIL_OF_THE_EIGHT_CONVERSION_MALUS
 			}
 		}
 		
@@ -763,6 +777,22 @@ task_conversion = {
 				# desc = COURT_CHAPLAIN_CONVERSION_HOLY_SITE_VISOKI
 			# }
 		# }
+		# Faiths holding the Temple of the One and consiring it a holy site have trouble being rooted out
+		if = {
+			limit = {
+				exists = scope:county
+				scope:county.faith = {
+					controls_holy_site = hs_temple_of_the_one
+				}
+				title:b_white_gold = {
+					is_holy_site_of = scope:county.faith
+				}
+			}
+			add = {
+				value = scope:councillor.conversion_holy_site_temple_of_the_one
+				desc = COURT_CHAPLAIN_CONVERSION_HOLY_SITE_TEMPLE_OF_THE_ONE
+			}
+		}
 
 		#Other
 		if = {

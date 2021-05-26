@@ -13,13 +13,6 @@ window = {
 	using = Window_Background_Sidebar
 
 	state = {
-		name = "map_click_check" # clicking the map changes the faith but doesnt call the refresh function
-		trigger_when = "[Not(EqualTo_string( GetVariableSystem.Get( 'faith_name_check' ), Faith.GetNameNoTooltip ))]"
-		on_start = "[PdxGuiTriggerAllAnimations('faith_view_refresh')]"
-		on_finish = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
-	}
-
-	state = {
 		name = "patron_important_action" # get the correct tab for the action
 		trigger_when = "[GetPlayer.MakeScope.Var('action_patron').IsSet]"
 		on_start = "[GetScriptedGui('action_patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -31,7 +24,6 @@ window = {
 		position = { 0 0 }
 		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'beliefs' )]"
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
-		on_start = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
 		on_start = "[GetVariableSystem.Clear( 'patron_trait' )]"
 
 		using = Animation_FadeIn_Quick
@@ -42,7 +34,7 @@ window = {
 		name = _hide
 		position = { -60 0 }
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
-		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 
 		using = Animation_FadeOut_Quick
 		using = Sound_WindowHide_Standard
@@ -1202,11 +1194,12 @@ window = {
 			state = {
 				name = _hide
 				alpha = 0
-				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
 			state = {
-				name = "faith_view_refresh"
+				name = "patron_get_patrons"
+				trigger_when = "[Not(FaithWindow.GetFaith.MakeScope.Var('faith_patrons_set').IsSet)]" #trigger when list doesnt exist - assume empty list exists still
 				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
@@ -1286,14 +1279,14 @@ window = {
 
 				blockoverride "scrollbox_empty" {
 					text = NO_PATRONS
-					visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+					visible = "[IsDataModelEmpty(FaithWindow.GetFaith.MakeScope.GetList('faith_patrons'))]"
 				}
 
 				blockoverride "scrollbox_content"
 				{
 					vbox = {
 						name = "patrons_list"
-						datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
+						datamodel = "[FaithWindow.GetFaith.MakeScope.GetList('faith_patrons')]"
 						layoutpolicy_horizontal = expanding
 
 						item = {
@@ -1337,13 +1330,21 @@ window = {
 											name = "patron_button"
 											layoutpolicy_horizontal = expanding
 											size = { 0 140 }
-											#alwaystransparent = yes
+
+											# state = {
+											# 	name = _mouse_hierarchy_enter
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_enter')]"
+											# }
+
+											# state = {
+											# 	name = _mouse_hierarchy_leave
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_leave')]"
+											# }
 
 											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
 											#down = has trait
 											enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
 											#onclick = give trait - this and down need 1.4 commands to pass flags
-
 
 											background = {
 												margin = { 100 35 }
@@ -1372,10 +1373,28 @@ window = {
 												margin = { 10 0 }
 												spacing = 7
 
-												icon = {
+												highlight_icon = {
+													name = "patron_icon"
 													size = { 120 120 }
-													texture = "[Trait.GetIcon(GetDummyMale)]"
-													#texture = "[Trait.GetIcon(GetPlayer.MakeScope.Var('dummy_var').Char)]" #global for 1.4
+													texture = "[Trait.GetIcon(GetNullCharacter)]"
+
+													# state = {
+													# 	name = "patron_glow_hover_enter"
+													# 	glow_alpha = 0.25
+													# }
+													# state = {
+													# 	name = "patron_glow_hover_leave"
+													# 	glow_alpha = 0.0
+													# }
+
+													# glow = {
+													# 	name = "patron_icon_glow"
+													# 	alpha = 0
+													# 	using = Color_Orange
+													# 	using = Glow_Standard
+
+													# 	glow_radius = 2
+													# }
 												}
 
 												divider_light = {
@@ -1383,9 +1402,9 @@ window = {
 												}
 
 												vbox = {
-													margin = { 5 10 }
+													margin = { 5 5 }
 													margin_left = 8
-													spacing = 10
+													spacing = 5
 													layoutpolicy_vertical = expanding
 													layoutpolicy_horizontal = expanding
 
@@ -1394,7 +1413,7 @@ window = {
 														text_label_left = {
 															name = "patron_name"
 															layoutpolicy_horizontal = expanding
-															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
+															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )|U]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
 															#text = "[GetPlayer.Custom( 'get_akatosh' )]"
 															# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
 															default_format = "#high"
@@ -1403,7 +1422,6 @@ window = {
 													}
 
 													vbox = {
-														spacing = 5
 														layoutpolicy_vertical = expanding
 														layoutpolicy_horizontal = expanding
 
@@ -1431,9 +1449,10 @@ window = {
 																	size = { 180 -1 }
 																	autoresize = yes
 																	max_width = 340
-																	text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
-																	fontsize = 14
+																	text = "[Trait.GetFullDescription( GetNullCharacter, Faith.Self )]"
+																	fontsize = 15
 																	fontsize_min = 12
+																	margin_bottom = -37
 																}
 															}
 														}
