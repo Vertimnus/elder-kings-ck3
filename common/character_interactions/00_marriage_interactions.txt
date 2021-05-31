@@ -436,6 +436,38 @@ arrange_marriage_interaction = {
 				}
 			}
 		}
+		
+		#EK Edit - race incompatibility triggers (for the AI, players marry whover)
+		trigger_if = {
+			limit = {
+				NOR = {
+					AND = {
+						scope:actor = { has_character_flag = race_khajiit }
+						scope:secondary_actor = { NOT = { has_character_flag = race_khajiit } }
+					}
+					AND = {
+						scope:actor = { NOT = { has_character_flag = race_khajiit } }
+						scope:secondary_actor = { has_character_flag = race_khajiit }
+					}
+					AND = {
+						scope:actor = { has_character_flag = race_argonian }
+						scope:secondary_actor = { NOT = { has_character_flag = race_argonian } }
+					}
+					AND = {
+						scope:actor = { NOT = { has_character_flag = race_argonian } }
+						scope:secondary_actor = { has_character_flag = race_argonian }
+					}
+					AND = {
+						scope:actor = { has_character_flag = race_goblinken }
+						scope:secondary_actor = { NOT = { has_character_flag = race_goblinken } }
+					}
+					AND = {
+						scope:actor = { NOT = { has_character_flag = race_goblinken } }
+						scope:secondary_actor = { has_character_flag = race_goblinken }
+					}
+				}
+			}
+		}
 	}
 
 	pre_auto_accept = {
