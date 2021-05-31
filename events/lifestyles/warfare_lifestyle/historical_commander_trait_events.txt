@@ -482,3 +482,120 @@ historical_commander_trait.0004 = {
 		}
 	}
 }
+
+##################################################
+# The Blackwater War
+# 0005
+##################################################
+
+historical_commander_trait.0005 = {
+	type = character_event
+	title = historical_commander_trait.0005.t
+	desc = historical_commander_trait.0005.desc
+	theme = war
+	left_portrait = root
+	
+	trigger = {
+		NOR = {
+			has_character_flag = being_taught_commander_trait
+			has_character_flag = had_historical_commander_trait_event_0005
+		}
+		number_of_commander_traits < 3
+
+	}
+
+	weight_multiplier = {
+		base = 1
+		compare_modifier = {
+			factor = martial
+			multiplier = 0.1
+			max = 2
+		}
+		modifier = {
+			factor = 0.3
+			number_of_commander_traits > 0
+		}
+		modifier = {
+			factor = 0.3
+			number_of_commander_traits > 1
+		}
+		upweight_for_focus_modifier = { FOCUS = martial_strategy_focus }
+	}
+
+	immediate = {
+		add_character_flag = {
+			flag = had_historical_commander_trait_event_0005
+		}
+	}
+
+	option = {
+		name = historical_commander_trait.0005.a
+		trigger = { NOT = { has_trait = organizer } }
+		add_trait = organizer
+		stress_impact = {
+			impatient = minor_stress_impact_gain
+			compassionate = minor_stress_impact_gain
+			forgiving = minor_stress_impact_gain
+			stubborn = minor_stress_impact_gain
+			lazy = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_rationality = 1
+				ai_energy = 0.25
+			}
+		}
+	}
+
+	option = {
+		name = historical_commander_trait.0005.b
+		trigger = { NOT = { has_trait = logistician } }
+		add_trait = logistician
+		stress_impact = {
+			impatient = minor_stress_impact_gain
+			stubborn = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_rationality = 1.25
+				ai_boldness = -0.75
+			}
+		}
+	}
+
+	option = {
+		name = historical_commander_trait.0005.c
+		trigger = { NOT = { has_trait = forder } }
+		add_trait = forder
+		stress_impact = {
+			lazy = minor_stress_impact_gain
+			patient = minor_stress_impact_gain
+
+		}
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_energy = 0.5
+				ai_boldness = 1
+				ai_vengefulness = 0.5
+			}
+		}
+	}
+	
+	option = {
+		name = historical_commander_trait.0005.d
+		custom_tooltip = historical_commander_trait.reject.tt
+
+		ai_chance = {
+			base = 100
+			ai_value_modifier = {
+				ai_compassion = 1
+				ai_boldness = -0.5
+				ai_honor = -0.5
+				ai_vengefulness = -0.5
+			}
+		}
+	}
+}
