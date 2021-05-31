@@ -1,18 +1,14 @@
 e_hammerfell = {
 	3000.1.1 = { change_development_level = 3 }
-	
 	800.1.1 = { holder = yathe_100 }
 	853.1.1 = { holder = yathe_101 }
 	3300.1.1 = { holder = phyllocid_1000 }
 	3328.1.1 = { holder = phyllocid_1001 }
-	3360.1.1 = { holder = 0 }
-	
-	# Commented out for easier modding of other titles
-	# 3360.1.1 = { holder = hegathe_1000 }
-	# 3411.1.1 = { holder = hegathe_1001 }
-	# 3432.1.1 = { holder = hegathe_1002 }
-	# 3451.1.1 = { holder = hegathe_1003 }
-	# 3471.1.1 = { holder = 0 }
+	3360.1.1 = { holder = hegathe_1000 }
+	3411.1.1 = { holder = hegathe_1001 }
+	3432.1.1 = { holder = hegathe_1002 }
+	3451.1.1 = { holder = hegathe_1003 }
+	3471.1.1 = { holder = 0 }
 }
 
 #k_hegathe
@@ -65,7 +61,10 @@ c_mopti = {
 }
 
 c_balhar = {
-	3350.1.1 = { holder = curylen_1000 }
+	3350.1.1 = { 
+		holder = curylen_1000
+		liege = k_hegathe
+	}
 	3365.1.1 = { liege = d_nohotogrha }
 }
 
@@ -119,11 +118,16 @@ c_dragonhorn = {
 }
 
 #k_gilane
-d_gilane = {
+k_gilane = {
 	3350.1.1 = { 
 		holder = nizwa_1000
-		liege = k_hegathe
+		liege = e_hammerfell
 	}
+	3362.1.1 = { holder = nizwa_1001 }
+	3365.1.1 = { holder = 0 }
+}
+d_gilane = {
+	3350.1.1 = { holder = nizwa_1000 }
 	3362.1.1 = { holder = nizwa_1001 }
 	3365.1.1 = { liege = 0 }
 	3385.1.1 = { holder = nizwa_1002 }
@@ -280,10 +284,7 @@ c_ayasofya = {
 c_cybiades = {
 	3300.1.1 = { holder = nisewan_1000 }
 	3354.1.1 = { holder = nisewan_1002 }
-	3359.1.1 = { 
-		holder = cybiak_1000
-		government = pirate_government
-	}
+	3359.1.1 = { holder = cybiak_1000 }
 	3362.1.1 = { holder = katrica_1000 }
 	3367.1.1 = { holder = katrica_1001 }
 	3398.1.1 = { holder = katrica_1002 }
@@ -322,9 +323,10 @@ c_tigonus = {
 	3362.1.1 = { holder = tigonus_1001 }
 }
 c_kulati = {
-	3350.1.1 = { holder = tigonus_1000 }
-	3362.1.1 = { holder = tigonus_1001 }
-	3365.1.1 = { holder = bergama_1000 }
+	3350.1.1 = { 
+		holder = kulati_1000
+		liege = d_lainlyn
+	}
 }
 c_hoonding_watch = {
 	3005.1.1 = { change_development_level = 1 }
@@ -346,16 +348,19 @@ c_rhanano = {
 
 #k_rihad
 k_rihad = {
-	3310.1.1 = { holder = curetar_1000 }
+	3300.1.1 = { holder = curetar_999 }
+	3323.1.1 = { holder = curetar_1000 }
 	3361.1.1 = { holder = curetar_1003 }
 }
 d_rihad = {
-	3310.1.1 = { holder = curetar_1000 }
+	3300.1.1 = { holder = curetar_999 }
+	3323.1.1 = { holder = curetar_1000 }
 	3361.1.1 = { holder = curetar_1003 }
 }
 c_rihad = {
 	3005.1.1 = { change_development_level = 12 }
-	3310.1.1 = { holder = curetar_1000 }
+	3300.1.1 = { holder = curetar_999 }
+	3323.1.1 = { holder = curetar_1000 }
 	3361.1.1 = { holder = curetar_1003 }
 }
 d_chaseguard = {
@@ -565,7 +570,10 @@ c_hnas = {
 		liege = d_gilane
 	}
 	3365.1.1 = { liege = 0 }
-	3482.1.1 = { holder = hnas_1001 }
+	3382.1.1 = { holder = hnas_1001 }
+}
+c_ko_estaran = {
+	3350.1.1 = { holder = ko_estaran_1000 }
 }
 
 #k_taneth
@@ -696,6 +704,24 @@ c_hasamir = {
 c_elinhir = {
 	3005.1.1 = { change_development_level = 12 }
 }
+d_spellscar = {
+	3350.1.1 = { holder = orichalc_1000 }
+}
+c_spellscar = {
+	3350.1.1 = { 
+		holder = rubedite_1000
+		liege = d_spellscar
+	}
+}
+c_chiselshriek = {
+	3350.1.1 = { holder = orichalc_1000 }
+}
+c_belkarth = {
+	3350.1.1 = { holder = bahah_1000 }
+}
+c_reinhold = {
+	3350.1.1 = { holder = bahah_1000 }
+}
 
 #k_dragonstar
 d_dragonstar = {
@@ -722,23 +748,29 @@ c_skypinnacle = {
 	3350.1.1 = { holder = galatite_1000 }
 	3372.1.1 = { holder = galatite_1002 }
 }
-d_spellscar = {
-	3350.1.1 = { holder = orichalc_1000 }
-}
-c_spellscar = {
-	3350.1.1 = { 
-		holder = rubedite_1000
-		liege = d_spellscar
-	}
-}
-c_chiselshriek = {
-	3350.1.1 = { holder = orichalc_1000 }
-}
 c_illthag = {
 	3350.1.1 = { holder = malachite_1000 }
 }
 c_abdir = {
 	3350.1.1 = { holder = zircon_1000 }
+}
+c_sirhan = {
+	3350.1.1 = { holder = sirhan_1000 }
+}
+c_rahniza = {
+	3350.1.1 = { holder = rahniza_1000 }
+}
+c_thunder_falls = {
+	3350.1.1 = { holder = chad_1000 }
+}
+c_hel_ra = {
+	3350.1.1 = { holder = chad_1000 }
+}
+c_kardala = {
+	3350.1.1 = { holder = kardala_1000 }
+}
+c_lankara = {
+	3350.1.1 = { holder = kardala_1000 }
 }
 
 #k_sunforge
@@ -769,6 +801,9 @@ c_heldorn = {
 }
 c_anbar_pass = {
 	3350.1.1 = { holder = brenewon_1000 }
+}
+d_riverpoint = {
+	3005.1.1 = { change_development_level = 1 }
 }
 c_riverpoint = {
 	3350.1.1 = { holder = americk_1000 }
@@ -806,7 +841,10 @@ c_java = {
 
 #k_abecean
 d_stros_mkai = {
-	3350.1.1 = { holder = pharos_1000 }
+	3350.1.1 = { 
+		holder = pharos_1000
+		liege = k_hegathe
+	}
 }
 c_stros_mkai = {
 	3005.1.1 = { change_development_level = 6 }
@@ -814,13 +852,76 @@ c_stros_mkai = {
 }
 c_saintsport = {
 	3005.1.1 = { change_development_level = 4 }
-	3050.1.1 = { holder = saintsport_1000 }
+	3350.1.1 = { 
+		holder = saintsport_1000
+		liege = d_stros_mkai
+	}
 }
-d_riverpoint = {
-	3005.1.1 = { change_development_level = 1 }
+d_abecean = {
+	3300.1.1 = { holder = curetar_999 }
+	3323.1.1 = { 
+		holder = curetar_1000b
+		liege = k_hegathe
+	}
+	3358.1.1 = { holder = curetar_1000b1 }
+	3381.1.1 = { holder = curetar_1000b2 }
+}
+c_the_chain = {
+	3300.1.1 = { holder = curetar_999 }
+	3323.1.1 = { holder = curetar_1000b }
+	3358.1.1 = { holder = curetar_1000b1 }
+	3381.1.1 = { holder = curetar_1000b2 }
+}
+c_cespar = {
+	3350.1.1 = { 
+		holder = berbera_1000
+		liege = d_abecean
+	}
+}
+c_herne = {
+	3350.1.1 = { holder = kanesh_1000 }
 }
 
 #k_stonedale
+d_stonedale = {
+	3350.1.1 = { holder = ahvaz_1000 }
+}
+c_stonedale = {
+	3350.1.1 = { holder = ahvaz_1000 }
+}
+c_ahvaz = {
+	3350.1.1 = { holder = ahvaz_1000 }
+}
+c_hadaf = {
+	3350.1.1 = {
+		holder = hadaf_1000
+		liege = d_stonedale
+	}
+}
+c_agadem = {
+	3350.1.1 = {
+		holder = agadem_1000
+		liege = d_vulkneu
+	}
+}
+c_meroe = {
+	3350.1.1 = {
+		holder = agadem_1000
+		liege = d_vulkneu
+	}
+}
+c_lacryma = {
+	3350.1.1 = {
+		holder = lacryma_1000
+		liege = d_vulkneu
+	}
+}
+c_djenne = {
+	3350.1.1 = { 
+		holder = djenne_1000
+		liege = d_stonedale
+	}
+}
 c_helland = {
 	3005.1.1 = { change_development_level = 1 }
 	

@@ -1,0 +1,181 @@
+#Building Academy, using the Western Castle assets as placeholders.
+@holding_illustration_western = "gfx/interface/illustrations/holding_types/castle_western.dds"
+
+academy_01 = {
+		asset = { 
+			type = pdxmesh
+			names = {
+				"building_western_castle_01_mesh"
+				"building_western_castle_01_b_mesh" 
+			}	
+			illustration = @holding_illustration_western
+			soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	construction_time = slow_construction_time
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+}
+
+#The different academy types that can be built in the academy holding
+#They all use the outpost icon as a placeholder
+
+#Warriors Academy
+academywar_01 = {
+	can_construct_potential = {
+		province = {
+			NOT = {
+				has_building = academyscho_01
+				has_building = academywar_01
+				has_building = academymag_01
+				has_building = academydip_01
+				has_building = academybard_01
+			}
+		}
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 1
+		knight_effectiveness_mult = 0.02
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.05
+				garrison_size = 0.025
+				hostile_raid_time = 0.1
+	}
+	#next_building = 
+}
+
+#Scholars Academy
+
+academyscho_01 = {
+	can_construct_potential = {
+		province = {
+			NOT = {
+				has_building = academyscho_01
+				has_building = academywar_01
+				has_building = academymag_01
+				has_building = academydip_01
+				has_building = academybard_01
+			}
+		}
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+	province_modifier = {
+		tax_mult = 0.01
+	}
+	county_modifier = { 
+		development_growth_factor = 0.01
+	}
+	#next_building = 
+}
+
+#Mage Academy
+
+academymag_01 = {
+	can_construct_potential = {
+		province = {
+			NOT = {
+				has_building = academyscho_01
+				has_building = academywar_01
+				has_building = academymag_01
+				has_building = academydip_01
+				has_building = academybard_01
+			}
+		}
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		men_at_arms_maintenance = -0.05
+		siege_weapon_siege_value_mult = 0.05
+	}
+	#next_building = 
+}
+
+#Diplomatic Academy
+#I dont know what bonuses to add to this
+
+academydip_01 = {
+	can_construct_potential = {
+		province = {
+			NOT = {
+				has_building = academyscho_01
+				has_building = academywar_01
+				has_building = academymag_01
+				has_building = academydip_01
+				has_building = academybard_01
+			}
+		}
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		diplomacy_per_prestige_level = 1 #it may be too much for level 1, specially if it stacks with other buildings like this one
+		owned_personal_scheme_success_chance_add = 5
+		
+	}
+	#next_building =
+}
+
+#Bard Academy
+academybard_01 = {
+	can_construct_potential = {
+		province = {
+			NOT = {
+				has_building = academyscho_01
+				has_building = academywar_01
+				has_building = academymag_01
+				has_building = academydip_01
+				has_building = academybard_01
+			}
+		}
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_1
+		tax_mult = 0.05
+	}	
+	county_modifier = {
+		county_opinon_add = 5
+	}
+
