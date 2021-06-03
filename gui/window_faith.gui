@@ -1306,19 +1306,13 @@ window = {
 									vbox = {
 										layoutpolicy_horizontal = expanding
 
-										state = {
-											name = _mouse_hierarchy_enter
-											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_enter_nc' ))]"
-										}
+
+										onmousehierarchyenter = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_enter_nc' ))]"
+										onmousehierarchyleave = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_leave_nc' ))]"
 
 										state = {
 											name = "mouse_enter_nc"
 											on_start = "[GetVariableSystem.Set('patron_trait', Trait.GetKey)]"
-										}
-
-										state = {
-											name = _mouse_hierarchy_leave
-											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_leave_nc' ))]"
 										}
 
 										state = {
