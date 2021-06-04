@@ -212,7 +212,7 @@ ek_prison.1002 = {
 		animation = schadenfreude
 	}
 	
-	trigger {
+	trigger = {
 		scope:imprisoner.culture = { has_innovation = innovation_blood_price }
 	}
 	
@@ -406,7 +406,7 @@ ek_prison.1002 = {
 				ai_rationality = 0.5 # Would rather not get hurt over nothing
 			}
 			modifier = { # Taking the blood price will kill you
-				modifier = 2
+				factor = 2
 				has_character_flag = blood_price_death
 			}
 			modifier = { # Taking the blood price will hurt a lot
@@ -624,12 +624,12 @@ ek_prison.1003 = {
 					
 					custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
 					
-					increase_wounds_effect = { REASON = blood_price }
+					increase_wounds_effect = { REASON = execution_blood_price }
 				}
 				else = { # Execution reason? +2 Wound
 					custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
 					
-					increase_wounds_two_times_effect = { REASON = blood_price }
+					increase_wounds_two_times_effect = { REASON = execution_blood_price }
 				}
 				
 				consume_all_criminal_reasons_effect = {
