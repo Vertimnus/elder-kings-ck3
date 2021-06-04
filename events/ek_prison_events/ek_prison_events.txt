@@ -406,19 +406,19 @@ ek_prison.1002 = {
 				ai_rationality = 0.5 # Would rather not get hurt over nothing
 			}
 			modifier = { # Taking the blood price will kill you
-				fimprisoner = 2
+				modifier = 2
 				has_character_flag = blood_price_death
 			}
 			modifier = { # Taking the blood price will hurt a lot
-				fimprisoner = 2
+				factor = 2
 				has_character_flag = blood_price_wounded_3
 			}
 			modifier = { # Taking the blood price will hurt
-				fimprisoner = 2
+				factor = 2
 				has_character_flag = blood_price_wounded_2
 			}
 			modifier = { # Taking the blood price will hurt a bit
-				fimprisoner = 2
+				factor = 2
 				has_character_flag = blood_price_wounded_1
 			}
 		}
@@ -588,7 +588,7 @@ ek_prison.1003 = {
 			}
 			# More likely to give them what they want
 			modifier = {
-				fimprisoner = 2
+				factor = 2
 				scope:prisoner = { has_character_flag = blood_price_wanted_pay_gold }
 			}
 		}
@@ -654,7 +654,7 @@ ek_prison.1003 = {
 			base = 50
 			# I want to hurt you
 			modifier = {
-				fimprisoner = 2
+				factor = 2
 				OR = {
 					has_trait = wrathful
 					has_trait = callous
@@ -664,7 +664,7 @@ ek_prison.1003 = {
 			}
 			# I hate you and would love to see you suffer
 			modifier = {
-				fimprisoner = 2
+				factor = 2
 				OR = {
 					has_relation_rival = scope:prisoner
 					has_relation_nemesis = scope:prisoner
@@ -672,7 +672,7 @@ ek_prison.1003 = {
 			}
 			# More likely to give them what they want
 			modifier = {
-				fimprisoner = 2
+				factor = 2
 				scope:prisoner = { has_character_flag = blood_price_wanted_pay_blood }
 			}
 		}
@@ -724,7 +724,7 @@ ek_prison.1003 = {
 			base = 10
 			# That would kill you
 			modifier = {
-				fimprisoner = 2
+				factor = 2
 				scope:prisoner = { has_character_flag = blood_price_death }
 			}
 		}
