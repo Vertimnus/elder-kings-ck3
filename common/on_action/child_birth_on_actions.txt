@@ -175,9 +175,9 @@ on_birth_child = {
 		### EK EDIT: Added the effect of the Hegemon legacy line
 		if = {
 			limit = {
-				hegemon_legacy_5
 				exists = scope:child.dynasty
 				scope:child.dynasty.dynast = { is_alive = yes }
+				scope:child.dynasty = { has_dynasty_perk = hegemon_legacy_5 }
 				NOT = {
 					scope:child = scope:child.dynasty.dynast # If the dynasty dies out, a posthumous child can revive it
 				}
