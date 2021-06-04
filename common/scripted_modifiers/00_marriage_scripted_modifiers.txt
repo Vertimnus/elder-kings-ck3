@@ -1494,6 +1494,41 @@ marriage_ai_accept_modifier = {
 		desc = MARRIAGE_SPOUSE_COUNCILLOR_BOOST_CHILD
 	}
 	
+	#################
+	# EK - RACES    #
+	#################
+	
+	modifier = {
+		add = -80
+		OR = {
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_khajiit }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_khajiit } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_khajiit } }
+				scope:secondary_recipient = { has_character_flag = race_khajiit }
+			}
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_argonian }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_argonian } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_argonian } }
+				scope:secondary_recipient = { has_character_flag = race_argonian }
+			}
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_goblinken }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_goblinken } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_goblinken } }
+				scope:secondary_recipient = { has_character_flag = race_goblinken }
+			}
+		}
+		desc = MARRIAGE_NO_OFFSPRING_REASON
+	}
+	
 	###########################
 	# EK - PRESERVING DYNASTY #
 	###########################

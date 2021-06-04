@@ -102,21 +102,21 @@ could_marry_character_trigger = {
 	NOT = {
 		scope:can_marry_check = { is_spouse_of = $CHARACTER$ }
 	}
-	#EK EDIT - No babies, no marriage (inter-species)
-	NOR = {
-		AND = {
-			scope:can_marry_check = { has_character_flag = race_khajiit }
-			$CHARACTER$ = { NOT = { has_character_flag = race_khajiit } }
-		}
-		AND = {
-			scope:can_marry_check = { has_character_flag = race_argonian }
-			$CHARACTER$ = { NOT = { has_character_flag = race_argonian } }
-		}
-		AND = {
-			scope:can_marry_check = { has_character_flag = race_goblinken }
-			$CHARACTER$ = { NOT = { has_character_flag = race_goblinken } }
-		}
-	}
+	#EK EDIT - No babies, no marriage (moved to scripted marriage modifiers)
+	# NOR = {
+		# AND = {
+			# scope:can_marry_check = { has_character_flag = race_khajiit }
+			# $CHARACTER$ = { NOT = { has_character_flag = race_khajiit } }
+		# }
+		# AND = {
+			# scope:can_marry_check = { has_character_flag = race_argonian }
+			# $CHARACTER$ = { NOT = { has_character_flag = race_argonian } }
+		# }
+		# AND = {
+			# scope:can_marry_check = { has_character_flag = race_goblinken }
+			# $CHARACTER$ = { NOT = { has_character_flag = race_goblinken } }
+		# }
+	# }
 }
 
 #Two characters are able to marry right now
