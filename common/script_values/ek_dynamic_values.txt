@@ -96,3 +96,22 @@ council_of_the_eight_leader_fervor_increase_value = {
 		}
 	}
 }
+
+# Effect of the hegemon_2 perk
+hegemon_2_1_scale = {
+	value = 0
+	if = {
+		limit = {
+			root = {
+				exists = dynasty
+				dynasty = liege.dynasty
+				dynasty = { has_dynasty_perk = hegemon_legacy_2 }
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = { root = { is_powerful_vassal = yes } }
+		multiply = 2
+	}
+}

@@ -1,4 +1,5 @@
 ﻿### EK EDIT: Removed references to vanilla titles
+### EK EDIT: Added the effect of Dominion Builder (pressing claim for members of your dynasty costs the same as if it was for yourself)
 
 claim_cb = {
 	group = claim
@@ -212,8 +213,18 @@ claim_cb = {
 		prestige = {
 			value = 0
 			if = {
+				### EK EDIT: Effect of Dominion Builder
 				# Prestige cost can vary significantly for personal claims, based on the situation(s) the claimant/defender are in.
-				limit = { scope:claimant = scope:attacker }
+				limit = {
+					OR = {
+						scope:claimant = scope:attacker
+						
+						AND = {
+							scope:claimant.dynasty = scope:attacker.dynasty
+							scope:claimant.dynasty = { has_dynasty_perk = hegemon_legacy_1 }
+						}
+					}
+				}
 
 				add = {
 					every_in_list = {
