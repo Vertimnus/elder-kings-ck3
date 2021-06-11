@@ -427,7 +427,7 @@ PixelShader =
 				#if defined( APPLY_WINTER )
 					Diffuse.rgb = ApplyDynamicMasksDiffuse( Diffuse.rgb, Normal, ColorMapCoords );
 				#endif
-
+				
 				SMaterialProperties MaterialProps = GetMaterialProperties( Diffuse.rgb, Normal, Properties.a, Properties.g, Properties.b );
 				#if defined( LOW_SPEC_SHADERS )
 					SLightingProperties LightingProps = GetSunLightingProperties( Input.WorldSpacePos, 1.0 );
@@ -655,6 +655,7 @@ Effect standard_alpha_to_coverage_winterShadow
 }
 
 
+
 Effect snap_to_terrain
 {
 	VertexShader = "VS_standard"
@@ -748,7 +749,6 @@ Effect standardShadow_mapobject
 {
 	VertexShader = "VS_jomini_mapobject_shadow"
 	PixelShader = "PS_jomini_mapobject_shadow"
-	RasterizerState = ShadowRasterizerState
 }
 
 Effect standard_alpha_to_coverage_mapobject
