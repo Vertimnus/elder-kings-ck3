@@ -152,7 +152,7 @@ spell_cleanup = {
     clear_variable_list = spell_list
     remove_variable = spell_county
     clear_variable_list = spell_counties
-    remove_variable = spell_province
+    # remove_variable = spell_province
     # remove_variable = spell_is_hostile
     # remove_variable = spell_is_province
 }
@@ -237,47 +237,47 @@ spell_raise_dead_castee_effect = {
 
 # global spell lists up to 45 is fine, after some need to be skipped maybe if wasteland is invalid
 
-add_spell = {
-    PREV = { add_to_variable_list = { name = spell_list target = PREV } }
-    set_variable = { name = spell value = flag:$NAME$ }
-}
+# add_spell = {
+#     PREV = { add_to_variable_list = { name = spell_list target = PREV } }
+#     set_variable = { name = spell value = flag:$NAME$ }
+# }
 
 init_alteration = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = oakflesh } }
-    province:2 = { add_spell = { NAME = wards } }
+    add_to_variable_list = { name = spell_list target = flag:oakflesh }
+    add_to_variable_list = { name = spell_list target = flag:wards }
 }
 init_conjuration = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = summon_scamp } }
+    add_to_variable_list = { name = spell_list target = flag:summon_scamp }
 }
 init_destruction = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = flames } }
-    province:2 = { add_spell = { NAME = frostbite } }
-    province:3 = { add_spell = { NAME = sparks } }
-    province:4 = { add_spell = { NAME = firestorm } }
+    add_to_variable_list = { name = spell_list target = flag:flames }
+    add_to_variable_list = { name = spell_list target = flag:frostbite }
+    add_to_variable_list = { name = spell_list target = flag:sparks }
+    add_to_variable_list = { name = spell_list target = flag:firestorm }
 }
 init_illusion = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = frenzy } }
+    add_to_variable_list = { name = spell_list target = flag:frenzy }
 }
 init_restoration = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = heal } }
+    add_to_variable_list = { name = spell_list target = flag:heal }
 }
 init_necromancy = {
     clear_variable_list = spell_list
-    province:1 = { add_spell = { NAME = raise_dead } }
+    add_to_variable_list = { name = spell_list target = flag:raise_dead }
 }
 
-spell_list_school = {
-    clear_variable_list = spell_list
-    every_in_global_list = { # ordered, based on spell level
-        variable = spell_list_$SCHOOL$
-        PREV = { add_to_variable_list = { name = spell_list target = PREV } }
-    }
-}
+# spell_list_school = {
+#     clear_variable_list = spell_list
+#     every_in_global_list = { # ordered, based on spell level
+#         variable = spell_list_$SCHOOL$
+#         PREV = { add_to_variable_list = { name = spell_list target = PREV } }
+#     }
+# }
 
 school_spell_master_effect = {
     switch = {
@@ -285,7 +285,7 @@ school_spell_master_effect = {
 
         flag:alteration = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:oakflesh = { $EFFECT$ = { SCHOOL = alteration SPELL = oakflesh } }
                 flag:wards = { $EFFECT$ = { SCHOOL = alteration SPELL = wards } }
             }
@@ -293,14 +293,14 @@ school_spell_master_effect = {
 
         flag:conjuration = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:summon_scamp = { $EFFECT$ = { SCHOOL = conjuration SPELL = summon_scamp } }
             }
         }
 
         flag:destruction = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:flames = { $EFFECT$ = { SCHOOL = destruction SPELL = flames } }
                 flag:frostbite = { $EFFECT$ = { SCHOOL = destruction SPELL = frostbite } }
                 flag:sparks = { $EFFECT$ = { SCHOOL = destruction SPELL = sparks } }
@@ -310,21 +310,21 @@ school_spell_master_effect = {
 
         flag:illusion = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:frenzy = { $EFFECT$ = { SCHOOL = illusion SPELL = frenzy } }
             }
         }
 
         flag:restoration = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:heal = { $EFFECT$ = { SCHOOL = restoration SPELL = heal } }
             }
         }
 
         flag:necromancy = {
             switch = {
-                trigger = scope:spell.var:spell
+                trigger = scope:spell
                 flag:raise_dead = { $EFFECT$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
             }
         }

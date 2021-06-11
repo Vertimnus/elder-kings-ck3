@@ -108,6 +108,9 @@ attrebus_potentate_cb = {
 		# truce
 		add_truce_attacker_victory_effect = yes
 		
+		# FP1: note the victory for future memorialisation via stele (if applicable).
+		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
+		
 		# Event chain, Attrebus won, what to do with that?
 		hidden_effect = {
 			scope:attacker = {
@@ -202,7 +205,6 @@ attrebus_potentate_cb = {
 	attacker_wargoal_percentage = 0.8
 	
 	max_ai_diplo_distance_to_title = 1000
-	min_ai_score = 100
 }
 
 crown_forebear_civil_war_cb = {
@@ -446,7 +448,6 @@ crown_forebear_civil_war_cb = {
 			add_dread = medium_dread_gain
 			# Prestige for Defender
 			add_prestige = medium_prestige_value
-			add_achievement_flag = { FLAG = achievement_know_your_place_flag }
 		}
 
 		on_lost_faction_revolt_war = yes
@@ -478,7 +479,6 @@ crown_forebear_civil_war_cb = {
 	max_defender_score_from_battles = 50
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
 }
 
 ### EK TODO: Find a way to use it
@@ -527,6 +527,22 @@ fp1_scandi_adventurer_conquest = {
 
 	on_declaration = {
 		on_declared_war = yes
+
+		# If scope:defender is a player or a king, give them a few choices.
+		scope:defender = {
+			if = {
+				limit = {
+					OR = {
+						is_ai = no
+						highest_held_title_tier >= tier_kingdom
+					}
+				}
+				trigger_event = {
+					id = fp1_trade_events.1131
+					days = 30
+				}
+			}
+		}
 	}
 
 	on_victory_desc = {
@@ -554,19 +570,13 @@ fp1_scandi_adventurer_conquest = {
 			every_in_de_jure_hierarchy = {
 				continue = {
 					OR = {
+						NOT = {	exists = holder }
 						NOT = {
-							exists = holder
-						}
-						NOT = {
-							holder = {
-								target_is_liege_or_above = scope:defender
-							}
+							holder = { target_is_liege_or_above = scope:defender }
 						}
 						AND = {
 							scope:attacker.faith = {
-								faith_hostility_level_comparison = {
-									prev.holder.faith <= scope:defender.faith
-								}
+								faith_hostility_level_comparison = { prev.holder.faith <= scope:defender.faith }
 							}
 							holder = {
 								OR = {
@@ -579,7 +589,7 @@ fp1_scandi_adventurer_conquest = {
 					tier > tier_county
 				}
 				limit = {
-					tier = tier_county
+					tier <= tier_duchy
 					exists = holder
 					holder = {
 						OR = {
@@ -659,6 +669,8 @@ fp1_scandi_adventurer_conquest = {
 		#Clean-up adventurer things.
 		scope:attacker = { clean_scandinavian_adventurer_effect = yes }
 
+		# FP1: note the victory for future memorialisation via stele (if applicable).
+		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
 	}
 
 	on_white_peace_desc = {
@@ -700,6 +712,9 @@ fp1_scandi_adventurer_conquest = {
 
 		#Clean-up adventurer things.
 		scope:attacker = { clean_scandinavian_adventurer_effect = yes }
+
+		# Since they failed to win, take away their efficacy loan.
+		scope:attacker = { remove_short_term_gold = scandinavian_adventurer_efficacy_loan_value }
 	}
 
 	on_defeat_desc = {
@@ -765,8 +780,57 @@ fp1_scandi_adventurer_conquest = {
 
 		on_lost_aggression_war_discontent_loss = yes
 
+		# Give scope:defender some goodies.
+		scope:defender = {
+			# Including a break from the fighting.
+			fp1_add_realm_size_appropriate_sa_reprieve_effect = yes
+			# And a tally towards a nickname.
+			## Which starts...
+			if = {
+				limit = {
+					NOT = { has_variable = fp1_has_beaten_sa_progress }
+				}
+				set_variable = {
+					name = fp1_has_beaten_sa_progress
+					value = 1
+				}
+			}
+			## ... and grows...
+			else_if = {
+				limit = {
+					has_variable = fp1_has_beaten_sa_progress
+					var:fp1_has_beaten_sa_progress <= 9
+				}
+				change_variable = {
+					name = fp1_has_beaten_sa_progress
+					add = 1
+				}
+			}
+			## ... towards a pay-off.
+			else_if = {
+				limit = {
+					OR = {
+						has_bad_nickname = yes
+						has_any_nickname = no
+					}
+				}
+				hidden_effect = {
+					random_list = {
+						20 = { give_nickname = nick_the_bane_of_danes }
+						20 = { give_nickname = nick_the_culture_wall }
+						20 = { give_nickname = nick_nord_foe }
+						20 = { give_nickname = nick_the_scourge_of_the_northerners }
+						20 = { give_nickname = nick_the_burner_of_ash }
+					}
+				}
+			}
+		}
+
 		#Clean-up adventurer things.
 		scope:attacker = { clean_scandinavian_adventurer_effect = yes }
+
+		# Since they lost, take away their efficacy loan.
+		scope:attacker = { remove_short_term_gold = scandinavian_adventurer_efficacy_loan_value }
 	}
 
 	transfer_behavior = transfer
@@ -786,6 +850,4 @@ fp1_scandi_adventurer_conquest = {
 	use_de_jure_wargoal_only = yes
 
 	attacker_wargoal_percentage = 0.8
-
-	min_ai_score = 100
 }

@@ -7,7 +7,6 @@ window = {
 	datacontext = "[GetVariableSystem]"
 	datacontext = "[CharacterWindow.GetCharacter]"
 	movable = no
-	allow_outside = yes
 	layer = middle
 
 	using = Window_Size_Sidebar
@@ -164,12 +163,12 @@ window = {
 
 				widget = {
 					parentanchor = bottom|hcenter
-					size = { 145 40 }
+					size = { 250 40 }
 
 					flowcontainer = {
 						parentanchor = bottom|hcenter
 						widgetanchor = bottom|left
-						position = { -20 -3 }
+						position = { -25 -3 }
 						ignoreinvisible = yes
 
 						text_label_center = {
@@ -1168,8 +1167,6 @@ window = {
 									}
 								}
 
-								#tooltip = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude').GetValueBreakdown]"
-
 								spacing = -3
 
 								using = Animation_Character_Window_Refresh
@@ -1182,7 +1179,7 @@ window = {
 
 								text_single = {
 									name = "aptitude_value"
-									text = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]"
+									text = "[CharacterWindow.GetCharacter.MakeScope.ScriptValue('aptitude')|0]"
 									align = nobaseline
 								}
 							}

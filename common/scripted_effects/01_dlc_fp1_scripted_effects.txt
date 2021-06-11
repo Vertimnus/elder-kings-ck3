@@ -1,8 +1,9 @@
-﻿##################################################
+﻿### EK EDIT: Disabled effects referencing vanilla content
+
+##################################################
 # Decisions
 ##################################################
 
-### EK EDIT: Disabled these two effects
 # secure_high_kingdom_north_sea_scripted_effect = {
 	# scope:founder = {
 		# #Standard effects.
@@ -92,7 +93,7 @@
 				# faith = { has_doctrine_parameter = unreformed }
 			# }
 			# #First, set a flag for achievements.
-			# add_character_flag = canute_the_greater_achievement_flag
+			# add_achievement_flag_effect = { FLAG = canute_the_greater_achievement_flag }
 			# #You become feudal.
 			# convert_whole_realm_to_feudalism_effect = yes
 			# #To keep you stable, we give you a nice permanent modifier.
@@ -172,16 +173,28 @@
 # }
 
 # found_capital_of_rus_scripted_effect = {
+	# #Reward fame to compensate for reduced development gain.
+	# add_prestige_experience = major_prestige_gain
 	# scope:new_rus_capital = {
-		# #Boost local development pretty heavily, tiering according to how much development the capital already has.
+		# #Boost local development a few levels; majority of development gain is handled in the modifiers now.
 		# if = {
-			# limit = { development_level >= 20 }
-			# change_development_level = 5
+			# limit = { development_level < 5 }
+			# change_development_level = {
+				# value = 5
+				# subtract = scope:new_rus_capital.development_level
+			# }
 		# }
 		# else_if = {
-			# limit = { development_level < 20 }
+			# limit = { development_level < 8 }
 			# change_development_level = {
-				# value = 25
+				# value = 8
+				# subtract = scope:new_rus_capital.development_level
+			# }
+		# }
+		# else_if = {
+			# limit = { development_level < 12 }
+			# change_development_level = {
+				# value = 12
 				# subtract = scope:new_rus_capital.development_level
 			# }
 		# }
@@ -250,7 +263,6 @@ fp1_apply_generic_stele_bonuses_effect = {
 	}
 }
 
-### EK EDIT: Decision disabled
 # elevate_mann_and_the_isles_scripted_effect = {
 	# # You gain the Legacy of Piracy dynasty modifier.
 	# dynasty = {
@@ -382,7 +394,6 @@ fp1_remove_stele_effect = {
 	}
 }
 
-### EK EDIT: Jomsvikings disabled
 # forge_the_jomsvikings_scripted_effect = {
 	# # Display simplified results.
 	# custom_tooltip = create_holy_order_decision_effect_message
@@ -505,7 +516,7 @@ fp1_remove_stele_effect = {
 		# value = scope:leader.primary_title
 	# }
 	# # Achievement flag.
-	# add_achievement_flag = { FLAG = achievement_non_nobis_domine_flag }
+	# add_achievement_flag_effect = { FLAG = achievement_non_nobis_domine_flag }
 	# # Some minor misc effects.
 	# create_holy_order_effect = yes
 	# scope:leader.primary_title = { set_coa = ho_jomsvikings }
@@ -610,9 +621,9 @@ fp1_tbc_death_effect = {
 		limit = { $TBC_VICTOR$.primary_title.tier < $TBC_LOSER$.primary_title.tier }
 		$TBC_VICTOR$ = { add_prestige = minor_prestige_gain }
 	}
-	$TBC_VICTOR$ = {
+	$TBC_LOSER$ = {
 		death = {
-			killer = $TBC_LOSER$
+			killer = $TBC_VICTOR$
 			death_reason = death_duel
 		}
 	}
@@ -674,6 +685,41 @@ clean_scandinavian_adventurer_effect = {
 			scope:attacker = { destroy_title = scope:destroyable_title }
 		}
 		remove_character_modifier = scandinavian_adventurer_fp1_modifier
+	}
+}
+
+fp1_add_realm_size_appropriate_sa_reprieve_effect = {
+	# Depending on the sub realm size of $VICTIM$, we give them a scaling amount of time not to be hit by SA attacks.
+	## The smallest realms get a long reprieve.
+	if = {
+		limit = { sub_realm_size <= tiny_realm_size }
+		add_character_modifier = {
+			modifier = fp1_reprieve_from_sa_modifier
+			years = 20
+		}
+	}
+	## Then a decent reprieve.
+	else_if = {
+		limit = { sub_realm_size <= minor_realm_size }
+		add_character_modifier = {
+			modifier = fp1_reprieve_from_sa_modifier
+			years = 15
+		}
+	}
+	## Then a short reprieve.
+	else_if = {
+		limit = { sub_realm_size <= medium_realm_size }
+		add_character_modifier = {
+			modifier = fp1_reprieve_from_sa_modifier
+			years = 10
+		}
+	}
+	## Then you're clearly too big and juicy a target for much reprieve at all.
+	else = {
+		add_character_modifier = {
+			modifier = fp1_reprieve_from_sa_modifier
+			years = 5
+		}
 	}
 }
 

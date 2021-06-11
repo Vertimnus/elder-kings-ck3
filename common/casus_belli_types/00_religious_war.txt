@@ -115,6 +115,17 @@
 	on_invalidated = {
 		
 	}
+	
+	ai_score_mult = {
+		value = 1
+		# Holy War are limited to connected neighbour to limit big empire expansions over weak realms.
+		add = {
+			if = {
+				limit = {  religious_war_vassals_constraints = yes }
+				add = -1000
+			}
+		}
+	}
 
 	cost = {
 		piety = {
@@ -223,7 +234,7 @@
 					desc = "CB_ATTACKER_VASSAL_CONTRACT"
 				}
 			}
-			
+
 			# Someone in the target region sacrificed your HoF.
 			if = {
 				limit = {
@@ -385,6 +396,17 @@
 
 		scope:attacker = {
 			add_piety = religious_cb_piety_white_peace
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 	}
 
@@ -440,9 +462,20 @@
 			}
 
 			scope:attacker = {
-				pay_short_term_income = {
-					years = 2
-					target = scope:defender
+				if = {
+					limit = {
+						monthly_character_income > 0
+					}
+					pay_short_term_income = {
+						years = 2
+						target = scope:defender
+					}
+				}
+				else = {
+					pay_short_term_gold = {
+						target = scope:defender
+						gold = medium_gold_value
+					}
 				}
 			}
 		}
@@ -476,7 +509,6 @@
 	attacker_wargoal_percentage = 0.8
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
 }
 
 religious_war = {
@@ -704,7 +736,7 @@ religious_war = {
 					desc = "CB_ATTACKER_VASSAL_CONTRACT"
 				}
 			}
-			
+
 			# Someone in the target region sacrificed your HoF.
 			if = {
 				limit = {
@@ -844,6 +876,7 @@ religious_war = {
 	}
 
 	on_white_peace = {
+		scope:attacker = { show_pow_release_message_effect = yes }
 
 		# Prestige for the attacker's war allies
 		add_from_contribution_attackers = {
@@ -866,6 +899,17 @@ religious_war = {
 
 		scope:attacker = {
 			add_piety = religious_cb_piety_white_peace
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 	}
 
@@ -911,9 +955,20 @@ religious_war = {
 			}
 
 			scope:attacker = {
-				pay_short_term_income = {
-					years = 3
-					target = scope:defender
+				if = {
+					limit = {
+						monthly_character_income > 0
+					}
+					pay_short_term_income = {
+						years = 3
+						target = scope:defender
+					}
+				}
+				else = {
+					pay_short_term_gold = {
+						target = scope:defender
+						gold = medium_gold_value
+					}
 				}
 			}
 		}
@@ -958,7 +1013,17 @@ religious_war = {
 	attacker_wargoal_percentage = 0.8
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
+
+	ai_score_mult = {
+		value = 1
+		# Holy War are limited to connected neighbour to limit big empire expansions over weak realms.
+		add = {
+			if = {
+				limit = {  religious_war_vassals_constraints = yes }
+				add = -1000
+			}
+		}
+	}
 }
 
 major_religious_war = {
@@ -1190,7 +1255,7 @@ major_religious_war = {
 					desc = "CB_ATTACKER_VASSAL_CONTRACT"
 				}
 			}
-			
+
 			# Someone in the target region sacrificed your HoF.
 			if = {
 				limit = {
@@ -1353,6 +1418,17 @@ major_religious_war = {
 
 		scope:attacker = {
 			add_piety = religious_cb_piety_white_peace
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 
 		# Truce
@@ -1401,9 +1477,20 @@ major_religious_war = {
 			}
 
 			scope:attacker = {
-				pay_short_term_income = {
-					years = 4
-					target = scope:defender
+				if = {
+					limit = {
+						monthly_character_income > 0
+					}
+					pay_short_term_income = {
+						years = 4
+						target = scope:defender
+					}
+				}
+				else = {
+					pay_short_term_gold = {
+						target = scope:defender
+						gold = medium_gold_value
+					}
 				}
 			}
 		}
@@ -1448,7 +1535,17 @@ major_religious_war = {
 	attacker_wargoal_percentage = 0.8
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
+
+	ai_score_mult = {
+		value = 1
+		# Holy War are limited to connected neighbour to limit big empire expansions over weak realms.
+		add = {
+			if = {
+				limit = {  religious_war_vassals_constraints = yes }
+				add = -1000
+			}
+		}
+	}
 }
 
 excommunication_war = {
@@ -1548,6 +1645,17 @@ excommunication_war = {
 		scope:attacker = { show_pow_release_message_effect = yes }
 		scope:attacker = {
 			add_piety = excommunication_cb_piety_white_peace
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 
 		# Truce
@@ -1668,7 +1776,17 @@ excommunication_war = {
 	max_defender_score_from_battles = 100
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
+
+	ai_score_mult = {
+		value = 1
+		# Holy War are limited to connected neighbour to limit big empire expansions over weak realms.
+		add = {
+			if = {
+				limit = {  religious_war_vassals_constraints = yes }
+				add = -1000
+			}
+		}
+	}
 }
 
 flowery_war_cb = {
@@ -1845,7 +1963,7 @@ flowery_war_cb = {
 	}
 
 	on_victory = {
-				scope:attacker = { show_pow_release_message_effect = yes }
+		scope:attacker = { show_pow_release_message_effect = yes }
 		scope:attacker = {
 			if = {	#If the attacker enjoys human sacrifice, then this was sacred.
 				limit = {
@@ -2285,7 +2403,13 @@ flowery_war_cb = {
 	}
 
 	on_white_peace = {
-		scope:attacker = { show_pow_release_message_effect = yes }
+		scope:attacker = { 
+			show_pow_release_message_effect = yes
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
 		scope:attacker = {	#Piety loss for the attacker if appropriate, otherwise prestige loss.
 			if = {
 				limit = {
@@ -2319,6 +2443,13 @@ flowery_war_cb = {
 			}
 			opinion = {
 				modifier = contributed_in_war
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
 			}
 		}
 
@@ -2801,7 +2932,17 @@ flowery_war_cb = {
 	max_defender_score_from_battles = 200
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
+
+	ai_score_mult = {
+		value = 1
+		# Holy War are limited to connected neighbour to limit big empire expansions over weak realms.
+		add = {
+			if = {
+				limit = {  religious_war_vassals_constraints = yes }
+				add = -1000
+			}
+		}
+	}
 }
 
 undirected_great_holy_war = {
@@ -2906,8 +3047,8 @@ undirected_great_holy_war = {
 				fraction = ghw_war_start_handout_percentage
 			}
 		}
-		
-		# First of the Crusader Kings achievement tracking.
+
+		# # First of the Crusader Kings achievement tracking.
 		# if = {
 			# limit = {
 				# scope:attacker.faith = faith:catholic
@@ -2917,7 +3058,7 @@ undirected_great_holy_war = {
 			# scope:attacker.faith.great_holy_war = {
 				# every_pledged_attacker = {
 					# limit = { fp1_achievement_culture_norse_trigger = yes }
-					# add_character_flag = first_of_the_crusader_kings_achievement_flag
+					# add_achievement_flag_effect = { FLAG = first_of_the_crusader_kings_achievement_flag }
 				# }
 			# }
 			# # Mark the first crusade as having happened.
@@ -3005,7 +3146,7 @@ undirected_great_holy_war = {
 					is_defender = scope:defender
 				}
 				every_war_attacker = {
-					add_achievement_flag = { FLAG = achievement_for_the_faith_flag }
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
 				}
 			}
 		}
@@ -3378,6 +3519,7 @@ undirected_great_holy_war = {
 	}
 
 	on_defeat = {
+		scope:attacker = { show_pow_release_message_effect = yes }
 		scope:attacker.faith.great_holy_war = {
 			divide_war_chest = {
 				defenders = yes
@@ -3413,7 +3555,7 @@ undirected_great_holy_war = {
 					is_defender = scope:defender
 				}
 				every_war_defender = {
-					add_achievement_flag = { FLAG = achievement_for_the_faith_flag }
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
 				}
 			}
 		}
@@ -3672,7 +3814,7 @@ directed_great_holy_war = {
 					is_defender = scope:defender
 				}
 				every_war_attacker = {
-					add_achievement_flag = { FLAG = achievement_for_the_faith_flag }
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
 				}
 			}
 		}
@@ -3842,7 +3984,7 @@ directed_great_holy_war = {
 					is_defender = scope:defender
 				}
 				every_war_defender = {
-					add_achievement_flag = { FLAG = achievement_for_the_faith_flag }
+					add_achievement_flag_effect = { FLAG = achievement_for_the_faith_flag }
 				}
 			}
 		}
@@ -3885,7 +4027,6 @@ directed_great_holy_war = {
 	on_invalidated_desc = msg_invalidate_war_title
 
 	max_ai_diplo_distance_to_title = 750
-	min_ai_score = 100
 }
 
 ### EK EDIT: New cb - Cleanse abomination
@@ -4302,6 +4443,17 @@ cleanse_abominations = {
 
 		scope:attacker = {
 			add_piety = religious_cb_piety_white_peace
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 	}
 
@@ -4388,5 +4540,4 @@ cleanse_abominations = {
 	attacker_wargoal_percentage = 0.8
 
 	max_ai_diplo_distance_to_title = 500
-	min_ai_score = 100
 }

@@ -1,4 +1,4 @@
-﻿### EK EDIT: Removed referencesto vanilla title
+﻿### EK EDIT: Removed references to vanilla title
 
 # Faction demand events
 
@@ -90,6 +90,20 @@ faction_demand.0001 = {
 				value = debt_level
 				multiplier = 25
 			}
+			modifier = {
+				add = -50
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_kingdom
+				}
+			}
+			modifier = {
+				add = -150
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_empire
+				}
+			}
 		}
 	}
 
@@ -130,6 +144,20 @@ faction_demand.0001 = {
 			compare_modifier = {
 				value = debt_level
 				multiplier = -25
+			}
+			modifier = {
+				add = -50
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_kingdom
+				}
+			}
+			modifier = {
+				add = -150
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_empire
+				}
 			}
 		}
 	}
@@ -615,6 +643,20 @@ faction_demand.1001 = {
 				value = debt_level
 				multiplier = 25
 			}
+			modifier = {
+				add = -50
+				scope:faction.faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_kingdom
+				}
+			}
+			modifier = {
+				add = -150
+				scope:faction.faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_empire
+				}
+			}
 		}
 	}
 
@@ -654,6 +696,20 @@ faction_demand.1001 = {
 			compare_modifier = {
 				value = debt_level
 				multiplier = -25
+			}
+			modifier = {
+				add = -25
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_kingdom
+				}
+			}
+			modifier = {
+				add = -50
+				scope:faction_target = {
+					is_at_war = no
+					primary_title.tier >= tier_empire
+				}
 			}
 		}
 	}
