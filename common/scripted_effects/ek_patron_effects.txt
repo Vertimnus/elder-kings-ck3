@@ -280,7 +280,7 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _eg_nyfa }
     $EFFECT$ = { TRAIT = _eg_ilni }
     $EFFECT$ = { TRAIT = _eg_tam }
-	# Cyrodiilic Heroes
+    # Cyrodiilic Heroes
     $EFFECT$ = { TRAIT = _ch_alessia }
     $EFFECT$ = { TRAIT = _ch_pelinal }
     $EFFECT$ = { TRAIT = _ch_morihaus }
@@ -301,16 +301,18 @@ patron_add_to_list = { #variant of this for local list for ai to select
     }
 }
 
-# patron_set_trait = { #need 1.4 commands to pass flag/scope:trait from gui
-#     patron_trait_master_effect = { EFFECT = patron_add_trait }
-# }
+patron_set_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+    patron_trait_master_effect = { EFFECT = patron_add_trait }
+}
 
-# patron_add_trait = { #need 1.4 commands to pass flag/scope:trait from gui
-#     if = {
-#         limit = { flag/scope:trait = $TRAIT$ }
-#         add_trait = p$TRAIT$
-#     }
-# }
+patron_add_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+    if = {
+        limit = { scope:trait = flag:$TRAIT$ }
+        add_trait = p$TRAIT$
+        set_variable = { name = recent_patron_selected value = yes years = 5 }
+    }
+    else = { remove_trait = p$TRAIT$ }
+}
 
 #need remove trait before grant. also need to replace the faith change one, also the modifier blocking recent
 
@@ -318,7 +320,7 @@ patron_add_to_list = { #variant of this for local list for ai to select
 patron_faith_change_clear_traits = {
     patron_trait_master_effect = { EFFECT = patron_faith_change_clear_trait }
 
-    add_character_flag = { flag = recent_patron_selected years = 5 }
+    set_variable = { name = recent_patron_selected value = yes years = 5 }
 }
 
 patron_faith_change_clear_trait = {
@@ -329,30 +331,23 @@ patron_faith_change_clear_trait = {
 }
 
 culture_group_on_start_effect = {
-    dummy_male = { #replace with global for 1.3.x
-        culture_group_var_effect = { CG = akaviri_group }
-        culture_group_var_effect = { CG = aldmeris_group }
-        culture_group_var_effect = { CG = ayleid_group }
-        culture_group_var_effect = { CG = nedic_group }
-        culture_group_var_effect = { CG = breton_group }
-        culture_group_var_effect = { CG = cyrodiilic_group }
-        culture_group_var_effect = { CG = nordic_group }
-        culture_group_var_effect = { CG = chimeris_group }
-        culture_group_var_effect = { CG = dunmeris_group }
-        culture_group_var_effect = { CG = orsimer_group }
-        culture_group_var_effect = { CG = yokudan_group }
-        culture_group_var_effect = { CG = khajiiti_group }
-        culture_group_var_effect = { CG = goblinken_group }
-        culture_group_var_effect = { CG = bosmeris_group }
-        culture_group_var_effect = { CG = argonian_group }
-    }
+    culture_group_var_effect = { CG = akaviri_group }
+    culture_group_var_effect = { CG = aldmeris_group }
+    culture_group_var_effect = { CG = ayleid_group }
+    culture_group_var_effect = { CG = nedic_group }
+    culture_group_var_effect = { CG = breton_group }
+    culture_group_var_effect = { CG = cyrodiilic_group }
+    culture_group_var_effect = { CG = nordic_group }
+    culture_group_var_effect = { CG = chimeris_group }
+    culture_group_var_effect = { CG = dunmeris_group }
+    culture_group_var_effect = { CG = orsimer_group }
+    culture_group_var_effect = { CG = yokudan_group }
+    culture_group_var_effect = { CG = khajiiti_group }
+    culture_group_var_effect = { CG = goblinken_group }
+    culture_group_var_effect = { CG = bosmeris_group }
+    culture_group_var_effect = { CG = argonian_group }
 }
 
 culture_group_var_effect = {
-    set_variable = { name = $CG$ value = culture_group:$CG$ }
-    # every_in_global_list = {
-    #     variable = culture_list
-    #     limit = { culture_group:$CG$ = THIS.culture_group }
-    #     add_to_variable_list = { name = $CG$_cultures target = THIS }
-    # }
+    set_global_variable = { name = $CG$ value = culture_group:$CG$ }
 }

@@ -1,4 +1,5 @@
-﻿
+﻿### EK EDIT: Removed references to vanilla tenets and holy sites
+
 ##########
 # Religious Relations
 ##########
@@ -68,12 +69,6 @@ court_chaplain_religious_relations_opinion_base = {
 court_chaplain_religious_relations_no_hof_opinion_base = {
 	add = court_chaplain_religious_relations_opinion_base
 	divide = court_chaplain_religious_relations_no_hof_balance
-}
-
-# Base modifier value
-court_chaplain_religious_relations_opinion_base = {
-	add = learning
-	divide = 2
 }
 
 # Bonus to opinion from Clerical Justifications Perk
@@ -166,6 +161,7 @@ court_chaplain_religious_relations_no_hof_monthly_increase = {
 	add = court_chaplain_religious_relations_monthly_increase
 	divide = court_chaplain_religious_relations_no_hof_balance
 }
+
 
 #####################
 # Fabricate Claim
@@ -302,6 +298,7 @@ court_chaplain_conversion_base_total = {
 
 convert_faith_fervor_modifier_scale = 0.5 # Fervor causes the conversion speed to scale from 150% to 50% of base.
 
+### EK EDIT: Removed vanilla values tied to holy sites
 # Development penalty
 convert_faith_development_penalty = {
 	value = 0
@@ -333,7 +330,6 @@ convert_faith_development_penalty = {
 		add = scope:councillor.conversion_adaptive_resistance
 		add = scope:councillor.conversion_mendicant_preachers_bonus
 		add = scope:councillor.conversion_communal_identity_bonus
-		### EK EDIT: These holy sites do not exist
 		# add = scope:councillor.conversion_holy_site_jerusalem
 		# add = scope:councillor.conversion_holy_site_kerala
 		# add = scope:councillor.conversion_holy_site_cordoba
@@ -477,20 +473,19 @@ conversion_reincarnation_resistance = {
 	}
 }
 
-### EK EDIT: Tenet disabled
-# conversion_dharmic_pacifism_resistance = {
-	# value = 0
-	# if = {
-		# limit = {
-			# exists = scope:county
-			# scope:county.faith = {
-				# has_doctrine = tenet_dharmic_pacifism
-			# }
-		# }
-		# subtract = court_chaplain_conversion_base_total
-		# multiply = 0.2
-	# }
-# }
+conversion_dharmic_pacifism_resistance = {
+	value = 0
+	if = {
+		limit = {
+			exists = scope:county
+			scope:county.faith = {
+				has_doctrine = tenet_dharmic_pacifism
+			}
+		}
+		subtract = court_chaplain_conversion_base_total
+		multiply = 0.2
+	}
+}
 
 conversion_adaptive_resistance = {
 	value = 0
@@ -690,7 +685,7 @@ population_fled_persecution_modifier_value = {
 	multiply = 0.15
 }
 
-### EK EDIT: Disabled these for now
+### EK EDIT: Disabled these as they reference vanilla titles
 ### Various Holy Site bonuses
 # conversion_holy_site_jerusalem = {
 	# value = 0

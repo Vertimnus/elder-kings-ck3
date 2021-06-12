@@ -79,6 +79,18 @@ patron_has_trait = {
 	has_trait = p$TRAIT$
 }
 
+patron_has_specific_trait = {
+	patron_trait_master_trigger = { TRIGGER = patron_has_given_trait }
+}
+
+patron_has_given_trait = {
+	trigger_if = {
+		limit = { scope:trait = flag:$TRAIT$ }
+		has_trait = p$TRAIT$
+	}
+	trigger_else = { always = no }
+}
+
 # patron_has_specific_trait = {
 # 	patron_trait_master_trigger = { TRIGGER = patron_has_given_trait }
 # }

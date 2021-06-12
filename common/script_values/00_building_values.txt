@@ -1,4 +1,6 @@
-﻿###################
+﻿### EK EDIT: Removed references to vanilla start dates and some special buildings
+
+###################
 # Building Values #
 ###################
 
@@ -58,12 +60,34 @@
 ############
 
 # Base
-@normal_garrison_base = 150
-@good_garrison_base = 250
+@normal_max_garrison_base = 150
+@good_max_garrison_base = 250
 
 # Scaling Increase
-@normal_garrison_scale_addition_per_tier = 150
-@good_garrison_scale_addition_per_tier = 250
+@normal_max_garrison_scale_addition_per_tier = 150
+@good_max_garrison_scale_addition_per_tier = 250
+
+
+##########################
+# Garrison Reinforcement #
+##########################
+
+# Reinforcement rate: by default it takes 2,8 years to completly refill a garrison 
+@base_garrison_reinforcement_factor = 0.03
+
+# Scaling increase: at level 8, it takes a bit less than 1 year to completly refill a garrison
+@garrison_reinforcement_factor_addition_per_tier = 0.01
+
+
+# Tier values
+@garrison_reinforcement_factor_tier_1 = @[base_garrison_reinforcement_factor]
+@garrison_reinforcement_factor_tier_2 = @[garrison_reinforcement_factor_tier_1 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_3 = @[garrison_reinforcement_factor_tier_2 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_4 = @[garrison_reinforcement_factor_tier_3 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_5 = @[garrison_reinforcement_factor_tier_4 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_6 = @[garrison_reinforcement_factor_tier_5 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_7 = @[garrison_reinforcement_factor_tier_6 + garrison_reinforcement_factor_addition_per_tier]
+@garrison_reinforcement_factor_tier_8 = @[garrison_reinforcement_factor_tier_7 + garrison_reinforcement_factor_addition_per_tier]
 
 ###############
 # Fort Levels #
@@ -257,23 +281,23 @@ building_disable_inefficient_value_add = 5
 @excellent_levy_tier_7 = @[excellent_levy_tier_6 + excellent_levy_scale_addition_per_tier]
 @excellent_levy_tier_8 = @[excellent_levy_tier_7 + excellent_levy_scale_addition_per_tier]
 
-@normal_garrison_tier_1 = @[normal_garrison_base]
-@normal_garrison_tier_2 = @[normal_garrison_tier_1 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_3 = @[normal_garrison_tier_2 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_4 = @[normal_garrison_tier_3 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_5 = @[normal_garrison_tier_4 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_6 = @[normal_garrison_tier_5 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_7 = @[normal_garrison_tier_6 + normal_garrison_scale_addition_per_tier]
-@normal_garrison_tier_8 = @[normal_garrison_tier_7 + normal_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_1 = @[normal_max_garrison_base]
+@normal_max_garrison_tier_2 = @[normal_max_garrison_tier_1 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_3 = @[normal_max_garrison_tier_2 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_4 = @[normal_max_garrison_tier_3 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_5 = @[normal_max_garrison_tier_4 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_6 = @[normal_max_garrison_tier_5 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_7 = @[normal_max_garrison_tier_6 + normal_max_garrison_scale_addition_per_tier]
+@normal_max_garrison_tier_8 = @[normal_max_garrison_tier_7 + normal_max_garrison_scale_addition_per_tier]
 
-@good_garrison_tier_1 = @[good_garrison_base]
-@good_garrison_tier_2 = @[good_garrison_tier_1 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_3 = @[good_garrison_tier_2 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_4 = @[good_garrison_tier_3 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_5 = @[good_garrison_tier_4 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_6 = @[good_garrison_tier_5 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_7 = @[good_garrison_tier_6 + good_garrison_scale_addition_per_tier]
-@good_garrison_tier_8 = @[good_garrison_tier_7 + good_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_1 = @[good_max_garrison_base]
+@good_max_garrison_tier_2 = @[good_max_garrison_tier_1 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_3 = @[good_max_garrison_tier_2 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_4 = @[good_max_garrison_tier_3 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_5 = @[good_max_garrison_tier_4 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_6 = @[good_max_garrison_tier_5 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_7 = @[good_max_garrison_tier_6 + good_max_garrison_scale_addition_per_tier]
+@good_max_garrison_tier_8 = @[good_max_garrison_tier_7 + good_max_garrison_scale_addition_per_tier]
 
 @normal_build_speed_tier_1 = @[normal_build_speed_base]
 @normal_build_speed_tier_2 = @[normal_build_speed_tier_1 + normal_build_speed_scale_addition_per_tier]
@@ -558,24 +582,24 @@ excellent_building_levy_tier_8 = @[excellent_levy_tier_8]
 ###################
 
 # Normal garrison
-normal_building_garrison_tier_1 = @[normal_garrison_tier_1]
-normal_building_garrison_tier_2 = @[normal_garrison_tier_2]
-normal_building_garrison_tier_3 = @[normal_garrison_tier_3]
-normal_building_garrison_tier_4 = @[normal_garrison_tier_4]
-normal_building_garrison_tier_5 = @[normal_garrison_tier_5]
-normal_building_garrison_tier_6 = @[normal_garrison_tier_6]
-normal_building_garrison_tier_7 = @[normal_garrison_tier_7]
-normal_building_garrison_tier_8 = @[normal_garrison_tier_8]
+normal_building_max_garrison_tier_1 = @[normal_max_garrison_tier_1]
+normal_building_max_garrison_tier_2 = @[normal_max_garrison_tier_2]
+normal_building_max_garrison_tier_3 = @[normal_max_garrison_tier_3]
+normal_building_max_garrison_tier_4 = @[normal_max_garrison_tier_4]
+normal_building_max_garrison_tier_5 = @[normal_max_garrison_tier_5]
+normal_building_max_garrison_tier_6 = @[normal_max_garrison_tier_6]
+normal_building_max_garrison_tier_7 = @[normal_max_garrison_tier_7]
+normal_building_max_garrison_tier_8 = @[normal_max_garrison_tier_8]
 
 # Good garrison
-good_building_garrison_tier_1 = @[good_garrison_tier_1]
-good_building_garrison_tier_2 = @[good_garrison_tier_2]
-good_building_garrison_tier_3 = @[good_garrison_tier_3]
-good_building_garrison_tier_4 = @[good_garrison_tier_4]
-good_building_garrison_tier_5 = @[good_garrison_tier_5]
-good_building_garrison_tier_6 = @[good_garrison_tier_6]
-good_building_garrison_tier_7 = @[good_garrison_tier_7]
-good_building_garrison_tier_8 = @[good_garrison_tier_8]
+good_building_max_garrison_tier_1 = @[good_max_garrison_tier_1]
+good_building_max_garrison_tier_2 = @[good_max_garrison_tier_2]
+good_building_max_garrison_tier_3 = @[good_max_garrison_tier_3]
+good_building_max_garrison_tier_4 = @[good_max_garrison_tier_4]
+good_building_max_garrison_tier_5 = @[good_max_garrison_tier_5]
+good_building_max_garrison_tier_6 = @[good_max_garrison_tier_6]
+good_building_max_garrison_tier_7 = @[good_max_garrison_tier_7]
+good_building_max_garrison_tier_8 = @[good_max_garrison_tier_8]
 
 ######################
 # Build Speed Values #
@@ -686,23 +710,23 @@ very_slow_construction_time = @[very_slow_construction_time_base]
 # scope:holder = holder
 fill_building_slot_chance = {
 	value = 140
-	#if = {
-	#	limit = {
-	#		current_date < 1066.1.1
-	#	}
-	#	subtract = 70
-	#}
+	### EK EDIT: Vanilla start date
+	# if = {
+		# limit = {
+			# current_date < 1066.1.1
+		# }
+		# subtract = 70
+	# }
 	if = {
 		limit = {
 			has_building_or_higher = tribe_01
 		}
 		subtract = 15
 	}
-	### EK EDIT: These Special Buildings don't exist
-	### EK TODO: Add our own
 	if = {
 		limit = {
 			has_special_building = yes
+			### EK EDIT: Removed the vanilla special buildings
 			# NOR = {
 				# has_building_or_higher = hadrians_wall_01
 				# has_building_or_higher = offas_dyke_01
@@ -740,13 +764,13 @@ fill_building_slot_chance = {
 # Chance of upgrading one more building. Used when starting from a bookmark. Done after filling out building slots
 upgrade_building_chance = {
 	value = 65
-	### EK EDIT: Removed fewer filled slots before vanilla 1066
-	#if = { # Very few upgraded buildings in 867
-	#	limit = {
-	#		current_date < 1066.1.1
-	#	}
-	#	subtract = 70
-	#}
+	### EK EDIT: Vanilla start date
+	# if = { # Very few upgraded buildings in 867
+		# limit = {
+			# current_date < 1066.1.1
+		# }
+		# subtract = 70
+	# }
 	if = {
 		limit = {
 			has_building_or_higher = tribe_01
@@ -768,3 +792,17 @@ upgrade_building_chance = {
 		multiply = combined_building_level
 	}
 }
+
+#################################
+# Garrison Reinforcement Values #
+#################################
+
+building_garrison_reinforcement_factor_tier_1 = @[garrison_reinforcement_factor_tier_1]
+building_garrison_reinforcement_factor_tier_2 = @[garrison_reinforcement_factor_tier_2]
+building_garrison_reinforcement_factor_tier_3 = @[garrison_reinforcement_factor_tier_3]
+building_garrison_reinforcement_factor_tier_4 = @[garrison_reinforcement_factor_tier_4]
+building_garrison_reinforcement_factor_tier_5 = @[garrison_reinforcement_factor_tier_5]
+building_garrison_reinforcement_factor_tier_6 = @[garrison_reinforcement_factor_tier_6]
+building_garrison_reinforcement_factor_tier_7 = @[garrison_reinforcement_factor_tier_7]
+building_garrison_reinforcement_factor_tier_8 = @[garrison_reinforcement_factor_tier_8]
+

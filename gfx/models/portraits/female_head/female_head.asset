@@ -14,8 +14,6 @@ pdxmesh = {
 		
 	}
 
-
-
 		additive_animation = { id = "chin_forward"					type = "female_head_chin_forward.anim" }
 		additive_animation = { id = "chin_height"					type = "female_head_chin_height.anim" }
 		additive_animation = { id = "chin_width"					type = "female_head_chin_width.anim" }
@@ -61,9 +59,6 @@ pdxmesh = {
 		additive_animation = { id = "head_body_height"				type = "female_head_body_height.anim" }
 		additive_animation = { id = "head_infant_proportions"				type = "female_head_infant_proportions.anim" }
 		additive_animation = { id = "head_hunchbacked"				type = "female_head_hunchbacked.anim" }
-
-
-
 
 
 		#### BLEND SHAPES ####
@@ -186,9 +181,6 @@ pdxmesh = {
 		blend_shape = { id = "female_bs_wounded_3"		type = "blendshapes/female_bs_wounded_3.mesh" }
 
 
-
-
-
 		#### Face detail blendshapes to go together with decals
 		blend_shape = { id = "female_bs_cheek_def_01"		type = "blendshapes/female_bs_cheek_def_01.mesh" }
 		blend_shape = { id = "female_bs_cheek_def_02"		type = "blendshapes/female_bs_cheek_def_02.mesh" }
@@ -210,8 +202,6 @@ pdxmesh = {
 
 		#### Neutral blendshape to use with attachment blends
 		blend_shape = { id = "female_bs_neutral"		type = "blendshapes/female_bs_neutral.mesh" }
-
-		blend_shape = { id = "female_bs_no_portrait"		type = "blendshapes/female_bs_no_portrait.mesh" }
 
 		#### Blend shapes that contain only changes to vertex normals. Used in conjunction with joint animations
 		blend_shape = { id = "female_nbs_forehead_brow_height_max"	type = "blendshapes/female_nbs_forehead_brow_height_max.mesh" data = "normal|tangent" }
@@ -305,6 +295,7 @@ pdxmesh = {
 		animation = { id = "head_frontEnd_pregnant"		type = "female_head_frontEnd_pregnant_1.anim" }
 
 		#EK2 ADDITIONS
+		blend_shape = { id = "female_bs_no_portrait"		type = "blendshapes/female_bs_no_portrait.mesh" }
 		additive_animation = { id = "head_no_animation"			type = "female_head_no_animation.anim" }
 
 		blend_shape = { id = "race_mer_ears_01"		type = "blendshapes/race_mer_ears_01.mesh" }
@@ -387,8 +378,6 @@ entity = {
 	attribute = { name = "head_body_height"					additive_animation = "head_body_height" default = 0.5 }
 	attribute = { name = "head_infant_proportions"					additive_animation = "head_infant_proportions" }
 	attribute = { name = "head_hunchbacked"					additive_animation = "head_hunchbacked" }
-
-
 
 
 	#### BLEND SHAPES ####
@@ -510,8 +499,10 @@ entity = {
 	attribute = { name = "bs_wounded_3"					blend_shape = "female_bs_wounded_3" }
 
 	attribute = { name = "bs_breast_size_max"		blend_shape = "female_bs_neutral" }
-
-
+	attribute = { name = "bs_cloak"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "bs_cap"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "bs_crown"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "bs_cap_02"					blend_shape = "female_bs_neutral" }
 
 	#### Face detail blendshapes to go together with decals
 	attribute = { name = "bs_cheek_def_01"					blend_shape = "female_bs_cheek_def_01" }
@@ -531,8 +522,6 @@ entity = {
 	attribute = { name = "bs_expression_cheek_left"					blend_shape = "female_bs_expression_cheek_left" }
 	attribute = { name = "bs_expression_cheek_right"					blend_shape = "female_bs_expression_cheek_right" }
 
-	attribute = { name = "bs_no_portrait"					blend_shape = "female_bs_no_portrait" }
-	
 	#### Blend shapes that contain only changes to vertex normals. Used in conjunction with joint animations
 	attribute = { name = "nbs_forehead_brow_height_max"		blend_shape = "female_nbs_forehead_brow_height_max" }
 
@@ -675,6 +664,7 @@ entity = {
 	state = {	name = "frontEnd_pregnant"				animation = "head_frontEnd_pregnant" chance = 100 looping = no next_state = "frontEnd_pregnant" }
 
 	#EK2 ADDITIONS
+	attribute = { name = "bs_no_portrait"					blend_shape = "female_bs_no_portrait" }
 	attribute = { name = "race_mer_ears_01_bs"					blend_shape = "race_mer_ears_01" }
 	attribute = { name = "race_mer_ears_02_bs"					blend_shape = "race_mer_ears_02" }
 	attribute = { name = "race_mer_ears_03_bs"					blend_shape = "race_mer_ears_03" }
@@ -722,9 +712,7 @@ entity = {
 	attribute = { name = "khajiit_sideburns_2"			blend_shape = "female_khajiit_sideburns_2" }
 
 	#END OF EK2 ADDITIONS
-
+	
 	#scale = 0.5
 
 }
-
-
