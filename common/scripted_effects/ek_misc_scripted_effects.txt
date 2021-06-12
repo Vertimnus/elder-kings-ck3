@@ -188,6 +188,47 @@ interregnum_shatter_cyrodiil = {
 	}
 }
 
+# Attrebus stuff
+attrebus_fulfill_required_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_required_tasks_complete } }
+			set_variable = {
+				name = attrebus_required_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_required_tasks_complete
+				add = 1
+			}
+		}
+		
+		change_variable = {
+			name = attrebus_years_pseudo_emperor_left
+			add = 5
+		}
+	}
+}
+attrebus_fulfill_optional_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_optional_tasks_complete } }
+			set_variable = {
+				name = attrebus_optional_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_optional_tasks_complete
+				add = 1
+			}
+		}
+	}
+}
+
 ### To easily apply the effects of the Plunderer perks
 calculate_bonus_resources_from_loot = {
 	### EK EDIT: Grand Raider - Loot * 1.25

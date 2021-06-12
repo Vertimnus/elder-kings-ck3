@@ -1161,19 +1161,7 @@ ek_attrebus_potentate.0060 = {
 				target = flag:flag_ch_attrebus
 			}
 			
-			if = {
-				limit = { NOT = { has_variable = attrebus_optional_tasks_complete } }
-				set_variable = {
-					name = attrebus_optional_tasks_complete
-					value = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = attrebus_optional_tasks_complete
-					add = 1
-				}
-			}
+			attrebus_fulfill_optional_task = { ATTREBUS = root }
 		}
 	}
 }
@@ -1217,6 +1205,28 @@ ek_attrebus_potentate.0062 = {
 		
 		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
 		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+	}
+}
+
+### Optional task 3: The renewed Imperial Legion
+ek_attrebus_potentate.0064 = {
+	title = ek_attrebus_potentate.0064.t
+	desc = ek_attrebus_potentate.0064.desc
+	
+	theme = martial
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	option = {
+		name = ek_attrebus_potentate.0064.a
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_fort_legion_headquarters_desc
+		custom_tooltip = attrebus_potentate_attrebus_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
 	}
 }
 

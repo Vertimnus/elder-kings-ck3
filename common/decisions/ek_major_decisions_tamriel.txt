@@ -166,24 +166,7 @@ attrebus_repay_debts_decision = {
 				target = flag:attrebus_repay_debts_decision
 			}
 			
-			if = {
-				limit = { NOT = { has_variable = attrebus_required_tasks_complete } }
-				set_variable = {
-					name = attrebus_required_tasks_complete
-					value = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = attrebus_required_tasks_complete
-					add = 1
-				}
-			}
-			
-			change_variable = {
-				name = attrebus_years_pseudo_emperor_left
-				add = 5
-			}
+			attrebus_fulfill_required_task = { ATTREBUS = root }
 		}
 		
 		trigger_event = ek_attrebus_potentate.0062
@@ -218,18 +201,47 @@ attrebus_rebuild_imperial_legion_decision = {
 	}
 
 	is_valid = {
-		number_maa_soldiers_of_base_type = {
-			type = heavy_infantry
-			value >= 300
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = heavy_infantry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_hi
 		}
-		number_maa_soldiers_of_base_type = {
-			type = mages
-			value >= 300
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = mages
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_wm
 		}
-		number_maa_soldiers_of_base_type = {
-			type = light_cavalry
-			value >= 300
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = light_cavalry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_lc
 		}
+		
+		custom_description = {
+			OR = {
+				number_maa_soldiers_of_base_type = {
+					type = heavy_infantry
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = mages
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = light_cavalry
+					value >= 500
+				}
+			}
+			text = attrebus_rebuild_imperial_legion_decision_500_hi_wc_lc
+		}
+		
+		has_title = title:c_bastion
 	}
 
 	is_valid_showing_failures_only = {
@@ -248,36 +260,22 @@ attrebus_rebuild_imperial_legion_decision = {
 	}
 
 	effect = {
-		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
-		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+		title:b_fort_legion.title_province = { add_building = the_bastion_02 }
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_will_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
 		
 		hidden_effect = {
 			add_to_global_variable_list = {
 				name = unavailable_unique_decisions
-				target = flag:attrebus_repay_debts_decision
+				target = flag:attrebus_rebuild_imperial_legion_decision
 			}
 			
-			if = {
-				limit = { NOT = { has_variable = attrebus_required_tasks_complete } }
-				set_variable = {
-					name = attrebus_required_tasks_complete
-					value = 1
-				}
-			}
-			else = {
-				change_variable = {
-					name = attrebus_required_tasks_complete
-					add = 1
-				}
-			}
-			
-			change_variable = {
-				name = attrebus_years_pseudo_emperor_left
-				add = 5
-			}
+			attrebus_fulfill_optional_task = { ATTREBUS = root }
 		}
 		
-		trigger_event = ek_attrebus_potentate.0062
+		trigger_event = ek_attrebus_potentate.0064
 	}
 
 	ai_potential = {
