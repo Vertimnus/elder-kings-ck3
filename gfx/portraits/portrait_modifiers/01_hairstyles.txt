@@ -6,6 +6,157 @@ hairstyles = {
 
     usage = game
     selection_behavior = weighted_random
+#EK2
+khajiit_hair = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = hairstyles
+            template = khajiit_hairstyles
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            has_gene = {
+                category = race_khajiit_features
+                template = khajiit_features
+            }
+        }
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+altmer_hair = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = hairstyles
+            template = altmer_hairstyles
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            OR = {
+            culture.culture_group = culture_group:aldmeris_group
+            culture.culture_group = culture_group:ayleid_group
+            }
+        }
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+bosmer_hair = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = hairstyles
+            template = bosmer_hairstyles
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            OR = {
+            culture.culture_group = culture_group:bosmeris_group
+            culture.culture_group = culture_group:chimeris_group
+            culture.culture_group = culture_group:dunmeris_group
+            culture.culture_group = culture_group:dwemeris_group
+
+            }
+        }
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+orc_hair = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = hairstyles
+            template = orc_hairstyles
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            culture.culture_group = culture_group:orsimer_group
+        }
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+goblin_hair = {
+    dna_modifiers = {
+        accessory = {
+            mode = add
+            gene = hairstyles
+            template = goblin_hairstyles
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            culture.culture_group = culture_group:goblinken_group
+        }
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+#EK2
+
+
+
+
+
+
+
 
     western_straight = {
         dna_modifiers = {
