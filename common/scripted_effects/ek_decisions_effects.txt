@@ -129,3 +129,23 @@ direnni_hegemony_pt_2_decision_effect = {
 	
 	custom_tooltip = direnni_hegemony_pt_2_decision_effect_c # Should your dynasty lose the title, it will be destroyed.
 }
+
+establish_lingua_tamrielis_decision = {
+	# Grant the innovation
+	culture = { add_innovation = innovation_lingua_tamrielis }
+	
+	# Get a same-culture opinion modifier
+	add_character_modifier = { modifier = established_lingua_tamrielis_modifier years = 50 }
+	
+	# Every province of your culture gets a modifier
+	every_county = {
+		limit = { this.culture = root.culture }
+		custom =  every_county_your_culture_gets_modifier
+		title_province = {
+			add_province_modifier = {
+				modifier = flourishing_culture_modifier
+				years = 50
+			}
+		}
+	}
+}

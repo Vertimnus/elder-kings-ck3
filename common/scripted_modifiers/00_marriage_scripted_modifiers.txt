@@ -1550,16 +1550,50 @@ marriage_ai_accept_modifier = {
 	
 	#Generic different culture and cultural group penalty - small nudge to keep people from marrying off cultural boundaries
 	modifier = {
-		add = -20
+		add = -25
 		scope:secondary_actor = {
 			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+			NOR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
 		}
 		desc = MARRIAGE_DIFFERENT_CULTURE_GROUP_REASON
 	}
 	modifier = {
 		add = -10
 		scope:secondary_actor = {
+			has_same_culture_group_as = scope:secondary_recipient
 			NOT = { has_same_culture_as = scope:secondary_recipient }
+			NOR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
+		}
+		desc = MARRIAGE_DIFFERENT_CULTURE_REASON
+	}
+	
+	# Effect of the Lingua Tamrielis innovation
+	modifier = {
+		add = -20
+		scope:secondary_actor = {
+			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+			OR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
+		}
+		desc = MARRIAGE_DIFFERENT_CULTURE_GROUP_REASON
+	}
+	modifier = {
+		add = -8
+		scope:secondary_actor = {
+			has_same_culture_group_as = scope:secondary_recipient
+			NOT = { has_same_culture_as = scope:secondary_recipient }
+			OR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
 		}
 		desc = MARRIAGE_DIFFERENT_CULTURE_REASON
 	}

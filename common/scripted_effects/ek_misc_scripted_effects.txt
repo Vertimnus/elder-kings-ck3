@@ -177,6 +177,56 @@ interregnum_shatter_cyrodiil = {
 	custom_tooltip = imperial_commune_creation_tooltip
 	custom_tooltip = rest_cyrodiil_indepndent_tooltip
 	custom_tooltip = interregnum_starts_tooltip
+	
+	# We (Cyrodiilic culture group) lose the Lingua Tamrielis innovation
+	every_culture_global = {
+		limit = {
+			culture_group = culture_group:cyrodiilic_group
+			has_innovation = innovation_lingua_tamrielis
+		}
+		remove_innovation = innovation_lingua_tamrielis
+	}
+}
+
+# Attrebus stuff
+attrebus_fulfill_required_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_required_tasks_complete } }
+			set_variable = {
+				name = attrebus_required_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_required_tasks_complete
+				add = 1
+			}
+		}
+		
+		change_variable = {
+			name = attrebus_years_pseudo_emperor_left
+			add = 5
+		}
+	}
+}
+attrebus_fulfill_optional_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_optional_tasks_complete } }
+			set_variable = {
+				name = attrebus_optional_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_optional_tasks_complete
+				add = 1
+			}
+		}
+	}
 }
 
 ### To easily apply the effects of the Plunderer perks
@@ -427,6 +477,58 @@ increase_wounds_two_times_effect = {
 		death = {
 			death_reason = death_$REASON$
 		}
+	}
+}
+
+# Inflict the Blood Price on someone - blood
+# Need a prisoner and an imprisoner
+inflict_bloodprice = {
+	$PRISONER$ = {
+		if = { # No reason? Small health penalty
+			limit = {
+				$JAILOR$ = {
+					NOR = {
+						has_imprisonment_reason = $PRISONER$
+						has_execute_reason = $PRISONER$
+					}
+				}
+			}
+			
+			custom_tooltip = extract_blood_price_effect_no_reason_tooltip
+			add_character_modifier = {
+				modifier = small_blood_price_modifier
+				years = 5
+			}
+		}
+		else_if = { # Imprisonment reason? +1 Wound
+			limit = { $JAILOR$ = { NOT = { has_execute_reason = $PRISONER$ } } }
+			
+			custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
+			
+			increase_wounds_effect = { REASON = execution_blood_price }
+		}
+		else = { # Execution reason? +2 Wound
+			custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
+			
+			increase_wounds_two_times_effect = { REASON = execution_blood_price }
+		}
+		
+		consume_all_criminal_reasons_effect = {
+			LIEGE = $JAILOR$
+			CRIMINAL = $PRISONER$
+		}
+		
+		$JAILOR$ = {
+			add_prestige = miniscule_prestige_value
+			if = {
+				limit = { faith = { has_doctrine = tenet_legalism } }
+				add_piety = miniscule_piety_value
+			}
+		}
+		
+		custom_tooltip = extract_blood_price_effect_survival_release_tooltip
+		
+		release_from_prison = yes
 	}
 }
 

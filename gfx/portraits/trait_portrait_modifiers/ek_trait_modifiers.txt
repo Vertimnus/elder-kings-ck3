@@ -2,12 +2,31 @@
 	vampire = {
 		traits = { vampire_character }
 		dna_modifiers = {
+			morph = {
+				mode = modify
+				gene = gene_bs_body_type
+				value = {
+					value = stress.negate #could use stess/100 instead of level for smoother
+					multiply = 0.001
+				}
+				# template = bs_gaunt_1
+			}
+			morph = {
+				mode = add			
+				gene = vampire_teeth
+				template = vampire_teeth
+				value = 1.0
+			}
 			color = {
 				gene = skin_color
 				mode = modify
 				
 				x = 0.0
-				y = -0.1
+				y = {
+					value = stress.negate #could use stess/100 instead of level for smoother
+					multiply = 0.001
+					subtract = 0.1
+				}
 			}
 			color = {
 				gene = eye_color
@@ -16,17 +35,11 @@
 				x = -1.0
 				y = -0.5
 			}
-			# accessory = {
-			# 	mode = add				
-			# 	gene = teeth_accessory
-			# 	template = vampire_teeth # I dont know how to add this
-			# 	value = 0.5
-			# }
 			accessory = {
 				mode = modify				
 				gene = eye_accessory
-				template = bloodshot_eyes
-				value = 0.5
+				template = vampire_eyes
+				value = 0.5 #use a script value or stress value for hunger to make vampire more/less vampiric
 			}
 		}
 	}

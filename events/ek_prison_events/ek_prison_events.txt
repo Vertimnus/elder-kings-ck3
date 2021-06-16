@@ -155,40 +155,7 @@ ek_prison.1001 = {
 			text = ek_prison.1001.e
 		}
 		
-		if = { # No reason? Small health penalty
-			limit = {
-				scope:imprisoner = {
-					NOR = {
-						has_imprisonment_reason = scope:recipient
-						has_execute_reason = scope:recipient
-					}
-				}
-			}
-			
-			add_character_modifier = {
-				modifier = small_blood_price_modifier
-				years = 5
-			}
-		}
-		else_if = { # Imprisonment reason? +1 Wound
-			limit = { scope:imprisoner = { NOT = { has_execute_reason = scope:recipient } } }
-			
-			increase_wounds_effect = { REASON = execution_blood_price }
-		}
-		else = { # Execution reason? +2 Wound
-			increase_wounds_two_times_effect = { REASON = execution_blood_price }
-		}
-		
-		if = {
-			limit = { NOT = { has_character_flag = blood_price_death } }
-		
-			consume_all_criminal_reasons_effect = {
-				LIEGE = scope:imprisoner
-				CRIMINAL = scope:recipient
-			}
-			
-			release_from_prison = yes
-		}
+		inflict_bloodprice = { JAILOR = scope:imprisoner PRISONER = scope:prisoner }
 	}
 }
 
@@ -214,6 +181,7 @@ ek_prison.1002 = {
 	
 	trigger = {
 		scope:imprisoner.culture = { has_innovation = innovation_blood_price }
+		scope:prisoner.culture = { has_innovation = innovation_blood_price }
 	}
 	
 	immediate = {
@@ -601,44 +569,8 @@ ek_prison.1003 = {
 			trigger_event = ek_prison.1001
 		}
 		
-		scope:prisoner = {
-			show_as_tooltip = {
-				if = { # No reason? Small health penalty
-					limit = {
-						scope:imprisoner = {
-							NOR = {
-								has_imprisonment_reason = scope:prisoner
-								has_execute_reason = scope:prisoner
-							}
-						}
-					}
-					
-					custom_tooltip = extract_blood_price_effect_no_reason_tooltip
-					add_character_modifier = {
-						modifier = small_blood_price_modifier
-						years = 5
-					}
-				}
-				else_if = { # Imprisonment reason? +1 Wound
-					limit = { scope:imprisoner = { NOT = { has_execute_reason = scope:prisoner } } }
-					
-					custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
-					
-					increase_wounds_effect = { REASON = execution_blood_price }
-				}
-				else = { # Execution reason? +2 Wound
-					custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
-					
-					increase_wounds_two_times_effect = { REASON = execution_blood_price }
-				}
-				
-				consume_all_criminal_reasons_effect = {
-					LIEGE = scope:imprisoner
-					CRIMINAL = scope:prisoner
-				}
-				
-				custom_tooltip = extract_blood_price_effect_survival_release_tooltip
-			}
+		show_as_tooltip = {
+			inflict_bloodprice = { JAILOR = scope:imprisoner PRISONER = scope:prisoner }
 		}
 		
 		stress_impact = {
