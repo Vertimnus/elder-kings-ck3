@@ -1,0 +1,89 @@
+﻿#EK2
+# Make sure the weights here match up best as possible with the custom_hair set
+mohawks = {
+
+    usage = game
+    selection_behavior = weighted_random
+
+mohawk_hair = {
+    dna_modifiers = {
+        morph = {
+            mode = replace
+            gene = hairline_mohawk
+            template = mohawk
+            value = 1.0
+        }
+    }
+    weight = {
+        base = 0
+        modifier = {
+            add = 100
+            culture.culture_group = culture_group:goblinken_group
+        }
+
+        modifier = {
+            add = 80
+            OR = {
+            culture.culture_group = culture_group:bosmeris_group
+            culture.culture_group = culture_group:orsimer_group
+            }
+        }
+
+        modifier = {
+            add = 60
+            OR = {
+            culture.culture_group = culture_group:nordic_group
+            culture.culture_group = culture_group:nedic_group
+            }
+        }
+
+        modifier = {
+            add = 40
+            OR = {
+            culture.culture_group = culture_group:dwemeris_group
+            culture.culture_group = culture_group:dunmeris_group
+            }
+        }
+
+        modifier = {
+            add = 30
+            AND = {
+            culture.culture_group = culture_group:aldmeris_group
+            highest_held_title_tier < tier_county
+            }
+        }
+
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}  
+
+no_mohawk_hair = {
+    dna_modifiers = {
+        morph = {
+            mode = replace
+            gene = hairline_mohawk
+            template = no_mohawk
+            value = 1.0
+        }
+    }
+    weight = {
+        base = 50
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}  
+        }
+#EK2
