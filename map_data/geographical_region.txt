@@ -193,8 +193,8 @@ mundus_tamriel_cyrodiil_jerall_mountains = {
 }
 
 ## BLACKWOOD
-mundus_tamriel_cyrodiil_blackwood = {
-	duchies = { d_blackwood d_leyawiin d_nomore d_bulwark d_blankenmarsh d_redman d_artemon }
+mundus_tamriel_cyrodiil_leyawiin = {
+	duchies = { d_leyawiin d_blackwood d_bulwark d_artemon d_redmane d_nomore d_blankenmarsh }
 }
 
 ## NIBENAY VALLEY
@@ -203,18 +203,18 @@ mundus_tamriel_cyrodiil_nibenay_valley = {
 }
 
 ## NIBENAY BASIN
-mundus_tamriel_cyrodiil_nibenay_basin = {
-	duchies = { d_redwater d_cuptor d_sundercliff d_caer_suvio d_entius d_mir_corrup d_cropsford d_facian d_sejanus d_drakelowe d_bethal d_scinia d_cheydinhal d_blueroad d_harm d_arrius d_farragut d_ghartok d_eastwatch }
+mundus_tamriel_cyrodiil_cheydinhal = {
+	duchies = { d_cheydinhal d_cropsford d_sejanus d_drakelowe d_bethal d_scinia d_blueroad d_harm d_arrius d_eastwatch d_farragut d_ghartok }
 }
 
 ## NIBENAY VALLEY
-mundus_tamriel_cyrodiil_nibenay_valley = {
-	duchies = { d_bravil d_irony d_grief }
+mundus_tamriel_cyrodiil_bravil = {
+	duchies = { d_bravil d_irony d_grief d_redwater d_cuptor d_sundercliff d_entius d_mir_corrup d_caer_suvio d_facian }
 }
 
 ## NIBENAY
 mundus_tamriel_cyrodiil_nibenay = {
-	regions = { mundus_tamriel_cyrodiil_blackwood mundus_tamriel_cyrodiil_nibenay_valley mundus_tamriel_cyrodiil_nibenay_basin }
+	regions = { mundus_tamriel_cyrodiil_leyawiin mundus_tamriel_cyrodiil_bravil mundus_tamriel_cyrodiil_cheydinhal }
 }
 
 ## COMPLETE CYRODIIL
@@ -470,10 +470,39 @@ mundus_tamriel_morrowind_stonefalls = {
 mundus_tamriel_morrowind_narsis = {
 	duchies = { d_narsis d_coronati d_larsus d_blackgate }
 }
+mundus_tamriel_morrowind_deshaan = {
+	duchies = { d_mournhold d_taldeic d_eidolon d_old_keep d_astula d_meralag d_amber_forest }
+}
+mundus_tamriel_morrowind_narsis = {
+	duchies = { d_narsis d_larsus d_blackgate d_coronati }
+}
+mundus_tamriel_morrowind_telvannis = {
+	duchies = { d_telvannis d_uradas d_firuth }
+}
+mundus_tamriel_morrowind_firewatch = {
+	duchies = { d_firewatch d_lolthanis d_oren d_helnim d_mothrivra d_draloris d_bosara }
+}
+mundus_tamriel_morrowind_tearmarsh = {
+	duchies = { d_tear d_karag d_rithendis d_felyon d_yengrith d_silnion d_bashipal d_hairab }
+}
+
+## VVARDENFELL: Ascadia, Ashlands, Azura's Coast
+mundus_tamriel_morrowind_ascadia = {
+	duchies = { d_ascadia d_amaya d_balmora d_bitter_coast d_west_gash d_molag_mar }
+}
+mundus_tamriel_morrowind_ashlands = {
+	duchies = { d_aldruhn d_valenvaryon d_kogoruhn d_marandus d_molag_amur }
+}
+mundus_tamriel_morrowind_azura_coast = {
+	duchies = { d_sadrith_mora d_missir d_tel_branora d_southern_grazelands d_northern_grazelands d_sheogorad }
+}
+mundus_tamriel_morrowind_vvardenfell = {
+	regions = { mundus_tamriel_morrowind_ascadia mundus_tamriel_morrowind_ashlands mundus_tamriel_morrowind_azura_coast }
+}
 
 ## COMPLETE MORROWIND
 mundus_tamriel_morrowind = {
-	regions = { mundus_tamriel_morrowind_velothis mundus_tamriel_morrowind_stonefalls mundus_tamriel_morrowind_narsis }
+	regions = { mundus_tamriel_morrowind_velothis mundus_tamriel_morrowind_stonefalls mundus_tamriel_morrowind_narsis mundus_tamriel_morrowind_vvardenfell }
 }
 
 
@@ -591,8 +620,20 @@ mundus_tamriel = {
 	custom_nativity_gold_coast = {
 		regions = { mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_kvatch }
 	}
-	custom_nativity_blackwood = {
-		regions = { mundus_tamriel_cyrodiil_blackwood }
+	custom_nativity_west_weald = {
+		regions = { mundus_tamriel_cyrodiil_skingrad }
+	}
+	custom_nativity_colovian_highlands = {
+		regions = { mundus_tamriel_cyrodiil_chorrol }
+	}
+	custom_nativity_jerall_mountains = {
+		regions = { mundus_tamriel_cyrodiil_jerall_mountains }
+	}
+	custom_nativity_nibenay_basin = {
+		regions = { mundus_tamriel_cyrodiil_cheydinhal }
+	}
+	custom_nativity_nibenese_lowlands = {
+		regions = { mundus_tamriel_cyrodiil_bravil mundus_tamriel_cyrodiil_leyawiin }
 	}
 ## Skyrim
 	custom_nativity_karth = {	
@@ -647,7 +688,10 @@ mundus_tamriel = {
 	custom_nativity_pellitine = {
 		regions = { mundus_tamriel_elsweyr_corinthe mundus_tamriel_elsweyr_alabaster }
 	}
-
+## Morrowind
+	custom_nativity_vvardenfell = {
+		regions = { mundus_tamriel_morrowind_vvardenfell }
+	}
 ###########################################################################
 # Graphical Regions
 ###########################################################################
@@ -665,21 +709,21 @@ mundus_tamriel = {
 graphical_mena = {
 	graphical = yes
 	regions = {
-		mundus_tamriel_hammerfell mundus_tamriel_yokuda #world_africa world_middle_east world_middle_east_persia
+		mundus_tamriel_hammerfell mundus_tamriel_yokuda
 	}
 }
 
 graphical_india = {
 	graphical = yes
 	regions = {
-		mundus_tamriel_elsweyr #world_india world_tibet world_burma
+		mundus_tamriel_elsweyr
 	}
 }
 
 graphical_mediterranean = {
 	graphical = yes
 	regions = {
-		mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_nibenay #world_europe_west_iberia world_europe_south custom_south_francia custom_burgundy world_asia_minor
+		mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_nibenay
 	}
 }
 
