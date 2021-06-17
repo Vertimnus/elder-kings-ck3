@@ -3,7 +3,7 @@
 	beast_race_features = {
 		inheritable = yes
 
-		non_khajiit = {
+		human = {
 			index = 0
 			male = {}
 			female = male
@@ -11,20 +11,24 @@
 			girl = male
 		}
 
-		khajiit_features = {
+		lilmothiit_khajiit_features = {
 			index = 1
 			male = {
 
-				setting = { attribute = "khajiit_teeth"	value = { min = 1.0 max = 1.0 }	}
+				
 				setting = { attribute = "bs_hair_khajiit"	value = { min = 1.0 max = 1.0 }	}
 				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
 
 				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
 
-
+				setting = { attribute = "khajiit_teeth"	value = { min = 0.0 max = 1.0 }	}
 				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "bs_khajiit_body"	value = { min = 1.0 max = 1.0 }	 }
+
+				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 0.0 }	}
+				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 1.0 max = 0.0 }	 }
+				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 1.0 max = 0.0 }	 }
 
 				texture_override = {
 					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
@@ -49,7 +53,7 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
+						{ 1.0  1.0 }
 						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
@@ -69,7 +73,7 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
+						{ 1.0  1.0 }
 						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
@@ -87,8 +91,8 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
+						{ 0.5  0.5 }
+						{ 0.5  0.5 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
 						diffuse = multiply
@@ -104,8 +108,8 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
+						{ 0.5  0.5 }
+						{ 0.5  0.5 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
 						diffuse = multiply
@@ -131,7 +135,7 @@
 					}
 				}
 
-				setting = { attribute = "khajiit_teeth"	value = { min = 1.0 max = 1.0 }	}
+				setting = { attribute = "khajiit_teeth"	value = { min = 0.0 max = 1.0 }	}
 
 				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
 
@@ -140,9 +144,14 @@
 
 				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "bs_khajiit_body"	value = { min = 1.0 max = 1.0 }	 }
 
-				setting = { attribute = "head_eye_scale"	value = { min = 0.2 max = 0.2 }	}
+				
+				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 0.0 }	}
+				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 1.0 max = 0.0 }	 }
+				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 1.0 max = 0.0 }	 }
+
+				setting = { attribute = "head_eye_scale"	value = { min = 0.1 max = 0.2 }	}
 
 				texture_override = {
 					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
@@ -160,7 +169,7 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
+						{ 1.0  1.0 }
 						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
@@ -180,7 +189,7 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
+						{ 1.0  1.0 }
 						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
@@ -198,8 +207,8 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
+						{ 0.5  0.5 }
+						{ 0.5  0.5 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
 						diffuse = multiply
@@ -215,8 +224,8 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
+						{ 0.5  0.5 }
+						{ 0.5  0.5 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
 						diffuse = multiply
@@ -229,217 +238,9 @@
 			girl = female
 		}
 
-		lilmothiit_features = {
-			index = 2
-			male = {
-
-				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 1.0 }	}
-				setting = { attribute = "bs_hair_khajiit"	value = { min = 1.0 max = 1.0 }	}
-				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
-
-				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
-
-
-				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
-
-				texture_override = {
-					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
-					diffuse = 	"gfx/models/portraits/male_body/khajiit_textures/no_diffuse.dds"
-					normal = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_normal.dds"
-					specular = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_properties.dds"
-				}
-
-				eye_hsv_shift_curve = {
-					curve = {
-						{ 0.0   { 0.0 0.0 0.0 } }
-						{ 1.0   { 0.0 1.0 0.0 } }
-					}
-				}
-
-				decal = { #nose/nails
-					body_part = head
-					textures = {
-						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_nose.dds"
-						normal = "gfx/models/portraits/decals/male_head/khajiit_head_nose_normal.dds"
-
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = replace
-						normal = replace
-					}
-					priority = 6
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #nose/nails
-					body_part = torso
-					textures = {
-						diffuse = "gfx/models/portraits/decals/male_body/khajiit_body_paws.dds"
-						normal = "gfx/models/portraits/decals/male_body/khajiit_body_paws_normal.dds"
-
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = replace
-						normal = replace
-					}
-					priority = 6
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
-					body_part = head
-					textures = {
-						diffuse = "gfx/models/portraits/male_head/khajiit_textures/khajiit_head_diffuse.dds"
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
-					}
-					priority = 5
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
-					body_part = torso
-					textures = {
-						diffuse = "gfx/models/portraits/male_body/khajiit_textures/khajiit_body_diffuse.dds"
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
-					}
-					priority = 5
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-			}
-
-			female = {
-
-				eye_hsv_shift_curve = {
-					curve = {
-						{ 0.0   { 0.0 0.0 0.0 } }
-						{ 1.0   { 0.0 1.0 0.0 } }
-					}
-				}
-
-				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 1.0 }	}
-
-				#below to remove the body mesh which is then replaced with a duplicate with high res textures.
-
-				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
-
-
-				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
-				setting = { attribute = "bs_khajiit_body"	value = { min = 0.0 max = 1.0 }	 }
-
-				texture_override = {
-					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
-					diffuse = 	"gfx/models/portraits/male_body/khajiit_textures/no_diffuse.dds"
-					normal = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_normal.dds"
-					specular = 	"gfx/models/portraits/male_head/khajiit_textures/khajiit_head_properties.dds"
-				}
-
-				decal = { #nose/nails
-					body_part = head
-					textures = {
-						diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_nose.dds"
-						normal = "gfx/models/portraits/decals/male_head/khajiit_head_nose_normal.dds"
-
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = replace
-						normal = replace
-					}
-					priority = 6
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #nose/nails
-					body_part = torso
-					textures = {
-						diffuse = "gfx/models/portraits/decals/male_body/khajiit_body_paws.dds"
-						normal = "gfx/models/portraits/decals/male_body/khajiit_body_paws_normal.dds"
-
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = replace
-						normal = replace
-					}
-					priority = 6
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
-					body_part = head
-					textures = {
-						diffuse = "gfx/models/portraits/male_head/khajiit_textures/khajiit_head_diffuse.dds"
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
-					}
-					priority = 5
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-
-				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
-					body_part = torso
-					textures = {
-						diffuse = "gfx/models/portraits/male_body/khajiit_textures/khajiit_body_diffuse.dds"
-					}
-					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
-						#gene strength%, decal alpha
-						{ 0.0  0.0 }
-						{ 1.0  1.0 }
-					}
-					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
-					}
-					priority = 5
-					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
-				}
-			}
-			boy = male
-			girl = female
-		}
 
 		argonian_features = {
-			index = 3
+			index = 2
 			male = {
 				setting = { attribute = "male_argonian_head_round_bs"	value = { min = 0.0 max = 1.0 }	}
 				setting = { attribute = "male_argonian_head_sharp_bs"	value = { min = 1.0 max = 0.0 }	}
@@ -451,7 +252,7 @@
 		}
 
 		no_portrait_features = {
-			index = 4
+			index = 3
 			male = {
 				setting = { attribute = "bs_body_no_portrait"	value = { min = 1.0 max = 1.0 }	}
 				setting = { attribute = "bs_no_portrait"	value = { min = 1.0 max = 1.0 }	}
