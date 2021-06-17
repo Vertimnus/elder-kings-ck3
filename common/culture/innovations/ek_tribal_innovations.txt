@@ -194,3 +194,38 @@ innovation_rite_of_theft = {
 	flag = global_regional
 	flag = tribal_era_regional
 }
+
+innovation_lingua_tamrielis = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @nobility_03
+
+	can_progress = { #Unlocked by event.
+		custom_description = {
+			text = "innovation_unlocked_by_decision_trigger"
+			
+			trigger_if = {
+				limit = { years_from_game_start < 1 }
+				this.culture_group = culture_group:cyrodiilic_group
+			}
+			trigger_else = {
+				always = no # Via decision
+			}
+			
+			# is_target_in_global_variable_list = {
+				# name = unavailable_unique_decisions
+				# target = flag:flag_promoted_gothic_innovations
+			# }
+		}
+	}
+
+	modifier = {
+		diplomacy_per_prestige_level = 1
+		diplomatic_range_mult = 0.25
+	}
+	
+	custom = reduces_cultural_penality_marriages
+
+	flag = global_regional
+	flag = tribal_era_regional
+}

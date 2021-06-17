@@ -108,85 +108,107 @@ ek_attrebus_potentate.0001 = {
 			resolve_title_and_vassal_change = scope:change
 		}
 		
-		ROOT = { destroy_title = title:e_colovian_estates }
-	}
-
-	# Off with the Snake's head!
-	option = {
-		trigger = { scope:potentate = { is_alive = yes } }
-		
-		name = ek_attrebus_potentate.0001.a
-		
-		if = {
-			limit = { scope:potentate = { age < 16 } }
-			add_stress = minor_stress_gain
-		}
-		
-		execute_prisoner_effect = {
-			VICTIM = scope:potentate
-			EXECUTIONER = scope:attrebus
-		}
-		
-		custom_tooltip = potentate_executed_elder_council_tooltip
-		add_character_flag = attrebus_v_potentate_1_executed_potentate
-		
-		# Prevent the AI from using it while it's being built
-		ai_chance = {
-			base = 0
+		scope:attrebus = {
+			destroy_title = title:e_colovian_estates
+			
+			hidden_effect = {
+				set_variable = {
+					name = attrebus_required_tasks_complete
+					value = 0
+				}
+				set_variable = {
+					name = attrebus_optional_tasks_complete
+					value = 0
+				}
+				set_variable = {
+					name = attrebus_years_pseudo_emperor_left
+					value = 5
+				}
+				
+				trigger_event = {
+					id = ek_attrebus_potentate.0050
+					days = 365
+				}
+			}
 		}
 	}
 
-	# Throw him in the dungeon and throw the key!
-	option = {
-		trigger = { scope:potentate = { is_alive = yes } }
+	# # Off with the Snake's head!
+	# option = {
+		# trigger = { scope:potentate = { is_alive = yes } }
 		
-		name = ek_attrebus_potentate.0001.b
+		# name = ek_attrebus_potentate.0001.a
 		
-		if = {
-			limit = { scope:potentate = { age < 16 } }
-			add_stress = 5
-		}
+		# if = {
+			# limit = { scope:potentate = { age < 16 } }
+			# add_stress = minor_stress_gain
+		# }
 		
-		add_dread = 5
-		imprison = { target = scope:potentate type = dungeon }
+		# execute_prisoner_effect = {
+			# VICTIM = scope:potentate
+			# EXECUTIONER = scope:attrebus
+		# }
 		
-		add_character_flag = attrebus_v_potentate_1_imprisoned_potentate
+		# custom_tooltip = potentate_executed_elder_council_tooltip
+		# add_character_flag = attrebus_v_potentate_1_executed_potentate
 		
-		# Prevent the AI from using it while it's being built
-		ai_chance = {
-			base = 0
-		}
-	}
+		# # Prevent the AI from using it while it's being built
+		# ai_chance = {
+			# base = 0
+		# }
+	# }
+
+	# # Throw him in the dungeon and throw the key!
+	# option = {
+		# trigger = { scope:potentate = { is_alive = yes } }
+		
+		# name = ek_attrebus_potentate.0001.b
+		
+		# if = {
+			# limit = { scope:potentate = { age < 16 } }
+			# add_stress = 5
+		# }
+		
+		# add_dread = 5
+		# imprison = { target = scope:potentate type = dungeon }
+		
+		# add_character_flag = attrebus_v_potentate_1_imprisoned_potentate
+		
+		# # Prevent the AI from using it while it's being built
+		# ai_chance = {
+			# base = 0
+		# }
+	# }
 	
-	# Banish him!
-	option = {
-		trigger = { scope:potentate = { is_alive = yes } }
+	# # Banish him!
+	# option = {
+		# trigger = { scope:potentate = { is_alive = yes } }
 		
-		name = ek_attrebus_potentate.0001.c
+		# name = ek_attrebus_potentate.0001.c
 		
-		scope:potentate = { banish = yes }
+		# scope:potentate = { banish = yes }
 		
-		add_character_flag = attrebus_v_potentate_1_banished_potentate
+		# add_character_flag = attrebus_v_potentate_1_banished_potentate
 		
-		# Prevent the AI from using it while it's being built
-		ai_chance = {
-			base = 0
-		}
-	}
+		# # Prevent the AI from using it while it's being built
+		# ai_chance = {
+			# base = 0
+		# }
+	# }
 	
-	# He ded
-	option = {
-		trigger = { scope:potentate = { is_alive = no } }
+	# # He ded
+	# option = {
+		# trigger = { scope:potentate = { is_alive = no } }
 		
-		name = ek_attrebus_potentate.0001.d
+		# name = ek_attrebus_potentate.0001.d
 		
-		add_character_flag = attrebus_v_potentate_1_dead_potentate
+		# add_character_flag = attrebus_v_potentate_1_dead_potentate
 		
-		# Prevent the AI from using it while it's being built
-		ai_chance = {
-			base = 0
-		}
-	}
+		# # Prevent the AI from using it while it's being built
+		# ai_chance = {
+			# base = 0
+		# }
+	# }
 	
 	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
 	option = {
@@ -197,796 +219,928 @@ ek_attrebus_potentate.0001 = {
 		show_as_tooltip = { interregnum_shatter_cyrodiil = yes }
 	}
 	
-	after = {
-		if = {
-			limit = { NOT = { has_character_flag = bypassed_attrebus_v_potentate } }
-			every_player = {
-				limit = { NOT = { this = scope:attrebus } }
-				trigger_event = {
-					id = ek_attrebus_potentate.0002
-					days = 1
-				}
-			}
+	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
+	option = {
+		trigger = { is_ai = no }
+		
+		name = ek_attrebus_potentate.0001.f
+	}
+	
+	# after = {
+		# if = {
+			# limit = { NOT = { has_character_flag = bypassed_attrebus_v_potentate } }
+			# every_player = {
+				# limit = { NOT = { this = scope:attrebus } }
+				# trigger_event = {
+					# id = ek_attrebus_potentate.0002
+					# days = 1
+				# }
+			# }
 			
-			# Part 2: The Akaviri lords in Cyrodiil
-			trigger_event = {
-				id = ek_attrebus_potentate.0003
-				days = 14
-			}
-		}
-		
-		else = {
-			trigger_event = {
-				id = ek_attrebus_potentate.0011
-				days = 1
-			}
-		}
-	}
-}
-
-# People get the news
-ek_attrebus_potentate.0002 = {
-	title = ek_attrebus_potentate.0001.t
-	
-	desc = {
-		desc = ek_attrebus_potentate.0002.desc
-		first_valid = {
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_executed_potentate } }
-				desc = ek_attrebus_potentate.0002.desc.potentate_executed
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_imprisoned_potentate } }
-				desc = ek_attrebus_potentate.0002.desc.potentate_imprisoned
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_banished_potentate } }
-				desc = ek_attrebus_potentate.0002.desc.potentate_banished
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_dead_potentate } }
-				desc = ek_attrebus_potentate.0002.desc.potentate_dead
-			}
-		}
-	}
-	
-	theme = crown
-	override_background = {
-		event_background = dungeon
-	}
-	
-	left_portrait = {
-		character = scope:attrebus
-		animation = war_over_win
-	}
-	
-	right_portrait = {
-		character = scope:potentate
-		animation = prisondungeon
-	}
-
-	immediate = {
-		play_music_cue = mx_cue_murder
-	}
-
-	option = {
-		name = ek_attrebus_potentate.0002.a
-	}
-}
-
-# Part 2: The Akaviri lords in Cyrodiil
-ek_attrebus_potentate.0003 = {
-	title = ek_attrebus_potentate.0003.t
-	
-	desc = {
-		desc = ek_attrebus_potentate.0003.desc
-		first_valid = {
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_executed_potentate } }
-				desc = ek_attrebus_potentate.0003.desc.potentate_executed
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_imprisoned_potentate } }
-				desc = ek_attrebus_potentate.0003.desc.potentate_imprisoned
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_banished_potentate } }
-				desc = ek_attrebus_potentate.0003.desc.potentate_banished
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_dead_potentate } }
-				desc = ek_attrebus_potentate.0003.desc.potentate_dead
-			}
-		}
-	}
-	
-	theme = crown
-	
-	left_portrait = {
-		character = scope:attrebus
-		animation = war_over_win
-	}
-	
-	right_portrait = {
-		character = scope:akaviri_vassal
-		animation = disbelief
-	}
-
-	immediate = {
-		random_vassal_or_below = {
-			limit = {
-				this.culture = culture:tsaesci
-			}
-			save_scope_as = akaviri_vassal
-		}
-	}
-
-	# Banish the lords, and brand those who dare stay here as criminals!
-	option = {
-		name = ek_attrebus_potentate.0003.a
-		
-		custom_tooltip = tsaesci_rulers_leave_criminal_tooltip
-		custom_tooltip = tsaesci_rulers_leave_development_culture_convert_tooltip
-		custom_tooltip = tsaesci_rulers_leave_future_counties_ban_tooltip
-		
-		### EK TODO: Just that
-		
-		every_held_title = {
-			limit = { tier = tier_county culture = culture:tsaesci }
-			change_development_progress_with_overflow = half_development
-			set_county_culture = root.culture
-		}
-		
-		add_character_flag = attrebus_v_potentate_2_exile
-		add_character_flag = will_uphold_attrebus_tsaesci_exile # Obviously
-		
-		### EK TODO: Decision or event if a new ruler comes into power in Cyrodiil to enforce the ban
-		
-		custom_tooltip = tsaesci_rulers_leave_elder_council_tooltip
-	}
-	
-	# Force them to kneel!
-	option = {
-		name = ek_attrebus_potentate.0003.b
-		
-		# Change all the Akaviri vassals feudal contract: Up the taxes and levies, and remove any advantageous (for them) special rights
-		every_vassal = {
-			limit = {
-				this.culture = culture:tsaesci
-				vassal_contract_has_modifiable_obligations = yes
-			}
-			show_as_tooltip = {
-				vassal_contract_increase_obligation_level = feudal_government_taxes
-				vassal_contract_increase_obligation_level = feudal_government_levies
-				
-				custom_tooltip = remove_all_special_contract_tooltip
-				
-				hidden_effect = {
-					vassal_contract_set_obligation_level = { type = special_contract level = 0 }
-					vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
-					vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
-					vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
-					vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
-					vassal_contract_set_obligation_level = { type = council_rights level = 0 }
-					vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
-				}
-			}
-		}
-		
-		add_character_flag = attrebus_v_potentate_2_kneel
-	}
-	
-	# They should not be condemned for the crimes of the Potentate
-	option = {
-		name = ek_attrebus_potentate.0003.c
-		
-		custom_tooltip = tsaesci_rulers_reform_potentate_tooltip
-		
-		add_character_flag = attrebus_v_potentate_2_let
-	}
-	
-	after = {
-		every_vassal_or_below = {
-			trigger_event = {
-				id = ek_attrebus_potentate.0004
-				days = 1
-			}
-		}
-		
-		# Part 3: The Temple District
-		trigger_event = {
-			id = ek_attrebus_potentate.0005
-			days = 14
-		}
-	}
-}
-
-# The vassals get the news ...
-ek_attrebus_potentate.0004 = {
-	title = ek_attrebus_potentate.0003.t
-	
-	desc = {
-		first_valid = {
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
-				desc = ek_attrebus_potentate.0004.desc.tsaesci_exile
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_kneel } }
-				desc = ek_attrebus_potentate.0004.desc.tsaesci_kneel
-			}
-			triggered_desc = {
-				trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_let } }
-				desc = ek_attrebus_potentate.0004.desc.tsaesci_let
-			}
-		}
-	}
-	
-	theme = crown
-	
-	left_portrait = {
-		character = scope:attrebus
-		animation = war_over_win
-	}
-	
-	# Enforce the ban too!
-	option = {
-		trigger = {
-			NOT = { culture = culture:tsaesci }
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
-		}
-		name = ek_attrebus_potentate.0004.a
-		
-		if = {
-			limit = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
-			every_held_title = {
-				limit = { tier = tier_county culture = culture:tsaesci }
-				change_development_progress_with_overflow = half_development
-				set_county_culture = root.culture
-			}
-		}
-		
-		### EK TODO: Just that
-		custom_tooltip = tsaesci_rulers_leave_future_counties_ban_tooltip
-		add_character_flag = will_uphold_attrebus_tsaesci_exile # Obviously
-	}
-	
-	# Protect our Akaviri population
-	option = {
-		trigger = {
-			NOT = { culture = culture:tsaesci }
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
-		}
-		name = ek_attrebus_potentate.0004.b
-		
-		custom_tooltip = tsaesci_rulers_refuse_enforce_ban_tooltip
-	}
-	
-	# Cyrodiil is too dangerous, we have to leave
-	option = {
-		trigger = {
-			culture = culture:tsaesci
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
-		}
-		name = ek_attrebus_potentate.0004.c
-		
-		# Get them couped
-		random_in_global_list = {
-			variable = culture_is_alive
-			
-			limit = { culture_group = culture_group:cyrodiilic_group }
-			
-			save_scope_as = culture_coup
-		}
-		
-		every_held_title = {
-			limit = { tier = tier_county culture = culture:tsaesci }
-			change_development_progress_with_overflow = half_development
-			set_county_culture = scope:culture_coup
-		}
-		
-		custom_tooltip = tsaesci_rulers_get_exiled_tooltip
-		custom_tooltip = tsaesci_rulers_game_over_tooltip
-		
-		create_character = {
-			location = capital_province
-			template = new_commander_character
-			faith = faith:imperial_cult
-			culture = scope:culture_coup
-			save_scope_as = title_recipient
-			gender_female_chance = {
-				if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-					add = 0
-				}
-				else_if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-					add = 100
-				}
-				else = {
-					add = 50
-				}
-			}
-		}
-		scope:title_recipient = { ek_character_setup_effect = yes }
-		
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = no
-		}
-		
-		# Let's do this
-		every_held_title = {
-			change_title_holder = {
-				holder = scope:title_recipient
-				change = scope:change
-			}
-		}
-		resolve_title_and_vassal_change = scope:change
-	}
-	
-	# We are here to stay!
-	option = {
-		trigger = {
-			culture = culture:tsaesci
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
-		}
-		name = ek_attrebus_potentate.0004.d
-		
-		# They're criminals
-		scope:attrebus = {
-			add_opinion = {
-				target = root
-				modifier = treachery_opinion
-			}
-		}
-	}
-	
-	# So be it
-	option = {
-		trigger = {
-			NOT = { culture = culture:tsaesci }
-			NOT = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
-		}
-		name = ek_attrebus_potentate.0004.e
-	}
-	
-	# It could have been worse...
-	option = {
-		trigger = {
-			culture = culture:tsaesci
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_kneel }
-		}
-		name = ek_attrebus_potentate.0004.f
-		
-		vassal_contract_increase_obligation_level = feudal_government_taxes
-		vassal_contract_increase_obligation_level = feudal_government_levies
-		
-		vassal_contract_set_obligation_level = { type = special_contract level = 0 }
-		vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
-		vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
-		vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
-		vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
-		vassal_contract_set_obligation_level = { type = council_rights level = 0 }
-		vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
-	}
-	
-	# Let us put all of this behind
-	option = {
-		trigger = {
-			culture = culture:tsaesci
-			scope:attrebus = { has_character_flag = attrebus_v_potentate_2_let }
-		}
-		name = ek_attrebus_potentate.0004.g
-	}
-}
-
-# Part 3: The Temple District
-ek_attrebus_potentate.0005 = {
-	title = ek_attrebus_potentate.0005.t
-	
-	desc = ek_attrebus_potentate.0005.desc
-	
-	theme = crown
-	
-	left_portrait = {
-		character = scope:militant_priest
-		animation = personality_bold
-	}
-	
-	right_portrait = {
-		character = scope:traditionalist_priest
-		animation = personality_zealous
-	}
-
-	immediate = {
-		random_ruler = {
-			limit = {
-				this.faith = root.faith
-				has_government = theocracy_government
-				this = character:valentian_99
-			}
-			alternative_limit = {
-				this.faith = root.faith
-				has_government = theocracy_government
-			}
-			save_scope_as = militant_priest
-		}
-		random_ruler = {
-			limit = {
-				this.faith = root.faith
-				has_government = theocracy_government
-				NOT = { this = scope:militant_priest }
-			}
-			save_scope_as = traditionalist_priest
-		}
-		
-		title:b_temple_district = { save_scope_as = temple_district }
-	}
-	
-	# Give the Temple District to a holy order
-	option = {
-		name = ek_attrebus_potentate.0005.a
-		
-		# We change the holding type here, and usurp it if needed
-		hidden_effect = {
-			scope:temple_district.title_province = { set_holding_type = castle_holding }
-			
-			if = {
-				limit = { NOT = { scope:temple_district.holder = root } }
-				create_title_and_vassal_change = {
-					type = leased_out
-					save_scope_as = change
-					add_claim_on_loss = no
-				}
-				scope:temple_district = {
-					change_title_holder_include_vassals = {
-						holder = root
-						change = scope:change
-					}
-				}
-				resolve_title_and_vassal_change = scope:change
-			}
-		}
-		
-		# We create the holy order if needed
-		if = {
-			limit = { NOT = { faith = { any_faith_holy_order = { holy_order_patron = root } } } }
-			scope:temple_district = { save_scope_as = ote_hq }
-			scope:ote_hq.holder.top_liege = { save_scope_as = ote_patron }
-
-			scope:ote_patron = {
-				### Important, make sure that scope:base_char is defined and references the holy order patron
-				scope:ote_patron = { save_scope_as = base_char }
-				create_character = {
-					template = holy_order_leader_character
-					location = scope:ote_hq.title_province
-					save_scope_as = leader
-				}
-				scope:leader = { ek_character_setup_effect = yes }
-
-				create_holy_order = {
-					leader = scope:leader
-					capital = scope:ote_hq
-					save_scope_as = new_holy_order
-				}
-				
-				hidden_effect = {
-					scope:leader = {
-						add_gold = 100 #So that they have some money to lend out
-						add_piety_level = 2
-						add_gold = holy_order_starting_gold
-						every_courtier = {
-							add_trait = order_member
-						}
-					}
-				}
-			}
-			
-			custom_tooltip = attrebus_leases_temple_district_transform_td_not_existing
-		}
-		
-		# Or else we save it
-		else = {
-			faith = {
-				random_faith_holy_order = {
-					limit = { holy_order_patron = root }
-					save_scope_as = order
-				}
-			}
-			
-			hidden_effect = {
-				scope:temple_district = { lease_out_to = scope:order }
-			}
-			
-			custom_tooltip = attrebus_leases_temple_district_transform_td
-		}
-		
-		custom_tooltip = attrebus_leases_temple_district_unpopular
-		custom_tooltip = attrebus_leases_temple_district_militaristic_faith
-		add_piety = -500
-		add_piety_level = -1
-		root.faith = { change_fervor = -25 }
-		
-		custom_tooltip = attrebus_leases_temple_district_elder_council
-		add_character_flag = attrebus_v_potentate_3_leased
-	}
-	
-	# Open up the Temple of the One to religious processions
-	option = {
-		name = ek_attrebus_potentate.0005.b
-		
-		add_piety = 250
-		root.faith = { change_fervor = 10 }
-		
-		add_character_modifier = { modifier = attrebus_opened_temple_district years = 5 }
-		title:d_imperial_isle = {
-			every_in_de_jure_hierarchy = {
-				limit = { tier = tier_county }
-				add_county_modifier = { modifier = ic_attrebus_opened_temple_district years = 5 }
-			}
-		}
-		
-		add_character_flag = attrebus_v_potentate_3_open
-	}
-	
-	after = {
-		# Part 4: The Nibenese lords
-		trigger_event = {
-			id = ek_attrebus_potentate.0007
-			days = 14
-		}
-	}
-}
-
-# Part 4: The Nibenese lords
-ek_attrebus_potentate.0007 = {
-	title = ek_attrebus_potentate.0007.t
-	
-	desc = ek_attrebus_potentate.0007.desc
-	
-	theme = crown
-	
-	left_portrait = {
-		character = scope:attrebus
-		animation = personality_bold
-	}
-	
-	right_portrait = {
-		character = scope:nibenese_vassal
-		animation = beg
-	}
-
-	immediate = {
-		random_vassal = {
-			limit = { culture = culture:nibenese }
-			save_scope_as = nibenese_vassal
-		}
-	}
-	
-	# Traitors! They are all traitors!
-	option = {
-		name = ek_attrebus_potentate.0007.a
-		
-		add_tyranny = 25
-		add_dread = 10
-		
-		# All the Nibenese lords in former Potentate land are branded traitors
-		custom_tooltip = former_potentate_vassals_traitors_tooltip
-		
-		hidden_effect = {
-			every_in_list = {
-				list = potentate_vassals
-				limit = {
-					is_vassal_or_below_of = scope:attrebus
-					primary_title.tier >= tier_county
-				}
-				save_temporary_scope_as = hook_target
-				scope:attrebus = {
-					add_opinion = {
-						target = scope:hook_target
-						modifier = treachery_opinion
-					}
-				}
-			}
-		}
-		
-		custom_tooltip = former_potentate_vassals_elder_council_tooltip
-		add_character_flag = attrebus_v_potentate_4_traitors
-	}
-	
-	# Demand oaths of loyalty from all of them, or abdicate
-	option = {
-		name = ek_attrebus_potentate.0007.b
-		
-		# Get a weak hook on every former Potentate vassal_contract_has_modifiable_obligations
-		custom_tooltip = former_potentate_vassals_hook_tooltip
-		
-		hidden_effect = {
-			every_in_list = {
-				list = potentate_vassals
-				limit = {
-					is_vassal_or_below_of = scope:attrebus
-					primary_title.tier >= tier_county
-				}
-				save_temporary_scope_as = hook_target
-				scope:attrebus = {
-					add_hook_no_toast = {
-						type = manipulation_hook
-						target = scope:hook_target
-					}
-				}
-			}
-		}
-		
-		add_character_flag = attrebus_v_potentate_4_hooks
-	}
-	
-	# The Potentate has been destroyed. We have nothing to fear from them.
-	option = {
-		name = ek_attrebus_potentate.0007.c
-		
-		every_in_list = {
-			list = potentate_vassals
-			limit = {
-				is_vassal_or_below_of = scope:attrebus
-				primary_title.tier >= tier_county
-			}
-			add_opinion = {
-				target = scope:attrebus
-				modifier = grateful_opinion
-				opinion = 15
-			}
-		}
-		
-		add_character_flag = attrebus_v_potentate_4_free
-	}
-	
-	after = {
-		# Part 5: The debt to the Elder Council
-		trigger_event = {
-			id = ek_attrebus_potentate.0009
-			days = 14
-		}
-	}
-}
-
-# Part 5: The debt to the Elder Council
-ek_attrebus_potentate.0009 = {
-	title = ek_attrebus_potentate.0009.t
-	
-	desc = ek_attrebus_potentate.0009.desc
-	
-	theme = stewardship_wealth_focus
-	
-	left_portrait = {
-		character = scope:attrebus
-		animation = worry
-	}
-	
-	# Repay it in full yourself
-	option = {
-		trigger = { gold >= 1000 }
-		name = ek_attrebus_potentate.0009.a
-		
-		show_as_unavailable = {
-			gold < 1000
-		}
-		
-		remove_short_term_gold = 1000
-		
-		add_character_flag = attrebus_v_potentate_5_full
-	}
-	
-	# Raise the taxes in Cyrodiil
-	option = {
-		name = ek_attrebus_potentate.0009.b
-		
-		remove_short_term_gold = 500
-		add_prestige_level = -1
-		
-		every_realm_county = { add_county_modifier = { modifier = debt_ec_raised_taxes years = 5 } }
-		
-		add_character_flag = attrebus_v_potentate_5_part
-	}
-	
-	# Being free from the Potentate should be enough!
-	option = {
-		name = ek_attrebus_potentate.0009.c
-		
-		add_dread = 25
-		
-		custom_tooltip = attrebus_anger_elder_council
-		add_character_flag = attrebus_v_potentate_5_refused
-	}
-	
-	after = {
-		# Part 6: Stepping down... unless?
-		if = {
-			limit = {
-				NOT = {
-					has_character_flag = attrebus_v_potentate_1_executed_potentate
-					has_character_flag = attrebus_v_potentate_2_exile
-					has_character_flag = attrebus_v_potentate_3_leased
-					has_character_flag = attrebus_v_potentate_4_traitors
-					has_character_flag = attrebus_v_potentate_5_refused
-				}
-			}
-			trigger_event = {
-				id = ek_attrebus_potentate.0011
-				days = 14
-			}
-		}
-		
-		# It's treason then.
-		# else = {
+			# # Part 2: The Akaviri lords in Cyrodiil
 			# trigger_event = {
-				# id = ek_attrebus_potentate.0013
+				# id = ek_attrebus_potentate.0003
 				# days = 14
 			# }
 		# }
+		
+		# else = {
+			# trigger_event = {
+				# id = ek_attrebus_potentate.0011
+				# days = 1
+			# }
+		# }
+	# }
+}
+
+# # People get the news
+# ek_attrebus_potentate.0002 = {
+	# title = ek_attrebus_potentate.0001.t
+	
+	# desc = {
+		# desc = ek_attrebus_potentate.0002.desc
+		# first_valid = {
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_executed_potentate } }
+				# desc = ek_attrebus_potentate.0002.desc.potentate_executed
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_imprisoned_potentate } }
+				# desc = ek_attrebus_potentate.0002.desc.potentate_imprisoned
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_banished_potentate } }
+				# desc = ek_attrebus_potentate.0002.desc.potentate_banished
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_dead_potentate } }
+				# desc = ek_attrebus_potentate.0002.desc.potentate_dead
+			# }
+		# }
+	# }
+	
+	# theme = crown
+	# override_background = {
+		# event_background = dungeon
+	# }
+	
+	# left_portrait = {
+		# character = scope:attrebus
+		# animation = war_over_win
+	# }
+	
+	# right_portrait = {
+		# character = scope:potentate
+		# animation = prisondungeon
+	# }
+
+	# immediate = {
+		# play_music_cue = mx_cue_murder
+	# }
+
+	# option = {
+		# name = ek_attrebus_potentate.0002.a
+	# }
+# }
+
+# # Part 2: The Akaviri lords in Cyrodiil
+# ek_attrebus_potentate.0003 = {
+	# title = ek_attrebus_potentate.0003.t
+	
+	# desc = {
+		# desc = ek_attrebus_potentate.0003.desc
+		# first_valid = {
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_executed_potentate } }
+				# desc = ek_attrebus_potentate.0003.desc.potentate_executed
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_imprisoned_potentate } }
+				# desc = ek_attrebus_potentate.0003.desc.potentate_imprisoned
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_banished_potentate } }
+				# desc = ek_attrebus_potentate.0003.desc.potentate_banished
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_1_dead_potentate } }
+				# desc = ek_attrebus_potentate.0003.desc.potentate_dead
+			# }
+		# }
+	# }
+	
+	# theme = crown
+	
+	# left_portrait = {
+		# character = scope:attrebus
+		# animation = war_over_win
+	# }
+	
+	# right_portrait = {
+		# character = scope:akaviri_vassal
+		# animation = disbelief
+	# }
+
+	# immediate = {
+		# random_vassal_or_below = {
+			# limit = {
+				# this.culture = culture:tsaesci
+			# }
+			# save_scope_as = akaviri_vassal
+		# }
+	# }
+
+	# # Banish the lords, and brand those who dare stay here as criminals!
+	# option = {
+		# name = ek_attrebus_potentate.0003.a
+		
+		# custom_tooltip = tsaesci_rulers_leave_criminal_tooltip
+		# custom_tooltip = tsaesci_rulers_leave_development_culture_convert_tooltip
+		# custom_tooltip = tsaesci_rulers_leave_future_counties_ban_tooltip
+		
+		# ### EK TODO: Just that
+		
+		# every_held_title = {
+			# limit = { tier = tier_county culture = culture:tsaesci }
+			# change_development_progress_with_overflow = half_development
+			# set_county_culture = root.culture
+		# }
+		
+		# add_character_flag = attrebus_v_potentate_2_exile
+		# add_character_flag = will_uphold_attrebus_tsaesci_exile # Obviously
+		
+		# ### EK TODO: Decision or event if a new ruler comes into power in Cyrodiil to enforce the ban
+		
+		# custom_tooltip = tsaesci_rulers_leave_elder_council_tooltip
+	# }
+	
+	# # Force them to kneel!
+	# option = {
+		# name = ek_attrebus_potentate.0003.b
+		
+		# # Change all the Akaviri vassals feudal contract: Up the taxes and levies, and remove any advantageous (for them) special rights
+		# every_vassal = {
+			# limit = {
+				# this.culture = culture:tsaesci
+				# vassal_contract_has_modifiable_obligations = yes
+			# }
+			# show_as_tooltip = {
+				# vassal_contract_increase_obligation_level = feudal_government_taxes
+				# vassal_contract_increase_obligation_level = feudal_government_levies
+				
+				# custom_tooltip = remove_all_special_contract_tooltip
+				
+				# hidden_effect = {
+					# vassal_contract_set_obligation_level = { type = special_contract level = 0 }
+					# vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
+					# vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
+					# vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
+					# vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
+					# vassal_contract_set_obligation_level = { type = council_rights level = 0 }
+					# vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
+				# }
+			# }
+		# }
+		
+		# add_character_flag = attrebus_v_potentate_2_kneel
+	# }
+	
+	# # They should not be condemned for the crimes of the Potentate
+	# option = {
+		# name = ek_attrebus_potentate.0003.c
+		
+		# custom_tooltip = tsaesci_rulers_reform_potentate_tooltip
+		
+		# add_character_flag = attrebus_v_potentate_2_let
+	# }
+	
+	# after = {
+		# every_vassal_or_below = {
+			# trigger_event = {
+				# id = ek_attrebus_potentate.0004
+				# days = 1
+			# }
+		# }
+		
+		# # Part 3: The Temple District
+		# trigger_event = {
+			# id = ek_attrebus_potentate.0005
+			# days = 14
+		# }
+	# }
+# }
+
+# # The vassals get the news ...
+# ek_attrebus_potentate.0004 = {
+	# title = ek_attrebus_potentate.0003.t
+	
+	# desc = {
+		# first_valid = {
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
+				# desc = ek_attrebus_potentate.0004.desc.tsaesci_exile
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_kneel } }
+				# desc = ek_attrebus_potentate.0004.desc.tsaesci_kneel
+			# }
+			# triggered_desc = {
+				# trigger = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_let } }
+				# desc = ek_attrebus_potentate.0004.desc.tsaesci_let
+			# }
+		# }
+	# }
+	
+	# theme = crown
+	
+	# left_portrait = {
+		# character = scope:attrebus
+		# animation = war_over_win
+	# }
+	
+	# # Enforce the ban too!
+	# option = {
+		# trigger = {
+			# NOT = { culture = culture:tsaesci }
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
+		# }
+		# name = ek_attrebus_potentate.0004.a
+		
+		# if = {
+			# limit = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
+			# every_held_title = {
+				# limit = { tier = tier_county culture = culture:tsaesci }
+				# change_development_progress_with_overflow = half_development
+				# set_county_culture = root.culture
+			# }
+		# }
+		
+		# ### EK TODO: Just that
+		# custom_tooltip = tsaesci_rulers_leave_future_counties_ban_tooltip
+		# add_character_flag = will_uphold_attrebus_tsaesci_exile # Obviously
+	# }
+	
+	# # Protect our Akaviri population
+	# option = {
+		# trigger = {
+			# NOT = { culture = culture:tsaesci }
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
+		# }
+		# name = ek_attrebus_potentate.0004.b
+		
+		# custom_tooltip = tsaesci_rulers_refuse_enforce_ban_tooltip
+	# }
+	
+	# # Cyrodiil is too dangerous, we have to leave
+	# option = {
+		# trigger = {
+			# culture = culture:tsaesci
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
+		# }
+		# name = ek_attrebus_potentate.0004.c
+		
+		# # Get them couped
+		# random_in_global_list = {
+			# variable = culture_is_alive
+			
+			# limit = { culture_group = culture_group:cyrodiilic_group }
+			
+			# save_scope_as = culture_coup
+		# }
+		
+		# every_held_title = {
+			# limit = { tier = tier_county culture = culture:tsaesci }
+			# change_development_progress_with_overflow = half_development
+			# set_county_culture = scope:culture_coup
+		# }
+		
+		# custom_tooltip = tsaesci_rulers_get_exiled_tooltip
+		# custom_tooltip = tsaesci_rulers_game_over_tooltip
+		
+		# create_character = {
+			# location = capital_province
+			# template = new_commander_character
+			# faith = faith:imperial_cult
+			# culture = scope:culture_coup
+			# save_scope_as = title_recipient
+			# gender_female_chance = {
+				# if = {
+					# limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
+					# add = 0
+				# }
+				# else_if = {
+					# limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
+					# add = 100
+				# }
+				# else = {
+					# add = 50
+				# }
+			# }
+		# }
+		# scope:title_recipient = { ek_character_setup_effect = yes }
+		
+		# create_title_and_vassal_change = {
+			# type = independency
+			# save_scope_as = change
+			# add_claim_on_loss = no
+		# }
+		
+		# # Let's do this
+		# every_held_title = {
+			# change_title_holder = {
+				# holder = scope:title_recipient
+				# change = scope:change
+			# }
+		# }
+		# resolve_title_and_vassal_change = scope:change
+	# }
+	
+	# # We are here to stay!
+	# option = {
+		# trigger = {
+			# culture = culture:tsaesci
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile }
+		# }
+		# name = ek_attrebus_potentate.0004.d
+		
+		# # They're criminals
+		# scope:attrebus = {
+			# add_opinion = {
+				# target = root
+				# modifier = treachery_opinion
+			# }
+		# }
+	# }
+	
+	# # So be it
+	# option = {
+		# trigger = {
+			# NOT = { culture = culture:tsaesci }
+			# NOT = { scope:attrebus = { has_character_flag = attrebus_v_potentate_2_exile } }
+		# }
+		# name = ek_attrebus_potentate.0004.e
+	# }
+	
+	# # It could have been worse...
+	# option = {
+		# trigger = {
+			# culture = culture:tsaesci
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_kneel }
+		# }
+		# name = ek_attrebus_potentate.0004.f
+		
+		# vassal_contract_increase_obligation_level = feudal_government_taxes
+		# vassal_contract_increase_obligation_level = feudal_government_levies
+		
+		# vassal_contract_set_obligation_level = { type = special_contract level = 0 }
+		# vassal_contract_set_obligation_level = { type = religious_rights level = 0 }
+		# vassal_contract_set_obligation_level = { type = fortification_rights level = 0 }
+		# vassal_contract_set_obligation_level = { type = coinage_rights level = 0 }
+		# vassal_contract_set_obligation_level = { type = war_declaration_rights level = 0 }
+		# vassal_contract_set_obligation_level = { type = council_rights level = 0 }
+		# vassal_contract_set_obligation_level = { type = title_revocation_rights level = 0 }
+	# }
+	
+	# # Let us put all of this behind
+	# option = {
+		# trigger = {
+			# culture = culture:tsaesci
+			# scope:attrebus = { has_character_flag = attrebus_v_potentate_2_let }
+		# }
+		# name = ek_attrebus_potentate.0004.g
+	# }
+# }
+
+# # Part 3: The Temple District
+# ek_attrebus_potentate.0005 = {
+	# title = ek_attrebus_potentate.0005.t
+	
+	# desc = ek_attrebus_potentate.0005.desc
+	
+	# theme = crown
+	
+	# left_portrait = {
+		# character = scope:militant_priest
+		# animation = personality_bold
+	# }
+	
+	# right_portrait = {
+		# character = scope:traditionalist_priest
+		# animation = personality_zealous
+	# }
+
+	# immediate = {
+		# random_ruler = {
+			# limit = {
+				# this.faith = root.faith
+				# has_government = theocracy_government
+				# this = character:valentian_99
+			# }
+			# alternative_limit = {
+				# this.faith = root.faith
+				# has_government = theocracy_government
+			# }
+			# save_scope_as = militant_priest
+		# }
+		# random_ruler = {
+			# limit = {
+				# this.faith = root.faith
+				# has_government = theocracy_government
+				# NOT = { this = scope:militant_priest }
+			# }
+			# save_scope_as = traditionalist_priest
+		# }
+		
+		# title:b_temple_district = { save_scope_as = temple_district }
+	# }
+	
+	# # Give the Temple District to a holy order
+	# option = {
+		# name = ek_attrebus_potentate.0005.a
+		
+		# # We change the holding type here, and usurp it if needed
+		# hidden_effect = {
+			# scope:temple_district.title_province = { set_holding_type = castle_holding }
+			
+			# if = {
+				# limit = { NOT = { scope:temple_district.holder = root } }
+				# create_title_and_vassal_change = {
+					# type = leased_out
+					# save_scope_as = change
+					# add_claim_on_loss = no
+				# }
+				# scope:temple_district = {
+					# change_title_holder_include_vassals = {
+						# holder = root
+						# change = scope:change
+					# }
+				# }
+				# resolve_title_and_vassal_change = scope:change
+			# }
+		# }
+		
+		# # We create the holy order if needed
+		# if = {
+			# limit = { NOT = { faith = { any_faith_holy_order = { holy_order_patron = root } } } }
+			# scope:temple_district = { save_scope_as = ote_hq }
+			# scope:ote_hq.holder.top_liege = { save_scope_as = ote_patron }
+
+			# scope:ote_patron = {
+				# ### Important, make sure that scope:base_char is defined and references the holy order patron
+				# scope:ote_patron = { save_scope_as = base_char }
+				# create_character = {
+					# template = holy_order_leader_character
+					# location = scope:ote_hq.title_province
+					# save_scope_as = leader
+				# }
+				# scope:leader = { ek_character_setup_effect = yes }
+
+				# create_holy_order = {
+					# leader = scope:leader
+					# capital = scope:ote_hq
+					# save_scope_as = new_holy_order
+				# }
+				
+				# hidden_effect = {
+					# scope:leader = {
+						# add_gold = 100 #So that they have some money to lend out
+						# add_piety_level = 2
+						# add_gold = holy_order_starting_gold
+						# every_courtier = {
+							# add_trait = order_member
+						# }
+					# }
+				# }
+			# }
+			
+			# custom_tooltip = attrebus_leases_temple_district_transform_td_not_existing
+		# }
+		
+		# # Or else we save it
+		# else = {
+			# faith = {
+				# random_faith_holy_order = {
+					# limit = { holy_order_patron = root }
+					# save_scope_as = order
+				# }
+			# }
+			
+			# hidden_effect = {
+				# scope:temple_district = { lease_out_to = scope:order }
+			# }
+			
+			# custom_tooltip = attrebus_leases_temple_district_transform_td
+		# }
+		
+		# custom_tooltip = attrebus_leases_temple_district_unpopular
+		# custom_tooltip = attrebus_leases_temple_district_militaristic_faith
+		# add_piety = -500
+		# add_piety_level = -1
+		# root.faith = { change_fervor = -25 }
+		
+		# custom_tooltip = attrebus_leases_temple_district_elder_council
+		# add_character_flag = attrebus_v_potentate_3_leased
+	# }
+	
+	# # Open up the Temple of the One to religious processions
+	# option = {
+		# name = ek_attrebus_potentate.0005.b
+		
+		# add_piety = 250
+		# root.faith = { change_fervor = 10 }
+		
+		# add_character_modifier = { modifier = attrebus_opened_temple_district years = 5 }
+		# title:d_imperial_isle = {
+			# every_in_de_jure_hierarchy = {
+				# limit = { tier = tier_county }
+				# add_county_modifier = { modifier = ic_attrebus_opened_temple_district years = 5 }
+			# }
+		# }
+		
+		# add_character_flag = attrebus_v_potentate_3_open
+	# }
+	
+	# after = {
+		# # Part 4: The Nibenese lords
+		# trigger_event = {
+			# id = ek_attrebus_potentate.0007
+			# days = 14
+		# }
+	# }
+# }
+
+# # Part 4: The Nibenese lords
+# ek_attrebus_potentate.0007 = {
+	# title = ek_attrebus_potentate.0007.t
+	
+	# desc = ek_attrebus_potentate.0007.desc
+	
+	# theme = crown
+	
+	# left_portrait = {
+		# character = scope:attrebus
+		# animation = personality_bold
+	# }
+	
+	# right_portrait = {
+		# character = scope:nibenese_vassal
+		# animation = beg
+	# }
+
+	# immediate = {
+		# random_vassal = {
+			# limit = { culture = culture:nibenese }
+			# save_scope_as = nibenese_vassal
+		# }
+	# }
+	
+	# # Traitors! They are all traitors!
+	# option = {
+		# name = ek_attrebus_potentate.0007.a
+		
+		# add_tyranny = 25
+		# add_dread = 10
+		
+		# # All the Nibenese lords in former Potentate land are branded traitors
+		# custom_tooltip = former_potentate_vassals_traitors_tooltip
+		
+		# hidden_effect = {
+			# every_in_list = {
+				# list = potentate_vassals
+				# limit = {
+					# is_vassal_or_below_of = scope:attrebus
+					# primary_title.tier >= tier_county
+				# }
+				# save_temporary_scope_as = hook_target
+				# scope:attrebus = {
+					# add_opinion = {
+						# target = scope:hook_target
+						# modifier = treachery_opinion
+					# }
+				# }
+			# }
+		# }
+		
+		# custom_tooltip = former_potentate_vassals_elder_council_tooltip
+		# add_character_flag = attrebus_v_potentate_4_traitors
+	# }
+	
+	# # Demand oaths of loyalty from all of them, or abdicate
+	# option = {
+		# name = ek_attrebus_potentate.0007.b
+		
+		# # Get a weak hook on every former Potentate vassal_contract_has_modifiable_obligations
+		# custom_tooltip = former_potentate_vassals_hook_tooltip
+		
+		# hidden_effect = {
+			# every_in_list = {
+				# list = potentate_vassals
+				# limit = {
+					# is_vassal_or_below_of = scope:attrebus
+					# primary_title.tier >= tier_county
+				# }
+				# save_temporary_scope_as = hook_target
+				# scope:attrebus = {
+					# add_hook_no_toast = {
+						# type = manipulation_hook
+						# target = scope:hook_target
+					# }
+				# }
+			# }
+		# }
+		
+		# add_character_flag = attrebus_v_potentate_4_hooks
+	# }
+	
+	# # The Potentate has been destroyed. We have nothing to fear from them.
+	# option = {
+		# name = ek_attrebus_potentate.0007.c
+		
+		# every_in_list = {
+			# list = potentate_vassals
+			# limit = {
+				# is_vassal_or_below_of = scope:attrebus
+				# primary_title.tier >= tier_county
+			# }
+			# add_opinion = {
+				# target = scope:attrebus
+				# modifier = grateful_opinion
+				# opinion = 15
+			# }
+		# }
+		
+		# add_character_flag = attrebus_v_potentate_4_free
+	# }
+	
+	# after = {
+		# # Part 5: The debt to the Elder Council
+		# trigger_event = {
+			# id = ek_attrebus_potentate.0009
+			# days = 14
+		# }
+	# }
+# }
+
+# # Part 5: The debt to the Elder Council
+# ek_attrebus_potentate.0009 = {
+	# title = ek_attrebus_potentate.0009.t
+	
+	# desc = ek_attrebus_potentate.0009.desc
+	
+	# theme = stewardship_wealth_focus
+	
+	# left_portrait = {
+		# character = scope:attrebus
+		# animation = worry
+	# }
+	
+	# # Repay it in full yourself
+	# option = {
+		# trigger = { gold >= 1000 }
+		# name = ek_attrebus_potentate.0009.a
+		
+		# show_as_unavailable = {
+			# gold < 1000
+		# }
+		
+		# remove_short_term_gold = 1000
+		
+		# add_character_flag = attrebus_v_potentate_5_full
+	# }
+	
+	# # Raise the taxes in Cyrodiil
+	# option = {
+		# name = ek_attrebus_potentate.0009.b
+		
+		# remove_short_term_gold = 500
+		# add_prestige_level = -1
+		
+		# every_realm_county = { add_county_modifier = { modifier = debt_ec_raised_taxes years = 5 } }
+		
+		# add_character_flag = attrebus_v_potentate_5_part
+	# }
+	
+	# # Being free from the Potentate should be enough!
+	# option = {
+		# name = ek_attrebus_potentate.0009.c
+		
+		# add_dread = 25
+		
+		# custom_tooltip = attrebus_anger_elder_council
+		# add_character_flag = attrebus_v_potentate_5_refused
+	# }
+	
+	# after = {
+		# # Part 6: Stepping down... unless?
+		# if = {
+			# limit = {
+				# NOT = {
+					# has_character_flag = attrebus_v_potentate_1_executed_potentate
+					# has_character_flag = attrebus_v_potentate_2_exile
+					# has_character_flag = attrebus_v_potentate_3_leased
+					# has_character_flag = attrebus_v_potentate_4_traitors
+					# has_character_flag = attrebus_v_potentate_5_refused
+				# }
+			# }
+			# trigger_event = {
+				# id = ek_attrebus_potentate.0011
+				# days = 14
+			# }
+		# }
+		
+		# # It's treason then.
+		# # else = {
+			# # trigger_event = {
+				# # id = ek_attrebus_potentate.0013
+				# # days = 14
+			# # }
+		# # }
+	# }
+# }
+
+# ek_attrebus_potentate.0050 = {
+	# title = ek_attrebus_potentate.0050.t
+	
+	# desc = ek_attrebus_potentate.0050.desc
+	
+	# theme = crown
+	
+	# left_portrait = {
+		# character = root
+		# animation = personality_bold
+	# }
+	
+	# option = {
+		# name = ek_attrebus_potentate.0050.a
+		
+		# faith:imperial_cult = {
+			# # Doctrines
+			# remove_doctrine = special_doctrine_cyrodiilic_cult
+			# remove_doctrine = doctrine_pluralism_pluralistic
+			# add_doctrine = doctrine_pluralism_righteous
+			
+			# # Tenets
+			# remove_doctrine = tenet_adaptive
+			# add_doctrine = tenet_unrelenting_faith
+		# }
+	# }
+	
+	# option = {
+		# name = ek_attrebus_potentate.0050.b
+	# }
+# }
+
+ek_attrebus_potentate.0050 = {
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = { var:attrebus_years_pseudo_emperor_left = { compare_value > 1 } }
+			change_variable = {
+				name = attrebus_years_pseudo_emperor_left
+				subtract = 1
+			}
+			
+			trigger_event = {
+				id = ek_attrebus_potentate.0050
+				days = 365
+			}
+		}
+		
+		else = {
+			trigger_event = ek_attrebus_potentate.0051
+		}
 	}
 }
 
 # Part 6: Stepping down, the Interregnum officially begins...
-ek_attrebus_potentate.0011 = {
-	title = ek_attrebus_potentate.0011.t
+ek_attrebus_potentate.0051 = {
+	title = ek_attrebus_potentate.0051.t
 	
-	desc = ek_attrebus_potentate.0011.desc
+	desc = {
+		desc = ek_attrebus_potentate.0051.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = { var:attrebus_required_tasks_complete = { compare_value > 1 } }
+				desc = ek_attrebus_potentate.0051.desc_duties_fulfilled
+			}
+			desc = ek_attrebus_potentate.0051.desc_duties_unfulfilled
+		}
+	}
 	
 	theme = stewardship_wealth_focus
 	
 	left_portrait = {
-		character = scope:attrebus
+		character = root
 		animation = personality_content
 	}
 	
 	# It has been an honour to serve Cyrodiil
 	option = {
-		name = ek_attrebus_potentate.0011.a
-		
-		interregnum_shatter_cyrodiil = yes
+		trigger = { var:attrebus_required_tasks_complete = { compare_value > 1 } }
+		name = ek_attrebus_potentate.0051.a
+	}
+	
+	# I seems I have have failed you...
+	option = {
+		trigger = { NOT = { var:attrebus_required_tasks_complete = { compare_value > 1 } } }
+		name = ek_attrebus_potentate.0051.b
 	}
 	
 	after = {
+		interregnum_shatter_cyrodiil = yes
+		
 		every_player = {
 			trigger_event = {
-				id = ek_attrebus_potentate.0012
+				id = ek_attrebus_potentate.0052
 				days = 3
 			}
 		}
 	}
 }
 
-ek_attrebus_potentate.0012 = {
-	title = ek_attrebus_potentate.0012.t
+ek_attrebus_potentate.0052 = {
+	title = ek_attrebus_potentate.0052.t
 	
-	desc = ek_attrebus_potentate.0012.desc
+	desc = ek_attrebus_potentate.0052.desc
 	
 	theme = stewardship_wealth_focus
 	
 	left_portrait = {
-		character = scope:attrebus
+		character = from
 		animation = personality_content
 	}
 	
 	immediate = {
-		show_as_tooltip = { scope:attrebus = { interregnum_shatter_cyrodiil = yes } }
+		show_as_tooltip = { from = { interregnum_shatter_cyrodiil = yes } }
 	}
 	
 	# An interesting development
 	option = {
-		name = ek_attrebus_potentate.0012.a
+		name = ek_attrebus_potentate.0052.a
 	}
 }
 
-ek_attrebus_potentate.0050 = {
-	title = ek_attrebus_potentate.0050.t
+# Early click of the 'The Interregnum?' decision
+ek_attrebus_potentate.0053 = {
+	title = ek_attrebus_potentate.0053.t
 	
-	desc = ek_attrebus_potentate.0050.desc
+	desc = ek_attrebus_potentate.0053.desc
+	
+	theme = stewardship_wealth_focus
+	
+	left_portrait = {
+		character = root
+		animation = personality_content
+	}
+	
+	# I still need more time
+	option = {
+		name = ek_attrebus_potentate.0053.a
+		
+		custom_tooltip = attrebus_interregnum_decision_more_time_required_tt
+		custom_tooltip = attrebus_interregnum_decision_required_tasks_tt
+		custom_tooltip = attrebus_interregnum_decision_optional_tasks_tt
+	}
+	
+	# Hand back the power to the Elder Council
+	option = {
+		name = ek_attrebus_potentate.0053.b
+		
+		interregnum_shatter_cyrodiil = yes
+	}
+	
+	# ATTREBUS THE EMPEROR
+	option = {
+		name = ek_attrebus_potentate.0053.c
+		
+		add_internal_flag = dangerous
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_tt
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_rulers_sides_tt
+	}
+}
+
+### NOTE: Sorry for anyone who has to parse that, it's all out of order lol
+### Optional task 1: A Cyrodiilic Hero
+ek_attrebus_potentate.0060 = {
+	title = ek_attrebus_potentate.0060.t
+	desc = ek_attrebus_potentate.0060.desc
 	
 	theme = crown
+	
+	trigger = {
+		piety_level >= max_piety_level
+		prestige_level >= max_prestige_level
+		
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		has_trait = paragon
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = special_patrons_available
+				target = flag:flag_ch_attrebus
+			}
+		}
+	}
 	
 	left_portrait = {
 		character = root
@@ -994,22 +1148,85 @@ ek_attrebus_potentate.0050 = {
 	}
 	
 	option = {
-		name = ek_attrebus_potentate.0050.a
+		name = ek_attrebus_potentate.0060.a
 		
-		faith:imperial_cult = {
-			# Doctrines
-			remove_doctrine = special_doctrine_cyrodiilic_cult
-			remove_doctrine = doctrine_pluralism_pluralistic
-			add_doctrine = doctrine_pluralism_righteous
+		add_trait = saint
+		
+		custom_tooltip = attrebus_potentate_attrebus_new_ch_patron_desc
+		custom_tooltip = attrebus_potentate_optional_task_2_fulfilled_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = special_patrons_available
+				target = flag:flag_ch_attrebus
+			}
 			
-			# Tenets
-			remove_doctrine = tenet_adaptive
-			add_doctrine = tenet_unrelenting_faith
+			attrebus_fulfill_optional_task = { ATTREBUS = root }
 		}
+	}
+}
+
+# People get the news
+ek_attrebus_potentate.0061 = {
+	title = ek_attrebus_potentate.0060.t
+	desc = ek_attrebus_potentate.0061.desc
+	
+	theme = crown
+	
+	left_portrait = {
+		character = from
+		animation = personality_bold
 	}
 	
 	option = {
-		name = ek_attrebus_potentate.0050.b
+		name = ek_attrebus_potentate.0061.a
+		
+		show_as_tooltip = { FROM = { add_trait = saint } }
+		
+		custom_tooltip = attrebus_potentate_attrebus_new_ch_patron_desc
+	}
+}
+
+### Required task 2: The Debts of a Warlord
+# People get the news
+ek_attrebus_potentate.0062 = {
+	title = ek_attrebus_potentate.0062.t
+	desc = ek_attrebus_potentate.0062.desc
+	
+	theme = crown
+	
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	
+	option = {
+		name = ek_attrebus_potentate.0062.a
+		
+		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
+		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+	}
+}
+
+### Optional task 3: The renewed Imperial Legion
+ek_attrebus_potentate.0064 = {
+	title = ek_attrebus_potentate.0064.t
+	desc = ek_attrebus_potentate.0064.desc
+	
+	theme = martial
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	option = {
+		name = ek_attrebus_potentate.0064.a
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_fort_legion_headquarters_desc
+		custom_tooltip = attrebus_potentate_attrebus_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
 	}
 }
 

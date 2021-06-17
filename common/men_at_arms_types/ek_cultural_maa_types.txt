@@ -149,6 +149,36 @@ direnni_sorcerers = {
 	stack = 100
 	icon = mages
 }
+welkynar_knights = {
+	type = heavy_cavalry
+	
+	damage = 125
+	toughness = 50
+	pursuit = 40
+	screen = 0
+	
+	terrain_bonus = {
+		mountains = { damage = 30 pursuit = 10 }
+		hills = { damage = 15 toughness = 5 }
+	}
+
+	counters = {
+		archers = 1
+	}
+
+	winter_bonus = {
+		normal_winter = { damage = -15 toughness = -5 }
+		harsh_winter = { damage = -30 toughness = -10 }
+	}
+
+	buy_cost = { gold = @heavy_cavalry_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @heavy_cavalry_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @heavy_cavalry_maa_high_maint_cost }
+	
+	stack = 50
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = heavy_cavalry
+}
 
 ### Argonian
 saxhleel_reel_ka = {
@@ -174,6 +204,31 @@ saxhleel_reel_ka = {
 	stack = 100
 	ai_quality = { value = culture_ai_weight_skirmishers }
 	icon = skirmishers
+}
+shellback_phalanx = {
+	type = pikemen
+	
+	damage = 40
+	toughness = 30
+	pursuit = 0
+	screen = 0
+	
+	terrain_bonus = {
+		### Add the terrains used in Black Marsh
+	}
+
+	counters = {
+		light_cavalry = 1
+		heavy_cavalry = 1
+	}
+
+	buy_cost = { gold = @pikemen_maa_recruitment_cost }
+	low_maintenance_cost = { gold = @pikemen_maa_low_maint_cost }
+	high_maintenance_cost = { gold = @pikemen_maa_high_maint_cost }
+	
+	stack = 100
+	ai_quality = { value = @cultural_maa_extra_ai_score }
+	icon = pikemen
 }
 
 ### Ayleidon

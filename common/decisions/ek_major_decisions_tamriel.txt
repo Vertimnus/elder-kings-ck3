@@ -80,3 +80,273 @@ form_pirate_confederacy_the_isles_decision = {
 		base = 100
 	}
 }
+
+##############
+#  ATTREBUS  #
+##############
+attrebus_interregnum_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_interregnum_decision_desc
+	selection_tooltip = attrebus_interregnum_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = attrebus_interregnum_decision_required_tasks_tt
+		custom_tooltip = attrebus_interregnum_decision_optional_tasks_tt
+		custom_tooltip = line_break
+		custom_tooltip = attrebus_interregnum_decision_early_effect_tt
+		
+		trigger_event = ek_attrebus_potentate.0053
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_repay_debts_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_repay_debts_decision_desc
+	selection_tooltip = attrebus_repay_debts_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+		}
+	}
+
+	is_valid = {
+		gold >= 2000
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+	
+	cost = {
+		gold = {
+			value = 2000
+		}
+	}
+
+	effect = {
+		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
+		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+			
+			attrebus_fulfill_required_task = { ATTREBUS = root }
+		}
+		
+		trigger_event = ek_attrebus_potentate.0062
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_rebuild_imperial_legion_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_rebuild_imperial_legion_decision_desc
+	selection_tooltip = attrebus_rebuild_imperial_legion_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_rebuild_imperial_legion_decision
+			}
+		}
+	}
+
+	is_valid = {
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = heavy_infantry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_hi
+		}
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = mages
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_wm
+		}
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = light_cavalry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_lc
+		}
+		
+		custom_description = {
+			OR = {
+				number_maa_soldiers_of_base_type = {
+					type = heavy_infantry
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = mages
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = light_cavalry
+					value >= 500
+				}
+			}
+			text = attrebus_rebuild_imperial_legion_decision_500_hi_wc_lc
+		}
+		
+		has_title = title:c_bastion
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+	
+	cost = {
+		gold = {
+			value = 500
+		}
+		prestige = {
+			value = 500
+		}
+	}
+
+	effect = {
+		title:b_fort_legion.title_province = { add_building = the_bastion_02 }
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_will_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_rebuild_imperial_legion_decision
+			}
+			
+			attrebus_fulfill_optional_task = { ATTREBUS = root }
+		}
+		
+		trigger_event = ek_attrebus_potentate.0064
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##############
+#   GENERAL  #
+##############
+establish_lingua_tamrielis_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = establish_lingua_tamrielis_decision_desc
+	selection_tooltip = establish_lingua_tamrielis_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		NOT = { culture = { has_innovation = innovation_lingua_tamrielis } }
+		highest_held_title_tier = tier_empire
+		primary_title = { any_in_de_jure_hierarchy = { tier = tier_county } } #Has de jure land
+	}
+
+	is_valid = {
+		completely_controls = root.primary_title
+		
+		custom_description = {
+			text = completely_controls_two_empires_ct
+			any_held_title = {
+				count >= 2
+				tier = tier_empire
+				any_in_de_jure_hierarchy = { tier = tier_county }
+				root = { completely_controls = prev }
+			}
+		}
+		
+		culture.culture_head = root
+		learning >= 15
+		has_trait = scholar
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		# show_as_tooltip = { establish_lingua_tamrielis_decision = yes }
+		establish_lingua_tamrielis_decision = yes
+	}
+
+	cost = {
+		gold = 500
+		prestige = 3000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
