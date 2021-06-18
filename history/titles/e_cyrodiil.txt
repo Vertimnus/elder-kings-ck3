@@ -16,11 +16,15 @@
 		holder = akavir_99 #Versidue-Shaie
 		name = AKAVIRI_POTENTATE
 	}
-	3244.2.24 = { holder = akavir_100 } #Savirian-Chorak
-	
-	3350.4.18 = {
-		holder = chorak_101
-		name = CYRODIILIC_POTENTATE } #Aixnieras-Ves
+	3244.2.24 = { holder = akavir_100 } #Savirien-Chorak
+	3350.12.18 = {
+		holder = 0 #Empire and Potentate collapse after Savirien-Chorak gets murdered
+		reset_name = yes
+	}
+	3351.4.18 = { #HistoryTemporary Move Aixnieras-Ves to a titular title
+		holder = chorak_101  #Aixnieras-Ves
+		#name = CYRODIILIC_POTENTATE
+	}
 	3362.12.4 = {
 		holder = sosildor_100 #Attrebus takes title from Potentate Remnant
 		reset_name = yes
@@ -35,7 +39,7 @@
 }
 #Colovian Estates, titular e_
 e_colovian_estates = {
-	3350.1.1 = { holder = sosildor_100 }
+	3351.7.2 = { holder = sosildor_100 }
 	3362.1.1 = { holder = 0 }
 	3368.9.22 = { holder = tor_912 } #Hieron of the Estates
 	
@@ -45,7 +49,7 @@ e_nibenay = {
 	3000.1.1 = {
 		succession_laws = { feudal_elective_succession_law }
 	}
-	3362.1.1 = {
+	3364.1.1 = {
 		holder = cuptor_99 #Venaros Cuptor unites multiple nibenese vassals against Attrebus
 		succession_laws = { feudal_elective_succession_law }
 	}
@@ -55,6 +59,7 @@ e_nibenay = {
 	#	clear_tribute_suzerain = e_cyrodiil
 	#	liege = e_cyrodiil 
 	#}
+	3501.1.1 = { holder = 0 }
 	3503.1.1 = { liege = 0 }
 	3517.1.1 = { holder = 3019 } #Caro
 	3549.1.1 = { holder = 3020 }
@@ -75,7 +80,7 @@ e_nibenay = {
 
 ##Cyrodiilic Potentate
 e_cyrodiilic_potentate = {
-	3350.4.18 = {
+	3351.4.18 = {
 		holder = chorak_101
 		name = CYRODIILIC_POTENTATE } #Aixnieras-Ves
 	3362.12.4 = {
@@ -94,6 +99,7 @@ k_heartlands = {
 }
 d_imperial_isle = {
 	300.1.1 = { change_development_level = 13 }
+	3350.12.18 = { holder = chorak_101 }
 	3362.1.1 = { holder = sosildor_100 }
 }
 c_imperial_city = {
@@ -113,6 +119,7 @@ c_imperial_city = {
 	2877.2.12 = { holder = reman_104 }
 	2920.12.6 = { holder = akavir_99 } #Versidue-Shaie
 	3244.2.24 = { holder = akavir_100 } #Savirian-Chorak
+	3350.12.18 = { holder = chorak_101 }
 	3362.1.1 = { holder = sosildor_100 }
 	3501.12.12 = { holder = tharn_65 } #HistoryTemporary - Replace with Molag Kena
 }
@@ -234,10 +241,8 @@ c_sercen = {
 	}
 }
 d_urasek = {
-	3351.1.1 = { 
-		liege = e_cyrodiil
-		holder = terentius_102
-	}
+	3351.1.1 = { holder = terentius_102 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3380.1.1 = { holder = terentius_103 }
 	3414.1.1 = { holder = terentius_104 }
 	3418.1.1 = { holder = terentius_105 }
@@ -277,6 +282,7 @@ c_magia = {
 	}
 	3308.1.1 = { holder = tharn_61 }
 	3314.1.1 = { holder = tharn_62 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3368.1.1 = { holder = tharn_63 }
 	3426.1.1 = { holder = tharn_64_parent }
 	3441.1.1 = { holder = tharn_64 }
@@ -300,15 +306,17 @@ c_drakewatch = {
 		liege = e_cyrodiil
 		holder = chorak_102
 	}
-	#3362.12.4 goes to imperial ruler?
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
+	#3362.12.4 goes to imperial ruler? #HistoryToDo
 }
 c_shinbone = {
 	3310.1.1 = {
 		liege = e_cyrodiil
 		holder = agrippa_99
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3357.1.1 = { holder = agrippa_100 }
-	3362.12.4 = { holder = agrippa_102 } #EK TODO, d_magia liege
+	3362.12.4 = { holder = agrippa_102 }
 	3423.1.1 = { holder = agrippa_105 }
 	3470.1.1 = { holder = agrippa_106 }
 	3502.1.1 = { holder = agrippa_107 }
@@ -415,18 +423,6 @@ c_coldcorn = {
 	3461.1.1 = { holder = broder_106 }
 	3504.1.1 = { holder = broder_108 }
 }
-d_carmala = {
-	3312.1.1 = { holder = jeril_100 }
-	3350.1.1 = { liege = k_chorrol }
-	3354.1.1 = { holder = jeril_101 }
-	3404.1.1 = { holder = jeril_103 }
-}
-c_carmala = {
-	3312.1.1 = { holder = jeril_100 }
-	3350.1.1 = { liege = d_carmala }
-	3354.1.1 = { holder = jeril_101 }
-	3404.1.1 = { holder = jeril_103 }
-}
 #d_greenlake
 d_greenlake = {
 	300.1.1 = { change_development_level = 8 }	
@@ -480,23 +476,16 @@ c_brokenway = {
 	3410.1.1 = { holder = vedetor_102 }
 	3431.1.1 = { holder = vedetor_103 }
 }
-
 d_carmala = {
 	3290.1.1 = { holder = vede_99 }
-	3341.1.1 = { holder = 0 }
-	3346.1.1 = { 
-		liege = k_chorrol
-		holder = jeril_100
-	}
+	3312.1.1 = { holder = jeril_100 }
+	3346.1.1 = { liege = k_chorrol }
 	3354.1.1 = { holder = jeril_101 }
 	3404.1.1 = { holder = jeril_102 }
 }
 c_carmala = {
 	3290.1.1 = { holder = vede_99 }
-	3341.1.1 = { 
-		liege = d_carmala
-		holder = jeril_100
-	}
+	3312.1.1 = { holder = jeril_100 }
 	3354.1.1 = { holder = jeril_101 }
 	3404.1.1 = { holder = jeril_102 }
 }
@@ -631,7 +620,7 @@ k_kvatch = {
 
 	3280.1.1 = { holder = pinder_99 }
 	3336.1.1 = { holder = pinder_100 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3368.10.1 = { liege = 0 }
 	3377.1.1 = { holder = pinder_101 }
 	3413.1.1 = { holder = pinder_102 }
@@ -725,15 +714,12 @@ d_dirich = {
 	3397.1.1 = { holder = romuval_304 }
 	3452.1.1 = { holder = romuval_305 }
 	3496.1.1 = {
-		liege = d_dirich
+		liege = 0
 		holder = romuval_306
 	}
 }
 c_dirich = {
-	3250.1.1 = {
-		liege = d_dirich
-		holder = romuval_97
-	}
+	3250.1.1 = { holder = romuval_97 }
 	3284.1.1 = { holder = romuval_98 }
 	3322.1.1 = { holder = romuval_300 }
 	3348.1.1 = { holder = romuval_301 }
@@ -758,32 +744,32 @@ c_ontus = {
 	3240.1.1 = { holder = pinder_98 }
 	3270.1.1 = { holder = pinder_99 }
 	3336.1.1 = { holder = pinder_300 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3377.1.1 = { holder = pinder_301 }
 }
 c_varondo = {
 	3240.1.1 = { holder = pinder_98 }
 	3270.1.1 = {holder = pinder_99 }
 	3336.1.1 = { holder = pinder_300 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3377.1.1 = { holder = pinder_301 }
 }
 c_rivercrest = {
 	300.1.1 = { change_development_level = 11 }
 	3330.1.1 = { holder = rivercrest_99 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3384.1.1 = { holder = rivercrest_100 }
 	3418.1.1 = { holder = rivercrest_102 }
 }
 c_proventia = {
 	3330.1.1 = { holder = rivercrest_99 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3384.1.1 = { holder = rivercrest_100 }
 	3418.1.1 = { holder = rivercrest_102 }
 }
 c_rockwell = {
 	3330.1.1 = { holder = rivercrest_99 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3384.1.1 = { holder = rivercrest_100 }
 	3418.1.1 = { holder = rivercrest_102 }
 }
@@ -938,10 +924,8 @@ c_sutch = {
 	3468.1.1 = { holder = massiner_104 } #can switch around titles in the future
 }
 d_hastrel = {
-	3350.1.1 = {
-		liege = e_colovian_estates
-		holder = inveran_100
-	}
+	3350.1.1 = { holder = inveran_100 }
+	3353.1.1 = { liege = e_colovian_estates }
 	3369.1.1 = { liege = 0 }
 	3372.1.1 = { holder = inveran_101 }
 	3434.1.1 = { holder = inveran_102 }
@@ -973,7 +957,7 @@ k_skingrad = {
 	
 	3308.1.1 = { holder = larich_99 }
 	3336.1.1 = { holder = larich_100 }
-	3350.1.1 = { liege = e_colovian_estates }
+	3351.7.2 = { liege = e_colovian_estates }
 	3368.1.1 = { holder = larich_102 }
 	3368.9.22 = { liege = 0 }
 	3389.1.1 = { holder = larich_103 }
@@ -1230,6 +1214,7 @@ d_cheydinhal = {
 	3300.1.1 = { holder = tharn_98 }
 	3322.1.1 = { holder = tharn_99 }
 	3350.4.18 = { liege = e_cyrodiil }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	
 	3365.1.1 = { holder = tharn_200 } #Abnur usurps due failure of his papa and ambition
 	3501.12.12 = { holder = aeresius_106 } #Caelia Aeresius takes over when Abnur disappears/dies, she keeps limited powers
@@ -1308,7 +1293,7 @@ c_belda = {
 	3310.1.1 = { holder = sartos_99 }
 	3350.1.1 = { holder = stormcatcher_99 }
 	3359.1.1 = { 
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = sartos_100 }
 	3370.1.1 = { liege = d_cheydinhal }
 	3393.1.1 = { holder = sartos_102 }
@@ -1321,7 +1306,7 @@ c_cephoriad = {
 	3310.1.1 = { holder = sartos_99 }
 	3350.1.1 = { holder = stormcatcher_99 }
 	3359.1.1 = { 
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = sartos_101 }
 	3370.1.1 = { liege = d_cheydinhal }
 	3399.1.1 = { holder = sartos_201 }
@@ -1411,7 +1396,7 @@ c_mourngate = {
 d_scinia = {
 	300.1.1 = { change_development_level = 7 }
 	3359.1.1 = {
-		liege = e_cyrodiil 
+		liege = e_cyrodiilic_potentate
 		holder = crito_3465
 	}
 	3380.1.1 = { holder = crito_3466 }
@@ -1523,7 +1508,7 @@ d_drakelowe = {
 }
 c_drakelowe = {
 	3267.1.1 = {
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = valentian_95
 	}
 	3341.1.1 = { holder = valentian_96 }
@@ -1558,6 +1543,7 @@ d_cropsford = {
 		liege = e_cyrodiil
 		holder = cropsford_1000
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3397.1.1 = { holder = crestbridge_1000 }
 	3423.1.1 = { holder = crestbridge_1001 }
 	3452.1.1 = { holder = cropsford_1001 }
@@ -1585,8 +1571,9 @@ d_sejanus = {
 		holder = cedrian_98
 	}
 	3301.1.1 = { holder = cedrian_99 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3357.1.1 = { holder = cedrian_100 }
-	#3365 EK TODO new liege
+	#3365 HistoryToDo new liege
 	3387.1.1 = { holder = cedrian_102 }
 	3420.1.1 = { holder = cedrian_106 }
 }
@@ -1641,6 +1628,7 @@ k_bravil = {
 		liege = e_cyrodiil
 		holder = fleccian_3385
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3373.1.1 = { holder = fleccian_3387 }
 	3404.1.1 = { holder = fleccian_3389 }
 	3465.1.1 = { holder = fleccian_3390 }
@@ -1835,6 +1823,7 @@ c_hunger_crag = {
 		government = theocracy_government
 		holder = hunger_crag_1000
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3366.12.3 = {
 		liege = 0
 		government = theocracy_government
@@ -1843,7 +1832,7 @@ c_hunger_crag = {
 }
 c_wyril = {
 	3358.1.1 = {
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = varyuis_999
 	}
 	3368.1.1 = { holder = varyuis_1000 }
@@ -1903,6 +1892,7 @@ d_cuptor = {
 		liege = e_cyrodiil
 		holder = cuptor_99
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	#3365 new liege, e_nibenay? EK TODO
 	3401.1.1 = { holder = cuptor_131 }
 	3421.1.1 = { holder = 0 }
@@ -1944,6 +1934,7 @@ c_nenalata = {
 		liege = e_cyrodiil
 		holder = cuptor_100
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3363.1.1 = { liege = e_nibenay }
 	3366.1.1 = { holder = cuptor_101 }
 	3400.1.1 = { holder = cuptor_103 }
@@ -1962,7 +1953,7 @@ c_morahame = {
 }
 c_bartholm = {
 	3359.7.15 = {
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = bartholomo_1000
 	}
 	3363.1.1 = { liege = e_nibenay }
@@ -1971,7 +1962,7 @@ c_bartholm = {
 }
 c_diabell = { 
 	3359.1.1 = {
-		liege = e_cyrodiil
+		liege = e_cyrodiilic_potentate
 		holder = diabell_1000
 	}
 	3368.1.1 = { liege = e_nibenay }
@@ -1991,6 +1982,7 @@ d_caer_suvio = {
 	3300.1.1 = { holder = suviero_507 }
 	3337.1.1 = { holder = suviero_508 }
 	3348.1.1 = { holder = suviero_509 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3363.1.1 = { liege = e_nibenay }
 	3394.1.1 = { holder = 0 }
 }
@@ -2051,6 +2043,7 @@ d_facian = {
 	3231.1.1 = { holder = ciero_3001 }
 	3286.1.1 = { holder = ciero_3003 }
 	3307.1.1 = { holder = ciero_3004 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3363.1.1 = { liege = e_nibenay }
 	3365.1.1 = { holder = ciero_3008 }
 	3367.1.1 = { holder = ciero_3009 }
@@ -2125,6 +2118,7 @@ c_ondo = {
 		liege = e_cyrodiil
 		holder = locundus_1000
 	}
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
 	3362.12.4 = {
 		liege = 0 #Potentate looses, Locundus goes independent
 	}
@@ -2475,23 +2469,21 @@ c_artemon = {
 	3843.1.1 = { holder = quarra_3066 }
 }
 c_bloodrun = {
-	3331.1.1 = { holder = quarra_3049 }
-	3365.4.5 = { holder = quarra_3050 }
-	3408.1.1 = { holder = quarra_3051 }
-	3454.1.1 = { holder = quarra_3052 }
-	3507.1.1 = { holder = quarra_3053 }
-	3531.1.1 = { holder = quarra_3054 }
-	3573.1.1 = { holder = quarra_3056 }
-	3604.1.1 = { holder = quarra_3057 }
-	3639.1.1 = { holder = quarra_3058 }
-	3667.1.1 = { holder = quarra_3059 }
-	3691.1.1 = { holder = quarra_3060 }
-	3710.1.1 = { holder = quarra_3061 }
-	3747.1.1 = { holder = quarra_3062 }
-	3777.1.1 = { holder = quarra_3063 }
-	3791.1.1 = { holder = quarra_3064 }
-	3819.1.1 = { holder = quarra_3065 }
-	3843.1.1 = { holder = quarra_3066 }
+	3359.1.1 = {
+		liege = d_artemon
+ 		holder = afelio_3175
+	}
+	3375.1.1 = { liege = e_nibenay }
+	3390.1.1 = { holder = afelio_3176 }
+	3432.1.1 = { holder = afelio_3178 }
+	3494.1.1 = { holder = afelio_3179 }
+	3540.1.1 = { holder = afelio_3180 }
+	3557.1.1 = { holder = afelio_3181 }
+	3583.1.1 = { holder = afelio_3182 }
+	3618.1.1 = { holder = afelio_3183 }
+	3631.1.1 = { holder = afelio_3184 }
+	3656.1.1 = { holder = afelio_3185 }
+	3690.1.1 = { holder = afelio_3186 }
 }
 c_rellesel = {
 	3351.1.1 = {
@@ -2502,20 +2494,10 @@ c_rellesel = {
 c_pantherfang = {
 	3359.1.1 = {
 		liege = d_artemon
- 		holder = afelio_3175
+ 		holder = pantherfang_1000
 	}
 	3375.1.1 = { liege = e_nibenay }
-	3390.1.1 = { holder = afelio_3176 }
-	3432.1.1 = { holder = afelio_3178 }
-	3483.1.1 = { liege = d_redman } #HistoryTemporary Check if that fits/looks good
-	3494.1.1 = { holder = afelio_3179 }
-	3540.1.1 = { holder = afelio_3180 }
-	3557.1.1 = { holder = afelio_3181 }
-	3583.1.1 = { holder = afelio_3182 }
-	3618.1.1 = { holder = afelio_3183 }
-	3631.1.1 = { holder = afelio_3184 }
-	3656.1.1 = { holder = afelio_3185 }
-	3690.1.1 = { holder = afelio_3186 }
+	#3483.1.1 = { liege = d_redman } #HistoryTemporary Check if that fits/looks good
 }
 
 d_blackwood = { 
