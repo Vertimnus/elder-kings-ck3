@@ -140,6 +140,7 @@ attrebus_repay_debts_decision = {
 				target = flag:attrebus_repay_debts_decision
 			}
 		}
+		gold >= 500
 	}
 
 	is_valid = {
@@ -161,6 +162,7 @@ attrebus_repay_debts_decision = {
 	effect = {
 		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
 		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+		custom_tooltip = attrebus_potentate_ec_debts_repayed_desc
 		
 		hidden_effect = {
 			add_to_global_variable_list = {
@@ -279,6 +281,163 @@ attrebus_rebuild_imperial_legion_decision = {
 		}
 		
 		trigger_event = ek_attrebus_potentate.0064
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_draft_tsaesci_act_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_draft_tsaesci_act_decision_desc
+	selection_tooltip = attrebus_draft_tsaesci_act_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_draft_tsaesci_act_decision
+			}
+		}
+	}
+
+	is_valid = {
+		custom_description = {
+			title:c_imperial_city.duchy = {
+				NOT = {
+					any_in_de_jure_hierarchy = {
+						holder.culture_group = culture_group:akaviri_group
+					}
+				}
+			}
+			text = attrebus_draft_tsaesci_act_decision_no_tsaesci_ruler_imperial_isle
+		}
+		custom_description = {
+			title:c_imperial_city.duchy = {
+				NOT = {
+					any_in_de_jure_hierarchy = {
+						culture_group = culture_group:akaviri_group
+					}
+				}
+			}
+			text = attrebus_draft_tsaesci_act_decision_no_tsaesci_province_imperial_isle
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	cost = {
+		prestige = {
+			value = 1000
+		}
+	}
+
+	effect = {
+		custom_tooltip = attrebus_draft_tsaesci_act_decision_effect_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_draft_tsaesci_act_decision
+			}
+		}
+		
+		# trigger_event = ek_attrebus_potentate.0064
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_secure_heartlands_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_secure_heartlands_decision_desc
+	selection_tooltip = attrebus_secure_heartlands_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
+			}
+		}
+		completely_controls_region = mundus_tamriel_cyrodiil_heartlands
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_cyrodiil_heartlands
+		has_title = title:k_heartlands
+		
+		custom_description = {
+			text = attrebus_secure_heartlands_decision_vassal_heartlands_positive_opinion
+			NOT = {
+				any_vassal = {
+					capital_province = { geographical_region = mundus_tamriel_cyrodiil_heartlands }
+					opinion = { target = ROOT value <= 0 }
+				}
+			}
+		}
+		
+		custom_description = {
+			text = attrebus_secure_heartlands_decision_full_control_imperial_isle
+			NOT = {
+				any_county = {
+					duchy = title:d_imperial_isle
+					county_control < full_county_control
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	effect = {
+		custom_tooltip = attrebus_secure_heartlands_desc
+		custom_tooltip = attrebus_potentate_required_task_3_fulfilled_desc
+		custom_tooltip = attrebus_potentate_ec_control_heartlands_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
+			}
+			
+			attrebus_fulfill_required_task = { ATTREBUS = root }
+		}
+		
+		# trigger_event = ek_attrebus_potentate.0062
 	}
 
 	ai_potential = {
