@@ -450,6 +450,168 @@ attrebus_secure_heartlands_decision = {
 }
 
 ##############
+#  CYRODIIL  #
+##############
+destroy_bridges_leyawiin_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_port.dds"
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { has_title = title:c_leyawiin } }
+				desc = destroy_bridges_leyawiin_decision_desc_vassal
+			}
+			desc = destroy_bridges_leyawiin_decision_desc_direct
+		}
+	}
+	
+	selection_tooltip = destroy_bridges_leyawiin_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# It's in your realm and the bridges can't have already been disabled (uses a global flag)
+		completely_controls = title:c_leyawiin
+		
+		NOT = { capital_county = title:c_leyawiin }
+		
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { NOT = { has_title = title:c_leyawiin } } # A vassal holds it
+			
+			title:c_leyawiin.holder = {
+				OR = {
+					opinion = {
+						target = ROOT
+						value >= 75
+					}
+					AND = {
+						opinion = {
+							target = ROOT
+							value >= 50
+						}
+						has_dread_level_towards = { target = ROOT level = 1 }
+					}
+					AND = {
+						opinion = {
+							target = ROOT
+							value >= 25
+						}
+						has_dread_level_towards = { target = ROOT level = 2 }
+					}
+					
+					root = { has_strong_hook = title:c_leyawiin.holder }
+				}
+			}
+		}
+		
+		trigger_else = {
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = destroy_bridges_leyawiin_decision_disables_bridges_leyawiin_01_ct
+		custom_tooltip = destroy_bridges_leyawiin_decision_enables_buildings_imperial_isle_ct
+		custom_tooltip = destroy_bridges_leyawiin_decision_enables_port_buildings_rumare_ct
+		custom_tooltip = repair_destroy_bridges_leyawiin_wait_a_month_ct
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+repair_bridges_leyawiin_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_port.dds"
+	
+	desc = repair_bridges_leyawiin_decision_desc
+	
+	selection_tooltip = repair_bridges_leyawiin_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# It's in your realm and the bridges can't have already been disabled (uses a global flag)
+		completely_controls = title:c_leyawiin
+		capital_county = title:c_leyawiin
+		
+		is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:destroy_bridges_leyawiin_decision
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls = title:d_leyawiin
+		has_title = title:d_leyawiin
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = repair_bridges_leyawiin_decision_enables_bridges_leyawiin_01_ct
+		custom_tooltip = repair_bridges_leyawiin_decision_disables_buildings_imperial_isle_ct
+		custom_tooltip = repair_bridges_leyawiin_decision_disables_port_buildings_rumare_ct
+		custom_tooltip = repair_destroy_bridges_leyawiin_wait_a_month_ct
+		
+		hidden_effect = {
+			remove_list_global_variable = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	cost = {
+		gold = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##############
 #   GENERAL  #
 ##############
 establish_lingua_tamrielis_decision = {
