@@ -42,8 +42,8 @@ interregnum_shatter_cyrodiil = {
 	}
 	scope:title_recipient = { ek_character_setup_effect = yes }
 	
-	# We give them everything we own in k_heartlands (they usurp c_imperial_city if needed)
-	title:k_heartlands = { add_to_list = titles_to_give }
+	### The Imperial Isle is seized
+	custom_tooltip = imperial_commune_creation_tooltip
 	title:d_imperial_isle = { add_to_list = titles_to_give }
 	title:c_imperial_city.title_province = { add_to_list = titles_to_give }
 	every_held_title = {
@@ -51,141 +51,259 @@ interregnum_shatter_cyrodiil = {
 		add_to_list = titles_to_give
 	}
 	
-	every_vassal = {
-		limit = { capital_province = { kingdom = title:k_heartlands } }
-		add_to_list = vassals_to_give
-	}
-	
-	create_title_and_vassal_change = {
-		type = independency
-		save_scope_as = change
-		add_claim_on_loss = no
-	}
-	
-	every_in_list = {
-		list = titles_to_give
-		change_title_holder = {
-			holder = scope:title_recipient
-			change = scope:change
-			take_baronies = yes
-		}
-	}
-	
-	every_in_list = {
-		list = vassals_to_give
-		change_liege = {
-			liege = scope:title_recipient
-			change = scope:change
-		}
-	}
-	
-	resolve_title_and_vassal_change = scope:change
-	
-	# Then they become independent
-	create_title_and_vassal_change = {
-		type = independency
-		save_scope_as = change
-		add_claim_on_loss = yes
-	}
-	scope:title_recipient = {
-		becomes_independent = {
-			change = scope:change
-		}
-	}
-
-	resolve_title_and_vassal_change = scope:change
-	
-	
-	## Now we destroy some stuff
-	destroy_title = title:e_cyrodiil
-	
-	primary_title = { save_scope_as = primary_title }
-	
-	### Vassals become independent
-	every_vassal = {
-		limit = { NOT = { this.primary_title = { target_is_de_jure_liege_or_above = scope:primary_title } } }
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = yes
-		}
-		becomes_independent = {
-			change = scope:change
-		}
-
-		resolve_title_and_vassal_change = scope:change
-	}
-	
-	### Any county that isn't de Jure under our primary title becomes independent
-	every_held_title = {
+	### If the 'Secure the Heartlands' task has been fulfilled, they get everything within the Heartlands
+	if = {
 		limit = {
-			NOT = { this = scope:primary_title }
-			NOT = { target_is_de_jure_liege_or_above = scope:primary_title }
-		}
-		add_to_list = titles_to_make_independent
-	}
-	
-	every_in_list = {
-		list = titles_to_make_independent
-		save_scope_as = current_title
-		
-		create_character = {
-			location = scope:current_title.location
-			template = new_commander_character ### EK TODO: Not that (lol)
-			faith = scope:current_title.faith
-			culture = scope:current_title.culture
-			save_scope_as = title_recipient
-			gender_female_chance = {
-				if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-					add = 0
-				}
-				else_if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-					add = 100
-				}
-				else = {
-					add = 50
-				}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
 			}
 		}
-		scope:title_recipient = { ek_character_setup_effect = yes }
 		
-		# We give them the title
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = no
-		}
+		custom_tooltip = imperial_commune_creation_full_heartlands_tooltip
+		
+		hidden_effect = {
+			# Lord-Protector of the Heartlands
+			title:k_heartlands = { add_to_list = titles_to_give }
+			
+			# Every vassal within the Heartlands is given to them
+			every_vassal = {
+				limit = { capital_province = { kingdom = title:k_heartlands } }
+				add_to_list = vassals_to_give
+			}
+			
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			
+			every_in_list = {
+				list = titles_to_give
+				change_title_holder = {
+					holder = scope:title_recipient
+					change = scope:change
+					take_baronies = yes
+				}
+			}
+			
+			every_in_list = {
+				list = vassals_to_give
+				change_liege = {
+					liege = scope:title_recipient
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+			
+			# Then they become independent
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
 
-		change_title_holder = {
-			holder = scope:title_recipient
-			change = scope:change
-			take_baronies = yes
+			resolve_title_and_vassal_change = scope:change
 		}
+	}
+	### Otherwise, they only get the Imperial Isle and c_ vassals who wish to join them
+	else = {
+		custom_tooltip = imperial_commune_creation_not_full_heartlands_tooltip
 		
-		# And we make them independent
-		scope:title_recipient = {
+		hidden_effect = {
+			every_vassal = {
+				limit = { capital_province = { duchy = title:d_imperial_isle } }
+				add_to_list = vassals_to_give
+			}
+			
+			every_vassal = {
+				limit = { capital_province = { kingdom = title:k_heartlands } NOT = { capital_province = { duchy = title:d_imperial_isle } } highest_held_title_tier < tier_duchy }
+				
+				random = {
+					chance = 25
+					
+					modifier = {
+						add = 25
+						this.culture = title_recipient.culture
+						this.faith = title_recipient.faith
+					}
+					
+					modifier = {
+						add = this.ai_honor
+					}
+					
+					modifier = {
+						add = 10
+						has_trait = content
+					}
+					
+					modifier = {
+						add = -10
+						has_trait = ambitious
+					}
+					
+					add_to_list = vassals_to_give
+				}
+			}
+			
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			
+			every_in_list = {
+				list = titles_to_give
+				change_title_holder = {
+					holder = scope:title_recipient
+					change = scope:change
+					take_baronies = yes
+				}
+			}
+			
+			every_in_list = {
+				list = vassals_to_give
+				change_liege = {
+					liege = scope:title_recipient
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+			
+			# Then they become independent
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
+
+			resolve_title_and_vassal_change = scope:change
+		}
+	}
+
+	
+	### Vassals become independent
+	hidden_effect = {
+		every_vassal = {
+			# Any vassal who does not hold land within de jure titles you own becomes independent
+			limit = {
+				NOT = {
+					this.primary_title.kingdom = {
+						any_in_de_jure_hierarchy = {
+							holder = root
+						}
+					}
+				}
+			}
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
 			becomes_independent = {
 				change = scope:change
 			}
+
+			resolve_title_and_vassal_change = scope:change
 		}
 		
-		resolve_title_and_vassal_change = scope:change
+		### Any county that isn't de Jure under our primary title becomes independent
+		every_in_list = {
+			list = titles_to_make_independent
+			save_scope_as = current_title
+			
+			create_character = {
+				location = scope:current_title.location
+				template = new_commander_character ### EK TODO: Not that (lol)
+				faith = scope:current_title.faith
+				culture = scope:current_title.culture
+				save_scope_as = title_recipient
+				gender_female_chance = {
+					if = {
+						limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
+						add = 0
+					}
+					else_if = {
+						limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
+						add = 100
+					}
+					else = {
+						add = 50
+					}
+				}
+			}
+			scope:title_recipient = { ek_character_setup_effect = yes }
+			
+			# We give them the title
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+
+			change_title_holder = {
+				holder = scope:title_recipient
+				change = scope:change
+				take_baronies = yes
+			}
+			
+			# And we make them independent
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+		}
 	}
 	
-	custom_tooltip = imperial_commune_creation_tooltip
-	custom_tooltip = rest_cyrodiil_indepndent_tooltip
-	custom_tooltip = interregnum_starts_tooltip
+	custom_tooltip = rest_cyrodiil_independent_tooltip
+	
+	if = {
+		limit = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+		}
+		custom_tooltip = attrebus_repay_debts_decision_effect_shattering
+		
+		hidden_effect = {
+			scope:title_recipient = { add_gold = 1000 }
+		}
+	}
 	
 	# We (Cyrodiilic culture group) lose the Lingua Tamrielis innovation
-	every_culture_global = {
-		limit = {
-			culture_group = culture_group:cyrodiilic_group
-			has_innovation = innovation_lingua_tamrielis
+	custom_tooltip = interregnum_loses_lingua_tamrielis
+	hidden_effect = {
+		every_culture_global = {
+			limit = {
+				culture_group = culture_group:cyrodiilic_group
+				has_innovation = innovation_lingua_tamrielis
+			}
+			remove_innovation = innovation_lingua_tamrielis
 		}
-		remove_innovation = innovation_lingua_tamrielis
 	}
+	
+	## Now we destroy some stuff, and the Interregnum begins...
+	hidden_effect = {
+		destroy_title = title:e_cyrodiilic_potentate
+	}
+	custom_tooltip = line_break
+	custom_tooltip = interregnum_starts_tooltip
 }
 
 # Attrebus stuff

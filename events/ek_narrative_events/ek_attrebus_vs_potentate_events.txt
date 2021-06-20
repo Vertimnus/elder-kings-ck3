@@ -13,19 +13,7 @@ namespace = ek_attrebus_potentate
 ek_attrebus_potentate.0001 = {
 	title = ek_attrebus_potentate.0001.t
 	
-	desc = {
-		desc = ek_attrebus_potentate.0001.desc
-		first_valid = {
-			triggered_desc = {
-				trigger = { scope:potentate = { is_alive = yes } }
-				desc = ek_attrebus_potentate.0001.desc.potentate_alive
-			}
-			triggered_desc = {
-				trigger = { scope:potentate = { is_alive = no } }
-				desc = ek_attrebus_potentate.0001.desc.potentate_dead
-			}
-		}
-	}
+	desc = ek_attrebus_potentate.0001.desc
 	
 	theme = war
 	
@@ -75,7 +63,7 @@ ek_attrebus_potentate.0001 = {
 				resolve_title_and_vassal_change = scope:change
 			}
 			
-			custom_tooltip = attrebus_potentate_cb_victory_with_current_zenas_ally_desc
+			custom_tooltip = attrebus_potentate_cb_victory_zenas_allies_deal_ct
 			
 			clear_variable_list = zenas_ally_give_land
 		}
@@ -85,6 +73,9 @@ ek_attrebus_potentate.0001 = {
 		scope:defender = {
 			every_vassal_or_below = { add_to_list = potentate_vassals }
 		}
+		# The First Legion is disbanded
+		custom_tooltip = attrebus_potentate_cb_victory_first_legion_disbanded_ct
+		scope:attrebus = { destroy_title = title:d_first_legion }
 		
 		## Now we can usurp stuff
 		hidden_effect = {
@@ -108,6 +99,7 @@ ek_attrebus_potentate.0001 = {
 			resolve_title_and_vassal_change = scope:change
 		}
 		
+		# We set up the pseudo-Emperor countdown
 		scope:attrebus = {
 			destroy_title = title:e_colovian_estates
 			
@@ -133,6 +125,22 @@ ek_attrebus_potentate.0001 = {
 		}
 	}
 
+	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
+	option = {
+		trigger = { is_ai = yes }
+		
+		name = ek_attrebus_potentate.0001.a
+		
+		interregnum_shatter_cyrodiil = yes
+	}
+	
+	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
+	option = {
+		trigger = { is_ai = no }
+		
+		name = ek_attrebus_potentate.0001.a
+	}
+	
 	# # Off with the Snake's head!
 	# option = {
 		# trigger = { scope:potentate = { is_alive = yes } }
@@ -209,22 +217,6 @@ ek_attrebus_potentate.0001 = {
 			# base = 0
 		# }
 	# }
-	
-	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
-	option = {
-		name = ek_attrebus_potentate.0001.e
-		
-		add_character_flag = bypassed_attrebus_v_potentate
-		
-		show_as_tooltip = { interregnum_shatter_cyrodiil = yes }
-	}
-	
-	# EARLY INTERREGNUM WHILE IT'S BEING BUILT
-	option = {
-		trigger = { is_ai = no }
-		
-		name = ek_attrebus_potentate.0001.f
-	}
 	
 	# after = {
 		# if = {
@@ -1205,10 +1197,33 @@ ek_attrebus_potentate.0062 = {
 		
 		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
 		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+		custom_tooltip = attrebus_potentate_ec_debts_repayed_desc
 	}
 }
 
 ### Optional task 3: The renewed Imperial Legion
+ek_attrebus_potentate.0064 = {
+	title = ek_attrebus_potentate.0064.t
+	desc = ek_attrebus_potentate.0064.desc
+	
+	theme = martial
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	option = {
+		name = ek_attrebus_potentate.0064.a
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_fort_legion_headquarters_desc
+		custom_tooltip = attrebus_potentate_attrebus_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
+	}
+}
+
+### Required task 1: The Tsaesci Remnants of Cyrodiil
 ek_attrebus_potentate.0064 = {
 	title = ek_attrebus_potentate.0064.t
 	desc = ek_attrebus_potentate.0064.desc

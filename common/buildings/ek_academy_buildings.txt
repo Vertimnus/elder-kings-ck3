@@ -2,6 +2,8 @@
 @holding_illustration_western = "gfx/interface/illustrations/holding_types/castle_western.dds"
 
 academy_01 = {
+	construction_time = slow_construction_time
+	
 	asset = { 
 		type = pdxmesh
 		names = {
@@ -11,12 +13,162 @@ academy_01 = {
 		illustration = @holding_illustration_western
 		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
 	}
+	
 	can_construct_potential = {
 		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
 	}
-	construction_time = slow_construction_time
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_1_cost
+	next_building = academy_02
+	
+	levy = normal_building_levy_tier_1
+	max_garrison = normal_building_max_garrison_tier_1
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_1
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_2
+	}
+	
 	character_modifier = {
 		monthly_prestige_gain_mult = 0.05
+	}
+}
+
+academy_02 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_magical_studies
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_2_cost
+	next_building = academy_03
+	
+	levy = normal_building_levy_tier_2
+	max_garrison = normal_building_max_garrison_tier_2
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_2
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_4
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.1
+	}
+}
+
+academy_03 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_schools_of_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_3_cost
+	next_building = academy_04
+	
+	levy = normal_building_levy_tier_3
+	max_garrison = normal_building_max_garrison_tier_3
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_3
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_6
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.15
+	}
+}
+
+academy_04 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_integrated_guilds
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_4_cost
+	
+	levy = normal_building_levy_tier_4
+	max_garrison = normal_building_max_garrison_tier_4
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_4
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_8
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.2
 	}
 }
 
@@ -25,27 +177,31 @@ academy_01 = {
 
 #Warriors Academy
 academywar_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		province = {
-			NOT = {
-				has_building = academyscho_01
-				has_building = academywar_01
-				has_building = academymag_01
-				has_building = academydip_01
-				has_building = academybard_01
-			}
-		}
+		# NOT = {
+			# has_building = academyscho_01
+			# has_building = academywar_01
+			# has_building = academymag_01
+			# has_building = academydip_01
+			# has_building = academybard_01
+		# }
 	}
+	
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
 
-	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
-	type_icon = "icon_building_outposts.dds"
-
+	
 	character_modifier = {
-		knight_limit = 1
 		knight_effectiveness_mult = 0.02
 	}
 	province_modifier = {
@@ -53,123 +209,151 @@ academywar_01 = {
 		garrison_size = 0.025
 		hostile_raid_time = 0.1
 	}
+	
 	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 #Scholars Academy
-
 academyscho_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		province = {
-			NOT = {
-				has_building = academyscho_01
-				has_building = academywar_01
-				has_building = academymag_01
-				has_building = academydip_01
-				has_building = academybard_01
-			}
-		}
+		# NOT = {
+			# has_building = academyscho_01
+			# has_building = academywar_01
+			# has_building = academymag_01
+			# has_building = academydip_01
+			# has_building = academybard_01
+		# }
 	}
+	
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
-
-	construction_time = quick_construction_time
-	cost_gold = normal_building_tier_1_cost
-	type_icon = "icon_building_outposts.dds"
-
-	character_modifier = {
-		monthly_prestige_gain_mult = 0.05
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
 	}
-	province_modifier = {
-		tax_mult = 0.01
+
+	cost_gold = normal_building_tier_1_cost
+	
+	character_modifier = {
+		monthly_lifestyle_xp_gain_mult = 0.05
+		cultural_head_fascination_mult = 0.05
 	}
 	county_modifier = { 
 		development_growth_factor = 0.01
 	}
+	
 	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 #Mage Academy
-
 academymag_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		province = {
-			NOT = {
-				has_building = academyscho_01
-				has_building = academywar_01
-				has_building = academymag_01
-				has_building = academydip_01
-				has_building = academybard_01
-			}
-		}
+		# NOT = {
+			# has_building = academyscho_01
+			# has_building = academywar_01
+			# has_building = academymag_01
+			# has_building = academydip_01
+			# has_building = academybard_01
+		# }
 	}
+	
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
 
-	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
-	type_icon = "icon_building_outposts.dds"
 	
 	character_modifier = {
-		men_at_arms_maintenance = -0.05
-		siege_weapon_siege_value_mult = 0.05
+		mages_siege_value_mult = 0.05
+		mages_damage_mult = 0.02
+		mages_pursuit_mult = 0.02
 	}
+	
 	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 #Diplomatic Academy
 #I dont know what bonuses to add to this
-
 academydip_01 = {
+		construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		province = {
-			NOT = {
-				has_building = academyscho_01
-				has_building = academywar_01
-				has_building = academymag_01
-				has_building = academydip_01
-				has_building = academybard_01
-			}
-		}
+		# NOT = {
+			# has_building = academyscho_01
+			# has_building = academywar_01
+			# has_building = academymag_01
+			# has_building = academydip_01
+			# has_building = academybard_01
+		# }
 	}
+	
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
 	
-	construction_time = quick_construction_time
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
 	cost_gold = normal_building_tier_1_cost
-	type_icon = "icon_building_outposts.dds"
 	
 	character_modifier = {
-		diplomacy_per_prestige_level = 1 #it may be too much for level 1, specially if it stacks with other buildings like this one
-		owned_personal_scheme_success_chance_add = 5
+		personal_scheme_power_mult = 0.01
+		owned_personal_scheme_success_chance_add = 1
 	}
-	#next_building =
+	
+	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 #Bard Academy
 academybard_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		province = {
-			NOT = {
-				has_building = academyscho_01
-				has_building = academywar_01
-				has_building = academymag_01
-				has_building = academydip_01
-				has_building = academybard_01
-			}
-		}
+		# NOT = {
+			# has_building = academyscho_01
+			# has_building = academywar_01
+			# has_building = academymag_01
+			# has_building = academydip_01
+			# has_building = academybard_01
+		# }
 	}
+	
 	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
 
-	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
-	type_icon = "icon_building_outposts.dds"
-
+	
 	province_modifier = {
 		monthly_income = normal_building_tax_tier_1
 		tax_mult = 0.05
@@ -177,4 +361,8 @@ academybard_01 = {
 	county_modifier = {
 		county_opinion_add = 5
 	}
+	
+	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
