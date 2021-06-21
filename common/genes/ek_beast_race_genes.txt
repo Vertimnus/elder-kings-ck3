@@ -3,7 +3,7 @@
 	beast_race_features = {
 		inheritable = yes
 
-		human = {
+		human_features = {
 			index = 0
 			male = {}
 			female = male
@@ -91,15 +91,17 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.5  0.5 }
-						{ 0.5  0.5 }
+						{ 1.0  1.0 }
+						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
+						diffuse = replace
 					}
 					priority = 5
 					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
 				}
+
+
 
 				decal = { #base fur texture. Applied after all fur patterns to retain some base fur colour.
 					body_part = torso
@@ -108,15 +110,32 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.5  0.5 }
-						{ 0.5  0.5 }
+						{ 1.0  1.0 }
+						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
+						diffuse = replace
 					}
 					priority = 5
 					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
 				}
+
+				decal = { #eyeliner
+				body_part = head
+				textures = {
+					diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_eyeliner.dds"
+				}
+				alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+					#gene strength%, decal alpha
+					{ 1.0  1.0 }
+					{ 1.0  1.0 }
+				}
+				blend_modes = {              #overlay/replace/hard_light/multiply
+					diffuse = replace
+				}
+				priority = 5
+				decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+			}
 			}
 
 			female = {
@@ -152,6 +171,7 @@
 				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 1.0 max = 0.0 }	 }
 
 				setting = { attribute = "head_eye_scale"	value = { min = 0.1 max = 0.2 }	}
+				setting = { attribute = "eye_depth"	value = { min = 0.05 max = 0.15 }	}
 
 				texture_override = {
 					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
@@ -207,11 +227,11 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.5  0.5 }
-						{ 0.5  0.5 }
+						{ 1.0  1.0 }
+						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
+						diffuse = replace
 					}
 					priority = 5
 					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
@@ -224,15 +244,32 @@
 					}
 					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
 						#gene strength%, decal alpha
-						{ 0.5  0.5 }
-						{ 0.5  0.5 }
+						{ 1.0  1.0 }
+						{ 1.0  1.0 }
 					}
 					blend_modes = {              #overlay/replace/hard_light/multiply
-						diffuse = multiply
+						diffuse = replace
 					}
 					priority = 5
 					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
 				}
+
+				decal = { #eyeliner
+				body_part = head
+				textures = {
+					diffuse = "gfx/models/portraits/decals/male_head/khajiit_head_eyeliner.dds"
+				}
+				alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+					#gene strength%, decal alpha
+					{ 1.0  1.0 }
+					{ 1.0  1.0 }
+				}
+				blend_modes = {              #overlay/replace/hard_light/multiply
+					diffuse = replace
+				}
+				priority = 5
+				decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+			}
 			}
 			boy = male
 			girl = female
@@ -282,6 +319,7 @@
 			}
 			female = {
 				setting = { attribute = "head_eye_scale"	value = { min = 0.0 max = 0.8 }	}
+				setting = { attribute = "eye_depth"	value = { min = 0.0 max = 0.6 }	}
 			}
 			boy = male
 			girl = female
@@ -4771,7 +4809,8 @@
 			index = 1
 			male = {
 				setting = { attribute = "khajiit_fangs"	value = { min = 0.0 max = 1.0 }	}
-				setting = { attribute = "mouth_lower_lip_size"	value = { min = 0.0 max = 0.7 } }
+				setting = { attribute = "mouth_lower_lip_size"	value = { min = 0.0 max = -1.0 } }
+
 			}
 			female = {
 				setting = { attribute = "khajiit_fangs"	value = { min = 0.0 max = 0.7 }	}
