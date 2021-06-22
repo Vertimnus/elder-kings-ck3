@@ -38,29 +38,20 @@ academy_government = {
 }
 
 legionary_government = {
-	create_cadet_branches = yes
-	rulers_should_have_dynasty = yes
-	dynasty_named_realms = no
-
 	primary_holding = castle_holding
-	valid_holdings = { tower_holding city_holding }
-	required_county_holdings = { castle_holding city_holding church_holding }
+	court_generate_spouses = no
+	court_generate_commanders = 5
+	valid_holdings = { castle_holding city_holding }
+	required_county_holdings = { city_holding castle_holding church_holding }
 
-	### EK TODO: Special contracts (more work needed...)
-	vassal_contract = {
-		feudal_government_taxes
-		feudal_government_levies
-		special_contract
-		religious_rights
-		fortification_rights
-		coinage_rights
-		succession_rights
-		war_declaration_rights
-		council_rights
-		title_revocation_rights
+	ai = {
+		use_lifestyle = yes
+		arrange_marriage = no
+		use_goals = no
+		use_scripted_guis = no
+		perform_religious_reformation = no
 	}
-	
-	# flag = government_can_raid_rule 
-	# flag = government_can_raid_across_water_rule
+
+	vassal_contract = { republic_government_obligations }
 	color = hsv{ 0.47 0.50 0.58 }
 }
