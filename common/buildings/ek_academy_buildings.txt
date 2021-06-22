@@ -2,91 +2,175 @@
 @holding_illustration_western = "gfx/interface/illustrations/holding_types/castle_western.dds"
 
 academy_01 = {
-		asset = { 
-			type = pdxmesh
-			names = {
-				"building_western_castle_01_mesh"
-				"building_western_castle_01_b_mesh" 
-			}	
-			illustration = @holding_illustration_western
-			soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
-		}
 	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	construction_time = slow_construction_time
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
 	cost_gold = main_building_tier_1_cost
-	max_garrison = normal_building_max_garrison_tier_1	
+	next_building = academy_02
+	
+	levy = normal_building_levy_tier_1
+	max_garrison = normal_building_max_garrison_tier_1
 	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_1
-
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_2
+	}
+	
 	character_modifier = {
 		monthly_prestige_gain_mult = 0.05
 	}
-	next_building = academy_02
 }
 
 academy_02 = {
-	asset = { 
-			type = pdxmesh
-			names = {
-				"building_western_castle_01_mesh"
-				"building_western_castle_01_b_mesh" 
-			}	
-			illustration = @holding_illustration_western
-			soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
-		}
 	construction_time = slow_construction_time
-	cost_gold = main_building_tier_2_cost
-	max_garrison = normal_building_max_garrison_tier_2
-	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_2	
 	
-	character_modifier = {
-	monthly_prestige_gain_mult = 0.06
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
 	}
 	
-	next_building = academy_03	
-
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_magical_studies
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_2_cost
+	next_building = academy_03
+	
+	levy = normal_building_levy_tier_2
+	max_garrison = normal_building_max_garrison_tier_2
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_2
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_4
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.1
+	}
 }
 
 academy_03 = {
-	asset = { 
-			type = pdxmesh
-			names = {
-				"building_western_castle_01_mesh"
-				"building_western_castle_01_b_mesh" 
-			}	
-			illustration = @holding_illustration_western
-			soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
-		}
 	construction_time = slow_construction_time
-	cost_gold = main_building_tier_3_cost
-	max_garrison = normal_building_max_garrison_tier_3
-	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_3	
 	
-	character_modifier = {
-	monthly_prestige_gain_mult = 0.08
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
 	}
 	
-	next_building = academy_04	
-
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_schools_of_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_3_cost
+	next_building = academy_04
+	
+	levy = normal_building_levy_tier_3
+	max_garrison = normal_building_max_garrison_tier_3
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_3
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_6
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.15
+	}
 }
 
 academy_04 = {
-	asset = { 
-			type = pdxmesh
-			names = {
-				"building_western_castle_01_mesh"
-				"building_western_castle_01_b_mesh" 
-			}	
-			illustration = @holding_illustration_western
-			soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
-		}
 	construction_time = slow_construction_time
-	cost_gold = main_building_tier_4_cost	
-	max_garrison = normal_building_max_garrison_tier_4
-	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_4	
 	
-	character_modifier = {
-	monthly_prestige_gain_mult = 0.1
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
 	}
 	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_integrated_guilds
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_4_cost
+	
+	levy = normal_building_levy_tier_4
+	max_garrison = normal_building_max_garrison_tier_4
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_4
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_8
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.2
+	}
 }
 
 #The different academy types that can be built in the academy holding
@@ -96,28 +180,46 @@ academy_04 = {
 #Raid time, garrison size, levy reinforcements, nยบ knights, knight efectiveness.
 
 academywar_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		building_requirement_academy = { LEVEL = 01 }
-		building_academywar_requirement_terrain = yes
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
 	}
-	can_construct_showing_failures_only {
+	
+	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
 	}
 
 	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
 	type_icon = "icon_building_outposts.dds"
 
+	
+	character_modifier = {
+		knight_limit = 1
+		knight_effectiveness_mult = 0.02
+	}
 	province_modifier = {
-				levy_reinforcement_rate = 0.05
-				garrison_size = 0.02
-				
+		levy_reinforcement_rate = 0.05
+		garrison_size = 0.025
+		hostile_raid_time = 0.1
 	}
-	ai_value = {
-		base = 10
-		ai_general_building_modifier = yes
-	}
+	
 	next_building = academywar_02
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 academywar_02 = {
@@ -327,30 +429,48 @@ academywar_08 = {
 #Scholars Academy
 #Prestige gain, holding tax mult, dev growth, county build cost, learning lifestyle exp.
 academyscho_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		building_requirement_academy = { LEVEL = 01 }
-		building_academyscho_requirement_terrain = yes
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
 	}
-	can_construct_showing_failures_only {
+	
+	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
 	}
 
 	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
 	type_icon = "icon_building_outposts.dds"
 
+	
 	character_modifier = {
 		monthly_prestige_gain_mult = 0.05
 	}
 	province_modifier = {
 		tax_mult = 0.01
+		monthly_lifestyle_xp_gain_mult = 0.05
+		cultural_head_fascination_mult = 0.05
+	}
+	county_modifier = { 
+		development_growth_factor = 0.01
 	}
 	
-	ai_value = {
-		base = 10
-		ai_general_building_modifier = yes
-	}
 	next_building = academyscho_02
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 academyscho_02 = {
@@ -563,12 +683,26 @@ academyscho_08 = {
 #MAA maintenance, Siege weapon efectivness & siege weapon toughness, battlemage maa efectivness & toughness, health boost minot, prestige
 
 academymag_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		building_requirement_academy = { LEVEL = 01 }
-		building_academymag_requirement_terrain = yes
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
 	}
-	can_construct_showing_failures_only {
+	
+	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
 	}
 
 	construction_time = quick_construction_time
@@ -576,17 +710,16 @@ academymag_01 = {
 	type_icon = "icon_building_outposts.dds"
 	
 	character_modifier = {
-		
+		men_at_arms_maintenance = -0.05
 		siege_weapon_siege_value_mult = 0.05
-		siege_weapon_toughness_add = 1
+		mages_siege_value_mult = 0.05
+		mages_damage_mult = 0.02
+		mages_pursuit_mult = 0.02
 	}
-
-	ai_value = {
-		base = 10
-		ai_general_building_modifier = yes
-	}
-
-	next_building = academymag_02
+	
+	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 academymag_02 = {
@@ -602,8 +735,7 @@ academymag_02 = {
 	cost_gold = normal_building_tier_2_cost
 	type_icon = "icon_building_outposts.dds"
 	
-	character_modifier = {
-		
+	character_modifier = {	
 		siege_weapon_siege_value_mult = 0.06
 		siege_weapon_toughness_add = 2
 	}
@@ -802,31 +934,42 @@ academymag_08 = {
 #Personal scheme sucess chance, county control%, diplo lifestyle ,  diplo x fame
 
 academydip_01 = {
+		construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		building_requirement_academy = { LEVEL = 01 }
-		building_academydip_requirement_terrain = yes
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
 	}
-	can_construct_showing_failures_only {
+	
+	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
 	}
 	
 	construction_time = quick_construction_time
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
 	cost_gold = normal_building_tier_1_cost
 	type_icon = "icon_building_outposts.dds"
 	
 	character_modifier = {
-		 
-		 
-		owned_personal_scheme_success_chance_add = 2
-		
+		diplomacy_per_prestige_level = 1 #it may be too much for level 1, specially if it stacks with other buildings like this one
+		owned_personal_scheme_success_chance_add = 5
+		personal_scheme_power_mult = 0.01
+		owned_personal_scheme_success_chance_add = 1
 	}
-
-	ai_value = {
-		base = 10
-		ai_general_building_modifier = yes
-	}
-
+	
 	next_building = academydip_02
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 academydip_02 = {
@@ -1053,33 +1196,45 @@ academydip_08 = {
 
 #Bard Academy
 #county opinion, tax mult, month incomme,  prestige, renown flat, renown% 
-academybard_01 = {
+ academybard_01 = {
+	construction_time = quick_construction_time
+	
 	can_construct_potential = {
-		building_requirement_academy = { LEVEL = 01 }
-		building_academybard_requirement_terrain = yes
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
 	}
-	can_construct_showing_failures_only {
+	
+	can_construct_showing_failures_only = {
 		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
 	}
 
 	construction_time = quick_construction_time
 	cost_gold = normal_building_tier_1_cost
 	type_icon = "icon_building_outposts.dds"
 
+	
 	province_modifier = {
-		
+		monthly_income = normal_building_tax_tier_1
 		tax_mult = 0.05
 	}	
 	county_modifier = {
-		county_opinon_add = 5
+		county_opinion_add = 5
 	}
-
-	ai_value = {
-		base = 10
-		ai_general_building_modifier = yes
-	}
-
+	
 	next_building = academybard_02
+	
+	type_icon = "icon_building_outposts.dds"
 }
 
 academybard_02 = {
