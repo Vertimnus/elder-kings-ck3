@@ -46,17 +46,25 @@ crown_authority = {
 				}
 			}
 			
-			# Might makes right
+			### EK EDIT: Might makes right
 			trigger_if = {
 				limit = { root.culture = { has_innovation = innovation_plenary_assemblies } }
 				always = yes
 			}
+			trigger_else_if = {
+				limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+				OR = {
+					piety_level >= 3
+					prestige_level >= 3
+				}
+			}
 			trigger_else = {
-				root = { prestige_level >= 3 }
+				prestige_level >= 3
 			}
 		}
 		
 		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
 			prestige = {
 				if = {
 					limit = {
@@ -66,6 +74,23 @@ crown_authority = {
 						}
 					}
 					add = increase_crown_authority_prestige_cost
+				}
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						NOR = {
+							has_realm_law = crown_authority_2
+							has_realm_law = crown_authority_3
+						}
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_crown_authority_prestige_cost
+					divide = 2
 				}
 			}
 		}
@@ -119,23 +144,45 @@ crown_authority = {
 				}
 			}
 			
-			# Might makes right
+			### EK EDIT: Might makes right
 			trigger_if = {
 				limit = { root.culture = { has_innovation = innovation_royal_prerogative } }
 				always = yes
 			}
+			trigger_else_if = {
+				limit = { faith = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } } }
+				OR = {
+					piety_level >= 4
+					prestige_level >= 4
+				}
+			}
 			trigger_else = {
-				root = { prestige_level >= 4 }
+				prestige_level >= 4
 			}
 		}
-
+		
 		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
 			prestige = {
 				if = {
 					limit = {
 						NOT = { has_realm_law = crown_authority_3 }
 					}
 					add = increase_crown_authority_prestige_cost
+				}
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = crown_authority_3 }
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_crown_authority_prestige_cost
+					divide = 2
 				}
 			}
 		}
@@ -182,23 +229,45 @@ crown_authority = {
 				}
 			}
 			
-			# Might makes right
+			### EK EDIT: Might makes right
 			trigger_if = {
 				limit = { root.culture = { has_innovation = innovation_royal_prerogative } }
 				always = yes
 			}
+			trigger_else_if = {
+				limit = { faith = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } } }
+				OR = {
+					piety_level >= 5
+					prestige_level >= 5
+				}
+			}
 			trigger_else = {
-				root = { prestige_level >= 5 }
+				prestige_level >= 5
 			}
 		}
 		
 		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
 			prestige = {
 				if = {
 					limit = {
 						NOT = { has_realm_law = crown_authority_3 }
 					}
 					add = increase_crown_authority_prestige_cost
+				}
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = crown_authority_3 }
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_crown_authority_prestige_cost
+					divide = 2
 				}
 			}
 		}
@@ -250,6 +319,7 @@ tribal_authority = {
 		}
 		
 		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
 			prestige = {
 				if = {
 					limit = {
@@ -259,6 +329,23 @@ tribal_authority = {
 						}
 					}
 					add = increase_tribal_authority_prestige_cost
+				}
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						NOR = {
+							has_realm_law = tribal_authority_2
+							has_realm_law = tribal_authority_3
+						}
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_tribal_authority_prestige_cost
+					divide = 2
 				}
 			}
 		}
@@ -306,14 +393,29 @@ tribal_authority = {
 				}
 			}
 		}
-
+		
 		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
 			prestige = {
 				if = {
 					limit = {
 						NOT = { has_realm_law = tribal_authority_3 }
 					}
 					add = increase_tribal_authority_prestige_cost
+				}
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						NOT = { has_realm_law = tribal_authority_3 }
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_tribal_authority_prestige_cost
+					divide = 2
 				}
 			}
 		}
@@ -357,7 +459,25 @@ tribal_authority = {
 			}
 		}
 		
-		pass_cost = { prestige = increase_tribal_authority_prestige_cost }
+		pass_cost = {
+			### EK EDIT: Might makes right - Devotion: Pay half the price in piety
+			prestige = {
+				add = increase_tribal_authority_prestige_cost
+				if = {
+					limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+					divide = 2
+				}
+			}
+			piety = {
+				if = {
+					limit = {
+						faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					}
+					add = increase_tribal_authority_prestige_cost
+					divide = 2
+				}
+			}
+		}
 		
 		on_pass = {
 			# Increment cooldown breaker tally, if appropriate.

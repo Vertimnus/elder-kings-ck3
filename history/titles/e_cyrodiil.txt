@@ -21,15 +21,6 @@
 		holder = 0 #Empire and Potentate collapse after Savirien-Chorak gets murdered
 		reset_name = yes
 	}
-	3351.4.18 = { #HistoryTemporary Move Aixnieras-Ves to a titular title
-		holder = chorak_101  #Aixnieras-Ves
-		#name = CYRODIILIC_POTENTATE
-	}
-	3362.12.4 = {
-		holder = sosildor_100 #Attrebus takes title from Potentate Remnant
-		reset_name = yes
-	}
-	3368.9.22 = { holder = 0 } #Death of Attrebus, EC declares Imperial Commune
 	3453.1.1 = { holder = blackdrake_101 } #The Black Drake, First of the Longhouse Emperors
 	3461.1.2 = { holder = blackdrake_102 }
 	3486.1.1 = { holder = blackdrake_105 } #Emperor Leovic, last of the Longhouse emperors
@@ -40,7 +31,7 @@
 #Colovian Estates, titular e_
 e_colovian_estates = {
 	3351.7.2 = { holder = sosildor_100 }
-	3362.1.1 = { holder = 0 }
+	3362.12.4 = { holder = 0 }
 	3368.9.22 = { holder = tor_912 } #Hieron of the Estates
 	
 }
@@ -81,12 +72,12 @@ e_nibenay = {
 ##Cyrodiilic Potentate
 e_cyrodiilic_potentate = {
 	3351.4.18 = {
-		holder = chorak_101
-		name = CYRODIILIC_POTENTATE } #Aixnieras-Ves
-	3362.12.4 = {
-		holder = 0 #Attrebus takes title from Potentate Remnant
-		reset_name = yes
+		holder = chorak_101 #Aixnieras-Ves
 	}
+	3362.12.4 = {
+		holder = sosildor_100 #Attrebus takes title from Potentate Remnant
+	}
+	3368.9.22 = { holder = 0 } #Death of Attrebus, EC declares Imperial Commune
 }
 
 ##Kingdom of Heartlands
@@ -141,7 +132,8 @@ c_arcanorum = {
 	2920.12.6 = { holder = akavir_99 } #Versidue-Shaie
 	3244.2.24 = { holder = akavir_100 } #Savirian-Chorak
 	3350.12.18 = { holder = chorak_101 } #Aixnieras-Vas
-	3362.1.1 = { holder = sosildor_100 }
+	3362.12.4 = { holder = sosildor_100 }
+	3368.2.13 = { holder = basicilius_1000 }	#EC loyalist after Attrebus takes over, installed as new leader of the legion. later imperial battlemage
 	3501.12.12 = { holder = tharn_65 } #HistoryTemporary - Replace with Molag Kena
 }
 c_bastion = {
@@ -160,9 +152,12 @@ c_bastion = {
 	2851.12.29 = { holder = reman_103 }
 	2877.2.12 = { holder = reman_104 }
 	2920.12.6 = { holder = akavir_99 } #Versidue-Shaie
+	3050.1.1 = { holder = toddus_howardus }
+	3051.1.1 = { holder = akavir_99 } #Versidue-Shaie
 	3244.2.24 = { holder = akavir_100 } #Savirian-Chorak
 	3350.12.18 = { holder = chorak_101 } #Aixnieras-Vas
-	3362.1.1 = { holder = sosildor_100 }
+	3351.4.18 = { holder = leztixus_1000 } #Imperialised Tsaesci, serving under Aixnieras
+	3362.12.4 = { holder = sosildor_100 } #Leztixus gets killed, Attrebus takes over IC, legion temporarily disbanded
 	3501.12.12 = { holder = tharn_65 } #HistoryTemporary - Replace with Molag Kena
 }
 c_sinkhole = {
@@ -184,6 +179,7 @@ c_sinkhole = {
 	3244.2.24 = { holder = akavir_100 } #Savirian-Chorak
 	3350.12.18 = { holder = chorak_101 } #Aixnieras-Vas
 	3362.1.1 = { holder = sosildor_100 }
+	3367.1.1 = { holder = nipia_1143 }
 	3501.12.12 = { holder = tharn_65 } #HistoryTemporary - Replace with Molag Kena
 }
 c_rumare = {
@@ -207,6 +203,22 @@ c_rumare = {
 	3362.1.1 = { holder = sosildor_100 }
 	3501.12.12 = { holder = tharn_65 } #HistoryTemporary - Replace with Molag Kena
 }
+d_nikel = {
+	3367.1.1 = { holder = 0 }
+}
+c_nikel = {
+	3367.1.1 = { holder = nipia_1143 }
+}
+c_empire = {
+	3367.1.1 = { holder = nipia_1143 }
+}
+c_yellow_tick = {
+	3367.1.1 = { holder = nipia_1143 }
+}
+c_breakneck = {
+	3367.1.1 = { holder = nipia_1143 }
+}
+
 d_caractacus = {
 	3240.1.1 = { holder = terentius_97 }
 	3280.1.1 = { holder = terentius_99 }
@@ -326,24 +338,140 @@ c_shinbone = {
 	3502.1.1 = { holder = agrippa_107 }
 }
 d_homestead = {
+	3300.1.1 = { liege = e_cyrodiil }
+	3338.1.1 = { holder = osician_225 }
+	3351.4.18 = { liege = e_cyrodiilic_potentate }
+	3369.1.1 = {
+		liege = 0
+		holder = ottiliae_251
+	}
+	3373.1.1 = { holder = ottiliae_252 }
+	3410.1.1 = { holder = 0 }
 	3496.1.3 = { holder = nipia_1000 }
 }
 c_homestead = {
-	3424.12.12 = { holder = nipia_1003 }
-	3443.7.2 = { holder = nipia_1002 }
+	3338.1.1 = { 
+		holder = osician_225
+	}
+	3369.1.1 = {
+		liege = 0
+		holder = ottiliae_251
+	}
+	3373.1.1 = { holder = ottiliae_252 }
+	3410.1.1 = { liege = d_bravil }
+	3420.1.1 = { holder = ottiliae_255 }
+	3460.1.1 = { holder = ottiliae_256 }
+	3490.1.1 = { holder = ottiliae_257 }
 	3496.1.3 = { holder = nipia_1000 }
+	3521.1.1 = { holder = nipia_1001 }
+	3542.1.1 = { holder = nipia_1011 }
+	3550.11.12 = { holder = ottiliae_260 }
+	3608.1.1 = { holder = ottiliae_261 }
+	3638.1.1 = { holder = ottiliae_262 }
+	3681.1.1 = { holder = ottiliae_263 }
+	3705.1.1 = { holder = ottiliae_264 }
+	3723.1.1 = { holder = ottiliae_265 }
 }
 c_sardavar = {
-	3496.10.9 = { holder = nipia_1000 }
-}
-c_pell_gate = {
-	3496.3.3 = { holder = nipia_1000 }
+	3496.1.3 = { holder = nipia_1000 }
+	3521.1.1 = { holder = nipia_1001 }
+	3542.1.1 = { holder = nipia_1011 }
 }
 c_white_rose = {
+	3338.1.1 = { holder = osician_225 }
+	3369.1.1 = {
+		liege = 0
+		holder = ottiliae_251
+	}
+	3373.1.1 = { holder = ottiliae_252 }
+	3410.1.1 = { liege = d_bravil }
+	3420.1.1 = { holder = ottiliae_255 }
+	3460.1.1 = { holder = ottiliae_256 }
+	3490.1.1 = { holder = ottiliae_257 }
 	3496.3.3 = {
 		liege = d_homestead
 		holder = nipia_1008
 	}
+	3532.12.12 = { holder = nipia_1009 }
+}
+c_roebeck = {
+	3338.1.1 = { holder = osician_225 }
+	3369.1.1 = {
+		liege = 0
+		holder = ottiliae_251
+	}
+	3373.1.1 = { holder = ottiliae_252 }
+	3410.1.1 = { liege = d_bravil }
+	3420.1.1 = { holder = ottiliae_255 }
+	3460.1.1 = { holder = ottiliae_256 }
+	3490.1.1 = { holder = ottiliae_257 }
+	3496.1.3 = { holder = nipia_1000 }
+	3521.1.1 = { holder = nipia_1001 }
+	3542.1.1 = { holder = nipia_1011 }
+	3550.11.12 = { holder = ottiliae_260 }
+	3608.1.1 = { holder = ottiliae_261 }
+	3638.1.1 = { holder = ottiliae_262 }
+	3681.1.1 = { holder = ottiliae_263 }
+	3705.1.1 = { holder = ottiliae_264 }
+	3723.1.1 = { holder = ottiliae_265 }
+}
+c_pell_gate = {
+	3339.1.1 = {
+		liege = d_homestead
+		holder = pell_gate_1000
+	}
+	3384.1.1 = { holder = pell_gate_1001 }
+	3496.1.3 = { holder = nipia_1000 }
+	3521.1.1 = { holder = nipia_1001 }
+	3542.1.1 = { holder = nipia_1011 }
+}
+
+d_variela = {
+	3300.1.1 = { liege = e_cyrodiilic_potentate }
+	3341.1.1 = { holder = kssazi_999 }
+	3356.1.1 = { holder = kssazi_1000 }
+	3362.12.4 = { holder = 0 }
+}
+c_variela = {
+	3300.1.1 = { liege = e_cyrodiil }
+	3341.1.1 = { holder = kssazi_999 }
+	3356.1.1 = { holder = kssazi_1000 }
+	3362.12.4 = { holder = osician_228 }
+	3406.1.1 = { holder = osician_232 }
+	3410.1.1 = { liege = d_bravil }
+	3440.1.1 = { holder = osician_233 }
+	#3490.1.1 = { holder = 450 }
+	#3542.1.1 = { holder = 451 }
+	#3570.1.1 = { holder = 452 }
+	#3605.1.1 = { holder = 453 }
+	#3635.1.1 = { holder = 454 }
+	#3674.1.1 = { holder = 455 }
+	#3690.1.1 = { holder = 456 }
+	#3731.1.1 = { holder = 457 }
+	#3769.1.1 = { holder = 458 }
+	#3787.1.1 = { holder = 459 }
+	#3833.1.1 = { holder = 460 }
+}
+c_veyond_cove = {
+	3341.1.1 = { holder = kssazi_999 }
+	3356.1.1 = { holder = kssazi_1000 }
+	3420.1.1 = { holder = kssazi_1001 }
+	3436.1.1 = { holder = kssazi_1002 }
+}
+c_mingo = {
+	3332.1.1 = { holder = bascilius_999 }
+	3341.1.1 = { liege = d_variela }
+	3368.1.1 = { holder = basicilius_1000 }
+}
+c_alessia = {
+	3351.4.18 = { holder = leztixus_1000 } #Imperialised Tsaesci, serving under Aixnieras
+	3362.12.4 = { holder = 0 } #Leztixus gets killed, Attrebus takes over IC, legion temporarily disbanded
+	3367.1.1 = { holder = basicilius_1000 }	#EC loyalist after Attrebus takes over, installed as new leader. later imperial battlemage
+}
+c_sardavar = {
+	3351.4.18 = { holder = leztixus_1000 } #Imperialised Tsaesci, serving under Aixnieras
+	3362.12.4 = { holder = 0 } #Leztixus gets killed, Attrebus takes over IC, legion temporarily disbanded
+	3367.1.1 = { holder = basicilius_1000 }	#EC loyalist after Attrebus takes over, installed as new leader. later imperial battlemage
 }
 
 ##Kingdom of Chorrol
@@ -1766,10 +1894,8 @@ c_hame = {
 	3300.1.1 = { liege = d_facian }
 	3307.1.1 = { holder = ciero_3005 }
 	3328.1.1 = { holder = ciero_3006 }
-	3361.1.1 = {
-		holder = ciero_3013 
-		liege = d_sundercliff 
-	}
+	3361.1.1 = { holder = ciero_3013 }
+	3362.12.4 = { liege = d_sundercliff } #Ilavio Valentian gets county after war
 	3398.1.1 = { holder = ciero_3014 }
 	3443.1.1 = { holder = ciero_3015 }
 }
@@ -1780,10 +1906,8 @@ c_cyrothrace = {
 	3300.1.1 = { liege = d_facian }
 	3307.1.1 = { holder = ciero_3005 }
 	3328.1.1 = { holder = ciero_3006 }
-	3361.1.1 = {
-		holder = ciero_3013 
-		liege = d_sundercliff 
-	}
+	3361.1.1 = { holder = ciero_3013 }
+	3362.12.4 = { liege = d_sundercliff } #Ilavio Valentian gets county after war
 	3398.1.1 = { holder = ciero_3014 }
 	3443.1.1 = { holder = ciero_3015 }	
 }
@@ -1839,6 +1963,7 @@ c_wyril = {
 		liege = e_cyrodiilic_potentate
 		holder = varyuis_999
 	}
+	3362.12.4 = { liege = d_sundercliff } #Ilavio Valentian gets county after war
 	3368.1.1 = { holder = varyuis_1000 }
 	3501.1.1 = { holder = varyuis_1001 }
 }
@@ -2509,7 +2634,7 @@ d_blackwood = {
 	3367.1.1 = { holder = arcato_100 }
 	3499.12.12 = {
 		liege = k_leyawiin
-		holder = vandacia_001 #HistoryTemporary - replace with Am-Halu
+		holder = vandacia_1000 #HistoryTemporary - replace with Am-Halu
 	}
 }
 c_blackwood = {
@@ -2533,7 +2658,7 @@ d_bulwark = {
 	3367.1.1 = { holder = arcato_101 }
 	3499.12.12 = {
 		liege = k_leyawiin
-		holder = vandacia_001 #HistoryTemporary - replace with Am-Halu
+		holder = vandacia_1000 #HistoryTemporary - replace with Am-Halu
 	} 
 }
 c_bulwark = {
@@ -2541,7 +2666,7 @@ c_bulwark = {
 	3367.1.1 = { holder = arcato_101 }
 	3499.12.12 = {
 		liege = k_leyawiin
-		holder = vandacia_001 #HistoryTemporary - replace with Am-Halu
+		holder = vandacia_1000 #HistoryTemporary - replace with Am-Halu
 	} 
 }
 

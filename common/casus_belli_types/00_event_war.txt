@@ -12,7 +12,7 @@ attrebus_potentate_cb = {
 
 	allowed_for_character = {}
 	allowed_against_character = {
-		has_title = title:e_cyrodiil
+		has_title = title:e_cyrodiilic_potentate
 	}
 
 	is_allowed_claim_title = {
@@ -72,23 +72,33 @@ attrebus_potentate_cb = {
 	}
 	
 	on_victory = {
+		### Most of the effects are in the follow up event ek_attrebus_potentate.0001
+		
 		scope:attacker = { show_pow_release_message_effect = yes }
 		
 		scope:attacker = {
-			every_war_ally = {
-				limit = { dynasty = dynasty:130005 }
-				add_to_list = zenas_ally
+			if = {
+				limit = {
+					any_war_ally = { dynasty = character:valentian_99.dynasty }
+				}
+				every_war_ally = {
+					limit = { dynasty = character:valentian_99.dynasty }
+					add_to_list = zenas_ally
+				}
 			}
+		
+			# Deal with the Liodes: for his support in the war, he gets some of the eastern land
+			character:valentian_99 = { save_scope_as = liodes }
+			custom_tooltip = attrebus_potentate_cb_victory_with_liodes_desc
 		}
 		
-		character:valentian_99 = { save_scope_as = liodes }
-		custom_tooltip = attrebus_potentate_cb_victory_with_liodes_desc
-		
+		# You seize all land directly held by the Potentate
 		custom_tooltip = attrebus_potentate_cb_seize_potentate_held_land
-		# The usurpation is done in the event
+		
+		# The first Legion is disbanded, as it sided with the Potentate
+		custom_tooltip = attrebus_potentate_cb_victory_first_legion_disbanded_ct
 		
 		scope:attacker = { 
-			give_nickname = nick_the_negotiator
 			add_prestige = 1000
 		}
 		

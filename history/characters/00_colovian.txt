@@ -323,6 +323,9 @@ sosildor_98 = {
 	religion = imperial_cult
 	culture = colovian
 	trait = zealous
+	trait = bastard
+
+	father = odiil_98b
 	
 	3290.1.1 = { birth = yes }
 	3316.1.1 = { add_spouse = sosildor_99 }
@@ -501,6 +504,16 @@ odiil_98 = {
 	
 	3247.1.1 = { birth = yes }
 	3319.1.1 = { death = yes }
+}
+odiil_98b = {
+	name = "Libertus"
+	dynasty = 100025
+	religion = imperial_cult
+	culture = colovian
+	father = odiil_13
+	
+	3256.1.1 = { birth = yes }
+	3320.1.1 = { death = yes }
 }
 odiil_99 = {
 	name = "Trenus" #Duke of Chorrol
@@ -2505,13 +2518,14 @@ jarol_100 = {
 	father = olo_98
 	
 	3331.1.1 = { birth = yes }
+	3355.1.1 = { culture = strident }
 	3403.1.1 = { death = yes }
 }
 jarol_101 = {
 	name = "Belisar" #Duke of Crowhaven
 	dynasty_house = olo_jarol
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = jarol_100
 	
 	3360.1.1 = { birth = yes }
@@ -2521,7 +2535,7 @@ jarol_102 = {
 	name = "Morihaus" #Duke of Crowhaven
 	dynasty_house = olo_jarol
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = jarol_101
 	trait = lifespan_2 #Powerful mage
 	trait = intellect_good_2
@@ -2533,7 +2547,7 @@ jarol_103 = {
 	name = "Quintus" #Duke of Crowhaven
 	dynasty_house = olo_jarol
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = jarol_102
 	trait = arrogant
 	trait = greedy
@@ -2547,7 +2561,7 @@ jarol_104 = {
 	female = yes
 	dynasty_house = olo_jarol
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = jarol_103
 	trait = compassionate
 	trait = just
@@ -2560,7 +2574,7 @@ jarol_105 = {
 	name = "Vorenus"
 	dynasty_house = olo_jarol
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = jarol_103
 	trait = temperate
 	trait = ambitious
@@ -2708,7 +2722,7 @@ massiner_101 = {
 	3358.1.1 = { birth = yes }
 	3370.1.1 = {
 		religion = imperial_cult
-		culture = colovian
+		culture = strident
 		effect = {
 			change_first_name = Octavian
 		}
@@ -2726,7 +2740,7 @@ massiner_102 = {
 	3359.1.1 = { birth = yes }
 	3370.1.1 = {
 		religion = imperial_cult
-		culture = colovian
+		culture = strident
 		effect = {
 			change_first_name = Ontus
 		}
@@ -2738,7 +2752,7 @@ massiner_103 = {
 	female = yes
 	dynasty = 100034
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = massiner_102
 	
 	3402.1.1 = { birth = yes }
@@ -2748,7 +2762,7 @@ massiner_104 = {
 	name = "Sabinus" #Duke of Sutch (Alliance War)
 	dynasty = 100034
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	father = massiner_102
 	
 	3438.1.1 = { birth = yes }
@@ -3226,7 +3240,7 @@ gurges_1000 = {
 	name = "Isobel" #Lore
 	dynasty = 100006
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 	female = yes
 	martial = 7
 	trait = education_martial_3
@@ -3245,7 +3259,7 @@ gurges_1001 = {
 	name = "Juntinus"
 	dynasty = 100006
 	religion = imperial_cult
-	culture = colovian
+	culture = strident
 
 	mother = gurges_1000
 	
@@ -3334,7 +3348,12 @@ nipia_1011 = {
 
     3499.11.10 = { birth = yes }
 	3501.10.10 = { employer = nipia_1000 }
-    3552.10.12 = { death = yes }
+    3550.10.12 = { 
+		death = { 
+			death_reason = death_battle
+			killer = ottiliae_260 #Slain by Dion Idessa who takes over her titles.
+			}
+		}
 }
 nipia_1002 = {
     name = "Eusebius"
@@ -3484,9 +3503,16 @@ nipia_1033 = {
     dynasty = 100039
     religion = hero_cult
     culture = colovian
+	sexuality = heterosexual
+	trait = sign_steed
+	trait = education_martial_3
+	trait = education_martial_prowess_1
+	trait = stubborn
+	trait = just
+	trait = calm
 	father = nipia_1043
 
-    3357.9.10 = { birth = yes }
+    3343.9.10 = { birth = yes }
     3398.4.1 = { death = yes }
 }
 nipia_1043 = {
@@ -3515,6 +3541,34 @@ nipia_1043 = {
     3321.1.10 = { birth = yes }
 	3340.1.1 = { give_nickname = nick_the_star_made_knight }
     3366.5.3 = { death = yes }
+}
+nipia_1143 = {
+    name = "Renmus"
+	dna = maera_dna_entry
+    dynasty = 100039
+    religion = hero_cult
+    culture = colovian
+	diplomacy = 7
+	martial = 10
+	stewardship = 3
+	intrigue = 6
+	learning = 5
+	prowess = 14
+	sexuality = heterosexual
+	trait = sign_apprentice
+	trait = education_martial_3
+	trait = education_magical_ability_2
+	trait = impatient
+	trait = ambitious
+	trait = wrathful
+	trait = impotent
+	trait = open_terrain_expert
+	trait = hunter_2
+	father = nipia_1053
+
+    3338.1.10 = { birth = yes }
+	3360.1.1 = { give_nickname = nick_magus }
+    3399.1.2 = { death = yes }
 }
 nipia_1053 = {
     name = "Dion"
@@ -3749,7 +3803,7 @@ nipia_1009 = {
     
     3491.2.1 = { birth = yes }
 	3501.10.10 = { employer = nipia_1000 }
-    3532.11.12 = { death = yes }
+    3562.11.12 = { death = yes }
 }
 nipia_1019 = {
     name = "Celaste" 
@@ -3867,7 +3921,7 @@ stirk_1000 = {
     name = "Hieronymus"
     dynasty = 100040
     religion = imperial_cult
-    culture = colovian
+    culture = strident
     
     3328.1.1 = { birth = yes }
     3376.1.1 = { death = yes }
@@ -3894,10 +3948,34 @@ vorenus_1000 = {
 	trait = brave
 	trait = compassionate
 	trait = reckless
+    father = vorenus_1002
     
     3462.2.6 = { birth = yes }
 	3500.1.1 = { set_relation_friend = character:nipia_1000 }
     3511.10.1 = { death = yes }
+}
+
+vorenus_1002 = {
+    name = "Agrippa"
+	dna = maera_dna_entry
+    dynasty = 100041
+    religion = imperial_cult
+    culture = colovian
+	diplomacy = 4
+	martial = 13
+	stewardship = 3
+	intrigue = 3
+	learning = 3
+	prowess = 13
+	sexuality = heterosexual
+	trait = education_martial_2
+	trait = just
+	trait = calm
+	trait = compassionate
+	trait = forest_fighter
+    
+    3411.2.6 = { birth = yes }
+    3482.10.1 = { death = yes }
 }
 
 vorenus_1001 = {
