@@ -359,6 +359,10 @@ reman_99 = { #Put under Reman cause its the wife of Hrol
 	religion = imperial_cult
 	culture = nibenese
 
+	trait = p_dibella
+
+	mother = reman_99c
+
 	2650.1.1 = {
 		birth=yes
 	}
@@ -366,6 +370,48 @@ reman_99 = { #Put under Reman cause its the wife of Hrol
 		culture = colovian
 	}
 	2681.5.16 = {
+		death=yes
+	}
+}
+reman_99b = { # Sister of Sed-Yenna
+	name = "Shonni-Et"
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+
+	trait = p_dibella
+	trait = seducer
+	trait = lustful
+	trait = gregarious
+	trait = zealous
+
+	mother = reman_99c
+
+	2664.1.1 = {
+		birth=yes
+	}
+	2680.8.16 = {
+		culture = colovian
+	}
+	2699.7.5 = {
+		effect = {
+			set_relation_lover = character:reman_100
+		}
+	}
+	2700.11.7 = {
+		death=yes
+	}
+}
+reman_99c = {
+	name = "Mater"
+	female = yes
+	religion = imperial_cult
+	culture = nibenese
+
+	2625.8.1 = {
+		birth=yes
+	}
+	2661.1.7 = {
 		death=yes
 	}
 }
@@ -386,6 +432,11 @@ reman_100 = {
 
 	2681.5.16 = {
 		birth=yes
+	}
+	2699.7.5 = {
+		effect = {
+			set_relation_lover = character:reman_99b
+		}
 	}
 	#2701.1.4 = {
 	#	effect = { add_amulet_of_kings = yes }
@@ -595,8 +646,8 @@ reman_205 = {
 	father = reman_203
 
 
-	3161.1.1 = { birth=yes }
-	3250.1.1 = { death=yes }
+	3161.1.1 = { birth = yes }
+	3250.1.1 = { death = yes }
 }
 
 #House Tor
@@ -605,9 +656,12 @@ tor_900 = {
 	dynasty_house = cyrodiil_tor
 	religion = imperial_cult
 	culture = colovian
-	father = reman_105
+	father = reman_103
 
-	2850.1.1 = { birth = yes }
+	trait = bastard
+
+	2877.4.2 = { birth = yes }
+	2899.1.1 = { add_trait = bastard_founder }
 	2931.1.1 = { death = yes }
 }
 tor_901 = {
@@ -717,9 +771,9 @@ akavir_100 = {
 	2931.6.17 = {
 		birth = yes
 	}
-	2936.1.1 = {set_relation_friend = character:zhenas_001}
+	2936.1.1 = { set_relation_friend = character:zhenas_001 }
 	#2987.1.1 = { add_trait = disabler immortal_age = 56 }
-	3350.4.18 = {
+	3350.12.18 = {
 		death = {
 			death_reason = death_murder
 		}

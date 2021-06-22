@@ -228,3 +228,50 @@ form_craglorn_kingdom_decision = {
 		base = 100
 	}
 }
+
+## Summerset
+
+form_auridon_kingdom_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = form_auridon_kingdom_decision_desc
+	selection_tooltip = form_auridon_kingdom_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_landed = yes
+		exists = capital_province
+		
+		can_unify_kingdom_of_is_shown = { REGION = tamriel_summerset_isles_auridon NATIVITY_REGION = auridon }
+	}
+
+	is_valid = {
+		can_unify_kingdom_of_is_valid = { REGION = tamriel_summerset_isles_auridon }
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	cost = {
+		gold = 500
+	}
+
+	effect = {
+		form_auridon_scripted_effect = yes
+		
+		trigger_event = { id = ektitulartitle.0001 }
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

@@ -171,8 +171,9 @@ rite_of_passage_decision = {
 	major = yes
 
 	is_shown = {
-		# always = no # WIP
-		faith = { has_doctrine_parameter = rite_of_passage_decision_active }
+		# Cut for the initial release, we'll see to it once we have more time
+		always = no
+		# faith = { has_doctrine_parameter = rite_of_passage_decision_active }
 	}
 
 	is_valid = {
@@ -479,7 +480,7 @@ council_of_the_eight_join_council_decision = { # A faith with the Divines panthe
 		custom_tooltip = council_of_the_eight_join_council_decision_effect_1
 		
 		if = {
-			NOT = { faith = { has_doctrine_parameter = spiritual_head_of_faith } }
+			limit = { NOT = { faith = { has_doctrine_parameter = spiritual_head_of_faith } } }
 			custom_tooltip = council_of_the_eight_join_council_decision_effect_2
 		}
 		
@@ -520,7 +521,7 @@ bury_in_cath_bedraud_decision = {
 
 	effect = {
 		show_as_tooltip = {
-			add_dynasty_prestige = minor_dynasty_prestige_value
+			dynasty = { add_dynasty_prestige = minor_dynasty_prestige_value }
 			if = {
 				limit = {
 					any_vassal = {

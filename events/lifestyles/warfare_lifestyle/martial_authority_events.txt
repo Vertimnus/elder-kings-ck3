@@ -1,4 +1,6 @@
-﻿#Events for authority lifestyle focus
+﻿### Plugged our own character creation effects
+
+#Events for authority lifestyle focus
 
 
 ##################################################
@@ -1068,8 +1070,9 @@ martial_authority.2052 = {
 		var:right_hand_person = {
 			is_alive = yes
 			is_imprisoned = yes
+			exists = var:is_right_hand_person_of
 		}
-		scope:imprisoner = var:is_right_hand_person_of 
+		scope:imprisoner = var:right_hand_person.var:is_right_hand_person_of
 	}
 
 	immediate = {
@@ -1090,14 +1093,15 @@ martial_authority.2053 = {
 	
 	trigger = {
 		exists = var:right_hand_person
-
 		var:right_hand_person = {
 			is_alive = yes
 			is_imprisoned = yes
+			exists = var:is_right_hand_person_of
+			var:is_right_hand_person_of = {
+				is_alive = yes
+			}
 		}
-		scope:imprisoner = {
-			NOT = { this = var:is_right_hand_person_of }
-		}
+		NOT = { scope:imprisoner = var:right_hand_person.var:is_right_hand_person_of }
 	}
 
 	immediate = {

@@ -347,7 +347,7 @@ window = {
 
                 background = {
                     texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
-                    frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
+                    frame = "[FixedPointToInt(GetPlayer.MakeScope.ScriptValue('spell_school_bg'))]"
                     framesize = { 140 70 }
                     spriteType = Corneredstretched
                     spriteborder = { 1 1 }
@@ -362,7 +362,6 @@ window = {
                         blend_mode = alphamultiply
                     }
                 }
-
 
                 blockoverride "scrollbox_replace_vbox"
                 {
@@ -386,266 +385,34 @@ window = {
 
                             item = {
                                 vbox = {
+                                    datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
                                     layoutpolicy_horizontal = expanding
                                     button_standard = {
                                         layoutpolicy_horizontal = expanding
                                         size = { 0 40 }
 
-                                        datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
-                                        tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
-                                        visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
-                                        onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
+                                        tooltip = "[ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End)]"
+                                        visible = "[ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End)]"
+                                        onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End)]"
 
-                                        onclick = "[PdxGuiTriggerAllAnimations( SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_province')), '(CFixedPoint)1' ), Select_CString( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.Var('spell').GetFlagName, '_hostile')), '(CFixedPoint)1' ), 'province_select_show_hostile', 'province_select_show' ), 'province_select_hide' ) )]"
+                                        onclick = "[PdxGuiTriggerAllAnimations( SelectLocalization( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.GetFlagName, '_province')), '(CFixedPoint)1' ), Select_CString( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate(Scope.GetFlagName, '_hostile')), '(CFixedPoint)1' ), 'province_select_show_hostile', 'province_select_show' ), 'province_select_hide' ) )]"
 
-                                        down = "[EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, Scope.Var('spell').GetFlagName )]"
-
-                                        widget = {
-                                            scissor = yes
-                                            size = { 420 38 }
-
-                                            highlight_icon = {
-                                                size = { 420 70 }
-                                                position = { -40 -5 }
-                                                visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
-
-                                                texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
-                                                frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                                framesize = { 140 70 }
-                                                spriteType = Corneredstretched
-                                                spriteborder = { 1 1 }
-                                                alpha = 0.6
-
-                                                modify_texture = {
-                                                    texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
-                                                    blend_mode = alphamultiply
-                                                }
-
-                                                using = Mask_Rough_Edges
-                                            }
-
-                                            highlight_icon = {
-                                                size = { 420 70 }
-                                                position = { -40 -5 }
-                                                visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
-
-                                                texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
-                                                frame = "[FixedPointToInt(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('spell_school_bg'))]"
-                                                framesize = { 140 70 }
-                                                spriteType = Corneredstretched
-                                                spriteborder = { 1 1 }
-
-                                                effectname = "GreyedOut"
-
-                                                tintcolor = { 0.6 0.6 0.6 0.7 }
-
-                                                modify_texture = {
-                                                    texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
-                                                    blend_mode = alphamultiply
-                                                }
-
-                                                using = Mask_Rough_Edges
-                                            }
-                                        }
+                                        down = "[EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, Scope.GetFlagName )]"
 
                                         widget = {
                                             name = "spell_valid"
                                             size = { 580 40 }
-                                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
-                                            widget = {
-                                                size = { 50 40 }
-                                                position = { 0 0 }
-                                                highlight_icon = {
-                                                    name = "spell_level_icon"
-                                                    size = { 32 32 }
-                                                    texture = "gfx/interface/spellbook_widget/spell_tier.dds"
-                                                    frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
-                                                    framesize = { 128 128 }
-                                                    parentanchor = center
-                                                    using = Master_Button_Modify_Texture
-                                                    tooltip = spell_tier
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 350 40 }
-                                                position = { 50 0 }
-                                                text_single = {
-                                                    name = "spell_name"
-                                                    parentanchor = vcenter
-                                                    text = spell_name
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#clickable"
-                                                    margin = { 0 0 }
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 80 40 }
-                                                parentanchor = right
-                                                position = { -100 0 }
-                                                text_single = {
-                                                    name = "spell_cost"
-                                                    parentanchor = vcenter
-                                                    text = spell_cost
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#high"
-                                                    margin = { 4 0 }
-                                                }
-                                                highlight_icon = {
-                                                    texture = "gfx/interface/icons/icon_magicka.dds"
-                                                    size = { 25 25 }
-                                                    parentanchor = vcenter
-                                                    alwaystransparent = yes
-                                                    #tooltip = [magicka|E] #"[Concept( 'magicka', 'Magicka' )|E]"
-                                                }
-                                            }
-                                            flowcontainer = {
-                                                name = "spell_icons"
-                                                parentanchor = right
-                                                position = { -5 0 }
-                                                ignoreinvisible = yes
-                                                #maxsize = { 150 40 }
-                                                # widget = {
-                                                #     size = { 40 40 }
-                                                #     #parentanchor = right
-                                                #     #position = { -40 0 }
-                                                #     visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_cooldown'))), 'yes')]"
-                                                #     highlight_icon = {
-                                                #         name = "spell_cooldown_icon"
-                                                #         size = { 34 34 }
-                                                #         texture = "gfx/interface/icons/icon_time.dds"
-                                                #         #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
-                                                #         parentanchor = center
-                                                #         tooltip = spell_cooldown
-                                                #     }
-                                                # }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
-                                                    highlight_icon = {
-                                                        name = "spell_province_icon"
-                                                        size = { 32 32 }
-                                                        texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_province
-                                                    }
-                                                }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
-                                                    highlight_icon = {
-                                                        name = "spell_hostile_icon"
-                                                        size = { 34 34 }
-                                                        texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_hostile
-                                                    }
-                                                }
-                                            }
+                                            visible = "[ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End)]"
+                                            using = ButtonSpellList
+                                            blockoverride "tint_greyout" {}
                                         }
-
                                         widget = {
                                             name = "spell_invalid"
                                             size = { 580 40 }
-                                            visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
-                                            widget = {
-                                                size = { 50 40 }
-                                                position = { 0 0 }
-                                                highlight_icon = {
-                                                    name = "spell_level_icon"
-                                                    size = { 32 32 }
-                                                    texture = "gfx/interface/spellbook_widget/spell_tier.dds"
-                                                    frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
-                                                    framesize = { 128 128 }
-                                                    parentanchor = center
-                                                    tintcolor = { 0.7 0.7 0.7 0.7 }
-                                                    using = Master_Button_Modify_Texture
-                                                    effectname = "GreyedOut"
-                                                    tooltip = spell_tier
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 350 40 }
-                                                position = { 50 0 }
-                                                text_single = {
-                                                    name = "spell_name"
-                                                    parentanchor = vcenter
-                                                    text = spell_name
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#low"
-                                                    margin = { 0 0 }
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 130 40 }
-                                                parentanchor = right
-                                                position = { -50 0 }
-                                                text_single = {
-                                                    name = "spell_cost"
-                                                    parentanchor = vcenter
-                                                    text = spell_cost
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#low"
-                                                    margin = { 4 0 }
-                                                }
-                                                highlight_icon = {
-                                                    texture = "gfx/interface/icons/icon_magicka.dds"
-                                                    size = { 25 25 }
-                                                    tintcolor = { 0.5 0.5 0.5 0.7 }
-                                                    parentanchor = vcenter
-                                                    alwaystransparent = yes
-                                                    effectname = "GreyedOut"
-                                                }
-                                            }
-                                            flowcontainer = {
-                                                name = "spell_icons"
-                                                parentanchor = right
-                                                position = { -5 0 }
-                                                ignoreinvisible = yes
-                                                #maxsize = { 150 40 }
-                                                # widget = {
-                                                #     size = { 40 40 }
-                                                #     #parentanchor = right
-                                                #     #position = { -40 0 }
-                                                #     visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_cooldown'))), 'yes')]"
-                                                #     highlight_icon = {
-                                                #         name = "spell_cooldown_icon"
-                                                #         size = { 34 34 }
-                                                #         texture = "gfx/interface/icons/icon_time.dds"
-                                                #         #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
-                                                #         parentanchor = center
-                                                #         tooltip = spell_cooldown
-                                                #         effectname = "GreyedOut"
-                                                #     }
-                                                # }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
-                                                    highlight_icon = {
-                                                        name = "spell_province_icon"
-                                                        size = { 32 32 }
-                                                        tintcolor = { 0.7 0.7 0.7 0.7 }
-                                                        texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_province
-                                                        effectname = "GreyedOut"
-                                                    }
-                                                }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
-                                                    highlight_icon = {
-                                                        name = "spell_hostile_icon"
-                                                        size = { 34 34 }
-                                                        texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_hostile
-                                                        effectname = "GreyedOut"
-                                                    }
-                                                }
+                                            visible = "[Not(ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End))]"
+                                            using = ButtonSpellList
+                                            blockoverride "spell_font" {
+                                                default_format = "#low"
                                             }
                                         }
                                     }
@@ -653,231 +420,22 @@ window = {
                                         layoutpolicy_horizontal = expanding
                                         size = { 0 40 }
 
-                                        datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
-                                        tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
+                                        tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End)]"
                                         enabled = no
-                                        visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
+                                        visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(Scope.GetFlagName) ).End))]"
 
                                         widget = {
-                                            name = "spell_unknown"
+                                            name = "spell_unkown"
                                             size = { 580 40 }
-                                            widget = {
-                                                size = { 50 40 }
-                                                position = { 0 0 }
-                                                icon = {
-                                                    name = "spell_level_icon"
-                                                    size = { 32 32 }
-                                                    texture = "gfx/interface/spellbook_widget/spell_tier.dds"
-                                                    frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
-                                                    framesize = { 128 128 }
-                                                    parentanchor = center
-                                                    tintcolor = { 0.7 0.7 0.7 0.7 }
-                                                    using = Master_Button_Modify_Texture
-                                                    tooltip = spell_tier
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 350 40 }
-                                                position = { 50 0 }
-                                                text_single = {
-                                                    name = "spell_name"
-                                                    parentanchor = vcenter
-                                                    text = spell_name
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#low"
-                                                    margin = { 0 0 }
-                                                }
-                                            }
-                                            widget = {
-                                                size = { 130 40 }
-                                                parentanchor = right
-                                                position = { -50 0 }
-                                                text_single = {
-                                                    name = "spell_cost"
-                                                    parentanchor = vcenter
-                                                    text = spell_cost
-                                                    layoutpolicy_horizontal = expanding
-                                                    align = top|left
-                                                    default_format = "#low"
-                                                    margin = { 4 0 }
-                                                }
-                                                icon = {
-                                                    texture = "gfx/interface/icons/icon_magicka.dds"
-                                                    size = { 25 25 }
-                                                    tintcolor = { 0.5 0.5 0.5 0.7 }
-                                                    parentanchor = vcenter
-                                                    alwaystransparent = yes
-                                                }
-                                            }
-                                            flowcontainer = {
-                                                name = "spell_icons"
-                                                parentanchor = right
-                                                position = { -5 0 }
-                                                ignoreinvisible = yes
-                                                #maxsize = { 150 40 }
-                                                # widget = {
-                                                #     size = { 40 40 }
-                                                #     parentanchor = right
-                                                #     #position = { -40 0 }
-                                                #     visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_cooldown'))), 'yes')]"
-                                                #     icon = {
-                                                #         name = "spell_cooldown_icon"
-                                                #         size = { 34 34 }
-                                                #         texture = "gfx/interface/icons/icon_time.dds"
-                                                #         #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
-                                                #         parentanchor = center
-                                                #         tooltip = spell_cooldown
-                                                #     }
-                                                # }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
-                                                    icon = {
-                                                        name = "spell_province_icon"
-                                                        size = { 32 32 }
-                                                        tintcolor = { 0.7 0.7 0.7 0.7 }
-                                                        texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_province
-                                                    }
-                                                }
-                                                widget = {
-                                                    size = { 40 40 }
-                                                    visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
-                                                    icon = {
-                                                        name = "spell_hostile_icon"
-                                                        size = { 34 34 }
-                                                        texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                                                        parentanchor = center
-                                                        tooltip = spell_hostile
-                                                    }
-                                                }
+                                            using = ButtonSpellList
+                                            blockoverride "spell_font" {
+                                                default_format = "#low"
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                        # vbox = {
-                        #     datamodel = "[GetPlayer.MakeScope.GetList('spell_list')]"
-                        #     layoutpolicy_horizontal = expanding
-                        #     spacing = 8
-
-                        #     item = {
-                        #         # hbox = {
-                        #         #     layoutpolicy_horizontal = expanding
-                        #         #     margin_bottom = 8
-                        #             button_standard = {
-                        #                 layoutpolicy_horizontal = expanding
-                        #                 size = { 0 40 }
-
-                        #                 datacontext = "[GetScriptedGui( 'spell_list_item' )]" #put the localize section in custom loc spell_$ID$
-                        #                 tooltip = "[ScriptedGui.IsValidTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End)]"
-                        #                 enabled = no
-                        #                 visible = "[Not(ScriptedGui.IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', Scope.Province.MakeScope ).End))]"
-
-                        #                 widget = {
-                        #                     name = "spell_unknown"
-                        #                     size = { 580 40 }
-                        #                     widget = {
-                        #                         size = { 50 40 }
-                        #                         position = { 0 0 }
-                        #                         icon = {
-                        #                             name = "spell_level_icon"
-                        #                             size = { 32 32 }
-                        #                             texture = "gfx/interface/spellbook_widget/spell_tier.dds"
-                        #                             frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_level' )))]"
-                        #                             framesize = { 128 128 }
-                        #                             parentanchor = center
-                        #                             tintcolor = { 0.7 0.7 0.7 0.7 }
-                        #                             using = Master_Button_Modify_Texture
-                        #                             tooltip = spell_tier
-                        #                         }
-                        #                     }
-                        #                     widget = {
-                        #                         size = { 350 40 }
-                        #                         position = { 50 0 }
-                        #                         text_single = {
-                        #                             name = "spell_name"
-                        #                             parentanchor = vcenter
-                        #                             text = spell_name
-                        #                             layoutpolicy_horizontal = expanding
-                        #                             align = top|left
-                        #                             default_format = "#low"
-                        #                             margin = { 0 0 }
-                        #                         }
-                        #                     }
-                        #                     widget = {
-                        #                         size = { 130 40 }
-                        #                         parentanchor = right
-                        #                         position = { -50 0 }
-                        #                         text_single = {
-                        #                             name = "spell_cost"
-                        #                             parentanchor = vcenter
-                        #                             text = spell_cost
-                        #                             layoutpolicy_horizontal = expanding
-                        #                             align = top|left
-                        #                             default_format = "#low"
-                        #                             margin = { 4 0 }
-                        #                         }
-                        #                         icon = {
-                        #                             texture = "gfx/interface/icons/icon_magicka.dds"
-                        #                             size = { 25 25 }
-                        #                             tintcolor = { 0.5 0.5 0.5 0.7 }
-                        #                             parentanchor = vcenter
-                        #                             alwaystransparent = yes
-                        #                         }
-                        #                     }
-                        #                     flowcontainer = {
-                        #                         name = "spell_icons"
-                        #                         parentanchor = right
-                        #                         position = { -5 0 }
-                        #                         ignoreinvisible = yes
-                        #                         #maxsize = { 150 40 }
-                        #                         # widget = {
-                        #                         #     size = { 40 40 }
-                        #                         #     parentanchor = right
-                        #                         #     #position = { -40 0 }
-                        #                         #     visible = "[EqualTo_string(Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_cooldown'))), 'yes')]"
-                        #                         #     icon = {
-                        #                         #         name = "spell_cooldown_icon"
-                        #                         #         size = { 34 34 }
-                        #                         #         texture = "gfx/interface/icons/icon_time.dds"
-                        #                         #         #visible = "[Localize(Concatenate(Concatenate(GetPlayer.MakeScope.Var('spell_school').GetFlagName, '_spell_'), Concatenate(Localize(Scope.Province.Custom('SpellProvince')), '_hostile')))]"
-                        #                         #         parentanchor = center
-                        #                         #         tooltip = spell_cooldown
-                        #                         #     }
-                        #                         # }
-                        #                         widget = {
-                        #                             size = { 40 40 }
-                        #                             visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_province' )), '(CFixedPoint)1' )]"
-                        #                             icon = {
-                        #                                 name = "spell_province_icon"
-                        #                                 size = { 32 32 }
-                        #                                 tintcolor = { 0.7 0.7 0.7 0.7 }
-                        #                                 texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
-                        #                                 parentanchor = center
-                        #                                 tooltip = spell_province
-                        #                             }
-                        #                         }
-                        #                         widget = {
-                        #                             size = { 40 40 }
-                        #                             visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.Var('spell').GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
-                        #                             icon = {
-                        #                                 name = "spell_hostile_icon"
-                        #                                 size = { 34 34 }
-                        #                                 texture = "gfx/interface/icons/symbols/icon_warning.dds"
-                        #                                 parentanchor = center
-                        #                                 tooltip = spell_hostile
-                        #                             }
-                        #                         }
-                        #                     }
-                        #                 }
-                        #             }
-                        #         # }
-                        #     }
-                        # }
                         expand = {
                             layoutpolicy_vertical = growing
                         }
@@ -1133,9 +691,9 @@ window = {
                 size = { 400 42 }
 
                 datacontext = "[GetScriptedGui( 'spell_cast_confirm' )]"
-                enabled = "[And(Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' )), ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-                tooltip = "[Select_CString( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' ), '', ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                enabled = "[And(Not(EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' )), ScriptedGui.IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(GetPlayer.MakeScope.Var('spell_selected').GetFlagName) ).End))]"
+                tooltip = "[Select_CString( EqualTo_string( GetPlayer.MakeScope.Var('spell_selected').GetFlagName, 'no_spell' ), '', ScriptedGui.IsShownTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(GetPlayer.MakeScope.Var('spell_selected').GetFlagName) ).End))]"
+                onclick = "[ScriptedGui.Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope( 'spell', MakeScopeFlag(GetPlayer.MakeScope.Var('spell_selected').GetFlagName) ).End)]"
 
                 onclick = "[ExecuteConsoleCommand('GUI.ClearWidgets spellbook_interaction_window')]"
                 onclick = "[GetScriptedGui('spell_cleanup').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -1185,5 +743,156 @@ Types Spells
         }
 
         using = tooltip_above
+    }
+}
+Template ButtonSpellList {
+    widget = {
+        scissor = yes
+        size = { 420 38 }
+
+        highlight_icon = {
+            size = { 420 70 }
+            position = { -40 -5 }
+
+            texture = "gfx/interface/spellbook_widget/spell_school_tab_bg.dds"
+            frame = "[FixedPointToInt(GetPlayer.MakeScope.ScriptValue('spell_school_bg'))]"
+            framesize = { 140 70 }
+            spriteType = Corneredstretched
+            spriteborder = { 1 1 }
+            alpha = 0.6
+
+            block "tint_greyout" {
+                tintcolor = { 0.6 0.6 0.6 1.0 }
+                effectname = "GreyedOut"
+            }
+
+            modify_texture = {
+                texture = "gfx/interface/component_masks/mask_fade_horizontal_extended.dds"
+                blend_mode = alphamultiply
+            }
+
+            using = Mask_Rough_Edges
+        }
+    }
+
+    widget = {
+        size = { 50 40 }
+        position = { 0 0 }
+        highlight_icon = {
+            name = "spell_level_icon"
+            size = { 32 32 }
+            texture = "gfx/interface/spellbook_widget/spell_tier.dds"
+            frame = "[FixedPointToInt(EmptyScope.ScriptValue(Concatenate( Scope.GetFlagName, '_level' )))]"
+            framesize = { 128 128 }
+            parentanchor = center
+            using = Master_Button_Modify_Texture
+            tooltip = spell_tier
+            block "tint_greyout" {
+                tintcolor = { 0.7 0.7 0.7 1.0 }
+                effectname = "GreyedOut"
+            }
+        }
+    }
+    widget = {
+        size = { 350 40 }
+        position = { 50 0 }
+        text_single = {
+            name = "spell_name"
+            parentanchor = vcenter
+            text = spell_name
+            layoutpolicy_horizontal = expanding
+            align = top|left
+            block "spell_font" {
+                default_format = "#clickable"
+            }
+            margin = { 0 0 }
+        }
+    }
+    widget = {
+        size = { 130 40 }
+        parentanchor = right
+        position = { -50 0 }
+        text_single = {
+            name = "spell_cost"
+            parentanchor = vcenter
+            position = { 25 0 }
+            text = "[EmptyScope.ScriptValue(Concatenate( Scope.GetFlagName, '_cost' ))|0]"
+            layoutpolicy_horizontal = expanding
+            align = top|left
+            block "spell_font" {
+                default_format = "#high"
+            }
+            margin = { 4 0 }
+        }
+        highlight_icon = {
+            texture = "gfx/interface/icons/icon_magicka.dds"
+            size = { 25 25 }
+            parentanchor = vcenter
+            alwaystransparent = yes
+            block "tint_greyout" {
+                tintcolor = { 0.5 0.5 0.5 1.0 }
+                effectname = "GreyedOut"
+            }
+        }
+        text_single = {
+            name = "spell_cost_tt"
+            parentanchor = vcenter
+            size = { 25 25 }
+            minimumsize = { 25 25 }
+            maximumsize = { 25 25 }
+            text = "[Concept( 'magicka', '    ' )]"
+            align = bottom|vcenter
+            fontsize = 25
+        }
+    }
+    flowcontainer = {
+        name = "spell_icons"
+        parentanchor = right
+        position = { -5 0 }
+        ignoreinvisible = yes
+        # widget = {
+        #     size = { 40 40 }
+        #     visible = "[Not( EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.GetFlagName, '_cooldown' )), '(CFixedPoint)0' ) )]"
+        #     highlight_icon = {
+        #         name = "spell_cooldown_icon"
+        #         size = { 34 34 }
+        #         texture = "gfx/interface/icons/icon_time.dds"
+        #         parentanchor = center
+        #         tooltip = spell_cooldown
+        #         block "tint_greyout" {
+        #             tintcolor = { 0.7 0.7 0.7 1.0 }
+        #             effectname = "GreyedOut"
+        #         }
+        #     }
+        # }
+        widget = {
+            size = { 40 40 }
+            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.GetFlagName, '_province' )), '(CFixedPoint)1' )]"
+            highlight_icon = {
+                name = "spell_province_icon"
+                size = { 32 32 }
+                texture = "gfx/interface/icons/map_icons/onmap_holding_icon.dds"
+                parentanchor = center
+                tooltip = spell_province
+                block "tint_greyout" {
+                    tintcolor = { 0.7 0.7 0.7 1.0 }
+                    effectname = "GreyedOut"
+                }
+            }
+        }
+        widget = {
+            size = { 40 40 }
+            visible = "[EqualTo_CFixedPoint( EmptyScope.ScriptValue(Concatenate( Scope.GetFlagName, '_hostile' )), '(CFixedPoint)1' )]"
+            highlight_icon = {
+                name = "spell_hostile_icon"
+                size = { 34 34 }
+                texture = "gfx/interface/icons/symbols/icon_warning.dds"
+                parentanchor = center
+                tooltip = spell_hostile
+                block "tint_greyout" {
+                    effectname = "GreyedOut"
+                }
+            }
+        }
     }
 }

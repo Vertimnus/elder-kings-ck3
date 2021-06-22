@@ -8,6 +8,7 @@ widget = {
 		using = Animation_FadeIn_Standard
 		on_start = "[PdxGuiTriggerAllAnimations('bookmarks_bars_appear')]"
 		on_finish = "[PdxGuiTriggerAllAnimations('bookmarks_buttons_shimmer')]"
+		on_finish = "[GetVariableSystem.Set('set_last_applied_ironman_mode', 'true' )]"
 		start_sound = {
 			soundeffect = "event:/SFX/UI/Frontend/sfx_ui_frontend_topbar_slide"
 		}
@@ -601,6 +602,7 @@ widget = {
 				name = "bookmarks_reset"
 				duration = 0.4
 				scale = 1
+				on_start = "[GameSetup.ResetView]"
 
 				animation = {
 					bezier = { 0 1 1 1 }
@@ -1020,6 +1022,7 @@ widget = {
 							name = "back_button"
 							shortcut = "close_window"
 
+							enabled = "[Not(GameSetup.HasGameStarted)]"
 							onclick = "[GameSetup.OnBack]"
 							oversound = "event:/SFX/UI/Generic/sfx_ui_generic_pointer_over"
 							clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
@@ -1548,6 +1551,7 @@ widget = {
 
 						button_normal = {
 							name = "start_button"
+							onclick = "[GameSetup.StartGame]"
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start')]"
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_game_start_selected_character')]"
 							onclick = "[PdxGuiTriggerAllAnimations('bookmarks_hide_any_character')]"

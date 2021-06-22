@@ -159,8 +159,8 @@ widget = {
 							layoutpolicy_vertical = expanding
 
 							hbox = {
-								spacing = 6
-								margin_top = -11
+								margin_top = -5
+								spacing = 7
 
 								icon = {
 									name = "gold_icon"
@@ -196,26 +196,28 @@ widget = {
 										using = Font_Size_Medium
 									}
 
-									text_single = {
-										name = "balance_positive"
-										visible = "[GreaterThanOrEqualTo_CFixedPoint(GetPlayerBalance, '(CFixedPoint)0')]"
+									container = {
+										text_single = {
+											name = "balance_positive"
+											visible = "[GreaterThanOrEqualTo_CFixedPoint(GetPlayerBalance, '(CFixedPoint)0')]"
 
-										layoutpolicy_horizontal = expanding
-										text = "CURRENT_BALANCE"
+											layoutpolicy_horizontal = expanding
+											text = "CURRENT_BALANCE"
 
-										max_width = 45
-										default_format = "#low"
-									}
+											max_width = 45
+											default_format = "#low"
+										}
 
-									text_single = {
-										name = "balance_negative"
-										visible = "[LessThan_CFixedPoint(GetPlayerBalance, '(CFixedPoint)0')]"
+										text_single = {
+											name = "balance_negative"
+											visible = "[LessThan_CFixedPoint(GetPlayerBalance, '(CFixedPoint)0')]"
 
-										layoutpolicy_horizontal = expanding
-										text = "CURRENT_BALANCE"
+											layoutpolicy_horizontal = expanding
+											text = "CURRENT_BALANCE"
 
-										max_width = 45
-										default_format = "#N"
+											max_width = 45
+											default_format = "#N"
+										}
 									}
 								}
 							}
@@ -1591,9 +1593,11 @@ icon = {
 							text_single = {
 								name = "date_text_sp"
 								visible = "[Not(GameHasMultiplePlayers)]"
+								layoutpolicy_horizontal = expanding
 
 								text = "CURRENT_DATE"
 								default_format = "#date"
+								autoresize = no
 								align = right|nobaseline
 								using = Font_Size_Medium
 							}
@@ -1605,6 +1609,7 @@ icon = {
 
 								text = "CURRENT_DATE"
 								default_format = "#medium;glow_color:{0.1,0.1,0.1,1}"
+								autoresize = no
 								align = right|nobaseline
 								using = Font_Size_Medium
 							}
@@ -2763,13 +2768,13 @@ widget = {
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]" # no .End apparently causes memory leak. emptyscope might be better
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxOtherScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GetPlayer.MakeScope.ScriptValue('magicka_max')), '(int32)66' )]"
 				}
 				#gets the progress bar part
 				widget = {
 					layoutpolicy_horizontal = expanding
 					layoutpolicy_vertical = expanding
-					layoutstretchfactor_vertical = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GuiScope.SetRoot( GetPlayer.MakeScope ).ScriptValue('magicka_max')), '(int32)66' )]"
+					layoutstretchfactor_vertical = "[GetProgressBarValueMaxScaled( FixedPointToFloat(GetPlayer.MakeScope.Var('magicka').GetValue), FixedPointToFloat(GetPlayer.MakeScope.ScriptValue('magicka_max')), '(int32)66' )]"
 
 					progressbar_ardor = {
 						#visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"

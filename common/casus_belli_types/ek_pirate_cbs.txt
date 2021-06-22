@@ -351,6 +351,10 @@
 				value = minor_prestige_value
 				multiply = -1.0
 			}
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 
 		# Prestige for the attacker's war allies
@@ -366,6 +370,13 @@
 			prestige = minor_prestige_value
 			opinion = {
 				modifier = contributed_in_war
+			}
+		}
+		
+		scope:defender = {
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
 			}
 		}
 
@@ -453,8 +464,6 @@
 	use_de_jure_wargoal_only = yes
 
 	attacker_wargoal_percentage = 0.8
-
-	min_ai_score = 100
 }
 
 pirate_city_seize_cb = { # Doesn't actually seize the city, but forces the holder to lease it to the pirate instead
@@ -932,8 +941,6 @@ pirate_city_seize_cb = { # Doesn't actually seize the city, but forces the holde
 	use_de_jure_wargoal_only = yes
 
 	attacker_wargoal_percentage = 0.8
-
-	min_ai_score = 100
 }
 
 pirate_extract_tribute_cb = { # Forces the coastal counties to give tribute to the Pirate ruler
@@ -1443,6 +1450,4 @@ pirate_extract_tribute_cb = { # Forces the coastal counties to give tribute to t
 	#defender_score_from_battles_scale = 50
 	max_attacker_score_from_battles = 100
 	max_defender_score_from_battles = 100
-
-	min_ai_score = 100
 }

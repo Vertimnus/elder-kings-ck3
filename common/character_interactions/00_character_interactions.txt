@@ -1,4 +1,6 @@
-﻿# Add general actions here, if any.
+﻿### EK EDIT: Locked the offer of vassalization behind innovations OR fame OR same house/dynasty heads
+
+# Add general actions here, if any.
 
 offer_vassalization_interaction = {
 	category = interaction_category_vassal
@@ -38,6 +40,53 @@ offer_vassalization_interaction = {
 				}
 			}
 		}
+		
+		### EK NOTE: Diplo-vassalize a county: Requires Casus Belli / Fame lvl 3
+		# Diplo-vassalize a duchy: Requires Chronicle Writing / Fame lvl 4
+		# Diplo-vassalize a kingdom: Requires Land Grants / Fame lvl 5
+		# Rightful Ownership: Increases the acceptance
+		# NOTE: Dynasty heads can always ask dynasty members, House Heads have a slight bonus
+		OR = {
+			AND = {
+				scope:actor = {
+					is_dynast = yes
+					dynasty = scope:recipient.dynasty
+				}
+			}
+			AND = {
+				scope:actor = {
+					is_house_head = yes
+					house = scope:recipient.house
+				}
+			}
+			trigger_if = {
+				limit = { scope:recipient = { highest_held_title_tier = tier_county } }
+				scope:actor = {
+					OR = {
+						prestige_level >= 3
+						culture = { has_innovation = innovation_casus_belli }
+					}
+				}
+			}
+			trigger_else_if = {
+				limit = { scope:recipient = { highest_held_title_tier = tier_duchy } }
+				scope:actor = {
+					OR = {
+						prestige_level >= 4
+						culture = { has_innovation = innovation_chronicle_writing }
+					}
+				}
+			}
+			trigger_else_if = {
+				limit = { scope:recipient = { highest_held_title_tier = tier_kingdom } }
+				scope:actor = {
+					OR = {
+						prestige_level >= 5
+						culture = { has_innovation = innovation_land_grants }
+					}
+				}
+			}
+		}
 	}
 
 	greeting = positive
@@ -66,6 +115,8 @@ offer_vassalization_interaction = {
 		#OPINION SCALES
 		#Dread
 		#Compare Opinion modifier.
+		
+		## EK MODIFIERS
 		
 		# PERKS
 		modifier = { # Perk boost
@@ -427,7 +478,7 @@ offer_vassalization_interaction = {
 			opinion_target = scope:actor
 			multiplier = 0.35
 		}
-		
+
 		# CONTRACT OPTIONS
 		modifier = {
 			add = 60
@@ -447,17 +498,33 @@ offer_vassalization_interaction = {
 			scope:high_obligations = yes
 			desc = CONTRACT_HIGH_TAXES_REASON
 		}
+		
+		## EK MODIFIERS
+		modifier = { # Rightful Ownership gives a slight bonus
+			add = 10
+			scope:actor = { culture = { has_innovation = innovation_rightful_ownership } }
+		}
+		modifier = { # House Heads have a slight bonus towards members of the same house
+			desc = offer_vassalization_interaction_aibehavior_dynasty_tt
+			trigger = {
+				scope:actor = {
+					is_house_head = yes
+					house = scope:recipient.house
+				}
+			}
+			add = 5
+		}
 	}
-	
-	# High starting obligations
+
+	# Low starting obligations
 	send_option = {
 		is_shown = {
 			scope:recipient = {
 				has_government = feudal_government
 			}
 		}
-		flag = high_obligations								# If selected then scope:flag_name will be set to yes
-		localization = high_obligations					# Loc_key for option label
+		flag = low_obligations
+		localization = low_obligations	
 	}
 
 	# Medium starting obligations
@@ -473,15 +540,15 @@ offer_vassalization_interaction = {
 
 	}
 
-	# Low starting obligations
+	# High starting obligations
 	send_option = {
 		is_shown = {
 			scope:recipient = {
 				has_government = feudal_government
 			}
 		}
-		flag = low_obligations
-		localization = low_obligations	
+		flag = high_obligations								# If selected then scope:flag_name will be set to yes
+		localization = high_obligations					# Loc_key for option label
 	}
 
 	# Low starting obligations + religious exemption
@@ -497,6 +564,21 @@ offer_vassalization_interaction = {
 		flag = religious_exemption
 		localization = religious_exemption
 	}
+
+	send_option = { # Needed so that the AI can use the interaction
+        is_shown = {
+            scope:recipient = {
+                NOT = {
+                    has_government = feudal_government
+                }
+            }
+            scope:actor = {
+                is_ai = yes
+            }
+        }
+        flag = no_flag
+        localization = SCOPE_EMPTY
+    }
 
 	send_options_exclusive = yes
 
@@ -816,7 +898,7 @@ offer_fealty_interaction = {
 			desc = CONTRACT_HIGH_TAXES_REASON
 		}
 	}
-	
+
 	# High starting obligations
 	send_option = {
 		is_shown = {
@@ -931,7 +1013,6 @@ force_vote_in_succession_election_interaction = {
 		}
 	}
 }
-
 
 set_primary_spouse_interaction = {
 	category = interaction_category_diplomacy
@@ -1208,3 +1289,67 @@ grant_independence_interaction = {
 		base = 0 #The AI should never do this!
 	}
 }
+
+expose_secret_interaction = {
+	interface_priority = 120
+	common_interaction = yes
+	category = interaction_category_hostile
+	interface = blackmail	
+	
+	desc = expose_secret_interaction_desc
+
+	is_shown = {
+		scope:recipient = {
+			any_known_secret = {
+				is_known_by = scope:actor
+			}
+			NOT = { this = scope:actor }
+			age > 10
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_diplomatically_available = yes } 
+	}
+	
+	on_accept = {
+		
+		scope:actor = {	
+			if = {
+				limit = {
+					exists = scope:target
+				}
+				scope:target = {
+					expose_secret = scope:actor
+				}
+			}	
+			else =
+			{
+				every_known_secret = {
+					limit = {
+						secret_owner = scope:recipient
+					}
+					expose_secret = scope:actor
+				}
+			}	
+			
+			stress_impact = {
+				honest = medium_stress_impact_loss
+				just = medium_stress_impact_loss
+				shy = medium_stress_impact_gain
+			}
+		}
+
+		scope:recipient = {
+			stress_impact = {
+				honest = medium_stress_impact_loss
+				just = medium_stress_impact_loss
+				shy = medium_stress_impact_gain
+			}
+		}
+	}
+
+	auto_accept = yes
+}
+
+

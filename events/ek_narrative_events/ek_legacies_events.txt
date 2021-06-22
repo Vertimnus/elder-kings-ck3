@@ -80,10 +80,9 @@ ek_legacies.0002 = {
 ek_legacies.0011 = {
 	hidden = yes
 	
-	type = none
+	type = none # error.log does not like it, but we need a none-type event to not rely on any root scope
 	
 	immediate = {
-		# every_player = { add_prestige = 100 }
 		every_in_global_list = {
 			variable = dynasties_with_legacies_modifiers_to_update
 			save_scope_as = current_dynasty
@@ -91,7 +90,6 @@ ek_legacies.0011 = {
 			dynasty_update_legacies_modifiers_effect = { DYNASTY = scope:current_dynasty }
 		}
 		
-		# trigger_event = { id = ek_legacies.0011 days = 30 } # Fires every month
-		trigger_event = { id = ek_legacies.0011 days = 7 } # Fires every month
+		trigger_event = { id = ek_legacies.0011 days = 7 } # Fires every week
 	}
 }

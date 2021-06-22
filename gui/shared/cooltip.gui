@@ -220,7 +220,6 @@
 						layoutpolicy_horizontal = growing #cutoff right side to remove bullet. position in widget instead of margin. or use size:1 to make dot tiny
 						#text = "#F [Localize( Concatenate( Culture.GetNameNoTooltip, '_desc' ) )]#!"
 						#text = "#size:1 [GetScriptedGui('culture_tooltip').BuildTooltip(GuiScope.SetRoot(Culture.MakeScope).End)]#!"
-						#text = "[SelectLocalization( '(bool)no','', 'CULTURE_DESC_ID' )]"
 						#text = "[Concatenate( Culture.GetTemplate.GetName, '_desc' )]" #can set variable flag in culture with key, need to fix sizing issue, also need to check var exists if not ingame. do template names change? could be exploited if they respond and cultures dont
 						text = "[Localize( Concatenate( Culture.MakeScope.Var('culture_key').GetFlagName, 'desc' ) )]"
 						default_format = "#low"
@@ -276,7 +275,7 @@ container = {
 	name = "GameConceptTooltipDefault"
 
 	object_tooltip_pop_out = {
-		visible = "[Not(EqualTo_string( GameConceptTooltip.GetParentText, SelectLocalization( '(bool)no','', 'culture_group_concept' ) ))]"
+		visible = "[Not(EqualTo_string( GameConceptTooltip.GetParentText, Localize( 'culture_group_concept' ) ))]"
 		blockoverride "header_tt" {}
 
 		blockoverride "header_additions" {
@@ -314,7 +313,7 @@ container = {
 	}
 
 	object_tooltip_pop_out = {
-		visible = "[EqualTo_string( GameConceptTooltip.GetParentText, SelectLocalization( '(bool)no','', 'culture_group_concept' ) )]"
+		visible = "[EqualTo_string( GameConceptTooltip.GetParentText, Localize( 'culture_group_concept' ) )]"
 
 		blockoverride "header_tt" {}
 
@@ -356,7 +355,7 @@ container = {
 
 		blockoverride "description_text" {
 			#text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
-			text = "[SelectLocalization( '(bool)no','', Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
+			text = "[Localize( Concatenate( GameConceptTooltip.GetDescription, '_desc' ) )]"
 			default_format = "#low"
 			max_width = 400
 		}
@@ -374,7 +373,7 @@ container = {
 				autoresize = yes
 				fontsize_min = 14
 				using = Font_Size_Small
-				text = "[GetScriptedGui('culture_group_cultures').ExecuteTooltip(GuiScope.SetRoot(GetDummyMale.MakeScope.Var(GameConceptTooltip.GetDescription).CultureGroup.MakeScope).End)]" #TODO switch to global variable for 1.3.x
+				text = "[GetScriptedGui('culture_group_cultures').ExecuteTooltip(GuiScope.SetRoot(GetGlobalVariable(GameConceptTooltip.GetDescription).CultureGroup.MakeScope).End)]" #TODO switch to global variable for 1.3.x
 			}
 
 			# vbox = {
@@ -569,7 +568,7 @@ template character_trait_tooltip {
 		}
 
 		blockoverride "concept_link" {
-			text = "[Trait.GetTraitCategoryLabel]"
+			text = "[Select_CString( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_patron' ) ), 'yes' ), patron_trait, Trait.GetTraitCategoryLabel )|E]"
 		}
 		blockoverride "description_text" {
 			block "actual_description_text" {
@@ -3634,6 +3633,22 @@ template culture_era_tooltip {
 			text_single = {
 				visible = "[CultureEra.IsActive]"
 				text = "CULTURE_ERA_TOOLTIP_REACHED"
+			}
+
+			container = {
+				using = era_innov_effects
+
+				blockoverride "eie_label_visible"
+				{
+					visible = "[CultureEraType.HasEffects]"
+					minimumsize = { 500 30 }
+				}
+
+
+				blockoverride "eie_effects"
+				{
+					text = "[CultureEraType.GetEffectsDesc]"
+				}
 			}
 
 			container = {

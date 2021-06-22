@@ -1,7 +1,7 @@
-﻿on_save_load = {
-	scope = character
-	effect = { trigger_event = { on_action = ek_on_save_load } }
-}
+﻿# on_save_load = {
+# 	scope = character
+# 	effect = { trigger_event = { on_action = ek_on_save_load } }
+# }
 
 # Education
 aptitude_education_magical_ability = {
@@ -231,12 +231,12 @@ spell_switch_caster = {
 		}
 		if = { #reset selection if new caster doesn know spell.
 			limit = {
-				exists = var:spell_province
-				var:spell_province = { save_temporary_scope_as = spell }
+				exists = var:spell_selected
+				save_temporary_scope_value_as = { name = spell value = var:spell_selected }
 				spell_known_trigger = no #throws an error because scope not set
 			}
 			set_variable = { name = spell_selected value = flag:no_spell }
-			remove_variable = spell_province
+			# remove_variable = spell_province
 			spell_reset_recipient = yes
 		}
 	}
@@ -324,7 +324,7 @@ spell_school_alteration = {
 		set_variable = { name = spell_school value = flag:alteration }
 		init_alteration = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -340,7 +340,7 @@ spell_school_conjuration = {
 		set_variable = { name = spell_school value = flag:conjuration }
 		init_conjuration = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -356,7 +356,7 @@ spell_school_destruction = {
 		set_variable = { name = spell_school value = flag:destruction }
 		init_destruction = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -372,7 +372,7 @@ spell_school_illusion = {
 		set_variable = { name = spell_school value = flag:illusion }
 		init_illusion = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -388,7 +388,7 @@ spell_school_restoration = {
 		set_variable = { name = spell_school value = flag:restoration }
 		init_restoration = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -404,7 +404,7 @@ spell_school_necromancy = {
 		set_variable = { name = spell_school value = flag:necromancy }
 		init_necromancy = yes
 		set_variable = { name = spell_selected value = flag:no_spell }
-		remove_variable = spell_province
+		# remove_variable = spell_province
 		# remove_variable = spell_is_hostile
 		# remove_variable = spell_is_province
 		spell_reset_recipient = yes
@@ -431,21 +431,22 @@ spell_list_item = {
 	is_valid = { spell_known_trigger = yes }
 	is_shown = { spell_selectable_trigger = yes }
 	effect = {
-		set_variable = { name = spell_selected value = scope:spell.var:spell }
-		set_variable = { name = spell_province value = scope:spell } #tempory until can pass flags. needed to pass to effect execution
+		set_variable = { name = spell_selected value = scope:spell }
+		#set_variable = { name = spell_province value = scope:spell } #tempory until can pass flags. needed to pass to effect execution
 		spell_reset_recipient = yes
 	}
 }
 
 spell_cast_confirm = { #need 2nd for caster/castee effects. or use bool scope to switch which to execute. emulate by feeding player or not and checking exists
 	scope = character
-	saved_scopes = { castee }
+	saved_scopes = { castee spell }
 
 	#is_valid = { selected_spell_castable_trigger = yes } # save scope and use same effect?
 	is_shown = {
 		trigger_if = {
-			limit = { exists = var:spell_province }
-			var:spell_province = { save_temporary_scope_as = spell }
+			limit = { exists = var:spell_selected }
+			#save_scope_value_as = { name = spell value = var:spell_selected }
+			#var:spell_province = { save_temporary_scope_as = spell }
 			spell_castable_trigger = yes
 		}
 		trigger_else = { always = no }
@@ -454,7 +455,8 @@ spell_cast_confirm = { #need 2nd for caster/castee effects. or use bool scope to
 	}
 	#effect = { selected_spell_effect = yes }
 	effect = {
-		var:spell_province = { save_temporary_scope_as = spell }
+		#save_scope_value_as = { name = spell value = var:spell_selected }
+		#var:spell_province = { save_temporary_scope_as = spell }
 		show_as_tooltip = {
 			if = { #effects for tooltip generation
 				limit = { exists = scope:castee }
