@@ -14,6 +14,17 @@ terentius_97 = {
 	3213.1.1 = { birth = yes }
 	3280.1.1 = { death = yes }
 }
+terentius_80 = {
+	name = "Septima"
+	female = yes
+	dynasty = 130000
+	culture = heartlander
+	religion = imperial_cult
+	father = terentius_97
+
+	3236.1.1 = { birth = yes }
+	3308.1.1 = { death = yes }
+}
 terentius_98 = {
 	name = "Petrus"
 	dynasty = 130000
@@ -34,17 +45,6 @@ terentius_99 = {
 	3245.1.1 = { birth = yes }
 	3310.1.1 = { death = yes }
 }
-terentius_80 = {
-	name = "Septima"
-	female = yes
-	dynasty = 130000
-	culture = heartlander
-	religion = imperial_cult
-	father = terentius_97
-
-	3236.1.1 = { birth = yes }
-	3308.1.1 = { death = yes }
-}
 terentius_100 = {
 	name = "Idessa" #Duke of Caractacus, marries Jano
 	female = yes
@@ -53,7 +53,7 @@ terentius_100 = {
 	religion = imperial_cult
 	father = terentius_99
 
-	3273.1.1 = { birth = yes }
+	3267.1.1 = { birth = yes }
 	3339.1.1 = { death = { death_reason = death_murder } }
 }
 terentius_101 = {
@@ -63,7 +63,7 @@ terentius_101 = {
 	religion = imperial_cult
 	father = terentius_98
 
-	3280.1.1 = { birth = yes }
+	3270.1.1 = { birth = yes }
 	3351.1.1 = { death = yes }
 }
 terentius_102 = {
@@ -73,17 +73,44 @@ terentius_102 = {
 	religion = imperial_cult
 	father = terentius_101
 
-	3317.1.1 = { birth = yes }
+	3292.1.1 = { birth = yes }
+	3324.1.1 = { add_spouse = terentius_102_wife }
 	3380.1.1 = { death = yes }
+}
+terentius_102_wife = {
+	name = "Carmala"
+	female = yes
+	culture = heartlander
+	religion = imperial_cult
+
+	3305.1.1 = { birth = yes }
+	3324.1.1 = { add_spouse = terentius_102 }
+	3370.1.1 = { death = yes }
+}
+terentius_102_daughter = {
+	name = "Vianis"
+	dynasty = 130000
+	female = yes
+	culture = heartlander
+	religion = imperial_cult
+
+	father = terentius_102
+	mother = terentius_102_wife
+
+	3338.1.1 = { birth = yes }
+	3357.1.1 = { add_spouse = quintilius_350 } #Valandrus Quintilius, Duke of Virtue
+	3403.1.1 = { death = yes }
 }
 terentius_103 = {
 	name = "Florin" #Duke of Urasek
 	dynasty = 130000
 	culture = heartlander
 	religion = imperial_cult
-	father = terentius_102
 
-	3343.1.1 = { birth = yes }
+	father = terentius_102
+	mother = terentius_102_wife
+
+	3336.1.1 = { birth = yes }
 	3414.1.1 = { death = yes }
 }
 terentius_104 = {
@@ -91,9 +118,13 @@ terentius_104 = {
 	dynasty = 130000
 	culture = heartlander
 	religion = imperial_cult
-	father = terentius_102
 
-	3344.1.1 = { birth = yes }
+	father = terentius_102
+	mother = terentius_102_wife
+
+	trait = twin #twin caro_806
+
+	3341.1.1 = { birth = yes }
 	3418.1.1 = { death = yes }
 }
 terentius_105 = {
@@ -787,6 +818,196 @@ basicilius_1000 = { #Mentioned in a ESO Treasure description as "legendary battl
 	3385.1.1 = { death = yes } #nor the day of her death
 }
 
+#Quintilius Dynasty (130011)
+quintilius_350 = {
+	name = "Valandrus" #Duke of Virtue (Interregnum)
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	add_trait = warlord
+	
+	3331.1.1 = { birth = yes }
+	3357.1.1 = { add_spouse = terentius_102_daughter } #Vianis Terentius
+	3372.1.1 = { death = yes }
+}
+quintilius_351 = {
+	name = "Magnus" #Duke of Virtue
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_350
+	mother = terentius_102_daughter
+
+	3359.1.1 = { birth = yes }
+	3372.1.1 = { add_pressed_claim = title:d_virtue }
+	3436.1.1 = { death = yes }
+}
+quintilius_352 = {
+	name = "Bruscus" #Duke of Virtue (Reachmen)
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_351
+	
+	3395.1.1 = { birth = yes }
+	3418.1.1 = { add_spouse = tharn_215 } #Pallia Tharn
+	3470.1.1 = { death = yes }
+}
+quintilius_353 = {
+	name = "Glabrius" #Duke of Virtue (Kamal)
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_352
+	mother = tharn_215 #Pallia Tharn
+	
+	3423.1.1 = { birth = yes }
+	3495.1.1 = { death = yes }
+}
+quintilius_354 = {
+	name = "Magnus" #Heir to Virtue (Kamal)
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_353
+	
+	3475.1.1 = { birth = yes }
+	3540.1.1 = { death = yes }
+}
+quintilius_355 = {
+	name = "Paula" #Heir to Virtue
+	female = yes
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_354
+	
+	3501.1.1 = { birth = yes }
+	3586.1.1 = { death = yes }
+}
+quintilius_356 = {
+	name = Anyte
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	female = yes
+	mother = quintilius_355
+	3528.1.1 = { birth = yes }
+	3595.1.1 = { death = yes }
+}
+quintilius_357 = {
+	name = Euraxia
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	female = yes
+	mother = quintilius_356
+	3566.1.1 = { birth = yes }
+	3634.1.1 = { death = yes }
+}
+quintilius_358 = {
+	name = Plinius
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	mother = quintilius_357
+	3593.1.1 = { birth = yes }
+	3663.1.1 = { death = yes }
+}
+quintilius_359 = {
+	name = Gualtierus
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_358
+	3613.1.1 = { birth = yes }
+	3683.1.1 = { death = yes }
+}
+quintilius_360 = {
+	name = Adrian
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_359
+	3635.1.1 = { birth = yes }
+	3703.1.1 = { death = yes }
+}
+quintilius_361 = {
+	name = Candidus
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_360
+	3672.1.1 = { birth = yes }
+	3723.1.1 = { death = yes }
+}
+quintilius_362 = {
+	name = Carfulenus
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	father = quintilius_361
+	3693.1.1 = { birth = yes }
+	3767.1.1 = { death = yes }
+}
+quintilius_363 = {
+	name = Rosentia
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	female = yes
+	father = quintilius_362
+	3719.1.1 = { birth = yes }
+	3788.1.1 = { death = yes }
+}
+quintilius_364 = {
+	name = Tullus
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	mother = quintilius_363
+	3756.1.1 = { birth = yes }
+	3828.1.1 = { death = yes }
+}
+quintilius_365 = {
+	name = Lucilla
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	female = yes
+	father = quintilius_364
+	3781.1.1 = { birth = yes }
+	3855.1.1 = { death = yes }
+}
+quintilius_366 = {
+	name = Nrio
+	dynasty = 130011
+	religion = imperial_cult
+	culture = heartlander
+	
+	mother = quintilius_365
+	3799.1.1 = { birth = yes }
+	3874.1.1 = { death = yes }
+}
+
+
+###Non-Dynastic Character Entries
 #Republics
 pell_gate_1000 = {
 	name = "Didius"
