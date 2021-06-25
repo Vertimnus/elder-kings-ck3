@@ -97,3 +97,85 @@ can_get_combo_trait_daedra = {
 		can_secretly_worship_$DAEDRA$ = yes
 	}
 }
+
+### Do these two rulers rule in the same province (= have their capital in the same mundus_tamriel_X)
+rulers_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { $CHAR1$ = { exists = capital_county } }
+				NOT = { $CHAR2$ = { exists = capital_county } }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		titles_in_same_province = { TITLE1 = $CHAR1$.capital_county TITLE2 = $CHAR2$.capital_county }
+	}
+}
+
+# Is the title capital in the same province as the ruler (= have their capital in the same mundus_tamriel_X)
+title_ruler_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { $CHAR$ = { exists = capital_county } }
+				NOT = { $TITLE$ = { exists = title_capital_county } }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		titles_in_same_province = { TITLE1 = $CHAR$.capital_county TITLE2 = $TITLE$ }
+	}
+}
+
+# Are these two titles in the same province? (= have their capital in the same mundus_tamriel_X)
+titles_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { exists = $TITLE1$.title_capital_county.title_province }
+				NOT = { exists = $TITLE2$.title_capital_county.title_province }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		OR = {
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_high_rock } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_high_rock } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_hammerfell } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_hammerfell } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_skyrim } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_skyrim } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_cyrodiil } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_cyrodiil } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_valenwood } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_valenwood } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_summerset_isles } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_summerset_isles } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_elsweyr } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_elsweyr } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
+			}
+			### EK TODO: Missing provinces
+		}
+	}
+}

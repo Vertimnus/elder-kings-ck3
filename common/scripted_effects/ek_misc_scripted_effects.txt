@@ -966,3 +966,63 @@ set_dragon_name_part = {
 set_combo_trait_daedra_flag = {
 	add_character_flag = stress_$TRAIT$_$DAEDRA$
 }
+
+### Might Makes Right
+# Laws - Check if a law is still good even after you lose a level of Fame or Devotion
+# Current scope must be the character
+might_makes_right_update_law_fame_devotion = {
+	# if = {
+		# limit = {
+			# OR = {
+				# AND = {
+					# has_realm_law = crown_authority_1
+					# NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+				# }
+				# has_realm_law = crown_authority_2
+				# has_realm_law = crown_authority_3
+			# }
+		# }
+	# }
+	if = {
+		limit = {
+			has_realm_law = crown_authority_3
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 5
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 5
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_2
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_2
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 4
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 4
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_1
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_1
+			NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+			NOR = {
+				prestige_level >= 3
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 3
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_0
+	}
+}

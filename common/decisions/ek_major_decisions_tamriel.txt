@@ -199,8 +199,7 @@ reintegrate_orsinium_decision = {
 		}
 		NOT = { culture_group = culture_group:orsimer_group }
 		any_held_title = {
-			count = all
-			has_variable = { name = orsinium_original_liege_boolean }
+			has_variable = orsinium_original_liege_boolean
 		}
 	}
 	
@@ -211,8 +210,7 @@ reintegrate_orsinium_decision = {
 		prestige_level >= 2
 		#You hold Orsinium's de jure duchy
 		any_held_title = {
-			count = all
-			has_variable = { name = orsinium_original_duchy_boolean }
+			has_variable = orsinium_original_duchy_boolean
 		}
 	}
 
@@ -226,14 +224,14 @@ reintegrate_orsinium_decision = {
 		#Saves the duchy that had become part of Orsinium
 		every_held_title = {
 			limit = {
-				has_variable = { name = orsinium_original_duchy_boolean }
+				has_variable = orsinium_original_duchy_boolean
 			}
 			save_scope_as = orsinium_original_duchy
 		}
 		#Saves the original de jure liege
 		every_held_title = {
 			limit = {
-				has_variable = { name = orsinium_original_liege_boolean }
+				has_variable = orsinium_original_liege_boolean
 			}
 			save_scope_as = orsinium_original_liege
 		}
@@ -245,14 +243,10 @@ reintegrate_orsinium_decision = {
 		destroy_title = title:k_orsinium
 		#Clears variables
 		scope:orsinium_original_duchy = { 
-			remove_variable = {
-				name = orsinium_original_duchy_boolean
-			}
+			remove_variable = orsinium_original_duchy_boolean
 		}
 		scope:orsinium_original_liege = { 
-			remove_variable = {
-				name = orsinium_original_liege_boolean
-			}
+			remove_variable = orsinium_original_liege_boolean
 		}
 		add_gold = -500
 		add_prestige_level = -1
