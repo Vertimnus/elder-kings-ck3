@@ -1,6 +1,158 @@
-﻿## Lex Dynasty (130239)
-
+﻿## Lex Dynasty (dyn_lex)
 # House Lex
+lex_caius = {
+	name = "Caius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+
+	trait = education_stewardship_4
+
+	3312.1.1 = { birth = yes }
+	3336.1.1 = { add_spouse = lex_caius_wife }
+	3347.1.1 = { give_nickname = nick_the_just }
+	3370.1.1 = {
+		#effect = {
+		#	if = { limit = { is_in_society = yes } leave_society = yes }
+		#	join_society = elder_council
+		#	set_society_grandmaster = yes
+		#	set_global_flag = imperial_commune_active
+		#	set_global_flag = commune399debug
+		#}
+	}
+	3376.1.1 = { death = yes }
+}
+lex_caius_wife = {
+	name = "Caecillia"
+	female = yes
+	dynasty = 100025
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = odiil_99
+
+	3319.1.1 = { birth = yes }
+	3336.1.1 = { add_spouse = lex_caius }
+	3383.1.1 = { death = yes }
+}
+lex_101 = {
+	name = "Hadrian"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	trait = intellect_good_1
+	trait = education_stewardship_3
+
+	sexuality = homosexual
+
+	father = lex_caius
+	mother = lex_caius_wife
+	
+	3338.1.1 = { birth = yes }
+	#3365.1.1 = { 
+	#	secret_religion = daedra_sanguine
+	#	effect = { c_15575 = { add_friend = ROOT } }
+	#}
+	#3376.1.1 = {
+	#	effect = {
+	#		if = { limit = { is_in_society = yes } leave_society = yes }
+	#		join_society = elder_council
+	#		set_society_grandmaster = yes
+	#	}
+	#}
+	3406.1.1 = { death = yes }
+}
+lex_102 = {
+	name = "Clagius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+
+	trait = intellect_bad_3
+	trait = education_martial_2
+	prowess = 12
+	
+	father = lex_caius
+	mother = lex_caius_wife
+
+	3341.1.1 = { birth = yes }
+	3382.1.1 = { death = yes }
+}
+lex_103 = {
+	name = "Silvia"
+	female = yes
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_caius
+	mother = lex_caius_wife
+
+	3350.1.1 = { birth = yes }
+	3411.1.1 = { death = yes }
+}
+lex_104 = {
+	name = "Gergius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_101
+	
+	3365.1.1 = { birth = yes }
+	3430.1.1 = { death = yes }
+}
+lex_105 = {
+	name = "Caius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_101
+	
+	3390.1.1 = { birth = yes }
+	3450.1.1 = { death = yes }
+}
+lex_106 = {
+	name = "Augurius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_105
+	
+	3425.1.1 = { birth = yes }
+	#3455.1.1 = {
+	#	effect = {
+	#		clr_global_flag = imperial_commune_active
+	#		clr_global_flag = commune399debug
+	#	}
+	#}
+	3500.1.1 = { death = yes }
+}
+lex_107 = {
+	name = "Dolcettus"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_106
+	
+	3460.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+lex_108 = {
+	name = "Lutherius"
+	dynasty = dyn_lex
+	culture = heartlander
+	religion = imperial_cult
+	
+	father = lex_107
+	
+	3483.1.1 = { birth = yes }
+	3541.1.1 = { death = yes }
+}
 
 ## Terentius Dynasty (130000)
 
@@ -1006,6 +1158,16 @@ quintilius_366 = {
 	3874.1.1 = { death = yes }
 }
 
+#Vetilii Dynasty (130012)
+vertilii_1000 = {
+	name = "Otius"
+	dynasty = 130012
+	religion = imperial_cult
+	culture = heartlander
+
+	3327.2.13 = { birth = yes }
+	3391.12.2 = { death = yes }
+}
 
 ###Non-Dynastic Character Entries
 #Republics
@@ -1030,6 +1192,24 @@ pell_gate_1002 = {
 	3361.1.1 = { birth = yes }
 	3428.1.1 = { death = yes }
 }
+weye_1000 = {
+	name = "Noster"
+	religion = imperial_cult
+	culture = heartlander
+
+	trait = p_zenithar
+
+	3331.1.1 = { birth = yes }
+	3404.1.1 = { death = yes }
+}
+yellowtick_1000 = {
+	name = "Rotus"
+	religion = imperial_cult
+	culture = heartlander
+
+	3326.1.1 = { birth = yes }
+	3401.1.1 = { death = yes }
+}
 
 
 #Theocracies
@@ -1037,7 +1217,20 @@ imperial_cult_1000 = {
 	name = "Gallinius"
 	religion = imperial_cult
 	culture = colovian
+
+	trait = education_learning_4
 	
 	3309.1.1 = { birth = yes }
 	3382.1.1 = { death = yes }
+}
+fanacasecul_1000 = {
+	name = "Nivelius"
+	religion = imperial_cult
+	culture = heartlander
+
+	trait = education_learning_3
+	trait = p_shezarr
+
+	3325.1.1 = { birth = yes }
+	3401.1.1 = { death = yes }
 }
