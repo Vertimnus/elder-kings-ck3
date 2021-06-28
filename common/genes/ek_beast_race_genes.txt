@@ -23,11 +23,13 @@
 
 				setting = { attribute = "khajiit_teeth"	value = { min = 0.0 max = 1.0 }	}
 				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "head_khajiit_head_normals"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "bs_khajiit_body"	value = { min = 1.0 max = 1.0 }	 }
 
 				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 0.0 }	}
 				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 1.0 max = 0.0 }	 }
+				setting = { attribute = "head_lilmothiit_head_normals"	value = { min = 1.0 max = 0.0 }	 }
 				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 1.0 max = 0.0 }	 }
 
 				texture_override = {
@@ -162,12 +164,14 @@
 
 
 				setting = { attribute = "head_khajiit_head_bs"	value = { min = 0.0 max = 1.0 }	 }
+				setting = { attribute = "head_khajiit_head_normals"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "head_khajiit_proportions"	value = { min = 0.0 max = 1.0 }	 }
 				setting = { attribute = "bs_khajiit_body"	value = { min = 1.0 max = 1.0 }	 }
 
 				
 				setting = { attribute = "lilmothiit_teeth"	value = { min = 1.0 max = 0.0 }	}
 				setting = { attribute = "head_lilmothiit_head_bs"	value = { min = 1.0 max = 0.0 }	 }
+				setting = { attribute = "head_lilmothiit_head_normals"	value = { min = 1.0 max = 0.0 }	 }
 				setting = { attribute = "head_lilmothiit_proportions"	value = { min = 1.0 max = 0.0 }	 }
 
 				setting = { attribute = "head_eye_scale"	value = { min = 0.1 max = 0.2 }	}
@@ -279,8 +283,37 @@
 		argonian_features = {
 			index = 2
 			male = {
-				setting = { attribute = "male_argonian_head_round_bs"	value = { min = 0.0 max = 1.0 }	}
-				setting = { attribute = "male_argonian_head_sharp_bs"	value = { min = 1.0 max = 0.0 }	}
+			#setting = { attribute = "male_argonian_head_round_bs"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "male_argonian_head_bs"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "male_argonian_head_normals"	value = { min = 0.0 max = 1.0 }	}
+				setting = { attribute = "head_argonian_proportions"	value = { min = 0.0 max = 1.0 }	}
+
+				texture_override = {
+					weight = 100  #if there are multiple texture_overrides in a character's dna one will be picked by weighted random
+					diffuse = 	"gfx/models/portraits/male_body/khajiit_textures/no_diffuse.dds"
+					normal = 	"gfx/models/portraits/male_head/argonian_textures/argonians_head_skin_normal.dds"
+					specular = 	"gfx/models/portraits/male_head/argonian_textures/argonians_head_skin_properties.dds"
+				}
+
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/male_head/argonian_textures/argonians_head_shadows.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 1.0  1.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = multiply
+					}
+					priority = 2
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+
 			}
 
 			female = {}
@@ -1813,6 +1846,83 @@
 
 
 
+
+	}
+
+	argonian_skin_shading = {
+
+		no_shading = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		shading_1 = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/male_head/argonian_textures/argonians_head_shading.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = hard_light
+					}
+					priority = 3
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+	}
+
+	
+	argonian_skin_highlights = {
+
+		no_highlights = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		highlights_1 = {
+			index = 1
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/male_head/argonian_textures/argonians_head_highlights.dds"
+					}
+					alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+						#gene strength%, decal alpha
+						{ 0.0  0.0 }
+						{ 1.0  1.0 }
+					}
+					blend_modes = {              #overlay/replace/hard_light/multiply
+						diffuse = replace
+					}
+					priority = 1
+					age = age_preset_child_features_wide_range
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
 
 	}
 
