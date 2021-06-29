@@ -99,6 +99,24 @@ headgear = {
 				# Should still wear armor when going to war
 				NOT = { portrait_wear_armor_trigger = yes }
 			}
+			#EK2 Too many Khajiit/Argonians/Lilmothiit wear headgear. This is to reduce that.
+			modifier = {
+				add = 75
+                OR = {
+					has_gene = {
+						category = beast_race_features
+						template = lilmothiit_khajiit_features
+				}
+	
+					has_gene = {
+					category = beast_race_features
+					template = argonian_features
+			}
+			}
+				# Should still wear armor when going to war
+				NOT = { portrait_wear_armor_trigger = yes }
+			}
+			#EK2
 		}
 	}
 

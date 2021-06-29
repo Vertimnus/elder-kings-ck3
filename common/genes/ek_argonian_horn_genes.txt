@@ -8,27 +8,62 @@ morph_genes = {
 				horns_straight = { 
 					index = 0
 					male = {
-						setting = { attribute = "argonian_horns_long"	value = { min = 0.0 max = 1.0 }	 } 
+						setting = { attribute = "argonian_horns_long"	value = { min = 0.0 max = 1.0 }	 
+						age = {
+							mode = multiply
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.20 0.9 }
+								{ 0.85 1.0 }
+							}					
+						}} 
 					}
 					female = male
 					boy = male
 					girl = female
 				}
+
+
 				horns_curved = { 
 					index = 1
 					male = {
-						setting = { attribute = "argonian_horns_curved"	value = { min = 0.0 max = 1.0 }	 } 
+						setting = { attribute = "argonian_horns_curved"	value = { min = 0.0 max = 1.0 }
+						age = {
+							mode = multiply
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.20 0.9 }
+								{ 0.85 1.0 }
+							}		 } 
 					}
+				}
 					female = male
 					boy = male
 					girl = female
 				}
+
+				
 				horns_goat = {
 				index = 2
 					male = {
-						setting = { attribute = "argonian_horns_curved"	value = { min = 1.0 max = 1.0 }	 } 
-						setting = { attribute = "argonian_horns_goat"	value = { min = 0.0 max = 1.0 }	 } 
-					}
+						setting = { attribute = "argonian_horns_curved"	value = { min = 1.0 max = 1.0 }	 
+						age = {
+							mode = multiply
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.10 1.0 }
+							}	} }
+
+						setting = { attribute = "argonian_horns_goat"	value = { min = 0.0 max = 1.0 }	 
+						age = {
+							mode = multiply
+							curve = {
+								{ 0.0 0.0 }
+								{ 0.10 0.0 }
+								{ 0.20 0.9 }
+								{ 0.85 1.0 }
+							}	} 
+					}}
 					female = male
 					boy = male
 					girl = female
