@@ -1081,7 +1081,7 @@ d_kvatch = {
 	3460.1.1 = { holder = kvinchal_6256 }
 	3464.12.4 = { holder = aquilarios_varen }
 	3497.1.1 = { holder = aquilarios_carolus }
-	3497.7.9 = { liege = k_anvil } # Fortunata makes Carolus her vassal
+	3497.7.10 = { liege = k_anvil } # Fortunata makes Carolus her vassal
 	#will become Goldwine by 3E
 }
 c_kvatch = { #Moved from centers of civilization
@@ -1107,7 +1107,10 @@ c_kvatch = { #Moved from centers of civilization
 	3497.1.1 = { holder = aquilarios_carolus }
 }
 d_order_of_the_hour = {
-	1040.1.1 = { holder = decan_ennon }
+	1040.1.1 = {
+		government = holy_order_government
+		holder = decan_ennon
+	}
 	3352.1.1 = {
 		government = holy_order_government
 		liege = k_kvatch
@@ -1123,11 +1126,15 @@ d_order_of_the_hour = {
 	3511.1.1 = { liege = 0 }
 }
 c_dasek_moor = {
-	1040.1.1 = { holder = decan_ennon }
+	3326.1.1 = {
+		government = feudal_government
+		holder = merula_lovorica
+	}
+	3350.1.1 = {
+		holder = merula_cavor
+	}
 	3352.1.1 = {
 		government = holy_order_government
-		liege = k_kvatch
-		holder = merula_cavor
 	}
 	3450.1.1 = { holder = hour_phrastus }
 	3470.1.1 = { holder = coventine_jonas }
@@ -1368,16 +1375,45 @@ c_gnoll = {
 
 ##Kingdom of Anvil
 k_anvil = { #Allies with e_cyordiil in warlords
-	2240.1.1 = { holder = olo_10 }
+	2190.1.1 = { holder = olo_9 }
+	2230.1.1 = { holder = olo_10 }
+	2240.1.1 = { liege = k_anvil }
 	2258.1.1 = { holder = olo_12 }
-	
+
 	3270.1.1 = { holder = olo_97 }
 	3309.1.1 = { holder = olo_98 }
 	3351.1.1 = { holder = olo_99 }
-	3350.4.18 = { liege = 0 }
-	3497.7.9 = { holder = dugal_1000
-	government = pirate_government }
-	#Anvil goes to different ruler post-warlords?
+	3364.1.1 = {
+		government = pirate_government
+		holder = dralgoner_arctur
+	}
+	3367.1.1 = { government = feudal_government }
+	3400.1.1 = { holder = dralgoner_6501 }
+	3436.1.1 = { holder = dralgoner_6503 }
+	3440.1.1 = { liege = k_colovia }
+
+	3497.7.9 = { 
+		holder = dugal_1000
+		government = pirate_government
+	}
+	3503.1.1 = { #Might wanna cut this and make dralgoner vassal of k_kvatch
+		government = feudal_government
+		liege = k_kvatch
+		holder = dralgoner_6505 
+	}
+	3550.1.1 = { holder = dralgoner_6506 }
+	3571.1.1 = { holder = dralgoner_6507 }
+	3572.1.1 = { holder = dralgoner_6508 }
+	3621.1.1 = { holder = dralgoner_6509 }
+	3664.1.1 = { holder = dralgoner_6510 }
+	3688.1.1 = { liege = k_anvil }
+	3700.1.1 = { holder = dralgoner_6511 }
+	3728.1.1 = { holder = dralgoner_6512 }
+	3731.10.1 = { liege = k_colovia }
+	3764.1.1 = { holder = dralgoner_6513 }
+	3804.1.1 = { holder = dralgoner_6514 }
+	3826.1.1 = { holder = dralgoner_6515 }
+	3863.1.1 = { holder = dralgoner_6516 }
 }
 d_anvil = {
 	2190.1.1 = { holder = olo_9 }
@@ -1388,8 +1424,32 @@ d_anvil = {
 	3270.1.1 = { holder = olo_97 }
 	3309.1.1 = { holder = olo_98 }
 	3351.1.1 = { holder = olo_99 }
+	3364.1.1 = {
+		government = pirate_government
+		holder = dralgoner_arctur
+	}
+	3367.1.1 = { government = feudal_government }
+	3400.1.1 = { holder = dralgoner_6501 }
+	3436.1.1 = { holder = dralgoner_6503 }
+	3440.1.1 = { liege = k_colovia }
 	3497.7.9 = { holder = dugal_1000 }
-	#Anvil goes to different ruler post-warlords?	
+	3503.1.1 = { 
+		liege = k_kvatch
+		holder = dralgoner_6505 
+	}
+	3550.1.1 = { holder = dralgoner_6506 }
+	3571.1.1 = { holder = dralgoner_6507 }
+	3572.1.1 = { holder = dralgoner_6508 }
+	3621.1.1 = { holder = dralgoner_6509 }
+	3664.1.1 = { holder = dralgoner_6510 }
+	3688.1.1 = { liege = k_anvil }
+	3700.1.1 = { holder = dralgoner_6511 }
+	3728.1.1 = { holder = dralgoner_6512 }
+	3731.10.1 = { liege = k_colovia }
+	3764.1.1 = { holder = dralgoner_6513 }
+	3804.1.1 = { holder = dralgoner_6514 }
+	3826.1.1 = { holder = dralgoner_6515 }
+	3863.1.1 = { holder = dralgoner_6516 }	
 }
 c_anvil = {
 	300.1.1 = { change_development_level = 16 }
@@ -1403,8 +1463,32 @@ c_anvil = {
 	3270.1.1 = { holder = olo_97 }
 	3309.1.1 = { holder = olo_98 }
 	3351.1.1 = { holder = olo_99 }
+	3364.1.1 = {
+		government = pirate_government
+		holder = dralgoner_arctur
+	}
+	3367.1.1 = { government = feudal_government }
+	3400.1.1 = { holder = dralgoner_6501 }
+	3436.1.1 = { holder = dralgoner_6503 }
+	3440.1.1 = { liege = k_colovia }
 	3497.7.9 = { holder = dugal_1000 }
-	#Anvil goes to different ruler post-warlords?	
+	3503.1.1 = { 
+		liege = k_kvatch
+		holder = dralgoner_6505 
+	}
+	3550.1.1 = { holder = dralgoner_6506 }
+	3571.1.1 = { holder = dralgoner_6507 }
+	3572.1.1 = { holder = dralgoner_6508 }
+	3621.1.1 = { holder = dralgoner_6509 }
+	3664.1.1 = { holder = dralgoner_6510 }
+	3688.1.1 = { liege = k_anvil }
+	3700.1.1 = { holder = dralgoner_6511 }
+	3728.1.1 = { holder = dralgoner_6512 }
+	3731.10.1 = { liege = k_colovia }
+	3764.1.1 = { holder = dralgoner_6513 }
+	3804.1.1 = { holder = dralgoner_6514 }
+	3826.1.1 = { holder = dralgoner_6515 }
+	3863.1.1 = { holder = dralgoner_6516 }
 }
 c_wariel = {
 	3352.1.1 = { 
@@ -1419,6 +1503,23 @@ c_wariel = {
 }
 c_strand = {
 	410.1.1 = { holder = faleria_10 }
+}
+c_atrene = {
+	3357.12.3 = {
+		liege = d_anvil
+		holder = sirota_1000
+	}
+	3398.9.28 = { holder = sirota_1001 }
+	3419.11.1 = { holder = sirota_1002 }
+}
+c_smokehole = {
+	3359.1.1 = {
+		government = pirate_government
+		holder = dralgoner_arctur
+	}
+	3367.1.1 = { government = feudal_government }
+	3400.1.1 = { holder = dralgoner_6501 }
+	3436.1.1 = { holder = dralgoner_6503 }
 }
 
 d_crowhaven = {
@@ -1490,11 +1591,25 @@ c_hastrel = {
 	3372.1.1 = { holder = inveran_101 }
 	3434.1.1 = { holder = inveran_102 }	
 }
+d_stirk = {
+	3359.1.1 = {
+		liege = k_anvil
+		government = pirate_government
+		holder = dralgoner_arctur
+	}
+	3363.1.1 = { liege = 0 }
+	3367.1.1 = { government = feudal_government }
+	3400.1.1 = { holder = dralgoner_6501 }
+	3436.1.1 = { holder = dralgoner_6503 }
+}
 c_stirk = {
 	3350.1.1 = {
 		holder = stirk_1000
 		liege = k_anvil
 		government = pirate_government
+	}
+	3359.1.1 = {
+		liege = d_stirk
 	}
 }
 
