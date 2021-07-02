@@ -666,7 +666,7 @@ widget = {
 				position_y = 37 #65 #0
 				duration = 0.15
 			}
-			
+
 			state = {
 				name = "bookmark_change_lower"
 				next = "fadein"
@@ -782,7 +782,7 @@ widget = {
 								state = {
 									name = "recommended_down"
 									on_start = "[PdxGuiWidget.FindChild('bookmark_button_actual').TriggerAnimation('button_selection')]"
-									on_start = "[PdxGuiWidget.FindChild('bookmarks_button').TriggerAnimation('shimmer')]"
+									#on_start = "[PdxGuiWidget.FindChild('bookmarks_button').TriggerAnimation('shimmer')]"
 									on_start = "[PdxGuiWidget.FindChild('bookmarks_button').TriggerAnimation('selected_glow')]"
 								}
 							}
@@ -2316,6 +2316,7 @@ types BookmarkPortraits
 							translate_uv = { 1 -1 }
 							alpha = 0.6
 						}
+						on_finish = "[PdxGuiTriggerAllAnimations('shimmer')]"
 					}
 
 					# Shimmer on appear
