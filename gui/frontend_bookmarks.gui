@@ -666,6 +666,24 @@ widget = {
 				position_y = 37 #65 #0
 				duration = 0.15
 			}
+			
+			state = {
+				name = "bookmark_change_lower"
+				next = "fadein"
+
+				alpha = 0
+				position_y = -50 #15 #-50
+			}
+
+			state = {
+				name = "fadein"
+				using = Animation_Curve_Default
+
+				alpha = 1
+				delay = 0.2
+				position_y = 37 #65 #0
+				duration = 0.2
+			}
 
 			hbox = {
 				allow_outside = yes
@@ -775,17 +793,36 @@ widget = {
 						size = { 100% 22 }
 						position = { 0 -18 }
 
-						icon = {
-							name = "tile_frame_bottom"
-							parentanchor = top|hcenter
-							size = { 100% 22 }
-							#position = { 0 -22 }
+						# icon = {
+						# 	name = "tile_frame_bottom"
+						# 	parentanchor = top|hcenter
+						# 	size = { 100% 22 }
+						# 	#position = { 0 -22 }
 
-							texture = "gfx/interface/component_decoration/decoration_frame_top_clean.dds"
-							spriteType = Corneredtiled
-							spriteborder = { 100 0 }
-							mirror = vertical
-							texture_density = 2
+						# 	texture = "gfx/interface/component_decoration/decoration_frame_top_clean.dds"
+						# 	spriteType = Corneredtiled
+						# 	spriteborder = { 100 0 }
+						# 	mirror = vertical
+						# 	texture_density = 2
+						# }
+
+						widget = {
+							parentanchor = bottom|hcenter
+							widgetanchor = bottom|hcenter
+							size = { 100% 22 }
+							scissor = yes
+							icon = {
+								name = "tile_frame_bottom"
+								parentanchor = top|hcenter
+								size = { 133% 22 }
+								#position = { 0 -22 }
+
+								texture = "gfx/interface/component_decoration/decoration_frame_top_clean.dds"
+								spriteType = Corneredtiled
+								spriteborder = { 100 0 }
+								mirror = vertical
+								texture_density = 2
+							}
 						}
 
 						widget = {
@@ -2382,6 +2419,7 @@ types BookmarkPortraits
 			size = { 100% 100% }
 			onclick = "[BookmarkItem.Select]"
 			onclick = "[PdxGuiTriggerAllAnimations('bookmark_tabs_reset')]"
+			onclick = "[PdxGuiTriggerAllAnimations('bookmark_change_lower')]"
 			onclick = "[PdxGuiInterruptThenTriggerAllAnimations('bookmark_change','bookmark_change')]"
 			onclick = "[PdxGuiInterruptThenTriggerAllAnimations('map_characters_appear','map_characters_appear')]"
 
@@ -2476,7 +2514,7 @@ types BookmarkPortraits
 					name = "bookmark_year_glow"
 					on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( EqualTo_int32( GameSetup.GetSelectedBookmark.GetDate.GetYear, BookmarkItem.GetDate.GetYear ), 'selected_glow', '' ))]"
 				}
-				
+
 				state = {
 					name = "selected_glow"
 					trigger_when = "[EqualTo_int32( GameSetup.GetSelectedBookmark.GetDate.GetYear, BookmarkItem.GetDate.GetYear )]"
