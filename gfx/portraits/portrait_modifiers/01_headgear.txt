@@ -99,6 +99,24 @@ headgear = {
 				# Should still wear armor when going to war
 				NOT = { portrait_wear_armor_trigger = yes }
 			}
+			#EK2 Too many Khajiit/Argonians/Lilmothiit wear headgear. This is to reduce that.
+			modifier = {
+				add = 75
+                OR = {
+					has_gene = {
+						category = beast_race_features
+						template = lilmothiit_khajiit_features
+				}
+	
+					has_gene = {
+					category = beast_race_features
+					template = argonian_features
+			}
+			}
+				# Should still wear armor when going to war
+				NOT = { portrait_wear_armor_trigger = yes }
+			}
+			#EK2
 		}
 	}
 
@@ -4141,5 +4159,39 @@ headgear = {
 				# }
 			}
 	    }
+	}
+
+	#RTT headgear
+	monarchs_journey_late_unlock = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = headgear
+				template = monarchs_journey_unleashed
+				range = { 0 1 } # For the randomness to work correctly
+			}
+		}
+
+		weight = {
+	        base = -100
+	        modifier = {
+	        	add = 110
+	        	# current_date >= 1300.1.1
+	        	OR = {
+					portrait_western_clothing_trigger = yes
+					portrait_western_clothing_spouse_trigger = yes
+				}
+	        	OR = {
+	        		AND = {
+	        			is_lowborn = no
+						is_female = yes
+	        		}
+	        		AND = {
+						has_government = republic_government
+						highest_held_title_tier <= tier_barony
+	        		}
+	        	}
+	        }
+        }
 	}
 }

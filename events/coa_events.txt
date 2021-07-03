@@ -14,6 +14,7 @@ coa.1 = {
 	immediate = {
 		trigger_event = coa.10 # e_reach
 		trigger_event = coa.11 # e_skyrim
+        trigger_event = coa.12 # k_rimmen
 	}
 }
 
@@ -115,5 +116,27 @@ coa.11 = {
 		}
 		
 		# title:e_skyrim = { set_coa = e_windhelm }
+	}
+}
+
+### For k_rimmen
+coa.12 = {
+	type = character_event
+	hidden = yes
+	
+	trigger = {
+		title:k_rimmen = {
+			can_event_change_coa_trigger = yes
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { culture_group = culture_group:cyrodiilic_group }
+			title:k_rimmen = { set_coa = k_euraxian_rimmen }
+		}
+		else = {
+			reset_coa_effect = { TITLE = k_rimmen }
+		}
 	}
 }

@@ -882,10 +882,6 @@ doctrine_core_tenets = {
 			}
 		}
 		
-		parameters = {
-			hostility_override_doctrine_lycanthropy_outlawed = 2
-		}
-		
 		# TODO: Update when we have a lycan trait line
 		traits = {
 			virtues = { lycan_character = 2 }
@@ -931,10 +927,6 @@ doctrine_core_tenets = {
 			}
 		}
 		
-		parameters = {
-			hostility_override_doctrine_necromancy_outlawed = 2
-		}
-		
 		# TODO: Update when we have a necromancer trait line
 		traits = {
 			virtues = { necromancer_character = 1 }
@@ -950,6 +942,7 @@ doctrine_core_tenets = {
 				limit = {
 					OR = {
 						religion_tag = molag_religion
+						religion_tag = vampiric_religion
 						flag:doctrine_pantheon_molag = { is_in_list = selected_doctrines }
 					}
 				}
@@ -978,10 +971,6 @@ doctrine_core_tenets = {
 					flag:doctrine_vampirism_pragmatic = { is_in_list = selected_doctrines }
 				}
 			}
-		}
-		
-		parameters = {
-			hostility_override_doctrine_vampirism_outlawed = 2
 		}
 		
 		# TODO: Update when we have a vampire trait line
@@ -1034,7 +1023,6 @@ doctrine_core_tenets = {
 			# TODO: Decision for Witches to become Occultists
 			# Handle Briarhearts somehow?
 			potent_witch_become_occultist = yes
-			hostility_override_doctrine_witchcraft_crime = 2
 		}
 		
 		traits = {
@@ -1179,8 +1167,14 @@ doctrine_core_tenets = {
 			cheaper_cleanse_abominations_active = yes
 			cheaper_holy_wars_pro_undeath_active = yes
 			bonus_cleanse_abomination_war_piety_active = yes
-			hostility_override_doctrine_vampirism_accepted = 3
-			hostility_override_doctrine_necromancy_accepted = 3
+		}
+		
+		traits = {
+			sins = {
+				vampire_character = 3
+				necromancer_character = 3
+				undead_character = 3
+			}
 		}
 	}
 	
@@ -2523,6 +2517,8 @@ doctrine_core_tenets = {
 			legalism_reduced_faction_virtues = yes
 			legalism_increased_faction_sins = yes
 			legalism_trust_just_leader_active = yes
+			### EK NOTE: 'Might Makes Right' effect can be tied to Devotion
+			ek_might_makes_right_devotion_active = yes
 		}
 	}
 
@@ -2674,6 +2670,8 @@ doctrine_core_tenets = {
 		parameters = {
 			temporal_condemnation_enabled = yes
 			religious_legal_pronouncements_law_cost_reduction = yes
+			### EK NOTE: 'Might Makes Right' effect can be tied to Devotion
+			ek_might_makes_right_devotion_active = yes
 		}
 	}
 
@@ -3016,8 +3014,8 @@ doctrine_core_tenets = {
 			increased_dynasty_prestige_marriage_mult = 1
 			increased_dynasty_prestige_long_reign_mult = 0.5
 			pilgrimage_decision_active = yes
-			### EK TODO: Just that
-			rite_of_passage_decision_active = yes
+			### EK TODO: Just that - cut for the initial release (it is a big beast after all)
+			# rite_of_passage_decision_active = yes
 		}
 
 		character_modifier = {

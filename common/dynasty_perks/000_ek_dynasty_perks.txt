@@ -73,3 +73,106 @@ dragonblood_legacy_5 = { # Earth, Mind, Dragon
 		}
 	}
 }
+
+# HEGEMON LEGACIES
+
+hegemon_legacy_1 = {
+	legacy = hegemon_legacy_track
+	
+	effect = {
+		custom_description_no_bullet = {
+			text = hegemon_legacy_1_effect
+		}
+	}
+	
+	ai_chance = {
+		value = 11
+		if = {
+			limit = {
+				can_start_new_legacy_track_trigger = no
+			}
+			multiply = 0
+		}
+	}
+}
+
+hegemon_legacy_2 = {
+	legacy = hegemon_legacy_track
+
+	effect = {
+		custom_description_no_bullet = {
+			text = hegemon_legacy_2_effect
+		}
+	}
+}
+
+hegemon_legacy_3 = {
+	legacy = hegemon_legacy_track
+
+	effect = {
+		hidden_effect = {
+			# Setting up the modifiers for the first time
+			dynasty = { save_scope_as = current_dynasty }
+			add_to_global_variable_list = { name = dynasties_with_legacies_modifiers_to_update target = scope:current_dynasty }
+			dynasty_update_legacies_modifiers_effect = { DYNASTY = scope:current_dynasty }
+		}
+		
+		custom_description_no_bullet = {
+			text = hegemon_legacy_3_a_effect
+		}
+		custom_description_no_bullet = {
+			text = hegemon_legacy_3_b_effect
+		}
+	}
+}
+
+hegemon_legacy_4 = {
+	legacy = hegemon_legacy_track
+	
+	character_modifier = {
+		dynasty_house_opinion = 5
+	}
+
+	effect = {
+		hidden_effect = {
+			# Setting up the modifiers for the first time
+			dynasty = { save_scope_as = current_dynasty }
+			add_to_global_variable_list = { name = dynasties_with_legacies_modifiers_to_update target = scope:current_dynasty }
+			dynasty_update_legacies_modifiers_effect = { DYNASTY = scope:current_dynasty }
+		}
+		
+		custom_description_no_bullet = {
+			text = hegemon_legacy_4_a_effect
+		}
+		# custom_description_no_bullet = { # We'll see about that later
+			# text = hegemon_legacy_4_b_effect
+		# }
+		custom_description_no_bullet = {
+			text = hegemon_legacy_4_c_effect
+		}
+	}
+}
+
+hegemon_legacy_5 = {
+	legacy = hegemon_legacy_track
+	
+	character_modifier = {
+		dynasty_opinion = 5
+	}
+
+	effect = {
+		hidden_effect = {
+			# Setting up the modifiers for the first time
+			dynasty = { save_scope_as = current_dynasty }
+			add_to_global_variable_list = { name = dynasties_with_legacies_modifiers_to_update target = scope:current_dynasty }
+			dynasty_update_legacies_modifiers_effect = { DYNASTY = scope:current_dynasty }
+		}
+		
+		custom_description_no_bullet = {
+			text = hegemon_legacy_5_a_effect
+		}
+		custom_description_no_bullet = {
+			text = hegemon_legacy_5_b_effect
+		}
+	}
+}

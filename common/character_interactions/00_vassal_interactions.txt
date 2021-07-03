@@ -1,4 +1,6 @@
-﻿#Interactions relating to vassals
+﻿### EK EDIT: Added the effects of the Provincial Governor special contract
+
+#Interactions relating to vassals
 
 grant_vassal_interaction = {
 	category = interaction_category_vassal
@@ -204,9 +206,16 @@ retract_vassal_interaction = {
 
 	notification_text = RETRACT_VASSAL_PROPOSAL
 
+	### EK EDIT: Vassals with the Provincial Governor contract can't be retracted vassal within their province
 	populate_recipient_list = {
 		scope:recipient = {
 			every_vassal = {
+				limit = {
+					OR = {
+						NOT = { rulers_in_same_province = { CHAR1 = this CHAR2 = scope:recipient } }
+						NOT = { scope:recipient = { vassal_contract_has_flag = has_provincial_governor_contract } }
+					}
+				}
 				add_to_list = characters
 			}
 		}
@@ -1027,6 +1036,22 @@ invite_to_council_position_interaction = {
 			scope:recipient.council_task = scope:target
 			scope:actor = { is_at_war_with = scope:recipient }
 		}
+		
+		trigger_if = {
+			limit = {
+				scope:target = scope:actor.council_task:councillor_court_chaplain
+			}
+			NOT = {
+				scope:actor.cp:councillor_court_chaplain = {
+					is_blocked_from_being_fired_from_council_trigger = { COURT_OWNER = scope:actor }
+				}
+			}
+			scope:actor.faith = {
+				scope:recipient.faith = this
+				#Not ideal but that's the only approximation we can do in script
+				NOT = { has_doctrine = doctrine_clerical_succession_spiritual_fixed_appointment }
+			}
+		}
 	}
 
 	on_accept = {
@@ -1673,6 +1698,12 @@ pardon_interaction = {
 		consume_all_criminal_reasons_effect = {
 			LIEGE = scope:actor
 			CRIMINAL = scope:recipient
+		}
+
+		scope:actor = {
+			stress_impact = {
+				forgiving =  medium_stress_loss
+			}
 		}
 		
 		scope:recipient = {

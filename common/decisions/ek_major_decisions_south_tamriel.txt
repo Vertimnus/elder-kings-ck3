@@ -1,0 +1,81 @@
+﻿###############
+# BLACK MARSH #
+###############
+recreate_lost_kingdom_arnesia_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = recreate_lost_kingdom_arnesia_decision_desc
+	selection_tooltip = recreate_lost_kingdom_arnesia_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_ruler = yes
+		is_landed = yes
+		exists = dynasty # Everyone should have a dynasty, but in case they don't...
+		OR = {
+			has_title = title:d_arnesia
+			has_title = title:d_seafalls
+			has_title = title:d_padomeic
+			has_title = title:d_nootanara
+			has_title = title:c_arnesia
+		}
+		NOT = {	#You can only do it once.
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:recreate_lost_kingdom_arnesia_decision
+			}
+		}
+		highest_held_title_tier <= tier_duchy
+	}
+	
+	is_valid = {
+		is_independent_ruler = yes
+		
+		prestige_level >= high_prestige_level
+		has_title = title:d_arnesia
+		completely_controls = title:d_arnesia
+		completely_controls = title:d_seafalls
+		completely_controls = title:d_padomeic
+		completely_controls = title:d_nootanara
+		
+		title:c_arnesia = { development_level >= 10 }
+		
+		has_government = feudal_government
+	}
+
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+		is_at_war = no
+	}
+
+	cost = {
+		gold = 500
+	}
+
+	effect = {
+		show_as_tooltip = {
+			recreate_arnesia_decision_scripted_effect = yes
+		}
+		save_scope_as = founder
+		trigger_event = {
+			id = south_tamriel.0001
+		}
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:recreate_lost_kingdom_arnesia_decision
+			}
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

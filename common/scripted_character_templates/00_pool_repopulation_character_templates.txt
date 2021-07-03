@@ -62,36 +62,27 @@ pool_repopulate_aptitude = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 95 = {}
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 		random_list = {
-				1 = { add_aptitude_skill = { VALUE = 4 } }
-				1 = { add_aptitude_skill = { VALUE = 5 } }
-				1 = { add_aptitude_skill = { VALUE = 6 } }
-				1 = { add_aptitude_skill = { VALUE = 7 } }
-				1 = { add_aptitude_skill = { VALUE = 8 } }
-			}
+			1 = { add_aptitude_skill = { VALUE = 4 } }
+			1 = { add_aptitude_skill = { VALUE = 5 } }
+			1 = { add_aptitude_skill = { VALUE = 6 } }
+			1 = { add_aptitude_skill = { VALUE = 7 } }
+			1 = { add_aptitude_skill = { VALUE = 8 } }
+		}
 		if = {
-			limit = {
-				culture = {
-					has_innovation = innovation_magical_studies
-				}
-			}
+			limit = { has_students_magicka_background = yes }
 			random_list = {
 				40 = { add_trait = education_magical_ability_1 }
 				35 = { add_trait = education_magical_ability_2 }
@@ -130,29 +121,18 @@ pool_repopulate_prowess = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 95 = {}
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
-		
-		### EK EDIT: Plugged in our own special effects
-		ek_character_setup_effect = yes
 		if = {
-			limit = {
-				culture = {
-					has_innovation = innovation_knighthood
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
 				}
 			}
+		}
+		
+		if = {
+			limit = { has_knighthood_background = yes }
 			random_list = {
 				40 = { add_trait = education_martial_prowess_1 }
 				35 = { add_trait = education_martial_prowess_2 }
@@ -160,6 +140,9 @@ pool_repopulate_prowess = {
 				10 = { add_trait = education_martial_prowess_4 }
 			}
 		}
+		
+		### EK EDIT: Plugged in our own special effects
+		ek_character_setup_effect = yes
 	}
 }
 
@@ -196,20 +179,15 @@ pool_repopulate_diplomacy = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 85 = {}
-				# 15 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
@@ -241,26 +219,25 @@ pool_repopulate_martial = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 65 = {}
-				# 15 = {
-					# add_trait = varangian
-				# }
-				# 15 = {
-					# add_trait = berserker
-				# }
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
+		
+		if = {
+			limit = { has_knighthood_background = yes }
+			random_list = {
+				40 = { add_trait = education_martial_prowess_1 }
+				35 = { add_trait = education_martial_prowess_2 }
+				20 = { add_trait = education_martial_prowess_3 }
+				10 = { add_trait = education_martial_prowess_4 }
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
@@ -295,20 +272,15 @@ pool_repopulate_stewardship = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 95 = {}
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
@@ -347,20 +319,15 @@ pool_repopulate_intrigue = {
 	}
 	dynasty = none
 	after_creation = {
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 95 = {}
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
@@ -417,26 +384,20 @@ pool_repopulate_learning = {
 				}
 			}
 		}
-		# if = {
-			# limit = {
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			# }
-			# random_list = {
-				# 95 = {}
-				# 5 = {
-					# add_trait = poet
-				# }
-			# }
-		# }
+		if = {
+			limit = { has_poet_background = yes }
+			random_list = {
+				95 = {}
+				5 = {
+					add_trait = poet
+				}
+			}
+		}
 		
 		### EK EDIT: Plugged in our own special effects
 		ek_character_setup_effect = yes
 	}
 }
-			
 
 pool_repopulate_spouse = {
 	opposite_gender = root
@@ -538,14 +499,7 @@ pool_repopulate_spouse = {
 	dynasty = none
 	after_creation = {
 		if = {
-			limit = {
-				### EK EDIT: That doesn't exist
-				always = no
-				# OR = {
-					# culture_group = culture_group:north_germanic_group
-					# religion = religion:germanic_religion
-				# }
-			}
+			limit = { has_poet_background = yes }
 			random_list = {
 				95 = {}
 				5 = {

@@ -1,4 +1,6 @@
-﻿stress_pulse = {
+﻿### EK EDIT: Added our own stress-related stuff
+
+stress_pulse = {
 	#TODO: Is this obsolete? Can it be deleted?
 }
 
@@ -34,7 +36,7 @@ on_stress_level_1_no_recently_hit = {
 		stress_threshold.0002 # Prison Mental Break
 	}
 	effect = {
-		add_achievement_flag = { FLAG = achievement_stressful_situation_flag }
+		add_achievement_flag_effect = { FLAG = achievement_stressful_situation_flag }
 		play_music_cue = "mx_cue_stress"
 	}
 }
@@ -57,7 +59,7 @@ on_stress_level_2_no_recently_hit = {
 		stress_threshold.0002 # Prison Mental Break
 	}
 	effect = {
-		add_achievement_flag = { FLAG = achievement_stressful_situation_flag }
+		add_achievement_flag_effect = { FLAG = achievement_stressful_situation_flag }
 		update_religions_stress = yes
 	}
 }
@@ -80,7 +82,7 @@ on_stress_level_3_no_recently_hit = {
 		stress_threshold.0002 # Prison Mental Break
 	}
 	effect = {
-		add_achievement_flag = { FLAG = achievement_stressful_situation_flag }
+		add_achievement_flag_effect = { FLAG = achievement_stressful_situation_flag }
 	}
 }
 
@@ -99,7 +101,7 @@ on_stress_level_4_no_recently_hit = {
 		stress_threshold.0400 # Trigger the 400 stress 'reset'. This event will also trigger its own mental breaks.
 	}
 	effect = {
-		add_achievement_flag = { FLAG = achievement_stressful_situation_flag }
+		add_achievement_flag_effect = { FLAG = achievement_stressful_situation_flag }
 		update_religions_stress = yes
 	}
 }
@@ -136,7 +138,10 @@ stress_threshold_level_2_event = {
  		100 = stress_threshold.2321 # Befuddled by Court: it feels like everything you do, others take advantage of.
  		100 = stress_threshold.2331 # Estranged Authority: your brevity and certainty is mistaken for ruthlessness.
  		100 = stress_threshold.2341 # Shirked Duty: you half-arse your noble duties, and it shows.
- 		100 = stress_threshold.2351 # Improprietous Remarks: increasingly frayed, you respond to a petitioner brashly.		
+ 		100 = stress_threshold.2351 # Improprietous Remarks: increasingly frayed, you respond to a petitioner brashly.	
+
+		### EK EDIT: Event pushing towards Daedric Worship
+ 		100 = stress_threshold.2501 # You feel the whispers of the Daedric Princes, preying on your sins and weaknesses...		
 	}
 }
 
@@ -148,7 +153,10 @@ stress_threshold_level_3_event = {
 		100 = stress_threshold.3301 # Death
 		100 = stress_threshold.3401 # Shooting the Messenger: you dramatically punish someone for giving you bad news.
 		100 = stress_threshold.3411 # I am Unworthy: your impostor syndrome has become a full-blown complex.
-		100 = stress_threshold.3421 # Domain of Debauchery: your holdings burn, but you're too ensconsed in hiding from your stress to care.		
+		100 = stress_threshold.3421 # Domain of Debauchery: your holdings burn, but you're too ensconsed in hiding from your stress to care.
+
+		### EK EDIT: Event pushing towards Daedric Worship
+ 		100 = stress_threshold.2501 # You feel the whispers of the Daedric Princes, preying on your sins and weaknesses...			
 	}
 }
 

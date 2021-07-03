@@ -54,159 +54,168 @@ has_magicka_less_than = {
 	}
 }
 
-spell_target_valid = { # same realm or neigboring realm. can't do hostile spells on self or family like murder plots - unless sadistic -cm also will not cast on you or their family
-	ROOT = var:spell_recipient
-}
+# spell_target_valid = { # same realm or neigboring realm. can't do hostile spells on self or family like murder plots - unless sadistic -cm also will not cast on you or their family
+# 	ROOT = var:spell_recipient
+# }
 
 # single gui, check if root = spell_caster to determine effects also need root = recipient & caster somewhere
 
 # PREFIX = "knows_" SCHOOL = "" POSTFIX = " = yes" or PREFIX = "can_cast = { SPELL = " SCHOOL = " SCHOOL = $SCHOOL$" POSTFIX = " }" "this allows spaces" "" should give empty acn use to get "spell_knows_flames = yes" and "spell_can_cast = { SPELL = flames }" need school for can cast trigger
 # spell_knows_flames = yes can_cast = { SPELL = flames }
-# master_spell_trigger = {
-# 	switch = {
-# 		trigger = var:spell_school
-# 		flag:alteration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$oakflesh$SCHOOL$$POSTFIX$ }
-# 				province:2 = { spell_$PREFIX$wards$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
+#known based on edu traits, aptitude, perks. actual check is perk vs defined spell level as number 1-5. perk check against education. aptitude implicit in cost
+#                                                                              use switch trigger = scriptval 1={has_perk}
+
+# spell_can_cast = {
+# 	var:spell_caster = { has_magicka = { VALUE = spell_cost_$SPELL$ } }
+# 	trigger_if = {
+# 		limit = { #hostile province, should stop other checks
+# 			var:spell_province = { has_variable = $SCHOOL$_hostile }
+# 			var:spell_province = { has_variable = $SCHOOL$_province }
+# 		}
+# 	}
+# 	trigger_else_if = {
+# 		limit = { #hostile no province, canot cast on self+children
+# 			var:spell_province = { has_variable = $SCHOOL$_hostile }
+# 		}
+# 		NOR = {
+# 			var:spell_recipient = ROOT # cant cast on self
+# 			var:spell_recipient = var:spell_caster # cant order cm to cast on self
+# 			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
+# 				limit = {
+# 					is_parent_of = var:spell_recipient
+# 					NOT = { has_trait_with_flag = can_murder_own_children }
+# 				}
+# 				is_parent_of = var:spell_recipient
 # 			}
 # 		}
-# 		flag:conjuration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$summon_scamp$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:destruction = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$flames$SCHOOL$$POSTFIX$ }
-# 				province:2 = { spell_$PREFIX$frostbite$SCHOOL$$POSTFIX$ }
-# 				province:3 = { spell_$PREFIX$sparks$SCHOOL$$POSTFIX$ }
-# 				province:4 = { spell_$PREFIX$firestorm$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:illusion = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$frenzy$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:restoration = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$heal$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
-# 		}
-# 		flag:necromancy = {
-# 			switch = {
-# 				trigger = scope:spell_province
-# 				province:1 = { spell_$PREFIX$raise_dead$SCHOOL$$POSTFIX$ }
-# 				fallback = { always = no }
-# 			}
+# 	}
+# 	trigger_else_if = {
+# 		limit = { #province no hostile,
+# 			var:spell_province = { has_variable = $SCHOOL$_province }
 # 		}
 # 	}
 # }
 
-alteration_spell_trigger = {
+school_spell_master_trigger = {
 	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$oakflesh$POSTFIX$ }
-		province:2 = { spell_$PREFIX$wards$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-conjuration_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$summon_scamp$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-destruction_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$flames$POSTFIX$ }
-		province:2 = { spell_$PREFIX$frostbite$POSTFIX$ }
-		province:3 = { spell_$PREFIX$sparks$POSTFIX$ }
-		province:4 = { spell_$PREFIX$firestorm$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-illusion_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$frenzy$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-restoration_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$heal$POSTFIX$ }
-		fallback = { always = no }
-	}
-}
-necromancy_spell_trigger = {
-	switch = {
-		trigger = var:spell_province
-		province:1 = { spell_$PREFIX$raise_dead$POSTFIX$ }
-		fallback = { always = no }
+		trigger = var:spell_school
+
+		flag:alteration = {
+			switch = {
+				trigger = scope:spell
+				flag:oakflesh = { $TRIGGER$ = { SCHOOL = alteration SPELL = oakflesh } }
+				flag:wards = { $TRIGGER$ = { SCHOOL = alteration SPELL = wards } }
+			}
+		}
+
+		flag:conjuration = {
+			switch = {
+				trigger = scope:spell
+				flag:summon_scamp = { $TRIGGER$ = { SCHOOL = conjuration SPELL = summon_scamp } }
+			}
+		}
+
+		flag:destruction = {
+			switch = {
+				trigger = scope:spell
+				flag:flames = { $TRIGGER$ = { SCHOOL = destruction SPELL = flames } }
+				flag:frostbite = { $TRIGGER$ = { SCHOOL = destruction SPELL = frostbite } }
+				flag:sparks = { $TRIGGER$ = { SCHOOL = destruction SPELL = sparks } }
+				flag:firestorm = { $TRIGGER$ = { SCHOOL = destruction SPELL = firestorm } }
+			}
+		}
+
+		flag:illusion = {
+			switch = {
+				trigger = scope:spell
+				flag:frenzy = { $TRIGGER$ = { SCHOOL = illusion SPELL = frenzy } }
+			}
+		}
+
+		flag:restoration = {
+			switch = {
+				trigger = scope:spell
+				flag:heal = { $TRIGGER$ = { SCHOOL = restoration SPELL = heal } }
+			}
+		}
+
+		flag:necromancy = {
+			switch = {
+				trigger = scope:spell
+				flag:raise_dead = { $TRIGGER$ = { SCHOOL = conjuration SPELL = raise_dead } } #temp necro -> conjuration as perks dont exist not sure how to handle
+			}
+		}
 	}
 }
 
 spell_known_trigger = {
-	switch = {
-		trigger = var:spell_school
-		flag:alteration = { alteration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = alteration }" } }
-		flag:conjuration = { conjuration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = conjuration }" } }
-		flag:destruction = { destruction_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = destruction }" } }
-		flag:illusion = { illusion_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = illusion }" } }
-		flag:restoration = { restoration_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = restoration }" } }
-		flag:necromancy = { necromancy_spell_trigger = { PREFIX = "known = { SPELL = " POSTFIX = " SCHOOL = necromancy }" } }
+	school_spell_master_trigger = { TRIGGER = spell_known }
+}
+spell_known = { # really need a better naming scheme for these pairs
+	var:spell_caster = {
+		switch = {
+			trigger = $SPELL$_level
+			1 = { has_perk = $SCHOOL$_novice_perk }
+			2 = { has_perk = $SCHOOL$_apprentice_perk }
+			3 = { has_perk = $SCHOOL$_journeyman_perk }
+			4 = { has_perk = $SCHOOL$_expert_perk }
+			5 = { has_perk = $SCHOOL$_master_perk }
+		}
 	}
 }
 
-#known based on edu traits, aptitude, perks. actual check is perk vs defined spell level as number 1-5. perk check against education. aptitude implicit in cost
-#                                                                              use switch trigger = scriptval 1={has_perk}
-
-spell_can_cast_trigger = {
-	switch = {
-		trigger = var:spell_school
-		flag:alteration = { alteration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = alteration }" } }
-		flag:conjuration = { conjuration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = conjuration }" } }
-		flag:destruction = { destruction_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = destruction }" } }
-		flag:illusion = { illusion_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = illusion }" } }
-		flag:restoration = { restoration_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = restoration }" } }
-		flag:necromancy = { necromancy_spell_trigger = { PREFIX = "can_cast = { SPELL = " POSTFIX = " SCHOOL = necromancy }" } }
-	}
+spell_selectable_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_selectable }
 }
-
-spell_known = {
-
-}
-
-spell_can_cast = {
-	var:spell_caster = { has_magicka = { VALUE = spell_cost_$SPELL$ } }
+spell_selectable = {
+	save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+	var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
+	# trigger_if = {
+	# 	limit = { exists = var:spell_recipient_old }
+	# 	var:spell_recipient_old = { save_temporary_scope_as = castee }
+	# }
+	# trigger_else = { var:spell_recipient = { save_temporary_scope_as = castee } }
 	trigger_if = {
 		limit = { #hostile province, should stop other checks
-			var:spell_province = { has_variable = $SCHOOL$_hostile }
-			var:spell_province = { has_variable = $SCHOOL$_province }
+			$SPELL$_hostile = 1
+			$SPELL$_province = 1
 		}
+		# is_commanding_army = yes
+		custom_description = {
+			text = "must be leading an army in a seige or raid"
+			exists = commanding_army
+			commanding_army = {
+				OR = {
+					is_army_in_siege = yes
+					is_army_in_raid = yes
+				}
+			}
+		}
+		# ROOT.location.barony_controller = { #need to account for raiding - leading raid army?
+		# 	OR = { # is the caster at war with the province controller or any char above them
+		# 		is_at_war_with = ROOT
+		# 		any_liege_or_above = {
+		# 			is_at_war_with = ROOT
+		# 		}
+		# 	}
+		# }
 	}
 	trigger_else_if = {
 		limit = { #hostile no province, canot cast on self+children
-			var:spell_province = { has_variable = $SCHOOL$_hostile }
+			$SPELL$_hostile = 1
 		}
 		NOR = {
-			var:spell_recipient = ROOT # cant cast on self
-			var:spell_recipient = var:spell_caster # cant order cm to cast on self 
+			custom_description = {
+				text = "You cant cast a hostile spell on yourself"
+				var:spell_recipient = ROOT # cant cast on self
+			}
+			trigger_if = {
+				limit = { NOT = { var:spell_recipient = ROOT } }
+				custom_description = {
+					text = "You cant order the cm to cast a hostile spell on themself"
+					var:spell_recipient = var:spell_caster # cant order cm to cast on self
+				}
+			}
 			trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
 				limit = {
 					is_parent_of = var:spell_recipient
@@ -217,8 +226,71 @@ spell_can_cast = {
 		}
 	}
 	trigger_else_if = {
-		limit = { #province no hostile, 
-			var:spell_province = { has_variable = $SCHOOL$_province }
+		limit = { #province no hostile,
+			$SPELL$_province = 1
+		}
+		var:spell_recipient = { is_landed = yes } #they have a county or barony, stops pope likes
+	}
+	trigger_else = { always = yes } #should default to this but the error log complains
+}
+
+spell_castable_trigger = {
+	school_spell_master_trigger = { TRIGGER = spell_castable }
+}
+spell_castable = {
+	spell_selectable = { SCHOOL = $SCHOOL$ SPELL = $SPELL$ }
+	#save_temporary_scope_value_as = { name = unimportant value = flag:$SCHOOL$ } # school not currently used, a use is needed
+	#var:spell_caster = { has_magicka = { VALUE = $SPELL$_cost } }
+	trigger_if = {
+		limit = { #hostile province, should stop other checks
+			$SPELL$_hostile = 1
+			$SPELL$_province = 1
+		}
+		custom_description = {
+			text = "No valid counties!"
+			variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		}
+		trigger_if = { #some issues with selection. may need separate execute trigger
+			limit = { exists = var:spell_county }
+			custom_description = {
+				text = "You must be there!"
+				var:spell_county = ROOT.location.county #need to be there to cast
+			}
 		}
 	}
+	# trigger_else_if = {
+	# 	limit = { #hostile no province, canot cast on self+children
+	# 		$SPELL$_hostile = 1
+	# 	}
+	# 	# NOR = {
+	# 	# 	custom_tooltip = {
+	# 	# 		text = "You cant cast a hostile spell on yourself"
+	# 	# 		var:spell_recipient = ROOT # cant cast on self
+	# 	# 	}
+	# 	# 	trigger_if = {
+	# 	# 		limit = { var:spell_recipient != ROOT }
+	# 	# 		custom_tooltip = {
+	# 	# 			text = "You cant order the cm to cast a hostile spell on themself"
+	# 	# 			var:spell_recipient = var:spell_caster # cant order cm to cast on self
+	# 	# 		}
+	# 	# 	}
+	# 	# 	trigger_if = { #copied from murder schemes, can't use hostile spells on own children, may expand to close family
+	# 	# 		limit = {
+	# 	# 			is_parent_of = var:spell_recipient
+	# 	# 			NOT = { has_trait_with_flag = can_murder_own_children }
+	# 	# 		}
+	# 	# 		is_parent_of = var:spell_recipient
+	# 	# 	}
+	# 	# }
+	# }
+	trigger_else_if = {
+		limit = { #province no hostile,
+			$SPELL$_province = 1
+		}
+		custom_description = {
+			text = "No valid counties!"
+			variable_list_size = { name = spell_counties value > 0 } #need to have some valid counties to target
+		}
+	}
+	trigger_else = { always = yes } #should default to this but the error log complains
 }

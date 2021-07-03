@@ -5,7 +5,7 @@
 			limit = {
 				is_adult = yes
 				patron_has_any_trait = no
-				NOT = { has_character_flag = recent_patron_selected }
+				NOT = { has_variable = recent_patron_selected }
 				# If a faith's pantheon cannot be changed, it means it's monotheist
 				NOT = { faith = { has_doctrine_parameter = pantheon_cannot_be_changed_active } }
 			}
@@ -17,13 +17,21 @@
 	}
 
 	effect = {
-		scope:actor = {
-			faith = {
-				open_view_data = {
-					view = faith
-				}
-			}
-			set_variable = action_patron #replace with create widget when available
+		# scope:actor = {
+		# 	faith = {
+		# 		open_view_data = {
+		# 			view = faith
+		# 			#view_message = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]"
+		# 		}
+		# 	}
+		# 	#set_variable = action_patron #replace with create widget when available
+		# }
+		scope:actor = { #still should use custom widgets if posible but this at least should be more multiplayer friendly
+			close_view = { view = religion }
+			close_view = { view = faith }
+
+			religion = { open_view = { view = religion } }
+			faith = { open_view_data = { view = faith } }
 		}
 	}
 }

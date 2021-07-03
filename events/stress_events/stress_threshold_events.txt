@@ -1,4 +1,5 @@
 ﻿### EK EDIT: Removed references to vanilla religions
+### EK EDIT: Added new events and options, some pushing you towards Daedric Worshipping, and some pushing you towards Skooma abuse
 
 namespace = stress_threshold
 
@@ -366,6 +367,8 @@ stress_threshold.1001 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -453,8 +456,10 @@ stress_threshold.1001 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -476,6 +481,15 @@ stress_threshold.1001 = {
 							}
 						}
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = {
+							OR = {
+								can_be_skooma_drinker = yes
+								has_trait = skooma_drinker
+							}
+						}
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -677,6 +691,53 @@ stress_threshold.1001 = {
 		add_stress = medium_stress_impact_loss
 	}
 
+	# Option X: Become skooma drinker, minor stress loss.
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1001.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.1001.skooma_drinker.effect
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 5
+				has_trait = gluttonous
+			}
+			modifier = {
+				add = 15
+				OR = {
+					has_trait = reveler_1
+					has_trait = reveler_2
+					has_trait = reveler_3
+				}
+			}
+		}
+
+		trait = skooma_drinker
+
+		if = {
+			limit = {
+				has_trait = skooma_drinker
+			}
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = {
+			add_trait = skooma_drinker
+		}
+
+		add_stress = medium_stress_impact_loss
+	}
+
 	# Option F: Become journaller, medium stress loss.
 	option = {
 		trigger = {
@@ -836,42 +897,20 @@ stress_threshold.1011 = {
 
 			add_character_flag = stress_threshold_option_conversion
 			# Only faiths where Lustful is a sin qualify for this conversion (which is brought on by lustful thoughts).
-			# hidden_effect = {
-				# random_list = {
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:catholic }
-							# NOT = { faith = faith:orthodox }
-						# }
-						# faith:catholic = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:orthodox }
-							# NOT = { faith = faith:catholic }
-						# }
-						# faith:orthodox = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:paulician }
-						# }
-						# faith:paulician = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:nestorian }
-						# }
-						# faith:nestorian = { save_scope_as = new_faith }
-					# }
-					# 20 = {
-						# trigger = {
-							# NOT = { faith = faith:karaism }
-						# }
-						# faith:karaism = { save_scope_as = new_faith }
-					# }
-				# }
-			# }
+			### EK EDIT: Redid the block from scratch to get an anti-Lustful faith
+			every_religion_global = {
+				every_faith = {
+					if = {
+						limit = { trait_is_sin = lustful }
+						add_to_list = anti_lustful_faiths
+					}
+				}
+			}
+			random_in_list = {
+				limit = { NOT = { root.faith = this } }
+				list = anti_lustful_faiths
+				save_scope_as = new_faith
+			}
 		}
 		if = {
 			limit = {
@@ -996,36 +1035,10 @@ stress_threshold.1011 = {
 	option = { # Option C-2: Convert to another Faith (different Religion), massive stress loss.
 		trigger = {
 			has_character_flag = stress_threshold_option_conversion
-			NOT = { faith.religion = scope:new_faith.religion}
+			NOT = { faith.religion = scope:new_faith.religion }
 		}
-		# name = { # Special event option name if converting from an Abrahamic faith to hardline Judaism.
-			# trigger = {
-				# faith = {
-					# has_doctrine = abrahamic_hostility_doctrine
-				# }
-				# scope:new_faith = faith:karaism
-			# }
-			# text = stress_threshold.1011.conversion.judaism
-		# }		
-		# name = { # Special event option name if converting from non-Christianity to Christianity.
-			# trigger = {
-				# faith = {
-					# NOT = { religion_tag = christianity_religion }
-				# }
-				# scope:new_faith = {
-					# religion_tag = christianity_religion
-				# }
-			# }
-			# text = stress_threshold.1011.conversion.christianity
-		# }
-		name = { # Fallback event option when converting from a non-Abrahamic faith to an Abrahamic one.
-			# trigger = {
-				# faith = {
-					# NOT = { has_doctrine = abrahamic_hostility_doctrine }
-				# }
-			# }
-			text = stress_threshold.1011.conversion.intrafaith
-		}
+		name = stress_threshold.1011.conversion.intrafaith
+		
 		ai_chance = {
 			base = 1
 			modifier = {
@@ -1101,6 +1114,16 @@ stress_threshold.1011 = {
 				has_trait = stubborn  
 			}
 		}
+	}
+	
+	option = { # EK Option F: Secretly worship Hermaeus Mora, surely that will help
+		trigger = { can_secretly_worship_hermaeus = yes }
+		
+		name = stress_threshold.1011.hermaeus
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		
+		add_stress = medium_stress_impact_loss
 	}
 
 	after = {
@@ -2068,8 +2091,10 @@ stress_threshold.1504 = {
 			OR = {
 				has_trait = hashishiyah
 				has_trait = drunkard
+				has_trait = skooma_drinker
 				can_be_hashishiyah = yes
 				can_be_drunkard = yes
+				can_be_skooma_drinker = yes
 			}
 			can_be_irritable = yes
 			can_be_journaller = yes
@@ -2088,6 +2113,7 @@ stress_threshold.1504 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 		modifier = {
@@ -2140,6 +2166,13 @@ stress_threshold.1504 = {
 		if = { #
 			limit = {
 				has_two_stress_threshold_options = no
+				can_be_skooma_drinker = yes
+			}
+			add_character_flag = stress_threshold_option_skooma_drinker
+		}
+		if = { #
+			limit = {
+				has_two_stress_threshold_options = no
 				can_be_irritable = yes
 			}
 			add_character_flag = stress_threshold_option_irritable
@@ -2164,7 +2197,7 @@ stress_threshold.1504 = {
 	#Lose prestige from reclusive.
 	#Lose learning from drug use.
 	#Gain Reclusive
-	#Gain hashishiyah
+	#Gain substance abuse
 	#Gain Stress
 	#(Wrathful/Temperate): Gain Irritable
 	#(Learning/Diligent): Gain Journaller
@@ -2201,16 +2234,18 @@ stress_threshold.1504 = {
 			}
 		}
 	}
-	option = { #Has hashishiyah or Drunkard
+	option = { #Has substance abuse
 		name = stress_threshold.1504.b
 		trigger = {
 			OR = {
 				has_trait = hashishiyah
 				has_trait = drunkard
+				has_trait = skooma_drinker
 			}
 		}
 		trait = hashishiyah
 		trait = drunkard
+		trait = skooma_drinker
 		random_list = {
 			80 = {
 			}
@@ -2271,16 +2306,18 @@ stress_threshold.1504 = {
 			}
 		}
 	}
-	option = { #Gains hashishiyah
+	option = { #Gains substance abuse
 		name = stress_threshold.1504.b
 		trigger = {
 			NOR = {
 				has_trait = hashishiyah
 				has_trait = drunkard
+				has_trait = skooma_drinker
 			}
 			OR = {
 				has_character_flag = stress_threshold_option_hashishiyah
 				has_character_flag = stress_threshold_option_drunkard
+				has_character_flag = stress_threshold_option_skooma_drinker
 			}
 			
 		}
@@ -2289,6 +2326,12 @@ stress_threshold.1504 = {
 				can_be_hashishiyah = yes
 			}
 			add_trait = hashishiyah
+		}
+		else_if = {
+			limit = {
+				can_be_skooma_drinker = yes
+			}
+			add_trait = skooma_drinker
 		}
 		else = {
 			add_trait = drunkard
@@ -2469,6 +2512,7 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 			OR = {
 				can_be_drunkard = yes
 				can_be_hashishiyah = yes
+				can_be_skooma_drinker = yes
 			}
 		}
 		hidden_effect = {
@@ -2480,6 +2524,10 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 				50 = {
 					trigger = { can_be_hashishiyah = yes }
 					add_character_flag = stress_threshold_hashishiyah
+				}
+				50 = {
+					trigger = { can_be_skooma_drinker = yes }
+					add_character_flag = stress_threshold_skooma_drinker
 				}
 			}
 		}
@@ -2594,6 +2642,13 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 				target = flag:hashishiyah
 			}
 		}
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_to_variable_list = {
+				name = extra_stress_threshold_event_option
+				target = flag:skooma_drinker
+			}
+		}
 	}
 
 	#To actually choose the options shown
@@ -2616,6 +2671,7 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 					has_character_flag = stress_threshold_confider
 					has_character_flag = stress_threshold_drunkard
 					has_character_flag = stress_threshold_hashishiyah
+					has_character_flag = stress_threshold_skooma_drinker
 				}
 			}
 			random_list = {
@@ -2742,6 +2798,11 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 					add_character_flag = stress_threshold_option_hashishiyah
 					remove_character_flag = stress_threshold_hashishiyah
 				}
+				10 = {
+					trigger = { has_character_flag = stress_threshold_skooma_drinker }
+					add_character_flag = stress_threshold_option_skooma_drinker
+					remove_character_flag = stress_threshold_skooma_drinker
+				}
 			}
 		}
 		#To clean out the flags that weren't chosen
@@ -2759,6 +2820,7 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 		remove_character_flag = stress_threshold_confider
 		remove_character_flag = stress_threshold_drunkard
 		remove_character_flag = stress_threshold_hashishiyah
+		remove_character_flag = stress_threshold_skooma_drinker
 	}
 
 	#To choose the extra, trait specific, options if two fun options haven't been found in the previous step
@@ -3033,6 +3095,20 @@ scripted_effect stress_threshold_fallback_event_select_options_effect = {
 							target = flag:hashishiyah
 						}
 					}
+					10 = {
+						trigger = {
+							NOT = { has_character_flag = stress_threshold_skooma_drinker }
+							is_target_in_variable_list = {
+								name = extra_stress_threshold_event_option
+								target = flag:skooma_drinker
+							}
+						}
+						add_character_flag = stress_threshold_option_skooma_drinker
+						remove_list_variable = {
+							name = extra_stress_threshold_event_option
+							target = flag:skooma_drinker
+						}
+					}
 				}
 			}
 		}
@@ -3301,6 +3377,7 @@ stress_threshold.1601 = {
 		trigger = {
 			has_character_flag = stress_threshold_option_confider
 			exists = scope:friend
+			scope:friend = { is_alive = yes }
 		}
 		name = {
 			trigger = { can_be_confider = yes }
@@ -3601,6 +3678,41 @@ stress_threshold.1601 = {
 		}	
 		else = {
 			add_trait = hashishiyah
+		}
+
+		add_stress = medium_stress_impact_loss
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = { #Gains Skooma drinker
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1601.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = hashishiyah }
+			text = stress_threshold.1601.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		if = {
+			limit = {
+				has_trait = skooma_drinker
+			}
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = {
+			add_trait = skooma_drinker
 		}
 
 		add_stress = medium_stress_impact_loss
@@ -4179,6 +4291,41 @@ stress_threshold.1602 = {
 		}
 	}
 
+	option = { #Gains Skooma Drinker
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1602.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.1602.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		if = {
+			limit = {
+				has_trait = skooma_drinker
+			}
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = {
+			add_trait = skooma_drinker
+		}
+
+		add_stress = medium_stress_impact_loss
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
 	# Endure: major stress gain!
 	option = {
 		name = {
@@ -4381,6 +4528,8 @@ stress_threshold.1701 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -4425,6 +4574,7 @@ stress_threshold.1701 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -4508,6 +4658,7 @@ stress_threshold.1701 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -4519,6 +4670,10 @@ stress_threshold.1701 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -4592,6 +4747,7 @@ stress_threshold.1701 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -4603,6 +4759,10 @@ stress_threshold.1701 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -4943,6 +5103,48 @@ stress_threshold.1701 = {
 		}
 	}
 
+	#Skooma: minor stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1701.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.1701.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = minor_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
+
 	#Grit your teeth and push through.
 	option = {
 		name = stress_threshold.1701.k
@@ -5144,6 +5346,8 @@ stress_threshold.1711 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -5180,6 +5384,7 @@ stress_threshold.1711 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -5248,6 +5453,7 @@ stress_threshold.1711 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -5259,6 +5465,10 @@ stress_threshold.1711 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -5319,6 +5529,7 @@ stress_threshold.1711 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -5330,6 +5541,10 @@ stress_threshold.1711 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -5627,6 +5842,48 @@ stress_threshold.1711 = {
 			}
 		}
 	}
+	
+	#Skooma: minor stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1711.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.1711.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = minor_stress_impact_loss
+		
+		#Make habitual skooma consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -5903,6 +6160,8 @@ stress_threshold.1721 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -5955,6 +6214,7 @@ stress_threshold.1721 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -6069,6 +6329,7 @@ stress_threshold.1721 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -6080,6 +6341,10 @@ stress_threshold.1721 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -6186,6 +6451,7 @@ stress_threshold.1721 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -6197,6 +6463,10 @@ stress_threshold.1721 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -6675,6 +6945,48 @@ stress_threshold.1721 = {
 			}
 		}
 	}
+	
+	#Skooma: minor stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1721.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = hashishiyah }
+			text = stress_threshold.1721.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = minor_stress_impact_loss
+		
+		#Make habitual skooma consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -6976,6 +7288,8 @@ stress_threshold.1731 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -7016,6 +7330,7 @@ stress_threshold.1731 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -7106,6 +7421,7 @@ stress_threshold.1731 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -7117,6 +7433,10 @@ stress_threshold.1731 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -7198,6 +7518,7 @@ stress_threshold.1731 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -7209,6 +7530,10 @@ stress_threshold.1731 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -7586,6 +7911,48 @@ stress_threshold.1731 = {
 			}
 		}
 	}
+	
+	#Skooma: minor stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.1731.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.1731.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = minor_stress_impact_loss
+		
+		#Make habitual skooma consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -7909,6 +8276,34 @@ stress_threshold.2101 = {
 		
 		add_character_modifier = {
 			modifier = stress_hashish_stupor
+			years = 3
+		}
+
+		add_stress = medium_stress_impact_loss
+	}
+
+	# Option B-3: Become skooma drinker, go on skooma spree, medium stress loss.
+	option = {
+		trigger = {
+			OR = {
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
+			}
+		}
+		name = stress_threshold.2101.skooma_drinker.effect
+
+
+		trait = skooma_drinker
+
+		if = {
+			limit = {
+				NOT = { has_trait = skooma_drinker }
+			}
+			add_trait = skooma_drinker
+		}	
+		
+		add_character_modifier = {
+			modifier = stress_skooma_stupor
 			years = 3
 		}
 
@@ -8392,6 +8787,8 @@ stress_threshold.2301 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -8416,6 +8813,7 @@ stress_threshold.2301 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -8460,6 +8858,7 @@ stress_threshold.2301 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -8471,6 +8870,10 @@ stress_threshold.2301 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -8507,6 +8910,7 @@ stress_threshold.2301 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -8518,6 +8922,10 @@ stress_threshold.2301 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -8753,6 +9161,56 @@ stress_threshold.2301 = {
 			}
 		}
 	}
+	
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2301.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = hashishiyah }
+			text = stress_threshold.2301.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#You seem less scary, or at least less noble.
+		if = {
+			limit = { dread >= major_dread_loss }
+			add_dread = major_dread_loss
+			add_prestige = miniscule_prestige_loss
+		}
+		else = { add_prestige = medium_prestige_loss }
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -8953,6 +9411,8 @@ stress_threshold.2311 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -9001,6 +9461,7 @@ stress_threshold.2311 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -9107,6 +9568,7 @@ stress_threshold.2311 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -9118,6 +9580,10 @@ stress_threshold.2311 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -9216,6 +9682,7 @@ stress_threshold.2311 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -9227,6 +9694,10 @@ stress_threshold.2311 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -9736,6 +10207,54 @@ stress_threshold.2311 = {
 			}
 		}
 	}
+	
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2311.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.2311.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Add regret coping modifier.
+		add_character_modifier = {
+			modifier = sugar_tooth_modifier
+			years = 10
+		}
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -9939,6 +10458,8 @@ stress_threshold.2321 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -9979,6 +10500,7 @@ stress_threshold.2321 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -10074,6 +10596,7 @@ stress_threshold.2321 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -10085,6 +10608,10 @@ stress_threshold.2321 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -10167,6 +10694,7 @@ stress_threshold.2321 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -10178,6 +10706,10 @@ stress_threshold.2321 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -10765,6 +11297,67 @@ stress_threshold.2321 = {
 			}
 		}
 	}
+	
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2321.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.2321.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Court reacts to your little upset.
+		every_in_list = {
+			list = affected_by_outburst
+			limit = {
+				NOR = {
+					has_trait = gluttonous
+					has_trait = forgiving
+					has_trait = compassionate
+				}
+				is_alive = yes
+			}
+			custom = stress_threshold.2321.skooma_drinker.list
+			add_opinion = {
+				modifier = disgusted_opinion
+				opinion = -20
+				target = root
+			}
+		}
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -10946,6 +11539,8 @@ stress_threshold.2331 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -10986,6 +11581,7 @@ stress_threshold.2331 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -11075,6 +11671,7 @@ stress_threshold.2331 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -11086,6 +11683,10 @@ stress_threshold.2331 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -11167,6 +11768,7 @@ stress_threshold.2331 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -11178,6 +11780,10 @@ stress_threshold.2331 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -11598,6 +12204,51 @@ stress_threshold.2331 = {
 			}
 		}
 	}
+	
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2331.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.2331.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Not a great look for anyone.
+		add_prestige = medium_prestige_loss
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -11771,6 +12422,8 @@ stress_threshold.2341 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -11803,6 +12456,7 @@ stress_threshold.2341 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -11876,6 +12530,7 @@ stress_threshold.2341 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -11887,6 +12542,10 @@ stress_threshold.2341 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -11952,6 +12611,7 @@ stress_threshold.2341 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -11963,6 +12623,10 @@ stress_threshold.2341 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -12373,6 +13037,51 @@ stress_threshold.2341 = {
 		}
 	}
 
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2341.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.2341.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Doesn't look great, even on a landed ruler.
+		add_prestige = medium_prestige_loss
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
+
 	#Grit your teeth and push through.
 	option = {
 		name = stress_threshold.2341.h
@@ -12541,6 +13250,8 @@ stress_threshold.2351 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -12577,6 +13288,7 @@ stress_threshold.2351 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -12645,6 +13357,7 @@ stress_threshold.2351 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -12656,6 +13369,10 @@ stress_threshold.2351 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -12716,6 +13433,7 @@ stress_threshold.2351 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -12727,6 +13445,10 @@ stress_threshold.2351 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -13059,6 +13781,51 @@ stress_threshold.2351 = {
 			}
 		}
 	}
+	
+	#Skooma: medium stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.2351.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.2351.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = medium_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Tsk, indulging on the job.
+		add_prestige = medium_prestige_loss
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -13130,6 +13897,1767 @@ stress_threshold.2351 = {
 				}
 			}
 		}
+	}
+}
+
+##################################################
+# Daedric Whispers
+# #2501
+##################################################
+
+# You feel the whispers of the Daedric Princes, preying on your sins and weaknesses...
+# Pick 3 Princes based on your traits
+stress_threshold.2501 = {
+	type = character_event
+	title = stress_threshold.2501.t
+	desc = stress_threshold.2501.desc
+	theme = mental_break
+	
+	override_background = {
+		event_background = throne_room
+	}
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+
+	trigger = {
+		#Landless characters & barons don't need fancy events.
+		is_landed = yes
+		primary_title.tier >= tier_county
+		
+		# You need at least one relevant trait and the ability to worship one Prince in secret
+		OR = {
+			# Personality traits
+			AND = {
+				has_trait = ambitious
+				OR = {
+					can_secretly_worship_boethiah = yes
+					can_secretly_worship_mehrunes = yes
+				}
+			}
+			AND = {
+				has_trait = arrogant
+				OR = {
+					can_secretly_worship_azura = yes
+				}
+			}
+			AND = {
+				has_trait = brave
+				OR = {
+					can_secretly_worship_hircine = yes
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = callous
+				OR = {
+					can_secretly_worship_boethiah = yes
+					can_secretly_worship_meridia = yes
+				}
+			}
+			AND = {
+				has_trait = compassionate
+				OR = {
+					can_secretly_worship_azura = yes
+				}
+			}
+			AND = {
+				has_trait = content
+				OR = {
+					can_secretly_worship_nocturnal = yes
+				}
+			}
+			AND = {
+				has_trait = craven
+				OR = {
+					can_secretly_worship_vaermina = yes
+				}
+			}
+			AND = {
+				has_trait = deceitful	
+				OR = {
+					can_secretly_worship_boethiah = yes
+					can_secretly_worship_mephala = yes
+				}
+			}
+			AND = {
+				has_trait = fickle	
+				OR = {
+					can_secretly_worship_sheogorath = yes
+				}
+			}
+			AND = {
+				has_trait = greedy	
+				OR = {
+					can_secretly_worship_clavicus = yes
+					can_secretly_worship_meridia = yes
+				}
+			}
+			AND = {
+				has_trait = honest	
+				OR = {
+					can_secretly_worship_vaermina = yes
+				}
+			}
+			AND = {
+				has_trait = humble	
+				OR = {
+					can_secretly_worship_peryite = yes
+				}
+			}
+			AND = {
+				has_trait = impatient	
+				OR = {
+					can_secretly_worship_mehrunes = yes
+				}
+			}
+			AND = {
+				has_trait = just	
+				OR = {
+					can_secretly_worship_meridia = yes
+				}
+			}
+			AND = {
+				has_trait = lazy	
+				OR = {
+					can_secretly_worship_clavicus = yes
+				}
+			}
+			AND = {
+				has_trait = lustful
+				OR = {
+					can_secretly_worship_mephala = yes
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = paranoid
+				OR = {
+					can_secretly_worship_boethiah = yes
+				}
+			}
+			AND = {
+				has_trait = sadistic
+				OR = {
+					can_secretly_worship_hircine = yes
+					can_secretly_worship_molag = yes
+				}
+			}
+			AND = {
+				has_trait = shy
+				OR = {
+					can_secretly_worship_namira = yes
+				}
+			}
+			AND = {
+				has_trait = stubborn
+				OR = {
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = trusting
+				OR = {
+					can_secretly_worship_clavicus = yes
+				}
+			}
+			AND = {
+				has_trait = vengeful
+				OR = {
+					can_secretly_worship_azura = yes
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = wrathful
+				OR = {
+					can_secretly_worship_mehrunes = yes
+					can_secretly_worship_molag = yes
+				}
+			}
+			AND = {
+				has_trait = zealous
+				OR = {
+					can_secretly_worship_meridia = yes
+				}
+			}
+			
+			# Perks
+			AND = {
+				has_trait = administrator
+				OR = {
+					can_secretly_worship_peryite = yes
+				}
+			}
+			AND = {
+				has_trait = overseer
+				OR = {
+					can_secretly_worship_peryite = yes
+				}
+			}
+			AND = {
+				has_trait = schemer
+				OR = {
+					can_secretly_worship_boethiah = yes
+					can_secretly_worship_mephala = yes
+				}
+			}
+			AND = {
+				has_trait = scholar
+				OR = {
+					can_secretly_worship_hermaeus = yes
+				}
+			}
+			AND = {
+				has_trait = seducer
+				OR = {
+					can_secretly_worship_mephala = yes
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = torturer
+				OR = {
+					can_secretly_worship_molag = yes
+				}
+			}
+			
+			# Lifestyles
+			AND = {
+				has_trait = lifestyle_herbalist
+				OR = {
+					can_secretly_worship_vaermina = yes
+				}
+			}
+			AND = {
+				has_trait = lifestyle_hunter
+				OR = {
+					can_secretly_worship_hircine = yes
+				}
+			}
+			AND = {
+				has_trait = lifestyle_mystic
+				OR = {
+					can_secretly_worship_hermaeus = yes
+					can_secretly_worship_mehrunes = yes
+				}
+			}
+			AND = {
+				has_trait = lifestyle_reveler
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			
+			# Genetic
+			AND = {
+				has_trait = beauty_good
+				OR = {
+					can_secretly_worship_azura = yes
+				}
+			}
+			AND = {
+				has_trait = beauty_bad
+				OR = {
+					can_secretly_worship_malacath = yes
+					can_secretly_worship_namira = yes
+				}
+			}
+			AND = {
+				has_trait = physique_good
+				OR = {
+					can_secretly_worship_malacath = yes
+				}
+			}
+			
+			# Coping mechanisms
+			AND = {
+				has_trait = comfort_eater
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = contrite
+				OR = {
+					can_secretly_worship_meridia = yes
+				}
+			}
+			AND = {
+				has_trait = drunkard
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = flagellant
+				OR = {
+					can_secretly_worship_molag = yes
+				}
+			}
+			AND = {
+				has_trait = inappetetic
+				OR = {
+					can_secretly_worship_namira = yes
+				}
+			}
+			AND = {
+				has_trait = irritable
+				OR = {
+					can_secretly_worship_molag = yes
+					can_secretly_worship_sheogorath = yes
+				}
+			}
+			AND = {
+				has_trait = journaller
+				OR = {
+					can_secretly_worship_hermaeus = yes
+				}
+			}
+			AND = {
+				has_trait = profligate
+				OR = {
+					can_secretly_worship_clavicus = yes
+				}
+			}
+			AND = {
+				has_trait = rakish
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = reclusive
+				OR = {
+					can_secretly_worship_sheogorath = yes
+				}
+			}
+			
+			# Crimes
+			AND = {
+				has_trait = adulterer
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				has_trait = cannibal
+				OR = {
+					can_secretly_worship_namira = yes
+				}
+			}
+			AND = {
+				has_trait = denounced
+				OR = {
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = disinherited
+				OR = {
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = fornicator
+				OR = {
+					can_secretly_worship_sanguine = yes
+				}
+			}
+			AND = {
+				is_lycan = yes
+				OR = {
+					can_secretly_worship_hircine = yes
+				}
+			}
+			AND = {
+				has_trait = murderer
+				OR = {
+					can_secretly_worship_mehrunes = yes
+					can_secretly_worship_mephala = yes
+				}
+			}
+			AND = {
+				is_vampire = yes
+				OR = {
+					can_secretly_worship_molag = yes
+				}
+			}
+			AND = {
+				has_trait = witch_group
+				OR = {
+					can_secretly_worship_hircine = yes
+				}
+			}
+			
+			
+			# Health
+			AND = {
+				has_trait = blind
+				OR = {
+					can_secretly_worship_nocturnal = yes
+				}
+			}
+			AND = {
+				has_trait = depressed
+				OR = {
+					can_secretly_worship_azura = yes
+					can_secretly_worship_nocturnal = yes
+				}
+			}
+			AND = {
+				has_trait = disfigured
+				OR = {
+					can_secretly_worship_malacath = yes
+				}
+			}
+			AND = {
+				has_trait = lunatic
+				OR = {
+					can_secretly_worship_hermaeus = yes
+					can_secretly_worship_sheogorath = yes
+				}
+			}
+			
+			# Other
+			AND = {
+				has_trait = poet
+				OR = {
+					can_secretly_worship_sheogorath = yes
+				}
+			}
+		}
+	}
+
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			factor = 0.33
+			is_secretly_worshipping_daedra = yes
+		}
+	}
+	
+	widget = {
+		gui = "event_window_widget_stress"
+		container = "custom_widgets_container"
+	}
+
+	immediate = {
+		root = { save_scope_as = stress_character } #For stress widget.
+
+		set_while_counter_variable_effect = yes
+		#Event option set-up to determine which event options we want to offer to the player.
+		while = {
+			limit = { var:while_counter < 3 }
+			random_list = {
+				# Personality traits
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = ambitious DAEDRA = boethiah }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = ambitious DAEDRA = boethiah }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = ambitious DAEDRA = mehrunes }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = ambitious DAEDRA = mehrunes }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = arrogant DAEDRA = azura }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = arrogant DAEDRA = azura }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = brave DAEDRA = hircine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = brave DAEDRA = hircine }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = brave DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = brave DAEDRA = malacath }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = callous DAEDRA = boethiah }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = callous DAEDRA = boethiah }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = callous DAEDRA = meridia }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = callous DAEDRA = meridia }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = compassionate DAEDRA = azura }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = compassionate DAEDRA = azura }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = content DAEDRA = nocturnal }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = content DAEDRA = nocturnal }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = craven DAEDRA = vaermina }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = craven DAEDRA = vaermina }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = deceitful DAEDRA = boethiah }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = deceitful DAEDRA = boethiah }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = deceitful DAEDRA = mephala }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = deceitful DAEDRA = mephala }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = fickle DAEDRA = sheogorath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = fickle DAEDRA = sheogorath }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = greedy DAEDRA = clavicus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = greedy DAEDRA = clavicus }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = greedy DAEDRA = meridia }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = greedy DAEDRA = meridia }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = honest DAEDRA = vaermina }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = honest DAEDRA = vaermina }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = humble DAEDRA = peryite }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = humble DAEDRA = peryite }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = impatient DAEDRA = mehrunes }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = impatient DAEDRA = mehrunes }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = just DAEDRA = meridia }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = just DAEDRA = meridia }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lazy DAEDRA = clavicus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lazy DAEDRA = clavicus }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lustful DAEDRA = mephala }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lustful DAEDRA = mephala }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lustful DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lustful DAEDRA = sanguine }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = paranoid DAEDRA = boethiah }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = paranoid DAEDRA = boethiah }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = sadistic DAEDRA = hircine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = sadistic DAEDRA = hircine }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = sadistic DAEDRA = molag }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = sadistic DAEDRA = molag }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = shy DAEDRA = namira }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = shy DAEDRA = namira }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = stubborn DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = stubborn DAEDRA = malacath }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = trusting DAEDRA = clavicus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = trusting DAEDRA = clavicus }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = vengeful DAEDRA = azura }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = vengeful DAEDRA = azura }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = vengeful DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = vengeful DAEDRA = malacath }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = wrathful DAEDRA = mehrunes }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = wrathful DAEDRA = mehrunes }
+				}
+				20 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = zealous DAEDRA = meridia }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = zealous DAEDRA = meridia }
+				}
+				
+				# Perks
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = administrator DAEDRA = peryite }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = administrator DAEDRA = peryite }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = overseer DAEDRA = peryite }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = overseer DAEDRA = peryite }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = schemer DAEDRA = boethiah }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = schemer DAEDRA = boethiah }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = schemer DAEDRA = mephala }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = schemer DAEDRA = mephala }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = scholar DAEDRA = hermaeus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = scholar DAEDRA = hermaeus }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = seducer DAEDRA = mephala }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = seducer DAEDRA = mephala }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = seducer DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = seducer DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = torturer DAEDRA = molag }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = torturer DAEDRA = molag }
+				}
+				
+				# Lifestyles
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lifestyle_herbalist DAEDRA = vaermina }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lifestyle_herbalist DAEDRA = vaermina }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lifestyle_hunter DAEDRA = hircine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lifestyle_hunter DAEDRA = hircine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lifestyle_mystic DAEDRA = hermaeus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lifestyle_mystic DAEDRA = hermaeus }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lifestyle_mystic DAEDRA = mehrunes }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lifestyle_mystic DAEDRA = mehrunes }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lifestyle_reveler DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lifestyle_reveler DAEDRA = sanguine }
+				}
+				
+				# Genetic
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = beauty_good DAEDRA = azura }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = beauty_good DAEDRA = azura }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = beauty_bad DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = beauty_bad DAEDRA = malacath }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = beauty_bad DAEDRA = namira }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = beauty_bad DAEDRA = namira }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = physique_good DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = physique_good DAEDRA = malacath }
+				}
+				
+				# Coping mechanisms
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = comfort_eater DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = comfort_eater DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = contrite DAEDRA = meridia }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = contrite DAEDRA = meridia }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = drunkard DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = drunkard DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = flagellant DAEDRA = molag }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = flagellant DAEDRA = molag }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = inappetetic DAEDRA = namira }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = inappetetic DAEDRA = namira }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = irritable DAEDRA = molag }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = irritable DAEDRA = molag }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = irritable DAEDRA = sheogorath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = irritable DAEDRA = sheogorath }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = journaller DAEDRA = hermaeus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = journaller DAEDRA = hermaeus }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = profligate DAEDRA = clavicus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = profligate DAEDRA = clavicus }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = rakish DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = rakish DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = reclusive DAEDRA = sheogorath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = reclusive DAEDRA = sheogorath }
+				}
+				
+				# Crimes
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = adulterer DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = adulterer DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = cannibal DAEDRA = namira }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = cannibal DAEDRA = namira }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = denounced DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = denounced DAEDRA = malacath }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = disinherited DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = disinherited DAEDRA = malacath }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = fornicator DAEDRA = sanguine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = fornicator DAEDRA = sanguine }
+				}
+				40 = {
+					trigger = {
+						is_lycan = yes
+						can_secretly_worship_hircine = yes
+						NOT = { has_character_flag = stress_lycan_hircine }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lycan DAEDRA = hircine }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = murderer DAEDRA = mehrunes }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = murderer DAEDRA = mehrunes }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = murderer DAEDRA = mephala }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = murderer DAEDRA = mephala }
+				}
+				40 = {
+					trigger = {
+						is_vampire = yes
+						can_secretly_worship_molag = yes
+						NOT = { has_character_flag = stress_vampire_molag }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = vampire DAEDRA = molag }
+				}
+				
+				# Health
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = blind DAEDRA = nocturnal }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = blind DAEDRA = nocturnal }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = depressed DAEDRA = azura }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = depressed DAEDRA = azura }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = depressed DAEDRA = nocturnal }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = depressed DAEDRA = nocturnal }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = disfigured DAEDRA = malacath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = disfigured DAEDRA = malacath }
+				}
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = lunatic DAEDRA = hermaeus }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = lunatic DAEDRA = hermaeus }
+				}
+				
+				# Other
+				40 = {
+					trigger = {
+						can_get_combo_trait_daedra = { TRAIT = poet DAEDRA = sheogorath }
+					}
+					set_combo_trait_daedra_flag = { TRAIT = poet DAEDRA = sheogorath }
+				}
+			}
+			increase_while_counter_variable_effect = yes
+		}
+		remove_while_counter_variable_effect = yes
+		
+		stress_threshold_event_post_immediate = yes
+	}
+	
+	# Personality traits
+	option = {
+		trigger = { has_character_flag = stress_ambitious_boethiah }
+		name = stress_threshold.2501.stress_ambitious_boethiah
+		
+		trait = ambitious
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_ambitious_mehrunes }
+		name = stress_threshold.2501.stress_ambitious_mehrunes
+		
+		trait = ambitious
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_arrogant_azura }
+		name = stress_threshold.2501.stress_arrogant_azura
+		
+		trait = arrogant
+		
+		give_azura_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_brave_hircine }
+		name = stress_threshold.2501.stress_brave_hircine
+		
+		trait = brave
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_brave_malacath }
+		name = stress_threshold.2501.stress_brave_malacath
+		
+		trait = brave
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_callous_boethiah }
+		name = stress_threshold.2501.stress_callous_boethiah
+		
+		trait = callous
+		
+		give_boethiah_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_callous_meridia }
+		name = stress_threshold.2501.stress_callous_meridia
+		
+		trait = callous
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_compassionate_azura }
+		name = stress_threshold.2501.stress_compassionate_azura
+		
+		trait = compassionate
+		
+		give_azura_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_content_nocturnal }
+		name = stress_threshold.2501.stress_content_nocturnal
+		
+		trait = content
+		
+		give_nocturnal_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_craven_vaermina }
+		name = stress_threshold.2501.stress_craven_vaermina
+		
+		trait = craven
+		
+		give_vaermina_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_deceitful_mephala }
+		name = stress_threshold.2501.stress_deceitful_mephala
+		
+		trait = deceitful
+		
+		give_boethiah_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_fickle_sheogorath }
+		name = stress_threshold.2501.stress_fickle_sheogorath
+		
+		trait = fickle
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_greedy_clavicus }
+		name = stress_threshold.2501.stress_greedy_clavicus
+		
+		trait = greedy
+		
+		give_clavicus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_greedy_meridia }
+		name = stress_threshold.2501.stress_greedy_meridia
+		
+		trait = greedy
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_honest_vaermina }
+		name = stress_threshold.2501.stress_honest_vaermina
+		
+		trait = honest
+		
+		give_vaermina_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_humble_peryite }
+		name = stress_threshold.2501.stress_humble_peryite
+		
+		trait = humble
+		
+		give_peryite_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_impatient_mehrunes }
+		name = stress_threshold.2501.stress_impatient_mehrunes
+		
+		trait = impatient
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_just_meridia }
+		name = stress_threshold.2501.stress_just_meridia
+		
+		trait = just
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lazy_clavicus }
+		name = stress_threshold.2501.stress_lazy_clavicus
+		
+		trait = lazy
+		
+		give_clavicus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lustful_mephala }
+		name = stress_threshold.2501.stress_lustful_mephala
+		
+		trait = deceitful
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lustful_sanguine }
+		name = stress_threshold.2501.stress_lustful_sanguine
+		
+		trait = lustful
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_paranoid_boethiah }
+		name = stress_threshold.2501.stress_paranoid_boethiah
+		
+		trait = paranoid
+		
+		give_boethiah_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_sadistic_hircine }
+		name = stress_threshold.2501.stress_sadistic_hircine
+		
+		trait = sadistic
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_sadistic_molag }
+		name = stress_threshold.2501.stress_sadistic_molag
+		
+		trait = sadistic
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_zealous_meridia }
+		name = stress_threshold.2501.stress_zealous_meridia
+		
+		trait = zealous
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_shy_namira }
+		name = stress_threshold.2501.stress_shy_namira
+		
+		trait = shy
+		
+		give_namira_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_stubborn_malacath }
+		name = stress_threshold.2501.stress_stubborn_malacath
+		
+		trait = stubborn
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_trusting_clavicus }
+		name = stress_threshold.2501.stress_trusting_clavicus
+		
+		trait = trusting
+		
+		give_clavicus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_vengeful_azura }
+		name = stress_threshold.2501.stress_vengeful_azura
+		
+		trait = vengeful
+		
+		give_azura_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_vengeful_malacath }
+		name = stress_threshold.2501.stress_vengeful_malacath
+		
+		trait = vengeful
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_wrathful_mehrunes }
+		name = stress_threshold.2501.stress_wrathful_mehrunes
+		
+		trait = wrathful
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_zealous_meridia }
+		name = stress_threshold.2501.stress_zealous_meridia
+		
+		trait = zealous
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Perks
+	option = {
+		trigger = { has_character_flag = stress_administrator_peryite }
+		name = stress_threshold.2501.stress_administrator_peryite
+		
+		trait = administrator
+		
+		give_peryite_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_overseer_peryite }
+		name = stress_threshold.2501.stress_overseer_peryite
+		
+		trait = overseer
+		
+		give_peryite_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_schemer_boethiah }
+		name = stress_threshold.2501.stress_schemer_boethiah
+		
+		trait = schemer
+		
+		give_boethiah_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_schemer_mephala }
+		name = stress_threshold.2501.stress_schemer_mephala
+		
+		trait = schemer
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_scholar_hermaeus }
+		name = stress_threshold.2501.stress_scholar_hermaeus
+		
+		trait = scholar
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_seducer_mephala }
+		name = stress_threshold.2501.stress_seducer_mephala
+		
+		trait = seducer
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_seducer_sanguine }
+		name = stress_threshold.2501.stress_seducer_sanguine
+		
+		trait = seducer
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_torturer_molag }
+		name = stress_threshold.2501.stress_torturer_molag
+		
+		trait = torturer
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Lifestyles
+	option = {
+		trigger = { has_character_flag = stress_herbalist_vaermina }
+		name = stress_threshold.2501.stress_herbalist_vaermina
+		
+		trait = lifestyle_herbalist
+		
+		give_vaermina_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_hunter_hircine }
+		name = stress_threshold.2501.stress_hunter_hircine
+		
+		trait = hunter_1
+		trait = hunter_2
+		trait = hunter_3
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_mystic_hermaeus }
+		name = stress_threshold.2501.stress_mystic_hermaeus
+		
+		trait = mystic_1
+		trait = mystic_2
+		trait = mystic_3
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_mystic_mehrunes }
+		name = stress_threshold.2501.stress_mystic_mehrunes
+		
+		trait = mystic_1
+		trait = mystic_2
+		trait = mystic_3
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_reveler_sanguine }
+		name = stress_threshold.2501.stress_reveler_sanguine
+		
+		trait = reveler_1
+		trait = reveler_2
+		trait = reveler_3
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Genetic
+	option = {
+		trigger = { has_character_flag = stress_beauty_good_azura }
+		name = stress_threshold.2501.stress_beauty_good_azura
+		
+		trait = beauty_good_1
+		trait = beauty_good_2
+		trait = beauty_good_3
+		
+		give_azura_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_beauty_bad_malacath }
+		name = stress_threshold.2501.stress_beauty_bad_malacath
+		
+		trait = beauty_bad_1
+		trait = beauty_bad_2
+		trait = beauty_bad_3
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_beauty_bad_namira }
+		name = stress_threshold.2501.stress_beauty_bad_namira
+		
+		trait = beauty_bad_1
+		trait = beauty_bad_2
+		trait = beauty_bad_3
+		
+		give_namira_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_physique_good_malacath }
+		name = stress_threshold.2501.stress_physique_good_malacath
+		
+		trait = physique_good_1
+		trait = physique_good_2
+		trait = physique_good_3
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Coping mechanism
+	option = {
+		trigger = { has_character_flag = stress_comfort_eater_sanguine }
+		name = stress_threshold.2501.stress_comfort_eater_sanguine
+		
+		trait = comfort_eater
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_contrite_meridia }
+		name = stress_threshold.2501.stress_contrite_meridia
+		
+		trait = contrite
+		
+		give_meridia_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_drunkard_sanguine }
+		name = stress_threshold.2501.stress_drunkard_sanguine
+		
+		trait = drunkard
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_flagellant_molag }
+		name = stress_threshold.2501.stress_flagellant_molag
+		
+		trait = flagellant
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_inappetetic_namira }
+		name = stress_threshold.2501.stress_inappetetic_namira
+		
+		trait = inappetetic
+		
+		give_namira_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_irritable_molag }
+		name = stress_threshold.2501.stress_irritable_molag
+		
+		trait = irritable
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_irritable_sheogorath }
+		name = stress_threshold.2501.stress_irritable_sheogorath
+		
+		trait = irritable
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_journaller_hermaeus }
+		name = stress_threshold.2501.stress_journaller_hermaeus
+		
+		trait = journaller
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_profilgate_clavicus }
+		name = stress_threshold.2501.stress_profilgate_clavicus
+		
+		trait = profligate
+		
+		give_clavicus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_rakish_sanguine }
+		name = stress_threshold.2501.stress_rakish_sanguine
+		
+		trait = rakish
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_reclusive_sheogorath }
+		name = stress_threshold.2501.stress_reclusive_sheogorath
+		
+		trait = reclusive
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Crimes
+	option = {
+		trigger = { has_character_flag = stress_adulterer_sanguine }
+		name = stress_threshold.2501.stress_adulterer_sanguine
+		
+		trait = adulterer
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_cannibal_namira }
+		name = stress_threshold.2501.stress_cannibal_namira
+		
+		trait = cannibal
+		
+		give_namira_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_denounced_malacath }
+		name = stress_threshold.2501.stress_denounced_malacath
+		
+		trait = denounced
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_disinherited_malacath }
+		name = stress_threshold.2501.stress_disinherited_malacath
+		
+		trait = disinherited
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_fornicator_sanguine }
+		name = stress_threshold.2501.stress_fornicator_sanguine
+		
+		trait = fornicator
+		
+		give_sanguine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lycan_hircine }
+		name = stress_threshold.2501.stress_lycan_hircine
+		
+		trait = lycan_character
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_murderer_mehrunes }
+		name = stress_threshold.2501.stress_murderer_mehrunes
+		
+		trait = murderer
+		
+		give_mehrunes_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_murderer_mephala }
+		name = stress_threshold.2501.stress_murderer_mephala
+		
+		trait = murderer
+		
+		give_mephala_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_vampire_molag }
+		name = stress_threshold.2501.stress_vampire_molag
+		
+		trait = vampire_character
+		
+		give_molag_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_witch_hircine }
+		name = stress_threshold.2501.stress_witch_hircine
+		
+		trait = witch
+		
+		give_hircine_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Health
+	option = {
+		trigger = { has_character_flag = stress_blind_nocturnal }
+		name = stress_threshold.2501.stress_blind_nocturnal
+		
+		trait = blind
+		
+		give_nocturnal_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_depressed_azura }
+		name = stress_threshold.2501.stress_depressed_azura
+		
+		trait = depressed_1
+		trait = depressed_genetic
+		
+		give_azura_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_depressed_nocturnal }
+		name = stress_threshold.2501.stress_depressed_nocturnal
+		
+		trait = depressed_1
+		trait = depressed_genetic
+		
+		give_nocturnal_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_disfigured_malacath }
+		name = stress_threshold.2501.stress_disfigured_malacath
+		
+		trait = disfigured
+		
+		give_malacath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lunatic_hermaeus }
+		name = stress_threshold.2501.stress_lunatic_hermaeus
+		
+		trait = lunatic_1
+		trait = lunatic_genetic
+		
+		give_hermaeus_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	option = {
+		trigger = { has_character_flag = stress_lunatic_sheogorath }
+		name = stress_threshold.2501.stress_lunatic_sheogorath
+		
+		trait = lunatic_1
+		trait = lunatic_genetic
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+	
+	# Special
+	option = {
+		trigger = { has_character_flag = stress_poet_sheogorath }
+		name = stress_threshold.2501.stress_poet_sheogorath
+		
+		trait = poet
+		
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+		add_stress = medium_stress_impact_loss
+	}
+
+	#Grit your teeth and push through.
+	option = {
+		name = stress_threshold.2501.no
+
+		#Account for stress.
+		stress_impact = {
+			base = medium_stress_impact_gain
+			zealous = minor_stress_impact_loss
+		}
+
+		ai_chance = { base = 0 }	#AI should never opt for stress.
+	}
+
+	after = {
+		stress_threshold_event_aftereffects = yes #Perform stress threshold event clean-up and preparation for future stress threshold events.
+		# Personality
+		remove_character_flag = stress_ambitious_boethiah
+		remove_character_flag = stress_ambitious_mehrunes
+		remove_character_flag = stress_arrogant_azura
+		remove_character_flag = stress_brave_hircine
+		remove_character_flag = stress_brave_malacath
+		remove_character_flag = stress_callous_boethiah
+		remove_character_flag = stress_callous_meridia
+		remove_character_flag = stress_compassionate_azura
+		remove_character_flag = stress_content_nocturnal
+		remove_character_flag = stress_craven_vaermina
+		remove_character_flag = stress_deceitful_boethiah
+		remove_character_flag = stress_deceitful_mephala
+		remove_character_flag = stress_fickle_sheogorath
+		remove_character_flag = stress_greedy_clavicus
+		remove_character_flag = stress_greedy_meridia
+		remove_character_flag = stress_honest_vaermina
+		remove_character_flag = stress_humble_peryite
+		remove_character_flag = stress_impatient_mehrunes
+		remove_character_flag = stress_just_meridia
+		remove_character_flag = stress_lazy_clavicus
+		remove_character_flag = stress_lustful_mephala
+		remove_character_flag = stress_lustful_sanguine
+		remove_character_flag = stress_paranoid_boethiah
+		remove_character_flag = stress_sadistic_hircine
+		remove_character_flag = stress_sadistic_molag
+		remove_character_flag = stress_shy_namira
+		remove_character_flag = stress_stubborn_malacath
+		remove_character_flag = stress_trusting_clavicus
+		remove_character_flag = stress_vengeful_azura
+		remove_character_flag = stress_vengeful_malacath
+		remove_character_flag = stress_wrathful_mehrunes
+		remove_character_flag = stress_wrathful_molag
+		remove_character_flag = stress_zealous_meridia
+		# Perks
+		remove_character_flag = stress_administrator_peryite
+		remove_character_flag = stress_overseer_peryite
+		remove_character_flag = stress_schemer_boethiah
+		remove_character_flag = stress_schemer_mephala
+		remove_character_flag = stress_scholar_hermaeus
+		remove_character_flag = stress_seducer_mephala
+		remove_character_flag = stress_seducer_sanguine
+		remove_character_flag = stress_torturer_molag
+		# Lifestyles
+		remove_character_flag = stress_herbalist_vaermina
+		remove_character_flag = stress_hunter_hircine
+		remove_character_flag = stress_mystic_hermaeus
+		remove_character_flag = stress_mystic_mehrunes
+		remove_character_flag = stress_reveler_sanguine
+		# Genetic
+		remove_character_flag = stress_beauty_good_azura
+		remove_character_flag = stress_beauty_bad_malacath
+		remove_character_flag = stress_beauty_bad_namira
+		remove_character_flag = stress_physique_good_malacath
+		# Coping
+		remove_character_flag = stress_comfort_eater_sanguine
+		remove_character_flag = stress_contrite_meridia
+		remove_character_flag = stress_drunkard_sanguine
+		remove_character_flag = stress_flagellant_molag
+		remove_character_flag = stress_inappetetic_namira
+		remove_character_flag = stress_irritable_molag
+		remove_character_flag = stress_irritable_sheogorath
+		remove_character_flag = stress_journaller_hermaeus
+		remove_character_flag = stress_profilgate_clavicus
+		remove_character_flag = stress_rakish_sanguine
+		remove_character_flag = stress_reclusive_sheogorath
+		# Crimes
+		remove_character_flag = stress_adulterer_sanguine
+		remove_character_flag = stress_cannibal_namira
+		remove_character_flag = stress_denounced_malacath
+		remove_character_flag = stress_disinherited_malacath
+		remove_character_flag = stress_fornicator_sanguine
+		remove_character_flag = stress_lycan_hircine
+		remove_character_flag = stress_murderer_mehrunes
+		remove_character_flag = stress_murderer_mephala
+		remove_character_flag = stress_vampire_molag
+		remove_character_flag = stress_witch_molag
+		# Health
+		remove_character_flag = stress_blind_nocturnal
+		remove_character_flag = stress_depressed_azura
+		remove_character_flag = stress_depressed_nocturnal
+		remove_character_flag = stress_disfigured_malacath
+		remove_character_flag = stress_lunatic_hermaeus
+		remove_character_flag = stress_lunatic_sheogorath
+		# Other
+		remove_character_flag = stress_poet_sheogorath
 	}
 }
 
@@ -13218,6 +15746,17 @@ stress_threshold.3001 = {
 		add_prestige_level = -1
 		add_stress = major_stress_impact_loss
 	}	
+	
+	# EK Option C: Sheogorath is the answer, of course
+	option = {
+		trigger = { can_secretly_worship_sheogorath = yes }
+		
+		name = stress_threshold.3001.sheogorath
+
+		give_sheogorath_worshipper_secret_or_trait_effect = yes
+
+		add_stress = medium_stress_impact_loss
+	}
 	
 	after = {
 		stress_threshold_event_aftereffects = yes # Perform stress threshold event clean-up and preparation for future stress threshold events.
@@ -13770,6 +16309,8 @@ stress_threshold.3401 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 		#There must also be 3 potential victims 
@@ -13945,6 +16486,7 @@ stress_threshold.3401 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -13956,6 +16498,10 @@ stress_threshold.3401 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -14013,6 +16559,7 @@ stress_threshold.3401 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -14024,6 +16571,10 @@ stress_threshold.3401 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -14358,6 +16909,52 @@ stress_threshold.3401 = {
 			}
 		}
 	}
+	
+	#Skooma: major stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.3401.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.3401.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = major_stress_impact_loss
+		
+		#Make habitual hashish consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Your behaviour is unbecoming.
+		add_prestige_level = -1
+		add_prestige = medium_prestige_loss
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -14374,6 +16971,17 @@ stress_threshold.3401 = {
 		ai_chance = { base = 0 }	#AI should never opt for stress.
 	}
 
+	# EK Option: Mephala and her Spinning Web will help
+	option = {
+		trigger = { can_secretly_worship_mephala = yes }
+		
+		name = stress_threshold.3401.mephala
+
+		give_mephala_worshipper_secret_or_trait_effect = yes
+
+		add_stress = medium_stress_impact_loss
+	}
+	
 	after = {
 		stress_threshold_event_aftereffects = yes #Perform stress threshold event clean-up and preparation for future stress threshold events.
 
@@ -14587,6 +17195,8 @@ stress_threshold.3411 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -14635,6 +17245,7 @@ stress_threshold.3411 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -14741,6 +17352,7 @@ stress_threshold.3411 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -14752,6 +17364,10 @@ stress_threshold.3411 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -14850,6 +17466,7 @@ stress_threshold.3411 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -14861,6 +17478,10 @@ stress_threshold.3411 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -15413,6 +18034,55 @@ stress_threshold.3411 = {
 			}
 		}
 	}
+	
+	#Skooma: major stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.3411.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.3411.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = major_stress_impact_loss
+		
+		#Make habitual skooma consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#You attempt to obliterate your brain with skooma.
+		add_character_modifier = {
+			modifier = tragic_skooma_modifier
+			years = 10
+		}
+		add_prestige_level = -1
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
+			}
+		}
+	}
 
 	#Grit your teeth and push through.
 	option = {
@@ -15695,6 +18365,8 @@ stress_threshold.3421 = {
 				has_trait = drunkard
 				can_be_hashishiyah = yes
 				has_trait = hashishiyah
+				can_be_skooma_drinker = yes
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -15731,6 +18403,7 @@ stress_threshold.3421 = {
 			OR = {
 				has_trait = drunkard
 				has_trait = hashishiyah
+				has_trait = skooma_drinker
 			}
 		}
 	}
@@ -15807,6 +18480,7 @@ stress_threshold.3421 = {
 				OR = {
 					has_trait = drunkard
 					has_trait = hashishiyah
+					has_trait = skooma_drinker
 				}
 			}
 			hidden_effect = {
@@ -15818,6 +18492,10 @@ stress_threshold.3421 = {
 					50 = {
 						trigger = { has_trait = hashishiyah }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { has_trait = skooma_drinker }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -15878,6 +18556,7 @@ stress_threshold.3421 = {
 				OR = {
 					can_be_drunkard = yes
 					can_be_hashishiyah = yes
+					can_be_skooma_drinker = yes
 				}
 			}
 			hidden_effect = {
@@ -15889,6 +18568,10 @@ stress_threshold.3421 = {
 					50 = {
 						trigger = { can_be_hashishiyah = yes }
 						add_character_flag = stress_threshold_option_hashishiyah
+					}
+					50 = {
+						trigger = { can_be_skooma_drinker = yes }
+						add_character_flag = stress_threshold_option_skooma_drinker
 					}
 				}
 			}
@@ -16277,6 +18960,59 @@ stress_threshold.3421 = {
 			modifier = {	#Pick this option if you have the relevant coping mechanism.
 				add = 200
 				has_trait = hashishiyah
+			}
+		}
+	}
+	
+	### EK EDIT: Added Skooma Drinker
+	#Skooma drinker: major stress loss
+	option = {
+		trigger = {
+			has_character_flag = stress_threshold_option_skooma_drinker
+		}
+		name = {
+			trigger = { can_be_skooma_drinker = yes }
+			text = stress_threshold.3421.skooma_drinker.gain
+		}
+		name = {
+			trigger = { has_trait = skooma_drinker }
+			text = stress_threshold.3421.skooma_drinker.effect
+		}
+
+		trait = skooma_drinker
+
+		#Account for stress.
+		add_stress = major_stress_impact_loss
+		
+		#Make habitual Skooma consumer, or go on a notable binge.
+		if = {
+			limit = { has_trait = skooma_drinker }
+			add_character_modifier = {
+				modifier = stress_skooma_stupor
+				years = 3
+			}
+		}	
+		else = { add_trait = skooma_drinker }
+		
+		#Other effects: the county suffers minor damage and your delay disgusts everyone.
+		scope:burning_holding.county = {
+			add_county_modifier = {
+				modifier = managed_urban_fires_modifier
+				years = 20
+			}
+			change_county_control = major_county_control_loss
+		}
+		add_prestige_level = -1
+
+		ai_chance = {
+			base = 25
+			ai_value_modifier = {
+				ai_greed = 0.25
+				ai_energy = -0.25
+			}
+			modifier = {	#Pick this option if you have the relevant coping mechanism.
+				add = 200
+				has_trait = skooma_drinker
 			}
 		}
 	}

@@ -33,21 +33,26 @@ race_traits_effect = {
 	
 	#Khajiit
 	if = {
-		limit = { culture_group = culture_group:khajiiti_group }
+		limit = { 
+			OR = { 
+				culture_group = culture_group:khajiiti_group
+				culture_group = culture_group:lilmothiit_group
+			}
+		}
 		add_character_flag = race_khajiit
 	}
 	
-	#goblinken
+	#Goblinken
 	if = {
 		limit = { culture_group = culture_group:goblinken_group }
 		add_character_flag = race_goblinken
 	}
 	
 	#Argonian
-	# if = {
-		# limit = { culture_group = culture_group:argonian_group }
-		# add_character_flag = race_argonian
-	# }
+	if = {
+		limit = { culture_group = culture_group:argonian_group }
+		add_character_flag = race_argonian
+	}
 	
 	add_character_flag = char_setup
 }
@@ -78,15 +83,15 @@ race_traits_inheritance_effect = {
 	}
 	
 	#Argonian
-	# if = {
-		# limit = { 
-			# OR = {
-				# scope:mother = { has_character_flag = race_argonian }
-				# scope:real_father = { has_character_flag = race_argonian }
-			# }
-		# }
-		# add_character_flag = race_argonian
-	# }
+	if = {
+		limit = { 
+			OR = {
+				scope:mother = { has_character_flag = race_argonian }
+				scope:real_father = { has_character_flag = race_argonian }
+			}
+		}
+		add_character_flag = race_argonian
+	}
 	
 	add_character_flag = char_setup
 }

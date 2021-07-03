@@ -34,3 +34,148 @@ is_vampire = {
 is_necromancer = {
 	has_trait = necromancer_character
 }
+
+### To reference culture & religions more easily for some effects
+# Poet
+has_poet_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_skald_tradition
+		}
+	}
+}
+has_poet_faith = {
+	always = no
+}
+has_poet_background = {
+	OR = {
+		has_poet_culture = yes
+		has_poet_faith = yes
+	}
+}
+# Knighthood
+has_knighthood_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_knightly_orders
+			has_innovation = innovation_knighthood
+		}
+	}
+}
+has_knighthood_faith = {
+	always = no
+}
+has_knighthood_background = {
+	OR = {
+		has_knighthood_culture = yes
+		has_knighthood_faith = yes
+	}
+}
+# Students of Magicka
+has_students_magicka_culture = {
+	culture = {
+		OR = {
+			has_innovation = innovation_magical_studies
+		}
+	}
+}
+has_students_magicka_faith = {
+	always = no
+}
+has_students_magicka_background = {
+	OR = {
+		has_students_magicka_culture = yes
+		has_students_magicka_faith = yes
+	}
+}
+
+### When choosing a Daedra to trigger Daedric Whispers
+can_get_combo_trait_daedra = {
+	NOT = { has_character_flag = stress_$TRAIT$_$DAEDRA$ }
+	AND = {
+		has_trait = $TRAIT$
+		can_secretly_worship_$DAEDRA$ = yes
+	}
+}
+
+### Do these two rulers rule in the same province (= have their capital in the same mundus_tamriel_X)
+rulers_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { $CHAR1$ = { exists = capital_county } }
+				NOT = { $CHAR2$ = { exists = capital_county } }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		titles_in_same_province = { TITLE1 = $CHAR1$.capital_county TITLE2 = $CHAR2$.capital_county }
+	}
+}
+
+# Is the title capital in the same province as the ruler (= have their capital in the same mundus_tamriel_X)
+title_ruler_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { $CHAR$ = { exists = capital_county } }
+				NOT = { $TITLE$ = { exists = title_capital_county } }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		titles_in_same_province = { TITLE1 = $CHAR$.capital_county TITLE2 = $TITLE$ }
+	}
+}
+
+# Are these two titles in the same province? (= have their capital in the same mundus_tamriel_X)
+titles_in_same_province = {
+	trigger_if = {
+		limit = {
+			OR = {
+				NOT = { exists = $TITLE1$.title_capital_county.title_province }
+				NOT = { exists = $TITLE2$.title_capital_county.title_province }
+			}
+		}
+		always = no
+	}
+	trigger_else = {
+		OR = {
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_high_rock } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_high_rock } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_hammerfell } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_hammerfell } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_skyrim } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_skyrim } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_cyrodiil } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_cyrodiil } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_valenwood } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_valenwood } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_summerset_isles } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_summerset_isles } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_elsweyr } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_elsweyr } }
+			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
+			}
+			### EK TODO: Missing provinces
+		}
+	}
+}

@@ -279,6 +279,59 @@ special_contract = {
 				}
 			}
 		}
+		
+		### EK EDIT: Provincial Governor - Is entrusted with ruling over a whole province (= Empire). Should make them be treated as the de Jure liege of the whole Empire, even though they're only a King-tier ruler
+		special_contract_provincial_governor = {
+			is_valid = {
+				scope:liege.culture = {
+					has_innovation = innovation_provincial_governors
+				}
+				scope:vassal.primary_title.tier >= tier_kingdom
+				# Can't be a provincial governor of the liege capital
+				NOT = { rulers_in_same_province = { CHAR1 = scope:vassal CHAR2 = scope:liege } }
+				# No other vassal in the province has this contract
+				NOT = {
+					scope:liege = {
+						any_vassal = {
+							NOT = { this = scope:vassal }
+							rulers_in_same_province = { CHAR1 = scope:vassal CHAR2 = this }
+							vassal_contract_has_flag = has_provincial_governor_contract
+						}
+					}
+				}
+			}
+			parent = special_contract_none
+			position = { 1 3 }
+			
+			vassal_opinion = 20
+			
+			liege_modifier = {
+				vassal_limit = -10
+			}
+			
+			vassal_modifier = {
+				# Similar to the King -> Emperor rank difference
+				domain_limit = 1
+				knight_limit = 1
+				men_at_arms_cap = 1
+				vassal_limit = 5
+			}
+			
+			flag = has_provincial_governor_contract
+			
+			ai_liege_desire =  {
+				value = 0
+				if = {
+					limit = {
+						scope:vassal = {
+							vassal_contract_obligation_level:feudal_government_taxes < feudal_tax_low_level
+							vassal_contract_obligation_level:feudal_government_levies < feudal_levies_low_level
+						}
+					}
+					add = @ai_standard_liege_desire
+				}
+			}
+		}
 	}
 }
 

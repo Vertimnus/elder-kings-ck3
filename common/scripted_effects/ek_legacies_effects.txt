@@ -1,0 +1,36 @@
+﻿dynasty_update_legacies_modifiers_effect = {
+	### Save the splendor
+	save_scope_value_as = {
+		name = splendor_level
+		value = $DYNASTY$.dynasty_prestige_level
+	}
+	### Put all the legacies related dynasty modifiers here (mostly Hegemons for now I guess)
+	# As a dynasty has a single level of splendor, we can loop once and add every modifier that way
+	# We just have to make sure that the dynasty has the required legacy perk (duh)
+	set_while_counter_variable_effect = yes
+	# Clean all the modifiers
+	$DYNASTY$ = {
+		remove_all_dynasty_modifier_instances = hegemon_legacy_3_1
+		remove_all_dynasty_modifier_instances = hegemon_legacy_4_1
+		remove_all_dynasty_modifier_instances = hegemon_legacy_5_1
+	}
+	while = {
+		limit = {
+			var:while_counter = { compare_value < scope:splendor_level }
+		}
+		if = {
+			limit = { $DYNASTY$ = { has_dynasty_perk = hegemon_legacy_3 } }
+			$DYNASTY$ = { add_dynasty_modifier = hegemon_legacy_3_1 }
+		}
+		if = {
+			limit = { $DYNASTY$ = { has_dynasty_perk = hegemon_legacy_4 } }
+			$DYNASTY$ = { add_dynasty_modifier = hegemon_legacy_4_1 }
+		}
+		if = {
+			limit = { $DYNASTY$ = { has_dynasty_perk = hegemon_legacy_5 } }
+			$DYNASTY$ = { add_dynasty_modifier = hegemon_legacy_5_1 }
+		}
+		increase_while_counter_variable_effect = yes
+	}
+	remove_while_counter_variable_effect = yes
+}

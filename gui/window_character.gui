@@ -7,7 +7,6 @@ window = {
 	datacontext = "[GetVariableSystem]"
 	datacontext = "[CharacterWindow.GetCharacter]"
 	movable = no
-	allow_outside = yes
 	layer = middle
 
 	using = Window_Size_Sidebar
@@ -20,7 +19,6 @@ window = {
 		position_x = 0
 
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
-		using = Reorder_Bloodlines
 	}
 
 	state = {
@@ -30,396 +28,6 @@ window = {
 		position_x = -60
 
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
-		on_start = "[GetVariableSystem.Clear( 'bloodline_open' )]"
-		on_start = "[GetVariableSystem.Clear( 'artifact_open' )]"
-	}
-
-	widget = {
-		name = "bloodline_list"
-		visible = "[GetVariableSystem.Exists( 'bloodline_open' )]"
-		layer = middle
-		#movable = yes
-		position = { 600 90 }
-		alwaystransparent = no
-
-		using = Window_Background
-		using = Window_Decoration
-		using = Window_Size_CharacterList
-		#size = { 580 88% }
-
-		#datacontext = "[KillListWindow.GetKills]"
-
-		state = {
-			name = _show
-			using = Animation_FadeIn_Quick
-			position_x = 600
-		}
-
-		state = {
-			name = _hide
-			using = Animation_FadeOut_Quick
-			position_x = 580
-			#on_start = "[GetVariableSystem.Clear( 'kill_list_open' )]"
-		}
-
-		vbox = {
-			using = Window_Margins
-
-			header_pattern = {
-				layoutpolicy_horizontal = expanding
-
-				blockoverride "header_text"
-				{
-					text = "BLOODLINE_LIST"
-				}
-
-				blockoverride "button_close"
-				{
-					onclick = "[GetVariableSystem.Clear( 'bloodline_open' )]"
-				}
-			}
-
-			scrollbox = {
-				layoutpolicy_horizontal = expanding
-				layoutpolicy_vertical = expanding
-
-				blockoverride "scrollbox_empty"
-				{
-					text = "No Bloodlines"
-					visible = "[EqualTo_CFixedPoint( GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'), '(CFixedPoint)0.0' )]" #blocked at the button, shouldn't see this
-				}
-
-				datacontext = "[Character.GetFaith]"
-
-				blockoverride "scrollbox_content" {
-					vbox = {
-						layoutpolicy_horizontal = expanding
-						datamodel = "[CharacterWindow.GetTraits]"
-						margin = { 15 15 }
-						#spacing = 12
-
-						item = {
-							vbox = {
-								visible = "[EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' )]"
-								layoutpolicy_horizontal = expanding
-								button_standard_list = {
-									name = "bloodline_button"
-									#visible = "[EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' )]"
-									layoutpolicy_horizontal = expanding
-									size = { 0 180 }
-									alwaystransparent = yes
-
-									highlight_icon = {
-										name = "bg"
-										size = { 100% 100% }
-										texture = "gfx/interface/tooltips/tooltip_bg.dds"
-
-										tintcolor = { 0.33 0.24 0.3 0.25 }
-
-										modify_texture = {
-											name = "overlay"
-											texture = "gfx/interface/component_overlay/overlay_window.dds"
-											spriteType = Corneredstretched
-											spriteborder = { 0 0 }
-											blend_mode = overlay
-										}
-									}
-
-									hbox = {
-										margin = { 10 0 }
-										spacing = 10
-
-										vbox = {
-											margin = { 0 10 }
-											spacing = 5
-
-											icon = {
-												size = { 120 120 }
-												texture = "[Trait.GetIcon(Character.Self)]"
-											}
-
-											hbox = {
-												name = "bloodline_properties"
-												#direction = horizontal
-												#ignoreinvisible = yes
-												#spacing = 5
-												margin = { 5 0 }
-												layoutpolicy_horizontal = expanding
-
-												background = {
-													using = Text_Label_Background
-													alpha = 1
-													margin = { 12 3 }
-												}
-
-												widget = {
-													name = "inherit_type"
-													size = { 25 25 }
-													icon = {
-														size = { 25 25 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'all' )]"
-														texture = "gfx/interface/icons/flat_icons/heterosexual.dds"
-														tooltip = bloodline_inherit_all
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'patri' )]"
-														texture = "gfx/interface/icons/flat_icons/male.dds"
-														tooltip = bloodline_inherit_patri
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_inherit' ) ), 'matri' )]"
-														texture = "gfx/interface/icons/flat_icons/female.dds"
-														tooltip = bloodline_inherit_matri
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-												}
-
-												widget = {
-													name = "matri_override"
-													size = { 25 25 }
-													icon = {
-														size = { 25 25 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' )]"
-														texture = "gfx/interface/character_window/matri_override.dds"
-														tooltip = bloodline_matri_override
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' )]"
-														texture = "gfx/interface/character_window/tick.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/green.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-													icon = {
-														size = { 25 25 }
-														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' ) )]"
-														texture = "gfx/interface/character_window/matri_override.dds"
-														tooltip = bloodline_matri_override_not
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_matri_override' ) ), 'yes' ) )]"
-														texture = "gfx/interface/icons/flat_icons/cancel_small.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/red.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-												}
-
-												widget = {
-													name = "allow_bastards"
-													size = { 25 25 }
-													icon = {
-														size = { 25 25 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' )]"
-														texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
-														tooltip = bloodline_allow_bastards
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' )]"
-														texture = "gfx/interface/character_window/tick.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/green.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-													icon = {
-														size = { 25 25 }
-														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' ) )]"
-														texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
-														tooltip = bloodline_allow_bastards_not
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[Not( EqualTo_string( Localize( Concatenate( Trait.GetKey, '_bastards' ) ), 'yes' ) )]"
-														texture = "gfx/interface/icons/flat_icons/cancel_small.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/red.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-												}
-												widget = {
-													name = "special_condition"
-													size = { 25 25 }
-													visible = "[EqualTo_string( Localize( Concatenate( Trait.GetKey, '_special' ) ), 'yes' )]"
-													icon = {
-														size = { 25 25 }
-														visible = "[GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End)]"
-														texture = "gfx/interface/icons/flat_icons/outliner.dds"
-														tooltip = bloodline_special_condition
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End)]"
-														texture = "gfx/interface/character_window/tick.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/green.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-													icon = {
-														size = { 25 25 }
-														visible = "[Not( GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End) )]"
-														texture = "gfx/interface/icons/flat_icons/outliner.dds"
-														tooltip = bloodline_special_condition_not
-														using = tooltip_se
-														using = Master_Button_Modify_Texture
-													}
-													icon = {
-														size = { 25 25 }
-														position = { 6 6 }
-														visible = "[Not( GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).IsValid(GuiScope.SetRoot(Character.MakeScope).End) )]"
-														texture = "gfx/interface/icons/flat_icons/cancel_small.dds"
-														alwaystransparent = yes
-														modify_texture = {
-															texture = "gfx/interface/colors/red.dds"
-															blend_mode = add
-															spritetype = corneredtiled
-														}
-													}
-												}
-											}
-										}
-
-										divider_light = {
-											layoutpolicy_vertical = expanding
-										}
-
-										vbox = {
-											margin = { 5 10 }
-											spacing = 10
-											layoutpolicy_vertical = expanding
-											layoutpolicy_horizontal = expanding
-
-											vbox = {
-												layoutpolicy_horizontal = expanding
-												text_label_left = {
-													name = "bloodline_name"
-													layoutpolicy_horizontal = expanding
-													text = "[Trait.GetNameNoTooltip( Character.Self )]"
-													default_format = "#high"
-													using = Font_Size_Medium
-												}
-												# spacer = {
-												# 	layoutpolicy_horizontal = growing
-												# }
-												text_single = {
-													name = "bloodline_founder"
-													layoutpolicy_horizontal = expanding
-													text = "Founder: [GetScriptedGui(Concatenate( Trait.GetKey, '_founder' )).ExecuteTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-													align = left
-													using = Font_Size_Small
-												}
-											}
-
-											hbox = {
-												spacing = 5
-												layoutpolicy_vertical = expanding
-												layoutpolicy_horizontal = expanding
-
-												# scrollbox = {
-												# 	name = "bloodline_modifier_scrollarea"
-												# 	#layoutpolicy_horizontal = expanding
-												# 	layoutpolicy_vertical = expanding
-												# 	size = { 150 0 }
-
-												# 	blockoverride "scrollbox_background" {}
-
-												# 	#blockoverride "scrollbox_margins" {}
-
-												# 	blockoverride "scrollbox_replace_vbox"
-												# 	{
-												# 		hbox = {
-												# 			size = { 0 500 }
-												# 			layoutpolicy_horizontal = expanding
-												# 			layoutpolicy_vertical = expanding
-												# 			text_multi = {
-												# 				name = "bloodline_modifiers"
-												# 				#size = { 150 0 }
-												# 				layoutpolicy_vertical = expanding
-												# 				layoutpolicy_horizontal = expanding
-												# 				text = "[Trait.GetFullDescription( Character.Self, Faith.Self )]"
-												# 				default_format = "#high"
-												# 				using = Font_Size_Small
-												# 			}
-												# 		}
-												# 	}
-
-												# 	blockoverride "scrollbox_background_fade" {}
-												# }
-												text_multi = {
-													name = "bloodline_modifiers"
-													size = { 150 0 }
-													layoutpolicy_vertical = expanding
-													#layoutpolicy_horizontal = expanding
-													text = "[Trait.GetFullDescription( Character.Self, Faith.Self )]"
-													default_format = "#high"
-													using = Font_Size_Small
-												}
-
-												divider_light = {
-													layoutpolicy_vertical = expanding
-												}
-
-												text_multi = {
-													name = "bloodline_desc"
-													layoutpolicy_vertical = expanding
-													layoutpolicy_horizontal = expanding
-													text = "#F [Localize( Concatenate( Trait.GetKey, '_desc' ) )]#!"
-													#text = "[Trait.GetDescription( Character.Self )]"
-													#default_format = "#high"
-													using = Font_Size_Small
-												}
-											}
-										}
-									}
-								}
-								spacer = {
-									size = { 0 12 }
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 
 	vbox = {
@@ -555,12 +163,12 @@ window = {
 
 				widget = {
 					parentanchor = bottom|hcenter
-					size = { 145 40 }
+					size = { 250 40 }
 
 					flowcontainer = {
 						parentanchor = bottom|hcenter
 						widgetanchor = bottom|left
-						position = { -20 -3 }
+						position = { -25 -3 }
 						ignoreinvisible = yes
 
 						text_label_center = {
@@ -948,8 +556,6 @@ window = {
 
 						button_kill_list = {
 							onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
-							onclick = "[VariableSystem.Clear( 'artifact_open' )]"
-							onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
 							size = { 25 25 }
 							parentanchor = center
 
@@ -1074,77 +680,6 @@ window = {
 							onclick = "[CharacterWindow.OnClickFocusButton]"
 							enabled = "[CharacterWindow.CanClickFocusButton]"
 							tooltip = "[CharacterWindow.GetFocusButtonTooltip]"
-
-							modify_texture = {
-								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-								blend_mode = alphamultiply
-							}
-						}
-					}
-				}
-
-
-				flowcontainer = {
-					parentanchor = bottom|left
-					#position = { 5 -5 }
-					spacing = 5
-					ignoreinvisible = yes
-					direction = vertical
-
-					# button_normal = {
-					# 	name = "open_artifact_grid"
-					# 	#visible = "[Character.HasKillsKnownTo( GetPlayer )]"
-
-					# 	size = { 35 35 }
-
-					# 	datacontext = "[Character]"
-					# 	tooltip = "OPEN_ARTIFACT_GRID_TOOLTIP"
-					# 	using = tooltip_es
-
-
-					# 	icon = {
-					# 		texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-					# 		size = { 100% 100% }
-					# 	}
-
-					# 	button_icon = {
-					# 		texture = "gfx/interface/icons/flat_icons/achievements.dds"
-					# 		onclick = "[VariableSystem.Toggle( 'artifact_open' )]"
-					# 		onclick = "[VariableSystem.Clear( 'bloodline_open' )]"
-					# 		onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('kill_list'), 'close_kill_list', '' ) )]"
-					# 		size = { 25 25 }
-					# 		parentanchor = center
-
-					# 		modify_texture = {
-					# 			texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-					# 			blend_mode = alphamultiply
-					# 		}
-					# 	}
-					# }
-
-					button_normal = {
-						name = "open_bloodline_list"
-						visible = "[GreaterThan_CFixedPoint( GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'), '(CFixedPoint)0.0' )]"
-
-						size = { 35 35 }
-
-						datacontext = "[Character]"
-						tooltip = "OPEN_BLOODLINE_LIST_TOOLTIP"
-						using = tooltip_es
-
-
-						icon = {
-							texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-							size = { 100% 100% }
-						}
-
-						button_icon = {
-							texture = "gfx/interface/character_window/blooddrop_flat_small.dds"
-							onclick = "[VariableSystem.Toggle( 'bloodline_open' )]"
-							onclick = "[VariableSystem.Clear( 'artifact_open' )]"
-							onclick = "[PdxGuiTriggerAllAnimations( Select_CString( IsGameViewOpen('kill_list'), 'close_kill_list', '' ) )]"
-							size = { 25 25 }
-							parentanchor = center
 
 							modify_texture = {
 								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
@@ -1315,28 +850,15 @@ window = {
 									fixedgridbox = {
 										name = "traits_big"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)5')]"
+										visible = "[LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)5')]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 54
 										addrow = 55
 										maxhorizontalslots = 5
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 55 55 }
@@ -1348,33 +870,20 @@ window = {
 									fixedgridbox = {
 										name = "traits_medium"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)5'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)7'))]"
+										visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)5'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)7'))]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 39
 										addrow = 40
 										maxhorizontalslots = 7
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 40 40 }
 												}
-
+												
 												blockoverride "glow_radius"
 												{
 													glow_radius = 4
@@ -1386,28 +895,15 @@ window = {
 									fixedgridbox = {
 										name = "traits_small"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)7'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)10'))]"
+										visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)7'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)10'))]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 28
 										addrow = 29
 										maxhorizontalslots = 10
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 29 29 }
@@ -1424,30 +920,16 @@ window = {
 									fixedgridbox = {
 										name = "traits_tiny"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)10')]"
+										visible = "[GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)10')]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 24
 										addrow = 25
 										maxhorizontalslots = 11
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)11' )]"
 										datamodel_wrap = 11
 										maxverticalslots = 2
 
-										state = {
-											name = _show
-											#trigger_on_create = yes
-											using = Reorder_Bloodlines
-										}
-
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 25 25 }
@@ -1499,28 +981,15 @@ window = {
 									fixedgridbox = {
 										name = "traits_big"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)4')]"
+										visible = "[LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)4')]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 54
 										addrow = 55
 										maxhorizontalslots = 5
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)5' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 55 55 }
@@ -1532,28 +1001,15 @@ window = {
 									fixedgridbox = {
 										name = "traits_medium"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)4'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)6'))]"
+										visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)4'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)6'))]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 39
 										addrow = 40
 										maxhorizontalslots = 7
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)7' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 40 40 }
@@ -1570,28 +1026,15 @@ window = {
 									fixedgridbox = {
 										name = "traits_small"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[And(GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)6'), LessThanOrEqualTo_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)8'))]"
+										visible = "[And(GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)6'), LessThanOrEqualTo_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)8'))]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 28
 										addrow = 29
 										maxhorizontalslots = 10
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)10' )]"
 										maxverticalslots = 1
-
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
 
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 29 29 }
@@ -1608,29 +1051,16 @@ window = {
 									fixedgridbox = {
 										name = "traits_tiny"
 										datamodel = "[CharacterWindow.GetTraits]"
-										visible = "[GreaterThan_int32(Subtract_int32(GetDataModelSize(CharacterWindow.GetTraits), FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter'))), '(int32)8')]"
+										visible = "[GreaterThan_int32(GetDataModelSize(CharacterWindow.GetTraits), '(int32)8')]"
 										flipdirection = yes
-										#ignoreinvisible = yes
 										addcolumn = 24
 										addrow = 25
 										maxhorizontalslots = 9
-										#maxhorizontalslots = "[Add_int32( FixedPointToInt(GuiScope.SetRoot( Character.MakeScope ).ScriptValue('trait_counter')), '(int32)9' )]"
 										datamodel_wrap = 9
 										maxverticalslots = 2
 
-										state = {
-											name = _show
-											using = Reorder_Bloodlines
-										}
-
 										item = {
 											icon_trait = {
-												visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
-												state = {
-													name = reorder
-													trigger_on_create = yes
-													using = Reorder_Bloodlines
-												}
 												blockoverride "icon_size"
 												{
 													size = { 25 25 }
@@ -1737,8 +1167,6 @@ window = {
 									}
 								}
 
-								#tooltip = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude').GetValueBreakdown]"
-
 								spacing = -3
 
 								using = Animation_Character_Window_Refresh
@@ -1751,7 +1179,7 @@ window = {
 
 								text_single = {
 									name = "aptitude_value"
-									text = "[GuiScope.SetRoot( CharacterWindow.GetCharacter.MakeScope ).ScriptValue('aptitude')|0]"
+									text = "[CharacterWindow.GetCharacter.MakeScope.ScriptValue('aptitude')|0]"
 									align = nobaseline
 								}
 							}
@@ -3462,7 +2890,6 @@ window = {
 
 							item = {
 								icon_trait = {
-									visible = "[Not( Or( EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'bloodline' ), EqualTo_string( Trait.GetDescription( GetNullCharacter ), 'artifact' ) ) )]"
 									text_multi = {
 										parentanchor = bottom|hcenter
 										widgetanchor = top|hcenter
@@ -4194,14 +3621,11 @@ window = {
 		state = {
 			name = character_window_refresh
 			using = Animation_Refresh_FadeOut
-			on_start = "[GetVariableSystem.Clear( 'bloodline_open' )]"
-			on_start = "[GetVariableSystem.Clear( 'artifact_open' )]"
 			alpha = 0.65
 		}
 
 		state = {
 			using = Animation_Refresh_FadeIn
-			using = Reorder_Bloodlines
 		}
 	}
 
@@ -4210,19 +3634,12 @@ window = {
 		state = {
 			name = character_window_refresh
 			using = Animation_Refresh_FadeOut
-			on_start = "[GetVariableSystem.Clear( 'bloodline_open' )]"
-			on_start = "[GetVariableSystem.Clear( 'artifact_open' )]"
 			alpha = 0.8
 		}
 
 		state = {
 			using = Animation_Refresh_FadeIn
-			using = Reorder_Bloodlines
 			duration = 0.25
 		}
-	}
-	template Reorder_Bloodlines
-	{
-		on_start = "[GetScriptedGui('reorder_traits').Execute(GuiScope.SetRoot(CharacterWindow.GetCharacter.MakeScope).End)]"
 	}
 

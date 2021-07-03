@@ -47,8 +47,6 @@ on_birth_real_father = {
 on_birth_child = {
 	on_actions = {
 		on_birth_birthsign
-		delay = { days = 1 } #allow other traits to be set
-		on_birth_bloodline
 	}
 	events = {
 		# middle_east_decisions.0012 #Saoshyant Descendants.
@@ -167,6 +165,25 @@ on_birth_child = {
 				#No need to check if the hook can be added, the kid was just born
 			}
 			scope:child.house.house_head = {
+				add_hook_no_toast = {
+					type = house_head_hook
+					target = scope:child
+				}
+			}
+		}
+		
+		### EK EDIT: Added the effect of the Hegemon legacy line
+		if = {
+			limit = {
+				exists = scope:child.dynasty
+				scope:child.dynasty.dynast = { is_alive = yes }
+				scope:child.dynasty = { has_dynasty_perk = hegemon_legacy_5 }
+				NOT = {
+					scope:child = scope:child.dynasty.dynast # If the dynasty dies out, a posthumous child can revive it
+				}
+				#No need to check if the hook can be added, the kid was just born
+			}
+			scope:child.dynasty.dynast = {
 				add_hook_no_toast = {
 					type = house_head_hook
 					target = scope:child

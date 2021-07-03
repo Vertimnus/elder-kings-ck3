@@ -1,0 +1,191 @@
+﻿#Blackcaster Arch-Mages
+
+#Felix Blackcaster
+blackcaster_1000 = {
+	name = "Felix"
+	dynasty = 100043 #Augustus
+	culture = colovian
+	religion = imperial_cult
+	
+	3330.1.1 = { birth = yes }
+	# 3346.1.1 = { add_trait = mage_3 }
+	# 3348.1.1 = { add_trait = schemer }
+	# 3349.1.1 = { add_trait = ambitious }
+	3350.1.1 = { give_nickname = nick_blackcaster }
+	3397.1.1 = { death = yes }
+}
+
+#Arch-Mage Yamanu-ko
+blackcaster_1001 = {
+	name = "Yamanu-ko"
+	culture = pellitinian
+	religion = twomoonsdance
+	female = yes
+	
+	3450.1.1 = { birth = yes }
+	# 3466.1.1 = { add_trait = mage_3 }
+	# 3470.1.1 = { add_trait = necromancer }
+	# 3475.1.1 = { secret_religion = king_of_worms_cult }
+	# 3480.1.1 = { add_trait = ambitious }
+	# 3495.1.1 = { add_trait = lunatic }
+	# 3499.1.1 = { religion = king_of_worms_cult }
+	# 3500.1.1 = { 
+		# add_trait = cruel
+		# add_trait = impaler 
+		# add_trait = wroth
+	# }
+	3503.1.1 = { death = yes }
+}
+
+blackcaster_1002 = {
+	name = "Zulfan"
+	culture = crown
+	religion = tall_papa
+	
+	3350.1.1 = { birth = yes }
+	# 3366.1.1 = { add_trait = mage_2 }
+	3370.1.1 = { employer = character:blackcaster_1000 }
+	3416.1.1 = { death = yes }
+}
+
+blackcaster_1003 = {
+	name = "Felicia"
+	dynasty = 100043 #Augustus
+	culture = colovian
+	religion = imperial_cult
+	female = yes
+	
+	father = blackcaster_1000
+	
+	3368.1.1 = { birth = yes }
+	# 3384.1.1 = { add_trait = mage_3 }
+	3397.1.1 = { employer = character:blackcaster_1002 }
+	3431.1.1 = { death = yes }
+}
+
+blackcaster_1004 = {
+	name = "Morganna"
+	culture = iliac
+	religion = breton_cult
+	female = yes
+	
+	3400.1.1 = { birth = yes }
+	# 3416.1.1 = { add_trait = mage_2 }
+	3420.1.1 = { employer = character:blackcaster_1003 }
+	3456.1.1 = { death = yes }
+}
+
+blackcaster_1005 = {
+	name = "Zeno"
+	culture = colovian
+	religion = imperial_cult
+	
+	3430.1.1 = { birth = yes }
+	# 3446.1.1 = { add_trait = mage_2 }
+	3450.1.1 = { employer = character:blackcaster_1004 }
+	3491.1.1 = { death = yes }
+}
+
+blackcaster_1006 = {
+	name = "Leta"
+	dynasty = 130006 #Doniticus
+	culture = heartlander
+	religion = imperial_cult
+	female = yes
+	
+	3470.1.1 = { birth = yes }
+	# 3486.1.1 = { add_trait = mage_2 }
+	# 3490.1.1 = { add_trait = necromancer }
+	3495.1.1 = { employer = character:blackcaster_1001 }
+	# 3500.1.1 = { effect = { c_301017 = { add_friend = ROOT } } }
+	# 3501.1.1 = { religion = king_of_worms_cult }
+	# 3502.1.1 = { 
+		# add_trait = cruel
+		# add_trait = paranoid 
+	# }
+	3503.1.1 = { death = yes }
+}
+
+## Dwemer
+
+#Yagrum Bagarn
+dwemer_1000 = {
+	name = "Yagrum"
+	dynasty = 5 
+	culture = dwemer
+	religion = reason_and_logic
+	give_nickname = nick_last_dwemer
+	dna = yagrum_dna_entry
+	
+	trait = celibate
+	trait = chaste
+	trait = diligent
+	trait = calm
+	trait = education_learning_4
+	trait = shrewd
+	
+	650.1.1 = { birth = yes }
+	695.1.1 = { 
+		trait = lifespan_7
+		effect = { set_immortal_age = 45 }
+	}
+	4254.1.1 = { death = yes }
+}
+
+## Dremora
+
+#Velehk Sain
+dremora_1000 = {
+	name = "Velehk"
+	dynasty = 170004 
+	culture = dremora
+	religion = molag_cult
+	
+	trait = sadistic
+	trait = impatient
+	trait = honest
+	trait = education_martial_4
+	
+	2345.1.1 = { birth = yes }
+	3497.1.1 = { death = yes }
+}
+
+dremora_1001 = {
+	name = "Dias"
+	culture = dremora
+	religion = sanguine_cult
+	
+	trait = lustful
+	
+	3335.1.1 = { birth = yes }
+	3355.1.1 = { employer = character:abdelnour_1000 }
+	3355.1.1 = { set_relation_lover = character:abdelnour_1000 }
+	3600.1.1 = { death = yes }
+}
+
+dremora_1002 = {
+	name = "Seris"
+	culture = dremora
+	religion = sanguine_cult
+	
+	trait = lustful
+	
+	3335.1.1 = { birth = yes }
+	3355.1.1 = { employer = character:abdelnour_1000 }
+	3355.1.1 = { set_relation_lover = character:abdelnour_1000 }
+	3600.1.1 = { death = yes }
+}
+
+
+#Random Stuff
+mysterious_killer = {
+	name = "Mysterious Killer"
+	
+	culture = sload
+	religion = sithis
+
+	trait = line_of_x
+	
+	1.1.1 = { birth = yes }
+	1.1.2 = { death = { death_reason = death_vanished } }
+}

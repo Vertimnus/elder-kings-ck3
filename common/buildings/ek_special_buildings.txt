@@ -13,7 +13,7 @@ imperial_city_01 = {
 	
 	cost_gold = 3000
 	
-	garrison = 500
+	max_garrison = 500
 	
 	duchy_capital_county_modifier = {
 		levy_size = 0.15
@@ -149,10 +149,38 @@ the_bastion_01 = {
 
 	character_modifier = {
 		dread_gain_mult = 0.3
-		dread_decay_mult = -0.25
-		dread_baseline_add = 15
 	}
-	garrison = good_building_garrison_tier_3
+	max_garrison = good_building_max_garrison_tier_2
+	province_modifier = {
+		defender_holding_advantage = normal_building_advantage_tier_2
+		fort_level = good_building_fort_level_tier_2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	next_building = the_bastion_02
+	
+	type = special
+}
+the_bastion_02 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_tower_of_london.dds"
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+
+	character_modifier = {
+		dread_gain_mult = 0.3
+		men_at_arms_cap = 2
+		men_at_arms_limit = 1
+		men_at_arms_maintenance = -0.1
+	}
+	max_garrison = good_building_max_garrison_tier_3
 	province_modifier = {
 		defender_holding_advantage = normal_building_advantage_tier_3
 		fort_level = good_building_fort_level_tier_3
@@ -174,6 +202,21 @@ imperial_city_harbor_01 = {
 		building_requirement_tribal = no
 	}
 	cost_gold = 1000
+	
+	is_enabled = {
+		NOT = { 
+			custom_description = {
+				text = bridges_leyawiin_01_enabled
+				title:b_leyawiin_castle.title_province = { has_building = bridges_leyawiin_01 }
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:destroy_bridges_leyawiin_decision
+					}
+				}
+			}
+		}
+	}
 
 	duchy_capital_county_modifier = {
 		tax_mult = 0.1
@@ -206,6 +249,21 @@ port_hestra_01 = {
 		building_requirement_tribal = no
 	}
 	cost_gold = 1000
+	
+	is_enabled = {
+		NOT = { 
+			custom_description = {
+				text = bridges_leyawiin_01_enabled
+				title:b_leyawiin_castle.title_province = { has_building = bridges_leyawiin_01 }
+				NOT = {
+					is_target_in_global_variable_list = {
+						name = unavailable_unique_decisions
+						target = flag:destroy_bridges_leyawiin_decision
+					}
+				}
+			}
+		}
+	}
 	
 	character_modifier = {
 		naval_movement_speed_mult = 0.25
@@ -278,7 +336,7 @@ understone_keep_01 = {
 	
 	cost_gold = 3000
 	
-	garrison = 500
+	max_garrison = 500
 	
 	county_modifier = {
 		hostile_raid_time = 0.5
@@ -370,6 +428,52 @@ hot_springs_mir_corrup_02 = {
 	}
 	
 	type = special
+}
+
+#########
+# Bridges of Leyawiin - cash to the city, disabled the Watefront District and Port Hestra special buildings
+#########
+bridges_leyawiin_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_building_tradeport.dds"
+	
+	can_construct_potential = {
+		barony = title:b_leyawiin_castle
+		building_requirement_tribal = no
+	}
+	cost_gold = 1000
+	
+	
+	is_enabled = {
+		custom_description = {
+			text = bridges_leyawiin_01_disabled
+			title:b_leyawiin_castle.title_province = { has_building = bridges_leyawiin_01 }
+			NOT = {
+				is_target_in_global_variable_list = {
+					name = unavailable_unique_decisions
+					target = flag:destroy_bridges_leyawiin_decision
+				}
+			}
+		}
+	}
+	
+	duchy_capital_county_modifier = {
+		tax_mult = 0.1
+	}
+	province_modifier = {
+		monthly_income = 2
+	}
+	county_modifier = {
+		development_growth = 0.1
+		development_growth_factor = 0.2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = duchy_capital
 }
 
 ################################
@@ -1716,7 +1820,7 @@ solitude_holy_walls_01 = {
 	
 	cost_gold = 1000
 	
-	garrison = 150
+	max_garrison = 150
 	
 	county_modifier = {
 		hostile_raid_time = 0.1
@@ -1763,7 +1867,7 @@ solitude_holy_walls_02 = { # The old divine enchantments have been refined and s
 	cost_gold = 1000
 	cost_piety = 1000
 	
-	garrison = 500
+	max_garrison = 500
 	
 	character_modifier = {
 		monthly_piety = 0.25
@@ -1928,6 +2032,61 @@ sancre_tor_02 = { # The city has been rebuilt and the tombs renovated
 	type = special
 }
 
+##########
+# Cath Bedraud: Ancient cemetary, holding most of High Rock's former royalty and great heroes
+##########
+cath_bedraud_01 = {
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_building_hall_of_heroes.dds"
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	is_enabled = {
+		custom_description = {
+			text = holy_site_building_trigger
+			barony = {
+				is_holy_site_of = scope:holder.faith
+			}
+		}
+	}
+	
+	show_disabled = yes
+	
+	cost_gold = 1000
+
+	character_modifier = {
+		monthly_piety = 0.25
+		monthly_dynasty_prestige_mult = 0.1
+		dynasty_opinion = 5
+		same_faith_opinion = 5
+	}
+	county_modifier = {
+		tax_mult = 0.2
+		development_growth_factor = 0.2
+		development_growth = 0.1
+	}
+	province_modifier = {
+		monthly_income = 2
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
 
 ############
 # Generic  #
@@ -1947,7 +2106,7 @@ grand_cathedral_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -1968,7 +2127,7 @@ grand_cathedral_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
 	}
 	
 	show_disabled = yes
@@ -2011,7 +2170,7 @@ daedric_shrine_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2032,7 +2191,7 @@ daedric_shrine_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
 	}
 	
 	show_disabled = yes
@@ -2075,7 +2234,7 @@ great_wyrd_tree_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2096,7 +2255,7 @@ great_wyrd_tree_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
 	}
 	
 	show_disabled = yes
@@ -2117,6 +2276,8 @@ great_wyrd_tree_01 = {
 	}
 	
 	type = special
+	
+	flag = is_used_for_cath_bedraud_burial
 }
 
 ##########
@@ -2133,7 +2294,7 @@ dragon_temple_01 = {
 	}
 	
 	can_construct = {
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
 		custom_description = {
 			text = holy_site_building_trigger
 			barony = {
@@ -2154,7 +2315,7 @@ dragon_temple_01 = {
 				is_holy_site_of = scope:holder.faith
 			}
 		}
-		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+		scope:holder = { faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
 	}
 	
 	show_disabled = yes

@@ -1,0 +1,75 @@
+﻿##############
+#   PIRATE   #
+##############
+### Go from a Feudal government to a Pirate one
+become_pirate_government_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_port.dds"
+	
+	desc = become_pirate_government_decision_desc
+	selection_tooltip = become_pirate_government_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		has_government = feudal_government
+		highest_held_title_tier < tier_kingdom
+		capital_province = { is_coastal = yes }
+		has_perk = raider_perk
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { is_independent_ruler = no }
+			
+			OR = {
+				has_trait = plunderer
+				liege = { has_government = pirate_government }
+			}
+		}
+		trigger_else = {
+			has_trait = plunderer
+		}
+		
+		custom_description = {
+			text = has_raided_for_two_hundred_gold_ct
+			var:total_loot = { compare_value >= 200 }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		change_government = pirate_government
+		custom_tooltip = become_pirate_government_decision_duchy_tier_title_ct
+		if = {
+			limit = { highest_held_title_tier >= tier_duchy }
+			every_held_title = {
+				limit = { this.tier >= tier_duchy }
+				add_title_law = pirate_elective_succession_law
+			}
+		}
+		custom_tooltip = become_pirate_government_decision_total_loot_workaround_ct
+		show_as_tooltip = { add_gold = var:total_loot }
+		
+		# trigger_event = ek_pirates.0001
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### Settle as a Pirate Confederacy
