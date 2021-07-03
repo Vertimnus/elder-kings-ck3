@@ -19,7 +19,7 @@ patron_select_patron_decision = {
         is_ruler = yes
         is_ai = yes
         has_active_patron_selected = no
-        patron_has_princes = yes
+        faith = { patron_has_princes = yes }
     }
 
     is_valid = {
@@ -29,7 +29,7 @@ patron_select_patron_decision = {
     }
 
     effect = {
-        custom_tooltip = select_personal_deity_decision_tt
+        #custom_tooltip = select_personal_deity_decision_tt
         trigger_event = patron_decision.001
     }
 
@@ -430,9 +430,7 @@ patron_boon_horde_decision = { #5000
                 # }
                 spawn_army = {
                     #levies =  #needed to bulk up army?
-                    levies = {
-                        value = 1
-                    }
+                    levies = { value = 0 }
                     men_at_arms = { # optional, multiple can be specified. Need either levies or MAA
                         type = daedra
                         stacks = {
@@ -449,7 +447,7 @@ patron_boon_horde_decision = { #5000
                     uses_supply = no #may be op, needs testing
                     #army = army # optional. If set, the stack will merge into this army
                     #save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war)
-                    #name = dremora # gives the troops a specific name that shows up in interfaces
+                    name = dremora_horde # gives the troops a specific name that shows up in interfaces
                 }
             }
             # 25 = { #failure
@@ -555,6 +553,22 @@ patron_boon_invasion_decision = { #25000
 
     ai_will_do = {
         base = 0
+    }
+}
+
+debug_mode_toggle_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+    ai_check_interval = 0
+    is_shown = { always = yes }
+    is_valid = { always = no }
+
+    effect = {
+        custom_tooltip = "Use button to toggle debug mode"
+    }
+
+    widget = {
+        gui = "decision_view_widget_toggle_debug"
     }
 }
 

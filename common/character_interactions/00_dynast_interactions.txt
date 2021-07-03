@@ -1,4 +1,5 @@
 ﻿### EK TODO: Make Impure characters easier to disinherit
+### EK EDIT: Reduced the cost of the interactions if the dynasty has the hegemon_legacy_4 perk
 
 #Interactions relating to the head of the dynasty
 
@@ -102,6 +103,12 @@ disinherit_interaction = {
 						}
 					}
 					add = medium_dynasty_prestige_value
+				}
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
 				}
 			}
 		}
@@ -330,7 +337,15 @@ restore_inheritance_interaction = {
 
 	cost = {
 		renown = {
-			value = medium_dynasty_prestige_value
+			value = {
+				add = medium_dynasty_prestige_value
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
+				}
+			}
 		}
 	}
 	
@@ -466,6 +481,12 @@ denounce_interaction = {
 						}
 					}
 					add = minor_dynasty_prestige_value
+				}
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
 				}
 			}
 		}
@@ -673,7 +694,15 @@ forgive_interaction = {
 
 	cost = {
 		renown = {
-			value = miniscule_dynasty_prestige_value
+			value = {
+				add = miniscule_dynasty_prestige_value
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
+				}
+			}
 		}
 	}
 	
@@ -1038,7 +1067,7 @@ dynast_claim_title_interaction = {
 	target_type = title
 	target_filter = recipient_domain_titles
 	ignores_pending_interaction_block = yes
-	cost = { renown = major_dynasty_prestige_value }
+	
 	is_shown = {
 		NOT = { scope:recipient = scope:actor }
 
@@ -1098,6 +1127,20 @@ dynast_claim_title_interaction = {
 		}
 	}
 
+	cost = {
+		renown = {
+			value = {
+				add = major_dynasty_prestige_value
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
+				}
+			}
+		}
+	}
+	
 	auto_accept = yes
 }
 
@@ -1189,7 +1232,17 @@ dynast_legitimize_bastard_interaction = {
 	auto_accept = yes
 
 	cost = {
-		renown = medium_dynasty_prestige_value
+		renown = {
+			value = {
+				add = medium_dynasty_prestige_value
+				
+				### EK EDIT: Effect of the hegemon_legacy_4 perk
+				if = {
+					limit = { scope:actor.dynasty = { has_dynasty_perk = hegemon_legacy_4 } }
+					multiply = 0.8
+				}
+			}
+		}
 	}
 	
 	on_accept = {

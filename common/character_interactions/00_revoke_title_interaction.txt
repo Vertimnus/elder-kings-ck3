@@ -1,4 +1,6 @@
-﻿revoke_title_interaction = {
+﻿### EK EDIT: Added the effects of the Provincial Governor special contract
+
+revoke_title_interaction = {
 
 	category = interaction_category_vassal
 	common_interaction = yes
@@ -127,15 +129,24 @@
 	can_be_picked_title = {
 		scope:target = {
 			is_contested = no
-			NOT = {
-				recent_history = {
-					type = granted
-					years = 1
-				}
-			}
+			# NOT = {
+				# recent_history = {
+					# type = granted
+					# years = 1
+				# }
+			# }
 			custom_description = {
 				text = "character_interactions_not_rel_head_title"
 				NOT = { exists = controlled_faith }
+			}
+			
+			### EK EDIT: Provincial Governor - Title cannot be de Jure part of the Province held by the vassal
+			custom_description = {
+				text = "ek_character_interactions_cannot_revoke_title_provincial_governor_province"
+				OR = {
+					NOT = { scope:recipient = { vassal_contract_has_flag = has_provincial_governor_contract } }
+					NOT = { title_ruler_in_same_province = { CHAR = scope:recipient TITLE = scope:target } }
+				}
 			}
 		}
 	}
@@ -355,6 +366,7 @@
 					divide = { value = scope:actor.max_military_strength min = 1 }
 					}
 				multiply = 50
+				max = 20
 	  		}
 		}
 	}

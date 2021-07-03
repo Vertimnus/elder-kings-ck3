@@ -265,6 +265,33 @@ direnni_999b1 = {
 	3362.1.1 = { death = yes }
 }
 
+direnni_999c1 = {
+	name = "Maalanrie"
+	dynasty = 730000
+	religion = mainland_auriel
+	culture = balfiera
+	trait = lifespan_3
+	female = yes
+	
+	father = direnni_999b
+	
+	3290.1.1 = { birth = yes }
+	3505.1.1 = { death = yes }
+}
+
+direnni_999c2 = {
+	name = "Parmon"
+	dynasty = 730000
+	religion = mainland_auriel
+	culture = balfiera
+	trait = lifespan_3
+	
+	mother = direnni_999c1
+	
+	3337.1.1 = { birth = yes }
+	3615.1.1 = { death = yes }
+}
+
 direnni_1000 = {
 	name = "Ancotar"
 	dynasty = 730000
@@ -306,6 +333,20 @@ direnni_1000b1 = {
 	
 	3299.1.1 = { birth = yes }
 	3427.1.1 = { death = yes }
+}
+
+direnni_1000b1a = {
+	name = "Cararilde"
+	dynasty = 730000
+	religion = mainland_auriel
+	culture = balfiera
+	trait = lifespan_3
+	female = yes
+	
+	mother = direnni_1000b1
+	
+	3335.1.1 = { birth = yes }
+	3561.1.1 = { death = yes }
 }
 
 direnni_1000b2 = {
@@ -433,6 +474,20 @@ direnni_tyrigel_1001 = {
 	3355.1.1 = { death = yes }
 }
 
+direnni_tyrigel_1001b = {
+	name = "Adreana" #ESO
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	female = yes
+	
+	father = direnni_tyrigel_1000
+
+	3145.1.1 = { birth = yes }
+	3375.1.1 = { death = yes }
+}
+
 direnni_tyrigel_1002 = {
 	name = "Duperil"
 	dynasty_house = direnni_tyrigel
@@ -459,6 +514,19 @@ direnni_tyrigel_1003 = {
 	3412.1.1 = { death = yes }
 }
 
+direnni_tyrigel_1004 = {
+	name = "Arunen"
+	dynasty_house = direnni_tyrigel
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	
+	father = direnni_tyrigel_1002
+
+	3310.1.1 = { birth = yes }
+	3462.1.1 = { death = yes }
+}
+
 ##Ravenn Dynasty (730001)
 
 #House Ravenn
@@ -476,6 +544,96 @@ ravenn_1000 = {
 	3504.1.1 = { death = yes }
 }
 
+##Arana Dynasty (700000)
+
+arana_1000 = {
+	name = "Hidellith"
+	dynasty = 700000
+	religion = auriel
+	culture = alinor
+	trait = lifespan_3
+	
+	trait = education_diplomacy_3
+	trait = zealous
+	trait = arrogant
+	trait = just
+	
+	3267.1.1 = { birth = yes }
+	3500.10.1 = { death = yes } #Hidellith actually would have died about 3555 days before this, and that time would have been spent as a regency for Naemon, but they Ayrenn returned. This will probably need some sort of new government type or something
+}
+
+arana_1001 = {
+	name = "Ayrenn"
+	dynasty = 700000
+	religion = auriel
+	culture = alinor
+	female = yes
+	father = arana_1000
+	trait = lifespan_3
+	give_nickname = nick_the_unforseen
+	
+	trait = education_martial_4
+	trait = ambitious
+	trait = brave
+	trait = cynical
+	trait = adventurer
+	
+	3475.5.5 = { birth = yes }
+	3724.2.8 = { death = yes }
+}
+
+arana_1002 = {
+	name = "Naemon"
+	dynasty = 700000
+	religion = auriel
+	culture = alinor
+	father = arana_1000
+	trait = lifespan_3
+	
+	trait = education_stewardship_3
+	trait = ambitious
+	
+	3478.5.5 = { birth = yes }
+	3494.5.5 = { add_spouse = errinorne_1000 }
+	3502.12.3 = { death = yes }
+}
+
+## Errinorne Dynasty (720002)
+
+errinorne_1000 = {
+	name = "Estre"
+	dynasty = 720002
+	religion = auriel
+	culture = auridon
+	trait = lifespan_3
+	spouse = arana_1002
+	female = yes
+	make_claim_strong = title:e_summerset
+	add_secret = {
+		type = secret_mehrunes_worshipper
+	}
+	
+	trait = education_learning_4
+	trait = ambitious
+	trait = deceitful
+	trait = arrogant
+	
+	3469.4.2 = { birth = yes }
+	3502.12.3 = { death = yes }
+}
+
+eldamar_1000 = {
+	name = "Ahlora"
+	dynasty = 720003
+	religion = auriel
+	culture = auridon
+	trait = lifespan_3
+	female = yes
+	
+	3298.1.1 = { birth = yes }
+	3530.1.1 = { death = yes }
+}
+
 ##Repubics/Theocracies
 
 urvaius_1000 = {
@@ -488,3 +646,28 @@ urvaius_1000 = {
 	3250.1.1 = { birth = yes }
 	3400.1.1 = { death = yes }
 }
+
+mannimarco_1000 = {
+	name = "Mannimarco"
+	religion = worm_cult
+	culture = alinor
+	
+	trait = ambitious
+	trait = callous
+	trait = arrogant
+	trait = education_learning_4
+	trait = education_magical_ability_4
+	trait = heresiarch
+	
+	trait = necromancer_character
+	
+	2895.1.1 = { birth = yes }
+	2960.1.1 = { trait = necromancer_character }
+	2980.1.1 = { 
+		trait = lifespan_7 # Placeholder for Lich trait
+		effect = { set_immortal_age = 85 }
+	}
+	2985.1.1 = { trait = heresiarch }
+	4249.1.1 = { death = yes }
+}
+

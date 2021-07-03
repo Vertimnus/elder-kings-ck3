@@ -80,3 +80,774 @@ form_pirate_confederacy_the_isles_decision = {
 		base = 100
 	}
 }
+
+##############
+#  ORSINIUM  #
+##############
+create_orsinium_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = create_orsinium_decision_desc
+	selection_tooltip = create_orsinium_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		title:k_orsinium = { is_title_created = no }
+		culture_group = culture_group:orsimer_group
+		highest_held_title_tier < tier_empire
+		NOT = {
+			any_held_title = {
+				count = 2
+				tier = tier_king
+			}
+		}
+	}
+	
+	is_valid = {
+		#GOLD
+		gold >= 1500
+		#FAME LEVEL
+		prestige_level >= 4
+		#INDEPENDENT
+		is_independent_ruler = yes
+		#Your main duchy's capital is Orc-culture
+		capital_county.de_jure_liege.title_capital_county.holder = { this = root }
+		capital_county.culture_group = culture_group:orsimer_group
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		#Becomes King of Orsinium
+		get_title = title:k_orsinium
+		#Saves the duchy that becomes part of Orsinium
+		every_held_title = {
+			limit = {
+				tier = tier_duchy
+				title_capital_county = root.capital_county
+				title_capital_county = {
+					culture_group = culture_group:orsimer_group
+					holder = root
+				}
+			}
+			save_scope_as = orsinium_original_duchy
+		}
+		#Saves the original de jure liege
+		scope:orsinium_original_duchy.de_jure_liege = { save_scope_as = orsinium_original_liege }
+		#Makes it de jure part of Orsinium
+		scope:orsinium_original_duchy = { 
+			set_de_jure_liege_title = title:k_orsinium
+			set_variable = {
+				name = orsinium_original_duchy_boolean
+				value = 1
+			}
+		}
+		#If there is an original de jure liege, he gets a claim in the duchy
+		scope:orsinium_original_duchy.de_jure_liege.holder = { add_pressed_claim = scope:orsinium_original_duchy }
+		#Marks the original liege title
+		scope:orsinium_original_liege = { 
+			set_variable = {
+				name = orsinium_original_liege_boolean
+				value = 1
+			}
+		}
+		#Faiths that worship Malacath love this
+		# if = {
+			# limit = {
+				# faith = @
+			# }
+			# add_piety_level = 1
+		# }
+		#Spend gold and fame
+		add_gold = -1500
+		add_prestige_level = -1
+	}
+
+	ai_potential = {
+		always = yes 
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+reintegrate_orsinium_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = reintegrate_orsinium_decision_desc
+	selection_tooltip = reintegrate_orsinium_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		OR = {
+			title:k_orsinium = { is_title_created = no }
+			AND = {
+				NOT = { title:k_orsinium.holder = root }
+				any_vassal = {
+					NOT = { has_title = title:k_orsinium }
+				}
+			}
+		}
+		NOT = { culture_group = culture_group:orsimer_group }
+		any_held_title = {
+			has_variable = orsinium_original_liege_boolean
+		}
+	}
+	
+	is_valid = {
+		#GOLD
+		gold >= 500
+		#FAME LEVEL
+		prestige_level >= 2
+		#You hold Orsinium's de jure duchy
+		any_held_title = {
+			has_variable = orsinium_original_duchy_boolean
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		#Saves the duchy that had become part of Orsinium
+		every_held_title = {
+			limit = {
+				has_variable = orsinium_original_duchy_boolean
+			}
+			save_scope_as = orsinium_original_duchy
+		}
+		#Saves the original de jure liege
+		every_held_title = {
+			limit = {
+				has_variable = orsinium_original_liege_boolean
+			}
+			save_scope_as = orsinium_original_liege
+		}
+		#Makes it de jure part of Orsinium
+		scope:orsinium_original_duchy = { set_de_jure_liege_title = scope:orsinium_original_liege }
+		#If there is an Orsinium de jure liege, he gets a claim in the duchy
+		title:k_orsinium.holder = { add_pressed_claim = scope:orsinium_original_duchy }
+		#No more King of Orsinium
+		destroy_title = title:k_orsinium
+		#Clears variables
+		scope:orsinium_original_duchy = { 
+			remove_variable = orsinium_original_duchy_boolean
+		}
+		scope:orsinium_original_liege = { 
+			remove_variable = orsinium_original_liege_boolean
+		}
+		add_gold = -500
+		add_prestige_level = -1
+	}
+
+	ai_potential = {
+		always = yes 
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##############
+#  ATTREBUS  #
+##############
+attrebus_interregnum_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_interregnum_decision_desc
+	selection_tooltip = attrebus_interregnum_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = attrebus_interregnum_decision_required_tasks_tt
+		custom_tooltip = attrebus_interregnum_decision_optional_tasks_tt
+		custom_tooltip = line_break
+		custom_tooltip = attrebus_interregnum_decision_early_effect_tt
+		
+		trigger_event = ek_attrebus_potentate.0053
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_repay_debts_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_repay_debts_decision_desc
+	selection_tooltip = attrebus_repay_debts_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+		}
+		gold >= 500
+	}
+
+	is_valid = {
+		gold >= 2000
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+	
+	cost = {
+		gold = {
+			value = 2000
+		}
+	}
+
+	effect = {
+		custom_tooltip = attrebus_potentate_attrebus_repay_debts_desc
+		custom_tooltip = attrebus_potentate_required_task_2_fulfilled_desc
+		custom_tooltip = attrebus_potentate_ec_debts_repayed_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+			
+			attrebus_fulfill_required_task = { ATTREBUS = root }
+		}
+		
+		trigger_event = ek_attrebus_potentate.0062
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_rebuild_imperial_legion_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_rebuild_imperial_legion_decision_desc
+	selection_tooltip = attrebus_rebuild_imperial_legion_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_rebuild_imperial_legion_decision
+			}
+		}
+	}
+
+	is_valid = {
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = heavy_infantry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_hi
+		}
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = mages
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_wm
+		}
+		custom_description = {
+			number_maa_soldiers_of_base_type = {
+				type = light_cavalry
+				value >= 300
+			}
+			text = attrebus_rebuild_imperial_legion_decision_300_lc
+		}
+		
+		custom_description = {
+			OR = {
+				number_maa_soldiers_of_base_type = {
+					type = heavy_infantry
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = mages
+					value >= 500
+				}
+				number_maa_soldiers_of_base_type = {
+					type = light_cavalry
+					value >= 500
+				}
+			}
+			text = attrebus_rebuild_imperial_legion_decision_500_hi_wc_lc
+		}
+		
+		has_title = title:c_bastion
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+	
+	cost = {
+		gold = {
+			value = 500
+		}
+		prestige = {
+			value = 500
+		}
+	}
+
+	effect = {
+		title:b_fort_legion.title_province = { add_building = the_bastion_02 }
+		
+		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
+		custom_tooltip = attrebus_potentate_attrebus_will_increase_personal_power_desc
+		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_rebuild_imperial_legion_decision
+			}
+			
+			attrebus_fulfill_optional_task = { ATTREBUS = root }
+		}
+		
+		trigger_event = ek_attrebus_potentate.0064
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_draft_tsaesci_act_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_draft_tsaesci_act_decision_desc
+	selection_tooltip = attrebus_draft_tsaesci_act_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_draft_tsaesci_act_decision
+			}
+		}
+	}
+
+	is_valid = {
+		custom_description = {
+			title:c_imperial_city.duchy = {
+				NOT = {
+					any_in_de_jure_hierarchy = {
+						holder.culture_group = culture_group:akaviri_group
+					}
+				}
+			}
+			text = attrebus_draft_tsaesci_act_decision_no_tsaesci_ruler_imperial_isle
+		}
+		custom_description = {
+			title:c_imperial_city.duchy = {
+				NOT = {
+					any_in_de_jure_hierarchy = {
+						culture_group = culture_group:akaviri_group
+					}
+				}
+			}
+			text = attrebus_draft_tsaesci_act_decision_no_tsaesci_province_imperial_isle
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	cost = {
+		prestige = {
+			value = 1000
+		}
+	}
+
+	effect = {
+		custom_tooltip = attrebus_draft_tsaesci_act_decision_effect_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_draft_tsaesci_act_decision
+			}
+		}
+		
+		# trigger_event = ek_attrebus_potentate.0064
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+attrebus_secure_heartlands_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = attrebus_secure_heartlands_decision_desc
+	selection_tooltip = attrebus_secure_heartlands_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		exists = var:attrebus_years_pseudo_emperor_left
+		var:attrebus_years_pseudo_emperor_left = { compare_value >= 1 }
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
+			}
+		}
+		completely_controls_region = mundus_tamriel_cyrodiil_heartlands
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_cyrodiil_heartlands
+		has_title = title:k_heartlands
+		
+		custom_description = {
+			text = attrebus_secure_heartlands_decision_vassal_heartlands_positive_opinion
+			NOT = {
+				any_vassal = {
+					capital_province = { geographical_region = mundus_tamriel_cyrodiil_heartlands }
+					opinion = { target = ROOT value <= 0 }
+				}
+			}
+		}
+		
+		custom_description = {
+			text = attrebus_secure_heartlands_decision_full_control_imperial_isle
+			NOT = {
+				any_county = {
+					duchy = title:d_imperial_isle
+					county_control < full_county_control
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+		is_at_war = no
+	}
+	
+	effect = {
+		custom_tooltip = attrebus_secure_heartlands_desc
+		custom_tooltip = attrebus_potentate_required_task_3_fulfilled_desc
+		custom_tooltip = attrebus_potentate_ec_control_heartlands_desc
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
+			}
+			
+			attrebus_fulfill_required_task = { ATTREBUS = root }
+		}
+		
+		# trigger_event = ek_attrebus_potentate.0062
+	}
+
+	ai_potential = {
+		always = no
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##############
+#  CYRODIIL  #
+##############
+destroy_bridges_leyawiin_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_port.dds"
+	
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { has_title = title:c_leyawiin } }
+				desc = destroy_bridges_leyawiin_decision_desc_vassal
+			}
+			desc = destroy_bridges_leyawiin_decision_desc_direct
+		}
+	}
+	
+	selection_tooltip = destroy_bridges_leyawiin_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# It's in your realm and the bridges can't have already been disabled (uses a global flag)
+		completely_controls = title:c_leyawiin
+		
+		NOT = { capital_county = title:c_leyawiin }
+		
+		NOT = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	is_valid = {
+		trigger_if = {
+			limit = { NOT = { has_title = title:c_leyawiin } } # A vassal holds it
+			
+			title:c_leyawiin.holder = {
+				OR = {
+					opinion = {
+						target = ROOT
+						value >= 75
+					}
+					AND = {
+						opinion = {
+							target = ROOT
+							value >= 50
+						}
+						has_dread_level_towards = { target = ROOT level = 1 }
+					}
+					AND = {
+						opinion = {
+							target = ROOT
+							value >= 25
+						}
+						has_dread_level_towards = { target = ROOT level = 2 }
+					}
+					
+					root = { has_strong_hook = title:c_leyawiin.holder }
+				}
+			}
+		}
+		
+		trigger_else = {
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = destroy_bridges_leyawiin_decision_disables_bridges_leyawiin_01_ct
+		custom_tooltip = destroy_bridges_leyawiin_decision_enables_buildings_imperial_isle_ct
+		custom_tooltip = destroy_bridges_leyawiin_decision_enables_port_buildings_rumare_ct
+		custom_tooltip = repair_destroy_bridges_leyawiin_wait_a_month_ct
+		
+		hidden_effect = {
+			add_to_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	cost = {
+		prestige = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+repair_bridges_leyawiin_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_port.dds"
+	
+	desc = repair_bridges_leyawiin_decision_desc
+	
+	selection_tooltip = repair_bridges_leyawiin_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# It's in your realm and the bridges can't have already been disabled (uses a global flag)
+		completely_controls = title:c_leyawiin
+		capital_county = title:c_leyawiin
+		
+		is_target_in_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:destroy_bridges_leyawiin_decision
+		}
+	}
+
+	is_valid = {
+		is_independent_ruler = yes
+		completely_controls = title:d_leyawiin
+		has_title = title:d_leyawiin
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = repair_bridges_leyawiin_decision_enables_bridges_leyawiin_01_ct
+		custom_tooltip = repair_bridges_leyawiin_decision_disables_buildings_imperial_isle_ct
+		custom_tooltip = repair_bridges_leyawiin_decision_disables_port_buildings_rumare_ct
+		custom_tooltip = repair_destroy_bridges_leyawiin_wait_a_month_ct
+		
+		hidden_effect = {
+			remove_list_global_variable = {
+				name = unavailable_unique_decisions
+				target = flag:destroy_bridges_leyawiin_decision
+			}
+		}
+	}
+
+	cost = {
+		gold = 1000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+##############
+#   GENERAL  #
+##############
+establish_lingua_tamrielis_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_misc.dds"
+	
+	desc = establish_lingua_tamrielis_decision_desc
+	selection_tooltip = establish_lingua_tamrielis_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		NOT = { culture = { has_innovation = innovation_lingua_tamrielis } }
+		highest_held_title_tier = tier_empire
+		primary_title = { any_in_de_jure_hierarchy = { tier = tier_county } } #Has de jure land
+	}
+
+	is_valid = {
+		completely_controls = root.primary_title
+		
+		custom_description = {
+			text = completely_controls_two_empires_ct
+			any_held_title = {
+				count >= 2
+				tier = tier_empire
+				any_in_de_jure_hierarchy = { tier = tier_county }
+				root = { completely_controls = prev }
+			}
+		}
+		
+		culture.culture_head = root
+		learning >= 15
+		has_trait = scholar
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		# show_as_tooltip = { establish_lingua_tamrielis_decision = yes }
+		establish_lingua_tamrielis_decision = yes
+	}
+
+	cost = {
+		gold = 500
+		prestige = 3000
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

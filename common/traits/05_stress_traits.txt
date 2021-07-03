@@ -153,6 +153,8 @@ irritable = { # Prone to outbursts and tantrums.
 
 	ai_war_chance = 0.25
 	ai_war_cooldown = -0.25
+
+	flag = can_duel_anyone_interaction
 	
 	ruler_designer_cost = 0
 
@@ -447,4 +449,35 @@ athletic = { # Exercises to relieve stress (Healthy)
 
 	ai_energy = 25
 	ai_boldness = 5
+}
+
+skooma_drinker = { # Substance Abuse (Skooma) - Basically a copy paste of hashishiyah
+	index = 195 # Leave some space for vanilla
+	fame = yes
+	stewardship = -2
+	diplomacy = -2
+	stress_loss_mult = 0.2
+
+	same_opinion = 10
+	
+	ruler_designer_cost = 5
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_skooma_drinker_desc
+			}
+			desc = trait_skooma_drinker_character_desc
+		}
+	}
+
+	ai_energy = -15
+	ai_rationality = -10
+
+	compatibility = {
+		temperate = @neg_compat_low
+	}
 }

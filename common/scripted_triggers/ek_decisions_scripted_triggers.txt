@@ -9,6 +9,36 @@
 	highest_held_title_tier >= tier_duchy
 }
 
+unify_small_kingdom_law_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				has_government = feudal_government
+				has_government = clan_government
+			}
+		}
+		OR = {
+			has_realm_law = crown_authority_1
+			has_realm_law = crown_authority_2
+			has_realm_law = crown_authority_3
+		}
+	}
+	trigger_else_if = {
+		limit = {
+			has_government = tribal_government
+		}
+		OR = {
+			has_realm_law = tribal_authority_1
+			has_realm_law = tribal_authority_2
+			has_realm_law = tribal_authority_3
+		}
+	}
+	# This shouldn't happen
+	trigger_else = {
+		always = no
+	}
+}
+
 unify_kingdom_law_trigger = {
 	trigger_if = {
 		limit = {
@@ -39,17 +69,18 @@ unify_kingdom_law_trigger = {
 
 can_unify_kingdom_of_is_shown = {
 	### Iron Orcs can unify Craglorn, but Skaal cannot
-	is_native_to = { REGION = $REGION$ CULTURE = root.culture }
-	capital_province = { geographical_region = custom_nativity_$REGION$ }
+	is_native_to = { REGION = $NATIVITY_REGION$ CULTURE = root.culture }
+	capital_province = { geographical_region = mundus_$REGION$ }
 	### The Kingdom can't be already held
-	NOT = { exists = title:k_$REGION$.holder }
+	NOT = { exists = title:k_$NATIVITY_REGION$.holder }
 	### And it can't have been formed recently (as in, hasn't crumbled already)
-	title:k_$REGION$ = { is_titular = yes }
+	title:k_$NATIVITY_REGION$ = { is_titular = yes }
 	### And we need the right government
 	unify_kingdom_government_trigger = yes
 }
 
 can_unify_kingdom_of_is_valid = {
-	completely_controls_region = custom_nativity_$REGION$
-	unify_kingdom_law_trigger = yes
+	completely_controls_region = mundus_$REGION$
+	unify_small_kingdom_law_trigger = yes
+	prestige_level >= 3
 }

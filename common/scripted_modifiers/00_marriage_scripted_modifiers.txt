@@ -422,6 +422,11 @@ marriage_ai_accept_modifier = {
 			}
 			scope:recipient.liege = scope:actor.liege
 		}
+		#EK EDIT - Alliances with different religions (group) are only warranted if they belong to the same culture_group
+		OR = {
+			scope:recipient.religion = scope:actor.religion
+			scope:recipient.culture_group = scope:actor.culture_group
+		}
 		
 		desc = DESIRES_ALLIANCE
 	}
@@ -1489,6 +1494,41 @@ marriage_ai_accept_modifier = {
 		desc = MARRIAGE_SPOUSE_COUNCILLOR_BOOST_CHILD
 	}
 	
+	#################
+	# EK - RACES    #
+	#################
+	
+	modifier = {
+		add = -80
+		OR = {
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_khajiit }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_khajiit } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_khajiit } }
+				scope:secondary_recipient = { has_character_flag = race_khajiit }
+			}
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_argonian }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_argonian } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_argonian } }
+				scope:secondary_recipient = { has_character_flag = race_argonian }
+			}
+			AND = {
+				scope:secondary_actor = { has_character_flag = race_goblinken }
+				scope:secondary_recipient = { NOT = { has_character_flag = race_goblinken } }
+			}
+			AND = {
+				scope:secondary_actor = { NOT = { has_character_flag = race_goblinken } }
+				scope:secondary_recipient = { has_character_flag = race_goblinken }
+			}
+		}
+		desc = MARRIAGE_NO_OFFSPRING_REASON
+	}
+	
 	###########################
 	# EK - PRESERVING DYNASTY #
 	###########################
@@ -1508,111 +1548,163 @@ marriage_ai_accept_modifier = {
 	# EK - CULTURES #
 	#################
 	
-	#Generic different cultural group penalty - small nudge to keep people from marrying off cultural boundaries
+	#Generic different culture and cultural group penalty - small nudge to keep people from marrying off cultural boundaries
 	modifier = {
-		add = -20
+		add = -25
 		scope:secondary_actor = {
 			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+			NOR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
 		}
 		desc = MARRIAGE_DIFFERENT_CULTURE_GROUP_REASON
 	}
-	
-	#Insular cultures - cultures that are more self-centered, isolated or otherwise harder to grasp for outsiders
 	modifier = {
-		add = -40
+		add = -10
 		scope:secondary_actor = {
-			NOT = { has_same_culture_group_as = scope:secondary_recipient }
-		}
-		OR = {
-			scope:secondary_actor = {
-				OR = {
-					has_culture = culture:alinor 
-					has_culture = culture:yokudan
-					has_culture = culture:alikr
-					has_culture = culture:horsemen
-					has_culture = culture:crown
-					has_culture = culture:chimer
-					has_culture = culture:reachfolk
-					has_culture = culture:kothringi
-					has_culture = culture:skaal
-					has_culture_group = culture_group:dunmeris_group
-					has_culture_group = culture_group:orsimer_group
-				}
-			}
-			scope:secondary_recipient = {
-				OR = {
-					has_culture = culture:alinor 
-					has_culture = culture:yokudan
-					has_culture = culture:alikr
-					has_culture = culture:horsemen
-					has_culture = culture:crown
-					has_culture = culture:chimer
-					has_culture = culture:reachfolk
-					has_culture = culture:kothringi
-					has_culture = culture:skaal
-					has_culture_group = culture_group:dunmeris_group
-					has_culture_group = culture_group:orsimer_group
-				}
+			has_same_culture_group_as = scope:secondary_recipient
+			NOT = { has_same_culture_as = scope:secondary_recipient }
+			NOR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
 			}
 		}
-		desc = MARRIAGE_INSULAR_CULTURE_REASON
+		desc = MARRIAGE_DIFFERENT_CULTURE_REASON
 	}
 	
-	#Men x Mer Traditions
+	# Effect of the Lingua Tamrielis innovation
+	modifier = {
+		add = -20
+		scope:secondary_actor = {
+			NOT = { has_same_culture_group_as = scope:secondary_recipient }
+			OR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
+		}
+		desc = MARRIAGE_DIFFERENT_CULTURE_GROUP_REASON
+	}
+	modifier = {
+		add = -8
+		scope:secondary_actor = {
+			has_same_culture_group_as = scope:secondary_recipient
+			NOT = { has_same_culture_as = scope:secondary_recipient }
+			OR = {
+				scope:secondary_actor.culture = { has_innovation = innovation_lingua_tamrielis }
+				scope:secondary_recipient.culture = { has_innovation = innovation_lingua_tamrielis }
+			}
+		}
+		desc = MARRIAGE_DIFFERENT_CULTURE_REASON
+	}
+	
+	# #Insular cultures - cultures that are more self-centered, isolated or otherwise harder to grasp for outsiders
+	# modifier = {
+		# add = -40
+		# scope:secondary_actor = {
+			# NOR = { 
+				# has_same_culture_group_as = scope:secondary_recipient
+				# religion = scope:secondary_recipient.religion
+			# }
+		# }
+		# OR = {
+			# scope:secondary_actor = {
+				# OR = {
+					# has_culture = culture:alinor 
+					# has_culture = culture:yokudan
+					# has_culture = culture:alikr
+					# has_culture = culture:horsemen
+					# has_culture = culture:crown
+					# has_culture = culture:chimer
+					# has_culture = culture:reachfolk
+					# has_culture = culture:kothringi
+					# has_culture = culture:skaal
+					# has_culture_group = culture_group:dunmeris_group
+					# has_culture_group = culture_group:orsimer_group
+				# }
+			# }
+			# scope:secondary_recipient = {
+				# OR = {
+					# has_culture = culture:alinor 
+					# has_culture = culture:yokudan
+					# has_culture = culture:alikr
+					# has_culture = culture:horsemen
+					# has_culture = culture:crown
+					# has_culture = culture:chimer
+					# has_culture = culture:reachfolk
+					# has_culture = culture:kothringi
+					# has_culture = culture:skaal
+					# has_culture_group = culture_group:dunmeris_group
+					# has_culture_group = culture_group:orsimer_group
+				# }
+			# }
+		# }
+		# desc = MARRIAGE_INSULAR_CULTURE_REASON
+	# }
+	
+	#Different Lifespans
 	modifier = {
 		add = -20
 		OR = {
 			AND = {
 				scope:secondary_actor = {
-					OR = {
-						has_culture_group = culture_group:nordic_group
-						has_culture_group = culture_group:nedic_group
-						has_culture_group = culture_group:cyrodiilic_group
-						has_culture_group = culture_group:breton_group
-						has_culture_group = culture_group:yokudan_group
-					}
+					NOT = { has_trait = lifespan }
 				}
 				scope:secondary_recipient = {
-					OR = {
-						has_culture_group = culture_group:aldmeris_group
-						has_culture_group = culture_group:bosmeris_group
-						has_culture_group = culture_group:orsimer_group
-						has_culture_group = culture_group:chimeris_group
-						has_culture_group = culture_group:dunmeris_group
-					}
+					has_trait = lifespan
+					NOT = { has_trait = lifespan_1 }
 				}
 			}
 			AND = {
 				scope:secondary_actor = {
-					OR = {
-						has_culture_group = culture_group:aldmeris_group
-						has_culture_group = culture_group:bosmeris_group
-						has_culture_group = culture_group:orsimer_group
-						has_culture_group = culture_group:chimeris_group
-						has_culture_group = culture_group:dunmeris_group
-					}
+					has_trait = lifespan_1
 				}
 				scope:secondary_recipient = {
-					OR = {
-						has_culture_group = culture_group:nordic_group
-						has_culture_group = culture_group:nedic_group
-						has_culture_group = culture_group:cyrodiilic_group
-						has_culture_group = culture_group:breton_group
-						has_culture_group = culture_group:yokudan_group
-					}
+					has_trait = lifespan
+					NOT = { has_trait = lifespan_1 has_trait = lifespan_2 }
+				}
+			}
+			AND = {
+				scope:secondary_actor = {
+					has_trait = lifespan_2
+				}
+				scope:secondary_recipient = {
+					has_trait = lifespan
+					NOT = { has_trait = lifespan_1 has_trait = lifespan_2 has_trait = lifespan_3 }
+				}
+			}
+			AND = {
+				scope:secondary_actor = {
+					has_trait = lifespan_3
+				}
+				scope:secondary_recipient = {
+					has_trait = lifespan
+					NOT = { has_trait = lifespan_1 has_trait = lifespan_2 has_trait = lifespan_3 has_trait = lifespan_4 }
 				}
 			}
 		}
-		desc = MARRIAGE_MAN_MER_CULTURE_GROUP_REASON
+		desc = MARRIAGE_LIFESPAN_REASON
 	}
 	
-	##############
-	# EK - RACES #
-	##############
-	
-	# modifier = {
-
-	# }
+	#Crown x Forebear divide
+	modifier = {
+		add = -20
+		scope:secondary_actor = {
+			OR = { 
+				culture = culture:forebear
+				culture = culture:crown
+			}
+			NOT = { has_same_culture_as = scope:secondary_recipient }
+		}
+		scope:secondary_recipient = {
+			OR = { 
+				culture = culture:forebear
+				culture = culture:crown
+			}
+			NOT = { has_same_culture_as = scope:secondary_actor }
+		}
+		desc = MARRIAGE_CROWN_FOREBEAR_REASON
+	}
 }
 
 divorce_character_ai_accept_modifier = {

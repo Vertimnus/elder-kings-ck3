@@ -1,0 +1,327 @@
+﻿# Accepted categories are: governments, cultures, culture_groups, faiths, religions
+# A Flavorization will apply if ALL specified categories have ANY of their entries
+# represented in the character/title
+# So for example:
+# governments = { feudal_government }
+# culture_groups = { mongolic_group central_germanic_group }
+# religions = { christianity_religion }
+# cultures = { norse }
+# faiths = { catholicism }
+# For this to apply a character MUST BE feudal, AND must also be EITHER altaic OR germanic
+# priority is used to determine priority, if they are the same then the LAST will be selected,
+# and honorifics will be prefered over landed titles. Default priority is 1
+# If a flavorization does not have a tier it can apply to all tiers of characters, too many non-tiered
+# flavorizations is bad for performance though, YOU HAVE BEEN WARNED!
+# 'top_liege = no' means that its the holder of the title causing the honorific that is tested for
+# the various categories, so for a prince it is the king that is tested, for a queen mother it is her son
+# if this is not specified ( or 'top_liege = yes' the default ) then it is the top liege of that character
+# that is tested, this means that most title flavor comes from the top liege of the title not the holder
+
+#sultan = { #Example
+#	gender = male
+#	special = holder
+#	tier = kingdom
+	#	governments = { feudal_government clan_government }
+#	religions = { islam_religion }
+#}
+
+#############################################
+
+# Special Titles
+
+#ecumenical_patriarch = {
+#	type = character
+#	gender = male
+#	special = holder
+#	tier = kingdom
+#	priority = 301
+#	titles = { k_orthodox }
+#	top_liege = no
+#}
+
+
+ #############################################
+ # Default titles by Government. This list should always be below any custom localization that is tied to specific cultures/religion.
+
+#Default Pirate tiers
+baron_pirate_male = { #Captain
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 5
+	governments = { pirate_government }
+	top_liege = no
+}
+baron_pirate_female = { #Captain
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 5
+	governments = { pirate_government }
+	top_liege = no
+}
+barony_pirate = {
+	type = title
+	tier = barony
+	priority = 5
+	governments = { pirate_government }
+	top_liege = no
+}
+count_pirate_independent_male = { #Admiral
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 17
+	governments = { pirate_government }
+	only_independent = yes
+	top_liege = no
+}
+count_pirate_independent_female = { #Admiral
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 17
+	governments = { pirate_government }
+	only_independent = yes
+	top_liege = no
+}
+county_pirate_independent = {
+	type = title
+	tier = county
+	priority = 17
+	governments = { pirate_government }
+	only_independent = yes
+}
+count_pirate_male = { #Magistrate
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 16
+	governments = { pirate_government }
+	top_liege = no
+}
+count_pirate_female = { #Magistrate
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 16
+	governments = { pirate_government }
+	top_liege = no
+}
+county_pirate = {
+	type = title
+	tier = county
+	priority = 16
+	governments = { pirate_government }
+	top_liege = no
+}
+duke_pirate_male = { #Governor
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 26
+	governments = { pirate_government }
+	top_liege = no
+}
+duke_pirate_female = { #Governor
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 26
+	governments = { pirate_government }
+	top_liege = no
+}
+duke_pirate_independent_male = { #Grand Admiral
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 27
+	governments = { pirate_government }
+	only_independent = yes
+	top_liege = no
+}
+duke_pirate_independent_female = { #Grand Admiral
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 27
+	governments = { pirate_government }
+	only_independent = yes
+	top_liege = no
+}
+duchy_pirate = {
+	type = title
+	tier = duchy
+	priority = 26
+	governments = { pirate_government }
+	top_liege = no
+}
+duchy_pirate_independent = {
+	type = title
+	tier = duchy
+	priority = 27
+	governments = { pirate_government }
+	only_independent = yes
+}
+king_pirate_male = { #Pirate-King
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 46
+	governments = { pirate_government }
+	top_liege = no
+}
+king_pirate_female = { #Pirate-Queen
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 46
+	governments = { pirate_government }
+	top_liege = no
+}
+kingdom_pirate = {
+	type = title
+	tier = kingdom
+	priority = 46
+	governments = { pirate_government }
+	top_liege = no
+}
+
+#Default Academy tiers
+baron_academy_male = { #Teacher
+	type = character
+	gender = male
+	special = holder
+	tier = barony
+	priority = 5
+	governments = { academy_government }
+	top_liege = no
+}
+baron_academy_female = { #Teacher
+	type = character
+	gender = female
+	special = holder
+	tier = barony
+	priority = 5
+	governments = { academy_government }
+	top_liege = no
+}
+barony_academy = { #School
+	type = title
+	tier = barony
+	priority = 5
+	governments = { academy_government }
+	top_liege = no
+}
+count_academy_male = { #Master
+	type = character
+	gender = male
+	special = holder
+	tier = county
+	priority = 16
+	governments = { academy_government }
+	top_liege = no
+}
+count_academy_female = { #Mistress
+	type = character
+	gender = female
+	special = holder
+	tier = county
+	priority = 16
+	governments = { academy_government }
+	top_liege = no
+}
+county_academy = { #Academy
+	type = title
+	tier = county
+	priority = 16
+	governments = { academy_government }
+	top_liege = no
+}
+duke_academy_male = { #Archmaster
+	type = character
+	gender = male
+	special = holder
+	tier = duchy
+	priority = 26
+	governments = { academy_government }
+	top_liege = no
+}
+duke_academy_female = { #Archmistress
+	type = character
+	gender = female
+	special = holder
+	tier = duchy
+	priority = 26
+	governments = { academy_government }
+	top_liege = no
+}
+duchy_academy = { #Grand Academy
+	type = title
+	tier = duchy
+	priority = 26
+	governments = { academy_government }
+	top_liege = no
+}
+kingdom_academy_male = { #Proctor
+	type = character
+	gender = male
+	special = holder
+	tier = kingdom
+	priority = 46
+	governments = { academy_government }
+	top_liege = no
+}
+kingdom_academy_female = { #Proctor
+	type = character
+	gender = female
+	special = holder
+	tier = kingdom
+	priority = 46
+	governments = { academy_government }
+	top_liege = no
+}
+kingdom_academy = { #State Academy
+	type = title
+	tier = kingdom
+	priority = 46
+	governments = { academy_government }
+	top_liege = no
+}
+emperor_academy_male = { #High Proctor
+	type = character
+	gender = male
+	special = holder
+	tier = empire
+	priority = 101
+	governments = { academy_government }
+	top_liege = no
+}
+emperor_academy_female = { #High Proctor
+	type = character
+	gender = female
+	special = holder
+	tier = empire
+	priority = 101
+	governments = { academy_government }
+	top_liege = no
+}
+empire_academy = { #Academic Realm
+	type = title
+	tier = empire
+	priority = 101
+	governments = { academy_government }
+	top_liege = no
+}

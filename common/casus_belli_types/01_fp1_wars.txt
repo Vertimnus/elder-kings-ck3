@@ -1,5 +1,4 @@
-﻿### EK EDIT: Disabled the CB for now
-### EK TODO: Reuse it for someone
+﻿### EK EDIT: Removed references to vanilla innovations, religions, and MaA
 
 # Custom CBs for FP1
 
@@ -13,13 +12,14 @@ fp1_varangian_adventurer_conquest = {
 	mutually_exclusive_titles = { always = yes }
 
 	allowed_for_character = {
-		always = no
-		### EK TODO: Change that
-		# culture = {
+		culture = {
+			### EK EDIT: Removed reference to vanilla innovation
+			### EK NOTE: Give it to someone else? Nomadic cultures maybe?
+			always = no
 			# has_innovation = innovation_varangian_adventurers
-			# # Can only be fired in the Tribal Era.
-			# NOT = { has_cultural_era_or_later = culture_era_early_medieval }
-		# }
+			# Can only be fired in the Tribal Era.
+			NOT = { has_cultural_era_or_later = culture_era_early_medieval }
+		}
 		OR = {
 			# Players can always use this.
 			is_ai = no
@@ -40,7 +40,7 @@ fp1_varangian_adventurer_conquest = {
 					# And if you *wanted* a viking apocalypse...
 					has_game_rule = fp1_scandi_adventurers_apocalyptic
 				}
-				### EK TODO: Change that
+				### EK EDIT: Removed references to vanilla regions
 				# Then, they need to hold all their territories within Scandinavia.
 				# any_realm_county = {
 					# count = all
@@ -63,11 +63,10 @@ fp1_varangian_adventurer_conquest = {
 	}
 
 	allowed_against_character = {
-		### EK TODO: Change that
 		# Cannot adventure against other adventuring cultures.
-		# NOT = {
-			# culture = { has_innovation = innovation_varangian_adventurers }
-		# }
+		NOT = {
+			culture = { has_innovation = innovation_varangian_adventurers }
+		}
 		# Players vs. AI filtering.
 		OR = {
 			# Can always target the AI.
@@ -184,6 +183,7 @@ fp1_varangian_adventurer_conquest = {
 				}
 			}
 
+			### EK EDIT: Removed vanilla innovation
 			#Innovation Piety Discounts
 			# if = {
 				# limit = {
@@ -327,9 +327,8 @@ fp1_varangian_adventurer_conquest = {
 				send_interface_toast = {
 					title = fp1_varangian_adventurer_conquest.troops_raised.tt
 					left_icon = scope:attacker
-					
-					### EK EDIT: As it uses vanilla DLC-locked men_at_arms, this is disabled for now
 					# Due to spawn_army parameter limitations and balancing concerns, we have to do this somewhat grossly.
+					### EK EDIT: Removed the vanilla MaA. Give some cultural MaA instead?
 					## Base Army
 					# if = {
 						# limit = { fp1_va_eligible_for_scandinavian_troops_trigger = yes }
@@ -799,7 +798,7 @@ fp1_varangian_adventurer_conquest = {
 								name = NORDIC_STATE_TITLE_NAME
 							}
 						}
-						### EK EDIT: Vanilla regions
+						### EK EDIT: Removed references to vanilla regions
 						# 25 = {
 							# trigger = {
 								# any_in_list = {
@@ -830,7 +829,7 @@ fp1_varangian_adventurer_conquest = {
 						add_claim_on_loss = no
 					}
 					scope:new_title = {
-						set_delete_on_destroy = yes
+						# TIT-27442
 						set_no_automatic_claims = yes
 						set_can_be_named_after_dynasty = no
 						change_title_holder = {
@@ -1131,6 +1130,7 @@ fp1_varangian_adventurer_conquest = {
 				change_government = feudal_government
 			}
 			## Seizing control so things *vaguely* work.
+			custom_tooltip = fp1_varangian_adventurer_conquest.summaries.control_rebate
 			scope:attacker = { trigger_event = fp1_varangian_adventures.0001 }
 			## And giving them a gold bounty to keep them afloat.
 			scope:attacker = { add_gold = varangian_adventures_bounty_amount_value }
@@ -1202,7 +1202,7 @@ fp1_varangian_adventurer_conquest = {
 			# Aaaaaand track the A Dangerous Business achievement.
 			if = {
 				limit = { has_trait = dwarf }
-				add_character_flag = a_dangerous_business_achievement_flag
+				add_achievement_flag_effect = { FLAG = a_dangerous_business_achievement_flag }
 			}
 		}
 
@@ -1254,6 +1254,10 @@ fp1_varangian_adventurer_conquest = {
 				value = minor_prestige_value
 				multiply = -1.0
 			}
+			stress_impact = {
+				ambitious = medium_stress_impact_gain
+				arrogant = medium_stress_impact_gain
+			}
 		}
 
 		# Prestige for the attacker's war allies
@@ -1269,6 +1273,12 @@ fp1_varangian_adventurer_conquest = {
 			prestige = medium_prestige_value
 			opinion = {
 				modifier = contributed_in_war
+			}
+		}
+
+		scope:defender = {
+			stress_impact = {
+				arrogant = medium_stress_impact_gain
 			}
 		}
 
@@ -1356,6 +1366,4 @@ fp1_varangian_adventurer_conquest = {
 	use_de_jure_wargoal_only = yes
 
 	attacker_wargoal_percentage = 0.8
-
-	min_ai_score = 100
 }

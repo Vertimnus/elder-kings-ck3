@@ -34,112 +34,112 @@ patron_faith_change_effect = {
 patron_ardor_initialize = {
     if = {
         limit = {
-            patron_azura_valid = yes
+            faith = { patron_azura_valid = yes }
             NOT = { has_variable = ardor_azura }
         }
         set_variable = { name = ardor_azura value = 0 }
     }
     if = {
         limit = {
-            patron_boethiah_valid = yes
+            faith = { patron_boethiah_valid = yes }
             NOT = { has_variable = ardor_boethiah }
         }
         set_variable = { name = ardor_boethiah value = 0 }
     }
     if = {
         limit = {
-            patron_clavicus_valid = yes
+            faith = { patron_clavicus_valid = yes }
             NOT = { has_variable = ardor_clavicus }
         }
         set_variable = { name = ardor_clavicus value = 0 }
     }
     if = {
         limit = {
-            patron_hermaeus_valid = yes
+            faith = { patron_hermaeus_valid = yes }
             NOT = { has_variable = ardor_hermaeus }
         }
         set_variable = { name = ardor_hermaeus value = 0 }
     }
     if = {
         limit = {
-            patron_hircine_valid = yes
+            faith = { patron_hircine_valid = yes }
             NOT = { has_variable = ardor_hircine }
         }
         set_variable = { name = ardor_hircine value = 0 }
     }
     if = {
         limit = {
-            patron_malacath_valid = yes
+            faith = { patron_malacath_valid = yes }
             NOT = { has_variable = ardor_malacath }
         }
         set_variable = { name = ardor_malacath value = 0 }
     }
     if = {
         limit = {
-            patron_mehrunes_valid = yes
+            faith = { patron_mehrunes_valid = yes }
             NOT = { has_variable = ardor_mehrunes }
         }
         set_variable = { name = ardor_mehrunes value = 0 }
     }
     if = {
         limit = {
-            patron_mephala_valid = yes
+            faith = { patron_mephala_valid = yes }
             NOT = { has_variable = ardor_mephala }
         }
         set_variable = { name = ardor_mephala value = 0 }
     }
     if = {
         limit = {
-            patron_meridia_valid = yes
+            faith = { patron_meridia_valid = yes }
             NOT = { has_variable = ardor_meridia }
         }
         set_variable = { name = ardor_meridia value = 0 }
     }
     if = {
         limit = {
-            patron_molag_valid = yes
+            faith = { patron_molag_valid = yes }
             NOT = { has_variable = ardor_molag }
         }
         set_variable = { name = ardor_molag value = 0 }
     }
     if = {
         limit = {
-            patron_namira_valid = yes
+            faith = { patron_namira_valid = yes }
             NOT = { has_variable = ardor_namira }
         }
         set_variable = { name = ardor_namira value = 0 }
     }
     if = {
         limit = {
-            patron_nocturnal_valid = yes
+            faith = { patron_nocturnal_valid = yes }
             NOT = { has_variable = ardor_nocturnal }
         }
         set_variable = { name = ardor_nocturnal value = 0 }
     }
     if = {
         limit = {
-            patron_peryite_valid = yes
+            faith = { patron_peryite_valid = yes }
             NOT = { has_variable = ardor_peryite }
         }
         set_variable = { name = ardor_peryite value = 0 }
     }
     if = {
         limit = {
-            patron_sanguine_valid = yes
+            faith = { patron_sanguine_valid = yes }
             NOT = { has_variable = ardor_sanguine }
         }
         set_variable = { name = ardor_sanguine value = 0 }
     }
     if = {
         limit = {
-            patron_sheogorath_valid = yes
+            faith = { patron_sheogorath_valid = yes }
             NOT = { has_variable = ardor_sheogorath }
         }
         set_variable = { name = ardor_sheogorath value = 0 }
     }
     if = {
         limit = {
-            patron_vaermina_valid = yes
+            faith = { patron_vaermina_valid = yes }
             NOT = { has_variable = ardor_vaermina }
         }
         set_variable = { name = ardor_vaermina value = 0 }
@@ -280,12 +280,13 @@ patron_trait_master_effect = {
     $EFFECT$ = { TRAIT = _eg_nyfa }
     $EFFECT$ = { TRAIT = _eg_ilni }
     $EFFECT$ = { TRAIT = _eg_tam }
-	# Cyrodiilic Heroes
+    # Cyrodiilic Heroes
     $EFFECT$ = { TRAIT = _ch_alessia }
     $EFFECT$ = { TRAIT = _ch_pelinal }
     $EFFECT$ = { TRAIT = _ch_morihaus }
     $EFFECT$ = { TRAIT = _ch_reman }
     $EFFECT$ = { TRAIT = _ch_bendu }
+    $EFFECT$ = { TRAIT = _ch_attrebus }
 }
 
 patron_get_list = {
@@ -295,20 +296,23 @@ patron_get_list = {
 patron_add_to_list = { #variant of this for local list for ai to select
     if = {
         limit = { patron$TRAIT$_valid = yes }
-        scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ } }
+        #scope:player_s = { add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ } }
+        add_to_variable_list = { name = faith_patrons target = flag:$TRAIT$ }
     }
 }
 
-# patron_set_trait = { #need 1.4 commands to pass flag/scope:trait from gui
-#     patron_trait_master_effect = { EFFECT = patron_add_trait }
-# }
+patron_set_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+    patron_trait_master_effect = { EFFECT = patron_add_trait }
+}
 
-# patron_add_trait = { #need 1.4 commands to pass flag/scope:trait from gui
-#     if = {
-#         limit = { flag/scope:trait = $TRAIT$ }
-#         add_trait = p$TRAIT$
-#     }
-# }
+patron_add_trait = { #need 1.4 commands to pass flag/scope:trait from gui
+    if = {
+        limit = { scope:trait = flag:$TRAIT$ }
+        add_trait = p$TRAIT$
+        set_variable = { name = recent_patron_selected value = yes years = 5 }
+    }
+    else = { remove_trait = p$TRAIT$ }
+}
 
 #need remove trait before grant. also need to replace the faith change one, also the modifier blocking recent
 
@@ -316,7 +320,7 @@ patron_add_to_list = { #variant of this for local list for ai to select
 patron_faith_change_clear_traits = {
     patron_trait_master_effect = { EFFECT = patron_faith_change_clear_trait }
 
-    add_character_flag = { flag = recent_patron_selected years = 5 }
+    set_variable = { name = recent_patron_selected value = yes years = 5 }
 }
 
 patron_faith_change_clear_trait = {
@@ -324,4 +328,26 @@ patron_faith_change_clear_trait = {
         limit = { faith = { patron$TRAIT$_valid = no } }
         remove_trait = p$TRAIT$
     }
+}
+
+culture_group_on_start_effect = {
+    culture_group_var_effect = { CG = akaviri_group }
+    culture_group_var_effect = { CG = aldmeris_group }
+    culture_group_var_effect = { CG = ayleid_group }
+    culture_group_var_effect = { CG = nedic_group }
+    culture_group_var_effect = { CG = breton_group }
+    culture_group_var_effect = { CG = cyrodiilic_group }
+    culture_group_var_effect = { CG = nordic_group }
+    culture_group_var_effect = { CG = chimeris_group }
+    culture_group_var_effect = { CG = dunmeris_group }
+    culture_group_var_effect = { CG = orsimer_group }
+    culture_group_var_effect = { CG = yokudan_group }
+    culture_group_var_effect = { CG = khajiiti_group }
+    culture_group_var_effect = { CG = goblinken_group }
+    culture_group_var_effect = { CG = bosmeris_group }
+    culture_group_var_effect = { CG = argonian_group }
+}
+
+culture_group_var_effect = {
+    set_global_variable = { name = $CG$ value = culture_group:$CG$ }
 }

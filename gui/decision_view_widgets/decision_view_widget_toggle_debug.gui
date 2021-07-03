@@ -1,0 +1,29 @@
+flowcontainer = {
+	name = "decision_view_widget_toggle_debug"
+	direction = vertical
+	minimumsize = { 514 -1 }
+	maximumsize = { 514 -1 }
+	ignoreinvisible = yes
+	margin_top = 15
+
+	flowcontainer = {
+		direction = horizontal
+		ignoreinvisible = yes
+		parentanchor = hcenter
+
+		button_standard = {
+			name = "toggle_debug"
+			minimumsize = { 200 0 }
+
+			onclick = "[ExecuteConsoleCommand('debug_mode')]"
+
+			text_single = {
+				text = "[Select_CString( InDebugMode, 'disable debug', 'enable debug' )]"
+				parentanchor = vcenter
+				align = nobaseline
+				position = { 10 0 }
+				fontsize_min = 14
+			}
+		}
+	}
+}

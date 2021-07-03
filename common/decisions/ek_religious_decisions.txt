@@ -12,83 +12,7 @@ change_holy_site_type_decision = {
 		any_sub_realm_barony = {
 			is_holy_site_of = root.faith
 			title_province = {
-				OR = {
-					AND = {
-						root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
-						OR = {
-							# exists = var:grand_cathedral
-							# has_building = grand_cathedral_01
-							exists = var:daedric_shrine
-							has_building = daedric_shrine_01
-							exists = var:great_wyrd_tree
-							has_building = great_wyrd_tree_01
-							exists = var:dragon_temple
-							has_building = dragon_temple_01
-							exists = var:holy_site_other_grand_temple
-							has_building = holy_site_other_grand_temple_01
-						}
-					}
-					AND = {
-						root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
-						OR = {
-							exists = var:grand_cathedral
-							has_building = grand_cathedral_01
-							# exists = var:daedric_shrine
-							# has_building = daedric_shrine_01
-							exists = var:great_wyrd_tree
-							has_building = great_wyrd_tree_01
-							exists = var:dragon_temple
-							has_building = dragon_temple_01
-							exists = var:holy_site_other_grand_temple
-							has_building = holy_site_other_grand_temple_01
-						}
-					}
-					AND = {
-						root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
-						OR = {
-							exists = var:grand_cathedral
-							has_building = grand_cathedral_01
-							exists = var:daedric_shrine
-							has_building = daedric_shrine_01
-							# exists = var:great_wyrd_tree
-							# has_building = great_wyrd_tree_01
-							exists = var:dragon_temple
-							has_building = dragon_temple_01
-							exists = var:holy_site_other_grand_temple
-							has_building = holy_site_other_grand_temple_01
-						}
-					}
-					AND = {
-						root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
-						OR = {
-							exists = var:grand_cathedral
-							has_building = grand_cathedral_01
-							exists = var:daedric_shrine
-							has_building = daedric_shrine_01
-							exists = var:great_wyrd_tree
-							has_building = great_wyrd_tree_01
-							# exists = var:dragon_temple
-							# has_building = dragon_temple_01
-							exists = var:holy_site_other_grand_temple
-							has_building = holy_site_other_grand_temple_01
-						}
-					}
-					AND = {
-						root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
-						OR = {
-							exists = var:grand_cathedral
-							has_building = grand_cathedral_01
-							exists = var:daedric_shrine
-							has_building = daedric_shrine_01
-							exists = var:great_wyrd_tree
-							has_building = great_wyrd_tree_01
-							exists = var:dragon_temple
-							has_building = dragon_temple_01
-							# exists = var:holy_site_other_grand_temple
-							# has_building = holy_site_other_grand_temple_01
-						}
-					}
-				}
+				province_has_wrong_holy_building_slot = { CHAR = root PROVINCE = this }
 			}
 		}
 	}
@@ -104,103 +28,27 @@ change_holy_site_type_decision = {
 			limit = {
 				is_holy_site_of = root.faith
 				title_province = {
-					OR = {
-						AND = {
-							root.faith = { has_doctrine_parameter = faith_uses_cathedrals }
-							OR = {
-								# exists = var:grand_cathedral
-								# has_building = grand_cathedral_01
-								exists = var:daedric_shrine
-								has_building = daedric_shrine_01
-								exists = var:great_wyrd_tree
-								has_building = great_wyrd_tree_01
-								exists = var:dragon_temple
-								has_building = dragon_temple_01
-								exists = var:holy_site_other_grand_temple
-								has_building = holy_site_other_grand_temple_01
-							}
-						}
-						AND = {
-							root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines }
-							OR = {
-								exists = var:grand_cathedral
-								has_building = grand_cathedral_01
-								# exists = var:daedric_shrine
-								# has_building = daedric_shrine_01
-								exists = var:great_wyrd_tree
-								has_building = great_wyrd_tree_01
-								exists = var:dragon_temple
-								has_building = dragon_temple_01
-								exists = var:holy_site_other_grand_temple
-								has_building = holy_site_other_grand_temple_01
-							}
-						}
-						AND = {
-							root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees }
-							OR = {
-								exists = var:grand_cathedral
-								has_building = grand_cathedral_01
-								exists = var:daedric_shrine
-								has_building = daedric_shrine_01
-								# exists = var:great_wyrd_tree
-								# has_building = great_wyrd_tree_01
-								exists = var:dragon_temple
-								has_building = dragon_temple_01
-								exists = var:holy_site_other_grand_temple
-								has_building = holy_site_other_grand_temple_01
-							}
-						}
-						AND = {
-							root.faith = { has_doctrine_parameter = faith_uses_dragon_temples }
-							OR = {
-								exists = var:grand_cathedral
-								has_building = grand_cathedral_01
-								exists = var:daedric_shrine
-								has_building = daedric_shrine_01
-								exists = var:great_wyrd_tree
-								has_building = great_wyrd_tree_01
-								# exists = var:dragon_temple
-								# has_building = dragon_temple_01
-								exists = var:holy_site_other_grand_temple
-								has_building = holy_site_other_grand_temple_01
-							}
-						}
-						AND = {
-							root.faith = { has_doctrine_parameter = faith_uses_grand_temples }
-							OR = {
-								exists = var:grand_cathedral
-								has_building = grand_cathedral_01
-								exists = var:daedric_shrine
-								has_building = daedric_shrine_01
-								exists = var:great_wyrd_tree
-								has_building = great_wyrd_tree_01
-								exists = var:dragon_temple
-								has_building = dragon_temple_01
-								# exists = var:holy_site_other_grand_temple
-								# has_building = holy_site_other_grand_temple_01
-							}
-						}
-					}
+					province_has_wrong_holy_building_slot = { CHAR = root PROVINCE = this }
 				}
 			}
 			if = {
-				limit = { root.faith = { has_doctrine_parameter = faith_uses_cathedrals } }
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_grand_cathedral } }
 				title_province = { add_special_building = grand_cathedral_01 }
 			}
 			else_if = {
-				limit = { root.faith = { has_doctrine_parameter = faith_uses_daedric_shrines } }
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_daedric_shrine } }
 				title_province = { add_special_building = daedric_shrine_01 }
 			}
 			else_if = {
-				limit = { root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_trees } }
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_great_wyrd_tree } }
 				title_province = { add_special_building = great_wyrd_tree_01 }
 			}
 			else_if = {
-				limit = { root.faith = { has_doctrine_parameter = faith_uses_dragon_temples } }
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_dragon_temple } }
 				title_province = { add_special_building = dragon_temple_01 }
 			}
 			else_if = {
-				limit = { root.faith = { has_doctrine_parameter = faith_uses_grand_temples } }
+				limit = { root.faith = { has_doctrine_parameter = faith_uses_holy_site_other_grand_temple } }
 				title_province = { add_special_building = holy_site_other_grand_temple_01 }
 			}
 		}
@@ -323,8 +171,9 @@ rite_of_passage_decision = {
 	major = yes
 
 	is_shown = {
-		# always = no # WIP
-		faith = { has_doctrine_parameter = rite_of_passage_decision_active }
+		# Cut for the initial release, we'll see to it once we have more time
+		always = no
+		# faith = { has_doctrine_parameter = rite_of_passage_decision_active }
 	}
 
 	is_valid = {
@@ -527,6 +376,10 @@ council_of_the_eight_assume_leadership_decision = {
 		is_imprisoned = no
 	}
 
+	cost = {
+		piety = major_piety_value
+	}
+
 	effect = {
 		title:k_council_of_the_eight = { save_scope_as = council_of_the_eight_title }
 		global_var:leader_council_eight_former_title = { save_scope_as = leader_council_eight_former_title }
@@ -548,3 +401,261 @@ council_of_the_eight_assume_leadership_decision = {
 		base = 20
 	}
 }
+
+council_of_the_eight_join_council_decision = { # A faith with the Divines pantheon can ask to join the Council
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	ai_check_interval = 120
+	
+	major = yes
+
+	desc = council_of_the_eight_join_council_decision_desc
+	selection_tooltip = council_of_the_eight_join_council_decision_tooltip
+
+	is_shown = {
+		is_ruler = yes
+		is_landed = yes
+		
+		# You can't be part of the council
+		faith = {
+			NOR = {
+				has_doctrine = special_faith_group_council_of_the_eight_leader
+				has_doctrine = special_faith_group_council_of_the_eight_member
+			}
+		}
+		
+		# You must worship the Divines
+		faith = { has_doctrine_parameter = pantheon_adds_deities_divines }
+	}
+	
+	is_valid = {
+		trigger_if = {
+			limit = { exists = faith.religious_head }
+			faith.religious_head = {
+				opinion = {
+					target = root
+					value >= 50
+				}
+			}
+		}
+		trigger_else = {
+			# You need 1 holy sites of your faith
+			custom_description = {
+				text = coe_no_hof_need_holy_site
+				any_realm_county = {
+					count >= 1
+					any_in_de_jure_hierarchy = {
+						tier = tier_barony
+						is_holy_site_of = root.faith
+					}
+				}
+			}
+		}
+		
+		piety_level >= high_piety_level
+		
+		global_var:leader_council_eight.religious_head = {
+			opinion = {
+				target = root
+				value >= 50
+			}
+		}
+		
+		highest_held_title_tier >= tier_duchy
+	}
+	
+	is_valid_showing_failures_only = {
+		is_capable_adult = yes
+		is_imprisoned = no
+	}
+
+	cost = {
+		piety = major_piety_value
+	}
+
+	effect = {
+		show_as_tooltip = {
+			faith = { add_doctrine = special_faith_group_council_of_the_eight_member }
+		}
+		
+		custom_tooltip = council_of_the_eight_join_council_decision_effect_1
+		
+		if = {
+			limit = { NOT = { faith = { has_doctrine_parameter = spiritual_head_of_faith } } }
+			custom_tooltip = council_of_the_eight_join_council_decision_effect_2
+		}
+		
+		trigger_event = ek_religious_decision.0410
+	}
+
+	ai_potential = {
+		is_landed = yes
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+### Bury an ancestor in Cath Bedraud
+bury_in_cath_bedraud_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+
+	desc = bury_in_cath_bedraud_decision_desc
+	selection_tooltip = bury_in_cath_bedraud_decision_tooltip
+
+	is_shown = {
+		faith = { controls_holy_site_with_flag = is_used_for_cath_bedraud_burial }
+		root.faith = {
+			controls_holy_site = hs_cath_bedraud
+		}
+		title:b_cath_bedraud = {
+			is_holy_site_of = root.faith
+		}
+		has_variable = ancestor_to_bury
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_at_war = no
+	}
+
+	effect = {
+		show_as_tooltip = {
+			dynasty = { add_dynasty_prestige = minor_dynasty_prestige_value }
+			if = {
+				limit = {
+					any_vassal = {
+						this.faith = {
+							controls_holy_site = hs_cath_bedraud
+						}
+						title:b_cath_bedraud = {
+							is_holy_site_of = this.faith
+						}
+					}
+				}
+				every_vassal = {
+					limit = {
+						this.faith = {
+							controls_holy_site = hs_cath_bedraud
+						}
+						title:b_cath_bedraud = {
+							is_holy_site_of = this.faith
+						}
+					}
+					custom = give_cath_bedraud_burial_vassals
+					add_opinion = {
+						modifier = pleased_opinion
+						target = root
+						opinion = 20
+					}
+				}
+			}
+		}
+		trigger_event = ek_religious_decision.0502
+	}
+
+	ai_check_interval = 36
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
+### With the Eight Divines as your main pantheon, go on a big pilgrimage in Cyrodiil and visit the Wayshrines
+# pilgrimage_of_the_eight_decision = {
+	# picture = "gfx/interface/illustrations/decisions/decision_destiny_goal.dds"
+	# ai_check_interval = 36
+
+	# desc = pilgrimage_of_the_eight_decision_desc
+	# selection_tooltip = pilgrimage_of_the_eight_decision_tooltip
+
+	# cooldown = { years = pilgrimage_cooldown_year_amount }
+
+	# is_shown = {
+		# is_landed = yes
+		# faith = { has_doctrine_parameter = pantheon_adds_deities_divines }
+	# }
+
+	# is_valid_showing_failures_only = {
+		# is_available_adult = yes
+		# is_at_war = no
+	# }
+
+	# effect = {
+		# if = {
+			# limit = {
+				# pilgrimage_of_the_eight_actual_cost = {
+					# value >= pilgrimage_very_long_extra_cost
+				# }
+			# }
+			# custom_tooltip = pilgrimage_of_the_eight_exceptionally_long_tt
+			# show_as_tooltip = {
+				# add_trait = pilgrim
+				# very_long_pilgrimage_reward_effect = yes
+			# }
+		# }
+		# else_if = {
+			# limit = {
+				# pilgrimage_of_the_eight_actual_cost = {
+					# value >= pilgrimage_long_extra_cost
+				# }
+			# }
+			# custom_tooltip = pilgrimage_of_the_eight_very_long_tt
+			# show_as_tooltip = {
+				# add_trait = pilgrim
+				# long_pilgrimage_reward_effect = yes
+			# }
+		# }
+		# else_if = {
+			# limit = {
+				# pilgrimage_of_the_eight_actual_cost = {
+					# value >= pilgrimage_medium_extra_cost
+				# }
+			# }
+			# custom_tooltip = pilgrimage_of_the_eight_long_tt
+			# show_as_tooltip = {
+				# add_trait = pilgrim
+				# medium_pilgrimage_reward_effect = yes
+			# }
+		# }
+		# else = {
+			# custom_tooltip = pilgrimage_of_the_eight_short_tt
+			# show_as_tooltip = {
+				# add_trait = pilgrim
+				# short_pilgrimage_reward_effect = yes
+			# }
+		# }
+
+		# if = {
+			# limit = { has_trait = ill }
+			# custom_tooltip = line_break
+			# custom_tooltip = pilgrimage_illness_warning
+		# }
+		# trigger_event = hajj.0001
+	# }
+
+	# cost = {
+		# gold = pilgrimage_of_the_eight_actual_cost
+	# }
+
+	# ai_potential = {
+		# is_landed = yes
+	# }
+
+	# ai_will_do = {
+		# base = 5
+		# compare_modifier = {
+			# value = age
+			# trigger = {
+				# NOT = {
+					# has_trait = cynical
+				# }
+			# }
+			# max = 70
+		# }
+	# }
+# }

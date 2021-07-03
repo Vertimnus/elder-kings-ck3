@@ -1,0 +1,701 @@
+﻿# Accepted categories are: governments, cultures, culture_groups, faiths, religions
+# A Flavorization will apply if ALL specified categories have ANY of their entries
+# represented in the character/title
+# So for example:
+# governments = { feudal_government }
+# culture_groups = { mongolic_group central_germanic_group }
+# religions = { christianity_religion }
+# cultures = { norse }
+# faiths = { catholicism }
+# For this to apply a character MUST BE feudal, AND must also be EITHER altaic OR germanic
+# priority is used to determine priority, if they are the same then the LAST will be selected,
+# and honorifics will be prefered over landed titles. Default priority is 1
+# If a flavorization does not have a tier it can apply to all tiers of characters, too many non-tiered
+# flavorizations is bad for performance though, YOU HAVE BEEN WARNED!
+# 'top_liege = no' means that its the holder of the title causing the honorific that is tested for
+# the various categories, so for a prince it is the king that is tested, for a queen mother it is her son
+# if this is not specified ( or 'top_liege = yes' the default ) then it is the top liege of that character
+# that is tested, this means that most title flavor comes from the top liege of the title not the holder
+
+#sultan = { #Example
+#	gender = male
+#	special = holder
+#	tier = kingdom
+	#	governments = { feudal_government clan_government }
+#	religions = { islam_religion }
+#}
+
+
+##############################################
+#Theocracy titles, religious (group) localization.
+
+#Default
+
+#Baron - Priest
+#Baroness - Priestess
+#Barony - Shrine
+
+#Count - High Priest
+#Countess - High Priestess
+#County - Temple
+
+#Duke - Arch-Priest
+#Duchess - Arch-Priestess
+#Duchy - Grand Temple
+
+#King - Primate
+#Queen - Primate
+#Kingdom - Primacy
+
+#Emperor - Arch-Primate
+#Empress - Arch-Primate
+#Empire - Arch-Primacy
+
+#Aldmeri Religion
+baron_theocracy_male_aldmer_religion = { #Monastic
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+baron_theocracy_female_aldmer_religion = { #Monastic
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+count_theocracy_male_aldmer_religion = { #Aldarch
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = county
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+count_theocracy_female_aldmer_religion = { #Aldarch
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = county
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+duke_theocracy_male_aldmer_religion = { #Curate
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+duke_theocracy_female_aldmer_religion = { #Curatess
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+duchy_theocracy_aldmer_religion = { #Chantry
+	type = title
+	tier = duchy
+	top_liege = no
+	priority = 30
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+king_theocracy_male_aldmer_religion = { #Arch-Curate
+	type = character
+	gender = male
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+king_theocracy_female_aldmer_religion = { #Arch-Curatess
+	type = character
+	gender = female
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+kingdom_theocracy_aldmer_religion = { #Arch-Chantry
+	type = title
+	tier = kingdom
+	top_liege = no
+	priority = 50
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+emperor_theocracy_male_aldmer_religion = { #Ascendant
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+emperor_theocracy_female_aldmer_religion = { #Ascendant
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+empire_theocracy_aldmer_religion = { #Ascendancy
+	type = title
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { aldmer_religion }
+}
+
+#Bosmeri Religion
+baron_theocracy_male_bosmeri_religion = { #Greenspeaker
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+baron_theocracy_female_bosmeri_religion = { #Greenspeaker
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+barony_theocracy_bosmeri_religion = { #Grove
+	type = title
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+count_theocracy_male_bosmeri_religion = { #Keeper
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+count_theocracy_female_bosmeri_religion = { #Keeper
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+county_theocracy_bosmeri_religion = { #Sacred Grove
+	type = title
+	tier = county
+	priority = 20
+	governments = { theocracy_government }
+	religions = { bosmeri_religion wyrd_religion }
+}
+duke_theocracy_male_bosmeri_religion = { #Diviner
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+duke_theocracy_female_bosmeri_religion = { #Diviner
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+king_theocracy_male_bosmeri_religion = { #Primate
+	type = character
+	gender = male
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+king_theocracy_female_bosmeri_religion = { #Primate
+	type = character
+	gender = female
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+emperor_theocracy_male_bosmeri_religion = { #Arch-Keeper
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+emperor_theocracy_female_bosmeri_religion = { #Arch-Keeper
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+empire_theocracy_bosmeri_religion = { #Forest
+	type = title
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { bosmeri_religion }
+}
+
+#Reach Religion
+baron_theocracy_male_reach_religion = { #Brother
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+baron_theocracy_female_reach_religion = { #Sister
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+count_theocracy_male_reach_religion = { #Shaman
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+count_theocracy_female_reach_religion = { #Shaman
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+duke_theocracy_male_reach_religion = { #Tagh Shaman
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+duke_theocracy_female_reach_religion = { #Tagh Shaman
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+king_theocracy_male_reach_religion = { #Martagh Shaman
+	type = character
+	gender = male
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+king_theocracy_female_reach_religion = { #Martagh Shaman
+	type = character
+	gender = female
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+emperor_theocracy_male_reach_religion = { #Patriarch
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+emperor_theocracy_female_reach_religion = { #Matriarch
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { reach_religion }
+}
+
+#Nedic-Nord Religion
+head_of_faith_eight_divines_male = {
+	type = character
+	gender = male
+	special = head_of_faith
+	faiths = { imperial_cult redguard_cult breton_cult nord_cult }
+	priority = 301
+	top_liege = no
+}
+
+head_of_faith_eight_divines_female = {
+	type = character
+	gender = female
+	special = head_of_faith
+	faiths = { imperial_cult redguard_cult breton_cult nord_cult }
+	priority = 301
+	top_liege = no
+}
+
+#Khajiiti Religion
+baron_theocracy_male_khajiiti_religion = { #Moon-Priest
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+baron_theocracy_female_khajiiti_religion = { #Moon-Priestess
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+count_theocracy_male_khajiiti_religion = { #Moon-Bishop
+	type = character
+	special = holder
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+count_theocracy_female_khajiiti_religion = { #Moon-Bishop
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+duke_theocracy_male_khajiiti_religion = { #Moon-Archbishop
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+duke_theocracy_female_khajiiti_religion = { #Moon-Archbishop
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+king_theocracy_male_khajiiti_religion = { #Moon-King
+	type = character
+	gender = male
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+king_theocracy_female_khajiiti_religion = { #Moon-Queen
+	type = character
+	gender = female
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+emperor_theocracy_male_khajiiti_religion = { #Moon-Emperor
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+emperor_theocracy_female_khajiiti_religion = { #Moon-Empress
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { khajiiti_religion }
+}
+
+#Wyrd Religion
+baron_theocracy_male_wyrd_religion = { #Acolyte
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+baron_theocracy_female_wyrd_religion = { #Acolyte
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = barony
+	priority = 10
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+count_theocracy_male_wyrd_religion = { #Wyr
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = male
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+count_theocracy_female_wyrd_religion = { #Wyress
+	type = character
+	special = holder
+	only_holder = yes
+	tier = county
+	gender = female
+	priority = 20
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duke_theocracy_male_wyrd_religion = { #High Wyr
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duke_theocracy_female_wyrd_religion = { #High Wyress
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = duchy
+	priority = 30
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+duchy_theocracy_wyrd_religion = { #Wyrd
+	type = title
+	tier = duchy
+	top_liege = no
+	priority = 30
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+king_theocracy_male_wyrd_religion = { #Beldam
+	type = character
+	gender = male
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+king_theocracy_female_wyrd_religion = { #Beldam
+	type = character
+	gender = female
+	special = holder
+	only_holder = yes
+	tier = kingdom
+	priority = 50
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+kingdom_theocracy_wyrd_religion = { #Coven
+	type = title
+	tier = kingdom
+	top_liege = no
+	priority = 50
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+emperor_theocracy_male_wyrd_religion = { #Supreme
+	type = character
+	special = holder
+	only_holder = yes
+	gender = male
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+emperor_theocracy_female_wyrd_religion = { #Supreme
+	type = character
+	special = holder
+	only_holder = yes
+	gender = female
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}
+empire_theocracy_wyrd_religion = { #Realm
+	type = title
+	tier = empire
+	priority = 105
+	top_liege = no
+	governments = { theocracy_government }
+	religions = { wyrd_religion }
+}

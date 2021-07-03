@@ -1,0 +1,1471 @@
+﻿#Building Academy, using the Western Castle assets as placeholders.
+@holding_illustration_western = "gfx/interface/illustrations/holding_types/castle_western.dds"
+
+academy_01 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	construction_time = slow_construction_time
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_1_cost
+	next_building = academy_02
+	
+	levy = normal_building_levy_tier_1
+	max_garrison = normal_building_max_garrison_tier_1
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_1
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_2
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+}
+
+academy_02 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_magical_studies
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_2_cost
+	next_building = academy_03
+	
+	levy = normal_building_levy_tier_2
+	max_garrison = normal_building_max_garrison_tier_2
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_2
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_4
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.1
+	}
+}
+
+academy_03 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_schools_of_magic
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_3_cost
+	next_building = academy_04
+	
+	levy = normal_building_levy_tier_3
+	max_garrison = normal_building_max_garrison_tier_3
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_3
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_6
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.15
+	}
+}
+
+academy_04 = {
+	construction_time = slow_construction_time
+	
+	asset = { 
+		type = pdxmesh
+		names = {
+			"building_western_castle_01_mesh"
+			"building_western_castle_01_b_mesh" 
+		}	
+		illustration = @holding_illustration_western
+		soundeffect = { soundeffect = "event:/SFX/Ambience/3DMapEmitters/Holdings/Castle/western_castle" soundparameter = { "Tier" = 0 } }
+	}
+	
+	can_construct_potential = {
+		building_requirement_tribal = no
+		barony_cannot_construct_holding = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_integrated_guilds
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal_holding_in_county = no
+	}
+	
+	cost_gold = main_building_tier_4_cost
+	
+	levy = normal_building_levy_tier_4
+	max_garrison = normal_building_max_garrison_tier_4
+	garrison_reinforcement_factor = building_garrison_reinforcement_factor_tier_4
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_8
+	}
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.2
+	}
+}
+
+#The different academy types that can be built in the academy holding
+#They all use the outpost icon as a placeholder
+
+#Warriors Academy
+#Raid time, garrison size, levy reinforcements, nยบ knights, knight efectiveness.
+
+academywar_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	
+	character_modifier = {
+		knight_limit = 1
+		knight_effectiveness_mult = 0.02
+	}
+	province_modifier = {
+		levy_reinforcement_rate = 0.05
+		garrison_size = 0.025
+		hostile_raid_time = 0.1
+	}
+	
+	next_building = academywar_02
+	
+	type_icon = "icon_building_outposts.dds"
+}
+
+academywar_02 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 01 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_2_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 1
+		knight_effectiveness_mult = 0.01
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.05
+				garrison_size = 0.02
+				hostile_raid_time = 0.05
+	}
+	ai_value = {
+		base = 9
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_03
+}
+
+academywar_03 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_3_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 2
+		knight_effectiveness_mult = 0.02
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.06
+				garrison_size = 0.04
+				hostile_raid_time = 0.05
+	}
+	ai_value = {
+		base = 8
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_04
+}
+
+academywar_04 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_4_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 3
+		knight_effectiveness_mult = 0.03
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.07
+				garrison_size = 0.05
+				hostile_raid_time = 0.07
+	}
+	ai_value = {
+		base = 7
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_05
+}
+
+academywar_05 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_5_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 4
+		knight_effectiveness_mult = 0.05
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.08
+				garrison_size = 0.07
+				hostile_raid_time = 0.1
+	}
+	ai_value = {
+		base = 6
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_06
+}
+
+academywar_06 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_6_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 5
+		knight_effectiveness_mult = 0.05
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.1
+				garrison_size = 0.1
+				hostile_raid_time = 0.15
+	}
+	ai_value = {
+		base = 5
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_07
+}
+
+
+academywar_07 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_7_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 5
+		knight_effectiveness_mult = 0.08
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.12
+				garrison_size = 0.12
+				hostile_raid_time = 0.2
+	}
+	ai_value = {
+		base = 4
+		ai_general_building_modifier = yes
+	}
+	next_building = academywar_08
+}
+
+academywar_08 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academywar_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_8_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		knight_limit = 6
+		knight_effectiveness_mult = 0.1
+	}
+	province_modifier = {
+				levy_reinforcement_rate = 0.15
+				garrison_size = 0.15
+				hostile_raid_time = 0.25
+	}
+	ai_value = {
+		base = 3
+		ai_general_building_modifier = yes
+	}
+	
+}
+
+#Scholars Academy
+#Prestige gain, holding tax mult, dev growth, county build cost, learning lifestyle exp.
+academyscho_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+	province_modifier = {
+		tax_mult = 0.01
+		monthly_lifestyle_xp_gain_mult = 0.05
+		cultural_head_fascination_mult = 0.05
+	}
+	county_modifier = { 
+		development_growth_factor = 0.01
+	}
+	
+	next_building = academyscho_02
+	
+	type_icon = "icon_building_outposts.dds"
+}
+
+academyscho_02 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 01 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_2_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.05
+	}
+	province_modifier = {
+		tax_mult = 0.02
+	}
+	
+	ai_value = {
+		base = 9
+		ai_general_building_modifier = yes
+	}
+	next_building = academyscho_03
+}
+
+academyscho_03 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_3_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.06
+	}
+	province_modifier = {
+		tax_mult = 0.04
+	}
+	
+	county_modifier = {
+		development_growth_factor = 0.01
+	}
+	ai_value = {
+		base = 8
+		ai_general_building_modifier = yes
+	}
+	next_building = academyscho_04
+}
+academyscho_04 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_4_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.06
+	}
+	province_modifier = {
+		tax_mult = 0.05
+	}
+	county_modifier = {
+		development_growth_factor = 0.02
+	}
+	
+	ai_value = {
+		base = 7
+		ai_general_building_modifier = yes
+	}
+	next_building = academyscho_05
+}
+
+academyscho_05 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_5_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.07
+	}
+	province_modifier = {
+		tax_mult = 0.05
+	}
+	county_modifier = {
+		development_growth_factor = 0.02
+		build_gold_cost = -0.05
+	}
+
+	ai_value = {
+		base = 6
+		ai_general_building_modifier = yes
+	}
+	next_building = academyscho_06
+}
+
+academyscho_06 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_6_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.08
+	}
+	province_modifier = {
+		tax_mult = 0.07
+	}
+	county_modifier = {
+		development_growth_factor = 0.03
+		build_gold_cost = -0.06
+	}
+	next_building = academyscho_07
+}
+
+academyscho_07 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_7_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.08
+		monthly_learning_lifestyle_xp_gain_mult = 0.05
+	}
+	province_modifier = {
+		tax_mult = 0.08
+	}
+	county_modifier = {
+		development_growth_factor = 0.04
+		build_gold_cost = -0.08
+	}
+
+	ai_value = {
+		base = 4
+		ai_general_building_modifier = yes
+	}
+	next_building = academyscho_08
+}
+
+academyscho_08 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academyscho_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_8_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = {
+		monthly_prestige_gain_mult = 0.1
+		monthly_learning_lifestyle_xp_gain_mult = 0.05
+	}
+	province_modifier = {
+		tax_mult = 0.1
+	}
+	county_modifier = {
+		development_growth_factor = 0.05
+		build_gold_cost = -0.1
+	}
+	ai_value = {
+		base = 3
+		ai_general_building_modifier = yes
+	}
+	
+}
+
+#Mages Academy
+#MAA maintenance, Siege weapon efectivness & siege weapon toughness, battlemage maa efectivness & toughness, health boost minot, prestige
+
+academymag_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		men_at_arms_maintenance = -0.05
+		siege_weapon_siege_value_mult = 0.05
+		mages_siege_value_mult = 0.05
+		mages_damage_mult = 0.02
+		mages_pursuit_mult = 0.02
+	}
+	
+	#next_building = 
+	
+	type_icon = "icon_building_outposts.dds"
+}
+
+academymag_02 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 01 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_2_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {	
+		siege_weapon_siege_value_mult = 0.06
+		siege_weapon_toughness_add = 2
+	}
+
+	ai_value = {
+		base = 9
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_03
+}
+
+
+academymag_03 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_3_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.05
+		siege_weapon_siege_value_mult = 0.05
+		siege_weapon_toughness_add = 1
+	}
+
+	ai_value = {
+		base = 8
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_04
+}
+
+academymag_04 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_4_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.07
+		siege_weapon_siege_value_mult = 0.06
+		siege_weapon_toughness_add = 2
+		#battlemage_damage_mult = 0.05
+		#battlemage_screen_mult = 0.05
+	}
+
+	ai_value = {
+		base = 7
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_05
+}
+
+academymag_05 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_5_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.07
+		siege_weapon_siege_value_mult = 0.06
+		siege_weapon_toughness_add = 2
+		#battlemage_damage_mult = 0.06
+		#battlemage_screen_mult = 0.06
+	}
+
+	ai_value = {
+		base = 6
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_06
+}
+
+academymag_06 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_6_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.08
+		siege_weapon_siege_value_mult = 0.07
+		siege_weapon_toughness_add = 2
+		#battlemage_damage_mult = 0.08
+		#battlemage_screen_mult = 0.08
+	}
+
+	ai_value = {
+		base = 5
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_07
+}
+
+academymag_07 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_7_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.08
+		siege_weapon_siege_value_mult = 0.07
+		siege_weapon_toughness_add = 2
+		#battlemage_damage_mult = 0.1
+		#battlemage_screen_mult = 0.1
+		monthly_prestige_gain_mult = 0.1
+	}
+
+	ai_value = {
+		base = 4
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academymag_08
+}
+
+academymag_08 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academymag_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_8_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+
+		men_at_arms_maintenance = -0.08
+		siege_weapon_siege_value_mult = 0.07
+		siege_weapon_toughness_add = 2
+		#battlemage_damage_mult = 0.12
+		#battlemage_screen_mult = 0.12
+		monthly_prestige_gain_mult = 0.1
+		health = 0.25
+	}
+
+	ai_value = {
+		base = 3
+		ai_general_building_modifier = yes
+	}
+
+	
+}
+
+#Diplomatic Academy
+#Personal scheme sucess chance, county control%, diplo lifestyle ,  diplo x fame
+
+academydip_01 = {
+		construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		diplomacy_per_prestige_level = 1 #it may be too much for level 1, specially if it stacks with other buildings like this one
+		owned_personal_scheme_success_chance_add = 5
+		personal_scheme_power_mult = 0.01
+		owned_personal_scheme_success_chance_add = 1
+	}
+	
+	next_building = academydip_02
+	
+	type_icon = "icon_building_outposts.dds"
+}
+
+academydip_02 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 01 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_2_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		owned_personal_scheme_success_chance_add = 3
+		
+	}
+
+	ai_value = {
+		base = 9
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_03
+}
+
+academydip_03 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_3_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		owned_personal_scheme_success_chance_add = 3
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.1
+	}
+
+	ai_value = {
+		base = 8
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_04
+}
+
+academydip_04 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_4_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		owned_personal_scheme_success_chance_add = 4
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.1
+	}
+
+	ai_value = {
+		base = 7
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_05
+}
+
+academydip_05 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_5_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		owned_personal_scheme_success_chance_add = 5
+		monthly_diplomatic_lifestyle_xp_gain_mult = 0.05
+		
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.12
+	}
+
+	ai_value = {
+		base = 6
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_06
+}
+
+academydip_06 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_6_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		owned_personal_scheme_success_chance_add = 7
+		monthly_diplomatic_lifestyle_xp_gain_mult = 0.05
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.12
+	}
+
+	ai_value = {
+		base = 5
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_07
+}
+
+academydip_07 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_7_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		monthly_piety_gain_mult = 0.1
+		owned_personal_scheme_success_chance_add = 7
+		monthly_diplomatic_lifestyle_xp_gain_mult = 0.08
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.12
+	}
+
+	ai_value = {
+		base = 4
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academydip_08
+}
+
+academydip_08 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academydip_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+	
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_8_cost
+	type_icon = "icon_building_outposts.dds"
+	
+	character_modifier = {
+		 
+		monthly_piety = 0.15
+		owned_personal_scheme_success_chance_add = 10
+		monthly_diplomatic_lifestyle_xp_gain_mult = 0.1
+		learning_per_prestige_level = 1
+		
+	}
+
+	county_modifier = {
+		monthly_county_control_change_factor = 0.15
+	}
+
+	ai_value = {
+		base = 3
+		ai_general_building_modifier = yes
+	}
+
+	
+}
+
+
+#Bard Academy
+#county opinion, tax mult, month incomme,  prestige, renown flat, renown% 
+ academybard_01 = {
+	construction_time = quick_construction_time
+	
+	can_construct_potential = {
+		NOT = {
+			has_building = academyscho_01
+			has_building = academywar_01
+			has_building = academymag_01
+			has_building = academydip_01
+			has_building = academybard_01
+		}
+	}
+	
+	can_construct_showing_failures_only = {
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		culture = {
+			has_innovation = innovation_war_magic
+		}
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_1_cost
+	type_icon = "icon_building_outposts.dds"
+
+	
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_1
+		tax_mult = 0.05
+	}	
+	county_modifier = {
+		county_opinion_add = 5
+	}
+	
+	next_building = academybard_02
+	
+	type_icon = "icon_building_outposts.dds"
+}
+
+academybard_02 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 01 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_2_cost
+	type_icon = "icon_building_outposts.dds"
+
+	province_modifier = {
+		
+		tax_mult = 0.06
+
+	}	
+	county_modifier = {
+		county_opinon_add = 5
+	}
+
+	ai_value = {
+		base = 9
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_03
+}
+
+academybard_03 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_3_cost
+	type_icon = "icon_building_outposts.dds"
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_3
+		tax_mult = 0.06
+
+	}	
+	county_modifier = {
+		county_opinon_add = 5
+	}
+
+	ai_value = {
+		base = 8
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_04
+}
+
+academybard_04 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 02 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_4_cost
+	type_icon = "icon_building_outposts.dds"
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_4
+		tax_mult = 0.06
+
+	}	
+	county_modifier = {
+		county_opinon_add = 5
+	}
+
+	ai_value = {
+		base = 7
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_05
+}
+
+academybard_05 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_5_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = { 
+		monthly_prestige_gain_mult = 0.1
+	}
+
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_5
+		tax_mult = 0.06
+
+	}	
+	county_modifier = {
+		county_opinon_add = 5
+	}
+
+	ai_value = {
+		base = 6
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_06
+}
+
+academybard_06 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 03 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = normal_building_tier_6_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = { 
+		monthly_prestige_gain_mult = 0.12
+	}
+
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_6
+		tax_mult = 0.07
+
+	}	
+	county_modifier = {
+		county_opinon_add = 10
+	}
+
+	ai_value = {
+		base = 5
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_07
+}
+
+
+
+academybard_07 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_7_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = { 
+
+		monthly_prestige_gain_mult = 0.14
+	}
+
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_7
+		tax_mult = 0.08
+
+	}	
+	county_modifier = {
+		county_opinon_add = 15
+	}
+
+	ai_value = {
+		base = 4
+		ai_general_building_modifier = yes
+	}
+
+	next_building = academybard_08
+}
+
+academybard_08 = {
+	can_construct_potential = {
+		building_requirement_academy = { LEVEL = 04 }
+		building_academybard_requirement_terrain = yes
+	}
+	can_construct_showing_failures_only {
+		building_requirement_tribal = no
+	}
+
+	construction_time = quick_construction_time
+	cost_gold = expensive_building_tier_8_cost
+	type_icon = "icon_building_outposts.dds"
+
+	character_modifier = { 
+		monthly_prestige_gain_mult = 0.15
+		monthly_dynasty_prestige = 0.3
+	}
+
+	province_modifier = {
+		monthly_income = normal_building_tax_tier_8
+		tax_mult = 0.1
+
+	}	
+	county_modifier = {
+		county_opinon_add = 20
+	}
+
+	ai_value = {
+		base = 3
+		ai_general_building_modifier = yes
+	}
+	
+}
+

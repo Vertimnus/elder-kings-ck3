@@ -6,6 +6,7 @@ window = {
 	name = "faith_window"
 	datacontext = "[FaithWindow.GetFaith]"
 	datacontext = "[GetVariableSystem]"
+	allow_outside = yes
 	movable = no
 	layer = windows_layer
 
@@ -13,26 +14,19 @@ window = {
 	using = Window_Background_Sidebar
 
 	state = {
-		name = "map_click_check" # clicking the map changes the faith but doesnt call the refresh function
-		trigger_when = "[Not(EqualTo_string( GetVariableSystem.Get( 'faith_name_check' ), Faith.GetNameNoTooltip ))]"
-		on_start = "[PdxGuiTriggerAllAnimations('faith_view_refresh')]"
-		on_finish = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
-	}
-
-	state = {
-		name = "patron_important_action" # get the correct tab for the action
-		trigger_when = "[GetPlayer.MakeScope.Var('action_patron').IsSet]"
-		on_start = "[GetScriptedGui('action_patron_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]"
+		name = "patron_action"
+		on_start = "[CloseGameView( 'religion' )]"
+		#on_finish = "[GetVariableSystem.Set( 'faith_view_tabs', 'patrons' )]" #DO NOT change this to start, crashes the game
 	}
 
 	state = {
 		name = _show
 		position = { 0 0 }
-		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', 'beliefs' )]"
+		on_start = "[GetVariableSystem.Set( 'faith_view_tabs', Select_CString( IsGameViewOpen( 'religion' ), 'patrons', 'beliefs' ) )]"
 		on_start = "[GetVariableSystem.Set( 'hide_bottom_left_HUD', 'true' )]"
-		on_start = "[GetVariableSystem.Set( 'faith_name_check', Faith.GetNameNoTooltip )]"
 		on_start = "[GetVariableSystem.Clear( 'patron_trait' )]"
+		on_start = "[PdxGuiWidget.TriggerAnimation('patron_action')]"
+		#on_start = "[CloseGameView( 'religion' )]" #crashes it
 
 		using = Animation_FadeIn_Quick
 		using = Sound_WindowShow_Standard
@@ -41,11 +35,103 @@ window = {
 	state = {
 		name = _hide
 		position = { -60 0 }
+		on_start = "[GetVariableSystem.Clear( 'faith_view_tabs' )]"
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
-		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+		on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 
 		using = Animation_FadeOut_Quick
 		using = Sound_WindowHide_Standard
+	}
+
+	widget = {
+		name = "patron_confirm"
+		position = { 960 -20 }
+		parentanchor = left|vcenter
+		widgetanchor = center
+		alwaystransparent = no
+
+		visible = "[GetPlayer.MakeScope.Var('patron_sel').IsSet]"
+		datacontext = "[GetPlayer.MakeScope.Var('patron_sel')]"
+		datacontext = "[GetTrait(Concatenate('p', Select_CString( GetPlayer.MakeScope.Var('patron_sel').IsSet, Scope.GetFlagName, '_akatosh') ))]"
+
+		using = Window_Size_MainTab
+		using = Window_Background
+		using = Window_Decoration_Spike
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+			using = Sound_WindowShow_Standard
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Quick
+			using = Sound_WindowHide_Standard
+		}
+
+		vbox = {
+			set_parent_size_to_minimum = yes
+			using = Window_Margins
+
+			hbox = {
+				margin_bottom = -10
+				layoutpolicy_horizontal = expanding
+
+				header_pattern_interaction = {
+					layoutpolicy_horizontal = expanding
+					minimumsize = { 100% 0 }
+
+					blockoverride "header_text" {
+						text = CONFIRM_PATRON
+					}
+
+					blockoverride "button_close"
+					{
+						onclick = "[GetScriptedGui('faith_set_patron').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).AddScope('patron_sel', MakeScopeBool('(bool)no') ).End)]"
+					}
+
+					icon = {
+						size = { 48 48 }
+						position = { 0 0 }
+						texture = "[Trait.GetIcon(GetNullCharacter)]"
+					}
+				}
+			}
+
+			hbox = {
+				margin = { 20 10 }
+				text_single = {
+					multiline = yes
+					max_width = 300
+					align = center
+					text = CONFIRM_PATRON_DESC
+				}
+			}
+
+			## Send Button
+			hbox = {
+				name = "patron_confirm_button"
+				margin = { 20 10 }
+				margin_bottom = 15
+				spacing = 3
+
+				button_primary_big = {
+					text = CONFIRM_PATRON_BUTTON
+
+					onclick = "[GetScriptedGui('faith_set_patron').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).AddScope('patron_sel', MakeScopeBool('(bool)yes') ).End)]"
+
+					clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
+				}
+
+				button_standard = {
+					visible = "[InDebugMode]"
+					size = { 42 42 }
+					text = "#D R#!"
+					tooltip = "patron_sel: [GetPlayer.MakeScope.Var('patron_sel').GetFlagName]"
+				}
+			}
+		}
 	}
 
 	### INSIDE WINDOW
@@ -1202,20 +1288,21 @@ window = {
 			state = {
 				name = _hide
 				alpha = 0
-				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+				on_start = "[GetScriptedGui('faith_clear_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
 			state = {
-				name = "faith_view_refresh"
+				name = "patron_get_patrons"
+				trigger_when = "[Not(FaithWindow.GetFaith.MakeScope.Var('faith_patrons_set').IsSet)]" #trigger when list doesnt exist - assume empty list exists still
 				on_start = "[GetScriptedGui('faith_get_patrons').Execute(GuiScope.SetRoot(FaithWindow.GetFaith.MakeScope).AddScope('player_s', GetPlayer.MakeScope ).End)]"
 			}
 
 			widget = {
 				size = { 0 45 }
 				layoutpolicy_horizontal = expanding
+				visible = "[Not( And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), GetPlayer.MakeScope.Var('recent_patron_selected').IsSet ) )]"
+
 				text_single = {
-					datacontext = "[FaithWindow.GetFaith]"
-					#layoutpolicy_horizontal = expanding
 					parentanchor = center
 					size = { 0 45 }
 					text = PATRONS_AVAILABLE
@@ -1240,6 +1327,79 @@ window = {
 					parentanchor = right|vcenter
 					#using = tooltip_e
 					margin = { 15 0 }
+					spacing = 5
+
+					text_single = {
+						parentanchor = vcenter
+						align = nobaseline
+						default_format = "#clickable"
+						text = EFFECTS_ONLY
+						fontsize = 15
+					}
+
+					button_checkbox = {
+						onclick = "[GetVariableSystem.Set( 'patron_trait', Select_CString( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'to_clear', 'all' ) )]"
+						onclick = "[GetVariableSystem.ClearIf( 'patron_trait', GetVariableSystem.HasValue( 'patron_trait', 'to_clear' ) )]"
+						checked = "[GetVariableSystem.HasValue('patron_trait', 'all')]"
+					}
+
+					tooltip = "[SelectLocalization( GetVariableSystem.HasValue( 'patron_trait', 'all' ), 'show_desc', 'show_modifier' )]" #localize this and probably other bits too
+				}
+			}
+
+			widget = {
+				size = { 0 65 }
+				layoutpolicy_horizontal = expanding
+				visible = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), GetPlayer.MakeScope.Var('recent_patron_selected').IsSet )]"
+
+				text_single = {
+					parentanchor = center
+					size = { 0 45 }
+					text = PATRONS_AVAILABLE
+					default_format = "#weak"
+					fontsize = 18
+					margin = { 0 10 }
+					position = { 0 -10 }
+					align = nobaseline
+					max_width = 330
+					autoresize = yes
+
+					state = {
+						name = "faith_view_refresh"
+						using = Animation_Refresh_FadeOut
+					}
+
+					state = {
+						using = Animation_Refresh_FadeIn
+					}
+				}
+				text_single = {
+					parentanchor = center
+					size = { 0 45 }
+					text = PATRON_TIMEOUT
+					default_format = "#X"
+					fontsize = 18
+					margin = { 0 10 }
+					position = { 0 15 }
+					align = nobaseline
+					max_width = 480
+					autoresize = yes
+
+					state = {
+						name = "faith_view_refresh"
+						using = Animation_Refresh_FadeOut
+					}
+
+					state = {
+						using = Animation_Refresh_FadeIn
+					}
+				}
+
+				flowcontainer = {
+					parentanchor = right|vcenter
+					#using = tooltip_e
+					margin = { 15 0 }
+					position = { 0 -10 }
 					spacing = 5
 
 					text_single = {
@@ -1286,14 +1446,14 @@ window = {
 
 				blockoverride "scrollbox_empty" {
 					text = NO_PATRONS
-					visible = "[IsDataModelEmpty(GetPlayer.MakeScope.GetList('faith_patrons'))]"
+					visible = "[IsDataModelEmpty(FaithWindow.GetFaith.MakeScope.GetList('faith_patrons'))]"
 				}
 
 				blockoverride "scrollbox_content"
 				{
 					vbox = {
 						name = "patrons_list"
-						datamodel = "[GetPlayer.MakeScope.GetList('faith_patrons')]"
+						datamodel = "[FaithWindow.GetFaith.MakeScope.GetList('faith_patrons')]"
 						layoutpolicy_horizontal = expanding
 
 						item = {
@@ -1313,19 +1473,12 @@ window = {
 									vbox = {
 										layoutpolicy_horizontal = expanding
 
-										state = {
-											name = _mouse_hierarchy_enter
-											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_enter_nc' ))]"
-										}
+										onmousehierarchyenter = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_enter_nc' ))]"
+										onmousehierarchyleave = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_leave_nc' ))]"
 
 										state = {
 											name = "mouse_enter_nc"
 											on_start = "[GetVariableSystem.Set('patron_trait', Trait.GetKey)]"
-										}
-
-										state = {
-											name = _mouse_hierarchy_leave
-											on_start = "[PdxGuiWidget.TriggerAnimation(Select_CString( GetVariableSystem.HasValue('patron_trait', 'all'),'', 'mouse_leave_nc' ))]"
 										}
 
 										state = {
@@ -1337,13 +1490,21 @@ window = {
 											name = "patron_button"
 											layoutpolicy_horizontal = expanding
 											size = { 0 140 }
-											#alwaystransparent = yes
+
+											# state = {
+											# 	name = _mouse_hierarchy_enter
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_enter')]"
+											# }
+
+											# state = {
+											# 	name = _mouse_hierarchy_leave
+											# 	on_start = "[PdxGuiWidget.FindChild('patron_icon').TriggerAnimation('patron_glow_hover_leave')]"
+											# }
 
 											clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_confirm"
-											#down = has trait
-											enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), '(bool)yes' )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
-											#onclick = give trait - this and down need 1.4 commands to pass flags
-
+											down = "[Not( GetScriptedGui('faith_set_patron').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).End) )]"
+											enabled = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), Or( Not( GetPlayer.MakeScope.Var('recent_patron_selected').IsSet ), Not( GetScriptedGui('faith_set_patron').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).End) ) ) )]" #diables mouse over effects. allow press but change sound to fail one and have tt say why - resent pick or wrong faith
+											onclick = "[GetScriptedGui('faith_set_patron').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).End)]"
 
 											background = {
 												margin = { 100 35 }
@@ -1372,10 +1533,28 @@ window = {
 												margin = { 10 0 }
 												spacing = 7
 
-												icon = {
+												highlight_icon = {
+													name = "patron_icon"
 													size = { 120 120 }
-													texture = "[Trait.GetIcon(GetDummyMale)]"
-													#texture = "[Trait.GetIcon(GetPlayer.MakeScope.Var('dummy_var').Char)]" #global for 1.4
+													texture = "[Trait.GetIcon(GetNullCharacter)]"
+
+													# state = {
+													# 	name = "patron_glow_hover_enter"
+													# 	glow_alpha = 0.25
+													# }
+													# state = {
+													# 	name = "patron_glow_hover_leave"
+													# 	glow_alpha = 0.0
+													# }
+
+													# glow = {
+													# 	name = "patron_icon_glow"
+													# 	alpha = 0
+													# 	using = Color_Orange
+													# 	using = Glow_Standard
+
+													# 	glow_radius = 2
+													# }
 												}
 
 												divider_light = {
@@ -1383,27 +1562,31 @@ window = {
 												}
 
 												vbox = {
-													margin = { 5 10 }
+													margin = { 5 5 }
 													margin_left = 8
-													spacing = 10
+													spacing = 5
 													layoutpolicy_vertical = expanding
 													layoutpolicy_horizontal = expanding
 
-													vbox = {
+													hbox = {
 														layoutpolicy_horizontal = expanding
 														text_label_left = {
 															name = "patron_name"
 															layoutpolicy_horizontal = expanding
-															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
+															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )|U]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
 															#text = "[GetPlayer.Custom( 'get_akatosh' )]"
 															# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
 															default_format = "#high"
 															using = Font_Size_Medium
 														}
+														text_single = {
+															visible = "[And( ObjectsEqual( Faith.Self, GetPlayer.GetFaith.Self ), Not( GetScriptedGui('faith_set_patron').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('trait', MakeScopeFlag(Scope.GetFlagName) ).End) ) )]"
+															text = YOUR_PATRON
+															using = Font_Size_Small
+														}
 													}
 
 													vbox = {
-														spacing = 5
 														layoutpolicy_vertical = expanding
 														layoutpolicy_horizontal = expanding
 
@@ -1431,9 +1614,10 @@ window = {
 																	size = { 180 -1 }
 																	autoresize = yes
 																	max_width = 340
-																	text = "[Trait.GetFullDescription( GetDummyMale, Faith.Self )]"
-																	fontsize = 14
+																	text = "[Trait.GetFullDescription( GetNullCharacter, Faith.Self )]"
+																	fontsize = 15
 																	fontsize_min = 12
+																	margin_bottom = -37
 																}
 															}
 														}
@@ -1553,11 +1737,7 @@ window = {
 
 				button_checkbox = {
 					onclick = "[ReligionWindow.OnShowOnlyReligionFaiths]"
-
-					blockoverride "checkbox"
-					{
-						checked = "[ReligionWindow.ShowOnlyReligionFaiths]"
-					}
+					checked = "[ReligionWindow.ShowOnlyReligionFaiths]"
 				}
 
 				text_multi = {

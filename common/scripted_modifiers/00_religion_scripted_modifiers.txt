@@ -183,6 +183,24 @@ religion_demand_conversion_default_modifier = {
 		}
 		desc = FP1_ADVENTURE_LEGACY_3_REASON
 	}
+	
+	#EK EDIT - Special cases
+	modifier = {
+		desc = ASK_FOR_CONVERSION_CROWN_FOREBEAR
+		trigger = {
+			OR = {
+				AND = {
+					scope:recipient.faith = faith:tall_papa
+					scope:recipient.culture = culture:crown
+				}
+				AND = {
+					scope:recipient.faith = faith:redguard_cult
+					scope:recipient.culture = culture:forebear
+				}
+			}
+		}
+		add = -35
+	}
 }
 
 sun_trial_death_modifier = {

@@ -1,4 +1,6 @@
-﻿feudal_government = {
+﻿### EK EDIT: Removed references to vanilla cultures & religions
+
+feudal_government = {
 	create_cadet_branches = yes
 	rulers_should_have_dynasty = yes
 	dynasty_named_realms = no
@@ -6,7 +8,6 @@
 	fallback = 1
 
 	primary_holding = castle_holding
-	valid_holdings = { tower_holding }
 	required_county_holdings = { castle_holding city_holding church_holding }
 
 	vassal_contract = {
@@ -27,7 +28,7 @@
 
 republic_government = {
 	primary_holding = city_holding
-	valid_holdings = { castle_holding tower_holding }
+	valid_holdings = { castle_holding }
 	required_county_holdings = { city_holding castle_holding church_holding }
 
 	ai = {
@@ -71,7 +72,7 @@ clan_government = {
 	create_cadet_branches = yes
 	rulers_should_have_dynasty = yes
 
-	valid_holdings = { castle_holding tower_holding }
+	valid_holdings = { castle_holding }
 	required_county_holdings = { castle_holding city_holding church_holding }
 	always_use_patronym = yes
 	dynasty_named_realms = no
@@ -151,6 +152,10 @@ tribal_government = {
 		republic_government_vassal_opinion = -20
 	
 		ai_war_chance = 0.25
+		monthly_prestige = 0.2
+		
+		#EK EDIT - Makes tribes more region-centered
+		diplomatic_range_mult = -0.3
 	}
 	
 	flag = government_can_raid_rule

@@ -9,8 +9,6 @@ green_pact_1000 = {
 	3502.1.1 = { death = yes }
 }
 
-## WILDERKING'S COURT
-
 #The Wilderking
 wilderking_100 = {
 	name = "Ostion" #First (and for our startdates, only) Wilderking
@@ -25,7 +23,53 @@ wilderking_100 = {
 	trait = sign_mage
 	
 	2845.4.9 = { birth = yes }
-	3500.1.1 = { death = yes }
+	3502.10.1 = { death = yes }
+}
+
+bramblebreach_100 = {
+	name = "Galathel" 
+	dynasty = 600011
+	culture = pactbosmer
+	religion = wilderking
+	female = yes
+	
+	3265.4.9 = { birth = yes }
+	3490.1.1 = { death = yes }
+}
+
+bramblebreach_101 = {
+	name = "Niriel" 
+	dynasty = 600011
+	culture = pactbosmer
+	religion = wilderking
+	female = yes
+	
+	trait = humble
+	trait = impatient
+	trait = zealous
+	
+	3340.4.9 = { birth = yes }
+	3570.1.1 = { death = yes }
+}
+
+valefern_100 = {
+	name = "Ondor" 
+	dynasty = 600012
+	culture = pactbosmer
+	religion = wilderking
+	
+	3330.4.9 = { birth = yes }
+	3555.1.1 = { death = yes }
+}
+
+elenwen_100 = {
+	name = "Galithor" 
+	dynasty = 600013
+	culture = pactbosmer
+	religion = wilderking
+	
+	3300.4.9 = { birth = yes }
+	3520.1.1 = { death = yes }
 }
 
 ## CAMORAN DYNASTY
@@ -124,12 +168,10 @@ camoran_8 = { # Elden Root ruler
 	female = yes
 	
 	trait = ambitious
-	trait = trusting
-	trait = just
 	trait = education_martial_3
 	
-	3327.7.4 = { birth = yes }
-	3446.7.4 = { death = yes }
+	3257.7.4 = { birth = yes }
+	3466.7.4 = { death = yes }
 }
 
 camoran_9 = { # Aeradan
@@ -137,10 +179,10 @@ camoran_9 = { # Aeradan
 	dynasty_house = camoran_graht
 	religion = greenpact
 	culture = civicbosmer
-	father = camoran_8
+	mother = camoran_8
 	
-	3381.7.4 = { birth = yes }
-	3563.9.4 = { death = yes }
+	3420.7.4 = { birth = yes }
+	3650.9.4 = { death = yes }
 }
 
 camoran_10 = { # Cormount ruler
@@ -155,7 +197,7 @@ camoran_10 = { # Cormount ruler
 	trait = arrogant
 	trait = forgiving
 	
-	3320.6.1 = { birth = yes }
+	3304.6.1 = { birth = yes }
 	3425.1.2 = { death = yes }
 }
 
@@ -190,7 +232,7 @@ camoran_12 = { # Woodhearth
 	trait = temperate
 	
 	
-	3229.4.8 = { birth = yes }
+	3183.4.8 = { birth = yes }
 	3413.4.7 = { death = yes }
 }
 
@@ -226,7 +268,7 @@ camoran_14 = { # Silvenar
 	trait = generous
 	
 	3304.9.7 = { birth = yes }
-	3533.1.2 = { death = yes }
+	3500.1.1 = { death = yes }
 }
 
 camoran_15 = { # Silvenar
@@ -315,11 +357,9 @@ camoran_22 = { # Springsite
 	trait = bastard
 	trait = denounced
 	
-	3311.9.7 = { birth = yes }
+	3260.1.1 = { birth = yes }
 	3436.1.2 = { death = yes }
 }
-
-## GRAHTWOOD CHARACTERS
 
 benoch_1 = { # Wormroot
 	name = "Ulmion" 
@@ -345,9 +385,8 @@ parikh_1 = { # Quirrion
 bearclaw_1 = { # Bonebarrows
 	name = "Faume" 
 	dynasty = 600010
-	religion = idealmasters
+	religion = greenpact
 	culture = pactbosmer
-	set_relation_rival = character:bearclaw_2
 	give_nickname = nick_toad_eye
 	
 	trait = education_learning_3
@@ -355,11 +394,14 @@ bearclaw_1 = { # Bonebarrows
 	trait = ambitious
 	trait = shy
 	trait = necromancer_character
+	trait = education_magical_ability_3
 	
-	3356.1.1 = { add_spouse = bosmer_lowborn_3 }
+	3332.1.1 = { add_spouse = bosmer_lowborn_3 }
 	
-	3310.9.9 = { birth = yes }
-	3525.1.6 = { death = yes }
+	3290.9.9 = { birth = yes }
+	3361.9.9 = { religion = idealmasters }
+	3469.1.6 = { death = yes }
+	3365.1.1 = { death = { death_reason = death_duel killer = bearclaw_2 } }
 }
 
 bearclaw_2 = { # Bonebarrows
@@ -370,16 +412,34 @@ bearclaw_2 = { # Bonebarrows
 	set_relation_rival = character:bearclaw_1
 	father = bearclaw_1
 	mother = bosmer_lowborn_3
+	
 	trait = education_martial_4
 	trait = brave
 	trait = ambitious
 	trait = deceitful
+	trait = education_martial_prowess_4
 	
-	3350.9.9 = { birth = yes }
-	3490.1.6 = { death = yes }
+	3333.9.9 = { birth = yes }
+	3430.1.6 = { death = yes }
 }
 
-## GREENSHADE CHARACTERS
+redfur_2 = { 
+	name = "Shan-ra" 
+	religion = twomoonsdance
+	culture = pellitinian
+	
+	3465.7.9 = { birth = yes }
+	3530.1.6 = { death = yes }
+}
+
+hectaran_1 = { 
+	name = "Placeholder" 
+	religion = meridia_cult
+	culture = hectahamic
+	
+	3340.7.9 = { birth = yes }
+	3550.1.6 = { death = yes }
+}
 
 driladan_1 = { # Driladan
 	name = "Emalith" 
@@ -388,25 +448,34 @@ driladan_1 = { # Driladan
 	culture = pactbosmer
 	female = yes
 	
-	3210.7.9 = { birth = yes }
+	3186.7.9 = { birth = yes }
 	3400.1.6 = { death = yes }
 }
 
-oiobala_1 = { # Vivicka my beloved
-	name = "Vivicka" 
-	dynasty = 1530000
-	religion = meridia_cult
-	culture = hectahamic
+driladan_2 = { # Driladan
+	name = "Indanas" 
+	dynasty = 600000
+	religion = greenpact
+	culture = pactbosmer
 	female = yes
-	sexuality = bisexual
 	
-	trait = education_learning_4
-	trait = ambitious
-	trait = just
-	trait = lazy
+	trait = brave
+	trait = stubborn
+	trait = honest
 	
-	3315.7.9 = { birth = yes }
-	3530.1.6 = { death = yes }
+	3470.1.1 = { birth = yes }
+	3502.10.10 = { death = yes }
+}
+
+driladan_3 = { # Driladan
+	name = "Celanir" 
+	dynasty = 600000
+	religion = greenpact
+	culture = pactbosmer
+	
+	3303.1.1 = { birth = yes }
+	3369.7.9 = { religion = hircine_cult }
+	3430.10.10 = { death = yes }
 }
 
 blackroot_1 = { # Blackroot clan
@@ -421,7 +490,17 @@ blackroot_1 = { # Blackroot clan
 	trait = callous
 	
 	3230.7.9 = { birth = yes }
-	3361.1.6 = { death = yes }
+	3371.1.6 = { death = yes }
+}
+
+redbranch_1 = { # Whisper Grove
+	name = "Anoriath" 
+	dynasty = 600015
+	religion = greenpact
+	culture = pactbosmer
+	
+	3335.7.9 = { birth = yes }
+	3450.10.6 = { death = yes }
 }
 
 vanellion_1 = { # Whisper Grove
@@ -432,8 +511,9 @@ vanellion_1 = { # Whisper Grove
 	
 	trait = deceitful
 	
-	3335.7.9 = { birth = yes }
-	3501.1.6 = { death = yes }
+	3428.7.9 = { birth = yes }
+	3502.1.1 = { religion = mehrunes_cult }
+	3502.10.6 = { death = yes }
 }
 
 springbrook_1 = { # Vullain
@@ -443,10 +523,20 @@ springbrook_1 = { # Vullain
 	culture = pactbosmer
 	
 	3143.7.9 = { birth = yes }
-	3361.1.6 = { death = yes }
+	3371.1.6 = { death = yes }
 }
 
-## MALABAL TOR CHARACTERS
+greenleaf_1 = { 
+	name = "Legonis" 
+	dynasty = 600014
+	religion = greenpact
+	culture = pactbosmer
+	
+	trait = education_martial_prowess_4
+	
+	3331.7.9 = { birth = yes }
+	3555.1.6 = { death = yes }
+}
 
 forestwalker_1 = { # Longvale
 	name = "Halindor" 
@@ -456,6 +546,17 @@ forestwalker_1 = { # Longvale
 	
 	3252.7.9 = { birth = yes }
 	3461.1.6 = { death = yes }
+}
+
+forestwalker_2 = { # Longvale
+	name = "Ulthorn" 
+	dynasty = 600008
+	religion = hircine_cult
+	culture = pactbosmer
+	give_nickname = nick_the_hound
+	
+	3445.7.9 = { birth = yes }
+	3502.10.6 = { death = yes }
 }
 
 branck_1 = { # Larawen
@@ -478,14 +579,15 @@ sharparrow_1 = { # Spearwood
 	3430.1.6 = { death = yes }
 }
 
-abasel_1 = { # Abamath
-	name = "Uuril" 
-	dynasty = 1530001
+sharparrow_2 = { # Spearwood
+	name = "Falicia" 
+	dynasty = 600002
 	religion = greenpact
-	culture = hectahamic
+	culture = pactbosmer
+	female = yes
 	
-	3232.7.9 = { birth = yes }
-	3430.1.6 = { death = yes }
+	3368.7.9 = { birth = yes }
+	3534.1.6 = { death = yes }
 }
 
 endrand_1 = { # Stranglevine
@@ -498,7 +600,25 @@ endrand_1 = { # Stranglevine
 	3499.1.6 = { death = yes }
 }
 
-### ARENTHIAN CHARACTERS
+endrand_2 = { # Stranglevine
+	name = "Perinor" 
+	dynasty = 600009
+	religion = greenpact
+	culture = pactbosmer
+	
+	3335.7.9 = { birth = yes }
+	3550.1.6 = { death = yes }
+}
+
+seedcatcher_1 = {
+	name = "Aglion" 
+	dynasty = 600016
+	religion = greenpact
+	culture = pactbosmer
+	
+	3215.7.9 = { birth = yes }
+	3450.1.6 = { death = yes }
+}
 
 vinedusk_1 = { # Vinedusk
 	name = "Nendaer" 
@@ -515,107 +635,6 @@ vinedusk_1 = { # Vinedusk
 	
 	3320.7.4 = { birth = yes }
 	3490.6.4 = { death = yes }
-}
-
-## IMPERIAL CHARACTERS
-
-zantonius_1 = { # Southpoint
-	name = "Gallus" 
-	dynasty = 100037
-	religion = imperial_cult
-	culture = colovian
-	
-	trait = education_stewardship_1
-	trait = arrogant
-	trait = arbitrary
-	trait = greedy
-	
-	3300.7.4 = { birth = yes }
-	3371.6.4 = { death = yes }
-}
-
-zantonius_2 = { # Southpoint
-	name = "Julius" 
-	dynasty = 100037
-	religion = reman_cult
-	culture = colovian
-	father = zantonius_1
-	set_relation_rival = character:zantonius_3
-	
-	trait = education_martial_2
-	trait = arrogant
-	trait = zealous
-	trait = just
-	
-	3330.7.4 = { birth = yes }
-	3362.6.4 = { death = { death_reason = death_battle} }
-}
-
-zantonius_3 = { # Southpoint
-	name = "Scipion" 
-	dynasty = 100037
-	religion = imperial_cult
-	culture = colovian
-	father = zantonius_1
-	set_relation_rival = character:zantonius_2
-	
-	trait = education_martial_2
-	trait = stubborn
-	trait = zealous
-	trait = just
-	
-	3334.7.4 = { birth = yes }
-	3392.6.4 = { death = yes }
-}
-
-zantonius_4 = { # Southpoint
-	name = "Fabio" 
-	dynasty = 100037
-	religion = imperial_cult
-	culture = colovian
-	
-	3370.7.4 = { birth = yes }
-	3441.6.4 = { death = yes }
-}
-
-zantonius_5 = { # Southpoint
-	name = "Florius" 
-	dynasty = 100037
-	religion = imperial_cult
-	culture = colovian
-	
-	3415.7.4 = { birth = yes }
-	3480.6.4 = { death = yes }
-}
-
-zantonius_6 = { # Southpoint
-	name = "Aulus" 
-	dynasty = 100037
-	religion = sheogorath_cult
-	culture = colovian
-	
-	trait = education_learning_2
-	trait = craven
-	trait = arrogant
-	trait = shy
-	
-	3470.7.4 = { birth = yes }
-	3503.6.4 = { death = yes }
-}
-
-axius_1 = { # Arenthia
-	name = "Cicero" 
-	dynasty = 100038
-	religion = imperial_cult
-	culture = colovian
-	
-	trait = education_martial_1
-	trait = greedy
-	trait = arrogant
-	trait = deceitful
-	
-	3319.7.4 = { birth = yes }
-	3387.6.4 = { death = yes }
 }
 
 # LOWBORNS
@@ -647,6 +666,76 @@ bosmer_lowborn_3 = { # Faume Toad-Eye's Dunmer Wife
 	culture = dunmer
 	female = yes
 	
-	3330.9.1 = { birth = yes }
+	trait = necromancer_character
+	
+	3300.9.1 = { birth = yes }
 	3505.1.7 = { death = yes }
+}
+
+bosmer_lowborn_4 = { # Rootwater
+	name = "Saromir"
+	religion = hermaeus_cult
+	culture = pactbosmer
+	
+	3382.9.1 = { birth = yes }
+	3505.1.7 = { death = yes }
+}
+
+bosmer_lowborn_5 = { # Arananga
+	name = "Althomir"
+	religion = wilderking
+	culture = pactbosmer
+	
+	3200.9.1 = { birth = yes }
+	3450.1.7 = { death = yes }
+}
+
+bosmer_lowborn_6 = { # Arananga
+	name = "Maruin"
+	religion = wilderking
+	culture = pactbosmer
+	
+	trait = calm
+	trait = compassionate
+	trait = gregarious
+	
+	3469.9.1 = { birth = yes }
+	3679.1.7 = { death = yes }
+}
+
+bosmer_lowborn_7 = { # Gladwell
+	name = "Basthelidir"
+	religion = greenpact
+	culture = civicbosmer
+	
+	3216.9.1 = { birth = yes }
+	3431.1.7 = { death = yes }
+}
+
+bosmer_lowborn_8 = { # Rootwater
+	name = "Balia"
+	religion = hermaeus_cult
+	culture = pactbosmer
+	female = yes
+	
+	3300.9.1 = { birth = yes }
+	3501.12.26 = { death = yes }
+}
+
+bosmer_lowborn_9 = { # Longhaven
+	name = "Gwilir"
+	religion = greenpact
+	culture = civicbosmer
+	
+	3250.9.1 = { birth = yes }
+	3470.1.1 = { death = yes }
+}
+
+bosmer_lowborn_10 = { # Longhaven
+	name = "Breduin"
+	religion = greenpact
+	culture = civicbosmer
+	
+	3436.1.1 = { birth = yes }
+	3650.1.7 = { death = yes }
 }

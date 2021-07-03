@@ -42,8 +42,8 @@ interregnum_shatter_cyrodiil = {
 	}
 	scope:title_recipient = { ek_character_setup_effect = yes }
 	
-	# We give them everything we own in k_heartlands (they usurp c_imperial_city if needed)
-	title:k_heartlands = { add_to_list = titles_to_give }
+	### The Imperial Isle is seized
+	custom_tooltip = imperial_commune_creation_tooltip
 	title:d_imperial_isle = { add_to_list = titles_to_give }
 	title:c_imperial_city.title_province = { add_to_list = titles_to_give }
 	every_held_title = {
@@ -51,132 +51,300 @@ interregnum_shatter_cyrodiil = {
 		add_to_list = titles_to_give
 	}
 	
-	every_vassal = {
-		limit = { capital_province = { kingdom = title:k_heartlands } }
-		add_to_list = vassals_to_give
-	}
-	
-	create_title_and_vassal_change = {
-		type = independency
-		save_scope_as = change
-		add_claim_on_loss = no
-	}
-	
-	every_in_list = {
-		list = titles_to_give
-		change_title_holder = {
-			holder = scope:title_recipient
-			change = scope:change
-			take_baronies = yes
-		}
-	}
-	
-	every_in_list = {
-		list = vassals_to_give
-		change_liege = {
-			liege = scope:title_recipient
-			change = scope:change
-		}
-	}
-	
-	resolve_title_and_vassal_change = scope:change
-	
-	# Then they become independent
-	create_title_and_vassal_change = {
-		type = independency
-		save_scope_as = change
-		add_claim_on_loss = yes
-	}
-	scope:title_recipient = {
-		becomes_independent = {
-			change = scope:change
-		}
-	}
-
-	resolve_title_and_vassal_change = scope:change
-	
-	
-	## Now we destroy some stuff
-	destroy_title = title:e_cyrodiil
-	
-	primary_title = { save_scope_as = primary_title }
-	
-	### Vassals become independent
-	every_vassal = {
-		limit = { NOT = { this.primary_title = { target_is_de_jure_liege_or_above = scope:primary_title } } }
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = yes
-		}
-		becomes_independent = {
-			change = scope:change
-		}
-
-		resolve_title_and_vassal_change = scope:change
-	}
-	
-	### Any county that isn't de Jure under our primary title becomes independent
-	every_held_title = {
+	### If the 'Secure the Heartlands' task has been fulfilled, they get everything within the Heartlands
+	if = {
 		limit = {
-			NOT = { this = scope:primary_title }
-			NOT = { target_is_de_jure_liege_or_above = scope:primary_title }
-		}
-		add_to_list = titles_to_make_independent
-	}
-	
-	every_in_list = {
-		list = titles_to_make_independent
-		save_scope_as = current_title
-		
-		create_character = {
-			location = scope:current_title.location
-			template = new_commander_character ### EK TODO: Not that (lol)
-			faith = scope:current_title.faith
-			culture = scope:current_title.culture
-			save_scope_as = title_recipient
-			gender_female_chance = {
-				if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
-					add = 0
-				}
-				else_if = {
-					limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
-					add = 100
-				}
-				else = {
-					add = 50
-				}
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_secure_heartlands_decision
 			}
 		}
-		scope:title_recipient = { ek_character_setup_effect = yes }
 		
-		# We give them the title
-		create_title_and_vassal_change = {
-			type = independency
-			save_scope_as = change
-			add_claim_on_loss = no
-		}
+		custom_tooltip = imperial_commune_creation_full_heartlands_tooltip
+		
+		hidden_effect = {
+			# Lord-Protector of the Heartlands
+			title:k_heartlands = { add_to_list = titles_to_give }
+			
+			# Every vassal within the Heartlands is given to them
+			every_vassal = {
+				limit = { capital_province = { kingdom = title:k_heartlands } }
+				add_to_list = vassals_to_give
+			}
+			
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			
+			every_in_list = {
+				list = titles_to_give
+				change_title_holder = {
+					holder = scope:title_recipient
+					change = scope:change
+					take_baronies = yes
+				}
+			}
+			
+			every_in_list = {
+				list = vassals_to_give
+				change_liege = {
+					liege = scope:title_recipient
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+			
+			# Then they become independent
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
 
-		change_title_holder = {
-			holder = scope:title_recipient
-			change = scope:change
-			take_baronies = yes
+			resolve_title_and_vassal_change = scope:change
 		}
+	}
+	### Otherwise, they only get the Imperial Isle and c_ vassals who wish to join them
+	else = {
+		custom_tooltip = imperial_commune_creation_not_full_heartlands_tooltip
 		
-		# And we make them independent
-		scope:title_recipient = {
+		hidden_effect = {
+			every_vassal = {
+				limit = { capital_province = { duchy = title:d_imperial_isle } }
+				add_to_list = vassals_to_give
+			}
+			
+			every_vassal = {
+				limit = { capital_province = { kingdom = title:k_heartlands } NOT = { capital_province = { duchy = title:d_imperial_isle } } highest_held_title_tier < tier_duchy }
+				
+				random = {
+					chance = 25
+					
+					modifier = {
+						add = 25
+						this.culture = title_recipient.culture
+						this.faith = title_recipient.faith
+					}
+					
+					modifier = {
+						add = this.ai_honor
+					}
+					
+					modifier = {
+						add = 10
+						has_trait = content
+					}
+					
+					modifier = {
+						add = -10
+						has_trait = ambitious
+					}
+					
+					add_to_list = vassals_to_give
+				}
+			}
+			
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+			
+			every_in_list = {
+				list = titles_to_give
+				change_title_holder = {
+					holder = scope:title_recipient
+					change = scope:change
+					take_baronies = yes
+				}
+			}
+			
+			every_in_list = {
+				list = vassals_to_give
+				change_liege = {
+					liege = scope:title_recipient
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+			
+			# Then they become independent
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
+
+			resolve_title_and_vassal_change = scope:change
+		}
+	}
+
+	
+	### Vassals become independent
+	hidden_effect = {
+		every_vassal = {
+			# Any vassal who does not hold land within de jure titles you own becomes independent
+			limit = {
+				NOT = {
+					this.primary_title.kingdom = {
+						any_in_de_jure_hierarchy = {
+							holder = root
+						}
+					}
+				}
+			}
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
 			becomes_independent = {
 				change = scope:change
 			}
+
+			resolve_title_and_vassal_change = scope:change
 		}
 		
-		resolve_title_and_vassal_change = scope:change
+		### Any county that isn't de Jure under our primary title becomes independent
+		every_in_list = {
+			list = titles_to_make_independent
+			save_scope_as = current_title
+			
+			create_character = {
+				location = scope:current_title.location
+				template = new_commander_character ### EK TODO: Not that (lol)
+				faith = scope:current_title.faith
+				culture = scope:current_title.culture
+				save_scope_as = title_recipient
+				gender_female_chance = {
+					if = {
+						limit = { scope:the_faith = { has_doctrine = doctrine_gender_male_dominated } }
+						add = 0
+					}
+					else_if = {
+						limit = { scope:the_faith = { has_doctrine = doctrine_gender_female_dominated } }
+						add = 100
+					}
+					else = {
+						add = 50
+					}
+				}
+			}
+			scope:title_recipient = { ek_character_setup_effect = yes }
+			
+			# We give them the title
+			create_title_and_vassal_change = {
+				type = independency
+				save_scope_as = change
+				add_claim_on_loss = no
+			}
+
+			change_title_holder = {
+				holder = scope:title_recipient
+				change = scope:change
+				take_baronies = yes
+			}
+			
+			# And we make them independent
+			scope:title_recipient = {
+				becomes_independent = {
+					change = scope:change
+				}
+			}
+			
+			resolve_title_and_vassal_change = scope:change
+		}
 	}
 	
-	custom_tooltip = imperial_commune_creation_tooltip
-	custom_tooltip = rest_cyrodiil_indepndent_tooltip
+	custom_tooltip = rest_cyrodiil_independent_tooltip
+	
+	if = {
+		limit = {
+			is_target_in_global_variable_list = {
+				name = unavailable_unique_decisions
+				target = flag:attrebus_repay_debts_decision
+			}
+		}
+		custom_tooltip = attrebus_repay_debts_decision_effect_shattering
+		
+		hidden_effect = {
+			scope:title_recipient = { add_gold = 1000 }
+		}
+	}
+	
+	# We (Cyrodiilic culture group) lose the Lingua Tamrielis innovation
+	custom_tooltip = interregnum_loses_lingua_tamrielis
+	hidden_effect = {
+		every_culture_global = {
+			limit = {
+				culture_group = culture_group:cyrodiilic_group
+				has_innovation = innovation_lingua_tamrielis
+			}
+			remove_innovation = innovation_lingua_tamrielis
+		}
+	}
+	
+	## Now we destroy some stuff, and the Interregnum begins...
+	hidden_effect = {
+		destroy_title = title:e_cyrodiilic_potentate
+	}
+	custom_tooltip = line_break
 	custom_tooltip = interregnum_starts_tooltip
+}
+
+# Attrebus stuff
+attrebus_fulfill_required_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_required_tasks_complete } }
+			set_variable = {
+				name = attrebus_required_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_required_tasks_complete
+				add = 1
+			}
+		}
+		
+		change_variable = {
+			name = attrebus_years_pseudo_emperor_left
+			add = 5
+		}
+	}
+}
+attrebus_fulfill_optional_task = {
+	$ATTREBUS$ = {
+		if = {
+			limit = { NOT = { has_variable = attrebus_optional_tasks_complete } }
+			set_variable = {
+				name = attrebus_optional_tasks_complete
+				value = 1
+			}
+		}
+		else = {
+			change_variable = {
+				name = attrebus_optional_tasks_complete
+				add = 1
+			}
+		}
+	}
 }
 
 ### To easily apply the effects of the Plunderer perks
@@ -427,5 +595,434 @@ increase_wounds_two_times_effect = {
 		death = {
 			death_reason = death_$REASON$
 		}
+	}
+}
+
+# Inflict the Blood Price on someone - blood
+# Need a prisoner and an imprisoner
+inflict_bloodprice = {
+	$PRISONER$ = {
+		if = { # No reason? Small health penalty
+			limit = {
+				$JAILOR$ = {
+					NOR = {
+						has_imprisonment_reason = $PRISONER$
+						has_execute_reason = $PRISONER$
+					}
+				}
+			}
+			
+			custom_tooltip = extract_blood_price_effect_no_reason_tooltip
+			add_character_modifier = {
+				modifier = small_blood_price_modifier
+				years = 5
+			}
+		}
+		else_if = { # Imprisonment reason? +1 Wound
+			limit = { $JAILOR$ = { NOT = { has_execute_reason = $PRISONER$ } } }
+			
+			custom_tooltip = extract_blood_price_effect_imprisonment_reason_tooltip
+			
+			increase_wounds_effect = { REASON = execution_blood_price }
+		}
+		else = { # Execution reason? +2 Wound
+			custom_tooltip = extract_blood_price_effect_execution_reason_tooltip
+			
+			increase_wounds_two_times_effect = { REASON = execution_blood_price }
+		}
+		
+		consume_all_criminal_reasons_effect = {
+			LIEGE = $JAILOR$
+			CRIMINAL = $PRISONER$
+		}
+		
+		$JAILOR$ = {
+			add_prestige = miniscule_prestige_value
+			if = {
+				limit = { faith = { has_doctrine = tenet_legalism } }
+				add_piety = miniscule_piety_value
+			}
+		}
+		
+		custom_tooltip = extract_blood_price_effect_survival_release_tooltip
+		
+		release_from_prison = yes
+	}
+}
+
+#generate a three part name for summoned dragons
+get_dragon_name = {
+    save_scope_value_as = { name = max_length value = { integer_range = { min = 13 max = 16 } } } #13-16 feels good. longest named dragon is 14, location is 15
+
+    # save length scopes for maths, need them to exist
+    save_scope_value_as = { name = part_1_length value = 0 }
+    save_scope_value_as = { name = part_2_length value = 0 }
+    save_scope_value_as = { name = part_3_length value = 0 }
+
+    # get part sizes and numbers
+    get_dragon_name_part_size = { X = 1 }
+    get_dragon_name_part_size = { X = 2 }
+    get_dragon_name_part_size = { X = 3 }
+
+    # if any are the same, get another
+    # also some filtering
+    while = { #part 1. 'the'/'of' dont tend to fit at the start
+        limit = {
+            OR = {
+                AND = { #The
+                    scope:part_1_length = 3
+                    scope:part_1 = 5
+                }
+                AND = { #Of
+                    scope:part_1_length = 2
+                    scope:part_1 = 11
+                }
+            }
+        }
+        save_scope_value_as = { name = part_1_length value = 0 }
+        get_dragon_name_part_size = { X = 1 }
+    }
+    while = { #part 2. cant be same as part 1
+        limit = {
+            scope:part_2_length = { compare_value = scope:part_1_length }
+            scope:part_2 = { compare_value = scope:part_1 }
+        }
+        save_scope_value_as = { name = part_2_length value = 0 }
+        get_dragon_name_part_size = { X = 2 }
+    }
+    while = { #part 3. 'the'/'of' dont tend to fit at the end, cant be same as part 1 or 2
+        limit = {
+            OR = {
+                AND = {
+                    scope:part_3_length = { compare_value = scope:part_1_length }
+                    scope:part_3 = { compare_value = scope:part_1 }
+                }
+                AND = {
+                    scope:part_3_length = { compare_value = scope:part_2_length }
+                    scope:part_3 = { compare_value = scope:part_2 }
+                }
+                AND = { #The
+                    scope:part_3_length = 3
+                    scope:part_3 = 5
+                }
+                AND = { #Of
+                    scope:part_3_length = 2
+                    scope:part_3 = 11
+                }
+            }
+        }
+        save_scope_value_as = { name = part_3_length value = 0 }
+        get_dragon_name_part_size = { X = 3 }
+    }
+
+    # convert number to name flag with switch
+    set_dragon_name_part = { X = 1 }
+    set_dragon_name_part = { X = 2 }
+    set_dragon_name_part = { X = 3 }
+}
+get_dragon_name_part_size = {
+    save_scope_value_as = { #save current length
+        name = current_length
+        value = {
+            value = scope:part_1_length
+            add = scope:part_2_length
+            add = scope:part_3_length
+        }
+    }
+
+    random_list = {
+        100 = {
+            trigger = { #would any of the options go over the max length? add 2 as min part length
+                save_temporary_scope_value_as = { name = trig_0 value = { value = scope:current_length add = 2 } }
+                scope:max_length = { compare_value < scope:trig_0 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 0 }
+            save_scope_value_as = { name = part_$X$ value = 0 }
+        }
+        14 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_2 value = { value = scope:current_length add = 2 } }
+                scope:max_length = { compare_value >= scope:trig_2 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 2 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 14 } } }
+        }
+        40 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_3 value = { value = scope:current_length add = 3 } }
+                scope:max_length = { compare_value >= scope:trig_3 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 3 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 40 } } }
+        }
+        41 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_4 value = { value = scope:current_length add = 4 } }
+                scope:max_length = { compare_value >= scope:trig_4 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 4 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 41 } } }
+        }
+        10 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_5 value = { value = scope:current_length add = 5 } }
+                scope:max_length = { compare_value >= scope:trig_5 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 5 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 10 } } }
+        }
+        6 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_6 value = { value = scope:current_length add = 6 } }
+                scope:max_length = { compare_value >= scope:trig_6 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 6 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 6 } } }
+        }
+        2 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_7 value = { value = scope:current_length add = 7 } }
+                scope:max_length = { compare_value >= scope:trig_7 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 7 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 2 } } }
+        }
+        1 = {
+            trigger = { #would this option be below max length?
+                save_temporary_scope_value_as = { name = trig_8 value = { value = scope:current_length add = 8 } }
+                scope:max_length = { compare_value >= scope:trig_8 }
+            }
+            save_scope_value_as = { name = part_$X$_length value = 8 }
+            save_scope_value_as = { name = part_$X$ value = { integer_range = { min = 1 max = 1 } } }
+        }
+    }
+}
+set_dragon_name_part = {
+    switch = {
+        trigger = scope:part_$X$_length
+
+        0 = { set_variable = { name = name$X$ value = flag:dn_blank days = 1 } } #Blank
+
+        2 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_ag } } #Burn
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_ah } } #Hunter
+                3 = { save_scope_value_as = { name = name$X$ value = flag:dn_al } } #Destroyer
+                4 = { save_scope_value_as = { name = name$X$ value = flag:dn_du } } #Devour
+                5 = { save_scope_value_as = { name = name$X$ value = flag:dn_fo } } #Frost
+                6 = { save_scope_value_as = { name = name$X$ value = flag:dn_in } } #Master
+                7 = { save_scope_value_as = { name = name$X$ value = flag:dn_lo } } #Deceive
+                8 = { save_scope_value_as = { name = name$X$ value = flag:dn_od } } #Snow
+                9 = { save_scope_value_as = { name = name$X$ value = flag:dn_on } } #Spirit
+                10 = { save_scope_value_as = { name = name$X$ value = flag:dn_qo } } #Lightning
+                11 = { save_scope_value_as = { name = name$X$ value = flag:dn_se } } #Of
+                12 = { save_scope_value_as = { name = name$X$ value = flag:dn_su } } #Air
+                13 = { save_scope_value_as = { name = name$X$ value = flag:dn_tu } } #Hammer
+                14 = { save_scope_value_as = { name = name$X$ value = flag:dn_ul } } #Eternity
+            }
+        }
+
+        3 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_bah } } #Wrath
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_dun } } #Grace
+                3 = { save_scope_value_as = { name = name$X$ value = flag:dn_dur } } #Curse
+                4 = { save_scope_value_as = { name = name$X$ value = flag:dn_fel } } #Feral
+                5 = { save_scope_value_as = { name = name$X$ value = flag:dn_fin } } #The
+                6 = { save_scope_value_as = { name = name$X$ value = flag:dn_fus } } #Force
+                7 = { save_scope_value_as = { name = name$X$ value = flag:dn_hah } } #Mind
+                8 = { save_scope_value_as = { name = name$X$ value = flag:dn_iiz } } #Ice
+                9 = { save_scope_value_as = { name = name$X$ value = flag:dn_jot } } #Maw
+                10 = { save_scope_value_as = { name = name$X$ value = flag:dn_kah } } #Pride
+                11 = { save_scope_value_as = { name = name$X$ value = flag:dn_kro } } #Sorcerer
+                12 = { save_scope_value_as = { name = name$X$ value = flag:dn_kun } } #Moonlight
+                13 = { save_scope_value_as = { name = name$X$ value = flag:dn_lok } } #Rise
+                14 = { save_scope_value_as = { name = name$X$ value = flag:dn_lot } } # Great
+                15 = { save_scope_value_as = { name = name$X$ value = flag:dn_luv } } #Tear
+                16 = { save_scope_value_as = { name = name$X$ value = flag:dn_mah } } #Fall/Fell
+                17 = { save_scope_value_as = { name = name$X$ value = flag:dn_mir } } #Allegiance
+                18 = { save_scope_value_as = { name = name$X$ value = flag:dn_mul } } #Strong
+                19 = { save_scope_value_as = { name = name$X$ value = flag:dn_nah } } #Fury
+                20 = { save_scope_value_as = { name = name$X$ value = flag:dn_nax } } #Cruelty
+                21 = { save_scope_value_as = { name = name$X$ value = flag:dn_neh } } #Never
+                22 = { save_scope_value_as = { name = name$X$ value = flag:dn_nin } } #Sting
+                23 = { save_scope_value_as = { name = name$X$ value = flag:dn_nir } } #Hunt
+                24 = { save_scope_value_as = { name = name$X$ value = flag:dn_nos } } #Strike
+                25 = { save_scope_value_as = { name = name$X$ value = flag:dn_qah } } #Armor
+                26 = { save_scope_value_as = { name = name$X$ value = flag:dn_rel } } #Domination
+                27 = { save_scope_value_as = { name = name$X$ value = flag:dn_rot } } #Word
+                28 = { save_scope_value_as = { name = name$X$ value = flag:dn_sah } } #Phantom
+                29 = { save_scope_value_as = { name = name$X$ value = flag:dn_sot } } #White
+                30 = { save_scope_value_as = { name = name$X$ value = flag:dn_sov } } #Shock
+                31 = { save_scope_value_as = { name = name$X$ value = flag:dn_sul } } #Day
+                32 = { save_scope_value_as = { name = name$X$ value = flag:dn_vah } } #Spring
+                33 = { save_scope_value_as = { name = name$X$ value = flag:dn_ved } } #Black
+                34 = { save_scope_value_as = { name = name$X$ value = flag:dn_vey } } #Cut
+                35 = { save_scope_value_as = { name = name$X$ value = flag:dn_vol } } #Horror
+                36 = { save_scope_value_as = { name = name$X$ value = flag:dn_vul } } #Dark
+                37 = { save_scope_value_as = { name = name$X$ value = flag:dn_vur } } #Valor
+                38 = { save_scope_value_as = { name = name$X$ value = flag:dn_yol } } #Fire
+                39 = { save_scope_value_as = { name = name$X$ value = flag:dn_zii } } #Spirit
+                40 = { save_scope_value_as = { name = name$X$ value = flag:dn_zin } } #Honor
+            }
+        }
+
+        4 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_brii } } #Beauty
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_brit } } #Beautiful
+                3 = { save_scope_value_as = { name = name$X$ value = flag:dn_daan } } #Doom
+                4 = { save_scope_value_as = { name = name$X$ value = flag:dn_drog } } #Lord
+                5 = { save_scope_value_as = { name = name$X$ value = flag:dn_duul } } #Crown
+                6 = { save_scope_value_as = { name = name$X$ value = flag:dn_feyn } } #Bane
+                7 = { save_scope_value_as = { name = name$X$ value = flag:dn_fiik } } #Mirror
+                8 = { save_scope_value_as = { name = name$X$ value = flag:dn_frin } } #Hot
+                9 = { save_scope_value_as = { name = name$X$ value = flag:dn_gaaf } } #Ghost
+                10 = { save_scope_value_as = { name = name$X$ value = flag:dn_gaar } } #Unleash/Release
+                11 = { save_scope_value_as = { name = name$X$ value = flag:dn_golz } } #Stone
+                12 = { save_scope_value_as = { name = name$X$ value = flag:dn_grah } } #Battle
+                13 = { save_scope_value_as = { name = name$X$ value = flag:dn_gron } } #Bind
+                14 = { save_scope_value_as = { name = name$X$ value = flag:dn_heyv } } #Duty
+                15 = { save_scope_value_as = { name = name$X$ value = flag:dn_jiid } } #Moon
+                16 = { save_scope_value_as = { name = name$X$ value = flag:dn_kaal } } #Champion
+                17 = { save_scope_value_as = { name = name$X$ value = flag:dn_kein } } #War
+                18 = { save_scope_value_as = { name = name$X$ value = flag:dn_kest } } #Tempest
+                19 = { save_scope_value_as = { name = name$X$ value = flag:dn_kren } } #Break
+                20 = { save_scope_value_as = { name = name$X$ value = flag:dn_krif } } #Fight
+                21 = { save_scope_value_as = { name = name$X$ value = flag:dn_krii } } #Kill
+                22 = { save_scope_value_as = { name = name$X$ value = flag:dn_kril } } #Brave
+                23 = { save_scope_value_as = { name = name$X$ value = flag:dn_krin } } #Courageous
+                24 = { save_scope_value_as = { name = name$X$ value = flag:dn_laas } } #Life
+                25 = { save_scope_value_as = { name = name$X$ value = flag:dn_liiv } } #Wither
+                26 = { save_scope_value_as = { name = name$X$ value = flag:dn_maar } } #Terror
+                27 = { save_scope_value_as = { name = name$X$ value = flag:dn_moro } } #Glory
+                28 = { save_scope_value_as = { name = name$X$ value = flag:dn_naak } } #Eat
+                29 = { save_scope_value_as = { name = name$X$ value = flag:dn_odus } } #Snowy
+                30 = { save_scope_value_as = { name = name$X$ value = flag:dn_onik } } #Wise
+                31 = { save_scope_value_as = { name = name$X$ value = flag:dn_paar } } #Ambition
+                32 = { save_scope_value_as = { name = name$X$ value = flag:dn_paaz } } #Fair
+                33 = { save_scope_value_as = { name = name$X$ value = flag:dn_qeth } } #Bone
+                34 = { save_scope_value_as = { name = name$X$ value = flag:dn_ruth } } #Rage
+                35 = { save_scope_value_as = { name = name$X$ value = flag:dn_thur } } #Overlord
+                36 = { save_scope_value_as = { name = name$X$ value = flag:dn_tiid } } #Time
+                37 = { save_scope_value_as = { name = name$X$ value = flag:dn_vaaz } } #Tear
+                38 = { save_scope_value_as = { name = name$X$ value = flag:dn_viin } } #Shine
+                39 = { save_scope_value_as = { name = name$X$ value = flag:dn_viir } } #Dying
+                40 = { save_scope_value_as = { name = name$X$ value = flag:dn_zind } } #Triumph
+                41 = { save_scope_value_as = { name = name$X$ value = flag:dn_zoor } } #Legend
+            }
+        }
+
+        5 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_ahzid } } #Bitter
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_hevno } } #Brutal
+                3 = { save_scope_value_as = { name = name$X$ value = flag:dn_kriid } } #Slayer
+                4 = { save_scope_value_as = { name = name$X$ value = flag:dn_munax } } #Cruel
+                5 = { save_scope_value_as = { name = name$X$ value = flag:dn_okaaz } } #Sea
+                6 = { save_scope_value_as = { name = name$X$ value = flag:dn_revak } } #Sacred
+                7 = { save_scope_value_as = { name = name$X$ value = flag:dn_strun } } #Storm
+                8 = { save_scope_value_as = { name = name$X$ value = flag:dn_viing } } #Wing
+                9 = { save_scope_value_as = { name = name$X$ value = flag:dn_vokun } } #Shadow
+                10 = { save_scope_value_as = { name = name$X$ value = flag:dn_yuvon } } #Gold/Golden
+            }
+        }
+
+        6 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_boziik } } #Bold(ly)
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_kinzon } } #Sharp
+                3 = { save_scope_value_as = { name = name$X$ value = flag:dn_nonvul } } #Noble
+                4 = { save_scope_value_as = { name = name$X$ value = flag:dn_rovaan } } #Wander
+                5 = { save_scope_value_as = { name = name$X$ value = flag:dn_sahrot } } #Mighty
+                6 = { save_scope_value_as = { name = name$X$ value = flag:dn_vahlok } } #Guardian
+            }
+        }
+
+        7 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_bahlaan } } #Worthy
+                2 = { save_scope_value_as = { name = name$X$ value = flag:dn_kruziik } } #Ancient
+            }
+        }
+
+        8 = {
+            switch = {
+                trigger = scope:part_$X$
+                1 = { save_scope_value_as = { name = name$X$ value = flag:dn_nahkriin } } #Vengeance
+            }
+        }
+    }
+}
+
+### Daedric whispers - Give the right combo of trait and daedra
+# Flag
+set_combo_trait_daedra_flag = {
+	add_character_flag = stress_$TRAIT$_$DAEDRA$
+}
+
+### Might Makes Right
+# Laws - Check if a law is still good even after you lose a level of Fame or Devotion
+# Current scope must be the character
+might_makes_right_update_law_fame_devotion = {
+	# if = {
+		# limit = {
+			# OR = {
+				# AND = {
+					# has_realm_law = crown_authority_1
+					# NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+				# }
+				# has_realm_law = crown_authority_2
+				# has_realm_law = crown_authority_3
+			# }
+		# }
+	# }
+	if = {
+		limit = {
+			has_realm_law = crown_authority_3
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 5
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 5
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_2
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_2
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 4
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 4
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_1
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_1
+			NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+			NOR = {
+				prestige_level >= 3
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 3
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_0
 	}
 }
