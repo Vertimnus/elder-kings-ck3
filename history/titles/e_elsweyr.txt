@@ -1,10 +1,10 @@
 e_elsweyr = {
     300.1.1 = { change_development_level = 5 }
     3229.1.1 = {
-        holder = anequina_001
+        #holder = anequina_002
     }
     3333.1.1 = {
-        holder = mane_002
+        #holder = mane_002
     }
 }
 #Pelletine
@@ -493,9 +493,7 @@ d_heimthor = {
 }
 
 c_heimthor = {
-    3319.1.1 = {
-        holder = heimthor_001
-    }
+    3319.1.1 = { holder = heimthor_001 }
 }
 
 d_xylo = {
@@ -506,37 +504,27 @@ d_xylo = {
 }
 
 c_artay = {
-    3345.1.1 = {
-        holder = xylo_001
-    }
+    3345.1.1 = { holder = xylo_001 }
 }
 
 c_agrotis = {
-    3321.1.1 = {
-        holder = agrotis_001
-    }
-    3345.1.1 = {
-        liege = d_xylo
-    }
+    3321.1.1 = { holder = agrotis_001 }
+    3345.1.1 = { liege = d_xylo }
 }
 
 #Anequina
 k_anequina = {
-    3229.1.1 = {
-        holder = anequina_001
-    }
-    3308.1.1 = {
-        holder = anequina_002
-    }
+    447.1.1 = { holder = anequina_001 }
+    3229.1.1 = { holder = anequina_002 }
+    3244.1.1 = { liege = e_elsweyr }
+    3308.1.1 = { holder = anequina_003 }
 }
 
+##Rimmen
 k_rimmen = {
-    3229.1.1 = {
-        holder = anequina_001
-    }
-    3308.1.1 = {
-        holder = anequina_002
-    }
+    449.1.1 = { holder = anequina_001 }
+    3229.1.1 = { holder = anequina_002 }
+    3308.1.1 = { holder = anequina_003 }
     3496.6.9 = {
         holder = tharn_202
         effect = { title:k_rimmen = { set_coa = k_euraxian_rimmen } }
@@ -556,25 +544,15 @@ c_verkarth = {
 }
 
 d_rimmen = {
-    3229.1.1 = {
-        holder = anequina_001
-    }
-    3308.1.1 = {
-        holder = anequina_002
-    }
-    3496.6.9 = {
-        holder = tharn_202
-    }
+    3229.1.1 = { holder = anequina_002 }
+    3308.1.1 = { holder = anequina_003 }
+    3496.6.9 = { holder = tharn_202 }
 }
 
 c_rimmen = {
     300.1.1 = { change_development_level = 14 }
-    3229.1.1 = {
-        holder = anequina_001
-    }
-    3308.1.1 = {
-        holder = anequina_002
-    }
+    3229.1.1 = { holder = anequina_002 }
+    3308.1.1 = { holder = anequina_003 }
 }
 
 c_hakoshae = {
@@ -592,35 +570,42 @@ c_hakoshae = {
     3499.1.1 = { holder = hakoshae_006 }
 }
 
-c_valley_guard = {
-   3342.1.1 = {
-        holder = rojodirr_001
+d_rim_valley = {
+    3342.1.1 = {
+        holder = rim_valley_001
         liege = k_rimmen
     }
 }
 
-d_rim_valley = {
-    3342.1.1 = {
-        holder = rojodirr_001
+c_valley_guard = {
+   3342.1.1 = {
+        holder = rim_valley_001
+        liege = k_rimmen
     }
 }
 
 d_ro_jodirr = {
-    3342.1.1 = {
-        holder = rojodirr_001
-    }
+    3342.1.1 = { holder = rim_valley_001 }
 }
 
 c_ro_jodirr = {
-    3342.1.1 = {
+    3351.1.1 = {
         holder = rojodirr_001
+        liege = d_rim_valley
     }
 }
 
 c_kerur = {
     3342.1.1 = {
-        holder = rojodirr_001
+        holder = rim_valley_001
     }
+}
+
+c_argolis = {
+    3324.1.1 = {
+        holder = argolis_001
+    }
+    3342.1.1 = { liege = d_rim_valley }
 }
 
 d_lynmount = {
@@ -631,9 +616,66 @@ d_lynmount = {
 }
 
 c_lynmount = {
-    3351.1.1 = {
-        holder = lynmount_001
+    3351.1.1 = { holder = lynmount_001 }
+}
+
+#Orcrest
+
+k_orcrest = {
+    3229.1.1 = { holder = anequina_002 }
+}
+
+d_orcrest = {
+    3229.1.1 = { holder = anequina_002 }
+    3340.1.1 = {
+        holder = rasiniit_001
+        liege = k_anequina
     }
+}
+
+c_orcrest = {
+    300.1.1 = { change_development_level = 11 }
+    3340.1.1 = { holder = rasiniit_001 }
+    3500.1.1 = { holder = zanai_001 }
+}
+
+c_weeping_scar = {
+    3351.1.1 = { holder = shortclaw_001 }
+	3500.1.1 = { holder = zalviit_001 }
+}
+
+c_the_tangle = {
+    3351.1.1 = { holder = shortclaw_002 }
+	3500.1.1 = { holder = sharpclaw_001 }
+}
+
+c_meryvale = {
+    3345.1.1 = { holder = merryvale_001 }
+	3500.1.1 = { holder = arana_1001 }
+}
+
+c_greenval = {
+    3345.1.1 = { holder = merryvale_001 }
+	3500.1.1 = { holder = ronai_001 }
+}
+
+c_tenmar = {
+    3345.1.1 = { holder = merryvale_001 }
+	3500.1.1 = { holder = arana_1001 }
+}
+
+c_badland = {
+    3313.1.1 = { holder = badland_001 }
+	3500.1.1 = { holder = sharpclaw_001 }
+}
+
+##Anequina
+d_anequina = {
+    447.1.1 = { holder = anequina_001 }
+    3229.1.1 = { holder = anequina_002 }
+    3244.1.1 = { holder = cicatrice_001 }
+    3254.1.1 = { holder = nequinal_001 }
+    3335.1.1 = { holder = nequinal_002 }
 }
 
 d_altadoon = {
@@ -668,39 +710,6 @@ c_tahuda = {
 	3500.1.1 = { holder = arana_1001 }
 	}
 
-c_meryvale = {
-	3500.1.1 = { holder = arana_1001 }
-	}
-
-c_tenmar = {
-	3500.1.1 = { holder = arana_1001 }
-	}
-
-c_orcrest = {
-    300.1.1 = { change_development_level = 11 }
-	3500.1.1 = { holder = zanai_001 }
-	}
-
 c_the_prowl = {
 	3500.1.1 = { holder = mahkar_001 }
-	}
-
-c_the_tangle = {
-	3500.1.1 = { holder = sharpclaw_001 }
-	}
-
-c_badland = {
-	3500.1.1 = { holder = sharpclaw_001 }
-	}
-
-c_weeping_scar = {
-	3500.1.1 = { holder = zalviit_001 }
-	}
-
-c_weeping_scar = {
-	3500.1.1 = { holder = zalviit_001 }
-	}
-
-c_greenval = {
-	3500.1.1 = { holder = ronai_001 }
 	}
