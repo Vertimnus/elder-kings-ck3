@@ -346,6 +346,33 @@ attrebus_fulfill_optional_task = {
 		}
 	}
 }
+# Functions to increase/decrease the number of years Attrebus has in his pseudo-Emperor path
+attrebus_increase_amount_pseudo_emperor_years = {
+	attrebus_change_amount_pseudo_emperor_years = { OPERATION = add AMOUNT = $AMOUNT$ }
+}
+attrebus_decrease_amount_pseudo_emperor_years = {
+	if = {
+		limit = { var:attrebus_years_pseudo_emperor_left = { compare_value <= $AMOUNT$ } }
+		
+		custom_tooltip = attrebus_change_amount_pseudo_emperor_years_ec_immediate_action_ct
+	}
+	
+	attrebus_change_amount_pseudo_emperor_years = { OPERATION = subtract AMOUNT = $AMOUNT$ }
+}
+attrebus_change_amount_pseudo_emperor_years = {
+	change_variable = {
+		name = attrebus_years_pseudo_emperor_left
+		$OPERATION$ = $AMOUNT$
+	}
+	
+	if = {
+		limit = { var:attrebus_years_pseudo_emperor_left = { compare_value < 1 } }
+		
+		custom_tooltip = attrebus_change_amount_pseudo_emperor_years_ec_immediate_action_ct
+		
+		trigger_event = ek_attrebus_potentate.0051
+	}
+}
 
 ### To easily apply the effects of the Plunderer perks
 calculate_bonus_resources_from_loot = {
