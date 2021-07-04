@@ -131,7 +131,7 @@ pelletine_001 = {
 	religion = twomoonsdance
 	female = yes
 	3200.1.1 = { birth = yes }
-	3229.1.1 = { add_spouse = anequina_002 } # Keirgo Soloni
+	3229.1.1 = { add_spouse = anequina_003 } # Keirgo Soloni
 	3290.1.1 = { death = yes }
 }
 
@@ -159,6 +159,23 @@ pelletine_003 = {
 
 #Anequinan Royal Family
 anequina_001 = {
+	name = "Darloc"
+	dynasty = 1110000
+	culture = anequinan
+	religion = mehrunes_cult
+	trait = brave
+	trait = ambitious
+	trait = callous
+	trait = education_martial_prowess_4
+	trait = physique_good_2
+	trait = scarred
+	trait = overseer
+
+	423.1.1 = { birth = yes }
+	452.1.1 = { give_nickname = nick_the_golden_beast }
+	500.1.1 = { death = { death_reason = battle } }
+}
+anequina_002 = {
     name = "Keirgo"
 	dynasty = 1110000
 	culture = anequinan
@@ -168,7 +185,7 @@ anequina_001 = {
 	3252.1.1 = { death = yes }
 }
 
-anequina_002 = {
+anequina_003 = {
 	name = "Dasha-daro"
 	dynasty = 1110000
 	culture = anequinan
@@ -692,7 +709,7 @@ agrotis_001 = {
 }
 
 #Rim Valley Dukes
-rojodirr_001 = {
+rim_valley_001 = {
 	name = "Dro'rassa"
 	culture = anequinan
 	religion = twomoonsdance
@@ -707,17 +724,53 @@ rojodirr_001 = {
 	dynasty_house = brae_rassa
 
 	3293.1.1 = { birth = yes }
-	3410.1.1 = { death = yes }
+	3380.1.1 = { death = yes }
+}
+
+#Ro Jodirr moon Bishop
+rojodirr_001 = {
+	name = "Ma'dran"
+	culture = anequinan
+	religion = twomoonsdance
+	lowborn = yes
+
+	3313.1.1 = { birth = yes }
+	3392.1.1 = { death = yes }
+}
+
+#Argolis mayor
+argolis_001 = {
+	name = "Assi-daro"
+	culture = anequinan
+	religion = twomoonsdance
+	lowborn = yes
+
+	3287.1.1 = { birth = yes }
+	3362.1.1 = { death = yes }
 }
 
 #Orcrest
+rasiniit_001 = {
+	name = "Soud-ra"
+	culture = anequinan
+	religion = twomoonsdance
+	dynasty = 1110010
+
+	trait = brave
+	trait = wrathful
+	trait = humble
+
+	3293.1.1 = { birth = yes }
+	3368.1.1 = { death = yes }
+}
+
 raihir_001 = {
 	name = "Thannar"
 	culture = anequinan
 	religion = idealmasters
 	dynasty = 1110004
 	give_nickname = nick_the_graveprowler
-	
+
 	trait = necromancer
 
 	3462.1.1 = { birth = yes }
@@ -730,11 +783,36 @@ zanai_001 = {
 	religion = manypathsdance
 	dynasty = 1110005
 	give_nickname = nick_the_cannibal_king
-	
+
 	trait = cannibal
 
 	3462.1.1 = { birth = yes }
 	3503.10.1 = { death = yes }
+}
+
+#Weeping Scar
+shortclaw_001 = {
+	name = "Sha'tabe"
+	culture = anequinan
+	religion = twomoonsdance
+	dynasty = 1110011
+
+	trait = twin
+	trait = poet
+	3341.1.1 = {birth = yes}
+	3380.1.1 = { death = { death_reason = death_duel killer = shortclaw_002 } }
+}
+
+shortclaw_002 = {
+	name = "Qa'tabe"
+	culture = anequinan
+	religion = twomoonsdance
+	dynasty = 1110011
+
+	trait = twin
+	trait = berserker
+	3341.1.1 = {birth = yes}
+	3380.1.1 = { death = { death_reason = death_duel killer = shortclaw_001 } }
 }
 
 sharpclaw_001 = {
@@ -748,13 +826,56 @@ sharpclaw_001 = {
 	3503.10.1 = { death = yes }
 }
 
+#Badlands count, went the same way as Shortclaw clan
+badland_001 = {
+	name = "Ak'averr"
+	culture = anequinan
+	religion = manypathsdance
+	dynasty = 1110007
+
+	3298.1.1 = { birth = yes }
+	3373.1.1 = { death = yes }
+}
+
+#Merryvale
+merryvale_001 = {
+	name = "Sala-Dro"
+	culture = anequinan
+	religion = manypathsdance
+	lowborn = yes
+
+	3300.1.1 = { birth = yes }
+	3387.1.1 = { death = yes }
+}
+
+#Ne Quin-al moon-bishops
+nequinal_001 = {
+	name = "Jodhama"
+	culture = anequinan
+	religion = manypathsdance
+	lowborn = yes
+
+	3231.1.1 = { birth = yes }
+	3335.1.1 = { death = yes }
+}
+nequinal_002 = {
+	name = "Zahleena"
+	culture = anequinan
+	religion = manypathsdance
+	lowborn = yes
+	female = yes
+
+	3300.1.1 = { birth = yes }
+	3386.1.1 = { death = yes }
+}
+
 mahkar_001 = {
 	name = "Rahti"
 	culture = anequinan
 	religion = manypathsdance
 	dynasty = 1110007
 	give_nickname = nick_the_peeler
-	
+
 	trait = hunter
 
 	3458.1.1 = { birth = yes }
@@ -766,12 +887,12 @@ zalviit_001 = {
 	culture = anequinan
 	religion = scions_faith
 	dynasty = 1110009
-	
+
 	trait = hunter
 	trait = sadistic
 
 	3400.1.1 = { birth = yes }
-	3429.12.10 = { 
+	3429.12.10 = {
 		trait = vampire_character
 		effect = { set_immortal_age = 29 }
 	}
@@ -784,7 +905,7 @@ ronai_001 = {
 	religion = manypathsdance
 	dynasty = 1110008
 	give_nickname = nick_the_charred_prince
-	
+
 	trait = lunatic_1
 	trait = wrathful
 	trait = arbitrary
