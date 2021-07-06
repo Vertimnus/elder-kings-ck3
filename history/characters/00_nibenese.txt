@@ -1714,6 +1714,7 @@ derana_100 = {
 	father = derana_99
 
 	3333.1.1 = { birth = yes }
+	3359.7.5 = { religion = reman_cult }
 	3402.1.1 = { death = yes }
 }
 derana_101 = {
@@ -4257,6 +4258,8 @@ caro_805 = { #Count of Leyawiin, Interregnum Startdate
 	intrigue = 4
 	learning = 3
 	trait = education_stewardship_3
+	trait = lazy
+	trait = shy
 
 	father = caro_803
 	mother = caro_804
@@ -4272,6 +4275,10 @@ caro_806 = {
 	culture = nibenese
 
 	trait = twin #twin terentius_104
+	trait = education_martial_1
+	trait = arrogant
+	trait = paranoid
+	trait = deceitful
 
 	father = terentius_102
 	#mother = 300330 ck2 id
@@ -4609,8 +4616,60 @@ divarios_100 = {
 	religion = imperial_cult
 	culture = nibenese
 
-	3328.1.1 = { birth = yes }
+	trait = education_learning_3
+	trait = just
+	trait = stubborn
+	trait = calm
+
+	3328.11.26 = { birth = yes }
+	3347.1.1 = { add_spouse = divarios_100_wife }
 	3372.1.1 = { death = yes }	
+}
+divarios_100_wife = {
+	name = "Fausta"
+	female = yes
+	dynasty = 120021
+	religion = imperial_cult
+	culture = nibenese
+
+	trait = education_learning_3
+	trait = greedy
+	trait = forgiving
+	trait = lustful
+
+	3328.8.3 = { birth = yes }
+	3374.1.1 = { death = yes }	
+}
+divarios_101 = {
+	name = "Cotius"
+	dynasty = 120004
+	religion = imperial_cult
+	culture = nibenese
+
+	father = divarios_100
+	mother = divarios_100_wife
+
+	trait = lunatic
+	trait = cynical
+	trait = generous
+	trait = curious
+
+	3347.10.4 = { birth = yes }
+	3377.1.1 = { religion = sheogorath_cult }
+	3406.6.14 = { death = yes }	
+}
+divarios_102 = {
+	name = "Longina"
+	female = yes
+	dynasty = 120004
+	religion = imperial_cult
+	culture = nibenese
+
+	father = divarios_100
+	mother = divarios_100_wife
+
+	3353.2.18 = { birth = yes }
+	3414.9.27 = { death = yes }	
 }
 
 ##Arcato Dynasty (120005)
@@ -4672,7 +4731,50 @@ zelik_100 = {
 	female = yes
 
 	3334.1.1 = { birth = yes }
+	3350.2.28 = { add_matrilineal_spouse = zelik_100_husband }
 	3381.1.1 = { death = yes }
+}
+zelik_100_husband = {
+	name = "Irndarus"
+	dynasty = 120016
+
+	culture = blackwood
+	religion = niben_cult
+
+	father = hertir_999
+
+	trait = bastard
+
+	3334.1.1 = { birth = yes }
+	3381.1.1 = { death = yes }
+}
+zelik_101 = {
+	name = "Zaeram"
+	dynasty = 120006
+
+	culture = blackwood
+	religion = niben_cult
+
+	mother = zelik_100
+	father = zelik_100_husband
+
+	3351.3.7 = { birth = yes }
+	3407.1.1 = { death = yes }
+}
+zelik_102 = {
+	name = "Eruntlai"
+	dynasty = 120006
+
+	female = yes
+
+	culture = blackwood
+	religion = niben_cult
+
+	mother = zelik_100
+	father = zelik_100_husband
+
+	3359.9.16 = { birth = yes }
+	3413.8.1 = { death = yes }
 }
 
 ##Vogian Dynasty (120007)
@@ -5393,6 +5495,7 @@ scepestos_1001 = {
 }
 scepestos_1002 = {
 	name = "Selenu"
+	dynasty = 120018
 	female = yes
 	religion = niben_cult
 	culture = blackwood
@@ -5402,6 +5505,85 @@ scepestos_1002 = {
 
 	3339.4.3 = { birth = yes }
 	3418.11.24 = { birth = yes }
+}
+
+#Xanthianus Dynasty (120019)
+xanthianus_1000 = {
+	name = "Styrichus"
+	dna = xanthianus_styrichus_dna_entry
+	dynasty = 120019
+	religion = imperial_cult
+	culture = blackwood
+
+	3337.2.16 = { birth = yes }
+	3357.1.1 = { add_spouse = xanthianus_1000_wife }
+	3382.5.21 = { birth = yes }
+}
+xanthianus_1000_wife = {
+	name = "Eudocia"
+	female = yes
+	religion = seth
+	culture = nibenese
+
+	3334.7.29 = { birth = yes }
+	3393.10.3 = { birth = yes }
+}
+xanthianus_1001 = {
+	name = "Kirsiati"
+	dynasty = 120019
+	female = yes
+	religion = imperial_cult
+	culture = blackwood
+
+	father = xanthianus_1000
+	mother = xanthianus_1000_wife
+
+	3359.8.5 = { birth = yes }
+	3413.4.9 = { birth = yes }
+}
+
+#Varopodius Dynasty (120020)
+varopodius_1000 = {
+	name = "Privis"
+	dynasty = 120020
+	religion = niben_cult
+	culture = nibenese
+
+	3327.10.1 = { birth = yes }
+	3346.1.1 = { add_spouse = varopodius_1000_wife }
+	3395.1.3 = { death = yes }
+}
+varopodius_1000_wife = {
+	name = "Danaria"
+	religion = niben_cult
+	culture = nibenese
+
+	3328.3.16 = { birth = yes }
+	3396.6.22 = { death = yes }
+}
+varopodius_1001 = {
+	name = "Surian"
+	dynasty = 120020
+	religion = niben_cult
+	culture = nibenese
+
+	father = varopodius_1000
+	mother = varopodius_1000_wife
+
+	3345.7.8 = { birth = yes }
+	3408.1.27 = { death = yes }
+}
+varopodius_1002 = {
+	name = "Tettius"
+	dynasty = 120020
+	religion = niben_cult
+	culture = nibenese
+
+	father = varopodius_1000
+	mother = varopodius_1000_wife
+
+	3353.3.12 = { birth = yes }
+	3412.8.6 = { death = yes }
 }
 
 ###Non-Dynastic Character Entries
@@ -5428,6 +5610,54 @@ nib_lowborn_1000 = {
 			}
 	}
 	3397.1.1 = { death = yes }
+}
+
+
+forsaken_cape_1000 = {
+	name = "Drojar-Ko"
+	dynasty = 1100006
+	culture = pellitinian
+	religion = twomoonsdance
+
+	trait = education_diplomacy_2
+	trait = bastard
+	trait = arbitrary
+	trait = diligent
+	trait = generous
+
+	father = alabaster_001
+
+	3339.1.1 = { birth = yes }
+	3353.1.1 = { add_spouse = forsaken_cape_1000_wife }
+	3407.1.1 = { death = yes }
+}
+forsaken_cape_1000_wife = {
+	name = "Unjasi"
+	female = yes
+	culture = pellitinian
+	religion = twomoonsdance
+
+	trait = education_martial_3
+	trait = patient
+	trait = ambitious
+
+	3339.7.11 = { birth = yes }
+	3405.8.5 = { death = yes }
+}
+forsaken_cape_1001 = {
+	name = "Sena-daro"
+	female = yes
+	dynasty = 1100006
+	culture = pellitinian
+	religion = twomoonsdance
+
+	father = forsaken_cape_1000
+	mother = forsaken_cape_1000_wife
+
+	trait = rowdy
+
+	3354.11.05 = { birth = yes }
+	3432.3.28 = { death = yes }
 }
 
 ##Cities
@@ -5542,7 +5772,41 @@ onyx_marshes_1000 = { #County in Nibenay, Bulwark
 	culture = lukiul
 
 	3323.7.28 = { birth = yes }
+	3343.1.1 = { add_spouse = onyx_marshes_1000_wife }
 	3381.6.14 = { death = yes }	
+}
+onyx_marshes_1000_wife = {
+	name = "Claws-the-Ghosts"
+	religion = hist
+	culture = lukiul
+
+	3322.10.13 = { birth = yes }
+	3378.3.28 = { death = yes }	
+}
+onyx_marshes_1001 = {
+	name = "Forest-Child"
+	#HistoryToDo Give Dynasty
+	religion = niben_cult
+	culture = lukiul
+
+	father = onyx_marshes_1000
+	mother = onyx_marshes_1000_wife
+
+	3341.9.13 = { birth = yes }
+	3404.10.26 = { death = yes }	
+}
+onyx_marshes_1002 = {
+	name = "Chews-The-Marrow"
+	female = yes
+	#HistoryToDo Give Dynasty
+	religion = niben_cult
+	culture = lukiul
+
+	father = onyx_marshes_1000
+	mother = onyx_marshes_1000_wife
+
+	3351.4.19 = { birth = yes }
+	3419.7.4 = { death = yes }	
 }
 
 
