@@ -94,6 +94,7 @@ tor_911 = {
 }
 tor_912 = {
 	name = "Hieron" #King of Colovian Estates ( Interregnum )
+	dna = hieron_dna_entry
 	dynasty_house = cyrodiil_tor
 	religion = reman_cult
 	culture = colovian
@@ -1571,16 +1572,21 @@ kvinchal_6259 = {
 #Pinder Dynasty 
 pinder_6300 = {
 	name = "Jesan"
-	dynasty = pinder
+	dynasty = kvinchal
 	religion = imperial_cult
 	culture = colovian
 
-	trait = bastard_founder
+	trait = legitimized_bastard
 
 	father = kvinchal_6252
 	
 	3365.1.1 = { birth = yes }
 	3378.1.1 = { add_spouse = tamrith_1003 }
+	3396.1.1 = {
+		dynasty = pinder
+		remove_trait = legitimized_bastard
+		trait = bastard_founder
+	}
 	3425.1.1 = { death = yes }
 }
 pinder_antus_mother = {
