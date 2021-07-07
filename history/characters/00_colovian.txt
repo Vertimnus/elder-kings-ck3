@@ -4069,6 +4069,9 @@ nipia_1033 = {
     dynasty = 100039
     religion = hero_cult
     culture = colovian
+	diplomacy = 6
+	martial = 8
+	prowess = 11
 	sexuality = heterosexual
 	trait = sign_steed
 	trait = education_martial_3
@@ -4079,6 +4082,20 @@ nipia_1033 = {
 	father = nipia_1043
 
     3343.9.10 = { birth = yes }
+	3360.1.1 = {
+		remove_trait = education_martial_3
+		remove_trait = education_martial_prowess_1
+	}
+	3361.1.1 = { 
+		add_trait = blademaster_1
+		add_trait = p_ch_reman
+		add_trait = open_terrain_expert
+		add_trait = ambitious
+		add_trait = education_martial_4
+		add_trait = education_martial_prowess_2
+		add_trait = one_eyed
+	}
+	3361.1.1 = { give_nickname = nick_one_eye }
     3398.4.1 = { death = yes }
 }
 nipia_1043 = {
@@ -4105,7 +4122,6 @@ nipia_1043 = {
 	father = nipia_1053
 
     3321.1.10 = { birth = yes }
-	3340.1.1 = { give_nickname = nick_the_star_made_knight }
     3366.5.3 = { death = yes }
 }
 nipia_1143 = {
@@ -4127,13 +4143,13 @@ nipia_1143 = {
 	trait = impatient
 	trait = ambitious
 	trait = wrathful
-	trait = impotent
+	trait = infertile
 	trait = open_terrain_expert
 	trait = hunter_2
 	father = nipia_1053
 
     3338.1.10 = { birth = yes }
-	3360.1.1 = { give_nickname = nick_magus }
+	3366.1.1 = { give_nickname = nick_magus }
     3399.1.2 = { death = yes }
 }
 nipia_1053 = {
@@ -4497,7 +4513,7 @@ stirk_1000 = {
 #House Vorenus
 vorenus_1000 = {
     name = "Tacitus" #'Easteregg' Character of an ESO Rper
-	dna = dion_dna_entry
+	dna = vorenus_dna_entry
     dynasty = 100041
     religion = imperial_cult
     culture = colovian
@@ -4513,6 +4529,7 @@ vorenus_1000 = {
 	trait = brave
 	trait = compassionate
 	trait = reckless
+	trait = peasant_leader
     father = vorenus_1002
     
     3462.2.6 = { birth = yes }
@@ -4537,13 +4554,52 @@ vorenus_1002 = {
 	trait = calm
 	trait = compassionate
 	trait = forest_fighter
+    father = vorenus_1003
     
     3411.2.6 = { birth = yes }
     3482.10.1 = { death = yes }
 }
+vorenus_1003 = {
+    name = "Silas"
+	dna = vorenus_dna_entry
+    dynasty = 100041
+    religion = imperial_cult
+    culture = colovian
+	sexuality = heterosexual
+    father = vorenus_1004
+    
+    3357.2.6 = { birth = yes }
+	3375.11.2 = { employer = nipia_1033 }
+    3421.10.1 = { death = yes }
+}
+vorenus_1004 = {
+    name = "Antonius"
+	dna = vorenus_dna_entry
+    dynasty = 100041
+    religion = imperial_cult
+    culture = colovian
+	prowess = 15
+	sexuality = heterosexual
+	trait = education_diplomacy_2
+	trait = wrathful
+	trait = impatient
+	trait = brave
+	trait = physique_good_1
+	trait = scarred
+	trait = improvident
+	trait = peasant_leader
+    
+    3327.2.6 = { birth = yes }
+    3375.10.1 = { 
+		death = { 
+			death_reason = death_battle
+			killer = wavrick_6125 #Slain by Reman who takes over his titles to establish the Wavrick dynasty.
+			}
+		}
+}
 vorenus_1001 = {
     name = "Brutus"
-	dna = dion_dna_entry
+	dna = vorenus_dna_entry
     dynasty = 100041
     religion = imperial_cult
     culture = colovian
@@ -4646,7 +4702,7 @@ kovich_1001 = {
 
 #Wavrick Dynasty (100048)
 wavrick_6125 = {
-	name = "Reman" #Count of Narfinsel (Warlord)
+	name = "Reman" #dynasty founder
 	dynasty = 100048
 	religion = imperial_cult
     culture = colovian
