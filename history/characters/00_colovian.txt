@@ -3340,13 +3340,18 @@ broder_101 = {
 broder_102 = {
 	name = "Faltonia" #Countess of Blackflats
 	female = yes
+	dna = maera_dna_entry
 	dynasty = 100035
 	religion = imperial_cult
 	culture = colovian
+	trait = honest
+	trait = brave
+	trait = ambitious
 	father = broder_100
 	mother = mantori_101
 	
 	3354.1.1 = { birth = yes }
+	3369.12.12 = { add_spouse = nipia_1033 }
 	3372.1.1 = { death = yes }
 }
 broder_103 = {
@@ -4058,10 +4063,31 @@ nipia_1023 = {
     dynasty = 100039
     religion = hero_cult
     culture = colovian
+	trait = sickly
 	father = nipia_1033
 
     3384.2.10 = { birth = yes }
-    3427.10.1 = { death = yes }
+    3419.10.1 = { death = yes }
+}
+nipia_1123 = {
+    name = "Livina"
+	dna = maera_dna_entry
+	female = yes
+    dynasty = 100039
+    religion = hero_cult
+    culture = colovian
+	father = nipia_1033
+	mother = broder_102
+
+    3369.12.12 = { birth = yes }
+	3384.12.12 = { 
+		add_trait = p_ch_reman
+		add_trait = ambitious
+		add_trait = stubborn
+		add_trait = temperate
+		add_trait = one_eyed
+	}
+    3427.10.1 = { death = { death_reason = death_old_age } }
 }
 nipia_1033 = {
     name = "Hassildor"
@@ -4086,6 +4112,11 @@ nipia_1033 = {
 		remove_trait = education_martial_3
 		remove_trait = education_martial_prowess_1
 	}
+	3360.10.9 = { 
+		effect = {
+			add_gold = 90
+		}
+	}
 	3361.1.1 = { 
 		add_trait = blademaster_1
 		add_trait = p_ch_reman
@@ -4096,6 +4127,8 @@ nipia_1033 = {
 		add_trait = one_eyed
 	}
 	3361.1.1 = { give_nickname = nick_one_eye }
+	3361.1.1 = { add_unpressed_claim = d_chorrol }
+	3361.2.1 = { add_unpressed_claim = c_chorrol }
     3398.4.1 = { death = yes }
 }
 nipia_1043 = {
@@ -4168,10 +4201,11 @@ nipia_1063 = {
     dynasty = 100039
     religion = hero_cult
     culture = colovian
+	trait = sickly
 	father = nipia_1033
 
     3361.2.10 = { birth = yes }
-    3421.10.1 = { death = { death_reason = death_old_age } }
+    3363.10.1 = { death = { death_reason = death_sickly } }
 }
 nipia_1073 = {
     name = "Aventus"
@@ -4179,7 +4213,7 @@ nipia_1073 = {
     dynasty = 100039
     religion = imperial_cult
     culture = colovian
-	father = nipia_1063
+	mother = nipia_1123
 
     3410.1.11 = { birth = yes }
     3477.4.1 = { death = { death_reason = death_old_age } }
