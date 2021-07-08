@@ -391,6 +391,70 @@
 
 )
 
+(define (script-fu-ck3-bm-border-edge-detect image layer border_size border_contrast)
+
+    (gimp-image-undo-group-start image)
+    (gimp-context-push)
+    (gimp-context-set-sample-threshold 0)
+
+    (let*
+        (
+            (layer_group_map (car (gimp-layer-group-new image)))
+            (layer_group_overlay (car (gimp-layer-group-new image)))
+            (layer_color (car (gimp-layer-new image (car (gimp-image-width image)) (car (gimp-image-height image)) RGBA-IMAGE "Colors" 50 LAYER-MODE-NORMAL )))
+            (layer_border (car (gimp-layer-new image (car (gimp-image-width image)) (car (gimp-image-height image)) RGBA-IMAGE "Borders" border_contrast LAYER-MODE-NORMAL )))
+        )
+        (gimp-image-insert-layer image layer_group_map 0 0)
+        (gimp-image-insert-layer image layer_group_overlay layer_group_map 0)
+        (gimp-image-insert-layer image layer_border layer_group_overlay 0)
+        (gimp-image-insert-layer image layer_color layer_group_overlay 1)
+
+        (gimp-image-lower-item-to-bottom image layer_group_map)
+        (gimp-item-set-name layer_group_map "Paper Map")
+        (gimp-layer-set-mode layer_group_overlay LAYER-MODE-SOFTLIGHT)
+        (gimp-item-set-name layer_group_overlay "Map Overlay")
+
+        (if (= TRUE (car (gimp-item-is-valid (car (gimp-image-get-layer-by-name image "flatmap.dds")))))
+            (gimp-image-reorder-item image (car (gimp-image-get-layer-by-name image "flatmap.dds")) layer_group_map 1)
+        )
+
+        (gimp-selection-all image)
+        (gimp-edit-copy layer)
+        (gimp-floating-sel-anchor (car (gimp-edit-paste layer_color TRUE)))
+        (gimp-floating-sel-anchor (car (gimp-edit-paste layer_border TRUE)))
+
+        (plug-in-edge RUN-NONINTERACTIVE image layer_border 2 0 0)
+        (gimp-image-select-color image CHANNEL-OP-REPLACE layer_border '(0 0 0))
+        (gimp-drawable-edit-clear layer_border)
+        (gimp-selection-invert image)
+        (gimp-drawable-colorize-hsl layer_border 0 0 -100)
+        (gimp-image-select-color image CHANNEL-OP-REPLACE layer_border '(0 0 0))
+        (gimp-selection-feather image border_size)
+
+        (gimp-context-set-foreground '(0 0 0))
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+
+        (gimp-image-select-item image CHANNEL-OP-REPLACE layer_color)
+        (gimp-selection-grow image 1)
+        (gimp-selection-border image 1)
+        (gimp-selection-feather image border_size)
+
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+        (gimp-edit-bucket-fill layer_border BUCKET-FILL-FG LAYER-MODE-NORMAL 100 0 FALSE 0 0)
+
+        (gimp-selection-all image)
+        (plug-in-gauss-rle RUN-NONINTERACTIVE image layer_color 5 TRUE TRUE)
+    )
+        
+    (gimp-context-pop)
+    (gimp-image-undo-group-end image)
+
+    (gimp-displays-flush)
+)
+
 (script-fu-register
     "script-fu-ck3-bm-border-overlay"
     "<Image>/Filters/Crusader Kings III/BM Border + Highlight"
@@ -437,6 +501,22 @@
     SF-DRAWABLE "layer" 0
     SF-TOGGLE "Merge layers?" TRUE
     SF-ADJUSTMENT "Abort After Tries" '(50 1 500 1 10 0 SF-SLIDER) ;default, min, max, size, click size
+    ;SF-ADJUSTMENT "Border Size Outer" '(2 1 10 2 2 0 SF-SLIDER)
+    ;SF-ADJUSTMENT "Feather Outer" '(3 0 10 1 1 0 SF-SLIDER)
+)
+
+(script-fu-register
+    "script-fu-ck3-bm-border-edge-detect"
+    "<Image>/Filters/Crusader Kings III/BM Edge Detect Border (Fast)"
+    "Use edge detection instead of individually processing"
+    "Varlatra"
+    "copyright"
+    "July 2021"
+    "RGB*, GRAY*"
+    SF-IMAGE "image" 0
+    SF-DRAWABLE "layer" 0
+    SF-ADJUSTMENT "Border Size" '(3 1 10 1 1 0 SF-SLIDER) ;default, min, max, size, click size
+    SF-ADJUSTMENT "Border Opacity" '(80 0 100 1 10 0 SF-SLIDER) ;default, min, max, size, click size
     ;SF-ADJUSTMENT "Border Size Outer" '(2 1 10 2 2 0 SF-SLIDER)
     ;SF-ADJUSTMENT "Feather Outer" '(3 0 10 1 1 0 SF-SLIDER)
 )
