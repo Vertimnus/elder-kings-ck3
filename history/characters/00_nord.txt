@@ -7063,10 +7063,10 @@ trollvanquisher_1003 = {
 }
 
 
-## Volkihar Dynasty (310017)
+## Volkihar Dynasty (dyn_volkihar)
 volkihar_1000 = {
 	name = "Harkon"
-	dynasty = 310017
+	dynasty = dyn_volkihar
 	culture = westmarcher
 	religion = molag_cult
 	dna = harkon_dna_entry
@@ -7110,7 +7110,7 @@ volkihar_1001 = {
 
 volkihar_1002 = {
 	name = "Serana"
-	dynasty = 310017
+	dynasty = dyn_volkihar
 	culture = westmarcher
 	religion = molag_cult
 	female = yes
@@ -7132,6 +7132,47 @@ volkihar_1002 = {
 		effect = { set_immortal_age = 25 }
 	}
 	4581.1.1 = { death = yes }
+}
+
+#Vittr House
+vittr_majorn = {
+	name = "Majorn"
+	dynasty_house = volkihar_vittr
+	culture = eastmarcher
+	religion = molag_cult
+	
+	trait = education_learning_4
+	trait = callous
+	trait = arrogant
+	trait = necromancer_character
+
+	3250.1.1 = { birth = yes }
+	3285.12.10 = { 
+		trait = vampire_character
+		effect = { set_immortal_age = 55 }
+		give_nickname = nick_the_ancient
+	}
+	3503.1.1 = { death = yes }
+}
+vittr_valeric = {
+	name = "Valeric"
+	dynasty_house = volkihar_vittr
+	culture = eastmarcher
+	religion = molag_cult
+	
+	trait = education_martial_2
+	trait = just 
+	trait = callous
+	trait = arrogant
+
+	father = vittr_majorn
+
+	3280.1.1 = { birth = yes }
+	3305.12.10 = { 
+		trait = vampire_character
+		effect = { set_immortal_age = 28 }
+	}
+	3567.1.1 = { death = yes }
 }
 
 #Gap-Tooth Dynasty
@@ -7666,6 +7707,70 @@ hoagbellow_10014 = {
 	3717.1.1 = { death = yes }
 }
 
+#Jurgald
+jurgald_1000 = {
+	name = "Terrfyga"
+	female = yes
+	dynasty = jurgald
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = lycan_character
+	
+	3304.7.12 = { birth = yes }
+	3357.8.26 = { death = yes }
+}
+jurgald_1001 = {
+	name = "Sabjof"
+	dynasty = jurgald
+	culture = eastmarcher
+	religion = nord_cult
+
+	mother = jurgald_1000
+
+	trait = lycan_character
+	
+	3332.10.5 = { birth = yes }
+	3350.1.1 = { add_spouse = jurgald_1001_wife }
+	3418.3.19 = { death = yes }
+}
+jurgald_1001_wife = {
+	name = "Maren"
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = education_intrigue_2
+	
+	3333.2.17 = { birth = yes }
+	3421.6.10 = { death = yes }
+}
+jurgald_1002 = {
+	name = "Greta"
+	dynasty = jurgald
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+
+	father = jurgald_1001
+	mother = jurgald_1001_wife
+	
+	3350.9.21 = { birth = yes }
+	3438.11.5 = { death = yes }
+}
+jurgald_1003 = {
+	name = "Kyr"
+	dynasty = jurgald
+	culture = eastmarcher
+	religion = nord_cult
+
+	father = jurgald_1001
+	mother = jurgald_1001_wife
+	
+	3358.3.17 = { birth = yes }
+	3441.4.28 = { death = yes }
+}
+
 ##Lowborns, Wifes, Husbands etc.
 nordwife_1000 = {
 	name = "Gundalin"
@@ -7897,6 +8002,17 @@ kynesgrove_1000 = {
 	
 	3336.1.1 = { birth = yes }
 	3398.1.1 = { death = yes }
+}
+shearpoint_1000 = {
+	name = "Sissel"
+	female = yes
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = p_julianos
+	
+	3332.1.1 = { birth = yes }
+	3393.1.1 = { death = yes }
 }
 
 
