@@ -44,10 +44,29 @@ frostvoice_hemming = {
 	culture = eastmarcher
 
 	trait = education_martial_3
+	trait = physical_good_2
 	trait = poet
+	trait = brave
+	trait = patient
+	trait = gregarious
+	trait = sign_lady
+	
+	martial = 5
+	diplomacy = 10
+	prowess = 10
+	stewardship = 2
+	stewardship = 4
+	intrigue = 1
+	
 
-	3330.1.1 = { birth = yes }
+	3325.9.1 = { birth = yes }
 	3350.1.1 = { add_spouse = frostvoice_orla }
+	3360.1.1 = {
+		effect = {
+			set_relation_friend = character:frostvoice_finn
+			set_relation_friend = character:frostvoice_neekho
+		}
+	}
 	3400.1.1 = { death = yes }
 }
 frostvoice_orla = {
@@ -59,7 +78,7 @@ frostvoice_orla = {
 	trait = education_martial_2
 	trait = patient
 
-	3330.1.1 = { birth = yes }
+	3334.1.1 = { birth = yes }
 	3400.1.1 = { death = yes }
 }
 frostvoice_hadring = {
@@ -105,15 +124,28 @@ frostvoice_finn = {
 	name = "Finn"
 	religion = hist
 	culture = lukiul
-
+	
+	trait = craven
+	trait = ambitious
+	trait = paranoid
 	trait = education_magical_ability_4
-	aptitude = 10
-
-	3330.1.1 = { birth = yes }
+	trait = education_learning_3
+	trait = sign_mage
+	
+	martial = 3
+	prowess = 0
+	diplomacy = 6
+	stewardship = 5
+	intrigue = 1
+	learning = 7
+	
+	3332.4.16 = { birth = yes }
 	3359.1.1 = { employer = frostvoice_hemming }
 	3360.1.1 = { give_council_position = councillor_court_mage }
 	3360.1.1 = {
 		effect = {
+			add_aptitude_skill = { VALUE = 10 }
+			set_relation_best_friend = character:frostvoice_neekho
 			set_relation_rival = character:frostvoice_marakai
 		}
 	}
@@ -124,12 +156,22 @@ frostvoice_neekho = {
 	religion = manypathsdance
 	culture = baandari
 	female = yes
+	sexuality = homosexual
 
 	trait = education_intrigue_3
 	trait = diligent
 	trait = deceitful
+	trait = sadistic
+	trait = sign_warrior
+	
+	martial = 2
+	prowess = 2
+	diplomacy = 5
+	stewardship = 5
+	intrigue = 8
+	learning = 0
 
-	3330.1.1 = { birth = yes }
+	3330.8.1 = { birth = yes }
 	3359.1.1 = { employer = frostvoice_hemming }
 	3360.1.1 = { give_council_position = councillor_spymaster }
 	3360.1.1 = {
@@ -146,6 +188,7 @@ frostvoice_marakai = {
 
 	trait = education_martial_3
 	trait = arbitrary
+	trait = sign_lady
 	martial = 8
 
 	3330.1.1 = { birth = yes }
