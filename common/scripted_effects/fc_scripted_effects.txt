@@ -1,0 +1,94 @@
+﻿fc_enforce_free_captives_effect = {
+	$PRISONER$ = {
+		# Concubines are released
+		if = {
+			limit = {
+				is_concubine = yes
+				OR = {
+					AND = { # They either have the same top liege
+						exists = concubinist.top_liege
+						exists = $JAILOR$.top_liege
+						concubinist.top_liege = $JAILOR$.top_liege
+					}
+					# Or the concubinist is the defender
+					concubinist = $JAILOR$
+				}
+			}
+			$JAILOR$ = { remove_concubine = $PRISONER$ }
+		}
+		
+		# Marriages are annuled
+		if = {
+			limit = {
+				is_married = yes
+				primary_spouse = {
+					OR = {
+						AND = { # They either have the same top liege
+							exists = this.top_liege
+							exists = $JAILOR$.top_liege
+							this.top_liege = $JAILOR$.top_liege
+						}
+						# Or the concubinist is the defender
+						this = $JAILOR$
+					}
+				}
+			}
+			
+			divorce = primary_spouse
+		}
+		
+		# Prisoners are freed
+		if = {
+			limit = { is_imprisoned_by = $JAILOR$ }
+			release_from_prison = yes
+		}
+		
+		# Freed characters are moved to $LIBERATOR$'s court, as guests
+		if = {
+			limit = {
+				# Concubines and wives of landed characters aren't moved
+				OR = {
+					is_concubine = no
+					AND = {
+						is_concubine = yes
+						concubinist = { is_landed = no }
+					}
+				}
+				OR = {
+					is_married = no
+					AND = {
+						is_married = yes
+						primary_spouse = { is_landed = no }
+					}
+				}
+			}
+			$LIBERATOR$ = { recruit_courtier = $PRISONER$ }
+		}
+		
+		# They are of course very grateful
+		add_opinion = { modifier = grateful_opinion target = $LIBERATOR$ opinion = 30 }
+		$LIBERATOR$ = { add_hook = { target = $PRISONER$ type = favor_hook } }
+	}
+
+	# Give some renown
+	if = {
+		limit = {
+			exists = $PRISONER$.dynasty
+			exists = $LIBERATOR$.dynasty
+			$PRISONER$.dynasty = $LIBERATOR$.dynasty
+		}
+		if = {
+			limit = {
+				exists = $PRISONER$.house_head
+				exists = $LIBERATOR$.house_head
+				$PRISONER$.house_head = $LIBERATOR$.house_head
+			}
+			
+			$LIBERATOR$.dynasty = { add_dynasty_prestige = minor_dynasty_prestige_gain }
+		}
+		
+		else = {
+			$LIBERATOR$.dynasty = { add_dynasty_prestige = miniscule_dynasty_prestige_gain }
+		}
+	}
+}

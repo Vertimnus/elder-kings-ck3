@@ -1,0 +1,490 @@
+﻿namespace = fc_war_event
+
+### Free Captives cb event
+# Heavily inspired from the CK2 event chain (JD.2000)
+# The defender gets this event soon after the war is declared
+# The defender can then release the captives, execute one of them, execute them all, or do nothing
+
+fc_war_event.0001 = { # Oopsie doopsie, maybe we should sue for peace? Or maybe show them that we aren't to be messed with!
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0001.desc
+	
+	theme = war
+	
+	trigger = {
+		is_at_war_as_defender = yes
+		is_at_war_with = scope:attacker
+	}
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	lower_right_portrait = {
+		character = scope:fc_chosen_captive
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	immediate = {
+		# TODO: Protect the captives from execution
+		# TODO: Select one random captive (to execute if needed)
+		every_prisoner = {
+			limit = { fc_is_close_kin_trigger = { CLOSE_KIN = scope:attacker } }
+			
+			add_to_list = hostages_war_prisoners
+		}
+		
+		every_courtier = {
+			limit = {
+				fc_is_close_kin_trigger = { CLOSE_KIN = scope:attacker }
+				has_opinion_modifier = {
+					modifier = forced_me_concubine_marriage_opinion
+					target = scope:defender
+				}
+			}
+			
+			add_to_list = hostages_war_prisoners
+		}
+		
+		random_in_local_list = {
+			list = hostages_war_prisoners
+			
+			save_scope_as = fc_chosen_captive
+		}
+	}
+	
+	option = { # End this war by sending the captives back
+		name = fc_war_event.0001.a
+		
+		random_list = {
+			50 = {
+				show_chance = no
+				desc = fc_war_event.0001.a.end_war
+				custom_tooltip = fc_war_event.0001.a.end_war.ct
+			}
+			50 = {
+				show_chance = no
+				desc = fc_war_event.0001.a.continue_war
+				custom_tooltip = fc_war_event.0001.a.continue_war.ct
+			}
+		}
+		
+		stress_impact = {
+			wrathful = minor_stress_impact_gain
+			arrogant = minor_stress_impact_gain
+			stubborn = minor_stress_impact_gain
+			
+			content = minor_stress_impact_loss
+		}
+		
+		scope:attacker = { trigger_event = { id = fc_war_event.0002 days = 1 } }
+		
+		ai_chance = {
+			base = 40
+			
+			modifier = {
+				add = 5
+				has_trait = content
+			}
+			modifier = {
+				add = 5
+				has_trait = compassionate
+			}
+		}
+	}
+	
+	option = { # Kill one captive
+		trigger = {
+			exists = scope:fc_chosen_captive
+			scope:fc_chosen_captive = { is_alive = yes }
+		}
+		
+		name = fc_war_event.0001.b
+		
+		show_as_tooltip = {
+			scope:fc_chosen_captive = {
+				death = {
+					killer = scope:defender
+					death_reason = death_execution
+				}
+			}
+		}
+		
+		add_prestige = medium_prestige_gain
+		stress_impact = {
+			compassionate = minor_stress_impact_gain
+			
+			wrathful = minor_stress_impact_loss
+		}
+		
+		scope:attacker = { trigger_event = { id = fc_war_event.0005 days = 1 } }
+		
+		ai_chance = {
+			base = 30
+			
+			modifier = {
+				add = 5
+				trait = wrathful
+			}
+			modifier = {
+				multiply = 0
+				has_any_good_relationship_with_character_trigger = { CHARACTER = scope:fc_chosen_captive }
+			}
+		}
+	}
+	
+	option = { # Kill all the captives
+		trigger = { # At least two captives
+			list_size = { name = hostages_war_prisoners value >= 2 }
+		}
+		
+		name = fc_war_event.0001.c
+		
+		show_as_tooltip = {
+			every_in_list = {
+				list = hostages_war_prisoners
+				
+				death = {
+					killer = scope:defender
+					death_reason = death_execution
+				}
+			}
+		}
+		
+		add_prestige = major_prestige_gain
+		stress_impact = {
+			compassionate = medium_stress_impact_gain
+			
+			sadistic = medium_stress_impact_loss
+		}
+		
+		scope:attacker = { trigger_event = { id = fc_war_event.0006 days = 1 } }
+		
+		ai_chance = {
+			base = 5
+			
+			modifier = {
+				add = 5
+				trait = sadistic
+			}
+			modifier = {
+				add = 5
+				has_relation_rival = scope:attacker
+			}
+		}
+	}
+	
+	option = { # We will settle this on the battlefield!
+		name = fc_war_event.0001.d
+		
+		custom_tooltip = fc_war_event.0001.d.ct
+		custom_tooltip = fc_war_event.0001.d.loss
+		
+		stress_impact = {
+			craven = minor_stress_impact_gain
+			
+			brave = minor_stress_impact_loss
+			arrogant = minor_stress_impact_loss
+			stubborn = minor_stress_impact_loss
+		}
+		
+		ai_chance = {
+			base = 25
+			
+			modifier = {
+				add = 5
+				has_trait = brave
+			}
+			modifier = {
+				add = 5
+				has_trait = arrogant
+			}
+			modifier = {
+				add = 5
+				has_trait = stubborn
+			}
+		}
+	}
+	
+	after = {
+		# TODO: End the diplomatic immunity
+	}
+}
+
+fc_war_event.0002 = { # The captives have been released! Should we end the war?
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0002.desc
+	
+	theme = war
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	option = { # They are back, and that's what matters
+		name = fc_war_event.0002.a
+		
+		scope:defender = {
+			every_prisoner = {
+				limit = { fc_is_close_kin_trigger = { PRISONER_KIN = scope:attacker } }
+				
+				add_to_temporary_list = hostages_war_prisoners_freed
+			}
+			
+			every_courtier = {
+				limit = {
+					fc_is_close_kin_trigger = { PRISONER_KIN = scope:attacker }
+					has_opinion_modifier = {
+						modifier = forced_me_concubine_marriage_opinion
+						target = scope:defender
+					}
+				}
+				
+				add_to_temporary_list = hostages_war_prisoners_freed
+			}
+		}
+		
+		every_in_list = {
+			list = hostages_war_prisoners_freed
+			
+			save_scope_as = current_prisoner
+			
+			fc_enforce_free_captives_effect = {
+				JAILOR = scope:defender
+				LIBERATOR = scope:attacker
+				PRISONER = scope:current_prisoner
+			}
+		}
+		
+		scope:attacker = {
+			random_character_war = {
+				limit = {
+					using_cb = hostages_war
+					primary_defender = scope:defender
+					primary_attacker = scope:attacker
+				}
+				end_war = invalidated
+			}
+		}
+		
+		scope:defender = { trigger_event = { id = fc_war_event.0003 days = 1 } }
+		
+		ai_chance = {
+			base = 80
+			
+			modifier = {
+				add = 5
+				has_trait = craven
+			}
+			modifier = {
+				add = 5
+				has_trait = content
+			}
+			modifier = {
+				add = 5
+				has_trait = compassionate
+			}
+		}
+	}
+	
+	option = { # No, we will show them what happens when they mess with our family!
+		name = fc_war_event.0002.b
+		
+		add_prestige = minor_prestige_loss
+		if = {
+			limit = { exists = scope:attacker.dynasty }
+			scope:attacker.dynasty = { add_dynasty_prestige = miniscule_dynasty_prestige_gain }
+		}
+		
+		custom_tooltip = fc_war_event.0002.b.ct
+		custom_tooltip = fc_war_event.0002.b.potential_execution.ct
+		
+		stress_impact = {
+			forgiving = minor_stress_impact_gain
+			just = minor_stress_impact_gain
+			
+			vengeful = minor_stress_impact_loss
+			wrathful = minor_stress_impact_loss
+			patriarch = minor_stress_impact_loss # You protect the family
+		}
+		
+		scope:defender = { trigger_event = { id = fc_war_event.0004 days = 1 } }
+		
+		ai_chance = {
+			base = 20
+			
+			modifier = {
+				add = 5
+				has_trait = vengeful
+			}
+			modifier = {
+				add = 5
+				has_trait = wrathful
+			}
+			modifier = {
+				add = 15
+				has_trait = patriarch
+			}
+		}
+	}
+}
+
+fc_war_event.0003 = { # Peace has been brokered.
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0003.desc
+	
+	theme = war
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	option = { # Perhaps it's for the best
+		name = fc_war_event.0003.a
+		
+		every_in_list = {
+			list = hostages_war_prisoners
+			
+			save_scope_as = current_hostages_war_prisoner
+			
+			custom_tooltip = fc_war_event.0003.a.prisoner_liberated.ct
+		}
+		
+		custom_tooltip = fc_war_event.0003.a.end_war.ct
+	}
+}
+
+fc_war_event.0004 = { # To war!
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0004.desc
+	
+	theme = war
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	option = { # So be it...
+		name = fc_war_event.0004.a
+		
+		custom_tooltip = fc_war_event.0004.a.ct
+	}
+	
+	option = { # Execute the prisoners! (like the third option in the first event)
+		trigger = {
+			any_in_list = {
+				list = hostages_war_prisoners
+				
+				is_alive = yes
+			}
+		}
+		
+		name = fc_war_event.0004.b
+		
+		show_as_tooltip = {
+			every_in_list = {
+				list = hostages_war_prisoners
+				
+				death = {
+					killer = scope:defender
+					death_reason = death_execution
+				}
+			}
+		}
+		
+		add_prestige = major_prestige_gain
+		stress_impact = {
+			compassionate = medium_stress_impact_gain
+			
+			wrathful = medium_stress_impact_loss
+		}
+		
+		scope:attacker = { trigger_event = { id = fc_war_event.0006 days = 1 } }
+	}
+}
+
+fc_war_event.0005 = { # One captive has been executed!
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0005.desc
+	
+	theme = war
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	option = { # Damn you!
+		name = fc_war_event.0005.a
+		
+		scope:fc_chosen_captive = {
+			death = {
+				killer = scope:defender
+				death_reason = death_execution
+			}
+		}
+	}
+}
+
+fc_war_event.0006 = { # All the captives have been executed!
+	type = character_event
+	title = fc_war_event.0001.t
+	desc = fc_war_event.0006.desc
+	
+	theme = war
+	
+	right_portrait = {
+		character = scope:attacker
+		animation = war_attacker
+	}
+	
+	left_portrait = {
+		character = scope:defender
+		animation = war_defender
+	}
+	
+	option = { # Damn you!
+		name = fc_war_event.0006.a
+		
+		every_in_list = {
+			list = hostages_war_prisoners
+			
+			death = {
+				killer = scope:defender
+				death_reason = death_execution
+			}
+		}
+	}
+}
