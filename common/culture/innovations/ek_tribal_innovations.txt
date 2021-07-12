@@ -40,11 +40,44 @@ innovation_war_magic = {
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @fortifications
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 
 	unlock_maa = war_mages
 	
 	custom = unlock_tribal_academy_buildings
+	custom = required_other_magical_innovations
 	unlock_building = academy_01
+
+	flag = global_regular
+	flag = tribal_era_regular
+}
+innovation_disorganized_military = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @fortifications
+	
+	potential = {
+		trigger_if = {
+			limit = { years_from_game_start < 1 }
+			this.culture_group = culture_group:goblinken_group
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+
+	modifier = {
+		men_at_arms_cap = -1
+		men_at_arms_limit = -1
+		levy_size = 0.25
+		levy_reinforcement_rate = 0.25
+	}
+	
+	custom = cannot_research_men_at_arms_innovations
+	custom = innovation_disorganized_military_can_be_reformed
 
 	flag = global_regular
 	flag = tribal_era_regular
