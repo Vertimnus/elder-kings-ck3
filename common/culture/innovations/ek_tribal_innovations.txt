@@ -33,6 +33,7 @@
 
 @moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
 @high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
+@crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
 
 
 #culture_group_military
@@ -94,10 +95,38 @@ innovation_lunar_lattice = {
 	unlock_maa = ohmes
 	unlock_maa = senche
 	
-	# custom = unlocks_other_maa_innovations
+	custom = replaces_innovation_basic_armor_forging
 
 	flag = global_regional
 	flag = tribal_era_regional
+}
+
+innovation_alfiq = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		has_innovation = innovation_lunar_lattice
+	}
+
+	unlock_maa = alfiq
+
+	flag = global_maa
+}
+
+innovation_pahmar = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @weapons_and_armor_02
+
+	potential = {
+		has_innovation = innovation_lunar_lattice
+	}
+
+	unlock_maa = pahmar
+
+	flag = global_maa
 }
 
 innovation_disorganized_military = { # Special, in the military tab (as to make it more obvious) but also rather specific. Can be lost.
