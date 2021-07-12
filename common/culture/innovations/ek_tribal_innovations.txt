@@ -54,7 +54,53 @@ innovation_war_magic = {
 	flag = global_regular
 	flag = tribal_era_regular
 }
-innovation_disorganized_military = {
+
+innovation_basic_armor_forging = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @weapons_and_armor_02
+	
+	potential = {
+		NOR = {
+			has_innovation = innovation_lunar_lattice
+		}
+	}
+
+	unlock_maa = light_footmen
+	unlock_maa = bowmen
+	unlock_maa = light_horsemen
+	unlock_maa = pikemen_unit
+	
+	# Note: This innovation should be given to *almost* everyone
+	# Notable exceptions: Khajiits (Lunar Lattice), and I guess whoever should have unique unit arts
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+# Khajiit specific
+innovation_lunar_lattice = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+		NOT = { has_innovation = innovation_basic_armor_forging }
+	}
+
+	unlock_maa = cathay
+	unlock_maa = suthay
+	unlock_maa = ohmes
+	unlock_maa = senche
+	
+	# custom = unlocks_other_maa_innovations
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_disorganized_military = { # Special, in the military tab (as to make it more obvious) but also rather specific. Can be lost.
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @fortifications
@@ -79,8 +125,8 @@ innovation_disorganized_military = {
 	custom = cannot_research_men_at_arms_innovations
 	custom = innovation_disorganized_military_can_be_reformed
 
-	flag = global_regular
-	flag = tribal_era_regular
+	flag = global_regional
+	flag = tribal_era_regional
 }
 
 #culture_group_civic
