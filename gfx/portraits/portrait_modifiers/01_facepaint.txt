@@ -1,0 +1,53 @@
+﻿#EK2
+# Make sure the weights here match up best as possible with the custom_hair set
+facepaint = {
+
+    usage = game
+    selection_behavior = weighted_random
+
+facepaint_nordic = {
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = facepaint
+            template = nordic
+            range = { 0 1 } # For the randomness to work correctly
+        }
+    }
+    weight = {
+        base = 0
+
+        modifier = {
+            add = 50
+            OR = {
+            culture.culture_group = culture_group:nordic_group
+            culture.culture_group = culture_group:nedic_group
+            }
+        }
+
+    }
+}  
+
+no_facepaint = {
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = facepaint
+            template = no_facepaint
+            value = 1.0
+        }
+    }
+    weight = {
+        base = 50
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}  
+        }
+#EK2
