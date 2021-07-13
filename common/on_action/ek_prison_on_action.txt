@@ -3,7 +3,20 @@
 ek_on_imprison = {
 	effect = {
 		if = {
-			limit = { scope:imprisoner.culture = { has_innovation = innovation_blood_price } }
+			limit = {
+				scope:imprisoner.culture = { has_innovation = innovation_blood_price }
+				OR = {
+					# If they aren't part of the realm then they're prisoners of war
+					trigger_if = {
+						limit = { scope:imprisoner = { is_independent_ruler = yes } }
+						root.top_liege = scope:imprisoner
+					}
+					trigger_else = {
+						root.top_liege = scope:imprisoner.top_liege
+					}
+					is_in_the_same_court_as_or_guest = scope:imprisoner
+				}
+			}
 			trigger_event = ek_prison.1002
 		}
 		else = {
