@@ -33,28 +33,140 @@
 
 @moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
 @high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
-
+@crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
+@bombard = "gfx/interface/icons/culture_innovations/innovation_ek_bombard.dds"
+@alchemy = "gfx/interface/icons/culture_innovations/innovation_alchemy.dds"
+@white_gold = "gfx/interface/icons/culture_innovations/innovation_ek_white_gold_tower.dds"
+@blood_price = "gfx/interface/icons/culture_innovations/innovation_blood_price.dds"
+@mammoth = "gfx/interface/icons/culture_innovations/innovation_mammoth.dds"
 
 #culture_group_military
 innovation_war_magic = {
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @fortifications
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 
 	unlock_maa = war_mages
 	
 	custom = unlock_tribal_academy_buildings
+	custom = required_other_magical_innovations
 	unlock_building = academy_01
 
 	flag = global_regular
 	flag = tribal_era_regular
 }
 
+innovation_basic_armor_forging = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @weapons_and_armor_02
+	
+	potential = {
+		NOR = {
+			has_innovation = innovation_lunar_lattice
+		}
+	}
+
+	unlock_maa = light_footmen
+	unlock_maa = bowmen
+	unlock_maa = light_horsemen
+	unlock_maa = pikemen_unit
+	
+	# Note: This innovation should be given to *almost* everyone
+	# Notable exceptions: Khajiits (Lunar Lattice), and I guess whoever should have unique unit arts
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+# Khajiit specific
+innovation_lunar_lattice = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+		NOT = { has_innovation = innovation_basic_armor_forging }
+	}
+
+	unlock_maa = cathay
+	unlock_maa = suthay
+	unlock_maa = ohmes
+	unlock_maa = senche
+	
+	custom = replaces_innovation_basic_armor_forging
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_alfiq = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @special_maa_02
+
+	potential = {
+		has_innovation = innovation_lunar_lattice
+	}
+
+	unlock_maa = alfiq
+
+	flag = global_maa
+}
+
+innovation_pahmar = {
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @weapons_and_armor_02
+
+	potential = {
+		has_innovation = innovation_lunar_lattice
+	}
+
+	unlock_maa = pahmar
+
+	flag = global_maa
+}
+
+innovation_disorganized_military = { # Special, in the military tab (as to make it more obvious) but also rather specific. Can be lost.
+	group = culture_group_military
+	culture_era = culture_era_tribal
+	icon = @fortifications
+	
+	potential = {
+		trigger_if = {
+			limit = { years_from_game_start < 1 }
+			this.culture_group = culture_group:goblinken_group
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+
+	modifier = {
+		men_at_arms_cap = -1
+		men_at_arms_limit = -1
+		levy_size = 0.25
+		levy_reinforcement_rate = 0.25
+	}
+	
+	custom = cannot_research_men_at_arms_innovations
+	custom = innovation_disorganized_military_can_be_reformed
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
 #culture_group_civic
 innovation_alchemy = {
 	group = culture_group_civic
 	culture_era = culture_era_tribal
-	icon = @administration_3
+	icon = @alchemy
 
 	modifier = {
 		health = 0.1
@@ -71,7 +183,7 @@ innovation_war_mammoths = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	region = world_innovation_mammoths
-	icon = @elephant
+	icon = @mammoth
 
 	unlock_maa = war_mammoth
 
@@ -83,7 +195,7 @@ innovation_seat_of_empires = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	region = mundus_tamriel_cyrodiil
-	icon = @majesty_03
+	icon = @white_gold
 
 	modifier = {
 		domain_limit = 1
@@ -123,7 +235,7 @@ innovation_moonstone_armor = {
 innovation_blood_price = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
-	icon = @nobility_01
+	icon = @blood_price
 	
 	potential = {
 		# Orcs only
