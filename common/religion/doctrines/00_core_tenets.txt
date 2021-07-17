@@ -2908,6 +2908,54 @@ doctrine_core_tenets = {
 		}
 	}
 
+	tenet_bhakti = {
+		icon = core_tenet_bhakti
+
+		piety_cost = faith_tenet_cost_mid
+
+		is_shown = {
+			always = no # Tenet disabled
+		}
+
+		can_pick = {
+			always = no
+		}
+
+		parameters = {
+			select_personal_god_active = yes
+		}
+	}
+
+	tenet_dharmic_pacifism = { #Mix of reincarnation and pacifism rites
+		icon = core_tenet_dharmawheel
+		
+		is_shown = {
+			always = no # Tenet disabled
+		}
+
+		can_pick = {
+			always = no
+		}
+		
+		parameters = {
+			reincarnation_resistance_to_conversion = yes
+			holy_wars_forbidden = yes
+			pacifist_opinion_active = yes
+			opinion_of_pacifist_opinion_active = 10
+		}
+
+		traits = {
+			virtues = { calm }
+			sins = { wrathful }
+		}
+		
+		character_modifier = {
+			domain_limit = 1
+			ai_war_chance = -0.25
+			ai_war_cooldown = 0.25
+		}
+	}
+
 	tenet_communal_identity = {
 		icon = core_tenet_followers
 		piety_cost = {
@@ -2925,13 +2973,18 @@ doctrine_core_tenets = {
 		}
 
 		can_pick = {
-			always = yes
+			always = no
 		}
 
 		parameters = {
 			same_culture_conversion_bonus_active = yes
 			same_faith_promote_culture_bonus_active = yes
 			other_culture_conversion_penalty_active = yes
+			great_holy_wars_active = yes
+			great_holy_wars_active_if_reformed = yes
+			# Some might notice that these two above shouldn't be here
+			# And they're right
+			# But since it has been commented out in the other tenets, the error.log throws an error
 		}
 
 		character_modifier = {
