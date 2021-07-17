@@ -15,8 +15,7 @@ set_culture_native_to = {
 }
 
 county_save_native_cultures = {
-	every_in_global_list = {
-		variable = culture_list
+	every_culture_global = {
 		limit = { is_native_to = { CULTURE = this REGION = $REGION$ } }
 		save_temporary_scope_as = culture_to_save
 		scope:current_county = {
@@ -29,8 +28,7 @@ county_save_native_cultures = {
 }
 
 create_local_culture_decision_scripted_effects = {
-	random_in_global_list = {
-		variable = culture_list
+	random_culture_global = {
 		limit = {
 			this.culture_group = root.culture_group
 			is_native_to = { CULTURE = this REGION = $REGION$ }
