@@ -23,7 +23,7 @@ try:
 	
 	# We take all the "Missing loc for name" lines and put them somewhere
 	for line in fileContent:
-		if "[culture_names.cpp:98]: Missing loc for name" in line:
+		if "Missing loc for name" in line:
 			interestingLines.append(line)
 	
 	# print(interestingLines)
@@ -34,7 +34,7 @@ try:
 	for line in interestingLines:
 		# Ugly, but basically we isolate what's between 'Missing loc for name' and 'in culture'
 		name = line.split("Missing loc for name")[1].split("in culture")[0].replace(" \'", '').replace("\' ", '').replace('\n', '')
-		
+
 		if not name in nameList:
 			nameList.append(name)
 	
