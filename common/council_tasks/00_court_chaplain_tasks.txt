@@ -471,7 +471,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.faith = { has_doctrine_parameter = same_culture_group_conversion_bonus_active }
-				scope:county.culture_group = scope:councillor.liege.culture_group
+				scope:county.culture_group = scope:councillor.faith.var:associated_culture_group
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_bonus_cg
@@ -483,7 +483,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.faith = { has_doctrine_parameter = same_culture_group_exclusive_conversion_bonus_active }
-				scope:county.culture_group = scope:councillor.liege.culture_group
+				scope:county.culture_group = scope:councillor.faith.var:associated_culture_group
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_bonus_cg_exclusive
@@ -495,7 +495,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.faith = { has_doctrine_parameter = same_culture_conversion_bonus_active }
-				scope:county.culture = scope:councillor.liege.culture
+				scope:county.culture = scope:councillor.faith.var:associated_culture
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_bonus_culture
@@ -507,7 +507,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.faith = { has_doctrine_parameter = same_culture_exclusive_conversion_bonus_active }
-				scope:county.culture = scope:councillor.liege.culture
+				scope:county.culture = scope:councillor.faith.var:associated_culture
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_bonus_culture_exclusive
@@ -520,7 +520,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_group_conversion_penalty_active }
-				NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+				NOT = { scope:county.culture_group = scope:councillor.faith.var:associated_culture_group }
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_resistance_cg
@@ -532,7 +532,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_group_exclusive_conversion_penalty_active }
-				NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+				NOT = { scope:county.culture_group = scope:councillor.faith.var:associated_culture_group }
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_resistance_cg_exclusive
@@ -544,7 +544,7 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_conversion_penalty_active }
-				NOT = { scope:county.culture = scope:councillor.liege.culture }
+				NOT = { scope:county.culture = scope:councillor.faith.var:associated_culture }
 			}
 			add = {
 				value = scope:councillor.conversion_communal_identity_resistance_culture
@@ -556,10 +556,10 @@ task_conversion = {
 			limit = {
 				exists = scope:county
 				scope:councillor.liege.faith = { has_doctrine_parameter = other_culture_exclusive_conversion_penalty_active }
-				NOT = { scope:county.culture = scope:councillor.liege.culture }
+				NOT = { scope:county.culture = scope:councillor.faith.var:associated_culture }
 			}
 			add = {
-				value = scope:councillor.conversion_communal_identity_resistance_culture
+				value = scope:councillor.conversion_communal_identity_resistance_culture_exclusive
 				desc = COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER
 			}
 		}
