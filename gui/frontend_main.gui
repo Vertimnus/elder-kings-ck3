@@ -304,8 +304,9 @@ widget = {
 				alpha = 1
 				delay = 0.5
 
-
 				using = Animation_Curve_Default
+				#on_finish = "[PdxGuiTriggerAllAnimations('shimmer')]"
+				on_finish = "[PdxGuiWidget.FindChild('ek_logo').TriggerAnimation('shimmer')]"
 			}
 
 			background = {
@@ -633,30 +634,16 @@ widget = {
 				set_parent_size_to_minimum = yes
 				# EK Main Logo
 				icon = {
+					name = "ek_logo"
 					texture = "gfx/interface/frontend/main_logo.dds"
 					size = { 500 250 }
 
 					modify_texture = {
 						name = "shimmer"
-						visible = "[BookmarkItem.GetBookmark.IsRecommended]"
 						texture = "gfx/interface/component_effects/effect_shimmer.dds"
 						blend_mode = colordodge
-						translate_uv = { 0.2 0.2 }
-					}
-
-					#	Recommended shimmer
-					state = {
-						trigger_on_create = yes #reco shimmer not work on changing bm. prime bm lower not go down on select either
-						name = _show
-						next = shimmer
-						duration = 0.2
-						delay = 5
-
-						modify_texture = {
-							name = "shimmer"
-							translate_uv = { 1 -0.4 }
-							alpha = 0.6
-						}
+						translate_uv = { 1 -0.4 }
+						alpha = 0.6
 					}
 
 					state = {
