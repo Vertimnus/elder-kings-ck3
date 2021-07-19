@@ -1,5 +1,6 @@
 ﻿l_english:
  ##### Doctrines
+ ## Religious families
  aedric_hostility_doctrine_name:0 "Aedric"
  aedric_hostility_doctrine_desc:0 "The following religions are Aedric:\n[GetReligionFamily('rf_aedra').GetReligions]"
  daedric_hostility_doctrine_name:0 "Daedric"
@@ -7,6 +8,7 @@
  aurbic_hostility_doctrine_name:0 "Aurbic"
  aurbic_hostility_doctrine_desc:0 "The following religions are Aurbic:\n[GetReligionFamily('rf_aurbis').GetReligions]"
  
+ ## Communal / Cultural Identity
  doctrine_parameter_same_culture_group_conversion_bonus_active:1 "Conversion Speed in [Faith.MakeScope.Var('associated_culture_group').CultureGroup.GetName] [counties|E]: #P +25%#!"
  doctrine_parameter_same_faith_promote_culture_group_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +25%#!"
  doctrine_parameter_other_culture_group_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -50%#!"
@@ -27,6 +29,13 @@
  doctrine_parameter_other_culture_exclusive_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture|E]: #N -100%#!"
  COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_culture_exclusive').GetBaseName]"
  
+ # When creating a faith
+ doctrine_parameter_same_culture_group_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetGroup.GetName] [counties|E]: #P +25%#!"
+ doctrine_parameter_same_culture_group_exclusive_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetGroup.GetName]  [counties|E]: #P +50%#!"
+ doctrine_parameter_same_culture_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetName] [counties|E]: #P +50%#!"
+ doctrine_parameter_same_culture_exclusive_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetName] [counties|E]: #P +100%#!"
+ 
+ ## Holy Buildings
  doctrine_parameter_faith_uses_grand_cathedral:0 "Uses Grand Cathedrals as [holy_sites|E] [special_building|E]"
  faith_uses_grand_cathedral_name:0 "'$doctrine_parameter_faith_uses_grand_cathedral$' Pantheon Doctrine parameter"
  doctrine_parameter_faith_uses_daedric_shrine:0 "Uses Daedric Shrines as [holy_sites|E] [special_building|E]"
@@ -38,6 +47,8 @@
  doctrine_parameter_faith_uses_holy_site_other_grand_temple:0 "Uses Grand Temples as [holy_sites|E] [special_building|E]"
  faith_uses_holy_site_other_grand_temple_name:0 "'$doctrine_parameter_faith_uses_holy_site_other_grand_temple$' Pantheon Doctrine parameter"
  
+ 
+ ## Special
  special_faith_existence_non_existent_name:0 "Non-existent"
  special_faith_existence_non_existent_desc:0 "This faith doesn't actually exist... Is it a glimpse from the future? The mad rambling of a so-called prophet? The imagination of a deluded priest? Who knows..."
  doctrine_parameter_faith_cannot_be_converted_to_active:0 "Converting to this [faith|E] is #N impossible#!"
@@ -494,6 +505,7 @@
  doctrine_pantheon_lamae_name:0 "Lamae Bal"
     doctrine_pantheon_lamae_bal_desc:0 "Blood-Scions must always spurn Molag Bal and shun the vile Arkay."
  ### Main
+ ## Communal / Cultural Identity
  doctrine_cultural_identity_name:0 "Cultural Identity"
  doctrine_cultural_identity_none_name:0 "No Cultural Ties"
     doctrine_cultural_identity_none_desc:0 "Our rites and beliefs can be shared to anyone, no matter their heritage. What truly matters is who, and what, they believe in."
@@ -505,6 +517,15 @@
     doctrine_cultural_identity_culture_desc:0 "The traditions and beliefs of our people have been tied together for centuries, and even those that could see us as their cousins might struggle at understanding our faith. But with time, even they could see the light."
  doctrine_cultural_identity_culture_exclusive_name:0 "Strong Communal Identity"
     doctrine_cultural_identity_culture_exclusive_desc:0 "It is almost unthinkable that someone outside of our close community could understand the very basics of our faith. Our traditions and rites are seen as an anomaly by anyone outside of our group, but we hold them as core tenets of our identity."
+ # When creating a faith
+ doctrine_cultural_identity_cg_creating_faith_name:0 "$doctrine_cultural_identity_name$"
+    doctrine_cultural_identity_cg_creating_faith_desc:0 "$doctrine_cultural_identity_none_desc$"
+ doctrine_cultural_identity_cg_exclusive_creating_faith_name:0 "$doctrine_cultural_identity_cg_exclusive_name$"
+    doctrine_cultural_identity_cg_exclusive_creating_faith_desc:0 "$doctrine_cultural_identity_cg_exclusive_desc$"
+ doctrine_cultural_identity_culture_creating_faith_name:0 "$doctrine_cultural_identity_culture_name$"
+    doctrine_cultural_identity_culture_creating_faith_desc:0 "$doctrine_cultural_identity_culture_desc$"
+ doctrine_cultural_identity_culture_exclusive_creating_faith_name:0 "$doctrine_cultural_identity_culture_exclusive_name$"
+    doctrine_cultural_identity_culture_exclusive_creating_faith_desc:0 "$doctrine_cultural_identity_culture_exclusive_desc$"
  
  ### Crimes
  doctrine_adultery_name:0 "Adultery"
