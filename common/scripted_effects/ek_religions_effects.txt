@@ -351,3 +351,34 @@ faith_give_view_daedric_princes = {
 		remove_doctrine = doctrine_hidden_daedra_criminal
 	}
 }
+
+faith_give_proper_cultural_identity_doctrine = {
+	if = {
+		limit = { has_doctrine = doctrine_cultural_identity_cg_creating_faith }
+		root.culture.culture_group = { save_scope_as = culture_faith }
+		set_variable = { name = associated_culture_group value = scope:culture_faith }
+		remove_doctrine = doctrine_cultural_identity_cg_creating_faith
+		add_doctrine = doctrine_cultural_identity_cg
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_cultural_identity_cg_exclusive_creating_faith }
+		root.culture.culture_group = { save_scope_as = culture_faith }
+		set_variable = { name = associated_culture_group value = scope:culture_faith }
+		remove_doctrine = doctrine_cultural_identity_cg_exclusive_creating_faith
+		add_doctrine = doctrine_cultural_identity_cg_exclusive
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_cultural_identity_culture_creating_faith }
+		root.culture = { save_scope_as = culture_faith }
+		set_variable = { name = associated_culture value = scope:culture_faith }
+		remove_doctrine = doctrine_cultural_identity_culture_creating_faith
+		add_doctrine = doctrine_cultural_identity_culture
+	}
+	else_if = {
+		limit = { has_doctrine = doctrine_cultural_identity_culture_exclusive_creating_faith }
+		root.culture = { save_scope_as = culture_faith }
+		set_variable = { name = associated_culture value = scope:culture_faith }
+		remove_doctrine = doctrine_cultural_identity_culture_exclusive_creating_faith
+		add_doctrine = doctrine_cultural_identity_culture_exclusive
+	}
+}
