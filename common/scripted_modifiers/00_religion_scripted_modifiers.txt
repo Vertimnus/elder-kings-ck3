@@ -201,6 +201,41 @@ religion_demand_conversion_default_modifier = {
 		}
 		add = -35
 	}
+	
+	### EK EDIT: Added the effect of Communal Identity
+	### EK NOTE: NEEDS TO BE SYNCHED WITH demand_conversion_likelihood_calculation
+	modifier = {
+		desc = ASK_FOR_CONVERSION_CULTURAL_IDENTITY_CG
+		trigger = {
+			scope:actor.faith = { has_doctrine = doctrine_cultural_identity_cg }
+			NOT = { scope:recipient.culture.culture_group = scope:actor.faith.var:associated_culture_group }
+		}
+		add = -25
+	}
+	modifier = {
+		desc = ASK_FOR_CONVERSION_CULTURAL_IDENTITY_CG_EXCLUSIVE
+		trigger = {
+			scope:actor.faith = { has_doctrine = doctrine_cultural_identity_cg_exclusive }
+			NOT = { scope:recipient.culture.culture_group = scope:actor.faith.var:associated_culture_group }
+		}
+		add = -50
+	}
+	modifier = {
+		desc = ASK_FOR_CONVERSION_CULTURAL_IDENTITY
+		trigger = {
+			scope:actor.faith = { has_doctrine = doctrine_cultural_identity_culture }
+			NOT = { scope:recipient.culture = scope:actor.faith.var:associated_culture }
+		}
+		add = -50
+	}
+	modifier = {
+		desc = ASK_FOR_CONVERSION_CULTURAL_IDENTITY_EXCLUSIVE
+		trigger = {
+			scope:actor.faith = { has_doctrine = doctrine_cultural_identity_culture_exclusive }
+			NOT = { scope:recipient.culture = scope:actor.faith.var:associated_culture }
+		}
+		add = -100
+	}
 }
 
 sun_trial_death_modifier = {
