@@ -6,6 +6,25 @@ hairstyles_scripted_characters = {
     usage = game
     selection_behavior = weighted_random
 
+    no_hair = { # No Hair
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = scripted_character_hairstyles_01
+                value = 0.0
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 200
+                exists = character:wulfharth_100
+                this = character:wulfharth_100
+            }
+        }
+    }
+
     male_hair_western_01 = { # Bowl cut
         dna_modifiers = {
             accessory = {
@@ -409,6 +428,11 @@ hairstyles_scripted_characters = {
         }   
         weight = {
             base = 0
+            modifier = {
+				add = 200
+				exists = character:fyr_100
+				this = character:fyr_100
+			}
         }
     }
 
