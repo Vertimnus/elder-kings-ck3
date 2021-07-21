@@ -18,10 +18,29 @@ facepaint_nordic = {
         base = 0
 
         modifier = {
-            add = 50
+            add = 75
+            AND = {
+                OR = {
+                culture.culture_group = culture_group:nordic_group
+                culture.culture_group = culture_group:nedic_group
+            }
             OR = {
-            culture.culture_group = culture_group:nordic_group
-            culture.culture_group = culture_group:nedic_group
+                prowess > high_skill_rating
+                martial > high_skill_rating
+            }
+        }
+        }
+        modifier = {
+            add = -40
+			is_female = yes
+        }
+
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
             }
         }
 
@@ -38,7 +57,7 @@ no_facepaint = {
         }
     }
     weight = {
-        base = 50
+        base = 25
         modifier = {
             add = -100
             OR = {
