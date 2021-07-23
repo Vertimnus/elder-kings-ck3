@@ -106,7 +106,11 @@ clothes = {
             }
             modifier = {
 				add = 1100
-				has_character_modifier = vow_of_poverty_modifier
+				OR = {
+					has_character_modifier = vow_of_poverty_modifier
+					### EK EDIT: Vows of Squalor means you don't wear crowns and stuff
+					has_character_modifier = vow_of_squalor_modifier
+				}
 			}
             modifier = {
             	add = -50
@@ -144,7 +148,11 @@ clothes = {
 			# Boring clothes for characters with an active Vow of Poverty
 			modifier = {
 				add = 100
-				has_character_modifier = vow_of_poverty_modifier
+				OR = {
+					has_character_modifier = vow_of_poverty_modifier
+					### EK EDIT: Vows of Squalor means you don't wear crowns and stuff
+					has_character_modifier = vow_of_squalor_modifier
+				}
 				# Should still wear armor when going to war
 				NOT = { portrait_wear_armor_trigger = yes }
 			}
@@ -183,7 +191,11 @@ clothes = {
 			# Boring clothes for characters with an active Vow of Poverty
 			modifier = {
 				add = 100
-				has_character_modifier = vow_of_poverty_modifier
+				OR = {
+					has_character_modifier = vow_of_poverty_modifier
+					### EK EDIT: Vows of Squalor means you don't wear crowns and stuff
+					has_character_modifier = vow_of_squalor_modifier
+				}
 				# Should still wear armor when going to war
 				NOT = { portrait_wear_armor_trigger = yes }
 			}
@@ -960,6 +972,16 @@ clothes = {
 				add = 120
 				is_imprisoned = yes
 				is_in_prison_type = dungeon
+				OR = {
+					portrait_byzantine_clothing_trigger = yes
+					portrait_northern_clothing_trigger = yes
+					portrait_western_clothing_trigger = yes
+				}
+			}
+			### EK EDIT: Added special conditions under which someone wears prison rags (Vows of Squalor)
+			modifier = {
+				add = 150
+				has_character_modifier = vow_of_squalor_modifier
 				OR = {
 					portrait_byzantine_clothing_trigger = yes
 					portrait_northern_clothing_trigger = yes
@@ -1944,6 +1966,17 @@ clothes = {
 					portrait_african_clothing_trigger = yes
 				}
 			}
+			### EK EDIT: Added special conditions under which someone wears prison rags (Vows of Squalor)
+			modifier = {
+				add = 150
+				has_character_modifier = vow_of_squalor_modifier
+				OR = {
+					portrait_mena_clothing_trigger = yes
+					portrait_indian_clothing_trigger = yes
+					portrait_steppe_clothing_trigger = yes
+					portrait_african_clothing_trigger = yes
+				}
+			}
 		}
 	}
 
@@ -2882,6 +2915,13 @@ clothes = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 			}
 	    }
 	}
@@ -2930,6 +2970,13 @@ clothes = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 	        }
 	    }
 	}	
@@ -2972,8 +3019,14 @@ clothes = {
 				OR = {
 					has_trait = devoted
 					AND = {
-						faith = {
-							has_doctrine_parameter = vows_of_poverty_active
+						OR = {
+							faith = {
+								has_doctrine_parameter = vows_of_poverty_active
+							}
+							### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+							faith = {
+								has_doctrine_parameter = vows_of_squalor_active
+							}
 						}
 						OR = {
 							AND = {
@@ -3037,6 +3090,13 @@ clothes = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 			}
 	    }
 	}
@@ -3075,6 +3135,13 @@ clothes = {
 				NOT = {
 					faith = {
 						has_doctrine_parameter = vows_of_poverty_active
+					}
+				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
 					}
 				}
 	        }
