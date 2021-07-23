@@ -115,7 +115,11 @@ headgear = {
 			# No headgear for characters with an active Vow of Poverty
 			modifier = {
 				add = 100
-				has_character_modifier = vow_of_poverty_modifier
+				OR = {
+					has_character_modifier = vow_of_poverty_modifier
+					### EK EDIT: Vows of Squalor means you don't wear crowns and stuff
+					has_character_modifier = vow_of_squalor_modifier
+				}
 				# Should still wear armor when going to war
 				NOT = { portrait_wear_armor_trigger = yes }
 			}
@@ -3536,6 +3540,13 @@ headgear = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 			}
 	    }
 	}
@@ -3564,6 +3575,13 @@ headgear = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 	        }
 	    }
 	}	
@@ -3588,8 +3606,14 @@ headgear = {
 				OR = {
 					has_trait = devoted
 					AND = {
-						faith = {
-							has_doctrine_parameter = vows_of_poverty_active
+						OR = {
+							faith = {
+								has_doctrine_parameter = vows_of_poverty_active
+							}
+							### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+							faith = {
+								has_doctrine_parameter = vows_of_squalor_active
+							}
 						}
 						OR = {
 							AND = {
@@ -3651,6 +3675,13 @@ headgear = {
 						has_doctrine_parameter = vows_of_poverty_active
 					}
 				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
+					}
+				}
 			}
 		}
 	}
@@ -3696,6 +3727,13 @@ headgear = {
 				NOT = {
 					faith = {
 						has_doctrine_parameter = vows_of_poverty_active
+					}
+				}
+				
+				### EK EDIT: Faiths with Vows of Squalor shouldn't wear good clothes
+				NOT = {
+					faith = {
+						has_doctrine_parameter = vows_of_squalor_active = yes
 					}
 				}
 	        }
