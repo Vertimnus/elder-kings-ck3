@@ -1,0 +1,136 @@
+﻿namespace = ek_imperial_city_modifiers
+
+
+########################
+# Gives the holder of the Imperial City modifiers tied to the special buildings in it
+# 0001-0010
+########################
+
+### The dynasty head gets the event
+ek_imperial_city_modifiers.0001 = {
+	hidden = yes
+	
+	trigger = {
+		OR = {
+			has_title = title:c_imperial_city
+			
+			has_character_modifier = temple_of_the_one_01_duchy_modifier
+			has_character_modifier = imperial_city_arena_01_duchy_modifier
+			has_character_modifier = the_bastion_01_duchy_modifier
+			has_character_modifier = the_bastion_02_duchy_modifier
+			has_character_modifier = port_hestra_01_duchy_modifier
+			has_character_modifier = arcane_university_01_duchy_modifier
+		}
+	}
+	
+	immediate = {
+		remove_character_modifier = temple_of_the_one_01_duchy_modifier
+		remove_character_modifier = imperial_city_arena_01_duchy_modifier
+		remove_character_modifier = the_bastion_01_duchy_modifier
+		remove_character_modifier = the_bastion_02_duchy_modifier
+		remove_character_modifier = port_hestra_01_duchy_modifier
+		remove_character_modifier = arcane_university_01_duchy_modifier
+		
+		every_county = {
+			limit = { has_county_modifier = imperial_city_harbor_01_duchy_modifier }
+			remove_county_modifier = imperial_city_harbor_01_duchy_modifier
+		}
+		
+		if = {
+			limit = {
+				capital_county = title:c_imperial_city
+				highest_held_title_tier >= tier_kingdom
+			}
+			
+			if = {
+				limit = {
+					completely_controls = title:b_arena_district
+					NOT = { has_title = title:b_arena_district }
+					title:b_arena_district.title_province = { has_building = imperial_city_arena_01 }
+				}
+				add_character_modifier = imperial_city_arena_01_duchy_modifier
+			}
+			
+			if = {
+				limit = {
+					completely_controls = title:c_bastion
+					NOT = { has_title = title:c_bastion }
+					title:c_bastion.title_province = { has_building = the_bastion_01 }
+				}
+				add_character_modifier = the_bastion_01_duchy_modifier
+			}
+			if = {
+				limit = {
+					completely_controls = title:c_bastion
+					NOT = { has_title = title:c_bastion }
+					title:c_bastion.title_province = { has_building = the_bastion_02 }
+				}
+				add_character_modifier = the_bastion_02_duchy_modifier
+			}
+			
+			### EK TODO: Take the Bridges of Leyawiin into account
+			if = {
+				limit = {
+					completely_controls = title:c_hestra
+					NOT = { has_title = title:c_hestra }
+					title:c_hestra.title_province = { has_building = port_hestra_01 }
+					NOT = {
+						custom_description = {
+							text = bridges_leyawiin_01_enabled
+							title:b_leyawiin_castle.title_province = { has_building = bridges_leyawiin_01 }
+							NOT = {
+								is_target_in_global_variable_list = {
+									name = unavailable_unique_decisions
+									target = flag:destroy_bridges_leyawiin_decision
+								}
+							}
+						}
+					}
+				}
+				add_character_modifier = port_hestra_01_duchy_modifier
+			}
+			
+			if = {
+				limit = {
+					completely_controls = title:c_arcanorum
+					NOT = { has_title = title:c_arcanorum }
+					title:c_arcanorum.title_province = { has_building = arcane_university_01 }
+				}
+				add_character_modifier = arcane_university_01_duchy_modifier
+			}
+			
+			### EK TODO: Take the Bridges of Leyawiin into account
+			### EK NOTE: Special, gives a county modifier to all the counties held in the Imperial Isle
+			if = {
+				limit = {
+					completely_controls = title:c_rumare
+					title:c_rumare.title_province = { has_building = imperial_city_harbor_01 }
+					NOT = {
+						custom_description = {
+							text = bridges_leyawiin_01_enabled
+							title:b_leyawiin_castle.title_province = { has_building = bridges_leyawiin_01 }
+							NOT = {
+								is_target_in_global_variable_list = {
+									name = unavailable_unique_decisions
+									target = flag:destroy_bridges_leyawiin_decision
+								}
+							}
+						}
+					}
+				}
+				every_county = {
+					limit = {
+						duchy = title:d_imperial_isle
+						ROOT = { completely_controls = PREV }
+					}
+					add_county_modifier = imperial_city_harbor_01_duchy_modifier
+				}
+			}
+		}
+		
+		trigger_event = {
+			id = ek_imperial_city_modifiers.0001
+			days = 7
+		}
+	}
+}

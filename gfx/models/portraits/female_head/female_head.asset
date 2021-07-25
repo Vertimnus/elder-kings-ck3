@@ -306,21 +306,43 @@ pdxmesh = {
 		blend_shape = { id = "female_orc_teeth_lips"		type = "blendshapes/female_orc_teeth_lips.mesh" }
 
 		blend_shape = { id = "female_khajiit_head"		type = "blendshapes/female_khajiit_head.mesh" data = "position" }
+		blend_shape = { id = "female_khajiit_head_normals"		type = "blendshapes/female_khajiit_head_normals.mesh" data = "normal|tangent" }
+
 		blend_shape = { id = "female_lilmothiit_head"		type = "blendshapes/female_lilmothiit_head.mesh" data = "position" }
+		blend_shape = { id = "female_lilmothiit_head_normals"		type = "blendshapes/female_lilmothiit_head_normals.mesh" data = "normal|tangent" }
+
+		blend_shape = { id = "female_argonian_head"		type = "blendshapes/female_argonian_head.mesh"  data = "position"} #data = "normal|tangent"
+		blend_shape = { id = "female_argonian_head_normals"		type = "blendshapes/female_argonian_head_normals.mesh"  data = "normal|tangent"} #data = "normal|tangent"
 
 		blend_shape = { id = "harelip"		type = "blendshapes/female_harelip.mesh" }
 		
 		additive_animation = { id = "jaw_open"				type = "female_head_jaw_open.anim" }
 		
-		additive_animation = { id = "head_khajiit_proportions"				type = "female_khajiit_head_proportions.anim" }
-		additive_animation = { id = "head_lilmothiit_proportions"				type = "female_lilmothiit_head_proportions.anim" }
-		additive_animation = { id = "female_head_eye_scale"				type = "female_head_eye_scale.anim" }
+		additive_animation = { id = "female_head_khajiit_proportions"				type = "female_khajiit_head_proportions.anim" }
+		additive_animation = { id = "female_head_argonian_proportions"				type = "female_argonian_head_proportions.anim" }
+		additive_animation = { id = "female_head_lilmothiit_proportions"				type = "female_lilmothiit_head_proportions.anim" }
 
 		blend_shape = { id = "female_khajiit_chin"		type = "blendshapes/female_khajiit_chin.mesh" }
 		blend_shape = { id = "female_khajiit_ear_tufts"		type = "blendshapes/female_khajiit_ear_tufts.mesh" }
 		blend_shape = { id = "female_khajiit_sideburns_1"		type = "blendshapes/female_khajiit_sideburns_1.mesh" }
 		blend_shape = { id = "female_khajiit_sideburns_2"		type = "blendshapes/female_khajiit_sideburns_2.mesh" }
 		#END OF EK2 ADDITIONS
+
+		#EPE
+		blend_shape = { id = "female_bs_ear_lobe_max"		type = "blendshapes/female_bs_ear_lobe_max.mesh" }
+		blend_shape = { id = "female_bs_ear_lobe_min"		type = "blendshapes/female_bs_ear_lobe_min.mesh" }
+		blend_shape = { id = "female_bs_eye_inner_max"		type = "blendshapes/female_bs_eye_inner_max.mesh" }
+		blend_shape = { id = "female_bs_eye_inner_min"		type = "blendshapes/female_bs_eye_inner_min.mesh" }
+		blend_shape = { id = "female_bs_eye_outer_max"		type = "blendshapes/female_bs_eye_outer_max.mesh" }
+		blend_shape = { id = "female_bs_eye_outer_min"		type = "blendshapes/female_bs_eye_outer_min.mesh" }
+		blend_shape = { id = "female_bs_nose_centre_max"		type = "blendshapes/female_bs_nose_centre_max.mesh" }
+		blend_shape = { id = "female_bs_nose_centre_min"		type = "blendshapes/female_bs_nose_centre_min.mesh" }
+		blend_shape = { id = "female_bs_nose_septum_max"		type = "blendshapes/female_bs_nose_septum_max.mesh" }
+		blend_shape = { id = "female_bs_nose_septum_min"		type = "blendshapes/female_bs_nose_septum_min.mesh" }
+		additive_animation = { id = "female_eye_size"					type = "female_eye_size.anim" }
+		additive_animation = { id = "female_eye_shut_top"					type = "female_head_eye_shut_top.anim" }
+		additive_animation = { id = "female_eye_shut_bottom"				type = "female_head_eye_shut_bottom.anim" }
+		#EPE
 
 		
 
@@ -683,14 +705,21 @@ entity = {
 
 	attribute = { name = "bs_orc_teeth_lips"					blend_shape = "female_orc_teeth_lips" }
 
-	attribute = { name = "head_khajiit_head_bs"					blend_shape = "female_khajiit_head" }
-	attribute = { name = "head_lilmothiit_head_bs"					blend_shape = "female_lilmothiit_head" }
+	attribute = { name = "khajiit_head_bs"					blend_shape = "female_khajiit_head" }
+	attribute = { name = "khajiit_head_normals"					blend_shape = "female_khajiit_head_normals" }
+
+	attribute = { name = "lilmothiit_head_bs"					blend_shape = "female_lilmothiit_head" }
+	attribute = { name = "lilmothiit_head_normals"					blend_shape = "female_lilmothiit_head_normals" }
+
+	attribute = { name = "argonian_head_bs"					blend_shape = "female_argonian_head" }
+	attribute = { name = "argonian_head_normals"					blend_shape = "female_argonian_head_normals" }
+	
 
 	attribute = { name = "bs_harelip"					blend_shape = "harelip" }
 
-	attribute = { name = "head_khajiit_proportions"					additive_animation = "head_khajiit_proportions" }
-	attribute = { name = "head_lilmothiit_proportions"					additive_animation = "head_lilmothiit_proportions" }
-	attribute = { name = "head_eye_scale"					additive_animation = "female_head_eye_scale" }
+	attribute = { name = "khajiit_head_proportions"					additive_animation = "female_head_khajiit_proportions" }
+	attribute = { name = "argonian_head_proportions"					additive_animation = "female_head_argonian_proportions" }
+	attribute = { name = "lilmothiit_head_proportions"					additive_animation = "female_head_lilmothiit_proportions" }
 
 	attribute = { name = "jaw_open"					additive_animation = "jaw_open" }
 
@@ -719,8 +748,29 @@ entity = {
 	attribute = { name = "khajiit_sideburns_1"			blend_shape = "female_khajiit_sideburns_1" }
 	attribute = { name = "khajiit_sideburns_2"			blend_shape = "female_khajiit_sideburns_2" }
 
+	attribute = { name = "beast_head_attachment01_variation_bs"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "beast_head_attachment02_variation_bs"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "beast_head_attachment03_variation_bs"					blend_shape = "female_bs_neutral" }
+	attribute = { name = "beast_head_attachment04_variation_bs"					blend_shape = "female_bs_neutral" }
+
+	attribute = { name = "beast_head_attachment01_young_bs"					blend_shape = "female_bs_neutral" }
+
 	#END OF EK2 ADDITIONS
 	
-	#scale = 0.5
+	#EPE
+	attribute = { name = "bs_ear_lobe_max"					blend_shape = "female_bs_ear_lobe_max" }
+	attribute = { name = "bs_ear_lobe_min"					blend_shape = "female_bs_ear_lobe_min" }
+	attribute = { name = "bs_eye_inner_max"					blend_shape = "female_bs_eye_inner_max" }
+	attribute = { name = "bs_eye_inner_min"					blend_shape = "female_bs_eye_inner_min" }
+	attribute = { name = "bs_eye_outer_max"					blend_shape = "female_bs_eye_outer_max" }
+	attribute = { name = "bs_eye_outer_min"					blend_shape = "female_bs_eye_outer_min" }
+	attribute = { name = "bs_nose_centre_max"					blend_shape = "female_bs_nose_centre_max" }
+	attribute = { name = "bs_nose_centre_min"					blend_shape = "female_bs_nose_centre_min" }
+	attribute = { name = "bs_nose_septum_max"					blend_shape = "female_bs_nose_septum_max" }
+	attribute = { name = "bs_nose_septum_min"					blend_shape = "female_bs_nose_septum_min" }
+	attribute = { name = "eye_size"					additive_animation = "female_eye_size" default = 0.5 }	
+	attribute = { name = "eye_shut_top"					additive_animation = "female_eye_shut_top" default = 0.5 }		
+	attribute = { name = "eye_shut_bottom"					additive_animation = "female_eye_shut_bottom" default = 0.5 }		
+	#EPE
 
 }

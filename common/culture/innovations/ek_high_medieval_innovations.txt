@@ -31,12 +31,33 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
+@moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
+@high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
+@crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
+@bombard = "gfx/interface/icons/culture_innovations/innovation_ek_bombard.dds"
+@alchemy = "gfx/interface/icons/culture_innovations/innovation_alchemy.dds"
+@white_gold = "gfx/interface/icons/culture_innovations/innovation_ek_white_gold_tower.dds"
+@blood_price = "gfx/interface/icons/culture_innovations/innovation_blood_price.dds"
+@mammoth = "gfx/interface/icons/culture_innovations/innovation_mammoth.dds"
+
 #culture_group_military
 innovation_schools_of_magic = {
 	group = culture_group_military
 	culture_era = culture_era_high_medieval
 	icon =  @weapons_and_armor_02
 	
+	potential = {
+		NOR = {
+			has_innovation = innovation_lunar_lattice
+		}
+	}
+	
+	can_progress = {
+		has_innovation = innovation_war_magic
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
+	
+	unlock_maa = spellswords
 	maa_upgrade = {
 		type = mages
 		toughness = 5
@@ -54,6 +75,10 @@ innovation_restoration_squads = {
 	culture_era = culture_era_high_medieval
 	icon =  @weapons_and_armor_02
 	
+	can_progress = {
+		has_innovation = innovation_war_magic
+	}
+	
 	modifier = {
 		hard_casualty_modifier = -0.1
 		hostile_county_attrition = -0.1
@@ -63,10 +88,26 @@ innovation_restoration_squads = {
 	flag = late_medieval_era_regular
 }
 
+#culture_group_civic
+innovation_provincial_governors = {
+	group = culture_group_civic
+	culture_era = culture_era_high_medieval
+	icon = @crown_01
+
+	unlock_casus_belli = individual_kingdom_de_jure_cb
+	custom = unlocks_kingdom_offer_vassalization_interaction
+	custom = unlock_provincial_governor_contract
+
+	flag = global_regular
+	flag = high_medieval_era_regular
+}
+
 #culture_group_regional
 innovation_seigneurialism = {
 	group = culture_group_regional
 	culture_era = culture_era_high_medieval
+	can_progress = { NOT = { has_innovation = innovation_native_nomadic } }
+	
 	region = mundus_tamriel_high_rock
 	icon = @administration_1
 

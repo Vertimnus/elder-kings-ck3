@@ -75,7 +75,10 @@ ek_attrebus_potentate.0001 = {
 		}
 		# The First Legion is disbanded
 		custom_tooltip = attrebus_potentate_cb_victory_first_legion_disbanded_ct
-		scope:attrebus = { destroy_title = title:d_first_legion }
+		scope:attrebus = {
+			destroy_title = title:d_first_legion
+			destroy_title = title:k_legionary_council
+		}
 		
 		## Now we can usurp stuff
 		hidden_effect = {
@@ -985,22 +988,16 @@ ek_attrebus_potentate.0001 = {
 ek_attrebus_potentate.0050 = {
 	hidden = yes
 	
+	trigger = {
+		var:attrebus_years_pseudo_emperor_left = { compare_value > 0 }
+	}
+	
 	immediate = {
-		if = {
-			limit = { var:attrebus_years_pseudo_emperor_left = { compare_value > 1 } }
-			change_variable = {
-				name = attrebus_years_pseudo_emperor_left
-				subtract = 1
-			}
-			
-			trigger_event = {
-				id = ek_attrebus_potentate.0050
-				days = 365
-			}
-		}
+		attrebus_decrease_amount_pseudo_emperor_years = { AMOUNT = 1 }
 		
-		else = {
-			trigger_event = ek_attrebus_potentate.0051
+		trigger_event = {
+			id = ek_attrebus_potentate.0050
+			days = 365
 		}
 	}
 }
@@ -1109,6 +1106,42 @@ ek_attrebus_potentate.0053 = {
 		add_internal_flag = dangerous
 		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_tt
 		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_rulers_sides_tt
+		
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_follow_up_event_tt
+		
+		trigger_event = ek_attrebus_potentate.0054
+	}
+}
+
+# Click on the third option
+ek_attrebus_potentate.0054 = {
+	title = ek_attrebus_potentate.0054.t
+	
+	desc = ek_attrebus_potentate.0054.desc
+	
+	theme = stewardship_wealth_focus
+	
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	
+	# Yes, do another civil war, what could possibly go wrong
+	option = {
+		name = ek_attrebus_potentate.0054.a
+		
+		# Required tasks
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_debt_not_repaid_tt
+		# Optional tasks
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_cyrodiilic_hero_tt
+		custom_tooltip = attrebus_interregnum_decision_colovian_caesar_civil_war_legion_side_ec_tt
+	}
+	
+	# Not yet...
+	option = {
+		name = ek_attrebus_potentate.0054.b
+		
+		interregnum_shatter_cyrodiil = yes
 	}
 }
 
@@ -1202,6 +1235,10 @@ ek_attrebus_potentate.0062 = {
 }
 
 ### Optional task 3: The renewed Imperial Legion
+# 3 possible commanders
+# EC choice: EC loyalist, gives you a few more years
+# Neutral choice
+# Attrebus choice: Attrebus loyalist, you lose a few years
 ek_attrebus_potentate.0064 = {
 	title = ek_attrebus_potentate.0064.t
 	desc = ek_attrebus_potentate.0064.desc
@@ -1213,20 +1250,143 @@ ek_attrebus_potentate.0064 = {
 		animation = personality_bold
 	}
 	
-	option = {
+	immediate = {
+		# We create the three characters
+		if = { # Historical outcome if possible
+			limit = {
+				exists = character:basicilius_1000
+				character:basicilius_1000 = { is_alive = yes is_landed = no }
+			}
+			character:basicilius_1000 = { save_scope_as = imperial_legion_ec_loyalist }
+		}
+		else = {
+			create_character = {
+				save_scope_as = imperial_legion_ec_loyalist
+				template = new_warrior_character
+				culture = culture:heartlander
+			}
+		}
+		
+		create_character = {
+			save_scope_as = imperial_legion_neutral
+			template = new_warrior_character
+			template_character = root
+		}
+		
+		create_character = {
+			save_scope_as = imperial_legion_attrebus_loyalist
+			template = new_warrior_character
+			template_character = root
+		}
+	}
+	
+	option = { # Go with EC loyalist
 		name = ek_attrebus_potentate.0064.a
 		
-		custom_tooltip = attrebus_potentate_attrebus_imperial_legion_rebuilt_desc
-		custom_tooltip = attrebus_potentate_attrebus_fort_legion_headquarters_desc
+		scope:imperial_legion_ec_loyalist = { save_scope_as = new_leader_first_legion }
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = title_change
+			add_claim_on_loss = no
+		}
+		title:d_first_legion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_ec_loyalist
+				change = scope:title_change
+			}
+		}
+		title:c_bastion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_ec_loyalist
+				change = scope:title_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:title_change
+		
+		custom_tooltip = attrebus_potentate_first_legion_ec_loyalist_desc
+		custom_tooltip = attrebus_potentate_attrebus_please_elder_council_desc
+		
+		attrebus_increase_amount_pseudo_emperor_years = { AMOUNT = 3 }
+	}
+	
+	option = { # Go with neutral party
+		name = ek_attrebus_potentate.0064.b
+		
+		scope:imperial_legion_neutral = { save_scope_as = new_leader_first_legion }
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = title_change
+			add_claim_on_loss = no
+		}
+		title:d_first_legion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_neutral
+				change = scope:title_change
+			}
+		}
+		title:c_bastion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_neutral
+				change = scope:title_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:title_change
+		
+		custom_tooltip = attrebus_potentate_first_legion_legion_desc
+	}
+	
+	option = { # Go with Attrebus loyalist
+		name = ek_attrebus_potentate.0064.c
+		
+		if = {
+			limit = { var:attrebus_years_pseudo_emperor_left = { compare_value <= 3 } }
+			add_internal_flag = dangerous
+			
+			show_as_tooltip = { attrebus_decrease_amount_pseudo_emperor_years = { AMOUNT = 3 } } # So the warning can be shown right at the top
+		}
+		else = {
+			custom_tooltip = attrebus_potentate_attrebus_anger_elder_council_desc
+		}
+		
 		custom_tooltip = attrebus_potentate_attrebus_increase_personal_power_desc
+		scope:imperial_legion_attrebus_loyalist = { save_scope_as = new_leader_first_legion }
+		
+		create_title_and_vassal_change = {
+			type = created
+			save_scope_as = title_change
+			add_claim_on_loss = no
+		}
+		title:d_first_legion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_attrebus_loyalist
+				change = scope:title_change
+			}
+		}
+		title:c_bastion = {
+			change_title_holder = {
+				holder = scope:imperial_legion_attrebus_loyalist
+				change = scope:title_change
+			}
+		}
+		resolve_title_and_vassal_change = scope:title_change
+		
+		custom_tooltip = attrebus_potentate_first_legion_attrebus_loyalist_desc
+		
+		hidden_effect = { attrebus_decrease_amount_pseudo_emperor_years = { AMOUNT = 3 } }
+	}
+	
+	after = {
+		custom_tooltip = attrebus_potentate_attrebus_fort_legion_headquarters_desc
 		custom_tooltip = attrebus_potentate_optional_task_3_fulfilled_desc
 	}
 }
 
 ### Required task 1: The Tsaesci Remnants of Cyrodiil
-ek_attrebus_potentate.0064 = {
-	title = ek_attrebus_potentate.0064.t
-	desc = ek_attrebus_potentate.0064.desc
+ek_attrebus_potentate.0065 = {
+	title = ek_attrebus_potentate.0065.t
+	desc = ek_attrebus_potentate.0065.desc
 	
 	theme = martial
 	

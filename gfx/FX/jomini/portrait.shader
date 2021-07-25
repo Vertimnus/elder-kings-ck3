@@ -774,6 +774,28 @@ PixelShader =
 		]]
 	}
 
+		MainCode PS_skin_alpha
+	{
+		Input = "VS_OUTPUT_PDXMESHPORTRAIT"
+		Output = "PDX_COLOR"
+		Code
+		[[
+			PDX_MAIN
+			{
+				float2 UV0 = Input.UV0;
+				float4 Diffuse = PdxTex2D( DiffuseMap, UV0 );								
+				float4 Properties = PdxTex2D( SpecularMap, UV0 );
+				float3 NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
+				
+				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorSkin.rgb, Diffuse.a );
+				
+				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
+				
+				return float4( Color, 1.0f );
+			}
+		]]
+	}
+
 	MainCode PS_attachment
 	{		
 		TextureSampler PatternMask
@@ -1123,6 +1145,13 @@ Effect portrait_eye
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_eye"
+}
+
+
+Effect skin_alpha
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_skin_alpha"
 }
 
 Effect portrait_eyeShadow

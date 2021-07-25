@@ -346,6 +346,33 @@ attrebus_fulfill_optional_task = {
 		}
 	}
 }
+# Functions to increase/decrease the number of years Attrebus has in his pseudo-Emperor path
+attrebus_increase_amount_pseudo_emperor_years = {
+	attrebus_change_amount_pseudo_emperor_years = { OPERATION = add AMOUNT = $AMOUNT$ }
+}
+attrebus_decrease_amount_pseudo_emperor_years = {
+	if = {
+		limit = { var:attrebus_years_pseudo_emperor_left = { compare_value <= $AMOUNT$ } }
+		
+		custom_tooltip = attrebus_change_amount_pseudo_emperor_years_ec_immediate_action_ct
+	}
+	
+	attrebus_change_amount_pseudo_emperor_years = { OPERATION = subtract AMOUNT = $AMOUNT$ }
+}
+attrebus_change_amount_pseudo_emperor_years = {
+	change_variable = {
+		name = attrebus_years_pseudo_emperor_left
+		$OPERATION$ = $AMOUNT$
+	}
+	
+	if = {
+		limit = { var:attrebus_years_pseudo_emperor_left = { compare_value < 1 } }
+		
+		custom_tooltip = attrebus_change_amount_pseudo_emperor_years_ec_immediate_action_ct
+		
+		trigger_event = ek_attrebus_potentate.0051
+	}
+}
 
 ### To easily apply the effects of the Plunderer perks
 calculate_bonus_resources_from_loot = {
@@ -640,6 +667,7 @@ inflict_bloodprice = {
 			add_prestige = miniscule_prestige_value
 			if = {
 				limit = { faith = { has_doctrine = tenet_legalism } }
+				custom_tooltip = tenet_legalism_respecting_traditions_ct
 				add_piety = miniscule_piety_value
 			}
 		}
@@ -965,4 +993,64 @@ set_dragon_name_part = {
 # Flag
 set_combo_trait_daedra_flag = {
 	add_character_flag = stress_$TRAIT$_$DAEDRA$
+}
+
+### Might Makes Right
+# Laws - Check if a law is still good even after you lose a level of Fame or Devotion
+# Current scope must be the character
+might_makes_right_update_law_fame_devotion = {
+	# if = {
+		# limit = {
+			# OR = {
+				# AND = {
+					# has_realm_law = crown_authority_1
+					# NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+				# }
+				# has_realm_law = crown_authority_2
+				# has_realm_law = crown_authority_3
+			# }
+		# }
+	# }
+	if = {
+		limit = {
+			has_realm_law = crown_authority_3
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 5
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 5
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_2
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_2
+			NOT = { culture = { has_innovation = innovation_royal_prerogative } }
+			NOR = {
+				prestige_level >= 4
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 4
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_1
+	}
+	if = {
+		limit = {
+			has_realm_law = crown_authority_1
+			NOT = { culture = { has_innovation = innovation_plenary_assemblies } }
+			NOR = {
+				prestige_level >= 3
+				AND = {
+					faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
+					piety_level >= 3
+				}
+			}
+		}
+		add_realm_law_skip_effects = crown_authority_0
+	}
 }

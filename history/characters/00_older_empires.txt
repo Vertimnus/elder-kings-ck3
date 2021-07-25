@@ -9,6 +9,14 @@ ysgramoor_100 = {
 	culture = eastmarcher
 
 	113.1.1 = { birth = yes }
+	129.1.1 = {
+		trait = education_martial_4
+		trait = organizer
+		trait = overseer
+		trait = content
+		trait = diligent
+		trait = humble
+	}
 	143.1.1 = { give_nickname = nick_hand_free }
 	221.1.1 = { death = yes }
 }
@@ -30,6 +38,14 @@ ysgramoor_102 = {
 	father = ysgramoor_100
 
 	164.1.1 = { birth = yes }
+	180.1.1 = {
+		trait = education_martial_4
+		trait = aggressive_attacker
+		trait = gallant
+		trait = ambitious
+		trait = vengeful
+		trait = diligent
+	}
 	222.1.1 = { give_nickname = nick_the_gifted }
 	243.1.1 = { death = yes }
 }
@@ -39,10 +55,14 @@ ysgramoor_103 = {
 	religion = nord_cult
 	culture = eastmarcher
 	father = ysgramoor_100
-	trait = bastard
+	trait = legitimized_bastard
 
 	165.1.1 = { birth = yes }
-	181.1.1 = { give_nickname = nick_the_outlaw }
+	181.1.1 = {
+		trait = education_martial_3
+		trait = adventurer
+		give_nickname = nick_the_outlaw
+	}
 	230.1.1 = { death = { death_reason = death_battle } }
 }
 ysgramoor_110 = {
@@ -50,9 +70,15 @@ ysgramoor_110 = {
 	dynasty = 300019 #Ysgramoor
 	religion = nord_cult
 	culture = eastmarcher
-	trait = zealous
 
 	301.1.1 = { birth = yes }
+	317.1.1 = {
+		trait = education_martial_4
+		trait = holy_warrior
+		trait = impatient
+		trait = zealous
+		trait = stubborn
+	}
 	361.1.1 = { religion = alessian }
 	369.1.1 = { death = { death_reason = death_battle } }
 }
@@ -69,6 +95,13 @@ numinex_100 = {
 	trait = one_eyed
 
 	392.1.1 = { birth = yes }
+	408.1.1 = {
+		trait = education_martial_4
+		trait = organizer
+		trait = arbitrary
+		trait = deceitful
+		trait = brave
+	}
 	420.1.1 = { give_nickname = nick_one_eye }
 	452.1.1 = { death = yes }
 }
@@ -85,8 +118,19 @@ kjoric_100 = {
 	culture = eastmarcher
 
 	430.1.1 = { birth = yes }
+	446.1.1 = {
+		trait = education_martial_3
+		trait = calm
+		trait = shy
+		trait = just
+	}
 	452.1.1 = { give_nickname = nick_the_white }
-	478.1.1 = { death = { death_reason = death_battle } }
+	478.1.1 = {
+		death = {
+			death_reason = death_battle
+			killer = alessian_105
+		}
+	}
 }
 
 kjoric_101 = {
@@ -94,11 +138,17 @@ kjoric_101 = {
 	dynasty = 300020 # of Kjoric
 	religion = alessian
 	culture = eastmarcher
+	father = kjoric_100
 
 	452.1.1 = { birth = yes }
 	# HistoryTodo: Figure out a chronology for Kjoric and Hoag that lets Hoag be around to fight Vivec in the War of Succession c. 1E 401 (see Sermon 9)
 	478.1.1 = { give_nickname = nick_merkiller }
-	482.1.1 = { death = { death_reason = death_battle } }
+	482.1.1 = {
+		death = {
+			death_reason = death_battle
+			killer = direnni_103
+		}
+	}
 }
 
 ## of Atmora Dynasty (330000)
@@ -111,15 +161,18 @@ wulfharth_100 = {
 	dynasty = 330000 # of Atmora
 	religion = nord_cult
 	culture = atmoran
-	trait = strong
-	trait = education_martial_4
-	trait = zealous
-	trait = wrathful
-	trait = vengeful
 	# trait = thuum_3
 	# HistoryTodo: give him Thu'um trait
 
 	425.1.1 = { birth = yes }
+	441.1.1 = {
+		trait = education_martial_4
+		trait = holy_warrior
+		trait = zealous
+		trait = wrathful
+		trait = vengeful
+		trait = strong
+	}
 	482.1.1 = {
 		trait = p_shezarr
 		give_nickname = nick_ysmir # Shor's Tongue
@@ -138,6 +191,10 @@ high_wall_100 = {
 	dynasty = 310015
 	
 	1955.1.1 = { birth = yes }
+	1971.1.1 = {
+		trait = education_stewardship_4
+		trait = architect
+	}
 	2032.1.1 = { death = yes }
 }
 
@@ -206,22 +263,73 @@ freiretta_100 = {
 	2645.1.1 = { death = yes }
 }
 
+## Whitestrake Dynasty (6)
+# House of Whitestrake
+whitestrake_100 = {
+	name = "Pelinal" # "Nibenay Warlord"
+	dna = pelinal_dna_entry
+	dynasty = 6
+	culture = blackwood
+	religion = reman_cult # a name that no one knew yet!
+	sexuality = homosexual
+
+	trait = education_martial_4
+	trait = blademaster_3
+	trait = reckless
+	trait = impatient
+	trait = callous
+	trait = zealous
+	trait = strong
+	trait = possessed_genetic
+	trait = p_shezarr
+	trait = lifespan_7
+
+	diplomacy = 0
+	martial = 15
+	prowess = 15
+	learning = 15
+
+	1.1.1 = { birth = yes }
+	242.1.1 = { give_nickname = nick_the_third }
+	243.1.1 = {
+		death = {
+			death_reason = death_pelinal
+			killer = adonai_100
+		}
+	}
+}
+
 ##Adonai Dynasty (1500000)
 
 #House Adonai
 
 adonai_100 = {
 	name = "Umaril" #Lore
-	religion = meridia_cult
-	culture = ayleid
+	dna = umaril_dna_entry
 	dynasty = 1500000
+	culture = ayleid
+	religion = meridia_cult
+
+	trait = education_martial_4
+	trait = blademaster_3
+	trait = cautious_leader
+	trait = patient # preferred "ruin-from-afar"
+	trait = sadistic
+	trait = zealous
+	trait = physique_good_3
+	trait = beauty_good_3
+	trait = pure_blooded
+	trait = lifespan_7
+
+	martial = 15
+	prowess = 11
 	
-	10.1.1 = { birth = yes }
+	1.1.1 = { birth = yes }
 	100.1.1 = { give_nickname = nick_the_unfeathered }
 	243.1.1 = {
 		death = {
 			death_reason = death_duel
-			killer = alessian_101
+			killer = whitestrake_100
 		}
 	}
 }
@@ -292,6 +400,14 @@ alessian_104 = {
 	father = alessian_103
 	
 	300.1.1 = {	birth = yes }
+	316.1.1 = {
+		trait = education_martial_4
+		trait = holy_warrior
+		trait = arbitrary
+		trait = callous
+		trait = zealous
+		trait = shrewd
+	}
 	361.1.1 = { death = yes }
 }
 
@@ -317,6 +433,12 @@ alessian_105 = {
 	father = alessian_104b
 	
 	445.1.1 = {	birth = yes }
+	461.1.1 = {
+		trait = education_martial_3
+		trait = wrathful
+		trait = zealous
+		trait = temperate
+	}
 	479.1.1 = { 
 		death = {
 			death_type = death_battle
@@ -334,8 +456,8 @@ alessian_106 = {
 	
 	father = alessian_105
 	
-	360.1.1 = {	birth = yes }
-	361.1.1 = { death = yes }
+	479.1.1 = {	birth = yes }
+	999.1.1 = { death = yes }
 }
 
 alessian_107 = {
@@ -348,6 +470,13 @@ alessian_107 = {
 	father = alessian_106
 	
 	999.1.1 = {	birth = yes }
+	1015.1.1 = {
+		trait = education_martial_4
+		trait = strategist
+		trait = ambitious
+		trait = impatient
+		trait = diligent
+	}
 	1047.1.1 = { death = yes }
 }
 
@@ -399,6 +528,14 @@ alessian_111 = {
 	father = alessian_110
 	
 	2537.1.1 = {birth = yes }
+	2553.1.1 = {
+		trait = education_diplomacy_3
+		trait = diplomat
+		trait = shrewd
+		trait = patient
+		trait = calm
+		trait = gregarious
+	}
 	2605.1.1 = { death = yes }
 }
 
@@ -522,13 +659,16 @@ reman_101 = {
 	religion = imperial_cult
 	culture = heartlander
 	father = reman_100
-	trait = education_stewardship_1
-	trait = wrathful
-	trait = vengeful
-	trait = arbitrary
 
 	2731.9.1 = {
 		birth=yes
+	}
+	2747.9.1 = {
+		trait = education_stewardship_1
+		trait = wrathful
+		trait = vengeful
+		trait = arbitrary
+		trait = irritable
 	}
 	#2762.6.6 = {
 	#	effect = { add_amulet_of_kings = yes }
@@ -543,21 +683,27 @@ reman_102 = {
 	religion = imperial_cult
 	culture = heartlander
 	father = reman_101 #Kastav I
-	trait = education_martial_3
-	trait = calm
-	trait = diligent
-	trait = forgiving
-	trait = strategist
-	trait = administrator
 
 	2794.2.28 = {
 		birth=yes
+	}
+	2810.2.28 = {
+		trait = education_martial_3
+		trait = logistician
+		trait = strategist
+		trait = administrator
+		trait = august
+		trait = shrewd
+		trait = patient
+		trait = calm
+		trait = diligent
 	}
 	#2805.1.11 = {
 	#	effect = { add_amulet_of_kings = yes }
 	#}
 	2851.12.29 = {
 		death=yes
+		# HistoryToDo: Killed in battle by the Morag Tong, specifically the ancestors of Dram
 	}
 }
 reman_103 = {
@@ -566,14 +712,17 @@ reman_103 = {
 	religion = imperial_cult
 	culture = colovian
 	father = reman_102 # Reman II
-	trait = education_martial_2
-	trait = reckless
-	trait = content
-	trait = brave
-	trait = humble
 
 	2816.1.27 = {
 		birth=yes
+	}
+	2832.1.27 = {
+		trait = education_martial_2
+		trait = reveler_3
+		trait = profligate
+		trait = gluttonous
+		trait = content
+		trait = humble
 	}
 	#2851.12.29 = {
 	#	effect = { add_amulet_of_kings = yes }
@@ -587,11 +736,17 @@ reman_104 = {
 	dynasty = 100013 #Reman
 	religion = imperial_cult
 	culture = colovian
-	trait = one_eyed
 	father = reman_102 #Kastav II
 
 	2832.10.4 = {
 		birth=yes
+	}
+	2848.10.4 = {
+		trait = education_intrigue_1
+		trait = paranoid
+		trait = lustful # seriously, this guy took too many mistresses
+		trait = vengeful
+		trait = one_eyed
 	}
 	#2870.1.1 = { add_spouse = 210015 }
 	#2877.2.12 = { effect = { add_amulet_of_kings = yes } }
@@ -599,7 +754,7 @@ reman_104 = {
 	2920.12.6 = {
 		death = {
 			death_reason = death_murder
-		#	killer = 210013
+			# HistoryToDo: Killed by his Redguard mistress, Corda
 		}
 	}
 }
@@ -806,11 +961,11 @@ tor_907 = {
 	3247.1.1 = { death = yes }
 }
 
-##of Akavir Dynasty (1600002)
+##of Akavir Dynasty (dyn_akavir)
 #House of Akavir
 akavir_99 = {
 	name = "Versidue-Shaie" #Tsaesci Potentate
-	dynasty = 1600002 #Of Akaviri
+	dynasty = dyn_akavir #Of Akaviri
 	religion = court_dawnbeauty
 	culture = tsaesci
 	trait = education_martial_4
@@ -832,7 +987,7 @@ akavir_99 = {
 }
 akavir_100 = {
 	name = "Savirien-Chorak" #Second Tsaesci Potentate
-	dynasty = 1600002 #Of Akaviri
+	dynasty = dyn_akavir #Of Akaviri
 	religion = court_dawnbeauty
 	culture = tsaesci
 	father = akavir_99

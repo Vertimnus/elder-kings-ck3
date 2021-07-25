@@ -2,9 +2,9 @@
 # Empty scope
 ek_on_game_start = {
 	effect = {
-		### Create a list with every culture. Because Paradox has every_faith, but not every_culture :(
+		### We need this effect to have the culture description, even with the new x_culture_global functions
 		# Akaviri
-		startup_culture_effect = { CULTURE = hakoshae }
+		startup_culture_effect = { CULTURE = rimmen }
 		startup_culture_effect = { CULTURE = jaegi }
 		startup_culture_effect = { CULTURE = tsaesci }
 		# Aldmeris
@@ -15,7 +15,8 @@ ek_on_game_start = {
 		# Ayleid
 		startup_culture_effect = { CULTURE = ayleid }
 		startup_culture_effect = { CULTURE = barsaebic }
-		startup_culture_effect = { CULTURE = hectahamic }
+		startup_culture_effect = { CULTURE = mathmeldi }
+		startup_culture_effect = { CULTURE = dynari }
 		# Bosmeris
 		startup_culture_effect = { CULTURE = pactbosmer }
 		startup_culture_effect = { CULTURE = civicbosmer }
@@ -36,6 +37,7 @@ ek_on_game_start = {
 		# Goblinken
 		startup_culture_effect = { CULTURE = goblin }
 		startup_culture_effect = { CULTURE = riekling }
+		startup_culture_effect = { CULTURE = riekr }
 		# Cyrodiilic
 		startup_culture_effect = { CULTURE = strident }
 		startup_culture_effect = { CULTURE = colovian }
@@ -46,6 +48,7 @@ ek_on_game_start = {
 		startup_culture_effect = { CULTURE = pellitinian }
 		startup_culture_effect = { CULTURE = anequinan }
 		startup_culture_effect = { CULTURE = baandari }
+		startup_culture_effect = { CULTURE = senchalese }
 		# Nedic
 		startup_culture_effect = { CULTURE = reachfolk }
 		startup_culture_effect = { CULTURE = kothringi }
@@ -129,6 +132,7 @@ ek_on_game_start = {
 		# Wrothgar
 		set_culture_native_to = { REGION = greater_wrothgar CULTURE = culture:bretic }
 		set_culture_native_to = { REGION = greater_wrothgar CULTURE = culture:reachfolk }
+		set_culture_native_to = { REGION = greater_wrothgar CULTURE = culture:riekr }
 		# Bangkorai
 		set_culture_native_to = { REGION = bangkorai CULTURE = culture:iliac }
 		set_culture_native_to = { REGION = bangkorai CULTURE = culture:duraki }
@@ -151,6 +155,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = abecee CULTURE = culture:abecean }
 		set_culture_native_to = { REGION = abecee CULTURE = culture:corelanya }
 		set_culture_native_to = { REGION = abecee CULTURE = culture:keptu }
+		set_culture_native_to = { REGION = abecee CULTURE = culture:strident }
 		## Cyrodiil
 		# Heartlands
 		set_culture_native_to = { REGION = heartlands CULTURE = culture:heartlander }
@@ -204,7 +209,7 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = grahtwood CULTURE = culture:pactbosmer }
 		set_culture_native_to = { REGION = grahtwood CULTURE = culture:civicbosmer }
 		set_culture_native_to = { REGION = grahtwood CULTURE = culture:wood_orc }
-		set_culture_native_to = { REGION = grahtwood CULTURE = culture:hectahamic }
+		set_culture_native_to = { REGION = grahtwood CULTURE = culture:mathmeldi }
 		# Greenshade
 		set_culture_native_to = { REGION = greenshade CULTURE = culture:pactbosmer }
 		set_culture_native_to = { REGION = greenshade CULTURE = culture:civicbosmer }
@@ -218,9 +223,10 @@ ek_on_game_start = {
 		## Elsweyr
 		# Anequina
 		set_culture_native_to = { REGION = anequina CULTURE = culture:anequinan }
-		set_culture_native_to = { REGION = anequina CULTURE = culture:hakoshae }
+		set_culture_native_to = { REGION = anequina CULTURE = culture:rimmen }
 		# Tenmar
 		set_culture_native_to = { REGION = tenmar CULTURE = culture:pellitinian }
+		set_culture_native_to = { REGION = tenmar CULTURE = culture:senchalese }
 		# Pellitine
 		set_culture_native_to = { REGION = pellitine CULTURE = culture:pellitinian }
 		## Morrowind
@@ -233,6 +239,20 @@ ek_on_game_start = {
 		set_culture_native_to = { REGION = greater_deshaan CULTURE = culture:dunmer }
 		# Padomay Coast
 		set_culture_native_to = { REGION = padomay_coast CULTURE = culture:dunmer }
+		# Southern Marshes
+		set_culture_native_to = { REGION = southern_marshes CULTURE = culture:dunmer }
+		## Black Marsh
+		# Middle Argonia
+		set_culture_native_to = { REGION = middle_argonia CULTURE = culture:yespest }
+		set_culture_native_to = { REGION = middle_argonia CULTURE = culture:lilmothiit }
+		# Onkobra
+		set_culture_native_to = { REGION = onkobra CULTURE = culture:kothringi }
+		# Black Bays
+		set_culture_native_to = { REGION = black_bays CULTURE = culture:yespest }
+		# Padomaic Marshes
+		set_culture_native_to = { REGION = padomaic_marshes CULTURE = culture:orma }
+		set_culture_native_to = { REGION = padomaic_marshes CULTURE = culture:horwalli }
+		set_culture_native_to = { REGION = padomaic_marshes CULTURE = culture:cantemiric }
 		
 		### Now that we know which cultures are native from which region, we can save every native culture in the county scope (genius, really)
 		setup_county_native_cultures_link = yes
@@ -266,6 +286,233 @@ ek_on_game_start = {
 				}
 			}
 		}
+		
+		### Cultural/Communal identity doctrines
+		# Aldmer pantheon
+		faith:auriel = {
+			culture:alinor.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:mainland_auriel = {
+			culture:alinor.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:malada = {
+			culture:mathmeldi.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Bosmeri pantheon
+		faith:greenpact = {
+			culture:pactbosmer.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:vineduskpact = {
+			culture:pactbosmer.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:blacksapmovement = {
+			culture:pactbosmer.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:wilderking = {
+			culture:pactbosmer.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Nedic-Nordic pantheon
+		faith:imperial_cult = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:nord_cult = {
+			culture:eastmarcher.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:breton_cult = {
+			culture:glenumbran.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:redguard_cult = {
+			culture:crown.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:hero_cult = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:reman_cult = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:niben_cult = {
+			culture:blackwood = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:moth_cult = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:aedric_nede = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:moth_cult = {
+			culture:colovian.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Trinimac
+		faith:trinimac_cult = {
+			culture:alinor.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:vosh_rakh = {
+			culture:mountain_orc.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Yokudan
+		faith:satakal = {
+			culture:crown.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:tall_papa = {
+			culture:crown.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:herd_mother = {
+			culture:horsemen = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		# Akaviri
+		faith:court_dawnbeauty = {
+			culture:tsaesci.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Atmoran
+		faith:totemism = {
+			culture:skaal.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:anuic_skaal = {
+			culture:skaal = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:dragon_cult = {
+			culture:skaal.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:ternion_totems = {
+			culture:skaal.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Dwemeris
+		faith:golden_tones = {
+			culture:dwemer = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		# Hist
+		faith:hist = {
+			culture:hleel.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:amberhist = {
+			culture:hleel.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Khajiit
+		faith:twomoonsdance = {
+			culture:baandari.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:manypathsdance = {
+			culture:baandari.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:baandari = {
+			culture:baandari = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:order_new_moon = {
+			culture:baandari.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Sithis
+		faith:xanmeer = {
+			culture:hleel.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:coiled_path = {
+			culture:ashlander = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		# Stone
+		faith:osh_ornim = {
+			culture:iron_orc = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		# Malacath
+		faith:code_of_malacath = {
+			culture:iron_orc.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:goblin_shamanism = {
+			culture:goblin.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:malacath_brutal_breed = {
+			culture:iron_orc.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Namira
+		faith:darkmoondance = {
+			culture:baandari.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		# Reach
+		faith:old_gods = {
+			culture:reachfolk = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:dwemer_idolatry = {
+			culture:reachfolk = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:hagraven_cult = {
+			culture:reachfolk = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:minotaur_cult = {
+			culture:reachfolk = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		faith:druadach_cult = {
+			culture:reachfolk = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture value = scope:culture_faith }
+		}
+		# Velothi
+		faith:old_velothi = {
+			culture:chimer.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:tribunal_temple = {
+			culture:ashlander.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:tribunal_cult = {
+			culture:ashlander.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:nerevarine = {
+			culture:ashlander.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:sixth_house = {
+			culture:ashlander.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		faith:cantemiric_sect = {
+			culture:ashlander.culture_group = { save_scope_as = culture_faith }
+			set_variable = { name = associated_culture_group value = scope:culture_faith }
+		}
+		
 		
 		### Holy Sites buildings
 		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one
@@ -357,17 +604,8 @@ ek_on_game_start = {
 			}
 		}
 		
-		### Innovations
-		# Cultural & regional
-		culture:alinor = { add_innovation = innovation_moonstone_armor }
-		culture:auridon = { add_innovation = innovation_moonstone_armor }
-		culture:balfiera = { add_innovation = innovation_moonstone_armor }
-		
-		culture:heartlander = { add_innovation = innovation_seat_of_empires }
-		culture:nibenese = { add_innovation = innovation_seat_of_empires }
-		culture:colovian = { add_innovation = innovation_seat_of_empires }
-		
-		culture:pactbosmer = { add_innovation = innovation_rite_of_theft }
+		### Innovations (moved outside this effect for better compatibility)
+		ek_add_game_start_innovations = yes
 		
 		### Laws & stuff
 		# If you're a pirate gov and are at least a duke, every duchy has an election
@@ -380,6 +618,9 @@ ek_on_game_start = {
 				}
 			}
 		}
+		
+		### Various effects if you hold certain titles
+		title:c_imperial_city.holder = { trigger_event = ek_imperial_city_modifiers.0001 }
 		
 		#############
 		# BOOKMARKS #
@@ -512,6 +753,8 @@ ek_on_game_start = {
 				}
 			}
 		}
+		
+		scope:leader.primary_title = { set_coa = d_order_of_the_hour }
 		
 		### 2E440 BOOKMARK ###
 		## Assassination of Logrolf, the High King of Skyrim, by a lowly noble on the order of Svartr

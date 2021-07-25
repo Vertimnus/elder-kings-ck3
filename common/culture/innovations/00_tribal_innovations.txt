@@ -31,6 +31,15 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
+@moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
+@high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
+@crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
+@bombard = "gfx/interface/icons/culture_innovations/innovation_ek_bombard.dds"
+@alchemy = "gfx/interface/icons/culture_innovations/innovation_alchemy.dds"
+@white_gold = "gfx/interface/icons/culture_innovations/innovation_ek_white_gold_tower.dds"
+@blood_price = "gfx/interface/icons/culture_innovations/innovation_blood_price.dds"
+@mammoth = "gfx/interface/icons/culture_innovations/innovation_mammoth.dds"
+
 #culture_group_military
 innovation_motte = {
 	group = culture_group_military
@@ -47,6 +56,10 @@ innovation_catapult = {
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @siege_weapons
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 
 	unlock_maa = onager
 
@@ -69,6 +82,10 @@ innovation_mustering_grounds = {
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @leadership_2
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 
 	modifier = {
 		men_at_arms_cap = 1
@@ -96,6 +113,16 @@ innovation_quilted_armor = {
 	group = culture_group_military
 	culture_era = culture_era_tribal
 	icon = @weapons_and_armor_02
+	
+	potential = {
+		NOR = {
+			has_innovation = innovation_lunar_lattice
+		}
+	}
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 
 	unlock_maa = armored_footmen
 
@@ -247,12 +274,16 @@ innovation_ledger = {
 	# flag = tribal_era_regional
 # }
 
-### EK EDIT: Use a custom innovation region for longboats
+### EK EDIT: This actually doesn't make a lot of sense, most Nordic cultures lost their sea-faring tradition over time
 innovation_longboats = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	region = world_innovation_longboats
 	icon = @longboats
+	
+	potential = {
+		always = no
+	}
 
 	modifier = {
 		embarkation_cost_mult = -0.75
@@ -264,6 +295,9 @@ innovation_longboats = {
 
 	flag = global_regional
 	flag = tribal_era_regional
+	
+	flag = unlocks_naval_raiding
+	flag = unlocks_sailable_major_rivers
 }
 
 innovation_elephantry = {
@@ -332,4 +366,7 @@ innovation_war_camels = {
 
 	# flag = global_regional
 	# flag = tribal_era_regional
+	
+	# flag = unlocks_naval_raiding
+	# flag = unlocks_sailable_major_rivers
 # }

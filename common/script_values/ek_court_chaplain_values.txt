@@ -4,7 +4,7 @@
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = same_culture_group_conversion_bonus_active }
-			scope:county.culture_group = scope:councillor.liege.culture_group
+			scope:county.culture_group = scope:councillor.faith.var:associated_culture_group
 		}
 		add = court_chaplain_conversion_base_total
 		multiply = 0.25
@@ -16,7 +16,7 @@ conversion_communal_identity_resistance_cg = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = other_culture_group_conversion_penalty_active }
-			NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+			NOT = { scope:county.culture_group = scope:councillor.faith.var:associated_culture_group }
 		}
 		subtract = court_chaplain_conversion_base_total
 		multiply = 0.5
@@ -29,7 +29,7 @@ conversion_communal_identity_bonus_cg_exclusive = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = same_culture_group_exclusive_conversion_bonus_active }
-			scope:county.culture_group = scope:councillor.liege.culture_group
+			scope:county.culture_group = scope:councillor.faith.var:associated_culture_group
 		}
 		add = court_chaplain_conversion_base_total
 		multiply = 0.50
@@ -41,7 +41,7 @@ conversion_communal_identity_resistance_cg_exclusive = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = other_culture_group_exclusive_conversion_penalty_active }
-			NOT = { scope:county.culture_group = scope:councillor.liege.culture_group }
+			NOT = { scope:county.culture_group = scope:councillor.faith.var:associated_culture_group }
 		}
 		subtract = court_chaplain_conversion_base_total
 		multiply = 1
@@ -54,7 +54,7 @@ conversion_communal_identity_bonus_culture = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = same_culture_conversion_bonus_active }
-			scope:county.culture = scope:councillor.liege.culture
+			scope:county.culture = scope:councillor.faith.var:associated_culture
 		}
 		add = court_chaplain_conversion_base_total
 		multiply = 0.50
@@ -66,7 +66,7 @@ conversion_communal_identity_resistance_culture = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = same_culture_conversion_bonus_active }
-			NOT = { scope:county.culture = scope:councillor.liege.culture }
+			NOT = { scope:county.culture = scope:councillor.faith.var:associated_culture }
 		}
 		subtract = court_chaplain_conversion_base_total
 		multiply = 0.5
@@ -79,19 +79,19 @@ conversion_communal_identity_bonus_culture_exclusive = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = same_culture_exclusive_conversion_bonus_active }
-			scope:county.culture = scope:councillor.liege.culture
+			scope:county.culture = scope:councillor.faith.var:associated_culture
 		}
 		add = court_chaplain_conversion_base_total
 		multiply = 1
 	}
 }
-conversion_communal_identity_resistance_culture = {
+conversion_communal_identity_resistance_culture_exclusive = {
 	value = 0
 	if = {
 		limit = {
 			exists = scope:county
 			scope:councillor.faith = { has_doctrine_parameter = other_culture_exclusive_conversion_penalty_active }
-			NOT = { scope:county.culture = scope:councillor.liege.culture }
+			NOT = { scope:county.culture = scope:councillor.faith.var:associated_culture }
 		}
 		subtract = court_chaplain_conversion_base_total
 		multiply = 1

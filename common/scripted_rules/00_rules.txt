@@ -75,6 +75,8 @@ faith_conversion = {
 	is_adult = yes
 	NOT = { faith.religious_head = root }
 	is_in_ongoing_great_holy_war = no
+	### EK EDIT: Some faiths do not actually exist at game start
+	scope:new_faith = { NOT = { has_doctrine = special_faith_existence_non_existent } }
 }
 
 # Determines if the mother of a character should spread the house to a bastard.
@@ -322,7 +324,7 @@ can_start_raid = {
 	is_at_war = no
 }
 
-### EK EDIT: Disabled unused innovations
+### EK EDIT: Now uses innovation flags check
 # Can this character cross water (sea, rivers) while on raid?
 # root: the potential raider
 can_raid_across_water = {
@@ -330,9 +332,7 @@ can_raid_across_water = {
 		government_has_flag = government_can_raid_across_water_rule
 		culture = {
 			OR = {
-				has_innovation = innovation_longboats
-				# has_innovation = innovation_african_canoes
-				has_innovation = innovation_abecean_pirates
+				has_innovation_flag = unlocks_naval_raiding
 			}
 		}
 		AND = {
@@ -343,6 +343,7 @@ can_raid_across_water = {
 	}
 }
 
+### EK EDIT: Now uses innovation flags check
 # Can this character traverse rivers using boats?
 # root: the owner of the army
 can_traverse_river = {
@@ -350,9 +351,7 @@ can_traverse_river = {
 		government_has_flag = government_can_traverse_river_rule
 		culture = {
 			OR = {
-				has_innovation = innovation_longboats
-				# has_innovation = innovation_african_canoes
-				has_innovation = innovation_abecean_pirates
+				has_innovation_flag = unlocks_sailable_major_rivers
 			}
 		}
 		AND = {

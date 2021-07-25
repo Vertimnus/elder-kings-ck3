@@ -179,10 +179,7 @@ ek_prison.1002 = {
 		animation = schadenfreude
 	}
 	
-	trigger = {
-		scope:imprisoner.culture = { has_innovation = innovation_blood_price }
-		scope:prisoner.culture = { has_innovation = innovation_blood_price }
-	}
+	trigger = { scope:imprisoner.culture = { has_innovation = innovation_blood_price } }
 	
 	immediate = {
 		### Taken from prison_notification.0001
@@ -658,6 +655,72 @@ ek_prison.1003 = {
 			modifier = {
 				factor = 2
 				scope:prisoner = { has_character_flag = blood_price_death }
+			}
+		}
+	}
+	
+	option = { # AH, you thought you were going out of here?
+		trigger = { has_any_bad_relationship_with_character_trigger = { CHARACTER = scope:prisoner } }
+		
+		name = ek_prison.1003.d
+		
+		send_interface_toast = {
+			title = ek_prison.1003.imprisoner_dungeon
+			left_icon = root
+			
+			show_as_tooltip = {
+				scope:imprisoner = {
+					if = {
+						limit = { can_set_relation_rival_trigger = { CHARACTER = scope:prisoner } }
+						progress_towards_rival_effect = { CHARACTER = scope:prisoner }
+					}
+				}
+			}
+		}
+		
+		hidden_effect = {
+			scope:prisoner = {
+				send_interface_toast = {
+					title = ek_prison.1003.dungeon
+					left_icon = root
+				
+					scope:imprisoner = {
+						if = {
+							limit = { can_set_relation_rival_trigger = { CHARACTER = scope:prisoner } }
+							progress_towards_rival_effect = { CHARACTER = scope:prisoner }
+						}
+					}
+				}
+			}
+		}
+		
+		add_prestige = miniscule_prestige_loss
+		if = {
+			limit = { faith = { has_doctrine = tenet_legalism } }
+			custom_tooltip = tenet_legalism_disrespecting_traditions_ct
+			add_piety = miniscule_piety_loss
+		}
+		
+		stress_impact = {
+			base = minor_stress_gain
+			
+			just = minor_stress_gain
+			
+			wrathful = minor_stress_loss
+			callous = minor_stress_loss
+			sadistic = minor_stress_loss
+			vengeful = minor_stress_loss
+		}
+		
+		ai_chance = {
+			base = 25
+
+			modifier = {
+				factor = 2
+				OR = {
+					has_relation_rival = scope:prisoner
+					has_relation_nemesis = scope:prisoner
+				}
 			}
 		}
 	}
