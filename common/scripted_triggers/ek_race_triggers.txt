@@ -1,65 +1,35 @@
 ﻿ek_race_compatible_trigger = {
 	trigger_if = {
 		limit = {
-			scope:mother = {
-				has_character_flag = race_khajiit
+			OR = {
+				$CHARACTER1$ = { has_character_flag = race_khajiit }
+				$CHARACTER2$ = { has_character_flag = race_khajiit }
 			}
 		}
-		scope:real_father = { has_character_flag = race_khajiit }
+		$CHARACTER1$ = { has_character_flag = race_khajiit }
+		$CHARACTER2$ = { has_character_flag = race_khajiit }
 	}
-	trigger_if = {
+	trigger_else_if = {
 		limit = {
-			scope:real_father = {
-				has_character_flag = race_khajiit
+			OR = {
+				$CHARACTER1$ = { has_character_flag = race_argonian }
+				$CHARACTER2$ = { has_character_flag = race_argonian }
 			}
 		}
-		scope:mother = { has_character_flag = race_khajiit }
+		$CHARACTER1$ = { has_character_flag = race_argonian }
+		$CHARACTER2$ = { has_character_flag = race_argonian }
 	}
-	trigger_if = {
+	trigger_else_if = {
 		limit = {
-			scope:mother = {
-				has_character_flag = race_argonian
+			OR = {
+				$CHARACTER1$ = { has_character_flag = race_goblinken }
+				$CHARACTER2$ = { has_character_flag = race_goblinken }
 			}
 		}
-		scope:real_father = { has_character_flag = race_argonian }
+		$CHARACTER1$ = { has_character_flag = race_goblinken }
+		$CHARACTER2$ = { has_character_flag = race_goblinken }
 	}
-	trigger_if = {
-		limit = {
-			scope:real_father = {
-				has_character_flag = race_argonian
-			}
-		}
-		scope:mother = { has_character_flag = race_argonian }
-	}
-	trigger_if = {
-		limit = {
-			scope:mother = {
-				has_character_flag = race_goblinken
-			}
-		}
-		scope:real_father = { has_character_flag = race_goblinken }
-	}
-	trigger_if = {
-		limit = {
-			scope:real_father = {
-				has_character_flag = race_goblinken
-			}
-		}
-		scope:mother = { has_character_flag = race_goblinken }
-	}
-	trigger_if = {
-		limit = {
-			scope:mother = {
-				NOT = { has_character_flag = race_khajiit }
-				NOT = { has_character_flag = race_argonian }
-				NOT = { has_character_flag = race_goblinken }
-			}
-			scope:real_father = {
-				NOT = { has_character_flag = race_khajiit }
-				NOT = { has_character_flag = race_argonian }
-				NOT = { has_character_flag = race_goblinken }
-			}
-		}
+	trigger_else = {
 		always = yes
 	}
 }
