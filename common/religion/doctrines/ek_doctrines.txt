@@ -152,6 +152,37 @@ doctrine_cultural_identity = {
 	}
 }
 
+### Marriage
+doctrine_marriage_suitable_party = {
+	group = "marriage"
+	
+	doctrine_marriage_suitable_party_one_landed = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_marriage_suitable_party_one_landed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			at_least_one_landed_character_to_marry_active = yes
+		}
+	}
+
+	doctrine_marriage_suitable_party_any = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_marriage_suitable_party_any }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			any_characters_can_marry_active = yes
+		}
+	}
+}
+
 ### Crimes
 doctrine_lycanthropy = {
 	group = "crimes"
