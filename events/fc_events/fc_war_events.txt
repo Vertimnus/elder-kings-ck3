@@ -34,14 +34,14 @@ fc_war_event.0001 = { # Oopsie doopsie, maybe we should sue for peace? Or maybe 
 		# TODO: Protect the captives from execution
 		# TODO: Select one random captive (to execute if needed)
 		every_prisoner = {
-			limit = { fc_is_close_kin_trigger = { CLOSE_KIN = scope:attacker } }
+			limit = { fc_is_close_kin_trigger = { PRISONER_KIN = scope:attacker } }
 			
 			add_to_list = hostages_war_prisoners
 		}
 		
 		every_courtier = {
 			limit = {
-				fc_is_close_kin_trigger = { CLOSE_KIN = scope:attacker }
+				fc_is_close_kin_trigger = { PRISONER_KIN = scope:attacker }
 				has_opinion_modifier = {
 					modifier = forced_me_concubine_marriage_opinion
 					target = scope:defender
@@ -129,7 +129,7 @@ fc_war_event.0001 = { # Oopsie doopsie, maybe we should sue for peace? Or maybe 
 			
 			modifier = {
 				add = 5
-				trait = wrathful
+				has_trait = wrathful
 			}
 			modifier = {
 				multiply = 0
@@ -170,7 +170,7 @@ fc_war_event.0001 = { # Oopsie doopsie, maybe we should sue for peace? Or maybe 
 			
 			modifier = {
 				add = 5
-				trait = sadistic
+				has_trait = sadistic
 			}
 			modifier = {
 				add = 5

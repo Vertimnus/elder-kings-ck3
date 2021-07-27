@@ -4,8 +4,27 @@ facepaint = {
 
     usage = game
     selection_behavior = weighted_random
+	
+facepaint_nord_01 = { # Eye-Stripe
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = facepaint
+            template = nordic
+            value = 0.08
+        }
+    }
+    weight = {
+        base = 0
+		modifier = {
+			add = 200
+            exists = character:frostvoice_hemming
+            this = character:frostvoice_hemming
+		}
+    }
+}  
 
-facepaint_nordic = {
+facepaint_nordic = { # Random
     dna_modifiers = {
         morph = {
             mode = add
@@ -18,34 +37,40 @@ facepaint_nordic = {
         base = 0
 
         modifier = {
-            add = 75
+            add = 200
             AND = {
                 OR = {
                 culture.culture_group = culture_group:nordic_group
                 culture.culture_group = culture_group:nedic_group
-            }
-            OR = {
+				}
+				OR = {
                 prowess > high_skill_rating
                 martial > high_skill_rating
-            }
+				}
+			}
         }
-        }
-        modifier = {
-            add = -40
-			is_female = yes
-        }
+		modifier = {
+			add = 100
+			AND = {
+				has_trait = berserker
+				culture.culture_group = culture_group:nordic_group
+		}
+	
+#        modifier = {
+#            add = -100
+#			is_female = yes
+#        }
 
         modifier = {
-            add = -100
+            add = -200
             OR = {
                 is_from_ruler_designer = yes
                 has_character_flag = has_scripted_appearance
                 has_trait = line_of_x
             }
         }
-
     }
-}  
+}
 
 no_facepaint = {
     dna_modifiers = {
