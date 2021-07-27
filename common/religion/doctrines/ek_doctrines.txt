@@ -12,6 +12,8 @@ doctrine_cultural_identity = {
 		}
 	}
 	
+	### This bloc is duplicated to show the player's culture when creating a faith
+	# You see that when the faith exists
 	doctrine_cultural_identity_cg = {
 		piety_cost = {
 			value = faith_doctrine_cost_mid
@@ -20,6 +22,8 @@ doctrine_cultural_identity = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		
+		is_shown = { always = no }
 		
 		parameters = {
 			same_culture_group_conversion_bonus_active = yes
@@ -37,6 +41,8 @@ doctrine_cultural_identity = {
 			}
 		}
 		
+		is_shown = { always = no }
+		
 		parameters = {
 			same_culture_group_exclusive_conversion_bonus_active = yes
 			same_faith_promote_culture_group_exclusive_bonus_active = yes
@@ -52,6 +58,8 @@ doctrine_cultural_identity = {
 				multiply = faith_unchanged_doctrine_cost_mult
 			}
 		}
+		
+		is_shown = { always = no }
 		
 		parameters = {
 			same_culture_conversion_bonus_active = yes
@@ -69,17 +77,108 @@ doctrine_cultural_identity = {
 			}
 		}
 		
+		is_shown = { always = no }
+		
 		parameters = {
 			same_culture_exclusive_conversion_bonus_active = yes
 			same_faith_promote_culture_exclusive_bonus_active = yes
 			other_culture_exclusive_conversion_penalty_active = yes
 		}
+	}
+	
+	# You see that when creating it
+	doctrine_cultural_identity_cg_creating_faith = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_cg }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
 		
-		character_modifier = {
-			different_culture_opinion = -10
-			different_culture_opinion = -10
-			opinion_of_different_culture = -10
-			same_culture_opinion = 10
+		parameters = {
+			same_culture_group_conversion_bonus_creating_faith_active = yes
+			same_faith_promote_culture_group_bonus_active = yes
+			other_culture_group_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_cg_exclusive_creating_faith = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_cg_exclusive }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_group_exclusive_conversion_bonus_creating_faith_active = yes
+			same_faith_promote_culture_group_exclusive_bonus_active = yes
+			other_culture_group_exclusive_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_culture_creating_faith = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_culture }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_conversion_bonus_creating_faith_active = yes
+			same_faith_promote_culture_bonus_active = yes
+			other_culture_conversion_penalty_active = yes
+		}
+	}
+	
+	doctrine_cultural_identity_culture_exclusive_creating_faith = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_cultural_identity_culture_exclusive }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		
+		parameters = {
+			same_culture_exclusive_conversion_bonus_creating_faith_active = yes
+			same_faith_promote_culture_exclusive_bonus_active = yes
+			other_culture_exclusive_conversion_penalty_active = yes
+		}
+	}
+}
+
+### Marriage
+doctrine_marriage_suitable_party = {
+	group = "marriage"
+	
+	doctrine_marriage_suitable_party_one_landed = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_marriage_suitable_party_one_landed }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			at_least_one_landed_character_to_marry_active = yes
+		}
+	}
+
+	doctrine_marriage_suitable_party_any = {
+		piety_cost = {
+			value = faith_doctrine_cost_mid
+			if = {
+				limit = { has_doctrine = doctrine_marriage_suitable_party_any }
+				multiply = faith_unchanged_doctrine_cost_mult
+			}
+		}
+		parameters = {
+			any_characters_can_marry_active = yes
 		}
 	}
 }

@@ -73,3 +73,57 @@ become_pirate_government_decision = {
 }
 
 ### Settle as a Pirate Confederacy
+
+#############
+#   OTHER   #
+#############
+# Lose the 'Disorganized Military' innovation
+disorganized_military_reform_military_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_invite_knights.dds"
+	
+	desc = disorganized_military_reform_military_decision_desc
+	selection_tooltip = disorganized_military_reform_military_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# Can't reform the military if it's not disorganized
+		culture = { has_innovation = innovation_disorganized_military }
+		# We are the culture head
+		exists = culture.culture_head
+		culture.culture_head = root
+	}
+
+	is_valid = {
+		martial >= 20
+		has_trait = strategist
+		has_trait = overseer
+		has_trait = gallant
+		
+		culture = { save_temporary_scope_as = current_culture }
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		show_as_tooltip = { culture = { remove_innovation = innovation_disorganized_military } }
+		
+		trigger_event = ek_major_decisions.0001
+	}
+
+	cost = {
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

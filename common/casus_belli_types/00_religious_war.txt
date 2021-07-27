@@ -28,14 +28,24 @@
 		trigger_else = { piety_level >= 1 }
 	}
 
-	### EK EDIT: You can use Holy Wars when you consider a faith Evil
+	### EK EDIT: You can use Holy Wars when you consider a faith Evil, or Hostile if your faith otherwise allows GHW (Warmonger, Armed Pilgrimages, Struggle & Submission)
 	allowed_against_character = {
 		scope:attacker = {
-			# Faith is considered evil
-			faith = {
-				faith_hostility_level = {
-					target = scope:defender.faith
-					value >= religious_cb_enabled_hostility_level
+			trigger_if = {
+				limit = { faith = { has_doctrine_parameter = holy_wars_against_hostile_faiths_active } }
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= faith_hostile_level # Hopefully this is the only place I have to check
+					}
+				}
+			}
+			trigger_else = {
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= religious_cb_enabled_hostility_level
+					}
 				}
 			}
 			ALL_FALSE = {
@@ -540,14 +550,24 @@ religious_war = {
 		trigger_else = { piety_level >= 2 }
 	}
 	
-	### EK EDIT: You can use Holy Wars when you consider a faith Evil
+	### EK EDIT: You can use Holy Wars when you consider a faith Evil, or Hostile if your faith otherwise allows GHW (Warmonger, Armed Pilgrimages, Struggle & Submission)
 	allowed_against_character = {
 		scope:attacker = {
-			# Faith is considered evil
-			faith = {
-				faith_hostility_level = {
-					target = scope:defender.faith
-					value >= religious_cb_enabled_hostility_level
+			trigger_if = {
+				limit = { faith = { has_doctrine_parameter = holy_wars_against_hostile_faiths_active } }
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= faith_hostile_level # Hopefully this is the only place I have to check
+					}
+				}
+			}
+			trigger_else = {
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= religious_cb_enabled_hostility_level
+					}
 				}
 			}
 			ALL_FALSE = {
@@ -1058,14 +1078,24 @@ major_religious_war = {
 		}
 	}
 
-	### EK EDIT: You can use Holy Wars when you consider a faith Evil
+	### EK EDIT: You can use Holy Wars when you consider a faith Evil, or Hostile if your faith otherwise allows GHW (Warmonger, Armed Pilgrimages, Struggle & Submission)
 	allowed_against_character = {
 		scope:attacker = {
-			# Faith is considered evil
-			faith = {
-				faith_hostility_level = {
-					target = scope:defender.faith
-					value >= religious_cb_enabled_hostility_level
+			trigger_if = {
+				limit = { faith = { has_doctrine_parameter = holy_wars_against_hostile_faiths_active } }
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= faith_hostile_level # Hopefully this is the only place I have to check
+					}
+				}
+			}
+			trigger_else = {
+				faith = {
+					faith_hostility_level = {
+						target = scope:defender.faith
+						value >= religious_cb_enabled_hostility_level
+					}
 				}
 			}
 			ALL_FALSE = {

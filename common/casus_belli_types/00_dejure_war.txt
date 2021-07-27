@@ -8,11 +8,7 @@ de_jure_cb = {
 	allowed_for_character = {
 		OR = {
 			culture = { has_innovation = innovation_rightful_ownership }
-			prestige_level >= 3
-			AND = {
-				faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
-				piety_level >= 3
-			}
+			might_makes_right_requires = { AMOUNT = 3 FLAG = flag:war }
 		}
 	}
 	
@@ -21,15 +17,8 @@ de_jure_cb = {
 			limit = { scope:attacker.culture = { has_innovation = innovation_rightful_ownership } }
 			always = yes
 		}
-		trigger_else_if = {
-			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
-			OR = {
-				piety_level >= 5
-				prestige_level >= 5
-			}
-		}
 		trigger_else = {
-			prestige_level >= 5
+			might_makes_right_requires = { AMOUNT = 5 FLAG = flag:war }
 		}
 	}
 	
@@ -424,11 +413,7 @@ individual_county_de_jure_cb = {
 	allowed_for_character = {
 		OR = {
 			culture = { has_innovation = innovation_casus_belli }
-			prestige_level >= 0
-			AND = {
-				faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
-				piety_level >= 0
-			}
+			might_makes_right_requires = { AMOUNT = 0 FLAG = flag:war }
 		}
 	}
 
@@ -437,15 +422,8 @@ individual_county_de_jure_cb = {
 			limit = { scope:attacker.culture = { has_innovation = innovation_casus_belli } }
 			always = yes
 		}
-		trigger_else_if = {
-			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
-			OR = {
-				piety_level >= 2
-				prestige_level >= 2
-			}
-		}
 		trigger_else = {
-			prestige_level >= 2
+			might_makes_right_requires = { AMOUNT = 2 FLAG = flag:war }
 		}
 	}
 
@@ -885,11 +863,7 @@ individual_duchy_de_jure_cb = {
 	allowed_for_character = {
 		OR = {
 			culture = { has_innovation =  innovation_chronicle_writing }
-			prestige_level >= 1
-			AND = {
-				faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
-				piety_level >= 1
-			}
+			might_makes_right_requires = { AMOUNT = 1 FLAG = flag:war }
 		}
 	}
 	
@@ -898,15 +872,8 @@ individual_duchy_de_jure_cb = {
 			limit = { scope:attacker.culture = { has_innovation = innovation_chronicle_writing } }
 			always = yes
 		}
-		trigger_else_if = {
-			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
-			OR = {
-				piety_level >= 3
-				prestige_level >= 3
-			}
-		}
 		trigger_else = {
-			prestige_level >= 3
+			might_makes_right_requires = { AMOUNT = 3 FLAG = flag:war }
 		}
 	}
 
@@ -1350,11 +1317,7 @@ individual_kingdom_de_jure_cb = {
 	allowed_for_character = {
 		OR = {
 			culture = { has_innovation = innovation_land_grants }
-			prestige_level >= 2
-			AND = {
-				faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active }
-				piety_level >= 2
-			}
+			might_makes_right_requires = { AMOUNT = 2 FLAG = flag:war }
 		}
 	}
 	
@@ -1363,15 +1326,8 @@ individual_kingdom_de_jure_cb = {
 			limit = { scope:attacker.culture = { has_innovation = innovation_land_grants } }
 			always = yes
 		}
-		trigger_else_if = {
-			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
-			OR = {
-				piety_level >= 4
-				prestige_level >= 4
-			}
-		}
 		trigger_else = {
-			prestige_level >= 4
+			might_makes_right_requires = { AMOUNT = 4 FLAG = flag:war }
 		}
 	}
 

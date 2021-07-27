@@ -298,9 +298,9 @@ pdxmesh = {
 		animation = { id = "head_frontEnd_child"			type = "male_head_frontEnd_child.anim" }
 
 		#EK2 ADDITIONS
-		additive_animation = { id = "head_khajiit_proportions"				type = "male_khajiit_head_proportions.anim" }
-		additive_animation = { id = "head_lilmothiit_proportions"				type = "male_lilmothiit_head_proportions.anim" }
-		additive_animation = { id = "male_head_eye_scale"				type = "male_head_eye_scale.anim" }
+		additive_animation = { id = "male_head_khajiit_proportions"				type = "male_khajiit_head_proportions.anim" }
+		additive_animation = { id = "male_head_argonian_proportions"				type = "male_argonian_head_proportions.anim" }
+		additive_animation = { id = "male_head_lilmothiit_proportions"				type = "male_lilmothiit_head_proportions.anim" }
 
 		additive_animation = { id = "head_no_animation"			type = "male_head_no_animation.anim" }
 
@@ -312,10 +312,13 @@ pdxmesh = {
 		blend_shape = { id = "male_orc_teeth_lips"		type = "blendshapes/male_orc_teeth_lips.mesh" }
 
 		blend_shape = { id = "male_khajiit_head"		type = "blendshapes/male_khajiit_head.mesh" data = "position" }
-		blend_shape = { id = "male_lilmothiit_head"		type = "blendshapes/male_lilmothiit_head.mesh" data = "position" }
+		blend_shape = { id = "male_khajiit_head_normals"		type = "blendshapes/male_khajiit_head_normals.mesh" data = "normal|tangent" }
 
-		blend_shape = { id = "male_argonian_head_round"		type = "blendshapes/male_argonian_round.mesh" data = "position" }
-		blend_shape = { id = "male_argonian_head_sharp"		type = "blendshapes/male_argonian_sharp.mesh" data = "position" }
+		blend_shape = { id = "male_lilmothiit_head"		type = "blendshapes/male_lilmothiit_head.mesh" data = "position" }
+		blend_shape = { id = "male_lilmothiit_head_normals"		type = "blendshapes/male_lilmothiit_head_normals.mesh" data = "normal|tangent" }	
+
+		blend_shape = { id = "male_argonian_head"		type = "blendshapes/male_argonian_head.mesh"  data = "position"} #data = "normal|tangent"
+		blend_shape = { id = "male_argonian_head_normals"		type = "blendshapes/male_argonian_head_normals.mesh"  data = "normal|tangent"} #data = "normal|tangent"
 
 		additive_animation = { id = "jaw_open"				type = "male_head_jaw_open.anim" }
 
@@ -328,6 +331,22 @@ pdxmesh = {
 
 		#additive_animation = { id = "whiskers_length2"			type = "whiskers_length.anim" }
 		#END OF EK2 ADDITIONS
+
+		#EPE
+		blend_shape = { id = "male_bs_ear_lobe_max"		type = "blendshapes/male_bs_ear_lobe_max.mesh" }
+		blend_shape = { id = "male_bs_ear_lobe_min"		type = "blendshapes/male_bs_ear_lobe_min.mesh" }
+		blend_shape = { id = "male_bs_eye_inner_max"		type = "blendshapes/male_bs_eye_inner_max.mesh" }
+		blend_shape = { id = "male_bs_eye_inner_min"		type = "blendshapes/male_bs_eye_inner_min.mesh" }
+		blend_shape = { id = "male_bs_eye_outer_max"		type = "blendshapes/male_bs_eye_outer_max.mesh" }
+		blend_shape = { id = "male_bs_eye_outer_min"		type = "blendshapes/male_bs_eye_outer_min.mesh" }
+		blend_shape = { id = "male_bs_nose_centre_max"		type = "blendshapes/male_bs_nose_centre_max.mesh" }
+		blend_shape = { id = "male_bs_nose_centre_min"		type = "blendshapes/male_bs_nose_centre_min.mesh" }
+		blend_shape = { id = "male_bs_nose_septum_max"		type = "blendshapes/male_bs_nose_septum_max.mesh" }
+		blend_shape = { id = "male_bs_nose_septum_min"		type = "blendshapes/male_bs_nose_septum_min.mesh" }
+		additive_animation = { id = "male_eye_size"					type = "male_eye_size.anim" }
+		additive_animation = { id = "male_eye_shut_top"					type = "male_head_eye_shut_top.anim" }
+		additive_animation = { id = "male_eye_shut_bottom"				type = "male_head_eye_shut_bottom.anim" }
+		#EPE
 
 
 		
@@ -698,15 +717,18 @@ entity = {
 	
 	attribute = { name = "bs_orc_teeth_lips"					blend_shape = "male_orc_teeth_lips" }
 		
-	attribute = { name = "head_khajiit_head_bs"					blend_shape = "male_khajiit_head" }
-	attribute = { name = "head_lilmothiit_head_bs"					blend_shape = "male_lilmothiit_head" }
+	attribute = { name = "khajiit_head_bs"					blend_shape = "male_khajiit_head" }
+	attribute = { name = "khajiit_head_normals"					blend_shape = "male_khajiit_head_normals" }
 
-	attribute = { name = "male_argonian_head_round_bs"					blend_shape = "male_argonian_head_round" }
-	attribute = { name = "male_argonian_head_sharp_bs"					blend_shape = "male_argonian_head_sharp" }
+	attribute = { name = "lilmothiit_head_bs"					blend_shape = "male_lilmothiit_head" }
+	attribute = { name = "lilmothiit_head_normals"					blend_shape = "male_lilmothiit_head_normals" }
 
-	attribute = { name = "head_khajiit_proportions"					additive_animation = "head_khajiit_proportions" }
-	attribute = { name = "head_lilmothiit_proportions"					additive_animation = "head_lilmothiit_proportions" }
-	attribute = { name = "head_eye_scale"					additive_animation = "male_head_eye_scale" }
+	attribute = { name = "argonian_head_bs"					blend_shape = "male_argonian_head" }
+	attribute = { name = "argonian_head_normals"					blend_shape = "male_argonian_head_normals" }
+
+	attribute = { name = "khajiit_head_proportions"					additive_animation = "male_head_khajiit_proportions" }
+	attribute = { name = "argonian_head_proportions"					additive_animation = "male_head_argonian_proportions" }
+	attribute = { name = "lilmothiit_head_proportions"					additive_animation = "male_head_lilmothiit_proportions" }
 	
 	attribute = { name = "jaw_open"					additive_animation = "jaw_open" }
 	
@@ -737,9 +759,31 @@ entity = {
 	attribute = { name = "khajiit_sideburns_1"			blend_shape = "male_khajiit_sideburns_1" }
 	attribute = { name = "khajiit_sideburns_2"			blend_shape = "male_khajiit_sideburns_2" }
 
+	attribute = { name = "beast_head_attachment01_variation_bs"					blend_shape = "male_bs_neutral" }
+	attribute = { name = "beast_head_attachment02_variation_bs"					blend_shape = "male_bs_neutral" }
+	attribute = { name = "beast_head_attachment03_variation_bs"					blend_shape = "male_bs_neutral" }
+	attribute = { name = "beast_head_attachment04_variation_bs"					blend_shape = "male_bs_neutral" }
+	
+	attribute = { name = "beast_head_attachment01_young_bs"					blend_shape = "male_bs_neutral" }
+
 
 	#END OF EK2 ADDITIONS
 
+	#EPE
+	attribute = { name = "bs_ear_lobe_max"					blend_shape = "male_bs_ear_lobe_max" }
+	attribute = { name = "bs_ear_lobe_min"					blend_shape = "male_bs_ear_lobe_min" }
+	attribute = { name = "bs_eye_inner_max"					blend_shape = "male_bs_eye_inner_max" }
+	attribute = { name = "bs_eye_inner_min"					blend_shape = "male_bs_eye_inner_min" }
+	attribute = { name = "bs_eye_outer_max"					blend_shape = "male_bs_eye_outer_max" }
+	attribute = { name = "bs_eye_outer_min"					blend_shape = "male_bs_eye_outer_min" }
+	attribute = { name = "bs_nose_centre_max"					blend_shape = "male_bs_nose_centre_max" }
+	attribute = { name = "bs_nose_centre_min"					blend_shape = "male_bs_nose_centre_min" }
+	attribute = { name = "bs_nose_septum_max"					blend_shape = "male_bs_nose_septum_max" }
+	attribute = { name = "bs_nose_septum_min"					blend_shape = "male_bs_nose_septum_min" }
+	attribute = { name = "eye_size"					additive_animation = "male_eye_size" default = 0.5 }		
+	attribute = { name = "eye_shut_top"					additive_animation = "male_eye_shut_top" default = 0.5 }		
+	attribute = { name = "eye_shut_bottom"					additive_animation = "male_eye_shut_bottom" default = 0.5 }		
+	#EPE
 
 	# No animation
 	

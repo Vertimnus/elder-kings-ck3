@@ -1,7 +1,162 @@
 ﻿#index range 501 - 587 may decrease to 550 depending on num patron deities
 
 # take care that the icons defined in the block include NOT = { exists = this }. the game ctd if it doesnt exist w/o an obvious reason
-# 1.4/1.3.x need dummy male/female in global variable for icon/desc selection. or illustration.GetTextureForFaith or something
+
+############################
+##  PATRON TRAIT ANATOMY  ##
+############################
+
+##  THE TRAIT  ##
+# p_dessert = {
+# 	index = 500
+
+# 	same_faith_opinion = 10
+# 	monthly_prestige = 0.5
+# 	monthly_piety = 0.1
+
+# 	shown_in_ruler_designer = no #easier to completly block it so ones incompatible with faith cant be chosen
+
+# 	name = {
+# 		first_valid = {
+# 			triggered_desc = {
+# 				trigger = { NOT = { exists = this } } #null character is used in the encyclopedia and as the default. this prevents just having "Follower of "
+# 				desc = trait_p_dessert_base
+# 			}
+# 			desc = trait_p_dessert #this uses custom loc to get "Follower of [name]" depending on faith
+# 		}
+# 	}
+
+# 	desc = {
+# 		first_valid = {
+# 			triggered_desc = {
+# 				trigger = { NOT = { exists = this } } #null character is passed in the faith window, so this gets used
+# 				desc = trait_p_dessert_null #if the patron tab is open a blank desc is used to just get the modifiers.
+# 			} #otherwise a default is used - necessary to have a description in the encyclopedia. encyclopedia is also static from launch
+# 			desc = trait_p_dessert_character_desc #the normal character description, mostly like any other trait. uses custom loc though
+# 			# desc = { #potential alternative to GetDessertDesc. add on to end of "[character] is a follower of [name]"
+# 			# 	desc = trait_p_dessert_character_desc
+# 			# 	triggered_desc = { #specific desc for faith
+# 			# 		trigger = { faith = { has_doctrine = tenet_cake_supremacy } } #trigger shared with custom loc
+# 			# 		desc = desc_cake
+# 			# 	}
+# 			# 	triggered_desc = { #specific desc for faith
+# 			# 		trigger = { faith = { has_doctrine = tenet_pie_fanaticism } } #trigger shared with custom loc
+# 			# 		desc = desc_pie
+# 			# 	}
+# 			# 	desc = desc_dessert #default desc non-specific faith
+# 			# }
+# 		}
+# 	}
+
+# 	icon = {
+# 		first_valid = {
+# 			triggered_desc = { #used in the faith patron tab. if tab open, get faith specific nbg icon, otherwise default icon
+# 				trigger = { NOT = { exists = this } }
+# 				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_dessert_icon'), 'p_dessert.dds' )]"
+# 			}
+# 			triggered_desc = { #specific icon for faith but with bg. used for normal view - ie not patron tab
+# 				trigger = { faith = { has_doctrine = tenet_cake_supremacy } } #trigger shared with custom loc
+# 				desc = p_cake.dds
+# 			}
+# 			triggered_desc = { #specific icon for faith but with bg. used for normal view - ie not patron tab
+# 				trigger = { faith = { has_doctrine = tenet_pie_fanaticism } } #trigger shared with custom loc
+# 				desc = p_pie.dds
+# 			}
+# 			desc = p_dessert.dds #default icon with bg for non-specific faith
+# 		}
+# 	}
+# }
+
+# ##  CUSTOM LOC  ##
+# #the custom loc all share similar trigger and should be mostly identical
+# get_dessert = { #for the patron tab to get appropriate name and desc. the name has to match the name of the trait with "get" the "p"
+# 	type = character #replace faith
+
+# 	text = {
+# 		trigger = { var:faith_window = { has_doctrine = tenet_cake_supremacy } } #var:faith_window used to check currently open faith instead of player's
+# 		localization_key = "_cake"
+# 	}
+
+# 	text = {
+# 		trigger = { var:faith_window = { has_doctrine = tenet_pie_fanaticism } } #var:faith_window used to check currently open faith instead of player's
+# 		localization_key = "_pie"
+# 	}
+
+# 	text = {
+# 		trigger = { always = no }
+# 		fallback = yes
+# 		localization_key = "_dessert"
+# 	}
+# }
+# get_dessert_icon = { #for patron tab to get appropriate icon with no bg
+# 	type = character #replace faith
+
+# 	text = {
+# 		trigger = { var:faith_window = { has_doctrine = tenet_cake_supremacy } } #var:faith_window used to check currently open faith instead of player's
+# 		localization_key = "p_cake_nbg.dds"
+# 	}
+
+# 	text = {
+# 		trigger = { var:faith_window = { has_doctrine = tenet_pie_fanaticism } } #var:faith_window used to check currently open faith instead of player's
+# 		localization_key = "p_pie_nbg.dds"
+# 	}
+
+# 	text = {
+# 		trigger = { always = no }
+# 		fallback = yes
+# 		localization_key = "p_dessert_nbg.dds"
+# 	}
+# }
+# GetDessertName = { #gets the name dependant on faith. used for trait name "Follower of [name]" and description "[character] is a follower of [name]"
+# 	type = character
+
+# 	text = {
+# 		trigger = { faith = { has_doctrine = tenet_cake_supremacy } } #specific to character faith
+# 		localization_key = god_cake_name
+# 	}
+
+# 	text = {
+# 		trigger = { faith = { has_doctrine = tenet_pie_fanaticism } } #specific to character faith
+# 		localization_key = god_pie_name
+# 	}
+
+# 	text = {
+# 		trigger = { always = no }
+# 		fallback = yes
+# 		localization_key = god_dessert_name
+# 	}
+# }
+# GetDessertDesc = { #legacy desc. not currently used as get_dessert bypasses it. left for possible future use, but not necessary to add to new
+# 	type = character
+
+# 	text = {
+# 		trigger = { faith = { has_doctrine = tenet_cake_supremacy } } #specific to character faith
+# 		localization_key = desc_cake
+# 	}
+
+# 	text = {
+# 		trigger = { faith = { has_doctrine = tenet_pie_fanaticism } } #specific to character faith
+# 		localization_key = desc_pie
+# 	}
+
+# 	text = {
+# 		trigger = { always = no }
+# 		fallback = yes
+# 		localization_key = desc_dessert
+# 	}
+# }
+
+# ## LOCALIZATION  ##
+#  trait_p_dessert:0 "Follower of [ROOT.Char.Custom('GetDessertName')]" #speciic trait name
+#  trait_p_dessert_base:0 "Follower of Dessert" #base trait name
+#  trait_p_dessert_null:0 "[SelectLocalization( GetVariableSystem.HasValue( 'faith_view_tabs', 'patrons' ), '', 'trait_p_dessert_desc' )]" #used to get blank desc in patron tab, normal desc in encyclopedia
+#  trait_p_dessert_desc:0 "A follower of Dessert." #base desc
+#  trait_p_dessert_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip] is a follower of [ROOT.Char.Custom('GetDessertName')]" #specific desc. possible use for GetDessertDesc
+#  p_dessert_patron:0 "yes" #used to show "Patron Trait" as trait type as they cannot be added
+#  #descs used in patron tab view for specific faiths
+#  desc_dessert:0 "All desserts are created equal, to favour one would be foolish"
+#  desc_cake:0 "Cake is the supreme dessert, others may be enjoyed but they are not sacred"
+#  desc_pie:0 "Pie is the one true dessert, consuming other so-called desserts is a sacrilege"
 
 # Divines
 p_akatosh = {
@@ -10,6 +165,8 @@ p_akatosh = {
 	same_faith_opinion = 10
 	monthly_prestige = 0.5
 	monthly_piety = 0.1
+
+	#nordic_opinion = -5 #alduin = bad cant do groups
 
 	shown_in_ruler_designer = no
 
@@ -37,7 +194,7 @@ p_akatosh = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_akatosh_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_akatosh_icon'), 'p_akatosh.dds' )]" #"[Select_CString( '(bool)yes', GetPlayer.Custom, 'p_akatosh_nbg.dds' )]"
 			}
 			desc = p_akatosh.dds
 		}
@@ -75,7 +232,7 @@ p_arkay = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_arkay_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_arkay_icon'), 'p_arkay.dds' )]"
 			}
 			desc = p_arkay.dds
 		}
@@ -114,7 +271,7 @@ p_dibella = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_dibella_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_dibella_icon'), 'p_dibella.dds' )]"
 			}
 			desc = p_dibella.dds
 		}
@@ -153,7 +310,7 @@ p_julianos = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_julianos_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_julianos_icon'), 'p_julianos.dds' )]"
 			}
 			desc = p_julianos.dds
 		}
@@ -192,7 +349,7 @@ p_kynareth = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_kynareth_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_kynareth_icon'), 'p_kynareth.dds' )]"
 			}
 			desc = p_kynareth.dds
 		}
@@ -231,7 +388,7 @@ p_mara = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_mara_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_mara_icon'), 'p_mara.dds' )]"
 			}
 			desc = p_mara.dds
 		}
@@ -270,7 +427,7 @@ p_stendarr = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_stendarr_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_stendarr_icon'), 'p_stendarr.dds' )]"
 			}
 			desc = p_stendarr.dds
 		}
@@ -309,7 +466,7 @@ p_zenithar = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_zenithar_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_zenithar_icon'), 'p_zenithar.dds' )]"
 			}
 			desc = p_zenithar.dds
 		}
@@ -348,7 +505,7 @@ p_shezarr = {
 		first_valid = {
 			triggered_desc = {
 				trigger = { NOT = { exists = this } }
-				desc = p_shezarr_nbg.dds
+				desc = "[Select_CString( GetPlayer.MakeScope.Var('faith_window').IsSet, GetPlayer.Custom('get_shezarr_icon'), 'p_shezarr.dds' )]"
 			}
 			desc = p_shezarr.dds
 		}
@@ -1813,7 +1970,7 @@ p_at_dragon = {
 # Elemental Gods
 p_eg_myn = {
 	index = 550
-	
+
 	stewardship = 1
 	vassal_opinion = 5
 	monthly_county_control_change_factor = 0.1
@@ -1853,7 +2010,7 @@ p_eg_myn = {
 }
 p_eg_zisa = {
 	index = 551
-	
+
 	diplomacy = 1
 	intrigue = 1
 	owned_personal_scheme_success_chance_add = 5
@@ -1894,7 +2051,7 @@ p_eg_zisa = {
 }
 p_eg_nyfa = {
 	index = 552
-	
+
 	martial = 1
 	prowess = 4
 	dread_gain_mult = 0.2
@@ -1935,7 +2092,7 @@ p_eg_nyfa = {
 }
 p_eg_ilni = {
 	index = 553
-	
+
 	learning = 1
 	development_growth_factor = 0.05
 	movement_speed = 0.1
@@ -1975,7 +2132,7 @@ p_eg_ilni = {
 }
 p_eg_tam = {
 	index = 554
-	
+
 	fertility = 0.2
 	close_relative_opinion = 5
 	attraction_opinion = 5

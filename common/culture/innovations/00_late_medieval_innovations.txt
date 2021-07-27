@@ -31,6 +31,15 @@
 @special_maa_01 = "gfx/interface/icons/culture_innovations/innovation_special_maa_01.dds"
 @special_maa_02 = "gfx/interface/icons/culture_innovations/innovation_special_maa_02.dds"
 
+@moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
+@high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
+@crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
+@bombard = "gfx/interface/icons/culture_innovations/innovation_bombard.dds"
+@alchemy = "gfx/interface/icons/culture_innovations/innovation_alchemy.dds"
+@white_gold = "gfx/interface/icons/culture_innovations/innovation_ek_white_gold_tower.dds"
+@blood_price = "gfx/interface/icons/culture_innovations/innovation_blood_price.dds"
+@mammoth = "gfx/interface/icons/culture_innovations/innovation_mammoth.dds"
+
 #culture_group_military
 innovation_machicolations = {
 	group = culture_group_military
@@ -47,6 +56,10 @@ innovation_siege_magic = {
 	group = culture_group_military
 	culture_era = culture_era_late_medieval
 	icon = @siege_weapons
+	
+	can_progress = {
+		has_innovation = innovation_war_magic
+	}
 
 	modifier = {
 		mages_siege_value_mult = 0.25
@@ -73,6 +86,10 @@ innovation_standing_armies = {
 	group = culture_group_military
 	culture_era = culture_era_late_medieval
 	icon = @leadership_2
+	
+	can_progress = {
+		NOT = { has_innovation = innovation_disorganized_military }
+	}
 	
 	modifier = {
 		men_at_arms_cap = 1

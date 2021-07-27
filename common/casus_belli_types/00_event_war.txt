@@ -221,20 +221,15 @@ crown_forebear_civil_war_cb = {
 	group = event
 	ai_only_against_liege = yes
 	target_titles = independence_domain
+	
 	allowed_for_character = {
-		OR = { 
-			scope:attacker.culture = culture:crown
-			scope:attacker.culture = culture:forebear 
-		} 
+		scope:attacker.culture = culture:forebear 
 		NOT = { scope:attacker.culture = scope:defender.culture }
 	}
 
 	allowed_against_character = {
 		scope:attacker = { liege = scope:defender }
-		OR = { 
-			scope:defender.culture = culture:crown
-			scope:defender.culture = culture:forebear 
-		} 
+		scope:defender.culture = culture:crown
 	}
 
 	target_de_jure_regions_above = yes
@@ -303,61 +298,44 @@ crown_forebear_civil_war_cb = {
 			type = independency
 			save_scope_as = change
 		}
-		scope:attacker = {
-			
-			show_pow_release_message_effect = yes
-			
-			add_prestige = medium_prestige_value
-			
-			change_liege_or_become_independent = {
-				CHANGE = scope:change
-				VASSAL = this
-			}
-			
-			if = {
-				limit = { has_title = title:d_sentinel }
-				get_title = title:k_sentinel
-			}
-			
-			destroy_title = title:e_hammerfell
-			add_pressed_claim = title:e_hammerfell
 		
-			every_war_ally = {
-				limit = { liege = scope:defender }
-				change_liege_or_become_independent = {
-					CHANGE = scope:change
-					VASSAL = this
-				}
-				hidden_effect = {
-					set_variable = {
-						name = independence_war_former_liege
-						value = scope:defender
-					}
-					add_truce_both_ways = {
-						character = scope:defender
-						days = 1825
-						war = root.war
-						result = victory
-					}
-				}
-			}
-		}
 		scope:defender = {
 		
 			add_pressed_claim = title:e_hammerfell
 			
 			every_vassal = {
 				limit = { 
-					OR = { 
-						has_title = title:d_pothago
-						has_title = title:d_stros_mkai
+					OR = {
+						culture = culture:forebear
 						has_title = title:d_lainlyn
-						NOT = { culture = scope:defender.culture }
 					}
 				}
 				change_liege_or_become_independent = {
 					CHANGE = scope:change
 					VASSAL = this
+				}
+			}
+			
+			every_war_ally = {
+				limit = { culture = culture:crown }
+				every_vassal = {
+					limit = { culture = culture:forebear }
+					hidden_effect = {
+						set_variable = {
+							name = independence_war_former_liege
+							value = liege
+						}
+						add_truce_both_ways = {
+							character = liege
+							days = 1825
+							war = root.war
+							result = victory
+						}
+					}
+					change_liege_or_become_independent = {
+						CHANGE = scope:change
+						VASSAL = this
+					}
 				}
 			}
 			
@@ -378,7 +356,24 @@ crown_forebear_civil_war_cb = {
 				add_realm_law = crown_authority_2
 			}
 		}
+		
+		scope:attacker = {
+			
+			show_pow_release_message_effect = yes
+			
+			add_prestige = medium_prestige_value
+			
+			if = {
+				limit = { has_title = title:d_sentinel }
+				get_title = title:k_sentinel
+			}
+			
+			destroy_title = title:e_hammerfell
+			add_pressed_claim = title:e_hammerfell
+		}
+		
 		resolve_title_and_vassal_change = scope:change
+		
 	}
 
 	on_white_peace_desc = {
@@ -458,6 +453,10 @@ crown_forebear_civil_war_cb = {
 			add_dread = medium_dread_gain
 			# Prestige for Defender
 			add_prestige = medium_prestige_value
+			any_war_ally = {
+				limit = { culture = culture:crown }
+				change_liege = scope:defender
+			}
 		}
 
 		on_lost_faction_revolt_war = yes
@@ -481,8 +480,8 @@ crown_forebear_civil_war_cb = {
 
 	use_de_jure_wargoal_only = yes
 
-	attacker_wargoal_percentage = 1.0
-	defender_wargoal_percentage = 0.0 # A single occupation will do
+	attacker_wargoal_percentage = 0.75
+	defender_wargoal_percentage = 1.0
 	defender_ticking_warscore_delay = { days = 0 } # No need for a delay here since the defender actually needs to occupy something rather than starting in control
 
 	max_attacker_score_from_battles = 100

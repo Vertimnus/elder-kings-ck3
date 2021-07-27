@@ -52,3 +52,20 @@
  attrebus_potentate_cb_victory_desc:0 "[attacker.GetShortUIName|U] shatters the Potentate, and Cyrodiil holds its breath as the Warlord will shape its history forever..."
  attrebus_potentate_cb_victory_with_liodes_desc:0 "If [liodes.GetNameNicknamed], or [liodes.GetHerHis] line, is still in the war they receive all the land held by the Potentate within any [de_jure|E] Duchy they hold land in"
  attrebus_potentate_cb_seize_potentate_held_land:0 "You seize all the land held directly by the Potentate"
+ 
+ ### Might Makes Right
+ might_makes_right_prestige_experience:0 "As you lack the required [innovation|E], you would need enough [prestige_experience|E] to claim that [might_makes_right|E]."
+ might_makes_right_piety_experience:0 "As you lack the required [innovation|E], you would need enough [piety_experience|E] to claim that [might_makes_right|E]."
+ might_makes_right_piety_experience_additional:0 "\nAs your [faith|E] has the [GetFaithDoctrine('tenet_legalism').GetBaseName] or the [GetFaithDoctrine('tenet_religious_legal_pronouncements').GetBaseName] [core_tenet|E], you can also claim that [might_makes_right|E] if you have enough [piety_experience|E]."
+ might_makes_right_law_insufficient_prestige_level:0 "#weak Not having the required [prestige_level|E] will revert the [law|E] to its previous level.#!"
+ might_makes_right_law_insufficient_piety_level:0 "#weak Not having the required [prestige_level|E] will revert the [law|E] to its previous level.#!"
+ might_makes_right_law_insufficient_prestige_or_piety_level:0 "#weak Not having the required [prestige_level|E] or [piety_level|E] will revert the [law|E] to its previous level.#!"
+ might_makes_right_law_insufficient_prestige_and_piety_level:0 "#weak Having neither the required [prestige_level|E] or [piety_level|E] will revert the [law|E] to its previous level.#!"
+ might_makes_right_law_requires_prestige_or_piety_level:0 "#weak Having either enough [prestige_experience|E] or [piety_experience|E] is enough"
+ 
+ might_makes_right_level_amount:0 "$might_makes_right_prestige_experience$\n\n[prestige_level|E] required: [GetModifier( 'prestige_level_$VALUE|0$' ).GetNameWithTooltip|L]"
+ might_makes_right_devotion_level_amount:0 "$might_makes_right_prestige_experience$\n$might_makes_right_piety_experience_additional$\n\n[prestige_level|E] required: [GetModifier( 'prestige_level_$VALUE|0$' ).GetNameWithTooltip|L]\n[piety_level|E] required: [GetModifier( 'piety_level_$VALUE|0$' ).GetNameWithTooltip|L]"
+ might_makes_right_level_amount_war:0 "$might_makes_right_level_amount$"
+ might_makes_right_level_amount_law:0 "$might_makes_right_level_amount$\n\n$might_makes_right_law_insufficient_prestige_level$"
+ might_makes_right_devotion_level_amount_war:0 "$might_makes_right_devotion_level_amount$\n\n$might_makes_right_law_requires_prestige_or_piety_level$ to use the [casus_belli|E].#!"
+ might_makes_right_devotion_level_amount_law:0 "$might_makes_right_devotion_level_amount$\n\n$might_makes_right_law_requires_prestige_or_piety_level$ the [law|E].#!\n$might_makes_right_law_insufficient_prestige_and_piety_level$"

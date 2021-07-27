@@ -459,10 +459,6 @@ mundus_tamriel_elsweyr = {
 }
 
 ### MORROWIND
-mundus_tamriel_morrowind_tearmarsh = {
-	duchies = { d_tear d_karag d_rithendis d_felyon d_yengrith d_silnion d_bashipal d_hairab }
-}
-
 ## VVARDENFELL: Ascadia, Ashlands, Azura's Coast
 mundus_tamriel_morrowind_ascadia = {
 	duchies = { d_ascadia d_amaya d_balmora d_bitter_coast d_west_gash d_molag_mar }
@@ -513,15 +509,72 @@ mundus_tamriel_morrowind_padomay_coast = {
 	regions = { mundus_tamriel_morrowind_necrom mundus_tamriel_morrowind_firewatch mundus_tamriel_morrowind_telvannis }
 }
 
-## COMPLETE MORROWIND
-mundus_tamriel_morrowind = {
-	regions = { mundus_tamriel_morrowind_vvardenfell mundus_tamriel_morrowind_velothi_range mundus_tamriel_morrowind_greater_deshaan mundus_tamriel_morrowind_padomay_coast }
+## SOUTHERN MARSHES: Tearmarsh
+mundus_tamriel_morrowind_tearmarsh = {
+	duchies = { d_tear d_karag d_rithendis d_felyon d_yengrith d_silnion d_bashipal d_hairab }
+}
+mundus_tamriel_morrowind_southern_marshes = {
+	regions = { mundus_tamriel_morrowind_tearmarsh }
 }
 
+## COMPLETE MORROWIND
+mundus_tamriel_morrowind = {
+	regions = { mundus_tamriel_morrowind_vvardenfell mundus_tamriel_morrowind_velothi_range mundus_tamriel_morrowind_greater_deshaan mundus_tamriel_morrowind_padomay_coast mundus_tamriel_morrowind_southern_marshes }
+}
+
+### BLACK MARSH
+## MIDDLE ARGONIA: Helstrom + Murkwood
+mundus_tamriel_black_marsh_helstrom = {
+	duchies = { d_helstrom d_rockpoint d_greenglade d_felmarsh d_alten_markmont }
+}
+mundus_tamriel_black_marsh_murkwood = {
+	duchies = { d_blackrose d_murkwood d_buwomousa d_vunalk }
+}
+mundus_tamriel_black_marsh_middle_argonia = {
+	regions = { mundus_tamriel_black_marsh_helstrom mundus_tamriel_black_marsh_murkwood }
+}
+
+## ONKOBRA: Shadowfen + Gideon
+mundus_tamriel_black_marsh_shadowfen = {
+	duchies = { d_stormhold d_alten_tormont d_alten_corimont d_murkwater }
+}
+mundus_tamriel_black_marsh_gideon = {
+	duchies = { d_gideon d_ge_vas_rexu d_coldmoor d_gloomire d_stonewaste_coast }
+}
+mundus_tamriel_black_marsh_onkobra = {
+	regions = { mundus_tamriel_black_marsh_shadowfen mundus_tamriel_black_marsh_gideon }
+}
+
+## BLACK BAYS: Soulrest + Murkimire
+mundus_tamriel_black_marsh_soulrest = {
+	duchies = { d_soulrest d_onkobra d_topal d_rockgrove }
+}
+mundus_tamriel_black_marsh_murkmire = {
+	duchies = { d_murkmire d_dead_water d_lakemire d_deepmire }
+}
+mundus_tamriel_black_marsh_black_bays = {
+	regions = { mundus_tamriel_black_marsh_soulrest mundus_tamriel_black_marsh_murkmire }
+}
+
+## PADOMAIC MARSHES: Thorn + Archon
+mundus_tamriel_black_marsh_thorn = {
+	duchies = { d_thorn d_shaie_creek d_branchmont d_arnesia d_padomeic }
+}
+mundus_tamriel_black_marsh_archon = {
+	duchies = { d_archon d_bogwraith d_branchgrove d_seaspring d_portmarsh d_nootanara d_seafalls }
+}
+mundus_tamriel_black_marsh_padomaic_marshes = {
+	regions = { mundus_tamriel_black_marsh_thorn mundus_tamriel_black_marsh_archon }
+}
+
+## COMPLETE BLACK MARSH:
+mundus_tamriel_black_marsh = {
+	regions = { mundus_tamriel_black_marsh_middle_argonia mundus_tamriel_black_marsh_onkobra mundus_tamriel_black_marsh_black_bays mundus_tamriel_black_marsh_padomaic_marshes }
+}
 
 ### TAMRIEL
 mundus_tamriel = { 
-	regions = { mundus_tamriel_high_rock mundus_tamriel_hammerfell mundus_tamriel_cyrodiil mundus_tamriel_skyrim mundus_tamriel_yokuda mundus_tamriel_summerset_isles mundus_tamriel_valenwood mundus_tamriel_elsweyr mundus_tamriel_morrowind }
+	regions = { mundus_tamriel_high_rock mundus_tamriel_hammerfell mundus_tamriel_cyrodiil mundus_tamriel_skyrim mundus_tamriel_yokuda mundus_tamriel_summerset_isles mundus_tamriel_valenwood mundus_tamriel_elsweyr mundus_tamriel_morrowind mundus_tamriel_black_marsh }
 }
 
 ###########################################################################
@@ -706,6 +759,22 @@ mundus_tamriel = {
 	custom_nativity_padomay_coast = {
 		regions = { mundus_tamriel_morrowind_padomay_coast }
 	}
+	custom_nativity_southern_marshes = {
+		regions = { mundus_tamriel_morrowind_southern_marshes }
+	}
+## Black Marsh
+	custom_nativity_middle_argonia = {
+		regions = { mundus_tamriel_black_marsh_middle_argonia }
+	}
+	custom_nativity_onkobra = {
+		regions = { mundus_tamriel_black_marsh_onkobra }
+	}
+	custom_nativity_black_bays = {
+		regions = { mundus_tamriel_black_marsh_black_bays }
+	}
+	custom_nativity_padomaic_marshes = {
+		regions = { mundus_tamriel_black_marsh_padomaic_marshes }
+	}
 ###########################################################################
 # Graphical Regions
 ###########################################################################
@@ -722,23 +791,23 @@ mundus_tamriel = {
 
 graphical_mena = {
 	graphical = yes
-	regions = {
-		mundus_tamriel_hammerfell mundus_tamriel_yokuda
-	}
+	regions = { mundus_tamriel_hammerfell mundus_tamriel_yokuda }
 }
 
 graphical_india = {
 	graphical = yes
-	regions = {
-		mundus_tamriel_elsweyr
-	}
+	regions = { mundus_tamriel_elsweyr_anequina }
 }
 
 graphical_mediterranean = {
 	graphical = yes
-	regions = {
-		mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_nibenay
-	}
+	regions = { mundus_tamriel_cyrodiil_anvil mundus_tamriel_cyrodiil_nibenay }
+}
+
+#Elsweyr Architecture
+graphical_sea = {
+	graphical = yes
+	regions = { mundus_tamriel_elsweyr_pellitine }
 }
 
 ##############################
@@ -746,33 +815,34 @@ graphical_mediterranean = {
 ##############################
 
 ### EK TODO: Use that
-# Based on vanilla, some northen Skyrim, Solstheim, and Atmora
+# Atmora? The rest of the Nordic world kinda threw away its sea-faring tradition
 world_innovation_longboats = {
-	regions = { mundus_tamriel_skyrim_solstheim mundus_tamriel_skyrim_west_ghost mundus_tamriel_skyrim_east_ghost }
+	regions = { }
 }
 
 # Akavir?
 world_innovation_elephants = {
-	regions = {
-		#world_india world_burma
-	}
+	regions = { }
 }
 
 # Same as longboats
 world_innovation_mammoths = {
-	regions = { mundus_tamriel_skyrim }
+	regions = { mundus_tamriel_skyrim_karth mundus_tamriel_high_rock_fharun }
 }
 
-# Hammerfell and Yokuda
+# Hammerfell (save for Ojwambu and Craglorn), Yokuda, and Anequina
 world_innovation_camels = {
-	regions = { mundus_tamriel_hammerfell mundus_tamriel_yokuda }
+	regions = { mundus_tamriel_hammerfell_alikr_desert mundus_tamriel_hammerfell_abecee mundus_tamriel_hammerfell_rihad  mundus_tamriel_hammerfell_taneth mundus_tamriel_hammerfell_stonedale mundus_tamriel_hammerfell_sunforge  mundus_tamriel_yokuda mundus_tamriel_elsweyr_anequina }
 }
 
 # Illiac Bay and Abecean Sea
 world_innovation_gunpowder = { # Cannons are canon
-	regions = {
-		mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_bangkorai mundus_tamriel_hammerfell_alikr_desert  mundus_tamriel_hammerfell_abecee
-	}
+	regions = { mundus_tamriel_high_rock_glenumbra mundus_tamriel_high_rock_stormhaven mundus_tamriel_high_rock_bangkorai mundus_tamriel_hammerfell_alikr_desert  mundus_tamriel_hammerfell_abecee }
+}
+
+# Abecean Sea and Anvil
+world_innovation_abecean_piratry = {
+	regions = { mundus_tamriel_hammerfell_abecean mundus_tamriel_hammerfell_hew_bane mundus_tamriel_cyrodiil_anvil }
 }
 
 # Counties in it are islands (small and surrounded by the sea)
@@ -843,6 +913,6 @@ world_steppe = { }
 # Climate Regions - Tie some commander traits to there
 ###########################################################################
 mundus_climate_winter = {
-	regions = { mundus_tamriel_skyrim mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_wrothgar } # Add Sheogorad once it's in
-	duchies = { d_blacklight }
+	regions = { mundus_tamriel_skyrim mundus_tamriel_high_rock_rivenspire mundus_tamriel_high_rock_wrothgar }
+	duchies = { d_blacklight d_sheogorad }
 }

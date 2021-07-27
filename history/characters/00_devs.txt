@@ -1,0 +1,215 @@
+## Romus Dynasty (romus)
+# House Romus
+romus_100 = {
+	name = "Heracles" # Elder Councillor in Colovia
+	dynasty = 1800000
+	religion = hist
+	culture = argonian
+
+	3341.1.1 = { birth = yes }
+	3360.1.1 = {
+		religion = imperial_cult
+		culture = colovian
+		# HistoryToDo: Give him an Argonian birth name and dynasty, make him begin as a ruler in Black Marsh before he moves to Colovia, takes a Colovian name, founds a new Colovian dynasty, etc.
+	}
+	3422.1.1 = { death = yes }
+}
+
+## Sarethi Dynasty (sarethi)
+# House Sarethi
+sarethi_100 = {
+	name = "Alarvyne" # Indoril Countess
+	dynasty = 1800001
+	religion = tribunal_temple
+	culture = dunmer
+	female = yes
+
+	trait = education_martial_4
+	trait = scarred
+	trait = zealous
+	trait = sadistic
+	trait = wrathful
+	trait = brave
+
+	3340.1.1 = { birth = yes }
+	3664.1.1 = { death = yes }
+}
+
+##Frost-Voice Dynasty (frostvoice)
+frostvoice_hemming = {
+	name = "Hemming"
+	dynasty = frostvoice
+	dna = hemming_dna_entry
+	religion = nord_cult
+	culture = eastmarcher
+
+	trait = education_martial_3
+	trait = physical_good_2
+	trait = poet
+	trait = brave
+	trait = patient
+	trait = gregarious
+	trait = sign_lady
+	
+	martial = 5
+	diplomacy = 10
+	prowess = 10
+	stewardship = 2
+	stewardship = 4
+	intrigue = 1
+	
+
+	3325.9.1 = { birth = yes }
+	3350.1.1 = { add_spouse = frostvoice_orla }
+	3360.1.1 = {
+		effect = {
+			set_relation_friend = character:frostvoice_finn
+			set_relation_friend = character:frostvoice_neekho
+		}
+	}
+	3400.1.1 = { death = yes }
+}
+frostvoice_orla = {
+	name = "Orla"
+	female = yes
+	religion = nord_cult
+	culture = eastmarcher
+
+	trait = education_martial_2
+	trait = patient
+
+	3334.1.1 = { birth = yes }
+	3400.1.1 = { death = yes }
+}
+frostvoice_hadring = {
+	name = "Hadring"
+	dynasty = frostvoice
+	religion = nord_cult
+	culture = eastmarcher
+
+	father = frostvoice_hemming
+	mother = frostvoice_orla
+
+	3347.1.1 = { birth = yes }
+	3368.1.1 = { trait = education_diplomacy_2 }
+	3413.1.1 = { death = yes }
+}
+frostvoice_halund = {
+	name = "Halund"
+	dynasty = frostvoice
+	religion = nord_cult
+	culture = eastmarcher
+
+	father = frostvoice_hemming
+	mother = frostvoice_orla
+
+	3355.1.1 = { birth = yes }
+	3421.1.1 = { death = yes }
+}
+frostvoice_bedrafloda = {
+	name = "Bedrafloda"
+	female = yes
+	dynasty = frostvoice
+	religion = nord_cult
+	culture = eastmarcher
+
+	father = frostvoice_hemming
+	mother = frostvoice_orla
+
+	3363.1.1 = { birth = yes }
+	3428.1.1 = { death = yes }
+}
+#And his entourage
+frostvoice_finn = {
+	name = "Finn"
+	religion = hist
+	culture = lukiul
+	
+	trait = craven
+	trait = ambitious
+	trait = paranoid
+	trait = education_magical_ability_4
+	trait = education_learning_3
+	trait = sign_mage
+	
+	martial = 3
+	prowess = 0
+	diplomacy = 6
+	stewardship = 5
+	intrigue = 1
+	learning = 7
+	
+	3332.4.16 = { birth = yes }
+	3359.1.1 = { employer = frostvoice_hemming }
+	3360.1.1 = { give_council_position = councillor_court_mage }
+	3360.1.1 = {
+		effect = {
+			add_aptitude_skill = { VALUE = 10 }
+			set_relation_best_friend = character:frostvoice_neekho
+			set_relation_rival = character:frostvoice_marakai
+		}
+	}
+	3400.1.1 = { death = yes }
+}
+frostvoice_neekho = {
+	name = "Nee'kho"
+	religion = manypathsdance
+	culture = baandari
+	female = yes
+	sexuality = homosexual
+
+	trait = education_intrigue_3
+	trait = diligent
+	trait = deceitful
+	trait = sadistic
+	trait = sign_warrior
+	
+	martial = 2
+	prowess = 2
+	diplomacy = 5
+	stewardship = 5
+	intrigue = 8
+	learning = 0
+
+	3330.8.1 = { birth = yes }
+	3359.1.1 = { employer = frostvoice_hemming }
+	3360.1.1 = { give_council_position = councillor_spymaster }
+	3360.1.1 = {
+		effect = {
+			set_relation_rival = character:frostvoice_marakai
+		}
+	}
+	3400.1.1 = { death = yes }
+}
+frostvoice_marakai = {
+	name = "Marakai"
+	religion = code_of_malacath
+	culture = mountain_orc
+
+	trait = education_martial_3
+	trait = arbitrary
+	trait = sign_lady
+	martial = 8
+
+	3330.1.1 = { birth = yes }
+	3359.1.1 = { employer = frostvoice_hemming }
+	3360.1.1 = { give_council_position = councillor_marshal }
+	3397.1.1 = {
+		death = {
+			death_reason = death_murder
+			killer = frostvoice_finn
+		}
+	}
+}
+frostvoice_galmar = {
+	name = "Galmar"
+	religion = nord_cult
+	culture = eastmarcher
+
+	trait = education_stewardship_3
+
+	3330.1.1 = { birth = yes }
+	3359.1.1 = { employer = frostvoice_hemming }
+	3360.1.1 = { give_council_position = councillor_steward }
+	3400.1.1 = { death = yes }
+}

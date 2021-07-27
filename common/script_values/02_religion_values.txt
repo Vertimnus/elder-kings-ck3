@@ -183,6 +183,7 @@ demand_conversion_tenet_impact = {
 	}
 }
 
+### EK NOTE: NEEDS TO BE SYNCHED WITH religion_demand_conversion_default_modifier
 demand_conversion_likelihood_calculation = {
 	#Five times actor's-recipient's learning
 	add = demand_conversion_learning_difference
@@ -298,6 +299,44 @@ demand_conversion_likelihood_calculation = {
 			}
 		}
 		add = 20
+	}
+	
+	### EK EDIT: Added the effect of Communal Identity
+	if = {
+		limit = {
+			faith = {
+				has_doctrine = doctrine_cultural_identity_cg
+				NOT = { scope:recipient.culture.culture_group = this.var:associated_culture_group }
+			}
+		}
+		add = -25
+	}
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine = doctrine_cultural_identity_cg_exclusive
+				NOT = { scope:recipient.culture.culture_group = this.var:associated_culture_group }
+			}
+		}
+		add = -50
+	}
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine = doctrine_cultural_identity_culture
+				NOT = { scope:recipient.culture = this.var:associated_culture }
+			}
+		}
+		add = -35
+	}
+	else_if = {
+		limit = {
+			faith = {
+				has_doctrine = doctrine_cultural_identity_culture_exclusive
+				NOT = { scope:recipient.culture = this.var:associated_culture }
+			}
+		}
+		add = -70
 	}
 
 	max = 100
@@ -1248,6 +1287,52 @@ faith_conversion_cost_mult = {
 			desc = faith_conversion_cost_present
 			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
 			value = 0.5
+		}
+	}
+	
+	### EK EDIT: Communal Identity
+	if = {
+		limit = {
+			scope:new_faith = { has_doctrine = doctrine_cultural_identity_cg }
+			NOT = { scope:character.culture.culture_group = scope:new_faith.var:associated_culture_group }
+		}
+		add = {
+			desc = faith_conversion_cost_cultural_identity_cg_outside_culture_group
+			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+			value = 0.25
+		}
+	}
+	else_if = {
+		limit = {
+			scope:new_faith = { has_doctrine = doctrine_cultural_identity_cg_exclusive }
+			NOT = { scope:character.culture.culture_group = scope:new_faith.var:associated_culture_group }
+		}
+		add = {
+			desc = faith_conversion_cost_cultural_identity_cg_exclusive_outside_culture_group
+			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+			value = 0.5
+		}
+	}
+	else_if = {
+		limit = {
+			scope:new_faith = { has_doctrine = doctrine_cultural_identity_culture }
+			NOT = { scope:character.culture = scope:new_faith.var:associated_culture }
+		}
+		add = {
+			desc = faith_conversion_cost_cultural_identity_outside_culture
+			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+			value = 0.5
+		}
+	}
+	else_if = {
+		limit = {
+			scope:new_faith = { has_doctrine = doctrine_cultural_identity_culture_exclusive }
+			NOT = { scope:character.culture = scope:new_faith.var:associated_culture }
+		}
+		add = {
+			desc = faith_conversion_cost_cultural_identity_exclusive_outside_culture
+			format = "BREAKDOWN_FORMAT_PIETY_PERCENTAGE_POSITIVE_IS_BAD"
+			value = 1
 		}
 	}
 }

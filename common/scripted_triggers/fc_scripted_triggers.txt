@@ -1,0 +1,20 @@
+﻿fc_is_close_kin_trigger = {
+	OR = {
+		is_spouse_of = $PRISONER_KIN$
+		has_friendly_relationship_with_character_trigger = { CHARACTER = $PRISONER_KIN$ } # Friend/Lover
+		is_close_family_of = $PRISONER_KIN$
+		this.dynasty = $PRISONER_KIN$.dynasty
+		is_consort_of = $PRISONER_KIN$
+	}
+}
+
+fc_is_valid_execution_target_trigger = {
+	fc_is_close_kin = { PRISONER_KIN = $PRISONER_KIN$ }
+	OR = {
+		is_imprisoned_by = $JAILOR$
+		has_opinion_modifier = {
+			modifier = forced_me_concubine_marriage_opinion
+			target = $JAILOR$
+		}
+	}
+}
