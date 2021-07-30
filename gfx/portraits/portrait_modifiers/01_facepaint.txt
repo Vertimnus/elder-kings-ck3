@@ -17,7 +17,7 @@ facepaint_nord_01 = { # Eye-Stripe
     weight = {
         base = 0
 		modifier = {
-			add = 200
+			add = 1000
             exists = character:frostvoice_hemming
             this = character:frostvoice_hemming
 		}
@@ -39,9 +39,7 @@ facepaint_nordic = { # Random
         modifier = {
             add = 200
             AND = {
-                OR = {
                 culture.culture_group = culture_group:nordic_group
-				}
 				OR = {
                 prowess > high_skill_rating
                 martial > high_skill_rating
@@ -49,10 +47,11 @@ facepaint_nordic = { # Random
 			}
         }
 		modifier = {
-			add = 100
+			add = 200
 			AND = {
 				has_trait = berserker
 				culture.culture_group = culture_group:nordic_group
+			}
 		}
 	
 #        modifier = {
@@ -61,7 +60,7 @@ facepaint_nordic = { # Random
 #        }
 
         modifier = {
-            add = -400
+            add = -500
             OR = {
                 is_from_ruler_designer = yes
                 has_character_flag = has_scripted_appearance
