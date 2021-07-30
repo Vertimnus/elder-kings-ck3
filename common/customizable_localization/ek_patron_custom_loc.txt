@@ -657,7 +657,7 @@ get_dv_akatosh = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_alduin"
 	}
 
@@ -667,24 +667,23 @@ get_dv_akatosh = {
 		localization_key = "_akatosh"
 	}
 }
-get_dv_akatosh_icon = {
+get_dv_akatosh_icon = { #all of them give errors during hot reload. normal is fine.
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_akatosh_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_akatosh_rc_nbg.dds"
 	}
 
-    text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_akatosh_nbg.dds"
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_akatosh_br_nbg.dds"
 	}
-
 
 	text = {
 		trigger = { always = no }
@@ -725,12 +724,12 @@ get_dv_arkay = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_orkey"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "_tuwhacca"
 	}
 
@@ -744,20 +743,20 @@ get_dv_arkay_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_arkay_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_arkay_rc_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_arkay_nbg.dds"
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_arkay_br_nbg.dds"
 	}
-	
+
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -816,23 +815,23 @@ get_dv_dibella_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_dibella_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_dibella_rc_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
-		localization_key = "p_dv_dibella_rf_nbg.dds"
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_dibella_br_nbg.dds"
 	}
 
-   text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_dibella_nbg.dds"
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_dv_dibella_rf_nbg.dds"
 	}
 
 	text = {
@@ -864,7 +863,7 @@ get_dv_julianos = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_jhunal"
 	}
 
@@ -878,20 +877,20 @@ get_dv_julianos_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_julianos_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_julianos_rc_nbg.dds"
 	}
 
-	  text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_julianos_nbg.dds"
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_julianos_br_nbg.dds"
 	}
-	
+
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -931,17 +930,17 @@ get_dv_kynareth = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_kyne"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "_tava"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
 		localization_key = "_kyne" #separate for future changes, if better nedic name
 	}
 
@@ -955,25 +954,25 @@ get_dv_kynareth_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_kynareth_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_kynareth_rc_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_kynareth_br_nbg.dds"
+	}
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
 		localization_key = "p_dv_kynareth_rf_nbg.dds"
 	}
 
-	  text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_kynareth_nbg.dds"
-	}
-	
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -1023,7 +1022,7 @@ get_dv_mara = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "_morwha"
 	}
 
@@ -1038,25 +1037,25 @@ get_dv_mara_icon = {
 
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_mara_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_mara_rc_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_mara_br_nbg.dds"
+	}
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
 		localization_key = "p_dv_mara_rf_nbg.dds"
 	}
 
-	  text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_mara_nbg.dds"
-	}
-	
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -1096,7 +1095,7 @@ get_dv_stendarr = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_stuhn"
 	}
 
@@ -1110,20 +1109,20 @@ get_dv_stendarr_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_stendarr_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_stendarr_rc_nbg.dds"
 	}
 
-	  text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_stendarr_nbg.dds"
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_stendarr_br_nbg.dds"
 	}
-	
+
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -1163,12 +1162,12 @@ get_dv_zenithar = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_tsun"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "_zeht"
 	}
 
@@ -1182,20 +1181,20 @@ get_dv_zenithar_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_zenithar_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_zenithar_rc_nbg.dds"
 	}
 
-	  text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
-		localization_key = "p_br_zenithar_nbg.dds"
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_dv_zenithar_br_nbg.dds"
 	}
-	
+
 	text = {
 		trigger = { always = no }
 		fallback = yes
@@ -1245,17 +1244,17 @@ get_dv_shezarr = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "_shor"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "_hoonding"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
 		localization_key = "_lorkh"
 	}
 
@@ -1269,17 +1268,17 @@ get_dv_shezarr_icon = {
 	type = character #replace faith
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_children_skyrim } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_children_skyrim } }
 		localization_key = "p_dv_shezarr_np_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window = { has_doctrine = tenet_desert_traditions } }
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_desert_traditions } }
 		localization_key = "p_dv_shezarr_rc_nbg.dds"
 	}
 
 	text = {
-		trigger = { var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
 		localization_key = "p_dv_shezzar_rf_nbg.dds"
 	}
 
@@ -1366,6 +1365,20 @@ get_ae_jephre = {
 		localization_key = "_jephre"
 	}
 }
+get_ae_jephre_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_ae_jephre_br_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ae_jephre_nbg.dds"
+	}
+}
 GetAeJephreName = {
 	type = character
 
@@ -1394,6 +1407,20 @@ get_ae_magnus = {
 		localization_key = "_magnus"
 	}
 }
+get_ae_magnus_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_ae_magnus_br_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ae_magnus_nbg.dds"
+	}
+}
 GetAeMagnusName = {
 	type = character
 
@@ -1420,6 +1447,20 @@ get_ae_phynaster = {
 		trigger = { always = no }
 		fallback = yes
 		localization_key = "_phynaster"
+	}
+}
+get_ae_phynaster_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window = { has_doctrine = tenet_syncretism_pantheon_aedra } }
+		localization_key = "p_ae_phynaster_br_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ae_phynaster_nbg.dds"
 	}
 }
 GetAePhynasterName = {
@@ -2352,6 +2393,20 @@ get_ob_hircine = {
 		localization_key = "_hircine"
 	}
 }
+get_ob_hircine_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_hircine_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_hircine_nbg.dds"
+	}
+}
 GetObHircineName = {
 	type = character
 
@@ -2378,6 +2433,20 @@ get_ob_malacath = {
 		trigger = { always = no }
 		fallback = yes
 		localization_key = "_malacath"
+	}
+}
+get_ob_malacath_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_malacath_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_malacath_nbg.dds"
 	}
 }
 GetObMalacathName = {
@@ -2436,6 +2505,20 @@ get_ob_mehrunes = {
 		localization_key = "_mehrunes"
 	}
 }
+get_ob_mehrunes_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_mehrunes_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_mehrunes_nbg.dds"
+	}
+}
 GetObMehrunesName = {
 	type = character
 
@@ -2492,6 +2575,20 @@ get_ob_molag = {
 		localization_key = "_molag"
 	}
 }
+get_ob_molag_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_molag_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_molag_nbg.dds"
+	}
+}
 GetObMolagName = {
 	type = character
 
@@ -2518,6 +2615,20 @@ get_ob_namira = {
 		trigger = { always = no }
 		fallback = yes
 		localization_key = "_namira"
+	}
+}
+get_ob_namira_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_namira_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_namira_nbg.dds"
 	}
 }
 GetObNamiraName = {
@@ -2548,6 +2659,20 @@ get_ob_nocturnal = {
 		localization_key = "_nocturnal"
 	}
 }
+get_ob_nocturnal_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_nocturnal_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_nocturnal_nbg.dds"
+	}
+}
 GetObNocturnalName = {
 	type = character
 
@@ -2574,6 +2699,20 @@ get_ob_peryite = {
 		trigger = { always = no }
 		fallback = yes
 		localization_key = "_peryite"
+	}
+}
+get_ob_peryite_icon = {
+	type = character #replace faith
+
+	text = {
+		trigger = { exists = var:faith_window var:faith_window.religion = religion:reach_religion } #would be better as a doctrine check if one exists
+		localization_key = "p_ob_peryite_rf_nbg.dds"
+	}
+
+	text = {
+		trigger = { always = no }
+		fallback = yes
+		localization_key = "p_ob_peryite_nbg.dds"
 	}
 }
 GetObPeryiteName = {

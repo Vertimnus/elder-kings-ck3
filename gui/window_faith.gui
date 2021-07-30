@@ -52,7 +52,7 @@ window = {
 
 		visible = "[GetPlayer.MakeScope.Var('patron_sel').IsSet]"
 		datacontext = "[GetPlayer.MakeScope.Var('patron_sel')]"
-		datacontext = "[GetTrait(Concatenate('p', Select_CString( GetPlayer.MakeScope.Var('patron_sel').IsSet, Scope.GetFlagName, '_akatosh') ))]"
+		datacontext = "[GetTrait(Concatenate('p', Select_CString( GetPlayer.MakeScope.Var('patron_sel').IsSet, Scope.GetFlagName, '_dv_akatosh') ))]"
 
 		using = Window_Size_MainTab
 		using = Window_Background
@@ -1590,8 +1590,6 @@ window = {
 															name = "patron_name"
 															layoutpolicy_horizontal = expanding
 															text = "[Localize( Concatenate( 'god', Concatenate( GetPlayer.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )|U]" # faith based custom loc no work (╯°□°）╯︵ ┻━┻
-															#text = "[GetPlayer.Custom( 'get_akatosh' )]"
-															# text = "[Localize( Concatenate( 'god', Concatenate( Faith.Custom( Concatenate( 'get', Scope.GetFlagName ) ), '_name' ) ) )]"
 															default_format = "#high"
 															using = Font_Size_Medium
 														}
