@@ -1,6 +1,12 @@
-﻿base_fervor_increase = {
-	value = 0.3
-}
+﻿# base_fervor_increase = {
+	# trigger = { fervor <= 50 }
+	# value = 0.3
+# }
+
+# base_fervor_decrease = {
+	# trigger = { fervor > 50 }
+	# value = -0.3
+# }
 
 #no_head_fervor = {
 #	trigger = {
@@ -10,7 +16,23 @@
 #}
 
 ### EK EDIT: Added our own fervor modifiers
-council_of_the_eight_leader_fervor_increase = {
-	trigger = { has_doctrine = special_faith_group_council_of_the_eight_leader }
-	value = council_of_the_eight_leader_fervor_increase_value
+# council_of_the_eight_leader_fervor_increase = {
+	# trigger = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+	# value = council_of_the_eight_leader_fervor_increase_value
+# }
+
+### EK EDIT: Fervor rework
+fervor_equilibrium_below = {
+	trigger = { fervor.compare_value < { value = var:fervor_equilibrium } }
+	value = fervor_equilibrium_below_value
+}
+fervor_equilibrium_above = {
+	trigger = { fervor.compare_value > { value = var:fervor_equilibrium } }
+	value = fervor_equilibrium_below_value
+}
+fervor_equilibrium_at_equilibrium = {
+	trigger = {
+		fervor.compare_value = { value = var:fervor_equilibrium add = 0 }
+	}
+	value = 0
 }
