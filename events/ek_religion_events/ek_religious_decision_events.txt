@@ -1773,3 +1773,93 @@ ek_religious_decision.0502 = {
 		remove_variable = ancestor_to_bury
 	}
 }
+
+#########################
+# RITUAL NIGHTMARES		#
+# 0601-0699				#
+#########################
+ek_religious_decision.0601 = {
+	type = character_event
+	title = ek_religious_decision.0601.t
+	
+	# Build the nightmare
+	desc = {
+		desc = ek_religious_decision.0601.desc_beginning
+		
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:nightmare_content = flag:sacrifice_self }
+				desc = ek_religious_decision.0601.desc.sacrifice_self
+			}
+		}
+		
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:nightmare_result = flag:triumph }
+				desc = ek_religious_decision.0601.desc.triumph
+			}
+			triggered_desc = {
+				trigger = { scope:nightmare_result = flag:defeat }
+				desc = ek_religious_decision.0601.desc.defeat
+			}
+		}
+	}
+	
+	theme = skull
+	override_background = {
+		event_background = bedchamber
+	}
+
+	left_portrait = {
+		character = ROOT
+		animation = paranoia
+	}
+	
+	immediate = {
+		random_list = {
+			50 = {
+				save_scope_value_as = {
+					name = nightmare_content
+					value = flag:sacrifice_self
+				}
+			}
+		}
+		
+		random_list = {
+			50 = {
+				save_scope_value_as = {
+					name = nightmare_result
+					value = flag:triumph
+				}
+			}
+			50 = {
+				save_scope_value_as = {
+					name = nightmare_result
+					value = flag:defeat
+				}
+			}
+		}
+	}
+
+	option = {
+		trigger = { scope:nightmare_result = flag:triumph }
+		name = ek_religious_decision.0601.a
+		
+		add_piety = 250
+		add_character_modifier = {
+			modifier = ritual_nightmares_triumph_1_modifier
+			months = 60
+		}
+	}
+
+	option = {
+		trigger = { scope:nightmare_result = flag:defeat }
+		name = ek_religious_decision.0601.b
+		
+		add_stress = medium_stress_impact_gain
+		add_character_modifier = {
+			modifier = ritual_nightmares_defeat_1_modifier
+			months = 60
+		}
+	}
+}
