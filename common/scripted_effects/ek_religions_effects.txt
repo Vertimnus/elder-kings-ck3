@@ -382,3 +382,87 @@ faith_give_proper_cultural_identity_doctrine = {
 		add_doctrine = doctrine_cultural_identity_culture_exclusive
 	}
 }
+
+### FERVOR EQUILIBRIUM
+faith_update_fervor_equilibrium = {
+	### FERVOR EQUILIBRIUM COMPUTATION
+	## Base
+	set_variable = {
+		name = fervor_equilibrium
+		value = 100
+	}
+	
+	## Every two counties subtract one fervor_equilibrium. 0 county = 100 fervor ; 100 counties = 50 fevor ; 200 counties = 0 fervor
+	# How should it impact our equilibrium
+	set_variable = {
+		name = half_num_county_followers
+		value = num_county_followers	
+	}
+	change_variable = {
+		name = half_num_county_followers
+		divide = 2
+	}
+	# Should we increase/decrease the equilibrium penality?
+	if = {
+		limit = { has_doctrine = doctrine_pluralism_pluralistic }
+		change_variable = {
+			name = half_num_county_followers
+			multiply = 0.85
+		}
+	}
+	# Apply it
+	change_variable = {
+		name = fervor_equilibrium
+		subtract = var:half_num_county_followers
+	}
+	
+	## Special
+	# The Leader of the Council of the Eight gets an equilibrium boost (5 per member)
+	if = {
+		limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+		every_religion_global = {
+			every_faith = {
+				limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
+				scope:current_faith = {
+					change_variable = {
+						name = fervor_equilibrium
+						add = 5
+					}
+				}
+			}
+		}
+	}
+	
+	# Faiths with Ecclesiarchy get an equilibrium boost
+	if = {
+		limit = { has_doctrine_parameter = holy_site_increase_fervor_equilibrium_active }
+		set_variable = {
+			name = ecclesiarchy_boost
+			value = 5
+		}
+		change_variable = {
+			name = ecclesiarchy_boost
+			multiply = holy_sites_controlled
+		}
+		
+		change_variable = {
+			name = fervor_equilibrium
+			add = var:ecclesiarchy_boost
+		}
+	}
+	
+	if = {
+		limit = { var:fervor_equilibrium = { compare_value < 0 } }
+		set_variable = {
+			name = fervor_equilibrium
+			value = 0
+		}
+	}
+	else_if = {
+		limit = { var:fervor_equilibrium = { compare_value > 100 } }
+		set_variable = {
+			name = fervor_equilibrium
+			value = 100
+		}
+	}
+}
