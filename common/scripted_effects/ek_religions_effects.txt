@@ -540,7 +540,6 @@ faith_update_fervor_equilibrium = {
 		}
 	}
 	
-	## Special
 	# The Leader of the Council of the Eight gets an equilibrium boost (5 per member)
 	if = {
 		limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
@@ -564,8 +563,61 @@ faith_update_fervor_equilibrium = {
 			add = var:fe_impact_leader_co8
 		}
 	}
+	
+	## Size penalty
+	# Faiths with over 50 counties get a scaling FE penalty, based on the (currently disabled) fervor gain penalty gain due to size
+	# fe = fe * 1/sqrt(max(49, faith_size)/49)
+	# Only checks if nb counties > 49, so fe *= 1/sqrt(faith_size/49)
+	if = {
+		limit = { num_county_followers > 49 }
+		set_local_variable = { name = param value = { value = num_county_followers } }
+		get_sqrt = yes
+		
+		if = { # Some tenets and doctrines can reduce this size penalty
+			limit = { has_doctrine_parameter = reduces_number_counties_fervor_equilibrium_penality_active }
+			# We slightly lower sqrt(faith_size), so the penalty isn't as strong
+			set_local_variable = {
+				name = result
+				value = {
+					value = local_var:result
+					multiply = 0.75
+				}
+			}
+		}
+		
+		set_local_variable = { name = result value = { value = local_var:result divide = 7 } } # We divide by sqrt(7) here, as sqrt(faith_size/49) = sqrt(faith_size)/sqrt(49)
+		
+		set_variable = { # We get 1/sqrt(faith_size/49)
+			name = fe_impact_faith_size
+			value = {
+				value = 1
+				divide = local_var:result
+			}
+		}
+		set_variable = { # That's our new Equilibrium
+			name = fervor_equilibrium_new
+			value = {
+				value = var:fervor_equilibrium
+				multiply = var:fe_impact_faith_size
+			}
+		}
+		# set_variable = { # That's the difference
+			# name = fe_impact_faith_size
+			# value = {
+				# value = var:fervor_equilibrium
+				# subtract = var:fervor_equilibrium_new
+			# }
+		# }
+		
+		set_variable = { # We apply the new equilibrium
+			name = fervor_equilibrium
+			value = var:fervor_equilibrium_new
+		}
+	}
+	
+	## Aftermath (once most penalties and bonuses have been applied)
 	# Each member of the Council of the Eight uses the average of their base fervor equilibrium and the leader's
-	else_if = {
+	if = {
 		limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
 		set_variable = {
 			name = fe_impact_leader_co8_member
