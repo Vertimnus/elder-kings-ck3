@@ -5,7 +5,7 @@
 indoril_1 = {
 	name = "Farwil"
 	dynasty = 1300000
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 
 	3265.1.1 = { birth = yes }
@@ -15,7 +15,7 @@ indoril_1 = {
 indoril_900 = {
 	name = "Kovan"
 	dynasty = 1300000
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 
 	988.1.1 = { birth = yes }
@@ -36,7 +36,7 @@ indoril_900 = {
 redoran_998 = {
 	name = "Aras" #Ruler of Great House Redoran
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 
 	3140.1.1 = { birth = yes }
@@ -45,7 +45,7 @@ redoran_998 = {
 redoran_999 = {
 	name = "Breynis" #Ruler of Great House Redoran
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	father = redoran_998
 
@@ -55,7 +55,7 @@ redoran_999 = {
 redoran_1000 = {
 	name = "Gavryn" #General Gavryn Redoran, Ruler of Great House Redoran
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	father = redoran_999
 
@@ -66,7 +66,7 @@ redoran_2000 = {
 	name = "Belosi"
 	female = yes
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	father = redoran_998
 
@@ -77,7 +77,7 @@ redoran_2001 = {
 	name = "Alurami"
 	female = yes
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	mother = redoran_2000
 
@@ -88,7 +88,7 @@ redoran_3000 = {
 	name = "Solvar"
 	female = yes
 	dynasty = 1300001
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	father = redoran_998
 
@@ -100,7 +100,7 @@ redoran_3000 = {
 redayn_100 = {
 	name = "Nardis" #Duke of Ghartok
 	dynasty_house = redoran_redayn
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	mother = redoran_2000
 
@@ -110,7 +110,7 @@ redayn_100 = {
 redayn_101 = {
 	name = "Llaren"
 	dynasty_house = redoran_redayn
-	culture = dunmer
+	culture = resdayn
 	religion = tribunal_temple
 	father = redayn_100
 
@@ -151,7 +151,7 @@ redayn_101 = {
 fyr_100 = {
 	name = "Divayth" # Baron/Count of Tel Fyr
 	dna = divayth_dna_entry
-	dynasty = 1300031
+	dynasty = 1300031 # Fyr
 	culture = chimer
 	religion = old_velothi
 	trait = intellect_good_3
@@ -162,16 +162,119 @@ fyr_100 = {
 		trait = scholar
 		trait = deviant
 		trait = content
-		trait = lazy
-		trait = shy
+#		trait = lazy
+#		trait = shy			# personally I think it makes more sense lore-wise to make him a baron instead of a count so making him super unambitious is less important than making him accurate, IMO. Cynical and callous fit him better, and they also reduce his energy and sociability like lazy and shy.
+		trait = cynical
+		trait = callous
 	}
 	230.1.1 = {
 		trait = lifespan_7
-		effect = { set_immortal_age = 30 }
+		effect = { 
+			set_immortal_age = 30 
+			add_aptitude_skill = { VALUE = 15 }
+		}
 	}
-	668.1.1 = { # setting this, by precedent, as the definitive year of Red Mountain
-		culture = dunmer
+	230.1.1 = {
+		effect = {
+				
+
+			}
+	}
+	668.1.1 = { # setting 1E 668, by precedent, as the definitive year of Red Mountain
+		culture = resdayn
 		religion = tribunal_cult
 	}
 	10000.1.1 = { death = yes } # according to GT Noonan, he didn't die in the Red Year, so really he's alive until the next kalpa hits
+}
+
+fyr_100a = {
+	name = "Alfe" # Alfe Fyr
+	female = yes
+	dna = divayth_dna_entry
+	dynasty = 130031 # Fyr
+	culture = resdayn
+	religion = tribunal_cult
+	trait = intellect_good_3
+	father = fyr_100
+
+	2921.1.1 = { birth = yes }
+	2937.1.1 = {
+		trait = education_intrigue_4 # the sharpest of the girls, in wit and tongue
+		trait = arrogant
+		trait = cynical
+		trait = callous
+		trait = lifespan_7
+		effect = { set_immortal_age = 30 }
+		effect = { set_relation_lover = character:fyr_100 }
+	}
+	10000.1.1 = { death = yes }
+}
+
+fyr_100b = {
+	name = "Beyte" # Beyte Fyr
+	female = yes
+	dna = divayth_dna_entry
+	dynasty = 130031 # Fyr
+	culture = resdayn
+	religion = tribunal_cult
+	trait = beauty_good_3
+	father = fyr_100
+
+	2921.1.1 = { birth = yes }
+	2937.1.1 = {
+		trait = education_diplomacy_4 # the sweet one, eager to please and be pleased
+		trait = gregarious
+		trait = honest
+		trait = generous
+		trait = lifespan_7
+		effect = { set_immortal_age = 30 }
+		effect = { set_relation_lover = character:fyr_100 }
+	}
+	10000.1.1 = { death = yes }
+}
+
+fyr_100d = {
+	name = "Delte" # Delte Fyr
+	female = yes
+	dna = divayth_dna_entry
+	dynasty = 130031 # Fyr
+	culture = resdayn
+	religion = tribunal_cult
+	trait = intellect_good_3
+	father = fyr_100
+
+	2921.1.1 = { birth = yes }
+	2937.1.1 = {
+		trait = education_stewardship_4 # the efficient one, organized and orderly, "acts as our steward"
+		trait = diligent
+		trait = patient
+		trait = temperate
+		trait = lifespan_7
+		effect = { set_immortal_age = 30 }
+		effect = { set_relation_lover = character:fyr_100 }
+	}
+	10000.1.1 = { death = yes }
+}
+
+fyr_100e = {
+	name = "Uupse" # Uupse Fyr
+	female = yes
+	dna = divayth_dna_entry
+	dynasty = 130031 # Fyr
+	culture = resdayn
+	religion = tribunal_cult
+	trait = beauty_good_3
+	father = fyr_100
+
+	2921.1.1 = { birth = yes }
+	2937.1.1 = {
+		trait = education_learning_4 # "helps with my researches" + only one to be a member of House Telvanni
+		trait = gregarious
+		trait = compassionate # the girl with the biggest heart, takes care of the inmates of the Corprusarium
+		trait = generous
+		trait = lifespan_7
+		effect = { set_immortal_age = 30 }
+		effect = { set_relation_lover = character:fyr_100 }
+	}
+	10000.1.1 = { death = yes }
 }

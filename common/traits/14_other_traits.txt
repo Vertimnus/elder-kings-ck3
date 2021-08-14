@@ -459,23 +459,9 @@ vampire_character = {
 	}
 }
 
-necromancer_character = {
-	index = 470
-	
-	triggered_opinion = {
-		parameter = necromancy_criminal
-		opinion_modifier = necromancy_crime
-		ignore_opinion_value_if_same_trait = yes
-	}
-	triggered_opinion = {
-		parameter = necromancy_shunned
-		opinion_modifier = necromancy_intolerant
-		ignore_opinion_value_if_same_trait = yes
-	}
-}
 
 pirate = {
-	index = 471
+	index = 470
 	
 	can_inherit = no
 	blocks_from_claim_inheritance = yes
@@ -501,3 +487,27 @@ pirate = {
 	ai_boldness = low_positive_ai_value
 	ai_sociability = low_positive_ai_value
 }
+briarheart = {
+	index = 471
+	               #these are only temporary until we get a better list of effects
+	immortal = yes
+	prowess = 8
+	monthly_lifestyle_xp_gain_mult = -0.4
+	monthly_prestige_gain_mult = 0.1
+	monthly_piety_gain_mult = 0.1
+	stress_gain_mult = 0.50
+	fertility = -0.6
+
+        desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { exists = this }
+				}
+				desc = trait_briarheart_desc
+			}
+			desc = trait_briarheart_character_desc
+		}
+	}
+
+	}

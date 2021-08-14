@@ -4,7 +4,7 @@ raathim_100 = {
 	name = "Casath" # Father of Kronin and Yoriss
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 
 	20.1.1 = {
 		birth = yes
@@ -18,7 +18,7 @@ raathim_101 = {
 	name = "Kronin" # King of Ebonheart-Mournhold
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	father = raathim_100
 
 	100.1.1 = {
@@ -34,7 +34,7 @@ raathim_102 = {
 	female = yes
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	father = raathim_100
 
 	140.1.1 = {
@@ -49,7 +49,7 @@ raathim_103 = {
 	name = "Materiah" # Mother of Moraelyn, Cruethys, and Ephen
 	female = yes
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 
 	160.1.1 = {
 		birth = yes
@@ -62,7 +62,7 @@ raathim_103 = {
 raathim_104 = {
 	name = "Ephen" # God of the Wild
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	mother = raathim_103 # not Kronin's son
 
 	190.1.1 = {
@@ -78,7 +78,7 @@ raathim_105 = {
 	name = "Cruethys" # King of Ebonheart-Mournhold
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	father = raathim_101
 	mother = raathim_103
 
@@ -94,7 +94,7 @@ raathim_106 = {
 	name = "Moraelyn" # King of Ebonheart-Mournhold
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	father = raathim_101
 	mother = raathim_103
 	trait = intellect_good_2
@@ -122,7 +122,7 @@ raathim_107 = {
 	female = yes
 	dynasty = 1300771 # Ra'athim
 	religion = old_velothi
-	culture = dunmer
+	culture = resdayn
 	father = raathim_106
 	#HistoryToDo: mother = Aliera of Wayrest
 
@@ -137,6 +137,7 @@ raathim_107 = {
 # Nerevar and the Gang
 mora_100 = {
 	name = "Nerevar" # Indoril Nerevar Mora
+	dynasty = 10
 	culture = chimer
 	religion = old_velothi
 	trait = intellect_good_3
@@ -148,12 +149,12 @@ mora_100 = {
 		trait = ambitious
 		trait = trusting
 		trait = just
-		trait = p_azura
-		trait = saint
+		trait = p_ob_azura
 		trait = lifespan_7
 	}
 	420.1.1 = { add_spouse = indoril_100 } # Alma Laesa Indoril
 	668.1.1 = {
+		trait = saint
 		death = { death_reason = death_red_mountain }
 	}
 }
@@ -169,7 +170,7 @@ sul_100 = {
 		trait = brave
 		trait = vengeful
 		trait = just
-		trait = p_azura
+		trait = p_ob_azura
 		#trait = lifespan_7
 		#effect = { set_immortal_age = 30 }
 	}
@@ -195,10 +196,10 @@ indoril_100 = {
 		trait = compassionate
 		trait = zealous
 		trait = family_first
-		trait = p_boethiah
+		trait = p_ob_boethiah
 		give_nickname = nick_alma
 		trait = lifespan_7
-		#effect = { set_immortal_age = 20 }
+		effect = { set_immortal_age = 20 }
 	}
 	668.1.1 = {
 		religion = tribunal_temple
@@ -207,20 +208,22 @@ indoril_100 = {
 }
 vehk_100 = {
 	name = "Vehk" # Pre-Ascension Vivec
+	dna = vivec_dna_entry
 	dynasty = 0 # Lowborn
 	culture = chimer
 	religion = old_velothi
 
 	200.1.1 = { birth = yes }
 	216.1.1 = {
+		dynasty = 11 # Vehk
 		trait = education_intrigue_4
 		trait = ambitious
 		trait = deceitful
 		trait = lustful
 		trait = poet
-		trait = p_mephala
+		trait = p_ob_mephala
 		trait = lifespan_7
-		#effect = { set_immortal_age = 30 }
+		effect = { set_immortal_age = 30 }
 	}
 	668.1.1 = {
 		religion = tribunal_temple
@@ -241,9 +244,9 @@ sotha_100 = {
 		trait = patient
 		trait = shy
 		trait = mystic_2
-		trait = p_azura
+		trait = p_ob_azura
 		trait = lifespan_7
-		#effect = { set_immortal_age = 30 }
+		effect = { set_immortal_age = 30 }
 	}
 	668.1.1 = {
 		religion = tribunal_temple
@@ -264,9 +267,9 @@ dagoth_100 = {
 		trait = vengeful
 		trait = deceitful
 		trait = arrogant
-		trait = p_nocturnal
+		trait = p_ob_nocturnal
 		trait = lifespan_7
-		give_nickname = nick_the_devil_of_dagoth
+		give_nickname = nick_dagoth_ur
 	}
 	668.1.1 = {
 		religion = sixth_house
@@ -278,6 +281,7 @@ dagoth_100 = {
 # House Avatheled
 avatheled_100 = {
 	name = "Kagrenac" # High Craftlord Kagrenac
+	dna = yagrum_dna_entry # Yagrenac...
 	dynasty = 8 # Avatheled
 	culture = dwemer
 	religion = golden_tones
@@ -304,11 +308,11 @@ duamaka_100 = {
 	dynasty = 9 # Duamaka
 	culture = dwemer
 	religion = golden_tones
-	trait = giant
 
 	200.1.1 = { birth = yes }
 	216.1.1 = {
 		trait = education_martial_4
+		trait = unyielding_defender
 		trait = trusting
 		trait = proud
 		trait = just

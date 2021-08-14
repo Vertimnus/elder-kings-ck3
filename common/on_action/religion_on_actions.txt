@@ -14,13 +14,17 @@ on_faith_created = {
 			}
 		
 			root = { play_music_cue = "mx_cue_faith_conversion" }
+			### EK EDIT: Updates the fervor equilibrium of the previous faith (nb of counties held might have changed)
+			faith_update_fervor_equilibrium = yes
 		}
 		set_variable = { name = has_created_a_faith }
 		check_for_equal_doctrine_effect = yes
 		
-		# Swaps the _creating_faith cultural identity doctrines for their real version
+		
+		### EK EDIT: Initializes some of the faith settings
 		root.faith = {
-			faith_give_proper_cultural_identity_doctrine = yes
+			faith_give_proper_cultural_identity_doctrine = yes # Swaps the _creating_faith cultural identity doctrines for their real version
+			faith_update_fervor_equilibrium = yes
 		}
 	}
 

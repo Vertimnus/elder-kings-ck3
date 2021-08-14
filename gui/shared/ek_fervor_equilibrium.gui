@@ -1,0 +1,139 @@
+types FervorEquilibrium
+{
+    type fervor_equilibrium_breakdown_widget = widget
+    {
+        alwaystransparent = no
+        using = GeneralTooltipSetup
+        widget = {
+            name = "background"
+            using = DefaultTooltipBackground
+            size = { 100% 100% }
+            alwaystransparent = no
+			max_width = 450
+        }
+        vbox = {
+            set_parent_size_to_minimum = yes
+            margin = { 20 10 }
+            margin_bottom = 20
+            spacing = 3
+
+            text_multi = {
+                layoutpolicy_horizontal = expanding
+                text = "FERVOR_EQUILIBRIUM_TITLE_TT"
+                align = left
+				max_width = 450
+            }
+
+            vbox = {
+                layoutpolicy_horizontal = expanding
+                layoutpolicy_vertical = expanding
+                #margin = { 0 4 }
+                spacing = -1
+
+                # text_multi = {
+                # 	layoutpolicy_horizontal = expanding
+                # 	text = "aptitude_title"
+                # 	align = left
+                # }
+				## But what is Fervor Equilibrium?
+				#
+                text_multi = {
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_EXPLANATION_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				## Fervor Equilibrium breakdown
+				# Explanation
+                text_multi = {
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_EXPLANATINON_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Base
+                text_multi = {
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_BASE_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+                # Number of Temples
+                text_multi = {
+                    visible = "[Faith.MakeScope.Var('fe_impact_nb_temples').IsSet]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_NUMBER_TEMPLES_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Sins & Virtues
+                text_multi = {
+                    visible = "[And(Not(Faith.HasDoctrineByKey( 'doctrine_no_head' )), Faith.MakeScope.Var('fe_impact_virtuous_traits_hof').IsSet)]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_NUMBER_VIRTUES_HOF_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+                text_multi = {
+                    visible = "[And(Not(Faith.HasDoctrineByKey( 'doctrine_no_head' )), Faith.MakeScope.Var('fe_impact_sinful_traits_hof').IsSet)]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_NUMBER_SINS_HOF_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Missing HoF
+                text_multi = {
+                    visible = "[And(Not(Faith.HasDoctrineByKey( 'doctrine_no_head' )), Faith.MakeScope.Var('fe_impact_hof_missing').IsSet)]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_MISSING_HOF_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Ecclesiarchy
+                text_multi = {
+                    visible = "[Faith.MakeScope.Var('fe_impact_ecclesiarchy_boost').IsSet]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_ECCLESIARCH_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				## Special
+				# Leader of the Council of the Eight
+                text_multi = {
+                    visible = "[Faith.MakeScope.Var('fe_impact_leader_co8').IsSet]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_LEADER_CO8_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Size multiplier
+                text_multi = {
+                    visible = "[Faith.MakeScope.Var('fe_impact_faith_size').IsSet]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_FAITH_SIZE_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+				# Member of the Council of the Eight
+                text_multi = {
+                    visible = "[Faith.MakeScope.Var('fe_impact_leader_co8_member').IsSet]"
+                    layoutpolicy_horizontal = expanding
+                    text = "FERVOR_EQUILIBRIUM_BREAKDOWN_LEADER_CO8_MEMBER_TT"
+                    align = left
+					autoresize = yes
+					max_width = 400
+                }
+            }
+        }
+    }
+}
