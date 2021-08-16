@@ -1,0 +1,107 @@
+﻿#Events dealing with coming of age
+
+namespace = ek_ice_wraith_hunt #can change this to ek_hunt or something if you wonna repurpose this file for general hunt events
+
+
+# Ice Wraith Hunt by AJ :sunglasses:
+ek_ice_wraith_hunt.0001 = { 			#Introduction
+	type = character_event
+	trigger = {
+		AND = {
+			age = 16
+			has_culture_group = culture_group:nordic_group
+			geographical_region	= mundus_tamriel_skyrim
+		}
+	}
+
+	theme = hunt_activity
+	override_background = { event_background = wilderness_mountains }
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+
+	title = ek_ice_wraith_hunt.0001.t
+	desc = ek_ice_wraith_hunt.0001.desc 		#You are given the option to go on an Ice Wraith hunt to prove yourself
+	option = {
+		name = ek_ice_wraith_hunt.0001.a 		#Decide to go
+		if = {
+			limit = { has_trait = craven }
+			add_stress = medium_stress_gain
+		}
+		create_story = {
+			type = story_type
+			save_scope_as = story
+		}
+		trigger_event = { id = ek_ice_wraith_hunt.0002 days = 3 } #Proceed to next part of event
+	}
+	option = {
+		name = ek_ice_wraith_hunt.0001.b 		#Decide not to go
+		add_prestige = medium_prestige_loss
+		add_character_modifier = {
+			modifier = nord_coward_modifier 	#Nordic opinion penalty for being cowardly
+			years = 10
+		}
+		if = { #if brave or ambitious, gain stress, otherwise 30% chance of losing paranoid, shy, or lazy and replacing with craven if the character has one of those traits
+			limit = {
+				OR = {
+					has_trait = brave
+					has_trait = ambitious
+				}
+			}
+			add_stress = medium_stress_gain
+		}
+		else_if = {
+			limit = {
+				NOT = { has_trait = craven }
+			}
+			random = {
+				chance = 30
+				if = {
+					limit = { has_trait = paranoid }
+					remove_trait = paranoid
+					add_trait = craven
+				}
+				else_if = {
+					limit = { has_trait = shy }
+					remove_trait = shy
+					add_trait = craven
+				}
+				else_if = {
+					limit = { has_trait = lazy }
+					remove_trait = lazy
+					add_trait = craven
+						
+				}
+			}
+		}
+	}
+}
+
+ek_ice_wraith_hunt.0002 = {			#Part 2 - pick difficulty
+	type = character_event
+	title = ek_ice_wraith_hunt.0002.t
+	theme = war
+	root.location = { save_scope_as = name } # this dont work or maybe loc dont work
+	override_background = {
+		event_background = wilderness_mountains
+	}
+	right_portrait = {
+		character = root
+		if = {
+			limit = { has_trait = craven }
+			animation = stress
+		}
+		else = { animation = worry }
+	}
+	desc = ek_ice_wraith_hunt.0002.desc
+	option = {
+		name = ek_ice_wraith_hunt.0002.a
+	}
+	option = {
+		name = ek_ice_wraith_hunt.0002.b
+	}
+	option = {
+		name = ek_ice_wraith_hunt.0002.c # no work !!!! ):
+	}
+}
