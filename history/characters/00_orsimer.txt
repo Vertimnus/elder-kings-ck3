@@ -867,6 +867,58 @@ shatul_1000 = {
 	3371.1.1 = { death = yes }
 }
 
+#Frostwall House
+frostwall_1000 = {
+	name = "Ghor"
+	dynasty_house = shatul_frostwall
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_magical_ability_2
+	trait = education_learning_2
+	
+	3308.10.8 = { birth = yes }
+	3374.3.12 = { death = yes }
+}
+frostwall_1000_wife = {
+	name = "Bolga"
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_diplomacy_1
+	
+	3310.4.12 = { birth = yes }
+	3373.6.24 = { death = yes }
+}
+frostwall_1001 = {
+	name = "Badush"
+	female = yes
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_martial_3
+
+	father = frostwall_1000
+	mother = frostwall_1000_wife
+
+	3326.7.15 = { birth = yes }
+	3392.3.19 = { death = yes }
+}
+frostwall_1002 = {
+	name = "Muglugd"
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_intrigue_2
+	trait = physique_bad_1
+
+	father = frostwall_1000
+	mother = frostwall_1000_wife
+
+	3336.2.8 = { birth = yes }
+	3397.11.16 = { death = yes }
+}
+
 ##Orgak Dynasty (800019)
 
 #Orgak House
@@ -1233,7 +1285,7 @@ kaval_1 = {
 
 }
 
-#Burzag Dinasty, Chiefs of Narzulbur (Gloombound)
+#Burzag Dynasty, Chiefs of Narzulbur (Gloombound)
 burzag_burzgrag = {
 	name = "Burzgrag"
 	dynasty = burzag
@@ -1242,4 +1294,69 @@ burzag_burzgrag = {
 	
 	3340.1.1 = { birth = yes }
 	3380.1.1 = { death = yes }
+}
+
+#Ivory Tooth Dynasty, Chiefs of Half-Moon Side, Falkreath
+ivory_tooth_1000 = {
+	name = "Ghorzal"
+	dynasty = ivory_tooth
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	sexuality = bisexual
+
+	trait = education_diplomacy_2
+	trait = gregarious
+	trait = lustful
+	trait = just
+	
+	3336.12.4 = { birth = yes }
+	3354.1.1 = { add_spouse = ivory_tooth_1000_wife }
+	3380.5.16 = { death = yes }
+}
+ivory_tooth_1000_wife = {
+	name = "Urgralag"
+	female = yes
+	dynasty = shardbrok
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_stewardship_1
+	
+	father = shardbrok_1000
+
+	3335.8.13 = { birth = yes }
+	3381.5.21 = { death = yes }
+}
+
+#Shardbrok Dynasty, Chiefs of Sunderstone, Falkreath
+shardbrok_1000 = {
+	name = "Madrukh"
+	dynasty = shardbrok
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_martial_2
+	
+	3303.2.8 = { birth = yes }
+	3365.3.3 = {
+		death = {
+			death_reason = death_duel
+			killer = shardbrok_1001
+		}
+	}
+}
+shardbrok_1001 = {
+	name = "Urzgor"
+	dynasty = shardbrok
+	culture = mountain_orc
+	religion = code_of_malacath
+
+	trait = education_martial_3
+	trait = cannibal #HistoryToDo turn this into a secret
+
+	father = shardbrok_1000
+	
+	3335.3.3 = { birth = yes }
+	3381.11.27 = { death = yes }
 }
