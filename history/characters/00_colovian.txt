@@ -3890,7 +3890,6 @@ nipia_1000 = {
 			add_gold = 50
 			add_piety = 100
 		}
-		set_relation_rival = character:nipia_1001
 	}
     3521.10.1 = { death = yes }
 }
@@ -3922,12 +3921,42 @@ nipia_1001 = {
 
     3479.2.10 = { birth = yes }
 	3496.10.9 = { give_nickname = nick_the_star_made_knight }
+	3499.1.2 = { add_spouse = nipia_1091 }
 	3501.10.10 = { employer = nipia_1000 }
+    3542.10.12 = { death = yes }
+}
+nipia_1091 = {  #Daughter of Sabinus Massiner of Sutch
+    name = "Ayelet"
+	dna = aiyelet_dna_entry
+	female = yes
+    dynasty = 100034
+    religion = imperial_cult
+    culture = strident
+	diplomacy = 9
+	martial = 3
+	stewardship = 7
+	intrigue = 8
+	learning = 6
+	prowess = 8
+	sexuality = heterosexual
+	trait = sign_warrior
+	trait = education_learning_3
+	trait = arrogant
+	trait = diligent
+	trait = brave
+	trait = beauty_good_1
+	trait = athletic
+	trait = adventurer
+	trait = p_dv_shezarr
+    father = massiner_104
+
+    3479.12.10 = { birth = yes }
     3542.10.12 = { death = yes }
 }
 nipia_1011 = {
     name = "Maera"
-	dna = maera_dna_entry
+	dna = aiyelet_dna_entry
+    dynasty = 100039
 	female = yes
     religion = hero_cult
     culture = colovian
@@ -3935,6 +3964,7 @@ nipia_1011 = {
 	trait = bossy
 	trait = intellect_good_2
 	father = nipia_1001
+	mother = nipia_1091
 
     3499.11.10 = { birth = yes }
 	3501.10.10 = { employer = nipia_1000 }
@@ -4415,8 +4445,13 @@ nipia_1008 = {
 	3496.10.9 = {
 		set_relation_rival = character:nipia_1000
 	}
-	3501.10.10 = { employer = nipia_1000 }
-    3532.11.12 = { death = yes }
+	3495.12.12 = { give_nickname = nick_centurion }
+	3496.7.10 = { employer = tharn_202 }
+    3503.1.1 = {
+		death = {
+			death_reason = death_battle
+		}
+	}
 }
 nipia_1009 = {
     name = "Radovan"
@@ -4596,7 +4631,13 @@ vorenus_1000 = {
     father = vorenus_1002
     
     3462.2.6 = { birth = yes }
+	3500.1.1 = { 
+		effect = { #Plunders the safe room of fort Istirus
+			add_gold = 100
+		}
+	}
 	3500.1.1 = { set_relation_friend = character:nipia_1000 }
+	3500.1.1 = { set_relation_friend = character:nipia_1007 }
     3511.10.1 = { death = yes }
 }
 vorenus_1002 = {
