@@ -382,3 +382,286 @@ faith_give_proper_cultural_identity_doctrine = {
 		add_doctrine = doctrine_cultural_identity_culture_exclusive
 	}
 }
+
+### FERVOR EQUILIBRIUM
+faith_update_fervor_equilibrium = {
+	save_scope_as = current_faith
+	
+	##### V1
+	# ### FERVOR EQUILIBRIUM COMPUTATION
+	# ## Base
+	# set_variable = {
+		# name = fervor_equilibrium
+		# value = 100
+	# }
+	
+	# ## Every two counties subtract one fervor_equilibrium. 0 county = 100 fervor ; 100 counties = 50 fevor ; 200 counties = 0 fervor
+	# # How should it impact our equilibrium
+	# set_variable = {
+		# name = half_num_county_followers
+		# value = num_county_followers	
+	# }
+	# change_variable = {
+		# name = half_num_county_followers
+		# divide = 2
+	# }
+	# # Should we increase/decrease the equilibrium penality?
+	# if = {
+		# limit = { has_doctrine = doctrine_pluralism_pluralistic }
+		# change_variable = {
+			# name = half_num_county_followers
+			# multiply = 0.85
+		# }
+	# }
+	# # Apply it
+	# change_variable = {
+		# name = fervor_equilibrium
+		# subtract = var:half_num_county_followers
+	# }
+	
+	##### V2
+	### FERVOR EQUILIBRIUM COMPUTATION
+	## Base
+	set_variable = {
+		name = fervor_equilibrium
+		value = 50
+	}
+	
+	## How many temples compared to our counties. High nb of temples = positive equilibrium impact
+	if = {
+		limit = { num_county_followers > 0 }
+		
+		# 0 = 0%fe; 0.5 = 10fe; 1 = 20%fe
+		set_variable = {
+			name = fe_impact_nb_temples
+			value = 0
+		}
+		
+		every_barony = {
+			limit = {
+				this.faith = scope:current_faith
+				title_province = { has_holding_type = church_holding }
+			}
+			scope:current_faith = { change_variable = { name = fe_impact_nb_temples add = 1 } }
+		}
+		
+		# We get the proportion of temples (most of the time between 0 and 1, might be a bit above 1)
+		change_variable = {
+			name = fe_impact_nb_temples
+			divide = num_county_followers
+		}
+		
+		# Multiply that by 20, so that the fervor impact is (mostly) between 0 and +20%
+		change_variable = {
+			name = fe_impact_nb_temples
+			multiply = 20
+		}
+		
+		## And finally we apply that to our fervor equilibrium
+		change_variable = {
+			name = fervor_equilibrium
+			add = var:fe_impact_nb_temples
+		}
+	}
+	
+	## Head of Faith impact (if any)
+	if = {
+		limit = { NOT = { has_doctrine_parameter = no_head_of_faith } }
+		if = {
+			limit = { exists = this.religious_head }
+			this.religious_head = { save_scope_as = hof }
+			
+			# Each sin/virtue of the HoF modifies the fervor equilibrium by -5/+5%
+			if = {
+				limit = { scope:hof = { num_sinful_traits > 0 } }
+				
+				set_variable = {
+					name = fe_impact_sinful_traits_hof
+					value = -5
+				}
+				change_variable = {
+					name = fe_impact_sinful_traits_hof
+					multiply = this.religious_head.num_sinful_traits
+				}
+				change_variable = {
+					name = fervor_equilibrium
+					add = var:fe_impact_sinful_traits_hof
+				}
+			}
+			if = {
+				limit = { scope:hof = { num_virtuous_traits > 0 } }
+				
+				set_variable = {
+					name = fe_impact_virtuous_traits_hof
+					value = 5
+				}
+				change_variable = {
+					name = fe_impact_virtuous_traits_hof
+					multiply = this.religious_head.num_virtuous_traits
+				}
+				change_variable = {
+					name = fervor_equilibrium
+					add = var:fe_impact_virtuous_traits_hof
+				}
+			}
+		}
+		else = {
+			# If there is no HoF while you should have one, we assume it has 3 sins (so you should get one)
+			set_variable = {
+				name = fe_impact_hof_missing
+				value = -15
+			}
+			change_variable = {
+				name = fervor_equilibrium
+				add = var:fe_impact_hof_missing
+			}
+		}
+	}
+	
+	## Daedric cults
+	# Once it's in the mod, the strength of the Daedra revered by its cult should impact the cult fervor (high fervor when the Prince is strong, low when the Prince is weak)
+	
+	## Doctrines & Tenets
+	# Faiths with Ecclesiarchy get an equilibrium boost for each holy site
+	if = {
+		limit = { has_doctrine_parameter = holy_site_increase_fervor_equilibrium_active }
+		set_variable = {
+			name = fe_impact_ecclesiarchy_boost
+			value = 5
+		}
+		change_variable = {
+			name = fe_impact_ecclesiarchy_boost
+			multiply = holy_sites_controlled
+		}
+		
+		change_variable = {
+			name = fervor_equilibrium
+			add = var:fe_impact_ecclesiarchy_boost
+		}
+	}
+	
+	# The Leader of the Council of the Eight gets an equilibrium boost (5 per member)
+	if = {
+		limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+		set_variable = {
+			name = fe_impact_leader_co8
+			value = 0
+		}
+		every_religion_global = {
+			every_faith = {
+				limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
+				scope:current_faith = {
+					change_variable = {
+						name = fe_impact_leader_co8
+						add = 5
+					}
+				}
+			}
+		}
+		change_variable = {
+			name = fervor_equilibrium
+			add = var:fe_impact_leader_co8
+		}
+	}
+	
+	## Size penalty
+	# Faiths with over 50 counties get a scaling FE penalty, based on the (currently disabled) fervor gain penalty gain due to size
+	# fe = fe * 1/sqrt(max(49, faith_size)/49)
+	# Only checks if nb counties > 49, so fe *= 1/sqrt(faith_size/49)
+	if = {
+		limit = { num_county_followers > 49 }
+		set_local_variable = { name = param value = { value = num_county_followers } }
+		get_sqrt = yes
+		
+		if = { # Some tenets and doctrines can reduce this size penalty
+			limit = { has_doctrine_parameter = reduces_number_counties_fervor_equilibrium_penality_active }
+			# We slightly lower sqrt(faith_size), so the penalty isn't as strong
+			set_local_variable = {
+				name = result
+				value = {
+					value = local_var:result
+					multiply = 0.75
+				}
+			}
+		}
+		
+		set_local_variable = { name = result value = { value = local_var:result divide = 7 } } # We divide by sqrt(7) here, as sqrt(faith_size/49) = sqrt(faith_size)/sqrt(49)
+		
+		set_variable = { # We get 1/sqrt(faith_size/49)
+			name = fe_impact_faith_size
+			value = {
+				value = 1
+				divide = local_var:result
+			}
+		}
+		set_variable = { # That's our new Equilibrium
+			name = fervor_equilibrium_new
+			value = {
+				value = var:fervor_equilibrium
+				multiply = var:fe_impact_faith_size
+			}
+		}
+		# set_variable = { # That's the difference
+			# name = fe_impact_faith_size
+			# value = {
+				# value = var:fervor_equilibrium
+				# subtract = var:fervor_equilibrium_new
+			# }
+		# }
+		
+		set_variable = { # We apply the new equilibrium
+			name = fervor_equilibrium
+			value = var:fervor_equilibrium_new
+		}
+	}
+	
+	## Aftermath (once most penalties and bonuses have been applied)
+	# Each member of the Council of the Eight uses the average of their base fervor equilibrium and the leader's
+	if = {
+		limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
+		set_variable = {
+			name = fe_impact_leader_co8_member
+			value = global_var:leader_council_eight.var:fervor_equilibrium
+		}
+		change_variable = {
+			name = fe_impact_leader_co8_member
+			subtract = var:fervor_equilibrium
+		}
+		change_variable = {
+			name = fe_impact_leader_co8_member
+			divide = 2
+		}
+		
+		change_variable = {
+			name = fervor_equilibrium
+			add = var:fe_impact_leader_co8_member
+		}
+	}
+	
+	## Finally, make sure it's between bounds that make sense
+	if = {
+		limit = { var:fervor_equilibrium = { compare_value < 0 } }
+		set_variable = {
+			name = fervor_equilibrium
+			value = 0
+		}
+	}
+	else_if = {
+		limit = { var:fervor_equilibrium = { compare_value > 100 } }
+		set_variable = {
+			name = fervor_equilibrium
+			value = 100
+		}
+	}
+	
+	## If we're the leader of the Council of the Eight, update the members' fervor equilibrium
+	if = {
+		limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
+		every_religion_global = {
+			every_faith = {
+				limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
+				faith_update_fervor_equilibrium = yes
+			}
+		}
+	}
+}

@@ -843,6 +843,20 @@ task_promote_culture = {
 		}
 	}
 
+	### EK EDIT: We need at culture within our culture group that is considered "alive"
+	is_valid_showing_failures_only = {
+		custom_description = {
+			text = "culture_whithin_culture_group_alive"
+			any_culture_global = {
+				this.culture_group = scope:councillor_liege.culture.culture_group
+				is_target_in_global_variable_list = {
+					name = culture_is_alive
+					target = this
+				}
+			}
+		}
+	}
+	
 	### EK EDIT: Vanilla cultures
 	potential_county = {
 		scope:county = {

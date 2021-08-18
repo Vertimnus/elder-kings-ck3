@@ -19,7 +19,7 @@ ek_character_setup_effect = {
 		lifespan_traits_effect = yes
 	}
 	
-	#Birthsigns
+	#Birthsign traits
 	if = {
 		limit = { NOT = { has_trait = birthsign } }
 		assign_birthsign_start_effect = yes
@@ -40,6 +40,7 @@ race_traits_effect = {
 			}
 		}
 		add_character_flag = race_khajiit
+		random_furstock_traits_effect = yes
 	}
 	
 	#Goblinken
@@ -69,6 +70,7 @@ race_traits_inheritance_effect = {
 			}
 		}
 		add_character_flag = race_khajiit
+		furstock_trait_effect = yes
 	}
 	
 	#Goblinken
@@ -94,6 +96,193 @@ race_traits_inheritance_effect = {
 	}
 	
 	add_character_flag = char_setup
+}
+
+random_furstock_traits_effect = {
+	if = {
+		limit = { 
+			NOR = {
+				has_trait = furstock_ohmes 
+				has_trait = furstock_ohmes_raht
+				has_trait = furstock_cathay
+				has_trait = furstock_cathay_raht
+				has_trait = furstock_suthay
+				has_trait = furstock_suthay_raht
+				has_trait = furstock_tojay
+				has_trait = furstock_tojay_raht
+				has_trait = furstock_dagi
+				has_trait = furstock_dagi_raht
+				has_trait = furstock_pahmar
+				has_trait = furstock_pahmar_raht
+			}
+		}
+		random_list = {
+			10 = { add_trait = furstock_ohmes }
+			10 = { add_trait = furstock_ohmes_raht }
+			10 = { add_trait = furstock_cathay }
+			10 = { add_trait = furstock_cathay_raht }
+			10 = { add_trait = furstock_suthay }
+			10 = { add_trait = furstock_suthay_raht }
+			10 = { add_trait = furstock_tojay }
+			10 = { add_trait = furstock_tojay_raht }
+			10 = { add_trait = furstock_dagi }
+			10 = { add_trait = furstock_dagi_raht }
+			10 = { add_trait = furstock_pahmar }
+			10 = { add_trait = furstock_pahmar_raht }
+		}
+	}
+}
+
+furstock_trait_effect = {
+	if = {
+		limit = {
+			NOR = {
+				has_trait = furstock_ohmes 
+				has_trait = furstock_ohmes_raht
+				has_trait = furstock_cathay
+				has_trait = furstock_cathay_raht
+				has_trait = furstock_suthay
+				has_trait = furstock_suthay_raht
+				has_trait = furstock_tojay
+				has_trait = furstock_tojay_raht
+				has_trait = furstock_dagi
+				has_trait = furstock_dagi_raht
+				has_trait = furstock_pahmar
+				has_trait = furstock_pahmar_raht
+			}
+		}
+		#Masser New - Secunda New = Suthay
+		if = {
+			limit = {
+				global_var:lunarphase_masser <= 6
+				global_var:lunarphase_secunda <= 8
+			}
+			add_trait = furstock_suthay
+		}
+		#Masser New - Secunda Waxing = Ohmes-raht
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 6
+				global_var:lunarphase_secunda <= 16
+			}
+			add_trait = furstock_ohmes_raht
+		}
+		#Masser New - Secunda Full = Ohmes
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 6
+				global_var:lunarphase_secunda <= 25
+			}
+			add_trait = furstock_ohmes
+		}
+		#Masser New - Secunda Waning = Suthay-raht 
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 6
+				global_var:lunarphase_secunda <= 33
+			}
+			add_trait = furstock_suthay_raht
+		}
+		#Masser Waxing - Secunda New = Tojay
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 12
+				global_var:lunarphase_secunda <= 8
+			}
+			add_trait = furstock_tojay
+		}
+		#Masser Waxing - Secunda Waxing = Cathay-raht
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 12
+				global_var:lunarphase_secunda <= 16
+			}
+			add_trait = furstock_cathay_raht
+		}
+		#Masser Waxing - Secunda Full = Cathay
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 12
+				global_var:lunarphase_secunda <= 25
+			}
+			add_trait = furstock_cathay
+		}
+		#Masser Waxing - Secunda Waning = Tojay-raht
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 12
+				global_var:lunarphase_secunda <= 33
+			}
+			add_trait = furstock_tojay_raht
+		}
+		#Masser Full - Secunda New = Pahmar
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 19
+				global_var:lunarphase_secunda <= 8
+			}
+			add_trait = furstock_pahmar
+		}
+		#Masser Full - Secunda Waxing = Senche-raht
+		# else_if = {
+			# limit = {
+				# global_var:lunarphase_masser <= 19
+				# global_var:lunarphase_secunda <= 16
+			# }
+			# add_trait = furstock_senche_raht
+		# }
+		#Masser Full - Secunda Full = Senche
+		# else_if = {
+			# limit = {
+				# global_var:lunarphase_masser <= 19
+				# global_var:lunarphase_secunda <= 25
+			# }
+			# add_trait = furstock_senche
+		# }
+		#Masser Full - Secunda Waning = Pahmar-raht
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 19
+				global_var:lunarphase_secunda <= 33
+			}
+			add_trait = furstock_pahmar_raht
+		}
+		#Masser Waning - Secunda New = Dagi
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 25
+				global_var:lunarphase_secunda <= 8
+			}
+			add_trait = furstock_dagi
+		}
+		#Masser Waning - Secunda Waxing = Alfiq-raht
+		# else_if = {
+			# limit = {
+				# global_var:lunarphase_masser <= 25
+				# global_var:lunarphase_secunda <= 16
+			# }
+			# add_trait = furstock_alfiq_raht
+		# }
+		#Masser Waning - Secunda Full = Alfiq
+		# else_if = {
+			# limit = {
+				# global_var:lunarphase_masser <= 25
+				# global_var:lunarphase_secunda <= 25
+			# }
+			# add_trait = furstock_alfiq
+		# }
+		#Masser Waning - Secunda Waning = Dagi-raht
+		else_if = {
+			limit = {
+				global_var:lunarphase_masser <= 25
+				global_var:lunarphase_secunda <= 33
+			}
+			add_trait = furstock_dagi_raht
+		}
+		else = {
+			random_furstock_traits_effect = yes
+		}
+	}
 }
 
 #Lifespan traits

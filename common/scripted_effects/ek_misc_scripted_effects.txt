@@ -1054,3 +1054,53 @@ might_makes_right_update_law_fame_devotion = {
 		add_realm_law_skip_effects = crown_authority_0
 	}
 }
+
+### Get the square root of a value
+# Need to set local_var:param, set_local_variable = { name = param value = 100 }
+# get_sqrt = {
+    # set_local_variable = { name = x value = local_var:param }
+    # set_local_variable = { name = y value = 1 }
+    # set_local_variable = { name = e value = 0.001 }
+    # set_local_variable = { name = condition value = { value = local_var:x subtract = local_var:y } }
+	# # add_prestige = 1
+	# # add_piety = local_var:x
+    # while = {
+        # limit = { local_var:condition > local_var:e }
+        # set_local_variable = { name = x value = { value = local_var:x add = local_var:y divide = 2 } }
+        # set_local_variable = { name = y value = { value = local_var:x divide = local_var:param } }
+        # set_local_variable = { name = condition value = { value = local_var:x subtract = local_var:y } }
+    # }
+	# add_piety = local_var:x
+	# add_piety = local_var:y
+	# add_piety = local_var:condition
+    # set_local_variable = { name = result value = local_var:x }
+# }
+# Calculate it one by one, not optimal but hey, worst case (for now) is to start at like 1000
+get_sqrt = {
+    get_sqrt_integer = yes
+    get_sqrt_precise = yes
+}
+
+get_sqrt_integer = { # Rough estimate
+	set_local_variable = { name = x value = 1 }
+    set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
+    while = {
+        limit = { local_var:param > local_var:x_squared }
+		
+		set_local_variable = { name = x value = { value = local_var:x add = 1 } }
+		set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
+    }
+    set_local_variable = { name = result value = local_var:x }
+}
+
+get_sqrt_precise = { # Much more precise estimate, but we need to know where to start (we know the square root is between x and x-1
+	set_local_variable = { name = x value = local_var:result }
+    set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
+    while = { # We work backwards
+        limit = { local_var:x_squared > local_var:param }
+		
+		set_local_variable = { name = x value = { value = local_var:x subtract = 0.001 } }
+		set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
+    }
+    set_local_variable = { name = result value = local_var:x }
+}
