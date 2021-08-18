@@ -175,7 +175,101 @@ titles_in_same_province = {
 				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
 				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_morrowind } }
 			}
+			AND = {
+				$TITLE1$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_black_marsh } }
+				$TITLE2$ = { title_capital_county.title_province = { geographical_region = mundus_tamriel_black_marsh } }
+			}
 			### EK TODO: Missing provinces
+		}
+	}
+}
+
+### Might Makes Right
+might_makes_right_requires = {
+	save_temporary_scope_value_as = { name = fame_devotion_amount value = $AMOUNT$ }
+	save_temporary_scope_value_as = { name = fame_devotion_amount value = scope:fame_devotion_amount.mmr_requirement_level_change }
+	
+	trigger_if = {
+		limit = { NOT = { exists = $FLAG$ } }
+		trigger_if = {
+			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+			custom_description = {
+				text = "might_makes_right_devotion_level_amount"
+				value = scope:fame_devotion_amount
+				OR = {
+					piety_level >= scope:fame_devotion_amount
+					prestige_level >= scope:fame_devotion_amount
+				}
+			}
+		}
+		trigger_else = {
+			custom_description = {
+				text = "might_makes_right_level_amount"
+				value = scope:fame_devotion_amount
+				prestige_level >= scope:fame_devotion_amount
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = { $FLAG$ = flag:war }
+		trigger_if = {
+			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+			custom_description = {
+				text = "might_makes_right_devotion_level_amount_war"
+				value = scope:fame_devotion_amount
+				OR = {
+					piety_level >= scope:fame_devotion_amount
+					prestige_level >= scope:fame_devotion_amount
+				}
+			}
+		}
+		trigger_else = {
+			custom_description = {
+				text = "might_makes_right_level_amount_war"
+				value = scope:fame_devotion_amount
+				prestige_level >= scope:fame_devotion_amount
+			}
+		}
+	}
+	trigger_else_if = {
+		limit = { $FLAG$ = flag:law }
+		trigger_if = {
+			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+			custom_description = {
+				text = "might_makes_right_devotion_level_amount_law"
+				value = scope:fame_devotion_amount
+				OR = {
+					piety_level >= scope:fame_devotion_amount
+					prestige_level >= scope:fame_devotion_amount
+				}
+			}
+		}
+		trigger_else = {
+			custom_description = {
+				text = "might_makes_right_level_amount_law"
+				value = scope:fame_devotion_amount
+				prestige_level >= scope:fame_devotion_amount
+			}
+		}
+	}
+	trigger_else = { # Unknown flag, we just go back to the default state
+		trigger_if = {
+			limit = { faith = { has_doctrine_parameter = ek_might_makes_right_devotion_active } }
+			custom_description = {
+				text = "might_makes_right_devotion_level_amount"
+				value = scope:fame_devotion_amount
+				OR = {
+					piety_level >= scope:fame_devotion_amount
+					prestige_level >= scope:fame_devotion_amount
+				}
+			}
+		}
+		trigger_else = {
+			custom_description = {
+				text = "might_makes_right_level_amount"
+				value = scope:fame_devotion_amount
+				prestige_level >= scope:fame_devotion_amount
+			}
 		}
 	}
 }

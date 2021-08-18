@@ -1,0 +1,55 @@
+﻿### Ask an old unmarried/widowed courtier of your culture to become a Clan-Parent (localized according to their gender)
+# Gives piety + renown (if of your dynasty)
+make_clan_parent_interaction = {
+	category = interaction_category_friendly
+	common_interaction = yes
+	desc = make_clan_parent_interaction_desc
+	
+	is_shown = {
+		NOT = {
+			scope:recipient = {
+				any_courtier = { has_trait = clan_parent }
+			}
+		}
+		
+		NOT = { scope:recipient = scope:actor }
+
+		scope:actor.culture = { has_innovation = innovation_clan_mothers }
+		scope:recipient.culture = { has_innovation = innovation_clan_mothers }
+		scope:actor.culture_group = scope:recipient.culture_group
+		
+		scope:recipient = {
+			is_courtier_of = scope:actor
+			age >= 50
+			is_female = yes
+			is_married = no
+			NOT = { has_trait = clan_parent }
+		}
+	}
+
+	on_accept = {
+		# The recipient becomes a Clan-Parent
+		scope:recipient = {
+			add_trait = clan_parent
+			add_piety_level = 1
+		}
+		
+		custom_tooltip = make_clan_parent_interaction_one_clan_parent_per_court_tt
+		
+		# The actor gets piety and renown if the woman is part of their dynasty
+		scope:actor = {
+			add_piety = minor_piety_gain
+			
+			if = {
+				limit = {
+					exists = scope:actor.dynasty
+					exists = scope:recipient.dynasty
+					scope:actor.dynasty = scope:recipient.dynasty
+				}
+				add_dynasty_prestige = minor_dynasty_prestige_value
+			}
+		}
+	}
+
+	auto_accept = yes
+}

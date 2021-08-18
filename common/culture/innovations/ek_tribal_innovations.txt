@@ -34,7 +34,7 @@
 @moonstone_armor_01 = "gfx/interface/icons/culture_innovations/innovation_moonstone_armor_01.dds"
 @high_rock_crowning_01 = "gfx/interface/icons/culture_innovations/innovation_high_rock_crowning_01.dds"
 @crown_01 = "gfx/interface/icons/culture_innovations/innovation_crown_01.dds"
-@bombard = "gfx/interface/icons/culture_innovations/innovation_ek_bombard.dds"
+@bombard = "gfx/interface/icons/culture_innovations/innovation_bombard.dds"
 @alchemy = "gfx/interface/icons/culture_innovations/innovation_alchemy.dds"
 @white_gold = "gfx/interface/icons/culture_innovations/innovation_ek_white_gold_tower.dds"
 @blood_price = "gfx/interface/icons/culture_innovations/innovation_blood_price.dds"
@@ -52,9 +52,7 @@ innovation_war_magic = {
 
 	unlock_maa = war_mages
 	
-	custom = unlock_tribal_academy_buildings
 	custom = required_other_magical_innovations
-	unlock_building = academy_01
 
 	flag = global_regular
 	flag = tribal_era_regular
@@ -177,59 +175,20 @@ innovation_alchemy = {
 	flag = tribal_era_regular
 }
 
+innovation_master_field = {
+	group = culture_group_civic
+	culture_era = culture_era_tribal
+	icon = @fortifications
+
+	
+	custom = unlock_tribal_academy_buildings
+	unlock_building = academy_01
+
+	flag = global_regular
+	flag = tribal_era_regular
+}
+
 #culture_group_regional
-# Region based
-innovation_war_mammoths = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	region = world_innovation_mammoths
-	icon = @mammoth
-
-	unlock_maa = war_mammoth
-
-	flag = global_regional
-	flag = tribal_era_regional
-}
-
-innovation_seat_of_empires = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	region = mundus_tamriel_cyrodiil
-	icon = @white_gold
-
-	modifier = {
-		domain_limit = 1
-		title_creation_cost_mult = -0.2
-	}
-
-	flag = global_regional
-	flag = tribal_era_regional
-}
-
-innovation_moonstone_armor = {
-	group = culture_group_regional
-	culture_era = culture_era_tribal
-	region = mundus_tamriel_summerset_isles
-	icon = @moonstone_armor_01
-
-	modifier = {
-		prowess = 1
-		monthly_prestige_gain_mult = 0.1
-	}
-	maa_upgrade = {
-		type = skirmishers
-		toughness = 2
-		screen = 2
-	}
-	maa_upgrade = {
-		type = light_cavalry
-		toughness = 2
-		screen = 2
-	}
-
-	flag = global_regional
-	flag = tribal_era_regional
-}
 
 # Culture/culture group based
 innovation_blood_price = {
@@ -310,10 +269,36 @@ innovation_rite_of_theft = {
 	flag = tribal_era_regional
 }
 
+innovation_clan_mothers = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	icon = @nobility_03
+	
+	potential = {
+		this.culture_group = culture_group:khajiiti_group
+	}
+	
+	custom = virtues_give_county_opinion
+	custom = unlocks_clan_mother_interaction
+	
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
 innovation_lingua_tamrielis = {
 	group = culture_group_regional
 	culture_era = culture_era_tribal
 	icon = @nobility_03
+	
+	potential = {
+		trigger_if = {
+			limit = { years_from_game_start < 1 }
+			this.culture_group = culture_group:cyrodiilic_group
+		}
+		trigger_else = {
+			has_innovation = innovation_lingua_tamrielis
+		}
+	}
 
 	can_progress = { #Unlocked by event.
 		custom_description = {
@@ -326,11 +311,6 @@ innovation_lingua_tamrielis = {
 			trigger_else = {
 				always = no # Via decision
 			}
-			
-			# is_target_in_global_variable_list = {
-				# name = unavailable_unique_decisions
-				# target = flag:flag_promoted_gothic_innovations
-			# }
 		}
 	}
 
@@ -343,4 +323,85 @@ innovation_lingua_tamrielis = {
 
 	flag = global_regional
 	flag = tribal_era_regional
+}
+
+# Region based
+innovation_war_mammoths = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	can_progress = { NOT = { has_innovation = innovation_native_nomadic } }
+	
+	region = world_innovation_mammoths
+	icon = @mammoth
+
+	unlock_maa = war_mammoth
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_seat_of_empires = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	can_progress = { NOT = { has_innovation = innovation_native_nomadic } }
+	
+	region = mundus_tamriel_cyrodiil
+	icon = @white_gold
+
+	modifier = {
+		domain_limit = 1
+		title_creation_cost_mult = -0.2
+	}
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+
+innovation_moonstone_armor = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	can_progress = { NOT = { has_innovation = innovation_native_nomadic } }
+	
+	region = mundus_tamriel_summerset_isles
+	icon = @moonstone_armor_01
+
+	modifier = {
+		prowess = 1
+		monthly_prestige_gain_mult = 0.1
+	}
+	maa_upgrade = {
+		type = skirmishers
+		toughness = 2
+		screen = 2
+	}
+	maa_upgrade = {
+		type = light_cavalry
+		toughness = 2
+		screen = 2
+	}
+
+	flag = global_regional
+	flag = tribal_era_regional
+}
+innovation_abecean_piratry = {
+	group = culture_group_regional
+	culture_era = culture_era_tribal
+	can_progress = { NOT = { has_innovation = innovation_native_nomadic } }
+	
+	region = world_innovation_abecean_piratry
+	icon = @longboats
+	
+	modifier = {
+		embarkation_cost_mult = -0.25
+		raid_speed = 0.1
+	}
+	
+	custom = unlocks_naval_raiding
+	custom = unlocks_sailable_major_rivers
+
+	flag = global_regional
+	flag = tribal_era_regional
+	
+	flag = unlocks_naval_raiding
+	flag = unlocks_sailable_major_rivers
 }

@@ -115,3 +115,28 @@ hegemon_2_1_scale = {
 		multiply = 2
 	}
 }
+
+### For Might Makes Right
+mmr_requirement_level_change = {
+	value = this
+	if = {
+		limit = { root.faith = { has_doctrine = tenet_pursuit_of_power } }
+		add = -1
+	}
+	min = 0
+	max = max_prestige_level
+}
+
+fervor_equilibrium_below_value = {
+	value = 0
+	add = var:fervor_equilibrium
+	subtract = fervor
+	divide = 100
+}
+
+fervor_equilibrium_above_value = {
+	value = 0
+	add = fervor
+	subtract = var:fervor_equilibrium
+	divide = 100
+}

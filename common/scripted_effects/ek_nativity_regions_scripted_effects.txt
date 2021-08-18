@@ -15,8 +15,7 @@ set_culture_native_to = {
 }
 
 county_save_native_cultures = {
-	every_in_global_list = {
-		variable = culture_list
+	every_culture_global = {
 		limit = { is_native_to = { CULTURE = this REGION = $REGION$ } }
 		save_temporary_scope_as = culture_to_save
 		scope:current_county = {
@@ -29,8 +28,7 @@ county_save_native_cultures = {
 }
 
 create_local_culture_decision_scripted_effects = {
-	random_in_global_list = {
-		variable = culture_list
+	random_culture_global = {
 		limit = {
 			this.culture_group = root.culture_group
 			is_native_to = { CULTURE = this REGION = $REGION$ }
@@ -171,11 +169,11 @@ setup_county_native_cultures_link = {
 		}
 		if = {
 			limit = { this.title_province = { geographical_region = custom_nativity_nibenay_basin } }
-			county_save_native_cultures = { REGION = nibena_basin }
+			county_save_native_cultures = { REGION = nibenay_basin }
 		}
 		if = {
 			limit = { this.title_province = { geographical_region = custom_nativity_nibenese_lowlands } }
-			county_save_native_cultures = { REGION = nibense_lowlands }
+			county_save_native_cultures = { REGION = nibenese_lowlands }
 		}
 		# Skyrim
 		if = {
@@ -262,6 +260,27 @@ setup_county_native_cultures_link = {
 		if = {
 			limit = { this.title_province = { geographical_region = custom_nativity_padomay_coast } }
 			county_save_native_cultures = { REGION = padomay_coast }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_southern_marshes } }
+			county_save_native_cultures = { REGION = southern_marshes }
+		}
+		# Black Marsh
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_middle_argonia } }
+			county_save_native_cultures = { REGION = middle_argonia }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_onkobra } }
+			county_save_native_cultures = { REGION = onkobra }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_black_bays } }
+			county_save_native_cultures = { REGION = black_bays }
+		}
+		if = {
+			limit = { this.title_province = { geographical_region = custom_nativity_padomaic_marshes } }
+			county_save_native_cultures = { REGION = padomaic_marshes }
 		}
 	}
 }

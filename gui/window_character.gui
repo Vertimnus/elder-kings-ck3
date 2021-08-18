@@ -484,10 +484,11 @@ window = {
 				parentanchor = top|left
 				position = { 200 20 }
 				ignoreinvisible = yes
+				visible = "[InDebugMode]"
 
 				# Debug personality
 				text_single = {
-					visible = "[InDebugMode]"
+					#visible = "[InDebugMode]"
 					tooltip = "CHARACTER_AI_VALUES_DEBUG_TOOLTIP"
 					text = "#D AIValue#!"
 					align = nobaseline
@@ -512,12 +513,13 @@ window = {
 				button = {
 					using = editor_button
 					name = "copy_portrait_button"
-					parentanchor = right
+					#parentanchor = right
 					size = { 60 40 }
 					text = "portrait"
 					align = center|nobaseline
+					onclick = "[ExecuteConsoleCommand('pe')]"
 					onclick = "[CharacterWindow.OnCopyPortrait]"
-					visible = "[IsGameViewOpen('portrait_editor')]"
+					#visible = "[IsGameViewOpen('portrait_editor')]"
 					fontcolor = { 1.0 1.0 1.0 1.0 }
 				}
 			}
@@ -526,165 +528,225 @@ window = {
 				parentanchor = bottom|left
 				position = { 5 -5 }
 				spacing = 5
+				ignoreinvisible = yes
+				direction = vertical
 
-				flowcontainer = {
-					parentanchor = bottom|left
-					#position = { 5 -5 }
-					spacing = 5
-					ignoreinvisible = yes
-					direction = vertical
+				button_normal = {
+					name = "important_char_info" #tt wiget and store char id in sys var on show/create
+					visible = "[StringIsEmpty(Localize(Concatenate( 'imp_char_', Character.GetSlowHistoryIdForDebug )))]"
 
-					button_normal = {
-						name = "open_kill_list"
-						visible = "[Character.HasKillsKnownTo( GetPlayer )]"
+					size = { 35 35 }
 
-						size = { 35 35 }
+					datacontext = "[Character]"
+					using = tooltip_es
 
-						datacontext = "[Character]"
-						tooltip = "OPEN_KILL_LIST_TOOLTIP"
-						using = tooltip_es
+					tooltipwidget = {
+						object_tooltip_pop_out = {
 
-						state = {
-							name = close_kill_list
-							on_start = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
-						}
+							state = {
+								name = _show
+								on_start = "[GetVariableSystem.Set('imp_char', Character.GetSlowHistoryIdForDebug)]"
+							}
 
-						icon = {
-							texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-							size = { 100% 100% }
-						}
+							blockoverride "header_tt" {}
 
-						button_kill_list = {
-							onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
-							size = { 25 25 }
-							parentanchor = center
+							blockoverride "header_additions" {
+							}
 
-							modify_texture = {
-								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-								blend_mode = alphamultiply
+							blockoverride "title_text" {
+								text = important_character_name
+								align = top
+								using = Font_Type_Flavor
+								using = Font_Size_Big
+							}
+
+							blockoverride "concept_link" {
+								text = "[important_character|E]"
+								align = top
+							}
+
+							blockoverride "description_text" {
+								text = important_character_desc
+								max_width = 450
+							}
+
+							blockoverride "bg_texture"
+							{
+								texture = "gfx/interface/tooltips/tooltip_bg_gameconcept.dds"
 							}
 						}
 					}
 
-					container = {
-						visible = "[Character.IsPlayer]"
-						tooltip = "PLAYER_STRESS_TOOLTIP"
-						using = tooltip_es
+					icon = {
+						texture = "gfx/interface/buttons/button_lifestyles_base.dds"
+						size = { 100% 100% }
+					}
 
-						widget = {
-							visible = "[Not(GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3'))]"
-							size = { 100% 100%}
+					highlight_icon = {
+						texture = "gfx/interface/window_character/important_character.dds"
+						size = { 100% 100% }
+					}
 
-							using = Animation_ShowHide_Standard
+					# text_single = {
+					# 	text = "i"
+					# 	default_format = "#clickable;bold;glow_color:{0,0,0,1}"
+					# 	using = Font_Size_Big
+					# 	using = Font_Type_Flavor
+					# 	align = nobaseline
+					# 	parentanchor = center
+					# }
+				}
 
-							background = {
-								texture = "gfx/interface/component_masks/mask_fade_circle.dds"
-								color = { 0.15 0.15 0.15 1 }
-								margin = { 12 12 }
-							}
+				button_normal = {
+					name = "open_kill_list"
+					visible = "[Character.HasKillsKnownTo( GetPlayer )]"
+
+					size = { 35 35 }
+
+					datacontext = "[Character]"
+					tooltip = "OPEN_KILL_LIST_TOOLTIP"
+					using = tooltip_es
+
+					state = {
+						name = close_kill_list
+						on_start = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
+					}
+
+					icon = {
+						texture = "gfx/interface/buttons/button_lifestyles_base.dds"
+						size = { 100% 100% }
+					}
+
+					button_kill_list = {
+						onclick = "[ToggleGameViewData( 'kill_list', Character.GetID  )]"
+						size = { 25 25 }
+						parentanchor = center
+
+						modify_texture = {
+							texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
+							blend_mode = alphamultiply
 						}
+					}
+				}
 
-						widget = {
-							visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
-							parentanchor = center
-							size = { 180% 180% }
-							using = Animation_ShowHide_Standard
+				container = {
+					visible = "[Character.IsPlayer]"
+					tooltip = "PLAYER_STRESS_TOOLTIP"
+					using = tooltip_es
 
-							icon = {
-								size = { 100% 100% }
-								texture = "gfx/interface/component_masks/mask_fade_circle.dds"
-								using = Color_Red
-								alpha = 0
+					widget = {
+						visible = "[Not(GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3'))]"
+						size = { 100% 100%}
 
-								state = {
-									name = a
-									next = b
-									trigger_on_create = yes
-									alpha = 0.5
-									duration = 0.4
-									using = Animation_Curve_Default
-								}
+						using = Animation_ShowHide_Standard
 
-								state = {
-									name = b
-									next = a
-									alpha = 0
-									duration = 1
-									using = Animation_Curve_Default
-								}
-							}
+						background = {
+							texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+							color = { 0.15 0.15 0.15 1 }
+							margin = { 12 12 }
 						}
+					}
 
+					widget = {
+						visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)3')]"
+						parentanchor = center
+						size = { 180% 180% }
+						using = Animation_ShowHide_Standard
 
 						icon = {
-							parentanchor = vcenter
-							size = { 35 35 }
-							texture = "gfx/interface/icons/stress/icon_stress_level.dds"
-							framesize = { 70 70 }
-							frame = "[IntToFrameIndex( GetPlayer.GetStressLevel )]"
-
-
-							modify_texture = {
-								visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
-								name = "glow"
-								texture = "gfx/interface/colors/gold.dds"
-								blend_mode = colordodge
-								alpha = 0
-							}
+							size = { 100% 100% }
+							texture = "gfx/interface/component_masks/mask_fade_circle.dds"
+							using = Color_Red
+							alpha = 0
 
 							state = {
 								name = a
 								next = b
-								duration = 0.4
 								trigger_on_create = yes
+								alpha = 0.5
+								duration = 0.4
 								using = Animation_Curve_Default
-
-								modify_texture = {
-									name = "glow"
-									alpha = 0.3
-								}
 							}
 
 							state = {
 								name = b
 								next = a
+								alpha = 0
 								duration = 1
 								using = Animation_Curve_Default
-
-								modify_texture = {
-									name = "glow"
-									alpha = 0
-								}
 							}
 						}
 					}
 
-					button_normal = {
-						name = "open_focus_button"
 
+					icon = {
+						parentanchor = vcenter
 						size = { 35 35 }
+						texture = "gfx/interface/icons/stress/icon_stress_level.dds"
+						framesize = { 70 70 }
+						frame = "[IntToFrameIndex( GetPlayer.GetStressLevel )]"
 
-						visible = "[Or( Character.GetFocus.IsValid, Character.PlayerCanManageFocus )]"
-						tooltip = "PLAYER_LIFESTYLE_TOOLTIP"
-						using = tooltip_ne
 
-
-						icon = {
-							texture = "gfx/interface/buttons/button_lifestyles_base.dds"
-							size = { 100% 100% }
+						modify_texture = {
+							visible = "[GreaterThanOrEqualTo_int32(GetPlayer.GetStressLevel, '(int32)2')]"
+							name = "glow"
+							texture = "gfx/interface/colors/gold.dds"
+							blend_mode = colordodge
+							alpha = 0
 						}
 
-						highlight_icon_lifestyle_focus = {
-							size = { 100% 100% }
-							texture = "[CharacterWindow.GetCharacter.GetFocus.GetIcon]"
-							onclick = "[CharacterWindow.OnClickFocusButton]"
-							enabled = "[CharacterWindow.CanClickFocusButton]"
-							tooltip = "[CharacterWindow.GetFocusButtonTooltip]"
+						state = {
+							name = a
+							next = b
+							duration = 0.4
+							trigger_on_create = yes
+							using = Animation_Curve_Default
 
 							modify_texture = {
-								texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
-								blend_mode = alphamultiply
+								name = "glow"
+								alpha = 0.3
 							}
+						}
+
+						state = {
+							name = b
+							next = a
+							duration = 1
+							using = Animation_Curve_Default
+
+							modify_texture = {
+								name = "glow"
+								alpha = 0
+							}
+						}
+					}
+				}
+
+				button_normal = {
+					name = "open_focus_button"
+
+					size = { 35 35 }
+
+					visible = "[Or( Character.GetFocus.IsValid, Character.PlayerCanManageFocus )]"
+					tooltip = "PLAYER_LIFESTYLE_TOOLTIP"
+					using = tooltip_ne
+
+
+					icon = {
+						texture = "gfx/interface/buttons/button_lifestyles_base.dds"
+						size = { 100% 100% }
+					}
+
+					highlight_icon_lifestyle_focus = {
+						size = { 100% 100% }
+						texture = "[CharacterWindow.GetCharacter.GetFocus.GetIcon]"
+						onclick = "[CharacterWindow.OnClickFocusButton]"
+						enabled = "[CharacterWindow.CanClickFocusButton]"
+						tooltip = "[CharacterWindow.GetFocusButtonTooltip]"
+
+						modify_texture = {
+							texture = "gfx/interface/icons/focuses/hud_icon_mask.dds"
+							blend_mode = alphamultiply
 						}
 					}
 				}
@@ -883,7 +945,7 @@ window = {
 												{
 													size = { 40 40 }
 												}
-												
+
 												blockoverride "glow_radius"
 												{
 													glow_radius = 4
@@ -1504,7 +1566,7 @@ window = {
 								visible = "[Character.HasLandedTitles]"
 								datacontext = "[Character.GetPrimaryTitle]"
 								layoutpolicy_horizontal = expanding
-								
+
 								text_single = {
 									name = "character_title"
 									layoutpolicy_horizontal = expanding

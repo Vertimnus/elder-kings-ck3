@@ -7,6 +7,7 @@ widget = {
 		name = _show
 		using = Animation_FadeIn_Standard
 		on_start = "[PdxGuiTriggerAllAnimations('bookmarks_bars_appear')]"
+		on_start = "[GfxSetActiveSkin('default')]"
 		on_finish = "[PdxGuiTriggerAllAnimations('bookmarks_buttons_shimmer')]"
 		on_finish = "[GetVariableSystem.Set('set_last_applied_ironman_mode', 'true' )]"
 		start_sound = {
@@ -2316,7 +2317,7 @@ types BookmarkPortraits
 							translate_uv = { 1 -1 }
 							alpha = 0.6
 						}
-						on_finish = "[PdxGuiTriggerAllAnimations('shimmer')]"
+						# on_finish = "[PdxGuiTriggerAllAnimations('shimmer')]"
 					}
 
 					# Shimmer on appear
@@ -2697,6 +2698,7 @@ types BookmarkPortraits
 							translate_uv = { 1 -1 }
 							alpha = 0.6
 						}
+						on_finish = "[PdxGuiTriggerAllAnimations('shimmer')]"
 					}
 
 					# Shimmer on appear

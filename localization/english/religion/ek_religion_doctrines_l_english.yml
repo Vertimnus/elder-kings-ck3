@@ -1,5 +1,13 @@
 ﻿l_english:
  ##### Doctrines
+ ## Fervor
+ fervor_equilibrium_below:0 "Current [fervor|E] is below the [fervor_equilibrium|E]"
+ fervor_equilibrium_above:0 "Current [fervor|E] is above the [fervor_equilibrium|E]"
+ fervor_equilibrium_at_equilibrium:0 "Current [fervor|E] is at the [fervor_equilibrium|E]"
+ # Special parameters
+ doctrine_parameter_holy_site_increase_fervor_equilibrium_active:0 "Each controlled [holy_site|E] increases the [fervor_equilibrium|E] by #P 5%#!"
+ doctrine_parameter_reduces_number_counties_fervor_equilibrium_penality_active:0 "The size penality on [fervor_equilibrium|E] is reduced"
+ ## Religious families
  aedric_hostility_doctrine_name:0 "Aedric"
  aedric_hostility_doctrine_desc:0 "The following religions are Aedric:\n[GetReligionFamily('rf_aedra').GetReligions]"
  daedric_hostility_doctrine_name:0 "Daedric"
@@ -7,23 +15,34 @@
  aurbic_hostility_doctrine_name:0 "Aurbic"
  aurbic_hostility_doctrine_desc:0 "The following religions are Aurbic:\n[GetReligionFamily('rf_aurbis').GetReligions]"
  
- doctrine_parameter_same_culture_group_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +25%#!"
+ ## Communal / Cultural Identity
+ doctrine_parameter_same_culture_group_conversion_bonus_active:1 "Conversion Speed in [Faith.MakeScope.Var('associated_culture_group').CultureGroup.GetName] [counties|E]: #P +25%#!"
  doctrine_parameter_same_faith_promote_culture_group_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +25%#!"
  doctrine_parameter_other_culture_group_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -50%#!"
  COURT_CHAPLAIN_CONVERSION_CG_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_cg').GetBaseName]"
  
- doctrine_parameter_same_culture_group_exclusive_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture_group|E]: #P +50%#!"
+ doctrine_parameter_same_culture_group_exclusive_conversion_bonus_active:1 "Conversion Speed in [Faith.MakeScope.Var('associated_culture_group').CultureGroup.GetName]  [counties|E]: #P +50%#!"
  doctrine_parameter_same_faith_promote_culture_group_exclusive_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +50%#!"
  doctrine_parameter_other_culture_group_exclusive_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture_group|E]: #N -100%#!"
  COURT_CHAPLAIN_CONVERSION_CG_EXCLUSIVE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_cg_exclusive').GetBaseName]"
  
+ doctrine_parameter_same_culture_conversion_bonus_active:1 "Conversion Speed in [Faith.MakeScope.Var('associated_culture').Culture.GetName] [counties|E]: #P +50%#!"
+ doctrine_parameter_same_faith_promote_culture_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +50%#!"
+ doctrine_parameter_other_culture_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture|E]: #N -50%#!"
  COURT_CHAPLAIN_CONVERSION_CULTURE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_culture').GetBaseName]"
  
- doctrine_parameter_same_culture_exclusive_conversion_bonus_active:1 "Conversion Speed in [counties|E] of my [culture|E]: #P +100%#!"
+ doctrine_parameter_same_culture_exclusive_conversion_bonus_active:1 "Conversion Speed in [Faith.MakeScope.Var('associated_culture').Culture.GetName] [counties|E]: #P +100%#!"
  doctrine_parameter_same_faith_promote_culture_exclusive_bonus_active:1 "Promote Culture Speed in [counties|E] of my [faith|E]: #P +100%#!"
  doctrine_parameter_other_culture_exclusive_conversion_penalty_active:1 "Conversion Speed in [counties|E] of a different [culture|E]: #N -100%#!"
  COURT_CHAPLAIN_CONVERSION_CULTURE_EXCLUSIVE_TIES_MODIFIER:0 "[councillor.GetFaith.GetName] — [GetFaithDoctrine('doctrine_cultural_identity_culture_exclusive').GetBaseName]"
  
+ # When creating a faith
+ doctrine_parameter_same_culture_group_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetGroup.GetName] [counties|E]: #P +25%#!"
+ doctrine_parameter_same_culture_group_exclusive_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetGroup.GetName]  [counties|E]: #P +50%#!"
+ doctrine_parameter_same_culture_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetName] [counties|E]: #P +50%#!"
+ doctrine_parameter_same_culture_exclusive_conversion_bonus_creating_faith_active:1 "Conversion Speed in [GetPlayer.GetCulture.GetName] [counties|E]: #P +100%#!"
+ 
+ ## Holy Buildings
  doctrine_parameter_faith_uses_grand_cathedral:0 "Uses Grand Cathedrals as [holy_sites|E] [special_building|E]"
  faith_uses_grand_cathedral_name:0 "'$doctrine_parameter_faith_uses_grand_cathedral$' Pantheon Doctrine parameter"
  doctrine_parameter_faith_uses_daedric_shrine:0 "Uses Daedric Shrines as [holy_sites|E] [special_building|E]"
@@ -34,6 +53,13 @@
  faith_uses_great_wyrd_tree_name:0 "'$doctrine_parameter_faith_uses_great_wyrd_tree$' Pantheon Doctrine parameter"
  doctrine_parameter_faith_uses_holy_site_other_grand_temple:0 "Uses Grand Temples as [holy_sites|E] [special_building|E]"
  faith_uses_holy_site_other_grand_temple_name:0 "'$doctrine_parameter_faith_uses_holy_site_other_grand_temple$' Pantheon Doctrine parameter"
+ 
+ 
+ ## Special
+ special_faith_existence_non_existent_name:0 "Non-existent"
+ special_faith_existence_non_existent_desc:0 "This faith doesn't actually exist... Is it a glimpse from the future? The mad rambling of a so-called prophet? The imagination of a deluded priest? Who knows..."
+ doctrine_parameter_faith_cannot_be_converted_to_active:0 "Converting to this [faith|E] is #N impossible#!"
+ faith_cannot_be_converted_to_active_name:0 "Non-existent Faith"
  
  ### Main pantheon
  doctrine_main_pantheon_name:0 "Main Pantheon"
@@ -94,7 +120,7 @@
     doctrine_parameter_hof_king_tier_title:0 "The [head_of_faith|E] title is a king tier title"
     doctrine_parameter_hof_de_jure_liege_other:0 "This [head_of_faith|E] is considered the de Jure liege of all the faiths taking part in the Council of the Eight"
     doctrine_parameter_doctrines_change_trickle_down:0 "[doctrine|E] changes will trickle down the other members of the Council of the Eight"
-    doctrine_parameter_fervor_bonus_number_coe_members:0 "#P +0.05#! [fervor|E] per member of the Council of the Eight (excluding the Leader)"
+    doctrine_parameter_number_coe_members_increase_fervor_equilibrium_active:0 "Each member of the Council of the Eight increases the [fervor_equilibrium|E] of the Leader by #P +5%#!"
     council_of_the_eight_leader_fervor_increase:0 "From the number of faiths in the Council of the Eight"
     doctrine_parameter_members_coe_conversion_penalty_active:0 "Conversion Speed in [counties|E] with a faith being in the Council of the Eight: #N -25%#!"
     MEMBERS_COUNCIL_OF_THE_EIGHT_CONVERSION_MALUS:0 "Trying to convert another member of the Council of the Eight"
@@ -485,19 +511,46 @@
  # Vampiric
  doctrine_pantheon_lamae_name:0 "Lamae Bal"
     doctrine_pantheon_lamae_bal_desc:0 "Blood-Scions must always spurn Molag Bal and shun the vile Arkay."
+ 
  ### Main
+ ## Communal / Cultural Identity
  doctrine_cultural_identity_name:0 "Cultural Identity"
  doctrine_cultural_identity_none_name:0 "No Cultural Ties"
     doctrine_cultural_identity_none_desc:0 "Our rites and beliefs can be shared to anyone, no matter their heritage. What truly matters is who, and what, they believe in."
  doctrine_cultural_identity_cg_name:0 "Cultural Identity"
     doctrine_cultural_identity_cg_desc:0 "Our culture evolved alongside our faith, and the two are linked together. Outsiders can still learn our rites and integrate our faith, but they have to understand that our beliefs were codified without them."
+    ASK_FOR_CONVERSION_CULTURAL_IDENTITY_CG:1 "[recipient.GetShortUIName|U] is not [new_faith.Var('associated_culture_group').CultureGroup.GetName]: $VALUE|=+0$"
+    faith_conversion_cost_cultural_identity_cg_outside_culture_group:0 "[new_faith.MakeScope.Faith.GetName] The [faith|E] does not recognize your [culture_group|E] - [GetFaithDoctrine('doctrine_cultural_identity_cg').GetBaseName]"
  doctrine_cultural_identity_cg_exclusive_name:0 "Strong Cultural Identity"
     doctrine_cultural_identity_cg_exclusive_desc:0 "The traditions of our people at large are intrinsically tied to our faith, and it is almost unthinkable for someone who does not share our traditions and heritage to adopt our beliefs and rites."
+    ASK_FOR_CONVERSION_CULTURAL_IDENTITY_CG_EXCLUSIVE:1 "[recipient.GetShortUIName|U] is not [actor.GetFaith.MakeScope.Var('associated_culture_group').CultureGroup.GetName]: $VALUE|=+0$"
+    faith_conversion_cost_cultural_identity_cg_exclusive_outside_culture_group:0 "The [faith|E] does not recognize your [culture_group|E] - [GetFaithDoctrine('doctrine_cultural_identity_cg_exclusive').GetBaseName]"
  doctrine_cultural_identity_culture_name:0 "Communal Identity"
     doctrine_cultural_identity_culture_desc:0 "The traditions and beliefs of our people have been tied together for centuries, and even those that could see us as their cousins might struggle at understanding our faith. But with time, even they could see the light."
+    ASK_FOR_CONVERSION_CULTURAL_IDENTITY:1 "[recipient.GetShortUIName|U] is not [actor.GetFaith.MakeScope.Var('associated_culture').Culture.GetName]: $VALUE|=+0$"
+    faith_conversion_cost_cultural_identity_outside_culture:0 "The [faith|E] does not recognize your [culture|E] - [GetFaithDoctrine('doctrine_cultural_identity').GetBaseName]"
  doctrine_cultural_identity_culture_exclusive_name:0 "Strong Communal Identity"
     doctrine_cultural_identity_culture_exclusive_desc:0 "It is almost unthinkable that someone outside of our close community could understand the very basics of our faith. Our traditions and rites are seen as an anomaly by anyone outside of our group, but we hold them as core tenets of our identity."
+    ASK_FOR_CONVERSION_CULTURAL_IDENTITY_EXCLUSIVE:1 "[recipient.GetShortUIName|U] is not [actor.GetFaith.MakeScope.Var('associated_culture').Culture.GetName]: $VALUE|=+0$"
+    faith_conversion_cost_cultural_identity_exclusive_outside_culture:0 "The [faith|E] does not recognize your [culture|E] - [GetFaithDoctrine('doctrine_cultural_identity_exclusive').GetBaseName]"
+ # When creating a faith
+ doctrine_cultural_identity_cg_creating_faith_name:0 "$doctrine_cultural_identity_name$"
+    doctrine_cultural_identity_cg_creating_faith_desc:0 "$doctrine_cultural_identity_none_desc$"
+ doctrine_cultural_identity_cg_exclusive_creating_faith_name:0 "$doctrine_cultural_identity_cg_exclusive_name$"
+    doctrine_cultural_identity_cg_exclusive_creating_faith_desc:0 "$doctrine_cultural_identity_cg_exclusive_desc$"
+ doctrine_cultural_identity_culture_creating_faith_name:0 "$doctrine_cultural_identity_culture_name$"
+    doctrine_cultural_identity_culture_creating_faith_desc:0 "$doctrine_cultural_identity_culture_desc$"
+ doctrine_cultural_identity_culture_exclusive_creating_faith_name:0 "$doctrine_cultural_identity_culture_exclusive_name$"
+    doctrine_cultural_identity_culture_exclusive_creating_faith_desc:0 "$doctrine_cultural_identity_culture_exclusive_desc$"
  
+ ### Marriages
+ doctrine_marriage_suitable_party_name:0 "Suitable Party"
+ doctrine_marriage_suitable_party_one_landed_name:0 "At Least One Landed"
+    doctrine_marriage_suitable_party_one_landed_desc:0 "Not everyone deserves to further their line. Only those strong enough to wield real power should be allowed to take wives and husbands."
+    doctrine_parameter_at_least_one_landed_character_to_marry_active:0 "At least one party must be [landed|E] to be [married|E]"
+ doctrine_marriage_suitable_party_any_name:0 "Any"
+    doctrine_marriage_suitable_party_any_desc:0 "It is foolish to impose restrictions on who can be married."
+    any_characters_can_marry_active:0 "There is no restriction in who can be [married|E]"
  ### Crimes
  doctrine_adultery_name:0 "Adultery"
  doctrine_adultery_crime_name:0 "Criminal"
@@ -601,9 +654,14 @@
  doctrine_parameter_worship_azura_shunned_active:0 "Worshipping $azura$ in [daedric_secret|E] is considered [shunned|E]"
  doctrine_parameter_worship_azura_criminal_active:0 "Worshipping $azura$ in [daedric_secret|E] is considered [criminal|E]"
  doctrine_azura_pantheon_name:0 "Pantheon"
+    doctrine_azura_pantheon_desc:0 "We love $azura$, and she loves us in return."
  doctrine_azura_allowed_name:0 "Allowed"
+    doctrine_azura_allowed_desc:0 "There are greater evils in this world than dawn and dusk."
  doctrine_azura_shunned_name:0 "Shunned"
+    doctrine_azura_shunned_desc:0 "We hold no love for $azura$'s wiles."
  doctrine_azura_criminal_name:0 "Criminal"
+    doctrine_azura_criminal_desc:0 "The worship of $azura$ - capricious, vapid, and dangerous as she is - can only bring disaster."
+
  
  doctrine_boethiah_name:0 "Worship of $boethiah$"
  FAITH_MUST_ALLOW_PATRON_BOETHIAH:0 "If you don't pick 'The Daedric Princes' as your main pantheon, you must align yourself with $boethiah$ through your doctrines or tenets.\n\nNeed one of:\n * [GetFaithDoctrine('tenet_unrelenting_faith').GetBaseName]\n * [GetFaithDoctrine('tenet_sacred_shadows').GetBaseName]"
@@ -611,19 +669,27 @@
  doctrine_parameter_worship_boethiah_shunned_active:0 "Worshipping $boethiah$ in [daedric_secret|E] is considered [shunned|E]"
  doctrine_parameter_worship_boethiah_criminal_active:0 "Worshipping $boethiah$ in [daedric_secret|E] is considered [criminal|E]"
  doctrine_boethiah_pantheon_name:0 "Pantheon"
+    doctrine_boethiah_pantheon_desc:0 "Praise and exalt the glory that is $boethiah$!"
  doctrine_boethiah_allowed_name:0 "Allowed"
+    doctrine_boethiah_allowed_desc:0 "We do not trust $boethiah$ fully, but who could?"
  doctrine_boethiah_shunned_name:0 "Shunned"
+    doctrine_boethiah_shunned_desc:0 "$boethiah$'s plots have no place here."
  doctrine_boethiah_criminal_name:0 "Criminal"
- 
+    doctrine_boethiah_criminal_desc:0 "To create a world where righteousness might endure, we all must spurn $boethia$'s foul treachery."
+
  doctrine_clavicus_name:0 "Worship of $clavicus$"
  FAITH_MUST_ALLOW_PATRON_CLAVICUS:0 "If you don't pick 'The Daedric Princes' as your main pantheon, you must align yourself with $clavicus$ through your doctrines or tenets.\n\nNeed one of:\n * [GetFaithDoctrine('tenet_lifestyle_ste_faith').GetBaseName]\n * [GetFaithDoctrine('tenet_daedric_bargains').GetBaseName]"
  doctrine_parameter_worship_clavicus_allowed_active:0 "Worshipping $clavicus$ in [daedric_secret|E] is not considered [shunned|E] or [criminal|E]"
  doctrine_parameter_worship_clavicus_shunned_active:0 "Worshipping $clavicus$ in [daedric_secret|E] is considered [shunned|E]"
  doctrine_parameter_worship_clavicus_criminal_active:0 "Worshipping $clavicus$ in [daedric_secret|E] is considered [criminal|E]"
  doctrine_clavicus_pantheon_name:0 "Pantheon"
+    doctrine_clavicus_pantheon_desc:0 "Approached with respect and caution, $clavicus$'s bargains can do great things."
  doctrine_clavicus_allowed_name:0 "Allowed"
+    doctrine_clavicus_allowed_desc:0 "$clavicus$'s deals are something to be wary about."
  doctrine_clavicus_shunned_name:0 "Shunned"
+    doctrine_clavicus_shunned_desc:0 "$clavicus$'s 'deals' cause nothing but trouble."
  doctrine_clavicus_criminal_name:0 "Criminal"
+    doctrine_clavicus_criminal_desc:0 "$clavicus$'s tricks bring only misery. Those who invite ruin must be punished!"
  
  doctrine_hermaeus_name:0 "Worship of $hermaeus$"
  FAITH_MUST_ALLOW_PATRON_HERMAEUS:0 "If you don't pick 'The Daedric Princes' as your main pantheon, you must align yourself with $hermaeus$ through your doctrines or tenets.\n\nNeed one of:\n * [GetFaithDoctrine('tenet_lifestyle_lea_faith').GetBaseName]" 
@@ -987,6 +1053,10 @@
     doctrine_parameter_ek_might_makes_right_devotion_active:0 "Certain [might_makes_right|E] [prestige_level|E] requirements can be fulfilled with [piety_level|E] and paid with [piety|E] in place of [prestige|E]"
     tenet_legalism_respecting_traditions_ct:0 "As you are #P upholding#! your culture and faith's tradition, you #P gain#! a small amount of [piety|E]"
     tenet_legalism_disrespecting_traditions_ct:0 "As you are #N disrespecting#! your culture and faith's tradition, you #N lose#! a small amount of [piety|E]"
+ 
+ doctrine_parameter_ek_might_makes_right_lower_requirement_active:0 "[might_makes_right|E] requires one less [prestige_level|E] or [piety_level|E]"
+ 
+ doctrine_parameter_holy_wars_against_hostile_faiths_active:0 "Can use [holy_wars|E] against [faiths|E] considered [faith_hostile|E] instead of [faith_evil|E]"
     
  tenet_consolamentum_sheogorath_religion_name:0 "Last Pilgrimage to the Asylums"
     tenet_consolamentum_sheogorath_religion_desc:0 "Sometimes the weight of the mortal world can be too much to bear. But we always know that the Asylums, our Lord's plane, is always there for us."

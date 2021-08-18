@@ -840,3 +840,54 @@ crusader_king = {
 
 	ai_zeal = 25
 }
+
+### EK Trait - For Khajiits
+clan_parent = { # Probably won't be ever awareded to men, but you never know!
+	index = 267
+	fame = yes
+	
+	monthly_piety = 0.5
+	diplomacy_per_piety_level = 1
+	martial_per_piety_level = 1
+	stewardship_per_piety_level = 1
+	intrigue_per_piety_level = 1
+	learning_per_piety_level = 2
+	
+	same_faith_opinion = 10
+	same_culture_opinion = 10
+	
+	flag = can_not_marry
+	can_inherit = no
+	
+	shown_in_ruler_designer = no
+
+	ai_sociability = very_low_negative_ai_value
+
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_clan_mother
+			}
+			triggered_desc = {
+				trigger = { is_female = yes }
+				desc = trait_clan_mother
+			}
+			triggered_desc = {
+				trigger = { is_female = no }
+				desc = trait_clan_father
+			}
+		}
+	}
+
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = this } }
+				desc = trait_clan_parent_desc
+			}
+			desc = trait_clan_parent_character_desc
+		}
+	}
+
+}

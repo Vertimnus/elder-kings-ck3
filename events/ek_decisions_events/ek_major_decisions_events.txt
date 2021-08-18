@@ -32,3 +32,278 @@ ek_major_decisions.0001 = {
 	}
 }
 
+# ek_major_decisions.0010 - 0020: Fund (Custom) Kingdom of Nibenay
+scripted_effect mark_original_nibenay_duchy = {
+	scope:caer_suvio_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:mir_corrup_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:artemon_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:grief_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:sundercliff_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:facian_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:cuptor_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:redwater_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+	scope:entius_duchy = {
+		set_variable = {
+			name = nibenay_original_duchy_boolean
+			value = 1
+		}
+	}
+}
+
+scripted_effect custom_nibenay_de_jure_setup = {
+	scope:caer_suvio_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:mir_corrup_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:artemon_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:grief_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:sundercliff_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:facian_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:cuptor_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:redwater_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+	scope:entius_duchy = {
+		set_de_jure_liege_title = title:k_nibenay
+	}
+}
+
+ek_major_decisions.0010 = {
+	type = character_event
+	title = ek_major_decisions.0010.t
+	desc = ek_major_decisions.0010.desc
+	theme = martial
+	
+	left_portrait = {
+		character = root
+	}
+	
+	immediate = {
+		if = {
+			limit = { has_title = title:d_caer_suvio }
+			title:d_caer_suvio = { save_scope_as = caer_suvio_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_mir_corrup }
+			title:d_mir_corrup = { save_scope_as = mir_corrup_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_artemon }
+			title:d_artemon = { save_scope_as = artemon_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_grief }
+			title:d_grief = { save_scope_as = grief_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_sundercliff }
+			title:d_sundercliff = { save_scope_as = sundercliff_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_facian }
+			title:d_facian = { save_scope_as = facian_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_cuptor }
+			title:d_cuptor = { save_scope_as = cuptor_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_redwater }
+			title:d_redwater = { save_scope_as = redwater_duchy }
+		}
+		if = {
+			limit = { has_title = title:d_entius }
+			title:d_entius = { save_scope_as = entius_duchy }
+		}
+	}
+
+	option = {
+		name = ek_major_decisions.0010.caer_suvio
+		
+		trigger = { has_title = title:d_caer_suvio }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_caer_suvio }
+		title:k_nibenay = { set_capital_county = d_caer_suvio.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+
+	option = {
+		name = ek_major_decisions.0010.mir_corrup
+		
+		trigger = { has_title = title:d_mir_corrup }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_mir_corrup }
+		title:k_nibenay = { set_capital_county = d_mir_corrup.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.artemon
+		
+		trigger = { has_title = title:d_artemon }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_artemon }
+		title:k_nibenay = { set_capital_county = d_artemon.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.grief
+		
+		trigger = { has_title = title:d_grief }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_grief }
+		title:k_nibenay = { set_capital_county = d_grief.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.sundercliff
+		
+		trigger = { has_title = title:d_sundercliff }
+		
+		get_title = title:k_nibenay
+		if = {
+			trigger = { 
+				OR = {
+					culture = culture:nibenese
+					culture = culture:blackwood
+				}
+			}
+			title:k_nibenay = { set_title_name = k_canulus }
+		}
+		else = {
+			title:k_nibenay = { set_title_name = k_sundercliff }
+		}
+		title:k_nibenay = { set_capital_county = d_sundercliff.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.facian
+		
+		trigger = { has_title = title:d_facian }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_facian }
+		title:k_nibenay = { set_capital_county = d_facian.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.cuptor
+		
+		trigger = { has_title = title:d_cuptor }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_cuptor }
+		title:k_nibenay = { set_capital_county = d_cuptor.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.redwater
+		
+		trigger = { has_title = title:d_redwater }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_redwater }
+		title:k_nibenay = { set_capital_county = d_redwater.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0010.entius
+		
+		trigger = { has_title = title:d_entius }
+		
+		get_title = title:k_nibenay
+		title:k_nibenay = { set_title_name = k_entius }
+		title:k_nibenay = { set_capital_county = d_entius.capital_county }
+		hidden_effect ={
+			mark_original_nibenay_duchy = yes
+			custom_nibenay_de_jure_setup = yes
+		}
+	}
+}
+

@@ -7,42 +7,1053 @@
 #       -worship from bargains/legal worship -> part of pantheon -> cult religion
 #       -part of pantheon should be default w/ cult getting major boons & slight discount, bargains should have moderate cost inflation
 
+#based on host_witch_ritual_decision
+host_daedra_summoning_azura_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_azura_desc
+	selection_tooltip = host_daedra_summoning_decision_azura_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_azura
+			faith = { has_doctrine_parameter = worship_azura_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 1
+			text = within_date
+			OR = { # First Seed 21st		Azura           21.3
+				AND = {
+					current_month = 2
+					current_day >= 21
+				}
+				AND = {
+					current_month = 3
+					current_day < 21
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_boethiah_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_boethiah_desc
+	selection_tooltip = host_daedra_summoning_decision_boethiah_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_boethiah
+			faith = { has_doctrine_parameter = worship_boethiah_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 2
+			text = within_date
+			OR = { # Sun's Dusk 2nd		Boethiah        2.11
+				AND = {
+					current_month = 10
+					current_day >= 2
+				}
+				AND = {
+					current_month = 11
+					current_day < 2
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_clavicus_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_clavicus_desc
+	selection_tooltip = host_daedra_summoning_decision_clavicus_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_clavicus
+			faith = { has_doctrine_parameter = worship_clavicus_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 3
+			text = within_date
+			OR = { # Morning Star 1st		Clavicus Vile   1.1
+				AND = {
+					current_month = 12
+					current_day >= 1
+				}
+				AND = {
+					current_month = 1
+					current_day < 1
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_hermaeus_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_hermaeus_desc
+	selection_tooltip = host_daedra_summoning_decision_hermaeus_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_hermaeus
+			faith = { has_doctrine_parameter = worship_hermaeus_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 4
+			text = within_date
+			OR = { # First Seed 5th		Hermaeus Mora   5.3
+				AND = {
+					current_month = 2
+					current_day >= 5
+				}
+				AND = {
+					current_month = 3
+					current_day < 5
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_hircine_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_hircine_desc
+	selection_tooltip = host_daedra_summoning_decision_hircine_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_hircine
+			faith = { has_doctrine_parameter = worship_hircine_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 5
+			text = within_date
+			OR = { # Mid Year 5th			Hircine         5.6
+				AND = {
+					current_month = 5
+					current_day >= 5
+				}
+				AND = {
+					current_month = 5
+					current_day < 5
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_malacath_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_malacath_desc
+	selection_tooltip = host_daedra_summoning_decision_malacath_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_malacath
+			faith = { has_doctrine_parameter = worship_malacath_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 6
+			text = within_date
+			OR = { # Frostfall 8th			Malacath        8.10
+				AND = {
+					current_month = 9
+					current_day >= 8
+				}
+				AND = {
+					current_month = 10
+					current_day < 8
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_mehrunes_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_mehrunes_desc
+	selection_tooltip = host_daedra_summoning_decision_mehrunes_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_mehrunes
+			faith = { has_doctrine_parameter = worship_mehrunes_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 7
+			text = within_date
+			OR = { # Sun's Dusk 20th		Mehrunes Dagon  20.11
+				AND = {
+					current_month = 10
+					current_day >= 20
+				}
+				AND = {
+					current_month = 11
+					current_day < 20
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_mephala_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_mephala_desc
+	selection_tooltip = host_daedra_summoning_decision_mephala_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_mephala
+			faith = { has_doctrine_parameter = worship_mephala_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 8
+			text = within_date
+			OR = { # Frostfall 13th		Mephala         13.10
+				AND = {
+					current_month = 9
+					current_day >= 13
+				}
+				AND = {
+					current_month = 10
+					current_day < 13
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_meridia_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_meridia_desc
+	selection_tooltip = host_daedra_summoning_decision_meridia_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_meridia
+			faith = { has_doctrine_parameter = worship_meridia_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 9
+			text = within_date
+			OR = { # Morning Star 13th		Meridia        	13.1
+				AND = {
+					current_month = 12
+					current_day >= 13
+				}
+				AND = {
+					current_month = 1
+					current_day < 13
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_molag_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_molag_desc
+	selection_tooltip = host_daedra_summoning_decision_molag_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_molag
+			faith = { has_doctrine_parameter = worship_molag_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 10
+			text = within_date
+			OR = { # Evening Star 20th		Molag Bal       20.12
+				AND = {
+					current_month = 11
+					current_day >= 20
+				}
+				AND = {
+					current_month = 12
+					current_day < 20
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_namira_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_namira_desc
+	selection_tooltip = host_daedra_summoning_decision_namira_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_namira
+			faith = { has_doctrine_parameter = worship_namira_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 11
+			text = within_date
+			OR = { # Second Seed 9th		Namira          9.5
+				AND = {
+					current_month = 4
+					current_day >= 9
+				}
+				AND = {
+					current_month = 5
+					current_day < 9
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_nocturnal_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_nocturnal_desc
+	selection_tooltip = host_daedra_summoning_decision_nocturnal_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_nocturnal
+			faith = { has_doctrine_parameter = worship_nocturnal_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 12
+			text = within_date
+			OR = { # Hearthfire 3th		Nocturnal       3.9
+				AND = {
+					current_month = 8
+					current_day >= 3
+				}
+				AND = {
+					current_month = 9
+					current_day < 3
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_peryite_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_peryite_desc
+	selection_tooltip = host_daedra_summoning_decision_peryite_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_peryite
+			faith = { has_doctrine_parameter = worship_peryite_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 13
+			text = within_date
+			OR = { # Rain's Hand 9th		Peryite         9.4
+				AND = {
+					current_month = 3
+					current_day >= 9
+				}
+				AND = {
+					current_month = 4
+					current_day < 9
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_sanguine_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_sanguine_desc
+	selection_tooltip = host_daedra_summoning_decision_sanguine_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_sanguine
+			faith = { has_doctrine_parameter = worship_sanguine_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 14
+			text = within_date
+			OR = { # Sun's Dawn 16th		Sanguine        16.2
+				AND = {
+					current_month = 1
+					current_day >= 16
+				}
+				AND = {
+					current_month = 2
+					current_day < 16
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_sheogorath_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_sheogorath_desc
+	selection_tooltip = host_daedra_summoning_decision_sheogorath_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_sheogorath
+			faith = { has_doctrine_parameter = worship_sheogorath_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 15
+			text = within_date
+			OR = { # Sun's Dawn 2nd		Sheogorath      2.2
+				AND = {
+					current_month = 1
+					current_day >= 2
+				}
+				AND = {
+					current_month = 2
+					current_day < 2
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+host_daedra_summoning_vaermina_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds"
+	ai_check_interval = 60
+
+	cost = { gold = 50 }
+
+	cooldown = { days = 3650 }
+
+	desc = host_daedra_summoning_decision_vaermina_desc
+	selection_tooltip = host_daedra_summoning_decision_vaermina_tooltip
+
+	is_shown = {
+		OR = {
+			has_trait = p_ob_vaermina
+			faith = { has_doctrine_parameter = worship_vaermina_focused_active }
+		}
+
+	}
+
+	is_valid = {
+		custom_description = {
+			value = 16
+			text = within_date
+			OR = { # Sun's Height 10th		Vaermina        10.7
+				AND = {
+					current_month = 6
+					current_day >= 10
+				}
+				AND = {
+					current_month = 7
+					current_day < 10
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+		is_landed = yes
+	}
+
+	effect = {
+		# capital_province = {
+		# 	spawn_activity = {
+		# 		type = activity_daedra_summoning
+		# 		owner = root
+		# 	}
+		# }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 0
+
+		modifier = {
+			add = 50
+			short_term_gold > 150
+		}
+	}
+}
+
 # based on select_personal_deity_decision
 patron_select_patron_decision = {
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_select_patron_decision_desc
-    selection_tooltip = patron_select_patron_decision_tooltip
+	desc = patron_select_patron_decision_desc
+	selection_tooltip = patron_select_patron_decision_tooltip
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        is_ai = yes
-        has_active_patron_selected = no
-        faith = { patron_has_princes = yes }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		is_ai = yes
+		has_active_patron_selected = no
+		#faith = { patron_has_princes = yes } #EKTODO check this. 
+		patron_has_princes = yes
+	}
 
-    is_valid = {
-    }
+	is_valid = {
+	}
 
-    is_valid_showing_failures_only = {
-    }
+	is_valid_showing_failures_only = {
+	}
 
-    effect = {
-        #custom_tooltip = select_personal_deity_decision_tt
-        trigger_event = patron_decision.001
-    }
+	effect = {
+		#custom_tooltip = select_personal_deity_decision_tt
+		trigger_event = patron_decision.001
+	}
 
-    ai_check_interval = 96
+	ai_check_interval = 96
 
-    ai_potential = {
-        piety >= minor_piety_value
-        patron_has_any_trait = no
-    }
+	ai_potential = {
+		piety >= minor_piety_value
+		patron_has_any_trait = no
+	}
 
-    ai_will_do = {
-        base = 100
-    }
+	ai_will_do = {
+		base = 100
+	}
 }
 
 ##########
@@ -56,137 +1067,137 @@ patron_select_patron_decision = {
 #sacrifice
 
 patron_offer_gold_decision = {
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_offer_gold_decision_desc
-    # selection_tooltip = patron_offer_gold_decision_tooltip
-    selection_tooltip = patron_offer_gold_decision_
+	desc = patron_offer_gold_decision_desc
+	# selection_tooltip = patron_offer_gold_decision_tooltip
+	selection_tooltip = patron_offer_gold_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 5 } #365 }
+	cooldown = { days = 5 } #365 }
 
-    is_valid_showing_failures_only = {
-        short_term_gold >= 50
-        #NOT = { var:ardor_display >= 10000 }
-    }
+	is_valid_showing_failures_only = {
+		short_term_gold >= 50
+		#NOT = { var:ardor_display >= 10000 }
+	}
 
-    effect = {
-        #show_as_tooltip = { #The effect is actually applied in the event itself
-        remove_short_term_gold = 50
-        #}
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = medium_ardor_value #doesnt auto detect value
-        #     change_variable = { name = ardor_display add = medium_ardor_value }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = medium_ardor_value }
-    }
+	effect = {
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		remove_short_term_gold = 50
+		#}
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = medium_ardor_value #doesnt auto detect value
+		#     change_variable = { name = ardor_display add = medium_ardor_value }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = medium_ardor_value }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = yes
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = yes
+	}
 
-    ai_will_do = {
-        base = 5
-    }
+	ai_will_do = {
+		base = 5
+	}
 }
 
 patron_offer_sacrifice_decision = {
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_offer_sacrifice_decision_desc
-    # selection_tooltip = patron_offer_sacrifice_decision_tooltip
-    selection_tooltip = patron_offer_sacrifice_decision_
+	desc = patron_offer_sacrifice_decision_desc
+	# selection_tooltip = patron_offer_sacrifice_decision_tooltip
+	selection_tooltip = patron_offer_sacrifice_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-                trigger_if = {
-                    limit = { exists = var:patron_shown }
-                    NOR = { #dont care for human sacrifice, based on ek1
-                        var:patron_shown = flag:azura
-                        var:patron_shown = flag:meridia
-                        var:patron_shown = flag:sanguine
-                    }
-                }
-                trigger_else = { always = no }
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+				trigger_if = {
+					limit = { exists = var:patron_shown }
+					NOR = { #dont care for human sacrifice, based on ek1
+						var:patron_shown = flag:azura
+						var:patron_shown = flag:meridia
+						var:patron_shown = flag:sanguine
+					}
+				}
+				trigger_else = { always = no }
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 365 }
+	cooldown = { days = 365 }
 
-    is_valid_showing_failures_only = {
-        any_prisoner = {
-            is_adult = yes
-            NOT = { any_heir_title = { count > 0 } }
-        }
-        #NOT = { var:ardor_display >= 10000 }
-    }
+	is_valid_showing_failures_only = {
+		any_prisoner = {
+			is_adult = yes
+			NOT = { any_heir_title = { count > 0 } }
+		}
+		#NOT = { var:ardor_display >= 10000 }
+	}
 
-    effect = {
-        random_prisoner = {
-            limit = {
-                is_imprisoned_by = ROOT
-                is_adult = yes
-                NOT = { any_heir_title = { count > 0 } }
-            }
-            if = {
-                limit = {
-                    ROOT = {
-                        exists = var:patron_shown
-                        var:patron_shown = flag:namira
-                    }
-                }
-                death = { killer = ROOT death_reason = death_eaten }
-            }
-            else = {
-                death = { killer = ROOT death_reason = death_execution_blot }
-            }
-        }
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = major_ardor_value #doesnt auto detect value
-        #     change_variable = { name = ardor_display add = major_ardor_value }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = major_ardor_value }
-    }
+	effect = {
+		random_prisoner = {
+			limit = {
+				is_imprisoned_by = ROOT
+				is_adult = yes
+				NOT = { any_heir_title = { count > 0 } }
+			}
+			if = {
+				limit = {
+					ROOT = {
+						exists = var:patron_shown
+						var:patron_shown = flag:namira
+					}
+				}
+				death = { killer = ROOT death_reason = death_eaten }
+			}
+			else = {
+				death = { killer = ROOT death_reason = death_execution_blot }
+			}
+		}
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = major_ardor_value #doesnt auto detect value
+		#     change_variable = { name = ardor_display add = major_ardor_value }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = major_ardor_value }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = yes
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = yes
+	}
 
-    ai_will_do = {
-        base = 1
-    }
+	ai_will_do = {
+		base = 1
+	}
 }
 
 # Shared Boons #
@@ -199,298 +1210,298 @@ patron_offer_sacrifice_decision = {
 # aura dispair +dread
 
 patron_boon_gold_decision = { #750
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_boon_gold_decision_desc
-    # selection_tooltip = patron_boon_gold_decision_tooltip
-    selection_tooltip = patron_boon_gold_decision_
+	desc = patron_boon_gold_decision_desc
+	# selection_tooltip = patron_boon_gold_decision_tooltip
+	selection_tooltip = patron_boon_gold_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 5 } #365 }
+	cooldown = { days = 5 } #365 }
 
-    is_valid_showing_failures_only = {
-        #	short_term_gold >= 50
-        # custom_description = {
-        #     text = insufficient_ardor
-        #     value = medium_ardor_value_double
-        #     var:ardor_display >= medium_ardor_value_double
-        # }
-        #patron_has_ardor = { ARDOR = medium_ardor_value_double }
-    }
+	is_valid_showing_failures_only = {
+		#	short_term_gold >= 50
+		# custom_description = {
+		#     text = insufficient_ardor
+		#     value = medium_ardor_value_double
+		#     var:ardor_display >= medium_ardor_value_double
+		# }
+		#patron_has_ardor = { ARDOR = medium_ardor_value_double }
+	}
 
-    effect = {
-        #show_as_tooltip = { #The effect is actually applied in the event itself
-        add_gold = 50
-        #}
-        #patron_gain_favor_effect = yes
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = neg_medium_ardor_value_double #doesnt auto detect value
-        #     change_variable = { name = ardor_display subtract = medium_ardor_value_double }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = neg_medium_ardor_value_double }
-    }
+	effect = {
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		add_gold = 50
+		#}
+		#patron_gain_favor_effect = yes
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = neg_medium_ardor_value_double #doesnt auto detect value
+		#     change_variable = { name = ardor_display subtract = medium_ardor_value_double }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = neg_medium_ardor_value_double }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = yes
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = yes
+	}
 
-    ai_will_do = {
-        base = 10
-    }
+	ai_will_do = {
+		base = 10
+	}
 }
 
 patron_boon_training_decision = { #5000
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_boon_training_decision_desc
-    # selection_tooltip = patron_boon_training_decision_tooltip
-    selection_tooltip = patron_boon_training_decision_
+	desc = patron_boon_training_decision_desc
+	# selection_tooltip = patron_boon_training_decision_tooltip
+	selection_tooltip = patron_boon_training_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 365 }
+	cooldown = { days = 365 }
 
-    is_valid_showing_failures_only = {
-        NAND = {
-            diplomacy >= 25
-            martial >= 25
-            stewardship >= 25
-            intrigue >= 25
-            learning >= 25
-        }
-        # custom_description = {
-        #     text = insufficient_ardor
-        #     value = massive_ardor_value
-        #     var:ardor_display >= massive_ardor_value
-        # }
-        #patron_has_ardor = { ARDOR = massive_ardor_value }
-    }
+	is_valid_showing_failures_only = {
+		NAND = {
+			diplomacy >= 25
+			martial >= 25
+			stewardship >= 25
+			intrigue >= 25
+			learning >= 25
+		}
+		# custom_description = {
+		#     text = insufficient_ardor
+		#     value = massive_ardor_value
+		#     var:ardor_display >= massive_ardor_value
+		# }
+		#patron_has_ardor = { ARDOR = massive_ardor_value }
+	}
 
-    effect = {
-        #show_as_tooltip = { #The effect is actually applied in the event itself
-        random_list = {
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                modifier = { #should be zero at 25 skill level
-                    add = { #subtract doesnt seem to work
-                        value = -1
-                        multiply = diplomacy
-                    }
-                    always = yes
-                }
-                add_diplomacy_skill = 1
-            }
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                modifier = {
-                    add = {
-                        value = -1
-                        multiply = martial
-                    }
-                    always = yes
-                }
-                add_martial_skill = 1
-            }
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                modifier = {
-                    add = {
-                        value = -1
-                        multiply = stewardship
-                    }
-                    always = yes
-                }
-                add_stewardship_skill = 1
-            }
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                modifier = {
-                    add = {
-                        value = -1
-                        multiply = intrigue
-                    }
-                    always = yes
-                }
-                add_intrigue_skill = 1
-            }
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                modifier = {
-                    add = {
-                        value = -1
-                        multiply = learning
-                    }
-                    always = yes
-                }
-                add_learning_skill = 1
-            }
-        }
-        #}
-        #patron_gain_favor_effect = yes
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = neg_massive_ardor_value #doesnt auto detect value
-        #     change_variable = { name = ardor_display subtract = massive_ardor_value }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = neg_massive_ardor_value }
-    }
+	effect = {
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		random_list = {
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				modifier = { #should be zero at 25 skill level
+					add = { #subtract doesnt seem to work
+						value = -1
+						multiply = diplomacy
+					}
+					always = yes
+				}
+				add_diplomacy_skill = 1
+			}
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				modifier = {
+					add = {
+						value = -1
+						multiply = martial
+					}
+					always = yes
+				}
+				add_martial_skill = 1
+			}
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				modifier = {
+					add = {
+						value = -1
+						multiply = stewardship
+					}
+					always = yes
+				}
+				add_stewardship_skill = 1
+			}
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				modifier = {
+					add = {
+						value = -1
+						multiply = intrigue
+					}
+					always = yes
+				}
+				add_intrigue_skill = 1
+			}
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				modifier = {
+					add = {
+						value = -1
+						multiply = learning
+					}
+					always = yes
+				}
+				add_learning_skill = 1
+			}
+		}
+		#}
+		#patron_gain_favor_effect = yes
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = neg_massive_ardor_value #doesnt auto detect value
+		#     change_variable = { name = ardor_display subtract = massive_ardor_value }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = neg_massive_ardor_value }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = yes
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = yes
+	}
 
-    ai_will_do = {
-        base = 5
-    }
+	ai_will_do = {
+		base = 5
+	}
 }
 
 patron_boon_horde_decision = { #5000
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_boon_horde_decision_desc
-    # selection_tooltip = patron_boon_horde_decision_tooltip
-    selection_tooltip = patron_boon_horde_decision_
+	desc = patron_boon_horde_decision_desc
+	# selection_tooltip = patron_boon_horde_decision_tooltip
+	selection_tooltip = patron_boon_horde_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 365 }
+	cooldown = { days = 365 }
 
-    is_valid_showing_failures_only = {
-        # NOT = { #hard cap on number that can be summoned - 3 + 1 per 7 learning? scope to and store in list variable
-        #     num hordes >= cap
-        # }
-        # custom_description = {
-        #     text = insufficient_ardor
-        #     value = massive_ardor_value
-        #     var:ardor_display >= massive_ardor_value
-        # } #may add scaling cost for more hordes as soft limit cost * list_size/10
-        #patron_has_ardor = { ARDOR = massive_ardor_value }
-    }
+	is_valid_showing_failures_only = {
+		# NOT = { #hard cap on number that can be summoned - 3 + 1 per 7 learning? scope to and store in list variable
+		#     num hordes >= cap
+		# }
+		# custom_description = {
+		#     text = insufficient_ardor
+		#     value = massive_ardor_value
+		#     var:ardor_display >= massive_ardor_value
+		# } #may add scaling cost for more hordes as soft limit cost * list_size/10
+		#patron_has_ardor = { ARDOR = massive_ardor_value }
+	}
 
-    effect = {
-        #show_as_tooltip = { #The effect is actually applied in the event itself
-        random_list = { #chance of failure or great success +30% larger
-            25 = {
-                #trigger = { NOT = { diplomacy = 20 } }
-                # modifier = { #should be zero at 25 skill level
-                #     add = { #subtract doesnt seem to work
-                #         value = -1
-                #         multiply = diplomacy
-                #     }
-                #     always = yes
-                # }
-                spawn_army = {
-                    #levies =  #needed to bulk up army?
-                    levies = { value = 0 }
-                    men_at_arms = { # optional, multiple can be specified. Need either levies or MAA
-                        type = daedra
-                        stacks = {
-                            value = 1
-                            # scope:attacker.faith.great_holy_war = {
-                            #     every_pledged_attacker = {
-                            #         add = 0.2
-                            #     }
-                            # }
-                        }
-                    }
-                    location = capital_province
-                    inheritable = no
-                    uses_supply = no #may be op, needs testing
-                    #army = army # optional. If set, the stack will merge into this army
-                    #save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war)
-                    name = dremora_horde # gives the troops a specific name that shows up in interfaces
-                }
-            }
-            # 25 = { #failure
-            #     #trigger = { NOT = { diplomacy = 20 } }
-            #     modifier = {
-            #         add = {
-            #             value = -1
-            #             multiply = martial
-            #         }
-            #         always = yes
-            #     }
-            #     add_martial_skill = 1
-            # }
-            # 25 = { #great success +30% size
-            #     #trigger = { NOT = { diplomacy = 20 } }
-            #     modifier = {
-            #         add = {
-            #             value = -1
-            #             multiply = stewardship
-            #         }
-            #         always = yes
-            #     }
-            #     add_stewardship_skill = 1
-            # }
-        }
-        #}
-        #patron_gain_favor_effect = yes
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = neg_massive_ardor_value #doesnt auto detect value
-        #     change_variable = { name = ardor_display subtract = massive_ardor_value }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = neg_massive_ardor_value }
-    }
+	effect = {
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		random_list = { #chance of failure or great success +30% larger
+			25 = {
+				#trigger = { NOT = { diplomacy = 20 } }
+				# modifier = { #should be zero at 25 skill level
+				#     add = { #subtract doesnt seem to work
+				#         value = -1
+				#         multiply = diplomacy
+				#     }
+				#     always = yes
+				# }
+				spawn_army = {
+					#levies =  #needed to bulk up army?
+					levies = { value = 0 }
+					men_at_arms = { # optional, multiple can be specified. Need either levies or MAA
+						type = daedra
+						stacks = {
+							value = 1
+							# scope:attacker.faith.great_holy_war = {
+							#     every_pledged_attacker = {
+							#         add = 0.2
+							#     }
+							# }
+						}
+					}
+					location = capital_province
+					inheritable = no
+					uses_supply = no #may be op, needs testing
+					#army = army # optional. If set, the stack will merge into this army
+					#save_scope_as/save_temporary_scope_as = new_army # optional way to get a reference to the new army. Note this might not be set if the army wasn't spawned (e.g. if the character is not at war)
+					name = dremora_horde # gives the troops a specific name that shows up in interfaces
+				}
+			}
+			# 25 = { #failure
+			#     #trigger = { NOT = { diplomacy = 20 } }
+			#     modifier = {
+			#         add = {
+			#             value = -1
+			#             multiply = martial
+			#         }
+			#         always = yes
+			#     }
+			#     add_martial_skill = 1
+			# }
+			# 25 = { #great success +30% size
+			#     #trigger = { NOT = { diplomacy = 20 } }
+			#     modifier = {
+			#         add = {
+			#             value = -1
+			#             multiply = stewardship
+			#         }
+			#         always = yes
+			#     }
+			#     add_stewardship_skill = 1
+			# }
+		}
+		#}
+		#patron_gain_favor_effect = yes
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = neg_massive_ardor_value #doesnt auto detect value
+		#     change_variable = { name = ardor_display subtract = massive_ardor_value }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = neg_massive_ardor_value }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = no
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = no
+	}
 
-    ai_will_do = {
-        base = 0
-    }
+	ai_will_do = {
+		base = 0
+	}
 }
 
 # Shared Major Boons #
@@ -498,78 +1509,78 @@ patron_boon_horde_decision = { #5000
 # invasion
 
 patron_boon_invasion_decision = { #25000
-    picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
+	picture = "gfx/interface/illustrations/decisions/decision_personal_religious.dds"
 
-    desc = patron_boon_invasion_decision_desc
-    # selection_tooltip = patron_boon_invasion_decision_tooltip
-    selection_tooltip = patron_boon_invasion_decision_
+	desc = patron_boon_invasion_decision_desc
+	# selection_tooltip = patron_boon_invasion_decision_tooltip
+	selection_tooltip = patron_boon_invasion_decision_
 
-    ai_check_interval = 3
+	ai_check_interval = 3
 
-    is_shown = {
-        is_adult = yes
-        is_ruler = yes
-        OR = {
-            AND = {
-                #is_ai = no
-                has_active_patron_selected = yes
-            }
-            # AND = {
-            #     is_ai = yes
-            #     patron_has_princes = yes
-            # }
-        }
-    }
+	is_shown = {
+		is_adult = yes
+		is_ruler = yes
+		OR = {
+			AND = {
+				#is_ai = no
+				has_active_patron_selected = yes
+			}
+			# AND = {
+			#     is_ai = yes
+			#     patron_has_princes = yes
+			# }
+		}
+	}
 
-    cooldown = { days = 365 }
+	cooldown = { days = 365 }
 
-    is_valid_showing_failures_only = {
-        #has_cult_religion = yes #really dedicated only
-        # custom_description = {
-        #     text = insufficient_ardor
-        #     value = monumental_ardor_value
-        #     var:ardor_display >= monumental_ardor_value
-        # }
-        #patron_has_ardor = { ARDOR = monumental_ardor_value }
-    }
+	is_valid_showing_failures_only = {
+		#has_cult_religion = yes #really dedicated only
+		# custom_description = {
+		#     text = insufficient_ardor
+		#     value = monumental_ardor_value
+		#     var:ardor_display >= monumental_ardor_value
+		# }
+		#patron_has_ardor = { ARDOR = monumental_ardor_value }
+	}
 
-    effect = {
-        #show_as_tooltip = { #The effect is actually applied in the event itself
-        #add_gold = 50
-        #}
-        #patron_gain_favor_effect = yes
-        # custom_description = {
-        #     text = patron_ardor_change
-        #     value = neg_monumental_ardor_value #doesnt auto detect value
-        #     change_variable = { name = ardor_display subtract = monumental_ardor_value }
-        # }
-        # patron_ardor_update_actual = yes
-        patron_ardor_change = { ARDOR = neg_monumental_ardor_value }
-    }
+	effect = {
+		#show_as_tooltip = { #The effect is actually applied in the event itself
+		#add_gold = 50
+		#}
+		#patron_gain_favor_effect = yes
+		# custom_description = {
+		#     text = patron_ardor_change
+		#     value = neg_monumental_ardor_value #doesnt auto detect value
+		#     change_variable = { name = ardor_display subtract = monumental_ardor_value }
+		# }
+		# patron_ardor_update_actual = yes
+		patron_ardor_change = { ARDOR = neg_monumental_ardor_value }
+	}
 
-    ai_potential = { #should be able to eventually may handle seperatly
-        always = no
-    }
+	ai_potential = { #should be able to eventually may handle seperatly
+		always = no
+	}
 
-    ai_will_do = {
-        base = 0
-    }
+	ai_will_do = {
+		base = 0
+	}
 }
 
 debug_mode_toggle_decision = {
 	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
 
-    ai_check_interval = 0
-    is_shown = { always = yes }
-    is_valid = { always = no }
+	ai_check_interval = 0
+	is_shown = { always = yes }
+	is_valid = { always = no }
 
-    effect = {
-        custom_tooltip = "Use button to toggle debug mode"
-    }
+	effect = {
+		custom_tooltip = "Use button to toggle debug mode"
+	}
 
-    widget = {
-        gui = "decision_view_widget_toggle_debug"
-    }
+	widget = {
+		gui = "decision_view_widget_toggle_debug"
+	}
 }
 
 # test_add_aptitude = {
