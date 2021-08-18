@@ -35,6 +35,9 @@ reachbreaker_102 = {
 	father = reachbreaker_101
 	
 	3328.1.1 = { birth = yes }
+	3358.1.1 = {
+		add_spouse = twicestabbed_98_sister
+	}
 	3362.1.1 = { death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of the family
 }
 reachbreaker_103 = {
@@ -134,7 +137,7 @@ stuhn_4 = {
 	father = stuhn_3
 	
 	3312.1.1 = { birth = yes }
-	#3346.1.1 = { add_spouse = 9177 }
+	3346.1.1 = { add_spouse = hoagbellow_10000_sister }
 	3382.1.1 = { trait = drunkard }
 	3384.1.1 = { death = {
 		death_reason = death_drinking_passive
@@ -160,7 +163,7 @@ stuhn_5 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_4
-	#mother = 9177
+	mother = hoagbellow_10000_sister
 
 	3346.1.1 = { birth = yes }
 	#3367.1.1 = { add_spouse = 9105 }
@@ -173,7 +176,7 @@ stuhn_401 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = stuhn_4
-	#mother = 9177
+	mother = hoagbellow_10000_sister
 
 	3348.1.1 = { birth = yes }
 	3383.12.12 = { death = {
@@ -705,6 +708,7 @@ highshoal_99 = {
 	religion = nord_cult
 	
 	3324.1.1 = { birth = yes }
+	3347.1.1 = { add_spouse = snowbourne_98 }
 	3361.1.1 = { trait = gluttonous }
 	3369.1.1 = { 
 		death = { 
@@ -718,6 +722,7 @@ highshoal_100 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
+	mother = snowbourne_98
 	
 	3349.1.1 = { birth = yes }
 	3421.1.1 = { death = yes }
@@ -728,6 +733,7 @@ highshoal_101 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
+	mother = snowbourne_98
 	
 	3350.1.1 = { birth = yes }
 	3426.1.1 = { death = yes }
@@ -738,6 +744,7 @@ highshoal_102 = {
 	culture = eastmarcher
 	religion = nord_cult
 	father = highshoal_99
+	mother = snowbourne_98
 	
 	3351.1.1 = { birth = yes }
 	3432.1.1 = { death = yes }
@@ -2148,6 +2155,9 @@ bannertorn_100 = {
 	culture = eastmarcher
 	religion = nord_cult
 	intrigue = 10
+
+	trait = twin
+
 	father = bannertorn_99
 
 	3331.1.1 = { 
@@ -2180,6 +2190,25 @@ bannertorn_100 = {
 	}
 	3362.1.1 = { culture = westmarcher }	
 	3401.1.1 = { death = yes }
+}
+bannertorn_100_sister = {
+	name = "Bergitt"
+	dna = gandis_dna_entry
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = twin
+
+	father = bannertorn_99
+
+	3331.1.1 = { 
+		birth = yes
+	}
+	3351.7.18 = { # Logrolf is assinated by her brother, earning their family the rank of nobility under Svatr
+		dynasty = 300006
+	}
+	3404.1.1 = { death = yes }
 }
 bannertorn_101 = {
 	name = "Logrolf" #Duke of Northwatch
@@ -2300,6 +2329,8 @@ cursebraid_299 = { #Marries Banner-Torn
 	religion = nord_cult
 	female = yes
 	mother = cursebraid_999
+
+	trait = bastard
 	
 	3334.1.1 = { birth = yes }
 	3404.1.1 = { death = yes }
@@ -2617,7 +2648,22 @@ thricepierced_98 = {
 	religion = nord_cult
 	
 	3322.1.1 = { birth = yes }
+	3337.1.1 = { add_spouse = thricepierced_98_wife }
+	3341.1.1 = { add_spouse = ysmjord_300027 }
 	3393.1.1 = { death = yes }
+}
+thricepierced_98_wife = {
+	name = "Eydis"
+	female = yes
+	culture = westmarcher
+	religion = nord_cult
+	
+	3323.1.1 = { birth = yes }
+	3338.1.1 = {
+		death = {
+			death_reason = death_childbirth
+		}
+	}
 }
 thricepierced_99 = {
 	name = "Axdin" #Duke of Ravenscar
@@ -2625,6 +2671,7 @@ thricepierced_99 = {
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_98
+	mother = thricepierced_98_wife
 	
 	3338.1.1 = { birth = yes }
 	3418.1.1 = { death = yes }
@@ -2672,17 +2719,18 @@ thricepierced_103 = {
 	3552.1.1 = { death = yes }
 }
 thricepierced_104 = {
-	name = "Votar" #Count of c_span_isles (Warlords & Interregnum )
+	name = "Votar" #Count of Icereach (Warlords & Interregnum )
 	dynasty = 310002
 	culture = westmarcher
 	religion = nord_cult
 	father = thricepierced_98
+	mother = ysmjord_300027
 	
 	3342.1.1 = { birth = yes }
 	3421.1.1 = { death = yes }
 }
 thricepierced_105 = {
-	name = "Borgas" #Count of c_span_isles
+	name = "Borgas" #Count of Icereach
 	dynasty = 310002
 	culture = westmarcher
 	religion = nord_cult
@@ -2692,7 +2740,7 @@ thricepierced_105 = {
 	3479.1.1 = { death = yes }
 }
 thricepierced_106 = {
-	name = "Leiborn" #Count of c_span_isles ( Alliance War )
+	name = "Leiborn" #Count of Icereach ( Alliance War )
 	dynasty = 310002
 	culture = westmarcher
 	religion = nord_cult
@@ -2702,7 +2750,7 @@ thricepierced_106 = {
 	3513.1.1 = { death = yes }
 }
 thricepierced_107 = {
-	name = "Mickal" #Count of c_span_isles
+	name = "Mickal" #Count of Icereach
 	dynasty = 310002
 	culture = westmarcher
 	religion = nord_cult
@@ -2762,12 +2810,35 @@ ghilred_1003 = {
 ##Snow-Bourne Dynasty (300007)
 
 #House Snow-Bourne
+snowbourne_97 = {
+	name = "Hanne"
+	female = yes
+	dynasty = 300007
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3294.1.1 = { birth = yes }
+	3353.1.1 = { death = yes }
+}
+snowbourne_98 = {
+	name = "Elsa"
+	female = yes
+	dynasty = 300007
+	culture = eastmarcher
+	religion = nord_cult
 
+	mother = snowbourne_97
+	
+	3332.1.1 = { birth = yes }
+	3398.1.1 = { death = yes }
+}
 snowbourne_99 = {
 	name = "Eiman"
 	dynasty = 300007
 	culture = eastmarcher
 	religion = nord_cult
+
+	mother = snowbourne_97
 	
 	3328.1.1 = { birth = yes }
 	3390.1.1 = { death = yes }
@@ -4343,14 +4414,52 @@ battleborn_102 = {
 ##Hate-Basket Dynasty (300011)
 
 #House Hate-Basket
+hatebasket_99 = {
+	name = "Fjaga"
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+	
+	3318.1.1 = { birth = yes }
+	3339.1.1 = { add_matrilineal_spouse = ysmjord_300026 }
+	3357.1.1 = { death = yes }
+}
 hatebasket_100 = {
 	name = "Olav" #Duke of Fellhammer ( Warlords & Interregnum )
 	dynasty = 300011
 	culture = eastmarcher
 	religion = nord_cult
+
+	mother = hatebasket_99
+	father = ysmjord_300026
 	
 	3340.1.1 = { birth = yes }
 	3429.1.1 = { death = yes }
+}
+hatebasket_100_1 = {
+	name = "Kari"
+	female = yes
+	dynasty = 300011
+	culture = eastmarcher
+	religion = nord_cult
+
+	mother = hatebasket_99
+	father = ysmjord_300026
+	
+	3343.1.1 = { birth = yes }
+	3402.1.1 = { death = yes }
+}
+hatebasket_100_2 = {
+	name = "Adalbar"
+	dynasty = 300011
+	culture = eastmarcher
+	religion = nord_cult
+
+	mother = hatebasket_99
+	father = ysmjord_300026
+	
+	3347.1.1 = { birth = yes }
+	3412.1.1 = { death = yes }
 }
 hatebasket_101 = {
 	name = "Ald" #Duke of Fellhammer
@@ -4745,6 +4854,17 @@ ambershield_97 = {
 	3359.1.1 = { death = { death_reason = death_dungeon_passive }
 	}
 }
+ambershield_97_sister = {
+	name = "Lydia"
+	female = yes
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = ambershield_96
+	
+	3337.1.1 = { birth = yes }
+	3391.1.1 = { death = yes }
+}
 ambershield_98 = {
 	name = "Freir" #Marries Olaf Bell-Striker
 	female = yes
@@ -4764,6 +4884,17 @@ ambershield_99 = {
 	father = ambershield_97
 	
 	3341.1.1 = { birth = yes }
+	3399.1.1 = { death = yes }
+}
+ambershield_99_sister = {
+	name = "Ulla"
+	female = yes
+	dynasty = 300015
+	culture = eastmarcher
+	religion = nord_cult
+	father = ambershield_97
+	
+	3347.1.1 = { birth = yes }
 	3399.1.1 = { death = yes }
 }
 ambershield_100 = {
@@ -4972,7 +5103,7 @@ snowwhale_99 = {
 
 	trait = education_intrigue_4
 	trait = gluttonous
-	trait = arbitrary
+	trait = ambitious
 	trait = chaste
 
 	father = snowwhale_98
@@ -5175,21 +5306,50 @@ swordpoet_103 = {
 		death = { 
 			death_reason = death_battle
 			killer = swordpoet_102
-			}
+		}
 	}
 }
 
 ##Twice-Stabbed Dynasty (310009)
 
 #House Twice-Stabbed
+twicestabbed_97 = {
+	name = "Irgnar"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3296.1.1 = { birth = yes }
+	3350.1.1 = {
+		death = { 
+			death_reason = death_battle
+		}
+	}
+}
 twicestabbed_98 = {
 	name = "Valdr" #Duke of Karthald (Warlords & Interregnum)
 	dynasty = 310009
 	culture = westmarcher
 	religion = nord_cult
+
+	father = twicestabbed_97
 	
 	3320.1.1 = { birth = yes }
 	3383.1.1 = { death = yes }
+}
+twicestabbed_98_sister = {
+	name = "Ysolda"
+	female = yes
+	dynasty = 310009
+	culture = westmarcher
+	religion = nord_cult
+
+	father = twicestabbed_97
+	
+	3327.1.1 = { birth = yes }
+	3358.1.1 = {
+		add_spouse = twicestabbed_98_sister
+	}
+	3362.1.1 = {  death = { death_reason = death_burned killer = reachbreaker_105 } } #Killed by Reachfolk along the rest of her spouse's family
 }
 twicestabbed_99 = {
 	name = "Tolgan" #Duke of Karthald
@@ -5708,7 +5868,7 @@ stormstruck_101 = {
 
 #House Ale-Scribe
 alescribe_99 = {
-	name = "Alof" #Duke of Morvunskar ( Warlords & Interregnum )
+	name = "Alof" #Count of Gallowsrock ( Warlords & Interregnum )
 	dynasty = 300017
 	culture = eastmarcher
 	religion = nord_cult
@@ -5717,7 +5877,7 @@ alescribe_99 = {
 	3371.1.1 = { death = yes }
 }
 alescribe_100 = {
-	name = "Jorgen" #Duke of Morvunskar
+	name = "Jorgen" #Count of Gallowsrock
 	dynasty = 300017
 	culture = eastmarcher
 	religion = nord_cult
@@ -5726,8 +5886,19 @@ alescribe_100 = {
 	3344.1.1 = { birth = yes }
 	3413.1.1 = { death = yes }
 }
+alescribe_100_1 = {
+	name = "Rakel"
+	female = yes
+	dynasty = 300017
+	culture = eastmarcher
+	religion = nord_cult
+	father = alescribe_99
+	
+	3345.1.1 = { birth = yes }
+	3419.1.1 = { death = yes }	
+}
 alescribe_101 = {
-	name = "Hamvir" #Duke of Morvunskar
+	name = "Hamvir" #Count of Gallowsrock
 	dynasty = 300017
 	culture = eastmarcher
 	religion = nord_cult
@@ -5737,7 +5908,7 @@ alescribe_101 = {
 	3429.1.1 = { death = yes }
 }
 alescribe_102 = {
-	name = "Helga" #Duke of Morvunskar, Marries Oaken-Shield
+	name = "Helga" #Count of Gallowsrock, Marries Oaken-Shield
 	female = yes
 	dynasty = 300017
 	culture = eastmarcher
@@ -7188,14 +7359,27 @@ vittr_valeric = {
 }
 
 #Gap-Tooth Dynasty
+gaptooth_10089 = {
+	name = "Silke"
+	female = yes
+	dynasty = 300021
+	culture = eastmarcher
+	religion = nord_cult
+	
+	trait = strong
+	
+	3321.1.1 = { birth = yes }
+	3368.1.1 = { death = { death_reason = death_duel killer = vittr_majorn } }
+}
 gaptooth_10090 = {
 	name = "Kjoric" #Count of Cronvangr
 	dynasty = 300021
 	culture = eastmarcher
 	religion = nord_cult
 	
-	
 	trait = strong
+
+	father = gaptooth_10089
 	
 	3348.1.1 = { birth = yes }
 	3432.1.1 = { death = yes }
@@ -7549,15 +7733,39 @@ orun_11020 = {
 }
 
 #Hoagbellow Dynasty (300023)
+hoagbellow_99999 = {
+	name = "Oda"
+	female = yes
+	dynasty = 300023
+	culture = eastmarcher
+	religion = nord_cult
+	
+	
+	3276.1.1 = { birth = yes }
+	3351.1.1 = { death = yes }
+}
 hoagbellow_10000 = {
 	name = "Skulvar" #Count of Snowgrad (Interregnum)
 	dynasty = 300023
 	culture = eastmarcher
 	religion = nord_cult
 	
+	mother = hoagbellow_99999
 	
 	3304.1.1 = { birth = yes }
 	3372.1.1 = { death = yes }
+}
+hoagbellow_10000_sister = {
+	name = "Idirfa"
+	female = yes
+	dynasty = 300023
+	culture = eastmarcher
+	religion = nord_cult
+
+	mother = hoagbellow_99999
+	
+	3306.1.1 = { birth = yes }
+	3378.1.1 = { death = yes }
 }
 hoagbellow_10001 = {
 	name = "Ulfrun"
@@ -8761,7 +8969,12 @@ palestone_1000 = {
 	trait = education_martial_3
 
 	3317.1.1 = { birth = yes }
-	3369.1.1 = { death = yes }
+	3369.1.1 = {
+		death = {
+			death_reason = death_duel
+			killer = yashnag_100
+		}
+	}
 }
 palestone_1001 = {
 	name = "Robert"
@@ -8820,14 +9033,47 @@ sour_stone_1002 = {
 
 #Ysmjord Dynasty
 #HistoryToDo Give Ysmjord ancestors
+ysmjord_300024 = {
+	name = "Ysmal"
+	dynasty = ysmjord
+	culture = westmarcher
+	religion = nord_cult 
+	
+	3297.1.1 = { birth = yes }
+	3359.1.1 = { death = yes }
+}
 ysmjord_300025 = { #Duke of Winstad, Husband to the Jarl of Hjaalmarsh
 	name = "Sven"
 	dynasty = ysmjord
 	culture = westmarcher
 	religion = nord_cult 
 	
-	3329.1.1 = { birth = yes }
+	father = ysmjord_300024
+	
+	3320.1.1 = { birth = yes }
 	3388.1.1 = { death = yes }
+}
+ysmjord_300026 = {
+	name = "Rogjoll"
+	dynasty = ysmjord
+	culture = westmarcher
+	religion = nord_cult 
+	
+	father = ysmjord_300024
+	
+	3322.1.1 = { birth = yes }
+	3392.1.1 = { death = yes }
+}
+ysmjord_300027 = {
+	name = "Hedwig"
+	female = yes
+	culture = westmarcher
+	religion = nord_cult 
+	
+	father = ysmjord_300024
+	
+	3324.1.1 = { birth = yes }
+	3406.1.1 = { death = yes }
 }
 
 #Ale-Ice Dynasty
@@ -8925,6 +9171,795 @@ whitebird_1003 = {
 
 	3359.12.3 = { birth = yes }
 	3418.1.1 = { death = yes }
+}
+
+#Eel-Eared Dynasty
+eel_eared_9449 = {
+	name = "Yorvir"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	3316.1.1 = { birth = yes }
+	3332.1.1 = { set_relation_rival = character:embervein_9474 }
+	3363.1.1 = { death = yes }
+}
+eel_eared_9450 = {
+	name = "Hafnar" #Head of House Eel-Eared, Doge (Interregnum)
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9449
+	
+	3342.1.1 = { birth = yes }
+	3406.1.1 = { death = yes }
+}
+eel_eared_9451 = {
+	name = "Embry" #Head of House Eel-Eared
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9450
+	
+	3380.1.1 = { birth = yes }
+	3451.1.1 = { death = yes }
+}
+eel_eared_9452 = {
+	name = "Jurgen" #Head of House Eel-Eared
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9451
+	
+	3425.1.1 = { birth = yes }
+	3478.1.1 = { death = yes }
+}
+eel_eared_9453 = {
+	name = "Valdar" #Head of House Eel-Eared
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9452
+	
+	3457.1.1 = { birth = yes }
+	3526.1.1 = { death = yes }
+}
+eel_eared_9454 = {
+	name = "Ingmar" #Head of House Eel-Eared
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9453
+	
+	3480.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
+eel_eared_9455 = {
+	name = "Tharsten"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	father = eel_eared_9454
+	
+	3507.1.1 = { birth = yes }
+	3527.1.1 = { add_spouse = eel_eared_9455_wife }
+	3559.1.1 = { death = yes }
+}
+eel_eared_9455_wife = {
+	#HistoryToDo
+	#was 92977 in ek1, check Grim-Fist when implementing them
+	name = "Nura"
+	dynasty = grim_fist
+	culture = westmarcher
+	religion = nord_cult
+
+	#father = 92968 ek1, not imported yet
+	
+	trait = twin
+	female = yes
+	
+	3511.1.1 = { birth = yes }
+	3595.1.1 = { death = yes }
+}
+eel_eared_9456 = {
+	name = "Uthgerd"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+
+	father = eel_eared_9455
+	mother = eel_eared_9455_wife
+	3528.1.1 = { birth = yes }
+	3591.1.1 = { death = yes }
+}
+eel_eared_9457 = {
+	name = "Bodil"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9456
+	3563.1.1 = { birth = yes }
+	3630.1.1 = { death = yes }
+}
+eel_eared_9458 = {
+	name = "Narri"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9457
+	3600.1.1 = { birth = yes }
+	3660.1.1 = { death = yes }
+}
+eel_eared_9459 = {
+	name = "Liesl"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9458
+	3626.1.1 = { birth = yes }
+	3694.1.1 = {
+		death = {
+			death_reason = death_murder_unknown
+			killer = embervein_9485 #Thonjolf Embervein
+		}
+	}
+}
+eel_eared_9460 = {
+	name = "Haesmar"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	mother = eel_eared_9459
+	3659.1.1 = { birth = yes }
+	3724.1.1 = { death = yes }
+}
+eel_eared_9461 = {
+	name = "Hert"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	father = eel_eared_9460
+	3683.1.1 = { birth = yes }
+	3750.1.1 = { death = yes }
+}
+eel_eared_9462 = {
+	name = "Skjoldr"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	mother = eel_eared_9461
+	3713.1.1 = { birth = yes }
+	3783.1.1 = { death = yes }
+}
+eel_eared_9463 = {
+	name = "Galmar"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	father = eel_eared_9462
+	3741.1.1 = { birth = yes }
+	3805.1.1 = { death = yes }
+}
+eel_eared_9464 = {
+	name = "Vrage"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	father = eel_eared_9463
+	3777.1.1 = { birth = yes }
+	3848.1.1 = { death = yes }
+}
+eel_eared_9465 = {
+	name = "Else"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	father = eel_eared_9464
+	3811.1.1 = { birth = yes }
+	3876.1.1 = { death = yes }
+}
+eel_eared_9466 = {
+	name = "Elda"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9465
+	3843.1.1 = { birth = yes }
+	3906.1.1 = { death = yes }
+}
+eel_eared_9467 = {
+	name = "Birna"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9466
+	3872.1.1 = { birth = yes }
+	3939.1.1 = { death = yes }
+}
+eel_eared_9468 = {
+	name = "Jolding"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	mother = eel_eared_9467
+	3903.1.1 = { birth = yes }
+	3967.1.1 = { death = yes }
+}
+eel_eared_9469 = {
+	name = "Ninetha"
+	dynasty = eel_eared
+	culture = westmarcher
+	religion = nord_cult
+	father = eel_eared_9452
+	female = yes
+	
+	3460.1.1 = { birth = yes }
+	3531.1.1 = { death = yes }
+}
+
+#Embervein Dynasty
+embervein_9474 = {
+	name = "Lodvar"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	3321.1.1 = { birth = yes }
+	3332.1.1 = { set_relation_rival = character:eel_eared_9449 }
+	3367.1.1 = { death = yes }
+}
+embervein_9475 = {
+	name = "Frorkmar" #Head of House Embervein, Count of Kyne's Aegis (Interregnum)
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9474
+	
+	3344.1.1 = { birth = yes }
+	3403.1.1 = { death = yes }
+}
+embervein_9476 = {
+	name = "Stalf" #Head of House Embervein
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9475
+	
+	3381.1.1 = { birth = yes }
+	3446.1.1 = { death = yes }
+}
+embervein_9477 = {
+	name = "Hroldan" #Head of House Embervein
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9476
+	
+	3414.1.1 = { birth = yes }
+	3478.1.1 = { death = yes }
+}
+embervein_9478 = {
+	name = "Karl" #Head of House Embervein
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9477
+	
+	3437.1.1 = { birth = yes }
+	3502.1.1 = { death = yes }
+}
+embervein_9479 = {
+	name = "Benkum" #Head of House Embervein
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9478
+	
+	3463.1.1 = { birth = yes }
+	3519.1.1 = { death = yes }
+}
+embervein_9480 = {
+	name = "Vidkun"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9479
+	
+	3496.1.1 = { birth = yes }
+	3572.1.1 = { death = yes }
+}
+embervein_9481 = {
+	name = "Hrothmund"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9480
+	3533.1.1 = { birth = yes }
+	3600.1.1 = { death = yes }
+}
+embervein_9482 = {
+	name = "Lodi"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9481
+	3563.1.1 = { birth = yes }
+	3632.1.1 = { death = yes }
+}
+embervein_9483 = {
+	name = "Margarte"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	father = embervein_9482
+	3601.1.1 = { birth = yes }
+	3666.1.1 = { death = yes }
+}
+embervein_9484 = {
+	name = "Gestur"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	mother = embervein_9483
+	3620.1.1 = { birth = yes }
+	3681.1.1 = { death = yes }
+}
+embervein_9485 = {
+	name = "Thonjolf"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = ruthless
+	trait = ambitious
+	trait = greedy
+	trait = envious
+	trait = gregarious
+	father = embervein_9484
+	3648.1.1 = { birth = yes }
+	3709.1.1 = { death = yes }
+}
+embervein_9486 = {
+	name = "Kili"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	father = embervein_9485
+	3681.1.1 = { birth = yes }
+	3747.1.1 = { death = yes }
+}
+embervein_9487 = {
+	name = "Olfina"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	mother = embervein_9486
+	3712.1.1 = { birth = yes }
+	3783.1.1 = { death = yes }
+}
+embervein_9488 = {
+	name = "Leidela"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	mother = embervein_9487
+	3738.1.1 = { birth = yes }
+	3802.1.1 = { death = yes }
+}
+embervein_9489 = {
+	name = "Ulfrun"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	mother = embervein_9488
+	3766.1.1 = { birth = yes }
+	3829.1.1 = { death = yes }
+}
+embervein_9490 = {
+	name = "Eisa"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	mother = embervein_9489
+	3794.1.1 = { birth = yes }
+	3858.1.1 = { death = yes }
+}
+embervein_9491 = {
+	name = "Rustleif"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	mother = embervein_9490
+	3825.1.1 = { birth = yes }
+	3888.1.1 = { death = yes }
+}
+embervein_9492 = {
+	name = "Irroke"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9491
+	3854.1.1 = { birth = yes }
+	3918.1.1 = { death = yes }
+}
+embervein_9493 = {
+	name = "Benor"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	father = embervein_9492
+	3890.1.1 = { birth = yes }
+	3957.1.1 = { death = yes }
+}
+embervein_9494 = {
+	name = "Betrid"
+	dynasty = embervein
+	culture = westmarcher
+	religion = nord_cult
+
+	female = yes
+	father = embervein_9493
+	3923.1.1 = { birth = yes }
+	3994.1.1 = { death = yes }
+}
+
+#Broadwall Dynasty
+broadwall_9400 = {
+	name = "Gunder"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	3277.1.1 = { birth = yes }
+	3312.1.1 = { add_spouse = cursebraid_999 }
+	3336.1.1 = { death = yes }
+}
+broadwall_9401 = {
+	name = "Avulstein"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9400
+	mother = cursebraid_999
+
+	3313.1.1 = { birth = yes }
+	3342.1.1 = {
+		death = {
+			death_reason = death_murder_unknown
+			killer = broadwall_9402
+		}
+	}
+}
+broadwall_9402 = {
+	name = "Esbern" #Count of Hraggstad (Interregnum)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	
+	trait = deceitful
+	trait = education_stewardship_3
+	trait = envious
+	trait = diligent
+
+	father = broadwall_9400
+	mother = cursebraid_999
+
+	3316.1.1 = { birth = yes }
+	3377.1.1 = { 
+		death = {
+			death_reason = death_murder_unknown
+			killer = broadwall_9403
+		} 
+	}
+}
+broadwall_9403 = {
+	name = "Asgeir" #Count of Ravenscar (Interregnum)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9400
+	mother = cursebraid_999
+
+	3320.1.1 = { birth = yes }
+	3393.1.1 = { death = yes }
+}
+broadwall_9406_mother = {
+	name = "Hilde"
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = beauty_good_1
+	trait = kind
+	trait = strong
+
+	female = yes
+	3311.1.1 = { birth = yes }
+	3373.1.1 = { death = yes }
+}
+broadwall_9406 = {
+	name = "Shalidor" #Baron of Bastion (Interregnum)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = bastard
+
+	father = broadwall_9401
+	mother = broadwall_9406_mother
+
+	3340.1.1 = { birth = yes }
+	3398.1.1 = { death = yes }
+}
+broadwall_9407 = {
+	name = "Kjoric" #Count of Ustenhall (Interregnum)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9402
+
+
+	3337.1.1 = { birth = yes }
+	3377.1.1 = { 
+		death = {
+			death_reason = death_murder_unknown
+			killer = broadwall_9403
+		} 
+	}
+}
+broadwall_9408 = {
+	name = "Sottilde"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9402
+
+	female = yes
+	3340.1.1 = { birth = yes }
+	3417.1.1 = { death = yes }
+}
+broadwall_9409 = {
+	name = "Hjalti" #Duke of Volskygge
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = legitimized_bastard
+	trait = beauty_good_1
+
+	father = broadwall_9403
+
+	3363.1.1 = { birth = yes }
+	3426.1.1 = { death = yes }
+}
+broadwall_9410 = {
+	name = "Erlendr" #Duke of Volskygge
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = intellect_good_1
+
+	father = broadwall_9409
+
+	3401.1.1 = { birth = yes }
+	3453.1.1 = { death = yes }
+}
+broadwall_9411 = {
+	name = "Drennen" #Duke of Volskygge (Reachmen)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = intellect_good_1
+	trait = ambitious
+
+	father = broadwall_9410
+
+	3434.1.1 = { birth = yes }
+	3492.1.1 = { death = yes }
+}
+broadwall_9412 = {
+	name = "Saerlund" #Duke of Volskygge (Kamal)
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = intellect_good_2
+	trait = ambitious
+
+	father = broadwall_9411
+
+	3469.1.1 = { birth = yes }
+	3536.1.1 = { death = yes }
+}
+broadwall_9413 = {
+	name = "Idgrod"
+	female = yes
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = intellect_good_1
+
+	father = broadwall_9412
+
+	3487.1.1 = { birth = yes }
+	3538.1.1 = { death = yes }
+}
+broadwall_9414 = {
+	name = "Solaf"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	
+	trait = intellect_good_1
+
+	mother = broadwall_9413
+
+	3507.1.1 = { birth = yes }
+	3575.1.1 = { death = yes }
+}
+
+broadwall_9415 = {
+	name = "Agnete"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+
+	father = broadwall_9414
+	3530.1.1 = { birth = yes }
+	3593.1.1 = { death = yes }
+}
+broadwall_9416 = {
+	name = "Alvide"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+
+	mother = broadwall_9415
+	3552.1.1 = { birth = yes }
+	3615.1.1 = { death = yes }
+}
+broadwall_9417 = {
+	name = "Wilmuth"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	mother = broadwall_9416
+	3587.1.1 = { birth = yes }
+	3652.1.1 = { death = yes }
+}
+broadwall_9418 = {
+	name = "Hamal"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+
+	father = broadwall_9417
+	3618.1.1 = { birth = yes }
+	3685.1.1 = { death = yes }
+}
+broadwall_9419 = {
+	name = "Maeva"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+
+	mother = broadwall_9418
+	3656.1.1 = { birth = yes }
+	3729.1.1 = { death = yes }
+}
+broadwall_9420 = {
+	name = "Hjoldir"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	mother = broadwall_9419
+	3688.1.1 = { birth = yes }
+	3753.1.1 = { death = yes }
+}
+broadwall_9421 = {
+	name = "Jolding"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9420
+	3719.1.1 = { birth = yes }
+	3791.1.1 = { death = yes }
+}
+broadwall_9422 = {
+	name = "Erna"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+	female = yes
+
+	mother = broadwall_9421
+	3754.1.1 = { birth = yes }
+	3822.1.1 = { death = yes }
+}
+broadwall_9423 = {
+	name = "Brynjolfr"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	mother = broadwall_9422
+	3775.1.1 = { birth = yes }
+	3841.1.1 = { death = yes }
+}
+broadwall_9424 = {
+	name = "Gralnach"
+	dynasty = broadwall
+	culture = westmarcher
+	religion = nord_cult
+
+	father = broadwall_9423
+	3813.1.1 = { birth = yes }
+	3879.1.1 = { death = yes }
 }
 
 ##Lowborns, Wifes, Husbands etc.
@@ -9260,6 +10295,257 @@ silent_moon_1000 = {
 
 	3324.1.1 = { birth = yes }
 	3395.1.1 = { death = yes }
+}
+talking_stone_1000 = {
+	name = "Bjorn"
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = p_dv_kynareth
+
+	3322.1.1 = { birth = yes }
+	3389.1.1 = { death = yes }
+}
+gjukar_1000 = {
+	name = "Gerica"
+	female = yes
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = p_dv_mara
+
+	3327.1.1 = { birth = yes }
+	3396.1.1 = { death = yes }
+}
+gjukar_1001 = {
+	name = "Eron"
+	culture = westmarcher
+	religion = nord_cult
+
+	trait = p_dv_dibella
+
+	3363.1.1 = { birth = yes }
+	3438.1.1 = { death = yes }
+}
+#Mayors of Dragonbridge
+dragonbridge_11300 = {
+	name = "Oengul"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3334.1.1 = { birth = yes }
+	3415.1.1 = { death = yes }
+}
+dragonbridge_11301 = {
+	name = "Talsgar"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3392.1.1 = { birth = yes }
+	3457.1.1 = { death = yes }
+}
+dragonbridge_11302 = {
+	name = "Eorlund"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3438.1.1 = { birth = yes }
+	3505.1.1 = { death = yes }
+}
+dragonbridge_11303 = {
+	name = "Lund"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3482.1.1 = { birth = yes }
+	3533.1.1 = { death = yes }
+}
+dragonbridge_11304 = {
+	name = "Orgnar"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3513.1.1 = { birth = yes }
+	3582.1.1 = { death = yes }
+}
+dragonbridge_11305 = {
+	name = "Roggvar"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3543.1.1 = { birth = yes }
+	3607.1.1 = { death = yes }
+}
+dragonbridge_11306 = {
+	name = "Einarth"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3575.1.1 = { birth = yes }
+	3638.1.1 = { death = yes }
+}
+dragonbridge_11307 = {
+	name = "Torkild"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3603.1.1 = { birth = yes }
+	3659.1.1 = { death = yes }
+}
+dragonbridge_11308 = {
+	name = "Sigurd"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3627.1.1 = { birth = yes }
+	3692.1.1 = { death = yes }
+}
+dragonbridge_11309 = {
+	name = "Rolard"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3653.1.1 = { birth = yes }
+	3709.1.1 = { death = yes }
+}
+dragonbridge_11310 = {
+	name = "Lokir"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3687.1.1 = { birth = yes }
+	3752.1.1 = { death = yes }
+}
+dragonbridge_11311 = {
+	name = "Gisela"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3710.1.1 = { birth = yes }
+	3779.1.1 = { death = yes }
+}
+dragonbridge_11312 = {
+	name = "Siri"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3744.1.1 = { birth = yes }
+	3806.1.1 = { death = yes }
+}
+dragonbridge_11313 = {
+	name = "Fjola"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3766.1.1 = { birth = yes }
+	3833.1.1 = { death = yes }
+}
+dragonbridge_11314 = {
+	name = "Gisela"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3787.1.1 = { birth = yes }
+	3852.1.1 = { death = yes }
+}
+dragonbridge_11315 = {
+	name = "Ygfa"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3806.1.1 = { birth = yes }
+	3871.1.1 = { death = yes }
+}
+dragonbridge_11316 = {
+	name = "Brida"
+	culture = westmarcher
+	religion = nord_cult
+	
+	female = yes
+	3832.1.1 = { birth = yes }
+	3900.1.1 = { death = yes }
+}
+dragonbridge_11317 = {
+	name = "Leigelf"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3854.1.1 = { birth = yes }
+	3921.1.1 = { death = yes }
+}
+dragonbridge_11318 = {
+	name = "Sifknir"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3881.1.1 = { birth = yes }
+	3943.1.1 = { death = yes }
+}
+dragonbridge_11319 = {
+	name = "Sarnir"
+	culture = westmarcher
+	religion = nord_cult
+	
+	3919.1.1 = { birth = yes }
+	3989.1.1 = { death = yes }
+}
+kilkreath_1000 = {
+	name = "Regner"
+	culture = westmarcher
+	religion = meridia_cult
+
+	trait = education_learning_2
+	trait = education_magic_ability_1
+	trait = kind
+
+	3329.1.1 = { birth = yes }
+	3396.1.1 = { death = yes }
+}
+stromhelm_1000 = {
+	name = "Bjorik"
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = p_dv_shezarr
+
+	3307.1.1 = { birth = yes }
+	3378.1.1 = { death = yes }
+}
+stromhelm_1001 = {
+	name = "Jurga"
+	female = yes
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = p_dv_shezarr
+
+	3343.1.1 = { birth = yes }
+	3401.1.1 = { death = yes }
+}
+wayward_1000 = {
+	name = "Mojeld"
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = p_dv_kynareth
+
+	3314.1.1 = { birth = yes }
+	3379.1.1 = { death = yes }
+}
+wayward_1001 = {
+	name = "Ulrar"
+	culture = eastmarcher
+	religion = nord_cult
+
+	trait = p_dv_kynareth
+
+	3332.1.1 = { birth = yes }
+	3401.1.1 = { death = yes }
 }
 
 dawnguard_1000 = {
