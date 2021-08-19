@@ -73,6 +73,12 @@ pattern_textures = {
 	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_01_normal.dds"
 	properties	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_01_properties.dds"
 }
+pattern_textures = {
+	name = "dunmer_daedric_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_properties.dds"
+}
 
 ##################
 #  	Layouts		 #
@@ -192,7 +198,14 @@ variation = {
 		b = { textures = "dunmer_spiral_01" layout = "aj_small_layout_02" }
 		a = { textures = "western_linen_fine_plain_01"	layout = "aj_small_layout_01" }
 	}	
-	
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_01" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_daedric_01" layout = "aj_small_layout_02" }
+		a = { textures = "western_linen_fine_plain_01"	layout = "aj_small_layout_01" }
+	}
 	# Color palette textures are 16-wide and N-high.
 	# Shaders will chose a row in the texture at random, and each column will be sampled once.
 	# First column will be masked by the red channel in the masks, second by the green, etc.
