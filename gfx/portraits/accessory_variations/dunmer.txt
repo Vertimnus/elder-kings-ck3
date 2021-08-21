@@ -55,6 +55,48 @@ pattern_textures = {
 	normal		= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_brocade_04_normal.dds"
 	properties	= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_brocade_04_properties.dds"
 }
+pattern_textures = {
+	name = "dunmer_resdayni_scrawl_trim_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/resdayni_scrawl_trim_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/resdayni_scrawl_trim_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_plain_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_spiral_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_spiral_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_spiral_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_spiral_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_brocade_silk_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_plain_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_brocade_silk_02"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_02_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_02_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_plain_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_brocade_silk_03"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_03_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_brocade_silk_03_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/western/western_silk_plain_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_daedric_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_daedric_01_properties.dds"
+}
+pattern_textures = {
+	name = "dunmer_belt_01"
+	colormask	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_belt_01_masks.dds"
+	normal		= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_belt_01_normal.dds"
+	properties	= "gfx/portraits/accessory_variations/textures/patterns/dunmer/dunmer_belt_01_properties.dds"
+}
 
 ##################
 #  	Layouts		 #
@@ -138,10 +180,22 @@ pattern_layout = {
 	offset 		= { x = { min = -0.8	max = -0.8 }    y = { min = 0.8	max = 0.8 } } 
 }
 pattern_layout = {
-	name = "test_layout_aj"	
+	name = "aj_small_layout_01"	
 	scale 		= { min = 0.05	max = 0.05 }
 	rotation 	= { min = 0	max = 0 }	
-	offset 		= { x = { min = -0.1	max = -0.1 }    y = { min = 0.4	max = 0.4 } } 
+	offset 		= { x = { min = -0.1	max = -0.1 }    y = { min = 0.3	max = 0.3 } } 
+}
+pattern_layout = {
+	name = "aj_small_layout_02"	
+	scale 		= { min = 0.069	max = 0.069 }
+	rotation 	= { min = 0	max = 0 }	
+	offset 		= { x = { min = -0.96	max = -0.96 }    y = { min = 0.4	max = 0.4 } } 
+}
+pattern_layout = {
+	name = "aj_medium_layout_01"	
+	scale 		= { min = 0.15	max = 0.15 }
+	rotation 	= { min = 0	max = 0 }	
+	offset 		= { x = { min = 0.05	max = 0.05 }    y = { min = -0.03	max = -0.03 } } 
 }
 
 ###################
@@ -157,12 +211,51 @@ variation = {
 	pattern = { 
 		weight = 1
 		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
-		r = { textures = "western_silk_plain_01" layout = "plain_fabric_full_layout" }
-		g = { textures = "western_silk_plain_01" layout = "plain_fabric_full_layout" }
-		b = { textures = "western_silk_plain_01" layout = "plain_fabric_full_layout" }
-		a = { textures = "western_silk_plain_01"	layout = "plain_fabric_full_layout" }
+		r = { textures = "dunmer_brocade_silk_01" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_spiral_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
 	}	
-	
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_01" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_daedric_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
+	}
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_02" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_spiral_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
+	}
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_02" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_daedric_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
+	}
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_03" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_spiral_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
+	}
+	pattern = { 
+		weight = 1
+		#r,g,b,a here refers to the channels in the pattern_mask scripted in the entity
+		r = { textures = "dunmer_brocade_silk_03" layout = "aj_medium_layout_01" }
+		g = { textures = "dunmer_resdayni_scrawl_trim_01" layout = "aj_small_layout_01" }
+		b = { textures = "dunmer_daedric_01" layout = "aj_small_layout_02" }
+		a = { textures = "dunmer_belt_01"	layout = "aj_small_layout_01" }
+	}
 	# Color palette textures are 16-wide and N-high.
 	# Shaders will chose a row in the texture at random, and each column will be sampled once.
 	# First column will be masked by the red channel in the masks, second by the green, etc.
