@@ -4,7 +4,7 @@ pdxmesh = {
 
 	blend_shape = { id = "male_clothes_secular_dunmer_01b_bs_fat"				type = "male_clothes_secular_dunmer_01b_bs_fat.mesh" }
 	blend_shape = { id = "male_clothes_secular_dunmer_01b_bs_gaunt"				type = "male_clothes_secular_dunmer_01b_bs_gaunt.mesh" }
-	blend_shape = { id = "male_clothes_secular_dunmer_01b_bs_neck"				type = "male_clothes_secular_dunmer_01b_bs_neck.mesh" }
+#	blend_shape = { id = "male_clothes_secular_dunmer_01b_bs_neck"				type = "male_clothes_secular_dunmer_01b_bs_neck.mesh" }
 
 	meshsettings = {
 		name = "male_clothes_secular_dunmer_01b_Shape"
@@ -23,7 +23,23 @@ entity = {
 
 	attribute = { name = "bs_body_fat_1"								blend_shape = "male_clothes_secular_dunmer_01b_bs_fat" }
 	attribute = { name = "bs_body_gaunt_1"								blend_shape = "male_clothes_secular_dunmer_01b_bs_gaunt" }
-	attribute = { name = "bs_body_neck_width_max"						blend_shape = "male_clothes_secular_dunmer_01b_bs_neck" }
+#	attribute = { name = "bs_body_neck_width_max"						blend_shape = "male_clothes_secular_dunmer_01b_bs_neck" }
+
+
+	game_data = {
+		portrait_accessory = {
+			pattern_mask = "gfx/models/portraits/attachments/male_clothes/secular/dunmer/dunmer_01/male_clothes_secular_dunmer_01_masks.dds"	#Any 4-channel texture. Each channel will be used to mask a pattern from the variation object
+			variation = "dunmer_nobility_high_01"	#A "variation" object in gfx/portraits/accessory_variations/
+		}
+	}
+}
+entity = {
+	name = "male_clothes_secular_dunmer_01b_low_entity"
+	pdxmesh = "male_clothes_secular_dunmer_01b_mesh"
+
+	attribute = { name = "bs_body_fat_1"								blend_shape = "male_clothes_secular_dunmer_01b_bs_fat" }
+	attribute = { name = "bs_body_gaunt_1"								blend_shape = "male_clothes_secular_dunmer_01b_bs_gaunt" }
+#	attribute = { name = "bs_body_neck_width_max"						blend_shape = "male_clothes_secular_dunmer_01b_bs_neck" }
 
 
 	game_data = {
