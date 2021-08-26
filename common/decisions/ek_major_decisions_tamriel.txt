@@ -106,21 +106,35 @@ create_orsinium_decision = {
 	}
 	
 	is_valid = {
-		#GOLD
-		gold >= 1500
 		#FAME LEVEL
 		prestige_level >= 4
 		#INDEPENDENT
 		is_independent_ruler = yes
-		#Your main duchy's capital is Orc-culture
-		capital_county.de_jure_liege.title_capital_county.holder = { this = root }
-		capital_county.culture_group = culture_group:orsimer_group
+		#DUKE
+		highest_held_title_tier > tier_county
+		#Your main duchy's capital is Orc-culture and is not already the capital of another kingdom
+		custom_description = {
+			capital_county.de_jure_liege.title_capital_county.holder = { this = root }
+			capital_county.culture_group = culture_group:orsimer_group
+			capital_county.de_jure_liege.title_capital_county = { save_temporary_scope_as = capital_check }
+			NOT = { any_kingdom = { title_capital_county = scope:capital_check } }
+			text = create_orsinium_decision_cd
+		}
 	}
 
 	is_valid_showing_failures_only = {
 		is_alive = yes
 		is_in_an_activity = no
 		is_imprisoned = no
+	}
+	
+	cost = {
+		prestige = {
+			value = 1000
+		}
+		gold = {
+			value = 1000
+		}
 	}
 
 	effect = {
@@ -164,9 +178,11 @@ create_orsinium_decision = {
 			# }
 			# add_piety_level = 1
 		# }
-		#Spend gold and fame
-		add_gold = -1500
-		add_prestige_level = -1
+		#Let other rulers know about it (only matters for players)
+		every_ruler = { 
+			limit = { is_ai = no }
+			trigger_event = @
+		}
 	}
 
 	ai_potential = {
@@ -204,8 +220,6 @@ reintegrate_orsinium_decision = {
 	}
 	
 	is_valid = {
-		#GOLD
-		gold >= 500
 		#FAME LEVEL
 		prestige_level >= 2
 		#You hold Orsinium's de jure duchy
@@ -219,7 +233,11 @@ reintegrate_orsinium_decision = {
 		is_in_an_activity = no
 		is_imprisoned = no
 	}
-
+	
+	cost = {
+		gold = { value = 500 }
+		prestige = { value = 500 }
+	}
 	effect = {
 		#Saves the duchy that had become part of Orsinium
 		every_held_title = {
@@ -248,8 +266,11 @@ reintegrate_orsinium_decision = {
 		scope:orsinium_original_liege = { 
 			remove_variable = orsinium_original_liege_boolean
 		}
-		add_gold = -500
-		add_prestige_level = -1
+		#Let other rulers know about it (only matters for players)
+		every_ruler = { 
+			limit = { is_ai = no }
+			trigger_event = @
+		}
 	}
 
 	ai_potential = {
@@ -290,102 +311,103 @@ create_new_nibenay_kingdom_decision = {
 	}
 	
 	is_valid = {
-		#GOLD
-		gold >= 1500
 		#FAME LEVEL
 		prestige_level >= 4
 		#INDEPENDENT
 		NOT = { liege = { has_title = e_cyrodiil } }
-		#HOLDS AT LEAST 4 CONTIGUOUS DUCHIES
-		OR = {
-			trigger_if = {
-				limit = { has_title = title:d_caer_suvio }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_facian
-					has_title = title:d_entius
-					has_title = title:d_grief
-					has_title = title:d_cuptor
+		#HOLDS AT LEAST 4 CONTIGUOUS DUCHIES IN NIBENAY
+		custom_description = {
+			OR = {
+				trigger_if = {
+					limit = { has_title = title:d_caer_suvio }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_facian
+						has_title = title:d_entius
+						has_title = title:d_grief
+						has_title = title:d_cuptor
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_mir_corrup }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_facian
+						has_title = title:d_entius
+						has_title = title:d_sundercliff
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_grief }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_caer_suvio
+						has_title = title:d_cuptor
+						has_title = title:d_redwater
+						has_title = title:d_artemon
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_sundercliff }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_cuptor
+						has_title = title:d_redwater
+						has_title = title:d_entius
+						has_title = title:d_mir_corrup
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_cuptor }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_sundercliff
+						has_title = title:d_redwater
+						has_title = title:d_entius
+						has_title = title:d_grief
+						has_title = title:d_caer_suvio
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_artemon }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_grief
+						has_title = title:d_cuptor
+						has_title = title:d_redwater
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_redwater }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_artemon
+						has_title = title:d_cuptor
+						has_title = title:d_sundercliff
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_entius }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_sundercliff
+						has_title = title:d_cuptor
+						has_title = title:d_caer_suvio
+						has_title = title:d_mir_corrup
+						has_title = title:d_facian
+					}
+				}
+				trigger_if = {
+					limit = { has_title = title:d_facian }
+					calc_true_if = {
+						amount = 3
+						has_title = title:d_caer_suvio
+						has_title = title:d_mir_corrup
+						has_title = title:d_entius
+					}
 				}
 			}
-			trigger_if = {
-				limit = { has_title = title:d_mir_corrup }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_facian
-					has_title = title:d_entius
-					has_title = title:d_sundercliff
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_grief }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_caer_suvio
-					has_title = title:d_cuptor
-					has_title = title:d_redwater
-					has_title = title:d_artemon
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_sundercliff }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_cuptor
-					has_title = title:d_redwater
-					has_title = title:d_entius
-					has_title = title:d_mir_corrup
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_cuptor }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_sundercliff
-					has_title = title:d_redwater
-					has_title = title:d_entius
-					has_title = title:d_grief
-					has_title = title:d_caer_suvio
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_artemon }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_grief
-					has_title = title:d_cuptor
-					has_title = title:d_redwater
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_redwater }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_artemon
-					has_title = title:d_cuptor
-					has_title = title:d_sundercliff
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_entius }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_sundercliff
-					has_title = title:d_cuptor
-					has_title = title:d_caer_suvio
-					has_title = title:d_mir_corrup
-					has_title = title:d_facian
-				}
-			}
-			trigger_if = {
-				limit = { has_title = title:d_facian }
-				calc_true_if = {
-					amount = 3
-					has_title = title:d_caer_suvio
-					has_title = title:d_mir_corrup
-					has_title = title:d_entius
-				}
-			}
+			text = create_new_nibenay_kingdom_ct
 		}
 	}
 
@@ -394,9 +416,17 @@ create_new_nibenay_kingdom_decision = {
 		is_in_an_activity = no
 		is_imprisoned = no
 	}
+	
+	cost = {
+		gold = { value = 1500 }
+		prestige = { value = 500 }
+	}
 
 	effect = {
-		trigger_event = { id = ek_major_decisions.0010 }
+		custom_description = {
+			trigger_event = { id = ek_major_decisions.0010 }
+			text = create_new_nibenay_kingdom_decision_cd
+		}
 	}
 
 	ai_potential = {
@@ -474,7 +504,7 @@ create_new_nibenay_kingdom_decision = {
 			# remove_variable = orsinium_original_liege_boolean
 		# }
 		# #Spends gold and prestige
-		# add_gold = -500
+		# remove_short_term = major_gold_value
 		# add_prestige = -500
 	# }
 
