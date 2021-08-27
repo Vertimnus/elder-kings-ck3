@@ -46,59 +46,51 @@
 }
 
 # full name for altmer - name 'len father grandfather 'ata mother grandmother 'cal house
-#triggers for male/female with father/mother first. some commented parts can be used to switch to match house with parents, so father first if same house.
-#need to account for same house parents, so fallback to male/female. doesnt account for cadet branches
 GetAltmerName = {
 	type = character
 
-	text = {
-		trigger = {
-			#ROOT.mother.house = ROOT.father.house #parents same house, put mother first for women
-			is_female = yes
+	# share house with only mother - matri
+	# share house with only father - patri
+	# share house with both - patri (assumed, will be accurate at least 50% of the time)
+	# share house with neither (cadet)
+		#share dynasty with only mother - matri
+		#share dynasty with only father - patri
+		#share dynasty with both - patri (assumed, 50% accurate)
+		#share dynasty with neither - patri (fallback, how did ou even achieve that?)
 
-			# # below works (mostly) dosnt for divorce though and there is no clear way round it tht isnt more work than it is worth
-			# # ROOT.father = { #checks if roots father has any spouse, who is roots mother and has a matrilinear marriage to ANYONE
-			# # 	exists = this
-			# # 	any_spouse = {
-			# # 		even_if_dead = yes
-			# # 		limit = { this = ROOT.mother }
-			# # 		matrilinear_marriage = yes #check current marriage? all?
-			# # 	}
-			# # }
-			# # ROOT.mother = { #same as above, but roles reversed. theoretically if both had a previous matri marriage this would trigger
-			# # 	exists = this
-			# # 	any_spouse = {
-			# # 		even_if_dead = yes
-			# # 		limit = { this = ROOT.father }
-			# # 		matrilinear_marriage = yes
-			# # 	}
-			# # }
-			# # # doesnt account for divorce
+	text = {
+		trigger = { #only father, both house
+			ROOT.house = ROOT.father.house
+		}
+		localization_key = alt_name_patri
+	}
+
+	text = {
+		trigger = { #only mother house - implicitly not father from prev
+			ROOT.house = ROOT.mother.house
 		}
 		localization_key = alt_name_matri
 	}
 
 	text = {
-		trigger = {
-			#ROOT.mother.house = ROOT.father.house #parents share a house, put father first for men. also fallback
-			is_female = no
+		trigger = { #only father, both dynasty
+			ROOT.dynasty = ROOT.father.dynasty
+		}
+		localization_key = alt_name_patri
+	}
+
+	text = {
+		trigger = { #only mother dynasty - implicitly not father from prev
+			ROOT.dynasty = ROOT.mother.dynasty
+		}
+		localization_key = alt_name_matri
+	}
+
+	text = {
+		trigger = { #fallback if they somehow dont share a dynasty with either parent - lowborn or some fuckery 
+			always = no
 		}
 		fallback = yes
 		localization_key = alt_name_patri
 	}
-
-	# text = {
-	# 	trigger = {
-	# 		ROOT.house = ROOT.mother.house #mother first if they share a house - no father or matri marriage
-	# 	}
-	# 	localization_key = alt_name_matri
-	# }
-
-	# text = {
-	# 	trigger = {
-	# 		ROOT.house = ROOT.father.house #father first if they share a house - patri marriage or no mother in history
-	# 	}
-	# 	fallback = yes
-	# 	localization_key = alt_name_patri
-	# }
 }
