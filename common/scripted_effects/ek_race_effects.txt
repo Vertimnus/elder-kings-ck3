@@ -4,10 +4,11 @@ ek_character_setup_effect = {
 	#Race flags
 	if = {
 		limit = { 
-			NOT = { 
+			NOR = { 
 				has_character_flag = race_khajiit
 				has_character_flag = race_argonian
 				has_character_flag = race_goblinken
+				has_character_flag = race_daedra
 			} 
 		}
 		race_traits_effect = yes
@@ -44,15 +45,20 @@ race_traits_effect = {
 	}
 	
 	#Goblinken
-	if = {
+	else_if = {
 		limit = { culture_group = culture_group:goblinken_group }
 		add_character_flag = race_goblinken
 	}
 	
 	#Argonian
-	if = {
+	else_if = {
 		limit = { culture_group = culture_group:argonian_group }
 		add_character_flag = race_argonian
+	}
+	#Daedra
+	else_if = {
+		limit = { culture_group = culture_group:daedric_group }
+		add_character_flag = race_daedra
 	}
 	
 	add_character_flag = char_setup
@@ -74,7 +80,7 @@ race_traits_inheritance_effect = {
 	}
 	
 	#Goblinken
-	if = {
+	else_if = {
 		limit = { 
 			OR = {
 				scope:mother = { has_character_flag = race_goblinken }
@@ -85,7 +91,7 @@ race_traits_inheritance_effect = {
 	}
 	
 	#Argonian
-	if = {
+	else_if = {
 		limit = { 
 			OR = {
 				scope:mother = { has_character_flag = race_argonian }
@@ -300,6 +306,12 @@ lifespan_traits_effect = {
 			}
 		}
 		add_trait = lifespan_3
+	}
+	else_if = {
+		limit = { 
+			culture_group = culture_group:daedric_group
+		}
+		add_trait = lifespan_7
 	}
 	
 	add_character_flag = char_setup

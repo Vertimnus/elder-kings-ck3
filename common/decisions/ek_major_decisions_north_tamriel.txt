@@ -361,6 +361,54 @@ solstheim_claim_coast_decision = {
 	}
 }
 
+keizaal_realm_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+	major = yes
+	ai_check_interval = 120
+	desc = keizaal_realm_decision_desc
+
+is_shown = {
+		is_independent_ruler = yes
+		faith = {
+            has_doctrine = doctrine_pantheon_dragons
+			}
+            has_culture_group = culture_group:nordic_group
+		    highest_held_title_tier >= tier_kingdom
+			
+		NOT = {
+			is_target_in_global_variable_list = {
+                name = unavailable_unique_decisions
+                target = flag:keizaal_realm_decision
+            }
+        }
+	}
+
+is_valid = {
+		has_culture_group = culture_group:nordic_group
+		piety_level >= 3
+        
+		OR = {
+			has_primary_title = title:e_skyrim
+			completely_controls_region = mundus_tamriel_skyrim
+			}
+		
+		faith = {
+            has_doctrine = doctrine_pantheon_dragons
+			}
+		}
+        
+effect = {
+       title:e_skyrim = { set_title_name = Keizaal }
+
+	  add_to_global_variable_list = {
+                name = unavailable_unique_decisions
+                target = flag:keizaal_realm_decision
+            }
+		trigger_event = dragon_cult.0001
+                trigger_event = dragon_cult.0002
+	    }
+    }
+
 ####################
 # DIRENNI HEGEMONY #
 ####################

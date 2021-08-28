@@ -384,40 +384,10 @@ faith_give_proper_cultural_identity_doctrine = {
 }
 
 ### FERVOR EQUILIBRIUM
+# PROBLEM! THE FE OF THE COUNCIL OF THE EIGHT MEMBERS DEPENDS ON THE LEADER.
+# SOLUTION? EVERYTMIME YOU UPDATE THE FERVOR EQUILIBRIUM OF ALL FAITHS, MAKE SURE TO FIRST UPDATE THE CO8 FERVOR EQUILIBRIUM
 faith_update_fervor_equilibrium = {
 	save_scope_as = current_faith
-	
-	##### V1
-	# ### FERVOR EQUILIBRIUM COMPUTATION
-	# ## Base
-	# set_variable = {
-		# name = fervor_equilibrium
-		# value = 100
-	# }
-	
-	# ## Every two counties subtract one fervor_equilibrium. 0 county = 100 fervor ; 100 counties = 50 fevor ; 200 counties = 0 fervor
-	# # How should it impact our equilibrium
-	# set_variable = {
-		# name = half_num_county_followers
-		# value = num_county_followers	
-	# }
-	# change_variable = {
-		# name = half_num_county_followers
-		# divide = 2
-	# }
-	# # Should we increase/decrease the equilibrium penality?
-	# if = {
-		# limit = { has_doctrine = doctrine_pluralism_pluralistic }
-		# change_variable = {
-			# name = half_num_county_followers
-			# multiply = 0.85
-		# }
-	# }
-	# # Apply it
-	# change_variable = {
-		# name = fervor_equilibrium
-		# subtract = var:half_num_county_followers
-	# }
 	
 	##### V2
 	### FERVOR EQUILIBRIUM COMPUTATION
@@ -451,10 +421,19 @@ faith_update_fervor_equilibrium = {
 			divide = num_county_followers
 		}
 		
-		# Multiply that by 20, so that the fervor impact is (mostly) between 0 and +20%
+		# Multiply that by 20, so that the fervor impact is between 0 and +20%
 		change_variable = {
 			name = fe_impact_nb_temples
 			multiply = 20
+		}
+		
+		# Cap it at 20
+		if = {
+			limit = { var:fe_impact_nb_temples = { compare_value > 20 } }
+			set_variable = {
+				name = fe_impact_nb_temples
+				value = 20
+			}
 		}
 		
 		## And finally we apply that to our fervor equilibrium
@@ -617,6 +596,7 @@ faith_update_fervor_equilibrium = {
 	
 	## Aftermath (once most penalties and bonuses have been applied)
 	# Each member of the Council of the Eight uses the average of their base fervor equilibrium and the leader's
+	# That's why we need to first calculate the Fervor Equilibrium of the Leader of the Council of the Eight
 	if = {
 		limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
 		set_variable = {
@@ -653,14 +633,1653 @@ faith_update_fervor_equilibrium = {
 			value = 100
 		}
 	}
+}
+
+### DYNAMIC HOSTILITY
+## Needs FAITH1 and FAITH2. Will define how FAITH1 sees FAITH2
+faith_update_base_hostility_with = {
+	every_religion_global = {
+		random_faith = {
+			limit = {
+				exists = this.var:faith_id
+				this.var:faith_id = { compare_value = $FAITH2_NUMBER$ }
+			}
+			save_scope_as = current_faith
+		}
+	}
 	
-	## If we're the leader of the Council of the Eight, update the members' fervor equilibrium
-	if = {
-		limit = { has_doctrine = special_faith_group_council_of_the_eight_leader }
-		every_religion_global = {
-			every_faith = {
-				limit = { has_doctrine = special_faith_group_council_of_the_eight_member }
-				faith_update_fervor_equilibrium = yes
+	$FAITH1$ = {
+		if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 0 } }
+			set_variable = {
+				name = base_hostility_0
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_0 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 1 } }
+			set_variable = {
+				name = base_hostility_1 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_1 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 2 } }
+			set_variable = {
+				name = base_hostility_2 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_2 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 3 } }
+			set_variable = {
+				name = base_hostility_3 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_3 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 4 } }
+			set_variable = {
+				name = base_hostility_4 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_4 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 5 } }
+			set_variable = {
+				name = base_hostility_5 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_5 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 6 } }
+			set_variable = {
+				name = base_hostility_6 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_6 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 7 } }
+			set_variable = {
+				name = base_hostility_7 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_7 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 8 } }
+			set_variable = {
+				name = base_hostility_8 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_8 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 9 } }
+			set_variable = {
+				name = base_hostility_9 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_9 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 10 } }
+			set_variable = {
+				name = base_hostility_10 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_10 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 11 } }
+			set_variable = {
+				name = base_hostility_11 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_11 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 12 } }
+			set_variable = {
+				name = base_hostility_12 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_12 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 13 } }
+			set_variable = {
+				name = base_hostility_13 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_13 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 14 } }
+			set_variable = {
+				name = base_hostility_14 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_14 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 15 } }
+			set_variable = {
+				name = base_hostility_15 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_15 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 16 } }
+			set_variable = {
+				name = base_hostility_16 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_16 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 17 } }
+			set_variable = {
+				name = base_hostility_17 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_17 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 18 } }
+			set_variable = {
+				name = base_hostility_18 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_18 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 19 } }
+			set_variable = {
+				name = base_hostility_19 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_19 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 20 } }
+			set_variable = {
+				name = base_hostility_20 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_20 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 21 } }
+			set_variable = {
+				name = base_hostility_21 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_21 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 22 } }
+			set_variable = {
+				name = base_hostility_22 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_22 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 23 } }
+			set_variable = {
+				name = base_hostility_23 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_23 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 24 } }
+			set_variable = {
+				name = base_hostility_24 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_24 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 25 } }
+			set_variable = {
+				name = base_hostility_25 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_25 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 26 } }
+			set_variable = {
+				name = base_hostility_26 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_26 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 27 } }
+			set_variable = {
+				name = base_hostility_27 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_27 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 28 } }
+			set_variable = {
+				name = base_hostility_28 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_28 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 29 } }
+			set_variable = {
+				name = base_hostility_29 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_29 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 30 } }
+			set_variable = {
+				name = base_hostility_30 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_30 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 31 } }
+			set_variable = {
+				name = base_hostility_31 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_31 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 32 } }
+			set_variable = {
+				name = base_hostility_32 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_32 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 33 } }
+			set_variable = {
+				name = base_hostility_33 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_33 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 34 } }
+			set_variable = {
+				name = base_hostility_34 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_34 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 35 } }
+			set_variable = {
+				name = base_hostility_35 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_35 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 36 } }
+			set_variable = {
+				name = base_hostility_36 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_36 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 37 } }
+			set_variable = {
+				name = base_hostility_37 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_37 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 38 } }
+			set_variable = {
+				name = base_hostility_38 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_38 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 39 } }
+			set_variable = {
+				name = base_hostility_39 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_39 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 40 } }
+			set_variable = {
+				name = base_hostility_40 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_40 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 41 } }
+			set_variable = {
+				name = base_hostility_41 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_41 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 42 } }
+			set_variable = {
+				name = base_hostility_42 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_42 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 43 } }
+			set_variable = {
+				name = base_hostility_43 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_43 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 44 } }
+			set_variable = {
+				name = base_hostility_44 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_44 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 45 } }
+			set_variable = {
+				name = base_hostility_45 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_45 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 46 } }
+			set_variable = {
+				name = base_hostility_46 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_46 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 47 } }
+			set_variable = {
+				name = base_hostility_47 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_47 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 48 } }
+			set_variable = {
+				name = base_hostility_48 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_48 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 49 } }
+			set_variable = {
+				name = base_hostility_49 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_49 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 50 } }
+			set_variable = {
+				name = base_hostility_50 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_50 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 51 } }
+			set_variable = {
+				name = base_hostility_51 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_51 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 52 } }
+			set_variable = {
+				name = base_hostility_52 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_52 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 53 } }
+			set_variable = {
+				name = base_hostility_53 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_53 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 54 } }
+			set_variable = {
+				name = base_hostility_54 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_54 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 55 } }
+			set_variable = {
+				name = base_hostility_55 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_55 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 56 } }
+			set_variable = {
+				name = base_hostility_56 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_56 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 57 } }
+			set_variable = {
+				name = base_hostility_57 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_57 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 58 } }
+			set_variable = {
+				name = base_hostility_58 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_58 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 59 } }
+			set_variable = {
+				name = base_hostility_59 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_59 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 60 } }
+			set_variable = {
+				name = base_hostility_60 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_60 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 61 } }
+			set_variable = {
+				name = base_hostility_61 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_61 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 62 } }
+			set_variable = {
+				name = base_hostility_62 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_62 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 63 } }
+			set_variable = {
+				name = base_hostility_63 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_63 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 64 } }
+			set_variable = {
+				name = base_hostility_64 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_64 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 65 } }
+			set_variable = {
+				name = base_hostility_65 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_65 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 66 } }
+			set_variable = {
+				name = base_hostility_66 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_66 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 67 } }
+			set_variable = {
+				name = base_hostility_67 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_67 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 68 } }
+			set_variable = {
+				name = base_hostility_68 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_68 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 69 } }
+			set_variable = {
+				name = base_hostility_69 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_69 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 70 } }
+			set_variable = {
+				name = base_hostility_70 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_70 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 71 } }
+			set_variable = {
+				name = base_hostility_71 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_71 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 72 } }
+			set_variable = {
+				name = base_hostility_72 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_72 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 73 } }
+			set_variable = {
+				name = base_hostility_73 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_73 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 74 } }
+			set_variable = {
+				name = base_hostility_74 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_74 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 75 } }
+			set_variable = {
+				name = base_hostility_75 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_75 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 76 } }
+			set_variable = {
+				name = base_hostility_76 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_76 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 77 } }
+			set_variable = {
+				name = base_hostility_77 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_77 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 78 } }
+			set_variable = {
+				name = base_hostility_78 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_78 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 79 } }
+			set_variable = {
+				name = base_hostility_79 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_79 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 80 } }
+			set_variable = {
+				name = base_hostility_80 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_80 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 81 } }
+			set_variable = {
+				name = base_hostility_81 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_81 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 82 } }
+			set_variable = {
+				name = base_hostility_82 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_82 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 83 } }
+			set_variable = {
+				name = base_hostility_83 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_83 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 84 } }
+			set_variable = {
+				name = base_hostility_84 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_84 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 85 } }
+			set_variable = {
+				name = base_hostility_85 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_85 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 86 } }
+			set_variable = {
+				name = base_hostility_86 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_86 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 87 } }
+			set_variable = {
+				name = base_hostility_87 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_87 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 88 } }
+			set_variable = {
+				name = base_hostility_88 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_88 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 89 } }
+			set_variable = {
+				name = base_hostility_89 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_89 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 90 } }
+			set_variable = {
+				name = base_hostility_90 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_90 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 91 } }
+			set_variable = {
+				name = base_hostility_91 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_91 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 92 } }
+			set_variable = {
+				name = base_hostility_92 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_92 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 93 } }
+			set_variable = {
+				name = base_hostility_93 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_93 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 94 } }
+			set_variable = {
+				name = base_hostility_94 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_94 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 95 } }
+			set_variable = {
+				name = base_hostility_95 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_95 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 96 } }
+			set_variable = {
+				name = base_hostility_96 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_96 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 97 } }
+			set_variable = {
+				name = base_hostility_97 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_97 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 98 } }
+			set_variable = {
+				name = base_hostility_98 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_98 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 99 } }
+			set_variable = {
+				name = base_hostility_99 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_99 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 100 } }
+			set_variable = {
+				name = base_hostility_100 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_100 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 101 } }
+			set_variable = {
+				name = base_hostility_101 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_101 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 102 } }
+			set_variable = {
+				name = base_hostility_102 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_102 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 103 } }
+			set_variable = {
+				name = base_hostility_103 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_103 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 104 } }
+			set_variable = {
+				name = base_hostility_104 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_104 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 105 } }
+			set_variable = {
+				name = base_hostility_105 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_105 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 106 } }
+			set_variable = {
+				name = base_hostility_106 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_106 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 107 } }
+			set_variable = {
+				name = base_hostility_107 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_107 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 108 } }
+			set_variable = {
+				name = base_hostility_108 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_108 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 109 } }
+			set_variable = {
+				name = base_hostility_109 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_109 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 110 } }
+			set_variable = {
+				name = base_hostility_110 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_110 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 111 } }
+			set_variable = {
+				name = base_hostility_111 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_111 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 112 } }
+			set_variable = {
+				name = base_hostility_112 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_112 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 113 } }
+			set_variable = {
+				name = base_hostility_113 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_113 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 114 } }
+			set_variable = {
+				name = base_hostility_114 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_114 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 115 } }
+			set_variable = {
+				name = base_hostility_115 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_115 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 116 } }
+			set_variable = {
+				name = base_hostility_116 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_116 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 117 } }
+			set_variable = {
+				name = base_hostility_117 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_117 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 118 } }
+			set_variable = {
+				name = base_hostility_118 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_118 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 119 } }
+			set_variable = {
+				name = base_hostility_119 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_119 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 120 } }
+			set_variable = {
+				name = base_hostility_120 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_120 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 121 } }
+			set_variable = {
+				name = base_hostility_121 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_121 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 122 } }
+			set_variable = {
+				name = base_hostility_122 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_122 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 123 } }
+			set_variable = {
+				name = base_hostility_123 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_123 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 124 } }
+			set_variable = {
+				name = base_hostility_124 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_124 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 125 } }
+			set_variable = {
+				name = base_hostility_125 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_125 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 126 } }
+			set_variable = {
+				name = base_hostility_126 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_126 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 127 } }
+			set_variable = {
+				name = base_hostility_127 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_127 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 128 } }
+			set_variable = {
+				name = base_hostility_128 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_128 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 129 } }
+			set_variable = {
+				name = base_hostility_129 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_129 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 130 } }
+			set_variable = {
+				name = base_hostility_130 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_130 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 131 } }
+			set_variable = {
+				name = base_hostility_131 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_131 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 132 } }
+			set_variable = {
+				name = base_hostility_132 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_132 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 133 } }
+			set_variable = {
+				name = base_hostility_133 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_133 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 134 } }
+			set_variable = {
+				name = base_hostility_134 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_134 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 135 } }
+			set_variable = {
+				name = base_hostility_135 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_135 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 136 } }
+			set_variable = {
+				name = base_hostility_136 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_136 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 137 } }
+			set_variable = {
+				name = base_hostility_137 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_137 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 138 } }
+			set_variable = {
+				name = base_hostility_138 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_138 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 139 } }
+			set_variable = {
+				name = base_hostility_139 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_139 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 140 } }
+			set_variable = {
+				name = base_hostility_140 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_140 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 141 } }
+			set_variable = {
+				name = base_hostility_141 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_141 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 142 } }
+			set_variable = {
+				name = base_hostility_142 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_142 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 143 } }
+			set_variable = {
+				name = base_hostility_143 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_143 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 144 } }
+			set_variable = {
+				name = base_hostility_144 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_144 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 145 } }
+			set_variable = {
+				name = base_hostility_145 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_145 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 146 } }
+			set_variable = {
+				name = base_hostility_146 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_146 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 147 } }
+			set_variable = {
+				name = base_hostility_147 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_147 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 148 } }
+			set_variable = {
+				name = base_hostility_148 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_148 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 149 } }
+			set_variable = {
+				name = base_hostility_149 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_149 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 150 } }
+			set_variable = {
+				name = base_hostility_150 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_150 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 151 } }
+			set_variable = {
+				name = base_hostility_151 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_151 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 152 } }
+			set_variable = {
+				name = base_hostility_152 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_152 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 153 } }
+			set_variable = {
+				name = base_hostility_153 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_153 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 154 } }
+			set_variable = {
+				name = base_hostility_154 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_154 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 155 } }
+			set_variable = {
+				name = base_hostility_155 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_155 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 156 } }
+			set_variable = {
+				name = base_hostility_156 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_156 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 157 } }
+			set_variable = {
+				name = base_hostility_157 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_157 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 158 } }
+			set_variable = {
+				name = base_hostility_158 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_158 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 159 } }
+			set_variable = {
+				name = base_hostility_159 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_159 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 160 } }
+			set_variable = {
+				name = base_hostility_160 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_160 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 161 } }
+			set_variable = {
+				name = base_hostility_161 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_161 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 162 } }
+			set_variable = {
+				name = base_hostility_162 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_162 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 163 } }
+			set_variable = {
+				name = base_hostility_163 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_163 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 164 } }
+			set_variable = {
+				name = base_hostility_164 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_164 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 165 } }
+			set_variable = {
+				name = base_hostility_165 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_165 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 166 } }
+			set_variable = {
+				name = base_hostility_166 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_166 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 167 } }
+			set_variable = {
+				name = base_hostility_167 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_167 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 168 } }
+			set_variable = {
+				name = base_hostility_168 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_168 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 169 } }
+			set_variable = {
+				name = base_hostility_169 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_169 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 170 } }
+			set_variable = {
+				name = base_hostility_170 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_170 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 171 } }
+			set_variable = {
+				name = base_hostility_171 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_171 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 172 } }
+			set_variable = {
+				name = base_hostility_172 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_172 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 173 } }
+			set_variable = {
+				name = base_hostility_173 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_173 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 174 } }
+			set_variable = {
+				name = base_hostility_174 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_174 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 175 } }
+			set_variable = {
+				name = base_hostility_175 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_175 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 176 } }
+			set_variable = {
+				name = base_hostility_176 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_176 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 177 } }
+			set_variable = {
+				name = base_hostility_177 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_177 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 178 } }
+			set_variable = {
+				name = base_hostility_178 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_178 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 179 } }
+			set_variable = {
+				name = base_hostility_179 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_179 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 180 } }
+			set_variable = {
+				name = base_hostility_180 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_180 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 181 } }
+			set_variable = {
+				name = base_hostility_181 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_181 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 182 } }
+			set_variable = {
+				name = base_hostility_182 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_182 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 183 } }
+			set_variable = {
+				name = base_hostility_183 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_183 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 184 } }
+			set_variable = {
+				name = base_hostility_184 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_184 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 185 } }
+			set_variable = {
+				name = base_hostility_185 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_185 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 186 } }
+			set_variable = {
+				name = base_hostility_186 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_186 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 187 } }
+			set_variable = {
+				name = base_hostility_187 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_187 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 188 } }
+			set_variable = {
+				name = base_hostility_188 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_188 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 189 } }
+			set_variable = {
+				name = base_hostility_189 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_189 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 190 } }
+			set_variable = {
+				name = base_hostility_190 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_190 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 191 } }
+			set_variable = {
+				name = base_hostility_191 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_191 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 192 } }
+			set_variable = {
+				name = base_hostility_192 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_192 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 193 } }
+			set_variable = {
+				name = base_hostility_193 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_193 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 194 } }
+			set_variable = {
+				name = base_hostility_194 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_194 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 195 } }
+			set_variable = {
+				name = base_hostility_195 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_195 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 196 } }
+			set_variable = {
+				name = base_hostility_196 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_196 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 197 } }
+			set_variable = {
+				name = base_hostility_197 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_197 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 198 } }
+			set_variable = {
+				name = base_hostility_198 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_198 }
+		}
+		else_if = {
+			limit = { $FAITH2_NUMBER$ = { compare_value = 199 } }
+			set_variable = {
+				name = base_hostility_199 
+				value = 50
+			}
+			faith_update_base_hostility_with_1 = { FAITH1 = $FAITH1$ FAITH2 = scope:current_faith FAITH_HOSTILITY_VARIABLE = base_hostility_199 }
+		}
+	}
+}
+
+faith_update_base_hostility_with_1 = {
+	### NEEDS THE VARIABLE THAT WE GOT IN THE PRECEDING EFFECT!!!
+	
+	$FAITH1$ = {
+		### Same faith = set to 0
+		if = {
+			limit = { $FAITH1$ = $FAITH2$ }
+			set_variable = {
+				name = $FAITH_HOSTILITY_VARIABLE$
+				value = 0
+			}
+		}
+		else = {
+			### Pantheon
+			if = {
+				limit = { faiths_have_same_pantheon = { FAITH1 = $FAITH1$ FAITH2 = $FAITH2$ } }
+				change_variable = {
+					name = $FAITH_HOSTILITY_VARIABLE$
+					subtract = 25
+				}
+			}
+			### Doctrines
+			### Tenets
+			### Sins & Virtues
+			
+			change_variable = {
+				name = $FAITH_HOSTILITY_VARIABLE$
+				subtract = 10
 			}
 		}
 	}
