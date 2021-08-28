@@ -1,0 +1,88 @@
+# Event window widget to rename dragon cultist ##-a child (intended to be used at birth)-##
+# Required controller: name_character
+
+vbox = {
+	name = "event_window_widget_name_dragon_priest"
+	layoutpolicy_horizontal = expanding
+	minimumsize = { 240 -1 }
+	ignoreinvisible = yes
+	margin = { 5 0 }
+	margin_bottom = 5
+	spacing = 3
+
+	# datacontext = "[EventWindowWidgetNameCharacter.GetCharacter]"
+
+	# editbox_standard = {
+	# 	size = { 240 30 }
+
+	# 	blockoverride "editbox_properties"
+	# 	{
+	# 		name = "no_name_needed"
+	# 		text = "[EventWindowWidgetNameCharacter.GetCurrentName]"
+	# 		ontextedited = "[EventWindowWidgetNameCharacter.OnEditCurrentName]"
+
+	# 		state = {
+	# 			name = "name_refresh"
+	# 			next = "b"
+	# 			using = Animation_Refresh_FadeOut
+	# 		}
+
+	# 		state = {
+	# 			name = "b"
+	# 			using = Animation_Refresh_FadeIn
+	# 		}
+	# 	}
+	# }
+
+	vbox = {
+		layoutpolicy_horizontal = expanding
+		spacing = 3
+		margin = { 5 0 }
+
+		#visible = "[GetVariableSystem.Exists( 'family_members_options_open' )]"
+
+		event_widget_name_dragon_priest_option = {
+			#visible = "[And( Not( Character.IsFemale ), Character.GetFather.IsValid )]"
+			text = "[EventWindowWidget.GetScope.GetFlagName('name_1')]"
+			#onclick = "[EventWindowWidgetNameCharacter.SetCurrentNameCultural( 'Lucifer' )]"
+		}
+
+		event_widget_name_dragon_priest_option = {
+			#visible = "[And( Character.IsFemale, Character.GetMother.IsValid )]"
+			text = "[EventWindowWidget.GetScope.GetFlagName('name_2')]"
+			#onclick = "[EventWindowWidgetNameCharacter.SetCurrentNameCultural( 'Mammon' )]"
+		}
+
+		event_widget_name_dragon_priest_option = {
+			#visible = "[And( Not( Character.IsFemale ), Character.GetFather.GetFather.IsValid )]"
+			text = "[EventWindowWidget.GetScope.GetFlagName('name_3')]"
+			#onclick = "[EventWindowWidgetNameCharacter.SetCurrentNameCultural( 'Asmodeus' )]"
+		}
+
+		# event_widget_name_dragon_priest_option = {
+		# 	#visible = "[And( Character.IsFemale, Character.GetFather.GetMother.IsValid )]"
+		# 	text = "[EventWindowWidget.GetScope.GetFlagName('name_4')]"
+		# 	#onclick = "[EventWindowWidgetNameCharacter.SetCurrentNameCultural( 'Leviathan' )]"
+		# }
+
+		# event_widget_name_dragon_priest_option = {
+		# 	#visible = "[And( Not( Character.IsFemale ), Character.GetMother.GetFather.IsValid )]"
+		# 	text = "[EventWindowWidget.GetScope.GetFlagName('name_5')]"
+		# 	#onclick = "[EventWindowWidgetNameCharacter.SetCurrentNameCultural( 'Beelzebub' )]"
+		# }
+	}
+
+}
+
+types EventWindowWidgetNameDragonPriest
+{
+	type event_widget_name_dragon_priest_option = button_standard_list {
+		layoutpolicy_horizontal = expanding
+
+		#onclick = "[PdxGuiTriggerAllAnimations('name_refresh')]"
+
+		background = {
+			using = Background_Area
+		}
+	}
+}

@@ -821,9 +821,9 @@ errinorne_36352 = {
 	father = errinorne_36350
 	mother = ancuryil_37100
 	3390.1.1 = { birth = yes }
-	3396.1.1 = { add_trait = cruel }
+	3396.1.1 = { add_trait = sadistic }
 	3398.1.1 = { add_trait = zealous }
-	3400.1.1 = { add_trait = proud }
+	3400.1.1 = { add_trait = arrogant }
 	3402.1.1 = {
 		add_trait = temperate
 		add_trait = just
@@ -832,7 +832,7 @@ errinorne_36352 = {
 		add_trait = education_stewardship_2
 		add_trait = architect
 	}
-	3410.1.1 = { add_spouse = arelsenil_37150 } #HistoryToDo Import character
+	3410.1.1 = { add_spouse = arelsenil_37150 }
 	3495.1.1 = { death = yes }
 }
 errinorne_36353 = {
@@ -1133,7 +1133,6 @@ errinorne_36368 = {
 	trait = brave
 	trait = content
 	trait = gluttonous
-	trait = duelist
 	trait = education_diplomacy_2
 	2201.1.1 = { birth = yes }
 	2268.1.1 = { 
@@ -1164,24 +1163,20 @@ errinorne_36370 = {
 	mother = errinorne_36355
 	trait = pure_blooded
 	trait = lifespan_3
-	trait = proud
 	trait = brave
 	trait = zealous
-	trait = gamer
 	trait = education_martial_3
 	learning = 5
 	martial = 8
 	intrigue = 6
 	3349.1.1 = { birth = yes }
-	3460.1.1 = { employer = 36001 } #HistoryToDo import
+	3460.1.1 = { employer = arana_1000 }
 	3466.1.1 = { #Killed his brother-errinorne_36350
-		effect = { add_depressed = yes }
-		add_trait = kinslayer
-		remove_trait = proud
+		effect = { add_stress = 100 }
+		add_trait = kinslayer_3
 	}
 	3468.1.1 = {
 		add_trait = drunkard
-		remove_trait = gamer
 	}
 	3476.1.1 = {
 		remove_trait = zealous
@@ -1204,7 +1199,6 @@ errinorne_36371 = {
 	trait = education_diplomacy_1
 	trait = scholar
 	trait = just
-	trait = cruel
 	trait = zealous
 	trait = wrathful
 	father = errinorne_36357
@@ -1216,23 +1210,24 @@ errinorne_36371 = {
 	}
 }
 errinorne_36372 = {
-	name = Aesmer
+	name = "Aesmer"
 	dynasty = errinorne
 	culture = altmer
 	religion = auriel
 	trait = pure_blooded
 	trait = lifespan_3
+	father = arelsamirmo_37250
 	mother = errinorne_36353
 	3543.1.1 = { birth = yes }
 	3844.1.1 = { death = yes }
 }
 errinorne_36373 = {
-	name = Calmaninde
+	name = "Calmaninde"
 	dynasty = errinorne
 	religion = auriel
 	culture = auridon
 	female = yes
-	add_trait = pure_altmer
+
 	father = errinorne_36372
 	3623.1.1 = { birth = yes }
 	3916.1.1 = { death = yes }
@@ -1680,7 +1675,7 @@ rilis_36 = {
 	trait = pure_blooded
 	trait = lifespan_3
 	3346.1.1 = { birth = yes }
-	#3381.1.1 = { effect = { set_special_character_title = lady } } #HistoryToDo
+	#3381.1.1 = { effect = { set_special_character_title = lady } } #HistoryToDo doesn't seem to be a thing in ck3 atm
 	3568.1.1 = { death = yes }
 }
 rilis_37 = {
@@ -1787,7 +1782,7 @@ ancuryil_37103 = {
 	trait = lustful
 	trait = deceitful
 	trait = arbitrary
-	trait = hedonist
+	trait = reveler_1
 	trait = education_magical_ability_2
 	trait = lifespan_3
 	2441.1.1 = { birth = yes }
@@ -1806,7 +1801,7 @@ ancuryil_37104 = {
 	trait = cynical
 	trait = honest
 	trait = ambitious
-	trait = envious
+	trait = vengeful
 	trait = education_stewardship_3
 	trait = lifespan_3
 	2731.1.1 = { birth = yes }
@@ -1823,11 +1818,46 @@ ancuryil_37105 = {
 	trait = cynical
 	trait = content
 	trait = deceitful
-	trait = envious
+	trait = vengeful
 	trait = education_stewardship_2
 	trait = lifespan_3
+
 	2873.1.1 = { birth = yes }
 	3172.1.1 = { death = yes }
+}
+ancuryil_37105_brother = {
+	name = "Illondil"
+	dynasty = ancuryil
+	religion = auriel
+	culture = auridon
+	mother = ancuryil_37104
+	
+	trait = zealous
+	trait = humble
+	trait = deceitful
+
+	trait = education_learning_2
+	trait = lifespan_3
+
+	2913.1.1 = { birth = yes }
+	3267.1.1 = { death = yes }
+}
+ancuryil_37105_sister = {
+	name = "Relaria"
+	dynasty = ancuryil
+	religion = auriel
+	culture = auridon
+	mother = ancuryil_37104
+	
+	trait = lustful
+	trait = deceitful
+	trait = arrogant
+
+	trait = education_intrigue_1
+	trait = lifespan_3
+
+	2917.1.1 = { birth = yes }
+	3267.1.1 = { death = yes }
 }
 ancuryil_37106 = {
 	name = "Utheilla"
@@ -1866,7 +1896,7 @@ ancuryil_37107 = {
 	2985.1.1 = { birth = yes }
 	3145.1.1 = { 
 		death = {
-			death_reason = death_murder_unknown
+			death_reason = death_murder
 			killer = ancuryil_37106
 		}
 	}
@@ -2020,13 +2050,16 @@ arelsenil_37157 = {
 ##Thalmor
 thalmor_1000 = {
 	name = "Malangwe" #ESO, Later a Member of the Veiled Heritance
-	#HistoryToDo dynasty
+	dynasty = ancuryil
 	female = yes
 	religion = auriel
 	culture = auridon
 
 	trait = pure_blooded
 	trait = lifespan_4
+
+	father = ancuryil_37105_brother
+	mother = ancuryil_37105_sister
 
 	3260.1.1 = { birth = yes }
 	3503.1.1 = { death = yes } #killed by the Vestige
@@ -2271,6 +2304,17 @@ caerinor_1003 = {
 }
 
 #Derinil
+derinil_999 = {
+	name = "Calindil"
+	dynasty = derinil
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	3017.1.1 = { birth = yes }
+	3331.1.1 = { death = yes }
+}
 derinil_1000 = {
 	name = "Ezridur"
 	dynasty = derinil
@@ -2278,6 +2322,8 @@ derinil_1000 = {
 	culture = auridon
 
 	trait = lifespan_3
+
+	father = derinil_999
 
 	3181.1.1 = { birth = yes }
 	3244.1.1 = { add_spouse = derinil_1000_wife }
@@ -2674,6 +2720,232 @@ shattered_grove_1001 = {
 	}
 }
 
+#Valano Dynasty
+valano_1000 = {
+	name = "Vorian"
+	dynasty = valano
+	religion = auriel
+	culture = auridon
+
+	3072.1.1 = { birth = yes }
+	3341.1.1 = { death = yes }
+}
+valano_valano = {
+	name = "Valano" #ESO Valano, Canonreeve of Silsailen
+	dynasty = valano
+	religion = auriel
+	culture = auridon
+
+	father = valano_1000
+
+	3267.1.1 = { birth = yes }
+	#HistoryToDo mehrunes worship secret
+	3502.5.9 = { death = yes } #killed by Vestige
+}
+valano_valano_wife = {
+	name = "Elanande"
+	female = yes
+	dynasty = hesenil
+	religion = auriel
+	culture = auridon
+
+	3271.1.1 = { birth = yes }
+	3481.1.1 = { 
+		death = {
+			death_reason = death_sacrificed_to_gods
+			killer = valano_valano
+		}
+	}
+}
+valano_elenwen = {
+	name = "Elenwen" #ESO Elenwen, Daughter of Valano
+	female = yes
+	dynasty = valano
+	religion = auriel
+	culture = auridon
+
+	father = valano_valano
+	mother = valano_valano_wife
+
+	trait = education_diplomacy_3
+
+	3460.1.1 = { birth = yes }
+	3691.1.1 = { death = yes }
+}
+
+#Arelsamirmo
+arelsamirmo_37248 = {
+	name = "Amara"
+	female = yes
+	dynasty = arelsamirmo
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	3167.1.1 = { birth = yes }
+	3281.1.1 = {
+		death = {
+			death_reason = death_childbirth
+		}
+	}
+}
+arelsamirmo_37249 = {
+	name = "Elwintinar"
+	dynasty = arelsamirmo
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	mother = arelsamirmo_37248
+
+	3159.1.1 = { birth = yes }
+	3367.1.1 = { death = yes }
+}
+arelsamirmo_37250 = {
+	name = "Tragrim"
+	dynasty = arelsamirmo
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	father = arelsamirmo_37249
+
+	3359.1.1 = { birth = yes }
+	3460.1.1 = { add_spouse = errinorne_36353 }
+	#3484.2.5 = { add_trait = has_knahaten_flu } #HistoryToDo Assign Knahaten flu
+	3484.3.4 = {
+		death = {
+			death_reason = death_ill #HistoryToDo Assign Knahaten Flu Death
+		}
+	}
+}
+arelsamirmo_nesaranwe = {
+	name = "Nesaranwe" #ESO Nesaranwe, Canonreeve of Vulkhel
+	female = yes
+	dynasty = arelsamirmo
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	mother = arelsamirmo_37248
+
+	3281.1.1 = { birth = yes }
+	3561.1.1 = { death = yes }
+}
+
+#Auralus
+auralus_entila = {
+	name = "Entila" #Mentioned in ESO
+	female = yes
+	dynasty = auralus
+
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	2143.1.1 = { birth = yes }
+	2362.1.1 = { death = yes }
+}
+
+#Fiora Dynasty
+fiora_fiorallelle = {
+	name = "Fiorallelle" #Early Kinlady
+	female = yes
+	dynasty = fiora
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_4
+
+	781.1.1 = { birth = yes }
+	1197.1.1 = { death = yes }
+}
+line_of_fiorallelle = {
+	name = "Line of Fiorallelle"
+	dynasty = fiora
+	religion = auriel
+	culture = auridon
+
+	trait = line_of_x
+
+	mother = fiora_fiorallelle
+
+	1197.1.1 = { birth = yes }
+	3003.1.1 = { death = yes }
+}
+fiora_1000 = {
+	name = "Olquar"
+	dynasty = fiora
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	father = line_of_fiorallelle
+
+	3003.1.1 = { birth = yes }
+	3321.1.1 = { death = yes }
+}
+fiora_1001 = {
+	name = "Caryara"
+	female = yes
+	dynasty = fiora
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	father = fiora_1000
+
+	3174.1.1 = { birth = yes }
+	3461.1.1 = { death = yes }
+}
+fiora_1002 = {
+	name = "Carecelmo"
+	dynasty = fiora
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	mother = fiora_1001
+
+	3291.1.1 = { birth = yes }
+	3616.1.1 = { death = yes }
+}
+
+#Jororil
+jaroril_1000 = {
+	name = "Indyen"
+	female = yes
+	dynasty = jororil
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	3217.1.1 = { birth = yes }
+	3474.1.1 = { death = yes }
+}
+jororil_ciranya = {
+	name = "Ciranya" #ESO Ciranya, Captain of South Beacon
+	female = yes
+	dynasty = jororil
+	religion = auriel
+	culture = auridon
+
+	trait = lifespan_3
+
+	3303.1.1 = { birth = yes }
+	3593.1.1 = { death = yes }
+}
+
+
 ##Repubics/Theocracies
 urvaius_1000 = {
 	name = "Herenia"
@@ -2709,9 +2981,70 @@ bewan_1001 = {
 	3584.1.1 = { death = yes }
 }
 
+iluvamir_1000 = {
+	name = "Telindil"
+	religion = auriel
+	culture = auridon
+
+	trait = p_ae_magnus
+	trait = lifespan_3
+
+	3241.1.1 = { birth = yes }
+	3495.1.1 = { death = yes }
+}
+iluvamir_1001 = {
+	name = "Ilirel"
+	female = yes
+	religion = auriel
+	culture = auridon
+
+	trait = p_ae_xarxes
+	trait = lifespan_3
+
+	3415.1.1 = { birth = yes }
+	3683.1.1 = { death = yes }
+}
+
+silatar_1000 = {
+	name = "Naris"
+	religion = auriel
+	culture = auridon
+
+	trait = p_ae_auriel
+	trait = lifespan_3
+
+	3269.1.1 = { birth = yes }
+	3491.1.1 = { death = yes }
+}
+
+tanzelwil_999 = {
+	name = "Firiel"
+	religion = auriel
+	culture = auridon
+
+	trait = p_ae_xarxes
+	trait = lifespan_3
+
+	3191.1.1 = { birth = yes }
+	3411.1.1 = { death = yes }
+}
+tanzelwil_1000 = {
+	name = "Langwe" # ESO Langwe, Priestess of Tanzelwil
+	female = yes
+	#HistoryToDo dynasty
+	religion = auriel
+	culture = auridon
+
+	trait = p_ae_xarxes
+	trait = lifespan_3
+
+	3310.1.1 = { death = yes }
+	3621.1.1 = { death = yes }
+}
+
 torinaan_1000 = {
 	name = "Shatha"
-	#HistoryToDo add her to one of the local noble houses
+	dynasty = derinil
 	female = yes
 	religion = auriel
 	culture = auridon
@@ -2719,6 +3052,8 @@ torinaan_1000 = {
 	trait = education_learning_4
 	trait = lifespan_3
 	trait = p_ae_auriel
+
+	father = derinil_999
 
 	3169.1.1 = { birth = yes }
 	3451.1.1 = { death = yes }
@@ -2821,6 +3156,34 @@ buraniim_1001 = {
 
 	3274.1.1 = { birth = yes }
 	3531.1.1 = { death = yes }
+}
+
+phaer_999 = {
+	name = "Silia"
+	female = yes
+	dynasty = phaeris
+	religion = auriel
+	culture = auridon
+
+	trait = education_stewardship_4
+	trait = lifespan_3
+
+	3194.1.1 = { birth = yes }
+	3481.1.1 = { death = yes }
+}
+phaer_1000 = {
+	name = "Eryeril"
+	dynasty = phaeris
+	religion = auriel
+	culture = auridon
+
+	trait = education_stewardship_1
+	trait = lifespan_3
+
+	mother = phaer_999
+
+	3301.1.1 = { birth = yes }
+	3593.1.1 = { death = yes }
 }
 
 north_beacon_1000 = {

@@ -1,4 +1,137 @@
-﻿##Seamount Dynasty (800013)
+﻿##Igrun Dynasty (igrun)
+
+#Igrun House
+
+igrun_99 = {
+	name = "Igron"
+	dynasty = igrun
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	870.1.1 = { birth = yes }
+	915.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = igrun_100
+		}
+	}
+}
+
+igrun_100 = {
+	name = "Torug" #Lore
+	dynasty = igrun
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = igrun_99
+	
+	890.1.1 = { birth = yes }
+	950.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = igrun_101
+		}
+	}
+}
+
+igrun_101 = {
+	name = "Golkarr" #Lore
+	dynasty = igrun
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = igrun_100
+	
+	930.1.1 = { birth = yes }
+	980.1.1 = { death = { death_reason = death_battle } }
+}
+
+igrun_102 = {
+	name = "Line of Golkarr"
+	dynasty = igrun
+	religion = code_of_malacath
+	culture = mountain_orc
+	trait = line_of_x
+	
+	father = igrun_101
+	
+	979.1.1 = { birth = yes }
+	3301.1.1 = { death = yes }
+}
+
+##Golzarga Dynasty (golzarga)
+
+#Golzarga House
+
+golzarga_99 = {
+	name = "Golzar"
+	dynasty = golzarga
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	2940.1.1 = { birth = yes }
+	2981.1.1 = { death = yes }
+}
+
+golzarga_100 = {
+	name = "Line of Golzar"
+	dynasty = golzarga
+	religion = code_of_malacath
+	culture = mountain_orc
+	trait = line_of_x
+	
+	father = golzarga_99
+	
+	2980.1.1 = { birth = yes }
+	3326.1.1 = { death = yes }
+}
+
+golzarga_101 = {
+	name = "Bashag"
+	dynasty = golzarga
+	religion = code_of_malacath
+	culture = mountain_orc
+	
+	father = golzarga_100
+	
+	3325.1.1 = { birth = yes }
+	3351.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = branquette_999
+		}
+	}
+}
+
+golzarga_102 = {
+	name = "Dagarha"
+	dynasty = golzarga
+	religion = code_of_malacath
+	culture = mountain_orc
+	trait = twin
+	female = yes
+	
+	father = golzarga_101
+	
+	3345.1.1 = { birth = yes }
+	3398.1.1 = { death = yes }
+}
+
+golzarga_103 = {
+	name = "Naroga"
+	dynasty = golzarga
+	religion = code_of_malacath
+	culture = mountain_orc
+	trait = twin
+	female = yes
+	
+	father = golzarga_101
+	
+	3345.1.1 = { birth = yes }
+	3412.1.1 = { death = yes }
+}
+
+##Seamount Dynasty (800013)
 
 #Seamount House
 
@@ -244,6 +377,18 @@ khazor_999 = {
 			killer = khazor_998
 		}  
 	}
+}
+
+khazor_999b = {
+	name = "Mazga"
+	dynasty = 800017
+	culture = mountain_orc
+	religion = code_of_malacath
+	father = khazor_998
+	female = yes
+	
+	3304.1.1 = { birth = yes }
+	3372.1.1 = { death = yes }  
 }
 
 khazor_1000 = {
@@ -512,6 +657,7 @@ yashnag_99 = {
 	religion = code_of_malacath
 	
 	3300.1.1 = { birth = yes }
+	3330.1.1 = { add_spouse = khazor_999b }
 	3350.1.1 = { death = {
 			death_reason = death_duel
 			killer = yashnag_100
@@ -525,15 +671,38 @@ yashnag_100 = {
 	culture = mountain_orc
 	religion = code_of_malacath
 	father = yashnag_99
+	mother = khazor_999b
+
+	disallow_random_traits = yes
 	
+	portrait_override = {	# Will override the character's appearance
+		portrait_modifier_overrides={
+			custom_clothes=male_clothes_secular_northern_war_nobility_01_common
+			custom_headgear=male_headgear_secular_steppe_royalty_01
+			custom_cloaks=male_furs_secular_fp1_nobility_03
+			custom_beards=male_beard_steppe_02
+			custom_hair=male_hair_western_09
+		}
+	}
+
 	3322.1.1 = { birth = yes }
 	3338.1.1 = {
 		trait = education_martial_4
 		trait = blademaster_1
 		trait = wrathful
+		trait = just
+		trait = ambitious
 		trait = scarred
 		trait = strong
 		trait = berserker
+		effect = {
+			add_perk = raider_perk
+			add_perk = sea_raider_perk
+			add_perk = sacred_raids_perk
+			add_perk = grand_raider_perk
+			add_perk = prisoners_and_loot_perk
+			add_perk = loot_and_prisoners_perk
+		}
 	}
 	#3354.1.1 = {
 	#	create_bloodline = { type = bloodline_yashnag }
@@ -671,7 +840,7 @@ ghorak_99 = {
 		death = {
 			death_reason = death_duel
 			killer = ghorak_100
-			}
+		}
 	}
 }
 ghorak_100 = {
@@ -934,7 +1103,7 @@ orgak_100 = {
 }
 
 orgak_101 = {
-	name = "Line_of_Kloth"
+	name = "Line of Kloth"
 	dynasty = 800019
 	culture = mountain_orc
 	religion = code_of_malacath
@@ -1036,17 +1205,54 @@ agluk_1001 = {
 	3387.1.1 = { death = yes }
 }
 
-##Bazul Dynasty (800020)
+##Bagrakh Dynasty (800020)
 
-#Bazul House
+#Bagrakh House
 
-bazul_1 = {
+bagrakh_998 = {
+	name = "Bugrash"
+	dynasty = 800020
+	culture = mountain_orc
+	religion = code_of_malacath
+	
+	father = igrun_102
+	
+	3300.1.1 = { birth = yes }
+	3344.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = bagrakh_999
+		}
+	}
+}
+
+bagrakh_999 = {
+	name = "Horak"
+	dynasty = 800020
+	culture = mountain_orc
+	religion = code_of_malacath
+	
+	father = bagrakh_998
+	
+	3319.1.1 = { birth = yes }
+	3350.1.1 = { 
+		death = {
+			death_reason = death_duel
+			killer = bagrakh_1000
+		}
+	}
+}
+
+bagrakh_1000 = {
 	name = "Mordularg"
 	dynasty = 800020
 	culture = mountain_orc
-	religion = malacath_brutal_breed
+	religion = code_of_malacath
+	
+	father = bagrakh_999
 	
 	3301.1.1 = { birth = yes }
+	3351.1.1 = { religion = malacath_brutal_breed }
 	3362.1.1 = { 
 		death = {
 			death_reason = death_duel
@@ -1055,13 +1261,14 @@ bazul_1 = {
 	}
 }
 
-bazul_2 = {
+bagrakh_1001 = {
 	name = "Horak"
 	dynasty = 800020
 	culture = mountain_orc
-	religion = malacath_brutal_breed
+	religion = code_of_malacath
 	
 	3336.1.1 = { birth = yes }
+	3351.1.1 = { religion = malacath_brutal_breed }
 	3382.1.1 = { death = yes }
 }
 
@@ -1330,15 +1537,35 @@ ivory_tooth_1000_wife = {
 }
 
 #Shardbrok Dynasty, Chiefs of Sunderstone, Falkreath
+
 shardbrok_1000 = {
 	name = "Madrukh"
+	dna = madrukh_shardbrok_dna_entry
 	dynasty = shardbrok
 	culture = mountain_orc
 	religion = code_of_malacath
 
 	trait = education_martial_2
+	trait = stubborn
+	trait = brave
+	trait = fickle
+
+	portrait_override = {
+		portrait_modifier_overrides={
+			custom_clothes=male_clothes_secular_steppe_nobility_01_common
+			custom_headgear=male_headgear_secular_fp1_common_02
+			custom_hair=male_hair_fp1_07
+			custom_beards=male_beard_mena_04
+		}
+	}
 	
 	3303.2.8 = { birth = yes }
+	3357.1.1 = {
+		remove_trait = brave
+		remove_trait = fickle
+		add_trait = gluttonous
+		add_trait = lazy
+	}
 	3365.3.3 = {
 		death = {
 			death_reason = death_duel
@@ -1370,7 +1597,6 @@ murug_1000 = {
 	
 	3306.2.8 = { birth = yes }
 	3364.3.3 = { death = yes }
-	}
 }
 
 #Murug Dynasty, Chiefs of Malak's Maw, Morrowind, and also [insert county name] in Rivenspire (thank you eso lore, very cool)
@@ -1382,5 +1608,4 @@ oathbound_100 = {
 	
 	3324.1.1 = { birth = yes }
 	3371.1.1 = { death = yes }
-	}
 }

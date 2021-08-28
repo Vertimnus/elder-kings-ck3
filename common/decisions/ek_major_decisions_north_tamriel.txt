@@ -361,6 +361,120 @@ solstheim_claim_coast_decision = {
 	}
 }
 
+keizaal_realm_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+	major = yes
+	ai_check_interval = 120
+	desc = keizaal_realm_decision_desc
+
+	is_shown = {
+		is_independent_ruler = yes
+		faith = {
+            has_doctrine = doctrine_pantheon_dragons
+		}
+		has_culture_group = culture_group:nordic_group
+		highest_held_title_tier >= tier_kingdom
+			
+		NOT = {
+			is_target_in_global_variable_list = {
+                name = unavailable_unique_decisions
+                target = flag:keizaal_realm_decision
+            }
+        }
+	}
+
+	is_valid = {
+		has_culture_group = culture_group:nordic_group
+		piety_level >= 3
+        
+		OR = {
+			has_primary_title = title:e_skyrim
+			completely_controls_region = mundus_tamriel_skyrim
+		}
+		
+		faith = {
+            has_doctrine = doctrine_pantheon_dragons
+		}
+	}
+		
+	cost = {
+		gold = 400
+		piety = 750
+	}
+        
+	effect = {
+       title:e_skyrim = { set_title_name = Keizaal }
+
+		add_to_global_variable_list = {
+			name = unavailable_unique_decisions
+			target = flag:keizaal_realm_decision
+		}
+		trigger_event = dragon_cult.0001
+        trigger_event = dragon_cult.0002
+	}
+}
+
+# First Nordic Empire, rather big
+reform_first_nordic_empire_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_dynasty_house.dds"
+
+	desc = reform_first_nordic_empire_decision_desc
+	selection_tooltip = reform_first_nordic_empire_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		always = no # Needs more work
+		is_landed = yes
+		exists = capital_province
+		
+		culture_group = culture_group:nordic_group
+		
+		has_title = title:e_skyrim
+	}
+
+	is_valid = {
+		completely_controls_region = mundus_tamriel_skyrim
+		completely_controls_region = mundus_tamriel_hammerfell_craglorn
+		completely_controls_region = mundus_tamriel_morrowind_velothis
+		completely_controls_region = mundus_tamriel_high_rock_fharun
+		completely_controls_region = mundus_tamriel_cyrodiil_bruma
+	}
+
+	is_valid_showing_failures_only = {
+		is_available_adult = yes
+	}
+
+	cost = {
+	}
+
+	effect = {
+		every_kingdom = {
+			limit = {
+				title_capital_county.title_province = {
+					OR = {
+						geographical_region = mundus_tamriel_skyrim
+						geographical_region = mundus_tamriel_hammerfell_craglorn
+						geographical_region = mundus_tamriel_morrowind_velothis
+						geographical_region = mundus_tamriel_high_rock_fharun
+						geographical_region = mundus_tamriel_cyrodiil_bruma
+					}
+				}
+			}
+			set_de_jure_liege_title = title:e_skyrim
+		}
+	}
+	
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+
 ####################
 # DIRENNI HEGEMONY #
 ####################

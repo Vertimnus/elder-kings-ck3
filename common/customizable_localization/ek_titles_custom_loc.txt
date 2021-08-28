@@ -44,3 +44,53 @@
 	}
 
 }
+
+# full name for altmer - name 'len father grandfather 'ata mother grandmother 'cal house
+GetAltmerName = {
+	type = character
+
+	# share house with only mother - matri
+	# share house with only father - patri
+	# share house with both - patri (assumed, will be accurate at least 50% of the time)
+	# share house with neither (cadet)
+		#share dynasty with only mother - matri
+		#share dynasty with only father - patri
+		#share dynasty with both - patri (assumed, 50% accurate)
+		#share dynasty with neither - patri (fallback, how did ou even achieve that?)
+
+	text = {
+		trigger = { #only father, both house
+			ROOT.house = ROOT.father.house
+		}
+		localization_key = alt_name_patri
+	}
+
+	text = {
+		trigger = { #only mother house - implicitly not father from prev
+			ROOT.house = ROOT.mother.house
+		}
+		localization_key = alt_name_matri
+	}
+
+	text = {
+		trigger = { #only father, both dynasty
+			ROOT.dynasty = ROOT.father.dynasty
+		}
+		localization_key = alt_name_patri
+	}
+
+	text = {
+		trigger = { #only mother dynasty - implicitly not father from prev
+			ROOT.dynasty = ROOT.mother.dynasty
+		}
+		localization_key = alt_name_matri
+	}
+
+	text = {
+		trigger = { #fallback if they somehow dont share a dynasty with either parent - lowborn or some fuckery 
+			always = no
+		}
+		fallback = yes
+		localization_key = alt_name_patri
+	}
+}

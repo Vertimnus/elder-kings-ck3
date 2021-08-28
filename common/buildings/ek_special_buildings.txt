@@ -476,6 +476,125 @@ bridges_leyawiin_01 = {
 	type = duchy_capital
 }
 
+##########
+# City of Orsinium
+##########
+city_of_orsinium_01 = { # Used by non-Orcs for a prestige boost
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_aurelian_walls.dds"
+	
+	can_construct_potential = {
+		barony = title:b_old_orsinium
+		building_requirement_tribal = no
+	}
+	
+	is_enabled = {
+		NOT = { scope:holder.culture = culture:mountain_orc }
+	}
+	
+	cost_gold = 3000
+
+	character_modifier = {
+		army_maintenance_mult = -0.05 # 'Stealing' the resources from the ruins
+		monthly_prestige = 0.5
+	}
+	
+	province_modifier = {
+		build_speed = -0.1 # 'Stealing' the resources from the ruins
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	next_building = city_of_orsinium_02
+	
+	type = special
+}
+city_of_orsinium_02 = { # Just reclaimed by the Orcs, work has begun
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_aurelian_walls.dds"
+	
+	can_construct_potential = {
+		barony = title:b_old_orsinium
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		scope:holder.culture = culture:mountain_orc
+	}
+	
+	is_enabled = {
+		scope:holder.culture = culture:mountain_orc
+	}
+	
+	cost_gold = 3000
+
+	character_modifier = {
+		monthly_prestige = 0.1
+		same_culture_opinion = 2
+	}
+	
+	max_garrison = good_building_max_garrison_tier_1
+	province_modifier = {
+		defender_holding_advantage = normal_building_advantage_tier_1
+		fort_level = good_building_fort_level_tier_1
+	}
+	county_modifier = {
+		development_growth = 0.1
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	next_building = city_of_orsinium_03
+	
+	type = special
+}
+city_of_orsinium_03 = { # Orcs have reclaimed it and rebuild it
+	construction_time = very_slow_construction_time
+
+	type_icon = "icon_structure_aurelian_walls.dds"
+	
+	can_construct_potential = {
+		barony = title:b_old_orsinium
+		building_requirement_tribal = no
+	}
+	
+	can_construct = {
+		scope:holder.culture = culture:mountain_orc
+	}
+	
+	is_enabled = {
+		scope:holder.culture = culture:mountain_orc
+	}
+	
+	cost_gold = 3000
+
+	character_modifier = {
+		monthly_prestige = 0.3
+		same_culture_opinion = 5
+	}
+	max_garrison = good_building_max_garrison_tier_3
+	province_modifier = {
+		defender_holding_advantage = normal_building_advantage_tier_3
+		fort_level = good_building_fort_level_tier_3
+	}
+	county_modifier = {
+		development_growth = 0.2
+		development_growth_factor = 0.15
+	}
+	
+	ai_value = {
+		base = 100
+	}
+	
+	type = special
+}
+
 ################################
 #             MINES            #
 ################################
