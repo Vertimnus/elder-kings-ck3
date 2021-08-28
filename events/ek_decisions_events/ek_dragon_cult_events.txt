@@ -1,7 +1,7 @@
 namespace = dragon_cult
 
- #dragon_cult.0001: Choosing capital
- #dragon_cult.0002: - xxxx: Becoming a Dragon Priest
+ #dragon_cult.0001: Choosing capital - Keizaal Formation
+ #dragon_cult.0002: Becoming a Dragon Priest - Keizaal Formation
  
  
  
@@ -48,7 +48,57 @@ namespace = dragon_cult
 	}
 }
 
- dragon_cult.0002 = {
+scripted_effect get_dragon_priest_name = {           
+        
+	random_list = {
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Kendov } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Unahzaal } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Kroniid } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Rahgol } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Reinvaaz } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Krilot } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Qahnaarin } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Nonvul } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Deinmaar } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Vintaas } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Yuvon } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Wahlaan } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Monah } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Vosaraan } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Pindaar } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Nonvul } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Miiraad } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Faraan } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Du'ul } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Kinbok } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Maltiid } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Tinvaak } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Lovaas } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Aakaal } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Qolaas } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Midrot } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Ensosin } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Ruvaak } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Viidost } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Motmahus } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Hahvulon } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Sosaal } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Vithaar } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Nahlot } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Tahrovin } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Mindoraan } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Onikiv } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Revak } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Krojul } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Mulaag } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Vokrii } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Onikaan } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Hahdrim } }
+			1 = { save_scope_value_as = { name = name_$X$ value = flag:Lahzorox } }
+	}
+}
+
+dragon_cult.0002 = {
     type = character_event
     title = dragon_cult.0002.t
     desc = dragon_cult.0002.desc
@@ -56,132 +106,60 @@ namespace = dragon_cult
     left_portrait = {    character = root  }
 
     immediate = {
-        switch = {
-            trigger = highest_skill
-        martial = {
-             random_list = {
-				1 = { save_scope_value_as = { name = name_1 value = flag:Kendov } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Unahzaal } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Kroniid } }
-			}
-				random_list = {
-				1 = { save_scope_value_as = { name = name_2 value = flag:Rahgol } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Reinvaaz } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Krilot } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_3 value = flag:Qahnaarin } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Nonvul } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Deinmaar } }
-			}
-		}
-        stewardship = {
-                random_list = {
-				1 = { save_scope_value_as = { name = name_1 value = flag:Vintaas } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Yuvon } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Wahlaan } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_2 value = flag:Monah } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Vosaraan } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Pindaar } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_3 value = flag:Nonvul } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Miiraad } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Faraan } }
-			}
-		}
-        diplomacy = {
-                random_list = {
-				1 = { save_scope_value_as = { name = name_1 value = flag:Du'ul } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Kinbok } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Maltiid } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_2 value = flag:Tinvaak } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Lovaas } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Sahrot } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_3 value = flag:Aakaal } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Qolaas } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Midrot } }
-			}
-		}
-        intrigue = {
-               random_list = {
-				1 = { save_scope_value_as = { name = name_1 value = flag:Ensosin } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Ruvaak } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Viidost } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_2 value = flag:Motmahus } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Hahvulon } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Sosaal } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_3 value = flag:Vithaar } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Nahlot } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Kroniid } }
-			}
-		}
-        learning = {
-                random_list = {
-				1 = { save_scope_value_as = { name = name_1 value = flag:Mindoraan } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Onikiv } }
-				1 = { save_scope_value_as = { name = name_1 value = flag:Revak } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_2 value = flag:Krojul } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Mulaag } }
-				1 = { save_scope_value_as = { name = name_2 value = flag:Vokrii } }
-			}
-			random_list = {
-				1 = { save_scope_value_as = { name = name_3 value = flag:Onikaan } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Hahdrim } }
-				1 = { save_scope_value_as = { name = name_3 value = flag:Lahzorox } }
-			}
-        }
-    }
+		get_dragon_priest_name = { X = 1 }
+        get_dragon_priest_name = { X = 2 }
+        get_dragon_priest_name = { X = 3 }
 }
-    option = { # take mask 1
+	
+option = { # take mask 1
         name = dragon_cult.0002.a
-        if = {
+        add_prestige = medium_prestige_gain
+		if = {
             limit = { exists = scope:name_1 }
             change_first_name = scope:name_1 }
 
         ai_chance = {
             base = 100
         }
+		stress_impact = {
+			humble = medium_stress_impact_gain
+		}
     }
 	option = { # take mask 2
         name = dragon_cult.0002.b
-        if = {
+        add_prestige = medium_prestige_gain
+		if = {
             limit = { exists = scope:name_2 }
             change_first_name = scope:name_2 }
 
         ai_chance = {
             base = 100
         }
+		stress_impact = {
+			humble = medium_stress_impact_gain
+		}
     }
 	option = { # take mask 3
         name = dragon_cult.0002.c
-        if = {
+        add_prestige = medium_prestige_gain
+		if = {
             limit = { exists = scope:name_3 }
             change_first_name = scope:name_3 }
 
         ai_chance = {
             base = 100
         }
+		stress_impact = {
+			humble = medium_stress_impact_gain
+		}
     }
-    option = { # No change
+    
+	option = { # No change
         name = dragon_cult.0002.d
         add_prestige = medium_prestige_gain
-    }
-    after = {
-    remove_variable = name_1
-    remove_variable = name_2
-    remove_variable = name_3 
+    
+	stress_impact = {
+			ambitious = medium_stress_impact_gain
+		}
 	}
 } 
