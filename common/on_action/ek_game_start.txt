@@ -303,6 +303,24 @@ ek_on_game_start = {
 					# Set k_council_of_the_eight as its religious title
 					set_religious_head_title = k_council_of_the_eight
 				}
+				
+				# We need to save every Chapel of the Council of the Eight
+				set_global_variable = {
+					name = council_eight_chapel_cyrodiil
+					value = faith:imperial_cult
+				}
+				set_global_variable = {
+					name = council_eight_chapel_skyrim
+					value = faith:nord_cult
+				}
+				set_global_variable = {
+					name = council_eight_chapel_high_rock
+					value = faith:breton_cult
+				}
+				set_global_variable = {
+					name = council_eight_chapel_hammerfell
+					value = faith:redguard_cult
+				}
 			}
 		}
 		
@@ -533,9 +551,56 @@ ek_on_game_start = {
 		}
 		
 		## Fervor Equilibrium
-		every_religion_global = {
-			every_faith = { faith_update_fervor_equilibrium = yes }
+		# First we handle the Leader of the Council of the Eight
+		global_var:leader_council_eight = {
+			faith_update_fervor_equilibrium = yes
 		}
+		every_religion_global = {
+			every_faith = { 
+				limit = { NOT = { this = global_var:leader_council_eight } }
+				faith_update_fervor_equilibrium = yes
+			}
+		}
+		
+		## Dynamic Religious Hostility
+		# Give each faith its id
+		# Side note: this also gives us the number of faiths in the game
+		# Note: We start at -1 to get an accurate number. The first faith will be at 0, and we won't have a phantom 79th base_hostility
+		set_global_variable = {
+			name = current_faith_id
+			value = -1
+		}
+
+		every_religion_global = {
+			every_faith = {
+				change_global_variable = {
+					name = current_faith_id
+					add = 1
+				}
+				set_variable = {
+					name = faith_id
+					value = global_var:current_faith_id
+				}
+			}
+		}
+		
+		### DISABLED FOR NOW, NEEDS MORE WORK
+		# Then for every faith we build the hostility list
+		# every_religion_global = {
+			# every_faith = {
+				# save_scope_as = curr_faith
+				# set_while_counter_variable_effect = yes
+				# while = {
+					# limit = { scope:curr_faith.var:while_counter = { compare_value <= global_var:current_faith_id } }
+					# faith_update_base_hostility_with = {
+						# FAITH2_NUMBER = scope:curr_faith.var:while_counter
+						# FAITH1 = scope:curr_faith
+					# }
+					# increase_while_counter_variable_effect = yes
+				# }
+				# remove_while_counter_variable_effect = yes
+			# }
+		# }
 		
 		### Holy Sites buildings
 		## Due to how special buildings work, only one special building can be added per holding. So if faiths with different types of holy buildings share a holy site, it might be worth to check if it cannot be given a unique one

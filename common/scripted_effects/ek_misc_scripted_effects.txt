@@ -1085,7 +1085,7 @@ get_sqrt_integer = { # Rough estimate
 	set_local_variable = { name = x value = 1 }
     set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
     while = {
-        limit = { local_var:param > local_var:x_squared }
+        limit = { local_var:param = { compare_value > local_var:x_squared } }
 		
 		set_local_variable = { name = x value = { value = local_var:x add = 1 } }
 		set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
@@ -1097,7 +1097,7 @@ get_sqrt_precise = { # Much more precise estimate, but we need to know where to 
 	set_local_variable = { name = x value = local_var:result }
     set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
     while = { # We work backwards
-        limit = { local_var:x_squared > local_var:param }
+        limit = { local_var:x_squared = { compare_value > local_var:param } }
 		
 		set_local_variable = { name = x value = { value = local_var:x subtract = 0.001 } }
 		set_local_variable = { name = x_squared value = { value = local_var:x multiply = local_var:x } }
