@@ -95,6 +95,7 @@ create_orsinium_kingdom_decision = {
 
 	is_shown = {
 		title:k_orsinium = { is_title_created = no }
+		culture = { has_innovation = innovation_denizens_lost_orsinium }
 		culture_group = culture_group:orsimer_group
 		highest_held_title_tier > tier_duchy
 	}
@@ -107,7 +108,7 @@ create_orsinium_kingdom_decision = {
 		#Your kingdom's capital is Orc-culture
 		capital_county.de_jure_liege.de_jure_liege = { save_temporary_scope_as = kingdom_check }
 		scope:kingdom_check.holder = root
-		scope:kingdom_check.title_capital_county.culture_group = culture_group:orsimer_group
+		scope:kingdom_check.title_capital_county.culture = { has_innovation = innovation_denizens_lost_orsinium }
 		completely_controls = scope:kingdom_check
 	}
 
@@ -160,6 +161,9 @@ create_orsinium_kingdom_decision = {
 			}
 			trigger_event = { id = ek_major_decisions.0021 days = 1 }
 		}
+		
+		### Modifiers to defend the new Orsinium
+		update_orsinium_mountain_orc_advantage = yes
 	}
 
 	ai_potential = {
@@ -182,7 +186,7 @@ create_orsinium_decision = {
 
 	is_shown = {
 		title:k_orsinium = { is_title_created = no }
-		culture_group = culture_group:orsimer_group
+		culture = { has_innovation = innovation_denizens_lost_orsinium }
 		highest_held_title_tier < tier_kingdom 
 	}
 	
@@ -196,7 +200,7 @@ create_orsinium_decision = {
 		#Your main duchy's capital is Orc-culture and is not already the capital of another kingdom
 		custom_description = {
 			capital_county.de_jure_liege.title_capital_county.holder = { this = root }
-			capital_county.culture_group = culture_group:orsimer_group
+			capital_county.culture = { has_innovation = innovation_denizens_lost_orsinium }
 			capital_county.de_jure_liege.title_capital_county = { save_temporary_scope_as = capital_check }
 			NOT = { any_kingdom = { title_capital_county = scope:capital_check } }
 			text = create_orsinium_decision_cd
@@ -262,6 +266,9 @@ create_orsinium_decision = {
 			}
 			trigger_event = { id = ek_major_decisions.0021 days = 1 }
 		}
+		
+		### Modifiers to defend the new Orsinium
+		update_orsinium_mountain_orc_advantage = yes
 	}
 
 	ai_potential = {
@@ -332,6 +339,10 @@ expand_orsinium_decision = {
 			# limit = { is_ai = no }
 			# trigger_event = @
 		# }
+		
+		
+		### Modifiers to defend the new Orsinium
+		update_orsinium_mountain_orc_advantage = yes
 	}
 
 	ai_potential = {
@@ -362,7 +373,7 @@ reintegrate_orsinium_decision = {
 				}
 			}
 		}
-		NOT = { culture_group = culture_group:orsimer_group }
+		NOT = { culture = { has_innovation = innovation_denizens_lost_orsinium } }
 		any_held_title = { has_variable = orsinium_original_liege_boolean }
 	}
 	
