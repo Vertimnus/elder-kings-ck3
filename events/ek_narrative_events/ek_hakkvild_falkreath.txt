@@ -1,0 +1,85 @@
+﻿#Event chain telling how Hakkvild regained Falkreath
+
+namespace = ek_hakkvild
+
+#ek_hakkvild.0001 = {
+#	title = ek_hakkvild.0001.t
+#	desc = ek_hakkvild.0001.desc
+#	
+#	theme = war
+#	
+#	left_portrait = {
+#		character = character:yashnag_100
+#		animation = war_over_win
+#	}
+#	
+#	right_portrait = {
+#		character = character:skjoralmor_100
+#		animation = anger
+#	}
+#
+#	lower_right_portrait = {
+#		character = scope:event_target
+#		animation = fear
+#	}
+#
+#	trigger = {
+#		scope:skjoralmor_200 = { is_alive = yes }
+#	}
+#
+#	option = {
+#		name = ek_hakkvild.0001.a
+#	}
+#}
+
+ek_hakkvild.0001 = {
+	type = character_event
+	title = ek_hakkvild.0001.t
+	desc = {
+		desc = ek_hakkvild.0001.desc
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_peace_ensues"
+		character:skjoralmor_100 = { save_scope_as = hakkvild }
+		character:yashnag_100 = { save_scope_as = yashnag }
+		character:skjoralmor_200 = { save_scope_as = engar }
+		character:skjoralmor_99 = { save_scope_as = falk }
+		title:d_helgen = { save_scope_as = helgen}
+		title:k_falkreath = { save_scope_as = falkreath }
+	}
+
+	theme = war
+	left_portrait = {
+		character = character:yashnag_100
+		animation = war_over_win
+	}
+	
+	right_portrait = {
+		character = character:skjoralmor_100
+		animation = anger
+	}
+
+	lower_right_portrait = {
+		character = character:skjoralmor_200
+	}
+
+	trigger = {
+		AND = {
+		character:skjoralmor_100 = { is_alive = yes }
+		character:yashnag_100 = { is_alive = yes }
+		character:skjoralmor_200 = { is_alive = yes }
+		}
+	}
+
+	
+
+	# Let's see what he has come up with.
+	option = {
+		name = ek_hakkvild.0001.a
+
+		ai_chance = {
+			base = 0	#The AI should never get this event, but if they do, shouldn't opt in.
+		}
+	}
+}

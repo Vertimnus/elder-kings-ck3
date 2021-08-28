@@ -1104,3 +1104,55 @@ get_sqrt_precise = { # Much more precise estimate, but we need to know where to 
     }
     set_local_variable = { name = result value = local_var:x }
 }
+
+### Orsinium Flavor
+update_orsinium_mountain_orc_advantage = {
+	if = {
+		limit = {
+			title:k_orsinium = {
+				is_title_created = yes
+				any_in_de_jure_hierarchy = { is_titular = no } # Has at least one de jure vassal
+			}
+		}
+		
+		### Orsinium Defense Squad: +20 advantage, -5 for each de Jure duchy in Orsinium
+		title:k_orsinium = {
+			set_variable = {
+				name = nb_orsinium_mountain_orc_advantage
+				value = 5
+			}
+
+			every_in_de_jure_hierarchy = {
+				limit = { tier = tier_duchy }
+				title:k_orsinium = {
+					change_variable = {
+						name = nb_orsinium_mountain_orc_advantage
+						subtract = 1
+					}
+				}
+			}
+		
+			if = {
+				limit = { var:nb_orsinium_mountain_orc_advantage = { compare_value > 0 } }
+					every_in_de_facto_hierarchy = {
+					limit = {
+						tier = tier_barony
+						save_temporary_scope_as = current_prov
+						title:k_orsinium = { is_de_jure_liege_or_above_target = scope:current_prov }
+					}
+					title_province = {
+						set_while_counter_variable_effect = yes
+						while = {
+							limit = {
+								var:while_counter = { compare_value < title:k_orsinium.var:nb_orsinium_mountain_orc_advantage }
+							}
+							add_province_modifier = orsinium_mountain_orc_advantage
+							increase_while_counter_variable_effect = yes
+						}
+						remove_while_counter_variable_effect = yes
+					}
+				}
+			}
+		}
+	}
+}
