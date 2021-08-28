@@ -1,0 +1,46 @@
+﻿ek_narrative_events_start = {
+	effect = {
+
+		#Hakkvilds Storyline - events\ek_narrative_events\ek_hakkvild_falkreath.txt
+		character:skjoralmor_200 = {
+			if = {
+				limit = {
+					is_alive = yes
+					is_landed = yes
+					#AND = {
+					#	is_ai = no
+					#}
+					AND = {
+						character:skjoralmor_100 = {
+							is_alive = yes
+						}
+						character:yashnag_100 = {
+							is_alive = yes
+						}
+					}
+				}
+				trigger_event = {
+					id = ek_hakkvild.0001
+					days = { 21 35 }
+				}
+			}
+		}
+
+		#Introduction to Yashnag - events\ek_narrative_events\ek_narrative_intros.txt
+		character:yashnag_100 = {
+			if = {
+				limit = {
+					is_alive = yes
+					is_landed = yes
+					#AND = {
+					#	is_ai = no
+					#}
+				}
+				trigger_event = {
+					id = ek_narrative_intro.yashnag
+				}
+			}
+		}
+
+	}
+}
