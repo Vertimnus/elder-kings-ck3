@@ -97,6 +97,7 @@ create_orsinium_kingdom_decision = {
 		title:k_orsinium = { is_title_created = no }
 		culture = { has_innovation = innovation_denizens_lost_orsinium }
 		culture_group = culture_group:orsimer_group
+		#This decision is for kings creating Orsinium
 		highest_held_title_tier > tier_duchy
 	}
 	
@@ -105,7 +106,7 @@ create_orsinium_kingdom_decision = {
 		prestige_level >= 4
 		#INDEPENDENT
 		is_independent_ruler = yes
-		#Your kingdom's capital is Orc-culture
+		#Your kingdom's capital (which you completely controls) is Orc-culture
 		capital_county.de_jure_liege.de_jure_liege = { save_temporary_scope_as = kingdom_check }
 		scope:kingdom_check.holder = root
 		scope:kingdom_check.title_capital_county.culture = { has_innovation = innovation_denizens_lost_orsinium }
@@ -128,20 +129,22 @@ create_orsinium_kingdom_decision = {
 		get_title = title:k_orsinium
 		#Saves the duchy that becomes part of Orsinium
 		capital_county.de_jure_liege.de_jure_liege = { save_scope_as = original_kingdom }
-		#Marks the original de jure liege
-		scope:original_kingdom = {
-			set_variable = {
-				name = orsinium_original_kingdom_boolean
-				value = 1
+		#Marks (and destroy) the original de jure liege
+		if = {
+			limit = { exists = original_kingdom }
+			scope:original_kingdom = {
+				set_variable = {
+					name = orsinium_original_kingdom_boolean
+					value = 1
+				}
 			}
+			destroy_title = scope:original_kingdom
 		}
 		#Makes it de jure part of Orsinium
 		every_duchy = {
 			limit = { de_jure_liege = scope:original_kingdom }
 			set_de_jure_liege_title = title:k_orsinium
 		}
-		#Destroys original kingdom
-		destroy_title = scope:original_kingdom
 		#Gives Orsinium a new capital
 		title:k_orsinium = { set_capital_county = scope:original_kingdom.title_capital_county }
 		#Marks Orsinium as complete kingdom
@@ -187,6 +190,7 @@ create_orsinium_decision = {
 	is_shown = {
 		title:k_orsinium = { is_title_created = no }
 		culture = { has_innovation = innovation_denizens_lost_orsinium }
+		#This decision is for dukes creating Orsinium
 		highest_held_title_tier < tier_kingdom 
 	}
 	
@@ -196,13 +200,18 @@ create_orsinium_decision = {
 		#INDEPENDENT
 		is_independent_ruler = yes
 		#DUKE
-		highest_held_title_tier > tier_county
+		highest_held_title_tier = tier_duchy
 		#Your main duchy's capital is Orc-culture and is not already the capital of another kingdom
 		custom_description = {
 			capital_county.de_jure_liege.title_capital_county.holder = { this = root }
 			capital_county.culture = { has_innovation = innovation_denizens_lost_orsinium }
 			capital_county.de_jure_liege.title_capital_county = { save_temporary_scope_as = capital_check }
-			NOT = { any_kingdom = { title_capital_county = scope:capital_check } }
+			NOT = { 
+				any_kingdom = { 
+					title_capital_county = scope:capital_check
+					NOT = { this = title:k_orsinium }
+				} 
+			}
 			text = create_orsinium_decision_cd
 		}
 	}
@@ -233,7 +242,7 @@ create_orsinium_decision = {
 		scope:orsinium_original_duchy.de_jure_liege = { save_scope_as = orsinium_original_liege }
 		#Marks the original de jure liege title (if so the game doesn't keep always trying to calc it)
 		if = {
-			limit = { exists = scope:orsinium_liege }
+			limit = { exists = scope:orsinium_original_liege }
 			scope:orsinium_original_liege = {
 				set_variable = {
 					name = orsinium_original_liege_boolean
@@ -298,7 +307,10 @@ expand_orsinium_decision = {
 		#FAME LEVEL
 		prestige_level >= 4
 		#You hold Orsinium's de jure duchy
-		any_held_title = { has_variable = orsinium_original_liege_boolean }
+		custom_description = {
+			any_held_title = { has_variable = orsinium_original_liege_boolean }
+			text = expand_orsinium_decision_cd
+		}
 	}
 
 	is_valid_showing_failures_only = {
@@ -321,9 +333,12 @@ expand_orsinium_decision = {
 			save_scope_as = orsinium_original_liege_kingdom
 		}
 		#Makes the original duchies de jure Orsinium
-		every_duchy = {
-			limit = { de_jure_liege = scope:orsinium_original_liege_kingdom }
-			set_de_jure_liege_title = title:k_orsinium
+		if = {
+			limit = { exists = orsinium_original_liege_kingdom }
+			every_duchy = {
+				limit = { de_jure_liege = scope:orsinium_original_liege_kingdom }
+				set_de_jure_liege_title = title:k_orsinium
+			}
 		}
 		#Destroys the original title
 		destroy_title = scope:orsinium_original_liege_kingdom
@@ -334,11 +349,16 @@ expand_orsinium_decision = {
 				value = 1
 			}
 		}
+		#Event for Orsinium king
+		trigger_event = { id = ek_major_decisions.0022 }
 		#Let other rulers know about it (only matters for players)
-		# every_ruler = { 
-			# limit = { is_ai = no }
-			# trigger_event = @
-		# }
+		every_ruler = { 
+			limit = { 
+				NOT = { has_title = title:k_orsinium }
+				is_ai = no
+			}
+			trigger_event = { id = ek_major_decisions.0023 days = 1 }
+		}
 		
 		
 		### Modifiers to defend the new Orsinium
@@ -364,6 +384,7 @@ reintegrate_orsinium_decision = {
 	ai_check_interval = 120
 
 	is_shown = {
+		#Either there is no Orsinium or it is not yours (duh) or a vassal's
 		OR = {
 			title:k_orsinium = { is_title_created = no }
 			AND = {
@@ -381,7 +402,10 @@ reintegrate_orsinium_decision = {
 		#FAME LEVEL
 		prestige_level >= 1
 		#You hold Orsinium's de jure duchy
-		any_held_title = { has_variable = orsinium_original_duchy_boolean }
+		custom_description = {
+			any_held_title = { has_variable = orsinium_original_duchy_boolean }
+			text = reintegrate_orsinium_decision_cd
+		}
 	}
 
 	is_valid_showing_failures_only = {
@@ -410,10 +434,16 @@ reintegrate_orsinium_decision = {
 			}
 			save_scope_as = orsinium_original_liege
 		}
-		#Makes it de jure part of Orsinium
-		scope:orsinium_original_duchy = { set_de_jure_liege_title = scope:orsinium_original_liege }
+		#Makes it de jure part of the original kingdom
 		#If there is an Orsinium de jure liege, he gets a claim in the duchy
-		title:k_orsinium.holder = { add_pressed_claim = scope:orsinium_original_duchy }
+		if = {
+			limit = { exists = orsinium_original_liege }
+			scope:orsinium_original_duchy = { set_de_jure_liege_title = scope:orsinium_original_liege }
+			title:k_orsinium.holder = { 
+				add_pressed_claim = scope:orsinium_original_duchy
+				save_scope_as = orsinium_old_king
+			}
+		}
 		#No more King of Orsinium
 		destroy_title = title:k_orsinium
 		#Clears variables
@@ -424,10 +454,10 @@ reintegrate_orsinium_decision = {
 			remove_variable = orsinium_original_liege_boolean
 		}
 		#Let other rulers know about it (only matters for players)
-		# every_ruler = { 
-			# limit = { is_ai = no }
-			# trigger_event = @
-		# }
+		every_ruler = { 
+			limit = { is_ai = no }
+			trigger_event = { id = ek_major_decisions.0024 days = 1 }
+		}
 	}
 
 	ai_potential = {
@@ -575,14 +605,14 @@ create_new_nibenay_kingdom_decision = {
 	}
 	
 	cost = {
-		gold = { value = 1500 }
+		gold = { value = 1000 }
 		prestige = { value = 500 }
 	}
 
 	effect = {
 		custom_description = {
 			trigger_event = { id = ek_major_decisions.0010 }
-			text = create_new_nibenay_kingdom_decision_cd
+			text = create_new_nibenay_kingdom_decision_cm
 		}
 	}
 
