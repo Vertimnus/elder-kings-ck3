@@ -309,6 +309,7 @@ ek_major_decisions.0010 = {
 
 # ek_major_decisions.0021 - 0030: Reestablish (or destroy) Orsinium
 
+#Creates Orsinium
 ek_major_decisions.0020 = {
 	type = character_event
 	title = ek_major_decisions.0020.t
@@ -325,11 +326,6 @@ ek_major_decisions.0020 = {
 
 	option = {
 		name = ek_major_decisions.0020.option
-		
-		scope:orsinium_capital = {
-			set_title_name = c_orsinium
-			add_county_modifier = city_of_the_orcs
-		}
 	}
 }
 
@@ -345,8 +341,8 @@ ek_major_decisions.0021 = {
 	}
 	
 	immediate = {
-		title:k_orsinium.holder = { save_scope_as = new_orsinium_king }
-		
+		title:k_orsinium.title_capital_county = { save_scope_as = orsinium_capital }
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
 	}
 
 	option = {
@@ -356,6 +352,8 @@ ek_major_decisions.0021 = {
 			OR = {
 				root = scope:orsinium_original_liege.holder
 				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scopeorsinium_original_liege_kingdom.de_jure_liege.holder
 			}
 		}
 	}
@@ -366,6 +364,9 @@ ek_major_decisions.0021 = {
 		trigger = { 
 			NOR = { 
 				root = scope:orsinium_original_liege.holder
+				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scopeorsinium_original_liege_kingdom.de_jure_liege.holder
 				culture_group = culture_group:orsimer_group
 			} 
 		}
@@ -375,7 +376,101 @@ ek_major_decisions.0021 = {
 		name = ek_major_decisions.0021.option.c
 		
 		trigger = { 
-			NOT = { root = scope:orsinium_original_liege.holder	}
+			NOT = { 
+				root = scope:orsinium_original_liege.holder
+				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scopeorsinium_original_liege_kingdom.de_jure_liege.holder
+			}
+			culture_group = culture_group:orsimer_group
+		}
+	}
+}
+
+#Orsinium expands
+ek_major_decisions.0022 = {
+	type = character_event
+	title = ek_major_decisions.0022.t
+	desc = ek_major_decisions.0022.desc
+	theme = martial
+	
+	left_portrait = {
+		character = root
+	}
+	
+	immediate = {
+		title:k_orsinium.title_capital_county = { save_scope_as = orsinium_capital }
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
+	}
+
+	option = {
+		name = ek_major_decisions.0022.option
+	}
+}
+
+#Notifies people that Orsinium has expanded
+ek_major_decisions.0023 = {
+	type = character_event
+	title = ek_major_decisions.0023.t
+	desc = ek_major_decisions.0023.desc
+	theme = martial
+	
+	left_portrait = {
+		character = title:k_orsinium.holder
+	}
+	
+	immediate = {
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
+	}
+	
+	option = {
+		name = ek_major_decisions.0023.option.1
+		
+		trigger = { 
+			NOT = { culture_group = culture_group:orsimer_group } 
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0023.option.b
+		
+		trigger = { 
+			culture_group = culture_group:orsimer_group
+		}
+	}
+}
+
+#Notifies people that Orsinium has been reintegrated into its former kingdom
+ek_major_decisions.0024 = {
+	type = character_event
+	title = ek_major_decisions.0024.t
+	desc = ek_major_decisions.0024.desc
+	theme = martial
+	
+	left_portrait = {
+		character = scope:orsinium_conqueror
+	}
+	
+	right_portrait = {
+		character = scope:orsinium_old_king
+	}
+	
+	immediate = {
+		scope:orsinium_original_liege.holder = { save_scope_as = orsinium_conqueror }
+	}
+	
+	option = {
+		name = ek_major_decisions.0024.option.a
+		
+		trigger = { 
+			NOT = { culture_group = culture_group:orsimer_group } 
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0024.option.b
+		
+		trigger = { 
 			culture_group = culture_group:orsimer_group
 		}
 	}
