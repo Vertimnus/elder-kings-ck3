@@ -279,13 +279,38 @@
 						priority = 1
 						decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
 					}
+					decal = { 
+						body_part = head
+						textures = {
+							diffuse = "gfx/models/portraits/decals/facepaint/tattoo_niben_05.dds"
+							normal = "gfx/models/portraits/decals/facepaint/tattoo_niben_05_n.dds"
+						}
+						alpha_curve = {              #controls decal alpha relative to gene strength. Will give a linear interpolation if left unspecified
+							#gene strength%, decal alpha
+							{ 0.0  0.0 }
+							{ 0.14  0.0 }
+							{ 0.14  0.77 }							
+							{ 0.28  0.77 }
+							{ 0.28  0.0 }
+							{ 1.00 0.0 }
+						}
+						blend_modes = {              #overlay/replace/hard_light/multiply
+							diffuse = replace
+							normal = overlay
+						}
+						priority = 1
+						decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+					}
 				}
 				female = male
+				boy = {}
+				girl = {}
 			}
+			
 			
 		}
 		scarification = {
-			inheritable = no
+			inheritable = yes
 			group = head_neck
 			no_scarification = {
 				index = 0
@@ -436,6 +461,8 @@
 					}
 				}
 				female = male
+				boy = {}
+				girl = {}
 			}
 			
 		}	
