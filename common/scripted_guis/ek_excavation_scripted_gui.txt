@@ -1,0 +1,34 @@
+﻿ek_start_excavation = {
+    scope = province
+	is_shown = {
+		has_variable = ruins_type
+	}
+	is_valid = {
+	
+	}
+    effect = {
+		save_scope_as = excavation_locale
+		if = {
+			limit = { ruins_type = flag:nordic }
+			
+			province_owner = {
+				create_story = {
+					type = story_cycle_excavation_nordic_generic
+					save_scope_as = story
+				}
+				scope:story = {
+					set_variable = {
+						name = excavation_locale
+						value = scope:excavation_locale
+					}
+				}
+				scope:excavation_locale = {
+					set_variable = {
+						name = excavation_story
+						value = scope:story
+					}
+				}
+			}
+		}
+    }
+}
