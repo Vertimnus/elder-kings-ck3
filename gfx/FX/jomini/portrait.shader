@@ -560,6 +560,22 @@ PixelShader =
 						OverlayDecal( Target.a, Blend.a ) 
 					);
 				}
+
+					else if( Blend.r == 0.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1 )
+					{
+
+					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
+					
+					HairColor.z = (HairColor.z * 0.4f);
+					float3 DarkHairColor = saturate(HSVtoRGB(HairColor));
+	
+  					Result = float4( 
+						OverlayDecal( Target.r, (DarkHairColor.r ) ),
+						OverlayDecal( Target.g, (DarkHairColor.g ) ),
+						OverlayDecal( Target.b, (DarkHairColor.b ) ),
+						OverlayDecal( Target.a, Blend.a ) 
+						);
+					}				
 				
 				else
 				{
@@ -629,6 +645,22 @@ PixelShader =
 						( Target.a * Blend.a )
 					);
 				}
+					else if(Blend.r == 0.0f && Blend.g == 2.0f && Blend.b == 0.0f)
+					{
+
+					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
+					
+					HairColor.z = (HairColor.z * 0.7f);
+					float3 DarkHairColor = saturate(HSVtoRGB(HairColor));
+	
+ 					Result = float4(
+						 ( Target.r * DarkHairColor.r ),
+						 ( Target.g * DarkHairColor.g ),
+						 ( Target.b * DarkHairColor.b ),
+						 ( Target.a * Blend.a )
+						 );
+					}
+
 				
 				else
 				{
