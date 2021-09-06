@@ -106,7 +106,43 @@ facepaint_dunmer = {
             }
         }
     }
-}  
+}
+
+scarification_dunmer = {
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = scarification
+            template = dunmer
+            range = { 0 1 }
+        }
+    }
+    weight = {
+        base = 0
+
+        modifier = {
+            add = 60
+			OR = {
+				culture = culture:ashlander
+				culture = culture:chimer
+			}
+        }
+
+        modifier = {
+            add = 10
+            culture.culture_group = culture_group:dunmeris_group
+        }
+
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}   
 
 no_facepaint = {
     dna_modifiers = {
