@@ -103,6 +103,14 @@ patron_has_given_trait = {
 # Valid Triggers - tenets, doctrines and anything alse allowing a patron trait should be here
 # They are all in a faith scope. this is necessary for the list generation in the ui as there may be no character of a given faith
 
+# Specific requirements #
+patron_can_have_anti_undeath_god = {
+	NOR = {
+		has_doctrine = doctrine_vampirism_accepted
+		has_doctrine = doctrine_necromancy_accepted
+	}
+}
+
 # Pantheons #
 patron_PANTHEON_valid = { has_doctrine_parameter = pantheon_adds_deities_$PANTHEON$ }
 
@@ -145,7 +153,10 @@ patron_vivec_valid = { always = no }
 
 # Divines #
 patron_dv_akatosh_valid = { patron_divines_valid = yes }
-patron_dv_arkay_valid = { patron_divines_valid = yes }
+patron_dv_arkay_valid = {
+	patron_divines_valid = yes
+	patron_can_have_anti_undeath_god = yes
+}
 patron_dv_dibella_valid = {
 	OR = {
 		patron_divines_valid = yes
@@ -181,7 +192,10 @@ patron_dv_shezarr_valid = {
 patron_ae_auriel_valid = { patron_aldmer_valid = yes }
 patron_ae_syrabane_valid = { patron_aldmer_valid = yes }
 patron_ae_trinimac_valid = { patron_aldmer_valid = yes }
-patron_ae_xarxes_valid = { patron_aldmer_valid = yes }
+patron_ae_xarxes_valid = {
+	patron_aldmer_valid = yes
+	patron_can_have_anti_undeath_god = yes
+}
 patron_ae_xen_valid = { patron_aldmer_valid = yes }
 patron_ae_jephre_valid = {
 	OR = {

@@ -4,10 +4,11 @@ ek_character_setup_effect = {
 	#Race flags
 	if = {
 		limit = { 
-			NOT = { 
+			NOR = { 
 				has_character_flag = race_khajiit
 				has_character_flag = race_argonian
 				has_character_flag = race_goblinken
+				has_character_flag = race_daedra
 			} 
 		}
 		race_traits_effect = yes
@@ -34,25 +35,36 @@ race_traits_effect = {
 	#Khajiit
 	if = {
 		limit = { 
-			OR = { 
-				culture_group = culture_group:khajiiti_group
-				culture_group = culture_group:lilmothiit_group
-			}
+			culture_group = culture_group:khajiiti_group
 		}
 		add_character_flag = race_khajiit
 		random_furstock_traits_effect = yes
 	}
 	
-	#Goblinken
+	#Lilmothit
 	if = {
+		limit = { 
+			culture_group = culture_group:lilmothiit_group
+		}
+		add_character_flag = race_khajiit
+	}
+	
+	#Goblinken
+	else_if = {
 		limit = { culture_group = culture_group:goblinken_group }
 		add_character_flag = race_goblinken
 	}
 	
 	#Argonian
-	if = {
+	else_if = {
 		limit = { culture_group = culture_group:argonian_group }
 		add_character_flag = race_argonian
+	}
+	
+	#Daedra
+	else_if = {
+		limit = { culture_group = culture_group:daedric_group }
+		add_character_flag = race_daedra
 	}
 	
 	add_character_flag = char_setup
@@ -74,7 +86,7 @@ race_traits_inheritance_effect = {
 	}
 	
 	#Goblinken
-	if = {
+	else_if = {
 		limit = { 
 			OR = {
 				scope:mother = { has_character_flag = race_goblinken }
@@ -85,7 +97,7 @@ race_traits_inheritance_effect = {
 	}
 	
 	#Argonian
-	if = {
+	else_if = {
 		limit = { 
 			OR = {
 				scope:mother = { has_character_flag = race_argonian }
@@ -301,6 +313,12 @@ lifespan_traits_effect = {
 		}
 		add_trait = lifespan_3
 	}
+	else_if = {
+		limit = { 
+			culture_group = culture_group:daedric_group
+		}
+		add_trait = lifespan_7
+	}
 	
 	add_character_flag = char_setup
 }
@@ -314,8 +332,8 @@ lifespan_traits_inheritance_effect = {
 			scope:mother = { has_trait = lifespan NOT = { has_trait = lifespan_1 has_trait = lifespan_2 } }
 		}
 		random_list = {
-			95 = { add_trait = lifespan_3 }
-			5 = { add_trait = lifespan_4 }
+			80 = { add_trait = lifespan_3 }
+			20 = { add_trait = lifespan_4 }
 		}
 	}
 	

@@ -9,8 +9,15 @@ yearly_global_pulse = {
 
 	effect = {
 		### EK EDIT: Update each faith Fervor Equilibrium
+		# First we handle the Leader of the Council of the Eight
+		global_var:leader_council_eight = {
+			faith_update_fervor_equilibrium = yes
+		}
 		every_religion_global = {
-			every_faith = { faith_update_fervor_equilibrium = yes }
+			every_faith = { 
+				limit = { NOT = { this = global_var:leader_council_eight } }
+				faith_update_fervor_equilibrium = yes
+			}
 		}
 	}
 }

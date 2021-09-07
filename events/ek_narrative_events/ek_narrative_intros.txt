@@ -1,0 +1,55 @@
+﻿#Events triggered at game start for certain characters if controlled by a player. Explains their situation and background.
+
+namespace = ek_narrative_intro
+
+ek_narrative_intro.yashnag = {
+	type = character_event
+	title = ek_narrative_intro.yashnag.t
+	desc = {
+		desc = ek_narrative_intro.yashnag.desc
+	}
+
+	immediate = {
+		play_music_cue = "mx_cue_peace_ensues"
+		character:skjoralmor_100 = { save_scope_as = hakkvild }
+		character:yashnag_100 = { save_scope_as = yashnag }
+		character:skjoralmor_200 = { save_scope_as = engar }
+		character:skjoralmor_99 = { save_scope_as = falk }
+		title:d_helgen = { save_scope_as = helgen}
+		title:k_falkreath = { save_scope_as = falkreath }
+		title:k_orsinium = { save_scope_as = orsinium }
+		character:branquette_999 = { save_scope_as = edgar }
+		character:deleyn_999 = { save_scope_as = anton }
+	}
+
+	theme = war
+	left_portrait = {
+		character = character:yashnag_100
+		animation = war_over_win
+	}
+	
+	right_portrait = {
+		character = character:skjoralmor_99
+		animation = anger
+	}
+
+
+	trigger = {
+		AND = {
+		character:skjoralmor_100 = { is_alive = yes }
+		character:yashnag_100 = { is_alive = yes }
+		character:skjoralmor_200 = { is_alive = yes }
+		}
+	}
+
+	
+
+	# Let's see what he has come up with.
+	option = {
+		name = ek_narrative_intro.yashnag.a
+
+		ai_chance = {
+			base = 0	#The AI should never get this event, but if they do, shouldn't opt in.
+		}
+	}
+}

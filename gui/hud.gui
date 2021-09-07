@@ -611,7 +611,8 @@ widget = {
 		visible = "[And( Not( IsPauseMenuShown ), And(Or(Not(IsObserver), GetPlayer.IsValid), IsDefaultGUIMode))]"
 		parentanchor = top|right
 		position = { 5 105 }
-		size = { 50 470 }
+		#size = { 50 470 }
+		size = { 50 425 }
 
 		using = Animation_ShowHide_Quick
 
@@ -1208,44 +1209,44 @@ widget = {
 					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
 					# }
 				}
-				button_hud_main_tab = {
-					name = "tab_societies_open"
-					tooltip = "SOCIETIES_BUTTON"
+				# button_hud_main_tab = {
+				# 	name = "tab_societies_open"
+				# 	tooltip = "SOCIETIES_BUTTON"
 
-					blockoverride "maintab_button"
-					{
-						texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
+				# 	blockoverride "maintab_button"
+				# 	{
+				# 		texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
 
-						onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'society' ))), 'society_open', 'society_closed' ) )]"
-						onclick = "[PdxGuiTriggerAllAnimations( 'detail_close' )]"
+				# 		onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'society' ))), 'society_open', 'society_closed' ) )]"
+				# 		onclick = "[PdxGuiTriggerAllAnimations( 'detail_close' )]"
 
-						#shortcut = "patron_window"
-						down = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
-					}
+				# 		#shortcut = "patron_window"
+				# 		down = "[GetVariableSystem.HasValue( 'decision_tab', 'society' )]"
+				# 	}
 
-					state = {
-						name = society_open
-						on_start = "[GetVariableSystem.Set( 'decision_tab', 'society' )]"
-					}
+				# 	state = {
+				# 		name = society_open
+				# 		on_start = "[GetVariableSystem.Set( 'decision_tab', 'society' )]"
+				# 	}
 
-					state = {
-						name = society_closed
-						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
-						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
-						on_start = "[ToggleGameView('decisions')]"
-					}
+				# 	state = {
+				# 		name = society_closed
+				# 		on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'society' ), 'to_clear', 'society' ) )]"
+				# 		on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+				# 		on_start = "[ToggleGameView('decisions')]"
+				# 	}
 
-					#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
-					# state = {
-					# 	name = _mouse_hierarchy_enter
-					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
-					# }
+				# 	#Game really doesn't like these and I have no idea why :( seems to work without them, might be that the glow/bg file is to short and the uv is shifted to far?
+				# 	# state = {
+				# 	# 	name = _mouse_hierarchy_enter
+				# 	# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_leave','hud_tab_glow_patron_enter')]"
+				# 	# }
 
-					# state = {
-					# 	name = _mouse_hierarchy_leave
-					# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
-					# }
-				}
+				# 	# state = {
+				# 	# 	name = _mouse_hierarchy_leave
+				# 	# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
+				# 	# }
+				# }
 			}
 
 			# Invisible button to ensure that these shortcuts don't get hidden

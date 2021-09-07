@@ -176,7 +176,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_caer_suvio }
-		title:k_nibenay = { set_capital_county = d_caer_suvio.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_caer_suvio.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -190,7 +190,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_mir_corrup }
-		title:k_nibenay = { set_capital_county = d_mir_corrup.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_mir_corrup.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -204,7 +204,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_artemon }
-		title:k_nibenay = { set_capital_county = d_artemon.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_artemon.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -218,7 +218,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_grief }
-		title:k_nibenay = { set_capital_county = d_grief.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_grief.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -243,7 +243,7 @@ ek_major_decisions.0010 = {
 		else = {
 			title:k_nibenay = { set_title_name = k_sundercliff }
 		}
-		title:k_nibenay = { set_capital_county = d_sundercliff.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_sundercliff.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -257,7 +257,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_facian }
-		title:k_nibenay = { set_capital_county = d_facian.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_facian.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -271,7 +271,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_cuptor }
-		title:k_nibenay = { set_capital_county = d_cuptor.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_cuptor.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -285,7 +285,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_redwater }
-		title:k_nibenay = { set_capital_county = d_redwater.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_redwater.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -299,7 +299,7 @@ ek_major_decisions.0010 = {
 		
 		get_title = title:k_nibenay
 		title:k_nibenay = { set_title_name = k_entius }
-		title:k_nibenay = { set_capital_county = d_entius.capital_county }
+		title:k_nibenay = { set_capital_county = title:d_entius.title_capital_county }
 		hidden_effect ={
 			mark_original_nibenay_duchy = yes
 			custom_nibenay_de_jure_setup = yes
@@ -307,3 +307,171 @@ ek_major_decisions.0010 = {
 	}
 }
 
+# ek_major_decisions.0021 - 0030: Reestablish (or destroy) Orsinium
+
+#Creates Orsinium
+ek_major_decisions.0020 = {
+	type = character_event
+	title = ek_major_decisions.0020.t
+	desc = ek_major_decisions.0020.desc
+	theme = martial
+	
+	left_portrait = {
+		character = root
+	}
+	
+	immediate = {
+		title:k_orsinium.title_capital_county = { save_scope_as = orsinium_capital }
+	}
+
+	option = {
+		name = ek_major_decisions.0020.option
+	}
+}
+
+#Notifies people that Orsinium has been created
+ek_major_decisions.0021 = {
+	type = character_event
+	title = ek_major_decisions.0021.t
+	desc = ek_major_decisions.0021.desc
+	theme = martial
+	
+	left_portrait = {
+		character = title:k_orsinium.holder
+	}
+	
+	immediate = {
+		title:k_orsinium.title_capital_county = { save_scope_as = orsinium_capital }
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
+	}
+
+	option = {
+		name = ek_major_decisions.0021.option.a
+		
+		trigger = { 
+			OR = {
+				root = scope:orsinium_original_liege.holder
+				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scope:orsinium_original_liege_kingdom.de_jure_liege.holder
+			}
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0021.option.b
+		
+		trigger = { 
+			NOR = { 
+				root = scope:orsinium_original_liege.holder
+				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scope:orsinium_original_liege_kingdom.de_jure_liege.holder
+				culture_group = culture_group:orsimer_group
+			} 
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0021.option.c
+		
+		trigger = { 
+			NOT = { 
+				root = scope:orsinium_original_liege.holder
+				root = scope:orsinium_original_liege.de_jure_liege.holder
+				root = scope:orsinium_original_liege_kingdom.holder
+				root = scope:orsinium_original_liege_kingdom.de_jure_liege.holder
+			}
+			culture_group = culture_group:orsimer_group
+		}
+	}
+}
+
+#Orsinium expands
+ek_major_decisions.0022 = {
+	type = character_event
+	title = ek_major_decisions.0022.t
+	desc = ek_major_decisions.0022.desc
+	theme = martial
+	
+	left_portrait = {
+		character = root
+	}
+	
+	immediate = {
+		title:k_orsinium.title_capital_county = { save_scope_as = orsinium_capital }
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
+	}
+
+	option = {
+		name = ek_major_decisions.0022.option
+	}
+}
+
+#Notifies people that Orsinium has expanded
+ek_major_decisions.0023 = {
+	type = character_event
+	title = ek_major_decisions.0023.t
+	desc = ek_major_decisions.0023.desc
+	theme = martial
+	
+	left_portrait = {
+		character = title:k_orsinium.holder
+	}
+	
+	immediate = {
+		title:k_orsinium = { save_scope_as = new_orsinium_king }
+	}
+	
+	option = {
+		name = ek_major_decisions.0023.option.1
+		
+		trigger = { 
+			NOT = { culture_group = culture_group:orsimer_group } 
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0023.option.b
+		
+		trigger = { 
+			culture_group = culture_group:orsimer_group
+		}
+	}
+}
+
+#Notifies people that Orsinium has been reintegrated into its former kingdom
+ek_major_decisions.0024 = {
+	type = character_event
+	title = ek_major_decisions.0024.t
+	desc = ek_major_decisions.0024.desc
+	theme = martial
+	
+	left_portrait = {
+		character = scope:orsinium_conqueror
+	}
+	
+	right_portrait = {
+		character = scope:orsinium_old_king
+	}
+	
+	immediate = {
+		scope:orsinium_original_liege.holder = { save_scope_as = orsinium_conqueror }
+	}
+	
+	option = {
+		name = ek_major_decisions.0024.option.a
+		
+		trigger = { 
+			NOT = { culture_group = culture_group:orsimer_group } 
+		}
+	}
+	
+	option = {
+		name = ek_major_decisions.0024.option.b
+		
+		trigger = { 
+			culture_group = culture_group:orsimer_group
+		}
+	}
+}
