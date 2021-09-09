@@ -41,11 +41,13 @@ facepaint_nordic = { # Random
             AND = {
                 culture.culture_group = culture_group:nordic_group
 				OR = {
-                prowess > high_skill_rating
-                martial > high_skill_rating
+					prowess > high_skill_rating
+					martial > high_skill_rating
+					portrait_wear_armor_trigger = yes
 				}
 			}
-        }
+		}
+			
 		modifier = {
 			add = 200
 			AND = {
@@ -59,8 +61,44 @@ facepaint_nordic = { # Random
 #			is_female = yes
 #        }
 
+#       modifier = {
+#			add = -500
+#			OR = {
+#			is_from_ruler_designer = yes
+#				has_character_flag = has_scripted_appearance
+#				has_trait = line_of_x
+#			}
+#		}
+	}
+}
+
+facepaint_dunmer = {
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = facepaint
+            template = dunmer
+            range = { 0 1 }
+        }
+    }
+    weight = {
+        base = 0
+
         modifier = {
-            add = -500
+            add = 80
+            culture = culture:ashlander
+        }
+
+        modifier = {
+            add = 30
+            AND = {
+            culture.culture_group = culture_group:dunmeris_group
+            highest_held_title_tier < tier_county
+            }
+        }
+
+        modifier = {
+            add = -100
             OR = {
                 is_from_ruler_designer = yes
                 has_character_flag = has_scripted_appearance
@@ -69,6 +107,42 @@ facepaint_nordic = { # Random
         }
     }
 }
+
+scarification_dunmer = {
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = scarification
+            template = dunmer
+            range = { 0 1 }
+        }
+    }
+    weight = {
+        base = 0
+
+        modifier = {
+            add = 60
+			OR = {
+				culture = culture:ashlander
+				culture = culture:chimer
+			}
+        }
+
+        modifier = {
+            add = 10
+            culture.culture_group = culture_group:dunmeris_group
+        }
+
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}   
 
 no_facepaint = {
     dna_modifiers = {
