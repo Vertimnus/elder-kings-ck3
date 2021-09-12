@@ -1,0 +1,628 @@
+﻿
+
+morph_genes = {
+
+	eye_sclera = { 
+	inheritable = yes
+	group = eyes
+	human_sclera = {
+		index = 0
+		male = {
+			decal = {
+				body_part = eyes
+				textures = {
+					diffuse = "gfx/models/portraits/male_head/sclera_normal.dds"
+					# normal = ""
+					# properties = ""
+				}
+				alpha_curve = {
+					{ 0.0   1.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					diffuse = replace
+					# normal = replace
+					# properties = replace
+				}
+				priority = 15
+				decal_apply_order = pre_skin_color # pre_skin_color | post_skin_color
+			}
+
+			decal = {
+				body_part = eyes
+				textures = {
+					#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_dremora.dds"
+					#normal = ""
+					properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+				}
+				alpha_curve = {
+					{ 0.0   0.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					#diffuse = multiply
+					#normal = replace
+					properties = replace
+				}
+				priority = 1
+				decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+			}
+
+			
+		}
+		female = male
+		boy = male
+		girl = male
+	}
+	black_sclera = {
+		index = 1
+		male = {
+			decal = {
+				body_part = eyes
+				textures = {
+					diffuse = "gfx/models/portraits/male_head/sclera_black.dds"
+					# normal = ""
+					# properties = ""
+				}
+				alpha_curve = {
+					{ 0.0   1.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					diffuse = replace
+					# normal = replace
+					# properties = replace
+				}
+				priority = 15
+				decal_apply_order = pre_skin_color # pre_skin_color | post_skin_color
+			}
+
+			
+			decal = {
+				body_part = eyes
+				textures = {
+					#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_dremora.dds"
+					#normal = ""
+					properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+				}
+				alpha_curve = {
+					{ 0.0   0.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					#diffuse = multiply
+					#normal = replace
+					properties = replace
+				}
+				priority = 1
+				decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+			}
+		}
+		female = male
+		boy = male
+		girl = female
+	}
+
+	colored_sclera = {
+		index = 2
+		male = {
+			decal = {
+				body_part = eyes
+				textures = {
+					diffuse = "gfx/models/portraits/male_head/sclera_colored.dds"
+					# normal = ""
+					# properties = ""
+				}
+				alpha_curve = {
+					{ 0.0   1.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					diffuse = replace
+					# normal = replace
+					# properties = replace
+				}
+				priority = 15
+				decal_apply_order = pre_skin_color # pre_skin_color | post_skin_color
+			}
+
+			
+			decal = {
+				body_part = eyes
+				textures = {
+					#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_dremora.dds"
+					#normal = ""
+					properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+				}
+				alpha_curve = {
+					{ 0.0   0.0 }
+					{ 1.0   1.0 }
+				}
+				blend_modes = {#overlay/replace/hard_light/multiply
+					#diffuse = multiply
+					#normal = replace
+					properties = replace
+				}
+				priority = 1
+				decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+			}
+		}
+		female = male
+		boy = male
+		girl = female
+	}
+}
+
+	eye_pupil = { #renamed from race_gene_mer_eyes
+		inheritable = yes
+		group = eyes
+		human_pupils = {
+			index = 0
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_human.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/human_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_human.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/human_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+		large_pupils = { #renamed from mer_eyes_01
+			index = 1
+			set_tags = "large_pupil"
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_large.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/large_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_large.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/large_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+		cross_pupils = { #renamed from mer_eyes_02
+			index = 2
+			set_tags = "cross_pupil"
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_cross.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/large_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_cross.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/large_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+		khajiit_pupils = {
+			index = 3
+			set_tags = "khajiit_pupil"
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_khajiit.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/khajiit_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_khajiit.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/khajiit_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+
+		argonian_pupils = {
+			index = 4
+			set_tags = "argonian_pupil"
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_argonian.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_argonian.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+		dremora_pupils = {
+			index = 5
+			set_tags = "dremora_pupil"
+			male = {
+				decal = {
+					body_part = head
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/decal_glowing_eyes_diffuse.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						# normal = replace
+						# properties = replace
+					}
+					priority = 10
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_dremora.dds"
+						#normal = ""
+						#properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   0.0 }
+						{ 1.0   0.65 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = multiply
+						#normal = replace
+						#properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+
+				decal = {
+					body_part = eyes
+					textures = {
+						#diffuse = "gfx/models/portraits/decals/male_head/pupil_glow_dremora.dds"
+						#normal = ""
+						properties = "gfx/models/portraits/decals/male_head/full_eyes_properties_emissive.dds"
+					}
+					alpha_curve = {
+						{ 0.0   0.0 }
+						{ 0.5   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						#diffuse = multiply
+						#normal = replace
+						properties = replace
+					}
+					priority = 1
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}
+			}
+			female = male
+			boy = male
+			girl = female
+		}
+	}
+
+	eye_overlay = { 
+		inheritable = yes
+		group = eyes
+		no_overlay = {
+			index = 0
+			male = {}
+			female = male
+			boy = male
+			girl = male
+		}
+
+		bloodshot = {
+			index = 1
+			male = {
+				decal = {
+					body_part = eyes
+					textures = {
+						diffuse = "gfx/models/portraits/decals/male_head/sclera_bloodshot.dds"
+						# normal = ""
+						# properties = ""
+					}
+					alpha_curve = {
+						{ 0.0   1.0 }
+						{ 1.0   1.0 }
+					}
+					blend_modes = {#overlay/replace/hard_light/multiply
+						diffuse = replace
+						# normal = replace
+						# properties = replace
+					}
+					priority = 20
+					decal_apply_order = post_skin_color # pre_skin_color | post_skin_color
+				}	
+			}
+			female = male
+			boy = male
+			girl = male
+		}
+
+	}
+	
+										
+	}
+
+

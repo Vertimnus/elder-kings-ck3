@@ -483,14 +483,24 @@ PixelShader =
 			#endif
 
 			//EK2 EMISSIVE SHADER
-			// Warcraft But I tweaked it
-			float3 EmissiveColor = vec3(0.0f);
-			float EmissiveMask =  PdxTex2D( NormalMap, Input.UV0 ).b;
-			#ifdef EMISSIVE
-				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor * 5.0f;
+			#ifdef EMISSIVE_NORMAL_BLUE
+
+				float3 EmissiveColor = vec3(0.0f);
+				float EmissiveMask =  PdxTex2D( NormalMap, Input.UV0 ).b;
+				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor;
 				Color += EmissiveColor;
 
 			#endif
+
+			#ifdef EMISSIVE_PROPERTIES_RED
+
+				float3 EmissiveColor = vec3(0.0f);
+				float EmissiveMask =  Properties.r;
+				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor;
+				Color += EmissiveColor;
+
+			#endif
+
 			//EK2 EMISSIVE SHADER
 			
 			Color = ApplyDistanceFog( Color, Input.WorldSpacePos );
@@ -600,6 +610,15 @@ PixelShader =
 						Target.a
 					);
 				}
+				else if ( Blend.r == 0.0f && Blend.g == 0.0f && Blend.b == 1.0f && TextureType == 1 )
+				{
+					Result = float4(
+						vPaletteColorEyes.r,
+						vPaletteColorEyes.g,
+						vPaletteColorEyes.b,
+						Target.a
+					);
+				}
 				else
 				{
 					Result = Blend;
@@ -636,7 +655,7 @@ PixelShader =
 			{
 				// Warcraft
 				// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply multiply blending as usual.
-				if(Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f)
+				if(Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f && TextureType == 1)
 				{
 					Result = float4(
 						( Target.r * vPaletteColorHair.r ),
@@ -645,7 +664,29 @@ PixelShader =
 						( Target.a * Blend.a )
 					);
 				}
-					else if(Blend.r == 0.0f && Blend.g == 2.0f && Blend.b == 0.0f)
+
+				else if ( Blend.r == 0.0f && Blend.g == 0.0f && Blend.b == 1.0f && TextureType == 1 )
+				{	
+					Result = float4(
+						(1.0f - (1.0f - Target.r) * (1.0f - vPaletteColorEyes.r) ),
+						(1.0f - (1.0f - Target.g) * (1.0f - vPaletteColorEyes.g) ),
+						(1.0f - (1.0f - Target.b) * (1.0f - vPaletteColorEyes.b) ),
+						(Target.a)
+					);
+					}
+
+				else if ( Blend.r == 1.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1 )
+				{	
+					Result = float4(
+						saturate((Target.r + 1.0f)),
+						saturate((Target.g + 1.0f)),
+						saturate((Target.b + 1.0f)),
+						(Target.a)
+					);
+					}					
+
+
+					else if(Blend.r == 0.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1)
 					{
 
 					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
@@ -673,9 +714,10 @@ PixelShader =
 			}
 
 			return lerp( Target, Result, Weight );
+			
 		}
 
-		void AddDecals( inout float3 Diffuse, inout float3 Normals, inout float4 Properties, float2 UV, uint InstanceIndex, uint From, uint To )
+		void AddDecals( inout float4 Diffuse, inout float3 Normals, inout float4 Properties, float2 UV, uint InstanceIndex, uint From, uint To, uint AlphaBlend)
 		{
 			// Body part index is scripted on the mesh asset and should match ECharacterPortraitPart
 			uint BodyPartIndex = GetBodyPartIndex( InstanceIndex );
@@ -715,8 +757,21 @@ PixelShader =
 						
 						uint DiffuseBlendMode = uint( BlendData.x * 255.0f );
 						float4 DiffuseSample = PdxTex2D( DecalDiffuseArray, float3( UV, DiffuseIndex ) );
+
+						//EK2
+						DiffuseSample = DiffuseSample * DiffuseSample;
+						//EK2
+
+						if (AlphaBlend == 1)
+						{
+						Weight = Weight;
+						}
+						else
+						{
 						Weight = DiffuseSample.a * Weight;
-						Diffuse = BlendDecal( DiffuseBlendMode, float4( Diffuse, 0.0f ), DiffuseSample, Weight, TextureType ).rgb;
+						}
+
+						Diffuse = BlendDecal( DiffuseBlendMode, Diffuse, DiffuseSample, Weight, TextureType );
 					}
 
 					if ( NormalIndex < 255.0f )
@@ -776,13 +831,12 @@ PixelShader =
 					Properties = PdxTex2D( SpecularMap, UV0 );
 					NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
 				}
-				
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount );
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount, 0 );
 				
 				//Warcraft
 				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorSkin.rgb, 1.0f );
 
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount );
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount, 0 );
 				
 				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
 				
@@ -825,20 +879,41 @@ PixelShader =
 			PDX_MAIN
 			{
 				float2 UV0 = Input.UV0;
-				float4 Diffuse = PdxTex2D( DiffuseMap, UV0 );								
+				float4 BaseDiffuse = PdxTex2D( DiffuseMap, UV0 );	
+				float4 Diffuse = Diffuse;				
 				float4 Properties = PdxTex2D( SpecularMap, UV0 );
 				float3 NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
-				
-				#ifdef DECALS
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount );
+
+				#ifdef EYE_DECAL
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount-1, 1);
 				#endif
-				
-				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorEyes.rgb, Diffuse.a );
-				
-				#ifdef DECALS
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount );
+
+				float3 EyeShift = vPaletteColorEyes.rgb;
+
+				#ifdef HSV_SHIFT
+				EyeShift = RGBtoHSV( vPaletteColorEyes.rgb );
+				EyeShift.x = EyeShift.x + 0.5f;
+				EyeShift = saturate(HSVtoRGB(EyeShift));
 				#endif
-				
+
+				#ifdef EYE_BLIND
+				EyeShift = RGBtoHSV( EyeShift );
+				EyeShift.y = EyeShift.y * 0.5f;
+				EyeShift = saturate(HSVtoRGB(EyeShift));
+				#endif
+
+				//Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb, BaseDiffuse.a );
+				float EyeDiffuseAlpha = saturate(BaseDiffuse.a + Diffuse.a);
+				#ifdef EYE_BLIND
+				Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb * EyeShift, EyeDiffuseAlpha * 0.5f );
+				#else
+				Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb * EyeShift, EyeDiffuseAlpha );
+				#endif
+
+				#ifdef EYE_DECAL
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount, 0);
+				#endif
+
 				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
 				
 				return float4( Color, 1.0f );
@@ -1228,13 +1303,28 @@ Effect portrait_eye
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_eye"
-	Defines = { "EMISSIVE" "DECALS" }
+	Defines = { "EMISSIVE_PROPERTIES_RED" "EYE_DECAL" }
 }
+
 Effect portrait_eye_no_decal
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_eye"
-	Defines = { "EMISSIVE" }
+	Defines = { "EMISSIVE_PROPERTIES_RED" }
+}
+
+Effect portrait_eye_shift
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_eye"
+	Defines = { "EMISSIVE_PROPERTIES_RED" "EYE_DECAL" "HSV_SHIFT"}
+}
+
+Effect portrait_eye_blind
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_eye"
+	Defines = { "EYE_DECAL" "EYE_BLIND"}
 }
 
 Effect skin_alpha
@@ -1254,6 +1344,7 @@ Effect portrait_attachment
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
+	Defines = { "EMISSIVE_NORMAL_BLUE" }
 }
 
 Effect portrait_attachmentShadow
@@ -1268,7 +1359,7 @@ Effect portrait_attachment_pattern
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
-	Defines = { "VARIATIONS_ENABLED" }
+	Defines = { "VARIATIONS_ENABLED" "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_patternShadow
@@ -1284,7 +1375,7 @@ Effect portrait_attachment_pattern_alpha_to_coverage
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
 	BlendState = "alpha_to_coverage"
-	Defines = { "VARIATIONS_ENABLED" }
+	Defines = { "VARIATIONS_ENABLED" "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_pattern_alpha_to_coverageShadow
@@ -1307,6 +1398,7 @@ Effect portrait_attachment_alpha_to_coverage
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
 	BlendState = "alpha_to_coverage"
+	Defines = {  "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_alpha_to_coverageShadow
