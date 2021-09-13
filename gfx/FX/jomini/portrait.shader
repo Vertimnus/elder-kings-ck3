@@ -758,8 +758,14 @@ PixelShader =
 						uint DiffuseBlendMode = uint( BlendData.x * 255.0f );
 						float4 DiffuseSample = PdxTex2D( DecalDiffuseArray, float3( UV, DiffuseIndex ) );
 
+						//if ( DiffuseBlendMode == BLEND_MODE_REPLACE )
+						//{
+						//	DiffuseSample = float4(DiffuseSample.r * DiffuseSample.r , DiffuseSample.g * DiffuseSample.g  ,DiffuseSample.b * DiffuseSample.b  ,DiffuseSample.a);
+						//DiffuseSample = saturate(DiffuseSample * DiffuseSample);
+						//}
+
 						//EK2
-						DiffuseSample = DiffuseSample * DiffuseSample;
+
 						//EK2
 
 						if (AlphaBlend == 1)
