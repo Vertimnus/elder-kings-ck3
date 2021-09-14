@@ -1,0 +1,1690 @@
+﻿namespace = ek_yearly_events
+
+# Character hears a bard sing Sway as We Kiss
+ek_yearly_events.0001 = {
+	type = character_event
+	title = ek_yearly_events.0001.t
+	desc = ek_yearly_events.0001.desc
+	theme = friendly
+	
+	left_portrait = {
+		character = root
+		animation = happiness
+	}	
+
+	trigger = {
+		NOT = { has_character_flag = ek_yearly_events_heard_Sway_event_happened }
+	}
+	
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 0.2
+			has_trait = compassionate
+		}
+		modifier = {
+			add = -0.2
+			has_trait = callous
+		}
+		modifier = {
+			add = 0.2
+			has_trait = patient
+		}
+		modifier = {
+			add = -0.2
+			has_trait = impatient
+		}
+		modifier = {
+			add = 0.2
+			has_trait = humble
+		}
+		modifier = {
+			add = -0.2
+			has_trait = arrogant
+		}
+	}
+	
+	immediate = {
+		play_music_cue = mx_cue_touching_moment 
+	}
+	
+	option = { # Bravo!
+		name = ek_yearly_events.0001.a
+		add_stress = -50
+		add_character_flag = ek_yearly_events_heard_Sway_event_happened
+		add_character_modifier = {
+			modifier = ek_yearly_events_heard_Sway
+			days = 3650
+		}
+		stress_impact = { arrogant = medium_stress_impact_gain
+						impatient = medium_stress_impact_gain 
+						callous = medium_stress_impact_gain		}
+		random_list = {
+			   10 = { add_trait = drunkard }
+			   90 = { }
+			}		
+	}
+
+	option = { # Meh
+		name = ek_yearly_events.0001.b
+		add_stress = -50
+		add_character_flag = ek_yearly_events_heard_Sway_event_happened
+		stress_impact = { humble = medium_stress_impact_gain 
+						compassionate = medium_stress_impact_gain		}		
+	}
+
+}
+
+
+# Cake and the Diamond 1
+ek_yearly_events.0002 = {
+	type = character_event
+	title = ek_yearly_events.0002.t
+	desc = ek_yearly_events.0002.desc
+	theme = medicine
+	
+	left_portrait =  root
+
+	right_portrait = {
+		character = scope:cake_alchemist
+		animation = idle
+	}	
+
+immediate = {
+		random_living_character = {
+			limit = {
+				is_available_ai_adult = yes
+				is_female = yes
+				age > 50
+				learning > 10		}
+			save_scope_as = cake_alchemist
+		}
+	}
+	trigger = {
+		NOT = { has_character_flag = ek_yearly_events_cake_happened	}
+	}
+	
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 0.2
+			has_trait = drunkard
+		}
+		modifier = {
+			add = 0.2
+			has_trait = gregarious
+		}
+		modifier = {
+			add = 0.2
+			has_trait = reveler_1
+		}
+		modifier = {
+			add = 0.4
+			has_trait = reveler_2
+		}
+		modifier = {
+			add = 0.6
+			has_trait = reveler_3
+		}
+		modifier = {
+			add = -0.2
+			has_trait = arrogant
+		}
+		modifier = {
+			add = -0.2
+			has_trait = shy
+		}
+		modifier = {
+			add = -0.2
+			has_trait = paranoid
+		}
+		modifier = {
+			add = -0.2
+			has_trait = reclusive
+		}
+	}
+	
+	option = { # Aren't you that alchemist lady?
+		name = ek_yearly_events.0002.a
+		add_character_flag = ek_yearly_events_cake_happened
+		trigger_event = {
+			id = ek_yearly_events.0003
+			days = {2 4}
+		} }		
+		
+
+	option = { # Away with you!
+		name = ek_yearly_events.0002.b
+		add_character_flag = ek_yearly_events_cake_happened
+	}	
+	
+
+}
+
+
+
+# Cake and the Diamond 2
+ek_yearly_events.0003 = {
+	type = character_event
+	title = ek_yearly_events.0003.t
+	desc = ek_yearly_events.0003.desc
+	theme = medicine
+	
+	left_portrait = {
+		character = root	}
+
+	right_portrait = {
+		character = scope:cake_alchemist
+		animation = idle
+	}	
+	
+	option = { # Fine!
+		name = ek_yearly_events.0003.a
+		stress_impact = {
+			greedy = minor_stress_impact_gain
+			comfort_eater = minor_stress_loss
+		}			
+		remove_short_term_gold = 15
+		
+		trigger_event = {
+			id = ek_yearly_events.0004
+			days = {2 4}
+		} }
+
+	option = { # Would you accept some fine and local ingredients instead?
+		name = ek_yearly_events.0003.b
+		
+		trigger = { has_trait = lifestyle_herbalist }
+
+		trigger_event = {
+			id = ek_yearly_events.0004
+			days = {2 4}
+		} }
+
+	option = { # Away with you!
+		name = ek_yearly_events.0003.c }
+}
+
+
+# Cake and the Diamond 3
+ek_yearly_events.0004 = {
+	type = character_event
+	title = ek_yearly_events.0004.t
+	desc = ek_yearly_events.0004.desc
+	theme = medicine
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:cake_alchemist
+		animation = idle }
+	
+	option = { # Gimme wine
+		name = ek_yearly_events.0004.a
+
+		stress_impact = {
+			drunkard = major_stress_impact_loss
+			gregarious = minor_stress_impact_loss
+		}
+		
+		random_list = { 50 = { trigger_event = {
+			id = ek_yearly_events.0005
+			days = {2 4}
+		} } 
+						50 = { send_interface_toast = {
+					left_icon = root
+					title = tooltip.ek_yearly_events.0004.a.fail.t
+					desc = tooltip.ek_yearly_events.0004.a.fail.desc
+					remove_short_term_gold = 50
+					add_prestige = minor_prestige_loss
+					stress_impact = {
+			base = major_stress_impact_gain	}
+					}
+		} }
+					
+	}
+	
+	option = { # Refuse Wine
+		name = ek_yearly_events.0004.b
+		stress_impact = {
+			drunkard = major_stress_impact_gain
+			gregarious = minor_stress_impact_gain }
+		trigger_event = {
+			id = ek_yearly_events.0005
+			days = {2 4}
+		}
+	}
+
+	option = { # Wine is sus
+		name = ek_yearly_events.0004.c
+		trigger = { intrigue > 10 }
+		
+	duel = {
+			skill = learning
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0004.c.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				send_interface_toast = {
+					left_icon = root
+					title = tooltip.ek_yearly_events.0004.c.success
+					root = {
+				imprison = {
+				target = scope:cake_alchemist
+				type = dungeon 
+							}    
+							}
+					add_prestige = minor_prestige_gain	}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0004.c.failure
+			}
+		}
+					
+	}
+}
+
+
+
+# CnD 4
+ek_yearly_events.0005 = {
+	type = character_event
+	title = ek_yearly_events.0005.t
+	desc = ek_yearly_events.0005.desc
+	theme = medicine
+	
+	left_portrait = {
+		character = root	}
+
+	right_portrait = {
+		character = scope:cake_alchemist
+		animation = idle }
+	
+	option = { # Eat the Cake
+		name = ek_yearly_events.0005.a
+
+		stress_impact = {
+			gluttonous = major_stress_impact_loss
+			comfort_eater = major_stress_impact_loss
+			inappetetic = major_stress_impact_gain
+		}
+
+		random_list = { 25 = { send_interface_toast = {
+					left_icon = root
+					title = tooltip.ek_yearly_events.0005.a.health.t
+					add_character_modifier = {
+			modifier = ek_yearly_events_had_cake_health
+			days = 3650	}
+					add_prestige = minor_prestige_gain	}}
+
+					25 = { send_interface_toast = {
+					left_icon = root
+					title = tooltip.ek_yearly_events.0005.a.prowess.t
+					add_character_modifier = {
+			modifier = ek_yearly_events_had_cake_prowess
+			days = 3650	}
+					add_prestige = minor_prestige_gain	}} 
+						20 = { send_interface_toast = {
+					left_icon = root
+					title = tooltip.ek_yearly_events.0004.a.fail.t
+					desc = tooltip.ek_yearly_events.0004.a.fail.desc
+					remove_short_term_gold = 50
+					add_prestige = minor_prestige_loss
+					stress_impact = {
+			base = major_stress_impact_gain	}
+					}
+		}
+						20 = { send_interface_toast = {
+					left_icon = root
+					desc = tooltip.ek_yearly_events.0005.a.disease.desc
+					add_trait = ill }	}
+
+						10 = { death = { killer = scope:cake_alchemist death_reason = death_mysterious } } 
+						
+						} 
+						
+						}
+			
+	option = { # Nope, I'm good.
+		name = ek_yearly_events.0005.b
+
+		stress_impact = {
+			gluttonous = major_stress_impact_gain
+			comfort_eater = major_stress_impact_gain
+			inappetetic = major_stress_impact_loss
+		}		
+	}
+}
+
+
+
+# Kolb and the Dragon 1
+ek_yearly_events.0006 = {
+	type = character_event
+	title = ek_yearly_events.0006.t
+	desc = ek_yearly_events.0006.desc
+	theme = hunting
+	
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+
+	right_portrait = { 
+		character = scope:katd_courtier 
+		animation = beg }
+
+	trigger = {
+		NOT = { has_character_flag = ek_yearly_events_katd_event_happened }
+	}
+
+	immediate = {
+		random_courtier = {
+			limit = {
+				is_available_ai_adult = yes		}
+			save_scope_as = katd_courtier
+		}
+	
+		random_courtier = {
+			limit = {
+				is_available_ai_adult = yes
+				prowess > 10		}
+			save_scope_as = katd_champion
+		}
+	}
+
+	
+		
+	
+		
+	weight_multiplier = {
+		base = 1
+		modifier = {
+			add = 0.2
+			prowess > 10
+		}
+		modifier = {
+			add = 0.2
+			has_trait = brave
+		}
+		modifier = {
+			add = 0.2
+			has_trait = wrathful
+		}
+		modifier = {
+			add = -0.2
+			has_trait = craven
+		}
+		modifier = {
+			add = 0.2
+			has_trait = ambitious
+		}
+		modifier = {
+			add = 0.2
+			has_trait = arrogant
+		}
+		modifier = {
+			add = -0.2
+			has_trait = calm
+		}
+		modifier = {
+			add = -0.2
+			has_trait = lazy
+		}
+		modifier = {
+			add = 0.2
+			has_trait = diligent
+		}
+		modifier = {
+			add = -0.2
+			has_trait = paranoid
+		}
+		modifier = {
+			add = 0.2
+			has_trait = compassionate
+		}
+	}
+	
+	option = { # Fine, I'll do it myself.
+		name = ek_yearly_events.0006.a	
+		trigger_event = {
+			id = ek_yearly_events.0007
+			days = {2 4}	}
+		add_character_flag = ek_yearly_events_katd_event_happened
+		stress_impact = {
+			brave = major_stress_impact_loss
+			diligent = major_stress_impact_loss
+			lazy = major_stress_impact_gain
+			craven = major_stress_impact_gain
+		}
+	}
+
+	option = { # Hey, you. Yeah, you do it.
+		name = ek_yearly_events.0006.b
+
+		trigger = { exists = scope:katd_champion }	
+		
+
+		scope:katd_champion = {
+				random_list = {
+					30 = { death = { death_reason = death_disappearance } 
+					}
+					60 = {
+						increase_wounds_effect = {
+							REASON = fight	
+						} }
+					10 = { add_gold = 50 }
+				}
+			}
+
+		stress_impact = {
+			brave = major_stress_impact_gain
+			diligent = major_stress_impact_gain
+			lazy = major_stress_impact_loss
+			craven = major_stress_impact_loss
+		}
+		add_character_flag = ek_yearly_events_katd_event_happened }
+	
+
+	option = { # dragons? are you mad?
+		name = ek_yearly_events.0006.c
+		trigger = { 
+					OR = { 
+					has_trait = cynical
+					learning > 10 }	}
+		add_character_flag = ek_yearly_events_katd_event_happened
+		add_prestige = 50
+		}
+	}
+
+
+# Katd 2
+ek_yearly_events.0007 = {
+	type = character_event
+	title = ek_yearly_events.0007.t
+	desc = ek_yearly_events.0007.desc
+	theme = hunting
+	right_portrait = root
+	
+	option = { # Enter Cold Cave
+		name = ek_yearly_events.0007.a
+		trigger_event = {
+			id = ek_yearly_events.0008
+			days = {2 4}
+		}
+			}	
+
+	option = { # Windy Cave
+		name = ek_yearly_events.0007.b
+		random_list = {
+					25 = { send_interface_toast = {
+					type = event_toast_effect_bad
+					left_icon = ROOT
+					desc = ek_yearly_events.0007.death.b
+					death = { death_reason = death_fall } 
+				}
+					}
+					25 = { send_interface_toast = {
+						type = event_toast_effect_bad
+						left_icon = ROOT
+						title = ek_yearly_events.0007.hurt.b
+						increase_wounds_effect = { REASON = fall }
+						add_prestige = -50
+					} }
+					25 = {
+						send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = ek_yearly_events.0007.gold.b
+						add_gold = 50	}
+			}
+					25 = { send_interface_toast = {
+						left_icon = ROOT
+						type = event_toast_effect_bad
+						title = ek_yearly_events.0007.back.b } }
+
+			 
+	} }
+
+	option = { # Trail
+		name = ek_yearly_events.0007.c
+		trigger_event = {
+			id = ek_yearly_events.0009
+			days = {2 4}
+		}
+		}
+	
+	
+}
+
+
+
+# Katd - Cold Cave
+ek_yearly_events.0008 = {
+	type = character_event
+	title = ek_yearly_events.0008.t
+	desc = ek_yearly_events.0008.desc
+	theme = hunting
+	
+	left_portrait = {	character = root	}
+		
+	option = { # Neck
+		name = ek_yearly_events.0008.a
+		duel = {
+			skill = prowess
+			value = decent_skill_rating
+			10 = {
+				desc = ek_yearly_events.0008.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_good
+					desc = tooltip.ek_yearly_events.0008.a.success
+					trigger_event = {
+					id = ek_yearly_events.0010
+					days = {2 4}
+						}
+					}
+				}
+			
+			5 = {
+				desc = ek_yearly_events.0008.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					desc = tooltip.ek_yearly_events.0008.a.failure
+					add_prestige = medium_prestige_loss
+					random_list = {
+					25 = { 
+					death = { death_reason = death_battle } 
+					}
+					25 = { increase_wounds_effect = { REASON = battle }
+					} } }
+				}
+			} }
+
+	option = { # Belly
+		name = ek_yearly_events.0008.b
+		duel = {
+			skill = intrigue
+			value = decent_skill_rating
+			10 = {
+				desc = ek_yearly_events.0008.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_good
+					desc = tooltip.ek_yearly_events.0008.b.success
+					trigger_event = {
+					id = ek_yearly_events.0010
+					days = {2 4}
+						}
+					}
+				}
+			
+			5 = {
+				desc = ek_yearly_events.0008.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					desc = tooltip.ek_yearly_events.0008.b.failure
+					add_prestige = medium_prestige_loss
+					death = { death_reason = death_battle } 
+					}
+					 } }
+				} }
+			
+
+
+
+# Katd - Trail
+ek_yearly_events.0009 = {
+	type = character_event
+	title = ek_yearly_events.0009.t
+	desc = ek_yearly_events.0009.desc
+	theme = hunting
+	
+	left_portrait = {
+		character = root
+	}
+
+	right_portrait = {
+		character = scope:katd_wise
+	}
+	
+	immediate = {
+		random_living_character = {
+			limit = {
+				is_available_ai_adult = yes
+				learning > 10
+				age > 50		}
+			save_scope_as = katd_wise
+		}
+	}
+
+	option = { # Hills
+		name = ek_yearly_events.0009.a
+		trigger_event = {
+			id = ek_yearly_events.0011
+			days = {2 4}
+		}
+		
+	}
+
+	option = { # Marsh
+		name = ek_yearly_events.0009.b
+		trigger_event = {
+			id = ek_yearly_events.0012
+			days = {2 4}
+		}
+		
+	}
+}
+
+
+
+# Katd Victory
+ek_yearly_events.0010 = {
+	type = character_event
+	title = ek_yearly_events.0010.t
+	desc =	ek_yearly_events.0010.desc
+	theme = hunting
+	
+	right_portrait = {
+		character = root
+		animation = war_over_win
+	}
+		
+	option = { # Hell ye
+		name = ek_yearly_events.0010.a
+		
+		add_gold = 100
+					add_prestige = major_prestige_gain
+					capital_county = { 
+						random_list = {
+								10 = { change_development_level = 1 }
+								10 = { change_development_level = 2 }
+								10 = { change_development_level = 3 }
+								10 = { change_development_level = 4 }
+								10 = { change_development_level = 5 }
+		}
+	}	
+	
+} }
+
+
+
+# Katd hills
+ek_yearly_events.0011 = {
+	type = character_event
+	title = ek_yearly_events.0011.t
+	desc = ek_yearly_events.0011.desc
+	theme = hunting
+	
+	right_portrait = {
+		character = root	}  
+	
+	option = { # climb down
+		name = ek_yearly_events.0011.a
+		stress_impact = {
+			drunkard = minor_stress_impact_gain
+		}
+		trigger_event = {
+			id = ek_yearly_events.0008
+			days = {2 4}
+		}
+	}
+
+	option = { # visit tavern
+		name = ek_yearly_events.0011.b
+		stress_impact = {
+			drunkard = minor_stress_impact_loss
+		}
+		trigger_event = {
+			id = ek_yearly_events.0013
+			days = {2 4}
+		}
+	} }
+
+
+
+# Katd Marsh
+ek_yearly_events.0012 = {
+	type = character_event
+	title = ek_yearly_events.0012.t
+	desc = ek_yearly_events.0012.desc
+	theme = hunting
+	
+	right_portrait = {
+		character = root
+		animation = fear
+	}  
+	
+	option = { # attack ghost
+		name = ek_yearly_events.0012.a
+		send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					desc = tooltip.ek_yearly_events.0012.a
+					death = { death_reason = death_vanished } 
+					} }
+
+
+	option = { # give gold
+		name = ek_yearly_events.0012.b
+		send_interface_toast = {
+					left_icon = root
+					desc = tooltip.ek_yearly_events.0012.b
+					remove_short_term_gold = 2
+					trigger_event = {
+					id = ek_yearly_events.0011
+					days = {2 4}
+									}
+					} } }
+
+# Katd - Tavern
+ek_yearly_events.0013 = {
+	type = character_event
+	title = ek_yearly_events.0013.t
+	desc = ek_yearly_events.0013.desc
+	theme = hunting
+	
+	left_portrait = {
+		character = root
+	}
+
+	right_portrait = {
+		character = scope:katd_owner
+	}
+
+immediate = {
+    faith = { save_temporary_scope_as = owner_faith }
+    random_living_character = {
+        limit = {
+            is_available_ai_adult = yes
+            is_landed = no
+            NOT = { culture = prev.culture }
+            faith = { faith_hostility_level = { target = scope:owner_faith value > 1 } }
+        }
+        save_scope_as = katd_owner
+    }
+}
+	
+	option = { # drink
+		name = ek_yearly_events.0013.a
+		stress_impact = {
+			drunkard = minor_stress_impact_loss
+			diligent = minor_stress_impact_gain
+		}
+		random_list = { 25 = { add_prestige = minor_prestige_gain }
+
+						25 = { death = { killer = scope:katd_owner death_reason = death_mysterious } } 
+						
+						}
+	}
+
+	option = { # sneak away
+		name = ek_yearly_events.0013.b
+		add_prestige = minor_prestige_loss
+		stress_impact = {
+			diligent = miniscule_stress_impact_gain
+		}
+		trigger_event = {
+					id = ek_yearly_events.0011
+					days = {2 4}
+									}
+	}
+}
+
+# Naked Nord
+ek_yearly_events.0014 = {
+	type = character_event
+	title = ek_yearly_events.0014.t
+	desc = ek_yearly_events.0014.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = scope:naked_witch
+		animation = dismissal }
+
+	right_portrait = {
+		character = scope:naked_nord
+		animation = shame
+	}
+
+	#trigger = {
+	#	is_at_location = mundus_tamriel_morrowind
+	#}
+
+	trigger = { exists = scope:naked_nord
+				exists = scope:naked_witch }	
+	
+
+	immediate = {
+		random_living_character = {
+			limit = {
+				is_available_ai_adult = yes
+				age < 50
+    #culture = culture:eastmarcher
+    is_male = yes    
+     } 
+	add_character_flag = is_naked
+	save_scope_as = naked_nord
+	 }
+			 
+		
+		random_living_character = {
+			limit = {
+				is_available_ai_adult = yes
+    is_female = yes
+    has_trait = witch
+    }
+	save_scope_as = naked_witch		
+	}
+	
+	}
+	
+	option = { # side with witch
+		name = ek_yearly_events.0014.a
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = root
+			SC_ATTACKER = scope:naked_nord
+			SC_DEFENDER = root
+			FATALITY = no
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = ek_yearly_events.0015
+			INVALIDATION_EVENT = single_combat.1006
+		}		
+	}
+
+	option = { # side with nord
+		name = ek_yearly_events.0014.b
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = root
+			SC_ATTACKER = scope:naked_witch
+			SC_DEFENDER = root
+			FATALITY = no
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = ek_yearly_events.0016
+			INVALIDATION_EVENT = single_combat.1006
+		}		
+	}
+
+	
+	option = { # sneak away
+		name = ek_yearly_events.0014.c
+		add_prestige = minor_prestige_loss
+		trigger = {
+		has_trait = craven
+	}
+		stress_impact = {
+			wrathful = minor_stress_impact_gain
+		}
+	}
+
+	option = { # shoo peasants
+		name = ek_yearly_events.0014.d
+		add_prestige = minor_prestige_gain
+		trigger = {
+		OR = { 
+		has_trait = arrogant
+		 } 
+	}
+		stress_impact = {
+			wrathful = minor_stress_impact_gain
+		}
+	}
+
+	option = { # steal cloudcleaver
+		name = ek_yearly_events.0014.e
+		
+		trigger = { intrigue > 10 } 
+
+		duel = {
+			skill = intrigue
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0014.e.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				trigger_event = {
+					id = ek_yearly_events.0017
+					days = {2 4}
+									}
+		}
+
+		5 = {
+				desc = ek_yearly_events.0014.e.failure
+					trigger_event = {
+					id = ek_yearly_events.0018
+					days = {2 4}
+									}
+					 }
+	}
+
+} }
+
+ek_yearly_events.0015 = { #duel naked nord
+	hidden = yes
+	
+
+	immediate = {
+		if = {
+			limit = {
+				root = scope:sc_victor
+			}
+			trigger_event = { id = ek_yearly_events.0019 days = 1 }
+		}
+		else = {
+			trigger_event = { id = ek_yearly_events.0020 days = 1 }
+		}
+	}
+}
+
+ek_yearly_events.0016 = { #duel naked witch
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				root = scope:sc_victor
+			}
+			trigger_event = { id = ek_yearly_events.0021 days = 1 }
+		}
+		else = {
+			trigger_event = { id = ek_yearly_events.0022 days = 1 }
+		}
+	}
+}
+
+ek_yearly_events.0017 = { #stolen artifact
+	type = character_event
+	title = ek_yearly_events.0017.t
+	desc = ek_yearly_events.0017.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root }
+
+	option = { # just sell it
+		name = ek_yearly_events.0017.a
+		add_gold = medium_gold_value
+
+		stress_impact = {
+			gregarious = minor_stress_impact_gain
+			deceitful = minor_stress_impact_loss
+		}
+	}
+
+	option = { # return it to naked nord
+		name = ek_yearly_events.0017.b
+		
+		trigger_event = { id = ek_yearly_events.0023 days = 1 }
+
+		stress_impact = {
+			shy = minor_stress_impact_gain
+			greedy = minor_stress_impact_gain
+		}
+	} }
+
+ek_yearly_events.0018 = { #caught stealing
+	type = character_event
+	title = ek_yearly_events.0018.t
+	desc = ek_yearly_events.0018.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root
+		animation = fear }
+
+	right_portrait = {
+		character = scope:naked_witch
+		animation = rage
+	}
+
+
+	option = { # oh no
+		name = ek_yearly_events.0018.a
+		
+		death = { killer = scope:naked_witch death_reason = death_mysterious }
+		}
+	
+	}
+
+ek_yearly_events.0019 = { #defeated nord
+	type = character_event
+	title = ek_yearly_events.0021.t
+	desc = ek_yearly_events.0019.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root }
+
+
+	option = { # just sell it
+		name = ek_yearly_events.0017.a
+		add_gold = medium_gold_value
+
+		stress_impact = {
+			gregarious = minor_stress_impact_gain
+			deceitful = minor_stress_impact_loss
+		}
+	}
+
+	option = { # return it to the witch
+		name = ek_yearly_events.0019.b
+		
+		trigger_event = { id = ek_yearly_events.0024 days = 1 }
+
+		stress_impact = {
+			shy = minor_stress_impact_gain
+			greedy = minor_stress_impact_gain
+		}
+	}
+	
+	}
+
+ek_yearly_events.0020 = { #nord wins
+	type = character_event
+	title = ek_yearly_events.0020.t
+	desc = ek_yearly_events.0020.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root
+		animation = fear }
+
+	right_portrait = {
+		character = scope:naked_nord
+		animation = rage
+	}
+
+
+	option = { # oh no
+		name = ek_yearly_events.0020.a
+		
+		death = { killer = scope:naked_nord death_reason = death_beaten }
+		}
+	
+	}
+
+ek_yearly_events.0021 = { #defeated witch
+	type = character_event
+	title = ek_yearly_events.0021.t
+	desc = ek_yearly_events.0021.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root }
+
+	option = { # just sell it
+		name = ek_yearly_events.0017.a
+		add_gold = medium_gold_value
+
+		stress_impact = {
+			gregarious = minor_stress_impact_gain
+			deceitful = minor_stress_impact_loss
+		}
+	}
+
+	option = { # return it to naked nord
+		name = ek_yearly_events.0017.b
+		
+		trigger_event = { id = ek_yearly_events.0023 days = 1 }
+
+		stress_impact = {
+			shy = minor_stress_impact_gain
+			greedy = minor_stress_impact_gain
+		}
+	} }
+
+ek_yearly_events.0022 = { #witch wins
+	type = character_event
+	title = ek_yearly_events.0020.t
+	desc = ek_yearly_events.0022.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root
+		animation = fear }
+
+	right_portrait = {
+		character = scope:naked_witch
+		animation = rage
+	}
+
+
+	option = { # oh no
+		name = ek_yearly_events.0018.a
+		
+		death = { killer = scope:naked_witch death_reason = death_mysterious }
+		}
+	
+	}
+	
+ek_yearly_events.0023 = { #return to nord
+	type = character_event
+	title = ek_yearly_events.0023.t
+	desc = ek_yearly_events.0023.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root
+						 }
+
+	right_portrait = {
+		character = scope:naked_nord
+		animation = ecstasy
+	}
+
+	scope:naked_nord = remove_character_flag = is_naked
+
+	option = { # pls join court
+		name = ek_yearly_events.0023.a
+		
+		duel = {
+			skill = diplomacy
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0023.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_good
+					title = tooltip.ek_yearly_events.0023.a.success
+					root = {
+				add_courtier = scope:naked_nord    
+							}
+					add_prestige = minor_prestige_gain	}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0023.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					title = tooltip.ek_yearly_events.0023.a.failure
+					
+					add_prestige = minor_prestige_loss	}
+			}
+		}
+		}
+
+		option = { # just leave me
+		name = ek_yearly_events.0023.b
+		add_prestige = medium_prestige_gain
+
+		stress_impact = {
+			gregarious = minor_stress_impact_gain
+			shy = minor_stress_impact_loss
+		}
+	} }
+
+ek_yearly_events.0024 = { #return to witch
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0024.desc
+	theme = death
+	override_background = { event_background = wilderness }
+	
+	left_portrait = {
+		character = root
+						 }
+
+	right_portrait = {
+		character = scope:naked_witch
+		animation = ecstasy
+	}
+
+	option = { # pls join court
+		name = ek_yearly_events.0023.a
+		
+		duel = {
+			skill = diplomacy
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0024.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_good
+					title = tooltip.ek_yearly_events.0024.a.success
+					root = {
+				add_courtier = scope:naked_witch    
+							}
+					add_prestige = minor_prestige_gain	}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0024.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					title = tooltip.ek_yearly_events.0024.a.failure
+					
+					add_prestige = minor_prestige_loss	}
+			}
+		}
+		}
+
+		option = { # just leave me
+		name = ek_yearly_events.0023.b
+		add_prestige = medium_prestige_gain
+
+		stress_impact = {
+			gregarious = minor_stress_impact_gain
+			shy = minor_stress_impact_loss
+		}
+	} }
+
+# Clever Kail-Perwa and the Great Boast 
+ek_yearly_events.0024 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0024.desc
+	theme = faith
+	
+	left_portrait =  root
+
+	right_portrait = {
+		character = scope:kpgb_ancestor
+	}	
+
+immediate = {
+  random_ancestor = {
+  even_if_dead = yes
+    limit = {
+      OR = {
+        intrigue > 10
+        learning > 10
+      }
+	  NOT = { has_trait = arrogant }
+      is_alive = no
+    }
+    save_scope_as = kpgb_ancestor
+  }
+}
+
+
+
+	trigger = {
+		 faith = { has_doctrine = tenet_ancestor_worship } 
+		has_trait = arrogant
+		OR = {
+				intrigue > 9
+				learning > 9 } 
+		NOT = { has_character_flag = kpgb_happened	}
+	 exists = scope:kpgb_ancestor
+	}
+
+	
+	
+	option = { # oh yes, im very clever much smort
+		name = ek_yearly_events.0024.a
+		add_character_flag = kpgb_happened
+		trigger_event = {
+			id = ek_yearly_events.0025
+			days = {2 4}
+		} }		
+		
+
+	option = { # I hereby renounce said smortiness
+		name = ek_yearly_events.0024.b
+		stress_impact = { arrogant = medium_stress_impact_gain
+						stubborn = medium_stress_impact_gain		}
+		send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = tooltip.ek_yearly_events.0024.b
+						add_character_flag = kpgb_happened
+						remove_trait = arrogant
+						add_trait = humble	}
+	}	
+	
+
+}
+
+# First Warning
+ek_yearly_events.0025 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0025.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+		right_portrait = {
+		character = scope:kpgb_ancestor
+		animation = disapproval
+	}
+
+	option = { # so be it
+		name = ek_yearly_events.0025.a
+		
+		stress_impact = { paranoid = medium_stress_impact_gain	}
+
+		trigger_event = {
+			id = ek_yearly_events.0026
+			days = {2 4} } 
+			} 
+}
+
+#first challenge
+ek_yearly_events.0026 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0026.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root
+		animation = fear }
+
+	right_portrait = {
+		character = scope:second_ancestor
+	}
+
+	immediate = {
+  random_ancestor = {
+  even_if_dead = yes
+    limit = {
+      OR = {
+        intrigue > 10
+        learning > 10
+      		}
+	  NOT = { has_trait = arrogant	}
+      is_alive = no
+    }
+    save_scope_as = second_ancestor
+  }
+}
+
+	option = { # solve the puzzle
+		name = ek_yearly_events.0026.a
+		
+		duel = {
+			skill = intrigue
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0026.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				trigger_event = {
+			id = ek_yearly_events.0027
+			days = {2 4}
+		}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0026.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					title = tooltip.ek_yearly_events.0026.a.failure
+					death = { killer = scope:second_ancestor death_reason = death_mysterious }	}
+			}
+		}
+
+		 }
+
+	option = { # I give up
+		name = ek_yearly_events.0026.b
+		stress_impact = { arrogant = medium_stress_impact_gain
+						stubborn = medium_stress_impact_gain		}
+		send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = tooltip.ek_yearly_events.0024.b
+						add_prestige = minor_prestige_loss
+						remove_trait = arrogant
+						add_trait = humble	}
+	} }
+
+#first victory
+ek_yearly_events.0027 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0027.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:second_ancestor
+	}
+
+	option = { # let the sun shine
+		name = ek_yearly_events.0027.a
+		
+		add_prestige = minor_prestige_gain
+
+		trigger_event = {
+			id = ek_yearly_events.0028
+			days = {2 4} } 
+			} 
+}
+
+#second challenge
+ek_yearly_events.0028 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0028.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:third_ancestor
+	}
+
+	immediate = {
+  random_ancestor = {
+  even_if_dead = yes
+    limit = {
+      OR = {
+        intrigue > 10
+        learning > 10
+      		}
+	  NOT = { has_trait = arrogant	}
+      is_alive = no
+    }
+    save_scope_as = third_ancestor
+  }
+}
+
+option = { # stop the victory
+		name = ek_yearly_events.0028.a
+		
+		duel = {
+			skill = learning
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0028.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				trigger_event = {
+			id = ek_yearly_events.0029
+			days = {2 4}
+		}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0028.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					title = tooltip.ek_yearly_events.0026.a.failure
+					death = { killer = scope:third_ancestor death_reason = death_mysterious }	}
+			}
+		}
+
+		 }
+
+	option = { # I give up
+		name = ek_yearly_events.0026.b
+		stress_impact = { arrogant = medium_stress_impact_gain
+						stubborn = medium_stress_impact_gain		}
+		send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = tooltip.ek_yearly_events.0024.b
+						add_prestige = minor_prestige_loss
+						remove_trait = arrogant
+						add_trait = humble	}
+	} 
+}
+
+#second victory
+ek_yearly_events.0029 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0029.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:third_ancestor
+	}
+
+	option = { # let the sun shine
+		name = ek_yearly_events.0027.a
+		
+		add_prestige = minor_prestige_gain
+
+		trigger_event = {
+			id = ek_yearly_events.0030
+			days = {2 4} } 
+			} 
+}
+
+ek_yearly_events.0030 = { #final test
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0030.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:kpgb_ancestor
+	}
+
+option = { # convince ancestor
+		name = ek_yearly_events.0030.a
+		
+		duel = {
+			skill = learning
+			value = decent_skill_rating
+			10 = { # success
+				desc = ek_yearly_events.0030.a.success
+				compare_modifier = {
+					value = scope:duel_value
+					multiplier = 1
+				}
+				trigger_event = {
+			id = ek_yearly_events.0031
+			days = {2 4}
+		}
+		}
+
+		10 = { #failure
+				desc = ek_yearly_events.0030.a.failure
+				send_interface_toast = {
+					left_icon = root
+					type = event_toast_effect_bad
+					title = tooltip.ek_yearly_events.0026.a.failure
+					death = { killer = scope:kpgb_ancestor death_reason = death_mysterious }	}
+			}
+		}
+
+		 }
+
+	option = { # I give up
+		name = ek_yearly_events.0026.b
+		stress_impact = { arrogant = medium_stress_impact_gain
+						stubborn = medium_stress_impact_gain		}
+		send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = tooltip.ek_yearly_events.0024.b
+						add_prestige = minor_prestige_loss
+						remove_trait = arrogant
+						add_trait = humble	}
+	} 
+}
+
+#final victory
+ek_yearly_events.0031 = {
+	type = character_event
+	title = ek_yearly_events.0024.t
+	desc = ek_yearly_events.0031.desc
+	theme = faith
+	
+	left_portrait = {
+		character = root }
+
+	right_portrait = {
+		character = scope:kpgb_ancestor
+	}
+
+	option = { # ok
+		name = ek_yearly_events.0031.a
+		
+		send_interface_toast = {
+						type = event_toast_effect_good
+						left_icon = ROOT
+						title = tooltip.ek_yearly_events.0024.b
+						add_prestige = major_prestige_gain
+						remove_trait = arrogant
+						add_trait = humble	}
+	} 
+}
+
+
+
+
+		
+
+
+
+
+
