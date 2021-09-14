@@ -996,16 +996,6 @@ health.1001 = {
 		animation = idle
 	}
 
-#EK EDIT
-	immediate = {
-		random_courtier = {
-			limit = {
-				is_available_ai_adult = yes
-				learning > 10		}
-			save_scope_as = ek_new_physician
-		} }
-#EK EDIT
-
 	trigger = {
 		can_contract_disease_trigger = { DISEASE = ill }
 	}
@@ -1064,6 +1054,11 @@ health.1001 = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
 		contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = no } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		random_courtier = {
+			limit = {
+				is_available_ai_adult = yes
+				learning > 10		}
+			save_scope_as = ek_new_physician
 	}
 
 	###NO COURT PHYSICIAN OPTIONS###
