@@ -1,0 +1,191 @@
+﻿namespace = the_arena
+
+the_arena.0001 = {
+	type = character_event
+	title = the_arena.0001.t
+	desc = the_arena.0001.desc
+	theme = war #please cool custom theme please
+	
+	left_portrait = {
+		character = root
+	}
+
+	option = { # make a bet
+		name = the_arena.0001.a
+		
+		random_list = { 50 = { trigger_event = {
+			id = the_arena.0002
+			days = {2 4} } 
+			} } 
+				 }
+
+	option = { # go to the bloodworks
+		name = the_arena.0001.b
+		trigger = { NOT = { has_trait = craven }
+					prowess > 9 }
+
+		trigger_event = {
+			id = the_arena.1001
+			days = {2 4} } 
+			}
+
+	option = { # this was a mistake
+		name = the_arena.0001.c 
+			} }
+
+the_arena.0002 = {
+	type = character_event
+	title = the_arena.0002.t
+	desc = the_arena.0002.desc
+	theme = war #please cool custom theme please
+	
+	left_portrait = {
+		character = root
+	}
+
+	lower_left_portrait = { character = scope:first_contestant }
+
+	lower_right_portrait = { character = scope:second_contestant }
+
+	immediate = {
+  random_living_character = {
+    limit = { prowess > 9 }
+    save_scope_as = first_contestant
+  }
+}
+
+	immediate = {
+  random_living_character = {
+    limit = { prowess > 9 }
+    save_scope_as = second_contestant
+  }
+}
+
+option = { # Bet on the First
+		name = the_arena.0002.a
+		
+		remove_short_term_gold = 50 
+
+		trigger_event = { #duel, bet on first
+			id = the_arena.0003
+			days = {2 4} }
+				
+	}
+
+	option = { # Bet on the Second
+		name = the_arena.0002.b
+		
+		remove_short_term_gold = 50 
+
+				trigger_event = { #duel, bet on second
+			id = the_arena.0004
+			days = {2 4} }		
+	}
+}
+
+the_arena.0003 = { #Bet on First
+	type = character_event
+	title = the_arena.0003.t
+	desc = the_arena.0003.desc
+	theme = war #please cool custom theme please
+	
+	left_portrait = {
+		character = scope:first_contestant
+		animation = rage
+	}
+
+	right_portrait = {
+		character = scope:second_contestant
+		animation = anger
+	}
+
+	lower_center_portrait = {
+		character = root }
+
+	option = { # Lower the Gates!
+		name = the_arena.0003.a
+		
+		remove_short_term_gold = 50 
+
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = root
+			SC_ATTACKER = scope:first_contestant
+			SC_DEFENDER = scope:second_contestant
+			FATALITY = no
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = the_arena.0005
+			INVALIDATION_EVENT = single_combat.1006
+		}		
+	}
+}
+
+the_arena.0004 = { #duel, bet on second
+	type = character_event
+	title = the_arena.0003.t
+	desc = the_arena.0003.desc
+	theme = war #please cool custom theme please
+	
+	left_portrait = {
+		character = scope:first_contestant
+		animation = rage
+	}
+
+	right_portrait = {
+		character = scope:second_contestant
+		animation = anger
+	}
+
+	lower_center_portrait = {
+		character = root }
+
+	option = { # Lower the Gates!
+		name = the_arena.0003.a
+		
+		remove_short_term_gold = 50 
+
+		configure_start_single_combat_effect = {
+			SC_INITIATOR = root
+			SC_ATTACKER = scope:first_contestant
+			SC_DEFENDER = scope:second_contestant
+			FATALITY = no
+			FIXED = no
+			LOCALE = terrain_scope
+			OUTPUT_EVENT = the_arena.0006
+			INVALIDATION_EVENT = single_combat.1006
+		}		
+	}
+}
+
+the_arena.0005 = { #results, bet on first
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				scope:first_contestant = scope:sc_victor
+			}
+			trigger_event = { id = the_arena.0007 days = 1 } #first wins
+		}
+		else = {
+			trigger_event = { id = the_arena.0008 days = 1 } #second wins
+		}
+	}
+}
+
+the_arena.0006 = { #results, bet on second
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = {
+				scope:second_contestant = scope:sc_victor
+			}
+			trigger_event = { id = the_arena.0009 days = 1 }
+		}
+		else = {
+			trigger_event = { id = the_arena.0010 days = 1 }
+		}
+	}
+}
+

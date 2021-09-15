@@ -59,6 +59,7 @@ PixelShader =
 		SampleModeV = "Clamp"
 		type = "2darray"
 	}
+
 	TextureSampler DecalNormalArray
 	{
 		Ref = JominiPortraitDecalNormalArray
@@ -395,7 +396,16 @@ VertexShader = {
 PixelShader =
 {
 	Code
-	[[		
+	[[
+		// Warcraft
+		// Should match SPortraitDecalTextureSet::BlendMode
+		#define BLEND_MODE_OVERLAY 0
+		#define BLEND_MODE_REPLACE 1
+		#define BLEND_MODE_HARD_LIGHT 2
+		#define BLEND_MODE_MULTIPLY 3
+		// Special handling of normal Overlay blend mode (in shader only)
+		#define BLEND_MODE_OVERLAY_NORMAL 4
+		
 		void CalculatePortraitLights( float3 WorldSpacePos, float ShadowTerm, SMaterialProperties MaterialProps, inout float3 DiffuseLightOut, inout float3 SpecularLightOut )
 		{
 			for( int i = 0; i < LIGHT_COUNT; ++i )
@@ -474,13 +484,24 @@ PixelShader =
 			#endif
 
 			//EK2 EMISSIVE SHADER
-			float3 EmissiveColor = vec3(0.0f);
-			float EmissiveMask =  PdxTex2D( NormalMap, Input.UV0 ).b;
-			#ifdef EMISSIVE
-				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor ;
+			#ifdef EMISSIVE_NORMAL_BLUE
+
+				float3 EmissiveColor = vec3(0.0f);
+				float EmissiveMask =  PdxTex2D( NormalMap, Input.UV0 ).b;
+				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor;
 				Color += EmissiveColor;
 
 			#endif
+
+			#ifdef EMISSIVE_PROPERTIES_RED
+
+				float3 EmissiveColor = vec3(0.0f);
+				float EmissiveMask =  Properties.r;
+				EmissiveColor = Diffuse.rgb * EmissiveMask * MaterialProps._DiffuseColor;
+				Color += EmissiveColor;
+
+			#endif
+
 			//EK2 EMISSIVE SHADER
 			
 			Color = ApplyDistanceFog( Color, Input.WorldSpacePos );
@@ -512,57 +533,46 @@ PixelShader =
 			Normal.z *= Overlay.z;
 			return Normal;
 		}
-	]]
+		
+		// Warcraft
+		uint GetBodyPartIndex( uint InstanceIndex )
+		{
+			uint Offset = InstanceIndex + PDXMESH_USER_DATA_OFFSET;
+			return uint( Data[Offset].x );
+		}
 
-	MainCode PS_skin
-	{
-		Input = "VS_OUTPUT_PDXMESHPORTRAIT"
-		Output = "PDX_COLOR"
-		Code
-		[[
-			// Should match SPortraitDecalTextureSet::BlendMode
-			#define BLEND_MODE_OVERLAY 0
-			#define BLEND_MODE_REPLACE 1
-			#define BLEND_MODE_HARD_LIGHT 2
-			#define BLEND_MODE_MULTIPLY 3
-			// Special handling of normal Overlay blend mode (in shader only)
-			#define BLEND_MODE_OVERLAY_NORMAL 4
+		float OverlayDecal( float Target, float Blend )
+		{
+			return float( Target > 0.5f ) * ( 1.0f - ( 2.0f * ( 1.0f - Target ) * ( 1.0f - Blend ) ) ) +
+				   float( Target <= 0.5f ) * ( 2.0f * Target * Blend );
+		}
 
-			uint GetBodyPartIndex( uint InstanceIndex )
+		float HardLightDecal( float Target, float Blend )
+		{
+			return float( Blend > 0.5f ) * ( 1.0f - ( 2.0f * ( 1.0f - Target ) * ( 1.0f - Blend ) ) ) +
+				   float( Blend <= 0.5f ) * ( 2.0f * Target * Blend );
+		}
+		
+		// Warcraft
+		float4 BlendDecal( uint BlendMode, float4 Target, float4 Blend, float Weight , uint TextureType )
+		{
+			float4 Result = vec4( 0.0f );
+
+			if ( BlendMode == BLEND_MODE_OVERLAY )
 			{
-				uint Offset = InstanceIndex + PDXMESH_USER_DATA_OFFSET;
-				return uint( Data[Offset].x );
-			}
-
-			float OverlayDecal( float Target, float Blend )
-			{
-				return float( Target > 0.5f ) * ( 1.0f - ( 2.0f * ( 1.0f - Target ) * ( 1.0f - Blend ) ) ) +
-					   float( Target <= 0.5f ) * ( 2.0f * Target * Blend );
-			}
-
-			float HardLightDecal( float Target, float Blend )
-			{
-				return float( Blend > 0.5f ) * ( 1.0f - ( 2.0f * ( 1.0f - Target ) * ( 1.0f - Blend ) ) ) +
-					   float( Blend <= 0.5f ) * ( 2.0f * Target * Blend );
-			}
-
-			float4 BlendDecal( uint BlendMode, float4 Target, float4 Blend, float Weight )
-			{
-				float4 Result = vec4( 0.0f );
-
-				if ( BlendMode == BLEND_MODE_OVERLAY )
+				// Warcraft
+				// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply overlay blending as usual.
+				if( Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f && TextureType == 1 )
 				{
-					// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply overlay blending as usual.
-					if(all(Blend.rgb == float3(1.0f, 0.0f, 0.0f)))
-					{
-  					Result = float4( 
+					Result = float4( 
 						OverlayDecal( Target.r, vPaletteColorHair.r ),
 						OverlayDecal( Target.g, vPaletteColorHair.g ),
 						OverlayDecal( Target.b, vPaletteColorHair.b ),
 						OverlayDecal( Target.a, Blend.a ) 
-						);
-					}
-					else if(all(Blend.rgb == float3(0.0f, 1.0f, 0.0f)))
+					);
+				}
+
+					else if( Blend.r == 0.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1 )
 					{
 
 					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
@@ -576,67 +586,108 @@ PixelShader =
 						OverlayDecal( Target.b, (DarkHairColor.b ) ),
 						OverlayDecal( Target.a, Blend.a ) 
 						);
-					}
-					else
-					{
-  					Result = float4( 
+					}				
+				
+				else
+				{
+					Result = float4( 
 						OverlayDecal( Target.r, Blend.r ),
 						OverlayDecal( Target.g, Blend.g ),
 						OverlayDecal( Target.b, Blend.b ),
 						OverlayDecal( Target.a, Blend.a ) 
-						);
-					}
+					);
 				}
-				else if ( BlendMode == BLEND_MODE_REPLACE )
+			}
+			else if ( BlendMode == BLEND_MODE_REPLACE )
+			{
+				// Warcraft
+				// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply replace blending as usual.
+				if( Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f && TextureType == 1 )
 				{
-					// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply replace blending as usual.
-					if(all(Blend.rgb == float3(1.0f, 0.0f, 0.0f)))
-					{
-  					Result = float4( vPaletteColorHair.rgb, Target.a );
-					}
-					else
-					{
- 					Result = Blend;
-					}
+					Result = float4(
+						vPaletteColorHair.r,
+						vPaletteColorHair.g,
+						vPaletteColorHair.b,
+						Target.a
+					);
+				}
+				else if ( Blend.r == 0.0f && Blend.g == 0.0f && Blend.b == 1.0f && TextureType == 1 )
+				{
+					Result = float4(
+						vPaletteColorEyes.r,
+						vPaletteColorEyes.g,
+						vPaletteColorEyes.b,
+						Target.a
+					);
+				}
+				else
+				{
+					Result = Blend;
+				}
+			}
+
+			else if ( BlendMode == BLEND_MODE_HARD_LIGHT )
+			{
+				// Warcraft
+				// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply hard light blending as usual.
+				if( Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f && TextureType == 1 )
+				{
+					Result = float4(
+						HardLightDecal( Target.r, vPaletteColorHair.r ),
+						HardLightDecal( Target.g, vPaletteColorHair.g ),
+						HardLightDecal( Target.b, vPaletteColorHair.b ),
+						HardLightDecal( Target.a, Blend.a )
+					);
+				}
+				
+				else
+				{
+					Result = float4(
+						HardLightDecal( Target.r, Blend.r ),
+						HardLightDecal( Target.g, Blend.g ),
+						HardLightDecal( Target.b, Blend.b ),
+						HardLightDecal( Target.a, Blend.a )
+					);
+				}
+			}
+
+
+			else if ( BlendMode == BLEND_MODE_MULTIPLY )
+			{
+				// Warcraft
+				// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply multiply blending as usual.
+				if(Blend.r == 1.0f && Blend.g == 0.0f && Blend.b == 0.0f && TextureType == 1)
+				{
+					Result = float4(
+						( Target.r * vPaletteColorHair.r ),
+						( Target.g * vPaletteColorHair.g ),
+						( Target.b * vPaletteColorHair.b ),
+						( Target.a * Blend.a )
+					);
 				}
 
-				else if ( BlendMode == BLEND_MODE_HARD_LIGHT )
-				{
-					// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply hard light blending as usual.
-					if(all(Blend.rgb == float3(1.0f, 0.0f, 0.0f)))
-					{
- 					Result = float4(
- 				   		HardLightDecal( Target.r, vPaletteColorHair.r ),
-  						HardLightDecal( Target.g, vPaletteColorHair.g ),
-   						HardLightDecal( Target.b, vPaletteColorHair.b ),
-   						HardLightDecal( Target.a, Blend.a )
-  						);
+				else if ( Blend.r == 0.0f && Blend.g == 0.0f && Blend.b == 1.0f && TextureType == 1 )
+				{	
+					Result = float4(
+						(1.0f - (1.0f - Target.r) * (1.0f - vPaletteColorEyes.r) ),
+						(1.0f - (1.0f - Target.g) * (1.0f - vPaletteColorEyes.g) ),
+						(1.0f - (1.0f - Target.b) * (1.0f - vPaletteColorEyes.b) ),
+						(Target.a)
+					);
 					}
-					else
-					{
- 					 Result = float4(
- 				   		HardLightDecal( Target.r, Blend.r ),
-  						HardLightDecal( Target.g, Blend.g ),
-   						HardLightDecal( Target.b, Blend.b ),
-   						HardLightDecal( Target.a, Blend.a )
-  						);
-					}
-				}
+
+				else if ( Blend.r == 1.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1 )
+				{	
+					Result = float4(
+						saturate((Target.r + 1.0f)),
+						saturate((Target.g + 1.0f)),
+						saturate((Target.b + 1.0f)),
+						(Target.a)
+					);
+					}					
 
 
-				else if ( BlendMode == BLEND_MODE_MULTIPLY )
-				{
-					// If Red channel is white, and blue and green are black, then colour the decal to the Hair Colour palette. Else, apply multiply blending as usual.
-					if(all(Blend.rgb == float3(1.0f, 0.0f, 0.0f)))
-					{
- 					Result = float4(
-						 ( Target.r * vPaletteColorHair.r ),
-						 ( Target.g * vPaletteColorHair.g ),
-						 ( Target.b * vPaletteColorHair.b ),
-						 ( Target.a * Blend.a )
-						 );
-					}
-						else if(all(Blend.rgb == float3(0.0f, 1.0f, 0.0f)))
+					else if(Blend.r == 0.0f && Blend.g == 1.0f && Blend.b == 0.0f && TextureType == 1)
 					{
 
 					float3 HairColor = RGBtoHSV( vPaletteColorHair.rgb );
@@ -652,80 +703,151 @@ PixelShader =
 						 );
 					}
 
-					else
-					{
- 					Result = Target * Blend;
-					}
-				}
-				else if ( BlendMode == BLEND_MODE_OVERLAY_NORMAL )
+				
+				else
 				{
-					Result = float4( OverlayNormal( Target.xyz, Blend.xyz ), Target.a );
+					Result = Target * Blend;
 				}
-
-				return lerp( Target, Result, Weight );
 			}
-
-			void AddDecals( inout float3 Diffuse, inout float3 Normals, inout float4 Properties, float2 UV, uint InstanceIndex, uint From, uint To )
+			else if ( BlendMode == BLEND_MODE_OVERLAY_NORMAL )
 			{
-				// Body part index is scripted on the mesh asset and should match ECharacterPortraitPart
-				uint BodyPartIndex = GetBodyPartIndex( InstanceIndex );
-
-				// Data for each decal is stored in two texels
-				uint DataTexelCountPerDecal = 2;
-				float DecalDivisor = TotalDecalCount * DataTexelCountPerDecal;
-				float Offset = 1.0f / ( DecalDivisor * DataTexelCountPerDecal );
-				uint FromDataTexel = From * DataTexelCountPerDecal;
-				uint ToDataTexel = To * DataTexelCountPerDecal;
-
-				// Sorted after priority
-				for ( uint i = FromDataTexel; i <= ToDataTexel; i += DataTexelCountPerDecal )
-				{
-					// Texel n is { diffuse_index, normal_index, properties_index, body_part_index }
-					// Index 255 => unused
-					float4 IndexData = PdxTex2DLod0( DecalData, float2( ( i / DecalDivisor ) + Offset, 0.0f ) );
-					uint Index = uint( IndexData.a * 255.0f );
-
-					if ( Index == BodyPartIndex )
-					{
-						// Texel n + 1 is { diffuse_blend_mode, normal_blend_mode, properties_blend_mode, weight }
-						float4 BlendData = PdxTex2DLod0( DecalData, float2( ( ( i + 1 ) / DecalDivisor ) + Offset, 0.0f ) );
-						float Weight = BlendData.a;
-
-						float DiffuseIndex = IndexData.x * 255.0f;
-						float NormalIndex = IndexData.y * 255.0f;
-						float PropertiesIndex = IndexData.z * 255.0f;
-
-						if ( DiffuseIndex < 255.0f )
-						{
-							uint DiffuseBlendMode = uint( BlendData.x * 255.0f );
-							float4 DiffuseSample = PdxTex2D( DecalDiffuseArray, float3( UV, DiffuseIndex ) );
-							Weight = DiffuseSample.a * Weight;
-							Diffuse = BlendDecal( DiffuseBlendMode, float4( Diffuse, 0.0f ), DiffuseSample, Weight ).rgb;
-						}
-
-						if ( NormalIndex < 255.0f )
-						{
-							uint NormalBlendMode = uint( BlendData.y * 255.0f );
-							if ( NormalBlendMode == BLEND_MODE_OVERLAY )
-							{
-								NormalBlendMode = BLEND_MODE_OVERLAY_NORMAL;
-							}
-							float3 NormalSample = UnpackDecalNormal( PdxTex2D( DecalNormalArray, float3( UV, NormalIndex ) ), Weight );
-							Normals = BlendDecal( NormalBlendMode, float4( Normals, 0.0f ), float4( NormalSample, 0.0f ), Weight ).xyz;
-						}
-
-						if ( PropertiesIndex < 255.0f )
-						{
-							uint PropertiesBlendMode = uint( BlendData.z * 255.0f );
-							float4 PropertiesSample = PdxTex2D( DecalPropertiesArray, float3( UV, PropertiesIndex ) );
-							Properties = BlendDecal( PropertiesBlendMode, Properties, PropertiesSample, Weight );
-						}
-					}
-				}
-
-				Normals = normalize( Normals );
+				Result = float4( OverlayNormal( Target.xyz, Blend.xyz ), Target.a );
 			}
 
+			return lerp( Target, Result, Weight );
+			
+		}
+
+		void AddDecals( inout float4 Diffuse, inout float3 Normals, inout float4 Properties, float2 UV, uint InstanceIndex, uint From, uint To, uint AlphaBlend)
+		{
+			// Body part index is scripted on the mesh asset and should match ECharacterPortraitPart
+			uint BodyPartIndex = GetBodyPartIndex( InstanceIndex );
+
+			// Data for each decal is stored in two texels
+			uint DataTexelCountPerDecal = 2;
+			float DecalDivisor = TotalDecalCount * DataTexelCountPerDecal;
+			float Offset = 1.0f / ( DecalDivisor * DataTexelCountPerDecal );
+			uint FromDataTexel = From * DataTexelCountPerDecal;
+			uint ToDataTexel = To * DataTexelCountPerDecal;
+
+			// Sorted after priority
+			for ( uint i = FromDataTexel; i <= ToDataTexel; i += DataTexelCountPerDecal )
+			{
+				// Texel n is { diffuse_index, normal_index, properties_index, body_part_index }
+				// Index 255 => unused
+				float4 IndexData = PdxTex2DLod0( DecalData, float2( ( i / DecalDivisor ) + Offset, 0.0f ) );
+				uint Index = uint( IndexData.a * 255.0f );
+
+				if ( Index == BodyPartIndex )
+				{
+					// Texel n + 1 is { diffuse_blend_mode, normal_blend_mode, properties_blend_mode, weight }
+					float4 BlendData = PdxTex2DLod0( DecalData, float2( ( ( i + 1 ) / DecalDivisor ) + Offset, 0.0f ) );
+					float Weight = BlendData.a;
+
+					float DiffuseIndex = IndexData.x * 255.0f;
+					float NormalIndex = IndexData.y * 255.0f;
+					float PropertiesIndex = IndexData.z * 255.0f;
+
+					// Warcraft
+					uint TextureType = 0;
+					
+					if ( DiffuseIndex < 255.0f )
+					{
+						// Warcraft
+						TextureType = 1;
+						
+						uint DiffuseBlendMode = uint( BlendData.x * 255.0f );
+						float4 DiffuseSample = PdxTex2D( DecalDiffuseArray, float3( UV, DiffuseIndex ) );
+						
+						//EK2
+						//Sample bottom left corner of the decal & get color.
+						float4 DiffuseDecalPointSample = PdxTex2D( DecalDiffuseArray, float3((0.0f + 0.5f) / 1024.0f , (1023.0f + 0.5f) / 1024.0f , DiffuseIndex ) );
+
+						// If bottom left corner is RED & Alpha 0 - FACEPAINT SHADER
+						if ( DiffuseDecalPointSample.r == 1.0f && DiffuseDecalPointSample.g == 0.0f && DiffuseDecalPointSample.b == 0.0f && DiffuseDecalPointSample.a == 0.0f )
+						{
+
+							float SampleWeight = 0.0f;
+							float FacepaintAlpha = 0.0f;
+
+							if (Weight < 0.25f)
+							{
+							SampleWeight = Weight * 4.0f;
+							FacepaintAlpha = DiffuseSample.r;
+							}
+
+							else if (Weight >= 0.25f && Weight < 0.5f)
+							{
+							SampleWeight = (Weight - 0.25f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.g;
+							}
+
+							else if (Weight >= 0.5f && Weight < 0.75f)
+							{
+							SampleWeight = (Weight - 0.5f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.b;
+							}
+
+							else
+							{
+							SampleWeight = (Weight - 0.75f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.a;
+							}
+
+							float3 EKDecalPaletteColor = PdxTex2D( DecalDiffuseArray, float3((SampleWeight / 32.0f)-(2.0f/1024.0f) , 2.0f / 1024.0f , DiffuseIndex ) ).rgb;
+							DiffuseSample = float4(EKDecalPaletteColor , FacepaintAlpha);
+							Weight = 1.0f;
+						}
+						//EK2
+
+						if (AlphaBlend == 1)
+						{
+						Weight = Weight;
+						}
+						else
+						{
+						Weight = DiffuseSample.a * Weight;
+						}
+
+						Diffuse = BlendDecal( DiffuseBlendMode, Diffuse, DiffuseSample, Weight, TextureType );
+					}
+
+					if ( NormalIndex < 255.0f )
+					{
+						// Warcraft
+						TextureType = 2;
+						
+						uint NormalBlendMode = uint( BlendData.y * 255.0f );
+						if ( NormalBlendMode == BLEND_MODE_OVERLAY )
+						{
+							NormalBlendMode = BLEND_MODE_OVERLAY_NORMAL;
+						}
+						float3 NormalSample = UnpackDecalNormal( PdxTex2D( DecalNormalArray, float3( UV, NormalIndex ) ), Weight );
+						Normals = BlendDecal( NormalBlendMode, float4( Normals, 0.0f ), float4( NormalSample, 0.0f ), Weight, TextureType ).xyz;
+					}
+
+					if ( PropertiesIndex < 255.0f )
+					{
+						// Warcraft
+						TextureType = 3;
+						
+						uint PropertiesBlendMode = uint( BlendData.z * 255.0f );
+						float4 PropertiesSample = PdxTex2D( DecalPropertiesArray, float3( UV, PropertiesIndex ) );
+						Properties = BlendDecal( PropertiesBlendMode, Properties, PropertiesSample, Weight, TextureType );
+					}
+				}
+			}
+
+			Normals = normalize( Normals );
+		}
+	]]
+
+	MainCode PS_skin
+	{
+		Input = "VS_OUTPUT_PDXMESHPORTRAIT"
+		Output = "PDX_COLOR"
+		Code
+		[[
 			PDX_MAIN
 			{			
 				float2 UV0 = Input.UV0;
@@ -747,22 +869,24 @@ PixelShader =
 					Properties = PdxTex2D( SpecularMap, UV0 );
 					NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
 				}
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount, 0 );
 				
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount );
-				
-				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorSkin.rgb, Diffuse.a );
+				//Warcraft
+				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorSkin.rgb, 1.0f );
 
-				AddDecals( Diffuse.rgb, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount );
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount, 0 );
 				
 				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
 				
-				return float4( Color, 1.0f );
+				//Warcraft
+				return float4( Color, Diffuse.a );
 			}
 			
 		]]
 	}
 	
-	MainCode PS_eye
+	# Warcraft
+	MainCode PS_skin_attachment
 	{
 		Input = "VS_OUTPUT_PDXMESHPORTRAIT"
 		Output = "PDX_COLOR"
@@ -775,8 +899,59 @@ PixelShader =
 				float4 Properties = PdxTex2D( SpecularMap, UV0 );
 				float3 NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
 				
-				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorEyes.rgb, Diffuse.a );
+				Diffuse.rgb = lerp( Diffuse.rgb, Diffuse.rgb * vPaletteColorSkin.rgb, 1.0f );
 				
+				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
+				
+				return float4( Color, Diffuse.a );
+			}
+		]]
+	}
+	
+	MainCode PS_eye
+	{
+		Input = "VS_OUTPUT_PDXMESHPORTRAIT"
+		Output = "PDX_COLOR"
+		Code
+		[[
+			PDX_MAIN
+			{
+				float2 UV0 = Input.UV0;
+				float4 BaseDiffuse = PdxTex2D( DiffuseMap, UV0 );	
+				float4 Diffuse = Diffuse;				
+				float4 Properties = PdxTex2D( SpecularMap, UV0 );
+				float3 NormalSample = UnpackRRxGNormal( PdxTex2D( NormalMap, UV0 ) );
+
+				#ifdef EYE_DECAL
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, 0, PreSkinColorDecalCount-1, 1);
+				#endif
+
+				float3 EyeShift = vPaletteColorEyes.rgb;
+
+				#ifdef HSV_SHIFT
+				EyeShift = RGBtoHSV( vPaletteColorEyes.rgb );
+				EyeShift.x = EyeShift.x + 0.5f;
+				EyeShift = saturate(HSVtoRGB(EyeShift));
+				#endif
+
+				#ifdef EYE_BLIND
+				EyeShift = RGBtoHSV( EyeShift );
+				EyeShift.y = EyeShift.y * 0.5f;
+				EyeShift = saturate(HSVtoRGB(EyeShift));
+				#endif
+
+				//Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb, BaseDiffuse.a );
+				float EyeDiffuseAlpha = saturate(BaseDiffuse.a + Diffuse.a);
+				#ifdef EYE_BLIND
+				Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb * EyeShift, EyeDiffuseAlpha * 0.5f );
+				#else
+				Diffuse.rgb = lerp( Diffuse.rgb, BaseDiffuse.rgb * EyeShift, EyeDiffuseAlpha );
+				#endif
+
+				#ifdef EYE_DECAL
+				AddDecals( Diffuse, NormalSample, Properties, UV0, Input.InstanceIndex, PreSkinColorDecalCount, DecalCount, 0);
+				#endif
+
 				float3 Color = CommonPixelShader( Diffuse, Properties, NormalSample, Input );
 				
 				return float4( Color, 1.0f );
@@ -805,7 +980,7 @@ PixelShader =
 			}
 		]]
 	}
-
+	
 	MainCode PS_attachment
 	{		
 		TextureSampler PatternMask
@@ -1128,8 +1303,19 @@ Effect portrait_skin
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_skin"
-	Defines = { "FAKE_SSS_EMISSIVE" "EMISSIVE"}
+	Defines = { "FAKE_SSS_EMISSIVE" }
 }
+
+# Warcraft
+Effect portrait_skin_attachment_alpha_to_coverage
+{
+	VertexShader = "VS_portrait_blend_shapes"
+	PixelShader = "PS_skin_attachment"
+	BlendState = "alpha_to_coverage"
+	RasterizerState = "rasterizer_no_culling"
+	Defines = { "FAKE_SSS_EMISSIVE" }
+}
+
 Effect portrait_skinShadow
 {
 	VertexShader = "VS_portrait_blend_shapes_shadow"
@@ -1141,7 +1327,7 @@ Effect portrait_skin_face
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_skin"
-	Defines = { "FAKE_SSS_EMISSIVE" "ENABLE_TEXTURE_OVERRIDE" "EMISSIVE"}
+	Defines = { "FAKE_SSS_EMISSIVE" "ENABLE_TEXTURE_OVERRIDE" }
 }
 Effect portrait_skin_faceShadow
 {
@@ -1155,9 +1341,29 @@ Effect portrait_eye
 {
 	VertexShader = "VS_standard"
 	PixelShader = "PS_eye"
-	Defines = { "EMISSIVE" }
+	Defines = { "EMISSIVE_PROPERTIES_RED" "EYE_DECAL" }
 }
 
+Effect portrait_eye_no_decal
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_eye"
+	Defines = { "EMISSIVE_PROPERTIES_RED" }
+}
+
+Effect portrait_eye_shift
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_eye"
+	Defines = { "EMISSIVE_PROPERTIES_RED" "EYE_DECAL" "HSV_SHIFT"}
+}
+
+Effect portrait_eye_blind
+{
+	VertexShader = "VS_standard"
+	PixelShader = "PS_eye"
+	Defines = { "EYE_DECAL" "EYE_BLIND"}
+}
 
 Effect skin_alpha
 {
@@ -1176,7 +1382,7 @@ Effect portrait_attachment
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
-	Defines = { "EMISSIVE" }
+	Defines = { "EMISSIVE_NORMAL_BLUE" }
 }
 
 Effect portrait_attachmentShadow
@@ -1191,7 +1397,7 @@ Effect portrait_attachment_pattern
 {
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
-	Defines = { "VARIATIONS_ENABLED" "EMISSIVE"}
+	Defines = { "VARIATIONS_ENABLED" "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_patternShadow
@@ -1207,7 +1413,7 @@ Effect portrait_attachment_pattern_alpha_to_coverage
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
 	BlendState = "alpha_to_coverage"
-	Defines = { "VARIATIONS_ENABLED" "EMISSIVE"}
+	Defines = { "VARIATIONS_ENABLED" "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_pattern_alpha_to_coverageShadow
@@ -1230,7 +1436,7 @@ Effect portrait_attachment_alpha_to_coverage
 	VertexShader = "VS_portrait_blend_shapes"
 	PixelShader = "PS_attachment"
 	BlendState = "alpha_to_coverage"
-	Defines = { "EMISSIVE" }
+	Defines = {  "EMISSIVE_NORMAL_BLUE"}
 }
 
 Effect portrait_attachment_alpha_to_coverageShadow

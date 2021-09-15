@@ -1524,6 +1524,323 @@
 			}
 		}
 	}
+	
+	margin_widget = {
+		name = "council_of_the_eight_window"
+		size = { 100% 100% }
+		margin = { 0 26 }
+		margin_right = 20
+
+		visible = "[GetVariableSystem.HasValue( 'decision_tab', 'council_of_the_eight' )]"
+
+		state = {
+			name = _show
+			using = Animation_FadeIn_Quick
+			using = Sound_WindowShow_Standard
+			using = Window_Position_MainTab
+		}
+
+		state = {
+			name = _hide
+			using = Animation_FadeOut_Quick
+			using = Sound_WindowHide_Standard
+			using = Window_Position_MainTab_Hide
+		}
+
+		widget = {
+			size = { 100% 100% }
+			
+			vbox = {
+				using = Window_Margins
+
+				# Header picture
+				header_with_picture = {
+					layoutpolicy_horizontal = expanding
+
+					blockoverride "header_text"
+					{
+						text = "COUNCIL_OF_THE_EIGHT_VIEW_TITLE"
+					}
+
+					blockoverride "button_close"
+					{
+						onclick = "[GetVariableSystem.Clear( 'decision_tab' )]"
+						onclick = "[DecisionsView.Close]"
+					}
+
+					blockoverride "illustration_texture"
+					{
+						texture = "gfx/interface/patron_window/header_council_of_the_eight.dds"
+					}
+				}
+
+				# Leader
+				vbox = {
+					name = "council_of_the_eight_leader_tab"
+					datacontext = "[GetGlobalVariable('leader_council_eight')]" # Get the CoE faith? It's a global variable
+					minimumsize = { 0 350 }
+					maximumsize = { 0 350 }
+					
+					text_single = {
+						text = "council_of_the_eight_leader_name"
+						align = center
+						fontsize = 20
+					}
+					text_single = {
+						text = "council_of_the_eight_archprimate_name"
+						align = center
+						fontsize = 20
+					}
+					text_single = {
+						text = "council_of_the_eight_leader_fervor"
+						align = center
+						fontsize = 20
+					}
+					text_multi = {
+						text = "council_of_the_eight_leader_fervor_equilibrium"
+						align = center
+						fontsize = 20
+						maximumsize = { 450 150 }
+						autoresize = yes
+					}
+					text_multi = {
+						text = "council_of_the_eight_leader_fervor_equilibrium_tt"
+						align = center
+						fontsize = 15
+						maximumsize = { 450 150 }
+						autoresize = yes
+					}
+		
+					background = {
+						margin_left = 80
+						margin_right = 80
+						margin_top = 10
+						margin_bottom = 10
+
+						texture = "gfx/interface/component_tiles/tile_dark_area_01.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 40 8 }
+
+						modify_texture = {
+							name = "mask"
+							texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 0 0 }
+							blend_mode = alphamultiply
+						}
+						modify_texture = {
+							name = "mask"
+							texture = "gfx/interface/component_masks/mask_legacy_track.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 0 0 }
+							blend_mode = alphamultiply
+						}
+					}
+				}
+
+				# Members list
+				vbox = {
+					name = "council_of_the_eight_members_tab"
+					minimumsize = { 0 500 }
+					maximumsize = { 0 500 }
+					
+					vbox = {
+						minimumsize = { 0 10 }
+						maximumsize = { 0 10 }
+						
+						text_single = {
+							text = "council_of_the_eight_members_tab_tt"
+							align = center
+							fontsize = 15
+						}
+					}
+					
+					vbox = {
+						
+						hbox = {
+							visible = "[Or(GetGlobalVariable('council_eight_chapel_black_marsh').IsSet, Or(GetGlobalVariable('council_eight_chapel_cyrodiil').IsSet, GetGlobalVariable('council_eight_chapel_elsweyr').IsSet))]"
+							margin = { 20 20 }
+							layoutpolicy_horizontal = expanding
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_black_marsh"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_black_marsh').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_black_marsh"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_cyrodiil"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_cyrodiil').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_cyrodiil"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_elsweyr"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_elsweyr').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_elsweyr"
+									align = center
+									fontsize = 15
+								}
+							}
+						}
+						
+						hbox = {
+							visible = "[Or(GetGlobalVariable('council_eight_chapel_hammerfell').IsSet, Or(GetGlobalVariable('council_eight_chapel_high_rock').IsSet, GetGlobalVariable('council_eight_chapel_morrowind').IsSet))]"
+							margin = { 20 20 }
+							layoutpolicy_horizontal = expanding
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_morrowind"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_morrowind').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_morrowind"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_hammerfell"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_hammerfell').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_hammerfell"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_high_rock"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_high_rock').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_high_rock"
+									align = center
+									fontsize = 15
+								}
+							}
+						}
+						
+						hbox = {
+							visible = "[Or(GetGlobalVariable('council_eight_chapel_skyrim').IsSet, Or(GetGlobalVariable('council_eight_chapel_summerset').IsSet, GetGlobalVariable('council_eight_chapel_valenwood').IsSet))]"
+							margin = { 20 20 }
+							layoutpolicy_horizontal = expanding
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_skyrim"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_skyrim').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_skyrim"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_summerset"
+								layoutpolicy_horizontal = expanding
+								layoutpolicy_vertical = expanding
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_summerset').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_summerset"
+									align = center
+									fontsize = 15
+								}
+							}
+							
+							vbox = {
+								margin = { 0 20 }
+								name = "council_of_the_eight_chapel_valenwood"
+								
+								visible = "[GetGlobalVariable('council_eight_chapel_valenwood').IsSet]"
+
+								text_single = {
+									text = "council_of_the_eight_chapel_valenwood"
+									align = center
+									fontsize = 15
+								}
+							}
+						}
+						
+						text_single = {
+							visible = "[Not(And(GetGlobalVariable('council_eight_chapel_high_rock').IsSet, And(GetGlobalVariable('council_eight_chapel_skyrim').IsSet, And(GetGlobalVariable('council_eight_chapel_cyrodiil').IsSet, And(GetGlobalVariable('council_eight_chapel_hammerfell').IsSet, And(GetGlobalVariable('council_eight_chapel_elsweyr').IsSet, And(GetGlobalVariable('council_eight_chapel_summerset').IsSet, And(GetGlobalVariable('council_eight_chapel_valenwood').IsSet, And(GetGlobalVariable('council_eight_chapel_black_marsh').IsSet, And(GetGlobalVariable('council_eight_chapel_morrowind').IsSet))))))))))]"
+							
+							text = "Chapels available: [SelectLocalization(GetGlobalVariable('council_eight_chapel_high_rock').IsSet,'','High Rock, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_skyrim').IsSet,'','Skyrim, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_summerset').IsSet,'','Summerset, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_elsweyr').IsSet,'','Elsweyr, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_valenwood').IsSet,'','Valenwood, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_cyrodiil').IsSet,'','Cyrodiil, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_black_marsh').IsSet,'','Black Marsh, ')][SelectLocalization(GetGlobalVariable('council_eight_chapel_morrowind').IsSet,'','Morrowind')]"
+							align = center
+							fontsize = 15
+						}
+						
+						text_multi = {
+							text = "council_of_the_eight_members_missing_chapels_tt"
+							align = center
+							fontsize = 15
+							maximumsize = { 450 150 }
+							autoresize = yes
+						}
+					}
+					
+					
+					background = {
+						margin_left = 80
+						margin_right = 80
+						margin_top = 10
+						margin_bottom = 10
+
+						texture = "gfx/interface/component_tiles/tile_dark_area_02.dds"
+						spriteType = Corneredstretched
+						spriteborder = { 40 8 }
+
+						modify_texture = {
+							name = "mask"
+							texture = "gfx/interface/component_masks/mask_fade_horizontal_middle_thick.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 0 0 }
+							blend_mode = alphamultiply
+						}
+						modify_texture = {
+							name = "mask"
+							texture = "gfx/interface/component_masks/mask_legacy_track.dds"
+							spriteType = Corneredstretched
+							spriteborder = { 0 0 }
+							blend_mode = alphamultiply
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 types Decisions

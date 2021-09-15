@@ -189,6 +189,7 @@ create_orsinium_decision = {
 
 	is_shown = {
 		title:k_orsinium = { is_title_created = no }
+		any_duchy = { NOT = { de_jure_liege = title:k_orsinium } }
 		culture = { has_innovation = innovation_denizens_lost_orsinium }
 		#This decision is for dukes creating Orsinium
 		highest_held_title_tier < tier_kingdom 
@@ -203,6 +204,7 @@ create_orsinium_decision = {
 		highest_held_title_tier = tier_duchy
 		#Your main duchy's capital is Orc-culture and is not already the capital of another kingdom
 		custom_description = {
+			capital_county.de_jure_liege.holder = { this = root }
 			capital_county.de_jure_liege.title_capital_county.holder = { this = root }
 			capital_county.culture = { has_innovation = innovation_denizens_lost_orsinium }
 			capital_county.de_jure_liege.title_capital_county = { save_temporary_scope_as = capital_check }

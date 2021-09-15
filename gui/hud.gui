@@ -888,6 +888,7 @@ widget = {
 					}
 				}
 
+				### EK tabs
 				# Patron
 				state = {
 					name = "hud_tab_glow_patron_enter"
@@ -935,6 +936,31 @@ widget = {
 						name = "glow_societies"
 						alpha = 0
 						translate_uv = { -0.2 -1.08 }
+					}
+				}
+				
+				# Council of the Eight
+				state = {
+					name = "hud_tab_glow_council_of_the_eight_enter"
+					duration = @duration_maintab_button_enter
+					using = Animation_Curve_Default
+
+					modify_texture = {
+						name = "glow_patron"
+						alpha = 1
+						translate_uv = { -0.2 -0.96 }
+					}
+				}
+
+				state = {
+					name = "hud_tab_glow_council_of_the_eight_leave"
+					duration = @duration_maintab_button_leave
+					using = Animation_Curve_Default
+
+					modify_texture = {
+						name = "glow_patron"
+						alpha = 0
+						translate_uv = { -0.2 -0.96 }
 					}
 				}
 			}
@@ -1247,6 +1273,32 @@ widget = {
 				# 	# 	on_start = "[PdxGuiInterruptThenTriggerAllAnimations('hud_tab_glow_patron_enter','hud_tab_glow_patron_leave')]"
 				# 	# }
 				# }
+				button_hud_main_tab = {
+					name = "tab_council_of_the_eight_open"
+					tooltip = "COUNCIL_OF_THE_EIGHT_BUTTON"
+
+					blockoverride "maintab_button"
+					{
+						texture = "gfx/interface/icons/hud_maintab/maintab_societies.dds"
+
+						onclick = "[PdxGuiTriggerAllAnimations( Select_CString( And(IsGameViewOpen('decisions'), Not(GetVariableSystem.HasValue( 'decision_tab', 'council_of_the_eight' ))), 'council_of_the_eight_open', 'council_of_the_eight_closed' ) )]"
+						onclick = "[PdxGuiTriggerAllAnimations( 'detail_close' )]"
+
+						down = "[GetVariableSystem.HasValue( 'decision_tab', 'council_of_the_eight' )]"
+					}
+
+					state = {
+						name = council_of_the_eight_open
+						on_start = "[GetVariableSystem.Set( 'decision_tab', 'council_of_the_eight' )]"
+					}
+
+					state = {
+						name = council_of_the_eight_closed
+						on_start = "[GetVariableSystem.Set( 'decision_tab', Select_CString( GetVariableSystem.HasValue( 'decision_tab', 'council_of_the_eight' ), 'to_clear', 'council_of_the_eight' ) )]"
+						on_start = "[GetVariableSystem.ClearIf( 'decision_tab', GetVariableSystem.HasValue( 'decision_tab', 'to_clear' ) )]"
+						on_start = "[ToggleGameView('decisions')]"
+					}
+				}
 			}
 
 			# Invisible button to ensure that these shortcuts don't get hidden
