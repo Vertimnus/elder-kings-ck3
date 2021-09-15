@@ -167,7 +167,7 @@ update_religions_piety_level = {
 		update_religions_piety_level_effect = { MODIFIER = devotion_gives_lifestyle_experience }
 	}
 	
-	### CONTROL GROWTH WITH WITH DEVOTION
+	### CONTROL GROWTH WITH DEVOTION
 	if = {
 		limit = {
 			OR = {
@@ -380,6 +380,30 @@ faith_give_proper_cultural_identity_doctrine = {
 		set_variable = { name = associated_culture value = scope:culture_faith }
 		remove_doctrine = doctrine_cultural_identity_culture_exclusive_creating_faith
 		add_doctrine = doctrine_cultural_identity_culture_exclusive
+	}
+}
+
+faith_give_special_faith_patrons_has_patrons_doctrine = {
+	if = {
+		limit = {
+			OR = {
+				has_doctrine = doctrine_pantheon_divines
+				has_doctrine = doctrine_pantheon_heroes
+				has_doctrine = doctrine_pantheon_aedra
+				has_doctrine = doctrine_pantheon_green_pact
+				has_doctrine = doctrine_pantheon_yokudan
+				has_doctrine = doctrine_pantheon_dwemer_ancestors
+				has_doctrine = pantheon_adds_deities_tribunal
+				has_doctrine = pantheon_adds_deities_atmoran_totems
+				has_doctrine = pantheon_adds_deities_elemental
+				
+				has_doctrine = doctrine_pantheon_daedra
+				has_doctrine = doctrine_pantheon_good_daedra
+				has_doctrine = doctrine_pantheon_bad_daedra
+				has_doctrine = doctrine_pantheon_nerevar
+			}
+		}
+		add_doctrine = special_faith_patrons_has_patrons
 	}
 }
 

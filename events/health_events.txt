@@ -996,7 +996,6 @@ health.1001 = {
 		animation = idle
 	}
 
-
 	trigger = {
 		can_contract_disease_trigger = { DISEASE = ill }
 	}
@@ -1055,6 +1054,11 @@ health.1001 = {
 		play_music_cue = "mx_cue_illness"
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
 		contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = no } #Adds the trait, sends event "health.2201" to those who care if health is brought too low
+		random_courtier = {
+			limit = {
+				is_available_ai_adult = yes
+				learning > 10		}
+			save_scope_as = ek_new_physician
 	}
 
 	###NO COURT PHYSICIAN OPTIONS###
@@ -1068,6 +1072,43 @@ health.1001 = {
 		find_court_physician_effect = yes
 		ai_chance = { base = 5 }
 	}
+
+	#(EK) Hire in-court physician
+	option = {
+		trigger = {
+			court_physician_available_trigger = no
+			root_picks_treatment_for_sick_character_trigger = yes
+			exists = { scope:ek_new_physician }
+		}
+		name = health.2201.b
+
+		pay_short_term_gold = {
+			target = scope:ek_new_physician
+			gold = 10
+		}
+
+		set_court_physician_effect = {
+			EMPLOYER = root
+			PHYSICIAN = scope:ek_new_physician
+		}
+
+		hidden_effect = {
+			reverse_add_opinion = {
+				target = scope:ek_new_physician
+				modifier = hired_me_opinion
+			}
+		}
+
+		ai_chance = {
+			factor = 500
+			modifier = {
+				short_term_gold < medium_gold_value
+				factor = 0
+			}
+		}
+
+	}
+	#EK EDIT
 
 	#OK
 	option = {
@@ -4424,6 +4465,14 @@ health.2201 = {
 		}
 
 		save_court_physician_as_effect = { SCOPE_NAME = physician }
+#EK EDIT
+		random_courtier = {
+			limit = {
+				is_available_ai_adult = yes
+				learning > 10		}
+			save_scope_as = ek_new_physician
+		}
+#EK EDIT
 	}
 
 	###COURT PHYSICIAN OPTIONS###
@@ -4520,6 +4569,42 @@ health.2201 = {
 		name = health.3101.e
 		find_court_physician_effect = yes
 		ai_chance = { base = 1 }
+	}
+
+	#(EK) Hire in-court physician
+	option = {
+		trigger = {
+			court_physician_available_trigger = no
+			root_picks_treatment_for_sick_character_trigger = yes
+			exists = { scope:ek_new_physician }
+		}
+		name = health.2201.b
+
+		pay_short_term_gold = {
+			target = scope:ek_new_physician
+			gold = 10
+		}
+
+		set_court_physician_effect = {
+			EMPLOYER = root
+			PHYSICIAN = scope:ek_new_physician
+		}
+
+		hidden_effect = {
+			reverse_add_opinion = {
+				target = scope:ek_new_physician
+				modifier = hired_me_opinion
+			}
+		}
+
+		ai_chance = {
+			factor = 500
+			modifier = {
+				short_term_gold < medium_gold_value
+				factor = 0
+			}
+		}
+
 	}
 
 	#Nothing to do

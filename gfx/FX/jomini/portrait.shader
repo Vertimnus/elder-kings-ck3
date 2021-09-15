@@ -59,6 +59,7 @@ PixelShader =
 		SampleModeV = "Clamp"
 		type = "2darray"
 	}
+
 	TextureSampler DecalNormalArray
 	{
 		Ref = JominiPortraitDecalNormalArray
@@ -757,9 +758,46 @@ PixelShader =
 						
 						uint DiffuseBlendMode = uint( BlendData.x * 255.0f );
 						float4 DiffuseSample = PdxTex2D( DecalDiffuseArray, float3( UV, DiffuseIndex ) );
-
+						
 						//EK2
-						DiffuseSample = DiffuseSample * DiffuseSample;
+						//Sample bottom left corner of the decal & get color.
+						float4 DiffuseDecalPointSample = PdxTex2D( DecalDiffuseArray, float3((0.0f + 0.5f) / 1024.0f , (1023.0f + 0.5f) / 1024.0f , DiffuseIndex ) );
+
+						// If bottom left corner is RED & Alpha 0 - FACEPAINT SHADER
+						if ( DiffuseDecalPointSample.r == 1.0f && DiffuseDecalPointSample.g == 0.0f && DiffuseDecalPointSample.b == 0.0f && DiffuseDecalPointSample.a == 0.0f )
+						{
+
+							float SampleWeight = 0.0f;
+							float FacepaintAlpha = 0.0f;
+
+							if (Weight < 0.25f)
+							{
+							SampleWeight = Weight * 4.0f;
+							FacepaintAlpha = DiffuseSample.r;
+							}
+
+							else if (Weight >= 0.25f && Weight < 0.5f)
+							{
+							SampleWeight = (Weight - 0.25f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.g;
+							}
+
+							else if (Weight >= 0.5f && Weight < 0.75f)
+							{
+							SampleWeight = (Weight - 0.5f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.b;
+							}
+
+							else
+							{
+							SampleWeight = (Weight - 0.75f) * 4.0f;
+							FacepaintAlpha = DiffuseSample.a;
+							}
+
+							float3 EKDecalPaletteColor = PdxTex2D( DecalDiffuseArray, float3((SampleWeight / 32.0f)-(2.0f/1024.0f) , 2.0f / 1024.0f , DiffuseIndex ) ).rgb;
+							DiffuseSample = float4(EKDecalPaletteColor , FacepaintAlpha);
+							Weight = 1.0f;
+						}
 						//EK2
 
 						if (AlphaBlend == 1)
