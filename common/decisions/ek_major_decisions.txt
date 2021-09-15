@@ -127,3 +127,67 @@ disorganized_military_reform_military_decision = {
 		base = 100
 	}
 }
+
+# Summon a Daedric Heir
+daedric_heir_decision = {
+	picture = "gfx/interface/illustrations/decisions/decision_major_religion.dds" #wip
+	
+	desc = daedric_heir_decision_desc
+	selection_tooltip = daedric_heir_decision_tooltip
+	major = yes
+
+	ai_check_interval = 120
+
+	is_shown = {
+		# You are a Daedra
+		culture_group = culture_group:daedric_group
+		NOT = { exists = player_heir }
+		faith.religion = { is_in_family = rf_daedra } # you worship a Daedra of some kind
+	}
+
+	is_valid_showing_failures_only = {
+		is_alive = yes
+		is_in_an_activity = no
+		is_imprisoned = no
+	}
+
+	effect = {
+		custom_tooltip = daedric_heir_decision_effect_tooltip
+		if = {
+			limit = {
+				is_female = yes
+			}
+			create_character = {
+			template_character = dremora_scion_character
+			gender_female_chance = 50
+			faith = this.faith
+			culture = this.culture
+			dynasty_house = root.house
+			mother = root
+			}
+		}
+		else = {
+			create_character = {
+			template_character = dremora_scion_character
+			gender_female_chance = 50
+			faith = this.faith
+			culture = this.culture
+			dynasty_house = root.house
+			father = root
+			}
+		}
+	}
+
+	cost = { #TODO - replace with Ardor once that system is more fleshed out
+		prestige = { value = medium_prestige_value }
+		piety = { value = medium_prestige_value }
+	}
+
+	ai_potential = {
+		always = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}

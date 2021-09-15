@@ -42,7 +42,7 @@ facepaint_nordic = { # Random
                 culture.culture_group = culture_group:nordic_group
 				OR = {
 					prowess > high_skill_rating
-					martial > high_skill_rating
+					#martial > high_skill_rating   #commented out to prevent guys like svartr getting facepaint when not in battle
 					portrait_wear_armor_trigger = yes
 				}
 			}
@@ -85,7 +85,7 @@ facepaint_dunmer = {
         base = 0
 
         modifier = {
-            add = 80
+            add = 50
             culture = culture:ashlander
         }
 
@@ -108,7 +108,11 @@ facepaint_dunmer = {
     }
 }
 
-scarification_dunmer = {
+}
+
+scarification = {
+
+scarification_dunmer = {  # full range
     dna_modifiers = {
         morph = {
             mode = add
@@ -121,12 +125,35 @@ scarification_dunmer = {
         base = 0
 
         modifier = {
-            add = 60
+            add = 50
 			OR = {
 				culture = culture:ashlander
 				culture = culture:chimer
 			}
         }
+
+        modifier = {
+            add = -100
+            OR = {
+                is_from_ruler_designer = yes
+                has_character_flag = has_scripted_appearance
+                has_trait = line_of_x
+            }
+        }
+    }
+}
+
+scarification_dunmer_2 = {  # all except the most extreme one
+    dna_modifiers = {
+        morph = {
+            mode = add
+            gene = scarification
+            template = dunmer
+            range = { 0 0.8 }
+        }
+    }
+    weight = {
+        base = 0
 
         modifier = {
             add = 10
