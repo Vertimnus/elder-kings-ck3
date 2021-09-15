@@ -16,3 +16,47 @@
 	province:1459 = { set_variable = { name = ruins_type_unique value = flag:nchuand_zel } }
 	
 }
+
+start_excavation_effect = {
+
+	if = {
+		limit = { has_variable = ruins_type_unique }
+		
+	}
+	else = {
+		if = {
+			limit = { var:ruins_type = flag:nordic }
+			start_excavation_with_type = { TYPE = nordic_generic }			
+		}
+		else_if = {
+			limit = { var:ruins_type = flag:dwemer }
+			start_excavation_with_type = { TYPE = dwemer_generic }			
+		}
+		else_if = {
+			limit = { var:ruins_type = flag:cave }
+			start_excavation_with_type = { TYPE = cave_generic }			
+		}
+		else_if = {
+			limit = { var:ruins_type = flag:fort }
+			start_excavation_with_type = { TYPE = fort_generic }			
+		}
+	}		
+}
+
+start_excavation_with_type = {
+
+	# create story cycle and subtract gold
+	province_owner = {
+		create_story = {
+			type = story_cycle_excavation_$TYPE$
+			save_scope_as = excavation_story
+		}
+		remove_gold = excavation_start_cost
+	}
+	
+	# Link story cycle to locale
+	scope:excavation_story = { 
+		set_variable = { name = excavation_locale value = prev }
+	}
+	set_variable = { name = active_excavation value = scope:excavation_story }
+}
