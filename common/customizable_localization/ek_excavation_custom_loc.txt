@@ -1,31 +1,35 @@
-﻿ek_ruins_type = {
+﻿get_ruins_name = {
 	type = province
 
 	text = {
-		localization_key = ek_ruins_fort_generic
-		trigger = { 
-			var:ruins_type = flag:fort  
-		}
+		localization_key = ruins_fort_generic
+		trigger = { var:ruins_type = flag:fort }
 	}
 	text = {
-		localization_key = ek_ruins_cave_generic
+		localization_key = ruins_cave_generic
+		trigger = { var:ruins_type = flag:cave }
+	}	
+	text = {
+		localization_key = ruins_nordic_generic
+		trigger = { var:ruins_type = flag:nordic }
+	}
+	text = {
+		localization_key = ruins_dwemer_generic
+		trigger = { var:ruins_type = flag:dwemer }
+	}	
+	text = { localization_key = ruins_fallback }
+}
+
+can_afford_excavation = {
+	type = province
+
+	text = {
+		localization_key = can_afford_excavation
 		trigger = { 
-			var:ruins_type = flag:cave 
+			province_owner.gold > excavation_start_cost
 		}
 	}	
 	text = {
-		localization_key = ek_ruins_nordic_generic
-		trigger = { 
-			var:ruins_type = flag:nordic  
-		}
-	}
-	text = {
-		localization_key = ek_ruins_dwemer_generic
-		trigger = { 
-			var:ruins_type = flag:dwemer  
-		}
-	}	
-	text = {
-		localization_key = ek_ruins_fallback
+		localization_key = cannot_afford_excavation
 	}
 }
