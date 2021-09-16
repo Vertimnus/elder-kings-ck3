@@ -61,12 +61,114 @@ start_excavation_with_type = {
 	set_variable = { name = active_excavation value = scope:excavation_story }
 }
 
-check_excavation_leader_validity = {
+alter_excavation_stage_progress = {
+	custom_tooltip = excavation_$operation$_progress_$amount$
+	scope:story = {
+		change_variable = { name = excavation_stage_progress $OPERATION$ = excavation_progress_$AMOUNT$ }
+		clamp_variable = { name = excavation_stage_progress min = 0 max = 2000000 }
+	}
+}
+
+excavation_story_standard_setup = {
+	set_variable = { name = excavation_stage value = 1 }
+	set_variable = { name = excavation_stage_max value = $MAX_STAGES$ }
+	
+	set_variable = { name = excavation_stage_progress value =  monthly_excavation_progress }
+	set_variable = { name = excavation_stage_progress_max value = 1000 }
+	
+	story_owner = {
+		trigger_event = {
+			on_action = $ON_ACTION$
+		}
+	}
+}
+
+excavation_story_standard_cleanup = {
+	var:excavation_locale = { 
+		remove_variable = excavation_story
+		remove_variable = ruins_type
+	}
+}
+
+excavation_story_standard_inheritance = {
+	if = {
+		limit = { always = yes }
+		make_story_owner = story_owner.player_heir
+	}
+	else = {
+		end_story = yes
+	}
+}
+
+excavation_story_standard_pulse = { 
+
+	# Check if leader is valid
 	if = {
 		limit = { 
 			has_variable = excavation_leader 
 			NOT = { var:excavation_leader = { is_courtier_of = prev.story_owner } }
 		}
 		remove_variable = excavation_leader 
+	}
+	
+	# Advance excavation progress variable
+	change_variable = { name = excavation_stage_progress add = scope:story_owner.monthly_excavation_progress }
+	
+	# If we have an excavation leader
+	if = {
+		limit = { has_variable = excavation_leader }
+		
+		# If we have finished a stage
+		if = {
+			limit = { var:excavation_stage_progress = { compare_value > prev.var:excavation_stage_progress_max } }
+			
+			if = { # If current stage is the end stage
+				limit = { var:excavation_stage = var:excavation_stage_max }
+				
+				roll_for_excavation_breakthrough = { ON_ACTION = $FINAL_ON$ }
+			
+				
+			}
+			else = { # If current stage is not end stage
+			
+				roll_for_excavation_breakthrough = { ON_ACTION = $INTER_ON$ }
+				
+				if = {
+					limit = { var:excavation_stage = { compare_value > var:excavation_stage_max } }
+					end_story = yes
+				}
+			}
+		}
+		else = {
+			story_owner = {
+				trigger_event = {
+					on_action = $MINOR_ON$ 
+				}
+			}
+		}
+	}	
+}
+
+roll_for_excavation_breakthrough = {
+	set_variable = { name = excavation_stage_progress value = 0 }
+	random_list = {
+		0 = {
+			modifier = {
+				always = yes
+				add = excavation_breakthrough_chance
+			}
+		}
+		100 = {
+			modifier = {
+				always = yes
+				add = excavation_breakthrough_chance_neg
+			}
+			story_owner = {
+				trigger_event = {
+					on_action = $ON_ACTION$
+				}
+			}
+			change_variable = { name = excavation_stage add = 1 }
+		}						
 	}
 }

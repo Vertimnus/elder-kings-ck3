@@ -2,11 +2,39 @@
 	value = 100
 }
 
+excavation_breakthrough_chance = {
+	if = {
+		limit = { has_variable = excavation_leader }
+		value = excavation_breakthrough_chance_owner
+		add = excavation_breakthrough_chance_leader
+		max = 100
+	}
+	else = {
+		value = 0
+	}
+}
+
+excavation_breakthrough_chance_owner = {
+	value = story_owner.martial
+	multiply = 2
+}
+
+excavation_breakthrough_chance_leader = {
+	value = var:excavation_leader.prowess
+	multiply = 2
+}
+
+
 # to be expanded upon later
 monthly_excavation_progress = {
-	value = monthly_excavation_progress_owner
-	add = monthly_excavation_progress_marshall
-	add = monthly_excavation_progress_knights
+	if = {
+		limit = { has_variable = excavation_leader }
+		value = monthly_excavation_progress_owner
+		add = monthly_excavation_progress_leader
+	}
+	else = {
+		value = 0
+	}
 }
 
 monthly_excavation_progress_owner = {
@@ -14,19 +42,9 @@ monthly_excavation_progress_owner = {
 	multiply = 2
 }
 
-monthly_excavation_progress_marshall = {
-	value = story_owner.cp:councillor_marshal.martial
+monthly_excavation_progress_leader = {
+	value = var:excavation_leader.prowess
 	multiply = 2
-}
-
-monthly_excavation_progress_knights = {
-	value = 0
-	story_owner = {
-		every_knight = {
-			add = prowess
-			divide = 5
-		}
-	}
 }
 
 est_excavation_stage_completion_time = {
@@ -78,3 +96,8 @@ excavation_intrigue = {
 excavation_stewardship = {
 	value = stewardship
 }
+
+excavation_progress_small = 25
+excavation_progress_medium = 50
+excavation_progress_large = 100
+excavation_progress_huge = 200

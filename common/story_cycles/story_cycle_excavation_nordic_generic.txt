@@ -1,80 +1,23 @@
 ﻿story_cycle_excavation_nordic_generic = {
 
 	on_setup = {
-		set_variable = { name = excavation_stage value = 1 }
-		set_variable = { name = excavation_stage_max value = 5 }
-		
-		set_variable = { name = excavation_stage_progress value =  monthly_excavation_progress }
-		set_variable = { name = excavation_stage_progress_max value = 1000 }
-		
-		story_owner = {
-			trigger_event = {
-				on_action = excavation_nordic_generic_beginning 
-			}
-		}
+		excavation_story_standard_setup = { MAX_STAGES = 5 ON_ACTION = excavation_nordic_generic_beginning }
 	}
 
 	on_end = {
-		var:excavation_locale = { 
-			remove_variable = excavation_story
-			remove_variable = ruins_type
-		}
+		excavation_story_standard_cleanup = yes
 	}
 
 	on_owner_death = {
-		if = {
-			limit = { always = yes }
-			make_story_owner = story_owner.player_heir
-		}
-		else = {
-			end_story = yes
-		}
+		excavation_story_standard_inheritance = yes
 	}
 	
 	# The excavation progresses...
 	effect_group = {
 		days = 30
 		chance = 100
-		effect = {
-					
-			# check for dead/departed excavation leader
-			check_excavation_leader_validity = yes
-				
-		
-			# Advance excavation progress variable
-			change_variable = { name = excavation_stage_progress add = scope:story_owner.monthly_excavation_progress }
-			
-			# If we have reached a new stage
-			if = {
-				limit = { var:excavation_stage_progress = { compare_value > prev.var:excavation_stage_progress_max } }
-				
-				if = { # If not end stage
-					limit = { var:excavation_stage = var:excavation_stage_max }
-					
-					story_owner = {
-						trigger_event = {
-							on_action = excavation_nordic_generic_final
-						}
-					}
-				}
-				else = { # If end stage
-					set_variable = { name = excavation_stage_progress value = 0 }
-					change_variable = { name = excavation_stage add = 1 }
-					
-					trigger_event = {
-						on_action = excavation_nordic_generic_intermediate
-					}
-					
-					end_story = yes
-				}
-			}
-			else = {
-				story_owner = {
-					trigger_event = {
-						on_action = excavation_nordic_generic_minor
-					}
-				}
-			}
+		effect = {					
+			excavation_story_standard_pulse = { FINAL_ON = excavation_nordic_generic_final INTER_ON = excavation_nordic_generic_intermediate MINOR_ON = excavation_nordic_generic_minor }			
 		}
 	}
 }
