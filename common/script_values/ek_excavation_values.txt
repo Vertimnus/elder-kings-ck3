@@ -4,12 +4,35 @@
 
 # to be expanded upon later
 monthly_excavation_progress = {
-	value = martial
+	value = story_owner.martial
 	multiply = 5
 }
 
 est_excavation_stage_completion_time = {
 	value = var:excavation_stage_progress_max
+	subtract = var:excavation_stage_progress
 	divide = monthly_excavation_progress
 }
 
+
+##############################
+
+est_excavation_stage_completion_time_display = {
+	value = var:active_excavation.est_excavation_stage_completion_time
+}
+
+monthly_excavation_progress_display = {
+	value = var:active_excavation.monthly_excavation_progress
+}
+
+excavation_stage_progress_display = {
+	value = var:active_excavation.var:excavation_stage_progress
+}
+
+excavation_stage_progress_max_display = {
+	value = var:active_excavation.var:excavation_stage_progress_max
+}
+
+excavation_stage_display = {
+	value = var:active_excavation.var:excavation_stage
+}
