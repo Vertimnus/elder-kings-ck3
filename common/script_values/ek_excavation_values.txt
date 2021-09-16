@@ -4,8 +4,29 @@
 
 # to be expanded upon later
 monthly_excavation_progress = {
+	value = monthly_excavation_progress_owner
+	add = monthly_excavation_progress_marshall
+	add = monthly_excavation_progress_knights
+}
+
+monthly_excavation_progress_owner = {
 	value = story_owner.martial
-	multiply = 5
+	multiply = 2
+}
+
+monthly_excavation_progress_marshall = {
+	value = story_owner.cp:councillor_marshal.martial
+	multiply = 2
+}
+
+monthly_excavation_progress_knights = {
+	value = 0
+	story_owner = {
+		every_knight = {
+			add = prowess
+			divide = 5
+		}
+	}
 }
 
 est_excavation_stage_completion_time = {
@@ -35,4 +56,25 @@ excavation_stage_progress_max_display = {
 
 excavation_stage_display = {
 	value = var:active_excavation.var:excavation_stage
+}
+
+
+excavation_learning = {
+	value = learning
+}
+
+excavation_martial = {
+	value = martial
+}
+
+excavation_diplomacy = {
+	value = diplomacy
+}
+
+excavation_intrigue = {
+	value = intrigue
+}
+
+excavation_stewardship = {
+	value = stewardship
 }

@@ -7,8 +7,10 @@
 		set_variable = { name = excavation_stage_progress value =  monthly_excavation_progress }
 		set_variable = { name = excavation_stage_progress_max value = 1000 }
 		
-		trigger_event = {
-			on_action = excavation_nordic_generic_beginning 
+		story_owner = {
+			trigger_event = {
+				on_action = excavation_nordic_generic_beginning 
+			}
 		}
 	}
 
@@ -45,8 +47,10 @@
 				if = { # If not end stage
 					limit = { var:excavation_stage = var:excavation_stage_max }
 					
-					trigger_event = {
-						on_action = excavation_nordic_generic_final
+					story_owner = {
+						trigger_event = {
+							on_action = excavation_nordic_generic_final
+						}
 					}
 				}
 				else = { # If end stage
@@ -61,8 +65,10 @@
 				}
 			}
 			else = {
-				trigger_event = {
-					on_action = excavation_nordic_generic_minor
+				story_owner = {
+					trigger_event = {
+						on_action = excavation_nordic_generic_minor
+					}
 				}
 			}
 		}
