@@ -18,7 +18,7 @@
     
                 blockoverride "header_text"
                 {
-                    text = "APPOINT_GOVERNOR"
+                    text = "Assign Excavation Leader"
                 }
     
                 blockoverride "button_close"
@@ -61,7 +61,7 @@
                             maxhorizontalslots = 1
                             maxverticalslots = 100
                             block "datamodel" {
-                                datamodel = "[GetPlayer.GetPrimaryTitle.MakeScope.GetList('excavation_leader_candidates')]"
+                                datamodel = "[GetPlayer.MakeScope.GetList('excavation_leader_candidates')]"
                             }
                             item = {
                                 widget = {
@@ -94,7 +94,7 @@
                                                             text = "Stewardship:  "
                                                         }
                                                         text_single = {
-                                                            text = "[Character.MakeScope.ScriptValue('excavation_stewarship')|0]"
+                                                            text = "[Character.MakeScope.ScriptValue('excavation_stewardship')|0]"
                                                         }
                                                     }
                                                     hbox = {
@@ -113,7 +113,7 @@
                                                             text = "Intrigue:  "
                                                         }
                                                         text_single = {
-                                                            text = text = "[Character.MakeScope.ScriptValue('excavation_intrigue')|0]"
+                                                            text = "[Character.MakeScope.ScriptValue('excavation_intrigue')|0]"
                                                         }
                                                     }
                                                     hbox = {
@@ -121,7 +121,7 @@
                                                             text = "Learning:  "
                                                         }
                                                         text_single = {
-                                                            text = text = "[Character.MakeScope.ScriptValue('excavation_learning')|0]"
+                                                            text = "[Character.MakeScope.ScriptValue('excavation_learning')|0]"
                                                         }
                                                     }
                                                     hbox = {
@@ -143,7 +143,7 @@
                                             texture = "gfx/interface/icons/title_status/icon_claim_pressed.dds"
                                             size = { 90 90 }
                                             tooltip = appoint_governor
-                                            onclick = "[GetScriptedGui('appoint_excavation_leader').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('new_excavation_leader',Scope.GetCharacter.MakeScope).End)]"
+                                            onclick = "[GetScriptedGui('appoint_new_excavation_leader').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('new_excavation_leader',Scope.GetCharacter.MakeScope).End)]"
                                             onclick = "[GetVariableSystem.Clear( 'window_appoint_excavation_leader' )]"
                                         }
                                     }

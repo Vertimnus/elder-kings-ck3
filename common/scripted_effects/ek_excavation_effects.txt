@@ -60,3 +60,13 @@ start_excavation_with_type = {
 	}
 	set_variable = { name = active_excavation value = scope:excavation_story }
 }
+
+check_excavation_leader_validity = {
+	if = {
+		limit = { 
+			has_variable = excavation_leader 
+			NOT = { var:excavation_leader = { is_courtier_of = prev.story_owner } }
+		}
+		remove_variable = excavation_leader 
+	}
+}

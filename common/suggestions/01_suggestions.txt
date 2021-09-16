@@ -1681,3 +1681,65 @@ suggestion_grant_title = {
 		}
 	}
 }
+
+suggestion_assign_excavation_leader = {
+
+	weight = {
+		base = 0
+
+		modifier = { #Is the suggestion available at all?
+			add = 10
+			any_held_county = {
+				county_is_missing_excavation_leader = yes
+			}			
+		}
+	}
+
+	check_create_suggestion = {
+		every_held_county = {
+			limit = {
+				county_is_missing_excavation_leader = yes
+			}
+
+			try_create_suggestion = {
+				suggestion_type = suggestion_assign_excavation_leader
+				landed_title = county
+			}
+		}	
+	}
+
+	effect = {
+		scope:landed_title.title_province = {
+		
+			open_view_data = {
+				view = holding_view
+			}
+		}
+	}
+
+	score = {
+		base = 50
+
+		modifier = { #Extra score for powerful vassals
+			add = 50
+			scope:recipient = {
+				is_powerful_vassal_of = scope:actor
+			}
+		}
+
+		modifier = { #Extra score for court chaplain that doesn't endorse you
+			add = 50
+			scope:recipient = {
+				opinion = {
+					target = root
+					value <= 0
+				}
+				has_council_position = councillor_court_chaplain
+			}
+		}
+	}
+
+	is_valid = {
+		gold > excavation_start_cost
+	}
+}
